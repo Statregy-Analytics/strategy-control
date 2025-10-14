@@ -1,0 +1,4 @@
+
+> strategy-admin@0.0.1 lint
+> eslint -c ./eslint.config.js "./src*/**/*.{js,cjs,mjs,vue}"
+

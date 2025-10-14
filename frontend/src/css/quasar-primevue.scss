@@ -1,0 +1,299 @@
+// ========================================
+// VARIÁVEIS PRIMEVUE PARA QUASAR
+// ========================================
+
+// Cores principais do PrimeVue
+$primevue-primary: #3b82f6;
+$primevue-primary-dark: #1d4ed8;
+$primevue-surface: #ffffff;
+$primevue-surface-ground: #f8fafc;
+$primevue-surface-section: #ffffff;
+$primevue-surface-card: #ffffff;
+$primevue-surface-overlay: #ffffff;
+$primevue-surface-border: #e5e7eb;
+$primevue-surface-hover: #f3f4f6;
+
+// Cores de texto
+$primevue-text-color: #374151;
+$primevue-text-color-secondary: #6b7280;
+$primevue-text-color-muted: #9ca3af;
+
+// Bordas e raios
+$primevue-border-radius: 6px;
+$primevue-border-color: #d1d5db;
+$primevue-border-color-hover: #9ca3af;
+$primevue-border-color-focus: #3b82f6;
+
+// Sombras
+$primevue-shadow:
+  0 1px 3px rgba(0, 0, 0, 0.1),
+  0 1px 2px rgba(0, 0, 0, 0.06);
+$primevue-shadow-focus: 0 0 0 3px rgba(59, 130, 246, 0.1);
+
+// Transições
+$primevue-transition: all 0.2s ease-in-out;
+
+// ========================================
+// OVERRIDE DAS CLASSES QUASAR
+// ========================================
+
+// Input Field Base
+.q-field {
+  .q-field__control {
+    border-radius: $primevue-border-radius !important;
+    background: $primevue-surface !important;
+    border: 1px solid $primevue-border-color !important;
+    transition: $primevue-transition !important;
+    box-shadow: none !important;
+    min-height: 12px !important;
+    max-height: 32px !important;
+    padding: 0 12px !important;
+
+    &:hover {
+      border-color: $primevue-border-color-hover !important;
+    }
+
+    &.q-field__control--focused {
+      border-color: $primevue-border-color-focus !important;
+      box-shadow: $primevue-shadow-focus !important;
+      outline: none !important;
+    }
+
+    // Remove estilo padrão do Quasar
+    &:before,
+    &:after {
+      display: none !important;
+    }
+  }
+
+  // Input interno
+  .q-field__native {
+    color: $primevue-text-color !important;
+    font-size: 14px !important;
+    padding: 10px 0 !important;
+    min-height: auto !important;
+
+    &::placeholder {
+      color: $primevue-text-color-muted !important;
+    }
+  }
+
+  // Label
+  .q-field__label {
+    color: $primevue-text-color-secondary !important;
+    font-size: 14px !important;
+    font-weight: 500 !important;
+    top: -8px !important;
+    left: 12px !important;
+    background: $primevue-surface !important;
+    padding: 0 4px !important;
+    transform: none !important;
+  }
+
+  // Margem inferior
+  .q-field__bottom {
+    padding-top: 4px !important;
+  }
+
+  // Estados de erro
+  &.q-field--error {
+    .q-field__control {
+      border-color: #ef4444 !important;
+      box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.1) !important;
+    }
+  }
+
+  // Estado desabilitado
+  &.q-field--disabled {
+    .q-field__control {
+      background: #f9fafb !important;
+      border-color: #e5e7eb !important;
+      color: $primevue-text-color-muted !important;
+    }
+  }
+}
+
+// ========================================
+// INPUTS ESPECÍFICOS
+// ========================================
+
+// QInput
+.q-input {
+  .q-field__control {
+    height: auto !important;
+  }
+}
+
+// QSelect
+.q-select {
+  .q-field__control {
+    cursor: pointer !important;
+  }
+
+  .q-select__dropdown-icon {
+    color: $primevue-text-color-secondary !important;
+    font-size: 16px !important;
+  }
+}
+
+// QTextarea
+.q-textarea {
+  .q-field__control {
+    min-height: 80px !important;
+  }
+
+  .q-field__native {
+    resize: vertical !important;
+  }
+}
+
+// QDate
+.q-date {
+  .q-field__control {
+    cursor: pointer !important;
+  }
+}
+
+// ========================================
+// BOTÕES ESTILO PRIMEVUE
+// ========================================
+
+.q-btn {
+  &.btn-primevue {
+    border-radius: $primevue-border-radius !important;
+    font-size: 14px !important;
+    font-weight: 500 !important;
+    padding: 10px 16px !important;
+    transition: $primevue-transition !important;
+    text-transform: none !important;
+    letter-spacing: 0 !important;
+
+    // Botão primário
+    &.btn-primary {
+      background: $primevue-primary !important;
+      color: white !important;
+      border: 1px solid $primevue-primary !important;
+
+      &:hover {
+        background: $primevue-primary-dark !important;
+        border-color: $primevue-primary-dark !important;
+      }
+    }
+
+    // Botão secundário
+    &.btn-secondary {
+      background: transparent !important;
+      color: $primevue-text-color !important;
+      border: 1px solid $primevue-border-color !important;
+
+      &:hover {
+        background: $primevue-surface-hover !important;
+        border-color: $primevue-border-color-hover !important;
+      }
+    }
+
+    // Botão outline
+    &.btn-outline {
+      background: transparent !important;
+      color: $primevue-primary !important;
+      border: 1px solid $primevue-primary !important;
+
+      &:hover {
+        background: $primevue-primary !important;
+        color: white !important;
+      }
+    }
+  }
+}
+
+// ========================================
+// CHECKBOX E RADIO ESTILO PRIMEVUE
+// ========================================
+
+.q-checkbox {
+  .q-checkbox__inner {
+    border-radius: 4px !important;
+    border: 1px solid $primevue-border-color !important;
+    background: $primevue-surface !important;
+    width: 18px !important;
+    height: 18px !important;
+
+    &:hover {
+      border-color: $primevue-border-color-hover !important;
+    }
+  }
+
+  &.q-checkbox--checked {
+    .q-checkbox__inner {
+      background: $primevue-primary !important;
+      border-color: $primevue-primary !important;
+    }
+  }
+}
+
+.q-radio {
+  .q-radio__inner {
+    border: 1px solid $primevue-border-color !important;
+    background: $primevue-surface !important;
+    width: 18px !important;
+    height: 18px !important;
+
+    &:hover {
+      border-color: $primevue-border-color-hover !important;
+    }
+  }
+
+  &.q-radio--checked {
+    .q-radio__inner {
+      border-color: $primevue-primary !important;
+
+      &:after {
+        background: $primevue-primary !important;
+      }
+    }
+  }
+}
+
+// ========================================
+// CLASSES UTILITÁRIAS PRIMEVUE
+// ========================================
+
+.primevue-card {
+  background: $primevue-surface-card !important;
+  border: 1px solid $primevue-surface-border !important;
+  border-radius: $primevue-border-radius !important;
+  box-shadow: $primevue-shadow !important;
+  padding: 20px !important;
+}
+
+.primevue-surface {
+  background: $primevue-surface-ground !important;
+}
+
+.primevue-text {
+  color: $primevue-text-color !important;
+}
+
+.primevue-text-secondary {
+  color: $primevue-text-color-secondary !important;
+}
+
+.primevue-text-muted {
+  color: $primevue-text-color-muted !important;
+}
+
+// ========================================
+// RESPONSIVIDADE
+// ========================================
+
+@media (max-width: 768px) {
+  .q-field {
+    .q-field__control {
+      min-height: 40px !important;
+    }
+
+    .q-field__native {
+      font-size: 16px !important; // Evita zoom no iOS
+    }
+  }
+}

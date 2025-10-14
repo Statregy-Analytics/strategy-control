@@ -1,40 +1,24 @@
-# Strategy Administração (strategy-admin)
+# strategy-control — instruções de desenvolvimento
 
-Gerenciamento da strategy analytics
+Este diretório contém o projeto completo (backend + frontend) e scripts para facilitar o desenvolvimento local com Docker.
 
-## Install the dependencies
+Sumário:
+
+- Backend: `backend/README.md` (instruções de desenvolvimento, uso do `./scripts/dev_up`, troubleshooting de `node_modules`)
+- Frontend: `frontend/README.md`
+
+Iniciar ambiente de desenvolvimento (backend + frontend):
+
 ```bash
-yarn
-# or
-npm install
+# do diretório raiz (admin)
+./scripts/dev_up
 ```
 
-### Start the app in development mode (hot-code reloading, error reporting, etc.)
-```bash
-quasar dev
-```
+Se encontrar erro do tipo "Cannot find module 'joi'" dentro do container do backend, veja a seção "Desenvolvimento com Docker (script `dev_up`)" em `backend/README.md` — ela explica a causa (bind-mount sobrescrevendo node_modules) e traz comandos úteis para resolução.
 
+---
 
-### Lint the files
-```bash
-yarn lint
-# or
-npm run lint
-```
+Para detalhes dos serviços, abra:
 
-
-### Format the files
-```bash
-yarn format
-# or
-npm run format
-```
-
-
-### Build the app for production
-```bash
-quasar build
-```
-
-### Customize the configuration
-See [Configuring quasar.config.js](https://v2.quasar.dev/quasar-cli-vite/quasar-config-js).
+- backend: `backend/README.md`
+- frontend: `frontend/README.md`

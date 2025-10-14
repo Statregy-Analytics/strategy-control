@@ -1,0 +1,19 @@
+# Ignore Python virtualenv and caches for backend
+venv/
+env/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+build/
+dist/
+*.egg-info/
+.env
+.env.*
+.venv
+.pytest_cache
+.DS_Store
+logs
+*.log
+/.git
+/.gitignore

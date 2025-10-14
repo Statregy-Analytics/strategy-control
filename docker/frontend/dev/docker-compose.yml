@@ -1,0 +1,42 @@
+services:
+  strategy-frontend:
+    build:
+      context: ../../..
+      dockerfile: docker/frontend/dev/Dockerfile
+      # build target is optional; kept for parity with multi-stage Dockerfiles
+      # target: development
+    container_name: strategy-frontend-dev
+    ports:
+      - "9000:9000"
+    volumes:
+      # Mount the whole frontend project into the container for live development
+      - ../../../frontend:/app:cached
+      # Keep node_modules inside a Docker volume so host mounts don't hide them
+      - frontend_node_modules:/app/node_modules
+    environment:
+      - NODE_ENV=development
+      - HOST=0.0.0.0
+      - PORT=9000
+      - CHOKIDAR_USEPOLLING=true
+      # Quasar/Vite can pick up these if needed
+      - PORT=9000
+      - VITE_HOST=0.0.0.0
+    stdin_open: true
+    tty: true
+    working_dir: /app
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD-SHELL", "wget -qO- http://localhost:9000 || exit 1"]
+      interval: 10s
+      timeout: 3s
+      retries: 5
+    networks:
+      - strategy-network-dev
+
+networks:
+  strategy-network-dev:
+    driver: bridge
+
+volumes:
+  frontend_node_modules:
+    driver: local

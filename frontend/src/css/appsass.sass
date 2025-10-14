@@ -1,0 +1,208 @@
+@font-face
+  font-family: 'Inter'
+  src: url('./fonts/Inter/Inter-Regular.ttf') format('truetype')
+  font-weight: 400
+  font-style: normal
+
+@font-face
+  font-family: 'Inter'
+  src: url('./fonts/Inter/Inter-Bold.ttf') format('truetype')
+  font-weight: 700
+  font-style: normal
+
+@font-face
+  font-family: 'Inter'
+  src: url('./fonts/Inter/Inter-Medium.ttf') format('truetype')
+  font-weight: 500
+  font-style: normal
+
+@font-face
+  font-family: 'Inter'
+  src: url('./fonts/Inter/Inter-Light.ttf') format('truetype')
+  font-weight: 300
+  font-style: normal
+
+@font-face
+  font-family: 'Inter'
+  src: url('./fonts/Inter/Inter-Thin.ttf') format('truetype')
+  font-weight: 100
+  font-style: normal
+
+@font-face
+  font-family: 'Inter'
+  src: url('./fonts/Inter/Inter-ExtraLight.ttf') format('truetype')
+  font-weight: 200
+  font-style: normal
+
+@font-face
+  font-family: 'Inter'
+  src: url('./fonts/Inter/Inter-SemiBold.ttf') format('truetype')
+  font-weight: 600
+  font-style: normal
+
+@font-face
+  font-family: 'Inter'
+  src: url('./fonts/Inter/Inter-ExtraBold.ttf') format('truetype')
+  font-weight: 800
+  font-style: normal
+
+@font-face
+  font-family: 'Inter'
+  src: url('./fonts/Inter/Inter-Black.ttf') format('truetype')
+  font-weight: 900
+  font-style: normal
+body
+  font-family: 'Inter', sans-serif !important
+.custom-btn-warning
+  background-color: #FFD2881c !important
+  color: #000 !important
+  border: 1px solid #FFD288 !important
+.custom-btn-primary
+  background-color: #21ba451c !important
+  color: #000 !important
+  border: 1px solid #F1FDE8 !important
+.custom-btn-info
+  background-color: #EDF8FF !important
+  color: #000 !important
+  border: 1px solid #B9E1FF !important
+.custom-btn-negative
+  background-color: #FF3D001c !important
+  color: #000 !important
+  border: 1px solid #FF3D00 !important
+.custom-btn-muted
+  background-color: #bdb4b41c !important
+  color: #000 !important
+  border: 1px solid #bdb4b4 !important
+.bg-negative-light
+  background:#FFF7EB !important
+.bg-positive-light
+  background:#EFF8FF !important
+%tag-style
+  font-size: 12px
+  font-weight: 400
+  border-radius: 2px
+%tag-border-style
+  border-radius: 8px !important
+.tag-positive-light
+  @extend %tag-style
+  border: 1px solid #75cfff
+
+.tag-warning-light
+  @extend %tag-style
+  border: 1px solid #FFB54A
+.text-h7
+  font-weight: 700 !important
+  font-size: 17px !important
+.card-authentication
+  height: 75vh
+  justify-items: center
+  .card-auth
+    background: linear-gradient(183.42deg, rgba(255, 255, 255, 0.08) 2.82%, rgba(255, 255, 255, 0.01) 97.18%)
+    width: 534px
+    // height: 568px
+    border-radius: 8px
+    padding: 48px
+    gap: 24px
+.notify-success
+  border-radius: 8px
+  border-width: 1px
+  background: linear-gradient(183.42deg, rgba(255, 255, 255, 0.08) 2.82%, rgba(255, 255, 255, 0.01) 97.18%)
+  border: 1px solid var(--success-500, #52C41A)
+  box-shadow: 0px 0px 12px 6px #74E23929
+.control-width
+  .q-dialog__inner
+    min-width: 20% !important
+    max-width: 60% !important
+.control-width-compare
+  .q-dialog__inner
+    min-width: 30% !important
+    max-width: 80% !important
+.control-width-historic
+  .q-dialog__inner
+    min-width: 50% !important
+    max-width: 80% !important
+.border-radius-pattern
+  border-radius: 8px !important
+.border-pattern
+  background:#FAFAFA !important
+  border-radius: 8px !important
+  border: 1px solid #74E23929 !important
+.border-gray
+  @extend %tag-border-style
+  border: 1px solid #E0E0E0 !important
+.outline
+  border: 1px solid currentColor !important
+.q-btn__icon 
+  color: inherit !important
+.text-compara
+  font-weight: 500 !important
+.text-title
+  font-weight: 700 !important
+  font-size:14px !important
+  color: #333 !important
+.d-grid-g14
+  display: grid !important
+  gap: 14px !important
+.trabler-icon-size
+  width:16px
+  height:16px
+.tabler-icon-s14
+  width:14px
+  height:14px
+.q-tab--active 
+  background-color: #00a2ff28
+  border-top-right-radius: 8px
+  border-top-left-radius: 8px
+
+.q-field__control
+  border-radius: 6px !important
+  // height: 30px !important
+
+// .q-checkbox__inner
+//   width: 14px !important
+//   height: 14px !important
+//   font-size: 14px
+
+
+// /* Cor da borda (cinza) */
+// .q-checkbox__inner:before
+//   border: 1px solid #999 !important
+
+
+// /* Cor quando selecionado (opcional) */
+// .q-checkbox__inner--truthy .q-checkbox__bg
+//   background: var(--q-primary) !important
+//   border-color: var(--q-muted) !important
+
+.input-personal
+  border-radius: 8px
+  border: 1px solid #d9d9d9
+  width: 100%
+  height: 42px
+  display: flex
+  place-items: center start
+  color: #d9d9d9
+  /* gap: 16px */
+  padding-left: calc(14 / 16) + em
+  justify-content: space-between
+  .text-input
+    font-family: Inter
+    font-weight: 400
+    font-size: 0.8em
+    line-height: 135%
+    letter-spacing: 0%
+    vertical-align: middle
+  &:hover
+    border: 1px solid #000 !important
+    cursor: pointer
+.border-right-3
+  border-right:  3px solid #EFEFEF !important
+
+.my-special-class:not(.text-left)
+  padding-left: 2.4rem !important
+.cpa-logic-table,
+.expansive-logic
+  tr:first-child
+    background-color: #f5f5f5
+    color: #000;
+    margin-right: 10px !important

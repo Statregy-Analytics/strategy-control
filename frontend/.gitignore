@@ -1,0 +1,4 @@
+playwright-videos/*.webm
+playwright-videos/*.png
+
+.env

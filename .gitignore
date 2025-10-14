@@ -31,3 +31,13 @@ yarn-error.log*
 
 # local .env files
 .env.local*
+
+.vscode/*
+*.sqlite
+*.sqlite3
+*.db
+
+*.env
+tutorial.txt
+config.txt
+tutorial.md

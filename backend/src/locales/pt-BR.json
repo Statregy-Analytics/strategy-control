@@ -1,0 +1,8 @@
+{
+  "any.required": "O campo '{field}' é obrigatório.",
+  "string.email": "O campo '{field}' deve ser um email válido.",
+  "string.min": "O campo '{field}' deve ter pelo menos {limit} caracteres.",
+  "cpf_invalid": "CPF/CNPJ inválido.",
+  "cpf_exists": "CPF/CNPJ já cadastrado.",
+  "payload_invalid": "Payload inválido."
+}

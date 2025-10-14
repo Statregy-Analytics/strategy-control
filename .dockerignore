@@ -1,0 +1,32 @@
+# Docker ignore for root context
+.git
+.gitignore
+README.md
+*.md
+.env*
+.DS_Store
+.vscode
+.idea
+
+# Frontend specific ignores when building from root
+frontend/node_modules
+frontend/dist
+frontend/build
+frontend/.quasar
+frontend/.cache
+frontend/logs
+frontend/*.log
+frontend/coverage
+
+# Backend specific ignores
+backend/node_modules
+backend/dist
+backend/build
+backend/.cache
+backend/logs
+backend/*.log
+backend/coverage
+backend/.env*
+
+# Docker files
+docker/

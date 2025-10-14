@@ -1,0 +1,172 @@
+name: Manual Deploy to VM
+
+on:
+  workflow_dispatch:
+    inputs:
+      pr_number:
+        description: "PR number to deploy (optional)"
+        required: false
+        default: ""
+      ref:
+        description: "Git ref or sha to deploy (optional). If provided overrides pr_number."
+        required: false
+        default: ""
+
+jobs:
+  deploy_manual:
+    name: Manual Deploy to VM
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+      id-token: write
+    steps:
+      - name: Determine ref to checkout
+        id: set_ref
+        run: |
+          set -euo pipefail
+          # Prefer explicit ref input when provided
+          if [ "${{ inputs.ref }}" != "" ]; then
+            echo "ref=${{ inputs.ref }}" >> $GITHUB_OUTPUT
+            exit 0
+          fi
+
+          # If a PR number was provided, prefer the merge ref which GitHub provides when available.
+          # However, for some repos or contexts (notably workflow_dispatch) the special merge ref
+          # refs/pull/<n>/merge may not exist. To avoid fetch failures in actions/checkout, try
+          # refs/pull/<n>/merge first and fall back to refs/pull/<n>/head when the merge ref is missing.
+          if [ "${{ inputs.pr_number }}" != "" ]; then
+            PR_NUM="${{ inputs.pr_number }}"
+            MERGE_REF="refs/pull/${PR_NUM}/merge"
+            HEAD_REF="refs/pull/${PR_NUM}/head"
+
+            # Probe the GitHub API for the merge ref; if present use it, otherwise fall back to head ref.
+            # Use the GITHUB_TOKEN (workflow has contents: read permission) so this works for private repos.
+            # The REST API expects the ref path without a duplicated leading 'refs/' segment
+            API_REF="${MERGE_REF#refs/}"
+            HTTP_STATUS=$(curl -s -o /dev/null -w "%{http_code}" -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" -H "Accept: application/vnd.github+json" "$GITHUB_API_URL/repos/${{ github.repository }}/git/refs/$API_REF" || true)
+            if [ "$HTTP_STATUS" = "200" ]; then
+              echo "ref=$MERGE_REF" >> $GITHUB_OUTPUT
+            else
+              echo "ref=$HEAD_REF" >> $GITHUB_OUTPUT
+            fi
+            exit 0
+          fi
+
+          # Default to the workflow's ref
+          echo "ref=${{ github.ref }}" >> $GITHUB_OUTPUT
+
+      - name: Checkout repository at requested ref
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          ref: ${{ steps.set_ref.outputs.ref }}
+          submodules: true
+
+      - name: Validate required deployment secrets
+        id: validate_secrets
+        env:
+          VM_HOST: ${{ secrets.VM_HOST }}
+          VM_USER: ${{ secrets.VM_USER }}
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+          SSH_PORT: ${{ secrets.SSH_PORT }}
+        run: |
+          set -euo pipefail
+          MISSING=()
+          if [ -z "${VM_HOST:-}" ]; then MISSING+=(VM_HOST); fi
+          if [ -z "${VM_USER:-}" ]; then MISSING+=(VM_USER); fi
+          if [ -z "${SSH_PRIVATE_KEY:-}" ]; then MISSING+=(SSH_PRIVATE_KEY); fi
+          PORT_OK=true
+          if [ -n "${SSH_PORT:-}" ]; then
+            if ! echo "${SSH_PORT}" | grep -E '^[0-9]+$' >/dev/null 2>&1; then
+              echo "Invalid SSH_PORT: must be numeric" >&2
+              PORT_OK=false
+            fi
+          fi
+          if [ ${#MISSING[@]} -ne 0 ] || [ "$PORT_OK" = false ]; then
+            echo "Missing or invalid deployment secrets: ${MISSING[*]}" >&2
+            echo "secrets_ok=false" >> "$GITHUB_OUTPUT"
+            exit 1
+          else
+            # detect common mistake: user uploaded public key instead of private key
+            PKG="${SSH_PRIVATE_KEY//\n/ }"
+            if echo "$PKG" | grep -E '^ssh-(rsa|ed25519|dss) ' >/dev/null 2>&1 || echo "$PKG" | grep -i 'BEGIN PUBLIC KEY' >/dev/null 2>&1 || echo "$PKG" | grep -E '\.pub$' >/dev/null 2>&1; then
+              echo "SSH_PRIVATE_KEY looks like a public key or not a private key. Make sure you set the private key content (e.g. cat ~/.ssh/id_ed25519) as the secret, not the .pub file." >&2
+              echo "secrets_ok=false" >> "$GITHUB_OUTPUT"
+              exit 1
+            fi
+            echo "secrets_ok=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Pre-clean remote app directory
+        if: steps.validate_secrets.outputs.secrets_ok == 'true'
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.VM_HOST }}
+          username: ${{ secrets.VM_USER }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          port: ${{ secrets.SSH_PORT }}
+          script: |
+            echo "Preparing remote path /home/${{ secrets.VM_USER }}/app"
+            # remove both the user's upload path and the final deploy path to avoid leftover files
+            if sudo -n true 2>/dev/null; then
+              sudo rm -rf /home/${{ secrets.VM_USER }}/app || true
+              sudo rm -rf /home/deploy/app || true
+            else
+              rm -rf /home/${{ secrets.VM_USER }}/app || true
+              rm -rf /home/deploy/app || true
+            fi
+            mkdir -p /home/${{ secrets.VM_USER }}
+
+      - name: Deploy files via rsync over SSH
+        if: steps.validate_secrets.outputs.secrets_ok == 'true'
+        env:
+          VM_HOST: ${{ secrets.VM_HOST }}
+          VM_USER: ${{ secrets.VM_USER }}
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+          SSH_PORT: ${{ secrets.SSH_PORT }}
+        run: |
+          set -euo pipefail
+          echo "Preparing ssh key and known_hosts for $VM_HOST"
+          mkdir -p ~/.ssh
+          printf "%s\n" "$SSH_PRIVATE_KEY" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+          # add host key to known_hosts (use port if provided)
+          if [ -n "$SSH_PORT" ]; then
+            ssh-keyscan -p "$SSH_PORT" "$VM_HOST" >> ~/.ssh/known_hosts 2>/dev/null || true
+            RSYNC_SSH="ssh -i ~/.ssh/id_rsa -o UserKnownHostsFile=~/.ssh/known_hosts -o StrictHostKeyChecking=no -p $SSH_PORT"
+          else
+            ssh-keyscan "$VM_HOST" >> ~/.ssh/known_hosts 2>/dev/null || true
+            RSYNC_SSH="ssh -i ~/.ssh/id_rsa -o UserKnownHostsFile=~/.ssh/known_hosts -o StrictHostKeyChecking=no"
+          fi
+          echo "Running rsync to $VM_USER@$VM_HOST:/home/$VM_USER/app"
+          # exclude .git by default; adjust excludes as needed
+          rsync -az --delete --exclude='.git' -e "$RSYNC_SSH" ./ "$VM_USER@$VM_HOST":/home/"$VM_USER"/app
+
+      - name: Move uploaded app to deploy home and fix permissions
+        if: steps.validate_secrets.outputs.secrets_ok == 'true'
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.VM_HOST }}
+          username: ${{ secrets.VM_USER }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          port: ${{ secrets.SSH_PORT }}
+          script: |
+            set -euo pipefail
+            SRC="/home/${{ secrets.VM_USER }}/app"
+            DST="/home/deploy/app"
+            if [ -d "$SRC" ]; then
+              if sudo -n true 2>/dev/null; then
+                sudo rm -rf "$DST" || true
+                sudo mv "$SRC" "$DST"
+                sudo chown -R deploy:deploy "/home/deploy"
+                sudo chmod -R 755 "$DST" || true
+              else
+                rm -rf "$DST" || true
+                mv "$SRC" "$DST" || true
+                chown -R deploy:deploy "/home/deploy" || true
+                chmod -R 755 "$DST" || true
+              fi
+            else
+              echo "Source $SRC does not exist; nothing to move"
+            fi

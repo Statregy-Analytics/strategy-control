@@ -1,0 +1,21 @@
+# Ignore node modules and build artifacts for frontend
+node_modules
+dist
+build
+.quasar
+.cache
+/.env
+.env.local
+.env.*.local
+.DS_Store
+npm-debug.log
+yarn-error.log
+pnpm-lock.yaml
+package-lock.json
+/.idea
+.vscode
+logs
+*.log
+coverage
+/.git
+/.gitignore
