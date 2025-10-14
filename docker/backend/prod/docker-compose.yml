@@ -1,0 +1,19 @@
+services:
+  strategy-backend-prod:
+    build:
+      context: ../../..
+      dockerfile: docker/backend/prod/Dockerfile
+    container_name: strategy-backend-prod
+    ports:
+      - "3333:3333"
+    env_file:
+      - ../../../backend/.env.production
+    environment:
+      - NODE_ENV=production
+    restart: unless-stopped
+    networks:
+      - strategy-network-prod
+
+networks:
+  strategy-network-prod:
+    driver: bridge

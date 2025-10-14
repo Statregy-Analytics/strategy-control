@@ -1,0 +1,19 @@
+services:
+  strategy-frontend-prod:
+    build:
+      context: ../../..
+      dockerfile: docker/frontend/prod/Dockerfile
+    container_name: strategy-frontend-prod
+    ports:
+      - "80:80"
+    env_file:
+      - ../../../frontend/.env.production
+    environment:
+      - NODE_ENV=production
+    restart: unless-stopped
+    networks:
+      - strategy-network-prod
+
+networks:
+  strategy-network-prod:
+    driver: bridge
