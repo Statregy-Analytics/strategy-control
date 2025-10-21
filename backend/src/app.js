@@ -7,11 +7,49 @@ const cors = require("cors");
 const authMiddleware = require("./middleware/auth");
 
 const app = express();
-app.use(express.json());
-// Enable CORS for the frontend (allow override via CORS_ORIGIN env)
-app.use(cors({ origin: process.env.CORS_ORIGIN || "http://localhost:9000" }));
+// Enable CORS for the frontend. Allow flexible dev origins (localhost ports)
+// or override via CORS_ORIGIN env (comma-separated list).
+const allowedOriginsRaw = process.env.CORS_ORIGIN || "";
+const allowedOrigins = allowedOriginsRaw
+  .split(",")
+  .map((s) => (s || "").trim())
+  .filter(Boolean);
+
+app.use(
+  cors({
+    origin: (origin, callback) => {
+      // allow non-browser requests (curl, server-to-server) which have no origin
+      if (!origin) return callback(null, true);
+      // if configured list contains this origin, allow
+      if (allowedOrigins.length && allowedOrigins.includes(origin))
+        return callback(null, true);
+      // allow any localhost origin (different dev ports like 9000,9001)
+      try {
+        const u = new URL(origin);
+        if (u.hostname === "localhost" || u.hostname === "127.0.0.1")
+          return callback(null, true);
+      } catch (e) {
+        // ignore
+      }
+      // otherwise reject
+      return callback(new Error("Not allowed by CORS"), false);
+    },
+  })
+);
 // auth middleware (populates req.user from Authorization header in dev)
 app.use(authMiddleware);
+// Increase JSON / urlencoded limits so large base64 payloads (avatar) are accepted
+app.use(express.json({ limit: "12mb" }));
+app.use(express.urlencoded({ limit: "12mb", extended: true }));
+
+// Ensure storage directory exists and serve static files for uploaded assets
+const path = require("path");
+const fs = require("fs");
+const storageDir = path.join(__dirname, "..", "storage");
+try {
+  fs.mkdirSync(storageDir, { recursive: true });
+} catch (e) {}
+app.use("/storage", express.static(storageDir));
 
 // Mount API routes under /api prefix
 app.use("/api/clients", clientsRouter);

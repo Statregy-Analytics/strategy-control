@@ -208,7 +208,7 @@
 </template>
 
 <script setup>
-import { ref, defineComponent, computed } from 'vue'
+import { ref, defineComponent, computed, onMounted } from 'vue'
 import { useLayoutStore } from 'src/stores/layout'
 import { storeToRefs } from 'pinia'
 import PasswordConfirm from 'components/Auth/PasswordConfirm.vue'
@@ -227,6 +227,10 @@ const selectedBank = ref(null)
 const uploadedFiles = ref([])
 const sendPasswordAction = ref(false)
 const { tiposOptionsDeposito, getNameClients, banks } = useMovement()
+
+onMounted(() => {
+  console.debug('[DEBUG] OpenDepositLayout mounted')
+})
 
 // clientes
 const clients = computed(() => {

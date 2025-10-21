@@ -63,16 +63,26 @@ import { storeToRefs } from 'pinia'
 const storeLogin = useAuthStore()
 const { auth } = storeToRefs(storeLogin)
 const setLandingPage = () => {
+  console.log('[DEBUG] setLandingPage called - setting finished and will push /edit-lp in 3s', {
+    selectedInitial: storeLogin.selectedInitial,
+    finished: storeLogin.finished,
+  })
   storeLogin.setFineshed(true)
   setTimeout(() => {
+    console.log('[DEBUG] Navigating to /edit-lp now')
     router.push({ path: '/edit-lp' })
   }, 3000)
 }
 
 const setTransiction = () => {
+  console.log('[DEBUG] setTransiction called - setting finished and will push /transaction in 3s', {
+    selectedInitial: storeLogin.selectedInitial,
+    finished: storeLogin.finished,
+  })
   storeLogin.setFineshed(true)
   setTimeout(() => {
-    router.push({ path: '/transaction' })
+    console.log('[DEBUG] Navigating to /transaction now (by name)')
+    router.push({ name: 'Transações' })
   }, 3000)
 }
 

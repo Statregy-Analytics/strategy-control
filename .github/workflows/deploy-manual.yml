@@ -56,11 +56,46 @@ jobs:
           # Default to the workflow's ref
           echo "ref=${{ github.ref }}" >> $GITHUB_OUTPUT
 
+      # Some repositories or workflow contexts (notably workflow_dispatch) may not have the
+      # special merge ref refs/pull/<n>/merge available. actions/checkout will fail if asked to
+      # fetch a non-existent ref. The step below probes the GitHub API for the merge ref and
+      # falls back to refs/pull/<n>/head when necessary. This mirrors the earlier logic in
+      # 'Determine ref to checkout' but ensures a reliable ref is passed to actions/checkout.
+      - name: Prepare and fetch requested ref
+        id: fetch_ref
+        run: |
+          set -euo pipefail
+          REQ_REF='${{ steps.set_ref.outputs.ref }}'
+          echo "Requested ref: $REQ_REF"
+
+          # If ref is a pull/merge ref, try fetching it; if it doesn't exist, try pull/<n>/head
+          if echo "$REQ_REF" | grep -qE '^refs/pull/[0-9]+/merge$'; then
+            PRNUM=$(echo "$REQ_REF" | sed -E 's@refs/pull/([0-9]+)/merge@\1@')
+            MERGE_REF="refs/pull/${PRNUM}/merge"
+            HEAD_REF="refs/pull/${PRNUM}/head"
+
+            echo "Probing for $MERGE_REF via GitHub API"
+            API_REF="${MERGE_REF#refs/}"
+            HTTP_STATUS=$(curl -s -o /dev/null -w "%{http_code}" -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" -H "Accept: application/vnd.github+json" "$GITHUB_API_URL/repos/${{ github.repository }}/git/refs/$API_REF" || true)
+            if [ "$HTTP_STATUS" = "200" ]; then
+              echo "ref=$MERGE_REF" >> "$GITHUB_OUTPUT"
+              echo "FOUND_REF=$MERGE_REF" >> "$GITHUB_ENV"
+            else
+              echo "Merge ref not found (HTTP $HTTP_STATUS), falling back to $HEAD_REF"
+              echo "ref=$HEAD_REF" >> "$GITHUB_OUTPUT"
+              echo "FOUND_REF=$HEAD_REF" >> "$GITHUB_ENV"
+            fi
+          else
+            # For any other ref, use it as-is
+            echo "ref=$REQ_REF" >> "$GITHUB_OUTPUT"
+            echo "FOUND_REF=$REQ_REF" >> "$GITHUB_ENV"
+          fi
+
       - name: Checkout repository at requested ref
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
-          ref: ${{ steps.set_ref.outputs.ref }}
+          ref: ${{ steps.fetch_ref.outputs.ref }}
           submodules: true
 
       - name: Validate required deployment secrets

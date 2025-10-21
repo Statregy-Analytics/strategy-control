@@ -11,7 +11,16 @@ const routes = [
       {
         path: '/transaction',
         name: 'Transações',
-        component: () => import('pages/TransctionPage.vue'),
+        component: () =>
+          import('pages/TransctionPage.vue')
+            .then((m) => {
+              console.debug('[DEBUG] TransctionPage imported successfully')
+              return m
+            })
+            .catch((err) => {
+              console.error('[DEBUG] Failed to import TransctionPage', err)
+              throw err
+            }),
       },
       {
         path: '/contracts',

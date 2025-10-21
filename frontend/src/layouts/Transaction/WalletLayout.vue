@@ -16,10 +16,14 @@
 <script setup>
 import BalanceInfoCard from 'src/components/Card/BalanceInfoCard.vue'
 import TransactionHistoric from 'src/components/Table/Wallet/TransactionHistoric.vue'
-import { defineComponent, ref } from 'vue'
+import { defineComponent, ref, onMounted } from 'vue'
 
 defineComponent({
   name: 'WalletLayout',
+})
+
+onMounted(() => {
+  console.debug('[DEBUG] WalletLayout mounted')
 })
 const infoCard = ref([
   {

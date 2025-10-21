@@ -45,6 +45,11 @@ onMounted(async () => {
     storeLogin.selectedInitial = true
   }
   console.log(route.query)
+  console.log('[DEBUG] AuthView mounted - state', {
+    selectedInitial: storeLogin.selectedInitial,
+    finished: storeLogin.finished,
+    auth: storeLogin.auth,
+  })
   if (route.query.q) {
     console.log(route.name)
     // await stateAuth(route.query.q, route.name);

@@ -7,12 +7,13 @@
     "start": "node src/index.js",
     "dev": "nodemon src/index.js",
     "test": "jest --runInBand",
-  "reset-db": "node -e \"const fs=require('fs');try{fs.unlinkSync('./dev.sqlite');console.log('deleted dev.sqlite')}catch(e){console.log('no dev.sqlite to delete')}\"",
+    "reset-db": "node -e \"const fs=require('fs');try{fs.unlinkSync('./dev.sqlite');console.log('deleted dev.sqlite')}catch(e){console.log('no dev.sqlite to delete')}\"",
     "test:watch": "jest --watch"
   },
   "dependencies": {
     "better-sqlite3": "^8.0.0",
     "cors": "^2.8.5",
+    "multer": "^1.4.4",
     "joi": "^17.9.2",
     "dotenv": "^16.0.0",
     "express": "^4.18.2"

@@ -28,6 +28,32 @@ router.get("/:id", (req, res) => {
 const Joi = require("joi");
 const path = require("path");
 const fs = require("fs");
+// storage roots for saving uploaded files (used both by multer and JSON dataURL fallback)
+const storageRoot = path.join(__dirname, "..", "..", "storage");
+const clientsStorage = path.join(storageRoot, "clients");
+try {
+  fs.mkdirSync(clientsStorage, { recursive: true });
+} catch (e) {}
+// multer for file uploads (optional)
+let upload;
+try {
+  const multer = require("multer");
+  // storage for uploaded avatars and other docs
+  const storageRoot = path.join(__dirname, "..", "..", "storage");
+  const clientsStorage = path.join(storageRoot, "clients");
+  try {
+    fs.mkdirSync(clientsStorage, { recursive: true });
+  } catch (e) {}
+  upload = multer({
+    dest: clientsStorage,
+    limits: { fileSize: 5 * 1024 * 1024 },
+  });
+} catch (e) {
+  // multer not installed; provide no-op middleware so server doesn't crash.
+  // Provide both single and fields to keep API compatible.
+  const noop = () => (req, res, next) => next();
+  upload = { single: noop, fields: () => noop() };
+}
 
 // load locale messages (pt-BR) - fallback to inline mapping
 let localeMessages = {};
@@ -212,21 +238,230 @@ function normalizeCpfCnpj(req, res, next) {
   next();
 }
 
-// Create
-router.post("/", normalizeCpfCnpj, validateClientBody, (req, res) => {
-  const data = req.body;
-  const created = adapter.create(data);
-  res.status(201).json(created);
-});
+// Helper to handle multipart payloads: if multipart, expect 'payload' JSON and file 'avatar'
+function extractPayloadAndFile(req) {
+  // default: json body
+  if (req.is && req.is("multipart/form-data")) {
+    let payload = {};
+    try {
+      if (req.body && req.body.payload) payload = JSON.parse(req.body.payload);
+    } catch (e) {
+      payload = {};
+    }
+    if (!payload) payload = {};
+    if (!payload.cliente) payload.cliente = {};
 
-// Update
-router.put("/:id", normalizeCpfCnpj, validateClientBody, (req, res) => {
-  const id = Number(req.params.id);
-  const data = req.body;
-  const updated = adapter.update(id, data);
-  if (!updated) return res.status(404).json({ error: "Not found" });
-  res.json(updated);
-});
+    // legacy single file (req.file) support
+    if (req.file) {
+      try {
+        const rel = path.join("clients", path.basename(req.file.path));
+        const url = `/storage/${rel}`;
+        payload.cliente.avatar = url;
+      } catch (e) {}
+    }
+
+    // support multiple named file fields: req.files is an object { fieldName: [file,...] }
+    if (req.files && typeof req.files === "object") {
+      try {
+        for (const fieldName of Object.keys(req.files)) {
+          const arr = req.files[fieldName];
+          if (!Array.isArray(arr) || arr.length === 0) continue;
+          const urls = arr.map(
+            (f) => `/storage/clients/${path.basename(f.path)}`
+          );
+          // if only one file, set as string for backward compatibility, otherwise array
+          payload.cliente[fieldName] = urls.length === 1 ? urls[0] : urls;
+        }
+      } catch (e) {
+        // ignore mapping errors
+      }
+    }
+    return payload;
+  }
+  // If JSON (not multipart), accept dataURL fields and persist them as files
+  try {
+    const body = req.body || {};
+    const payload =
+      body &&
+      (body.payload
+        ? typeof body.payload === "string"
+          ? JSON.parse(body.payload)
+          : body.payload
+        : body);
+    if (payload && payload.cliente && typeof payload.cliente === "object") {
+      const docFields = [
+        "avatar",
+        "comprovante_endereco",
+        "certidao_casamento",
+        "certidao_nascimento",
+      ];
+
+      function writeDataUrlToFile(dataurl, prefix) {
+        try {
+          if (!dataurl || typeof dataurl !== "string") return null;
+          const m = dataurl.match(/^data:(.+?);base64,(.*)$/);
+          if (!m) return null;
+          const mime = m[1];
+          const base64 = m[2];
+          const ext =
+            (mime.split("/")[1] || "bin").replace(/[^a-z0-9]/gi, "") || "bin";
+          const name = `${prefix}-${Date.now()}-${Math.random()
+            .toString(16)
+            .slice(2, 8)}.${ext}`;
+          const dest = path.join(clientsStorage, name);
+          const buf = Buffer.from(base64, "base64");
+          fs.writeFileSync(dest, buf);
+          return `/storage/clients/${name}`;
+        } catch (e) {
+          return null;
+        }
+      }
+
+      for (const f of docFields) {
+        const val = payload.cliente[f];
+        if (!val) continue;
+        // single dataurl string
+        if (typeof val === "string" && val.startsWith("data:")) {
+          const url = writeDataUrlToFile(val, f);
+          if (url) payload.cliente[f] = url;
+        } else if (Array.isArray(val) && val.length) {
+          const urls = [];
+          for (const v of val) {
+            if (typeof v === "string" && v.startsWith("data:")) {
+              const url = writeDataUrlToFile(v, f);
+              if (url) urls.push(url);
+            } else if (typeof v === "string" && v.startsWith("/storage")) {
+              urls.push(v);
+            }
+          }
+          if (urls.length === 1) payload.cliente[f] = urls[0];
+          else if (urls.length > 1) payload.cliente[f] = urls;
+        }
+      }
+    }
+    return payload;
+  } catch (e) {
+    return req.body;
+  }
+}
+
+// Create (supports multipart via upload.fields)
+router.post(
+  "/",
+  // accept named file fields. These keys will be mapped into payload.cliente.<fieldName>
+  upload.fields([
+    { name: "avatar", maxCount: 1 },
+    { name: "comprovante_endereco", maxCount: 3 },
+    { name: "certidao_casamento", maxCount: 2 },
+    { name: "certidao_nascimento", maxCount: 2 },
+  ]),
+  normalizeCpfCnpj,
+  (req, res, next) => {
+    try {
+      // DEBUG LOGS: inspect incoming request for multipart parsing issues
+      try {
+        console.log(
+          "[DEBUG][clients.post] content-type=",
+          req.headers && req.headers["content-type"]
+        );
+        console.log(
+          "[DEBUG][clients.post] is multipart=",
+          req.is && req.is("multipart/form-data")
+        );
+        console.log(
+          "[DEBUG][clients.post] body keys=",
+          Object.keys(req.body || {})
+        );
+        console.log("[DEBUG][clients.post] has file=", !!req.file);
+      } catch (e) {}
+      const data = extractPayloadAndFile(req);
+      // validate
+      const cliente = data && (data.cliente || data);
+      const { error } = clienteSchema.validate(cliente);
+      if (error) {
+        // DEBUG: log formatted Joi error and brief cliente metadata to diagnose 400s
+        try {
+          const detail = error.details && error.details[0];
+          console.log(
+            "[DEBUG][clients.validation] joi=",
+            formatJoiError(detail)
+          );
+          const keys = Object.keys(cliente || {});
+          const avatarType =
+            cliente && cliente.avatar ? typeof cliente.avatar : null;
+          const avatarLen =
+            cliente && cliente.avatar ? String(cliente.avatar).length : 0;
+          console.log(
+            "[DEBUG][clients.validation] cliente.keys=",
+            keys,
+            "avatarType=",
+            avatarType,
+            "avatarLen=",
+            avatarLen
+          );
+        } catch (e) {}
+        return next(
+          ValidationError(
+            formatJoiError(error.details && error.details[0]),
+            400
+          )
+        );
+      }
+      const created = adapter.create(data);
+      res.status(201).json(created);
+    } catch (err) {
+      next(err);
+    }
+  }
+);
+
+// Update (supports multipart)
+router.put(
+  "/:id",
+  upload.fields([
+    { name: "avatar", maxCount: 1 },
+    { name: "comprovante_endereco", maxCount: 3 },
+    { name: "certidao_casamento", maxCount: 2 },
+    { name: "certidao_nascimento", maxCount: 2 },
+  ]),
+  normalizeCpfCnpj,
+  (req, res, next) => {
+    try {
+      // DEBUG LOGS: inspect incoming request for multipart parsing issues
+      try {
+        console.log(
+          "[DEBUG][clients.put] content-type=",
+          req.headers && req.headers["content-type"]
+        );
+        console.log(
+          "[DEBUG][clients.put] is multipart=",
+          req.is && req.is("multipart/form-data")
+        );
+        console.log(
+          "[DEBUG][clients.put] body keys=",
+          Object.keys(req.body || {})
+        );
+        console.log("[DEBUG][clients.put] has file=", !!req.file);
+      } catch (e) {}
+      const id = Number(req.params.id);
+      const data = extractPayloadAndFile(req);
+      const cliente = data && (data.cliente || data);
+      const { error } = clienteSchema.validate(cliente);
+      if (error)
+        return next(
+          ValidationError(
+            formatJoiError(error.details && error.details[0]),
+            400
+          )
+        );
+      const updated = adapter.update(id, data);
+      if (!updated) return res.status(404).json({ error: "Not found" });
+      res.json(updated);
+    } catch (err) {
+      next(err);
+    }
+  }
+);
 
 // Delete
 router.delete("/:id", (req, res) => {

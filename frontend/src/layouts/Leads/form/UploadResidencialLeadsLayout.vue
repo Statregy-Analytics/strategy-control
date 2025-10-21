@@ -46,7 +46,11 @@
     </label-form>
     <!-- Upload de Quitação de débitos UPTU -->
 
-    <label-form className="q-mt-sm" textLabel="Quitação de débitos UPTU" helperText=".jpg, .png, .pdf — até 5MB">
+    <label-form
+      className="q-mt-sm"
+      textLabel="Quitação de débitos UPTU"
+      helperText=".jpg, .png, .pdf — até 5MB"
+    >
       <div class="row q-gutter-sm q-mt-xs" style="margin-top: 0; align-items: center">
         <q-btn
           label="Upload"
@@ -90,7 +94,11 @@
     </label-form>
     <!-- Upload de FOTOS da Residêcia(Tiradas pela Equipe)-->
 
-    <label-form className="q-mt-sm" textLabel="Fotos da Residência (Tiradas pela Equipe Strategy)" helperText=".jpg, .png — até 5MB">
+    <label-form
+      className="q-mt-sm"
+      textLabel="Fotos da Residência (Tiradas pela Equipe Strategy)"
+      helperText=".jpg, .png — até 5MB"
+    >
       <div class="row q-gutter-sm q-mt-xs" style="margin-top: 0; align-items: center">
         <q-btn
           label="Upload"
@@ -136,23 +144,60 @@
 </template>
 <script setup>
 import labelForm from 'src/components/Form/LabelForm.vue'
-import { defineComponent, ref } from 'vue'
+import { defineComponent, ref, watch } from 'vue'
+import { useLayoutStore } from 'src/stores/layout'
+import { storeToRefs } from 'pinia'
+
 defineComponent({
   name: 'UploadResidencialLeadsLayout',
 })
+
+const layoutStore = useLayoutStore()
+const { clientEdit } = storeToRefs(layoutStore)
+
 const uploadedFiles = ref([])
 const uploadedDebitos = ref([])
 const uploadedFotos = ref([])
+const pendingNames = new Map()
+
 const triggerFileInput = () => {
   const fileInput = document.querySelector('.upload-certidao')
   if (fileInput) fileInput.click()
 }
 const handleFileUpload = (event) => {
   const files = event.target.files
-  if (files.length > 0) {
-    uploadedFiles.value = Array.from(files)
-    console.log('Arquivos selecionados:', uploadedFiles.value)
-  }
+  if (!files || files.length === 0) return
+  const arr = Array.from(files)
+  const items = arr.map((f) => ({ file: f, name: f.name, preview: null, dataUrl: null }))
+  items.forEach((it, idx) => {
+    const r = new FileReader()
+    r.onload = (ev) => {
+      items[idx].preview = ev.target.result
+      items[idx].dataUrl = ev.target.result
+      try {
+        if (items[idx] && items[idx].file && items[idx].file.name)
+          pendingNames.set(items[idx].dataUrl, items[idx].file.name)
+      } catch (err) {
+        if (typeof console !== 'undefined' && console.debug)
+          console.debug('pendingNames set failed', err)
+      }
+      uploadedFiles.value = items
+      try {
+        if (clientEdit && clientEdit.value) {
+          if (!clientEdit.value.cliente) clientEdit.value.cliente = {}
+          const urls = items.filter((x) => x.dataUrl).map((x) => x.dataUrl)
+          if (urls.length === 1) clientEdit.value.cliente.iptu = urls[0]
+          else if (urls.length > 1) clientEdit.value.cliente.iptu = urls
+          else delete clientEdit.value.cliente.iptu
+        }
+      } catch (err) {
+        if (typeof console !== 'undefined' && console.debug)
+          console.debug('persist iptu failed', err)
+      }
+    }
+    r.readAsDataURL(it.file)
+  })
+  uploadedFiles.value = items
 }
 const triggerFileInputIptu = () => {
   const fileInput = document.querySelector('.upload-debitos-uptu')
@@ -160,10 +205,38 @@ const triggerFileInputIptu = () => {
 }
 const handleFileUploadIptu = (event) => {
   const files = event.target.files
-  if (files.length > 0) {
-    uploadedDebitos.value = Array.from(files)
-    console.log('Arquivos selecionados:', uploadedDebitos.value)
-  }
+  if (!files || files.length === 0) return
+  const arr = Array.from(files)
+  const items = arr.map((f) => ({ file: f, name: f.name, preview: null, dataUrl: null }))
+  items.forEach((it, idx) => {
+    const r = new FileReader()
+    r.onload = (ev) => {
+      items[idx].preview = ev.target.result
+      items[idx].dataUrl = ev.target.result
+      try {
+        if (items[idx] && items[idx].file && items[idx].file.name)
+          pendingNames.set(items[idx].dataUrl, items[idx].file.name)
+      } catch (err) {
+        if (typeof console !== 'undefined' && console.debug)
+          console.debug('pendingNames set failed', err)
+      }
+      uploadedDebitos.value = items
+      try {
+        if (clientEdit && clientEdit.value) {
+          if (!clientEdit.value.cliente) clientEdit.value.cliente = {}
+          const urls = items.filter((x) => x.dataUrl).map((x) => x.dataUrl)
+          if (urls.length === 1) clientEdit.value.cliente.quitacao_uptu = urls[0]
+          else if (urls.length > 1) clientEdit.value.cliente.quitacao_uptu = urls
+          else delete clientEdit.value.cliente.quitacao_uptu
+        }
+      } catch (err) {
+        if (typeof console !== 'undefined' && console.debug)
+          console.debug('persist quitacao_uptu failed', err)
+      }
+    }
+    r.readAsDataURL(it.file)
+  })
+  uploadedDebitos.value = items
 }
 const triggerFileInputFotos = () => {
   const fileInput = document.querySelector('.upload-fotos')
@@ -171,9 +244,105 @@ const triggerFileInputFotos = () => {
 }
 const handleFileUploadFotos = (event) => {
   const files = event.target.files
-  if (files.length > 0) {
-    uploadedFotos.value = Array.from(files)
-    console.log('Arquivos selecionados:', uploadedFotos.value)
+  if (!files || files.length === 0) return
+  const arr = Array.from(files)
+  const items = arr.map((f) => ({ file: f, name: f.name, preview: null, dataUrl: null }))
+  items.forEach((it, idx) => {
+    const r = new FileReader()
+    r.onload = (ev) => {
+      items[idx].preview = ev.target.result
+      items[idx].dataUrl = ev.target.result
+      try {
+        if (items[idx] && items[idx].file && items[idx].file.name)
+          pendingNames.set(items[idx].dataUrl, items[idx].file.name)
+      } catch (err) {
+        if (typeof console !== 'undefined' && console.debug)
+          console.debug('pendingNames set failed', err)
+      }
+      uploadedFotos.value = items
+      try {
+        if (clientEdit && clientEdit.value) {
+          if (!clientEdit.value.cliente) clientEdit.value.cliente = {}
+          const urls = items.filter((x) => x.dataUrl).map((x) => x.dataUrl)
+          if (urls.length === 1) clientEdit.value.cliente.fotos_residencia = urls[0]
+          else if (urls.length > 1) clientEdit.value.cliente.fotos_residencia = urls
+          else delete clientEdit.value.cliente.fotos_residencia
+        }
+      } catch (err) {
+        if (typeof console !== 'undefined' && console.debug)
+          console.debug('persist fotos_residencia failed', err)
+      }
+    }
+    r.readAsDataURL(it.file)
+  })
+  uploadedFotos.value = items
+}
+
+function resolveStorageUrl(u) {
+  try {
+    if (!u) return u
+    if (typeof u === 'string' && u.startsWith('/storage')) {
+      const apiBase =
+        (import.meta && import.meta.env && import.meta.env.VITE_API_BASE_URL) ||
+        'http://localhost:3333'
+      return `${String(apiBase).replace(/\/$/, '')}${u}`
+    }
+    return u
+  } catch {
+    return u
   }
 }
+
+watch(
+  () => clientEdit && clientEdit.value && clientEdit.value.cliente,
+  (cliente) => {
+    try {
+      const iptu = cliente && cliente.iptu
+      if (iptu) {
+        const arr = Array.isArray(iptu) ? iptu : [iptu]
+        uploadedFiles.value = arr.map((u) => ({
+          file: null,
+          name:
+            typeof u === 'string' && u.startsWith('/storage')
+              ? u.split('/').pop()
+              : pendingNames.get(u) || 'iptu',
+          preview: resolveStorageUrl(u),
+          dataUrl: u,
+        }))
+      } else uploadedFiles.value = []
+
+      const deb = cliente && cliente.quitacao_uptu
+      if (deb) {
+        const arr2 = Array.isArray(deb) ? deb : [deb]
+        uploadedDebitos.value = arr2.map((u) => ({
+          file: null,
+          name:
+            typeof u === 'string' && u.startsWith('/storage')
+              ? u.split('/').pop()
+              : pendingNames.get(u) || 'quitacao_uptu',
+          preview: resolveStorageUrl(u),
+          dataUrl: u,
+        }))
+      } else uploadedDebitos.value = []
+
+      const fotos = cliente && cliente.fotos_residencia
+      if (fotos) {
+        const arr3 = Array.isArray(fotos) ? fotos : [fotos]
+        uploadedFotos.value = arr3.map((u) => ({
+          file: null,
+          name:
+            typeof u === 'string' && u.startsWith('/storage')
+              ? u.split('/').pop()
+              : pendingNames.get(u) || 'foto',
+          preview: resolveStorageUrl(u),
+          dataUrl: u,
+        }))
+      } else uploadedFotos.value = []
+    } catch (err) {
+      if (typeof console !== 'undefined' && console.debug)
+        console.debug('sync leads residential previews failed', err)
+    }
+  },
+  { immediate: true, deep: true },
+)
 </script>

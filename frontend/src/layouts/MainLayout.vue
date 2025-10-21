@@ -71,7 +71,7 @@
     <q-page-container>
       <router-view v-slot="{ Component }">
         <transition name="fade" mode="out-in">
-          <component :is="Component" :key="route.path"></component>
+          <RenderLogger :component="Component" :routePath="route.path" :key="route.path" />
         </transition>
       </router-view>
     </q-page-container>
@@ -83,6 +83,7 @@
 import CompletBrand from 'src/components/brand/CompletBrand.vue'
 import MenuBar from 'src/components/navbar/menuBar.vue'
 import RequestSuccess from 'src/components/Card/RequestSuccess.vue'
+import RenderLogger from 'src/components/Debug/RenderLogger.vue'
 import { useRoute } from 'vue-router'
 import { defineComponent, onBeforeMount, computed, ref } from 'vue'
 import { useLayoutStore } from 'src/stores/layout'

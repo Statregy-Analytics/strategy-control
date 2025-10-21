@@ -30,3 +30,4 @@ backend/.env*
 
 # Docker files
 docker/
+!docker/frontend/prod/nginx.conf

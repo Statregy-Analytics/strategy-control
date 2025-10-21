@@ -1,7 +1,7 @@
 <template>
   <q-avatar :size="size" :rounded="rounded" :color="bgColor" class="avatar-initials">
-    <template v-if="src && src !== ''">
-      <q-img :src="src" />
+    <template v-if="srcToUse && srcToUse !== ''">
+      <q-img :src="srcToUse" />
     </template>
     <template v-else>
       <div class="initials">{{ initials }}</div>
@@ -33,6 +33,23 @@ const initials = computed(() => {
 })
 
 // simple deterministic background color based on name
+// resolve /storage paths to the API host so dev server origin doesn't break images
+const srcToUse = computed(() => {
+  try {
+    const s = props.src || ''
+    if (!s) return ''
+    if (s.startsWith('/storage')) {
+      const apiBase =
+        (import.meta && import.meta.env && import.meta.env.VITE_API_BASE_URL) ||
+        'http://localhost:3333'
+      return `${String(apiBase).replace(/\/$/, '')}${s}`
+    }
+    return s
+  } catch {
+    return props.src || ''
+  }
+})
+
 const bgColor = computed(() => {
   if (props.src) return ''
   const name = props.name || ''

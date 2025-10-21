@@ -4,6 +4,8 @@ const state = () => {
     selectedInitial: null,
     auth: {
       conectetion: null,
+      email: null,
+      password: null,
       token: null,
       validateToken: null,
     },

@@ -16,9 +16,13 @@
 <script setup>
 import BalanceInfoCard from 'src/components/Card/BalanceInfoCard.vue'
 import MovementHistoric from 'src/components/Table/Wallet/MovementHistoric.vue'
-import { defineComponent, ref } from 'vue'
+import { defineComponent, ref, onMounted } from 'vue'
 defineComponent({
   name: 'AvailableForMovementLayout',
+})
+
+onMounted(() => {
+  console.debug('[DEBUG] AvailableForMovementLayout mounted')
 })
 const infoCard = ref([
   {

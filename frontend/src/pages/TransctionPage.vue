@@ -38,6 +38,9 @@
 
 <script setup>
 import TitlePage from 'src/components/TitlePage.vue'
+// top-level module evaluation log to detect if the chunk is imported/executed
+console.debug('[DEBUG] TransctionPage module evaluated')
+console.debug('[DEBUG] TransctionPage mounted')
 import WalletLayout from 'src/layouts/Transaction/WalletLayout.vue'
 import AvailableForMovementLayout from 'src/layouts/Transaction/AvailableForMovementLayout.vue'
 import ContratctsInvesmentsLayout from 'src/layouts/Transaction/ContractsInvesmentsLayout.vue'

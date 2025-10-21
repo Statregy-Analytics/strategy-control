@@ -124,7 +124,13 @@ const onSubmit = () => {
 
   setTimeout(() => {
     validation.value = false
-    if (tokenRef.value.validate() && auth.value.token && auth.value.password && auth.value.email) {
+    console.log('[DEBUG] TokenValidation on timeout - values', {
+      tokenFieldValid: tokenRef.value.validate(),
+      authToken: auth.value.token,
+      authEmail: auth.value.email,
+      authPassword: auth.value.password,
+    })
+    if (tokenRef.value.validate() && auth.value.token && auth.value.email) {
       console.log('Token validado com sucesso!')
       router.replace({
         name: 'Selected',

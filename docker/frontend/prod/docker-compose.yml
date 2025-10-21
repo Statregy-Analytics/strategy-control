@@ -1,5 +1,5 @@
 services:
-  strategy-frontend-prod:
+  strategy-frontend:
     build:
       context: ../../..
       dockerfile: docker/frontend/prod/Dockerfile
