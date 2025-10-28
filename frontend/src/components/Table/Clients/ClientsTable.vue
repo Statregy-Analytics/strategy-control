@@ -192,6 +192,7 @@
       full-height
       full-width
       maximized
+      persistent
       class="control-width"
       data-test="clients-create-dialog"
     >

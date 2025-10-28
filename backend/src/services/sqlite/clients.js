@@ -362,6 +362,25 @@ function create(data) {
   if (cliente && cliente.cpf_cnpj) {
     cliente.cpf_cnpj = String(cliente.cpf_cnpj).replace(/\D/g, "");
   }
+  // ensure bank.created_at and each bankRegister item has created_at set to now if missing (on update)
+  try {
+    const now = new Date().toISOString();
+    if (cliente) {
+      if (!cliente.bank) cliente.bank = {};
+      if (!cliente.bank.created_at) cliente.bank.created_at = now;
+      if (Array.isArray(cliente.bankRegister)) {
+        cliente.bankRegister = cliente.bankRegister.map((b) => {
+          try {
+            if (!b) return b;
+            if (!b.created_at) b.created_at = now;
+            return b;
+          } catch (e) {
+            return b;
+          }
+        });
+      }
+    }
+  } catch (e) {}
   // store the whole payload object (so frontend structure is preserved)
   // Ensure we don't duplicate assessor at top-level: prefer investment.assessor as source of truth
   try {
@@ -369,6 +388,25 @@ function create(data) {
     if (obj && obj.assessor != null) {
       // remove top-level assessor to avoid duplication; keep investment.assessor
       delete obj.assessor;
+    }
+  } catch (e) {}
+  // ensure bank.created_at and each bankRegister item has created_at set to now if missing
+  try {
+    const now = new Date().toISOString();
+    if (cliente) {
+      if (!cliente.bank) cliente.bank = {};
+      if (!cliente.bank.created_at) cliente.bank.created_at = now;
+      if (Array.isArray(cliente.bankRegister)) {
+        cliente.bankRegister = cliente.bankRegister.map((b) => {
+          try {
+            if (!b) return b;
+            if (!b.created_at) b.created_at = now;
+            return b;
+          } catch (e) {
+            return b;
+          }
+        });
+      }
     }
   } catch (e) {}
   const payload = JSON.stringify(

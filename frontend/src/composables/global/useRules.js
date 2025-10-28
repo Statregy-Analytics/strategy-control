@@ -107,9 +107,12 @@ export default function useRules() {
     (val) => emailRe.test(val) || 'Campo invalido!',
   ]
   const requiredRole = [(val) => !!val || 'Campo é obrigatorio.']
+  // telefone internacional (E.164): + seguido apenas de dígitos, entre 8 e 15 dígitos
   const phoneRole = [
     (val) => !!val || 'Campo é obrigatorio.',
-    (val) => val.length == 16 || 'Campo incompleto',
+    (val) =>
+      /^\+\d{8,15}$/.test(String(val || '')) ||
+      'Formato inválido. Use + seguido apenas por números (ex: +5514981819999).',
   ]
   const zipCodeRule = [
     (val) => !!val || 'Campo é obrigatorio.',

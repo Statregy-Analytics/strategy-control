@@ -59,8 +59,35 @@
           outlined
           v-model="clientEdit.cliente.telefone"
           dense
-          placeholder="000 0000-0000"
+          placeholder="+5511912345678"
+          inputmode="tel"
+          :rules="phoneRole"
         ></q-input>
+      </label-form>
+    </div>
+
+    <!-- Campo de senha: aparecer junto às informações pessoais e documentos -->
+    <div class="row q-gutter-sm q-mt-sm">
+      <label-form className="col" textLabel="Senha">
+        <q-input
+          outlined
+          ref="passwordRef"
+          v-model="clientEdit.password"
+          dense
+          aria-placeholder="Digite a senha"
+          unmasked-value
+          class="q-my-sm"
+          :type="isPwd ? 'password' : 'text'"
+        >
+          <template v-slot:append>
+            <q-icon
+              color="grey-5"
+              :name="isPwd ? 'visibility_off' : 'visibility'"
+              class="cursor-pointer"
+              @click="isPwd = !isPwd"
+            />
+          </template>
+        </q-input>
       </label-form>
     </div>
 
@@ -80,6 +107,11 @@
           @input="onInputBirth"
         ></q-input>
       </label-form>
+      <div class="col" style="display: flex; align-items: center">
+        <div style="font-size: 0.9rem; color: #666; margin-left: 8px">
+          Idade: <strong>{{ computedAgeDisplay }}</strong>
+        </div>
+      </div>
 
       <label-form className="col" textLabel="Profissão">
         <q-select
@@ -174,14 +206,15 @@
       <label-form
         className="col"
         textLabel="Telefone do Contato"
-        helperText="Formato: (99) 99999-9999"
+        helperText="Formato internacional: + seguido do código do país e número (ex: +5511912345678)"
       >
         <q-input
           outlined
           v-model="clientEdit.cliente.contato_telefone"
           dense
-          placeholder="(99) 99999-9999"
-          mask="(##) #####-####"
+          placeholder="+5511912345678"
+          inputmode="tel"
+          :rules="phoneRole"
         />
       </label-form>
     </div>
@@ -658,7 +691,7 @@ import useRules from 'src/composables/global/useRules'
 
 const layoutStore = useLayoutStore()
 const { clientEdit } = storeToRefs(layoutStore)
-const { nameRule, emailRule, cpfRule } = useRules()
+const { nameRule, emailRule, cpfRule, phoneRole } = useRules()
 const uploadedFiles = ref([])
 const uploadedCertidao = ref([])
 // mapa temporário para associar dataURL -> nome original do arquivo selecionado
@@ -671,6 +704,9 @@ const uploadedRgFront = ref([])
 const uploadedRgBack = ref([])
 const fileRgFrontInput = ref(null)
 const fileRgBackInput = ref(null)
+// password helpers for inline password field in personal data
+const isPwd = ref(false)
+const passwordRef = ref(null)
 // error states for inline feedback
 const nameError = ref(false)
 const nameErrorMessage = ref('')
@@ -729,6 +765,16 @@ const onBlurCpf = () => {
 const onInputBirth = () => {
   birthError.value = false
   birthErrorMessage.value = ''
+  // update computed age whenever birth changes
+  try {
+    const b = clientEdit.value && clientEdit.value.cliente && clientEdit.value.cliente.birth
+    const age = computeAge(b)
+    if (clientEdit && clientEdit.value && clientEdit.value.cliente) {
+      clientEdit.value.cliente.age = age
+    }
+  } catch {
+    /* ignore */
+  }
 }
 const onBlurBirth = () => {
   const val = clientEdit.value?.cliente?.birth
@@ -1228,6 +1274,39 @@ watch(
 defineComponent({
   name: 'PersonalDataLayout',
 })
+
+// helper: compute age in years from date string (ISO or yyyy-mm-dd)
+function computeAge(birth) {
+  try {
+    if (!birth) return null
+    const d = new Date(birth)
+    if (isNaN(d.getTime())) return null
+    const today = new Date()
+    let age = today.getFullYear() - d.getFullYear()
+    const m = today.getMonth() - d.getMonth()
+    if (m < 0 || (m === 0 && today.getDate() < d.getDate())) age--
+    return age
+  } catch {
+    return null
+  }
+}
+
+// expose computed display and numeric age via top-level computed refs
+import { computed } from 'vue'
+const computedAge = computed(() => {
+  try {
+    const b = clientEdit.value && clientEdit.value.cliente && clientEdit.value.cliente.birth
+    return computeAge(b)
+  } catch {
+    return null
+  }
+})
+const computedAgeDisplay = computed(() => {
+  const a = computedAge.value
+  return a === null || a === undefined ? '-' : `${a} anos`
+})
+
+// numeric age is available via computedAge.value when needed by parents
 </script>
 
 <style scoped>

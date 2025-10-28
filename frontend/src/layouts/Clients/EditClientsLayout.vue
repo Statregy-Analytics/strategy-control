@@ -5,7 +5,7 @@
       :advisor="advisorEdit.assessor ? advisorEdit.assessor.name : ''"
     />
 
-    <q-separator></q-separator>
+    <q-separator />
 
     <q-banner inline-actions rounded class="q-ma-md border-pattern">
       <div class="row">
@@ -20,9 +20,6 @@
         </div>
         <div class="col-3">
           <span class="text-muted" style="font-size: 12px">ID #{{ clientEdit.id }}</span>
-          <div class="">
-            {{ clientEdit.cliente.name }}
-          </div>
         </div>
         <div class="col">
           <q-btn
@@ -31,79 +28,32 @@
             no-caps
             class="custom-btn-muted"
             :label="'Classificação: ' + clientEdit.level"
+            disable
           />
-          <q-btn
-            flat
-            round
-            dense
-            color="grey-6"
-            icon="keyboard_arrow_down"
-            @click.prevent="showLevelOptions = !showLevelOptions"
-          />
-          <q-menu v-model="showLevelOptions" self="top middle" square>
-            <q-list style="min-width: 420px; padding-top: 2px">
-              <q-item
-                dense
-                v-for="userClient in clientesSelected"
-                :key="userClient"
-                clickable
-                @click="selectClient(userClient.id)"
-                style="border-radius: 6px; margin-inline: 2px"
-              >
-                <q-item-section avatar>
-                  <q-avatar size="32px">
-                    <q-img
-                      :src="userClient.avatar"
-                      :alt="userClient.name"
-                      :title="userClient.name"
-                    />
-                  </q-avatar>
-                </q-item-section>
-                <q-item-section align="left">
-                  {{ userClient.name }}
-                </q-item-section>
-              </q-item>
-            </q-list>
-          </q-menu>
         </div>
       </div>
-      <template v-slot:action>
-        <q-btn
-          outline
-          color="primary"
-          label="Comparar"
-          no-caps
-          size="sm"
-          class="outline"
-          :icon="$filtersString.resolveUrl('img:icons/replace.svg')"
-          @click.prevent="showCompareOptions = !showCompareOptions"
-        />
 
-        <q-menu v-model="showCompareOptions" self="top middle" square>
-          <q-list style="min-width: 420px; padding-top: 2px">
-            <q-item
-              dense
-              v-for="userClient in clientesSelected"
-              :key="userClient"
-              clickable
-              style="border-radius: 6px; margin-inline: 2px"
-              @click="selectCompare(userClient.id)"
-            >
-              <q-item-section avatar>
-                <q-avatar size="32px">
-                  <q-img :src="userClient.avatar" :alt="userClient.name" :title="userClient.name" />
-                </q-avatar>
-              </q-item-section>
-              <q-item-section align="left">
-                {{ userClient.name }}
-              </q-item-section>
-            </q-item>
-          </q-list>
-        </q-menu>
-        <q-btn flat size="xs" :icon="$filtersString.resolveUrl('img:icons/edit.svg')" />
-        <q-btn flat size="xs" :icon="$filtersString.resolveUrl('img:icons/trash.svg')" />
+      <div class="row q-mt-xs">
+        <div class="col-12">
+          <div style="font-weight: 600; word-break: break-word">
+            {{ clientEdit.cliente && clientEdit.cliente.name }}
+          </div>
+        </div>
+      </div>
+
+      <template v-slot:action>
+        <compare-button />
+        <q-btn
+          id="header-remove-btn"
+          flat
+          size="xs"
+          :icon="$filtersString.resolveUrl('img:icons/trash.svg')"
+          @click.prevent.stop="onHeaderRemove"
+          aria-label="Remover"
+        />
       </template>
     </q-banner>
+
     <q-card-section>
       <div class="text-h7 text-bold">Informações e Documentos Pessoais</div>
       <personal-data-layout class="q-my-lg" />
@@ -116,16 +66,20 @@
       <upload-documents-layout class="q-my-lg" />
       <div class="text-h7 text-bold q-mt-lg">Documentos Contábeis de Pessoa Jurídica</div>
       <upload-persona-layout class="q-my-lg" />
-      <div class="text-h7 text-bold q-mt-lg">Investimento</div>
+      <div class="text-h7 text-bold q-mt-lg">Carteira</div>
       <investment-form-layout class="q-my-lg" />
       <div class="text-h7 text-bold q-mt-lg">Contratos</div>
       <contract-client-table class="q-my-lg" />
+      <!-- Campos da Carteira que ficam abaixo dos contratos e acima de Empréstimos -->
+      <carteira-contracts-fields class="q-my-lg" />
       <div class="text-h7 text-bold q-mt-lg">Empréstimo</div>
       <we-lend-form-layout class="q-my-lg" />
     </q-card-section>
+
     <q-card-actions vertical>
       <div class="row justify-end q-pa-md">
         <q-btn
+          id="footer-remove-btn"
           size="sm"
           unelevated
           color="negative"
@@ -133,7 +87,7 @@
           label="Remover"
           icon="delete"
           data-test="clients-remove-btn"
-          @click.prevent="confirmRemove = true"
+          @click.prevent="onFooterRemove"
           :disable="!clientEdit.id"
         />
         <div class="row items-center">
@@ -154,6 +108,7 @@
         </div>
       </div>
     </q-card-actions>
+
     <!-- confirmation dialog for delete -->
     <q-dialog v-model="confirmRemove" persistent>
       <q-card>
@@ -175,10 +130,10 @@
 import { defineComponent, ref, computed } from 'vue'
 import { useQuasar } from 'quasar'
 import { useLayoutStore } from 'src/stores/layout'
-import { useClientStore } from 'src/stores/client'
 import { useAdvisorStore } from 'src/stores/advisor'
 import { storeToRefs } from 'pinia'
 import TitleCard from 'src/components/Card/TitleCard.vue'
+import CompareButton from 'src/components/Button/CompareButton.vue'
 import PersonalDataLayout from 'src/layouts/Clients/PersonalDataLayout.vue'
 import BankDetailsLayout from 'src/layouts/Clients/BankDetailsLayout.vue'
 import DataResidentialLayout from 'src/layouts/Clients/DataResidentialLayout.vue'
@@ -188,39 +143,47 @@ import UploadPersonaLayout from 'src/layouts/Clients/Form/UploadPersonaLayout.vu
 import InvestmentFormLayout from 'src/layouts/Clients/Form/InvestmentFormLayout.vue'
 import WeLendFormLayout from 'src/layouts/Clients/Form/WeLendFormLayout.vue'
 import ContractClientTable from 'src/components/Table/Clients/ContractClientTable.vue'
+import CarteiraContractsFields from 'src/layouts/Clients/Form/CarteiraContractsFields.vue'
 import useCliente from 'src/composables/Fakes/useCliente'
 import useAdvisors from 'src/composables/Fakes/useAdvisors'
+// useClientStore removed: compare functionality moved/removed from this layout
 import useRules from 'src/composables/global/useRules'
 defineComponent({
   name: 'EditClientsLayout',
 })
 
 const layoutStore = useLayoutStore()
-const clientStore = useClientStore()
 const advisorStore = useAdvisorStore()
 const { clientEdit } = storeToRefs(layoutStore)
 const { advisorEdit } = storeToRefs(advisorStore)
-const showLevelOptions = ref(false)
-const showCompareOptions = ref(false)
 const clienteApi = useCliente()
-const { rowsClient, getClientIdName, getClient, createClient, updateClient, deleteClient } =
-  clienteApi
+const { rowsClient, createClient, updateClient, deleteClient } = clienteApi
+// compare feature removed: showCompareOptions/toggle/selectCompare handled elsewhere
+
+// clientStore not required in this layout anymore
+
 const { rowsAssessores } = useAdvisors()
 const confirmRemove = ref(false)
-const selectClient = (id) => {
-  layoutStore.setClientEdit(getClient(id))
-  showLevelOptions.value = false
+const onHeaderRemove = () => {
+  try {
+    console.debug('onHeaderRemove clicked for client id=', clientEdit.value && clientEdit.value.id)
+    // reuse the same confirmation dialog
+    confirmRemove.value = true
+  } catch {
+    /* ignore */
+  }
 }
-const selectCompare = (id) => {
-  const selectedClient = getClient(id)
-  const currentClient = clientEdit.value
-  clientStore.setCompare([currentClient, selectedClient])
-  layoutStore.setDialogCompare(true)
-  showCompareOptions.value = false
+const onFooterRemove = () => {
+  try {
+    console.debug('onFooterRemove clicked for client id=', clientEdit.value && clientEdit.value.id)
+    confirmRemove.value = true
+  } catch {
+    /* ignore */
+  }
 }
-const clientesSelected = computed(() => {
-  return getClientIdName()
-})
+// openEdit removed — comparison menu will handle actions
+
+// compare menu and selection removed; main button opens edit dialog via openEdit()
 
 const titleHeader = computed(() => {
   try {
@@ -260,6 +223,18 @@ const canSave = computed(() => {
   if (!isFieldValid(nameRule, name)) return false
   if (!isFieldValid(emailRule, email)) return false
   if (!isFieldValid(cpfRule, cpf)) return false
+  // compute age from birth and enforce 18..110
+  try {
+    const d = new Date(birth)
+    if (isNaN(d.getTime())) return false
+    const today = new Date()
+    let age = today.getFullYear() - d.getFullYear()
+    const m = today.getMonth() - d.getMonth()
+    if (m < 0 || (m === 0 && today.getDate() < d.getDate())) age--
+    if (age < 18 || age > 110) return false
+  } catch {
+    return false
+  }
   return true
 })
 

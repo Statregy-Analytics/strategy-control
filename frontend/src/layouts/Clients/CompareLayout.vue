@@ -29,7 +29,7 @@
                 :id="item.id"
                 :avatar="item.cliente.avatar"
                 :name="item.cliente.name"
-                :level="item.level"
+                :show-level="false"
               />
               <q-btn
                 flat
@@ -80,7 +80,7 @@
   </q-card>
 </template>
 <script setup>
-import { defineComponent, onMounted, ref } from 'vue'
+import { defineComponent, onMounted, ref, watch } from 'vue'
 import { useQuasar } from 'quasar'
 import { useLayoutStore } from 'src/stores/layout'
 import { useClientStore } from 'src/stores/client'
@@ -98,7 +98,7 @@ const clientStore = useClientStore()
 const advisorStore = useAdvisorStore()
 const { advisorEdit } = storeToRefs(advisorStore)
 const { compare } = storeToRefs(clientStore)
-const { dialogOpengHeader } = storeToRefs(layoutStore)
+const { dialogOpengHeader, dialogCompare } = storeToRefs(layoutStore)
 const option = ref({ label: 'Todos os dados', value: 'all' })
 const $q = useQuasar()
 const sendEmptyArray = () => {
@@ -129,6 +129,31 @@ defineComponent({
 })
 onMounted(() => {
   layoutStore.setDialogOpengHeader('Compararação de Clientes')
+  console.debug(
+    'CompareLayout mounted, compare payload=',
+    JSON.parse(JSON.stringify(compare.value || [])),
+  )
+})
+
+// log whenever compare array changes or the compare dialog opens
+watch(compare, (val) => {
+  try {
+    console.debug('CompareLayout watch compare =>', JSON.parse(JSON.stringify(val || [])))
+  } catch {
+    console.debug('CompareLayout watch compare => (unserializable)')
+  }
+})
+watch(dialogCompare, (val) => {
+  if (val) {
+    try {
+      console.debug(
+        'dialogCompare opened, compare=',
+        JSON.parse(JSON.stringify(compare.value || [])),
+      )
+    } catch {
+      console.debug('dialogCompare opened, compare (unserializable)')
+    }
+  }
 })
 </script>
 

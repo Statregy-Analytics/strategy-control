@@ -55,7 +55,15 @@
         />
       </label-form>
       <label-form className="col" textLabel="Telfone/Celular">
-        <q-input outlined v-model="leadEdit.cliente.phone" dense placeholder="" class="q-my-sm" />
+        <q-input
+          outlined
+          v-model="leadEdit.cliente.phone"
+          dense
+          placeholder="+5511912345678"
+          inputmode="tel"
+          :rules="phoneRole"
+          class="q-my-sm"
+        />
       </label-form>
     </div>
     <div class="row q-gutter-sm justify-around">
@@ -177,7 +185,7 @@ defineComponent({
 const leadStore = useLeadStore()
 const { leadEdit } = storeToRefs(leadStore)
 
-const { nameRule, emailRule, cpfRule } = useRules()
+const { nameRule, emailRule, cpfRule, phoneRole } = useRules()
 
 const getFirstErrorMessage = (rules, value) => {
   if (!rules || !Array.isArray(rules)) return ''

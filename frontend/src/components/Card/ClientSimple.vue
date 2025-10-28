@@ -12,8 +12,14 @@
       </q-item-label>
     </q-item-section>
 
-    <q-item-section side>
-      <q-btn size="sm" outline no-caps class="custom-btn-muted" :label="'Classif..:' + level" />
+    <q-item-section side v-if="showLevel && level">
+      <q-btn
+        size="sm"
+        outline
+        no-caps
+        class="custom-btn-muted"
+        :label="'Classificação: ' + level"
+      />
     </q-item-section>
     <q-btn
       flat
@@ -69,6 +75,10 @@ export default defineComponent({
     },
     level: {
       type: String,
+    },
+    showLevel: {
+      type: Boolean,
+      default: true,
     },
   },
   setup(props) {

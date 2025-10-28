@@ -1,5 +1,27 @@
 <template>
   <div class="UploadResidential">
+    <!-- Endereço complementar para documentos residenciais -->
+    <div class="row q-gutter-sm q-mt-sm">
+      <label-form className="col" textLabel="Complemento">
+        <q-input
+          outlined
+          v-model="clientEdit.residential.complemento"
+          dense
+          placeholder="Apto / Bloco / Complemento"
+        ></q-input>
+      </label-form>
+
+      <label-form className="col" textLabel="CEP">
+        <q-input
+          outlined
+          v-model="clientEdit.residential.cep"
+          dense
+          placeholder="00000-000"
+          mask="#####-###"
+        ></q-input>
+      </label-form>
+    </div>
+
     <!-- Upload de IPTU CAPA -->
 
     <label-form className="q-mt-sm" textLabel="UPTU Capa" helperText=".jpg, .png, .pdf — até 5MB">
@@ -252,6 +274,14 @@ const uploadedFiles = ref([])
 const uploadedDebitos = ref([])
 const uploadedFotos = ref([])
 const pendingNames = new Map()
+
+// ensure residential object exists to bind complemento/cep safely
+try {
+  if (clientEdit && clientEdit.value && !clientEdit.value.residential)
+    clientEdit.value.residential = {}
+} catch {
+  /* ignore */
+}
 
 const openFile = (url) => {
   try {
