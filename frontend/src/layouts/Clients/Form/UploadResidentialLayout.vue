@@ -1,30 +1,8 @@
 <template>
   <div class="UploadResidential">
-    <!-- Endereço complementar para documentos residenciais -->
-    <div class="row q-gutter-sm q-mt-sm">
-      <label-form className="col" textLabel="Complemento">
-        <q-input
-          outlined
-          v-model="clientEdit.residential.complemento"
-          dense
-          placeholder="Apto / Bloco / Complemento"
-        ></q-input>
-      </label-form>
-
-      <label-form className="col" textLabel="CEP">
-        <q-input
-          outlined
-          v-model="clientEdit.residential.cep"
-          dense
-          placeholder="00000-000"
-          mask="#####-###"
-        ></q-input>
-      </label-form>
-    </div>
-
     <!-- Upload de IPTU CAPA -->
 
-    <label-form className="q-mt-sm" textLabel="UPTU Capa" helperText=".jpg, .png, .pdf — até 5MB">
+    <label-form className="q-mt-sm" textLabel="IPTU Capa" helperText=".jpg, .png, .pdf — até 5MB">
       <div class="row q-gutter-sm q-mt-xs" style="margin-top: 0; align-items: center">
         <q-btn
           label="Upload"
@@ -70,7 +48,7 @@
               padding="xs"
               icon="description"
               color="secondary"
-              :label="item.name"
+              :label="displayName(item)"
               no-caps
               class="q-ma-sm text-muted"
               @click.prevent.stop="item.preview && openFile(item.preview)"
@@ -97,11 +75,11 @@
         />
       </div>
     </label-form>
-    <!-- Upload de Quitação de débitos UPTU -->
+    <!-- Upload de Quitação de débitos IPTU -->
 
     <label-form
       className="q-mt-sm"
-      textLabel="Quitação de débitos UPTU"
+      textLabel="Quitação de débitos IPTU"
       helperText=".jpg, .png, .pdf — até 5MB"
     >
       <div class="row q-gutter-sm q-mt-xs" style="margin-top: 0; align-items: center">
@@ -149,7 +127,7 @@
               padding="xs"
               icon="description"
               color="secondary"
-              :label="item.name"
+              :label="displayName(item)"
               no-caps
               class="q-ma-sm text-muted"
               @click.prevent.stop="item.preview && openFile(item.preview)"
@@ -178,11 +156,7 @@
     </label-form>
     <!-- Upload de FOTOS da Residêcia(Tiradas pela Equipe)-->
 
-    <label-form
-      className="q-mt-sm"
-      textLabel="Fotos da Residência (Tiradas pela Equipe Strategy)"
-      helperText=".jpg, .png — até 5MB"
-    >
+    <label-form className="q-mt-sm" textLabel="Fotos do imóvel" helperText=".jpg, .png — até 5MB">
       <div class="row q-gutter-sm q-mt-xs" style="margin-top: 0; align-items: center">
         <q-btn
           label="Upload"
@@ -228,7 +202,7 @@
               padding="xs"
               icon="description"
               color="secondary"
-              :label="item.name"
+              :label="displayName(item)"
               no-caps
               class="q-ma-sm text-muted"
               @click.prevent.stop="item.preview && openFile(item.preview)"
@@ -275,6 +249,26 @@ const uploadedDebitos = ref([])
 const uploadedFotos = ref([])
 const pendingNames = new Map()
 
+// helper to upload a single file and return {url, name}
+const uploadSingleFile = async (file) => {
+  try {
+    const apiBase = (import.meta && import.meta.env && import.meta.env.VITE_API_BASE_URL) || ''
+    const fd = new FormData()
+    fd.append('file', file)
+    const res = await fetch(`${apiBase.replace(/\/$/, '')}/api/clients/upload`, {
+      method: 'POST',
+      body: fd,
+    })
+    if (!res.ok) throw new Error('upload failed')
+    const body = await res.json()
+    return { url: body && body.url ? body.url : null, name: (body && body.name) || file.name }
+  } catch (err) {
+    if (typeof console !== 'undefined' && console.debug)
+      console.debug('uploadSingleFile failed', err)
+    return { url: null, name: file.name }
+  }
+}
+
 // ensure residential object exists to bind complemento/cep safely
 try {
   if (clientEdit && clientEdit.value && !clientEdit.value.residential)
@@ -310,119 +304,245 @@ const triggerFileInput = () => {
   const fileInput = document.querySelector('.upload-certidao')
   if (fileInput) fileInput.click()
 }
-const handleFileUpload = (event) => {
+const handleFileUpload = async (event) => {
   const files = event.target.files
   if (!files || files.length === 0) return
   const arr = Array.from(files)
-  const items = arr.map((f) => ({ file: f, name: f.name, preview: null, dataUrl: null }))
-  items.forEach((it, idx) => {
-    const r = new FileReader()
-    r.onload = (ev) => {
-      items[idx].preview = ev.target.result
-      items[idx].dataUrl = ev.target.result
+  const uploaded = []
+  await Promise.all(
+    arr.map(async (f) => {
       try {
-        if (items[idx] && items[idx].file && items[idx].file.name)
-          pendingNames.set(items[idx].dataUrl, items[idx].file.name)
-      } catch (err) {
-        if (typeof console !== 'undefined' && console.debug)
-          console.debug('pendingNames set failed', err)
+        const r = await uploadSingleFile(f)
+        if (r.url) {
+          try {
+            pendingNames.set(r.url, r.name)
+          } catch (e) {
+            void e
+          }
+          uploaded.push({
+            file: f,
+            name: r.name,
+            preview: resolveStorageUrl(r.url),
+            dataUrl: r.url,
+          })
+          return
+        }
+      } catch (e) {
+        void e
       }
-      uploadedFiles.value = items
-      // persist into clientEdit.residential so save includes these files
+      const dataUrl = await new Promise((resolve) => {
+        const reader = new FileReader()
+        reader.onload = (ev) => resolve(ev.target.result)
+        reader.readAsDataURL(f)
+      })
       try {
-        if (clientEdit && clientEdit.value) {
-          if (!clientEdit.value.residential) clientEdit.value.residential = {}
-          const urls = items.filter((x) => x.dataUrl).map((x) => x.dataUrl)
-          if (urls.length === 1) clientEdit.value.residential.iptu_capa = urls[0]
-          else if (urls.length > 1) clientEdit.value.residential.iptu_capa = urls
-          else delete clientEdit.value.residential.iptu_capa
+        if (f && f.name) pendingNames.set(dataUrl, f.name)
+      } catch (e) {
+        void e
+      }
+      // try backend b64 fallback to persist file and get /storage url
+      try {
+        const apiBase = (import.meta && import.meta.env && import.meta.env.VITE_API_BASE_URL) || ''
+        const res = await fetch(`${apiBase.replace(/\/$/, '')}/api/clients/upload-b64`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ name: f.name, data: dataUrl }),
+        })
+        if (res && res.ok) {
+          const body = await res.json()
+          const url = body && body.url ? body.url : null
+          const name = (body && body.name) || f.name
+          if (url) {
+            try {
+              pendingNames.set(url, name)
+            } catch (e) {
+              void e
+            }
+            uploaded.push({ file: f, name, preview: resolveStorageUrl(url), dataUrl: url })
+            return
+          }
         }
       } catch (err) {
-        if (typeof console !== 'undefined' && console.debug)
-          console.debug('persist iptu_capa failed', err)
+        void err
       }
+      uploaded.push({ file: f, name: f.name, preview: dataUrl, dataUrl })
+    }),
+  )
+  uploadedFiles.value = uploaded
+  try {
+    if (clientEdit && clientEdit.value) {
+      if (!clientEdit.value.residential) clientEdit.value.residential = {}
+      const urls = uploaded.filter((x) => x.dataUrl).map((x) => x.dataUrl)
+      if (urls.length === 1) clientEdit.value.residential.iptu_capa = urls[0]
+      else if (urls.length > 1) clientEdit.value.residential.iptu_capa = urls
+      else delete clientEdit.value.residential.iptu_capa
     }
-    r.readAsDataURL(it.file)
-  })
-  uploadedFiles.value = items
+  } catch (err) {
+    if (typeof console !== 'undefined' && console.debug)
+      console.debug('persist iptu_capa failed', err)
+  }
 }
 const triggerFileInputIptu = () => {
   const fileInput = document.querySelector('.upload-debitos-uptu')
   if (fileInput) fileInput.click()
 }
-const handleFileUploadIptu = (event) => {
+const handleFileUploadIptu = async (event) => {
   const files = event.target.files
   if (!files || files.length === 0) return
   const arr = Array.from(files)
-  const items = arr.map((f) => ({ file: f, name: f.name, preview: null, dataUrl: null }))
-  items.forEach((it, idx) => {
-    const r = new FileReader()
-    r.onload = (ev) => {
-      items[idx].preview = ev.target.result
-      items[idx].dataUrl = ev.target.result
+  const uploaded = []
+  await Promise.all(
+    arr.map(async (f) => {
       try {
-        if (items[idx] && items[idx].file && items[idx].file.name)
-          pendingNames.set(items[idx].dataUrl, items[idx].file.name)
-      } catch (err) {
-        if (typeof console !== 'undefined' && console.debug)
-          console.debug('pendingNames set failed', err)
+        const r = await uploadSingleFile(f)
+        if (r.url) {
+          try {
+            pendingNames.set(r.url, r.name)
+          } catch (e) {
+            void e
+          }
+          uploaded.push({
+            file: f,
+            name: r.name,
+            preview: resolveStorageUrl(r.url),
+            dataUrl: r.url,
+          })
+          return
+        }
+      } catch (e) {
+        void e
       }
-      uploadedDebitos.value = items
+      const dataUrl = await new Promise((resolve) => {
+        const reader = new FileReader()
+        reader.onload = (ev) => resolve(ev.target.result)
+        reader.readAsDataURL(f)
+      })
       try {
-        if (clientEdit && clientEdit.value) {
-          if (!clientEdit.value.residential) clientEdit.value.residential = {}
-          const urls = items.filter((x) => x.dataUrl).map((x) => x.dataUrl)
-          if (urls.length === 1) clientEdit.value.residential.quitacao_debitos_uptu = urls[0]
-          else if (urls.length > 1) clientEdit.value.residential.quitacao_debitos_uptu = urls
-          else delete clientEdit.value.residential.quitacao_debitos_uptu
+        if (f && f.name) pendingNames.set(dataUrl, f.name)
+      } catch (e) {
+        void e
+      }
+      try {
+        const apiBase = (import.meta && import.meta.env && import.meta.env.VITE_API_BASE_URL) || ''
+        const res = await fetch(`${apiBase.replace(/\/$/, '')}/api/clients/upload-b64`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ name: f.name, data: dataUrl }),
+        })
+        if (res && res.ok) {
+          const body = await res.json()
+          const url = body && body.url ? body.url : null
+          const name = (body && body.name) || f.name
+          if (url) {
+            try {
+              pendingNames.set(url, name)
+            } catch (e) {
+              void e
+            }
+            uploaded.push({ file: f, name, preview: resolveStorageUrl(url), dataUrl: url })
+            return
+          }
         }
       } catch (err) {
-        if (typeof console !== 'undefined' && console.debug)
-          console.debug('persist quitacao_debitos_uptu failed', err)
+        void err
       }
+      uploaded.push({ file: f, name: f.name, preview: dataUrl, dataUrl })
+    }),
+  )
+  uploadedDebitos.value = uploaded
+  try {
+    if (clientEdit && clientEdit.value) {
+      if (!clientEdit.value.residential) clientEdit.value.residential = {}
+      const urls = uploaded.filter((x) => x.dataUrl).map((x) => x.dataUrl)
+      if (urls.length === 1) clientEdit.value.residential.quitacao_debitos_uptu = urls[0]
+      else if (urls.length > 1) clientEdit.value.residential.quitacao_debitos_uptu = urls
+      else delete clientEdit.value.residential.quitacao_debitos_uptu
     }
-    r.readAsDataURL(it.file)
-  })
-  uploadedDebitos.value = items
+  } catch (err) {
+    if (typeof console !== 'undefined' && console.debug)
+      console.debug('persist quitacao_debitos_uptu failed', err)
+  }
 }
 const triggerFileInputFotos = () => {
   const fileInput = document.querySelector('.upload-fotos')
   if (fileInput) fileInput.click()
 }
-const handleFileUploadFotos = (event) => {
+const handleFileUploadFotos = async (event) => {
   const files = event.target.files
   if (!files || files.length === 0) return
   const arr = Array.from(files)
-  const items = arr.map((f) => ({ file: f, name: f.name, preview: null, dataUrl: null }))
-  items.forEach((it, idx) => {
-    const r = new FileReader()
-    r.onload = (ev) => {
-      items[idx].preview = ev.target.result
-      items[idx].dataUrl = ev.target.result
+  const uploaded = []
+  await Promise.all(
+    arr.map(async (f) => {
       try {
-        if (items[idx] && items[idx].file && items[idx].file.name)
-          pendingNames.set(items[idx].dataUrl, items[idx].file.name)
-      } catch (err) {
-        if (typeof console !== 'undefined' && console.debug)
-          console.debug('pendingNames set failed', err)
+        const r = await uploadSingleFile(f)
+        if (r.url) {
+          try {
+            pendingNames.set(r.url, r.name)
+          } catch (e) {
+            void e
+          }
+          uploaded.push({
+            file: f,
+            name: r.name,
+            preview: resolveStorageUrl(r.url),
+            dataUrl: r.url,
+          })
+          return
+        }
+      } catch (e) {
+        void e
       }
-      uploadedFotos.value = items
+      const dataUrl = await new Promise((resolve) => {
+        const reader = new FileReader()
+        reader.onload = (ev) => resolve(ev.target.result)
+        reader.readAsDataURL(f)
+      })
       try {
-        if (clientEdit && clientEdit.value) {
-          if (!clientEdit.value.residential) clientEdit.value.residential = {}
-          const urls = items.filter((x) => x.dataUrl).map((x) => x.dataUrl)
-          if (urls.length === 1) clientEdit.value.residential.fotos_residencia = urls[0]
-          else if (urls.length > 1) clientEdit.value.residential.fotos_residencia = urls
-          else delete clientEdit.value.residential.fotos_residencia
+        if (f && f.name) pendingNames.set(dataUrl, f.name)
+      } catch (e) {
+        void e
+      }
+      try {
+        const apiBase = (import.meta && import.meta.env && import.meta.env.VITE_API_BASE_URL) || ''
+        const res = await fetch(`${apiBase.replace(/\/$/, '')}/api/clients/upload-b64`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ name: f.name, data: dataUrl }),
+        })
+        if (res && res.ok) {
+          const body = await res.json()
+          const url = body && body.url ? body.url : null
+          const name = (body && body.name) || f.name
+          if (url) {
+            try {
+              pendingNames.set(url, name)
+            } catch (e) {
+              void e
+            }
+            uploaded.push({ file: f, name, preview: resolveStorageUrl(url), dataUrl: url })
+            return
+          }
         }
       } catch (err) {
-        if (typeof console !== 'undefined' && console.debug)
-          console.debug('persist fotos_residencia failed', err)
+        void err
       }
+      uploaded.push({ file: f, name: f.name, preview: dataUrl, dataUrl })
+    }),
+  )
+  uploadedFotos.value = uploaded
+  try {
+    if (clientEdit && clientEdit.value) {
+      if (!clientEdit.value.residential) clientEdit.value.residential = {}
+      const urls = uploaded.filter((x) => x.dataUrl).map((x) => x.dataUrl)
+      if (urls.length === 1) clientEdit.value.residential.fotos_residencia = urls[0]
+      else if (urls.length > 1) clientEdit.value.residential.fotos_residencia = urls
+      else delete clientEdit.value.residential.fotos_residencia
     }
-    r.readAsDataURL(it.file)
-  })
-  uploadedFotos.value = items
+  } catch (err) {
+    if (typeof console !== 'undefined' && console.debug)
+      console.debug('persist fotos_residencia failed', err)
+  }
 }
 
 // helper to resolve /storage urls to API base (same logic as PersonalDataLayout)
@@ -432,12 +552,39 @@ function resolveStorageUrl(u) {
     if (typeof u === 'string' && u.startsWith('/storage')) {
       const apiBase =
         (import.meta && import.meta.env && import.meta.env.VITE_API_BASE_URL) ||
-        'http://localhost:3333'
+        (import.meta && import.meta.env && import.meta.env.DEV ? '' : 'http://localhost:3333')
       return `${String(apiBase).replace(/\/$/, '')}${u}`
     }
     return u
   } catch {
     return u
+  }
+}
+
+// Helper to present a friendly/short filename for uploaded items
+const displayName = (item) => {
+  try {
+    if (!item) return ''
+    const n = item.name || ''
+    if (typeof n === 'string' && n && !n.startsWith('data:') && n.length < 100) return n
+    if (item.file && item.file.name) return item.file.name
+    if (item.dataUrl && pendingNames.has(item.dataUrl)) return pendingNames.get(item.dataUrl)
+    const preview = item.preview || item.dataUrl || n
+    if (preview && typeof preview === 'string' && preview.startsWith('/storage')) {
+      const parts = preview.split('/')
+      return parts[parts.length - 1] || 'arquivo'
+    }
+    if (typeof n === 'string' && n.startsWith('data:')) {
+      const m = n.match(/^data:(.+?);base64,/) || []
+      const mime = m[1]
+      const ext = mime ? mime.split('/')[1] || 'bin' : 'bin'
+      return `arquivo.${ext}`
+    }
+    if (typeof n === 'string' && n.length > 80) return `${n.slice(0, 40)}…${n.slice(-20)}`
+    return String(n || 'arquivo')
+  } catch (e) {
+    void e
+    return ''
   }
 }
 

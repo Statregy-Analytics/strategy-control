@@ -324,7 +324,8 @@ const editLead = async (id) => {
   storeLayout.setLeadDialog(true)
 
   const apiBase =
-    (import.meta && import.meta.env && import.meta.env.VITE_API_BASE_URL) || 'http://localhost:3333'
+    (import.meta && import.meta.env && import.meta.env.VITE_API_BASE_URL) ||
+    (import.meta && import.meta.env && import.meta.env.DEV ? '' : 'http://localhost:3333')
 
   try {
     const res = await fetch(`${apiBase}/api/leads/${id}`)
@@ -419,7 +420,7 @@ const confirmRemoveRow = (id) => {
       try {
         const apiBase =
           (import.meta && import.meta.env && import.meta.env.VITE_API_BASE_URL) ||
-          'http://localhost:3333'
+          (import.meta && import.meta.env && import.meta.env.DEV ? '' : 'http://localhost:3333')
         const res = await fetch(`${apiBase}/api/leads/${id}`, { method: 'DELETE' })
         if (res.ok) {
           $q.notify({ message: 'Lead removido', color: 'positive' })

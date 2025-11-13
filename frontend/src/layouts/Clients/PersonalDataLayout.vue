@@ -1,5 +1,41 @@
 <template>
   <q-form class="PersonalDataLayout">
+    <div class="row">
+      <label-form className="col row" textLabel="Foto (Avatar)">
+        <div class="col">
+          <q-btn
+            label=""
+            color="primary"
+            icon="photo_camera"
+            flat
+            size="sm"
+            no-caps
+            @click="triggerPhotoInput"
+          />
+        </div>
+
+        <div class="row q-gutter-sm q-mt-xs" style="margin-top: 0; align-items: center">
+          <div v-if="uploadedPhoto">
+            <q-avatar size="156px" class="q-ml-sm">
+              <img :src="uploadedPhoto" alt="foto" />
+            </q-avatar>
+
+            <q-btn flat dense round icon="delete" color="negative" @click="clearPhoto" />
+          </div>
+
+          <input
+            type="file"
+            ref="filePhotoInput"
+            style="display: none"
+            @change="handleFilePhoto"
+            accept=".jpg, .jpeg, .png"
+          />
+        </div>
+      </label-form>
+    </div>
+
+    <slot></slot>
+
     <div class="row q-gutter-sm">
       <label-form className="col" :required="true" textLabel="Nome">
         <q-input
@@ -11,12 +47,24 @@
           :error="nameError"
           :error-message="nameErrorMessage"
           @blur="onBlurName"
-          @input="onInputName"
+          @input="
+            (val) => {
+              onInputName()
+              onInputTextProp('name', val)
+            }
+          "
+          @keydown="onKeydownText"
+          @paste="onPasteText('name', $event)"
         ></q-input>
       </label-form>
 
       <label-form className="col" textLabel="RG">
-        <q-input outlined v-model="clientEdit.cliente.rg" dense placeholder=""></q-input>
+        <q-input
+          outlined
+          v-model="clientEdit.cliente.rg"
+          dense
+          placeholder="00.000.000-0"
+        ></q-input>
       </label-form>
 
       <label-form className="col" :required="true" textLabel="CPF">
@@ -37,7 +85,12 @@
 
     <div class="row q-gutter-sm">
       <label-form className="col" textLabel="CNH">
-        <q-input outlined v-model="clientEdit.cliente.cnh" dense placeholder=""></q-input>
+        <q-input
+          outlined
+          v-model="clientEdit.cliente.cnh"
+          dense
+          placeholder="Digite o número da CNH"
+        ></q-input>
       </label-form>
 
       <label-form className="col" :required="true" textLabel="E-mail">
@@ -59,9 +112,11 @@
           outlined
           v-model="clientEdit.cliente.telefone"
           dense
-          placeholder="+5511912345678"
-          inputmode="tel"
+          placeholder="5511912345678"
+          inputmode="numeric"
           :rules="phoneRole"
+          @blur="onBlurTelefone"
+          @input="() => onInputNumeric('telefone')"
         ></q-input>
       </label-form>
     </div>
@@ -99,6 +154,7 @@
           navigation-min-year-month="1990/07"
           type="date"
           dense
+          :hint="`idade - ${computedAgeDisplay}`"
           placeholder="value"
           :rules="[(val) => !!val || 'Campo é obrigatorio.']"
           :error="birthError"
@@ -107,11 +163,11 @@
           @input="onInputBirth"
         ></q-input>
       </label-form>
-      <div class="col" style="display: flex; align-items: center">
+      <!-- <div class="col" style="display: flex; align-items: center">
         <div style="font-size: 0.9rem; color: #666; margin-left: 8px">
           Idade: <strong>{{ computedAgeDisplay }}</strong>
         </div>
-      </div>
+      </div> -->
 
       <label-form className="col" textLabel="Profissão">
         <q-select
@@ -149,36 +205,13 @@
         <q-input
           outlined
           v-model="clientEdit.cliente.apelido"
+          @input="(val) => onInputTextProp('apelido', val)"
+          @blur="onBlurText('apelido')"
+          @keydown="onKeydownText"
+          @paste="onPasteText('apelido', $event)"
           dense
           placeholder="Como o cliente é chamado"
         ></q-input>
-      </label-form>
-
-      <label-form className="col" textLabel="Foto (Avatar)" helperText=".jpg, .png — até 5MB">
-        <div class="row q-gutter-sm q-mt-xs" style="margin-top: 0; align-items: center">
-          <q-btn
-            label="Upload Foto"
-            color="primary"
-            icon="photo_camera"
-            outline
-            no-caps
-            style="border-radius: 6px; border: 2px solid #00a3ff"
-            @click="triggerPhotoInput"
-          />
-          <div v-if="uploadedPhoto">
-            <q-avatar size="56px" class="q-ml-sm">
-              <img :src="uploadedPhoto" alt="foto" />
-            </q-avatar>
-            <q-btn flat dense round icon="delete" color="negative" @click="clearPhoto" />
-          </div>
-          <input
-            type="file"
-            ref="filePhotoInput"
-            style="display: none"
-            @change="handleFilePhoto"
-            accept=".jpg, .jpeg, .png"
-          />
-        </div>
       </label-form>
     </div>
 
@@ -198,23 +231,26 @@
         <q-input
           outlined
           v-model="clientEdit.cliente.contato_nome"
+          @input="(val) => onInputTextProp('contato_nome', val)"
+          @keydown="onKeydownText"
+          @paste="onPasteText('contato_nome', $event)"
+          @blur="onBlurText('contato_nome')"
           dense
           placeholder="Nome do contato"
         />
       </label-form>
 
-      <label-form
-        className="col"
-        textLabel="Telefone do Contato"
-        helperText="Formato internacional: + seguido do código do país e número (ex: +5511912345678)"
-      >
+      <label-form className="col" textLabel="Telefone do Contato">
         <q-input
           outlined
+          hint="Formato: código do país seguido do número (ex: 5511912345678) — o '+' não é necessário"
           v-model="clientEdit.cliente.contato_telefone"
           dense
-          placeholder="+5511912345678"
-          inputmode="tel"
+          placeholder="5511912345678"
+          inputmode="numeric"
           :rules="phoneRole"
+          @blur="onBlurTelefoneContato"
+          @input="() => onInputNumeric('contato_telefone')"
         />
       </label-form>
     </div>
@@ -226,7 +262,13 @@
       </label-form>
 
       <label-form className="col" textLabel="UF de Expedição (RG)">
-        <q-input outlined v-model="clientEdit.cliente.rg_expedicao_uf" dense placeholder="UF" />
+        <q-input
+          outlined
+          v-model="clientEdit.cliente.rg_expedicao_uf"
+          @blur="onBlurText('rg_expedicao_uf')"
+          dense
+          placeholder="Digite a UF de expedição"
+        />
       </label-form>
 
       <label-form className="col" textLabel="Gênero">
@@ -255,6 +297,10 @@
         <q-input
           outlined
           v-model="clientEdit.cliente.nacionalidade"
+          @blur="onBlurText('nacionalidade')"
+          @input="(val) => onInputTextProp('nacionalidade', val)"
+          @keydown="onKeydownText"
+          @paste="onPasteText('nacionalidade', $event)"
           dense
           placeholder="Ex: Brasileiro"
         />
@@ -264,7 +310,10 @@
         <q-input
           outlined
           v-model="clientEdit.cliente.patrimonio_valor"
+          @blur="onBlurPatrimonio"
+          @input="() => onInputNumeric('patrimonio_valor', true)"
           dense
+          inputmode="decimal"
           placeholder="R$ 0,00"
         />
       </label-form>
@@ -273,31 +322,63 @@
     <!-- Nomes dos pais e naturalidade -->
     <div class="row q-gutter-sm q-mt-sm">
       <label-form className="col" textLabel="Nome completo do Pai">
-        <q-input outlined v-model="clientEdit.cliente.nome_pai" dense placeholder="Nome do pai" />
+        <q-input
+          outlined
+          v-model="clientEdit.cliente.nome_pai"
+          @input="(val) => onInputTextProp('nome_pai', val)"
+          @keydown="onKeydownText"
+          @paste="onPasteText('nome_pai', $event)"
+          dense
+          placeholder="Nome do pai"
+          @blur="onBlurText('nome_pai')"
+        />
       </label-form>
 
       <label-form className="col" textLabel="Nome completo da Mãe">
-        <q-input outlined v-model="clientEdit.cliente.nome_mae" dense placeholder="Nome da mãe" />
+        <q-input
+          outlined
+          v-model="clientEdit.cliente.nome_mae"
+          @input="(val) => onInputTextProp('nome_mae', val)"
+          @keydown="onKeydownText"
+          @paste="onPasteText('nome_mae', $event)"
+          dense
+          placeholder="Nome da mãe"
+          @blur="onBlurText('nome_mae')"
+        />
       </label-form>
 
       <label-form className="col" textLabel="Naturalidade (Cidade)">
         <q-input
           outlined
           v-model="clientEdit.cliente.naturalidade_cidade"
+          @input="(val) => onInputTextProp('naturalidade_cidade', val)"
+          @keydown="onKeydownText"
+          @paste="onPasteText('naturalidade_cidade', $event)"
           dense
           placeholder="Cidade"
+          @blur="onBlurText('naturalidade_cidade')"
         />
       </label-form>
     </div>
 
     <div class="row q-gutter-sm q-mt-sm">
       <label-form className="col" textLabel="Naturalidade (UF)">
-        <q-input outlined v-model="clientEdit.cliente.naturalidade_uf" dense placeholder="UF" />
-      </label-form>
-
-      <label-form className="col" textLabel="RG (formatação)" helperText="Formato: 00.000.000-0">
         <q-input
           outlined
+          v-model="clientEdit.cliente.naturalidade_uf"
+          @input="(val) => onInputTextProp('naturalidade_uf', val)"
+          @keydown="onKeydownText"
+          @paste="onPasteText('naturalidade_uf', $event)"
+          dense
+          placeholder="UF"
+          @blur="onBlurText('naturalidade_uf')"
+        />
+      </label-form>
+
+      <label-form className="col" textLabel="RG (formatação)">
+        <q-input
+          outlined
+          hint="Formato: 00.000.000-0"
           v-model="clientEdit.cliente.rg"
           dense
           placeholder="00.000.000-0"
@@ -363,7 +444,7 @@
                 padding="xs"
                 icon="description"
                 color="secondary"
-                :label="item.name"
+                :label="displayName(item)"
                 no-caps
                 class="q-ma-sm text-muted"
                 @click.prevent.stop="item.preview && openFile(item.preview)"
@@ -437,7 +518,7 @@
                 padding="xs"
                 icon="description"
                 color="secondary"
-                :label="item.name"
+                :label="displayName(item)"
                 no-caps
                 class="q-ma-sm text-muted"
                 @click.prevent.stop="item.preview && openFile(item.preview)"
@@ -466,7 +547,16 @@
 
     <div class="row q-gutter-sm q-mt-sm">
       <label-form className="col" textLabel="Rua">
-        <q-input outlined v-model="clientEdit.cliente.rua" dense placeholder="Rua"></q-input>
+        <q-input
+          outlined
+          v-model="clientEdit.cliente.rua"
+          dense
+          placeholder="Rua"
+          @input="(val) => onInputTextProp('rua', val)"
+          @blur="onBlurText('rua')"
+          @keydown="onKeydownText"
+          @paste="onPasteText('rua', $event)"
+        ></q-input>
       </label-form>
 
       <label-form className="col" textLabel="Número">
@@ -475,11 +565,21 @@
           v-model="clientEdit.cliente.numero_casa"
           dense
           placeholder="Número da casa"
+          @input="() => onInputNumeric('numero_casa')"
         ></q-input>
       </label-form>
 
       <label-form className="col" textLabel="Bairro / Cidade">
-        <q-input outlined v-model="clientEdit.cliente.cidade" dense placeholder="Cidade"></q-input>
+        <q-input
+          outlined
+          v-model="clientEdit.cliente.cidade"
+          dense
+          placeholder="Cidade"
+          @input="(val) => onInputTextProp('cidade', val)"
+          @blur="onBlurText('cidade')"
+          @keydown="onKeydownText"
+          @paste="onPasteText('cidade', $event)"
+        ></q-input>
       </label-form>
     </div>
 
@@ -488,6 +588,7 @@
         <q-input
           outlined
           v-model="clientEdit.cliente.estado"
+          @blur="onBlurText('estado')"
           dense
           placeholder="Estado (UF)"
         ></q-input>
@@ -504,7 +605,13 @@
       </label-form>
 
       <label-form className="col" textLabel="País">
-        <q-input outlined v-model="clientEdit.cliente.pais" dense placeholder="Brasil"></q-input>
+        <q-input
+          outlined
+          v-model="clientEdit.cliente.pais"
+          @blur="onBlurText('pais')"
+          dense
+          placeholder="Brasil"
+        ></q-input>
       </label-form>
     </div>
 
@@ -560,7 +667,7 @@
                 padding="xs"
                 icon="description"
                 color="secondary"
-                :label="item.name"
+                :label="displayName(item)"
                 no-caps
                 class="q-ma-sm text-muted"
                 @click.prevent.stop="item.preview && openFile(item.preview)"
@@ -646,7 +753,7 @@
                 padding="xs"
                 icon="description"
                 color="secondary"
-                :label="item.name"
+                :label="displayName(item)"
                 no-caps
                 class="q-ma-sm text-muted"
                 @click.prevent.stop="item.preview && openFile(item.preview)"
@@ -688,6 +795,7 @@ import { defineComponent, ref, watch } from 'vue'
 import { useLayoutStore } from 'src/stores/layout'
 import { storeToRefs } from 'pinia'
 import useRules from 'src/composables/global/useRules'
+import { titleCase } from 'src/utils/normalize'
 
 const layoutStore = useLayoutStore()
 const { clientEdit } = storeToRefs(layoutStore)
@@ -736,11 +844,19 @@ const onInputName = () => {
   nameError.value = false
   nameErrorMessage.value = ''
 }
+
+// Ensure name field is normalized (title-case) on blur as well
 const onBlurName = () => {
-  const val = clientEdit.value?.cliente?.name
-  const res = evaluateRule(nameRule, val)
-  nameError.value = !res.ok
-  nameErrorMessage.value = res.ok ? '' : res.message
+  try {
+    const val = clientEdit.value?.cliente?.name
+    const res = evaluateRule(nameRule, val)
+    nameError.value = !res.ok
+    nameErrorMessage.value = res.ok ? '' : res.message
+    // reuse generic text blur normalizer to apply title-case
+    onBlurText('name')
+  } catch (e) {
+    void e
+  }
 }
 const onInputEmail = () => {
   emailError.value = false
@@ -767,7 +883,20 @@ const onInputBirth = () => {
   birthErrorMessage.value = ''
   // update computed age whenever birth changes
   try {
-    const b = clientEdit.value && clientEdit.value.cliente && clientEdit.value.cliente.birth
+    let b = clientEdit.value && clientEdit.value.cliente && clientEdit.value.cliente.birth
+    // If user typed birth in dd/mm/yyyy (common in pt-BR), convert to ISO yyyy-mm-dd
+    if (typeof b === 'string' && /^\d{2}\/\d{2}\/\d{4}$/.test(b)) {
+      try {
+        const parts = b.split('/')
+        const day = parts[0].padStart(2, '0')
+        const month = parts[1].padStart(2, '0')
+        const year = parts[2]
+        b = `${year}-${month}-${day}`
+        clientEdit.value.cliente.birth = b
+      } catch (e) {
+        void e
+      }
+    }
     const age = computeAge(b)
     if (clientEdit && clientEdit.value && clientEdit.value.cliente) {
       clientEdit.value.cliente.age = age
@@ -777,11 +906,228 @@ const onInputBirth = () => {
   }
 }
 const onBlurBirth = () => {
+  try {
+    // ensure displayed/stored birth is ISO (yyyy-mm-dd) if user entered dd/mm/yyyy
+    const raw = clientEdit.value?.cliente?.birth
+    if (typeof raw === 'string' && /^\d{2}\/\d{2}\/\d{4}$/.test(raw)) {
+      const [d, m, y] = raw.split('/')
+      clientEdit.value.cliente.birth = `${y}-${m.padStart(2, '0')}-${d.padStart(2, '0')}`
+    }
+  } catch (e) {
+    void e
+  }
   const val = clientEdit.value?.cliente?.birth
   const res = evaluateRule([(v) => !!v || 'Campo é obrigatorio.'], val)
   birthError.value = !res.ok
   birthErrorMessage.value = res.ok ? '' : res.message
 }
+// normalize telefone on blur: remove non-digits, allow user to omit leading +
+const onBlurTelefone = () => {
+  try {
+    if (!clientEdit || !clientEdit.value || !clientEdit.value.cliente) return
+    const t = clientEdit.value.cliente.telefone
+    if (t == null) return
+    const digits = String(t).replace(/\D/g, '')
+    clientEdit.value.cliente.telefone = digits
+  } catch (e) {
+    void e
+  }
+}
+const onBlurTelefoneContato = () => {
+  try {
+    if (!clientEdit || !clientEdit.value || !clientEdit.value.cliente) return
+    const t = clientEdit.value.cliente.contato_telefone
+    if (t == null) return
+    const digits = String(t).replace(/\D/g, '')
+    clientEdit.value.cliente.contato_telefone = digits
+  } catch (e) {
+    void e
+  }
+}
+
+// Format patrimonio_valor on blur as 00.000.000,00 (pt-BR)
+const formatNumberPtBr = (num) => {
+  try {
+    if (num == null || num === '') return ''
+    const n =
+      typeof num === 'number'
+        ? num
+        : Number(
+            String(num)
+              .replace(/[^0-9,.-]/g, '')
+              .replace(/\./g, '')
+              .replace(/,/, '.'),
+          )
+    if (!Number.isFinite(n)) return ''
+    return new Intl.NumberFormat('pt-BR', {
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2,
+    }).format(n)
+  } catch {
+    return ''
+  }
+}
+
+const onBlurPatrimonio = () => {
+  try {
+    if (!clientEdit || !clientEdit.value || !clientEdit.value.cliente) return
+    const v = clientEdit.value.cliente.patrimonio_valor
+    const formatted = formatNumberPtBr(v)
+    clientEdit.value.cliente.patrimonio_valor = formatted
+  } catch (e) {
+    void e
+  }
+}
+
+// Generic text normalization: trim, collapse spaces, title-case; for UF fields uppercase
+const onBlurText = (field) => {
+  try {
+    if (!clientEdit || !clientEdit.value || !clientEdit.value.cliente) return
+    const obj = clientEdit.value.cliente
+    let val = obj[field]
+    if (val == null) return
+    val = String(val).trim().replace(/\s+/g, ' ')
+    if (
+      /^(naturalidade_uf|rg_expedicao_uf|estado|estado_civil)$/i.test(field) ||
+      /^[A-Za-z]{1,3}$/.test(val)
+    ) {
+      obj[field] = val.toUpperCase()
+      return
+    }
+    // title case (use centralized titleCase util to match backend rules)
+    try {
+      obj[field] = titleCase(val)
+    } catch {
+      // fallback to simple capitalization
+      obj[field] = val
+        .split(' ')
+        .map((w) => (w.length ? w[0].toUpperCase() + w.slice(1).toLowerCase() : w))
+        .join(' ')
+    }
+  } catch (e) {
+    void e
+  }
+}
+// Enforce text-only input on certain fields (remove digits/symbols except common name characters)
+// variant that receives the emitted value directly (safer ordering with v-model)
+const onInputTextProp = (field, emittedVal) => {
+  try {
+    if (!clientEdit || !clientEdit.value || !clientEdit.value.cliente) return
+    const obj = clientEdit.value.cliente
+    let val = emittedVal == null ? '' : String(emittedVal)
+    val = val.replace(/[^A-Za-zÀ-ÖØ-öø-ÿ\s\-']+/g, '')
+    val = val.replace(/\s+/g, ' ').trim()
+    obj[field] = val
+  } catch (e) {
+    void e
+  }
+}
+
+// prevent typing non-letter characters in text fields like 'name'
+const onKeydownText = (event) => {
+  try {
+    if (event.ctrlKey || event.metaKey) return
+    const allowedKeys = [
+      'Backspace',
+      'Delete',
+      'ArrowLeft',
+      'ArrowRight',
+      'ArrowUp',
+      'ArrowDown',
+      'Tab',
+      'Enter',
+      'Home',
+      'End',
+      ' ',
+      '-',
+      "'",
+      '’',
+    ]
+    if (allowedKeys.includes(event.key)) return
+    // allow letters (unicode)
+    if (/^\p{L}$/u.test(event.key)) return
+    event.preventDefault()
+  } catch (e) {
+    void e
+  }
+}
+
+// handle paste into text fields: filter to letters, spaces, hyphen and apostrophe
+const onPasteText = (field, event) => {
+  try {
+    const clipboardData = event.clipboardData || window.clipboardData
+    const paste = clipboardData.getData('text') || ''
+    const filtered = String(paste).replace(/[^\p{L}\s\-\u2019']+/gu, '')
+    if (!filtered) {
+      event.preventDefault()
+      return
+    }
+    const target = event.target
+    if (target && typeof target.selectionStart === 'number') {
+      event.preventDefault()
+      const start = target.selectionStart
+      const end = target.selectionEnd
+      const cur = String(target.value || '')
+      const next = cur.slice(0, start) + filtered + cur.slice(end)
+      if (!clientEdit.value) clientEdit.value = {}
+      if (!clientEdit.value.cliente) clientEdit.value.cliente = {}
+      clientEdit.value.cliente[field] = next.replace(/\s+/g, ' ').trim()
+      const pos = start + filtered.length
+      setTimeout(() => {
+        try {
+          target.setSelectionRange(pos, pos)
+        } catch (e) {
+          void e
+        }
+      }, 0)
+    }
+  } catch (e) {
+    void e
+  }
+}
+
+// Enforce numeric-only input; allowDecimal toggles acceptance of '.' and ','
+const onInputNumeric = (field, allowDecimal = false) => {
+  try {
+    if (!clientEdit || !clientEdit.value || !clientEdit.value.cliente) return
+    const obj = clientEdit.value.cliente
+    let val = obj[field]
+    if (val == null) return
+    val = String(val)
+    if (allowDecimal) {
+      // allow digits, dot and comma
+      val = val.replace(/[^0-9.,-]+/g, '')
+    } else {
+      val = val.replace(/\D+/g, '')
+    }
+    obj[field] = val
+  } catch (e) {
+    void e
+  }
+}
+// Ensure any incoming phone values with leading '+' are normalized for display
+watch(
+  clientEdit,
+  (n) => {
+    try {
+      if (!n || !n.cliente) return
+      const c = n.cliente
+      if (c.telefone && typeof c.telefone === 'string' && c.telefone.startsWith('+')) {
+        c.telefone = String(c.telefone).replace(/\D/g, '')
+      }
+      if (
+        c.contato_telefone &&
+        typeof c.contato_telefone === 'string' &&
+        c.contato_telefone.startsWith('+')
+      ) {
+        c.contato_telefone = String(c.contato_telefone).replace(/\D/g, '')
+      }
+    } catch (e) {
+      void e
+    }
+  },
+  { immediate: true, deep: true },
+)
 const optionsProfission = [
   { label: 'Engenheiro', value: 'engenheiro' },
   { label: 'Médico', value: 'medico' },
@@ -854,56 +1200,181 @@ const handleFileRgFront = (event) => {
   const files = event.target.files
   if (!files || files.length === 0) return
   const file = files[0]
-  const r = new FileReader()
-  r.onload = (e) => {
-    const dataUrl = e.target.result
+  // upload immediately to server and set returned /storage url as field
+  ;(async () => {
     try {
-      if (file && file.name) pendingNames.set(dataUrl, file.name)
+      const apiBase = (import.meta && import.meta.env && import.meta.env.VITE_API_BASE_URL) || ''
+      const fd = new FormData()
+      fd.append('file', file)
+      const res = await fetch(`${apiBase.replace(/\/$/, '')}/api/clients/upload`, {
+        method: 'POST',
+        body: fd,
+      })
+      if (!res.ok) throw new Error('upload failed')
+      const body = await res.json()
+      const url = body && body.url ? body.url : null
+      const name = (body && body.name) || file.name
+      if (url) {
+        // preserve mapping from storage url to original name
+        try {
+          pendingNames.set(url, name)
+        } catch (e) {
+          void e
+        }
+        const item = { file: file, name, preview: resolveStorageUrl(url), dataUrl: url }
+        uploadedRgFront.value = [item]
+        if (clientEdit && clientEdit.value) {
+          if (!clientEdit.value.cliente) clientEdit.value.cliente = {}
+          clientEdit.value.cliente.rg_frente = url
+        }
+      }
     } catch (err) {
       if (typeof console !== 'undefined' && console.debug)
-        console.debug('pendingNames set failed', err)
+        console.debug('rg front upload failed', err)
+      // fallback to dataURL preview if upload fails
+      const r = new FileReader()
+      r.onload = async (e) => {
+        const dataUrl = e.target.result
+        try {
+          if (file && file.name) pendingNames.set(dataUrl, file.name)
+        } catch (err) {
+          void err
+        }
+        // attempt to send base64 to backend fallback endpoint so we persist and get a /storage URL
+        try {
+          const apiBase =
+            (import.meta && import.meta.env && import.meta.env.VITE_API_BASE_URL) || ''
+          const res = await fetch(`${apiBase.replace(/\/$/, '')}/api/clients/upload-b64`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ name: file.name, data: dataUrl }),
+          })
+          if (res && res.ok) {
+            const body = await res.json()
+            const url = body && body.url ? body.url : null
+            const name = (body && body.name) || file.name
+            if (url) {
+              try {
+                pendingNames.set(url, name)
+              } catch (e) {
+                void e
+              }
+              const item = { file: file, name, preview: resolveStorageUrl(url), dataUrl: url }
+              uploadedRgFront.value = [item]
+              if (clientEdit && clientEdit.value) {
+                if (!clientEdit.value.cliente) clientEdit.value.cliente = {}
+                clientEdit.value.cliente.rg_frente = url
+              }
+              return
+            }
+          }
+        } catch (err) {
+          void err
+        }
+        // fallback to dataURL preview when backend b64 upload not available
+        const item = {
+          file: file,
+          name: file.name || pendingNames.get(dataUrl) || 'rg_frente',
+          preview: dataUrl,
+          dataUrl,
+        }
+        uploadedRgFront.value = [item]
+        if (clientEdit && clientEdit.value) {
+          if (!clientEdit.value.cliente) clientEdit.value.cliente = {}
+          clientEdit.value.cliente.rg_frente = dataUrl
+        }
+      }
+      r.readAsDataURL(file)
     }
-    const item = {
-      file: file,
-      name: file.name || pendingNames.get(dataUrl) || 'rg_frente',
-      preview: dataUrl,
-      dataUrl,
-    }
-    uploadedRgFront.value = [item]
-    if (clientEdit && clientEdit.value) {
-      if (!clientEdit.value.cliente) clientEdit.value.cliente = {}
-      clientEdit.value.cliente.rg_frente = dataUrl
-    }
-  }
-  r.readAsDataURL(file)
+  })()
 }
 
 const handleFileRgBack = (event) => {
   const files = event.target.files
   if (!files || files.length === 0) return
   const file = files[0]
-  const r = new FileReader()
-  r.onload = (e) => {
-    const dataUrl = e.target.result
+  ;(async () => {
     try {
-      if (file && file.name) pendingNames.set(dataUrl, file.name)
+      const apiBase = (import.meta && import.meta.env && import.meta.env.VITE_API_BASE_URL) || ''
+      const fd = new FormData()
+      fd.append('file', file)
+      const res = await fetch(`${apiBase.replace(/\/$/, '')}/api/clients/upload`, {
+        method: 'POST',
+        body: fd,
+      })
+      if (!res.ok) throw new Error('upload failed')
+      const body = await res.json()
+      const url = body && body.url ? body.url : null
+      const name = (body && body.name) || file.name
+      if (url) {
+        try {
+          pendingNames.set(url, name)
+        } catch (e) {
+          void e
+        }
+        const item = { file: file, name, preview: resolveStorageUrl(url), dataUrl: url }
+        uploadedRgBack.value = [item]
+        if (clientEdit && clientEdit.value) {
+          if (!clientEdit.value.cliente) clientEdit.value.cliente = {}
+          clientEdit.value.cliente.rg_verso = url
+        }
+      }
     } catch (err) {
       if (typeof console !== 'undefined' && console.debug)
-        console.debug('pendingNames set failed', err)
+        console.debug('rg back upload failed', err)
+      const r = new FileReader()
+      r.onload = async (e) => {
+        const dataUrl = e.target.result
+        try {
+          if (file && file.name) pendingNames.set(dataUrl, file.name)
+        } catch (err) {
+          void err
+        }
+        try {
+          const apiBase =
+            (import.meta && import.meta.env && import.meta.env.VITE_API_BASE_URL) || ''
+          const res = await fetch(`${apiBase.replace(/\/$/, '')}/api/clients/upload-b64`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ name: file.name, data: dataUrl }),
+          })
+          if (res && res.ok) {
+            const body = await res.json()
+            const url = body && body.url ? body.url : null
+            const name = (body && body.name) || file.name
+            if (url) {
+              try {
+                pendingNames.set(url, name)
+              } catch (e) {
+                void e
+              }
+              const item = { file: file, name, preview: resolveStorageUrl(url), dataUrl: url }
+              uploadedRgBack.value = [item]
+              if (clientEdit && clientEdit.value) {
+                if (!clientEdit.value.cliente) clientEdit.value.cliente = {}
+                clientEdit.value.cliente.rg_verso = url
+              }
+              return
+            }
+          }
+        } catch (err) {
+          void err
+        }
+        const item = {
+          file: file,
+          name: file.name || pendingNames.get(dataUrl) || 'rg_verso',
+          preview: dataUrl,
+          dataUrl,
+        }
+        uploadedRgBack.value = [item]
+        if (clientEdit && clientEdit.value) {
+          if (!clientEdit.value.cliente) clientEdit.value.cliente = {}
+          clientEdit.value.cliente.rg_verso = dataUrl
+        }
+      }
+      r.readAsDataURL(file)
     }
-    const item = {
-      file: file,
-      name: file.name || pendingNames.get(dataUrl) || 'rg_verso',
-      preview: dataUrl,
-      dataUrl,
-    }
-    uploadedRgBack.value = [item]
-    if (clientEdit && clientEdit.value) {
-      if (!clientEdit.value.cliente) clientEdit.value.cliente = {}
-      clientEdit.value.cliente.rg_verso = dataUrl
-    }
-  }
-  r.readAsDataURL(file)
+  })()
 }
 
 /* RG clear handlers replaced by removeUploadedRgFront/removeUploadedRgBack when using list UI */
@@ -917,84 +1388,174 @@ const triggerFileInputCertidao = () => {
 }
 
 // Função para lidar com o upload de arquivos
-const handleFileUpload = (event) => {
+const handleFileUpload = async (event) => {
   const files = event.target.files
   if (!files || files.length === 0) return
   const arr = Array.from(files)
-  // build items with preview if image
-  const items = arr.map((f) => ({ file: f, name: f.name, preview: null, dataUrl: null }))
-  // read data URLs (for both preview and payload persistence)
-  items.forEach((it, idx) => {
-    const r = new FileReader()
-    r.onload = (ev) => {
-      items[idx].preview = ev.target.result
-      items[idx].dataUrl = ev.target.result
-      // preserve original filename for this dataURL so watcher mapping can reuse it
+  // attempt to upload each file immediately; fallback to dataURL preview on failure
+  const uploaded = []
+  await Promise.all(
+    arr.map(async (f) => {
       try {
-        if (items[idx] && items[idx].file && items[idx].file.name) {
-          pendingNames.set(items[idx].dataUrl, items[idx].file.name)
-        }
-      } catch {
-        /* ignore */
-      }
-      // assign once preview/data ready
-      uploadedFiles.value = items
-      // also sync into clientEdit payload so backend can persist these files
-      try {
-        if (clientEdit && clientEdit.value) {
-          if (!clientEdit.value.cliente) clientEdit.value.cliente = {}
-          const urls = items.filter((x) => x.dataUrl).map((x) => x.dataUrl)
-          if (urls.length === 1) clientEdit.value.cliente.comprovante_endereco = urls[0]
-          else if (urls.length > 1) clientEdit.value.cliente.comprovante_endereco = urls
-          else delete clientEdit.value.cliente.comprovante_endereco
+        const apiBase = (import.meta && import.meta.env && import.meta.env.VITE_API_BASE_URL) || ''
+        const fd = new FormData()
+        fd.append('file', f)
+        const res = await fetch(`${apiBase.replace(/\/$/, '')}/api/clients/upload`, {
+          method: 'POST',
+          body: fd,
+        })
+        if (!res.ok) throw new Error('upload failed')
+        const body = await res.json()
+        const url = body && body.url ? body.url : null
+        const name = (body && body.name) || f.name
+        if (url) {
+          try {
+            pendingNames.set(url, name)
+          } catch (e) {
+            void e
+          }
+          uploaded.push({ file: f, name, preview: resolveStorageUrl(url), dataUrl: url })
+          return
         }
       } catch (err) {
         if (typeof console !== 'undefined' && console.debug)
-          console.debug('persist comprovante_endereco failed', err)
+          console.debug('file upload failed', err)
       }
+      // fallback: read as dataURL and try backend b64 persistence
+      const r = await new Promise((resolve) => {
+        const reader = new FileReader()
+        reader.onload = (ev) => resolve(ev.target.result)
+        reader.readAsDataURL(f)
+      })
+      try {
+        if (f && f.name) pendingNames.set(r, f.name)
+      } catch (e) {
+        void e
+      }
+      try {
+        const apiBase = (import.meta && import.meta.env && import.meta.env.VITE_API_BASE_URL) || ''
+        const res = await fetch(`${apiBase.replace(/\/$/, '')}/api/clients/upload-b64`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ name: f.name, data: r }),
+        })
+        if (res && res.ok) {
+          const body = await res.json()
+          const url = body && body.url ? body.url : null
+          const name = (body && body.name) || f.name
+          if (url) {
+            try {
+              pendingNames.set(url, name)
+            } catch (e) {
+              void e
+            }
+            uploaded.push({ file: f, name, preview: url, dataUrl: url })
+            return
+          }
+        }
+      } catch (err) {
+        void err
+      }
+      uploaded.push({ file: f, name: f.name, preview: r, dataUrl: r })
+    }),
+  )
+  uploadedFiles.value = uploaded
+  try {
+    if (clientEdit && clientEdit.value) {
+      if (!clientEdit.value.cliente) clientEdit.value.cliente = {}
+      const urls = uploaded.filter((x) => x.dataUrl).map((x) => x.dataUrl)
+      if (urls.length === 1) clientEdit.value.cliente.comprovante_endereco = urls[0]
+      else if (urls.length > 1) clientEdit.value.cliente.comprovante_endereco = urls
+      else delete clientEdit.value.cliente.comprovante_endereco
     }
-    r.readAsDataURL(it.file)
-  })
-  // assign immediate (readers will fill dataUrl/preview asynchronously)
-  uploadedFiles.value = items
-  console.log('Arquivos selecionados:', uploadedFiles.value)
+  } catch (err) {
+    if (typeof console !== 'undefined' && console.debug)
+      console.debug('persist comprovante_endereco failed', err)
+  }
 }
 // Função para lidar com o upload de arquivos
-const handleFileCertidao = (event) => {
+const handleFileCertidao = async (event) => {
   const files = event.target.files
   if (!files || files.length === 0) return
   const arr = Array.from(files)
-  const items = arr.map((f) => ({ file: f, name: f.name, preview: null, dataUrl: null }))
-  items.forEach((it, idx) => {
-    const r = new FileReader()
-    r.onload = (ev) => {
-      items[idx].preview = ev.target.result
-      items[idx].dataUrl = ev.target.result
+  const uploaded = []
+  await Promise.all(
+    arr.map(async (f) => {
       try {
-        if (items[idx] && items[idx].file && items[idx].file.name) {
-          pendingNames.set(items[idx].dataUrl, items[idx].file.name)
-        }
-      } catch {
-        /* ignore */
-      }
-      uploadedCertidao.value = items
-      try {
-        if (clientEdit && clientEdit.value) {
-          if (!clientEdit.value.cliente) clientEdit.value.cliente = {}
-          const urls = items.filter((x) => x.dataUrl).map((x) => x.dataUrl)
-          if (urls.length === 1) clientEdit.value.cliente.certidao_casamento = urls[0]
-          else if (urls.length > 1) clientEdit.value.cliente.certidao_casamento = urls
-          else delete clientEdit.value.cliente.certidao_casamento
+        const apiBase = (import.meta && import.meta.env && import.meta.env.VITE_API_BASE_URL) || ''
+        const fd = new FormData()
+        fd.append('file', f)
+        const res = await fetch(`${apiBase.replace(/\/$/, '')}/api/clients/upload`, {
+          method: 'POST',
+          body: fd,
+        })
+        if (!res.ok) throw new Error('upload failed')
+        const body = await res.json()
+        const url = body && body.url ? body.url : null
+        const name = (body && body.name) || f.name
+        if (url) {
+          try {
+            pendingNames.set(url, name)
+          } catch (e) {
+            void e
+          }
+          uploaded.push({ file: f, name, preview: resolveStorageUrl(url), dataUrl: url })
+          return
         }
       } catch (err) {
         if (typeof console !== 'undefined' && console.debug)
-          console.debug('persist certidao_casamento failed', err)
+          console.debug('certidao upload failed', err)
       }
+      const r = await new Promise((resolve) => {
+        const reader = new FileReader()
+        reader.onload = (ev) => resolve(ev.target.result)
+        reader.readAsDataURL(f)
+      })
+      try {
+        if (f && f.name) pendingNames.set(r, f.name)
+      } catch (e) {
+        void e
+      }
+      try {
+        const apiBase = (import.meta && import.meta.env && import.meta.env.VITE_API_BASE_URL) || ''
+        const res = await fetch(`${apiBase.replace(/\/$/, '')}/api/clients/upload-b64`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ name: f.name, data: r }),
+        })
+        if (res && res.ok) {
+          const body = await res.json()
+          const url = body && body.url ? body.url : null
+          const name = (body && body.name) || f.name
+          if (url) {
+            try {
+              pendingNames.set(url, name)
+            } catch (e) {
+              void e
+            }
+            uploaded.push({ file: f, name, preview: url, dataUrl: url })
+            return
+          }
+        }
+      } catch (err) {
+        void err
+      }
+      uploaded.push({ file: f, name: f.name, preview: r, dataUrl: r })
+    }),
+  )
+  uploadedCertidao.value = uploaded
+  try {
+    if (clientEdit && clientEdit.value) {
+      if (!clientEdit.value.cliente) clientEdit.value.cliente = {}
+      const urls = uploaded.filter((x) => x.dataUrl).map((x) => x.dataUrl)
+      if (urls.length === 1) clientEdit.value.cliente.certidao_casamento = urls[0]
+      else if (urls.length > 1) clientEdit.value.cliente.certidao_casamento = urls
+      else delete clientEdit.value.cliente.certidao_casamento
     }
-    r.readAsDataURL(it.file)
-  })
-  uploadedCertidao.value = items
-  console.log('Arquivos selecionados (certidao):', uploadedCertidao.value)
+  } catch (err) {
+    if (typeof console !== 'undefined' && console.debug)
+      console.debug('persist certidao_casamento failed', err)
+  }
 }
 const removeUploadedFile = (index) => {
   try {
@@ -1125,12 +1686,49 @@ function resolveStorageUrl(u) {
     if (typeof u === 'string' && u.startsWith('/storage')) {
       const apiBase =
         (import.meta && import.meta.env && import.meta.env.VITE_API_BASE_URL) ||
-        'http://localhost:3333'
+        (import.meta && import.meta.env && import.meta.env.DEV ? '' : 'http://localhost:3333')
       return `${String(apiBase).replace(/\/$/, '')}${u}`
     }
     return u
   } catch {
     return u
+  }
+}
+// Helper to present a friendly/short filename for uploaded items
+const displayName = (item) => {
+  try {
+    if (!item) return ''
+    // prefer explicit name if sensible
+    const n = item.name || ''
+    if (typeof n === 'string' && n && !n.startsWith('data:') && n.length < 100) return n
+
+    // if file object exists, prefer its original filename
+    if (item.file && item.file.name) return item.file.name
+
+    // if we have a dataUrl and preserved pending name, use it
+    if (item.dataUrl && pendingNames.has(item.dataUrl)) return pendingNames.get(item.dataUrl)
+
+    // prefer basename of preview if it's a storage url
+    const preview = item.preview || item.dataUrl || n
+    if (preview && typeof preview === 'string' && preview.startsWith('/storage')) {
+      const parts = preview.split('/')
+      return parts[parts.length - 1] || 'arquivo'
+    }
+
+    // if name looks like data:..., infer extension from mime
+    if (typeof n === 'string' && n.startsWith('data:')) {
+      const m = n.match(/^data:(.+?);base64,/) || []
+      const mime = m[1]
+      const ext = mime ? mime.split('/')[1] || 'bin' : 'bin'
+      return `arquivo.${ext}`
+    }
+
+    // fallback: truncate long names
+    if (typeof n === 'string' && n.length > 80) return `${n.slice(0, 40)}…${n.slice(-20)}`
+    return String(n || 'arquivo')
+  } catch (e) {
+    void e
+    return ''
   }
 }
 watch(
@@ -1157,6 +1755,15 @@ watch(
               // if user just selected this file, use preserved original name
               const pn = pendingNames.get(u)
               if (pn) return pn
+              // if we have an uploadedFiles entry for this dataUrl with original file, prefer that name
+              try {
+                const found = (uploadedFiles.value || []).find(
+                  (it) => it && it.dataUrl === u && it.file && it.file.name,
+                )
+                if (found && found.file && found.file.name) return found.file.name
+              } catch (e) {
+                void e
+              }
               const m = u.match(/^data:(.+?);base64,/) || []
               const mime = m[1]
               const ext = mime ? mime.split('/')[1] || 'bin' : 'bin'
@@ -1192,6 +1799,14 @@ watch(
               if (typeof u === 'string' && u.startsWith('data:')) {
                 const pn = pendingNames.get(u)
                 if (pn) return pn
+                try {
+                  const found = (uploadedCertidao.value || []).find(
+                    (it) => it && it.dataUrl === u && it.file && it.file.name,
+                  )
+                  if (found && found.file && found.file.name) return found.file.name
+                } catch (e) {
+                  void e
+                }
                 const m = u.match(/^data:(.+?);base64,/) || []
                 const mime = m[1]
                 const ext = mime ? mime.split('/')[1] || 'bin' : 'bin'
@@ -1222,6 +1837,14 @@ watch(
             if (typeof u === 'string' && u.startsWith('data:')) {
               const pn = pendingNames.get(u)
               if (pn) return pn
+              try {
+                const found = (uploadedRgFront.value || [])
+                  .concat(uploadedRgBack.value || [])
+                  .find((it) => it && it.dataUrl === u && it.file && it.file.name)
+                if (found && found.file && found.file.name) return found.file.name
+              } catch (e) {
+                void e
+              }
               const m = u.match(/^data:(.+?);base64,/) || []
               const mime = m[1]
               const ext = mime ? mime.split('/')[1] || 'bin' : 'bin'

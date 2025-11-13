@@ -2,7 +2,7 @@
   <div class="UploadResidencialLeadsLayout">
     <!-- Upload de IPTU CAPA -->
 
-    <label-form className="q-mt-sm" textLabel="UPTU Capa" helperText=".jpg, .png, .pdf — até 5MB">
+    <label-form className="q-mt-sm" textLabel="IPTU Capa" helperText=".jpg, .png, .pdf — até 5MB">
       <div class="row q-gutter-sm q-mt-xs" style="margin-top: 0; align-items: center">
         <q-btn
           label="Upload"
@@ -22,7 +22,7 @@
             padding="xs"
             icon="description"
             color="secondary"
-            :label="item.name"
+            :label="displayName(item)"
             no-caps
             class="q-ma-sm text-muted"
           />
@@ -44,11 +44,11 @@
         />
       </div>
     </label-form>
-    <!-- Upload de Quitação de débitos UPTU -->
+    <!-- Upload de Quitação de débitos IPTU -->
 
     <label-form
       className="q-mt-sm"
-      textLabel="Quitação de débitos UPTU"
+      textLabel="Quitação de débitos IPTU"
       helperText=".jpg, .png, .pdf — até 5MB"
     >
       <div class="row q-gutter-sm q-mt-xs" style="margin-top: 0; align-items: center">
@@ -70,7 +70,7 @@
             padding="xs"
             icon="description"
             color="secondary"
-            :label="item.name"
+            :label="displayName(item)"
             no-caps
             class="q-ma-sm text-muted"
           />
@@ -94,11 +94,7 @@
     </label-form>
     <!-- Upload de FOTOS da Residêcia(Tiradas pela Equipe)-->
 
-    <label-form
-      className="q-mt-sm"
-      textLabel="Fotos da Residência (Tiradas pela Equipe Strategy)"
-      helperText=".jpg, .png — até 5MB"
-    >
+    <label-form className="q-mt-sm" textLabel="Fotos do imóvel" helperText=".jpg, .png — até 5MB">
       <div class="row q-gutter-sm q-mt-xs" style="margin-top: 0; align-items: center">
         <q-btn
           label="Upload"
@@ -118,7 +114,7 @@
             padding="xs"
             icon="description"
             color="secondary"
-            :label="item.name"
+            :label="displayName(item)"
             no-caps
             class="q-ma-sm text-muted"
           />
@@ -171,16 +167,43 @@ const handleFileUpload = (event) => {
   const items = arr.map((f) => ({ file: f, name: f.name, preview: null, dataUrl: null }))
   items.forEach((it, idx) => {
     const r = new FileReader()
-    r.onload = (ev) => {
-      items[idx].preview = ev.target.result
-      items[idx].dataUrl = ev.target.result
+    r.onload = async (ev) => {
+      const dataUrl = ev.target.result
       try {
         if (items[idx] && items[idx].file && items[idx].file.name)
-          pendingNames.set(items[idx].dataUrl, items[idx].file.name)
+          pendingNames.set(dataUrl, items[idx].file.name)
       } catch (err) {
         if (typeof console !== 'undefined' && console.debug)
           console.debug('pendingNames set failed', err)
       }
+      try {
+        const apiBase = (import.meta && import.meta.env && import.meta.env.VITE_API_BASE_URL) || ''
+        const res = await fetch(`${apiBase.replace(/\/$/, '')}/api/clients/upload-b64`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ name: items[idx].file.name, data: dataUrl }),
+        })
+        if (res && res.ok) {
+          const body = await res.json()
+          const url = body && body.url ? body.url : null
+          const name = (body && body.name) || (items[idx].file && items[idx].file.name)
+          if (url) {
+            try {
+              pendingNames.set(url, name)
+            } catch (e) {
+              void e
+            }
+            items[idx].preview = resolveStorageUrl(url)
+            items[idx].dataUrl = url
+            uploadedFiles.value = items
+            return
+          }
+        }
+      } catch (err) {
+        void err
+      }
+      items[idx].preview = dataUrl
+      items[idx].dataUrl = dataUrl
       uploadedFiles.value = items
       try {
         if (clientEdit && clientEdit.value) {
@@ -210,17 +233,44 @@ const handleFileUploadIptu = (event) => {
   const items = arr.map((f) => ({ file: f, name: f.name, preview: null, dataUrl: null }))
   items.forEach((it, idx) => {
     const r = new FileReader()
-    r.onload = (ev) => {
-      items[idx].preview = ev.target.result
-      items[idx].dataUrl = ev.target.result
+    r.onload = async (ev) => {
+      const dataUrl = ev.target.result
       try {
         if (items[idx] && items[idx].file && items[idx].file.name)
-          pendingNames.set(items[idx].dataUrl, items[idx].file.name)
+          pendingNames.set(dataUrl, items[idx].file.name)
       } catch (err) {
         if (typeof console !== 'undefined' && console.debug)
           console.debug('pendingNames set failed', err)
       }
-      uploadedDebitos.value = items
+      try {
+        const apiBase = (import.meta && import.meta.env && import.meta.env.VITE_API_BASE_URL) || ''
+        const res = await fetch(`${apiBase.replace(/\/$/, '')}/api/clients/upload-b64`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ name: items[idx].file.name, data: dataUrl }),
+        })
+        if (res && res.ok) {
+          const body = await res.json()
+          const url = body && body.url ? body.url : null
+          const name = (body && body.name) || (items[idx].file && items[idx].file.name)
+          if (url) {
+            try {
+              pendingNames.set(url, name)
+            } catch (e) {
+              void e
+            }
+            items[idx].preview = resolveStorageUrl(url)
+            items[idx].dataUrl = url
+            uploadedFotos.value = items
+            return
+          }
+        }
+      } catch (err) {
+        void err
+      }
+      items[idx].preview = dataUrl
+      items[idx].dataUrl = dataUrl
+      uploadedFotos.value = items
       try {
         if (clientEdit && clientEdit.value) {
           if (!clientEdit.value.cliente) clientEdit.value.cliente = {}
@@ -249,17 +299,44 @@ const handleFileUploadFotos = (event) => {
   const items = arr.map((f) => ({ file: f, name: f.name, preview: null, dataUrl: null }))
   items.forEach((it, idx) => {
     const r = new FileReader()
-    r.onload = (ev) => {
-      items[idx].preview = ev.target.result
-      items[idx].dataUrl = ev.target.result
+    r.onload = async (ev) => {
+      const dataUrl = ev.target.result
       try {
         if (items[idx] && items[idx].file && items[idx].file.name)
-          pendingNames.set(items[idx].dataUrl, items[idx].file.name)
+          pendingNames.set(dataUrl, items[idx].file.name)
       } catch (err) {
         if (typeof console !== 'undefined' && console.debug)
           console.debug('pendingNames set failed', err)
       }
-      uploadedFotos.value = items
+      try {
+        const apiBase = (import.meta && import.meta.env && import.meta.env.VITE_API_BASE_URL) || ''
+        const res = await fetch(`${apiBase.replace(/\/$/, '')}/api/clients/upload-b64`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ name: items[idx].file.name, data: dataUrl }),
+        })
+        if (res && res.ok) {
+          const body = await res.json()
+          const url = body && body.url ? body.url : null
+          const name = (body && body.name) || (items[idx].file && items[idx].file.name)
+          if (url) {
+            try {
+              pendingNames.set(url, name)
+            } catch (e) {
+              void e
+            }
+            items[idx].preview = resolveStorageUrl(url)
+            items[idx].dataUrl = url
+            uploadedDebitos.value = items
+            return
+          }
+        }
+      } catch (err) {
+        void err
+      }
+      items[idx].preview = dataUrl
+      items[idx].dataUrl = dataUrl
+      uploadedDebitos.value = items
       try {
         if (clientEdit && clientEdit.value) {
           if (!clientEdit.value.cliente) clientEdit.value.cliente = {}
@@ -284,12 +361,39 @@ function resolveStorageUrl(u) {
     if (typeof u === 'string' && u.startsWith('/storage')) {
       const apiBase =
         (import.meta && import.meta.env && import.meta.env.VITE_API_BASE_URL) ||
-        'http://localhost:3333'
+        (import.meta && import.meta.env && import.meta.env.DEV ? '' : 'http://localhost:3333')
       return `${String(apiBase).replace(/\/$/, '')}${u}`
     }
     return u
   } catch {
     return u
+  }
+}
+
+// Helper to present a friendly/short filename for uploaded items
+const displayName = (item) => {
+  try {
+    if (!item) return ''
+    const n = item.name || ''
+    if (typeof n === 'string' && n && !n.startsWith('data:') && n.length < 100) return n
+    if (item.file && item.file.name) return item.file.name
+    if (item.dataUrl && pendingNames.has(item.dataUrl)) return pendingNames.get(item.dataUrl)
+    const preview = item.preview || item.dataUrl || n
+    if (preview && typeof preview === 'string' && preview.startsWith('/storage')) {
+      const parts = preview.split('/')
+      return parts[parts.length - 1] || 'arquivo'
+    }
+    if (typeof n === 'string' && n.startsWith('data:')) {
+      const m = n.match(/^data:(.+?);base64,/) || []
+      const mime = m[1]
+      const ext = mime ? mime.split('/')[1] || 'bin' : 'bin'
+      return `arquivo.${ext}`
+    }
+    if (typeof n === 'string' && n.length > 80) return `${n.slice(0, 40)}…${n.slice(-20)}`
+    return String(n || 'arquivo')
+  } catch (e) {
+    void e
+    return ''
   }
 }
 

@@ -1,5 +1,9 @@
 const express = require("express");
 const path = require("path");
+// Load environment variables from .env when present (useful when running outside Docker)
+try {
+  require("dotenv").config({ path: path.resolve(process.cwd(), ".env") });
+} catch (e) {}
 const app = express();
 const root = process.env.STATIC_ROOT || "/usr/src/app";
 

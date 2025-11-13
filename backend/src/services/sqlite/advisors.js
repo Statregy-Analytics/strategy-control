@@ -2,8 +2,11 @@ const Database = require("better-sqlite3");
 const path = require("path");
 const fs = require("fs");
 
-const dbFile =
-  process.env.SQLITE_FILE || path.join(__dirname, "../../../dev.sqlite");
+const defaultDbFile =
+  process.env.NODE_ENV === "test"
+    ? path.join(__dirname, "../../../test.sqlite")
+    : path.join(__dirname, "../../../dev.sqlite");
+const dbFile = process.env.SQLITE_FILE || defaultDbFile;
 try {
   const dir = path.dirname(dbFile);
   try {

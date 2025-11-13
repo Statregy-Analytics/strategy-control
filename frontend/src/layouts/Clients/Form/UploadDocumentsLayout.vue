@@ -26,7 +26,7 @@
             padding="xs"
             icon="description"
             color="secondary"
-            :label="item.name"
+            :label="displayName(item)"
             no-caps
             class="q-ma-sm text-muted"
           />
@@ -74,7 +74,7 @@
             padding="xs"
             icon="description"
             color="secondary"
-            :label="item.name"
+            :label="displayName(item)"
             no-caps
             class="q-ma-sm text-muted"
           />
@@ -119,7 +119,7 @@
             padding="xs"
             icon="description"
             color="secondary"
-            :label="item.name"
+            :label="displayName(item)"
             no-caps
             class="q-ma-sm text-muted"
           />
@@ -168,7 +168,7 @@
             padding="xs"
             icon="description"
             color="secondary"
-            :label="item.name"
+            :label="displayName(item)"
             no-caps
             class="q-ma-sm text-muted"
           />
@@ -222,12 +222,38 @@ function resolveStorageUrl(u) {
     if (typeof u === 'string' && u.startsWith('/storage')) {
       const apiBase =
         (import.meta && import.meta.env && import.meta.env.VITE_API_BASE_URL) ||
-        'http://localhost:3333'
+        (import.meta && import.meta.env && import.meta.env.DEV ? '' : 'http://localhost:3333')
       return `${String(apiBase).replace(/\/$/, '')}${u}`
     }
     return u
   } catch {
     return u
+  }
+}
+// Helper to present a friendly/short filename for uploaded items
+const displayName = (item) => {
+  try {
+    if (!item) return ''
+    const n = item.name || ''
+    if (typeof n === 'string' && n && !n.startsWith('data:') && n.length < 100) return n
+    if (item.file && item.file.name) return item.file.name
+    if (item.dataUrl && pendingNames.has(item.dataUrl)) return pendingNames.get(item.dataUrl)
+    const preview = item.preview || item.dataUrl || n
+    if (preview && typeof preview === 'string' && preview.startsWith('/storage')) {
+      const parts = preview.split('/')
+      return parts[parts.length - 1] || 'arquivo'
+    }
+    if (typeof n === 'string' && n.startsWith('data:')) {
+      const m = n.match(/^data:(.+?);base64,/) || []
+      const mime = m[1]
+      const ext = mime ? mime.split('/')[1] || 'bin' : 'bin'
+      return `arquivo.${ext}`
+    }
+    if (typeof n === 'string' && n.length > 80) return `${n.slice(0, 40)}…${n.slice(-20)}`
+    return String(n || 'arquivo')
+  } catch (e) {
+    void e
+    return ''
   }
 }
 
@@ -236,118 +262,262 @@ function resolveStorageUrl(u) {
 const triggerFileInput = () => {
   if (fileInputCertidao.value) fileInputCertidao.value.click()
 }
-const handleFileUpload = (event) => {
+const uploadSingleFile = async (file) => {
+  try {
+    const apiBase = (import.meta && import.meta.env && import.meta.env.VITE_API_BASE_URL) || ''
+    const fd = new FormData()
+    fd.append('file', file)
+    const res = await fetch(`${apiBase.replace(/\/$/, '')}/api/clients/upload`, {
+      method: 'POST',
+      body: fd,
+    })
+    if (!res.ok) throw new Error('upload failed')
+    const body = await res.json()
+    return { url: body && body.url ? body.url : null, name: (body && body.name) || file.name }
+  } catch (err) {
+    if (typeof console !== 'undefined' && console.debug)
+      console.debug('uploadSingleFile failed', err)
+    return { url: null, name: file.name }
+  }
+}
+const handleFileUpload = async (event) => {
   const files = event.target.files
   if (!files || files.length === 0) return
   const arr = Array.from(files)
-  const items = arr.map((f) => ({ file: f, name: f.name, preview: null, dataUrl: null }))
-  items.forEach((it, idx) => {
-    const r = new FileReader()
-    r.onload = (ev) => {
-      items[idx].preview = ev.target.result
-      items[idx].dataUrl = ev.target.result
+  const uploaded = []
+  await Promise.all(
+    arr.map(async (f) => {
       try {
-        if (items[idx] && items[idx].file && items[idx].file.name)
-          pendingNames.set(items[idx].dataUrl, items[idx].file.name)
-      } catch (err) {
-        if (typeof console !== 'undefined' && console.debug)
-          console.debug('pendingNames set failed', err)
+        const r = await uploadSingleFile(f)
+        if (r.url) {
+          try {
+            pendingNames.set(r.url, r.name)
+          } catch (e) {
+            void e
+          }
+          uploaded.push({
+            file: f,
+            name: r.name,
+            preview: resolveStorageUrl(r.url),
+            dataUrl: r.url,
+          })
+          return
+        }
+      } catch (e) {
+        void e
       }
-      uploadedFiles.value = items
+      // fallback to dataURL preview, but try backend b64 persistence first
+      const dataUrl = await new Promise((resolve) => {
+        const reader = new FileReader()
+        reader.onload = (ev) => resolve(ev.target.result)
+        reader.readAsDataURL(f)
+      })
       try {
-        if (clientEdit && clientEdit.value) {
-          if (!clientEdit.value.cliente) clientEdit.value.cliente = {}
-          const urls = items.filter((x) => x.dataUrl).map((x) => x.dataUrl)
-          if (urls.length === 1) clientEdit.value.cliente.certidao = urls[0]
-          else if (urls.length > 1) clientEdit.value.cliente.certidao = urls
-          else delete clientEdit.value.cliente.certidao
+        if (f && f.name) pendingNames.set(dataUrl, f.name)
+      } catch (e) {
+        void e
+      }
+      try {
+        const apiBase = (import.meta && import.meta.env && import.meta.env.VITE_API_BASE_URL) || ''
+        const res = await fetch(`${apiBase.replace(/\/$/, '')}/api/clients/upload-b64`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ name: f.name, data: dataUrl }),
+        })
+        if (res && res.ok) {
+          const body = await res.json()
+          const url = body && body.url ? body.url : null
+          const name = (body && body.name) || f.name
+          if (url) {
+            try {
+              pendingNames.set(url, name)
+            } catch (e) {
+              void e
+            }
+            uploaded.push({ file: f, name, preview: resolveStorageUrl(url), dataUrl: url })
+            return
+          }
         }
       } catch (err) {
-        if (typeof console !== 'undefined' && console.debug)
-          console.debug('persist certidao failed', err)
+        void err
       }
+      uploaded.push({ file: f, name: f.name, preview: dataUrl, dataUrl })
+    }),
+  )
+  uploadedFiles.value = uploaded
+  try {
+    if (clientEdit && clientEdit.value) {
+      if (!clientEdit.value.cliente) clientEdit.value.cliente = {}
+      const urls = uploaded.filter((x) => x.dataUrl).map((x) => x.dataUrl)
+      if (urls.length === 1) clientEdit.value.cliente.certidao = urls[0]
+      else if (urls.length > 1) clientEdit.value.cliente.certidao = urls
+      else delete clientEdit.value.cliente.certidao
     }
-    r.readAsDataURL(it.file)
-  })
-  uploadedFiles.value = items
+  } catch (err) {
+    if (typeof console !== 'undefined' && console.debug)
+      console.debug('persist certidao failed', err)
+  }
 }
 
 const triggerFileInputIrpf = () => {
   if (fileInputIrpf.value) fileInputIrpf.value.click()
 }
-const handleFileUploadIrpf = (event) => {
+const handleFileUploadIrpf = async (event) => {
   const files = event.target.files
   if (!files || files.length === 0) return
   const arr = Array.from(files)
-  const items = arr.map((f) => ({ file: f, name: f.name, preview: null, dataUrl: null }))
-  items.forEach((it, idx) => {
-    const r = new FileReader()
-    r.onload = (ev) => {
-      items[idx].preview = ev.target.result
-      items[idx].dataUrl = ev.target.result
+  const uploaded = []
+  await Promise.all(
+    arr.map(async (f) => {
       try {
-        if (items[idx] && items[idx].file && items[idx].file.name)
-          pendingNames.set(items[idx].dataUrl, items[idx].file.name)
-      } catch (err) {
-        if (typeof console !== 'undefined' && console.debug)
-          console.debug('pendingNames set failed', err)
+        const r = await uploadSingleFile(f)
+        if (r.url) {
+          try {
+            pendingNames.set(r.url, r.name)
+          } catch (e) {
+            void e
+          }
+          uploaded.push({
+            file: f,
+            name: r.name,
+            preview: resolveStorageUrl(r.url),
+            dataUrl: r.url,
+          })
+          return
+        }
+      } catch (e) {
+        void e
       }
-      uploadedIrpf.value = items
+      const dataUrl = await new Promise((resolve) => {
+        const reader = new FileReader()
+        reader.onload = (ev) => resolve(ev.target.result)
+        reader.readAsDataURL(f)
+      })
       try {
-        if (clientEdit && clientEdit.value) {
-          if (!clientEdit.value.cliente) clientEdit.value.cliente = {}
-          const urls = items.filter((x) => x.dataUrl).map((x) => x.dataUrl)
-          if (urls.length === 1) clientEdit.value.cliente.irpf = urls[0]
-          else if (urls.length > 1) clientEdit.value.cliente.irpf = urls
-          else delete clientEdit.value.cliente.irpf
+        if (f && f.name) pendingNames.set(dataUrl, f.name)
+      } catch (e) {
+        void e
+      }
+      try {
+        const apiBase = (import.meta && import.meta.env && import.meta.env.VITE_API_BASE_URL) || ''
+        const res = await fetch(`${apiBase.replace(/\/$/, '')}/api/clients/upload-b64`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ name: f.name, data: dataUrl }),
+        })
+        if (res && res.ok) {
+          const body = await res.json()
+          const url = body && body.url ? body.url : null
+          const name = (body && body.name) || f.name
+          if (url) {
+            try {
+              pendingNames.set(url, name)
+            } catch (e) {
+              void e
+            }
+            uploaded.push({ file: f, name, preview: resolveStorageUrl(url), dataUrl: url })
+            return
+          }
         }
       } catch (err) {
-        if (typeof console !== 'undefined' && console.debug)
-          console.debug('persist irpf failed', err)
+        void err
       }
+      uploaded.push({ file: f, name: f.name, preview: dataUrl, dataUrl })
+    }),
+  )
+  uploadedIrpf.value = uploaded
+  try {
+    if (clientEdit && clientEdit.value) {
+      if (!clientEdit.value.cliente) clientEdit.value.cliente = {}
+      const urls = uploaded.filter((x) => x.dataUrl).map((x) => x.dataUrl)
+      if (urls.length === 1) clientEdit.value.cliente.irpf = urls[0]
+      else if (urls.length > 1) clientEdit.value.cliente.irpf = urls
+      else delete clientEdit.value.cliente.irpf
     }
-    r.readAsDataURL(it.file)
-  })
-  uploadedIrpf.value = items
+  } catch (err) {
+    if (typeof console !== 'undefined' && console.debug) console.debug('persist irpf failed', err)
+  }
 }
 
 const triggerFileInputIrpfRecibo = () => {
   if (fileInputIrpfRecibo.value) fileInputIrpfRecibo.value.click()
 }
-const handleFileUploadIrpfRecibo = (event) => {
+const handleFileUploadIrpfRecibo = async (event) => {
   const files = event.target.files
   if (!files || files.length === 0) return
   const arr = Array.from(files)
-  const items = arr.map((f) => ({ file: f, name: f.name, preview: null, dataUrl: null }))
-  items.forEach((it, idx) => {
-    const r = new FileReader()
-    r.onload = (ev) => {
-      items[idx].preview = ev.target.result
-      items[idx].dataUrl = ev.target.result
+  const uploaded = []
+  await Promise.all(
+    arr.map(async (f) => {
       try {
-        if (items[idx] && items[idx].file && items[idx].file.name)
-          pendingNames.set(items[idx].dataUrl, items[idx].file.name)
-      } catch (err) {
-        if (typeof console !== 'undefined' && console.debug)
-          console.debug('pendingNames set failed', err)
+        const r = await uploadSingleFile(f)
+        if (r.url) {
+          try {
+            pendingNames.set(r.url, r.name)
+          } catch (e) {
+            void e
+          }
+          uploaded.push({
+            file: f,
+            name: r.name,
+            preview: resolveStorageUrl(r.url),
+            dataUrl: r.url,
+          })
+          return
+        }
+      } catch (e) {
+        void e
       }
-      uploadedIrpfRecibo.value = items
+      const dataUrl = await new Promise((resolve) => {
+        const reader = new FileReader()
+        reader.onload = (ev) => resolve(ev.target.result)
+        reader.readAsDataURL(f)
+      })
       try {
-        if (clientEdit && clientEdit.value) {
-          if (!clientEdit.value.cliente) clientEdit.value.cliente = {}
-          const urls = items.filter((x) => x.dataUrl).map((x) => x.dataUrl)
-          if (urls.length === 1) clientEdit.value.cliente.irpf_recibo = urls[0]
-          else if (urls.length > 1) clientEdit.value.cliente.irpf_recibo = urls
-          else delete clientEdit.value.cliente.irpf_recibo
+        if (f && f.name) pendingNames.set(dataUrl, f.name)
+      } catch (e) {
+        void e
+      }
+      try {
+        const apiBase = (import.meta && import.meta.env && import.meta.env.VITE_API_BASE_URL) || ''
+        const res = await fetch(`${apiBase.replace(/\/$/, '')}/api/clients/upload-b64`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ name: f.name, data: dataUrl }),
+        })
+        if (res && res.ok) {
+          const body = await res.json()
+          const url = body && body.url ? body.url : null
+          const name = (body && body.name) || f.name
+          if (url) {
+            try {
+              pendingNames.set(url, name)
+            } catch (e) {
+              void e
+            }
+            uploaded.push({ file: f, name, preview: resolveStorageUrl(url), dataUrl: url })
+            return
+          }
         }
       } catch (err) {
-        if (typeof console !== 'undefined' && console.debug)
-          console.debug('persist irpf_recibo failed', err)
+        void err
       }
+      uploaded.push({ file: f, name: f.name, preview: dataUrl, dataUrl })
+    }),
+  )
+  uploadedIrpfRecibo.value = uploaded
+  try {
+    if (clientEdit && clientEdit.value) {
+      if (!clientEdit.value.cliente) clientEdit.value.cliente = {}
+      const urls = uploaded.filter((x) => x.dataUrl).map((x) => x.dataUrl)
+      if (urls.length === 1) clientEdit.value.cliente.irpf_recibo = urls[0]
+      else if (urls.length > 1) clientEdit.value.cliente.irpf_recibo = urls
+      else delete clientEdit.value.cliente.irpf_recibo
     }
-    r.readAsDataURL(it.file)
-  })
-  uploadedIrpfRecibo.value = items
+  } catch (err) {
+    if (typeof console !== 'undefined' && console.debug)
+      console.debug('persist irpf_recibo failed', err)
+  }
 }
 
 const triggerFileInputExtrato = () => {

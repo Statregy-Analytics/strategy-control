@@ -286,7 +286,7 @@ const saveLead = async () => {
   try {
     if (payload.id) {
       const res = await fetch(
-        `${(import.meta.env && import.meta.env.VITE_API_BASE_URL) || 'http://localhost:3333'}/api/leads/${payload.id}`,
+        `${(import.meta.env && import.meta.env.VITE_API_BASE_URL) || (import.meta.env && import.meta.env.DEV ? '' : 'http://localhost:3333')}/api/leads/${payload.id}`,
         {
           method: 'PUT',
           headers: { 'Content-Type': 'application/json' },
@@ -303,7 +303,7 @@ const saveLead = async () => {
       }
     } else {
       const res = await fetch(
-        `${(import.meta.env && import.meta.env.VITE_API_BASE_URL) || 'http://localhost:3333'}/api/leads`,
+        `${(import.meta.env && import.meta.env.VITE_API_BASE_URL) || (import.meta.env && import.meta.env.DEV ? '' : 'http://localhost:3333')}/api/leads`,
         {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
@@ -333,7 +333,7 @@ const removeLead = async () => {
   if (!payload.id) return
   try {
     const res = await fetch(
-      `${(import.meta.env && import.meta.env.VITE_API_BASE_URL) || 'http://localhost:3333'}/api/leads/${payload.id}`,
+      `${(import.meta.env && import.meta.env.VITE_API_BASE_URL) || (import.meta.env && import.meta.env.DEV ? '' : 'http://localhost:3333')}/api/leads/${payload.id}`,
       {
         method: 'DELETE',
       },

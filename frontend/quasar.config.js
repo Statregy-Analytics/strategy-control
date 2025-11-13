@@ -12,7 +12,7 @@ export default defineConfig((ctx) => {
     // app boot file (/src/boot)
     // --> boot files are part of "main.js"
     // https://v2.quasar.dev/quasar-cli-vite/boot-files
-    boot: ['i18n', 'axios', 'filters', 'table-icons'],
+    boot: ['i18n', 'axios', 'filters', 'table-icons', 'customizedDirectives'],
 
     // https://v2.quasar.dev/quasar-cli-vite/quasar-config-file#css
     css: ['app.scss'],
@@ -99,17 +99,20 @@ export default defineConfig((ctx) => {
 
     // Full list of options: https://v2.quasar.dev/quasar-cli-vite/quasar-config-file#devserver
     devServer: {
-      // https: true,
+      host: '0.0.0.0',
+      port: 9000,
+      // https: false,
       open: true, // opens browser window automatically
       proxy: {
         // encaminhar chamadas à API e arquivos estáticos (/storage) para o backend local
         '/api': {
-          target: 'http://localhost:3333',
+          // when running inside Docker Compose, target the backend service by name
+          target: 'http://strategy-backend:3333',
           changeOrigin: true,
           secure: false,
         },
         '/storage': {
-          target: 'http://localhost:3333',
+          target: 'http://strategy-backend:3333',
           changeOrigin: true,
           secure: false,
         },

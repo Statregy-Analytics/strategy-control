@@ -4,7 +4,7 @@
       <span class="text-bolder text-h7">Documentos Residenciais</span>
     </div>
     <div class="row justify-around q-gutter-sm">
-      <label-form className="col" textLabel="Cadastramento do imóvel">
+      <label-form className="col" textLabel="Nome do imóvel">
         <q-input
           outlined
           v-model="leadEdit.residential.register"
@@ -13,7 +13,7 @@
           class="q-my-sm"
         ></q-input>
       </label-form>
-      <label-form className="col" textLabel="Registro do imóvel">
+      <label-form className="col" textLabel="Matricula do imóvel">
         <q-input
           outlined
           v-model="leadEdit.residential.property"

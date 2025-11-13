@@ -84,7 +84,7 @@ async function fetchAudit() {
     const token = btoa(JSON.stringify({ id: 'admin', role: 'admin' }))
     const base =
       (import.meta && import.meta.env && import.meta.env.VITE_API_BASE_URL) ||
-      'http://localhost:3333'
+      (import.meta && import.meta.env && import.meta.env.DEV ? '' : 'http://localhost:3333')
     const qs = new URLSearchParams()
     qs.set('page', String(page.value))
     qs.set('pageSize', String(pageSize.value))

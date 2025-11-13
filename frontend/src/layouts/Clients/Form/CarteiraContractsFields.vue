@@ -25,10 +25,11 @@
       </label-form>
       <label-form className="col" textLabel="Valor do dividendo (R$)">
         <q-input
+          v-currency-mask
           outlined
           v-model="clientEdit.investment.valor_dividendo"
           dense
-          placeholder=""
+          placeholder="Ex.: 1000,00"
           class="q-my-sm"
         ></q-input>
       </label-form>
@@ -42,6 +43,8 @@ import { ref, computed, onMounted } from 'vue'
 import { useLayoutStore } from 'src/stores/layout'
 import { storeToRefs } from 'pinia'
 import useAdvisors from 'src/composables/Fakes/useAdvisors'
+
+
 
 const layoutStore = useLayoutStore()
 const { clientEdit } = storeToRefs(layoutStore)

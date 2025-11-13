@@ -2,3 +2,8 @@ playwright-videos/*.webm
 playwright-videos/*.png
 
 .env
+
+# Quasar core related directories
+.quasar
+/dist
+/quasar.config.*.temporary.compiled*

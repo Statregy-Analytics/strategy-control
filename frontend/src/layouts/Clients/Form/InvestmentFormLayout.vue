@@ -18,6 +18,9 @@
           dense
           placeholder=""
           class="q-my-sm"
+          @keydown="onKeydownNumeric"
+          @paste="onPasteNumeric"
+          @update:model-value="(val) => onInputNumeric(val)"
         ></q-input>
       </label-form>
     </div>
@@ -61,6 +64,89 @@ const selectedClassification = computed({
 })
 
 defineComponent({ name: 'CarteiraFormLayout' })
+
+// enforce numeric-only input for carteira total (clientEdit.investment.saldo)
+const onInputNumeric = (val) => {
+  try {
+    if (!clientEdit || !clientEdit.value) return
+    if (!clientEdit.value.investment) clientEdit.value.investment = {}
+    // value may be passed as event payload; fallback to current model value
+    let v = val == null ? clientEdit.value.investment.saldo : val
+    if (v == null) v = ''
+    // keep only digits
+    const digits = String(v).replace(/\D+/g, '')
+    clientEdit.value.investment.saldo = digits
+  } catch (e) {
+    void e
+  }
+}
+
+// prevent typing non-digit characters
+const onKeydownNumeric = (event) => {
+  try {
+    // allow control/meta shortcuts (copy/paste/select all)
+    if (event.ctrlKey || event.metaKey) return
+    const allowedKeys = [
+      'Backspace',
+      'Delete',
+      'ArrowLeft',
+      'ArrowRight',
+      'ArrowUp',
+      'ArrowDown',
+      'Tab',
+      'Enter',
+      'Home',
+      'End',
+    ]
+    if (allowedKeys.includes(event.key)) return
+    // allow digits
+    if (/^[0-9]$/.test(event.key)) return
+    // otherwise prevent
+    event.preventDefault()
+  } catch (e) {
+    void e
+  }
+}
+
+// sanitize pasted content: only allow digits, insert filtered text at cursor
+const onPasteNumeric = (event) => {
+  try {
+    const clipboardData = event.clipboardData || window.clipboardData
+    const paste = clipboardData.getData('text') || ''
+    const digits = String(paste).replace(/\D+/g, '')
+    if (!digits) {
+      // nothing to paste
+      event.preventDefault()
+      return
+    }
+    // insert filtered digits into the input at cursor position
+    const target = event.target
+    if (target && typeof target.selectionStart === 'number') {
+      event.preventDefault()
+      const start = target.selectionStart
+      const end = target.selectionEnd
+      const cur = String(target.value || '')
+      const next = cur.slice(0, start) + digits + cur.slice(end)
+      // set value and move cursor
+      target.value = next
+      // update model value stored in clientEdit
+      if (!clientEdit.value) clientEdit.value = {}
+      if (!clientEdit.value.investment) clientEdit.value.investment = {}
+      clientEdit.value.investment.saldo = next.replace(/\D+/g, '')
+      const pos = start + digits.length
+      // set selection/cursor after paste
+      setTimeout(() => {
+        try {
+          target.setSelectionRange(pos, pos)
+        } catch (e) {
+          void e
+        }
+      }, 0)
+    }
+  } catch (e) {
+    void e
+  }
+}
 
 // propagate selected investment classification to top-level client level
 watch(

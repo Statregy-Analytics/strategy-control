@@ -7,9 +7,15 @@ import axios from 'axios'
 // good idea to move this instance creation inside of the
 // "export default () => {}" function below (which runs individually
 // for each client)
-const rawBase = (import.meta && import.meta.env && import.meta.env.VITE_API_BASE_URL) || 'http://localhost:3333'
+// In dev use the devServer proxy (same-origin) so browser won't trigger PNA/CORS issues.
+// In production use the configured VITE_API_BASE_URL or fallback to localhost:3333
+const isDev = Boolean(import.meta && import.meta.env && import.meta.env.DEV)
+const rawBase = isDev
+  ? ''
+  : (import.meta && import.meta.env && import.meta.env.VITE_API_BASE_URL) || 'http://localhost:3333'
 // Ensure base contains the /api prefix so composables can call paths like '/clients'
-const base = rawBase.endsWith('/api') ? rawBase : `${rawBase.replace(/\/$/, '')}/api`
+const base =
+  rawBase === '' ? '/api' : rawBase.endsWith('/api') ? rawBase : `${rawBase.replace(/\/$/, '')}/api`
 const api = axios.create({ baseURL: base })
 
 export default defineBoot(({ app }) => {

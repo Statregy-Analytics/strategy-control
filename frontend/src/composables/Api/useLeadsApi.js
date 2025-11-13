@@ -52,7 +52,7 @@ export default function useLeadsApi(baseUrl = null) {
   const apiBase =
     baseUrl ||
     (import.meta && import.meta.env && import.meta.env.VITE_API_BASE_URL) ||
-    'http://localhost:3333'
+    (import.meta && import.meta.env && import.meta.env.DEV ? '' : 'http://localhost:3333')
 
   async function fetchLeads(opts = {}) {
     loading.value = true

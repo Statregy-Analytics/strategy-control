@@ -7,14 +7,19 @@
 
     <q-separator />
 
-    <q-banner inline-actions rounded class="q-ma-md border-pattern">
+    <q-banner
+      inline-actions
+      rounded
+      class="q-ma-md border-pattern"
+      v-if="titleHeader != 'Inclusão de Cliente'"
+    >
       <div class="row">
         <div class="col-1">
           <q-avatar size="32px">
             <q-img
-              :src="clientEdit.cliente.avatar"
-              :alt="clientEdit.cliente.name"
-              :title="clientEdit.cliente.name"
+              :src="resolveStorageUrl(clientEdit.cliente && clientEdit.cliente.avatar)"
+              :alt="clientEdit.cliente && clientEdit.cliente.name"
+              :title="clientEdit.cliente && clientEdit.cliente.name"
             />
           </q-avatar>
         </div>
@@ -56,18 +61,21 @@
 
     <q-card-section>
       <div class="text-h7 text-bold">Informações e Documentos Pessoais</div>
-      <personal-data-layout class="q-my-lg" />
-      <div class="text-h7 text-bold">Dados Bancários</div>
-      <bank-details-layout class="q-my-lg" />
+
+      <personal-data-layout class="q-my-lg">
+        <!-- <div class="text-h7 text-bold q-mt-lg">Carteira</div> -->
+        <investment-form-layout class="" />
+      </personal-data-layout>
       <div class="text-h7 text-bold">Documentos Residencias</div>
       <data-residential-layout class="q-my-lg" />
       <upload-residential-layout class="q-my-lg" />
+      <div class="text-h7 text-bold">Dados Bancários</div>
+      <bank-details-layout class="q-my-lg" />
       <div class="text-h7 text-bold q-mt-lg">Documentos Contábeis de Pessoa Física</div>
       <upload-documents-layout class="q-my-lg" />
       <div class="text-h7 text-bold q-mt-lg">Documentos Contábeis de Pessoa Jurídica</div>
       <upload-persona-layout class="q-my-lg" />
-      <div class="text-h7 text-bold q-mt-lg">Carteira</div>
-      <investment-form-layout class="q-my-lg" />
+
       <div class="text-h7 text-bold q-mt-lg">Contratos</div>
       <contract-client-table class="q-my-lg" />
       <!-- Campos da Carteira que ficam abaixo dos contratos e acima de Empréstimos -->
@@ -76,14 +84,14 @@
       <we-lend-form-layout class="q-my-lg" />
     </q-card-section>
 
-    <q-card-actions vertical>
+    <q-card-actions align="right">
       <div class="row justify-end q-pa-md">
         <q-btn
           id="footer-remove-btn"
           size="sm"
           unelevated
-          color="negative"
-          class="q-mr-sm"
+          class="q-mx-md text-negative"
+          padding="sm lg"
           label="Remover"
           icon="delete"
           data-test="clients-remove-btn"
@@ -95,14 +103,18 @@
             >Preencha todos os campos obrigatórios corretamente (Nome, CPF, E-mail, Data de
             Nascimento)</q-tooltip
           >
+          <!-- :disable="!canSave" -->
           <q-btn
-            :disable="!canSave"
-            size="sm"
-            unelevated
+            class="q-mr-sm"
             color="primary"
+            padding="sm lg"
             label="Salvar"
-            icon="save"
-            data-test="clients-save-btn"
+            no-caps
+            dense
+            style="border-radius: 8px"
+            data-test="clients-create-btn"
+            :loading="isSaving"
+            :disable="isSaving || !canSave"
             @click.prevent="saveClient"
           />
         </div>
@@ -148,6 +160,21 @@ import useCliente from 'src/composables/Fakes/useCliente'
 import useAdvisors from 'src/composables/Fakes/useAdvisors'
 // useClientStore removed: compare functionality moved/removed from this layout
 import useRules from 'src/composables/global/useRules'
+// resolve /storage urls to backend API base (fallback http://localhost:3333)
+const resolveStorageUrl = (u) => {
+  try {
+    if (!u) return u
+    if (typeof u === 'string' && u.startsWith('/storage')) {
+      const apiBase =
+        (import.meta && import.meta.env && import.meta.env.VITE_API_BASE_URL) ||
+        (import.meta && import.meta.env && import.meta.env.DEV ? '' : 'http://localhost:3333')
+      return `${String(apiBase).replace(/\/$/, '')}${u}`
+    }
+    return u
+  } catch {
+    return u
+  }
+}
 defineComponent({
   name: 'EditClientsLayout',
 })
@@ -164,10 +191,10 @@ const { rowsClient, createClient, updateClient, deleteClient } = clienteApi
 
 const { rowsAssessores } = useAdvisors()
 const confirmRemove = ref(false)
+const isSaving = ref(false)
 const onHeaderRemove = () => {
   try {
-    console.debug('onHeaderRemove clicked for client id=', clientEdit.value && clientEdit.value.id)
-    // reuse the same confirmation dialog
+    // reuse the same confirmation dialog as footer
     confirmRemove.value = true
   } catch {
     /* ignore */
@@ -181,10 +208,6 @@ const onFooterRemove = () => {
     /* ignore */
   }
 }
-// openEdit removed — comparison menu will handle actions
-
-// compare menu and selection removed; main button opens edit dialog via openEdit()
-
 const titleHeader = computed(() => {
   try {
     const payload = clientEdit.value || {}
@@ -242,6 +265,7 @@ const canSave = computed(() => {
 const $q = useQuasar()
 
 const saveClient = async () => {
+  if (isSaving.value) return
   const payload = clientEdit.value || {}
   // basic client-side validation to avoid sending invalid payloads to the backend
   const cliente = payload.cliente || {}
@@ -262,6 +286,7 @@ const saveClient = async () => {
   }
   // frontend uniqueness checks to avoid duplicate name/email
   try {
+    isSaving.value = true
     const nameNormalized = String(cliente.name || '')
       .trim()
       .toLowerCase()
@@ -353,6 +378,9 @@ const saveClient = async () => {
       message: err && err.message ? err.message : 'Erro ao salvar cliente',
       color: 'negative',
     })
+  } finally {
+    // allow subsequent saves
+    isSaving.value = false
   }
 }
 

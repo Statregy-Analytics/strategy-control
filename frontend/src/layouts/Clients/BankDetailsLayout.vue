@@ -6,7 +6,7 @@
           outlined
           v-model="clientEdit.bank.name"
           dense
-          placeholder=""
+          placeholder="Ex.: Itaú"
           class="q-my-sm"
         ></q-input>
       </label-form>
@@ -15,7 +15,7 @@
           outlined
           v-model="clientEdit.bank.agency"
           dense
-          placeholder=""
+          placeholder="0000-0"
           class="q-my-sm"
         ></q-input>
       </label-form>
@@ -24,17 +24,23 @@
           outlined
           v-model="clientEdit.bank.account"
           dense
-          placeholder=""
+          placeholder="00.000-0"
           class="q-my-sm"
         ></q-input>
       </label-form>
     </div>
     <div class="row q-gutter-sm justify-around">
-      <label-form className="col d-block" textLabel="Tipo de Conta">
-        <div class="row">
+      <label-form className="col d-block row" textLabel="Tipo de Conta">
+
+          <!-- <q-select
+            outlined
+            v-model="clientEdit.bank.type"
+            :options="tipo_conta"
+            dense
+          ></q-select> -->
           <q-radio v-model="clientEdit.bank.type" val="pf" label="Pessoa Física" />
           <q-radio v-model="clientEdit.bank.type" val="pj" label="Pessoa Juridica" />
-        </div>
+
       </label-form>
       <label-form className="col d-block" textLabel="CPF/CNPJ">
         <q-input
@@ -241,7 +247,10 @@ watch(
   },
   { immediate: true, deep: true },
 )
-
+// const tipo_conta = [
+//   { label: 'Pessoa Física', value: 'pf' },
+//   { label: 'Pessoa Juridica', value: 'pj' }
+// ]
 // when bank.type changes, if switched to 'pf' ensure bank.cpf_cnpj matches cliente.cpf
 watch(
   () => clientEdit.value && clientEdit.value.bank && clientEdit.value.bank.type,

@@ -3,9 +3,13 @@ const path = require("path");
 const fs = require("fs");
 // require advisors adapter to resolve advisor ids/names when storing/reading
 const advisors = require("./advisors");
+const { normalizeClientFields } = require("../../lib/normalize");
 
-const dbFile =
-  process.env.SQLITE_FILE || path.join(__dirname, "../../../dev.sqlite");
+const defaultDbFile =
+  process.env.NODE_ENV === "test"
+    ? path.join(__dirname, "../../../test.sqlite")
+    : path.join(__dirname, "../../../dev.sqlite");
+const dbFile = process.env.SQLITE_FILE || defaultDbFile;
 try {
   // ensure file exists so better-sqlite3 can open it in write mode
   const dir = path.dirname(dbFile);
@@ -280,6 +284,8 @@ function toShape(row) {
     },
   };
 }
+// Normalização de campos centralizada em backend/src/lib/normalize.js
+// A função normalizeClientFields é importada do módulo compartilhado
 
 function list() {
   // include internal rowid so we can fallback when id column is null for legacy rows
@@ -409,6 +415,11 @@ function create(data) {
       }
     }
   } catch (e) {}
+  // normalize text fields that should start with uppercase first letter
+  try {
+    normalizeClientFields(cliente);
+  } catch (e) {}
+
   const payload = JSON.stringify(
     payloadObj.cliente ? payloadObj : { cliente: payloadObj }
   );
@@ -520,6 +531,11 @@ function update(id, data) {
       delete obj.assessor;
     }
   } catch (e) {}
+  // normalize text fields that should start with uppercase first letter
+  try {
+    normalizeClientFields(cliente);
+  } catch (e) {}
+
   const payload = JSON.stringify(
     payloadObj.cliente ? payloadObj : { cliente: payloadObj }
   );
@@ -618,7 +634,6 @@ function del(id, opts) {
 }
 
 function listAudit(clientId, opts) {
-  // opts: { page, pageSize, action, from, to, userId }
   const _opts = opts || {};
   const p = {
     page: _opts.page != null ? Number(_opts.page) : 1,
@@ -636,8 +651,7 @@ function listAudit(clientId, opts) {
   }
   const userIdFilter = p.userId;
   if (userIdFilter) {
-    // we'll handle userId filtering in JS to avoid SQL datatype/LIKE issues
-    // do not add SQL filter for user here
+    // handle in JS filtering like advisors
   }
   if (p.from) {
     filters.push("created_at >= ?");
@@ -650,13 +664,11 @@ function listAudit(clientId, opts) {
 
   const where = filters.length ? "WHERE " + filters.join(" AND ") : "";
   try {
-    // total count (without userId filtering)
     const countRow = db
       .prepare(`SELECT COUNT(1) as cnt FROM clients_audit ${where}`)
       .get(...params);
     let total = countRow && countRow.cnt ? countRow.cnt : 0;
 
-    // If userId filter is requested, fetch matching rows (without LIMIT) and filter in JS
     if (userIdFilter) {
       const rowsAll = db
         .prepare(
@@ -668,9 +680,7 @@ function listAudit(clientId, opts) {
         if (copy.user) {
           try {
             copy.user = JSON.parse(copy.user);
-          } catch (e) {
-            /* leave as-is */
-          }
+          } catch (e) {}
         }
         return copy;
       });
@@ -678,7 +688,6 @@ function listAudit(clientId, opts) {
         if (!r.user) return false;
         if (typeof r.user === "string") {
           if (r.user === userIdFilter) return true;
-          // match common JSON text patterns
           if (r.user.includes(`"id":"${userIdFilter}"`)) return true;
           if (r.user.includes(userIdFilter)) return true;
           return false;
@@ -698,14 +707,12 @@ function listAudit(clientId, opts) {
       return { rows: pageRows, total };
     }
 
-    // pagination (no userId filter)
     const offset = (Math.max(1, Number(p.page)) - 1) * Number(p.pageSize);
     const rows = db
       .prepare(
         `SELECT * FROM clients_audit ${where} ORDER BY created_at DESC LIMIT ? OFFSET ?`
       )
       .all(...params, Number(p.pageSize), offset);
-
     const parsed = rows.map((r) => {
       const copy = Object.assign({}, r);
       if (copy.user) {

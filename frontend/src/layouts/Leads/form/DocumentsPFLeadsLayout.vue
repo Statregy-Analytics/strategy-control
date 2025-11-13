@@ -29,7 +29,7 @@
             padding="xs"
             icon="description"
             color="secondary"
-            :label="item.name"
+            :label="displayName(item)"
             no-caps
             class="q-ma-sm text-muted"
           />
@@ -53,7 +53,11 @@
     </label-form>
     <!-- Upload de Declaracao IRPF -->
 
-    <label-form className="q-mt-sm" textLabel="Declaração IRPF" helperText=".jpg, .png, .pdf — até 5MB">
+    <label-form
+      className="q-mt-sm"
+      textLabel="Declaração IRPF"
+      helperText=".jpg, .png, .pdf — até 5MB"
+    >
       <div class="row q-gutter-sm q-mt-xs" style="margin-top: 0; align-items: center">
         <q-btn
           label="Upload"
@@ -73,7 +77,7 @@
             padding="xs"
             icon="description"
             color="secondary"
-            :label="item.name"
+            :label="displayName(item)"
             no-caps
             class="q-ma-sm text-muted"
           />
@@ -118,7 +122,7 @@
             padding="xs"
             icon="description"
             color="secondary"
-            :label="item.name"
+            :label="displayName(item)"
             no-caps
             class="q-ma-sm text-muted"
           />
@@ -143,7 +147,11 @@
 
     <!-- Upload de Extrato Bancario-->
 
-    <label-form className="q-mt-sm" textLabel="Extrato bancário dos últimos 6 meses" helperText=".jpg, .png, .pdf — até 5MB">
+    <label-form
+      className="q-mt-sm"
+      textLabel="Extrato bancário dos últimos 6 meses"
+      helperText=".jpg, .png, .pdf — até 5MB"
+    >
       <div class="row q-gutter-sm q-mt-xs" style="margin-top: 0; align-items: center">
         <q-btn
           label="Upload"
@@ -163,7 +171,7 @@
             padding="xs"
             icon="description"
             color="secondary"
-            :label="item.name"
+            :label="displayName(item)"
             no-caps
             class="q-ma-sm text-muted"
           />
@@ -198,48 +206,282 @@ const uploadedFiles = ref([])
 const uploadedIrpf = ref([])
 const uploadedIrpfRecibo = ref([])
 const uploadedExtrato = ref([])
+const pendingNames = new Map()
+// helper to upload a single file and return {url, name}
+const uploadSingleFile = async (file) => {
+  try {
+    const apiBase = (import.meta && import.meta.env && import.meta.env.VITE_API_BASE_URL) || ''
+    const fd = new FormData()
+    fd.append('file', file)
+    const res = await fetch(`${apiBase.replace(/\/$/, '')}/api/clients/upload`, {
+      method: 'POST',
+      body: fd,
+    })
+    if (!res.ok) throw new Error('upload failed')
+    const body = await res.json()
+    return { url: body && body.url ? body.url : null, name: (body && body.name) || file.name }
+  } catch (err) {
+    if (typeof console !== 'undefined' && console.debug)
+      console.debug('uploadSingleFile failed', err)
+    return { url: null, name: file.name }
+  }
+}
 const triggerFileInput = () => {
   const fileInput = document.querySelector('.upload-negative')
   if (fileInput) fileInput.click()
 }
-const handleFileUpload = (event) => {
-  const files = event.target.files
-  if (files.length > 0) {
-    uploadedFiles.value = Array.from(files)
-    console.log('Arquivos selecionados:', uploadedFiles.value)
+// Helper to present a friendly/short filename for uploaded items
+const displayName = (item) => {
+  try {
+    if (!item) return ''
+    const n = item.name || ''
+    if (typeof n === 'string' && n && !n.startsWith('data:') && n.length < 100) return n
+    if (item.file && item.file.name) return item.file.name
+    if (item.dataUrl && pendingNames.has(item.dataUrl)) return pendingNames.get(item.dataUrl)
+    const preview = item.preview || item.dataUrl || n
+    if (preview && typeof preview === 'string' && preview.startsWith('/storage')) {
+      const parts = preview.split('/')
+      return parts[parts.length - 1] || 'arquivo'
+    }
+    if (typeof n === 'string' && n.startsWith('data:')) {
+      const m = n.match(/^data:(.+?);base64,/) || []
+      const mime = m[1]
+      const ext = mime ? mime.split('/')[1] || 'bin' : 'bin'
+      return `arquivo.${ext}`
+    }
+    if (typeof n === 'string' && n.length > 80) return `${n.slice(0, 40)}…${n.slice(-20)}`
+    return String(n || 'arquivo')
+  } catch (e) {
+    void e
+    return ''
   }
+}
+const handleFileUpload = async (event) => {
+  const files = event.target.files
+  if (!files || files.length === 0) return
+  const arr = Array.from(files)
+  const uploaded = []
+  await Promise.all(
+    arr.map(async (f) => {
+      try {
+        const r = await uploadSingleFile(f)
+        if (r.url) {
+          try {
+            pendingNames.set(r.url, r.name)
+          } catch (e) {
+            void e
+          }
+          uploaded.push({ file: f, name: r.name, preview: r.url, dataUrl: r.url })
+          return
+        }
+      } catch (e) {
+        void e
+      }
+      const dataUrl = await new Promise((resolve) => {
+        const reader = new FileReader()
+        reader.onload = (ev) => resolve(ev.target.result)
+        reader.readAsDataURL(f)
+      })
+      try {
+        if (f && f.name) pendingNames.set(dataUrl, f.name)
+      } catch (e) {
+        void e
+      }
+      try {
+        const apiBase = (import.meta && import.meta.env && import.meta.env.VITE_API_BASE_URL) || ''
+        const res = await fetch(`${apiBase.replace(/\/$/, '')}/api/clients/upload-b64`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ name: f.name, data: dataUrl }),
+        })
+        if (res && res.ok) {
+          const body = await res.json()
+          const url = body && body.url ? body.url : null
+          const name = (body && body.name) || f.name
+          if (url) {
+            try {
+              pendingNames.set(url, name)
+            } catch (e) {
+              void e
+            }
+            uploaded.push({ file: f, name: name, preview: url, dataUrl: url })
+            return
+          }
+        }
+      } catch (err) {
+        void err
+      }
+      uploaded.push({ file: f, name: f.name, preview: dataUrl, dataUrl })
+    }),
+  )
+  uploadedFiles.value = uploaded
 }
 const triggerFileInputIrpf = () => {
   const fileInput = document.querySelector('.upload-irpf')
   if (fileInput) fileInput.click()
 }
-const handleFileUploadIrpf = (event) => {
+const handleFileUploadIrpf = async (event) => {
   const files = event.target.files
-  if (files.length > 0) {
-    uploadedIrpf.value = Array.from(files)
-    console.log('Arquivos selecionados:', uploadedIrpf.value)
-  }
+  if (!files || files.length === 0) return
+  const arr = Array.from(files)
+  const uploaded = []
+  await Promise.all(
+    arr.map(async (f) => {
+      try {
+        const r = await uploadSingleFile(f)
+        if (r.url) {
+          try {
+            pendingNames.set(r.url, r.name)
+          } catch (e) {
+            void e
+          }
+          uploaded.push({ file: f, name: r.name, preview: r.url, dataUrl: r.url })
+          return
+        }
+      } catch (e) {
+        void e
+      }
+      const dataUrl = await new Promise((resolve) => {
+        const reader = new FileReader()
+        reader.onload = (ev) => resolve(ev.target.result)
+        reader.readAsDataURL(f)
+      })
+      try {
+        if (f && f.name) pendingNames.set(dataUrl, f.name)
+      } catch (e) {
+        void e
+      }
+      try {
+        const apiBase = (import.meta && import.meta.env && import.meta.env.VITE_API_BASE_URL) || ''
+        const res = await fetch(`${apiBase.replace(/\/$/, '')}/api/clients/upload-b64`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ name: f.name, data: dataUrl }),
+        })
+        if (res && res.ok) {
+          const body = await res.json()
+          const url = body && body.url ? body.url : null
+          const name = (body && body.name) || f.name
+          if (url) {
+            try {
+              pendingNames.set(url, name)
+            } catch (e) {
+              void e
+            }
+            uploaded.push({ file: f, name: name, preview: url, dataUrl: url })
+            return
+          }
+        }
+      } catch (err) {
+        void err
+      }
+      uploaded.push({ file: f, name: f.name, preview: dataUrl, dataUrl })
+    }),
+  )
+  uploadedIrpf.value = uploaded
 }
 const triggerFileInputIrpfRecibo = () => {
   const fileInput = document.querySelector('.upload-irpf')
   if (fileInput) fileInput.click()
 }
-const handleFileUploadIrpfRecibo = (event) => {
+const handleFileUploadIrpfRecibo = async (event) => {
   const files = event.target.files
-  if (files.length > 0) {
-    uploadedIrpfRecibo.value = Array.from(files)
-    console.log('Arquivos selecionados:', uploadedIrpfRecibo.value)
-  }
+  if (!files || files.length === 0) return
+  const arr = Array.from(files)
+  const uploaded = []
+  await Promise.all(
+    arr.map(async (f) => {
+      try {
+        const r = await uploadSingleFile(f)
+        if (r.url) {
+          try {
+            pendingNames.set(r.url, r.name)
+          } catch (e) {
+            void e
+          }
+          uploaded.push({ file: f, name: r.name, preview: r.url, dataUrl: r.url })
+          return
+        }
+      } catch (e) {
+        void e
+      }
+      const dataUrl = await new Promise((resolve) => {
+        const reader = new FileReader()
+        reader.onload = (ev) => resolve(ev.target.result)
+        reader.readAsDataURL(f)
+      })
+      try {
+        if (f && f.name) pendingNames.set(dataUrl, f.name)
+      } catch (e) {
+        void e
+      }
+      try {
+        const apiBase = (import.meta && import.meta.env && import.meta.env.VITE_API_BASE_URL) || ''
+        const res = await fetch(`${apiBase.replace(/\/$/, '')}/api/clients/upload-b64`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ name: f.name, data: dataUrl }),
+        })
+        if (res && res.ok) {
+          const body = await res.json()
+          const url = body && body.url ? body.url : null
+          const name = (body && body.name) || f.name
+          if (url) {
+            try {
+              pendingNames.set(url, name)
+            } catch (e) {
+              void e
+            }
+            uploaded.push({ file: f, name: name, preview: url, dataUrl: url })
+            return
+          }
+        }
+      } catch (err) {
+        void err
+      }
+      uploaded.push({ file: f, name: f.name, preview: dataUrl, dataUrl })
+    }),
+  )
+  uploadedIrpfRecibo.value = uploaded
 }
 const triggerFileInputExtrato = () => {
   const fileInput = document.querySelector('.upload-extrato')
   if (fileInput) fileInput.click()
 }
-const handleFileUploadExtrato = (event) => {
+const handleFileUploadExtrato = async (event) => {
   const files = event.target.files
-  if (files.length > 0) {
-    uploadedExtrato.value = Array.from(files)
-    console.log('Arquivos selecionados:', uploadedExtrato.value)
-  }
+  if (!files || files.length === 0) return
+  const arr = Array.from(files)
+  const uploaded = []
+  await Promise.all(
+    arr.map(async (f) => {
+      try {
+        const r = await uploadSingleFile(f)
+        if (r.url) {
+          try {
+            pendingNames.set(r.url, r.name)
+          } catch (e) {
+            void e
+          }
+          uploaded.push({ file: f, name: r.name, preview: r.url, dataUrl: r.url })
+          return
+        }
+      } catch (e) {
+        void e
+      }
+      const dataUrl = await new Promise((resolve) => {
+        const reader = new FileReader()
+        reader.onload = (ev) => resolve(ev.target.result)
+        reader.readAsDataURL(f)
+      })
+      try {
+        pendingNames.set(dataUrl, f.name)
+      } catch (e) {
+        void e
+      }
+      uploaded.push({ file: f, name: f.name, preview: dataUrl, dataUrl })
+    }),
+  )
+  uploadedExtrato.value = uploaded
 }
 </script>

@@ -11,6 +11,10 @@ on:
         description: "Git ref or sha to deploy (optional). If provided overrides pr_number."
         required: false
         default: ""
+      folder_name:
+        description: "Nome da pasta de deploy (padrão: app)"
+        required: false
+        default: "admin"
 
 jobs:
   deploy_manual:
@@ -142,14 +146,14 @@ jobs:
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           port: ${{ secrets.SSH_PORT }}
           script: |
-            echo "Preparing remote path /home/${{ secrets.VM_USER }}/app"
+            echo "Preparing remote path /home/${{ secrets.VM_USER }}/${{ inputs.folder_name }}"
             # remove both the user's upload path and the final deploy path to avoid leftover files
             if sudo -n true 2>/dev/null; then
-              sudo rm -rf /home/${{ secrets.VM_USER }}/app || true
-              sudo rm -rf /home/deploy/app || true
+              sudo rm -rf /home/${{ secrets.VM_USER }}/${{ inputs.folder_name }} || true
+              sudo rm -rf /home/deploy/${{ inputs.folder_name }} || true
             else
-              rm -rf /home/${{ secrets.VM_USER }}/app || true
-              rm -rf /home/deploy/app || true
+              rm -rf /home/${{ secrets.VM_USER }}/${{ inputs.folder_name }} || true
+              rm -rf /home/deploy/${{ inputs.folder_name }} || true
             fi
             mkdir -p /home/${{ secrets.VM_USER }}
 
@@ -174,9 +178,9 @@ jobs:
             ssh-keyscan "$VM_HOST" >> ~/.ssh/known_hosts 2>/dev/null || true
             RSYNC_SSH="ssh -i ~/.ssh/id_rsa -o UserKnownHostsFile=~/.ssh/known_hosts -o StrictHostKeyChecking=no"
           fi
-          echo "Running rsync to $VM_USER@$VM_HOST:/home/$VM_USER/app"
+          echo "Running rsync to $VM_USER@$VM_HOST:/home/$VM_USER/${{ inputs.folder_name }}"
           # exclude .git by default; adjust excludes as needed
-          rsync -az --delete --exclude='.git' -e "$RSYNC_SSH" ./ "$VM_USER@$VM_HOST":/home/"$VM_USER"/app
+          rsync -az --delete --exclude='.git' -e "$RSYNC_SSH" ./ "$VM_USER@$VM_HOST":/home/"$VM_USER"/${{ inputs.folder_name }}
 
       - name: Move uploaded app to deploy home and fix permissions
         if: steps.validate_secrets.outputs.secrets_ok == 'true'
@@ -188,8 +192,8 @@ jobs:
           port: ${{ secrets.SSH_PORT }}
           script: |
             set -euo pipefail
-            SRC="/home/${{ secrets.VM_USER }}/app"
-            DST="/home/deploy/app"
+            SRC="/home/${{ secrets.VM_USER }}/${{ inputs.folder_name }}"
+            DST="/home/deploy/${{ inputs.folder_name }}"
             if [ -d "$SRC" ]; then
               if sudo -n true 2>/dev/null; then
                 sudo rm -rf "$DST" || true

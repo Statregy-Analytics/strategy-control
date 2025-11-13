@@ -42,3 +42,4 @@ tutorial.txt
 config.txt
 tutorial.md
 storage/*
+*.db-journal

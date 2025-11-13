@@ -15,20 +15,10 @@
           outlined
           v-model="clientEdit.newWeLend.value"
           dense
-          placeholder=""
+          placeholder="ex.: 1.000,00"
+          v-currency-mask
           class="q-my-sm"
         ></q-input>
-      </label-form>
-      <label-form className="col" textLabel="Saldo disponível">
-        <q-input
-          outlined
-          v-model="clientEdit.investment.data_value_welend"
-          dense
-          class="q-my-sm"
-          bg-color="white"
-          navigation-min-year-month="1990/07"
-          type="date"
-        />
       </label-form>
     </div>
     <div class="row justify-around q-gutter-sm">
@@ -45,8 +35,9 @@
         <q-input
           outlined
           v-model="clientEdit.newWeLend.value_before"
+          v-currency-mask
           dense
-          placeholder=""
+          placeholder="Ex:1.000,00"
           class="q-my-sm"
         ></q-input>
       </label-form>
@@ -66,9 +57,9 @@
           outlined
           v-model="clientEdit.newWeLend.value_antecipacao"
           dense
-          placeholder=""
           class="q-my-sm"
-          type="number"
+          placeholder="Ex:1.000,00"
+          v-currency-mask
           inputmode="numeric"
         ></q-input>
       </label-form>
@@ -79,7 +70,7 @@
           outlined
           v-model="clientEdit.newWeLend.parcelas_quitacao"
           dense
-          placeholder=""
+          placeholder="ex.:2"
           class="q-my-sm"
           type="number"
           inputmode="numeric"
@@ -87,10 +78,11 @@
           :rules="parcelasRules"
         ></q-input>
       </label-form>
-      <label-form className="col" textLabel="Dia de Pagamento (R$)">
+      <label-form className="col" textLabel="Dia de Pagamento">
         <q-select
           outlined
           dense
+          v-select-placeholder
           :options="optionsPayment"
           v-model="clientEdit.newWeLend.date_payment"
           class="q-my-sm"
