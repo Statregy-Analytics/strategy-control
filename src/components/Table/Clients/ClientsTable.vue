@@ -31,27 +31,13 @@
       </template>
       <template #body-cell-actions="props">
         <q-td :props="props">
-          <q-btn size="xs" padding="xs" flat icon="more_vert" aria-label="Opções do cliente">
-            <q-menu transition-show="flip-right" transition-hide="flip-left">
-              <q-btn flat no-caps v-close-popup class="client-action" @click="editCustomer(props.row.id)">
-                <q-icon name="edit" size="0.9rem" class="text-muted" />
-                <span class="q-ml-sm text-muted">Editar</span>
-              </q-btn>
-            </q-menu>
-          </q-btn>
+          <RowActions :actions="rowActions" aria-label="Opções do cliente" @select="handleRowAction($event, props.row)" />
         </q-td>
       </template>
     </q-table>
-    <div class="row justify-between items-center q-mt-md">
-      <div class="row items-center">
-        <span class="q-mr-sm">Itens por página:</span>
-        <q-select dense outlined :model-value="pagination.pageSize" :options="[5, 10, 15, 20]"
-          dropdown-icon="keyboard_arrow_down" @update:model-value="changeRowsPerPage" />
-        <span class="q-ml-md text-caption text-grey-8">Mostrando {{ firstItemIndex }} a {{ lastItemIndex }} de {{ pagination.totalItems }} registros</span>
-      </div>
-      <q-pagination v-if="pagination.totalPages > 1" :model-value="pagination.page" color="primary"
-        :max="pagination.totalPages" :max-pages="6" size="sm" direction-links @update:model-value="changePage" />
-    </div>
+    <entity-table-footer :page="pagination.page" :page-size="pagination.pageSize" :total-items="pagination.totalItems"
+      :total-pages="pagination.totalPages" :first-item="firstItemIndex" :last-item="lastItemIndex"
+      @page="changePage" @page-size="changeRowsPerPage" />
     <q-dialog
       v-model="editDialog"
       position="right"
@@ -79,6 +65,8 @@ import { useClientStore } from 'src/stores/client'
 import { getApiErrorMessage } from 'src/services/apiError'
 import useNotification from 'src/composables/global/useNotification'
 import EditClientLayout from 'src/layouts/Clients/EditClientLayout.vue'
+import EntityTableFooter from 'src/components/Entity/EntityTableFooter.vue'
+import RowActions from 'src/components/Entity/RowActions.vue'
 
 const store = useClientStore()
 const { data, loading, pagination } = storeToRefs(store)
@@ -87,6 +75,7 @@ const search = ref('')
 const selected = ref([])
 const editDialog = ref(false)
 const selectedCustomerId = ref(null)
+const rowActions = [{ name: 'edit', label: 'Editar', icon: 'edit', color: 'grey-7' }]
 const tablePagination = computed({
   get: () => ({
     page: pagination.value.page,
@@ -123,6 +112,7 @@ const changeRowsPerPage = (pageSize) => load({ page: 1, pageSize })
 const changePage = (page) => load({ page })
 const reloadCurrentPage = () => load()
 const editCustomer = (id) => { selectedCustomerId.value = id; editDialog.value = true }
+const handleRowAction = (action, row) => { if (action === 'edit') editCustomer(row.id) }
 const closeEditor = () => { editDialog.value = false; selectedCustomerId.value = null }
 const statusLabel = (status) => ({ Prospect: 'Prospect', Active: 'Ativo', Suspended: 'Suspenso', Archived: 'Arquivado' })[status] || status
 const formatDate = (value) => value ? new Intl.DateTimeFormat('pt-BR').format(new Date(value)) : '—'
@@ -130,7 +120,3 @@ const firstItemIndex = computed(() => pagination.value.totalItems ? (pagination.
 const lastItemIndex = computed(() => Math.min(pagination.value.page * pagination.value.pageSize, pagination.value.totalItems))
 onMounted(load)
 </script>
-
-<style scoped>
-.client-action { min-width: 181px; justify-content: flex-start; font-size: small; }
-</style>
