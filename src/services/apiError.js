@@ -1,24 +1,26 @@
-/**
- * Extrai uma mensagem legível a partir de um erro do axios.
- * A API responde no formato { success, errors: [{ code, message, field }], ... }.
- *
- * @param {unknown} error erro capturado de uma chamada axios
- * @param {string} fallback mensagem padrão caso nada seja encontrado
- * @returns {string}
- */
+const messagesByCode = {
+  internal_server_error: 'O servidor não conseguiu concluir a operação. Tente novamente mais tarde.',
+  validation_error: 'Revise os campos informados.',
+  invalid_request: 'Os dados enviados não são válidos.',
+  conflict: 'A operação conflita com o estado atual do cadastro.',
+  not_found: 'O registro solicitado não foi encontrado.',
+  unauthorized: 'Sua sessão expirou. Entre novamente.',
+  forbidden: 'Você não possui permissão para realizar esta operação.',
+}
+
 export function getApiErrorMessage(error, fallback = 'Algo deu errado. Tente novamente.') {
   const errors = error?.response?.data?.errors
   if (Array.isArray(errors) && errors.length) {
-    return errors.map((e) => e.message).filter(Boolean).join(' ') || fallback
+    const messages = errors.map((item) => messagesByCode[item.code] || item.message).filter(Boolean)
+    if (errors.some((item) => item.code === 'internal_server_error')) return fallback
+    return messages.join(' ') || fallback
+  }
+  if (error?.message === 'Network Error') {
+    return 'Não foi possível conectar ao servidor. Verifique sua conexão e tente novamente.'
   }
   return error?.response?.data?.message || error?.message || fallback
 }
 
-/**
- * Retorna a lista bruta de erros da API (com code/field), útil para destacar campos.
- * @param {unknown} error
- * @returns {Array<{code: string, message: string, field: string|null}>}
- */
 export function getApiErrors(error) {
   const errors = error?.response?.data?.errors
   return Array.isArray(errors) ? errors : []

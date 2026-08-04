@@ -73,7 +73,19 @@ const addressKinds = ['Residential', 'Commercial', 'Correspondence']
 
 const normalize = () => {
   const source = props.identification || {}
-  names.value = structuredClone(source.names || (source.primaryName ? [source.primaryName] : []))
+  const fallbackName = source.primaryName
+    ? [source.primaryName]
+    : source.fullName
+      ? [{
+          id: null,
+          kind: 'Legal',
+          displayName: source.fullName,
+          validFrom: source.createdAtUtc?.slice(0, 10) || today(),
+          validTo: null,
+          isPrimary: true,
+        }]
+      : []
+  names.value = structuredClone(source.names || fallbackName)
   contacts.value = structuredClone(source.contacts || [])
   addresses.value = structuredClone(source.addresses || (source.residentialAddress ? [source.residentialAddress] : []))
   if (!names.value.length) addName()
@@ -82,10 +94,10 @@ const normalize = () => {
     else addContact()
   }
 }
-watch(() => props.identification, normalize, { immediate: true, deep: true })
 const addName = () => names.value.push({ id: null, kind: 'Legal', displayName: '', validFrom: today(), validTo: null, isPrimary: names.value.length === 0 })
 const addContact = () => contacts.value.push({ id: null, kind: 'Email', value: '', isPrimary: contacts.value.length === 0 })
 const addAddress = () => addresses.value.push({ id: null, kind: 'Residential', line1: '', line2: null, city: '', stateOrProvince: null, postalCode: null, countryId: null, isPrimary: addresses.value.length === 0 })
+watch(() => props.identification, normalize, { immediate: true, deep: true })
 const setPrimary = (collection, index) => { if (collection[index].isPrimary) collection.forEach((item, i) => { if (i !== index) item.isPrimary = false }) }
 const execute = async (section, request, successMessage) => {
   try { saving.value = section; await request(); successNotify(successMessage); emit('updated') }

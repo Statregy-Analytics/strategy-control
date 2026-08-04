@@ -4,7 +4,12 @@ import { LocalStorage } from 'quasar'
 
 export const TOKEN_KEY = 'sa_access_token'
 export const REFRESH_TOKEN_KEY = 'sa_refresh_token'
-export const WORKSPACE_KEY = 'sa_workspace_id'
+export const WORKSPACE_KEY = 'sa_selected_workspace_id'
+export const LEGACY_WORKSPACE_KEY = 'sa_workspace_id'
+
+// A versão anterior selecionava automaticamente o workspace padrão.
+// Remova essa seleção implícita para evitar preflight CORS desnecessário.
+LocalStorage.remove(LEGACY_WORKSPACE_KEY)
 
 const baseURL = import.meta.env.VITE_API_URL || 'https://strategyanalytics.codebiz.com.br'
 const api = axios.create({ baseURL })
@@ -56,6 +61,7 @@ api.interceptors.response.use(
         LocalStorage.remove(TOKEN_KEY)
         LocalStorage.remove(REFRESH_TOKEN_KEY)
         LocalStorage.remove(WORKSPACE_KEY)
+        LocalStorage.remove(LEGACY_WORKSPACE_KEY)
         window.dispatchEvent(new CustomEvent('auth:expired'))
         throw refreshError
       })

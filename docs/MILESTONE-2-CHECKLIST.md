@@ -71,8 +71,8 @@ Contrato de referência: [swagger.json](Api/swagger.json).
 - [x] Editar nomes com `PUT /api/v1/admin/customers/{id}/names`.
 - [x] Editar contatos com `PUT /api/v1/admin/customers/{id}/contacts`.
 - [x] Editar endereços com `PUT /api/v1/admin/customers/{id}/addresses`.
-- [ ] Consultar e alterar status.
-- [ ] Implementar preferências e catálogo de preferências.
+- [x] Consultar e alterar status.
+- [x] Implementar preferências e catálogo de preferências.
 - [x] Invalidar/recarregar summary e projeções afetadas após cada escrita.
 
 ## 3. Perfis profissional, financeiro e segurança

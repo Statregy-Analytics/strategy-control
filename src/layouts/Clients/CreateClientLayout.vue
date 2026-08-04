@@ -48,13 +48,13 @@ const { successNotify, errorNotify } = useNotification()
 const formRef = ref(null)
 const loading = ref(false)
 const kindOptions = [
-  { label: 'Pessoa física', value: 'Individual' },
+  { label: 'Pessoa física', value: 'Person' },
   { label: 'Pessoa jurídica', value: 'Organization' },
 ]
-const form = reactive({ kind: 'Individual', name: '', email: '', birthDate: '' })
+const form = reactive({ kind: 'Person', name: '', email: '', birthDate: '' })
 
 const resetForm = () => {
-  Object.assign(form, { kind: 'Individual', name: '', email: '', birthDate: '' })
+  Object.assign(form, { kind: 'Person', name: '', email: '', birthDate: '' })
   formRef.value?.resetValidation()
 }
 const onClose = () => {
@@ -68,7 +68,7 @@ const onSubmit = async () => {
     await createCustomer({
       kind: form.kind,
       status: 'Active',
-      birthDate: form.kind === 'Individual' && form.birthDate ? form.birthDate : null,
+      birthDate: form.kind === 'Person' && form.birthDate ? form.birthDate : null,
       names: [{ id: null, kind: 'Legal', displayName: form.name, validFrom: new Date().toISOString().slice(0, 10), validTo: null, isPrimary: true }],
       contacts: [{ id: null, kind: 'Email', value: form.email, isPrimary: true }],
       addresses: [],

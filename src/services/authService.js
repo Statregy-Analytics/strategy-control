@@ -1,4 +1,4 @@
-import { api, TOKEN_KEY, REFRESH_TOKEN_KEY, WORKSPACE_KEY } from 'src/boot/axios'
+import { api, TOKEN_KEY, REFRESH_TOKEN_KEY, WORKSPACE_KEY, LEGACY_WORKSPACE_KEY } from 'src/boot/axios'
 import { LocalStorage } from 'quasar'
 
 export async function login({ email, password }) {
@@ -6,7 +6,6 @@ export async function login({ email, password }) {
   const payload = data?.data ?? data
   if (payload?.accessToken) LocalStorage.set(TOKEN_KEY, payload.accessToken)
   if (payload?.refreshToken) LocalStorage.set(REFRESH_TOKEN_KEY, payload.refreshToken)
-  if (payload?.user?.workspaceId) LocalStorage.set(WORKSPACE_KEY, payload.user.workspaceId)
   return payload
 }
 
@@ -38,6 +37,7 @@ export function clearSession() {
   LocalStorage.remove(TOKEN_KEY)
   LocalStorage.remove(REFRESH_TOKEN_KEY)
   LocalStorage.remove(WORKSPACE_KEY)
+  LocalStorage.remove(LEGACY_WORKSPACE_KEY)
 }
 
 export function selectWorkspace(workspaceId) {

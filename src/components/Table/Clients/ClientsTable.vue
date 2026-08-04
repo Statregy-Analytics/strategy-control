@@ -1,8 +1,7 @@
 <template>
   <div class="q-pa-md">
-    <q-table flat dense row-key="id" :rows="data" :columns="columns" :loading="loading"
-      :pagination="{ page: pagination.page, rowsPerPage: pagination.pageSize, rowsNumber: pagination.totalItems }"
-      @request="onRequest">
+    <q-table v-model:pagination="tablePagination" flat dense row-key="id" :rows="data" :columns="columns"
+      :loading="loading" @request="onRequest">
       <template #top>
         <q-input v-model="search" dense outlined debounce="400" clearable placeholder="Pesquisar cliente" @update:model-value="reload">
           <template #prepend><q-icon name="search" /></template>
@@ -32,7 +31,7 @@
 </template>
 
 <script setup>
-import { onMounted, ref } from 'vue'
+import { computed, onMounted, ref } from 'vue'
 import { storeToRefs } from 'pinia'
 import { useRouter } from 'vue-router'
 import { useClientStore } from 'src/stores/client'
@@ -44,9 +43,24 @@ const store = useClientStore()
 const { data, loading, pagination } = storeToRefs(store)
 const { errorNotify } = useNotification()
 const search = ref('')
+const tablePagination = computed({
+  get: () => ({
+    page: pagination.value.page,
+    rowsPerPage: pagination.value.pageSize,
+    rowsNumber: pagination.value.totalItems,
+  }),
+  set: ({ page, rowsPerPage, rowsNumber }) => {
+    pagination.value = {
+      ...pagination.value,
+      page,
+      pageSize: rowsPerPage,
+      totalItems: rowsNumber,
+    }
+  },
+})
 const columns = [
   { name: 'primaryName', label: 'Cliente', field: 'primaryName', align: 'left' },
-  { name: 'kind', label: 'Tipo', field: 'kind', align: 'left', format: (v) => v === 'Individual' ? 'Pessoa física' : 'Pessoa jurídica' },
+  { name: 'kind', label: 'Tipo', field: 'kind', align: 'left', format: (v) => v === 'Person' ? 'Pessoa física' : v === 'Organization' ? 'Pessoa jurídica' : v },
   { name: 'status', label: 'Status', field: 'status', align: 'left' },
   { name: 'updatedAtUtc', label: 'Atualizado em', field: 'updatedAtUtc', align: 'left' },
   { name: 'actions', label: '', field: 'id', align: 'right' },
@@ -62,7 +76,7 @@ const load = async (params = {}) => {
 const onRequest = ({ pagination: requested }) => load({ page: requested.page, pageSize: requested.rowsPerPage })
 const reload = () => load({ page: 1 })
 const openCustomer = (id) => router.push({ name: 'ClienteDetalhe', params: { id } })
-const statusLabel = (status) => ({ Active: 'Ativo', Inactive: 'Inativo', Blocked: 'Bloqueado', Pending: 'Pendente' })[status] || status
+const statusLabel = (status) => ({ Prospect: 'Prospect', Active: 'Ativo', Suspended: 'Suspenso', Archived: 'Arquivado' })[status] || status
 const formatDate = (value) => value ? new Intl.DateTimeFormat('pt-BR').format(new Date(value)) : '—'
 onMounted(load)
 </script>

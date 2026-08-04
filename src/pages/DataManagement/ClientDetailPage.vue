@@ -25,9 +25,15 @@
     <q-tabs v-else v-model="tab" align="left" active-color="primary" indicator-color="primary" class="q-mb-md">
       <q-tab name="overview" label="Visão geral" no-caps />
       <q-tab name="registration" label="Dados cadastrais" no-caps />
+      <q-tab name="settings" label="Status e preferências" no-caps />
     </q-tabs>
     <q-tab-panels v-if="!loading && !errorMessage && !notFound" v-model="tab" animated>
       <q-tab-panel name="overview" class="q-pa-none">
+        <q-banner v-if="partialWarning" rounded class="bg-orange-1 text-warning q-mb-md">
+          <template #avatar><q-icon name="warning_amber" /></template>
+          {{ partialWarning }}
+          <template #action><q-btn flat color="warning" label="Tentar novamente" @click="loadCustomer" /></template>
+        </q-banner>
         <div class="row q-col-gutter-md">
           <div class="col-12 col-md-8">
             <q-card flat bordered><q-card-section>
@@ -59,6 +65,9 @@
       <q-tab-panel name="registration" class="q-pa-none">
         <client-registration-editor :customer-id="route.params.id" :identification="identification" @updated="loadCustomer" />
       </q-tab-panel>
+      <q-tab-panel name="settings" class="q-pa-none">
+        <client-preferences-panel :customer-id="route.params.id" @updated="loadCustomer" />
+      </q-tab-panel>
     </q-tab-panels>
   </q-page>
 </template>
@@ -67,13 +76,22 @@
 import { computed, onMounted, ref } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import ClientRegistrationEditor from 'src/components/Clients/ClientRegistrationEditor.vue'
+import ClientPreferencesPanel from 'src/components/Clients/ClientPreferencesPanel.vue'
 import { getCustomerHeader, getCustomerIdentification, getCustomerSummary } from 'src/services/customerService'
 import { getApiErrorMessage } from 'src/services/apiError'
 
 const route = useRoute(), router = useRouter()
 const summary = ref(null), header = ref(null), identification = ref(null)
-const loading = ref(true), notFound = ref(false), errorMessage = ref(''), tab = ref('overview')
-const displayName = computed(() => header.value?.displayName || summary.value?.header?.displayName || 'Detalhe do cliente')
+const loading = ref(true), notFound = ref(false), errorMessage = ref(''), partialWarning = ref(''), tab = ref('overview')
+const displayName = computed(() =>
+  header.value?.displayName
+  || header.value?.primaryName
+  || summary.value?.header?.displayName
+  || summary.value?.header?.primaryName
+  || identification.value?.names?.find((name) => name.isPrimary)?.displayName
+  || identification.value?.primaryName?.displayName
+  || 'Detalhe do cliente',
+)
 const documents = computed(() => summary.value?.documentSummary ?? {})
 const documentMetrics = computed(() => [
   { label: 'Aprovados', value: documents.value.approved ?? 0, color: 'positive' },
@@ -83,20 +101,28 @@ const documentMetrics = computed(() => [
 ])
 const complianceLabel = computed(() => summary.value?.compliance?.primaryAlert?.title || summary.value?.compliance?.status || 'Sem alertas')
 const statusColor = computed(() => header.value?.status === 'Active' ? 'positive' : 'grey')
-const statusLabel = (v) => ({ Active: 'Ativo', Inactive: 'Inativo', Blocked: 'Bloqueado', Pending: 'Pendente' })[v] || v
-const kindLabel = (v) => ({ Individual: 'Pessoa física', Organization: 'Pessoa jurídica' })[v] || v || 'Não informado'
+const statusLabel = (v) => ({ Prospect: 'Prospect', Active: 'Ativo', Suspended: 'Suspenso', Archived: 'Arquivado' })[v] || v
+const kindLabel = (v) => ({ Person: 'Pessoa física', Organization: 'Pessoa jurídica' })[v] || v || 'Não informado'
 const booleanLabel = (v) => v === true ? 'Sim' : v === false ? 'Não' : 'Não informado'
 const loadCustomer = async () => {
-  loading.value = true; notFound.value = false; errorMessage.value = ''
-  try {
-    const [summaryData, headerData, identificationData] = await Promise.all([
-      getCustomerSummary(route.params.id), getCustomerHeader(route.params.id), getCustomerIdentification(route.params.id),
-    ])
-    summary.value = summaryData; header.value = headerData; identification.value = identificationData
-  } catch (error) {
-    if (error.response?.status === 404) notFound.value = true
-    else errorMessage.value = getApiErrorMessage(error, 'Não foi possível carregar o cliente.')
-  } finally { loading.value = false }
+  loading.value = true; notFound.value = false; errorMessage.value = ''; partialWarning.value = ''
+  const [summaryResult, headerResult, identificationResult] = await Promise.allSettled([
+    getCustomerSummary(route.params.id), getCustomerHeader(route.params.id), getCustomerIdentification(route.params.id),
+  ])
+  if (summaryResult.status === 'fulfilled') summary.value = summaryResult.value
+  else {
+    summary.value = null
+    partialWarning.value = 'O resumo operacional está temporariamente indisponível. Os dados cadastrais disponíveis continuam acessíveis.'
+  }
+  if (headerResult.status === 'fulfilled') header.value = headerResult.value
+  if (identificationResult.status === 'fulfilled') identification.value = identificationResult.value
+  const essentialFailures = [headerResult, identificationResult].filter((result) => result.status === 'rejected')
+  if (essentialFailures.length === 2) {
+    const errors = essentialFailures.map((result) => result.reason)
+    notFound.value = errors.every((error) => error.response?.status === 404)
+    if (!notFound.value) errorMessage.value = getApiErrorMessage(errors[0], 'Não foi possível carregar os dados do cliente.')
+  }
+  loading.value = false
 }
 onMounted(loadCustomer)
 </script>
