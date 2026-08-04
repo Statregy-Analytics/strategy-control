@@ -266,15 +266,15 @@ Observações:
 
 No detalhe, abrir “Status e preferências”.
 
-- [ ] Status atual é carregado.
-- [ ] Botão fica desabilitado sem alteração.
-- [ ] Alterar para Prospect funciona.
-- [ ] Alterar para Active funciona.
-- [ ] Alterar para Suspended funciona.
-- [ ] Alterar para Archived funciona em cliente de teste.
-- [ ] Status do header é atualizado.
-- [ ] Status da tabela é atualizado ao retornar.
-- [ ] Status persiste após recarregar a página.
+- [x] Status atual é carregado.
+- [x] Botão fica desabilitado sem alteração.
+- [x] Alterar para Prospect funciona.
+- [x] Alterar para Active funciona.
+- [x] Alterar para Suspended funciona.
+- [x] Alterar para Archived funciona em cliente de teste.
+- [x] Status do header é atualizado.
+- [x] Status da tabela é atualizado ao retornar.
+- [x] Status persiste após recarregar a página.
 
 Endpoints:
 
@@ -283,19 +283,21 @@ Endpoints:
 
 Observações:
 
->
+> Os quatro estados foram aceitos pela API. O fluxo no navegador foi validado
+> com `Prospect` e `Active`; o cliente de homologação foi restaurado para
+> `Active`. Nenhum erro do backend foi identificado nesta seção.
 
 ## 11. Preferências
 
-- [ ] Catálogo de preferências é carregado.
-- [ ] Preferências atuais são carregadas.
-- [ ] Moeda principal pode ser alterada.
-- [ ] Moeda secundária pode ser alterada ou removida.
-- [ ] Idioma pode ser alterado.
-- [ ] Fuso horário pode ser alterado.
-- [ ] Tema pode ser alterado.
-- [ ] Salvar apresenta confirmação.
-- [ ] Valores persistem após `Ctrl+F5`.
+- [x] Catálogo de preferências é carregado.
+- [x] Preferências atuais são carregadas.
+- [x] Moeda principal pode ser alterada.
+- [x] Moeda secundária pode ser alterada ou removida.
+- [x] Idioma pode ser alterado.
+- [x] Fuso horário pode ser alterado.
+- [x] Tema pode ser alterado.
+- [x] Salvar apresenta confirmação.
+- [x] Valores persistem após `Ctrl+F5`.
 - [ ] Falha do catálogo apresenta botão para tentar novamente.
 
 Endpoints:
@@ -306,33 +308,38 @@ Endpoints:
 
 Observações:
 
+> Preferências persistidas: moeda principal `BRL`, moeda secundária removida,
+> idioma `pt-BR`, fuso `America/Sao_Paulo` e tema `Dark`.
 >
+> O estado de falha do catálogo permanece pendente porque o serviço
+> compartilhado não foi interrompido artificialmente. Nenhum erro do backend
+> foi identificado no fluxo disponível.
 
 ## 12. Resultado final desta rodada
 
-- [ ] Login e sessão aprovados.
-- [ ] CORS aprovado.
+- [x] Login e sessão aprovados.
+- [!] CORS aprovado.
 - [ ] Listagem aprovada.
-- [ ] Cadastro de pessoa física aprovado.
-- [ ] Cadastro de pessoa jurídica aprovado.
-- [ ] Detalhe aprovado.
-- [ ] Degradação do summary aprovada.
-- [ ] Nomes aprovados.
-- [ ] Contatos aprovados.
-- [ ] Endereços aprovados.
-- [ ] Status aprovado.
-- [ ] Preferências aprovadas.
-- [ ] Nenhum token ou senha foi registrado nas evidências.
+- [x] Cadastro de pessoa física aprovado.
+- [x] Cadastro de pessoa jurídica aprovado.
+- [x] Detalhe aprovado.
+- [x] Degradação do summary aprovada.
+- [!] Nomes aprovados.
+- [!] Contatos aprovados.
+- [!] Endereços aprovados.
+- [x] Status aprovado.
+- [x] Preferências aprovadas.
+- [x] Nenhum token ou senha foi registrado nas evidências.
 - [ ] Podemos avançar para perfil profissional/financeiro.
 
 ## Bugs encontrados
 
 |  Nº | Tela/fluxo | Passos para reproduzir | Endpoint | HTTP | Request ID / Correlation ID | Situação |
 | --: | ---------- | ---------------------- | -------- | ---: | --------------------------- | -------- |
-|   1 |            |                        |          |      |                             | Aberto   |
-|   2 |            |                        |          |      |                             | Aberto   |
-|   3 |            |                        |          |      |                             | Aberto   |
-|   4 |            |                        |          |      |                             | Aberto   |
+|   1 | Detalhe/resumo | Abrir qualquer cliente homologado | `GET /admin/customers/{id}/summary` | 500 | `019fce0fd6e77f929de00cb9d1ba4bab` / `019fce0fd6e774e7852d15cce6e3e6e1` | Aberto |
+|   2 | Nomes e contatos | Salvar mais de um item e reabrir o editor | `GET /admin/customers/{id}/identification` | 200 | `019fce1340027a24b6bcb3c66be5e465` / `019fce1340027fbe906bedfa6204358c` | Aberto |
+|   3 | Contatos | Salvar contato `Phone` ou `Mobile` | `PUT /admin/customers/{id}/contacts` | 400 | `019fce2054137e949a87b7d2c9c5a8f2` / `019fce2054137ef68e6975336ab6f9ef` | Aberto |
+|   4 | Escritas cadastrais | Salvar nomes, contatos ou endereços pelo navegador | `PUT /admin/customers/{id}/*` | — | Requisições diretas `200`; navegador sem resposta acessível | Aberto |
 
 ## Evidências e notas gerais
 
