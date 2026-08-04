@@ -70,6 +70,7 @@ const saving = ref('')
 const nameKinds = ['Legal', 'Preferred', 'Social']
 const contactKinds = ['Email', 'Phone', 'Mobile']
 const addressKinds = ['Residential', 'Commercial', 'Correspondence']
+const cloneCollection = (items) => items.map((item) => ({ ...item }))
 
 const normalize = () => {
   const source = props.identification || {}
@@ -85,9 +86,9 @@ const normalize = () => {
           isPrimary: true,
         }]
       : []
-  names.value = structuredClone(source.names || fallbackName)
-  contacts.value = structuredClone(source.contacts || [])
-  addresses.value = structuredClone(source.addresses || (source.residentialAddress ? [source.residentialAddress] : []))
+  names.value = cloneCollection(source.names || fallbackName)
+  contacts.value = cloneCollection(source.contacts || [])
+  addresses.value = cloneCollection(source.addresses || (source.residentialAddress ? [source.residentialAddress] : []))
   if (!names.value.length) addName()
   if (!contacts.value.length) {
     if (source.primaryEmail) contacts.value.push({ id: source.primaryEmail.id || null, kind: 'Email', value: source.primaryEmail.value || '', isPrimary: true })

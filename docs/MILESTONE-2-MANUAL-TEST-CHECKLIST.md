@@ -205,14 +205,14 @@ Observações:
 
 ## 8. Dados cadastrais — contatos
 
-- [ ] Contatos existentes são carregados.
-- [ ] Adicionar contato funciona.
-- [ ] Remover contato funciona.
-- [ ] Tipos Email, Phone e Mobile estão disponíveis.
-- [ ] Apenas um contato permanece como principal.
-- [ ] Salvar contatos funciona.
-- [ ] Header é atualizado quando o contato principal muda.
-- [ ] Dados persistem após `Ctrl+F5`.
+- [!] Contatos existentes são carregados.
+- [x] Adicionar contato funciona.
+- [x] Remover contato funciona.
+- [x] Tipos Email, Phone e Mobile estão disponíveis.
+- [x] Apenas um contato permanece como principal.
+- [!] Salvar contatos funciona.
+- [x] Header é atualizado quando o contato principal muda.
+- [x] Dados persistem após `Ctrl+F5`.
 
 Endpoint:
 
@@ -220,18 +220,34 @@ Endpoint:
 
 Observações:
 
+> **Erro do backend — tipos rejeitados:** `Phone` e `Mobile` retornaram `400`
+> com `customers.invalid_contact_kind`, embora sejam os tipos previstos para o
+> fluxo. Para `Mobile`: request ID
+> `019fce2054137e949a87b7d2c9c5a8f2`, correlation ID
+> `019fce2054137ef68e6975336ab6f9ef`. Para `Phone`: request ID
+> `019fce20c3ce70b4afff11994e6b5f94`, correlation ID
+> `019fce20c3ce7d72a4c4d24a45a20396`.
 >
+> **Erro do backend — projeção incompleta:** depois de salvar dois contatos de
+> e-mail, a identificação retornou apenas `primaryEmail`. Não há coleção com
+> todos os contatos, IDs e tipos para reconstruir o editor após recarregar.
+>
+> **Erro do backend — CORS no navegador:** o `PUT /contacts` não concluiu no
+> fluxo do navegador. A chamada direta com dois contatos `Email` válidos
+> retornou `200` e atualizou o header. Request ID:
+> `019fce20fff8703cb90519a1389425c7`; correlation ID:
+> `019fce20fff870d2af031aae4635fca7`.
 
 ## 9. Dados cadastrais — endereços
 
-- [ ] Estado sem endereços é exibido corretamente.
-- [ ] Adicionar endereço funciona.
-- [ ] Endereço, complemento, cidade, estado e CEP podem ser preenchidos.
-- [ ] Tipos Residential, Commercial e Correspondence estão disponíveis.
-- [ ] Apenas um endereço permanece como principal.
-- [ ] Remover endereço funciona.
-- [ ] Salvar endereços funciona.
-- [ ] Dados persistem após `Ctrl+F5`.
+- [x] Estado sem endereços é exibido corretamente.
+- [x] Adicionar endereço funciona.
+- [x] Endereço, complemento, cidade, estado e CEP podem ser preenchidos.
+- [x] Tipos Residential, Commercial e Correspondence estão disponíveis.
+- [x] Apenas um endereço permanece como principal.
+- [x] Remover endereço funciona.
+- [!] Salvar endereços funciona.
+- [x] Dados persistem após `Ctrl+F5`.
 
 Endpoint:
 
@@ -239,7 +255,12 @@ Endpoint:
 
 Observações:
 
->
+> **Erro do backend — CORS no navegador:** o `PUT /addresses` não concluiu no
+> fluxo do navegador. A mesma operação direta, com endereço `Residential`
+> válido, retornou `200`; após recarregar, o endereço foi projetado em
+> `residentialAddress` e carregado corretamente no editor. Request ID:
+> `019fce22aebc724ea369afaab26ffa09`; correlation ID:
+> `019fce22aebc721fb97cb3dde16c9360`.
 
 ## 10. Status do cliente
 
