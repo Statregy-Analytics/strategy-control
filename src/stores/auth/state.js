@@ -7,6 +7,7 @@ const state = () => {
       token: null,
       validateToken: null,
     },
+    user: null,
     passwordReset: null,
     finished: null,
   }

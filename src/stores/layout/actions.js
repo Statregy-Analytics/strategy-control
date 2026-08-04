@@ -48,6 +48,9 @@ const actions = {
   setDialogCompare(payload) {
     this.dialogCompare = payload
   },
+  setCreateClientDialog(payload) {
+    this.createClientDialog = payload
+  },
   seAdvisorsDialog(payload) {
     this.advisorsDialog = payload
   },

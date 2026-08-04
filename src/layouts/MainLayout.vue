@@ -62,7 +62,24 @@
               :icon="$filtersString.resolveUrl('img:icons/user.svg')"
               colo="white"
             />
-            <q-tooltip>Account</q-tooltip>
+            <q-tooltip>Conta</q-tooltip>
+            <q-menu anchor="bottom right" self="top right">
+              <q-list style="min-width: 180px">
+                <q-item v-if="user" class="text-grey-7">
+                  <q-item-section>
+                    <q-item-label class="text-bold">{{ user.name }}</q-item-label>
+                    <q-item-label caption>{{ user.email }}</q-item-label>
+                  </q-item-section>
+                </q-item>
+                <q-separator v-if="user" />
+                <q-item clickable v-close-popup @click="onLogout">
+                  <q-item-section avatar>
+                    <q-icon name="logout" color="negative" />
+                  </q-item-section>
+                  <q-item-section class="text-negative">Sair</q-item-section>
+                </q-item>
+              </q-list>
+            </q-menu>
           </q-btn>
         </div>
       </q-toolbar>
@@ -83,20 +100,37 @@
 import CompletBrand from 'src/components/brand/CompletBrand.vue'
 import MenuBar from 'src/components/navbar/menuBar.vue'
 import RequestSuccess from 'src/components/Card/RequestSuccess.vue'
-import { useRoute } from 'vue-router'
+import { useRoute, useRouter } from 'vue-router'
 import { defineComponent, onBeforeMount } from 'vue'
 import { useLayoutStore } from 'src/stores/layout'
+import { useAuthStore } from 'src/stores/auth'
 import { storeToRefs } from 'pinia'
+import useNotification from 'src/composables/global/useNotification'
 defineComponent({
   name: 'MainLayout',
 })
 const route = useRoute()
+const router = useRouter()
 const layoutStore = useLayoutStore()
+const authStore = useAuthStore()
+const { showLoading, hideLoading, successNotify } = useNotification()
 
 onBeforeMount(() => {
   if (route.meta.painel) layoutStore.setPainel(route.meta.painel)
 })
 const { dialogConfirmAction, painel } = storeToRefs(layoutStore)
+const { user } = storeToRefs(authStore)
+
+const onLogout = async () => {
+  try {
+    showLoading('Saindo...')
+    await authStore.logoutAction()
+  } finally {
+    hideLoading()
+    successNotify('Sessão encerrada.')
+    router.push({ name: 'Auth' })
+  }
+}
 
 const linkesRoutes = [
   {

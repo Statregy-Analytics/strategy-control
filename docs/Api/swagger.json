@@ -1,0 +1,9586 @@
+{
+"openapi": "3.1.1",
+"info": {
+"title": "Strategy Analytics API",
+"description": "Modular Monolith API for Strategy Analytics, trazendo serviços de Clientes, Transações, Contratos e mais. [Build: 1.1.0-rc.2]",
+"version": "v1"
+},
+"servers": [
+{
+"url": "https://strategyanalytics.codebiz.com.br",
+"description": "Default Server"
+}
+],
+"paths": {
+"/info": {
+"get": {
+"tags": [
+"Meta"
+],
+"operationId": "GetApiInfo",
+"responses": {
+"200": {
+"description": "OK"
+}
+}
+}
+},
+"/api/v1/auth/register": {
+"post": {
+"tags": [
+"Authentication"
+],
+"operationId": "Register",
+"requestBody": {
+"content": {
+"application/json": {
+"schema": {
+"$ref": "#/components/schemas/AuthRegisterRequest"
+}
+}
+},
+"required": true
+},
+"responses": {
+"200": {
+"description": "OK"
+}
+}
+}
+},
+"/api/v1/auth/login": {
+"post": {
+"tags": [
+"Authentication"
+],
+"operationId": "Login",
+"requestBody": {
+"content": {
+"application/json": {
+"schema": {
+"$ref": "#/components/schemas/AuthLoginRequest"
+}
+}
+},
+"required": true
+},
+"responses": {
+"200": {
+"description": "OK"
+}
+}
+}
+},
+"/api/v1/auth/refresh": {
+"post": {
+"tags": [
+"Authentication"
+],
+"operationId": "RefreshAccessToken",
+"requestBody": {
+"content": {
+"application/json": {
+"schema": {
+"$ref": "#/components/schemas/AuthRefreshRequest"
+}
+}
+},
+"required": true
+},
+"responses": {
+"200": {
+"description": "OK"
+}
+}
+}
+},
+"/api/v1/auth/logout": {
+"post": {
+"tags": [
+"Authentication"
+],
+"operationId": "Logout",
+"requestBody": {
+"content": {
+"application/json": {
+"schema": {
+"$ref": "#/components/schemas/AuthLogoutRequest"
+}
+}
+},
+"required": true
+},
+"responses": {
+"200": {
+"description": "OK"
+}
+},
+"security": [
+{}
+]
+}
+},
+"/api/v1/auth/email-confirmation/request": {
+"post": {
+"tags": [
+"Authentication"
+],
+"operationId": "RequestEmailConfirmationCode",
+"requestBody": {
+"content": {
+"application/json": {
+"schema": {
+"$ref": "#/components/schemas/VerificationCodeRequest"
+}
+}
+},
+"required": true
+},
+"responses": {
+"200": {
+"description": "OK"
+}
+}
+}
+},
+"/api/v1/auth/email-confirmation/confirm": {
+"post": {
+"tags": [
+"Authentication"
+],
+"operationId": "ConfirmEmail",
+"requestBody": {
+"content": {
+"application/json": {
+"schema": {
+"$ref": "#/components/schemas/VerificationCodeValidationRequest"
+}
+}
+},
+"required": true
+},
+"responses": {
+"200": {
+"description": "OK"
+}
+}
+}
+},
+"/api/v1/auth/email/confirm": {
+"post": {
+"tags": [
+"Authentication"
+],
+"operationId": "ConfirmEmailAlias",
+"requestBody": {
+"content": {
+"application/json": {
+"schema": {
+"$ref": "#/components/schemas/VerificationCodeValidationRequest"
+}
+}
+},
+"required": true
+},
+"responses": {
+"200": {
+"description": "OK"
+}
+}
+}
+},
+"/api/v1/auth/email/resend-confirmation": {
+"post": {
+"tags": [
+"Authentication"
+],
+"operationId": "ResendEmailConfirmation",
+"requestBody": {
+"content": {
+"application/json": {
+"schema": {
+"$ref": "#/components/schemas/VerificationCodeRequest"
+}
+}
+},
+"required": true
+},
+"responses": {
+"200": {
+"description": "OK"
+}
+}
+}
+},
+"/api/v1/auth/password-reset/request": {
+"post": {
+"tags": [
+"Authentication"
+],
+"operationId": "RequestPasswordResetCode",
+"requestBody": {
+"content": {
+"application/json": {
+"schema": {
+"$ref": "#/components/schemas/VerificationCodeRequest"
+}
+}
+},
+"required": true
+},
+"responses": {
+"200": {
+"description": "OK"
+}
+}
+}
+},
+"/api/v1/auth/password/forgot": {
+"post": {
+"tags": [
+"Authentication"
+],
+"operationId": "ForgotPassword",
+"requestBody": {
+"content": {
+"application/json": {
+"schema": {
+"$ref": "#/components/schemas/VerificationCodeRequest"
+}
+}
+},
+"required": true
+},
+"responses": {
+"200": {
+"description": "OK"
+}
+}
+}
+},
+"/api/v1/auth/password-reset/complete": {
+"post": {
+"tags": [
+"Authentication"
+],
+"operationId": "CompletePasswordReset",
+"requestBody": {
+"content": {
+"application/json": {
+"schema": {
+"$ref": "#/components/schemas/PasswordResetCompletionRequest"
+}
+}
+},
+"required": true
+},
+"responses": {
+"200": {
+"description": "OK"
+}
+}
+}
+},
+"/api/v1/auth/password/reset": {
+"post": {
+"tags": [
+"Authentication"
+],
+"operationId": "ResetPassword",
+"requestBody": {
+"content": {
+"application/json": {
+"schema": {
+"$ref": "#/components/schemas/PasswordResetCompletionRequest"
+}
+}
+},
+"required": true
+},
+"responses": {
+"200": {
+"description": "OK"
+}
+}
+}
+},
+"/api/v1/auth/me": {
+"get": {
+"tags": [
+"Authentication"
+],
+"operationId": "GetCurrentUser",
+"responses": {
+"200": {
+"description": "OK"
+}
+},
+"security": [
+{}
+]
+}
+},
+"/api/v1/admin/auth/ping": {
+"get": {
+"tags": [
+"Authentication"
+],
+"operationId": "AdminAuthPing",
+"responses": {
+"200": {
+"description": "OK"
+}
+},
+"security": [
+{}
+]
+}
+},
+"/api/v1/client/auth/ping": {
+"get": {
+"tags": [
+"Authentication"
+],
+"operationId": "ClientAuthPing",
+"responses": {
+"200": {
+"description": "OK"
+}
+},
+"security": [
+{}
+]
+}
+},
+"/api/v1/preferences/catalog": {
+"get": {
+"tags": [
+"Preferences"
+],
+"operationId": "GetPreferenceCatalog",
+"responses": {
+"200": {
+"description": "OK"
+}
+},
+"security": [
+{}
+]
+}
+},
+"/api/v1/public/profiles/{token}": {
+"get": {
+"tags": [
+"Public Profiles"
+],
+"operationId": "GetPublicProfile",
+"parameters": [
+{
+"name": "token",
+"in": "path",
+"required": true,
+"schema": {
+"type": "string"
+}
+}
+],
+"responses": {
+"200": {
+"description": "OK"
+}
+}
+}
+},
+"/api/v1/admin/customer-verification/catalog": {
+"get": {
+"tags": [
+"Customer Verification"
+],
+"operationId": "GetCustomerVerificationCatalog",
+"responses": {
+"200": {
+"description": "OK"
+}
+},
+"security": [
+{}
+]
+}
+},
+"/api/v1/webhooks/twilio/sms-status": {
+"post": {
+"tags": [
+"Webhooks"
+],
+"operationId": "ReceiveTwilioSmsStatus",
+"parameters": [
+{
+"name": "verificationId",
+"in": "query",
+"required": true,
+"schema": {
+"type": "string",
+"format": "uuid"
+}
+}
+],
+"responses": {
+"200": {
+"description": "OK"
+}
+}
+}
+},
+"/api/v1/me/systems": {
+"get": {
+"tags": [
+"Current User"
+],
+"operationId": "ListCurrentUserSystems",
+"responses": {
+"200": {
+"description": "OK"
+}
+},
+"security": [
+{}
+]
+}
+},
+"/api/v1/admin/customers": {
+"post": {
+"tags": [
+"Customers"
+],
+"operationId": "CreateCustomer",
+"requestBody": {
+"content": {
+"application/json": {
+"schema": {
+"$ref": "#/components/schemas/CreateCustomerRequest"
+}
+}
+},
+"required": true
+},
+"responses": {
+"200": {
+"description": "OK"
+}
+},
+"security": [
+{}
+]
+},
+"get": {
+"tags": [
+"Customers"
+],
+"operationId": "ListCustomers",
+"parameters": [
+{
+"name": "page",
+"in": "query",
+"schema": {
+"pattern": "^-?(?:0|[1-9]\\d*)$",
+"type": [
+"integer",
+"string"
+],
+"format": "int32"
+}
+},
+{
+"name": "pageSize",
+"in": "query",
+"schema": {
+"pattern": "^-?(?:0|[1-9]\\d*)$",
+"type": [
+"integer",
+"string"
+],
+"format": "int32"
+}
+},
+{
+"name": "status",
+"in": "query",
+"schema": {
+"type": "string"
+}
+},
+{
+"name": "kind",
+"in": "query",
+"schema": {
+"type": "string"
+}
+},
+{
+"name": "name",
+"in": "query",
+"schema": {
+"type": "string"
+}
+},
+{
+"name": "contact",
+"in": "query",
+"schema": {
+"type": "string"
+}
+},
+{
+"name": "document",
+"in": "query",
+"schema": {
+"type": "string"
+}
+},
+{
+"name": "createdFromUtc",
+"in": "query",
+"schema": {
+"type": "string",
+"format": "date-time"
+}
+},
+{
+"name": "createdToUtc",
+"in": "query",
+"schema": {
+"type": "string",
+"format": "date-time"
+}
+},
+{
+"name": "updatedFromUtc",
+"in": "query",
+"schema": {
+"type": "string",
+"format": "date-time"
+}
+},
+{
+"name": "updatedToUtc",
+"in": "query",
+"schema": {
+"type": "string",
+"format": "date-time"
+}
+},
+{
+"name": "sortBy",
+"in": "query",
+"schema": {
+"type": "string"
+}
+},
+{
+"name": "sortDirection",
+"in": "query",
+"schema": {
+"type": "string"
+}
+},
+{
+"name": "documentTypeId",
+"in": "query",
+"schema": {
+"type": "string",
+"format": "uuid"
+}
+},
+{
+"name": "countryId",
+"in": "query",
+"schema": {
+"type": "string",
+"format": "uuid"
+}
+}
+],
+"responses": {
+"200": {
+"description": "OK",
+"content": {
+"application/json": {
+"schema": {
+"$ref": "#/components/schemas/PagedResponseOfCustomerSummaryResponse"
+}
+}
+}
+}
+},
+"security": [
+{}
+]
+}
+},
+"/api/v1/admin/customers/cards": {
+"get": {
+"tags": [
+"Customers"
+],
+"operationId": "ListCustomerCards",
+"parameters": [
+{
+"name": "page",
+"in": "query",
+"schema": {
+"pattern": "^-?(?:0|[1-9]\\d*)$",
+"type": [
+"integer",
+"string"
+],
+"format": "int32"
+}
+},
+{
+"name": "pageSize",
+"in": "query",
+"schema": {
+"pattern": "^-?(?:0|[1-9]\\d*)$",
+"type": [
+"integer",
+"string"
+],
+"format": "int32"
+}
+},
+{
+"name": "status",
+"in": "query",
+"schema": {
+"type": "string"
+}
+},
+{
+"name": "kind",
+"in": "query",
+"schema": {
+"type": "string"
+}
+},
+{
+"name": "name",
+"in": "query",
+"schema": {
+"type": "string"
+}
+},
+{
+"name": "contact",
+"in": "query",
+"schema": {
+"type": "string"
+}
+},
+{
+"name": "document",
+"in": "query",
+"schema": {
+"type": "string"
+}
+},
+{
+"name": "createdFromUtc",
+"in": "query",
+"schema": {
+"type": "string",
+"format": "date-time"
+}
+},
+{
+"name": "createdToUtc",
+"in": "query",
+"schema": {
+"type": "string",
+"format": "date-time"
+}
+},
+{
+"name": "updatedFromUtc",
+"in": "query",
+"schema": {
+"type": "string",
+"format": "date-time"
+}
+},
+{
+"name": "updatedToUtc",
+"in": "query",
+"schema": {
+"type": "string",
+"format": "date-time"
+}
+},
+{
+"name": "sortBy",
+"in": "query",
+"schema": {
+"type": "string"
+}
+},
+{
+"name": "sortDirection",
+"in": "query",
+"schema": {
+"type": "string"
+}
+},
+{
+"name": "documentTypeId",
+"in": "query",
+"schema": {
+"type": "string",
+"format": "uuid"
+}
+},
+{
+"name": "countryId",
+"in": "query",
+"schema": {
+"type": "string",
+"format": "uuid"
+}
+}
+],
+"responses": {
+"200": {
+"description": "OK",
+"content": {
+"application/json": {
+"schema": {
+"$ref": "#/components/schemas/PagedResponseOfCustomerCardResponse"
+}
+}
+}
+}
+},
+"security": [
+{}
+]
+}
+},
+"/api/v1/admin/customers/{id}": {
+"get": {
+"tags": [
+"Customers"
+],
+"operationId": "GetCustomer",
+"parameters": [
+{
+"name": "id",
+"in": "path",
+"required": true,
+"schema": {
+"type": "string",
+"format": "uuid"
+}
+}
+],
+"responses": {
+"200": {
+"description": "OK"
+}
+},
+"security": [
+{}
+]
+},
+"patch": {
+"tags": [
+"Customers"
+],
+"operationId": "UpdateCustomer",
+"parameters": [
+{
+"name": "id",
+"in": "path",
+"required": true,
+"schema": {
+"type": "string",
+"format": "uuid"
+}
+}
+],
+"requestBody": {
+"content": {
+"application/json": {
+"schema": {
+"$ref": "#/components/schemas/UpdateCustomerRequest"
+}
+}
+},
+"required": true
+},
+"responses": {
+"200": {
+"description": "OK"
+}
+},
+"security": [
+{}
+]
+},
+"delete": {
+"tags": [
+"Customers"
+],
+"operationId": "ArchiveCustomer",
+"parameters": [
+{
+"name": "id",
+"in": "path",
+"required": true,
+"schema": {
+"type": "string",
+"format": "uuid"
+}
+}
+],
+"responses": {
+"200": {
+"description": "OK"
+}
+},
+"security": [
+{}
+]
+}
+},
+"/api/v1/admin/customers/{id}/header": {
+"get": {
+"tags": [
+"Customers"
+],
+"operationId": "GetCustomerHeader",
+"parameters": [
+{
+"name": "id",
+"in": "path",
+"required": true,
+"schema": {
+"type": "string",
+"format": "uuid"
+}
+}
+],
+"responses": {
+"200": {
+"description": "OK"
+}
+},
+"security": [
+{}
+]
+}
+},
+"/api/v1/admin/customers/{id}/summary": {
+"get": {
+"tags": [
+"Customers"
+],
+"operationId": "GetCustomerOperationalOverview",
+"parameters": [
+{
+"name": "id",
+"in": "path",
+"required": true,
+"schema": {
+"type": "string",
+"format": "uuid"
+}
+}
+],
+"responses": {
+"200": {
+"description": "OK"
+}
+},
+"security": [
+{}
+]
+}
+},
+"/api/v1/admin/customers/{id}/identification": {
+"get": {
+"tags": [
+"Customers"
+],
+"operationId": "GetCustomerIdentification",
+"parameters": [
+{
+"name": "id",
+"in": "path",
+"required": true,
+"schema": {
+"type": "string",
+"format": "uuid"
+}
+}
+],
+"responses": {
+"200": {
+"description": "OK"
+}
+},
+"security": [
+{}
+]
+}
+},
+"/api/v1/admin/customers/{id}/identification-contact": {
+"get": {
+"tags": [
+"Customers"
+],
+"operationId": "GetCustomerIdentificationContact",
+"parameters": [
+{
+"name": "id",
+"in": "path",
+"required": true,
+"schema": {
+"type": "string",
+"format": "uuid"
+}
+}
+],
+"responses": {
+"200": {
+"description": "OK"
+}
+},
+"security": [
+{}
+]
+}
+},
+"/api/v1/admin/customers/quick-search": {
+"get": {
+"tags": [
+"Customers"
+],
+"operationId": "SearchCustomerHeaders",
+"parameters": [
+{
+"name": "query",
+"in": "query",
+"schema": {
+"type": "string"
+}
+},
+{
+"name": "pageSize",
+"in": "query",
+"schema": {
+"pattern": "^-?(?:0|[1-9]\\d*)$",
+"type": [
+"integer",
+"string"
+],
+"format": "int32"
+}
+}
+],
+"responses": {
+"200": {
+"description": "OK"
+}
+},
+"security": [
+{}
+]
+}
+},
+"/api/v1/admin/customers/lookup": {
+"get": {
+"tags": [
+"Customers"
+],
+"operationId": "LookupCustomers",
+"parameters": [
+{
+"name": "search",
+"in": "query",
+"schema": {
+"type": "string"
+}
+},
+{
+"name": "limit",
+"in": "query",
+"schema": {
+"pattern": "^-?(?:0|[1-9]\\d*)$",
+"type": [
+"integer",
+"string"
+],
+"format": "int32"
+}
+}
+],
+"responses": {
+"200": {
+"description": "OK"
+}
+},
+"security": [
+{}
+]
+}
+},
+"/api/v1/admin/customers/{id}/names": {
+"put": {
+"tags": [
+"Customers"
+],
+"operationId": "ReplaceCustomerNames",
+"parameters": [
+{
+"name": "id",
+"in": "path",
+"required": true,
+"schema": {
+"type": "string",
+"format": "uuid"
+}
+}
+],
+"requestBody": {
+"content": {
+"application/json": {
+"schema": {
+"$ref": "#/components/schemas/ReplaceCustomerNamesRequest"
+}
+}
+},
+"required": true
+},
+"responses": {
+"200": {
+"description": "OK"
+}
+},
+"security": [
+{}
+]
+}
+},
+"/api/v1/admin/customers/{id}/contacts": {
+"put": {
+"tags": [
+"Customers"
+],
+"operationId": "ReplaceCustomerContacts",
+"parameters": [
+{
+"name": "id",
+"in": "path",
+"required": true,
+"schema": {
+"type": "string",
+"format": "uuid"
+}
+}
+],
+"requestBody": {
+"content": {
+"application/json": {
+"schema": {
+"$ref": "#/components/schemas/ReplaceCustomerContactsRequest"
+}
+}
+},
+"required": true
+},
+"responses": {
+"200": {
+"description": "OK"
+}
+},
+"security": [
+{}
+]
+}
+},
+"/api/v1/admin/customers/{id}/addresses": {
+"put": {
+"tags": [
+"Customers"
+],
+"operationId": "ReplaceCustomerAddresses",
+"parameters": [
+{
+"name": "id",
+"in": "path",
+"required": true,
+"schema": {
+"type": "string",
+"format": "uuid"
+}
+}
+],
+"requestBody": {
+"content": {
+"application/json": {
+"schema": {
+"$ref": "#/components/schemas/ReplaceCustomerAddressesRequest"
+}
+}
+},
+"required": true
+},
+"responses": {
+"200": {
+"description": "OK"
+}
+},
+"security": [
+{}
+]
+}
+},
+"/api/v1/admin/customers/{id}/status": {
+"patch": {
+"tags": [
+"Customers"
+],
+"operationId": "ChangeCustomerStatus",
+"parameters": [
+{
+"name": "id",
+"in": "path",
+"required": true,
+"schema": {
+"type": "string",
+"format": "uuid"
+}
+}
+],
+"requestBody": {
+"content": {
+"application/json": {
+"schema": {
+"$ref": "#/components/schemas/ChangeCustomerStatusRequest"
+}
+}
+},
+"required": true
+},
+"responses": {
+"200": {
+"description": "OK"
+}
+},
+"security": [
+{}
+]
+},
+"get": {
+"tags": [
+"Customers"
+],
+"operationId": "GetCustomerStatus",
+"parameters": [
+{
+"name": "id",
+"in": "path",
+"required": true,
+"schema": {
+"type": "string",
+"format": "uuid"
+}
+}
+],
+"responses": {
+"200": {
+"description": "OK"
+}
+},
+"security": [
+{}
+]
+}
+},
+"/api/v1/admin/customers/{id}/preferences": {
+"get": {
+"tags": [
+"Customers"
+],
+"operationId": "GetCustomerPreferences",
+"parameters": [
+{
+"name": "id",
+"in": "path",
+"required": true,
+"schema": {
+"type": "string",
+"format": "uuid"
+}
+}
+],
+"responses": {
+"200": {
+"description": "OK"
+}
+},
+"security": [
+{}
+]
+},
+"patch": {
+"tags": [
+"Customers"
+],
+"operationId": "UpdateCustomerPreferences",
+"parameters": [
+{
+"name": "id",
+"in": "path",
+"required": true,
+"schema": {
+"type": "string",
+"format": "uuid"
+}
+}
+],
+"requestBody": {
+"content": {
+"application/json": {
+"schema": {
+"$ref": "#/components/schemas/UpdateCustomerPreferencesRequest"
+}
+}
+},
+"required": true
+},
+"responses": {
+"200": {
+"description": "OK"
+}
+},
+"security": [
+{}
+]
+}
+},
+"/api/v1/admin/customers/{id}/professional-profile": {
+"get": {
+"tags": [
+"Customers"
+],
+"operationId": "GetCustomerProfessionalProfile",
+"parameters": [
+{
+"name": "id",
+"in": "path",
+"required": true,
+"schema": {
+"type": "string",
+"format": "uuid"
+}
+}
+],
+"responses": {
+"200": {
+"description": "OK"
+}
+},
+"security": [
+{}
+]
+},
+"put": {
+"tags": [
+"Customers"
+],
+"operationId": "UpsertCustomerProfessionalProfile",
+"parameters": [
+{
+"name": "id",
+"in": "path",
+"required": true,
+"schema": {
+"type": "string",
+"format": "uuid"
+}
+}
+],
+"requestBody": {
+"content": {
+"application/json": {
+"schema": {
+"$ref": "#/components/schemas/UpsertCustomerProfessionalProfileRequest"
+}
+}
+},
+"required": true
+},
+"responses": {
+"200": {
+"description": "OK"
+}
+},
+"security": [
+{}
+]
+}
+},
+"/api/v1/admin/customers/{id}/financial-profile/current": {
+"get": {
+"tags": [
+"Customers"
+],
+"operationId": "GetCurrentCustomerFinancialProfile",
+"parameters": [
+{
+"name": "id",
+"in": "path",
+"required": true,
+"schema": {
+"type": "string",
+"format": "uuid"
+}
+}
+],
+"responses": {
+"200": {
+"description": "OK"
+}
+},
+"security": [
+{}
+]
+}
+},
+"/api/v1/admin/customers/{id}/financial-profile": {
+"get": {
+"tags": [
+"Customers"
+],
+"operationId": "GetCustomerFinancialProfile",
+"parameters": [
+{
+"name": "id",
+"in": "path",
+"required": true,
+"schema": {
+"type": "string",
+"format": "uuid"
+}
+}
+],
+"responses": {
+"200": {
+"description": "OK"
+}
+},
+"security": [
+{}
+]
+}
+},
+"/api/v1/admin/customers/{id}/professional-financial-security": {
+"get": {
+"tags": [
+"Customers"
+],
+"operationId": "GetCustomerProfessionalFinancialSecurity",
+"parameters": [
+{
+"name": "id",
+"in": "path",
+"required": true,
+"schema": {
+"type": "string",
+"format": "uuid"
+}
+}
+],
+"responses": {
+"200": {
+"description": "OK"
+}
+},
+"security": [
+{}
+]
+}
+},
+"/api/v1/admin/customers/{id}/account-security": {
+"get": {
+"tags": [
+"Customers"
+],
+"operationId": "GetCustomerAccountSecurity",
+"parameters": [
+{
+"name": "id",
+"in": "path",
+"required": true,
+"schema": {
+"type": "string",
+"format": "uuid"
+}
+}
+],
+"responses": {
+"200": {
+"description": "OK"
+}
+},
+"security": [
+{}
+]
+}
+},
+"/api/v1/admin/customers/{id}/financial-profiles": {
+"post": {
+"tags": [
+"Customers"
+],
+"operationId": "CreateCustomerFinancialProfile",
+"parameters": [
+{
+"name": "id",
+"in": "path",
+"required": true,
+"schema": {
+"type": "string",
+"format": "uuid"
+}
+}
+],
+"requestBody": {
+"content": {
+"application/json": {
+"schema": {
+"$ref": "#/components/schemas/CreateCustomerFinancialProfileRequest"
+}
+}
+},
+"required": true
+},
+"responses": {
+"200": {
+"description": "OK"
+}
+},
+"security": [
+{}
+]
+},
+"get": {
+"tags": [
+"Customers"
+],
+"operationId": "ListCustomerFinancialProfiles",
+"parameters": [
+{
+"name": "id",
+"in": "path",
+"required": true,
+"schema": {
+"type": "string",
+"format": "uuid"
+}
+},
+{
+"name": "page",
+"in": "query",
+"schema": {
+"pattern": "^-?(?:0|[1-9]\\d*)$",
+"type": [
+"integer",
+"string"
+],
+"format": "int32"
+}
+},
+{
+"name": "pageSize",
+"in": "query",
+"schema": {
+"pattern": "^-?(?:0|[1-9]\\d*)$",
+"type": [
+"integer",
+"string"
+],
+"format": "int32"
+}
+}
+],
+"responses": {
+"200": {
+"description": "OK",
+"content": {
+"application/json": {
+"schema": {
+"$ref": "#/components/schemas/PagedResponseOfCustomerFinancialProfileResponse"
+}
+}
+}
+}
+},
+"security": [
+{}
+]
+}
+},
+"/api/v1/admin/customers/{id}/bank-accounts": {
+"post": {
+"tags": [
+"Customers"
+],
+"operationId": "CreateCustomerBankAccount",
+"parameters": [
+{
+"name": "id",
+"in": "path",
+"required": true,
+"schema": {
+"type": "string",
+"format": "uuid"
+}
+}
+],
+"requestBody": {
+"content": {
+"application/json": {
+"schema": {
+"$ref": "#/components/schemas/CreateCustomerBankAccountRequest"
+}
+}
+},
+"required": true
+},
+"responses": {
+"200": {
+"description": "OK"
+}
+},
+"security": [
+{}
+]
+},
+"get": {
+"tags": [
+"Customers"
+],
+"operationId": "ListCustomerBankAccounts",
+"parameters": [
+{
+"name": "id",
+"in": "path",
+"required": true,
+"schema": {
+"type": "string",
+"format": "uuid"
+}
+},
+{
+"name": "page",
+"in": "query",
+"schema": {
+"pattern": "^-?(?:0|[1-9]\\d*)$",
+"type": [
+"integer",
+"string"
+],
+"format": "int32"
+}
+},
+{
+"name": "pageSize",
+"in": "query",
+"schema": {
+"pattern": "^-?(?:0|[1-9]\\d*)$",
+"type": [
+"integer",
+"string"
+],
+"format": "int32"
+}
+},
+{
+"name": "status",
+"in": "query",
+"schema": {
+"type": "string"
+}
+}
+],
+"responses": {
+"200": {
+"description": "OK",
+"content": {
+"application/json": {
+"schema": {
+"$ref": "#/components/schemas/PagedResponseOfCustomerBankAccountResponse"
+}
+}
+}
+}
+},
+"security": [
+{}
+]
+}
+},
+"/api/v1/admin/customers/{id}/bank-accounts/{bankAccountId}": {
+"get": {
+"tags": [
+"Customers"
+],
+"operationId": "GetCustomerBankAccount",
+"parameters": [
+{
+"name": "id",
+"in": "path",
+"required": true,
+"schema": {
+"type": "string",
+"format": "uuid"
+}
+},
+{
+"name": "bankAccountId",
+"in": "path",
+"required": true,
+"schema": {
+"type": "string",
+"format": "uuid"
+}
+}
+],
+"responses": {
+"200": {
+"description": "OK"
+}
+},
+"security": [
+{}
+]
+},
+"patch": {
+"tags": [
+"Customers"
+],
+"operationId": "UpdateCustomerBankAccount",
+"parameters": [
+{
+"name": "id",
+"in": "path",
+"required": true,
+"schema": {
+"type": "string",
+"format": "uuid"
+}
+},
+{
+"name": "bankAccountId",
+"in": "path",
+"required": true,
+"schema": {
+"type": "string",
+"format": "uuid"
+}
+}
+],
+"requestBody": {
+"content": {
+"application/json": {
+"schema": {
+"$ref": "#/components/schemas/UpdateCustomerBankAccountRequest"
+}
+}
+},
+"required": true
+},
+"responses": {
+"200": {
+"description": "OK"
+}
+},
+"security": [
+{}
+]
+}
+},
+"/api/v1/admin/customers/{id}/bank-accounts/{bankAccountId}/primary": {
+"post": {
+"tags": [
+"Customers"
+],
+"operationId": "SetPrimaryCustomerBankAccount",
+"parameters": [
+{
+"name": "id",
+"in": "path",
+"required": true,
+"schema": {
+"type": "string",
+"format": "uuid"
+}
+},
+{
+"name": "bankAccountId",
+"in": "path",
+"required": true,
+"schema": {
+"type": "string",
+"format": "uuid"
+}
+}
+],
+"responses": {
+"200": {
+"description": "OK"
+}
+},
+"security": [
+{}
+]
+}
+},
+"/api/v1/admin/customers/{id}/bank-accounts/{bankAccountId}/set-primary": {
+"post": {
+"tags": [
+"Customers"
+],
+"operationId": "SetPrimaryCustomerBankAccountAlias",
+"parameters": [
+{
+"name": "id",
+"in": "path",
+"required": true,
+"schema": {
+"type": "string",
+"format": "uuid"
+}
+},
+{
+"name": "bankAccountId",
+"in": "path",
+"required": true,
+"schema": {
+"type": "string",
+"format": "uuid"
+}
+}
+],
+"responses": {
+"200": {
+"description": "OK"
+}
+},
+"security": [
+{}
+]
+}
+},
+"/api/v1/admin/customers/{id}/bank-accounts/{bankAccountId}/status": {
+"patch": {
+"tags": [
+"Customers"
+],
+"operationId": "ChangeCustomerBankAccountStatus",
+"parameters": [
+{
+"name": "id",
+"in": "path",
+"required": true,
+"schema": {
+"type": "string",
+"format": "uuid"
+}
+},
+{
+"name": "bankAccountId",
+"in": "path",
+"required": true,
+"schema": {
+"type": "string",
+"format": "uuid"
+}
+}
+],
+"requestBody": {
+"content": {
+"application/json": {
+"schema": {
+"$ref": "#/components/schemas/ChangeCustomerBankAccountStatusRequest"
+}
+}
+},
+"required": true
+},
+"responses": {
+"200": {
+"description": "OK"
+}
+},
+"security": [
+{}
+]
+}
+},
+"/api/v1/admin/customers/{id}/bank-accounts/{bankAccountId}/archive": {
+"post": {
+"tags": [
+"Customers"
+],
+"operationId": "ArchiveCustomerBankAccount",
+"parameters": [
+{
+"name": "id",
+"in": "path",
+"required": true,
+"schema": {
+"type": "string",
+"format": "uuid"
+}
+},
+{
+"name": "bankAccountId",
+"in": "path",
+"required": true,
+"schema": {
+"type": "string",
+"format": "uuid"
+}
+}
+],
+"responses": {
+"200": {
+"description": "OK"
+}
+},
+"security": [
+{}
+]
+}
+},
+"/api/v1/admin/customers/{id}/compliance/flags": {
+"post": {
+"tags": [
+"Customers"
+],
+"operationId": "CreateCustomerComplianceFlag",
+"parameters": [
+{
+"name": "id",
+"in": "path",
+"required": true,
+"schema": {
+"type": "string",
+"format": "uuid"
+}
+}
+],
+"requestBody": {
+"content": {
+"application/json": {
+"schema": {
+"$ref": "#/components/schemas/CreateComplianceFlagRequest"
+}
+}
+},
+"required": true
+},
+"responses": {
+"200": {
+"description": "OK"
+}
+},
+"security": [
+{}
+]
+},
+"get": {
+"tags": [
+"Customers"
+],
+"operationId": "ListCustomerComplianceFlags",
+"parameters": [
+{
+"name": "id",
+"in": "path",
+"required": true,
+"schema": {
+"type": "string",
+"format": "uuid"
+}
+},
+{
+"name": "page",
+"in": "query",
+"schema": {
+"pattern": "^-?(?:0|[1-9]\\d*)$",
+"type": [
+"integer",
+"string"
+],
+"format": "int32"
+}
+},
+{
+"name": "pageSize",
+"in": "query",
+"schema": {
+"pattern": "^-?(?:0|[1-9]\\d*)$",
+"type": [
+"integer",
+"string"
+],
+"format": "int32"
+}
+},
+{
+"name": "flagType",
+"in": "query",
+"schema": {
+"type": "string"
+}
+},
+{
+"name": "severity",
+"in": "query",
+"schema": {
+"type": "string"
+}
+},
+{
+"name": "status",
+"in": "query",
+"schema": {
+"type": "string"
+}
+},
+{
+"name": "detectedFromUtc",
+"in": "query",
+"schema": {
+"type": "string",
+"format": "date-time"
+}
+},
+{
+"name": "detectedToUtc",
+"in": "query",
+"schema": {
+"type": "string",
+"format": "date-time"
+}
+}
+],
+"responses": {
+"200": {
+"description": "OK",
+"content": {
+"application/json": {
+"schema": {
+"$ref": "#/components/schemas/PagedResponseOfComplianceFlagResponse"
+}
+}
+}
+}
+},
+"security": [
+{}
+]
+}
+},
+"/api/v1/admin/customers/{id}/compliance/flags/{flagId}": {
+"get": {
+"tags": [
+"Customers"
+],
+"operationId": "GetCustomerComplianceFlag",
+"parameters": [
+{
+"name": "id",
+"in": "path",
+"required": true,
+"schema": {
+"type": "string",
+"format": "uuid"
+}
+},
+{
+"name": "flagId",
+"in": "path",
+"required": true,
+"schema": {
+"type": "string",
+"format": "uuid"
+}
+}
+],
+"responses": {
+"200": {
+"description": "OK"
+}
+},
+"security": [
+{}
+]
+},
+"patch": {
+"tags": [
+"Customers"
+],
+"operationId": "UpdateCustomerComplianceFlag",
+"parameters": [
+{
+"name": "id",
+"in": "path",
+"required": true,
+"schema": {
+"type": "string",
+"format": "uuid"
+}
+},
+{
+"name": "flagId",
+"in": "path",
+"required": true,
+"schema": {
+"type": "string",
+"format": "uuid"
+}
+}
+],
+"requestBody": {
+"content": {
+"application/json": {
+"schema": {
+"$ref": "#/components/schemas/UpdateComplianceFlagRequest"
+}
+}
+},
+"required": true
+},
+"responses": {
+"200": {
+"description": "OK"
+}
+},
+"security": [
+{}
+]
+}
+},
+"/api/v1/admin/customers/{id}/compliance/flags/{flagId}/resolve": {
+"post": {
+"tags": [
+"Customers"
+],
+"operationId": "ResolveCustomerComplianceFlag",
+"parameters": [
+{
+"name": "id",
+"in": "path",
+"required": true,
+"schema": {
+"type": "string",
+"format": "uuid"
+}
+},
+{
+"name": "flagId",
+"in": "path",
+"required": true,
+"schema": {
+"type": "string",
+"format": "uuid"
+}
+}
+],
+"requestBody": {
+"content": {
+"application/json": {
+"schema": {
+"$ref": "#/components/schemas/ResolveComplianceFlagRequest"
+}
+}
+},
+"required": true
+},
+"responses": {
+"200": {
+"description": "OK"
+}
+},
+"security": [
+{}
+]
+}
+},
+"/api/v1/admin/customers/{id}/compliance/flags/{flagId}/dismiss": {
+"post": {
+"tags": [
+"Customers"
+],
+"operationId": "DismissCustomerComplianceFlag",
+"parameters": [
+{
+"name": "id",
+"in": "path",
+"required": true,
+"schema": {
+"type": "string",
+"format": "uuid"
+}
+},
+{
+"name": "flagId",
+"in": "path",
+"required": true,
+"schema": {
+"type": "string",
+"format": "uuid"
+}
+}
+],
+"requestBody": {
+"content": {
+"application/json": {
+"schema": {
+"$ref": "#/components/schemas/ResolveComplianceFlagRequest"
+}
+}
+},
+"required": true
+},
+"responses": {
+"200": {
+"description": "OK"
+}
+},
+"security": [
+{}
+]
+}
+},
+"/api/v1/admin/customers/{id}/compliance/alerts": {
+"get": {
+"tags": [
+"Customers"
+],
+"operationId": "GetCustomerComplianceAlerts",
+"parameters": [
+{
+"name": "id",
+"in": "path",
+"required": true,
+"schema": {
+"type": "string",
+"format": "uuid"
+}
+}
+],
+"responses": {
+"200": {
+"description": "OK"
+}
+},
+"security": [
+{}
+]
+}
+},
+"/api/v1/admin/customers/{id}/compliance/card": {
+"get": {
+"tags": [
+"Customers"
+],
+"operationId": "GetCustomerComplianceCard",
+"parameters": [
+{
+"name": "id",
+"in": "path",
+"required": true,
+"schema": {
+"type": "string",
+"format": "uuid"
+}
+}
+],
+"responses": {
+"200": {
+"description": "OK"
+}
+},
+"security": [
+{}
+]
+}
+},
+"/api/v1/admin/customers/{id}/compliance/history": {
+"get": {
+"tags": [
+"Customers"
+],
+"operationId": "GetCustomerComplianceHistory",
+"parameters": [
+{
+"name": "id",
+"in": "path",
+"required": true,
+"schema": {
+"type": "string",
+"format": "uuid"
+}
+},
+{
+"name": "page",
+"in": "query",
+"schema": {
+"pattern": "^-?(?:0|[1-9]\\d*)$",
+"type": [
+"integer",
+"string"
+],
+"format": "int32"
+}
+},
+{
+"name": "pageSize",
+"in": "query",
+"schema": {
+"pattern": "^-?(?:0|[1-9]\\d*)$",
+"type": [
+"integer",
+"string"
+],
+"format": "int32"
+}
+}
+],
+"responses": {
+"200": {
+"description": "OK",
+"content": {
+"application/json": {
+"schema": {
+"$ref": "#/components/schemas/PagedResponseOfCustomerTimelineEventResponse"
+}
+}
+}
+}
+},
+"security": [
+{}
+]
+}
+},
+"/api/v1/admin/customers/{id}/timeline": {
+"get": {
+"tags": [
+"Customers"
+],
+"operationId": "GetCustomerTimeline",
+"parameters": [
+{
+"name": "id",
+"in": "path",
+"required": true,
+"schema": {
+"type": "string",
+"format": "uuid"
+}
+},
+{
+"name": "page",
+"in": "query",
+"schema": {
+"pattern": "^-?(?:0|[1-9]\\d*)$",
+"type": [
+"integer",
+"string"
+],
+"format": "int32"
+}
+},
+{
+"name": "pageSize",
+"in": "query",
+"schema": {
+"pattern": "^-?(?:0|[1-9]\\d*)$",
+"type": [
+"integer",
+"string"
+],
+"format": "int32"
+}
+},
+{
+"name": "eventType",
+"in": "query",
+"schema": {
+"type": "string"
+}
+},
+{
+"name": "entityType",
+"in": "query",
+"schema": {
+"type": "string"
+}
+},
+{
+"name": "fromUtc",
+"in": "query",
+"schema": {
+"type": "string",
+"format": "date-time"
+}
+},
+{
+"name": "toUtc",
+"in": "query",
+"schema": {
+"type": "string",
+"format": "date-time"
+}
+}
+],
+"responses": {
+"200": {
+"description": "OK",
+"content": {
+"application/json": {
+"schema": {
+"$ref": "#/components/schemas/PagedResponseOfCustomerTimelineEventResponse"
+}
+}
+}
+}
+},
+"security": [
+{}
+]
+}
+},
+"/api/v1/admin/customers/{id}/documents/summary": {
+"get": {
+"tags": [
+"Customers"
+],
+"operationId": "GetCustomerDocumentSummary",
+"parameters": [
+{
+"name": "id",
+"in": "path",
+"required": true,
+"schema": {
+"type": "string",
+"format": "uuid"
+}
+}
+],
+"responses": {
+"200": {
+"description": "OK"
+}
+},
+"security": [
+{}
+]
+}
+},
+"/api/v1/admin/banks": {
+"post": {
+"tags": [
+"Banks"
+],
+"operationId": "CreateBank",
+"requestBody": {
+"content": {
+"application/json": {
+"schema": {
+"$ref": "#/components/schemas/CreateBankRequest"
+}
+}
+},
+"required": true
+},
+"responses": {
+"200": {
+"description": "OK"
+}
+},
+"security": [
+{}
+]
+},
+"get": {
+"tags": [
+"Banks"
+],
+"operationId": "ListBanks",
+"parameters": [
+{
+"name": "page",
+"in": "query",
+"schema": {
+"pattern": "^-?(?:0|[1-9]\\d*)$",
+"type": [
+"integer",
+"string"
+],
+"format": "int32"
+}
+},
+{
+"name": "pageSize",
+"in": "query",
+"schema": {
+"pattern": "^-?(?:0|[1-9]\\d*)$",
+"type": [
+"integer",
+"string"
+],
+"format": "int32"
+}
+},
+{
+"name": "countryId",
+"in": "query",
+"schema": {
+"type": "string",
+"format": "uuid"
+}
+},
+{
+"name": "isActive",
+"in": "query",
+"schema": {
+"type": "boolean"
+}
+}
+],
+"responses": {
+"200": {
+"description": "OK",
+"content": {
+"application/json": {
+"schema": {
+"$ref": "#/components/schemas/PagedResponseOfBankResponse"
+}
+}
+}
+}
+},
+"security": [
+{}
+]
+}
+},
+"/api/v1/client/profile": {
+"get": {
+"tags": [
+"Client Profile"
+],
+"operationId": "GetClientProfile",
+"responses": {
+"200": {
+"description": "OK"
+}
+},
+"security": [
+{}
+]
+},
+"patch": {
+"tags": [
+"Client Profile"
+],
+"operationId": "UpdateClientProfile",
+"requestBody": {
+"content": {
+"application/json": {
+"schema": {
+"$ref": "#/components/schemas/UpdateClientProfileRequest"
+}
+}
+},
+"required": true
+},
+"responses": {
+"200": {
+"description": "OK"
+}
+},
+"security": [
+{}
+]
+}
+},
+"/api/v1/client/profile/summary": {
+"get": {
+"tags": [
+"Client Profile"
+],
+"operationId": "GetClientProfileSummary",
+"responses": {
+"200": {
+"description": "OK"
+}
+},
+"security": [
+{}
+]
+}
+},
+"/api/v1/client/profile/preferences": {
+"get": {
+"tags": [
+"Client Profile"
+],
+"operationId": "GetClientProfilePreferences",
+"responses": {
+"200": {
+"description": "OK"
+}
+},
+"security": [
+{}
+]
+},
+"patch": {
+"tags": [
+"Client Profile"
+],
+"operationId": "UpdateClientProfilePreferences",
+"requestBody": {
+"content": {
+"application/json": {
+"schema": {
+"$ref": "#/components/schemas/UpdateCustomerPreferencesRequest"
+}
+}
+},
+"required": true
+},
+"responses": {
+"200": {
+"description": "OK"
+}
+},
+"security": [
+{}
+]
+}
+},
+"/api/v1/client/profile/professional-profile": {
+"get": {
+"tags": [
+"Client Profile"
+],
+"operationId": "GetClientProfessionalProfile",
+"responses": {
+"200": {
+"description": "OK"
+}
+},
+"security": [
+{}
+]
+},
+"put": {
+"tags": [
+"Client Profile"
+],
+"operationId": "UpdateClientProfessionalProfile",
+"requestBody": {
+"content": {
+"application/json": {
+"schema": {
+"$ref": "#/components/schemas/UpsertCustomerProfessionalProfileRequest"
+}
+}
+},
+"required": true
+},
+"responses": {
+"200": {
+"description": "OK"
+}
+},
+"security": [
+{}
+]
+}
+},
+"/api/v1/client/profile/financial-profile": {
+"get": {
+"tags": [
+"Client Profile"
+],
+"operationId": "GetClientFinancialProfile",
+"responses": {
+"200": {
+"description": "OK"
+}
+},
+"security": [
+{}
+]
+},
+"put": {
+"tags": [
+"Client Profile"
+],
+"operationId": "UpdateClientFinancialProfile",
+"requestBody": {
+"content": {
+"application/json": {
+"schema": {
+"$ref": "#/components/schemas/CreateCustomerFinancialProfileRequest"
+}
+}
+},
+"required": true
+},
+"responses": {
+"200": {
+"description": "OK"
+}
+},
+"security": [
+{}
+]
+}
+},
+"/api/v1/client/profile/trusted-contacts": {
+"get": {
+"tags": [
+"Client Profile"
+],
+"operationId": "ListClientTrustedContacts",
+"responses": {
+"200": {
+"description": "OK"
+}
+},
+"security": [
+{}
+]
+},
+"post": {
+"tags": [
+"Client Profile"
+],
+"operationId": "CreateClientTrustedContact",
+"requestBody": {
+"content": {
+"application/json": {
+"schema": {
+"$ref": "#/components/schemas/UpsertClientTrustedContactRequest"
+}
+}
+},
+"required": true
+},
+"responses": {
+"200": {
+"description": "OK"
+}
+},
+"security": [
+{}
+]
+}
+},
+"/api/v1/client/profile/trusted-contacts/{contactId}": {
+"put": {
+"tags": [
+"Client Profile"
+],
+"operationId": "UpdateClientTrustedContact",
+"parameters": [
+{
+"name": "contactId",
+"in": "path",
+"required": true,
+"schema": {
+"type": "string",
+"format": "uuid"
+}
+}
+],
+"requestBody": {
+"content": {
+"application/json": {
+"schema": {
+"$ref": "#/components/schemas/UpsertClientTrustedContactRequest"
+}
+}
+},
+"required": true
+},
+"responses": {
+"200": {
+"description": "OK"
+}
+},
+"security": [
+{}
+]
+},
+"delete": {
+"tags": [
+"Client Profile"
+],
+"operationId": "RemoveClientTrustedContact",
+"parameters": [
+{
+"name": "contactId",
+"in": "path",
+"required": true,
+"schema": {
+"type": "string",
+"format": "uuid"
+}
+}
+],
+"responses": {
+"200": {
+"description": "OK"
+}
+},
+"security": [
+{}
+]
+}
+},
+"/api/v1/client/profile/bank-accounts": {
+"get": {
+"tags": [
+"Client Profile"
+],
+"operationId": "ListClientBankAccounts",
+"parameters": [
+{
+"name": "page",
+"in": "query",
+"schema": {
+"pattern": "^-?(?:0|[1-9]\\d*)$",
+"type": [
+"integer",
+"string"
+],
+"format": "int32"
+}
+},
+{
+"name": "pageSize",
+"in": "query",
+"schema": {
+"pattern": "^-?(?:0|[1-9]\\d*)$",
+"type": [
+"integer",
+"string"
+],
+"format": "int32"
+}
+},
+{
+"name": "status",
+"in": "query",
+"schema": {
+"type": "string"
+}
+}
+],
+"responses": {
+"200": {
+"description": "OK"
+}
+},
+"security": [
+{}
+]
+},
+"post": {
+"tags": [
+"Client Profile"
+],
+"operationId": "CreateClientBankAccount",
+"requestBody": {
+"content": {
+"application/json": {
+"schema": {
+"$ref": "#/components/schemas/CreateClientBankAccountRequest"
+}
+}
+},
+"required": true
+},
+"responses": {
+"200": {
+"description": "OK"
+}
+},
+"security": [
+{}
+]
+}
+},
+"/api/v1/client/profile/bank-accounts/{bankAccountId}": {
+"get": {
+"tags": [
+"Client Profile"
+],
+"operationId": "GetClientBankAccount",
+"parameters": [
+{
+"name": "bankAccountId",
+"in": "path",
+"required": true,
+"schema": {
+"type": "string",
+"format": "uuid"
+}
+}
+],
+"responses": {
+"200": {
+"description": "OK"
+}
+},
+"security": [
+{}
+]
+},
+"patch": {
+"tags": [
+"Client Profile"
+],
+"operationId": "UpdateClientBankAccount",
+"parameters": [
+{
+"name": "bankAccountId",
+"in": "path",
+"required": true,
+"schema": {
+"type": "string",
+"format": "uuid"
+}
+}
+],
+"requestBody": {
+"content": {
+"application/json": {
+"schema": {
+"$ref": "#/components/schemas/UpdateClientBankAccountRequest"
+}
+}
+},
+"required": true
+},
+"responses": {
+"200": {
+"description": "OK"
+}
+},
+"security": [
+{}
+]
+}
+},
+"/api/v1/client/profile/bank-accounts/{bankAccountId}/primary": {
+"post": {
+"tags": [
+"Client Profile"
+],
+"operationId": "SetPrimaryClientBankAccount",
+"parameters": [
+{
+"name": "bankAccountId",
+"in": "path",
+"required": true,
+"schema": {
+"type": "string",
+"format": "uuid"
+}
+}
+],
+"responses": {
+"200": {
+"description": "OK"
+}
+},
+"security": [
+{}
+]
+}
+},
+"/api/v1/client/profile/bank-accounts/{bankAccountId}/archive": {
+"post": {
+"tags": [
+"Client Profile"
+],
+"operationId": "ArchiveClientBankAccount",
+"parameters": [
+{
+"name": "bankAccountId",
+"in": "path",
+"required": true,
+"schema": {
+"type": "string",
+"format": "uuid"
+}
+}
+],
+"responses": {
+"200": {
+"description": "OK"
+}
+},
+"security": [
+{}
+]
+}
+},
+"/api/v1/client/profile/timeline": {
+"get": {
+"tags": [
+"Client Profile"
+],
+"operationId": "GetClientProfileTimeline",
+"parameters": [
+{
+"name": "page",
+"in": "query",
+"schema": {
+"pattern": "^-?(?:0|[1-9]\\d*)$",
+"type": [
+"integer",
+"string"
+],
+"format": "int32"
+}
+},
+{
+"name": "pageSize",
+"in": "query",
+"schema": {
+"pattern": "^-?(?:0|[1-9]\\d*)$",
+"type": [
+"integer",
+"string"
+],
+"format": "int32"
+}
+},
+{
+"name": "eventType",
+"in": "query",
+"schema": {
+"type": "string"
+}
+},
+{
+"name": "entityType",
+"in": "query",
+"schema": {
+"type": "string"
+}
+},
+{
+"name": "fromUtc",
+"in": "query",
+"schema": {
+"type": "string",
+"format": "date-time"
+}
+},
+{
+"name": "toUtc",
+"in": "query",
+"schema": {
+"type": "string",
+"format": "date-time"
+}
+}
+],
+"responses": {
+"200": {
+"description": "OK"
+}
+},
+"security": [
+{}
+]
+}
+},
+"/api/v1/client/profile/documents": {
+"get": {
+"tags": [
+"Client Profile"
+],
+"operationId": "ListClientProfileDocuments",
+"parameters": [
+{
+"name": "page",
+"in": "query",
+"schema": {
+"pattern": "^-?(?:0|[1-9]\\d*)$",
+"type": [
+"integer",
+"string"
+],
+"format": "int32"
+}
+},
+{
+"name": "pageSize",
+"in": "query",
+"schema": {
+"pattern": "^-?(?:0|[1-9]\\d*)$",
+"type": [
+"integer",
+"string"
+],
+"format": "int32"
+}
+},
+{
+"name": "documentTypeId",
+"in": "query",
+"schema": {
+"type": "string",
+"format": "uuid"
+}
+},
+{
+"name": "categoryId",
+"in": "query",
+"schema": {
+"type": "string",
+"format": "uuid"
+}
+},
+{
+"name": "status",
+"in": "query",
+"schema": {
+"type": "string"
+}
+},
+{
+"name": "createdFromUtc",
+"in": "query",
+"schema": {
+"type": "string",
+"format": "date-time"
+}
+},
+{
+"name": "createdToUtc",
+"in": "query",
+"schema": {
+"type": "string",
+"format": "date-time"
+}
+}
+],
+"responses": {
+"200": {
+"description": "OK"
+}
+},
+"security": [
+{}
+]
+},
+"post": {
+"tags": [
+"Client Profile"
+],
+"operationId": "UploadClientProfileDocument",
+"requestBody": {
+"content": {
+"multipart/form-data": {
+"schema": {
+"required": [
+"file",
+"documentTypeId"
+],
+"type": "object",
+"allOf": [
+{
+"type": "object",
+"properties": {
+"file": {
+"$ref": "#/components/schemas/IFormFile"
+}
+}
+},
+{
+"type": "object",
+"properties": {
+"documentTypeId": {
+"type": "string",
+"format": "uuid"
+}
+}
+},
+{
+"type": "object",
+"properties": {
+"countryId": {
+"type": "string",
+"format": "uuid"
+}
+}
+},
+{
+"type": "object",
+"properties": {
+"requirementId": {
+"type": "string",
+"format": "uuid"
+}
+}
+},
+{
+"type": "object",
+"properties": {
+"issuedOn": {
+"type": "string",
+"format": "date"
+}
+}
+},
+{
+"type": "object",
+"properties": {
+"expiresOn": {
+"type": "string",
+"format": "date"
+}
+}
+},
+{
+"type": "object",
+"properties": {
+"metadata": {
+"type": "string"
+}
+}
+}
+]
+}
+}
+},
+"required": true
+},
+"responses": {
+"200": {
+"description": "OK"
+}
+},
+"security": [
+{}
+]
+}
+},
+"/api/v1/client/profile/documents/summary": {
+"get": {
+"tags": [
+"Client Profile"
+],
+"operationId": "GetClientProfileDocumentSummary",
+"responses": {
+"200": {
+"description": "OK"
+}
+},
+"security": [
+{}
+]
+}
+},
+"/api/v1/client/profile/documents/overview": {
+"get": {
+"tags": [
+"Client Profile"
+],
+"operationId": "GetClientProfileDocumentOverview",
+"responses": {
+"200": {
+"description": "OK"
+}
+},
+"security": [
+{}
+]
+}
+},
+"/api/v1/client/profile/documents/progress": {
+"get": {
+"tags": [
+"Client Profile"
+],
+"operationId": "GetClientProfileDocumentProgress",
+"responses": {
+"200": {
+"description": "OK"
+}
+},
+"security": [
+{}
+]
+}
+},
+"/api/v1/client/profile/documents/{documentId}/replace": {
+"post": {
+"tags": [
+"Client Profile"
+],
+"operationId": "ReplaceClientProfileDocument",
+"parameters": [
+{
+"name": "documentId",
+"in": "path",
+"required": true,
+"schema": {
+"type": "string",
+"format": "uuid"
+}
+}
+],
+"requestBody": {
+"content": {
+"multipart/form-data": {
+"schema": {
+"required": [
+"file"
+],
+"type": "object",
+"allOf": [
+{
+"type": "object",
+"properties": {
+"file": {
+"$ref": "#/components/schemas/IFormFile"
+}
+}
+},
+{
+"type": "object",
+"properties": {
+"issuedOn": {
+"type": "string",
+"format": "date"
+}
+}
+},
+{
+"type": "object",
+"properties": {
+"expiresOn": {
+"type": "string",
+"format": "date"
+}
+}
+}
+]
+}
+}
+},
+"required": true
+},
+"responses": {
+"200": {
+"description": "OK"
+}
+},
+"security": [
+{}
+]
+}
+},
+"/api/v1/client/profile/documents/{documentId}/download": {
+"get": {
+"tags": [
+"Client Profile"
+],
+"operationId": "DownloadClientProfileDocument",
+"parameters": [
+{
+"name": "documentId",
+"in": "path",
+"required": true,
+"schema": {
+"type": "string",
+"format": "uuid"
+}
+}
+],
+"responses": {
+"200": {
+"description": "OK"
+}
+},
+"security": [
+{}
+]
+}
+},
+"/api/v1/client/profile/documents/{documentId}/temporary-url": {
+"get": {
+"tags": [
+"Client Profile"
+],
+"operationId": "GetClientProfileDocumentTemporaryUrl",
+"parameters": [
+{
+"name": "documentId",
+"in": "path",
+"required": true,
+"schema": {
+"type": "string",
+"format": "uuid"
+}
+},
+{
+"name": "expiresInMinutes",
+"in": "query",
+"schema": {
+"pattern": "^-?(?:0|[1-9]\\d*)$",
+"type": [
+"integer",
+"string"
+],
+"format": "int32"
+}
+}
+],
+"responses": {
+"200": {
+"description": "OK"
+}
+},
+"security": [
+{}
+]
+}
+},
+"/api/v1/client/profile/document-types": {
+"get": {
+"tags": [
+"Client Profile"
+],
+"operationId": "ListClientProfileDocumentTypes",
+"parameters": [
+{
+"name": "categoryId",
+"in": "query",
+"schema": {
+"type": "string",
+"format": "uuid"
+}
+}
+],
+"responses": {
+"200": {
+"description": "OK"
+}
+},
+"security": [
+{}
+]
+}
+},
+"/api/v1/client/profile/document-types/{documentTypeId}/countries/{countryId}/data-definition": {
+"get": {
+"tags": [
+"Client Profile"
+],
+"operationId": "GetClientProfileDocumentDataDefinition",
+"parameters": [
+{
+"name": "documentTypeId",
+"in": "path",
+"required": true,
+"schema": {
+"type": "string",
+"format": "uuid"
+}
+},
+{
+"name": "countryId",
+"in": "path",
+"required": true,
+"schema": {
+"type": "string",
+"format": "uuid"
+}
+}
+],
+"responses": {
+"200": {
+"description": "OK"
+}
+},
+"security": [
+{}
+]
+}
+},
+"/api/v1/client/profile/provided-documents": {
+"post": {
+"tags": [
+"Client Profile"
+],
+"operationId": "CreateClientProvidedDocument",
+"requestBody": {
+"content": {
+"application/json": {
+"schema": {
+"$ref": "#/components/schemas/CreateProvidedDocumentRequest"
+}
+}
+},
+"required": true
+},
+"responses": {
+"200": {
+"description": "OK"
+}
+},
+"security": [
+{}
+]
+}
+},
+"/api/v1/client/profile/provided-documents/{documentId}": {
+"put": {
+"tags": [
+"Client Profile"
+],
+"operationId": "UpdateClientProvidedDocument",
+"parameters": [
+{
+"name": "documentId",
+"in": "path",
+"required": true,
+"schema": {
+"type": "string",
+"format": "uuid"
+}
+}
+],
+"requestBody": {
+"content": {
+"application/json": {
+"schema": {
+"$ref": "#/components/schemas/UpdateProvidedDocumentRequest"
+}
+}
+},
+"required": true
+},
+"responses": {
+"200": {
+"description": "OK"
+}
+},
+"security": [
+{}
+]
+}
+},
+"/api/v1/client/profile/provided-documents/{documentId}/archive": {
+"post": {
+"tags": [
+"Client Profile"
+],
+"operationId": "ArchiveClientProvidedDocument",
+"parameters": [
+{
+"name": "documentId",
+"in": "path",
+"required": true,
+"schema": {
+"type": "string",
+"format": "uuid"
+}
+}
+],
+"responses": {
+"200": {
+"description": "OK"
+}
+},
+"security": [
+{}
+]
+}
+},
+"/api/v1/client/profile/avatar": {
+"post": {
+"tags": [
+"Client Profile"
+],
+"operationId": "UploadClientProfileAvatar",
+"requestBody": {
+"content": {
+"multipart/form-data": {
+"schema": {
+"required": [
+"file"
+],
+"type": "object",
+"properties": {
+"file": {
+"$ref": "#/components/schemas/IFormFile"
+}
+}
+}
+}
+},
+"required": true
+},
+"responses": {
+"200": {
+"description": "OK"
+}
+},
+"security": [
+{}
+]
+},
+"delete": {
+"tags": [
+"Client Profile"
+],
+"operationId": "RemoveClientProfileAvatar",
+"responses": {
+"204": {
+"description": "No Content"
+}
+},
+"security": [
+{}
+]
+}
+},
+"/api/v1/client/profile/avatar/url": {
+"get": {
+"tags": [
+"Client Profile"
+],
+"operationId": "GetClientProfileAvatarUrl",
+"parameters": [
+{
+"name": "expiresInMinutes",
+"in": "query",
+"schema": {
+"pattern": "^-?(?:0|[1-9]\\d*)$",
+"type": [
+"integer",
+"string"
+],
+"format": "int32"
+}
+}
+],
+"responses": {
+"200": {
+"description": "OK"
+}
+},
+"security": [
+{}
+]
+}
+},
+"/api/v1/client/profile/signature": {
+"post": {
+"tags": [
+"Client Profile"
+],
+"operationId": "UploadClientProfileSignature",
+"requestBody": {
+"content": {
+"multipart/form-data": {
+"schema": {
+"required": [
+"file"
+],
+"type": "object",
+"properties": {
+"file": {
+"$ref": "#/components/schemas/IFormFile"
+}
+}
+}
+}
+},
+"required": true
+},
+"responses": {
+"200": {
+"description": "OK"
+}
+},
+"security": [
+{}
+]
+},
+"delete": {
+"tags": [
+"Client Profile"
+],
+"operationId": "RemoveClientProfileSignature",
+"responses": {
+"204": {
+"description": "No Content"
+}
+},
+"security": [
+{}
+]
+}
+},
+"/api/v1/client/profile/signature/url": {
+"get": {
+"tags": [
+"Client Profile"
+],
+"operationId": "GetClientProfileSignatureUrl",
+"parameters": [
+{
+"name": "expiresInMinutes",
+"in": "query",
+"schema": {
+"pattern": "^-?(?:0|[1-9]\\d*)$",
+"type": [
+"integer",
+"string"
+],
+"format": "int32"
+}
+}
+],
+"responses": {
+"200": {
+"description": "OK"
+}
+},
+"security": [
+{}
+]
+}
+},
+"/api/v1/client/profile/share-links": {
+"post": {
+"tags": [
+"Client Profile"
+],
+"operationId": "CreateClientProfileShareLink",
+"requestBody": {
+"content": {
+"application/json": {
+"schema": {
+"$ref": "#/components/schemas/CreateShareLinkRequest"
+}
+}
+},
+"required": true
+},
+"responses": {
+"200": {
+"description": "OK"
+}
+},
+"security": [
+{}
+]
+},
+"get": {
+"tags": [
+"Client Profile"
+],
+"operationId": "ListClientProfileShareLinks",
+"responses": {
+"200": {
+"description": "OK"
+}
+},
+"security": [
+{}
+]
+}
+},
+"/api/v1/client/profile/share-links/{linkId}": {
+"delete": {
+"tags": [
+"Client Profile"
+],
+"operationId": "RevokeClientProfileShareLink",
+"parameters": [
+{
+"name": "linkId",
+"in": "path",
+"required": true,
+"schema": {
+"type": "string",
+"format": "uuid"
+}
+}
+],
+"responses": {
+"204": {
+"description": "No Content"
+}
+},
+"security": [
+{}
+]
+}
+},
+"/api/v1/client/banks": {
+"get": {
+"tags": [
+"Client Banks"
+],
+"operationId": "ListClientBanks",
+"parameters": [
+{
+"name": "page",
+"in": "query",
+"schema": {
+"pattern": "^-?(?:0|[1-9]\\d*)$",
+"type": [
+"integer",
+"string"
+],
+"format": "int32"
+}
+},
+{
+"name": "pageSize",
+"in": "query",
+"schema": {
+"pattern": "^-?(?:0|[1-9]\\d*)$",
+"type": [
+"integer",
+"string"
+],
+"format": "int32"
+}
+},
+{
+"name": "countryId",
+"in": "query",
+"schema": {
+"type": "string",
+"format": "uuid"
+}
+}
+],
+"responses": {
+"200": {
+"description": "OK"
+}
+},
+"security": [
+{}
+]
+}
+},
+"/api/v1/client/onboarding/status": {
+"get": {
+"tags": [
+"Client Onboarding"
+],
+"operationId": "GetClientOnboardingStatus",
+"responses": {
+"200": {
+"description": "OK"
+}
+},
+"security": [
+{}
+]
+}
+},
+"/api/v1/admin/customers/{customerId}/verification-level": {
+"get": {
+"tags": [
+"Customer Verification"
+],
+"operationId": "GetCustomerVerificationLevel",
+"parameters": [
+{
+"name": "customerId",
+"in": "path",
+"required": true,
+"schema": {
+"type": "string",
+"format": "uuid"
+}
+}
+],
+"responses": {
+"200": {
+"description": "OK"
+}
+},
+"security": [
+{}
+]
+}
+},
+"/api/v1/admin/customers/{customerId}/verification-areas/{areaId}/status": {
+"put": {
+"tags": [
+"Customer Verification"
+],
+"operationId": "UpsertCustomerVerificationAreaStatus",
+"parameters": [
+{
+"name": "customerId",
+"in": "path",
+"required": true,
+"schema": {
+"type": "string",
+"format": "uuid"
+}
+},
+{
+"name": "areaId",
+"in": "path",
+"required": true,
+"schema": {
+"type": "string",
+"format": "uuid"
+}
+}
+],
+"requestBody": {
+"content": {
+"application/json": {
+"schema": {
+"$ref": "#/components/schemas/UpsertCustomerVerificationAreaStatusRequest"
+}
+}
+},
+"required": true
+},
+"responses": {
+"200": {
+"description": "OK"
+}
+},
+"security": [
+{}
+]
+}
+},
+"/api/v1/data-intake/submissions/drafts": {
+"post": {
+"tags": [
+"Data Intake"
+],
+"operationId": "CreateDataIntakeDraft",
+"requestBody": {
+"content": {
+"application/json": {
+"schema": {
+"$ref": "#/components/schemas/CreateDataIntakeDraftRequest"
+}
+}
+},
+"required": true
+},
+"responses": {
+"200": {
+"description": "OK"
+}
+},
+"security": [
+{}
+]
+}
+},
+"/api/v1/data-intake/submissions/{id}": {
+"get": {
+"tags": [
+"Data Intake"
+],
+"operationId": "GetDataIntakeSubmission",
+"parameters": [
+{
+"name": "id",
+"in": "path",
+"required": true,
+"schema": {
+"type": "string",
+"format": "uuid"
+}
+}
+],
+"responses": {
+"200": {
+"description": "OK"
+}
+},
+"security": [
+{}
+]
+},
+"patch": {
+"tags": [
+"Data Intake"
+],
+"operationId": "UpdateDataIntakeDraft",
+"parameters": [
+{
+"name": "id",
+"in": "path",
+"required": true,
+"schema": {
+"type": "string",
+"format": "uuid"
+}
+}
+],
+"requestBody": {
+"content": {
+"application/json": {
+"schema": {
+"$ref": "#/components/schemas/UpdateDataIntakeDraftRequest"
+}
+}
+},
+"required": true
+},
+"responses": {
+"200": {
+"description": "OK"
+}
+},
+"security": [
+{}
+]
+}
+},
+"/api/v1/data-intake/submissions/{id}/attachments": {
+"post": {
+"tags": [
+"Data Intake"
+],
+"operationId": "AddDataIntakeSubmissionAttachment",
+"parameters": [
+{
+"name": "id",
+"in": "path",
+"required": true,
+"schema": {
+"type": "string",
+"format": "uuid"
+}
+}
+],
+"requestBody": {
+"content": {
+"application/json": {
+"schema": {
+"$ref": "#/components/schemas/AddDataIntakeSubmissionAttachmentRequest"
+}
+}
+},
+"required": true
+},
+"responses": {
+"200": {
+"description": "OK"
+}
+},
+"security": [
+{}
+]
+}
+},
+"/api/v1/data-intake/submissions/{id}/submit": {
+"post": {
+"tags": [
+"Data Intake"
+],
+"operationId": "SubmitDataIntakeDraft",
+"parameters": [
+{
+"name": "id",
+"in": "path",
+"required": true,
+"schema": {
+"type": "string",
+"format": "uuid"
+}
+}
+],
+"requestBody": {
+"content": {
+"application/json": {
+"schema": {
+"$ref": "#/components/schemas/SubmitDataIntakeDraftRequest"
+}
+}
+},
+"required": true
+},
+"responses": {
+"200": {
+"description": "OK"
+}
+},
+"security": [
+{}
+]
+}
+},
+"/api/v1/data-intake/submissions/{id}/correction-request": {
+"post": {
+"tags": [
+"Data Intake"
+],
+"operationId": "RequestDataIntakeSubmissionCorrection",
+"parameters": [
+{
+"name": "id",
+"in": "path",
+"required": true,
+"schema": {
+"type": "string",
+"format": "uuid"
+}
+}
+],
+"requestBody": {
+"content": {
+"application/json": {
+"schema": {
+"$ref": "#/components/schemas/RequestDataIntakeCorrectionRequest"
+}
+}
+},
+"required": true
+},
+"responses": {
+"200": {
+"description": "OK"
+}
+},
+"security": [
+{}
+]
+}
+},
+"/api/v1/data-intake/submissions/{id}/resubmit": {
+"post": {
+"tags": [
+"Data Intake"
+],
+"operationId": "ResubmitDataIntakeSubmission",
+"parameters": [
+{
+"name": "id",
+"in": "path",
+"required": true,
+"schema": {
+"type": "string",
+"format": "uuid"
+}
+}
+],
+"requestBody": {
+"content": {
+"application/json": {
+"schema": {
+"$ref": "#/components/schemas/ResubmitDataIntakeSubmissionRequest"
+}
+}
+},
+"required": true
+},
+"responses": {
+"200": {
+"description": "OK"
+}
+},
+"security": [
+{}
+]
+}
+},
+"/api/v1/data-intake/submissions/{id}/reprocess": {
+"post": {
+"tags": [
+"Data Intake"
+],
+"operationId": "RequestDataIntakeSubmissionReprocess",
+"parameters": [
+{
+"name": "id",
+"in": "path",
+"required": true,
+"schema": {
+"type": "string",
+"format": "uuid"
+}
+}
+],
+"requestBody": {
+"content": {
+"application/json": {
+"schema": {
+"$ref": "#/components/schemas/RequestDataIntakeReprocessRequest"
+}
+}
+},
+"required": true
+},
+"responses": {
+"200": {
+"description": "OK"
+}
+},
+"security": [
+{}
+]
+}
+},
+"/api/v1/data-intake/submissions/{id}/history": {
+"get": {
+"tags": [
+"Data Intake"
+],
+"operationId": "ListDataIntakeSubmissionHistory",
+"parameters": [
+{
+"name": "id",
+"in": "path",
+"required": true,
+"schema": {
+"type": "string",
+"format": "uuid"
+}
+}
+],
+"responses": {
+"200": {
+"description": "OK"
+}
+},
+"security": [
+{}
+]
+}
+},
+"/api/v1/admin/document-categories": {
+"post": {
+"tags": [
+"Documents"
+],
+"operationId": "CreateDocumentCategory",
+"requestBody": {
+"content": {
+"application/json": {
+"schema": {
+"$ref": "#/components/schemas/CreateDocumentCategoryRequest"
+}
+}
+},
+"required": true
+},
+"responses": {
+"200": {
+"description": "OK"
+}
+},
+"security": [
+{}
+]
+},
+"get": {
+"tags": [
+"Documents"
+],
+"operationId": "ListDocumentCategories",
+"responses": {
+"200": {
+"description": "OK"
+}
+},
+"security": [
+{}
+]
+}
+},
+"/api/v1/admin/document-types": {
+"post": {
+"tags": [
+"Documents"
+],
+"operationId": "CreateDocumentType",
+"requestBody": {
+"content": {
+"application/json": {
+"schema": {
+"$ref": "#/components/schemas/CreateDocumentTypeRequest"
+}
+}
+},
+"required": true
+},
+"responses": {
+"200": {
+"description": "OK"
+}
+},
+"security": [
+{}
+]
+},
+"get": {
+"tags": [
+"Documents"
+],
+"operationId": "ListDocumentTypes",
+"parameters": [
+{
+"name": "categoryId",
+"in": "query",
+"schema": {
+"type": "string",
+"format": "uuid"
+}
+}
+],
+"responses": {
+"200": {
+"description": "OK"
+}
+},
+"security": [
+{}
+]
+}
+},
+"/api/v1/admin/document-types/{documentTypeId}/countries": {
+"get": {
+"tags": [
+"Documents"
+],
+"operationId": "ListDocumentTypeCountries",
+"parameters": [
+{
+"name": "documentTypeId",
+"in": "path",
+"required": true,
+"schema": {
+"type": "string",
+"format": "uuid"
+}
+}
+],
+"responses": {
+"200": {
+"description": "OK"
+}
+},
+"security": [
+{}
+]
+}
+},
+"/api/v1/admin/document-types/{documentTypeId}/countries/{countryId}": {
+"get": {
+"tags": [
+"Documents"
+],
+"operationId": "GetDocumentTypeCountry",
+"parameters": [
+{
+"name": "documentTypeId",
+"in": "path",
+"required": true,
+"schema": {
+"type": "string",
+"format": "uuid"
+}
+},
+{
+"name": "countryId",
+"in": "path",
+"required": true,
+"schema": {
+"type": "string",
+"format": "uuid"
+}
+}
+],
+"responses": {
+"200": {
+"description": "OK"
+}
+},
+"security": [
+{}
+]
+},
+"put": {
+"tags": [
+"Documents"
+],
+"operationId": "SetDocumentTypeCountry",
+"parameters": [
+{
+"name": "documentTypeId",
+"in": "path",
+"required": true,
+"schema": {
+"type": "string",
+"format": "uuid"
+}
+},
+{
+"name": "countryId",
+"in": "path",
+"required": true,
+"schema": {
+"type": "string",
+"format": "uuid"
+}
+}
+],
+"requestBody": {
+"content": {
+"application/json": {
+"schema": {
+"$ref": "#/components/schemas/SetDocumentTypeCountryRequest"
+}
+}
+},
+"required": true
+},
+"responses": {
+"200": {
+"description": "OK"
+}
+},
+"security": [
+{}
+]
+},
+"delete": {
+"tags": [
+"Documents"
+],
+"operationId": "DeactivateDocumentTypeCountry",
+"parameters": [
+{
+"name": "documentTypeId",
+"in": "path",
+"required": true,
+"schema": {
+"type": "string",
+"format": "uuid"
+}
+},
+{
+"name": "countryId",
+"in": "path",
+"required": true,
+"schema": {
+"type": "string",
+"format": "uuid"
+}
+}
+],
+"responses": {
+"200": {
+"description": "OK"
+}
+},
+"security": [
+{}
+]
+}
+},
+"/api/v1/admin/document-types/{documentTypeId}/countries/{countryId}/metadata-schemas": {
+"get": {
+"tags": [
+"Documents"
+],
+"operationId": "ListDocumentMetadataSchemas",
+"parameters": [
+{
+"name": "documentTypeId",
+"in": "path",
+"required": true,
+"schema": {
+"type": "string",
+"format": "uuid"
+}
+},
+{
+"name": "countryId",
+"in": "path",
+"required": true,
+"schema": {
+"type": "string",
+"format": "uuid"
+}
+},
+{
+"name": "status",
+"in": "query",
+"schema": {
+"type": "string"
+}
+},
+{
+"name": "page",
+"in": "query",
+"schema": {
+"pattern": "^-?(?:0|[1-9]\\d*)$",
+"type": [
+"integer",
+"string"
+],
+"format": "int32"
+}
+},
+{
+"name": "pageSize",
+"in": "query",
+"schema": {
+"pattern": "^-?(?:0|[1-9]\\d*)$",
+"type": [
+"integer",
+"string"
+],
+"format": "int32"
+}
+}
+],
+"responses": {
+"200": {
+"description": "OK",
+"content": {
+"application/json": {
+"schema": {
+"$ref": "#/components/schemas/PagedResponseOfDocumentMetadataSchemaResponse"
+}
+}
+}
+}
+},
+"security": [
+{}
+]
+},
+"post": {
+"tags": [
+"Documents"
+],
+"operationId": "CreateDocumentMetadataSchema",
+"parameters": [
+{
+"name": "documentTypeId",
+"in": "path",
+"required": true,
+"schema": {
+"type": "string",
+"format": "uuid"
+}
+},
+{
+"name": "countryId",
+"in": "path",
+"required": true,
+"schema": {
+"type": "string",
+"format": "uuid"
+}
+}
+],
+"requestBody": {
+"content": {
+"application/json": {
+"schema": {
+"$ref": "#/components/schemas/CreateDocumentMetadataSchemaRequest"
+}
+}
+},
+"required": true
+},
+"responses": {
+"200": {
+"description": "OK"
+}
+},
+"security": [
+{}
+]
+}
+},
+"/api/v1/admin/document-types/{documentTypeId}/countries/{countryId}/metadata-schemas/{schemaId}": {
+"get": {
+"tags": [
+"Documents"
+],
+"operationId": "GetDocumentMetadataSchema",
+"parameters": [
+{
+"name": "documentTypeId",
+"in": "path",
+"required": true,
+"schema": {
+"type": "string",
+"format": "uuid"
+}
+},
+{
+"name": "countryId",
+"in": "path",
+"required": true,
+"schema": {
+"type": "string",
+"format": "uuid"
+}
+},
+{
+"name": "schemaId",
+"in": "path",
+"required": true,
+"schema": {
+"type": "string",
+"format": "uuid"
+}
+}
+],
+"responses": {
+"200": {
+"description": "OK"
+}
+},
+"security": [
+{}
+]
+},
+"put": {
+"tags": [
+"Documents"
+],
+"operationId": "UpdateDocumentMetadataSchema",
+"parameters": [
+{
+"name": "documentTypeId",
+"in": "path",
+"required": true,
+"schema": {
+"type": "string",
+"format": "uuid"
+}
+},
+{
+"name": "countryId",
+"in": "path",
+"required": true,
+"schema": {
+"type": "string",
+"format": "uuid"
+}
+},
+{
+"name": "schemaId",
+"in": "path",
+"required": true,
+"schema": {
+"type": "string",
+"format": "uuid"
+}
+}
+],
+"requestBody": {
+"content": {
+"application/json": {
+"schema": {
+"$ref": "#/components/schemas/UpdateDocumentMetadataSchemaRequest"
+}
+}
+},
+"required": true
+},
+"responses": {
+"200": {
+"description": "OK"
+}
+},
+"security": [
+{}
+]
+},
+"delete": {
+"tags": [
+"Documents"
+],
+"operationId": "DeleteDocumentMetadataSchema",
+"parameters": [
+{
+"name": "documentTypeId",
+"in": "path",
+"required": true,
+"schema": {
+"type": "string",
+"format": "uuid"
+}
+},
+{
+"name": "countryId",
+"in": "path",
+"required": true,
+"schema": {
+"type": "string",
+"format": "uuid"
+}
+},
+{
+"name": "schemaId",
+"in": "path",
+"required": true,
+"schema": {
+"type": "string",
+"format": "uuid"
+}
+}
+],
+"responses": {
+"200": {
+"description": "OK"
+}
+},
+"security": [
+{}
+]
+}
+},
+"/api/v1/admin/document-types/{documentTypeId}/countries/{countryId}/metadata-schemas/{schemaId}/validate": {
+"post": {
+"tags": [
+"Documents"
+],
+"operationId": "ValidateDocumentMetadataSchema",
+"parameters": [
+{
+"name": "documentTypeId",
+"in": "path",
+"required": true,
+"schema": {
+"type": "string",
+"format": "uuid"
+}
+},
+{
+"name": "countryId",
+"in": "path",
+"required": true,
+"schema": {
+"type": "string",
+"format": "uuid"
+}
+},
+{
+"name": "schemaId",
+"in": "path",
+"required": true,
+"schema": {
+"type": "string",
+"format": "uuid"
+}
+}
+],
+"responses": {
+"200": {
+"description": "OK"
+}
+},
+"security": [
+{}
+]
+}
+},
+"/api/v1/admin/document-types/{documentTypeId}/countries/{countryId}/metadata-schemas/{schemaId}/validate-instance": {
+"post": {
+"tags": [
+"Documents"
+],
+"operationId": "ValidateDocumentMetadataInstance",
+"parameters": [
+{
+"name": "documentTypeId",
+"in": "path",
+"required": true,
+"schema": {
+"type": "string",
+"format": "uuid"
+}
+},
+{
+"name": "countryId",
+"in": "path",
+"required": true,
+"schema": {
+"type": "string",
+"format": "uuid"
+}
+},
+{
+"name": "schemaId",
+"in": "path",
+"required": true,
+"schema": {
+"type": "string",
+"format": "uuid"
+}
+}
+],
+"requestBody": {
+"content": {
+"application/json": {
+"schema": {
+"$ref": "#/components/schemas/ValidateMetadataInstanceRequest"
+}
+}
+},
+"required": true
+},
+"responses": {
+"200": {
+"description": "OK"
+}
+},
+"security": [
+{}
+]
+}
+},
+"/api/v1/admin/document-types/{documentTypeId}/countries/{countryId}/metadata-schemas/{schemaId}/publish": {
+"post": {
+"tags": [
+"Documents"
+],
+"operationId": "PublishDocumentMetadataSchema",
+"parameters": [
+{
+"name": "documentTypeId",
+"in": "path",
+"required": true,
+"schema": {
+"type": "string",
+"format": "uuid"
+}
+},
+{
+"name": "countryId",
+"in": "path",
+"required": true,
+"schema": {
+"type": "string",
+"format": "uuid"
+}
+},
+{
+"name": "schemaId",
+"in": "path",
+"required": true,
+"schema": {
+"type": "string",
+"format": "uuid"
+}
+}
+],
+"responses": {
+"200": {
+"description": "OK"
+}
+},
+"security": [
+{}
+]
+}
+},
+"/api/v1/admin/document-types/{documentTypeId}/countries/{countryId}/metadata-schemas/{schemaId}/retire": {
+"post": {
+"tags": [
+"Documents"
+],
+"operationId": "RetireDocumentMetadataSchema",
+"parameters": [
+{
+"name": "documentTypeId",
+"in": "path",
+"required": true,
+"schema": {
+"type": "string",
+"format": "uuid"
+}
+},
+{
+"name": "countryId",
+"in": "path",
+"required": true,
+"schema": {
+"type": "string",
+"format": "uuid"
+}
+},
+{
+"name": "schemaId",
+"in": "path",
+"required": true,
+"schema": {
+"type": "string",
+"format": "uuid"
+}
+}
+],
+"responses": {
+"200": {
+"description": "OK"
+}
+},
+"security": [
+{}
+]
+}
+},
+"/api/v1/admin/document-types/{documentTypeId}/countries/{countryId}/upload-definition": {
+"get": {
+"tags": [
+"Documents"
+],
+"operationId": "GetDocumentUploadDefinition",
+"parameters": [
+{
+"name": "documentTypeId",
+"in": "path",
+"required": true,
+"schema": {
+"type": "string",
+"format": "uuid"
+}
+},
+{
+"name": "countryId",
+"in": "path",
+"required": true,
+"schema": {
+"type": "string",
+"format": "uuid"
+}
+}
+],
+"responses": {
+"200": {
+"description": "OK"
+}
+},
+"security": [
+{}
+]
+}
+},
+"/api/v1/admin/document-types/{documentTypeId}/countries/{countryId}/data-definition": {
+"get": {
+"tags": [
+"Documents"
+],
+"operationId": "GetDocumentDataDefinition",
+"parameters": [
+{
+"name": "documentTypeId",
+"in": "path",
+"required": true,
+"schema": {
+"type": "string",
+"format": "uuid"
+}
+},
+{
+"name": "countryId",
+"in": "path",
+"required": true,
+"schema": {
+"type": "string",
+"format": "uuid"
+}
+}
+],
+"responses": {
+"200": {
+"description": "OK"
+}
+},
+"security": [
+{}
+]
+}
+},
+"/api/v1/admin/customers/{customerId}/provided-documents": {
+"post": {
+"tags": [
+"Documents"
+],
+"operationId": "CreateCustomerProvidedDocument",
+"parameters": [
+{
+"name": "customerId",
+"in": "path",
+"required": true,
+"schema": {
+"type": "string",
+"format": "uuid"
+}
+}
+],
+"requestBody": {
+"content": {
+"application/json": {
+"schema": {
+"$ref": "#/components/schemas/CreateProvidedDocumentRequest"
+}
+}
+},
+"required": true
+},
+"responses": {
+"200": {
+"description": "OK"
+}
+},
+"security": [
+{}
+]
+}
+},
+"/api/v1/admin/customers/{customerId}/provided-documents/{documentId}": {
+"put": {
+"tags": [
+"Documents"
+],
+"operationId": "UpdateCustomerProvidedDocument",
+"parameters": [
+{
+"name": "customerId",
+"in": "path",
+"required": true,
+"schema": {
+"type": "string",
+"format": "uuid"
+}
+},
+{
+"name": "documentId",
+"in": "path",
+"required": true,
+"schema": {
+"type": "string",
+"format": "uuid"
+}
+}
+],
+"requestBody": {
+"content": {
+"application/json": {
+"schema": {
+"$ref": "#/components/schemas/UpdateProvidedDocumentRequest"
+}
+}
+},
+"required": true
+},
+"responses": {
+"200": {
+"description": "OK"
+}
+},
+"security": [
+{}
+]
+}
+},
+"/api/v1/admin/customers/{customerId}/provided-documents/{documentId}/archive": {
+"post": {
+"tags": [
+"Documents"
+],
+"operationId": "ArchiveCustomerProvidedDocument",
+"parameters": [
+{
+"name": "customerId",
+"in": "path",
+"required": true,
+"schema": {
+"type": "string",
+"format": "uuid"
+}
+},
+{
+"name": "documentId",
+"in": "path",
+"required": true,
+"schema": {
+"type": "string",
+"format": "uuid"
+}
+}
+],
+"responses": {
+"200": {
+"description": "OK"
+}
+},
+"security": [
+{}
+]
+}
+},
+"/api/v1/admin/customers/{customerId}/document-requirements": {
+"post": {
+"tags": [
+"Documents"
+],
+"operationId": "CreateCustomerDocumentRequirement",
+"parameters": [
+{
+"name": "customerId",
+"in": "path",
+"required": true,
+"schema": {
+"type": "string",
+"format": "uuid"
+}
+}
+],
+"requestBody": {
+"content": {
+"application/json": {
+"schema": {
+"$ref": "#/components/schemas/CreateDocumentRequirementRequest"
+}
+}
+},
+"required": true
+},
+"responses": {
+"200": {
+"description": "OK"
+}
+},
+"security": [
+{}
+]
+},
+"get": {
+"tags": [
+"Documents"
+],
+"operationId": "ListCustomerDocumentRequirements",
+"parameters": [
+{
+"name": "customerId",
+"in": "path",
+"required": true,
+"schema": {
+"type": "string",
+"format": "uuid"
+}
+}
+],
+"responses": {
+"200": {
+"description": "OK"
+}
+},
+"security": [
+{}
+]
+}
+},
+"/api/v1/admin/customers/{customerId}/documents": {
+"post": {
+"tags": [
+"Documents"
+],
+"operationId": "UploadCustomerDocument",
+"parameters": [
+{
+"name": "customerId",
+"in": "path",
+"required": true,
+"schema": {
+"type": "string",
+"format": "uuid"
+}
+}
+],
+"requestBody": {
+"content": {
+"multipart/form-data": {
+"schema": {
+"required": [
+"file",
+"documentTypeId"
+],
+"type": "object",
+"allOf": [
+{
+"type": "object",
+"properties": {
+"file": {
+"$ref": "#/components/schemas/IFormFile"
+}
+}
+},
+{
+"type": "object",
+"properties": {
+"documentTypeId": {
+"type": "string",
+"format": "uuid"
+}
+}
+},
+{
+"type": "object",
+"properties": {
+"countryId": {
+"type": "string",
+"format": "uuid"
+}
+}
+},
+{
+"type": "object",
+"properties": {
+"requirementId": {
+"type": "string",
+"format": "uuid"
+}
+}
+},
+{
+"type": "object",
+"properties": {
+"issuedOn": {
+"type": "string",
+"format": "date"
+}
+}
+},
+{
+"type": "object",
+"properties": {
+"expiresOn": {
+"type": "string",
+"format": "date"
+}
+}
+},
+{
+"type": "object",
+"properties": {
+"metadata": {
+"type": "string"
+}
+}
+}
+]
+}
+}
+},
+"required": true
+},
+"responses": {
+"200": {
+"description": "OK"
+}
+},
+"security": [
+{}
+]
+},
+"get": {
+"tags": [
+"Documents"
+],
+"operationId": "ListCustomerDocuments",
+"parameters": [
+{
+"name": "customerId",
+"in": "path",
+"required": true,
+"schema": {
+"type": "string",
+"format": "uuid"
+}
+},
+{
+"name": "page",
+"in": "query",
+"schema": {
+"pattern": "^-?(?:0|[1-9]\\d*)$",
+"type": [
+"integer",
+"string"
+],
+"format": "int32"
+}
+},
+{
+"name": "pageSize",
+"in": "query",
+"schema": {
+"pattern": "^-?(?:0|[1-9]\\d*)$",
+"type": [
+"integer",
+"string"
+],
+"format": "int32"
+}
+},
+{
+"name": "documentTypeId",
+"in": "query",
+"schema": {
+"type": "string",
+"format": "uuid"
+}
+},
+{
+"name": "categoryId",
+"in": "query",
+"schema": {
+"type": "string",
+"format": "uuid"
+}
+},
+{
+"name": "status",
+"in": "query",
+"schema": {
+"type": "string"
+}
+},
+{
+"name": "createdFromUtc",
+"in": "query",
+"schema": {
+"type": "string",
+"format": "date-time"
+}
+},
+{
+"name": "createdToUtc",
+"in": "query",
+"schema": {
+"type": "string",
+"format": "date-time"
+}
+}
+],
+"responses": {
+"200": {
+"description": "OK",
+"content": {
+"application/json": {
+"schema": {
+"$ref": "#/components/schemas/PagedResponseOfAdminDocumentResponse"
+}
+}
+}
+}
+},
+"security": [
+{}
+]
+}
+},
+"/api/v1/admin/documents": {
+"get": {
+"tags": [
+"Documents"
+],
+"operationId": "ListDocuments",
+"parameters": [
+{
+"name": "page",
+"in": "query",
+"schema": {
+"pattern": "^-?(?:0|[1-9]\\d*)$",
+"type": [
+"integer",
+"string"
+],
+"format": "int32"
+}
+},
+{
+"name": "pageSize",
+"in": "query",
+"schema": {
+"pattern": "^-?(?:0|[1-9]\\d*)$",
+"type": [
+"integer",
+"string"
+],
+"format": "int32"
+}
+},
+{
+"name": "customerId",
+"in": "query",
+"schema": {
+"type": "string",
+"format": "uuid"
+}
+},
+{
+"name": "ownerId",
+"in": "query",
+"schema": {
+"type": "string",
+"format": "uuid"
+}
+},
+{
+"name": "documentTypeId",
+"in": "query",
+"schema": {
+"type": "string",
+"format": "uuid"
+}
+},
+{
+"name": "categoryId",
+"in": "query",
+"schema": {
+"type": "string",
+"format": "uuid"
+}
+},
+{
+"name": "status",
+"in": "query",
+"schema": {
+"type": "string"
+}
+},
+{
+"name": "visibility",
+"in": "query",
+"schema": {
+"type": "string"
+}
+},
+{
+"name": "createdFromUtc",
+"in": "query",
+"schema": {
+"type": "string",
+"format": "date-time"
+}
+},
+{
+"name": "createdToUtc",
+"in": "query",
+"schema": {
+"type": "string",
+"format": "date-time"
+}
+}
+],
+"responses": {
+"200": {
+"description": "OK",
+"content": {
+"application/json": {
+"schema": {
+"$ref": "#/components/schemas/PagedResponseOfAdminDocumentResponse"
+}
+}
+}
+}
+},
+"security": [
+{}
+]
+}
+},
+"/api/v1/admin/customers/{customerId}/documents/grouped": {
+"get": {
+"tags": [
+"Documents"
+],
+"operationId": "GetCustomerGroupedDocuments",
+"parameters": [
+{
+"name": "customerId",
+"in": "path",
+"required": true,
+"schema": {
+"type": "string",
+"format": "uuid"
+}
+}
+],
+"responses": {
+"200": {
+"description": "OK"
+}
+},
+"security": [
+{}
+]
+}
+},
+"/api/v1/admin/customers/{customerId}/documents/overview": {
+"get": {
+"tags": [
+"Documents"
+],
+"operationId": "GetCustomerDocumentOverview",
+"parameters": [
+{
+"name": "customerId",
+"in": "path",
+"required": true,
+"schema": {
+"type": "string",
+"format": "uuid"
+}
+}
+],
+"responses": {
+"200": {
+"description": "OK"
+}
+},
+"security": [
+{}
+]
+}
+},
+"/api/v1/admin/customers/{customerId}/documents/progress": {
+"get": {
+"tags": [
+"Documents"
+],
+"operationId": "GetCustomerDocumentProgress",
+"parameters": [
+{
+"name": "customerId",
+"in": "path",
+"required": true,
+"schema": {
+"type": "string",
+"format": "uuid"
+}
+}
+],
+"responses": {
+"200": {
+"description": "OK"
+}
+},
+"security": [
+{}
+]
+}
+},
+"/api/v1/admin/customers/{customerId}/documents/{id}": {
+"get": {
+"tags": [
+"Documents"
+],
+"operationId": "GetCustomerDocument",
+"parameters": [
+{
+"name": "customerId",
+"in": "path",
+"required": true,
+"schema": {
+"type": "string",
+"format": "uuid"
+}
+},
+{
+"name": "id",
+"in": "path",
+"required": true,
+"schema": {
+"type": "string",
+"format": "uuid"
+}
+}
+],
+"responses": {
+"200": {
+"description": "OK"
+}
+},
+"security": [
+{}
+]
+}
+},
+"/api/v1/admin/documents/{id}": {
+"get": {
+"tags": [
+"Documents"
+],
+"operationId": "GetDocument",
+"parameters": [
+{
+"name": "id",
+"in": "path",
+"required": true,
+"schema": {
+"type": "string",
+"format": "uuid"
+}
+}
+],
+"responses": {
+"200": {
+"description": "OK"
+}
+},
+"security": [
+{}
+]
+},
+"delete": {
+"tags": [
+"Documents"
+],
+"operationId": "DeleteDocument",
+"parameters": [
+{
+"name": "id",
+"in": "path",
+"required": true,
+"schema": {
+"type": "string",
+"format": "uuid"
+}
+},
+{
+"name": "deleteObject",
+"in": "query",
+"schema": {
+"type": "boolean"
+}
+}
+],
+"responses": {
+"200": {
+"description": "OK"
+}
+},
+"security": [
+{}
+]
+}
+},
+"/api/v1/admin/documents/{id}/temporary-url": {
+"get": {
+"tags": [
+"Documents"
+],
+"operationId": "CreateDocumentTemporaryUrl",
+"parameters": [
+{
+"name": "id",
+"in": "path",
+"required": true,
+"schema": {
+"type": "string",
+"format": "uuid"
+}
+},
+{
+"name": "expiresInMinutes",
+"in": "query",
+"schema": {
+"pattern": "^-?(?:0|[1-9]\\d*)$",
+"type": [
+"integer",
+"string"
+],
+"format": "int32"
+}
+}
+],
+"responses": {
+"200": {
+"description": "OK"
+}
+},
+"security": [
+{}
+]
+}
+},
+"/api/v1/admin/documents/{id}/download": {
+"get": {
+"tags": [
+"Documents"
+],
+"operationId": "DownloadDocument",
+"parameters": [
+{
+"name": "id",
+"in": "path",
+"required": true,
+"schema": {
+"type": "string",
+"format": "uuid"
+}
+}
+],
+"responses": {
+"200": {
+"description": "OK"
+}
+},
+"security": [
+{}
+]
+}
+},
+"/api/v1/admin/documents/{id}/status": {
+"patch": {
+"tags": [
+"Documents"
+],
+"operationId": "ChangeDocumentStatus",
+"parameters": [
+{
+"name": "id",
+"in": "path",
+"required": true,
+"schema": {
+"type": "string",
+"format": "uuid"
+}
+}
+],
+"requestBody": {
+"content": {
+"application/json": {
+"schema": {
+"$ref": "#/components/schemas/ChangeDocumentStatusRequest"
+}
+}
+},
+"required": true
+},
+"responses": {
+"200": {
+"description": "OK"
+}
+},
+"security": [
+{}
+]
+}
+},
+"/api/v1/admin/documents/{id}/reviews": {
+"post": {
+"tags": [
+"Documents"
+],
+"operationId": "ReviewDocument",
+"parameters": [
+{
+"name": "id",
+"in": "path",
+"required": true,
+"schema": {
+"type": "string",
+"format": "uuid"
+}
+}
+],
+"requestBody": {
+"content": {
+"application/json": {
+"schema": {
+"$ref": "#/components/schemas/ReviewDocumentRequest"
+}
+}
+},
+"required": true
+},
+"responses": {
+"200": {
+"description": "OK"
+}
+},
+"security": [
+{}
+]
+}
+},
+"/api/v1/admin/users": {
+"post": {
+"tags": [
+"Users"
+],
+"operationId": "CreateUser",
+"requestBody": {
+"content": {
+"application/json": {
+"schema": {
+"$ref": "#/components/schemas/CreateUserRequest"
+}
+}
+},
+"required": true
+},
+"responses": {
+"200": {
+"description": "OK"
+}
+},
+"security": [
+{}
+]
+},
+"get": {
+"tags": [
+"Users"
+],
+"operationId": "ListUsers",
+"parameters": [
+{
+"name": "page",
+"in": "query",
+"schema": {
+"pattern": "^-?(?:0|[1-9]\\d*)$",
+"type": [
+"integer",
+"string"
+],
+"format": "int32"
+}
+},
+{
+"name": "pageSize",
+"in": "query",
+"schema": {
+"pattern": "^-?(?:0|[1-9]\\d*)$",
+"type": [
+"integer",
+"string"
+],
+"format": "int32"
+}
+},
+{
+"name": "workspaceId",
+"in": "query",
+"schema": {
+"type": "string",
+"format": "uuid"
+}
+},
+{
+"name": "status",
+"in": "query",
+"schema": {
+"type": "string"
+}
+},
+{
+"name": "role",
+"in": "query",
+"schema": {
+"type": "string"
+}
+},
+{
+"name": "search",
+"in": "query",
+"schema": {
+"type": "string"
+}
+}
+],
+"responses": {
+"200": {
+"description": "OK",
+"content": {
+"application/json": {
+"schema": {
+"$ref": "#/components/schemas/PagedResponseOfUserResponse"
+}
+}
+}
+}
+},
+"security": [
+{}
+]
+}
+},
+"/api/v1/admin/users/{id}": {
+"get": {
+"tags": [
+"Users"
+],
+"operationId": "GetUser",
+"parameters": [
+{
+"name": "id",
+"in": "path",
+"required": true,
+"schema": {
+"type": "string",
+"format": "uuid"
+}
+}
+],
+"responses": {
+"200": {
+"description": "OK"
+}
+},
+"security": [
+{}
+]
+},
+"patch": {
+"tags": [
+"Users"
+],
+"operationId": "UpdateUser",
+"parameters": [
+{
+"name": "id",
+"in": "path",
+"required": true,
+"schema": {
+"type": "string",
+"format": "uuid"
+}
+}
+],
+"requestBody": {
+"content": {
+"application/json": {
+"schema": {
+"$ref": "#/components/schemas/UpdateUserRequest"
+}
+}
+},
+"required": true
+},
+"responses": {
+"200": {
+"description": "OK"
+}
+},
+"security": [
+{}
+]
+}
+},
+"/api/v1/admin/users/{id}/status": {
+"patch": {
+"tags": [
+"Users"
+],
+"operationId": "ChangeUserStatus",
+"parameters": [
+{
+"name": "id",
+"in": "path",
+"required": true,
+"schema": {
+"type": "string",
+"format": "uuid"
+}
+}
+],
+"requestBody": {
+"content": {
+"application/json": {
+"schema": {
+"$ref": "#/components/schemas/ChangeUserStatusRequest"
+}
+}
+},
+"required": true
+},
+"responses": {
+"200": {
+"description": "OK"
+}
+},
+"security": [
+{}
+]
+}
+},
+"/api/v1/admin/users/{id}/roles": {
+"patch": {
+"tags": [
+"Users"
+],
+"operationId": "ChangeUserRoles",
+"parameters": [
+{
+"name": "id",
+"in": "path",
+"required": true,
+"schema": {
+"type": "string",
+"format": "uuid"
+}
+}
+],
+"requestBody": {
+"content": {
+"application/json": {
+"schema": {
+"$ref": "#/components/schemas/ChangeUserRolesRequest"
+}
+}
+},
+"required": true
+},
+"responses": {
+"200": {
+"description": "OK"
+}
+},
+"security": [
+{}
+]
+}
+},
+"/api/v1/admin/users/{id}/referral-code": {
+"patch": {
+"tags": [
+"Users"
+],
+"operationId": "ConfigureUserReferralCode",
+"parameters": [
+{
+"name": "id",
+"in": "path",
+"required": true,
+"schema": {
+"type": "string",
+"format": "uuid"
+}
+}
+],
+"requestBody": {
+"content": {
+"application/json": {
+"schema": {
+"$ref": "#/components/schemas/ConfigureUserReferralCodeRequest"
+}
+}
+},
+"required": true
+},
+"responses": {
+"200": {
+"description": "OK"
+}
+},
+"security": [
+{}
+]
+}
+},
+"/api/v1/users/me": {
+"get": {
+"tags": [
+"Users"
+],
+"operationId": "GetAuthenticatedUserProfile",
+"responses": {
+"200": {
+"description": "OK"
+}
+},
+"security": [
+{}
+]
+}
+},
+"/api/v1/users/me/profile": {
+"patch": {
+"tags": [
+"Users"
+],
+"operationId": "UpdateAuthenticatedUserProfile",
+"requestBody": {
+"content": {
+"application/json": {
+"schema": {
+"$ref": "#/components/schemas/UpdateCurrentProfileRequest"
+}
+}
+},
+"required": true
+},
+"responses": {
+"200": {
+"description": "OK"
+}
+},
+"security": [
+{}
+]
+}
+},
+"/api/v1/users/me/password": {
+"patch": {
+"tags": [
+"Users"
+],
+"operationId": "ChangeAuthenticatedUserPassword",
+"requestBody": {
+"content": {
+"application/json": {
+"schema": {
+"$ref": "#/components/schemas/ChangeCurrentPasswordRequest"
+}
+}
+},
+"required": true
+},
+"responses": {
+"200": {
+"description": "OK"
+}
+},
+"security": [
+{}
+]
+}
+},
+"/api/v1/users/me/phone-verification/request": {
+"post": {
+"tags": [
+"Users"
+],
+"operationId": "RequestAuthenticatedUserPhoneVerification",
+"requestBody": {
+"content": {
+"application/json": {
+"schema": {
+"$ref": "#/components/schemas/PhoneVerificationRequest"
+}
+}
+},
+"required": true
+},
+"responses": {
+"200": {
+"description": "OK"
+}
+},
+"security": [
+{}
+]
+}
+},
+"/api/v1/users/me/phone-verification/confirm": {
+"post": {
+"tags": [
+"Users"
+],
+"operationId": "ConfirmAuthenticatedUserPhoneVerification",
+"requestBody": {
+"content": {
+"application/json": {
+"schema": {
+"$ref": "#/components/schemas/PhoneVerificationValidationRequest"
+}
+}
+},
+"required": true
+},
+"responses": {
+"200": {
+"description": "OK"
+}
+},
+"security": [
+{}
+]
+}
+},
+"/api/v1/users/me/sessions": {
+"get": {
+"tags": [
+"Users"
+],
+"operationId": "ListUserSessions",
+"responses": {
+"200": {
+"description": "OK"
+}
+},
+"security": [
+{}
+]
+},
+"delete": {
+"tags": [
+"Users"
+],
+"operationId": "RevokeAllUserSessions",
+"parameters": [
+{
+"name": "keepCurrentSession",
+"in": "query",
+"schema": {
+"type": "boolean"
+}
+}
+],
+"responses": {
+"200": {
+"description": "OK"
+}
+},
+"security": [
+{}
+]
+}
+},
+"/api/v1/users/me/sessions/{sessionId}": {
+"delete": {
+"tags": [
+"Users"
+],
+"operationId": "RevokeUserSession",
+"parameters": [
+{
+"name": "sessionId",
+"in": "path",
+"required": true,
+"schema": {
+"type": "string",
+"format": "uuid"
+}
+}
+],
+"responses": {
+"200": {
+"description": "OK"
+}
+},
+"security": [
+{}
+]
+}
+}
+},
+"components": {
+"schemas": {
+"AddDataIntakeSubmissionAttachmentRequest": {
+"required": [
+"fileName",
+"contentType",
+"size",
+"storageProvider",
+"storageKey",
+"checksum",
+"visibility",
+"status"
+],
+"type": "object",
+"properties": {
+"fileName": {
+"type": "string"
+},
+"contentType": {
+"type": "string"
+},
+"size": {
+"pattern": "^-?(?:0|[1-9]\\d*)$",
+"type": [
+"integer",
+"string"
+],
+"format": "int64"
+},
+"storageProvider": {
+"type": "string"
+},
+"storageKey": {
+"type": "string"
+},
+"checksum": {
+"type": "string"
+},
+"visibility": {
+"oneOf": [
+{
+"type": "null"
+},
+{
+"$ref": "#/components/schemas/FileVisibility"
+}
+]
+},
+"status": {
+"oneOf": [
+{
+"type": "null"
+},
+{
+"$ref": "#/components/schemas/FileStatus"
+}
+]
+}
+}
+},
+"AdminDocumentResponse": {
+"required": [
+"id",
+"customerId",
+"documentTypeId",
+"documentTypeCode",
+"documentTypeName",
+"categoryId",
+"categoryName",
+"requirementId",
+"status",
+"countryId",
+"countryIsoCode",
+"issuedOn",
+"expiresOn",
+"metadata",
+"createdAtUtc",
+"archivedAtUtc",
+"file"
+],
+"type": "object",
+"properties": {
+"id": {
+"type": "string",
+"format": "uuid"
+},
+"customerId": {
+"type": "string",
+"format": "uuid"
+},
+"documentTypeId": {
+"type": "string",
+"format": "uuid"
+},
+"documentTypeCode": {
+"type": [
+"null",
+"string"
+]
+},
+"documentTypeName": {
+"type": [
+"null",
+"string"
+]
+},
+"categoryId": {
+"type": [
+"null",
+"string"
+],
+"format": "uuid"
+},
+"categoryName": {
+"type": [
+"null",
+"string"
+]
+},
+"requirementId": {
+"type": [
+"null",
+"string"
+],
+"format": "uuid"
+},
+"status": {
+"type": "string"
+},
+"countryId": {
+"type": [
+"null",
+"string"
+],
+"format": "uuid"
+},
+"countryIsoCode": {
+"type": [
+"null",
+"string"
+]
+},
+"issuedOn": {
+"type": [
+"null",
+"string"
+],
+"format": "date"
+},
+"expiresOn": {
+"type": [
+"null",
+"string"
+],
+"format": "date"
+},
+"metadata": {
+"type": "string"
+},
+"createdAtUtc": {
+"type": "string",
+"format": "date-time"
+},
+"archivedAtUtc": {
+"type": [
+"null",
+"string"
+],
+"format": "date-time"
+},
+"file": {
+"oneOf": [
+{
+"type": "null"
+},
+{
+"$ref": "#/components/schemas/DocumentFileResponse"
+}
+]
+}
+}
+},
+"ApiErrorItem": {
+"required": [
+"code",
+"message"
+],
+"type": "object",
+"properties": {
+"code": {
+"type": "string"
+},
+"message": {
+"type": "string"
+},
+"field": {
+"type": [
+"null",
+"string"
+]
+},
+"retryAfterSeconds": {
+"pattern": "^-?(?:0|[1-9]\\d*)$",
+"type": [
+"null",
+"integer",
+"string"
+],
+"format": "int32"
+}
+}
+},
+"AuthLoginRequest": {
+"required": [
+"email",
+"password"
+],
+"type": "object",
+"properties": {
+"email": {
+"type": "string"
+},
+"password": {
+"type": "string"
+}
+}
+},
+"AuthLogoutRequest": {
+"required": [
+"refreshToken"
+],
+"type": "object",
+"properties": {
+"refreshToken": {
+"type": "string"
+}
+}
+},
+"AuthRefreshRequest": {
+"required": [
+"refreshToken"
+],
+"type": "object",
+"properties": {
+"refreshToken": {
+"type": "string"
+}
+}
+},
+"AuthRegisterRequest": {
+"required": [
+"name",
+"email",
+"password"
+],
+"type": "object",
+"properties": {
+"name": {
+"type": "string"
+},
+"email": {
+"type": "string"
+},
+"password": {
+"type": "string"
+},
+"referralCode": {
+"type": [
+"null",
+"string"
+]
+}
+}
+},
+"BankResponse": {
+"required": [
+"id",
+"name",
+"countryId",
+"code",
+"isActive",
+"createdAtUtc"
+],
+"type": "object",
+"properties": {
+"id": {
+"type": "string",
+"format": "uuid"
+},
+"name": {
+"type": "string"
+},
+"countryId": {
+"type": "string",
+"format": "uuid"
+},
+"code": {
+"type": [
+"null",
+"string"
+]
+},
+"isActive": {
+"type": "boolean"
+},
+"createdAtUtc": {
+"type": "string",
+"format": "date-time"
+}
+}
+},
+"ChangeCurrentPasswordRequest": {
+"required": [
+"currentPassword",
+"newPassword"
+],
+"type": "object",
+"properties": {
+"currentPassword": {
+"type": "string"
+},
+"newPassword": {
+"type": "string"
+}
+},
+"additionalProperties": false
+},
+"ChangeCustomerBankAccountStatusRequest": {
+"required": [
+"status"
+],
+"type": "object",
+"properties": {
+"status": {
+"type": "string"
+}
+}
+},
+"ChangeCustomerStatusRequest": {
+"required": [
+"status"
+],
+"type": "object",
+"properties": {
+"status": {
+"type": "string"
+}
+}
+},
+"ChangeDocumentStatusRequest": {
+"required": [
+"status"
+],
+"type": "object",
+"properties": {
+"status": {
+"type": "string"
+}
+}
+},
+"ChangeUserRolesRequest": {
+"required": [
+"roles"
+],
+"type": "object",
+"properties": {
+"roles": {
+"type": "array",
+"items": {
+"type": "string"
+}
+}
+}
+},
+"ChangeUserStatusRequest": {
+"required": [
+"status"
+],
+"type": "object",
+"properties": {
+"status": {
+"type": "string"
+}
+}
+},
+"ComplianceFlagResponse": {
+"required": [
+"id",
+"customerId",
+"flagType",
+"severity",
+"status",
+"title",
+"description",
+"monitoringFrequency",
+"detectedBy",
+"detectedAtUtc",
+"resolvedAtUtc",
+"createdByUserId",
+"resolvedByUserId",
+"relatedPepDescription",
+"relatedPepRelationship",
+"createdAtUtc",
+"updatedAtUtc"
+],
+"type": "object",
+"properties": {
+"id": {
+"type": "string",
+"format": "uuid"
+},
+"customerId": {
+"type": "string",
+"format": "uuid"
+},
+"flagType": {
+"type": "string"
+},
+"severity": {
+"type": "string"
+},
+"status": {
+"type": "string"
+},
+"title": {
+"type": "string"
+},
+"description": {
+"type": [
+"null",
+"string"
+]
+},
+"monitoringFrequency": {
+"type": [
+"null",
+"string"
+]
+},
+"detectedBy": {
+"type": "string"
+},
+"detectedAtUtc": {
+"type": "string",
+"format": "date-time"
+},
+"resolvedAtUtc": {
+"type": [
+"null",
+"string"
+],
+"format": "date-time"
+},
+"createdByUserId": {
+"type": "string",
+"format": "uuid"
+},
+"resolvedByUserId": {
+"type": [
+"null",
+"string"
+],
+"format": "uuid"
+},
+"relatedPepDescription": {
+"type": [
+"null",
+"string"
+]
+},
+"relatedPepRelationship": {
+"type": [
+"null",
+"string"
+]
+},
+"createdAtUtc": {
+"type": "string",
+"format": "date-time"
+},
+"updatedAtUtc": {
+"type": [
+"null",
+"string"
+],
+"format": "date-time"
+}
+}
+},
+"ConfigureUserReferralCodeRequest": {
+"required": [
+"referralCode",
+"status",
+"expiresAtUtc"
+],
+"type": "object",
+"properties": {
+"referralCode": {
+"type": [
+"null",
+"string"
+]
+},
+"status": {
+"type": "string"
+},
+"expiresAtUtc": {
+"type": [
+"null",
+"string"
+],
+"format": "date-time"
+}
+}
+},
+"CreateBankRequest": {
+"required": [
+"name",
+"countryId",
+"code",
+"isActive"
+],
+"type": "object",
+"properties": {
+"name": {
+"type": "string"
+},
+"countryId": {
+"type": "string",
+"format": "uuid"
+},
+"code": {
+"type": [
+"null",
+"string"
+]
+},
+"isActive": {
+"type": [
+"null",
+"boolean"
+]
+}
+}
+},
+"CreateClientBankAccountRequest": {
+"required": [
+"bankId",
+"branch",
+"accountNumber",
+"accountDigit",
+"accountType",
+"holderType",
+"holderName",
+"holderDocument",
+"pixKey",
+"pixKeyType",
+"isPrimary"
+],
+"type": "object",
+"properties": {
+"bankId": {
+"type": "string",
+"format": "uuid"
+},
+"branch": {
+"type": "string"
+},
+"accountNumber": {
+"type": "string"
+},
+"accountDigit": {
+"type": [
+"null",
+"string"
+]
+},
+"accountType": {
+"type": "string"
+},
+"holderType": {
+"type": "string"
+},
+"holderName": {
+"type": [
+"null",
+"string"
+]
+},
+"holderDocument": {
+"type": [
+"null",
+"string"
+]
+},
+"pixKey": {
+"type": [
+"null",
+"string"
+]
+},
+"pixKeyType": {
+"type": [
+"null",
+"string"
+]
+},
+"isPrimary": {
+"type": "boolean"
+}
+},
+"additionalProperties": false
+},
+"CreateComplianceFlagRequest": {
+"required": [
+"flagType",
+"severity",
+"status",
+"title",
+"description",
+"monitoringFrequency",
+"detectedBy",
+"detectedAtUtc",
+"relatedPepDescription",
+"relatedPepRelationship",
+"evidence"
+],
+"type": "object",
+"properties": {
+"flagType": {
+"type": "string"
+},
+"severity": {
+"type": "string"
+},
+"status": {
+"type": [
+"null",
+"string"
+]
+},
+"title": {
+"type": "string"
+},
+"description": {
+"type": [
+"null",
+"string"
+]
+},
+"monitoringFrequency": {
+"type": [
+"null",
+"string"
+]
+},
+"detectedBy": {
+"type": "string"
+},
+"detectedAtUtc": {
+"type": [
+"null",
+"string"
+],
+"format": "date-time"
+},
+"relatedPepDescription": {
+"type": [
+"null",
+"string"
+]
+},
+"relatedPepRelationship": {
+"type": [
+"null",
+"string"
+]
+},
+"evidence": {
+"type": [
+"null",
+"string"
+]
+}
+}
+},
+"CreateCustomerBankAccountRequest": {
+"required": [
+"bankId",
+"branch",
+"accountNumber",
+"accountDigit",
+"accountType",
+"holderType",
+"holderName",
+"holderDocument",
+"pixKey",
+"pixKeyType",
+"isPrimary",
+"status"
+],
+"type": "object",
+"properties": {
+"bankId": {
+"type": "string",
+"format": "uuid"
+},
+"branch": {
+"type": "string"
+},
+"accountNumber": {
+"type": "string"
+},
+"accountDigit": {
+"type": [
+"null",
+"string"
+]
+},
+"accountType": {
+"type": "string"
+},
+"holderType": {
+"type": "string"
+},
+"holderName": {
+"type": [
+"null",
+"string"
+]
+},
+"holderDocument": {
+"type": [
+"null",
+"string"
+]
+},
+"pixKey": {
+"type": [
+"null",
+"string"
+]
+},
+"pixKeyType": {
+"type": [
+"null",
+"string"
+]
+},
+"isPrimary": {
+"type": "boolean"
+},
+"status": {
+"type": [
+"null",
+"string"
+]
+}
+}
+},
+"CreateCustomerFinancialProfileRequest": {
+"required": [
+"individualMonthlyIncome",
+"householdMonthlyIncome",
+"declaredNetWorth",
+"currencyCode",
+"effectiveFrom",
+"effectiveTo"
+],
+"type": "object",
+"properties": {
+"individualMonthlyIncome": {
+"pattern": "^-?(?:0|[1-9]\\d*)(?:\\.\\d+)?$",
+"type": [
+"null",
+"number",
+"string"
+],
+"format": "double"
+},
+"householdMonthlyIncome": {
+"pattern": "^-?(?:0|[1-9]\\d*)(?:\\.\\d+)?$",
+"type": [
+"null",
+"number",
+"string"
+],
+"format": "double"
+},
+"declaredNetWorth": {
+"pattern": "^-?(?:0|[1-9]\\d*)(?:\\.\\d+)?$",
+"type": [
+"null",
+"number",
+"string"
+],
+"format": "double"
+},
+"currencyCode": {
+"type": "string"
+},
+"effectiveFrom": {
+"type": "string",
+"format": "date"
+},
+"effectiveTo": {
+"type": [
+"null",
+"string"
+],
+"format": "date"
+}
+},
+"additionalProperties": false
+},
+"CreateCustomerRequest": {
+"required": [
+"kind",
+"status",
+"birthDate",
+"names",
+"contacts",
+"addresses"
+],
+"type": "object",
+"properties": {
+"kind": {
+"type": "string"
+},
+"status": {
+"type": [
+"null",
+"string"
+]
+},
+"birthDate": {
+"type": [
+"null",
+"string"
+],
+"format": "date"
+},
+"names": {
+"type": [
+"null",
+"array"
+],
+"items": {
+"$ref": "#/components/schemas/CustomerNameRequest"
+}
+},
+"contacts": {
+"type": [
+"null",
+"array"
+],
+"items": {
+"$ref": "#/components/schemas/CustomerContactRequest"
+}
+},
+"addresses": {
+"type": [
+"null",
+"array"
+],
+"items": {
+"$ref": "#/components/schemas/CustomerAddressRequest"
+}
+}
+}
+},
+"CreateDataIntakeDraftRequest": {
+"required": [
+"title",
+"data"
+],
+"type": "object",
+"properties": {
+"title": {
+"type": [
+"null",
+"string"
+]
+},
+"data": {
+"oneOf": [
+{
+"type": "null"
+},
+{
+"$ref": "#/components/schemas/JsonObject"
+}
+]
+}
+}
+},
+"CreateDocumentCategoryRequest": {
+"required": [
+"code",
+"name"
+],
+"type": "object",
+"properties": {
+"code": {
+"type": "string"
+},
+"name": {
+"type": "string"
+}
+}
+},
+"CreateDocumentMetadataSchemaRequest": {
+"required": [
+"schema",
+"uiSchema",
+"changeSummary"
+],
+"type": "object",
+"properties": {
+"schema": {
+"type": "string"
+},
+"uiSchema": {
+"type": [
+"null",
+"string"
+]
+},
+"changeSummary": {
+"type": [
+"null",
+"string"
+]
+}
+}
+},
+"CreateDocumentRequirementRequest": {
+"required": [
+"documentTypeId",
+"dueDate"
+],
+"type": "object",
+"properties": {
+"documentTypeId": {
+"type": "string",
+"format": "uuid"
+},
+"dueDate": {
+"type": [
+"null",
+"string"
+],
+"format": "date"
+}
+}
+},
+"CreateDocumentTypeRequest": {
+"required": [
+"categoryId",
+"code",
+"name"
+],
+"type": "object",
+"properties": {
+"categoryId": {
+"type": "string",
+"format": "uuid"
+},
+"code": {
+"type": "string"
+},
+"name": {
+"type": "string"
+},
+"requiresExpirationDate": {
+"type": "boolean",
+"default": false
+}
+}
+},
+"CreateProvidedDocumentRequest": {
+"required": [
+"documentTypeId",
+"countryId",
+"issuedOn",
+"expiresOn",
+"data"
+],
+"type": "object",
+"properties": {
+"documentTypeId": {
+"type": "string",
+"format": "uuid"
+},
+"countryId": {
+"type": "string",
+"format": "uuid"
+},
+"issuedOn": {
+"type": [
+"null",
+"string"
+],
+"format": "date"
+},
+"expiresOn": {
+"type": [
+"null",
+"string"
+],
+"format": "date"
+},
+"data": {
+"$ref": "#/components/schemas/JsonElement"
+},
+"evidenceDocumentIds": {
+"type": [
+"null",
+"array"
+],
+"items": {
+"type": "string",
+"format": "uuid"
+}
+}
+},
+"additionalProperties": false
+},
+"CreateShareLinkRequest": {
+"required": [
+"scope",
+"expiresInHours",
+"maxUses"
+],
+"type": "object",
+"properties": {
+"scope": {
+"type": "string"
+},
+"expiresInHours": {
+"pattern": "^-?(?:0|[1-9]\\d*)$",
+"type": [
+"integer",
+"string"
+],
+"format": "int32"
+},
+"maxUses": {
+"pattern": "^-?(?:0|[1-9]\\d*)$",
+"type": [
+"null",
+"integer",
+"string"
+],
+"format": "int32"
+}
+}
+},
+"CreateUserRequest": {
+"required": [
+"name",
+"email",
+"password",
+"status",
+"workspaceId",
+"roles"
+],
+"type": "object",
+"properties": {
+"name": {
+"type": "string"
+},
+"email": {
+"type": "string"
+},
+"password": {
+"type": "string"
+},
+"status": {
+"type": "string"
+},
+"workspaceId": {
+"type": [
+"null",
+"string"
+],
+"format": "uuid"
+},
+"roles": {
+"type": "array",
+"items": {
+"type": "string"
+}
+}
+}
+},
+"CustomerAddressRequest": {
+"required": [
+"id",
+"kind",
+"line1",
+"line2",
+"city",
+"stateOrProvince",
+"postalCode",
+"countryId",
+"isPrimary"
+],
+"type": "object",
+"properties": {
+"id": {
+"type": [
+"null",
+"string"
+],
+"format": "uuid"
+},
+"kind": {
+"type": "string"
+},
+"line1": {
+"type": "string"
+},
+"line2": {
+"type": [
+"null",
+"string"
+]
+},
+"city": {
+"type": "string"
+},
+"stateOrProvince": {
+"type": [
+"null",
+"string"
+]
+},
+"postalCode": {
+"type": [
+"null",
+"string"
+]
+},
+"countryId": {
+"type": [
+"null",
+"string"
+],
+"format": "uuid"
+},
+"isPrimary": {
+"type": "boolean"
+}
+}
+},
+"CustomerBankAccountResponse": {
+"required": [
+"id",
+"customerId",
+"bankId",
+"branch",
+"accountNumber",
+"accountNumberMasked",
+"accountDigit",
+"accountType",
+"holderType",
+"holderName",
+"holderDocument",
+"holderDocumentMasked",
+"pixKey",
+"pixKeyMasked",
+"pixKeyType",
+"isPrimary",
+"status",
+"createdAtUtc",
+"updatedAtUtc",
+"archivedAtUtc"
+],
+"type": "object",
+"properties": {
+"id": {
+"type": "string",
+"format": "uuid"
+},
+"customerId": {
+"type": "string",
+"format": "uuid"
+},
+"bankId": {
+"type": "string",
+"format": "uuid"
+},
+"branch": {
+"type": "string"
+},
+"accountNumber": {
+"type": "string"
+},
+"accountNumberMasked": {
+"type": [
+"null",
+"string"
+]
+},
+"accountDigit": {
+"type": [
+"null",
+"string"
+]
+},
+"accountType": {
+"type": "string"
+},
+"holderType": {
+"type": "string"
+},
+"holderName": {
+"type": [
+"null",
+"string"
+]
+},
+"holderDocument": {
+"type": [
+"null",
+"string"
+]
+},
+"holderDocumentMasked": {
+"type": [
+"null",
+"string"
+]
+},
+"pixKey": {
+"type": [
+"null",
+"string"
+]
+},
+"pixKeyMasked": {
+"type": [
+"null",
+"string"
+]
+},
+"pixKeyType": {
+"type": [
+"null",
+"string"
+]
+},
+"isPrimary": {
+"type": "boolean"
+},
+"status": {
+"type": "string"
+},
+"createdAtUtc": {
+"type": "string",
+"format": "date-time"
+},
+"updatedAtUtc": {
+"type": [
+"null",
+"string"
+],
+"format": "date-time"
+},
+"archivedAtUtc": {
+"type": [
+"null",
+"string"
+],
+"format": "date-time"
+}
+}
+},
+"CustomerCardResponse": {
+"required": [
+"customerId",
+"displayName",
+"customerKind",
+"status",
+"maskedDocument",
+"avatarUrl",
+"advisorId",
+"advisorName",
+"lastAccessAtUtc",
+"customerSince",
+"documentClassification",
+"documentLevel",
+"documentComplianceStatus",
+"complianceStatus",
+"documentSummary",
+"primaryContact",
+"createdAtUtc",
+"updatedAtUtc"
+],
+"type": "object",
+"properties": {
+"customerId": {
+"type": "string",
+"format": "uuid"
+},
+"displayName": {
+"type": [
+"null",
+"string"
+]
+},
+"customerKind": {
+"type": "string"
+},
+"status": {
+"type": "string"
+},
+"maskedDocument": {
+"type": [
+"null",
+"string"
+]
+},
+"avatarUrl": {
+"type": [
+"null",
+"string"
+]
+},
+"advisorId": {
+"type": [
+"null",
+"string"
+],
+"format": "uuid"
+},
+"advisorName": {
+"type": [
+"null",
+"string"
+]
+},
+"lastAccessAtUtc": {
+"type": [
+"null",
+"string"
+],
+"format": "date-time"
+},
+"customerSince": {
+"type": "string",
+"format": "date"
+},
+"documentClassification": {
+"type": [
+"null",
+"string"
+]
+},
+"documentLevel": {
+"pattern": "^-?(?:0|[1-9]\\d*)$",
+"type": [
+"null",
+"integer",
+"string"
+],
+"format": "int32"
+},
+"documentComplianceStatus": {
+"type": [
+"null",
+"string"
+]
+},
+"complianceStatus": {
+"type": [
+"null",
+"string"
+]
+},
+"documentSummary": {
+"oneOf": [
+{
+"type": "null"
+},
+{
+"$ref": "#/components/schemas/CustomerDocumentSummaryResponse"
+}
+]
+},
+"primaryContact": {
+"type": [
+"null",
+"string"
+]
+},
+"createdAtUtc": {
+"type": "string",
+"format": "date-time"
+},
+"updatedAtUtc": {
+"type": [
+"null",
+"string"
+],
+"format": "date-time"
+}
+}
+},
+"CustomerContactRequest": {
+"required": [
+"id",
+"kind",
+"value",
+"isPrimary"
+],
+"type": "object",
+"properties": {
+"id": {
+"type": [
+"null",
+"string"
+],
+"format": "uuid"
+},
+"kind": {
+"type": "string"
+},
+"value": {
+"type": "string"
+},
+"isPrimary": {
+"type": "boolean"
+}
+}
+},
+"CustomerDocumentSummaryResponse": {
+"required": [
+"customerId",
+"requirementCount",
+"documentCount",
+"approved",
+"pending",
+"rejected",
+"inReview",
+"missing",
+"waived"
+],
+"type": "object",
+"properties": {
+"customerId": {
+"type": "string",
+"format": "uuid"
+},
+"requirementCount": {
+"pattern": "^-?(?:0|[1-9]\\d*)$",
+"type": [
+"integer",
+"string"
+],
+"format": "int32"
+},
+"documentCount": {
+"pattern": "^-?(?:0|[1-9]\\d*)$",
+"type": [
+"integer",
+"string"
+],
+"format": "int32"
+},
+"approved": {
+"pattern": "^-?(?:0|[1-9]\\d*)$",
+"type": [
+"integer",
+"string"
+],
+"format": "int32"
+},
+"pending": {
+"pattern": "^-?(?:0|[1-9]\\d*)$",
+"type": [
+"integer",
+"string"
+],
+"format": "int32"
+},
+"rejected": {
+"pattern": "^-?(?:0|[1-9]\\d*)$",
+"type": [
+"integer",
+"string"
+],
+"format": "int32"
+},
+"inReview": {
+"pattern": "^-?(?:0|[1-9]\\d*)$",
+"type": [
+"integer",
+"string"
+],
+"format": "int32"
+},
+"missing": {
+"pattern": "^-?(?:0|[1-9]\\d*)$",
+"type": [
+"integer",
+"string"
+],
+"format": "int32"
+},
+"waived": {
+"pattern": "^-?(?:0|[1-9]\\d*)$",
+"type": [
+"integer",
+"string"
+],
+"format": "int32"
+}
+}
+},
+"CustomerFinancialProfileResponse": {
+"required": [
+"id",
+"customerId",
+"individualMonthlyIncome",
+"householdMonthlyIncome",
+"declaredNetWorth",
+"currencyCode",
+"effectiveFrom",
+"effectiveTo",
+"createdAtUtc",
+"updatedAtUtc"
+],
+"type": "object",
+"properties": {
+"id": {
+"type": "string",
+"format": "uuid"
+},
+"customerId": {
+"type": "string",
+"format": "uuid"
+},
+"individualMonthlyIncome": {
+"pattern": "^-?(?:0|[1-9]\\d*)(?:\\.\\d+)?$",
+"type": [
+"null",
+"number",
+"string"
+],
+"format": "double"
+},
+"householdMonthlyIncome": {
+"pattern": "^-?(?:0|[1-9]\\d*)(?:\\.\\d+)?$",
+"type": [
+"null",
+"number",
+"string"
+],
+"format": "double"
+},
+"declaredNetWorth": {
+"pattern": "^-?(?:0|[1-9]\\d*)(?:\\.\\d+)?$",
+"type": [
+"null",
+"number",
+"string"
+],
+"format": "double"
+},
+"currencyCode": {
+"type": "string"
+},
+"effectiveFrom": {
+"type": "string",
+"format": "date"
+},
+"effectiveTo": {
+"type": [
+"null",
+"string"
+],
+"format": "date"
+},
+"createdAtUtc": {
+"type": "string",
+"format": "date-time"
+},
+"updatedAtUtc": {
+"type": [
+"null",
+"string"
+],
+"format": "date-time"
+}
+}
+},
+"CustomerNameRequest": {
+"required": [
+"id",
+"kind",
+"displayName",
+"validFrom",
+"validTo",
+"isPrimary"
+],
+"type": "object",
+"properties": {
+"id": {
+"type": [
+"null",
+"string"
+],
+"format": "uuid"
+},
+"kind": {
+"type": "string"
+},
+"displayName": {
+"type": "string"
+},
+"validFrom": {
+"type": "string",
+"format": "date"
+},
+"validTo": {
+"type": [
+"null",
+"string"
+],
+"format": "date"
+},
+"isPrimary": {
+"type": "boolean"
+}
+}
+},
+"CustomerOperationalSummaryResponse": {
+"required": [
+"advisorId",
+"advisorName",
+"lastAccessAtUtc",
+"riskClassification",
+"complianceStatus",
+"documentLevel",
+"documentSummary"
+],
+"type": "object",
+"properties": {
+"advisorId": {
+"type": [
+"null",
+"string"
+],
+"format": "uuid"
+},
+"advisorName": {
+"type": [
+"null",
+"string"
+]
+},
+"lastAccessAtUtc": {
+"type": [
+"null",
+"string"
+],
+"format": "date-time"
+},
+"riskClassification": {
+"type": "string"
+},
+"complianceStatus": {
+"type": "string"
+},
+"documentLevel": {
+"pattern": "^-?(?:0|[1-9]\\d*)$",
+"type": [
+"integer",
+"string"
+],
+"format": "int32"
+},
+"documentSummary": {
+"$ref": "#/components/schemas/CustomerDocumentSummaryResponse"
+}
+}
+},
+"CustomerSummaryResponse": {
+"required": [
+"id",
+"workspaceId",
+"kind",
+"status",
+"primaryName",
+"primaryContact",
+"createdAtUtc",
+"updatedAtUtc",
+"archivedAtUtc",
+"operationalSummary"
+],
+"type": "object",
+"properties": {
+"id": {
+"type": "string",
+"format": "uuid"
+},
+"workspaceId": {
+"type": "string",
+"format": "uuid"
+},
+"kind": {
+"type": "string"
+},
+"status": {
+"type": "string"
+},
+"primaryName": {
+"type": [
+"null",
+"string"
+]
+},
+"primaryContact": {
+"type": [
+"null",
+"string"
+]
+},
+"createdAtUtc": {
+"type": "string",
+"format": "date-time"
+},
+"updatedAtUtc": {
+"type": [
+"null",
+"string"
+],
+"format": "date-time"
+},
+"archivedAtUtc": {
+"type": [
+"null",
+"string"
+],
+"format": "date-time"
+},
+"operationalSummary": {
+"oneOf": [
+{
+"type": "null"
+},
+{
+"$ref": "#/components/schemas/CustomerOperationalSummaryResponse"
+}
+]
+}
+}
+},
+"CustomerTimelineEventResponse": {
+"required": [
+"id",
+"eventType",
+"title",
+"description",
+"entityType",
+"entityId",
+"actorUserId",
+"actorName",
+"source",
+"context",
+"occurredAtUtc"
+],
+"type": "object",
+"properties": {
+"id": {
+"type": "string",
+"format": "uuid"
+},
+"eventType": {
+"type": "string"
+},
+"title": {
+"type": "string"
+},
+"description": {
+"type": [
+"null",
+"string"
+]
+},
+"entityType": {
+"type": [
+"null",
+"string"
+]
+},
+"entityId": {
+"type": [
+"null",
+"string"
+],
+"format": "uuid"
+},
+"actorUserId": {
+"type": [
+"null",
+"string"
+],
+"format": "uuid"
+},
+"actorName": {
+"type": [
+"null",
+"string"
+]
+},
+"source": {
+"type": "string"
+},
+"context": {
+"type": "string"
+},
+"occurredAtUtc": {
+"type": "string",
+"format": "date-time"
+}
+}
+},
+"DocumentFileResponse": {
+"required": [
+"id",
+"fileName",
+"contentType",
+"extension",
+"size",
+"checksum",
+"visibility",
+"status"
+],
+"type": "object",
+"properties": {
+"id": {
+"type": "string",
+"format": "uuid"
+},
+"fileName": {
+"type": "string"
+},
+"contentType": {
+"type": "string"
+},
+"extension": {
+"type": "string"
+},
+"size": {
+"pattern": "^-?(?:0|[1-9]\\d*)$",
+"type": [
+"integer",
+"string"
+],
+"format": "int64"
+},
+"checksum": {
+"type": "string"
+},
+"visibility": {
+"type": "string"
+},
+"status": {
+"type": "string"
+}
+}
+},
+"DocumentMetadataSchemaResponse": {
+"required": [
+"id",
+"documentTypeId",
+"countryId",
+"version",
+"status",
+"schema",
+"uiSchema",
+"changeSummary",
+"createdBy",
+"createdAtUtc",
+"publishedBy",
+"publishedAtUtc",
+"retiredBy",
+"retiredAtUtc"
+],
+"type": "object",
+"properties": {
+"id": {
+"type": "string",
+"format": "uuid"
+},
+"documentTypeId": {
+"type": "string",
+"format": "uuid"
+},
+"countryId": {
+"type": "string",
+"format": "uuid"
+},
+"version": {
+"pattern": "^-?(?:0|[1-9]\\d*)$",
+"type": [
+"integer",
+"string"
+],
+"format": "int32"
+},
+"status": {
+"type": "string"
+},
+"schema": {
+"type": "string"
+},
+"uiSchema": {
+"type": "string"
+},
+"changeSummary": {
+"type": [
+"null",
+"string"
+]
+},
+"createdBy": {
+"type": [
+"null",
+"string"
+],
+"format": "uuid"
+},
+"createdAtUtc": {
+"type": "string",
+"format": "date-time"
+},
+"publishedBy": {
+"type": [
+"null",
+"string"
+],
+"format": "uuid"
+},
+"publishedAtUtc": {
+"type": [
+"null",
+"string"
+],
+"format": "date-time"
+},
+"retiredBy": {
+"type": [
+"null",
+"string"
+],
+"format": "uuid"
+},
+"retiredAtUtc": {
+"type": [
+"null",
+"string"
+],
+"format": "date-time"
+}
+}
+},
+"FileStatus": {
+"type": "integer"
+},
+"FileVisibility": {
+"type": "integer"
+},
+"IFormFile": {
+"type": "string",
+"format": "binary"
+},
+"JsonElement": {},
+"JsonObject": {
+"type": "object"
+},
+"PagedResponseOfAdminDocumentResponse": {
+"type": "object",
+"properties": {
+"pagination": {
+"$ref": "#/components/schemas/PaginationMetadata"
+},
+"data": {
+"type": [
+"null",
+"array"
+],
+"items": {
+"$ref": "#/components/schemas/AdminDocumentResponse"
+}
+},
+"success": {
+"type": "boolean"
+},
+"requestId": {
+"type": "string"
+},
+"correlationId": {
+"type": [
+"null",
+"string"
+]
+},
+"errors": {
+"type": "array",
+"items": {
+"$ref": "#/components/schemas/ApiErrorItem"
+}
+}
+}
+},
+"PagedResponseOfBankResponse": {
+"type": "object",
+"properties": {
+"pagination": {
+"$ref": "#/components/schemas/PaginationMetadata"
+},
+"data": {
+"type": [
+"null",
+"array"
+],
+"items": {
+"$ref": "#/components/schemas/BankResponse"
+}
+},
+"success": {
+"type": "boolean"
+},
+"requestId": {
+"type": "string"
+},
+"correlationId": {
+"type": [
+"null",
+"string"
+]
+},
+"errors": {
+"type": "array",
+"items": {
+"$ref": "#/components/schemas/ApiErrorItem"
+}
+}
+}
+},
+"PagedResponseOfComplianceFlagResponse": {
+"type": "object",
+"properties": {
+"pagination": {
+"$ref": "#/components/schemas/PaginationMetadata"
+},
+"data": {
+"type": [
+"null",
+"array"
+],
+"items": {
+"$ref": "#/components/schemas/ComplianceFlagResponse"
+}
+},
+"success": {
+"type": "boolean"
+},
+"requestId": {
+"type": "string"
+},
+"correlationId": {
+"type": [
+"null",
+"string"
+]
+},
+"errors": {
+"type": "array",
+"items": {
+"$ref": "#/components/schemas/ApiErrorItem"
+}
+}
+}
+},
+"PagedResponseOfCustomerBankAccountResponse": {
+"type": "object",
+"properties": {
+"pagination": {
+"$ref": "#/components/schemas/PaginationMetadata"
+},
+"data": {
+"type": [
+"null",
+"array"
+],
+"items": {
+"$ref": "#/components/schemas/CustomerBankAccountResponse"
+}
+},
+"success": {
+"type": "boolean"
+},
+"requestId": {
+"type": "string"
+},
+"correlationId": {
+"type": [
+"null",
+"string"
+]
+},
+"errors": {
+"type": "array",
+"items": {
+"$ref": "#/components/schemas/ApiErrorItem"
+}
+}
+}
+},
+"PagedResponseOfCustomerCardResponse": {
+"type": "object",
+"properties": {
+"pagination": {
+"$ref": "#/components/schemas/PaginationMetadata"
+},
+"data": {
+"type": [
+"null",
+"array"
+],
+"items": {
+"$ref": "#/components/schemas/CustomerCardResponse"
+}
+},
+"success": {
+"type": "boolean"
+},
+"requestId": {
+"type": "string"
+},
+"correlationId": {
+"type": [
+"null",
+"string"
+]
+},
+"errors": {
+"type": "array",
+"items": {
+"$ref": "#/components/schemas/ApiErrorItem"
+}
+}
+}
+},
+"PagedResponseOfCustomerFinancialProfileResponse": {
+"type": "object",
+"properties": {
+"pagination": {
+"$ref": "#/components/schemas/PaginationMetadata"
+},
+"data": {
+"type": [
+"null",
+"array"
+],
+"items": {
+"$ref": "#/components/schemas/CustomerFinancialProfileResponse"
+}
+},
+"success": {
+"type": "boolean"
+},
+"requestId": {
+"type": "string"
+},
+"correlationId": {
+"type": [
+"null",
+"string"
+]
+},
+"errors": {
+"type": "array",
+"items": {
+"$ref": "#/components/schemas/ApiErrorItem"
+}
+}
+}
+},
+"PagedResponseOfCustomerSummaryResponse": {
+"type": "object",
+"properties": {
+"pagination": {
+"$ref": "#/components/schemas/PaginationMetadata"
+},
+"data": {
+"type": [
+"null",
+"array"
+],
+"items": {
+"$ref": "#/components/schemas/CustomerSummaryResponse"
+}
+},
+"success": {
+"type": "boolean"
+},
+"requestId": {
+"type": "string"
+},
+"correlationId": {
+"type": [
+"null",
+"string"
+]
+},
+"errors": {
+"type": "array",
+"items": {
+"$ref": "#/components/schemas/ApiErrorItem"
+}
+}
+}
+},
+"PagedResponseOfCustomerTimelineEventResponse": {
+"type": "object",
+"properties": {
+"pagination": {
+"$ref": "#/components/schemas/PaginationMetadata"
+},
+"data": {
+"type": [
+"null",
+"array"
+],
+"items": {
+"$ref": "#/components/schemas/CustomerTimelineEventResponse"
+}
+},
+"success": {
+"type": "boolean"
+},
+"requestId": {
+"type": "string"
+},
+"correlationId": {
+"type": [
+"null",
+"string"
+]
+},
+"errors": {
+"type": "array",
+"items": {
+"$ref": "#/components/schemas/ApiErrorItem"
+}
+}
+}
+},
+"PagedResponseOfDocumentMetadataSchemaResponse": {
+"type": "object",
+"properties": {
+"pagination": {
+"$ref": "#/components/schemas/PaginationMetadata"
+},
+"data": {
+"type": [
+"null",
+"array"
+],
+"items": {
+"$ref": "#/components/schemas/DocumentMetadataSchemaResponse"
+}
+},
+"success": {
+"type": "boolean"
+},
+"requestId": {
+"type": "string"
+},
+"correlationId": {
+"type": [
+"null",
+"string"
+]
+},
+"errors": {
+"type": "array",
+"items": {
+"$ref": "#/components/schemas/ApiErrorItem"
+}
+}
+}
+},
+"PagedResponseOfUserResponse": {
+"type": "object",
+"properties": {
+"pagination": {
+"$ref": "#/components/schemas/PaginationMetadata"
+},
+"data": {
+"type": [
+"null",
+"array"
+],
+"items": {
+"$ref": "#/components/schemas/UserResponse"
+}
+},
+"success": {
+"type": "boolean"
+},
+"requestId": {
+"type": "string"
+},
+"correlationId": {
+"type": [
+"null",
+"string"
+]
+},
+"errors": {
+"type": "array",
+"items": {
+"$ref": "#/components/schemas/ApiErrorItem"
+}
+}
+}
+},
+"PaginationMetadata": {
+"required": [
+"page",
+"pageSize",
+"totalItems",
+"totalPages",
+"hasNextPage",
+"hasPreviousPage"
+],
+"type": "object",
+"properties": {
+"page": {
+"pattern": "^-?(?:0|[1-9]\\d*)$",
+"type": [
+"integer",
+"string"
+],
+"format": "int32"
+},
+"pageSize": {
+"pattern": "^-?(?:0|[1-9]\\d*)$",
+"type": [
+"integer",
+"string"
+],
+"format": "int32"
+},
+"totalItems": {
+"pattern": "^-?(?:0|[1-9]\\d*)$",
+"type": [
+"integer",
+"string"
+],
+"format": "int32"
+},
+"totalPages": {
+"pattern": "^-?(?:0|[1-9]\\d*)$",
+"type": [
+"integer",
+"string"
+],
+"format": "int32"
+},
+"hasNextPage": {
+"type": "boolean"
+},
+"hasPreviousPage": {
+"type": "boolean"
+}
+}
+},
+"PasswordResetCompletionRequest": {
+"required": [
+"email",
+"code",
+"newPassword",
+"confirmNewPassword"
+],
+"type": "object",
+"properties": {
+"email": {
+"type": "string"
+},
+"code": {
+"type": "string"
+},
+"newPassword": {
+"type": "string"
+},
+"confirmNewPassword": {
+"type": "string"
+}
+}
+},
+"PhoneVerificationRequest": {
+"required": [
+"phoneNumber"
+],
+"type": "object",
+"properties": {
+"phoneNumber": {
+"type": "string"
+}
+}
+},
+"PhoneVerificationValidationRequest": {
+"required": [
+"phoneNumber",
+"code"
+],
+"type": "object",
+"properties": {
+"phoneNumber": {
+"type": "string"
+},
+"code": {
+"type": "string"
+}
+}
+},
+"ReplaceCustomerAddressesRequest": {
+"required": [
+"addresses"
+],
+"type": "object",
+"properties": {
+"addresses": {
+"type": [
+"null",
+"array"
+],
+"items": {
+"$ref": "#/components/schemas/CustomerAddressRequest"
+}
+}
+}
+},
+"ReplaceCustomerContactsRequest": {
+"required": [
+"contacts"
+],
+"type": "object",
+"properties": {
+"contacts": {
+"type": [
+"null",
+"array"
+],
+"items": {
+"$ref": "#/components/schemas/CustomerContactRequest"
+}
+}
+}
+},
+"ReplaceCustomerNamesRequest": {
+"required": [
+"names"
+],
+"type": "object",
+"properties": {
+"names": {
+"type": [
+"null",
+"array"
+],
+"items": {
+"$ref": "#/components/schemas/CustomerNameRequest"
+}
+}
+}
+},
+"RequestDataIntakeCorrectionRequest": {
+"required": [
+"notes"
+],
+"type": "object",
+"properties": {
+"notes": {
+"type": [
+"null",
+"string"
+]
+}
+}
+},
+"RequestDataIntakeReprocessRequest": {
+"required": [
+"notes"
+],
+"type": "object",
+"properties": {
+"notes": {
+"type": [
+"null",
+"string"
+]
+}
+}
+},
+"ResolveComplianceFlagRequest": {
+"required": [
+"description"
+],
+"type": "object",
+"properties": {
+"description": {
+"type": [
+"null",
+"string"
+]
+}
+}
+},
+"ResubmitDataIntakeSubmissionRequest": {
+"required": [
+"title",
+"data",
+"notes"
+],
+"type": "object",
+"properties": {
+"title": {
+"type": [
+"null",
+"string"
+]
+},
+"data": {
+"oneOf": [
+{
+"type": "null"
+},
+{
+"$ref": "#/components/schemas/JsonObject"
+}
+]
+},
+"notes": {
+"type": [
+"null",
+"string"
+]
+}
+}
+},
+"ReviewDocumentRequest": {
+"required": [
+"status",
+"notes"
+],
+"type": "object",
+"properties": {
+"status": {
+"type": "string"
+},
+"notes": {
+"type": [
+"null",
+"string"
+]
+}
+}
+},
+"SetDocumentTypeCountryRequest": {
+"type": "object",
+"properties": {
+"isActive": {
+"type": "boolean",
+"default": true
+}
+}
+},
+"SubmitDataIntakeDraftRequest": {
+"required": [
+"notes"
+],
+"type": "object",
+"properties": {
+"notes": {
+"type": [
+"null",
+"string"
+]
+}
+}
+},
+"UpdateClientBankAccountRequest": {
+"required": [
+"bankId",
+"branch",
+"accountNumber",
+"accountDigit",
+"accountType",
+"holderType",
+"holderName",
+"holderDocument",
+"pixKey",
+"pixKeyType",
+"isPrimary"
+],
+"type": "object",
+"properties": {
+"bankId": {
+"type": "string",
+"format": "uuid"
+},
+"branch": {
+"type": "string"
+},
+"accountNumber": {
+"type": "string"
+},
+"accountDigit": {
+"type": [
+"null",
+"string"
+]
+},
+"accountType": {
+"type": "string"
+},
+"holderType": {
+"type": "string"
+},
+"holderName": {
+"type": [
+"null",
+"string"
+]
+},
+"holderDocument": {
+"type": [
+"null",
+"string"
+]
+},
+"pixKey": {
+"type": [
+"null",
+"string"
+]
+},
+"pixKeyType": {
+"type": [
+"null",
+"string"
+]
+},
+"isPrimary": {
+"type": "boolean"
+}
+},
+"additionalProperties": false
+},
+"UpdateClientPersonalDetailsRequest": {
+"required": [
+"gender",
+"maritalStatus",
+"nationality",
+"birthCity",
+"birthState",
+"motherName",
+"fatherName"
+],
+"type": "object",
+"properties": {
+"gender": {
+"type": [
+"null",
+"string"
+]
+},
+"maritalStatus": {
+"type": [
+"null",
+"string"
+]
+},
+"nationality": {
+"type": [
+"null",
+"string"
+]
+},
+"birthCity": {
+"type": [
+"null",
+"string"
+]
+},
+"birthState": {
+"type": [
+"null",
+"string"
+]
+},
+"motherName": {
+"type": [
+"null",
+"string"
+]
+},
+"fatherName": {
+"type": [
+"null",
+"string"
+]
+}
+},
+"additionalProperties": false
+},
+"UpdateClientProfileRequest": {
+"required": [
+"birthDate",
+"names",
+"contacts",
+"addresses",
+"personalDetails"
+],
+"type": "object",
+"properties": {
+"birthDate": {
+"type": [
+"null",
+"string"
+],
+"format": "date"
+},
+"names": {
+"type": [
+"null",
+"array"
+],
+"items": {
+"$ref": "#/components/schemas/CustomerNameRequest"
+}
+},
+"contacts": {
+"type": [
+"null",
+"array"
+],
+"items": {
+"$ref": "#/components/schemas/CustomerContactRequest"
+}
+},
+"addresses": {
+"type": [
+"null",
+"array"
+],
+"items": {
+"$ref": "#/components/schemas/CustomerAddressRequest"
+}
+},
+"personalDetails": {
+"oneOf": [
+{
+"type": "null"
+},
+{
+"$ref": "#/components/schemas/UpdateClientPersonalDetailsRequest"
+}
+]
+}
+},
+"additionalProperties": false
+},
+"UpdateComplianceFlagRequest": {
+"required": [
+"severity",
+"status",
+"description",
+"monitoringFrequency",
+"relatedPepDescription",
+"relatedPepRelationship"
+],
+"type": "object",
+"properties": {
+"severity": {
+"type": "string"
+},
+"status": {
+"type": "string"
+},
+"description": {
+"type": [
+"null",
+"string"
+]
+},
+"monitoringFrequency": {
+"type": [
+"null",
+"string"
+]
+},
+"relatedPepDescription": {
+"type": [
+"null",
+"string"
+]
+},
+"relatedPepRelationship": {
+"type": [
+"null",
+"string"
+]
+}
+}
+},
+"UpdateCurrentProfileRequest": {
+"required": [
+"name",
+"email"
+],
+"type": "object",
+"properties": {
+"name": {
+"type": "string"
+},
+"email": {
+"type": "string"
+}
+},
+"additionalProperties": false
+},
+"UpdateCustomerBankAccountRequest": {
+"required": [
+"bankId",
+"branch",
+"accountNumber",
+"accountDigit",
+"accountType",
+"holderType",
+"holderName",
+"holderDocument",
+"pixKey",
+"pixKeyType",
+"isPrimary",
+"status"
+],
+"type": "object",
+"properties": {
+"bankId": {
+"type": "string",
+"format": "uuid"
+},
+"branch": {
+"type": "string"
+},
+"accountNumber": {
+"type": "string"
+},
+"accountDigit": {
+"type": [
+"null",
+"string"
+]
+},
+"accountType": {
+"type": "string"
+},
+"holderType": {
+"type": "string"
+},
+"holderName": {
+"type": [
+"null",
+"string"
+]
+},
+"holderDocument": {
+"type": [
+"null",
+"string"
+]
+},
+"pixKey": {
+"type": [
+"null",
+"string"
+]
+},
+"pixKeyType": {
+"type": [
+"null",
+"string"
+]
+},
+"isPrimary": {
+"type": "boolean"
+},
+"status": {
+"type": "string"
+}
+}
+},
+"UpdateCustomerPreferencesRequest": {
+"required": [
+"primaryCurrencyCode",
+"secondaryCurrencyCode",
+"languageCode",
+"timeZoneId",
+"theme"
+],
+"type": "object",
+"properties": {
+"primaryCurrencyCode": {
+"type": [
+"null",
+"string"
+]
+},
+"secondaryCurrencyCode": {
+"type": [
+"null",
+"string"
+]
+},
+"languageCode": {
+"type": "string"
+},
+"timeZoneId": {
+"type": "string"
+},
+"theme": {
+"type": "string"
+}
+}
+},
+"UpdateCustomerRequest": {
+"required": [
+"kind",
+"birthDate"
+],
+"type": "object",
+"properties": {
+"kind": {
+"type": "string"
+},
+"birthDate": {
+"type": [
+"null",
+"string"
+],
+"format": "date"
+}
+}
+},
+"UpdateDataIntakeDraftRequest": {
+"required": [
+"title",
+"data"
+],
+"type": "object",
+"properties": {
+"title": {
+"type": [
+"null",
+"string"
+]
+},
+"data": {
+"oneOf": [
+{
+"type": "null"
+},
+{
+"$ref": "#/components/schemas/JsonObject"
+}
+]
+}
+}
+},
+"UpdateDocumentMetadataSchemaRequest": {
+"required": [
+"schema",
+"uiSchema",
+"changeSummary"
+],
+"type": "object",
+"properties": {
+"schema": {
+"type": "string"
+},
+"uiSchema": {
+"type": [
+"null",
+"string"
+]
+},
+"changeSummary": {
+"type": [
+"null",
+"string"
+]
+}
+}
+},
+"UpdateProvidedDocumentRequest": {
+"required": [
+"issuedOn",
+"expiresOn",
+"data"
+],
+"type": "object",
+"properties": {
+"issuedOn": {
+"type": [
+"null",
+"string"
+],
+"format": "date"
+},
+"expiresOn": {
+"type": [
+"null",
+"string"
+],
+"format": "date"
+},
+"data": {
+"$ref": "#/components/schemas/JsonElement"
+},
+"evidenceDocumentIds": {
+"type": [
+"null",
+"array"
+],
+"items": {
+"type": "string",
+"format": "uuid"
+}
+}
+},
+"additionalProperties": false
+},
+"UpdateUserRequest": {
+"required": [
+"name",
+"email",
+"workspaceId"
+],
+"type": "object",
+"properties": {
+"name": {
+"type": "string"
+},
+"email": {
+"type": "string"
+},
+"workspaceId": {
+"type": [
+"null",
+"string"
+],
+"format": "uuid"
+}
+}
+},
+"UpsertClientTrustedContactRequest": {
+"required": [
+"name",
+"relationship",
+"phoneNumber",
+"email"
+],
+"type": "object",
+"properties": {
+"name": {
+"type": "string"
+},
+"relationship": {
+"type": "string"
+},
+"phoneNumber": {
+"type": "string"
+},
+"email": {
+"type": [
+"null",
+"string"
+]
+}
+},
+"additionalProperties": false
+},
+"UpsertCustomerProfessionalProfileRequest": {
+"required": [
+"occupation",
+"employerName",
+"validFrom",
+"validTo",
+"isCurrent"
+],
+"type": "object",
+"properties": {
+"occupation": {
+"type": "string"
+},
+"employerName": {
+"type": [
+"null",
+"string"
+]
+},
+"validFrom": {
+"type": "string",
+"format": "date"
+},
+"validTo": {
+"type": [
+"null",
+"string"
+],
+"format": "date"
+},
+"isCurrent": {
+"type": [
+"null",
+"boolean"
+]
+}
+},
+"additionalProperties": false
+},
+"UpsertCustomerVerificationAreaStatusRequest": {
+"required": [
+"status",
+"statusReason",
+"sourceType",
+"sourceId"
+],
+"type": "object",
+"properties": {
+"status": {
+"type": "string"
+},
+"statusReason": {
+"type": [
+"null",
+"string"
+]
+},
+"sourceType": {
+"type": [
+"null",
+"string"
+]
+},
+"sourceId": {
+"type": [
+"null",
+"string"
+],
+"format": "uuid"
+}
+}
+},
+"UserResponse": {
+"required": [
+"id",
+"name",
+"email",
+"status",
+"workspaceId",
+"workspaceIds",
+"roles",
+"referralCode",
+"referralCodeStatus",
+"referralCodeExpiresAtUtc",
+"createdAtUtc",
+"updatedAtUtc",
+"lastLoginAtUtc"
+],
+"type": "object",
+"properties": {
+"id": {
+"type": "string",
+"format": "uuid"
+},
+"name": {
+"type": "string"
+},
+"email": {
+"type": "string"
+},
+"status": {
+"type": "string"
+},
+"workspaceId": {
+"type": [
+"null",
+"string"
+],
+"format": "uuid"
+},
+"workspaceIds": {
+"type": "array",
+"items": {
+"type": "string",
+"format": "uuid"
+}
+},
+"roles": {
+"type": "array",
+"items": {
+"type": "string"
+}
+},
+"referralCode": {
+"type": [
+"null",
+"string"
+]
+},
+"referralCodeStatus": {
+"type": [
+"null",
+"string"
+]
+},
+"referralCodeExpiresAtUtc": {
+"type": [
+"null",
+"string"
+],
+"format": "date-time"
+},
+"createdAtUtc": {
+"type": "string",
+"format": "date-time"
+},
+"updatedAtUtc": {
+"type": [
+"null",
+"string"
+],
+"format": "date-time"
+},
+"lastLoginAtUtc": {
+"type": [
+"null",
+"string"
+],
+"format": "date-time"
+}
+}
+},
+"ValidateMetadataInstanceRequest": {
+"required": [
+"metadata",
+"issuedOn",
+"expiresOn"
+],
+"type": "object",
+"properties": {
+"metadata": {
+"type": "string"
+},
+"issuedOn": {
+"type": [
+"null",
+"string"
+],
+"format": "date"
+},
+"expiresOn": {
+"type": [
+"null",
+"string"
+],
+"format": "date"
+}
+}
+},
+"VerificationCodeRequest": {
+"required": [
+"email"
+],
+"type": "object",
+"properties": {
+"email": {
+"type": "string"
+}
+}
+},
+"VerificationCodeValidationRequest": {
+"required": [
+"email",
+"code"
+],
+"type": "object",
+"properties": {
+"email": {
+"type": "string"
+},
+"code": {
+"type": "string"
+}
+}
+}
+},
+"securitySchemes": {
+"Bearer": {
+"type": "http",
+"description": "Enter your JWT token",
+"scheme": "bearer",
+"bearerFormat": "JWT"
+}
+}
+},
+"tags": [
+{
+"name": "Meta"
+},
+{
+"name": "Authentication"
+},
+{
+"name": "Preferences"
+},
+{
+"name": "Public Profiles"
+},
+{
+"name": "Customer Verification"
+},
+{
+"name": "Webhooks"
+},
+{
+"name": "Current User"
+},
+{
+"name": "Customers"
+},
+{
+"name": "Banks"
+},
+{
+"name": "Client Profile"
+},
+{
+"name": "Client Banks"
+},
+{
+"name": "Client Onboarding"
+},
+{
+"name": "Data Intake"
+},
+{
+"name": "Documents"
+},
+{
+"name": "Users"
+}
+]
+}

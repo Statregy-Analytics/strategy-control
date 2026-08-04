@@ -86,10 +86,13 @@ import { storeToRefs } from 'pinia'
 import { useRouter } from 'vue-router'
 import TitleAuth from 'src/components/Auth/TitleAuth.vue'
 import LabelForm from 'src/components/Form/LabelForm.vue'
+import useNotification from 'src/composables/global/useNotification'
+import { getApiErrorMessage } from 'src/services/apiError'
 
 const storeAuth = useAuthStore()
 const { selectedInitial, auth, passwordReset } = storeToRefs(storeAuth)
 const router = useRouter()
+const { showLoading, hideLoading, successNotify, errorNotify } = useNotification()
 const emailRef = ref(null)
 const passwordRef = ref(null)
 defineComponent({
@@ -103,10 +106,17 @@ const isPwd = ref(true)
 const onSubmit = async () => {
   emailRef.value.validate()
   passwordRef.value.validate()
-  if (!emailRef.value.hasError || !passwordRef.value.hasError) {
-    // await authAction();
-    // Aqui vai ser feito a logica de envio de authenticação
-    router.push({ name: 'TokenValidation' })
+  if (emailRef.value.hasError || passwordRef.value.hasError) return
+
+  try {
+    showLoading('Autenticando...')
+    await storeAuth.loginAction({ email: auth.value.email, password: auth.value.password })
+    successNotify('Bem-vindo!')
+    router.push({ name: 'Transações' })
+  } catch (error) {
+    errorNotify(getApiErrorMessage(error, 'Não foi possível entrar. Verifique suas credenciais.'))
+  } finally {
+    hideLoading()
   }
 }
 </script>

@@ -14,6 +14,7 @@ const state = () => {
       destination: 'movimentar',
     },
     dialogCompare: false,
+    createClientDialog: false,
     projection: false,
     projectionStatus: 1,
     paramentroLogic: false,
