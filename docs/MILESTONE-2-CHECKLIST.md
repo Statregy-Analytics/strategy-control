@@ -66,14 +66,14 @@ Contrato de referência: [swagger.json](Api/swagger.json).
 - [x] Tornar a linha/nome do cliente navegável para o detalhe.
 - [x] Carregar a primeira renderização com `GET /api/v1/admin/customers/{id}/summary`.
 - [x] Criar estados de loading, vazio, erro e cliente não encontrado.
-- [ ] Renderizar header com `GET /api/v1/admin/customers/{id}/header`.
-- [ ] Implementar identificação com `GET /api/v1/admin/customers/{id}/identification`.
-- [ ] Editar nomes com `PUT /api/v1/admin/customers/{id}/names`.
-- [ ] Editar contatos com `PUT /api/v1/admin/customers/{id}/contacts`.
-- [ ] Editar endereços com `PUT /api/v1/admin/customers/{id}/addresses`.
+- [x] Renderizar header com `GET /api/v1/admin/customers/{id}/header`.
+- [x] Implementar identificação com `GET /api/v1/admin/customers/{id}/identification`.
+- [x] Editar nomes com `PUT /api/v1/admin/customers/{id}/names`.
+- [x] Editar contatos com `PUT /api/v1/admin/customers/{id}/contacts`.
+- [x] Editar endereços com `PUT /api/v1/admin/customers/{id}/addresses`.
 - [ ] Consultar e alterar status.
 - [ ] Implementar preferências e catálogo de preferências.
-- [ ] Invalidar/recarregar summary e projeções afetadas após cada escrita.
+- [x] Invalidar/recarregar summary e projeções afetadas após cada escrita.
 
 ## 3. Perfis profissional, financeiro e segurança
 
