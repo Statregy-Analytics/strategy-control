@@ -1,7 +1,7 @@
 <template>
-  <div class="row q-col-gutter-md">
-    <div class="col-12 col-md-4">
-      <q-card flat bordered>
+  <div :class="hideStatus ? '' : 'row q-col-gutter-md'">
+    <div v-if="!hideStatus" class="col-12 col-md-4">
+      <q-card flat :bordered="!embedded">
         <q-card-section><div class="text-subtitle1 text-weight-bold">Status do cliente</div>
           <div class="text-caption text-grey-7">Controla o estado operacional do cadastro.</div></q-card-section>
         <q-separator />
@@ -14,24 +14,24 @@
       </q-card>
     </div>
 
-    <div class="col-12 col-md-8">
-      <q-card flat bordered>
+    <div :class="hideStatus ? 'col-12' : 'col-12 col-md-8'">
+      <q-card flat :bordered="!embedded">
         <q-card-section><div class="text-subtitle1 text-weight-bold">Preferências</div>
           <div class="text-caption text-grey-7">Moeda, idioma, fuso horário e tema definidos pelo catálogo da API.</div></q-card-section>
-        <q-separator />
+        <q-separator v-if="!embedded" />
         <q-card-section v-if="loading" class="row justify-center q-pa-xl"><q-spinner color="primary" size="36px" /></q-card-section>
         <q-banner v-else-if="loadError" class="bg-red-1 text-negative">{{ loadError }}
           <template #action><q-btn flat color="negative" label="Tentar novamente" @click="load" /></template>
         </q-banner>
-        <q-card-section v-else class="row q-col-gutter-md">
-          <q-select v-model="form.primaryCurrencyCode" :options="currencyOptions" emit-value map-options outlined label="Moeda principal" class="col-12 col-sm-6" />
-          <q-select v-model="form.secondaryCurrencyCode" :options="currencyOptions" emit-value map-options clearable outlined label="Moeda secundária" class="col-12 col-sm-6" />
-          <q-select v-model="form.languageCode" :options="languageOptions" emit-value map-options outlined label="Idioma" class="col-12 col-sm-6" />
-          <q-select v-model="form.timeZoneId" :options="timeZoneOptions" emit-value map-options outlined label="Fuso horário" class="col-12 col-sm-6" />
-          <q-select v-model="form.theme" :options="themeOptions" emit-value map-options outlined label="Tema" class="col-12 col-sm-6" />
+        <q-card-section v-else class="row q-col-gutter-sm q-px-none q-py-sm">
+          <label-form class-name="col-12 col-md-4" text-label="Moeda principal"><q-select v-model="form.primaryCurrencyCode" :options="currencyOptions" emit-value map-options outlined dense /></label-form>
+          <label-form class-name="col-12 col-md-4" text-label="Moeda secundária"><q-select v-model="form.secondaryCurrencyCode" :options="currencyOptions" emit-value map-options clearable outlined dense /></label-form>
+          <label-form class-name="col-12 col-md-4" text-label="Idioma"><q-select v-model="form.languageCode" :options="languageOptions" emit-value map-options outlined dense /></label-form>
+          <label-form class-name="col-12 col-md-4" text-label="Fuso horário"><q-select v-model="form.timeZoneId" :options="timeZoneOptions" emit-value map-options outlined dense /></label-form>
+          <label-form class-name="col-12 col-md-4" text-label="Tema"><q-select v-model="form.theme" :options="themeOptions" emit-value map-options outlined dense /></label-form>
         </q-card-section>
-        <q-card-actions v-if="!loading && !loadError" align="right">
-          <q-btn color="primary" label="Salvar preferências" no-caps :loading="savingPreferences" @click="savePreferences" />
+        <q-card-actions v-if="!loading && !loadError" align="right" class="q-pa-none">
+          <q-btn flat dense size="sm" color="primary" icon="save" label="Salvar preferências" no-caps :loading="savingPreferences" @click="savePreferences" />
         </q-card-actions>
       </q-card>
     </div>
@@ -43,8 +43,13 @@ import { computed, onMounted, reactive, ref } from 'vue'
 import { changeCustomerStatus, getCustomerPreferences, getCustomerStatus, getPreferenceCatalog, updateCustomerPreferences } from 'src/services/customerService'
 import { getApiErrorMessage } from 'src/services/apiError'
 import useNotification from 'src/composables/global/useNotification'
+import LabelForm from 'src/components/Form/LabelForm.vue'
 
-const props = defineProps({ customerId: { type: String, required: true } })
+const props = defineProps({
+  customerId: { type: String, required: true },
+  embedded: { type: Boolean, default: false },
+  hideStatus: { type: Boolean, default: false },
+})
 const emit = defineEmits(['updated'])
 const { successNotify, errorNotify } = useNotification()
 const loading = ref(true), loadError = ref(''), savingStatus = ref(false), savingPreferences = ref(false)

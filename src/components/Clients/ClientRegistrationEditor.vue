@@ -1,54 +1,54 @@
 <template>
-  <div class="q-gutter-md">
-    <q-card flat bordered>
-      <q-card-section class="row items-center">
+  <div :class="embedded ? 'q-gutter-lg' : 'q-gutter-md'">
+    <q-card flat :bordered="!embedded">
+      <q-card-section class="row items-center q-px-none q-py-sm">
         <div class="text-subtitle1 text-weight-bold">Nomes</div><q-space />
-        <q-btn flat color="primary" icon="add" label="Adicionar" no-caps @click="addName" />
+        <q-btn flat dense size="sm" color="primary" icon="add" label="Adicionar" no-caps @click="addName" />
       </q-card-section>
-      <q-separator />
-      <q-card-section v-for="(item, index) in names" :key="item.id || index" class="row q-col-gutter-sm">
-        <q-input v-model="item.displayName" label="Nome" outlined dense class="col-12 col-md-5" />
-        <q-select v-model="item.kind" :options="nameKinds" label="Tipo" outlined dense class="col-6 col-md-2" />
-        <q-input v-model="item.validFrom" type="date" label="Válido desde" outlined dense class="col-6 col-md-2" />
-        <q-checkbox v-model="item.isPrimary" label="Principal" class="col" @update:model-value="setPrimary(names, index)" />
-        <q-btn flat round color="negative" icon="delete" :disable="names.length === 1" @click="names.splice(index, 1)" />
+      <q-separator v-if="!embedded" />
+      <q-card-section v-for="(item, index) in names" :key="item.id || index" class="row q-col-gutter-sm items-end q-px-none q-py-sm">
+        <label-form class-name="col-12 col-md-4" text-label="Nome"><q-input v-model="item.displayName" placeholder="value" outlined dense /></label-form>
+        <label-form class-name="col-6 col-md-3" text-label="Tipo"><q-select v-model="item.kind" :options="nameKinds" outlined dense /></label-form>
+        <label-form class-name="col-6 col-md-3" text-label="Válido desde"><q-input v-model="item.validFrom" type="date" outlined dense /></label-form>
+        <q-checkbox v-model="item.isPrimary" label="Principal" class="col-auto q-mb-xs" @update:model-value="setPrimary(names, index)" />
+        <q-btn flat round dense color="negative" icon="delete" class="q-mb-xs" :disable="names.length === 1" @click="names.splice(index, 1)" />
       </q-card-section>
-      <q-card-actions align="right"><q-btn color="primary" label="Salvar nomes" no-caps :loading="saving === 'names'" @click="saveNames" /></q-card-actions>
+      <q-card-actions align="right" class="q-pa-none"><q-btn flat dense size="sm" color="primary" icon="save" label="Salvar nomes" no-caps :loading="saving === 'names'" @click="saveNames" /></q-card-actions>
     </q-card>
 
-    <q-card flat bordered>
-      <q-card-section class="row items-center">
+    <q-card flat :bordered="!embedded">
+      <q-card-section class="row items-center q-px-none q-py-sm">
         <div class="text-subtitle1 text-weight-bold">Contatos</div><q-space />
-        <q-btn flat color="primary" icon="add" label="Adicionar" no-caps @click="addContact" />
+        <q-btn flat dense size="sm" color="primary" icon="add" label="Adicionar" no-caps @click="addContact" />
       </q-card-section>
-      <q-separator />
-      <q-card-section v-for="(item, index) in contacts" :key="item.id || index" class="row q-col-gutter-sm">
-        <q-select v-model="item.kind" :options="contactKinds" label="Tipo" outlined dense class="col-12 col-md-3" />
-        <q-input v-model="item.value" label="Contato" outlined dense class="col-12 col-md-6" />
-        <q-checkbox v-model="item.isPrimary" label="Principal" class="col" @update:model-value="setPrimary(contacts, index)" />
-        <q-btn flat round color="negative" icon="delete" :disable="contacts.length === 1" @click="contacts.splice(index, 1)" />
+      <q-separator v-if="!embedded" />
+      <q-card-section v-for="(item, index) in contacts" :key="item.id || index" class="row q-col-gutter-sm items-end q-px-none q-py-sm">
+        <label-form class-name="col-12 col-md-3" text-label="Tipo"><q-select v-model="item.kind" :options="contactKinds" outlined dense /></label-form>
+        <label-form class-name="col-12 col-md-6" text-label="Contato"><q-input v-model="item.value" placeholder="value" outlined dense /></label-form>
+        <q-checkbox v-model="item.isPrimary" label="Principal" class="col q-mb-xs" @update:model-value="setPrimary(contacts, index)" />
+        <q-btn flat round dense color="negative" icon="delete" class="q-mb-xs" :disable="contacts.length === 1" @click="contacts.splice(index, 1)" />
       </q-card-section>
-      <q-card-actions align="right"><q-btn color="primary" label="Salvar contatos" no-caps :loading="saving === 'contacts'" @click="saveContacts" /></q-card-actions>
+      <q-card-actions align="right" class="q-pa-none"><q-btn flat dense size="sm" color="primary" icon="save" label="Salvar contatos" no-caps :loading="saving === 'contacts'" @click="saveContacts" /></q-card-actions>
     </q-card>
 
-    <q-card flat bordered>
-      <q-card-section class="row items-center">
+    <q-card flat :bordered="!embedded">
+      <q-card-section class="row items-center q-px-none q-py-sm">
         <div class="text-subtitle1 text-weight-bold">Endereços</div><q-space />
-        <q-btn flat color="primary" icon="add" label="Adicionar" no-caps @click="addAddress" />
+        <q-btn flat dense size="sm" color="primary" icon="add" label="Adicionar" no-caps @click="addAddress" />
       </q-card-section>
-      <q-separator />
-      <q-card-section v-if="!addresses.length" class="text-grey-7">Nenhum endereço cadastrado.</q-card-section>
-      <q-card-section v-for="(item, index) in addresses" :key="item.id || index" class="row q-col-gutter-sm">
-        <q-select v-model="item.kind" :options="addressKinds" label="Tipo" outlined dense class="col-12 col-md-3" />
-        <q-input v-model="item.line1" label="Endereço" outlined dense class="col-12 col-md-6" />
-        <q-input v-model="item.line2" label="Complemento" outlined dense class="col-12 col-md-3" />
-        <q-input v-model="item.city" label="Cidade" outlined dense class="col-12 col-md-4" />
-        <q-input v-model="item.stateOrProvince" label="Estado/Província" outlined dense class="col-6 col-md-3" />
-        <q-input v-model="item.postalCode" label="CEP" outlined dense class="col-6 col-md-2" />
+      <q-separator v-if="!embedded" />
+      <q-card-section v-if="!addresses.length" class="text-grey-7 q-px-none">Nenhum endereço cadastrado.</q-card-section>
+      <q-card-section v-for="(item, index) in addresses" :key="item.id || index" class="row q-col-gutter-sm items-end q-px-none q-py-sm">
+        <label-form class-name="col-12 col-md-3" text-label="Tipo"><q-select v-model="item.kind" :options="addressKinds" outlined dense /></label-form>
+        <label-form class-name="col-12 col-md-6" text-label="Endereço"><q-input v-model="item.line1" placeholder="value" outlined dense /></label-form>
+        <label-form class-name="col-12 col-md-3" text-label="Complemento"><q-input v-model="item.line2" placeholder="value" outlined dense /></label-form>
+        <label-form class-name="col-12 col-md-4" text-label="Cidade"><q-input v-model="item.city" placeholder="value" outlined dense /></label-form>
+        <label-form class-name="col-6 col-md-3" text-label="Estado/Província"><q-input v-model="item.stateOrProvince" placeholder="value" outlined dense /></label-form>
+        <label-form class-name="col-6 col-md-2" text-label="CEP"><q-input v-model="item.postalCode" placeholder="value" outlined dense /></label-form>
         <q-checkbox v-model="item.isPrimary" label="Principal" class="col" @update:model-value="setPrimary(addresses, index)" />
         <q-btn flat round color="negative" icon="delete" @click="addresses.splice(index, 1)" />
       </q-card-section>
-      <q-card-actions align="right"><q-btn color="primary" label="Salvar endereços" no-caps :loading="saving === 'addresses'" @click="saveAddresses" /></q-card-actions>
+      <q-card-actions align="right" class="q-pa-none"><q-btn flat dense size="sm" color="primary" icon="save" label="Salvar endereços" no-caps :loading="saving === 'addresses'" @click="saveAddresses" /></q-card-actions>
     </q-card>
   </div>
 </template>
@@ -58,8 +58,13 @@ import { ref, watch } from 'vue'
 import { replaceCustomerAddresses, replaceCustomerContacts, replaceCustomerNames } from 'src/services/customerService'
 import { getApiErrorMessage } from 'src/services/apiError'
 import useNotification from 'src/composables/global/useNotification'
+import LabelForm from 'src/components/Form/LabelForm.vue'
 
-const props = defineProps({ customerId: { type: String, required: true }, identification: { type: Object, default: () => ({}) } })
+const props = defineProps({
+  customerId: { type: String, required: true },
+  identification: { type: Object, default: () => ({}) },
+  embedded: { type: Boolean, default: false },
+})
 const emit = defineEmits(['updated'])
 const { successNotify, errorNotify } = useNotification()
 const today = () => new Date().toISOString().slice(0, 10)

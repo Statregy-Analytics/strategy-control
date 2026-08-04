@@ -47,6 +47,10 @@ URL: `http://localhost:8080/dataManagement`
 
 - [x] A tabela carrega dados reais da API.
 - [x] O loading aparece durante a consulta.
+- [x] A tabela segue a identidade visual das listagens de Leads e Assessores.
+- [x] Cada linha apresenta checkbox, avatar, nome e contato principal.
+- [x] O menu de três pontos apresenta a ação “Editar”.
+- [x] Itens por página e total de registros aparecem no rodapé externo.
 - [x] Nome do cliente é exibido.
 - [x] Contato principal é exibido ou aparece como não informado.
 - [x] Pessoa física aparece como “Pessoa física”.
@@ -123,20 +127,23 @@ Observações:
 
 > Nenhum erro do backend foi identificado no cadastro válido desta rodada.
 
-## 5. Abertura do detalhe
+## 5. Abertura da edição do cliente
 
-Abrir o cliente pelo nome ou pela seta.
+Abrir o cliente pelo nome ou pelo menu de opções da linha.
 
-URL esperada:
+URL da listagem:
 
-`http://localhost:8080/dataManagement/clients/{id}`
+`http://localhost:8080/dataManagement`
 
-- [x] Clicar no nome abre o cliente correto.
-- [x] Clicar na seta abre o cliente correto.
-- [x] Botão voltar funciona.
+- [x] Clicar no nome abre o cliente correto em um painel lateral.
+- [x] Menu de opções apresenta a ação “Editar”.
+- [x] Clicar em “Editar” abre o cliente correto em um painel lateral.
+- [x] A listagem permanece visível ao fundo.
+- [x] Botão fechar retorna à listagem sem mudar de rota.
 - [x] Loading aparece durante as consultas.
 - [x] Header mostra nome, contato e status.
-- [x] Identificação mostra os dados disponíveis.
+- [x] Header, dados cadastrais, perfil profissional e preferências carregam de forma independente.
+- [x] O seletor do header troca de cliente sem fechar o painel lateral.
 - [x] Cliente inexistente apresenta “Cliente não encontrado”.
 - [x] Falha temporária apresenta opção de tentar novamente.
 
@@ -178,7 +185,7 @@ Observações:
 
 ## 7. Dados cadastrais — nomes
 
-No detalhe, abrir “Dados cadastrais”.
+No painel lateral de edição, expandir “Dados cadastrais”.
 
 - [!] Nomes existentes são carregados.
 - [x] Adicionar nome funciona.
@@ -271,7 +278,8 @@ Observações:
 
 ## 10. Status do cliente
 
-No detalhe, abrir “Status e preferências”.
+No painel lateral de edição, alterar o status diretamente no header. As
+preferências permanecem na seção inferior do formulário.
 
 - [x] Status atual é carregado.
 - [x] Botão fica desabilitado sem alteração.
@@ -329,7 +337,7 @@ Observações:
 - [ ] Listagem aprovada.
 - [x] Cadastro de pessoa física aprovado.
 - [x] Cadastro de pessoa jurídica aprovado.
-- [x] Detalhe aprovado.
+- [x] Painel lateral de edição aprovado.
 - [x] Degradação do summary aprovada.
 - [!] Nomes aprovados.
 - [!] Contatos aprovados.
@@ -341,17 +349,21 @@ Observações:
 
 ## 13. Perfil profissional — painel administrativo
 
-URL: `http://localhost:8080/dataManagement/clients/{id}`
+URL: `http://localhost:8080/dataManagement`
 
-Pré-condição: usar um cliente `Active` e abrir a área de perfil profissional.
+Pré-condição: usar um cliente `Active`, abrir o menu de opções da linha e clicar
+em “Editar”. O painel deve abrir lateralmente sem sair da listagem.
 
-1. [ ] Abrir a visão combinada e conferir loading, sucesso e campos sem dados.
-2. [ ] Comparar os dados combinados com a consulta do perfil profissional.
-3. [ ] Entrar em edição, alterar profissão, empresa e demais campos disponíveis.
-4. [ ] Salvar e confirmar mensagem de sucesso.
-5. [ ] Recarregar com `Ctrl+F5` e confirmar persistência.
-6. [ ] Limpar um campo opcional, salvar e confirmar que ele permanece vazio.
-7. [ ] Simular falha da API e confirmar mensagem amigável e nova tentativa.
+1. [x] O botão “Editar” abre um `q-dialog` lateral e mantém a listagem ao fundo.
+2. [x] Header e seções possuem loadings independentes.
+3. [x] O perfil profissional carrega sem bloquear os dados cadastrais e as preferências.
+4. [x] Perfil ainda não cadastrado apresenta formulário vazio, sem erro genérico.
+5. [ ] Comparar os dados combinados com a consulta do perfil profissional.
+6. [ ] Alterar ocupação, empregador e vigência com dados válidos.
+7. [ ] Salvar e confirmar mensagem de sucesso.
+8. [ ] Fechar, reabrir o painel e confirmar persistência.
+9. [ ] Limpar um campo opcional, salvar e confirmar que ele permanece vazio.
+10. [ ] Simular falha da API e confirmar mensagem amigável e nova tentativa.
 
 Endpoints esperados:
 

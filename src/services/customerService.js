@@ -18,3 +18,6 @@ export async function changeCustomerStatus(id, status) { return unwrap(await api
 export async function getCustomerPreferences(id) { return unwrap(await api.get(`/api/v1/admin/customers/${id}/preferences`)) }
 export async function updateCustomerPreferences(id, preferences) { return unwrap(await api.patch(`/api/v1/admin/customers/${id}/preferences`, preferences)) }
 export async function getPreferenceCatalog() { return unwrap(await api.get('/api/v1/preferences/catalog')) }
+export async function getCustomerProfessionalFinancialSecurity(id) { return unwrap(await api.get(`/api/v1/admin/customers/${id}/professional-financial-security`)) }
+export async function getCustomerProfessionalProfile(id) { return unwrap(await api.get(`/api/v1/admin/customers/${id}/professional-profile`)) }
+export async function updateCustomerProfessionalProfile(id, profile) { return unwrap(await api.put(`/api/v1/admin/customers/${id}/professional-profile`, profile)) }
