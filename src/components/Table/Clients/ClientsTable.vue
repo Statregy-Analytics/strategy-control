@@ -1,452 +1,68 @@
 <template>
-  <div class="q-pa-md ClientsTable">
-    <q-table
-      flat
-      dense
-      class="my-sticky-header-column-table"
-      hide-pagination
-      :pagination="pagination"
-      :rows="paginatedRows"
-      :columns="props.columns.length == 0 ? columnsClient : props.columns"
-      row-key="id"
-      @update:pagination="updatePagination"
-      :selected-rows-label="getSelectedString"
-      selection="multiple"
-      v-model:selected="selected"
-    >
-      <!-- Filtros -->
-      <template v-slot:top>
-        <div class="row col-12 justify-between">
-          <div class="col-3 text-start">
-            <q-input
-              dense
-              outlined
-              debounce="300"
-              v-model="filter"
-              placeholder="Pesquisar por palavra-chave"
-              clearable
-              prepend-inner-icon="search"
-            >
-              <template v-slot:prepend>
-                <q-icon name="search" size="1.2rem" />
-              </template>
-            </q-input>
-          </div>
-          <div class="col self-end items-end" style="text-align-last: end">
-            <q-btn color="primary" no-caps label="Exportar" flat size="sm" @click="exportTable" />
-            <q-btn
-              size="xs"
-              padding="xs"
-              no-caps
-              outline
-              label="Comparar Clientes"
-              :class="!compareBtn ? 'text-muted' : 'text-primary'"
-              @click.prevent.stop="compareSelected"
-            />
-            <q-btn size="md" padding="xs" outline color="primary" class="border-radius-4">
-              <IconLayoutCards size="18" />
-            </q-btn>
-            <q-btn size="md" padding="xs" outline class="outline" color="primary">
-              <IconList size="18" />
-            </q-btn>
-          </div>
-        </div>
+  <div class="q-pa-md">
+    <q-table flat dense row-key="id" :rows="data" :columns="columns" :loading="loading"
+      :pagination="{ page: pagination.page, rowsPerPage: pagination.pageSize, rowsNumber: pagination.totalItems }"
+      @request="onRequest">
+      <template #top>
+        <q-input v-model="search" dense outlined debounce="400" clearable placeholder="Pesquisar cliente" @update:model-value="reload">
+          <template #prepend><q-icon name="search" /></template>
+        </q-input>
       </template>
-      <!-- Coluna de Clientes -->
-      <template v-slot:body-cell-cliente="props">
+      <template #body-cell-primaryName="props">
         <q-td :props="props">
-          <q-item>
-            <q-item-section avatar>
-              <q-avatar size="32px" class="q-mr-sm">
-                <q-img
-                  :src="props.row.cliente.avatar"
-                  :alt="props.row.cliente.name"
-                  :title="props.row.cliente.name"
-                />
-              </q-avatar>
-            </q-item-section>
-            <q-item-section align="left">
-              <q-item-label>
-                {{ props.row.cliente.name }}
-              </q-item-label>
-              <q-item-label caption>
-                {{ props.row.cliente.email }}
-              </q-item-label>
-            </q-item-section>
-          </q-item>
-        </q-td>
-      </template>
-
-      <!-- Coluna de emprestimo -->
-      <template v-slot:body-cell-emprestimo="props">
-        <q-td :props="props">
-          <q-btn
-            size="xs"
-            outline
-            padding="xs"
-            no-caps
-            class="custom-btn-muted"
-            :label="props.row.emprestimo"
-          />
-        </q-td>
-      </template>
-      <!-- dividendo -->
-      <template v-slot:body-cell-dividendo="props">
-        <q-td :props="props">
-          <p>
-            {{ $filtersString.formatPartternCurrency(props.row.dividendo.total) }} <br />
-            <span class="text-muted text-small">Data: {{ props.row.dividendo.data }}</span>
-          </p>
-        </q-td>
-      </template>
-      <!-- contrato -->
-      <template v-slot:body-cell-contrato="props">
-        <q-td :props="props">
-          <p>
-            {{ $filtersString.formatPartternCurrency(props.row.contrato.total) }} <br />
-            <span class="text-muted text-small">{{ props.row.contrato.quantity }}</span>
-          </p>
-        </q-td>
-      </template>
-      <template v-slot:body-cell-saldo="props">
-        <q-td :props="props">
-          <p>{{ $filtersString.formatPartternCurrency(props.row.saldo) }} <br /></p>
-        </q-td>
-      </template>
-      <!-- actions -->
-      <template v-slot:body-cell-actions="props">
-        <q-td :props="props">
-          <q-btn
-            size="xs"
-            padding="xs"
-            no-caps
-            flat
-            :icon="$filtersString.resolveUrl('img:icons/dots-vertical.svg')"
-          >
-            <q-menu transition-show="flip-right" transition-hide="flip-left">
-              <div
-                class=""
-                style="
-                  min-width: 181px;
-                  border-radius: 12px;
-                  gap: 4px;
-                  display: flex;
-                  flex-direction: column;
-                  justify-content: start;
-                "
-              >
-                <q-btn
-                  class="q-mb-xs"
-                  no-caps
-                  flat
-                  style="min-width: 181px; align-items: start"
-                  @click.prevent="editClient(props.row.id)"
-                >
-                  <q-icon
-                    :name="$filtersString.resolveUrl('img:icons/edit.svg')"
-                    size="0.8rem"
-                    class="text-muted"
-                  />
-                  <span class="q-ml-sm text-muted" style="font-size: small; color: #656565">
-                    Editar
-                  </span>
-                  <!-- <q-tooltip anchor="top middle" self="bottom middle" transition-show="scale">
-                  </q-tooltip> -->
-                </q-btn>
-                <q-btn class="q-mb-xs" no-caps flat style="min-width: 181px; align-items: start">
-                  <q-icon
-                    :name="$filtersString.resolveUrl('img:icons/trash.svg')"
-                    size="0.8rem"
-                    class="text-red"
-                    color="red"
-                  />
-                  <span class="q-ml-sm text-muted" style="font-size: small; color: #656565">
-                    Remover
-                  </span>
-                </q-btn>
-              </div>
-              <!-- <q-list style="min-width: 100px; border-radius: 12px"> </q-list> -->
-            </q-menu>
+          <q-btn flat no-caps padding="none" class="text-left" color="dark" @click="openCustomer(props.row.id)">
+            <div>
+              <div class="text-weight-medium">{{ props.row.primaryName || 'Sem nome' }}</div>
+              <div class="text-caption text-grey-7">{{ props.row.primaryContact || 'Sem contato principal' }}</div>
+            </div>
           </q-btn>
         </q-td>
       </template>
+      <template #body-cell-status="props">
+        <q-td :props="props"><q-badge :color="props.value === 'Active' ? 'positive' : 'grey'">{{ statusLabel(props.value) }}</q-badge></q-td>
+      </template>
+      <template #body-cell-updatedAtUtc="props">
+        <q-td :props="props">{{ formatDate(props.value || props.row.createdAtUtc) }}</q-td>
+      </template>
+      <template #body-cell-actions="props">
+        <q-td :props="props"><q-btn flat round dense icon="chevron_right" aria-label="Abrir cliente" @click="openCustomer(props.row.id)" /></q-td>
+      </template>
     </q-table>
-    <q-dialog
-      v-model="clientDialog"
-      position="right"
-      full-height
-      full-width
-      maximized
-      class="control-width"
-    >
-      <edit-clients-layout />
-    </q-dialog>
-    <q-dialog
-      v-model="dialogCompare"
-      position="right"
-      full-height
-      full-width
-      maximized
-      persistent
-      class="control-width-compare"
-    >
-      <compare-layout />
-    </q-dialog>
-    <!-- <div class="q-mt-md">Selected: {{ JSON.stringify(selected) }}</div> -->
-    <div class="row justify-between items-center q-mt-md">
-      <div class="row items-center">
-        <span class="q-mr-sm">Itens por página:</span>
-        <q-select
-          dense
-          outlined
-          v-model="pagination.rowsPerPage"
-          :options="[5, 10, 15, 20]"
-          @update:model-value="updateRowsPerPage"
-          :popup-content-style="{ fontSize: '10px' }"
-          dropdown-icon="keyboard_arrow_down"
-        />
-        <span class="q-ml-md text-caption text-grey-8">
-          Mostrando {{ firstItemIndex }} a {{ lastItemIndex }} de
-          {{ filteredRows.length }} registros
-        </span>
-      </div>
-      <div class="row justify-center q-mt-md">
-        <q-pagination
-          v-model="pagination.page"
-          color="primary"
-          :max="pagesNumber"
-          :max-pages="6"
-          size="sm"
-          direction-links
-        />
-      </div>
-    </div>
   </div>
 </template>
 
 <script setup>
-import { ref, computed, defineComponent } from 'vue'
-import { exportFile, useQuasar } from 'quasar'
-import { useLayoutStore } from 'src/stores/layout'
+import { onMounted, ref } from 'vue'
 import { storeToRefs } from 'pinia'
+import { useRouter } from 'vue-router'
 import { useClientStore } from 'src/stores/client'
-import useCliente from 'src/composables/Fakes/useCliente'
+import { getApiErrorMessage } from 'src/services/apiError'
+import useNotification from 'src/composables/global/useNotification'
 
-import EditClientsLayout from 'src/layouts/Clients/EditClientsLayout.vue'
-import CompareLayout from 'src/layouts/Clients/CompareLayout.vue'
-defineComponent({
-  name: 'ClientsTable',
-})
-const props = defineProps({
-  columns: {
-    type: Array,
-    default: () => [],
-  },
-})
-const storeLayout = useLayoutStore()
-const storeClient = useClientStore()
-// const { compare } = storeToRefs(storeClient)
-const { clientDialog, dialogCompare } = storeToRefs(storeLayout)
-const { rowsClient, columnsClient, getClient } = useCliente()
-// const classCompare = computed(() => {
-//   console.log('classCompare', compare.value.length)
-//   return compare.value.length < 3 ? 'control-width' : 'control-width-compare'
-// })
-
-const editClient = (id) => {
-  storeLayout.setDialogOpengHeader('Clientes')
-  console.log('editClient', id)
-  storeLayout.setClientDialog(true)
-  storeLayout.setClientEdit(getClient(id))
-}
-
-const compareSelected = () => {
-  if (selected.value.length < 2) {
-    $q.notify({
-      message: 'Selecione pelo menos dois clientes para comparar.',
-      color: 'negative',
-      icon: 'warning',
-    })
-    return
-  }
-  storeLayout.setDialogOpengHeader('Comparar Clientes')
-  storeLayout.setDialogCompare(true)
-  storeClient.setCompareSelect(selected.value)
-}
-const selected = ref([])
-const compareBtn = computed(() => {
-  return selected.value.length > 1
-})
-const getSelectedString = () => {
-  return selected.value.length === 0
-    ? ''
-    : `${selected.value.length} record${selected.value.length > 1 ? 's' : ''} selected of ${rowsClient.length}`
-}
-
-const pagination = ref({
-  page: 1,
-  rowsPerPage: 5,
-  rowsNumber: 0,
-})
-const updatePagination = (val) => {
-  pagination.value = val
-}
-const filter = ref('')
-// Filtra as linhas com base nos filtros aplicados
-const filteredRows = computed(() => {
-  return rowsClient.filter((row) => {
-    // Filtro de pesquisa geral
-    if (
-      filter.value &&
-      !Object.values(row.cliente).some((val) =>
-        String(val).toLowerCase().includes(filter.value.toLowerCase()),
-      )
-    ) {
-      return false
-    }
-    return true
-  })
-})
-// Calcula o número total de linhas para paginação
-const rowsNumber = computed(() => filteredRows.value.length)
-
-// Retorna apenas as linhas da página atual
-const paginatedRows = computed(() => {
-  const start = (pagination.value.page - 1) * pagination.value.rowsPerPage
-  const end = start + pagination.value.rowsPerPage
-  return filteredRows.value.slice(start, end)
-})
-// Calcula o número total de páginas
-const pagesNumber = computed(() => {
-  return Math.ceil(rowsNumber.value / pagination.value.rowsPerPage)
-})
-
-// Índices dos itens exibidos
-const firstItemIndex = computed(() => {
-  return (pagination.value.page - 1) * pagination.value.rowsPerPage + 1
-})
-
-const lastItemIndex = computed(() => {
-  const end = pagination.value.page * pagination.value.rowsPerPage
-  return end > rowsNumber.value ? rowsNumber.value : end
-})
-
-function wrapCsvValue(val, formatFn, row) {
-  console.log('wrapCsvValue', val, formatFn, row)
-  let formatted = formatFn !== void 0 ? formatFn(val, row) : val
-
-  formatted = formatted === void 0 || formatted === null ? '' : String(formatted)
-
-  formatted = formatted.split('"').join('""')
-  /**
-   * Excel accepts \n and \r in strings, but some other CSV parsers do not
-   * Uncomment the next two lines to escape new lines
-   */
-  // .split('\n').join('\\n')
-  // .split('\r').join('\\r')
-
-  return `"${formatted}"`
-}
-const updateRowsPerPage = (val) => {
-  pagination.value.rowsPerPage = val
-  pagination.value.page = 1
-}
-const $q = useQuasar()
-const exportTable = () => {
-  // naive encoding to csv format
-  const content = [columnsClient.map((col) => wrapCsvValue(col.label))]
-    .concat(
-      rowsClient.map((row) =>
-        columnsClient
-          .map((col) =>
-            wrapCsvValue(
-              typeof col.field === 'function'
-                ? col.field(row)
-                : row[col.field === void 0 ? col.name : col.field],
-              col.format,
-              row,
-            ),
-          )
-          .join(','),
-      ),
-    )
-    .join('\r\n')
-  const date = new Date()
-  const status = exportFile(
-    `clientes-${date.getDate()}-${date.getMonth()}-${date.getTime()}.csv`,
-    content,
-    'text/csv',
-  )
-
-  if (status !== true) {
-    $q.notify({
-      message: 'Browser denied file download...',
-      color: 'negative',
-      icon: 'warning',
-    })
+const router = useRouter()
+const store = useClientStore()
+const { data, loading, pagination } = storeToRefs(store)
+const { errorNotify } = useNotification()
+const search = ref('')
+const columns = [
+  { name: 'primaryName', label: 'Cliente', field: 'primaryName', align: 'left' },
+  { name: 'kind', label: 'Tipo', field: 'kind', align: 'left', format: (v) => v === 'Individual' ? 'Pessoa física' : 'Pessoa jurídica' },
+  { name: 'status', label: 'Status', field: 'status', align: 'left' },
+  { name: 'updatedAtUtc', label: 'Atualizado em', field: 'updatedAtUtc', align: 'left' },
+  { name: 'actions', label: '', field: 'id', align: 'right' },
+]
+const load = async (params = {}) => {
+  try {
+    await store.fetchCustomers({ page: params.page ?? pagination.value.page, pageSize: params.pageSize ?? pagination.value.pageSize,
+      name: search.value || undefined, sortBy: 'name', sortDirection: 'asc' })
+  } catch (error) {
+    errorNotify(getApiErrorMessage(error, 'Não foi possível carregar os clientes.'))
   }
 }
+const onRequest = ({ pagination: requested }) => load({ page: requested.page, pageSize: requested.rowsPerPage })
+const reload = () => load({ page: 1 })
+const openCustomer = (id) => router.push({ name: 'ClienteDetalhe', params: { id } })
+const statusLabel = (status) => ({ Active: 'Ativo', Inactive: 'Inativo', Blocked: 'Bloqueado', Pending: 'Pendente' })[status] || status
+const formatDate = (value) => value ? new Intl.DateTimeFormat('pt-BR').format(new Date(value)) : '—'
+onMounted(load)
 </script>
-<style lang="sass">
-.custom-btn-warning
-  background-color: #FFD2881c !important
-  color: #000 !important
-  border: 1px solid #FFD288 !important
-.custom-btn-primary
-  background-color: #21ba451c !important
-  color: #000 !important
-  border: 1px solid #F1FDE8 !important
-.custom-btn-negative
-  background-color: #FF3D001c !important
-  color: #000 !important
-  border: 1px solid #FF3D00 !important
-.custom-btn-muted
-  background-color: #bdb4b41c !important
-  color: #000 !important
-  border: 1px solid #bdb4b4 !important
-.q-btn--outline:before
-  background-color: transparent !important
-  border: 1px solid transparent !important
-.my-sticky-header-column-table
-  tr th
-    position: sticky
-    /* higher than z-index for td below */
-    z-index: 2
-    /* bg color is important; just specify one */
-    background: #FAFAFA
-
-  /* this will be the loading indicator */
-  thead tr:last-child th
-    /* height of all previous header rows */
-    top: 48px
-    /* highest z-index */
-    z-index: 3
-    font-weight: 700
-    text-align: start
-  thead tr:first-child th
-    top: 0
-    z-index: 1
-  tr:first-child th:first-child
-    /* highest z-index */
-    z-index: 3
-
-  td:first-child
-    z-index: 1
-
-  td:first-child, th:first-child
-    position: sticky
-    left: 0
-
-  /* prevent scrolling behind sticky top row on focus */
-  tbody
-    /* height of all previous header rows */
-    scroll-margin-top: 48px
-.q-table--dense .q-table__top
-  padding: 6px 0px !important
-.q-table--dense .q-table th:first-child, .q-table--dense .q-table td:first-child
-  padding: 0px !important
-.q-checkbox--dense .q-checkbox__inner
-  width: 0.4em
-  min-width: 0.1em
-  height: 0.4em
-</style>

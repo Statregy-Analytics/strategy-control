@@ -1,8 +1,8 @@
-import useCliente from 'src/composables/Fakes/useCliente'
-const { getClientIdName } = useCliente()
 const getters = {
-  clientSelected: (state) => {
-    return getClientIdName(state.compare)
-  },
+  clientSelected: (state) => state.compare.map((item) => ({
+    id: item.id,
+    name: item.primaryName,
+  })),
 }
+
 export default { ...getters }

@@ -2,59 +2,73 @@ import { defineBoot } from '#q-app/wrappers'
 import axios from 'axios'
 import { LocalStorage } from 'quasar'
 
-// Be careful when using SSR for cross-request state pollution
-// due to creating a Singleton instance here;
-// If any client changes this (global) instance, it might be a
-// good idea to move this instance creation inside of the
-// "export default () => {}" function below (which runs individually
-// for each client)
-
-// Chaves usadas para persistir os tokens no LocalStorage
 export const TOKEN_KEY = 'sa_access_token'
 export const REFRESH_TOKEN_KEY = 'sa_refresh_token'
+export const WORKSPACE_KEY = 'sa_workspace_id'
 
 const baseURL = import.meta.env.VITE_API_URL || 'https://strategyanalytics.codebiz.com.br'
-
 const api = axios.create({ baseURL })
+const refreshClient = axios.create({ baseURL })
+let refreshPromise = null
 
-// Gera um UUID v4 para o header Idempotency-Key
 const generateIdempotencyKey = () => {
-  if (typeof crypto !== 'undefined' && crypto.randomUUID) {
-    return crypto.randomUUID()
-  }
-  return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, (c) => {
-    const r = (Math.random() * 16) | 0
-    const v = c === 'x' ? r : (r & 0x3) | 0x8
-    return v.toString(16)
+  if (typeof crypto !== 'undefined' && crypto.randomUUID) return crypto.randomUUID()
+  return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, (char) => {
+    const random = (Math.random() * 16) | 0
+    const value = char === 'x' ? random : (random & 0x3) | 0x8
+    return value.toString(16)
   })
 }
 
-// Anexa o Bearer token (quando autenticado) e o Idempotency-Key
-// obrigatório pela API em toda operação de escrita (POST/PUT/PATCH/DELETE).
 api.interceptors.request.use((config) => {
   const token = LocalStorage.getItem(TOKEN_KEY)
-  if (token) {
-    config.headers.Authorization = `Bearer ${token}`
+  const workspaceId = LocalStorage.getItem(WORKSPACE_KEY)
+  if (token) config.headers.Authorization = `Bearer ${token}`
+  if (workspaceId && !config.headers['X-Workspace-Id']) {
+    config.headers['X-Workspace-Id'] = workspaceId
   }
-
   const method = (config.method || 'get').toLowerCase()
   if (['post', 'put', 'patch', 'delete'].includes(method) && !config.headers['Idempotency-Key']) {
     config.headers['Idempotency-Key'] = generateIdempotencyKey()
   }
-
   return config
 })
 
+api.interceptors.response.use(
+  (response) => response,
+  async (error) => {
+    const originalRequest = error.config
+    const refreshToken = LocalStorage.getItem(REFRESH_TOKEN_KEY)
+    if (error.response?.status !== 401 || originalRequest?._retry || !refreshToken) {
+      return Promise.reject(error)
+    }
+    originalRequest._retry = true
+    refreshPromise ??= refreshClient
+      .post('/api/v1/auth/refresh', { refreshToken })
+      .then(({ data }) => {
+        const payload = data?.data ?? data
+        if (!payload?.accessToken) throw new Error('A API não retornou um novo access token.')
+        LocalStorage.set(TOKEN_KEY, payload.accessToken)
+        if (payload.refreshToken) LocalStorage.set(REFRESH_TOKEN_KEY, payload.refreshToken)
+        return payload.accessToken
+      })
+      .catch((refreshError) => {
+        LocalStorage.remove(TOKEN_KEY)
+        LocalStorage.remove(REFRESH_TOKEN_KEY)
+        LocalStorage.remove(WORKSPACE_KEY)
+        window.dispatchEvent(new CustomEvent('auth:expired'))
+        throw refreshError
+      })
+      .finally(() => { refreshPromise = null })
+    const accessToken = await refreshPromise
+    originalRequest.headers.Authorization = `Bearer ${accessToken}`
+    return api(originalRequest)
+  },
+)
+
 export default defineBoot(({ app }) => {
-  // for use inside Vue files (Options API) through this.$axios and this.$api
-
   app.config.globalProperties.$axios = axios
-  // ^ ^ ^ this will allow you to use this.$axios (for Vue Options API form)
-  //       so you won't necessarily have to import axios in each vue file
-
   app.config.globalProperties.$api = api
-  // ^ ^ ^ this will allow you to use this.$api (for Vue Options API form)
-  //       so you can easily perform requests against your app's API
 })
 
 export { api }

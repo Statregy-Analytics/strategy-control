@@ -44,6 +44,11 @@ const routes = [
             component: () => import('pages/DataManagement/ClientsPage.vue'),
           },
           {
+            path: 'clients/:id',
+            name: 'ClienteDetalhe',
+            component: () => import('pages/DataManagement/ClientDetailPage.vue'),
+          },
+          {
             path: 'assessores',
             name: 'Assessores',
             component: () => import('pages/DataManagement/AdvisorsPage.vue'),

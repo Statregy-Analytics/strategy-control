@@ -2,146 +2,78 @@
   <q-card class="CreateClientLayout">
     <title-card title="Criar Novo Cliente" @on-close="onClose" />
     <q-separator />
-    <q-form ref="formRef" @submit.prevent.stop="onSubmit" class="q-pa-md">
+    <q-form ref="formRef" class="q-pa-md" @submit.prevent.stop="onSubmit">
+      <label-form textLabel="Tipo de cliente">
+        <q-select
+          v-model="form.kind"
+          :options="kindOptions"
+          emit-value
+          map-options
+          outlined
+          dense
+          class="q-my-sm"
+        />
+      </label-form>
       <label-form textLabel="Nome">
-        <q-input
-          outlined
-          dense
-          v-model="form.name"
-          bg-color="white"
-          class="q-my-sm"
-          :rules="[(val) => (val && val.length > 0) || 'Campo obrigatório']"
-        />
+        <q-input v-model="form.name" outlined dense class="q-my-sm"
+          :rules="[(value) => !!value || 'Campo obrigatório']" />
       </label-form>
-
       <label-form textLabel="E-mail">
-        <q-input
-          outlined
-          dense
-          type="email"
-          v-model="form.email"
-          bg-color="white"
-          class="q-my-sm"
-          :rules="[
-            (val) => (val && val.length > 0) || 'Campo obrigatório',
-            (val) => /.+@.+\..+/.test(val) || 'E-mail inválido',
-          ]"
-        />
+        <q-input v-model="form.email" type="email" outlined dense class="q-my-sm"
+          :rules="[(value) => !!value || 'Campo obrigatório', (value) => /.+@.+\..+/.test(value) || 'E-mail inválido']" />
       </label-form>
-
-      <label-form textLabel="Senha">
-        <q-input
-          outlined
-          dense
-          :type="isPwd ? 'password' : 'text'"
-          v-model="form.password"
-          bg-color="white"
-          class="q-my-sm"
-          :rules="[
-            (val) => (val && val.length > 0) || 'Campo obrigatório',
-            (val) => (val && val.length >= 8) || 'Mínimo de 8 caracteres',
-          ]"
-        >
-          <template v-slot:append>
-            <q-icon
-              color="grey-5"
-              :name="isPwd ? 'visibility_off' : 'visibility'"
-              class="cursor-pointer"
-              @click="isPwd = !isPwd"
-            />
-          </template>
-        </q-input>
+      <label-form textLabel="Data de nascimento">
+        <q-input v-model="form.birthDate" type="date" outlined dense class="q-my-sm"
+          :disable="form.kind === 'Organization'" />
       </label-form>
-
-      <label-form textLabel="Confirmar Senha">
-        <q-input
-          outlined
-          dense
-          :type="isPwdConfirm ? 'password' : 'text'"
-          v-model="form.passwordConfirm"
-          bg-color="white"
-          class="q-my-sm"
-          :rules="[
-            (val) => (val && val.length > 0) || 'Campo obrigatório',
-            (val) => val === form.password || 'As senhas não conferem',
-          ]"
-        >
-          <template v-slot:append>
-            <q-icon
-              color="grey-5"
-              :name="isPwdConfirm ? 'visibility_off' : 'visibility'"
-              class="cursor-pointer"
-              @click="isPwdConfirm = !isPwdConfirm"
-            />
-          </template>
-        </q-input>
-      </label-form>
-
-      <div class="q-mt-lg">
-        <q-btn
-          type="submit"
-          color="primary"
-          label="Criar Cliente"
-          padding="md"
-          no-caps
-          :loading="loading"
-          style="width: 100%; border-radius: 8px"
-        />
-      </div>
+      <q-btn type="submit" color="primary" label="Criar Cliente" no-caps class="full-width q-mt-lg"
+        :loading="loading" />
     </q-form>
   </q-card>
 </template>
+
 <script setup>
-import { defineComponent, ref, reactive } from 'vue'
+import { reactive, ref } from 'vue'
 import { useLayoutStore } from 'src/stores/layout'
+import { useClientStore } from 'src/stores/client'
 import LabelForm from 'src/components/Form/LabelForm.vue'
 import TitleCard from 'src/components/Card/TitleCard.vue'
-import { createClientUser } from 'src/services/userService'
+import { createCustomer } from 'src/services/customerService'
 import { getApiErrorMessage } from 'src/services/apiError'
 import useNotification from 'src/composables/global/useNotification'
 
-defineComponent({
-  name: 'CreateClientLayout',
-})
-
 const layoutStore = useLayoutStore()
+const clientStore = useClientStore()
 const { successNotify, errorNotify } = useNotification()
-
 const formRef = ref(null)
-const isPwd = ref(true)
-const isPwdConfirm = ref(true)
 const loading = ref(false)
-const form = reactive({
-  name: '',
-  email: '',
-  password: '',
-  passwordConfirm: '',
-})
+const kindOptions = [
+  { label: 'Pessoa física', value: 'Individual' },
+  { label: 'Pessoa jurídica', value: 'Organization' },
+]
+const form = reactive({ kind: 'Individual', name: '', email: '', birthDate: '' })
 
 const resetForm = () => {
-  form.name = ''
-  form.email = ''
-  form.password = ''
-  form.passwordConfirm = ''
+  Object.assign(form, { kind: 'Individual', name: '', email: '', birthDate: '' })
   formRef.value?.resetValidation()
 }
-
 const onClose = () => {
   resetForm()
   layoutStore.setCreateClientDialog(false)
 }
-
 const onSubmit = async () => {
-  const valid = await formRef.value.validate()
-  if (!valid) return
-
+  if (!(await formRef.value.validate())) return
   try {
     loading.value = true
-    await createClientUser({
-      name: form.name,
-      email: form.email,
-      password: form.password,
+    await createCustomer({
+      kind: form.kind,
+      status: 'Active',
+      birthDate: form.kind === 'Individual' && form.birthDate ? form.birthDate : null,
+      names: [{ id: null, kind: 'Legal', displayName: form.name, validFrom: new Date().toISOString().slice(0, 10), validTo: null, isPrimary: true }],
+      contacts: [{ id: null, kind: 'Email', value: form.email, isPrimary: true }],
+      addresses: [],
     })
+    await clientStore.fetchCustomers({ page: 1, pageSize: clientStore.pagination.pageSize })
     successNotify('Cliente criado com sucesso!')
     onClose()
   } catch (error) {
