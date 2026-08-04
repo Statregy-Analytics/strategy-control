@@ -358,12 +358,12 @@ em “Editar”. O painel deve abrir lateralmente sem sair da listagem.
 2. [x] Header e seções possuem loadings independentes.
 3. [x] O perfil profissional carrega sem bloquear os dados cadastrais e as preferências.
 4. [x] Perfil ainda não cadastrado apresenta formulário vazio, sem erro genérico.
-5. [ ] Comparar os dados combinados com a consulta do perfil profissional.
-6. [ ] Alterar ocupação, empregador e vigência com dados válidos.
-7. [ ] Salvar e confirmar mensagem de sucesso.
-8. [ ] Fechar, reabrir o painel e confirmar persistência.
+5. [x] Comparar os dados combinados com a consulta do perfil profissional.
+6. [x] Alterar ocupação, empregador e vigência com dados válidos.
+7. [!] Salvar e confirmar mensagem de sucesso.
+8. [!] Fechar, reabrir o painel e confirmar persistência.
 9. [ ] Limpar um campo opcional, salvar e confirmar que ele permanece vazio.
-10. [ ] Simular falha da API e confirmar mensagem amigável e nova tentativa.
+10. [x] Simular falha da API e confirmar mensagem amigável e nova tentativa.
 
 Endpoints esperados:
 
@@ -373,19 +373,27 @@ Endpoints esperados:
 
 Observações:
 
+> **Erro do backend — CORS no navegador:** o
+> `PUT /api/v1/admin/customers/{id}/professional-profile` não concluiu no fluxo
+> do navegador. O frontend preservou os dados preenchidos e exibiu a mensagem
+> amigável de falha de conexão. Ao fechar e reabrir o painel, o perfil continuou
+> vazio porque a escrita não chegou a ser persistida.
 >
+> Dados usados: ocupação `Analista de Investimentos`, empregador
+> `Strategy Analytics`, vigência inicial `2026-08-04` e vínculo atual.
 
 ## 14. Perfil financeiro e segurança — painel administrativo
 
-1. [ ] Abrir o perfil financeiro atual e conferir moeda e valores formatados.
-2. [ ] Abrir o histórico e confirmar a ordem da versão mais recente para a mais antiga.
-3. [ ] Criar uma versão alterando pelo menos um valor válido.
-4. [ ] Confirmar que a versão anterior continua no histórico.
-5. [ ] Recarregar e confirmar que a nova versão é a atual.
-6. [ ] Tentar valores inválidos e confirmar validação amigável.
-7. [ ] Abrir segurança da conta e conferir somente informações mascaradas.
-8. [ ] Confirmar que senha, tokens, códigos e segredos de 2FA não aparecem.
-9. [ ] Confirmar que a tela não oferece configuração de 2FA neste marco.
+1. [x] Abrir o perfil financeiro atual e validar o estado sem perfil cadastrado.
+2. [x] Abrir o histórico e validar o estado sem versões cadastradas.
+3. [ ] Com histórico preenchido, confirmar a ordem da versão mais recente para a mais antiga.
+4. [ ] Criar uma versão alterando pelo menos um valor válido.
+5. [ ] Confirmar que a versão anterior continua no histórico.
+6. [ ] Recarregar e confirmar que a nova versão é a atual.
+7. [ ] Tentar valores inválidos e confirmar validação amigável.
+8. [x] Abrir segurança da conta e conferir o estado sem informações disponíveis.
+9. [x] Confirmar que senha, tokens, códigos e segredos de 2FA não aparecem.
+10. [x] Confirmar que a tela não oferece configuração de 2FA neste marco.
 
 Endpoints esperados:
 
@@ -396,7 +404,9 @@ Endpoints esperados:
 
 Observações:
 
->
+> Perfil atual, histórico e segurança retornaram sem dados para o cliente
+> `4ff8ec17-e9ea-416a-828c-b393d9b0119a`. O frontend apresentou formulário de
+> nova versão, histórico vazio e valores “Não informado” sem erro técnico.
 
 ## 15. Autenticação e perfil — portal do cliente
 
@@ -696,7 +706,7 @@ Resultado final:
 |   1 | Detalhe/resumo | Abrir qualquer cliente homologado | `GET /admin/customers/{id}/summary` | 500 | `019fce0fd6e77f929de00cb9d1ba4bab` / `019fce0fd6e774e7852d15cce6e3e6e1` | Aberto |
 |   2 | Nomes e contatos | Salvar mais de um item e reabrir o editor | `GET /admin/customers/{id}/identification` | 200 | `019fce1340027a24b6bcb3c66be5e465` / `019fce1340027fbe906bedfa6204358c` | Aberto |
 |   3 | Contatos | Salvar contato `Phone` ou `Mobile` | `PUT /admin/customers/{id}/contacts` | 400 | `019fce2054137e949a87b7d2c9c5a8f2` / `019fce2054137ef68e6975336ab6f9ef` | Aberto |
-|   4 | Escritas cadastrais | Salvar nomes, contatos ou endereços pelo navegador | `PUT /admin/customers/{id}/*` | — | Requisições diretas `200`; navegador sem resposta acessível | Aberto |
+|   4 | Escritas cadastrais e profissionais | Salvar nomes, contatos, endereços ou perfil profissional pelo navegador | `PUT /admin/customers/{id}/*` | — | Requisições diretas cadastrais `200`; navegador sem resposta acessível | Aberto |
 
 ## Evidências e notas gerais
 

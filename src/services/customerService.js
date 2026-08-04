@@ -21,3 +21,7 @@ export async function getPreferenceCatalog() { return unwrap(await api.get('/api
 export async function getCustomerProfessionalFinancialSecurity(id) { return unwrap(await api.get(`/api/v1/admin/customers/${id}/professional-financial-security`)) }
 export async function getCustomerProfessionalProfile(id) { return unwrap(await api.get(`/api/v1/admin/customers/${id}/professional-profile`)) }
 export async function updateCustomerProfessionalProfile(id, profile) { return unwrap(await api.put(`/api/v1/admin/customers/${id}/professional-profile`, profile)) }
+export async function getCustomerCurrentFinancialProfile(id) { return unwrap(await api.get(`/api/v1/admin/customers/${id}/financial-profile/current`)) }
+export async function listCustomerFinancialProfiles(id, params = {}) { return (await api.get(`/api/v1/admin/customers/${id}/financial-profiles`, { params })).data }
+export async function createCustomerFinancialProfile(id, profile) { return unwrap(await api.post(`/api/v1/admin/customers/${id}/financial-profiles`, profile)) }
+export async function getCustomerAccountSecurity(id) { return unwrap(await api.get(`/api/v1/admin/customers/${id}/account-security`)) }
