@@ -1,8 +1,9 @@
 # Checklist manual de homologação — Marco 2
 
-Checklist focado nas funcionalidades já implementadas no `strategy-control`.
+Roteiro de implementação e homologação dos fluxos do Marco 2 nos dois frontends.
 
-Ambiente: `http://localhost:8080`
+- Painel administrativo (`strategy-control`): `http://localhost:8080`
+- Portal do cliente (`Strategy-analytics-v2`): `http://localhost:9010`
 
 Data da homologação: \_**\_/\_\_**/**\_\_\_\_**
 
@@ -15,6 +16,12 @@ Versão/commit testado: **\*\***\*\***\*\***\_\_**\*\***\*\***\*\***
 - Marque `[!]` quando houver falha.
 - Registre o bug na tabela ao final, sem copiar tokens ou senhas.
 - Para falhas de API, anote endpoint, status HTTP, `requestId` e `correlationId`.
+- Esta tabela deve conter somente erros do backend. Erros do frontend devem ser
+  corrigidos e o cenário deve ser executado novamente antes de avançar.
+- Uma falha do backend bloqueia somente a homologação integrada daquele cenário;
+  as demais telas e fluxos do frontend podem continuar sendo implementados e testados.
+- Em cada escrita, confirme o envio de `Idempotency-Key`; quando aplicável,
+  confirme também `Authorization` e `X-Workspace-Id`.
 
 ## 1. Login e sessão
 
@@ -315,10 +322,10 @@ Observações:
 > compartilhado não foi interrompido artificialmente. Nenhum erro do backend
 > foi identificado no fluxo disponível.
 
-## 12. Resultado final desta rodada
+## 12. Resultado da rodada — CRM administrativo
 
 - [x] Login e sessão aprovados.
-- [!] CORS aprovado.
+- [!] CORS das escritas cadastrais reprovado.
 - [ ] Listagem aprovada.
 - [x] Cadastro de pessoa física aprovado.
 - [x] Cadastro de pessoa jurídica aprovado.
@@ -331,6 +338,344 @@ Observações:
 - [x] Preferências aprovadas.
 - [x] Nenhum token ou senha foi registrado nas evidências.
 - [ ] Podemos avançar para perfil profissional/financeiro.
+
+## 13. Perfil profissional — painel administrativo
+
+URL: `http://localhost:8080/dataManagement/clients/{id}`
+
+Pré-condição: usar um cliente `Active` e abrir a área de perfil profissional.
+
+1. [ ] Abrir a visão combinada e conferir loading, sucesso e campos sem dados.
+2. [ ] Comparar os dados combinados com a consulta do perfil profissional.
+3. [ ] Entrar em edição, alterar profissão, empresa e demais campos disponíveis.
+4. [ ] Salvar e confirmar mensagem de sucesso.
+5. [ ] Recarregar com `Ctrl+F5` e confirmar persistência.
+6. [ ] Limpar um campo opcional, salvar e confirmar que ele permanece vazio.
+7. [ ] Simular falha da API e confirmar mensagem amigável e nova tentativa.
+
+Endpoints esperados:
+
+- `GET /api/v1/admin/customers/{id}/professional-financial-security`
+- `GET /api/v1/admin/customers/{id}/professional-profile`
+- `PUT /api/v1/admin/customers/{id}/professional-profile`
+
+Observações:
+
+>
+
+## 14. Perfil financeiro e segurança — painel administrativo
+
+1. [ ] Abrir o perfil financeiro atual e conferir moeda e valores formatados.
+2. [ ] Abrir o histórico e confirmar a ordem da versão mais recente para a mais antiga.
+3. [ ] Criar uma versão alterando pelo menos um valor válido.
+4. [ ] Confirmar que a versão anterior continua no histórico.
+5. [ ] Recarregar e confirmar que a nova versão é a atual.
+6. [ ] Tentar valores inválidos e confirmar validação amigável.
+7. [ ] Abrir segurança da conta e conferir somente informações mascaradas.
+8. [ ] Confirmar que senha, tokens, códigos e segredos de 2FA não aparecem.
+9. [ ] Confirmar que a tela não oferece configuração de 2FA neste marco.
+
+Endpoints esperados:
+
+- `GET /api/v1/admin/customers/{id}/financial-profile/current`
+- `GET /api/v1/admin/customers/{id}/financial-profile`
+- `GET|POST /api/v1/admin/customers/{id}/financial-profiles`
+- `GET /api/v1/admin/customers/{id}/account-security`
+
+Observações:
+
+>
+
+## 15. Autenticação e perfil — portal do cliente
+
+URL: `http://localhost:9010`
+
+Pré-condição: entrar com um usuário Client vinculado ao cliente de homologação.
+
+1. [ ] Fazer login e validar o acesso com `GET /api/v1/client/auth/ping`.
+2. [ ] Recarregar a página e confirmar a restauração por `/auth/me`.
+3. [ ] Forçar access token expirado e confirmar refresh com retry único.
+4. [ ] Forçar refresh inválido e confirmar limpeza da sessão e retorno ao login.
+5. [ ] Abrir o resumo do próprio perfil.
+6. [ ] Abrir e editar os dados pessoais permitidos.
+7. [ ] Salvar preferências de idioma, moeda, fuso e tema.
+8. [ ] Recarregar e confirmar que perfil e preferências persistiram.
+9. [ ] Confirmar que o cliente não consegue consultar outro cliente por ID.
+
+Endpoints esperados:
+
+- `GET /api/v1/auth/me`
+- `GET /api/v1/client/auth/ping`
+- `GET /api/v1/client/profile/summary`
+- `GET|PATCH /api/v1/client/profile`
+- `GET|PATCH /api/v1/client/profile/preferences`
+
+Observações:
+
+>
+
+## 16. Perfis e contatos de confiança — portal do cliente
+
+1. [ ] Abrir, editar e recarregar o perfil profissional.
+2. [ ] Abrir, editar e recarregar o perfil financeiro.
+3. [ ] Validar campos obrigatórios e formatos antes do envio.
+4. [ ] Listar contatos de confiança no estado vazio e no estado preenchido.
+5. [ ] Cadastrar um contato de confiança válido.
+6. [ ] Editar o contato e confirmar persistência após recarregar.
+7. [ ] Excluir o contato após confirmação explícita.
+8. [ ] Confirmar que falhas não removem os dados que estavam no formulário.
+
+Endpoints esperados:
+
+- `GET|PUT /api/v1/client/profile/professional-profile`
+- `GET|PUT /api/v1/client/profile/financial-profile`
+- `GET|POST /api/v1/client/profile/trusted-contacts`
+- `PUT|DELETE /api/v1/client/profile/trusted-contacts/{contactId}`
+
+Observações:
+
+>
+
+## 17. Catálogo de bancos — painel administrativo
+
+1. [ ] Abrir o catálogo e confirmar loading, vazio, sucesso e erro.
+2. [ ] Cadastrar um banco com código e nome válidos.
+3. [ ] Confirmar que o banco aparece sem duplicar a lista.
+4. [ ] Tentar cadastrar o mesmo código e validar o conflito `409`.
+5. [ ] Confirmar que somente bancos ativos aparecem no portal do cliente.
+
+Endpoints esperados:
+
+- `GET /api/v1/admin/banks`
+- `POST /api/v1/admin/banks`
+
+Observações:
+
+>
+
+## 18. Contas bancárias — painel administrativo
+
+1. [ ] Abrir um cliente sem contas e validar o estado vazio.
+2. [ ] Cadastrar uma conta válida usando um banco do catálogo.
+3. [ ] Confirmar que agência, conta e chave Pix aparecem mascaradas.
+4. [ ] Abrir o detalhe, editar um campo permitido e salvar.
+5. [ ] Cadastrar uma segunda conta e defini-la como principal.
+6. [ ] Confirmar que apenas uma conta permanece principal.
+7. [ ] Alterar o status e confirmar atualização da lista.
+8. [ ] Arquivar a conta secundária após confirmação.
+9. [ ] Recarregar e confirmar persistência de todas as alterações.
+
+Endpoints esperados:
+
+- `GET|POST /api/v1/admin/customers/{id}/bank-accounts`
+- `GET|PATCH /api/v1/admin/customers/{id}/bank-accounts/{bankAccountId}`
+- `POST /api/v1/admin/customers/{id}/bank-accounts/{bankAccountId}/set-primary`
+- `PATCH /api/v1/admin/customers/{id}/bank-accounts/{bankAccountId}/status`
+- `POST /api/v1/admin/customers/{id}/bank-accounts/{bankAccountId}/archive`
+
+Observações:
+
+>
+
+## 19. Contas bancárias — portal do cliente
+
+1. [ ] Listar somente bancos ativos.
+2. [ ] Validar o estado vazio das próprias contas.
+3. [ ] Cadastrar uma conta e confirmar mascaramento na resposta e na tela.
+4. [ ] Editar a conta e confirmar persistência.
+5. [ ] Cadastrar uma segunda conta e torná-la principal.
+6. [ ] Arquivar a conta secundária.
+7. [ ] Confirmar que número integral e chave Pix bruta nunca aparecem em tela ou log.
+8. [ ] Em usuário bloqueado pelo guard `Deposit`, exibir a ação de onboarding correta.
+
+Endpoints esperados:
+
+- `GET /api/v1/client/banks`
+- `GET|POST /api/v1/client/profile/bank-accounts`
+- `GET|PATCH /api/v1/client/profile/bank-accounts/{bankAccountId}`
+- `POST /api/v1/client/profile/bank-accounts/{bankAccountId}/primary`
+- `POST /api/v1/client/profile/bank-accounts/{bankAccountId}/archive`
+
+Observações:
+
+>
+
+## 20. Documentos — portal do cliente (fluxo prioritário)
+
+Usar somente `/api/v1/client/profile/documents/*`; não usar
+`/data-intake/submissions/*`.
+
+1. [ ] Abrir a tela e conferir overview, progresso e requisitos pendentes.
+2. [ ] Conferir o catálogo de tipos e a definição de dados para tipo/país.
+3. [ ] Selecionar PDF, JPEG e PNG válidos e visualizar nome e tamanho.
+4. [ ] Rejeitar no frontend formato não permitido e arquivo maior que 25 MB.
+5. [ ] Enviar um arquivo válido por multipart e acompanhar loading/progresso.
+6. [ ] Confirmar atualização de overview, progress e onboarding após o upload.
+7. [ ] Baixar diretamente e abrir o arquivo correto.
+8. [ ] Gerar URL temporária e confirmar que ela funciona dentro da validade.
+9. [ ] Usar um documento rejeitado e substituí-lo por outro arquivo válido.
+10. [ ] Confirmar que requisito conflitante, rejeição e storage indisponível têm mensagens distintas.
+11. [ ] Recarregar e confirmar que status e progresso persistem.
+
+Endpoints esperados:
+
+- `GET /api/v1/client/profile/documents/overview`
+- `GET /api/v1/client/profile/documents/progress`
+- `GET /api/v1/client/profile/document-types`
+- `GET /api/v1/client/profile/document-types/{documentTypeId}/countries/{countryId}/data-definition`
+- `POST /api/v1/client/profile/documents`
+- `POST /api/v1/client/profile/documents/{documentId}/replace`
+- `GET /api/v1/client/profile/documents/{documentId}/download`
+- `GET /api/v1/client/profile/documents/{documentId}/temporary-url`
+
+Observações:
+
+>
+
+## 21. Configuração documental — painel administrativo
+
+1. [ ] Listar e cadastrar categoria documental.
+2. [ ] Listar e cadastrar tipo de documento.
+3. [ ] Configurar país para o tipo selecionado.
+4. [ ] Criar schema de metadados, validar o schema e uma instância.
+5. [ ] Publicar o schema e confirmar que passa a ser usado na definição.
+6. [ ] Consultar definições de upload e dados.
+7. [ ] Retirar um schema somente após confirmação e validar o estado resultante.
+8. [ ] Confirmar mensagens específicas para conflito e validação.
+
+Endpoints esperados: `/api/v1/admin/document-categories`,
+`/api/v1/admin/document-types` e os sub-recursos de país e `metadata-schemas`.
+
+Observações:
+
+>
+
+## 22. Requisitos e revisão documental — painel administrativo
+
+1. [ ] Criar e listar um requisito documental para o cliente.
+2. [ ] Abrir overview, progresso e agrupamento de documentos.
+3. [ ] Fazer upload administrativo de um documento válido.
+4. [ ] Abrir o detalhe e baixar o arquivo diretamente.
+5. [ ] Gerar e testar a URL temporária.
+6. [ ] Rejeitar com motivo obrigatório e confirmar o status no portal do cliente.
+7. [ ] Substituir o documento rejeitado pelo portal.
+8. [ ] Aprovar a nova versão no painel administrativo.
+9. [ ] Confirmar atualização de summary, cards, overview e progress.
+10. [ ] Alterar status e excluir somente um documento descartável de homologação.
+
+Endpoints esperados: `/api/v1/admin/customers/{customerId}/document-requirements`,
+`/documents`, `/documents/overview`, `/documents/progress` e
+`/api/v1/admin/documents/{id}` com seus sub-recursos.
+
+Observações:
+
+>
+
+## 23. Compliance — painel administrativo
+
+1. [ ] Abrir o card sem flags e validar o estado saudável.
+2. [ ] Criar uma flag com os campos obrigatórios.
+3. [ ] Confirmar atualização do card, alertas e histórico.
+4. [ ] Editar a flag e recarregar a página.
+5. [ ] Resolver uma flag e confirmar que ela deixa de estar pendente.
+6. [ ] Criar outra flag, descartá-la e conferir o histórico.
+7. [ ] Confirmar que o portal do cliente não expõe flags nem evidências internas.
+
+Endpoints esperados: `/api/v1/admin/customers/{id}/compliance/card`, `/flags`,
+`/alerts`, `/history`, `/flags/{flagId}/resolve` e `/dismiss`.
+
+Observações:
+
+>
+
+## 24. Verificação e timeline
+
+1. [ ] No painel, carregar o catálogo de áreas de verificação.
+2. [ ] Consultar o nível atual do cliente.
+3. [ ] Alterar o status de uma área e confirmar atualização do nível.
+4. [ ] Abrir a timeline administrativa e validar paginação e ordem cronológica.
+5. [ ] No portal, abrir a timeline própria.
+6. [ ] Confirmar que o cliente vê apenas eventos permitidos da própria conta.
+
+Endpoints esperados:
+
+- `GET /api/v1/admin/customer-verification/catalog`
+- `GET /api/v1/admin/customers/{customerId}/verification-level`
+- `PUT /api/v1/admin/customers/{customerId}/verification-areas/{areaId}/status`
+- `GET /api/v1/admin/customers/{id}/timeline`
+- `GET /api/v1/client/profile/timeline`
+
+Observações:
+
+>
+
+## 25. Onboarding e autosserviço de conta
+
+1. [ ] Consultar o onboarding e conferir etapa atual, pendências e ações.
+2. [ ] Para cada resposta `403` de guard, exibir a ação necessária em vez de erro genérico.
+3. [ ] Solicitar confirmação de e-mail e concluir com código válido.
+4. [ ] Validar código inválido/expirado e reenvio com controle de repetição.
+5. [ ] Solicitar recuperação de senha e concluir a redefinição.
+6. [ ] Alterar a senha autenticada e entrar novamente com a senha nova.
+7. [ ] Solicitar e confirmar telefone; validar código inválido/expirado.
+8. [ ] Listar sessões, revogar uma sessão secundária e revogar todas as demais.
+9. [ ] Confirmar que senha, códigos e tokens não aparecem em logs ou mensagens.
+
+Endpoints esperados: `/api/v1/client/onboarding/status`, rotas de confirmação de
+e-mail e reset de senha, `/api/v1/users/me/password`, `/phone-verification/*` e
+`/api/v1/users/me/sessions`.
+
+Observações:
+
+>
+
+## 26. Avatar, assinatura e compartilhamento
+
+1. [ ] Enviar avatar válido, recarregar e abrir sua URL.
+2. [ ] Excluir o avatar e confirmar o estado vazio.
+3. [ ] Enviar assinatura válida, recarregar e abrir sua URL.
+4. [ ] Excluir a assinatura e confirmar o estado vazio.
+5. [ ] Criar um link de compartilhamento com o escopo disponível.
+6. [ ] Abrir `/api/v1/public/profiles/{token}` sem sessão e conferir somente dados autorizados.
+7. [ ] Revogar o link e confirmar que o token deixa de funcionar.
+8. [ ] Confirmar que uploads inválidos e storage indisponível têm mensagens amigáveis.
+
+Endpoints esperados: `/api/v1/client/profile/avatar`, `/signature`,
+`/share-links` e `/api/v1/public/profiles/{token}`.
+
+Observações:
+
+>
+
+## 27. Regressão e aceite final do Marco 2
+
+Executar com perfis Admin e Client separados.
+
+- [ ] Reexecutar as seções 1 a 26 sem regressão.
+- [ ] Testar loading, vazio, sucesso e falha nas telas novas.
+- [ ] Testar respostas `401`, `403`, `404`, `409`, `422` e `429` aplicáveis.
+- [ ] Testar troca de workspace quando o usuário possuir mais de um.
+- [ ] Confirmar que toda escrita envia `Idempotency-Key` estável por ação.
+- [ ] Confirmar que dados sensíveis estão mascarados e ausentes dos logs.
+- [ ] Executar lint e build nos dois frontends.
+- [ ] Executar `git diff --check` nos dois repositórios.
+- [ ] Confirmar que contratos, transações, investimentos, patrimônio, OCR avançado
+  e `/data-intake/submissions/*` não foram incluídos neste marco.
+- [ ] Todos os bugs de backend deste documento foram corrigidos e revalidados,
+  ou formalmente aceitos como impedimento externo com responsável definido.
+- [ ] Checklist técnico `MILESTONE-2-CHECKLIST.md` está integralmente atualizado.
+- [ ] Marco 2 aprovado pelo responsável da homologação.
+
+Resultado final:
+
+- Data: ____/____/________
+- Commit do `strategy-control`: ________________________________
+- Commit do `Strategy-analytics-v2`: ___________________________
+- Responsável: ________________________________________________
+- Situação: [ ] Aprovado  [ ] Reprovado  [ ] Aprovado com ressalvas
+- Ressalvas:
+
+>
 
 ## Bugs encontrados
 
