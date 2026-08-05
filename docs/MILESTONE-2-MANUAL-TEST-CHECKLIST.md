@@ -563,13 +563,13 @@ Observações:
 > Continuar no repositório `Strategy-analytics-v2`, em
 > `http://localhost:9010`, usando o checklist Client daquele repositório.
 
-1. [ ] Listar somente bancos ativos.
-2. [ ] Validar o estado vazio das próprias contas.
-3. [ ] Cadastrar uma conta e confirmar mascaramento na resposta e na tela.
-4. [ ] Editar a conta e confirmar persistência.
-5. [ ] Cadastrar uma segunda conta e torná-la principal.
+1. [x] Listar somente bancos ativos.
+2. [x] Validar o estado vazio das próprias contas.
+3. [x] Cadastrar uma conta e confirmar mascaramento na resposta e na tela.
+4. [x] Editar a conta e confirmar persistência.
+5. [x] Cadastrar uma segunda conta e torná-la principal.
 6. [ ] Arquivar a conta secundária.
-7. [ ] Confirmar que número integral e chave Pix bruta nunca aparecem em tela ou log.
+7. [x] Confirmar que número integral e chave Pix bruta nunca aparecem em tela ou log.
 8. [ ] Em usuário bloqueado pelo guard `Deposit`, exibir a ação de onboarding correta.
 
 Endpoints esperados:
@@ -582,7 +582,18 @@ Endpoints esperados:
 
 Observações:
 
+> **Validação em 05/08/2026:** a aba “Contas Bancárias” carregou o catálogo
+> ativo e apresentou corretamente o estado vazio. Foram cadastradas duas contas
+> descartáveis do banco 644. A primeira foi editada (agência `0001` para
+> `0002`) e a segunda foi definida como principal; a troca persistiu após novo
+> carregamento. Números de conta foram exibidos apenas como `***6543` e
+> `***4567`; documento integral e chave Pix bruta não apareceram na tela.
 >
+> O endpoint de arquivamento respondeu com sucesso e a interface notificou
+> “Conta arquivada”, porém a conta secundária continuou sendo devolvida pela
+> listagem, inclusive após recarregar a página. O item 6 permanece bloqueado
+> para correção do backend. O guard `Deposit` não foi exercitado com este
+> usuário, que já possui acesso ao perfil.
 
 ## 20. Documentos — portal do cliente (fluxo prioritário)
 

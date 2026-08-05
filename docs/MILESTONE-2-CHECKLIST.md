@@ -110,12 +110,12 @@ Contrato de referência: [swagger.json](Api/swagger.json).
 
 ### Portal do cliente
 
-- [ ] Consultar bancos ativos com `GET /api/v1/client/banks`.
-- [ ] Listar e criar contas próprias.
-- [ ] Consultar e editar conta própria.
-- [ ] Definir conta principal e arquivar.
+- [x] Consultar bancos ativos com `GET /api/v1/client/banks`.
+- [x] Listar e criar contas próprias.
+- [x] Consultar e editar conta própria.
+- [x] Definir conta principal e arquivar.
 - [ ] Tratar o guard de onboarding `Deposit`.
-- [ ] Nunca exibir número integral ou chave Pix bruta.
+- [x] Nunca exibir número integral ou chave Pix bruta.
 
 ## 5. Documentos
 
