@@ -41,6 +41,17 @@ Observações:
 
 >
 
+## Mapa de ambientes
+
+Este arquivo é o roteiro mestre e mantém a ordem cronológica do Marco 2.
+Quando uma etapa mudar de aplicação, siga o aviso de **troca de ambiente** antes
+de continuar:
+
+- Painel administrativo: repositório `strategy-control`, `http://localhost:8080`.
+- Portal do cliente: repositório `Strategy-analytics-v2`, `http://localhost:9010`.
+- As evidências detalhadas das etapas Client também ficam em
+  `Strategy-analytics-v2/docs/MILESTONE-2-CLIENT-MANUAL-TEST-CHECKLIST.md`.
+
 ## 2. Listagem de clientes
 
 URL: `http://localhost:8080/dataManagement`
@@ -191,7 +202,7 @@ No painel lateral de edição, expandir “Dados cadastrais”.
 - [x] Adicionar nome funciona.
 - [x] Tipos Legal, Preferred e Social estão disponíveis.
 - [x] Apenas um nome permanece como principal.
-- [!] Salvar nomes funciona.
+- [x] Salvar nomes funciona.
 - [x] Header é atualizado depois de salvar.
 - [x] Dados persistem após `Ctrl+F5`.
 - [x] Não é possível remover o único nome restante.
@@ -209,13 +220,10 @@ Observações:
 > coleção completa. Ao reabrir, o editor não consegue reconstruir os nomes já
 > cadastrados com segurança.
 >
-> **Erro do backend — CORS no navegador:** o `PUT /names` foi bloqueado no
-> fluxo do navegador e o frontend apresentou a mensagem amigável de falha de
-> conexão. A mesma requisição autenticada, com `Idempotency-Key`, executada
-> diretamente contra a API retornou `200`, provando que o payload e o endpoint
-> são válidos. Request ID da confirmação direta:
-> `019fce15833f7b32b1d040bd95c91beb`; correlation ID:
-> `019fce15833f772e9c9d24e00f493562`.
+> **Revalidação em 05/08/2026:** o `PUT /names` concluiu pelo navegador, exibiu
+> “Nomes atualizados” e o nome principal permaneceu após fechar e reabrir o
+> painel. O bloqueio de CORS desta escrita foi corrigido. A limitação da
+> projeção da coleção completa permanece aberta.
 
 ## 8. Dados cadastrais — contatos
 
@@ -226,7 +234,7 @@ Observações:
 - [x] Apenas um contato permanece como principal.
 - [!] Salvar contatos funciona.
 - [x] Header é atualizado quando o contato principal muda.
-- [x] Dados persistem após `Ctrl+F5`.
+- [!] Dados persistem após `Ctrl+F5`.
 
 Endpoint:
 
@@ -234,9 +242,12 @@ Endpoint:
 
 Observações:
 
-> **Erro do backend — tipos rejeitados:** `Phone` e `Mobile` retornaram `400`
-> com `customers.invalid_contact_kind`, embora sejam os tipos previstos para o
-> fluxo. Para `Mobile`: request ID
+> **Erro do backend — persistência dos tipos:** na rodada anterior, `Phone` e
+> `Mobile` retornaram `400` com `customers.invalid_contact_kind`. Em
+> 05/08/2026, ambos passaram a ser aceitos pelo `PUT` e apareceram no formulário
+> logo após a resposta, porém desapareceram ao fechar e reabrir o painel; a
+> leitura voltou a apresentar somente o contato `Email`. A correção, portanto,
+> ainda não garante persistência. Evidências anteriores para `Mobile`: request ID
 > `019fce2054137e949a87b7d2c9c5a8f2`, correlation ID
 > `019fce2054137ef68e6975336ab6f9ef`. Para `Phone`: request ID
 > `019fce20c3ce70b4afff11994e6b5f94`, correlation ID
@@ -246,11 +257,9 @@ Observações:
 > e-mail, a identificação retornou apenas `primaryEmail`. Não há coleção com
 > todos os contatos, IDs e tipos para reconstruir o editor após recarregar.
 >
-> **Erro do backend — CORS no navegador:** o `PUT /contacts` não concluiu no
-> fluxo do navegador. A chamada direta com dois contatos `Email` válidos
-> retornou `200` e atualizou o header. Request ID:
-> `019fce20fff8703cb90519a1389425c7`; correlation ID:
-> `019fce20fff870d2af031aae4635fca7`.
+> **Revalidação em 05/08/2026:** o `PUT /contacts` concluiu pelo navegador; o
+> bloqueio de CORS foi corrigido. O cenário continua reprovado porque os novos
+> contatos `Mobile` e `Phone` não foram devolvidos ao reabrir o cliente.
 
 ## 9. Dados cadastrais — endereços
 
@@ -260,7 +269,7 @@ Observações:
 - [x] Tipos Residential, Commercial e Correspondence estão disponíveis.
 - [x] Apenas um endereço permanece como principal.
 - [x] Remover endereço funciona.
-- [!] Salvar endereços funciona.
+- [x] Salvar endereços funciona.
 - [x] Dados persistem após `Ctrl+F5`.
 
 Endpoint:
@@ -269,12 +278,9 @@ Endpoint:
 
 Observações:
 
-> **Erro do backend — CORS no navegador:** o `PUT /addresses` não concluiu no
-> fluxo do navegador. A mesma operação direta, com endereço `Residential`
-> válido, retornou `200`; após recarregar, o endereço foi projetado em
-> `residentialAddress` e carregado corretamente no editor. Request ID:
-> `019fce22aebc724ea369afaab26ffa09`; correlation ID:
-> `019fce22aebc721fb97cb3dde16c9360`.
+> **Revalidação em 05/08/2026:** o `PUT /addresses` concluiu pelo navegador e o
+> endereço `Residential` permaneceu após fechar e reabrir o painel. O bloqueio
+> de CORS desta escrita foi corrigido.
 
 ## 10. Status do cliente
 
@@ -333,7 +339,7 @@ Observações:
 ## 12. Resultado da rodada — CRM administrativo
 
 - [x] Login e sessão aprovados.
-- [!] CORS das escritas cadastrais reprovado.
+- [x] CORS das escritas cadastrais aprovado após correção do backend.
 - [ ] Listagem aprovada.
 - [x] Cadastro de pessoa física aprovado.
 - [x] Cadastro de pessoa jurídica aprovado.
@@ -341,11 +347,11 @@ Observações:
 - [x] Degradação do summary aprovada.
 - [!] Nomes aprovados.
 - [!] Contatos aprovados.
-- [!] Endereços aprovados.
+- [x] Endereços aprovados.
 - [x] Status aprovado.
 - [x] Preferências aprovadas.
 - [x] Nenhum token ou senha foi registrado nas evidências.
-- [ ] Podemos avançar para perfil profissional/financeiro.
+- [x] Podemos avançar para perfil profissional/financeiro.
 
 ## 13. Perfil profissional — painel administrativo
 
@@ -360,8 +366,8 @@ em “Editar”. O painel deve abrir lateralmente sem sair da listagem.
 4. [x] Perfil ainda não cadastrado apresenta formulário vazio, sem erro genérico.
 5. [x] Comparar os dados combinados com a consulta do perfil profissional.
 6. [x] Alterar ocupação, empregador e vigência com dados válidos.
-7. [!] Salvar e confirmar mensagem de sucesso.
-8. [!] Fechar, reabrir o painel e confirmar persistência.
+7. [x] Salvar e confirmar mensagem de sucesso.
+8. [x] Fechar, reabrir o painel e confirmar persistência.
 9. [ ] Limpar um campo opcional, salvar e confirmar que ele permanece vazio.
 10. [x] Simular falha da API e confirmar mensagem amigável e nova tentativa.
 
@@ -373,14 +379,13 @@ Endpoints esperados:
 
 Observações:
 
-> **Erro do backend — CORS no navegador:** o
-> `PUT /api/v1/admin/customers/{id}/professional-profile` não concluiu no fluxo
-> do navegador. O frontend preservou os dados preenchidos e exibiu a mensagem
-> amigável de falha de conexão. Ao fechar e reabrir o painel, o perfil continuou
-> vazio porque a escrita não chegou a ser persistida.
+> **Revalidação em 05/08/2026:** o
+> `PUT /api/v1/admin/customers/{id}/professional-profile` concluiu pelo
+> navegador, exibiu confirmação e os dados permaneceram após fechar e reabrir
+> o painel. O bloqueio de CORS foi corrigido.
 >
 > Dados usados: ocupação `Analista de Investimentos`, empregador
-> `Strategy Analytics`, vigência inicial `2026-08-04` e vínculo atual.
+> `Strategy Analytics`, vigência inicial `2026-08-05` e vínculo atual.
 
 ## 14. Perfil financeiro e segurança — painel administrativo
 
@@ -410,15 +415,22 @@ Observações:
 
 ## 15. Autenticação e perfil — portal do cliente
 
+> **Troca de ambiente — Portal do cliente**
+> Continuar no repositório `Strategy-analytics-v2`, em
+> `http://localhost:9010`. Registrar as evidências desta etapa também em
+> `docs/MILESTONE-2-CLIENT-MANUAL-TEST-CHECKLIST.md` daquele repositório.
+
 URL: `http://localhost:9010`
 
 Pré-condição: entrar com um usuário Client vinculado ao cliente de homologação.
 
-1. [ ] Fazer login e validar o acesso com `GET /api/v1/client/auth/ping`.
-2. [ ] Recarregar a página e confirmar a restauração por `/auth/me`.
+1. [x] Fazer login e validar o acesso com `GET /api/v1/client/auth/ping`.
+2. [x] Recarregar a página e confirmar a restauração por `/auth/me`.
 3. [ ] Forçar access token expirado e confirmar refresh com retry único.
 4. [ ] Forçar refresh inválido e confirmar limpeza da sessão e retorno ao login.
-5. [ ] Abrir o resumo do próprio perfil.
+   - [x] Abrir `/login?session=expired` e confirmar o aviso amigável de sessão expirada.
+   - [ ] Confirmar que uma falha real de refresh limpa a sessão e gera esse redirecionamento.
+5. [x] Abrir o resumo do próprio perfil.
 6. [ ] Abrir e editar os dados pessoais permitidos.
 7. [ ] Salvar preferências de idioma, moeda, fuso e tema.
 8. [ ] Recarregar e confirmar que perfil e preferências persistiram.
@@ -434,17 +446,43 @@ Endpoints esperados:
 
 Observações:
 
+> Implementação em andamento no `Strategy-analytics-v2`: fundação de refresh,
+> retry único, restauração por `/auth/me`, validação por `/client/auth/ping` e
+> aviso de sessão expirada concluídos no commit `55c0eca`. Resumo, dados
+> pessoais e preferências estão implementados localmente e aguardam homologação
+> com uma sessão Client válida.
 >
+> **Validação em 04/08/2026:** `http://localhost:9010/login?session=expired`
+> carregou o formulário de login e apresentou o aviso “Sua sessão expirou.
+> Entre novamente para continuar.”. O build do portal e `git diff --check`
+> passaram. O navegador não possuía uma sessão Client; por isso login/ping,
+> restauração, refresh real, resumo e escritas continuam desmarcados.
+>
+> Acesso direto a `http://localhost:9010/system/config/profile` sem sessão foi
+> redirecionado para `/login`, que apresentou e-mail, senha e a ação
+> “Continuar”, sem erros no console.
+>
+> **Rodada autenticada em 04/08/2026:** login e `/client/auth/ping` foram
+> aprovados. Após recarregar, a sessão permaneceu no dashboard por restauração
+> via `/auth/me`. Ao abrir o perfil, o backend respondeu que o usuário não está
+> vinculado a um customer profile. Os itens 6 a 9 ficaram bloqueados; o
+> frontend passou a apresentar uma mensagem amigável em português.
+>
+> **Revalidação em 05/08/2026:** o usuário `client@example.com` passou a abrir
+> o próprio perfil sem erro de vínculo. A tela carregou a identificação `Local
+> Client`, o e-mail autenticado, os dados pessoais e as preferências. O bloqueio
+> para iniciar a etapa 16 foi removido. Os itens 6 a 9 desta seção ainda exigem
+> a homologação das respectivas escritas e restrições de acesso.
 
 ## 16. Perfis e contatos de confiança — portal do cliente
 
-1. [ ] Abrir, editar e recarregar o perfil profissional.
-2. [ ] Abrir, editar e recarregar o perfil financeiro.
-3. [ ] Validar campos obrigatórios e formatos antes do envio.
-4. [ ] Listar contatos de confiança no estado vazio e no estado preenchido.
-5. [ ] Cadastrar um contato de confiança válido.
-6. [ ] Editar o contato e confirmar persistência após recarregar.
-7. [ ] Excluir o contato após confirmação explícita.
+1. [x] Abrir, editar e recarregar o perfil profissional.
+2. [x] Abrir, editar e recarregar o perfil financeiro.
+3. [x] Validar campos obrigatórios e formatos antes do envio.
+4. [x] Listar contatos de confiança no estado vazio e no estado preenchido.
+5. [x] Cadastrar um contato de confiança válido.
+6. [x] Editar o contato e confirmar persistência após recarregar.
+7. [x] Excluir o contato após confirmação explícita.
 8. [ ] Confirmar que falhas não removem os dados que estavam no formulário.
 
 Endpoints esperados:
@@ -456,9 +494,16 @@ Endpoints esperados:
 
 Observações:
 
->
+> **Validação em 05/08/2026:** perfis profissional e financeiro foram salvos e
+> persistiram após recarregar. Um contato descartável foi criado, editado,
+> confirmado após recarregar e excluído mediante confirmação explícita. Estados
+> vazio e preenchido foram aprovados. Nenhum erro do backend foi identificado;
+> permanece pendente apenas o cenário de falha controlada da API.
 
 ## 17. Catálogo de bancos — painel administrativo
+
+> **Troca de ambiente — Painel administrativo**
+> Retornar ao repositório `strategy-control`, em `http://localhost:8080`.
 
 1. [ ] Abrir o catálogo e confirmar loading, vazio, sucesso e erro.
 2. [ ] Cadastrar um banco com código e nome válidos.
@@ -477,7 +522,7 @@ Observações:
 
 ## 18. Contas bancárias — painel administrativo
 
-1. [ ] Abrir um cliente sem contas e validar o estado vazio.
+1. [x] Abrir um cliente sem contas e validar o estado vazio.
 2. [ ] Cadastrar uma conta válida usando um banco do catálogo.
 3. [ ] Confirmar que agência, conta e chave Pix aparecem mascaradas.
 4. [ ] Abrir o detalhe, editar um campo permitido e salvar.
@@ -497,9 +542,16 @@ Endpoints esperados:
 
 Observações:
 
->
+> O cliente `Claudio Manhães` foi aberto pelo menu “Editar” da listagem. A
+> seção “Contas bancárias” carregou de forma independente, apresentou a tabela
+> no estado vazio e disponibilizou o formulário compacto “Adicionar conta” no
+> mesmo painel lateral. Nenhum dado bancário foi enviado nesta validação.
 
 ## 19. Contas bancárias — portal do cliente
+
+> **Troca de ambiente — Portal do cliente**
+> Continuar no repositório `Strategy-analytics-v2`, em
+> `http://localhost:9010`, usando o checklist Client daquele repositório.
 
 1. [ ] Listar somente bancos ativos.
 2. [ ] Validar o estado vazio das próprias contas.
@@ -555,6 +607,9 @@ Observações:
 >
 
 ## 21. Configuração documental — painel administrativo
+
+> **Troca de ambiente — Painel administrativo**
+> Retornar ao repositório `strategy-control`, em `http://localhost:8080`.
 
 1. [ ] Listar e cadastrar categoria documental.
 2. [ ] Listar e cadastrar tipo de documento.
@@ -612,6 +667,10 @@ Observações:
 
 ## 24. Verificação e timeline
 
+> **Etapa compartilhada entre ambientes**
+> Validar primeiro os itens administrativos no `strategy-control` e depois os
+> itens Client no `Strategy-analytics-v2`, preservando a ordem abaixo.
+
 1. [ ] No painel, carregar o catálogo de áreas de verificação.
 2. [ ] Consultar o nível atual do cliente.
 3. [ ] Alterar o status de uma área e confirmar atualização do nível.
@@ -632,6 +691,10 @@ Observações:
 >
 
 ## 25. Onboarding e autosserviço de conta
+
+> **Troca de ambiente — Portal do cliente**
+> Continuar no repositório `Strategy-analytics-v2`, em
+> `http://localhost:9010`, usando o checklist Client daquele repositório.
 
 1. [ ] Consultar o onboarding e conferir etapa atual, pendências e ações.
 2. [ ] Para cada resposta `403` de guard, exibir a ação necessária em vez de erro genérico.
@@ -705,8 +768,9 @@ Resultado final:
 | --: | ---------- | ---------------------- | -------- | ---: | --------------------------- | -------- |
 |   1 | Detalhe/resumo | Abrir qualquer cliente homologado | `GET /admin/customers/{id}/summary` | 500 | `019fce0fd6e77f929de00cb9d1ba4bab` / `019fce0fd6e774e7852d15cce6e3e6e1` | Aberto |
 |   2 | Nomes e contatos | Salvar mais de um item e reabrir o editor | `GET /admin/customers/{id}/identification` | 200 | `019fce1340027a24b6bcb3c66be5e465` / `019fce1340027fbe906bedfa6204358c` | Aberto |
-|   3 | Contatos | Salvar contato `Phone` ou `Mobile` | `PUT /admin/customers/{id}/contacts` | 400 | `019fce2054137e949a87b7d2c9c5a8f2` / `019fce2054137ef68e6975336ab6f9ef` | Aberto |
-|   4 | Escritas cadastrais e profissionais | Salvar nomes, contatos, endereços ou perfil profissional pelo navegador | `PUT /admin/customers/{id}/*` | — | Requisições diretas cadastrais `200`; navegador sem resposta acessível | Aberto |
+|   3 | Contatos | Salvar contato `Phone` ou `Mobile`, fechar e reabrir o editor | `PUT /admin/customers/{id}/contacts` | 200 | Revalidação visual em 05/08/2026; IDs da resposta não ficaram expostos na interface | Aberto — aceita a escrita, mas não persiste `Phone`/`Mobile` |
+|   4 | Escritas cadastrais e profissionais | Salvar nomes, contatos, endereços ou perfil profissional pelo navegador | `PUT /admin/customers/{id}/*` | 200 | Revalidação visual em 05/08/2026 | Resolvido — CORS corrigido; nomes, endereço e perfil persistiram |
+|   5 | Portal — perfil Client | Entrar como Client e abrir `/system/config/profile` | `GET /client/profile/*` | 200 | Revalidação visual em 05/08/2026 | Resolvido — usuário vinculado e perfil carregado |
 
 ## Evidências e notas gerais
 
