@@ -29,6 +29,8 @@ export async function listBanks(params = {}) { return (await api.get('/api/v1/ad
 export async function createBank(bank) { return unwrap(await api.post('/api/v1/admin/banks', bank)) }
 export async function listCustomerBankAccounts(id, params = {}) { return (await api.get(`/api/v1/admin/customers/${id}/bank-accounts`, { params })).data }
 export async function createCustomerBankAccount(id, account) { return unwrap(await api.post(`/api/v1/admin/customers/${id}/bank-accounts`, account)) }
+export async function getCustomerBankAccount(id, bankAccountId) { return unwrap(await api.get(`/api/v1/admin/customers/${id}/bank-accounts/${bankAccountId}`)) }
+export async function updateCustomerBankAccount(id, bankAccountId, account) { return unwrap(await api.patch(`/api/v1/admin/customers/${id}/bank-accounts/${bankAccountId}`, account)) }
 export async function setPrimaryCustomerBankAccount(id, bankAccountId) { return unwrap(await api.post(`/api/v1/admin/customers/${id}/bank-accounts/${bankAccountId}/set-primary`)) }
 export async function changeCustomerBankAccountStatus(id, bankAccountId, status) { return unwrap(await api.patch(`/api/v1/admin/customers/${id}/bank-accounts/${bankAccountId}/status`, { status })) }
 export async function archiveCustomerBankAccount(id, bankAccountId) { return unwrap(await api.post(`/api/v1/admin/customers/${id}/bank-accounts/${bankAccountId}/archive`)) }
