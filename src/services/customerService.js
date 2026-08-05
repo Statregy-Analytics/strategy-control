@@ -26,6 +26,7 @@ export async function listCustomerFinancialProfiles(id, params = {}) { return (a
 export async function createCustomerFinancialProfile(id, profile) { return unwrap(await api.post(`/api/v1/admin/customers/${id}/financial-profiles`, profile)) }
 export async function getCustomerAccountSecurity(id) { return unwrap(await api.get(`/api/v1/admin/customers/${id}/account-security`)) }
 export async function listBanks(params = {}) { return (await api.get('/api/v1/admin/banks', { params })).data }
+export async function createBank(bank) { return unwrap(await api.post('/api/v1/admin/banks', bank)) }
 export async function listCustomerBankAccounts(id, params = {}) { return (await api.get(`/api/v1/admin/customers/${id}/bank-accounts`, { params })).data }
 export async function createCustomerBankAccount(id, account) { return unwrap(await api.post(`/api/v1/admin/customers/${id}/bank-accounts`, account)) }
 export async function setPrimaryCustomerBankAccount(id, bankAccountId) { return unwrap(await api.post(`/api/v1/admin/customers/${id}/bank-accounts/${bankAccountId}/set-primary`)) }

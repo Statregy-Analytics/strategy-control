@@ -100,8 +100,8 @@ Contrato de referência: [swagger.json](Api/swagger.json).
 
 ### Painel administrativo
 
-- [ ] Listar catálogo com `GET /api/v1/admin/banks`.
-- [ ] Criar banco com `POST /api/v1/admin/banks`.
+- [x] Listar catálogo com `GET /api/v1/admin/banks`.
+- [x] Criar banco com `POST /api/v1/admin/banks`.
 - [ ] Listar e criar contas do cliente.
 - [ ] Consultar e editar conta.
 - [ ] Definir conta principal.

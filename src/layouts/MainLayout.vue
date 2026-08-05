@@ -154,6 +154,7 @@ const linkesRoutes = [
       { text: 'Clientes', icon: '', to: '/dataManagement' },
       { text: 'Assessores', icon: 'copy', to: '/dataManagement/assessores' },
       { text: 'Leads', icon: 'paste', to: '/dataManagement/leads' },
+      { text: 'Bancos', icon: 'account_balance', to: '/dataManagement/banks' },
     ],
   },
 ]

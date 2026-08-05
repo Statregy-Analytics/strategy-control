@@ -58,6 +58,11 @@ const routes = [
             name: 'Leads',
             component: () => import('pages/DataManagement/LeadPage.vue'),
           },
+          {
+            path: 'banks',
+            name: 'Bancos',
+            component: () => import('pages/DataManagement/BanksPage.vue'),
+          },
         ],
       },
     ],

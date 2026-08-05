@@ -506,9 +506,9 @@ Observações:
 > Retornar ao repositório `strategy-control`, em `http://localhost:8080`.
 
 1. [ ] Abrir o catálogo e confirmar loading, vazio, sucesso e erro.
-2. [ ] Cadastrar um banco com código e nome válidos.
-3. [ ] Confirmar que o banco aparece sem duplicar a lista.
-4. [ ] Tentar cadastrar o mesmo código e validar o conflito `409`.
+2. [x] Cadastrar um banco com código e nome válidos.
+3. [x] Confirmar que o banco aparece sem duplicar a lista.
+4. [!] Tentar cadastrar o mesmo código e validar o conflito `409`.
 5. [ ] Confirmar que somente bancos ativos aparecem no portal do cliente.
 
 Endpoints esperados:
@@ -518,7 +518,17 @@ Endpoints esperados:
 
 Observações:
 
+> **Validação em 05/08/2026:** o catálogo carregou 511 bancos, com loading,
+> paginação, filtro de ativos e cadastro em painel lateral. Datas zeradas são
+> apresentadas como não informadas, sem converter para `31/12/1969`. Os estados
+> vazio e erro com nova tentativa estão implementados, mas não foram provocados
+> nesta rodada.
 >
+> O banco de homologação com código `HMG805` foi criado e apareceu uma única vez
+> na lista atualizada. Ao repetir o mesmo código com outro nome, o backend
+> respondeu com sucesso e criou outro registro, elevando o total de 512 para
+> 513. Era esperado conflito `409`. A API não oferece exclusão de banco para
+> remover os dois registros descartáveis.
 
 ## 18. Contas bancárias — painel administrativo
 
@@ -771,6 +781,7 @@ Resultado final:
 |   3 | Contatos | Salvar contato `Phone` ou `Mobile`, fechar e reabrir o editor | `PUT /admin/customers/{id}/contacts` | 200 | Revalidação visual em 05/08/2026; IDs da resposta não ficaram expostos na interface | Aberto — aceita a escrita, mas não persiste `Phone`/`Mobile` |
 |   4 | Escritas cadastrais e profissionais | Salvar nomes, contatos, endereços ou perfil profissional pelo navegador | `PUT /admin/customers/{id}/*` | 200 | Revalidação visual em 05/08/2026 | Resolvido — CORS corrigido; nomes, endereço e perfil persistiram |
 |   5 | Portal — perfil Client | Entrar como Client e abrir `/system/config/profile` | `GET /client/profile/*` | 200 | Revalidação visual em 05/08/2026 | Resolvido — usuário vinculado e perfil carregado |
+|   6 | Catálogo de bancos | Cadastrar novamente o código `HMG805` com outro nome | `POST /admin/banks` | 200 | IDs não expostos na notificação; total passou de 512 para 513 | Aberto — deveria retornar `409`, mas criou duplicidade |
 
 ## Evidências e notas gerais
 
