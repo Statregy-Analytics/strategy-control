@@ -155,6 +155,7 @@ const linkesRoutes = [
       { text: 'Assessores', icon: 'copy', to: '/dataManagement/assessores' },
       { text: 'Leads', icon: 'paste', to: '/dataManagement/leads' },
       { text: 'Bancos', icon: 'account_balance', to: '/dataManagement/banks' },
+      { text: 'Documentos', icon: 'description', to: '/dataManagement/document-settings' },
     ],
   },
 ]

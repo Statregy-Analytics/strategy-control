@@ -39,7 +39,13 @@ URL: `http://localhost:8080/auth`
 
 Observações:
 
->
+> **Implementação em 08/08/2026:** adicionada a tela
+> `/dataManagement/document-settings`, seguindo listagem densa e edição lateral.
+> Categorias, tipos, associação de país, schemas, validação, publicação,
+> retirada e definições de upload/dados usam os endpoints administrativos. Lint,
+> build e `git diff --check` passaram. A homologação integrada permanece
+> pendente porque não havia sessão Admin disponível no navegador local iniciado
+> para a revisão visual.
 
 ## Mapa de ambientes
 

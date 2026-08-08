@@ -123,21 +123,21 @@ Contrato de referência: [swagger.json](Api/swagger.json).
 
 Usar somente `/api/v1/client/profile/documents/*`. Não integrar o fluxo novo com `/data-intake/submissions/*`.
 
-- [ ] Carregar `/documents/overview` para a tela principal.
-- [ ] Carregar `/documents/progress` para nível, classificação e progresso.
-- [ ] Carregar catálogo de tipos de documento.
-- [ ] Carregar definição de dados por tipo e país.
-- [ ] Implementar upload multipart.
-- [ ] Aceitar somente PDF, JPEG e PNG, até 25 MB.
-- [ ] Implementar substituição de documento rejeitado.
-- [ ] Implementar download direto e URL temporária.
-- [ ] Recarregar overview, progress e onboarding depois de upload/substituição.
+- [x] Carregar `/documents/overview` para a tela principal.
+- [x] Carregar `/documents/progress` para nível, classificação e progresso.
+- [x] Carregar catálogo de tipos de documento.
+- [x] Carregar definição de dados por tipo e país.
+- [x] Implementar upload multipart.
+- [x] Aceitar somente PDF, JPEG e PNG, até 25 MB.
+- [x] Implementar substituição de documento rejeitado.
+- [x] Implementar download direto e URL temporária.
+- [x] Recarregar overview, progress e onboarding depois de upload/substituição.
 - [ ] Tratar explicitamente arquivo inválido, requisito conflitante, rejeição e storage indisponível.
 
 ### Painel administrativo
 
-- [ ] Configurar categorias e tipos de documentos.
-- [ ] Configurar país, schemas e definições de upload/dados.
+- [x] Configurar categorias e tipos de documentos.
+- [x] Configurar país, schemas e definições de upload/dados.
 - [ ] Criar e listar requisitos documentais do cliente.
 - [ ] Carregar overview e progress do cliente.
 - [ ] Fazer upload administrativo.

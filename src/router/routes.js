@@ -63,6 +63,11 @@ const routes = [
             name: 'Bancos',
             component: () => import('pages/DataManagement/BanksPage.vue'),
           },
+          {
+            path: 'document-settings',
+            name: 'Configuração documental',
+            component: () => import('pages/DataManagement/DocumentSettingsPage.vue'),
+          },
         ],
       },
     ],
