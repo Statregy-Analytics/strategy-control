@@ -698,6 +698,11 @@ Observações:
 > Criação, edição, resolução e descarte usam ações contextuais e confirmação com
 > justificativa. A homologação integrada permanece pendente porque o navegador
 > interno foi redirecionado para `/auth` e não havia sessão Admin disponível.
+>
+> **Homologação autenticada em 08/08/2026:** a sessão Admin foi restaurada com
+> o usuário documentado no repositório backend. O histórico carregou no estado
+> vazio, mas card, flags e alertas falharam no backend. O frontend foi corrigido
+> para manter cada projeção visível e indicar somente os blocos indisponíveis.
 
 ## 23. Compliance — painel administrativo
 
@@ -823,6 +828,7 @@ Resultado final:
 |   4 | Escritas cadastrais e profissionais | Salvar nomes, contatos, endereços ou perfil profissional pelo navegador | `PUT /admin/customers/{id}/*` | 200 | Revalidação visual em 05/08/2026 | Resolvido — CORS corrigido; nomes, endereço e perfil persistiram |
 |   5 | Portal — perfil Client | Entrar como Client e abrir `/system/config/profile` | `GET /client/profile/*` | 200 | Revalidação visual em 05/08/2026 | Resolvido — usuário vinculado e perfil carregado |
 |   6 | Catálogo de bancos | Cadastrar novamente o código `HMG805` com outro nome | `POST /admin/banks` | 200 | IDs não expostos na notificação; total passou de 512 para 513 | Aberto — deveria retornar `409`, mas criou duplicidade |
+|   7 | Compliance do cliente | Abrir o editor de `Carlos Farias` e aguardar o painel Compliance | `GET /admin/customers/{id}/compliance/card`, `/flags`, `/alerts` | Erro | Homologação visual em 08/08/2026 | Aberto — as três projeções falham; `/history` responde e exibe estado vazio |
 
 ## Evidências e notas gerais
 
