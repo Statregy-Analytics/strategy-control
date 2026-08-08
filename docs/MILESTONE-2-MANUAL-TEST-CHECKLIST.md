@@ -787,7 +787,14 @@ e-mail e reset de senha, `/api/v1/users/me/password`, `/phone-verification/*` e
 
 Observações:
 
->
+> **Implementação em 08/08/2026:** adicionada ao portal a aba “Mídia e
+> compartilhamento”, com preview, upload e exclusão independentes de avatar e
+> assinatura, validação local de PNG/JPEG até 5 MB, listagem, criação e revogação
+> de links. A rota pública `/public/profile/:token` consulta o endpoint público
+> sem sessão e filtra defensivamente campos sensíveis. Build e
+> `git diff --check` passaram; o lint permanece impedido pela configuração
+> legada do ESLint 9. Os itens ficam desmarcados até a homologação com arquivos
+> descartáveis e um link criado para o teste.
 
 ## 26. Avatar, assinatura e compartilhamento
 

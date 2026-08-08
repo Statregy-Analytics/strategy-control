@@ -173,8 +173,8 @@ Usar somente `/api/v1/client/profile/documents/*`. Não integrar o fluxo novo co
 - [x] Implementar alteração de senha autenticada.
 - [x] Implementar solicitação e confirmação de telefone.
 - [x] Listar e revogar sessões.
-- [ ] Implementar avatar e assinatura.
-- [ ] Implementar links de compartilhamento e perfil público.
+- [x] Implementar avatar e assinatura.
+- [x] Implementar links de compartilhamento e perfil público.
 
 ## 8. Qualidade e homologação
 
