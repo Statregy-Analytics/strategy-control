@@ -138,13 +138,13 @@ Usar somente `/api/v1/client/profile/documents/*`. Não integrar o fluxo novo co
 
 - [x] Configurar categorias e tipos de documentos.
 - [x] Configurar país, schemas e definições de upload/dados.
-- [ ] Criar e listar requisitos documentais do cliente.
-- [ ] Carregar overview e progress do cliente.
-- [ ] Fazer upload administrativo.
-- [ ] Baixar ou gerar URL temporária.
-- [ ] Revisar, aprovar e rejeitar documentos.
-- [ ] Alterar status e excluir documento.
-- [ ] Recarregar summary, cards, overview e progress após revisão.
+- [x] Criar e listar requisitos documentais do cliente.
+- [x] Carregar overview e progress do cliente.
+- [x] Fazer upload administrativo.
+- [x] Baixar ou gerar URL temporária.
+- [x] Revisar, aprovar e rejeitar documentos.
+- [x] Alterar status e excluir documento.
+- [x] Recarregar summary, cards, overview e progress após revisão.
 
 ## 6. Compliance, verificação e timeline
 

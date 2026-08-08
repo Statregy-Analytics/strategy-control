@@ -73,6 +73,12 @@
         <q-separator />
 
         <form-section>
+          <client-documents-panel :key="`documents-${customerId}`" :customer-id="customerId" @updated="onSectionUpdated" />
+        </form-section>
+
+        <q-separator />
+
+        <form-section>
           <client-preferences-panel
             :key="`settings-${customerId}`"
             embedded
@@ -95,6 +101,7 @@ import ClientPreferencesPanel from 'src/components/Clients/ClientPreferencesPane
 import ClientProfessionalPanel from 'src/components/Clients/ClientProfessionalPanel.vue'
 import ClientFinancialSecurityPanel from 'src/components/Clients/ClientFinancialSecurityPanel.vue'
 import ClientBankAccountsPanel from 'src/components/Clients/ClientBankAccountsPanel.vue'
+import ClientDocumentsPanel from 'src/components/Clients/ClientDocumentsPanel.vue'
 import EntityHeader from 'src/components/Entity/EntityHeader.vue'
 import FormSection from 'src/components/Entity/FormSection.vue'
 import { useClientStore } from 'src/stores/client'

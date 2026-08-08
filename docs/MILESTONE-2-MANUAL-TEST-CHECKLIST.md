@@ -667,7 +667,12 @@ Endpoints esperados: `/api/v1/admin/document-categories`,
 
 Observações:
 
->
+> **Implementação em 08/08/2026:** o editor lateral de clientes recebeu um
+> painel documental independente após contas bancárias. O painel integra
+> requisitos, overview, progresso, upload multipart, download, URL temporária,
+> revisão, alteração de status e exclusão confirmada. Estados de loading, erro,
+> vazio e retry são isolados. A homologação com escritas permanece pendente até
+> uma sessão Admin estar disponível no navegador.
 
 ## 22. Requisitos e revisão documental — painel administrativo
 
