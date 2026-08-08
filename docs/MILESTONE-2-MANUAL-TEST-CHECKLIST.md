@@ -719,7 +719,16 @@ Endpoints esperados: `/api/v1/admin/customers/{id}/compliance/card`, `/flags`,
 
 Observações:
 
->
+> **Implementação em 08/08/2026:** o portal recebeu a aba “Conta e segurança”
+> com onboarding e sessões carregados independentemente, confirmação de e-mail
+> e telefone, alteração autenticada de senha e revogação individual ou coletiva
+> de sessões. O fluxo público “Esqueci minha senha” deixou de usar o serviço
+> legado e passou a solicitar e concluir a recuperação por e-mail e código, com
+> controle de reenvio. Respostas `403` com ação de onboarding agora recebem
+> orientação específica. O build e `git diff --check` passaram; o lint continua
+> impedido pela configuração legada do ESLint 9. Os cenários permanecem
+> desmarcados até a homologação integrada, especialmente porque códigos e troca
+> real de senha exigem os canais de confirmação do usuário.
 
 ## 24. Verificação e timeline
 

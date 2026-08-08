@@ -166,13 +166,13 @@ Usar somente `/api/v1/client/profile/documents/*`. Não integrar o fluxo novo co
 
 ## 7. Onboarding e autosserviço de conta
 
-- [ ] Carregar `GET /api/v1/client/onboarding/status`.
-- [ ] Transformar respostas `403` de guard em ações de onboarding.
-- [ ] Implementar confirmação e reenvio de e-mail.
-- [ ] Implementar esquecimento e redefinição de senha.
-- [ ] Implementar alteração de senha autenticada.
-- [ ] Implementar solicitação e confirmação de telefone.
-- [ ] Listar e revogar sessões.
+- [x] Carregar `GET /api/v1/client/onboarding/status`.
+- [x] Transformar respostas `403` de guard em ações de onboarding.
+- [x] Implementar confirmação e reenvio de e-mail.
+- [x] Implementar esquecimento e redefinição de senha.
+- [x] Implementar alteração de senha autenticada.
+- [x] Implementar solicitação e confirmação de telefone.
+- [x] Listar e revogar sessões.
 - [ ] Implementar avatar e assinatura.
 - [ ] Implementar links de compartilhamento e perfil público.
 
