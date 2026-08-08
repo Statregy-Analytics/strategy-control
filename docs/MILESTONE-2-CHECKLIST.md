@@ -53,12 +53,12 @@ Contrato de referência: [swagger.json](Api/swagger.json).
 - [x] Busca por nome.
 - [x] Criar cliente com `POST /api/v1/admin/customers`.
 - [x] Remover dados fictícios de contratos, saldo e dividendos da tabela.
-- [ ] Adicionar filtros por status, tipo, contato e documento.
-- [ ] Implementar ordenação selecionável.
-- [ ] Implementar grade com `GET /api/v1/admin/customers/cards`.
-- [ ] Implementar autocomplete/troca rápida com `GET /api/v1/admin/customers/lookup`.
-- [ ] Atualizar a listagem após alteração de status ou exclusão.
-- [ ] Avaliar separadamente a criação/vinculação do usuário de acesso do cliente.
+- [x] Adicionar filtros por status, tipo, contato e documento.
+- [x] Implementar ordenação selecionável.
+- [x] Implementar grade com `GET /api/v1/admin/customers/cards`.
+- [x] Implementar autocomplete/troca rápida com `GET /api/v1/admin/customers/lookup`.
+- [x] Atualizar a listagem após alteração de status ou exclusão.
+- [x] Avaliar separadamente a criação/vinculação do usuário de acesso do cliente.
 
 ### Próxima etapa — detalhe do cliente
 
