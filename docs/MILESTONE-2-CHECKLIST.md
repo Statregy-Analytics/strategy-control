@@ -154,15 +154,15 @@ Usar somente `/api/v1/client/profile/documents/*`. Não integrar o fluxo novo co
 - [x] Listar, criar e editar flags.
 - [x] Resolver e descartar flags.
 - [x] Exibir alertas e histórico.
-- [ ] Carregar catálogo de verificação.
-- [ ] Consultar nível de verificação do cliente.
-- [ ] Atualizar status das áreas de verificação.
-- [ ] Implementar timeline paginada.
+- [x] Carregar catálogo de verificação.
+- [x] Consultar nível de verificação do cliente.
+- [x] Atualizar status das áreas de verificação.
+- [x] Implementar timeline paginada.
 
 ### Portal do cliente
 
-- [ ] Implementar timeline própria.
-- [ ] Não expor flags, evidências ou controles administrativos de compliance.
+- [x] Implementar timeline própria.
+- [x] Não expor flags, evidências ou controles administrativos de compliance.
 
 ## 7. Onboarding e autosserviço de conta
 

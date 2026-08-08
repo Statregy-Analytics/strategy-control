@@ -85,6 +85,12 @@
         <q-separator />
 
         <form-section>
+          <client-verification-timeline-panel :key="`verification-${customerId}`" :customer-id="customerId" @updated="onSectionUpdated" />
+        </form-section>
+
+        <q-separator />
+
+        <form-section>
           <client-preferences-panel
             :key="`settings-${customerId}`"
             embedded
@@ -109,6 +115,7 @@ import ClientFinancialSecurityPanel from 'src/components/Clients/ClientFinancial
 import ClientBankAccountsPanel from 'src/components/Clients/ClientBankAccountsPanel.vue'
 import ClientDocumentsPanel from 'src/components/Clients/ClientDocumentsPanel.vue'
 import ClientCompliancePanel from 'src/components/Clients/ClientCompliancePanel.vue'
+import ClientVerificationTimelinePanel from 'src/components/Clients/ClientVerificationTimelinePanel.vue'
 import EntityHeader from 'src/components/Entity/EntityHeader.vue'
 import FormSection from 'src/components/Entity/FormSection.vue'
 import { useClientStore } from 'src/stores/client'

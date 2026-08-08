@@ -727,10 +727,10 @@ Observações:
 > Validar primeiro os itens administrativos no `strategy-control` e depois os
 > itens Client no `Strategy-analytics-v2`, preservando a ordem abaixo.
 
-1. [ ] No painel, carregar o catálogo de áreas de verificação.
-2. [ ] Consultar o nível atual do cliente.
+1. [x] No painel, carregar o catálogo de áreas de verificação.
+2. [x] Consultar o nível atual do cliente.
 3. [ ] Alterar o status de uma área e confirmar atualização do nível.
-4. [ ] Abrir a timeline administrativa e validar paginação e ordem cronológica.
+4. [x] Abrir a timeline administrativa e validar paginação e ordem cronológica.
 5. [ ] No portal, abrir a timeline própria.
 6. [ ] Confirmar que o cliente vê apenas eventos permitidos da própria conta.
 
@@ -744,7 +744,17 @@ Endpoints esperados:
 
 Observações:
 
->
+> **Implementação e homologação em 08/08/2026:** o editor lateral de Carlos
+> Farias carregou o catálogo com 24 áreas, exibiu o nível atual de forma
+> independente e apresentou quatro eventos administrativos do mais recente para
+> o mais antigo. O controle de atualização de área foi implementado, mas não foi
+> acionado nesta rodada para não alterar dados reais sem um caso de homologação
+> definido. A timeline Client foi implementada no portal sem flags, evidências ou
+> ações administrativas; sua revisão visual integrada permanece pendente porque
+> a conexão com a aba autenticada do portal expirou durante a troca de ambiente.
+> Lint, build e `git diff --check` passaram no painel. No portal, build e diff
+> passaram; o lint segue bloqueado pela configuração legada do ESLint 9, que não
+> possui `eslint.config.js`.
 
 ## 25. Onboarding e autosserviço de conta
 
