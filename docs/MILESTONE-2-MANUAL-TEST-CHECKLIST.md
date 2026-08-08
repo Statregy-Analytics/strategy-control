@@ -693,7 +693,11 @@ Endpoints esperados: `/api/v1/admin/customers/{customerId}/document-requirements
 
 Observações:
 
->
+> **Implementação em 08/08/2026:** adicionado ao editor lateral do cliente um
+> painel de compliance com card consolidado, flags, alertas e histórico.
+> Criação, edição, resolução e descarte usam ações contextuais e confirmação com
+> justificativa. A homologação integrada permanece pendente porque o navegador
+> interno foi redirecionado para `/auth` e não havia sessão Admin disponível.
 
 ## 23. Compliance — painel administrativo
 

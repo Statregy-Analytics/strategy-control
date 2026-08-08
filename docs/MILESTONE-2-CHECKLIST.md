@@ -150,10 +150,10 @@ Usar somente `/api/v1/client/profile/documents/*`. Não integrar o fluxo novo co
 
 ### Painel administrativo
 
-- [ ] Implementar card de compliance.
-- [ ] Listar, criar e editar flags.
-- [ ] Resolver e descartar flags.
-- [ ] Exibir alertas e histórico.
+- [x] Implementar card de compliance.
+- [x] Listar, criar e editar flags.
+- [x] Resolver e descartar flags.
+- [x] Exibir alertas e histórico.
 - [ ] Carregar catálogo de verificação.
 - [ ] Consultar nível de verificação do cliente.
 - [ ] Atualizar status das áreas de verificação.
