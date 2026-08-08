@@ -79,22 +79,22 @@ Contrato de referência: [swagger.json](Api/swagger.json).
 
 ### Painel administrativo
 
-- [ ] Carregar visão combinada em `/professional-financial-security`.
-- [ ] Consultar e editar perfil profissional.
-- [ ] Consultar perfil financeiro atual.
-- [ ] Listar histórico de perfis financeiros.
-- [ ] Criar uma nova versão do perfil financeiro.
-- [ ] Exibir segurança da conta sem dados sensíveis.
-- [ ] Não implementar configuração de 2FA neste marco.
+- [x] Carregar visão combinada em `/professional-financial-security`.
+- [x] Consultar e editar perfil profissional.
+- [x] Consultar perfil financeiro atual.
+- [x] Listar histórico de perfis financeiros.
+- [x] Criar uma nova versão do perfil financeiro.
+- [x] Exibir segurança da conta sem dados sensíveis.
+- [x] Não implementar configuração de 2FA neste marco.
 
 ### Portal do cliente
 
-- [ ] Carregar `GET /api/v1/client/profile/summary`.
-- [ ] Consultar e atualizar `/client/profile`.
-- [ ] Consultar e atualizar preferências.
-- [ ] Consultar e atualizar perfil profissional.
-- [ ] Consultar e atualizar perfil financeiro.
-- [ ] Implementar contatos de confiança.
+- [x] Carregar `GET /api/v1/client/profile/summary`.
+- [x] Consultar e atualizar `/client/profile`.
+- [x] Consultar e atualizar preferências.
+- [x] Consultar e atualizar perfil profissional.
+- [x] Consultar e atualizar perfil financeiro.
+- [x] Implementar contatos de confiança.
 
 ## 4. Contas bancárias
 
@@ -102,11 +102,11 @@ Contrato de referência: [swagger.json](Api/swagger.json).
 
 - [x] Listar catálogo com `GET /api/v1/admin/banks`.
 - [x] Criar banco com `POST /api/v1/admin/banks`.
-- [ ] Listar e criar contas do cliente.
-- [ ] Consultar e editar conta.
-- [ ] Definir conta principal.
-- [ ] Alterar status e arquivar conta.
-- [ ] Exibir valores mascarados nas telas de leitura.
+- [x] Listar e criar contas do cliente.
+- [x] Consultar e editar conta.
+- [x] Definir conta principal.
+- [x] Alterar status e arquivar conta.
+- [x] Exibir valores mascarados nas telas de leitura.
 
 ### Portal do cliente
 
@@ -132,7 +132,7 @@ Usar somente `/api/v1/client/profile/documents/*`. Não integrar o fluxo novo co
 - [x] Implementar substituição de documento rejeitado.
 - [x] Implementar download direto e URL temporária.
 - [x] Recarregar overview, progress e onboarding depois de upload/substituição.
-- [ ] Tratar explicitamente arquivo inválido, requisito conflitante, rejeição e storage indisponível.
+- [x] Tratar explicitamente arquivo inválido, requisito conflitante, rejeição e storage indisponível.
 
 ### Painel administrativo
 

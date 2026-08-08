@@ -38,7 +38,7 @@
 <script setup>
 import { computed, onMounted, reactive, ref } from 'vue'
 import LabelForm from 'src/components/Form/LabelForm.vue'
-import { createCustomerFinancialProfile, getCustomerAccountSecurity, getCustomerCurrentFinancialProfile, listCustomerFinancialProfiles } from 'src/services/customerService'
+import { createCustomerFinancialProfile, getCustomerAccountSecurity, getCustomerCurrentFinancialProfile, getCustomerProfessionalFinancialSecurity, listCustomerFinancialProfiles } from 'src/services/customerService'
 import { getApiErrorMessage } from 'src/services/apiError'
 import useNotification from 'src/composables/global/useNotification'
 
@@ -66,10 +66,11 @@ const fill = (profile = {}) => Object.assign(form, {
 })
 const load = async () => {
   loading.value = true; loadError.value = ''
-  const [currentResult, historyResult, securityResult] = await Promise.allSettled([
-    getCustomerCurrentFinancialProfile(props.customerId), listCustomerFinancialProfiles(props.customerId, { page: 1, pageSize: 20 }), getCustomerAccountSecurity(props.customerId),
+  const [combinedResult, currentResult, historyResult, securityResult] = await Promise.allSettled([
+    getCustomerProfessionalFinancialSecurity(props.customerId), getCustomerCurrentFinancialProfile(props.customerId), listCustomerFinancialProfiles(props.customerId, { page: 1, pageSize: 20 }), getCustomerAccountSecurity(props.customerId),
   ])
   if (currentResult.status === 'fulfilled') fill(currentResult.value || {})
+  else if (combinedResult.status === 'fulfilled') fill(combinedResult.value?.financialProfile || combinedResult.value?.financial || {})
   else if (currentResult.reason?.response?.status !== 404) loadError.value = getApiErrorMessage(currentResult.reason, 'Não foi possível carregar o perfil financeiro.')
   if (historyResult.status === 'fulfilled') history.value = historyResult.value?.data ?? []
   if (securityResult.status === 'fulfilled') security.value = securityResult.value || {}
