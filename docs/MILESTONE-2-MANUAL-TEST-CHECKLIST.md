@@ -570,7 +570,7 @@ Observações:
 5. [x] Cadastrar uma segunda conta e torná-la principal.
 6. [ ] Arquivar a conta secundária.
 7. [x] Confirmar que número integral e chave Pix bruta nunca aparecem em tela ou log.
-8. [ ] Em usuário bloqueado pelo guard `Deposit`, exibir a ação de onboarding correta.
+8. [x] Em usuário bloqueado pelo guard `Deposit`, exibir a ação de onboarding correta.
 
 Endpoints esperados:
 
@@ -594,6 +594,16 @@ Observações:
 > listagem, inclusive após recarregar a página. O item 6 permanece bloqueado
 > para correção do backend. O guard `Deposit` não foi exercitado com este
 > usuário, que já possui acesso ao perfil.
+>
+> **Revalidação em 05/08/2026:** ao abrir “Documentação”, o backend acionou o
+> guard `Deposit`. O portal traduziu o bloqueio, ocultou o conteúdo inacessível
+> e apresentou as ações “Abrir depósito” e “Verificar novamente”. A primeira
+> retorna ao dashboard e abre o mesmo modal do botão “Depósito”, sem acessar o
+> fluxo legado `/system/dashboard/deposit`.
+>
+> **Correção validada em 08/08/2026:** a ação foi executada no navegador,
+> retornou a `/system/dashboard`, abriu o `CardDeposit` com QR Code/chave Pix e
+> manteve a página legada fora do fluxo.
 
 ## 20. Documentos — portal do cliente (fluxo prioritário)
 
@@ -625,7 +635,12 @@ Endpoints esperados:
 
 Observações:
 
->
+> **Validação em 05/08/2026:** o usuário de homologação está bloqueado pelo
+> guard `Deposit`. A aba apresenta orientação em português e link para
+> `/system/dashboard/deposit`. Overview, progresso, catálogo, upload,
+> substituição e downloads não puderam ser homologados enquanto o requisito de
+> onboarding não for satisfeito. A orientação utiliza o modal atual de depósito
+> do dashboard, e não a página legada.
 
 ## 21. Configuração documental — painel administrativo
 

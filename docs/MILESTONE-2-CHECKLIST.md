@@ -114,7 +114,7 @@ Contrato de referência: [swagger.json](Api/swagger.json).
 - [x] Listar e criar contas próprias.
 - [x] Consultar e editar conta própria.
 - [x] Definir conta principal e arquivar.
-- [ ] Tratar o guard de onboarding `Deposit`.
+- [x] Tratar o guard de onboarding `Deposit`.
 - [x] Nunca exibir número integral ou chave Pix bruta.
 
 ## 5. Documentos
