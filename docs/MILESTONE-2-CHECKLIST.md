@@ -29,19 +29,19 @@ Contrato de referência: [swagger.json](Api/swagger.json).
 - [x] Refresh automático com rotação do refresh token.
 - [x] Retry único da requisição após `401`.
 - [x] Logout e limpeza da sessão local.
-- [ ] Redirecionar para login com aviso quando o refresh falhar.
-- [ ] Restaurar usuário com `GET /api/v1/auth/me` ao iniciar a aplicação.
-- [ ] Carregar sistemas disponíveis com `GET /api/v1/me/systems`.
-- [ ] Criar seletor de workspace quando o usuário possuir mais de um.
+- [x] Redirecionar para login com aviso quando o refresh falhar.
+- [x] Restaurar usuário com `GET /api/v1/auth/me` ao iniciar a aplicação.
+- [x] Carregar sistemas disponíveis com `GET /api/v1/me/systems`.
+- [x] Criar seletor de workspace quando o usuário possuir mais de um.
 
 ### Portal do cliente
 
 - [x] Login básico conectado à API nova.
 - [x] Logout básico conectado à API nova.
-- [ ] Aplicar a mesma estratégia de refresh e retry único.
-- [ ] Corrigir o interceptor de `401` para rejeitar o erro após limpar a sessão.
-- [ ] Restaurar usuário com `GET /api/v1/auth/me`.
-- [ ] Validar acesso Client com `GET /api/v1/client/auth/ping`.
+- [x] Aplicar a mesma estratégia de refresh e retry único.
+- [x] Corrigir o interceptor de `401` para rejeitar o erro após limpar a sessão.
+- [x] Restaurar usuário com `GET /api/v1/auth/me`.
+- [x] Validar acesso Client com `GET /api/v1/client/auth/ping`.
 
 ## 2. CRM administrativo — clientes
 

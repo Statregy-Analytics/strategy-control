@@ -24,6 +24,11 @@ export async function getCurrentUser() {
   return data?.data ?? data
 }
 
+export async function getMySystems() {
+  const { data } = await api.get('/api/v1/me/systems')
+  return data?.data ?? data
+}
+
 export async function logout() {
   const refreshToken = LocalStorage.getItem(REFRESH_TOKEN_KEY)
   try {

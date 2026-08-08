@@ -41,6 +41,14 @@
         </div>
 
         <q-space />
+        <q-select
+          v-if="workspaceOptions.length > 1"
+          v-model="selectedWorkspace"
+          :options="workspaceOptions"
+          emit-value map-options dense outlined dark options-dense
+          label="Workspace" class="workspace-select q-mr-md"
+          @update:model-value="changeWorkspace"
+        />
         <q-badge outline color="primary" class="q-pa-sm">
           <IconUser class="trabler-icon-size" />
           <span class="text-grey">Clientes:</span>
@@ -101,11 +109,14 @@ import CompletBrand from 'src/components/brand/CompletBrand.vue'
 import MenuBar from 'src/components/navbar/menuBar.vue'
 import RequestSuccess from 'src/components/Card/RequestSuccess.vue'
 import { useRoute, useRouter } from 'vue-router'
-import { defineComponent, onBeforeMount } from 'vue'
+import { computed, defineComponent, onBeforeMount, onMounted, ref } from 'vue'
 import { useLayoutStore } from 'src/stores/layout'
 import { useAuthStore } from 'src/stores/auth'
 import { storeToRefs } from 'pinia'
 import useNotification from 'src/composables/global/useNotification'
+import { getMySystems, selectWorkspace } from 'src/services/authService'
+import { LocalStorage } from 'quasar'
+import { WORKSPACE_KEY } from 'src/boot/axios'
 defineComponent({
   name: 'MainLayout',
 })
@@ -120,6 +131,21 @@ onBeforeMount(() => {
 })
 const { dialogConfirmAction, painel } = storeToRefs(layoutStore)
 const { user } = storeToRefs(authStore)
+const systems = ref([])
+const selectedWorkspace = ref(LocalStorage.getItem(WORKSPACE_KEY) || null)
+const collection = (value) => Array.isArray(value) ? value : value?.systems || value?.items || value?.data || []
+const workspaces = computed(() => systems.value.flatMap((system) => system.workspaces || system.workspaceIds || []).map((workspace) => typeof workspace === 'string' ? { id: workspace, name: workspace } : workspace))
+const workspaceOptions = computed(() => workspaces.value.map((workspace) => ({ value: workspace.id || workspace.workspaceId, label: workspace.name || workspace.displayName || workspace.id || workspace.workspaceId })).filter((item) => item.value))
+const changeWorkspace = (workspaceId) => { selectWorkspace(workspaceId); window.location.reload() }
+onMounted(async () => {
+  try {
+    systems.value = collection(await getMySystems())
+    if (!selectedWorkspace.value && workspaceOptions.value.length === 1) {
+      selectedWorkspace.value = workspaceOptions.value[0].value
+      selectWorkspace(selectedWorkspace.value)
+    }
+  } catch { systems.value = [] }
+})
 
 const onLogout = async () => {
   try {
@@ -174,6 +200,8 @@ const linkesRoutes = [
   padding: 0.7rem
 .text-small
   font-size: 0.7rem
+.workspace-select
+  width: 190px
 .GPL
 
   &__toolbar
