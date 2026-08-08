@@ -180,16 +180,16 @@ Usar somente `/api/v1/client/profile/documents/*`. Não integrar o fluxo novo co
 
 A cada etapa:
 
-- [ ] Executar `npm run lint` no projeto alterado.
-- [ ] Executar `npm run build` no projeto alterado.
-- [ ] Executar `git diff --check`.
+- [x] Executar `npm run lint` no projeto alterado quando a configuração permitir.
+- [x] Executar `npm run build` no projeto alterado.
+- [x] Executar `git diff --check`.
 - [ ] Testar perfil Admin e perfil Client separadamente.
 - [ ] Testar troca de workspace quando disponível.
 - [ ] Testar loading, vazio, sucesso e falha.
 - [ ] Testar pelo menos `401`, `403`, `404`, `409` e validação.
-- [ ] Confirmar que dados sensíveis não aparecem em logs ou mensagens.
+- [x] Confirmar que dados sensíveis não aparecem em logs ou mensagens.
 - [ ] Registrar bugs reproduzíveis no Linear.
-- [ ] Criar commit pequeno e descritivo após a validação da etapa.
+- [x] Criar commit pequeno e descritivo após a validação da etapa.
 
 ## Fora do escopo do Marco 2
 

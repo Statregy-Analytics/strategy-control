@@ -822,15 +822,15 @@ Executar com perfis Admin e Client separados.
 - [ ] Testar loading, vazio, sucesso e falha nas telas novas.
 - [ ] Testar respostas `401`, `403`, `404`, `409`, `422` e `429` aplicáveis.
 - [ ] Testar troca de workspace quando o usuário possuir mais de um.
-- [ ] Confirmar que toda escrita envia `Idempotency-Key` estável por ação.
-- [ ] Confirmar que dados sensíveis estão mascarados e ausentes dos logs.
+- [x] Confirmar que toda escrita envia `Idempotency-Key` estável por ação.
+- [x] Confirmar que dados sensíveis estão mascarados e ausentes dos logs.
 - [ ] Executar lint e build nos dois frontends.
-- [ ] Executar `git diff --check` nos dois repositórios.
-- [ ] Confirmar que contratos, transações, investimentos, patrimônio, OCR avançado
+- [x] Executar `git diff --check` nos dois repositórios.
+- [x] Confirmar que contratos, transações, investimentos, patrimônio, OCR avançado
   e `/data-intake/submissions/*` não foram incluídos neste marco.
 - [ ] Todos os bugs de backend deste documento foram corrigidos e revalidados,
   ou formalmente aceitos como impedimento externo com responsável definido.
-- [ ] Checklist técnico `MILESTONE-2-CHECKLIST.md` está integralmente atualizado.
+- [x] Checklist técnico `MILESTONE-2-CHECKLIST.md` está integralmente atualizado.
 - [ ] Marco 2 aprovado pelo responsável da homologação.
 
 Resultado final:
@@ -843,6 +843,15 @@ Resultado final:
 - Ressalvas:
 
 >
+
+> **Regressão técnica em 08/08/2026:** todas as integrações previstas no
+> checklist técnico foram implementadas e divididas em commits por etapa. O
+> painel administrativo passou em lint, build e `git diff --check`. O portal
+> passou em build e diff; seu lint permanece indisponível porque o projeto usa
+> ESLint 9 sem `eslint.config.js`, problema estrutural anterior a estas etapas.
+> O Marco 2 ainda não pode ser marcado como aprovado: há bugs de backend abertos
+> na tabela abaixo e cenários manuais que exigem códigos de confirmação, uploads
+> e dados descartáveis de homologação.
 
 ## Bugs encontrados
 
