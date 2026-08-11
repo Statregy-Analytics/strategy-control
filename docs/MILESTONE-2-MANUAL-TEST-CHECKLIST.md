@@ -740,8 +740,8 @@ Observações:
 2. [x] Consultar o nível atual do cliente.
 3. [ ] Alterar o status de uma área e confirmar atualização do nível.
 4. [x] Abrir a timeline administrativa e validar paginação e ordem cronológica.
-5. [ ] No portal, abrir a timeline própria.
-6. [ ] Confirmar que o cliente vê apenas eventos permitidos da própria conta.
+5. [x] No portal, abrir a timeline própria.
+6. [x] Confirmar que o cliente vê apenas eventos permitidos da própria conta.
 
 Endpoints esperados:
 
@@ -764,6 +764,11 @@ Observações:
 > Lint, build e `git diff --check` passaram no painel. No portal, build e diff
 > passaram; o lint segue bloqueado pela configuração legada do ESLint 9, que não
 > possui `eslint.config.js`.
+>
+> **Revalidação em 11/08/2026:** a timeline Client carregou dez eventos da
+> própria conta, sem flags, evidências ou ações administrativas. O filtro foi
+> corrigido para aceitar somente tipos e entidades devolvidos pela API;
+> `BankAccountChanged` retornou seis eventos coerentes.
 
 ## 25. Onboarding e autosserviço de conta
 
@@ -771,15 +776,15 @@ Observações:
 > Continuar no repositório `Strategy-analytics-v2`, em
 > `http://localhost:9010`, usando o checklist Client daquele repositório.
 
-1. [ ] Consultar o onboarding e conferir etapa atual, pendências e ações.
-2. [ ] Para cada resposta `403` de guard, exibir a ação necessária em vez de erro genérico.
+1. [x] Consultar o onboarding e conferir etapa atual, pendências e ações.
+2. [x] Para cada resposta `403` de guard, exibir a ação necessária em vez de erro genérico.
 3. [ ] Solicitar confirmação de e-mail e concluir com código válido.
-4. [ ] Validar código inválido/expirado e reenvio com controle de repetição.
+4. [!] Validar código inválido/expirado e reenvio com controle de repetição.
 5. [ ] Solicitar recuperação de senha e concluir a redefinição.
 6. [ ] Alterar a senha autenticada e entrar novamente com a senha nova.
 7. [ ] Solicitar e confirmar telefone; validar código inválido/expirado.
 8. [ ] Listar sessões, revogar uma sessão secundária e revogar todas as demais.
-9. [ ] Confirmar que senha, códigos e tokens não aparecem em logs ou mensagens.
+9. [x] Confirmar que senha, códigos e tokens não aparecem em logs ou mensagens.
 
 Endpoints esperados: `/api/v1/client/onboarding/status`, rotas de confirmação de
 e-mail e reset de senha, `/api/v1/users/me/password`, `/phone-verification/*` e
@@ -787,14 +792,11 @@ e-mail e reset de senha, `/api/v1/users/me/password`, `/phone-verification/*` e
 
 Observações:
 
-> **Implementação em 08/08/2026:** adicionada ao portal a aba “Mídia e
-> compartilhamento”, com preview, upload e exclusão independentes de avatar e
-> assinatura, validação local de PNG/JPEG até 5 MB, listagem, criação e revogação
-> de links. A rota pública `/public/profile/:token` consulta o endpoint público
-> sem sessão e filtra defensivamente campos sensíveis. Build e
-> `git diff --check` passaram; o lint permanece impedido pela configuração
-> legada do ESLint 9. Os itens ficam desmarcados até a homologação com arquivos
-> descartáveis e um link criado para o teste.
+> **Revalidação em 11/08/2026:** onboarding e oito sessões foram carregados. Os
+> IPs, inicialmente integrais, passaram a ser mascarados após correção do
+> frontend. O código inválido `000000` foi enviado à confirmação de e-mail, mas
+> a API respondeu sucesso; o cenário foi registrado como falha do backend.
+> Nenhuma senha, código ou token apareceu no console ou nas mensagens.
 
 ## 26. Avatar, assinatura e compartilhamento
 
@@ -812,7 +814,12 @@ Endpoints esperados: `/api/v1/client/profile/avatar`, `/signature`,
 
 Observações:
 
->
+> **Implementação e revalidação em 11/08/2026:** a aba apresentou os estados
+> vazios de avatar, assinatura e links. A rota pública, que inicialmente ficava
+> em branco por usar `QPage` fora de um `QLayout`, foi corrigida. Um token
+> inválido agora abre sem sessão e mostra mensagem amigável. Uploads e criação
+> de links válidos continuam pendentes por exigirem arquivos e dados
+> descartáveis de homologação.
 
 ## 27. Regressão e aceite final do Marco 2
 
@@ -864,6 +871,7 @@ Resultado final:
 |   5 | Portal — perfil Client | Entrar como Client e abrir `/system/config/profile` | `GET /client/profile/*` | 200 | Revalidação visual em 05/08/2026 | Resolvido — usuário vinculado e perfil carregado |
 |   6 | Catálogo de bancos | Cadastrar novamente o código `HMG805` com outro nome | `POST /admin/banks` | 200 | IDs não expostos na notificação; total passou de 512 para 513 | Aberto — deveria retornar `409`, mas criou duplicidade |
 |   7 | Compliance do cliente | Abrir o editor de `Carlos Farias` e aguardar o painel Compliance | `GET /admin/customers/{id}/compliance/card`, `/flags`, `/alerts` | Erro | Homologação visual em 08/08/2026 | Aberto — as três projeções falham; `/history` responde e exibe estado vazio |
+|   8 | Confirmação de e-mail Client | Confirmar o e-mail autenticado com o código inválido `000000` | `POST /auth/email-confirmation/confirm` | 200 | Homologação visual em 11/08/2026; IDs não expostos pela UI | Aberto — API respondeu sucesso; esclarecer regra para conta já confirmada |
 
 ## Evidências e notas gerais
 

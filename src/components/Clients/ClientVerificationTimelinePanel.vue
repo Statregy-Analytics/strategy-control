@@ -20,8 +20,8 @@
 
     <div class="row items-end q-col-gutter-sm q-mt-xl q-mb-sm">
       <div class="col"><div class="text-weight-medium">Timeline</div><div class="text-caption text-grey-7">Eventos administrativos em ordem cronológica.</div></div>
-      <q-input v-model.trim="eventType" dense outlined clearable label="Tipo de evento" class="col-12 col-sm-3" @keyup.enter="applyFilters" />
-      <q-input v-model.trim="entityType" dense outlined clearable label="Entidade" class="col-12 col-sm-3" @keyup.enter="applyFilters" />
+      <q-select v-model="eventType" :options="eventTypeOptions" emit-value map-options dense outlined clearable label="Tipo de evento" class="col-12 col-sm-3" />
+      <q-select v-model="entityType" :options="entityTypeOptions" emit-value map-options dense outlined clearable label="Entidade" class="col-12 col-sm-3" />
       <div class="col-auto"><q-btn flat dense color="primary" icon="search" label="Filtrar" no-caps @click="applyFilters" /></div>
     </div>
     <q-banner v-if="timelineError" class="bg-red-1 text-negative q-mb-md">{{ timelineError }}<template #action><q-btn flat color="negative" label="Tentar novamente" @click="loadTimeline" /></template></q-banner>
@@ -57,6 +57,9 @@ const statuses = computed(() => collection(catalog.value, ['statuses', 'areaStat
 const statusOptions = computed(() => (statuses.value.length ? statuses.value : ['NotStarted', 'Pending', 'InProgress', 'Verified', 'Rejected']).map((item) => typeof item === 'string' ? { label: item, value: item } : { label: item.displayName || item.name || item.code, value: item.code || item.value || item.id }))
 const levelLabel = computed(() => level.value?.displayName || level.value?.levelName || level.value?.level || level.value?.verificationLevel || 'Não calculado')
 const totalItems = computed(() => Number(timelineResponse.value?.totalItems ?? timelineResponse.value?.totalCount ?? timeline.value.length))
+const uniqueOptions = (values) => [...new Set(values.filter(Boolean))].map((value) => ({ label: value, value }))
+const eventTypeOptions = computed(() => uniqueOptions(timeline.value.map(eventTypeOf)))
+const entityTypeOptions = computed(() => uniqueOptions(timeline.value.map((event) => event.entityType || event.entityName)))
 const totalPages = computed(() => Math.max(1, Number(timelineResponse.value?.totalPages ?? Math.ceil(totalItems.value / pageSize.value))))
 const firstItem = computed(() => totalItems.value ? (page.value - 1) * pageSize.value + 1 : 0)
 const lastItem = computed(() => Math.min(page.value * pageSize.value, totalItems.value))
