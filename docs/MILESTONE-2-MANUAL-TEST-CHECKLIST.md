@@ -797,16 +797,19 @@ Observações:
 > frontend. O código inválido `000000` foi enviado à confirmação de e-mail, mas
 > a API respondeu sucesso; o cenário foi registrado como falha do backend.
 > Nenhuma senha, código ou token apareceu no console ou nas mensagens.
+> A recuperação pública aceitou a solicitação e exibiu os campos de código e
+> nova senha, com bloqueio de reenvio por 60 segundos. O código não apareceu no
+> sandbox de e-mail disponível, portanto a redefinição não pôde ser concluída.
 
 ## 26. Avatar, assinatura e compartilhamento
 
-1. [ ] Enviar avatar válido, recarregar e abrir sua URL.
-2. [ ] Excluir o avatar e confirmar o estado vazio.
-3. [ ] Enviar assinatura válida, recarregar e abrir sua URL.
-4. [ ] Excluir a assinatura e confirmar o estado vazio.
-5. [ ] Criar um link de compartilhamento com o escopo disponível.
-6. [ ] Abrir `/api/v1/public/profiles/{token}` sem sessão e conferir somente dados autorizados.
-7. [ ] Revogar o link e confirmar que o token deixa de funcionar.
+1. [x] Enviar avatar válido, recarregar e abrir sua URL.
+2. [x] Excluir o avatar e confirmar o estado vazio.
+3. [x] Enviar assinatura válida, recarregar e abrir sua URL.
+4. [x] Excluir a assinatura e confirmar o estado vazio.
+5. [x] Criar um link de compartilhamento com o escopo disponível.
+6. [x] Abrir `/api/v1/public/profiles/{token}` sem sessão e conferir somente dados autorizados.
+7. [x] Revogar o link e confirmar que o token deixa de funcionar.
 8. [ ] Confirmar que uploads inválidos e storage indisponível têm mensagens amigáveis.
 
 Endpoints esperados: `/api/v1/client/profile/avatar`, `/signature`,
@@ -820,6 +823,14 @@ Observações:
 > inválido agora abre sem sessão e mostra mensagem amigável. Uploads e criação
 > de links válidos continuam pendentes por exigirem arquivos e dados
 > descartáveis de homologação.
+>
+> Um link `Profile` válido por 24 horas foi criado, aberto sem sessão e revogado
+> em seguida. O token passou a responder como inválido após a revogação. A
+> página pública foi endurecida para não renderizar IDs internos, além de
+> tokens, segredos, senhas e evidências.
+> Avatar e assinatura foram homologados com `logo-small.png`: ambos persistiram
+> após recarregar, suas URLs alimentaram os previews e as exclusões restauraram
+> os dois estados vazios. Os arquivos usados no teste foram removidos da conta.
 
 ## 27. Regressão e aceite final do Marco 2
 
