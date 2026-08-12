@@ -24,25 +24,46 @@
       <q-expansion-item v-model="formOpen" dense dense-toggle :icon="editingId ? 'edit' : 'add'" :label="editingId ? 'Editar conta' : 'Adicionar conta'" header-class="text-primary q-mt-md">
         <q-form ref="formRef" class="q-pt-sm" @submit.prevent="save">
           <div class="row q-col-gutter-sm">
-            <label-form class-name="col-12 col-md-4" text-label="Banco">
-              <q-select v-model="form.bankId" :options="bankOptions" emit-value map-options outlined dense options-dense :rules="[required]" />
+            <label-form class-name="col-12 col-md-4 bank-field" text-label="Banco">
+              <q-select
+                ref="bankSelectRef"
+                v-model="form.bankId"
+                class="bank-select"
+                :options="filteredBankOptions"
+                emit-value
+                map-options
+                use-input
+                fill-input
+                hide-selected
+                outlined
+                dense
+                options-dense
+                input-debounce="150"
+                aria-label="Pesquisar banco"
+                hide-bottom-space
+                :rules="[required]"
+                @filter="filterBanks"
+                @update:model-value="onBankSelected"
+              >
+                <template #no-option><q-item><q-item-section class="text-grey-7">Nenhum banco encontrado.</q-item-section></q-item></template>
+              </q-select>
             </label-form>
             <label-form class-name="col-12 col-md-4" text-label="Agência">
-              <q-input v-model.trim="form.branch" outlined dense maxlength="20" :rules="[required]" />
+              <q-input v-model.trim="form.branch" outlined dense maxlength="20" hide-bottom-space :rules="[required]" />
             </label-form>
             <label-form class-name="col-8 col-md-3" text-label="Conta">
-              <q-input :model-value="editingId ? editingMasks.accountNumber : form.accountNumber" outlined dense maxlength="30" :readonly="Boolean(editingId)" :rules="[required]" @update:model-value="form.accountNumber = $event" />
+              <q-input :model-value="editingId ? editingMasks.accountNumber : form.accountNumber" outlined dense maxlength="30" :readonly="Boolean(editingId)" hide-bottom-space :rules="[required]" @update:model-value="form.accountNumber = $event" />
             </label-form>
             <label-form class-name="col-4 col-md-1" text-label="Dígito"><q-input v-model.trim="form.accountDigit" outlined dense maxlength="4" /></label-form>
             <label-form class-name="col-12 col-md-4" text-label="Tipo de conta">
-              <q-select v-model="form.accountType" :options="accountTypeOptions" emit-value map-options outlined dense :rules="[required]" />
+              <q-select v-model="form.accountType" :options="accountTypeOptions" emit-value map-options outlined dense hide-bottom-space :rules="[required]" />
             </label-form>
             <label-form class-name="col-12 col-md-4" text-label="Tipo de titular">
-              <q-select v-model="form.holderType" :options="holderTypeOptions" emit-value map-options outlined dense :rules="[required]" />
+              <q-select v-model="form.holderType" :options="holderTypeOptions" emit-value map-options outlined dense hide-bottom-space :rules="[required]" />
             </label-form>
             <label-form class-name="col-12 col-md-4" text-label="Nome do titular"><q-input v-model.trim="form.holderName" outlined dense /></label-form>
             <label-form class-name="col-12 col-md-4" text-label="Documento do titular"><q-input :model-value="editingId ? editingMasks.holderDocument : form.holderDocument" outlined dense :readonly="Boolean(editingId)" @update:model-value="form.holderDocument = $event" /></label-form>
-            <label-form class-name="col-12 col-md-4" text-label="Tipo de chave Pix"><q-input v-model.trim="form.pixKeyType" outlined dense /></label-form>
+            <label-form class-name="col-12 col-md-4" text-label="Tipo de chave Pix"><q-select v-model="form.pixKeyType" :options="pixKeyTypeOptions" emit-value map-options clearable outlined dense options-dense aria-label="Tipo de chave Pix" /></label-form>
             <label-form class-name="col-12 col-md-4" text-label="Chave Pix"><q-input :model-value="editingId ? editingMasks.pixKey : form.pixKey" outlined dense :readonly="Boolean(editingId)" @update:model-value="form.pixKey = $event" /></label-form>
             <label-form class-name="col-12 col-md-4" text-label="Status"><q-select v-model="form.status" :options="statusOptions" emit-value map-options outlined dense /></label-form>
             <div class="col-12 col-md-4 row items-center"><q-checkbox v-model="form.isPrimary" label="Definir como principal" /></div>
@@ -61,7 +82,7 @@
 </template>
 
 <script setup>
-import { reactive, ref } from 'vue'
+import { nextTick, reactive, ref } from 'vue'
 import LabelForm from 'src/components/Form/LabelForm.vue'
 import RowActions from 'src/components/Entity/RowActions.vue'
 import { archiveCustomerBankAccount, changeCustomerBankAccountStatus, createCustomerBankAccount, getCustomerBankAccount, listBanks, listCustomerBankAccounts, setPrimaryCustomerBankAccount, updateCustomerBankAccount } from 'src/services/customerService'
@@ -71,11 +92,17 @@ import useNotification from 'src/composables/global/useNotification'
 const props = defineProps({ customerId: { type: String, required: true } })
 const emit = defineEmits(['updated'])
 const { successNotify, errorNotify } = useNotification()
-const formRef = ref(null), loading = ref(true), saving = ref(false), actionSaving = ref(false), loadError = ref(''), formOpen = ref(false), editingId = ref(null), archiveDialog = ref(false), archiveTarget = ref(null)
-const accounts = ref([]), bankOptions = ref([])
+const formRef = ref(null), bankSelectRef = ref(null), loading = ref(true), saving = ref(false), actionSaving = ref(false), loadError = ref(''), formOpen = ref(false), editingId = ref(null), archiveDialog = ref(false), archiveTarget = ref(null)
+const accounts = ref([]), bankOptions = ref([]), filteredBankOptions = ref([])
 const editingMasks = reactive({ accountNumber: '', holderDocument: '', pixKey: '' })
 const accountTypeOptions = [{ label: 'Conta corrente', value: 'Checking' }, { label: 'Conta poupança', value: 'Savings' }, { label: 'Conta de pagamento', value: 'Payment' }]
 const holderTypeOptions = [{ label: 'Pessoa física', value: 'Individual' }, { label: 'Pessoa jurídica', value: 'Organization' }]
+const pixKeyTypeOptions = [
+  { label: 'CPF/CNPJ', value: 'Document' },
+  { label: 'E-mail', value: 'Email' },
+  { label: 'Telefone', value: 'Phone' },
+  { label: 'Aleatória', value: 'Random' },
+]
 const statusOptions = [{ label: 'Ativa', value: 'Active' }, { label: 'Inativa', value: 'Inactive' }]
 const emptyForm = () => ({ bankId: null, branch: '', accountNumber: '', accountDigit: null, accountType: '', holderType: '', holderName: null, holderDocument: null, pixKey: null, pixKeyType: null, isPrimary: false, status: 'Active' })
 const form = reactive(emptyForm())
@@ -90,6 +117,20 @@ const columns = [
 const required = (value) => !!value || 'Campo obrigatório'
 const masked = (value) => value || 'Não informado'
 const bankName = (id) => bankOptions.value.find((bank) => bank.value === id)?.label || 'Banco não identificado'
+const normalizeSearch = (value) => String(value || '').normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLocaleLowerCase('pt-BR')
+const onBankSelected = async () => {
+  filteredBankOptions.value = bankOptions.value
+  await nextTick()
+  bankSelectRef.value?.hidePopup()
+}
+const filterBanks = (value, update) => {
+  update(() => {
+    const search = normalizeSearch(value)
+    filteredBankOptions.value = search
+      ? bankOptions.value.filter((bank) => normalizeSearch(bank.label).includes(search))
+      : bankOptions.value
+  })
+}
 const actionsFor = (account) => [
   { name: 'edit', label: 'Editar', icon: 'edit', color: 'grey-7' },
   ...(!account.isPrimary ? [{ name: 'primary', label: 'Definir como principal', icon: 'star_outline', color: 'primary' }] : []),
@@ -135,3 +176,17 @@ const confirmArchive = async () => { try { actionSaving.value = true; await arch
 
 load()
 </script>
+
+<style scoped>
+.bank-field { min-width: 0; }
+.bank-select {
+  min-width: 0;
+  width: 100%;
+}
+.bank-select :deep(.q-field__native > span) {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+</style>

@@ -11,8 +11,8 @@
         <label-form class-name="col-12 col-md-4" text-label="Renda mensal individual"><q-input v-model="form.individualMonthlyIncome" type="number" min="0" step="0.01" outlined dense placeholder="0,00" /></label-form>
         <label-form class-name="col-12 col-md-4" text-label="Renda mensal familiar"><q-input v-model="form.householdMonthlyIncome" type="number" min="0" step="0.01" outlined dense placeholder="0,00" /></label-form>
         <label-form class-name="col-12 col-md-4" text-label="Patrimônio declarado"><q-input v-model="form.declaredNetWorth" type="number" min="0" step="0.01" outlined dense placeholder="0,00" /></label-form>
-        <label-form class-name="col-12 col-md-4" text-label="Moeda"><q-input v-model.trim="form.currencyCode" maxlength="3" outlined dense placeholder="BRL" :rules="[(value) => !!value || 'Informe a moeda']" /></label-form>
-        <label-form class-name="col-12 col-md-4" text-label="Válido desde"><q-input v-model="form.effectiveFrom" type="date" outlined dense :rules="[(value) => !!value || 'Informe a data inicial']" /></label-form>
+        <label-form class-name="col-12 col-md-4" text-label="Moeda"><q-input v-model.trim="form.currencyCode" maxlength="3" outlined dense placeholder="BRL" hide-bottom-space :rules="[(value) => !!value || 'Informe a moeda']" /></label-form>
+        <label-form class-name="col-12 col-md-4" text-label="Válido desde"><q-input v-model="form.effectiveFrom" type="date" outlined dense hide-bottom-space :rules="[(value) => !!value || 'Informe a data inicial']" /></label-form>
         <label-form class-name="col-12 col-md-4" text-label="Válido até"><q-input v-model="form.effectiveTo" type="date" outlined dense clearable /></label-form>
       </div>
       <div class="row justify-end q-mt-sm"><q-btn type="submit" flat dense size="sm" color="primary" icon="add" label="Criar nova versão" no-caps :loading="saving" /></div>

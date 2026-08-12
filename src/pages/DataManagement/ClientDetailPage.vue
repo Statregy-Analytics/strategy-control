@@ -77,7 +77,7 @@ import { computed, onMounted, ref } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import ClientRegistrationEditor from 'src/components/Clients/ClientRegistrationEditor.vue'
 import ClientPreferencesPanel from 'src/components/Clients/ClientPreferencesPanel.vue'
-import { getCustomerHeader, getCustomerIdentification, getCustomerSummary } from 'src/services/customerService'
+import { getCustomer, getCustomerSummary } from 'src/services/customerService'
 import { getApiErrorMessage } from 'src/services/apiError'
 
 const route = useRoute(), router = useRouter()
@@ -106,21 +106,22 @@ const kindLabel = (v) => ({ Person: 'Pessoa física', Organization: 'Pessoa jur�
 const booleanLabel = (v) => v === true ? 'Sim' : v === false ? 'Não' : 'Não informado'
 const loadCustomer = async () => {
   loading.value = true; notFound.value = false; errorMessage.value = ''; partialWarning.value = ''
-  const [summaryResult, headerResult, identificationResult] = await Promise.allSettled([
-    getCustomerSummary(route.params.id), getCustomerHeader(route.params.id), getCustomerIdentification(route.params.id),
+  const [summaryResult, customerResult] = await Promise.allSettled([
+    getCustomerSummary(route.params.id), getCustomer(route.params.id),
   ])
   if (summaryResult.status === 'fulfilled') summary.value = summaryResult.value
   else {
     summary.value = null
     partialWarning.value = 'O resumo operacional está temporariamente indisponível. Os dados cadastrais disponíveis continuam acessíveis.'
   }
-  if (headerResult.status === 'fulfilled') header.value = headerResult.value
-  if (identificationResult.status === 'fulfilled') identification.value = identificationResult.value
-  const essentialFailures = [headerResult, identificationResult].filter((result) => result.status === 'rejected')
-  if (essentialFailures.length === 2) {
-    const errors = essentialFailures.map((result) => result.reason)
-    notFound.value = errors.every((error) => error.response?.status === 404)
-    if (!notFound.value) errorMessage.value = getApiErrorMessage(errors[0], 'Não foi possível carregar os dados do cliente.')
+  if (customerResult.status === 'fulfilled') {
+    header.value = customerResult.value
+    identification.value = customerResult.value
+  } else {
+    header.value = null
+    identification.value = null
+    notFound.value = customerResult.reason?.response?.status === 404
+    if (!notFound.value) errorMessage.value = getApiErrorMessage(customerResult.reason, 'Não foi possível carregar os dados do cliente.')
   }
   loading.value = false
 }

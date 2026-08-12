@@ -8,7 +8,7 @@
     <div v-if="verificationLoading" class="row justify-center q-pa-lg"><q-spinner color="primary" size="30px" /></div>
     <template v-else>
       <q-banner rounded class="bg-blue-1 text-primary q-mb-md"><span class="text-caption">Nível atual</span><div class="text-subtitle1 text-weight-bold">{{ levelLabel }}</div></q-banner>
-      <q-list v-if="areas.length" bordered separator>
+      <q-list v-if="areas.length" bordered separator class="history-list" role="region" tabindex="0" aria-label="Áreas de verificação cadastral">
         <q-item v-for="area in areas" :key="areaId(area)">
           <q-item-section><q-item-label>{{ area.name || area.displayName || area.code }}</q-item-label><q-item-label caption>{{ area.description || 'Área de verificação cadastral' }}</q-item-label></q-item-section>
           <q-item-section side><q-badge outline color="primary">{{ currentStatus(area) || 'Não iniciado' }}</q-badge></q-item-section>
@@ -27,7 +27,7 @@
     <q-banner v-if="timelineError" class="bg-red-1 text-negative q-mb-md">{{ timelineError }}<template #action><q-btn flat color="negative" label="Tentar novamente" @click="loadTimeline" /></template></q-banner>
     <div v-if="timelineLoading" class="row justify-center q-pa-lg"><q-spinner color="primary" size="30px" /></div>
     <template v-else>
-      <q-list v-if="timeline.length" bordered separator><q-item v-for="event in timeline" :key="event.id || `${eventTypeOf(event)}-${eventDate(event)}`"><q-item-section avatar><q-icon name="history" color="primary" /></q-item-section><q-item-section><q-item-label>{{ event.title || event.description || eventTypeOf(event) }}</q-item-label><q-item-label caption>{{ event.entityType || event.entityName || 'Cliente' }} · {{ formatDate(eventDate(event)) }}</q-item-label></q-item-section></q-item></q-list>
+      <q-list v-if="sortedTimeline.length" bordered separator class="history-list" role="region" tabindex="0" aria-label="Eventos administrativos"><q-item v-for="event in sortedTimeline" :key="event.id || `${eventTypeOf(event)}-${eventDate(event)}`"><q-item-section avatar><q-icon name="history" color="primary" /></q-item-section><q-item-section><q-item-label>{{ event.title || event.description || eventTypeOf(event) }}</q-item-label><q-item-label caption>{{ event.entityType || event.entityName || 'Cliente' }} · {{ formatDate(eventDate(event)) }}</q-item-label></q-item-section></q-item></q-list>
       <div v-else class="text-caption text-grey-7 q-pa-md">Nenhum evento encontrado.</div>
       <entity-table-footer :page="page" :page-size="pageSize" :total-items="totalItems" :total-pages="totalPages" :first-item="firstItem" :last-item="lastItem" :page-size-options="[5,10,20]" @page="changePage" @page-size="changePageSize" />
     </template>
@@ -69,6 +69,14 @@ const currentStatus = (area) => areaStatuses.value.find((item) => (item.areaId |
 const eventTypeOf = (event) => event.eventType || event.type || event.action || 'Evento'
 const eventDate = (event) => event.occurredAtUtc || event.createdAtUtc || event.timestampUtc || event.date
 const formatDate = (value) => value ? new Intl.DateTimeFormat('pt-BR', { dateStyle: 'short', timeStyle: 'short' }).format(new Date(value)) : 'Data não informada'
+const sortedTimeline = computed(() => [...timeline.value].sort((a, b) => {
+  const firstDate = new Date(eventDate(a)).getTime()
+  const secondDate = new Date(eventDate(b)).getTime()
+  if (Number.isNaN(firstDate) && Number.isNaN(secondDate)) return 0
+  if (Number.isNaN(firstDate)) return 1
+  if (Number.isNaN(secondDate)) return -1
+  return firstDate - secondDate
+}))
 const requiredRules = [(value) => Boolean(value) || 'Campo obrigatório']
 const loadVerification = async () => { verificationLoading.value = true; verificationError.value = ''; const result = await Promise.allSettled([getVerificationCatalog(), getCustomerVerificationLevel(props.customerId)]); if (result[0].status === 'fulfilled') catalog.value = result[0].value || {}; if (result[1].status === 'fulfilled') level.value = result[1].value || {}; const failed = result.filter((item) => item.status === 'rejected'); if (failed.length) verificationError.value = 'Não foi possível carregar todas as informações de verificação.'; verificationLoading.value = false }
 const loadTimeline = async () => { timelineLoading.value = true; timelineError.value = ''; try { timelineResponse.value = await getCustomerTimeline(props.customerId, { page: page.value, pageSize: pageSize.value, eventType: eventType.value || undefined, entityType: entityType.value || undefined }); timeline.value = collection(timelineResponse.value, ['events', 'timeline']) } catch (error) { timelineError.value = getApiErrorMessage(error, 'Não foi possível carregar a timeline.') } finally { timelineLoading.value = false } }
@@ -81,4 +89,12 @@ const load = () => { page.value = 1; loadVerification(); loadTimeline() }
 watch(() => props.customerId, load, { immediate: true })
 </script>
 
-<style scoped>.status-dialog { width: min(560px, calc(100vw - 32px)); }</style>
+<style scoped>
+.history-list {
+  max-height: 320px;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  scrollbar-gutter: stable;
+}
+.status-dialog { width: min(560px, calc(100vw - 32px)); }
+</style>

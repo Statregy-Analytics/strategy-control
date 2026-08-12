@@ -9,9 +9,11 @@ export async function listCustomers(params = {}) {
 export async function listCustomerCards(params = {}) { return (await api.get('/api/v1/admin/customers/cards', { params })).data }
 export async function lookupCustomers(params = {}) { return unwrap(await api.get('/api/v1/admin/customers/lookup', { params })) }
 export async function createCustomer(payload) { return unwrap(await api.post('/api/v1/admin/customers', payload)) }
+export async function getCustomer(id) { return unwrap(await api.get('/api/v1/admin/customers/' + id)) }
 export async function getCustomerSummary(id) { return unwrap(await api.get(`/api/v1/admin/customers/${id}/summary`)) }
 export async function getCustomerHeader(id) { return unwrap(await api.get(`/api/v1/admin/customers/${id}/header`)) }
 export async function getCustomerIdentification(id) { return unwrap(await api.get(`/api/v1/admin/customers/${id}/identification`)) }
+export async function getCustomerIdentificationContact(id) { return unwrap(await api.get('/api/v1/admin/customers/' + id + '/identification-contact')) }
 export async function replaceCustomerNames(id, names) { return unwrap(await api.put(`/api/v1/admin/customers/${id}/names`, { names })) }
 export async function replaceCustomerContacts(id, contacts) { return unwrap(await api.put(`/api/v1/admin/customers/${id}/contacts`, { contacts })) }
 export async function replaceCustomerAddresses(id, addresses) { return unwrap(await api.put(`/api/v1/admin/customers/${id}/addresses`, { addresses })) }

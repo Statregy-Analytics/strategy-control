@@ -3,12 +3,12 @@
     <title-card title="Cliente" @on-close="emit('close')" />
     <q-separator />
 
-    <q-card-section v-if="headerLoading" class="row justify-center q-pa-xl">
+    <q-card-section v-if="customerLoading" class="row justify-center q-pa-xl">
       <q-spinner color="primary" size="36px" />
     </q-card-section>
-    <q-banner v-else-if="headerError" rounded class="bg-red-1 text-negative q-ma-md">
-      {{ headerError }}
-      <template #action><q-btn flat color="negative" label="Tentar novamente" @click="loadHeader" /></template>
+    <q-banner v-else-if="customerError" rounded class="bg-red-1 text-negative q-ma-md">
+      {{ customerError }}
+      <template #action><q-btn flat color="negative" label="Tentar novamente" @click="loadCustomer" /></template>
     </q-banner>
     <template v-else>
       <entity-header :id="customerId" :name="displayName" :options="customerOptions" short-id switch-label="Trocar cliente" @select="selectCustomer">
@@ -31,13 +31,7 @@
 
       <q-card-section class="client-sections">
         <form-section title="Informações pessoais e cadastrais" caption="Nomes, contatos e endereços do cliente">
-          <div v-if="registrationLoading" class="row justify-center q-pa-xl"><q-spinner color="primary" size="32px" /></div>
-          <q-banner v-else-if="registrationError" class="bg-red-1 text-negative q-mt-md">
-            {{ registrationError }}
-            <template #action><q-btn flat color="negative" label="Tentar novamente" @click="loadIdentification" /></template>
-          </q-banner>
           <client-registration-editor
-            v-else
             :key="`registration-${customerId}`"
             embedded
             :customer-id="customerId"
@@ -119,7 +113,7 @@ import ClientVerificationTimelinePanel from 'src/components/Clients/ClientVerifi
 import EntityHeader from 'src/components/Entity/EntityHeader.vue'
 import FormSection from 'src/components/Entity/FormSection.vue'
 import { useClientStore } from 'src/stores/client'
-import { changeCustomerStatus, getCustomerHeader, getCustomerIdentification } from 'src/services/customerService'
+import { changeCustomerStatus, getCustomer } from 'src/services/customerService'
 import { getApiErrorMessage } from 'src/services/apiError'
 import useNotification from 'src/composables/global/useNotification'
 
@@ -130,13 +124,17 @@ const { successNotify, errorNotify } = useNotification()
 const { data: availableCustomers } = storeToRefs(clientStore)
 const header = ref(null)
 const identification = ref(null)
-const headerLoading = ref(true)
-const registrationLoading = ref(true)
-const headerError = ref('')
-const registrationError = ref('')
+const customerLoading = ref(true)
+const customerError = ref('')
 const selectedStatus = ref('')
 const savingStatus = ref(false)
-const displayName = computed(() => header.value?.displayName || header.value?.primaryName || 'Cliente')
+const displayName = computed(() =>
+  header.value?.displayName
+  || header.value?.primaryName
+  || header.value?.names?.find((name) => name.isPrimary)?.displayName
+  || header.value?.names?.[0]?.displayName
+  || 'Cliente',
+)
 const customerOptions = computed(() => availableCustomers.value.map((customer) => ({
   id: customer.id, name: customer.primaryName || 'Sem nome', caption: customer.primaryContact || 'Sem contato principal',
 })))
@@ -145,25 +143,21 @@ const statusOptions = [
   { label: 'Suspenso', value: 'Suspended' }, { label: 'Arquivado', value: 'Archived' },
 ]
 
-const loadHeader = async () => {
-  headerLoading.value = true
-  headerError.value = ''
-  try { header.value = await getCustomerHeader(props.customerId); selectedStatus.value = header.value?.status || '' }
-  catch (error) { headerError.value = getApiErrorMessage(error, 'Não foi possível carregar o cliente.') }
-  finally { headerLoading.value = false }
-}
-const loadIdentification = async () => {
-  registrationLoading.value = true
-  registrationError.value = ''
-  try { identification.value = await getCustomerIdentification(props.customerId) }
-  catch (error) { registrationError.value = getApiErrorMessage(error, 'Não foi possível carregar os dados cadastrais.') }
-  finally { registrationLoading.value = false }
-}
-const load = () => {
+const loadCustomer = async () => {
+  customerLoading.value = true
+  customerError.value = ''
   header.value = null
   identification.value = null
-  loadHeader()
-  loadIdentification()
+  try {
+    const customer = await getCustomer(props.customerId)
+    header.value = customer
+    identification.value = customer
+    selectedStatus.value = customer?.status || ''
+  } catch (error) {
+    customerError.value = getApiErrorMessage(error, 'Não foi possível carregar os dados do cliente.')
+  } finally {
+    customerLoading.value = false
+  }
 }
 const selectCustomer = (id) => { if (id !== props.customerId) emit('select', id) }
 const saveStatus = async (status) => {
@@ -179,9 +173,9 @@ const saveStatus = async (status) => {
     errorNotify(getApiErrorMessage(error, 'Não foi possível alterar o status.'))
   } finally { savingStatus.value = false }
 }
-const onSectionUpdated = () => { loadHeader(); loadIdentification(); emit('updated') }
+const onSectionUpdated = () => { loadCustomer(); emit('updated') }
 
-watch(() => props.customerId, load, { immediate: true })
+watch(() => props.customerId, loadCustomer, { immediate: true })
 </script>
 
 <style scoped>
