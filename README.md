@@ -36,5 +36,11 @@ npm run format
 quasar build
 ```
 
+### Deploy de produção
+
+Cada push na branch `main` dispara validação, build e deploy atômico por SSH.
+Consulte [docs/PRODUCTION-DEPLOY.md](docs/PRODUCTION-DEPLOY.md) para configurar
+o servidor e os secrets do environment `production` no GitHub.
+
 ### Customize the configuration
 See [Configuring quasar.config.js](https://v2.quasar.dev/quasar-cli-vite/quasar-config-js).
