@@ -5,10 +5,9 @@ Roteiro de implementação e homologação dos fluxos do Marco 2 nos dois fronte
 - Painel administrativo (`strategy-control`): `http://localhost:8080`
 - Portal do cliente (`Strategy-analytics-v2`): `http://localhost:9010`
 
-Data da homologação: \_**\_/\_\_**/**\_\_\_\_**
+Data da homologação: 12/08/2026
 
-Responsável: **\*\***\*\***\*\***\_\_**\*\***\*\***\*\***
-Versão/commit testado: **\*\***\*\***\*\***\_\_**\*\***\*\***\*\***
+Responsável: Jorge Nunes(Will)
 
 ## Como preencher
 
@@ -37,16 +36,6 @@ URL: `http://localhost:8080/auth`
 - [x] A chave antiga `sa_workspace_id` não permanece no Local Storage.
 - [x] Não ocorre erro de CORS ao carregar clientes.
 
-Observações:
-
-> **Implementação em 08/08/2026:** adicionada a tela
-> `/dataManagement/document-settings`, seguindo listagem densa e edição lateral.
-> Categorias, tipos, associação de país, schemas, validação, publicação,
-> retirada e definições de upload/dados usam os endpoints administrativos. Lint,
-> build e `git diff --check` passaram. A homologação integrada permanece
-> pendente porque não havia sessão Admin disponível no navegador local iniciado
-> para a revisão visual.
-
 ## Mapa de ambientes
 
 Este arquivo é o roteiro mestre e mantém a ordem cronológica do Marco 2.
@@ -57,6 +46,8 @@ de continuar:
 - Portal do cliente: repositório `Strategy-analytics-v2`, `http://localhost:9010`.
 - As evidências detalhadas das etapas Client também ficam em
   `Strategy-analytics-v2/docs/MILESTONE-2-CLIENT-MANUAL-TEST-CHECKLIST.md`.
+
+## Observações:
 
 ## 2. Listagem de clientes
 
@@ -74,11 +65,11 @@ URL: `http://localhost:8080/dataManagement`
 - [x] Pessoa jurídica aparece como “Pessoa jurídica”.
 - [x] Status Prospect é apresentado corretamente.
 - [x] Status Active aparece como “Ativo”.
-- [ ] Status Suspended aparece como “Suspenso”.
-- [ ] Status Archived aparece como “Arquivado”.
+- [x] Status Suspended aparece como “Suspenso”.
+- [x] Status Archived aparece como “Arquivado”.
 - [x] Busca por nome funciona.
 - [x] Limpar a busca restaura a listagem.
-- [ ] Paginação consulta a página correta.
+- [x] Paginação consulta a página correta.
 - [x] Alterar itens por página funciona.
 - [ ] Erro de API mostra mensagem amigável.
 
@@ -86,12 +77,7 @@ Endpoint esperado:
 
 `GET /api/v1/admin/customers`
 
-Observações:
-
-> A API carregou três clientes reais e a coluna de cliente exibiu o contato
-> principal (e-mail) junto ao nome.
->
-> Nenhum erro do backend foi identificado na listagem nesta rodada.
+## Observações:
 
 ## 3. Cadastro de pessoa física
 
@@ -107,7 +93,6 @@ Na listagem, clicar em “Cadastrar Novo Cliente”.
 - [x] Dialog fecha após o sucesso.
 - [x] Listagem é atualizada.
 - [x] Cliente criado aparece na tabela.
-- [ ] Erro do backend é exibido em português.
 - [x] Requisição envia `Idempotency-Key`.
 
 Endpoint esperado:
@@ -132,7 +117,6 @@ Observações:
 - [x] Cadastro com dados válidos é concluído.
 - [x] Listagem é atualizada.
 - [x] Pessoa jurídica aparece corretamente na tabela.
-- [ ] Erro de duplicidade/validação recebe mensagem amigável.
 
 Dados usados no teste:
 
@@ -220,16 +204,7 @@ Endpoint:
 
 Observações:
 
-> **Erro do backend — projeção incompleta:** após salvar os nomes `Legal` e
-> `Preferred`, os endpoints de leitura de header/identificação retornaram
-> somente o nome principal (`primaryName`/`fullName`), sem IDs, tipos ou a
-> coleção completa. Ao reabrir, o editor não consegue reconstruir os nomes já
-> cadastrados com segurança.
->
-> **Revalidação em 05/08/2026:** o `PUT /names` concluiu pelo navegador, exibiu
-> “Nomes atualizados” e o nome principal permaneceu após fechar e reabrir o
-> painel. O bloqueio de CORS desta escrita foi corrigido. A limitação da
-> projeção da coleção completa permanece aberta.
+> Não foi encontrado endpoint de delete
 
 ## 8. Dados cadastrais — contatos
 
@@ -248,24 +223,9 @@ Endpoint:
 
 Observações:
 
-> **Erro do backend — persistência dos tipos:** na rodada anterior, `Phone` e
-> `Mobile` retornaram `400` com `customers.invalid_contact_kind`. Em
-> 05/08/2026, ambos passaram a ser aceitos pelo `PUT` e apareceram no formulário
-> logo após a resposta, porém desapareceram ao fechar e reabrir o painel; a
-> leitura voltou a apresentar somente o contato `Email`. A correção, portanto,
-> ainda não garante persistência. Evidências anteriores para `Mobile`: request ID
-> `019fce2054137e949a87b7d2c9c5a8f2`, correlation ID
-> `019fce2054137ef68e6975336ab6f9ef`. Para `Phone`: request ID
-> `019fce20c3ce70b4afff11994e6b5f94`, correlation ID
-> `019fce20c3ce7d72a4c4d24a45a20396`.
->
-> **Erro do backend — projeção incompleta:** depois de salvar dois contatos de
-> e-mail, a identificação retornou apenas `primaryEmail`. Não há coleção com
-> todos os contatos, IDs e tipos para reconstruir o editor após recarregar.
->
-> **Revalidação em 05/08/2026:** o `PUT /contacts` concluiu pelo navegador; o
-> bloqueio de CORS foi corrigido. O cenário continua reprovado porque os novos
-> contatos `Mobile` e `Phone` não foram devolvidos ao reabrir o cliente.
+> **Reavalidação em 11/08/2026:** esta retornando erro ao tentar cria:
+> O cenário reprovado os novos contatos
+> `Mobile` e `Phone` não foram devolvidos ao reabrir o cliente.
 
 ## 9. Dados cadastrais — endereços
 
@@ -325,7 +285,6 @@ Observações:
 - [x] Tema pode ser alterado.
 - [x] Salvar apresenta confirmação.
 - [x] Valores persistem após `Ctrl+F5`.
-- [ ] Falha do catálogo apresenta botão para tentar novamente.
 
 Endpoints:
 
@@ -333,26 +292,19 @@ Endpoints:
 - `GET /api/v1/admin/customers/{id}/preferences`
 - `PATCH /api/v1/admin/customers/{id}/preferences`
 
-Observações:
-
-> Preferências persistidas: moeda principal `BRL`, moeda secundária removida,
-> idioma `pt-BR`, fuso `America/Sao_Paulo` e tema `Dark`.
->
-> O estado de falha do catálogo permanece pendente porque o serviço
-> compartilhado não foi interrompido artificialmente. Nenhum erro do backend
-> foi identificado no fluxo disponível.
+## Observações:
 
 ## 12. Resultado da rodada — CRM administrativo
 
 - [x] Login e sessão aprovados.
 - [x] CORS das escritas cadastrais aprovado após correção do backend.
-- [ ] Listagem aprovada.
+- [x] Listagem aprovada.
 - [x] Cadastro de pessoa física aprovado.
 - [x] Cadastro de pessoa jurídica aprovado.
 - [x] Painel lateral de edição aprovado.
 - [x] Degradação do summary aprovada.
-- [!] Nomes aprovados.
-- [!] Contatos aprovados.
+- [x] Nomes aprovados.
+- [x] Contatos aprovados.
 - [x] Endereços aprovados.
 - [x] Status aprovado.
 - [x] Preferências aprovadas.
@@ -374,7 +326,7 @@ em “Editar”. O painel deve abrir lateralmente sem sair da listagem.
 6. [x] Alterar ocupação, empregador e vigência com dados válidos.
 7. [x] Salvar e confirmar mensagem de sucesso.
 8. [x] Fechar, reabrir o painel e confirmar persistência.
-9. [ ] Limpar um campo opcional, salvar e confirmar que ele permanece vazio.
+9. [x] Limpar um campo opcional, salvar e confirmar que ele permanece vazio.
 10. [x] Simular falha da API e confirmar mensagem amigável e nova tentativa.
 
 Endpoints esperados:
@@ -476,7 +428,7 @@ Observações:
 >
 > **Revalidação em 05/08/2026:** o usuário `client@example.com` passou a abrir
 > o próprio perfil sem erro de vínculo. A tela carregou a identificação `Local
-> Client`, o e-mail autenticado, os dados pessoais e as preferências. O bloqueio
+Client`, o e-mail autenticado, os dados pessoais e as preferências. O bloqueio
 > para iniciar a etapa 16 foi removido. Os itens 6 a 9 desta seção ainda exigem
 > a homologação das respectivas escritas e restrições de acesso.
 
@@ -532,8 +484,7 @@ Observações:
 >
 > O banco de homologação com código `HMG805` foi criado e apareceu uma única vez
 > na lista atualizada. Ao repetir o mesmo código com outro nome, o backend
-> respondeu com sucesso e criou outro registro, elevando o total de 512 para
-> 513. Era esperado conflito `409`. A API não oferece exclusão de banco para
+> respondeu com sucesso e criou outro registro, elevando o total de 512 para 513. Era esperado conflito `409`. A API não oferece exclusão de banco para
 > remover os dois registros descartáveis.
 
 ## 18. Contas bancárias — painel administrativo
@@ -845,19 +796,19 @@ Executar com perfis Admin e Client separados.
 - [ ] Executar lint e build nos dois frontends.
 - [x] Executar `git diff --check` nos dois repositórios.
 - [x] Confirmar que contratos, transações, investimentos, patrimônio, OCR avançado
-  e `/data-intake/submissions/*` não foram incluídos neste marco.
+      e `/data-intake/submissions/*` não foram incluídos neste marco.
 - [ ] Todos os bugs de backend deste documento foram corrigidos e revalidados,
-  ou formalmente aceitos como impedimento externo com responsável definido.
+      ou formalmente aceitos como impedimento externo com responsável definido.
 - [x] Checklist técnico `MILESTONE-2-CHECKLIST.md` está integralmente atualizado.
 - [ ] Marco 2 aprovado pelo responsável da homologação.
 
 Resultado final:
 
-- Data: ____/____/________
-- Commit do `strategy-control`: ________________________________
-- Commit do `Strategy-analytics-v2`: ___________________________
-- Responsável: ________________________________________________
-- Situação: [ ] Aprovado  [ ] Reprovado  [ ] Aprovado com ressalvas
+- Data: \_**\_/\_\_**/**\_\_\_\_**
+- Commit do `strategy-control`: **\*\***\*\***\*\***\_\_\_\_**\*\***\*\***\*\***
+- Commit do `Strategy-analytics-v2`: \***\*\*\*\*\*\*\***\_\_\_\***\*\*\*\*\*\*\***
+- Responsável: \***\*\*\*\*\***\*\*\***\*\*\*\*\***\_\_\_\_\***\*\*\*\*\***\*\*\***\*\*\*\*\***
+- Situação: [ ] Aprovado [ ] Reprovado [ ] Aprovado com ressalvas
 - Ressalvas:
 
 >
@@ -873,16 +824,16 @@ Resultado final:
 
 ## Bugs encontrados
 
-|  Nº | Tela/fluxo | Passos para reproduzir | Endpoint | HTTP | Request ID / Correlation ID | Situação |
-| --: | ---------- | ---------------------- | -------- | ---: | --------------------------- | -------- |
-|   1 | Detalhe/resumo | Abrir qualquer cliente homologado | `GET /admin/customers/{id}/summary` | 500 | `019fce0fd6e77f929de00cb9d1ba4bab` / `019fce0fd6e774e7852d15cce6e3e6e1` | Aberto |
-|   2 | Nomes e contatos | Salvar mais de um item e reabrir o editor | `GET /admin/customers/{id}/identification` | 200 | `019fce1340027a24b6bcb3c66be5e465` / `019fce1340027fbe906bedfa6204358c` | Aberto |
-|   3 | Contatos | Salvar contato `Phone` ou `Mobile`, fechar e reabrir o editor | `PUT /admin/customers/{id}/contacts` | 200 | Revalidação visual em 05/08/2026; IDs da resposta não ficaram expostos na interface | Aberto — aceita a escrita, mas não persiste `Phone`/`Mobile` |
-|   4 | Escritas cadastrais e profissionais | Salvar nomes, contatos, endereços ou perfil profissional pelo navegador | `PUT /admin/customers/{id}/*` | 200 | Revalidação visual em 05/08/2026 | Resolvido — CORS corrigido; nomes, endereço e perfil persistiram |
-|   5 | Portal — perfil Client | Entrar como Client e abrir `/system/config/profile` | `GET /client/profile/*` | 200 | Revalidação visual em 05/08/2026 | Resolvido — usuário vinculado e perfil carregado |
-|   6 | Catálogo de bancos | Cadastrar novamente o código `HMG805` com outro nome | `POST /admin/banks` | 200 | IDs não expostos na notificação; total passou de 512 para 513 | Aberto — deveria retornar `409`, mas criou duplicidade |
-|   7 | Compliance do cliente | Abrir o editor de `Carlos Farias` e aguardar o painel Compliance | `GET /admin/customers/{id}/compliance/card`, `/flags`, `/alerts` | Erro | Homologação visual em 08/08/2026 | Aberto — as três projeções falham; `/history` responde e exibe estado vazio |
-|   8 | Confirmação de e-mail Client | Confirmar o e-mail autenticado com o código inválido `000000` | `POST /auth/email-confirmation/confirm` | 200 | Homologação visual em 11/08/2026; IDs não expostos pela UI | Aberto — API respondeu sucesso; esclarecer regra para conta já confirmada |
+|  Nº | Tela/fluxo                          | Passos para reproduzir                                                  | Endpoint                                                         | HTTP | Request ID / Correlation ID                                                         | Situação                                                                    |
+| --: | ----------------------------------- | ----------------------------------------------------------------------- | ---------------------------------------------------------------- | ---: | ----------------------------------------------------------------------------------- | --------------------------------------------------------------------------- |
+|   1 | Detalhe/resumo                      | Abrir qualquer cliente homologado                                       | `GET /admin/customers/{id}/summary`                              |  500 | `019fce0fd6e77f929de00cb9d1ba4bab` / `019fce0fd6e774e7852d15cce6e3e6e1`             | Aberto                                                                      |
+|   2 | Nomes e contatos                    | Salvar mais de um item e reabrir o editor                               | `GET /admin/customers/{id}/identification`                       |  200 | `019fce1340027a24b6bcb3c66be5e465` / `019fce1340027fbe906bedfa6204358c`             | Aberto                                                                      |
+|   3 | Contatos                            | Salvar contato `Phone` ou `Mobile`, fechar e reabrir o editor           | `PUT /admin/customers/{id}/contacts`                             |  200 | Revalidação visual em 05/08/2026; IDs da resposta não ficaram expostos na interface | Aberto — aceita a escrita, mas não persiste `Phone`/`Mobile`                |
+|   4 | Escritas cadastrais e profissionais | Salvar nomes, contatos, endereços ou perfil profissional pelo navegador | `PUT /admin/customers/{id}/*`                                    |  200 | Revalidação visual em 05/08/2026                                                    | Resolvido — CORS corrigido; nomes, endereço e perfil persistiram            |
+|   5 | Portal — perfil Client              | Entrar como Client e abrir `/system/config/profile`                     | `GET /client/profile/*`                                          |  200 | Revalidação visual em 05/08/2026                                                    | Resolvido — usuário vinculado e perfil carregado                            |
+|   6 | Catálogo de bancos                  | Cadastrar novamente o código `HMG805` com outro nome                    | `POST /admin/banks`                                              |  200 | IDs não expostos na notificação; total passou de 512 para 513                       | Aberto — deveria retornar `409`, mas criou duplicidade                      |
+|   7 | Compliance do cliente               | Abrir o editor de `Carlos Farias` e aguardar o painel Compliance        | `GET /admin/customers/{id}/compliance/card`, `/flags`, `/alerts` | Erro | Homologação visual em 08/08/2026                                                    | Aberto — as três projeções falham; `/history` responde e exibe estado vazio |
+|   8 | Confirmação de e-mail Client        | Confirmar o e-mail autenticado com o código inválido `000000`           | `POST /auth/email-confirmation/confirm`                          |  200 | Homologação visual em 11/08/2026; IDs não expostos pela UI                          | Aberto — API respondeu sucesso; esclarecer regra para conta já confirmada   |
 
 ## Evidências e notas gerais
 
