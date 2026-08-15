@@ -7,7 +7,7 @@
     <q-banner v-if="verificationError" class="bg-red-1 text-negative q-mb-md">{{ verificationError }}<template #action><q-btn flat color="negative" label="Tentar novamente" @click="loadVerification" /></template></q-banner>
     <div v-if="verificationLoading" class="row justify-center q-pa-lg"><q-spinner color="primary" size="30px" /></div>
     <template v-else>
-      <q-banner rounded class="bg-blue-1 text-primary q-mb-md"><span class="text-caption">Nível atual</span><div class="text-subtitle1 text-weight-bold">{{ levelLabel }}</div></q-banner>
+      <q-list bordered class="q-mb-md rounded-borders"><q-item><q-item-section><q-item-label caption>Nível atual</q-item-label><q-item-label class="text-weight-medium">{{ levelLabel }}</q-item-label></q-item-section></q-item></q-list>
       <q-list v-if="areas.length" bordered separator class="history-list" role="region" tabindex="0" aria-label="Áreas de verificação cadastral">
         <q-item v-for="area in areas" :key="areaId(area)">
           <q-item-section><q-item-label>{{ area.name || area.displayName || area.code }}</q-item-label><q-item-label caption>{{ area.description || 'Área de verificação cadastral' }}</q-item-label></q-item-section>

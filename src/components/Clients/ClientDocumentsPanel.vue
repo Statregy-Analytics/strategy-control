@@ -4,7 +4,17 @@
     <q-banner v-if="error" class="bg-red-1 text-negative q-mt-md">{{ error }}<template #action><q-btn flat color="negative" label="Tentar novamente" @click="load" /></template></q-banner>
     <div v-if="loading" class="row justify-center q-pa-xl"><q-spinner color="primary" size="32px" /></div>
     <template v-else-if="!error">
-      <div class="row q-col-gutter-md q-mt-sm"><div class="col-12 col-md-6"><q-banner rounded class="bg-blue-1 text-primary"><div class="text-caption">Documentos cadastrados</div><div class="text-h6">{{ totalDocuments }}</div></q-banner></div><div class="col-12 col-md-6"><q-banner rounded class="bg-blue-1 text-primary"><div class="text-caption">Progresso documental</div><q-linear-progress class="q-my-xs" rounded :value="progressPercentage/100" /><div>{{ progressPercentage }}%</div></q-banner></div></div>
+      <q-list bordered separator class="q-mt-md rounded-borders">
+        <q-item>
+          <q-item-section><q-item-label caption>Documentos cadastrados</q-item-label><q-item-label>{{ totalDocuments }}</q-item-label></q-item-section>
+        </q-item>
+        <q-item>
+          <q-item-section>
+            <q-item-label caption>Progresso documental</q-item-label>
+            <div class="row items-center q-gutter-sm"><q-linear-progress class="col" rounded :value="progressPercentage / 100" /><span class="text-caption text-grey-7">{{ progressPercentage }}%</span></div>
+          </q-item-section>
+        </q-item>
+      </q-list>
       <div class="text-weight-medium q-mt-lg q-mb-sm">Requisitos</div><q-list v-if="requirements.length" bordered separator><q-item v-for="item in requirements" :key="item.id"><q-item-section><q-item-label>{{ typeName(item.documentTypeId) }}</q-item-label><q-item-label caption>Prazo: {{ formatDate(item.dueDate) }}</q-item-label></q-item-section><q-item-section side><q-badge :color="item.isSatisfied?'positive':'warning'">{{ item.isSatisfied?'Atendido':'Pendente' }}</q-badge></q-item-section></q-item></q-list><div v-else class="text-caption text-grey-7">Nenhum requisito cadastrado.</div>
       <div class="text-weight-medium q-mt-lg q-mb-sm">Arquivos</div><q-table flat dense hide-pagination row-key="id" :rows="documents" :columns="columns"><template #body-cell-name="props"><q-td :props="props">{{ props.row.documentTypeName||typeName(props.row.documentTypeId) }}</q-td></template><template #body-cell-status="props"><q-td :props="props"><q-badge :color="statusColor(props.value)">{{ statusLabel(props.value) }}</q-badge></q-td></template><template #body-cell-actions="props"><q-td :props="props"><row-actions :actions="documentActions" @select="action=>runAction(action,props.row)" /></q-td></template><template #no-data><div class="full-width text-center text-grey-7 q-pa-lg">Nenhum documento enviado.</div></template></q-table>
     </template>

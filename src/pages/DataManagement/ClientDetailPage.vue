@@ -34,32 +34,32 @@
           {{ partialWarning }}
           <template #action><q-btn flat color="warning" label="Tentar novamente" @click="loadCustomer" /></template>
         </q-banner>
-        <div class="row q-col-gutter-md">
-          <div class="col-12 col-md-8">
-            <q-card flat bordered><q-card-section>
-              <div class="text-subtitle1 text-weight-bold">Identificação e contato</div><q-separator class="q-my-md" />
-              <div class="row q-col-gutter-lg">
-                <div class="col-12 col-sm-6"><div class="text-caption text-grey-7">Nome</div><div>{{ displayName }}</div></div>
-                <div class="col-12 col-sm-6"><div class="text-caption text-grey-7">E-mail</div><div>{{ identification?.primaryEmail?.value || 'Não informado' }}</div></div>
-                <div class="col-12 col-sm-6"><div class="text-caption text-grey-7">Telefone</div><div>{{ identification?.primaryPhone?.value || 'Não informado' }}</div></div>
-                <div class="col-12 col-sm-6"><div class="text-caption text-grey-7">Tipo</div><div>{{ kindLabel(header?.kind) }}</div></div>
-              </div>
-            </q-card-section></q-card>
-            <q-card flat bordered class="q-mt-md"><q-card-section>
-              <div class="text-subtitle1 text-weight-bold">Documentos</div><q-separator class="q-my-md" />
-              <div class="row q-col-gutter-md">
-                <div v-for="metric in documentMetrics" :key="metric.label" class="col-6 col-sm-3">
-                  <div class="rounded-borders bg-grey-1 q-pa-md text-center"><div :class="'text-h5 text-' + metric.color">{{ metric.value }}</div><div class="text-caption">{{ metric.label }}</div></div>
-                </div>
-              </div>
-            </q-card-section></q-card>
-          </div>
-          <div class="col-12 col-md-4"><q-card flat bordered><q-card-section>
-            <div class="text-subtitle1 text-weight-bold">Resumo operacional</div>
-            <q-list separator><q-item><q-item-section><q-item-label caption>Compliance</q-item-label><q-item-label>{{ complianceLabel }}</q-item-label></q-item-section></q-item>
+        <div class="client-overview">
+          <form-section title="Identificação e contato" caption="Dados principais do cadastro do cliente">
+            <q-list bordered separator class="rounded-borders">
+              <q-item><q-item-section><q-item-label caption>Nome</q-item-label><q-item-label>{{ displayName }}</q-item-label></q-item-section></q-item>
+              <q-item><q-item-section><q-item-label caption>E-mail</q-item-label><q-item-label>{{ identification?.primaryEmail?.value || 'Não informado' }}</q-item-label></q-item-section></q-item>
+              <q-item><q-item-section><q-item-label caption>Telefone</q-item-label><q-item-label>{{ identification?.primaryPhone?.value || 'Não informado' }}</q-item-label></q-item-section></q-item>
+              <q-item><q-item-section><q-item-label caption>Tipo</q-item-label><q-item-label>{{ kindLabel(header?.kind) }}</q-item-label></q-item-section></q-item>
+            </q-list>
+          </form-section>
+          <q-separator />
+          <form-section title="Documentos" caption="Situação documental consolidada">
+            <q-list bordered separator class="rounded-borders">
+              <q-item v-for="metric in documentMetrics" :key="metric.label">
+                <q-item-section><q-item-label>{{ metric.label }}</q-item-label></q-item-section>
+                <q-item-section side><q-badge :color="metric.color">{{ metric.value }}</q-badge></q-item-section>
+              </q-item>
+            </q-list>
+          </form-section>
+          <q-separator />
+          <form-section title="Resumo operacional" caption="Controles e vínculos atuais do cliente">
+            <q-list bordered separator class="rounded-borders">
+              <q-item><q-item-section><q-item-label caption>Compliance</q-item-label><q-item-label>{{ complianceLabel }}</q-item-label></q-item-section></q-item>
               <q-item><q-item-section><q-item-label caption>E-mail confirmado</q-item-label><q-item-label>{{ booleanLabel(summary?.accountSecurity?.emailConfirmed) }}</q-item-label></q-item-section></q-item>
-              <q-item><q-item-section><q-item-label caption>Contas bancárias</q-item-label><q-item-label>{{ summary?.bankAccounts?.total ?? 0 }}</q-item-label></q-item-section></q-item></q-list>
-          </q-card-section></q-card></div>
+              <q-item><q-item-section><q-item-label caption>Contas bancárias</q-item-label><q-item-label>{{ summary?.bankAccounts?.total ?? 0 }}</q-item-label></q-item-section></q-item>
+            </q-list>
+          </form-section>
         </div>
       </q-tab-panel>
       <q-tab-panel name="registration" class="q-pa-none">
@@ -77,6 +77,7 @@ import { computed, onMounted, ref } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import ClientRegistrationEditor from 'src/components/Clients/ClientRegistrationEditor.vue'
 import ClientPreferencesPanel from 'src/components/Clients/ClientPreferencesPanel.vue'
+import FormSection from 'src/components/Entity/FormSection.vue'
 import { getCustomer, getCustomerSummary } from 'src/services/customerService'
 import { getApiErrorMessage } from 'src/services/apiError'
 

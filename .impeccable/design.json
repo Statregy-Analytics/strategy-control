@@ -1,0 +1,135 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-08-14T21:00:00-03:00",
+  "title": "Design System: Strategy Administração",
+  "extensions": {
+    "colorMeta": {
+      "strategy-blue": {
+        "role": "primary",
+        "displayName": "Azul Strategy",
+        "canonical": "#00a3ff",
+        "tonalRamp": ["#00324f", "#00537f", "#0074b3", "#0095e6", "#24adff", "#63c4ff", "#a3dcff", "#e5f6ff"]
+      },
+      "black": {
+        "role": "neutral",
+        "displayName": "Preto Estrutural",
+        "canonical": "#000000",
+        "tonalRamp": ["#000000", "#1f1f1f", "#3d3d3d", "#5c5c5c", "#7a7a7a", "#a3a3a3", "#cccccc", "#f2f2f2"]
+      },
+      "ink": { "role": "neutral", "displayName": "Tinta Operacional", "canonical": "#333333" },
+      "muted": { "role": "neutral", "displayName": "Cinza de Apoio", "canonical": "#6a6a6a" },
+      "quiet": { "role": "neutral", "displayName": "Cinza Silencioso", "canonical": "#999999" },
+      "border": { "role": "neutral", "displayName": "Borda Neutra", "canonical": "#e0e0e0" },
+      "surface-soft": { "role": "neutral", "displayName": "Superfície Suave", "canonical": "#fafafa" },
+      "white": { "role": "neutral", "displayName": "Branco de Trabalho", "canonical": "#ffffff" },
+      "positive": { "role": "semantic", "displayName": "Sucesso", "canonical": "#52c41a" },
+      "negative": { "role": "semantic", "displayName": "Erro", "canonical": "#c10015" },
+      "info": { "role": "semantic", "displayName": "Informação", "canonical": "#31ccec" },
+      "warning": { "role": "semantic", "displayName": "Atenção", "canonical": "#f2c037" }
+    },
+    "typographyMeta": {
+      "title": { "displayName": "Título Operacional", "purpose": "Títulos de página, painel e seção." },
+      "body": { "displayName": "Corpo", "purpose": "Dados, valores e conteúdo corrente." },
+      "label": { "displayName": "Rótulo", "purpose": "Labels externos e ações compactas." },
+      "caption": { "displayName": "Legenda", "purpose": "IDs, contatos e metadados." }
+    },
+    "shadows": [
+      { "name": "overlay-native", "value": "Quasar overlay elevation", "purpose": "Somente menus, diálogos e notificações sobrepostas." }
+    ],
+    "motion": [
+      { "name": "page-fade", "value": "opacity 355ms", "purpose": "Transição discreta entre rotas no layout principal." }
+    ],
+    "breakpoints": [
+      { "name": "sm", "value": "600px" },
+      { "name": "md", "value": "1024px" }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "Ação dominante de uma região, como Criar Novo.",
+      "html": "<button class=\"ds-btn-primary\">+ Criar Novo</button>",
+      "css": ".ds-btn-primary { background:#00a3ff; color:#fff; border:0; border-radius:8px; padding:8px; font:500 14px/1.35 Inter,sans-serif; cursor:pointer; transition:filter .15s ease; } .ds-btn-primary:hover { filter:brightness(.94); } .ds-btn-primary:focus-visible { outline:2px solid #00324f; outline-offset:2px; } .ds-btn-primary:active { filter:brightness(.88); }"
+    },
+    {
+      "name": "Flat Action",
+      "kind": "button",
+      "refersTo": "button-flat",
+      "description": "Ação secundária, utilitária ou de fim de seção.",
+      "html": "<button class=\"ds-btn-flat\">Salvar seção</button>",
+      "css": ".ds-btn-flat { background:transparent; color:#00a3ff; border:0; border-radius:8px; padding:4px 8px; font:500 14px/1.35 Inter,sans-serif; cursor:pointer; } .ds-btn-flat:hover { background:#e5f6ff; } .ds-btn-flat:focus-visible { outline:2px solid #00a3ff; outline-offset:2px; } .ds-btn-flat:active { background:#a3dcff; }"
+    },
+    {
+      "name": "Outlined Field",
+      "kind": "input",
+      "refersTo": "input-outlined",
+      "description": "Campo administrativo denso com rótulo externo.",
+      "html": "<label class=\"ds-field\"><span class=\"ds-field-label\">Nome</span><input class=\"ds-field-input\" value=\"Cliente exemplo\"></label>",
+      "css": ".ds-field { display:grid; gap:4px; color:#333; font-family:Inter,sans-serif; } .ds-field-label { font-size:14px; font-weight:500; } .ds-field-input { height:40px; padding:0 12px; border:1px solid #e0e0e0; border-radius:6px; background:#fff; color:#333; font:400 14px/1.35 Inter,sans-serif; } .ds-field-input:hover { border-color:#999; } .ds-field-input:focus { border-color:#00a3ff; outline:1px solid #00a3ff; }"
+    },
+    {
+      "name": "Search Field",
+      "kind": "input",
+      "refersTo": "input-outlined",
+      "description": "Busca compacta no topo de listagens.",
+      "html": "<label class=\"ds-search\"><svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><path d=\"m21 21-4.35-4.35m2.35-5.65a8 8 0 1 1-16 0 8 8 0 0 1 16 0Z\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"/></svg><input placeholder=\"Pesquisar por palavra-chave\"></label>",
+      "css": ".ds-search { width:320px; height:40px; display:flex; align-items:center; gap:8px; padding:0 12px; border:1px solid #e0e0e0; border-radius:6px; background:#fff; color:#6a6a6a; } .ds-search svg { width:18px; height:18px; } .ds-search input { min-width:0; flex:1; border:0; outline:0; color:#333; font:400 14px/1.35 Inter,sans-serif; } .ds-search:hover { border-color:#999; } .ds-search:focus-within { border-color:#00a3ff; outline:1px solid #00a3ff; }"
+    },
+    {
+      "name": "Entity Header",
+      "kind": "custom",
+      "refersTo": "entity-panel",
+      "description": "Identidade e estado do registro no topo do editor lateral.",
+      "html": "<section class=\"ds-entity\"><span class=\"ds-avatar\">JS</span><span><small>ID #82A4F7C1</small><strong>Joana Silva</strong></span><button>Ativo</button></section>",
+      "css": ".ds-entity { min-height:74px; display:flex; align-items:center; gap:16px; padding:16px; border:1px solid rgba(116,226,57,.16); border-radius:8px; background:#fafafa; color:#333; font-family:Inter,sans-serif; } .ds-avatar { width:38px; height:38px; display:grid; place-items:center; border-radius:50%; background:#eef2f4; color:#59666c; font-size:12px; } .ds-entity span:nth-child(2) { display:grid; gap:2px; min-width:170px; } .ds-entity small { color:#999; font-size:12px; } .ds-entity strong { font-size:16px; font-weight:500; } .ds-entity button { margin-left:auto; border:1px solid #e0e0e0; border-radius:6px; background:#fff; padding:6px 10px; color:#333; } .ds-entity button:focus-visible { outline:2px solid #00a3ff; outline-offset:2px; }"
+    },
+    {
+      "name": "Dense Entity Row",
+      "kind": "custom",
+      "description": "Célula principal das tabelas administrativas.",
+      "html": "<div class=\"ds-row\"><span class=\"ds-row-avatar\">JS</span><span><strong>Joana Silva</strong><small>joana@exemplo.com</small></span><button aria-label=\"Opções do cliente\">⋮</button></div>",
+      "css": ".ds-row { min-height:48px; display:flex; align-items:center; gap:12px; padding:4px 8px; border-bottom:1px solid #e0e0e0; color:#333; font-family:Inter,sans-serif; } .ds-row-avatar { width:32px; height:32px; display:grid; place-items:center; border-radius:50%; background:#eef2f4; color:#59666c; font-size:11px; } .ds-row span:nth-child(2) { display:grid; gap:2px; } .ds-row strong { font-size:14px; font-weight:500; } .ds-row small { color:#6a6a6a; font-size:12px; } .ds-row button { margin-left:auto; border:0; background:transparent; border-radius:8px; padding:6px 10px; font-size:18px; } .ds-row button:hover { background:#fafafa; } .ds-row button:focus-visible { outline:2px solid #00a3ff; }"
+    },
+    {
+      "name": "Top Navigation",
+      "kind": "nav",
+      "description": "Barra global escura com estado ativo em Azul Strategy.",
+      "html": "<nav class=\"ds-nav\"><strong>Strategy</strong><a class=\"ds-nav-active\" href=\"#\">Clientes</a><a href=\"#\">Assessores</a><a href=\"#\">Leads</a></nav>",
+      "css": ".ds-nav { min-height:64px; display:flex; align-items:center; gap:20px; padding:0 20px; background:#000; color:#fff; font-family:Inter,sans-serif; } .ds-nav strong { margin-right:16px; } .ds-nav a { height:64px; display:flex; align-items:center; color:#fff; text-decoration:none; font-size:12px; border-bottom:2px solid transparent; } .ds-nav a:hover { color:#63c4ff; } .ds-nav a:focus-visible { outline:2px solid #00a3ff; outline-offset:-2px; } .ds-nav .ds-nav-active { color:#00a3ff; border-color:#00a3ff; }"
+    }
+  ],
+  "narrative": {
+    "northStar": "Precisão Operacional",
+    "overview": "O sistema visual funciona como uma estação de trabalho financeira: direto, sóbrio e eficiente. A interface privilegia leitura rápida, comparação entre registros e continuidade da tarefa. A marca aparece por meio do Azul Strategy, da tipografia Inter e de detalhes consistentes, sem competir com os dados. A referência normativa é a implementação consolidada até o commit eeb8df4, de 04/08/2026, especialmente os fluxos de Leads e Assessores e as primitivas compartilhadas extraídas nesse período. Clientes deve usar a mesma composição, densidade, alinhamento e comportamento, ainda que seus dados e endpoints sejam diferentes.",
+    "keyCharacteristics": [
+      "Densidade administrativa com hierarquia clara.",
+      "Superfícies predominantemente planas e claras.",
+      "Azul usado para ação, foco, seleção e estado ativo.",
+      "Listagem preservada como contexto durante edição lateral.",
+      "Seções verticais e independentes dentro dos editores."
+    ],
+    "rules": [
+      { "name": "The One Accent Rule", "body": "O Azul Strategy identifica ação ou estado; não deve virar decoração ou preencher grandes áreas de conteúdo.", "section": "colors" },
+      { "name": "The External Label Rule", "body": "Campos administrativos usam rótulos externos claros; placeholder não substitui label.", "section": "typography" },
+      { "name": "The Listing Context Rule", "body": "CRUD administrativo mantém a listagem visível e edita em painel lateral.", "section": "layout" },
+      { "name": "The Vertical Editor Rule", "body": "Seções de um mesmo registro fluem de cima para baixo; não criar cards funcionais lado a lado.", "section": "layout" },
+      { "name": "The Flat-by-Default Rule", "body": "Não adicionar sombra a tabelas, seções ou cards em repouso; elevação só representa uma camada temporariamente acima da interface.", "section": "elevation" }
+    ],
+    "dos": [
+      "Do comparar qualquer novo CRUD com Leads e Assessores antes de compor a tela.",
+      "Do reutilizar EntityHeader, FormSection, RowActions, EntityTableFooter, TitleCard e LabelForm quando aplicáveis.",
+      "Do manter busca, tabela e paginação alinhadas ao mesmo eixo e densidade.",
+      "Do preservar carregamentos, erros e retries independentes por seção.",
+      "Do fazer as telas de Clientes convergirem para o padrão consolidado até 04/08/2026."
+    ],
+    "donts": [
+      "Don't organizar a edição do cliente como dashboard de cards lado a lado.",
+      "Don't copiar stores fake, campos fictícios ou componentes acoplados a outro domínio.",
+      "Don't transformar endpoints em cards ou abas sem justificativa de tarefa do usuário.",
+      "Don't criar uma nova paleta, tipografia ou linguagem de elevação para Clientes.",
+      "Don't exibir dados sensíveis integrais ou depender apenas de cor para comunicar estado."
+    ]
+  }
+}
