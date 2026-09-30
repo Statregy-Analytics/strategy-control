@@ -77,6 +77,24 @@ ou fechar durante uma falha parcial exige conferir os documentos já enviados.
 Não há exclusão de anexos vinculados no contrato consumido; apenas arquivos ainda
 não enviados podem ser removidos da fila.
 
+## Ajuste visual do painel
+
+O [frame de contratos no Figma](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1807-3975)
+orientou o acabamento escuro com transparência; ele é uma referência visual de
+contratos, não o desenho exato do formulário de imóveis. Foram ajustados campos,
+menus, listas e legendas para o tema escuro, com props `dark` nos componentes
+compartilhados aplicadas pelo fluxo de Formulários.
+
+O editor mantém 8 px entre rótulo e campo, 16 px na grade principal e 24 px entre
+seções. Os campos dinâmicos adaptam as colunas à largura disponível no painel,
+reduzindo de três para duas e uma coluna. A identidade e os componentes existentes
+foram preservados, sem mudança aprovada no sistema visual global; `DESIGN.md` e
+`.impeccable/design.json` permanecem inalterados.
+
+A revisão visual deste ajuste foi realizada em desktop e celular, em localhost
+isolado com respostas de API simuladas. Ela não constitui homologação com a
+integração real.
+
 ## Verificação local e homologação
 
 Testes de modelo: `node --test tests/data-intake-model.test.mjs`.

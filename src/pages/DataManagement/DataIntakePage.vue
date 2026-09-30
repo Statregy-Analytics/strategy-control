@@ -15,7 +15,7 @@
       <q-table dark flat dense hide-pagination row-key="id" class="intake-table" :rows="rows" :columns="columns" :loading="loading" :pagination="{ rowsPerPage: 0 }">
         <template #top>
           <div class="row full-width items-center q-col-gutter-md">
-            <label-form class-name="col-12 col-sm-5 col-md-3" text-label="Status"><q-select v-model="status" clearable outlined dense emit-value map-options :options="statusOptions" aria-label="Filtrar por status" @update:model-value="changePage(1)" /></label-form>
+            <label-form class-name="col-12 col-sm-5 col-md-3" text-label="Status"><q-select dark options-dense v-model="status" clearable outlined dense emit-value map-options :options="statusOptions" aria-label="Filtrar por status" @update:model-value="changePage(1)" /></label-form>
             <div class="col-auto self-end"><q-btn flat dense no-caps icon="refresh" label="Atualizar" :disable="loading" @click="loadList" /></div>
           </div>
         </template>
@@ -23,10 +23,10 @@
           <q-td :props="slotProps"><q-item dense class="q-pa-none"><q-item-section avatar><q-avatar size="32px" color="blue-grey-1" text-color="blue-grey-7" icon="description" /></q-item-section><q-item-section><q-item-label><q-btn flat dense no-caps class="text-left" :label="slotProps.row.title || 'Sem título'" :disable="!user || !!userError" @click="open(slotProps.row.id)" /></q-item-label><q-item-label caption>ID #{{ slotProps.row.id.slice(0, 8) }}</q-item-label></q-item-section></q-item></q-td>
         </template>
         <template #body-cell-status="slotProps"><q-td :props="slotProps"><q-badge>{{ statusLabels[slotProps.value] || slotProps.value }}</q-badge></q-td></template>
-        <template #body-cell-actions="slotProps"><q-td :props="slotProps"><row-actions v-if="user && !userError" :actions="[{ name: 'open', label: 'Abrir formulário', icon: 'edit_note' }]" @select="open(slotProps.row.id)" /></q-td></template>
+        <template #body-cell-actions="slotProps"><q-td :props="slotProps"><row-actions dark v-if="user && !userError" :actions="[{ name: 'open', label: 'Abrir formulário', icon: 'edit_note' }]" @select="open(slotProps.row.id)" /></q-td></template>
         <template #no-data><div class="full-width text-center q-pa-xl text-muted">{{ listError ? 'A listagem está indisponível.' : 'Nenhuma submissão encontrada para este filtro.' }}</div></template>
       </q-table>
-      <entity-table-footer :page="page" :page-size="pageSize" :total-items="total" :total-pages="totalPages" :first-item="total ? (page - 1) * pageSize + 1 : 0" :last-item="Math.min(page * pageSize, total)" @page="changePage" @page-size="changeSize" />
+      <entity-table-footer dark :page="page" :page-size="pageSize" :total-items="total" :total-pages="totalPages" :first-item="total ? (page - 1) * pageSize + 1 : 0" :last-item="Math.min(page * pageSize, total)" @page="changePage" @page-size="changeSize" />
     </div>
     <q-dialog v-model="dialog" position="right" full-height class="control-width" :persistent="editorBusy">
       <intake-editor v-if="dialog && user" :key="editorKey" :submission-id="selectedId" :catalog="catalog" :user="user" @close="closeEditor" @busy="editorBusy = $event" @updated="loadList" />
@@ -87,5 +87,6 @@ onBeforeUnmount(() => { listRevision++ })
 </script>
 
 <style scoped>
+.intake-table :deep(.q-item__label--caption) { color: rgba(255, 255, 255, .72); }
 .intake-table { background: var(--sa-surface); border: 1px solid var(--sa-border); border-radius: var(--sa-radius); }
 </style>

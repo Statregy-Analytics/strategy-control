@@ -1,35 +1,35 @@
 <template>
-  <q-card class="column no-wrap intake-editor">
+  <q-card dark class="column no-wrap intake-editor">
     <title-card :title="submission ? 'Detalhe da submissão' : 'Novo formulário'" :disable-close="busy" @on-close="emit('close')" />
     <q-separator />
     <div ref="editorBody" class="col scroll">
       <entity-header v-if="submission" :id="submission.id" :name="submission.title || 'Formulário'" short-id>
         <template #status><q-badge class="q-ml-md">{{ statusLabels[submission.status] || submission.status }}</q-badge></template>
       </entity-header>
-      <q-card-section>
+      <q-card-section class="intake-editor__content">
         <q-banner v-if="loadError" class="bg-red-1 text-negative" role="alert">{{ loadError }}<template #action><q-btn flat label="Tentar novamente" @click="load" /></template></q-banner>
         <q-linear-progress v-if="loading" indeterminate aria-label="Carregando submissão" />
         <template v-if="!loading && !loadError">
           <form-section title="Identificação" caption="Selecione o formulário publicado e o cliente responsável pela declaração.">
             <div class="row q-col-gutter-md">
               <label-form v-if="!submission" class-name="col-12 col-md-6" text-label="Formulário">
-                <q-select v-model="selectedCode" outlined dense :options="catalog.map(item => ({ label: item.name, value: item.code }))" emit-value map-options :disable="busy || jobs.length > 0" aria-label="Formulário" @update:model-value="selectForm" />
+                <q-select dark options-dense hide-bottom-space v-model="selectedCode" outlined dense :options="catalog.map(item => ({ label: item.name, value: item.code }))" emit-value map-options :disable="busy || jobs.length > 0" aria-label="Formulário" @update:model-value="selectForm" />
               </label-form>
               <label-form v-if="!submission" class-name="col-12 col-md-6" text-label="Cliente">
-                <q-select v-model="customer" outlined dense use-input input-debounce="300" :options="customers" :loading="customersLoading" :disable="busy || jobs.length > 0" aria-label="Cliente" @filter="findCustomers">
+                <q-select dark options-dense hide-bottom-space v-model="customer" outlined dense use-input input-debounce="300" :options="customers" :loading="customersLoading" :disable="busy || jobs.length > 0" aria-label="Cliente" @filter="findCustomers">
                   <template #no-option><q-item><q-item-section>{{ customerError || 'Nenhum cliente encontrado. Pesquise pelo nome.' }}</q-item-section></q-item></template>
                 </q-select>
               </label-form>
               <label-form class-name="col-12" text-label="Título da submissão" data-intake-field="title">
-                <q-input v-model="title" outlined dense :disable="!editable || busy" maxlength="200" aria-label="Título da submissão" :error="!!errors.title" :error-message="errors.title" />
+                <q-input dark hide-bottom-space v-model="title" outlined dense :disable="!editable || busy" maxlength="200" aria-label="Título da submissão" :error="!!errors.title" :error-message="errors.title" />
               </label-form>
             </div>
           </form-section>
           <q-linear-progress v-if="formLoading" indeterminate aria-label="Carregando formulário" />
           <q-banner v-if="formError" class="bg-red-1 text-negative q-my-md" role="alert">{{ formError }}<template #action><q-btn flat label="Tentar novamente" @click="submission ? resolvePinnedForm() : selectForm(selectedCode)" /></template></q-banner>
           <template v-if="form && !formLoading">
-            <div class="text-caption text-muted">{{ form.name }} · versão {{ form.versionNumber }}<span v-if="form.metadata?.description"> — {{ form.metadata.description }}</span></div>
-            <q-banner v-if="!editable && ['Draft', 'NeedsCorrection'].includes(submission?.status || 'Draft')" class="q-my-md">
+            <div class="text-caption text-muted q-mb-lg">{{ form.name }} · versão {{ form.versionNumber }}<span v-if="form.metadata?.description"> — {{ form.metadata.description }}</span></div>
+            <q-banner v-if="!editable && ['Draft', 'NeedsCorrection'].includes(submission?.status || 'Draft')" dark class="q-my-md">
               A versão publicada não permite edição com o seu perfil. Os dados permanecem disponíveis para consulta.
             </q-banner>
             <q-banner v-if="errors._form" class="bg-red-1 text-negative q-my-md" role="alert">{{ errors._form }}</q-banner>
@@ -44,7 +44,7 @@
           <div v-else-if="!selectedCode && !submission && !formLoading" class="text-muted q-py-lg">Escolha um formulário para começar. Apenas versões publicadas aparecem no catálogo.</div>
 
           <form-section v-if="submission" title="Anexos vinculados">
-            <q-list v-if="submission.attachments?.length" separator>
+            <q-list dark v-if="submission.attachments?.length" separator>
               <q-item v-for="attachment in submission.attachments" :key="attachment.id">
                 <q-item-section avatar><q-icon name="description" /></q-item-section>
                 <q-item-section><q-item-label class="intake-wrap">{{ attachment.fileName }}</q-item-label><q-item-label caption>{{ attachment.customerUploadedDocumentId ? 'Documento vinculado' : 'Anexo sem vínculo documental' }}</q-item-label></q-item-section>
@@ -65,7 +65,7 @@
           <div v-if="form && !canSubmit && editable" class="text-caption text-muted q-mb-lg">Seu perfil pode salvar este rascunho. O envio deve ser realizado por um perfil autorizado no formulário.</div>
 
           <form-section v-if="canReview" title="Revisão" caption="Confira os dados e documentos antes de concluir a análise.">
-            <label-form text-label="Observações da análise"><q-input v-model="notes" type="textarea" outlined dense :disable="busy" maxlength="2000" aria-label="Observações da análise" /></label-form>
+            <label-form text-label="Observações da análise"><q-input dark hide-bottom-space v-model="notes" type="textarea" outlined dense :disable="busy" maxlength="2000" aria-label="Observações da análise" /></label-form>
             <div class="row justify-end q-gutter-sm q-mt-md">
               <q-btn flat dense no-caps label="Solicitar correção" icon="edit_note" :disable="busy || !notes.trim()" @click="review('correction-request')" />
               <q-btn flat dense no-caps label="Rejeitar" color="negative" icon="close" :disable="busy || !notes.trim()" @click="review('reject')" />
@@ -76,7 +76,7 @@
           <form-section v-if="submission" title="Histórico">
             <q-linear-progress v-if="historyLoading" indeterminate aria-label="Carregando histórico" />
             <q-banner v-if="historyError" class="bg-red-1 text-negative">{{ historyError }}<template #action><q-btn flat label="Tentar novamente" @click="loadHistory" /></template></q-banner>
-            <q-list v-else-if="history.length" separator>
+            <q-list dark v-else-if="history.length" separator>
               <q-item v-for="event in history" :key="event.id"><q-item-section><q-item-label>{{ eventLabels[event.eventType] || 'Atualização da submissão' }}</q-item-label><q-item-label caption>{{ formatDate(event.occurredAtUtc) }} · {{ statusLabels[event.toStatus] || 'Registrado' }}</q-item-label><q-item-label v-if="event.notes" class="intake-wrap">{{ event.notes }}</q-item-label></q-item-section></q-item>
             </q-list>
             <div v-else-if="!historyLoading && !historyError" class="text-muted">Nenhum evento registrado.</div>
@@ -270,7 +270,7 @@ async function save(submit) {
 function review(action) {
   if (!canReview.value || busy.value || (action !== 'approve' && !notes.value.trim())) return
   const label = { approve: 'Aprovar submissão', reject: 'Rejeitar submissão', 'correction-request': 'Solicitar correção' }[action]
-  $q.dialog({ title: label, message: action === 'approve' ? 'Confirmar a análise? A aprovação poderá registrar o patrimônio do cliente.' : action === 'reject' ? 'A rejeição é definitiva. Confirmar?' : 'Enviar as observações ao autor para correção?', cancel: true, ok: { label: 'Confirmar', flat: true }, persistent: true }).onOk(async () => {
+  $q.dialog({ dark: true, title: label, message: action === 'approve' ? 'Confirmar a análise? A aprovação poderá registrar o patrimônio do cliente.' : action === 'reject' ? 'A rejeição é definitiva. Confirmar?' : 'Enviar as observações ao autor para correção?', cancel: true, ok: { label: 'Confirmar', flat: true }, persistent: true }).onOk(async () => {
     busy.value = true; actionError.value = ''; message.value = ''
     try {
       submission.value = await write('post', intakePath(submission.value.id, action), { notes: notes.value.trim() || null })
@@ -295,4 +295,17 @@ onBeforeUnmount(() => { disposed = true; selectionRevision++; lookupRevision++ }
 <style scoped>
 .intake-editor { width: min(960px, 100vw); max-width: 100vw; }
 .intake-wrap { overflow-wrap: anywhere; }
+.intake-editor__content { padding: 24px; container-type: inline-size; }
+.intake-editor :deep(.LabelForm) { align-content: start; gap: 8px !important; }
+.intake-editor :deep(.form-section) { padding: 0; margin-bottom: 24px; }
+.intake-editor :deep(.text-muted),
+.intake-editor :deep(.q-item__label--caption) { color: rgba(255, 255, 255, .72) !important; }
+.intake-editor :deep(.q-field__bottom) { color: #ffb4bd; }
+.intake-editor :deep(input::placeholder) { color: rgba(255, 255, 255, .72); opacity: 1; }
+.intake-editor :deep(.q-field__control) { border-radius: 8px; }
+.intake-editor .scroll { color-scheme: dark; }
+.intake-editor :deep(.form-section__caption) { color: rgba(255, 255, 255, .72); }
+@container (max-width: 719px) { .intake-editor :deep(.LabelForm.col-md-4) { width: 50%; } }
+@container (max-width: 479px) { .intake-editor :deep(.LabelForm.col-md-4), .intake-editor :deep(.LabelForm) { width: 100%; } }
+@media (max-width: 599px) { .intake-editor__content { padding: 16px; } }
 </style>
