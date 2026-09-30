@@ -8,7 +8,7 @@
         <span class="text-primary"> {{ advisor }} </span>
       </span>
     </div>
-    <q-btn v-close-popup flat icon="close" size="sm" rounded color="grey-6" @click="onClose" />
+    <q-btn v-close-popup="!disableClose" flat icon="close" size="sm" rounded color="grey-6" aria-label="Fechar painel" :disable="disableClose" @click="onClose" />
   </q-card-section>
 </template>
 <script>
@@ -18,6 +18,7 @@ export default defineComponent({
   name: 'TitleCard',
   emits: ['onClose'],
   props: {
+    disableClose: { type: Boolean, default: false },
     title: {
       type: String,
       required: true,

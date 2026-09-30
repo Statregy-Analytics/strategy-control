@@ -4,3 +4,95 @@
 .text-muted {
   color: #999 !important;
 }
+
+:root {
+  --sa-bg: #111522;
+  --sa-surface: rgba(7, 12, 24, 0.64);
+  --sa-surface-soft: rgba(255, 255, 255, 0.06);
+  --sa-border: rgba(255, 255, 255, 0.16);
+  --sa-text: #ffffff;
+  --sa-muted: rgba(255, 255, 255, 0.58);
+  --sa-radius: 14px;
+}
+
+body {
+  background: #111522;
+}
+
+.sa-shell {
+  color: var(--sa-text);
+  background:
+    radial-gradient(circle at 74% 38%, rgba(0, 143, 214, 0.52), transparent 34%),
+    radial-gradient(circle at 4% 5%, rgba(98, 24, 52, 0.34), transparent 28%),
+    linear-gradient(135deg, #191d2b 0%, #111522 52%, #172032 100%);
+  background-attachment: fixed;
+}
+
+.sa-sidebar {
+  color: #fff;
+  border-color: var(--sa-border) !important;
+  background: linear-gradient(145deg, rgba(8, 9, 18, 0.92), rgba(13, 19, 31, 0.82)) !important;
+  box-shadow: 4px 4px 12px rgba(0,0,0,.24);
+  backdrop-filter: blur(20px);
+}
+
+.sa-page-container { min-height: 100vh; background: transparent; }
+.sa-shell .q-page { background: transparent; }
+.sa-shell .TitlePage { color: #fff; }
+.sa-shell .TitlePage .q-breadcrumbs { display: none; }
+
+.sa-shell .q-field--outlined .q-field__control,
+.control-width .q-field--outlined .q-field__control,
+.control-width-compare .q-field--outlined .q-field__control {
+  color: #fff;
+  border: 1px solid rgba(255,255,255,.24);
+  background: rgba(255,255,255,.07);
+}
+.sa-shell .q-field--outlined .q-field__control::before,
+.control-width .q-field--outlined .q-field__control::before,
+.control-width-compare .q-field--outlined .q-field__control::before { border: 0 !important; }
+.sa-shell .q-field__native, .sa-shell .q-field__input, .sa-shell .q-field__prepend, .sa-shell .q-field__append,
+.control-width .q-field__native, .control-width .q-field__input, .control-width .q-field__prepend, .control-width .q-field__append { color: #fff !important; }
+.sa-shell .q-field__native::placeholder { color: rgba(255,255,255,.62); opacity: 1; }
+
+.control-width .q-dialog__inner > .q-card,
+.control-width-compare .q-dialog__inner > .q-card {
+  color: #fff;
+  border-left: 1px solid rgba(255,255,255,.18);
+  background:
+    radial-gradient(circle at 100% 45%, rgba(0,130,196,.35), transparent 38%),
+    linear-gradient(145deg, rgba(14,17,29,.98), rgba(14,25,40,.98));
+  box-shadow: -12px 0 40px rgba(0,0,0,.38);
+}
+.control-width .q-card .q-card,
+.control-width-compare .q-card .q-card {
+  color: #fff;
+  background: transparent;
+}
+.control-width .q-table__container,
+.control-width-compare .q-table__container {
+  color: #fff;
+  border: 1px solid rgba(255,255,255,.12);
+  border-radius: 10px;
+  background: rgba(255,255,255,.035);
+}
+.control-width .q-table thead,
+.control-width .q-table tbody,
+.control-width .q-table tr,
+.control-width .q-table th,
+.control-width .q-table td {
+  color: inherit;
+  background: transparent;
+  border-color: rgba(255,255,255,.08);
+}
+.control-width .border-pattern, .control-width-compare .border-pattern {
+  color: #fff;
+  border-color: rgba(255,255,255,.16) !important;
+  background: rgba(255,255,255,.05) !important;
+}
+.control-width .text-muted, .control-width-compare .text-muted { color: rgba(255,255,255,.52) !important; }
+.control-width .q-separator, .control-width-compare .q-separator { background: rgba(255,255,255,.12); }
+
+@media (max-width: 700px) {
+  .control-width .q-dialog__inner { min-width: 100% !important; max-width: 100% !important; }
+}

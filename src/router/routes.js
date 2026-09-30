@@ -44,6 +44,11 @@ const routes = [
             component: () => import('pages/DataManagement/ClientsPage.vue'),
           },
           {
+            path: 'forms',
+            name: 'Formulários',
+            component: () => import('pages/DataManagement/DataIntakePage.vue'),
+          },
+          {
             path: 'clients/:id',
             name: 'ClienteDetalhe',
             component: () => import('pages/DataManagement/ClientDetailPage.vue'),
@@ -98,7 +103,7 @@ const routes = [
       {
         path: '',
         name: 'Selected',
-        component: () => import('pages/IndexPage.vue'),
+        redirect: { name: 'Clientes' },
         meta: { requiresAuth: true },
       },
     ],

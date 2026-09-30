@@ -1,0 +1,340 @@
+{
+  "schema": {
+    "type": "object",
+    "additionalProperties": false,
+    "required": [
+      "apelidoImovel",
+      "tipo",
+      "valorEstimado",
+      "estaQuitado",
+      "cep",
+      "logradouro",
+      "numero",
+      "bairro",
+      "cidade",
+      "uf"
+    ],
+    "properties": {
+      "apelidoImovel": {
+        "type": "string",
+        "minLength": 3,
+        "maxLength": 120
+      },
+      "tipo": {
+        "type": "string",
+        "enum": [
+          "Apartamento",
+          "Casa",
+          "Terreno",
+          "Comercial",
+          "Rural",
+          "Outro"
+        ]
+      },
+      "valorEstimado": {
+        "type": "number",
+        "minimum": 0
+      },
+      "estaQuitado": {
+        "type": "boolean"
+      },
+      "restanteParaQuitacao": {
+        "type": "number",
+        "minimum": 0
+      },
+      "cep": {
+        "type": "string",
+        "pattern": "^[0-9]{5}-?[0-9]{3}$"
+      },
+      "logradouro": {
+        "type": "string",
+        "minLength": 3,
+        "maxLength": 200
+      },
+      "numero": {
+        "type": "string",
+        "maxLength": 20
+      },
+      "complemento": {
+        "type": "string",
+        "maxLength": 100
+      },
+      "bairro": {
+        "type": "string",
+        "maxLength": 100
+      },
+      "cidade": {
+        "type": "string",
+        "maxLength": 100
+      },
+      "uf": {
+        "type": "string",
+        "pattern": "^[A-Z]{2}$"
+      },
+      "inscricaoImobiliaria": {
+        "type": "string",
+        "maxLength": 40
+      },
+      "numeroMatricula": {
+        "type": "string",
+        "maxLength": 40
+      },
+      "areaTerreno": {
+        "type": "number",
+        "minimum": 0
+      },
+      "areaConstruida": {
+        "type": "number",
+        "minimum": 0
+      },
+      "quartos": {
+        "type": "integer",
+        "minimum": 0,
+        "maximum": 50
+      },
+      "banheiros": {
+        "type": "integer",
+        "minimum": 0,
+        "maximum": 50
+      }
+    }
+  },
+  "formVersionId": "test-version",
+  "metadata": {
+    "description": "Declaração de imóvel para registro de patrimônio do cliente.",
+    "targetAction": "assets.declare_real_estate",
+    "permissions": {
+      "create": [
+        "Client",
+        "Admin"
+      ],
+      "updateOwnDraft": [
+        "Client"
+      ],
+      "submit": [
+        "Client"
+      ],
+      "validate": [
+        "Admin"
+      ]
+    },
+    "requiredAttachments": [
+      {
+        "key": "matriculaImovelAnexo",
+        "minCount": 1,
+        "documentTypeId": "MATRICULA_DOCUMENT_TYPE_ID"
+      },
+      {
+        "key": "iptuAnexo",
+        "minCount": 1,
+        "documentTypeId": "IPTU_DOCUMENT_TYPE_ID"
+      },
+      {
+        "key": "fotosImovelAnexo",
+        "minCount": 1,
+        "documentTypeId": "FOTOS_DOCUMENT_TYPE_ID"
+      }
+    ]
+  },
+  "name": "Declaração de Imóvel",
+  "code": "asset-real-estate",
+  "uiSchema": {
+    "sections": [
+      {
+        "id": "identificacao",
+        "title": "Identificação do Imóvel",
+        "fields": [
+          "apelidoImovel",
+          "tipo"
+        ]
+      },
+      {
+        "id": "financeiro",
+        "title": "Valor e Situação Financeira",
+        "fields": [
+          "valorEstimado",
+          "estaQuitado",
+          "restanteParaQuitacao"
+        ]
+      },
+      {
+        "id": "localizacao",
+        "title": "Localização",
+        "fields": [
+          "cep",
+          "logradouro",
+          "numero",
+          "complemento",
+          "bairro",
+          "cidade",
+          "uf"
+        ]
+      },
+      {
+        "id": "registro",
+        "title": "Registro Imobiliário",
+        "fields": [
+          "inscricaoImobiliaria",
+          "numeroMatricula"
+        ]
+      },
+      {
+        "id": "caracteristicas",
+        "title": "Características Físicas",
+        "fields": [
+          "areaTerreno",
+          "areaConstruida",
+          "quartos",
+          "banheiros"
+        ]
+      },
+      {
+        "id": "documentacao",
+        "title": "Documentação do Imóvel",
+        "fields": [
+          "matriculaImovelAnexo",
+          "iptuAnexo",
+          "convencaoCondominioAnexo"
+        ]
+      },
+      {
+        "id": "fotos",
+        "title": "Fotos do Imóvel",
+        "fields": [
+          "fotosImovelAnexo"
+        ]
+      }
+    ],
+    "fields": {
+      "apelidoImovel": {
+        "label": "Apelido do Imóvel",
+        "component": "text",
+        "placeholder": "Ex: Apartamento Centro, Casa de Praia..."
+      },
+      "tipo": {
+        "label": "Tipo",
+        "component": "select",
+        "options": [
+          {
+            "value": "Apartamento",
+            "label": "Apartamento"
+          },
+          {
+            "value": "Casa",
+            "label": "Casa"
+          },
+          {
+            "value": "Terreno",
+            "label": "Terreno"
+          },
+          {
+            "value": "Comercial",
+            "label": "Comercial"
+          },
+          {
+            "value": "Rural",
+            "label": "Rural"
+          },
+          {
+            "value": "Outro",
+            "label": "Outro"
+          }
+        ]
+      },
+      "valorEstimado": {
+        "label": "Valor Estimado (R$)",
+        "component": "currency",
+        "placeholder": "0,00"
+      },
+      "estaQuitado": {
+        "label": "Está quitado?",
+        "component": "toggle",
+        "helpText": "Se desativado, habilita saldo devedor."
+      },
+      "restanteParaQuitacao": {
+        "label": "Restante para Quitação (R$)",
+        "component": "currency",
+        "placeholder": "0,00"
+      },
+      "cep": {
+        "label": "CEP",
+        "component": "text",
+        "placeholder": "00000-000"
+      },
+      "logradouro": {
+        "label": "Logradouro",
+        "component": "text",
+        "placeholder": "Av. Principal..."
+      },
+      "numero": {
+        "label": "Número",
+        "component": "text",
+        "placeholder": "123"
+      },
+      "complemento": {
+        "label": "Complemento",
+        "component": "text",
+        "placeholder": "Apto 101"
+      },
+      "bairro": {
+        "label": "Bairro",
+        "component": "text",
+        "placeholder": "Centro"
+      },
+      "cidade": {
+        "label": "Cidade",
+        "component": "text",
+        "placeholder": "São Paulo"
+      },
+      "uf": {
+        "label": "UF",
+        "component": "text",
+        "placeholder": "SP"
+      },
+      "inscricaoImobiliaria": {
+        "label": "Inscrição Imobiliária (IPTU)",
+        "component": "text",
+        "placeholder": "000.000.0000-0"
+      },
+      "numeroMatricula": {
+        "label": "Número da Matrícula",
+        "component": "text",
+        "placeholder": "123.456"
+      },
+      "areaTerreno": {
+        "label": "Área Terreno (m²)",
+        "component": "number"
+      },
+      "areaConstruida": {
+        "label": "Área Construída (m²)",
+        "component": "number"
+      },
+      "quartos": {
+        "label": "Quartos",
+        "component": "stepper"
+      },
+      "banheiros": {
+        "label": "Banheiros",
+        "component": "stepper"
+      },
+      "matriculaImovelAnexo": {
+        "label": "Matrícula do Imóvel",
+        "component": "attachment"
+      },
+      "iptuAnexo": {
+        "label": "IPTU (ano corrente)",
+        "component": "attachment"
+      },
+      "convencaoCondominioAnexo": {
+        "label": "Convenção de Condomínio (opcional)",
+        "component": "attachment"
+      },
+      "fotosImovelAnexo": {
+        "label": "Fotos do Imóvel",
+        "component": "attachment"
+      }
+    }
+  },
+  "versionNumber": 1,
+  "formDefinitionId": "test-definition"
+}

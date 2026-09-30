@@ -1,5 +1,5 @@
 <template>
-  <q-card class="EditClientLayout">
+  <q-card class="EditClientLayout sa-client-editor">
     <title-card title="Cliente" @on-close="emit('close')" />
     <q-separator />
 
@@ -181,4 +181,8 @@ watch(() => props.customerId, loadCustomer, { immediate: true })
 <style scoped>
 .client-header__status { width: 118px; }
 .client-sections { padding: 12px 20px 40px; }
+.sa-client-editor { min-width: min(920px, 100vw); }
+.client-sections > :deep(.form-section) { margin: 16px 0; padding: 22px; border: 1px solid rgba(255,255,255,.14); border-radius: 14px; background: linear-gradient(135deg, rgba(3,8,18,.55), rgba(255,255,255,.035)); box-shadow: 4px 4px 12px rgba(0,0,0,.18); }
+.client-sections > :deep(.q-separator) { display: none; }
+@media (max-width: 700px) { .sa-client-editor { min-width: 100vw; } .client-sections { padding: 8px 12px 28px; } .client-sections > :deep(.form-section) { padding: 16px; } }
 </style>

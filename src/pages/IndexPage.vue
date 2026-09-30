@@ -1,13 +1,11 @@
 <template>
   <q-page
-    class="IndexPage q-ma-sm row justify-center align-center items-center bg-transparent q-gutter-lg"
+    class="IndexPage row justify-center align-center items-center bg-transparent q-gutter-lg"
     style="min-height: auto !important"
     v-if="auth.token"
   >
-    <div class="col-12 text-center text-h4 text-white text-bold">
-      Boas Vindas, <span class="text-blue">João Silva</span>
-    </div>
-    <div class="col-12 text-center text-grey-5 q-mb-md">Selecione o sistema que deseja acessar</div>
+    <div class="col-12 text-center text-h4 text-white text-bold">Selecionar Sistema</div>
+    <div class="col-12 text-center text-grey-5 q-mb-md">Escolha qual ambiente deseja acessar.</div>
     <q-card class="card-auth col-sm-12 col-12 col-md-12 text-center" style="max-width: 320px">
       <q-icon
         :name="$filtersString.resolveUrl('img:icons/screen-share.svg')"
@@ -16,8 +14,7 @@
         class="col self-center"
       />
       <p class="text-h7 text-white q-mt-md">
-        Sistema de Edição <br />
-        de Landing Page
+        Edição de Landing Page
       </p>
       <p class="text-center text-grey-5 q-mb-md">
         Gestão e monitoramento de todos os dados e sistemas da Strategy Analytics
@@ -38,8 +35,7 @@
         class="col self-center"
       />
       <p class="text-h7 text-white q-mt-md">
-        Painel de inserção <br />
-        de dados
+        Inserção de Dados
       </p>
       <p class="text-center text-grey-5 q-mb-md">
         Gestão e monitoramento de todos os dados e sistemas da Strategy Analytics
@@ -80,13 +76,19 @@ const router = useRouter()
 </script>
 <style lang="sass">
 .IndexPage
-  height: auto !important
+  min-height: 100vh !important
+  padding: 120px 24px
+  background: radial-gradient(circle at 50% 50%, rgba(19,112,169,.45), transparent 35%), linear-gradient(135deg, #1a1e2d, #111522 65%, #4e1723) !important
   justify-items: center
   .card-auth
-    background: linear-gradient(183.42deg, rgba(255, 255, 255, 0.08) 2.82%, rgba(255, 255, 255, 0.01) 97.18%)
-    width: auto
-    height: auto !important
-    border-radius: 8px
-    padding: 48px
+    background: linear-gradient(160deg, rgba(255, 255, 255, 0.10), rgba(255, 255, 255, 0.025))
+    width: 496px
+    max-width: calc(100vw - 32px) !important
+    min-height: 300px
+    border: 1px solid rgba(255,255,255,.16)
+    box-shadow: 4px 4px 18px rgba(0,0,0,.28)
+    backdrop-filter: blur(20px)
+    border-radius: 14px
+    padding: 36px
     gap: 24px
 </style>

@@ -1,8 +1,9 @@
 <template>
-  <div class="">
-    <title-auth @actionEmit="backRouter()" />
-    <q-form class="q-gutter-sm row q-mt-md" @submit.prevent.stop="onSubmit">
-      <label-form className="col-12" textLabel="E-mail ou CPF">
+  <div class="sa-sign-in">
+    <div class="sa-sign-in__brand">Strategy Analytics</div>
+    <div class="sa-sign-in__subtitle">Sistema de Gestão Financeira</div>
+    <q-form class="q-gutter-sm row q-mt-xl" @submit.prevent.stop="onSubmit">
+      <label-form className="col-12" textLabel="E-mail">
         <q-input
           outlined
           v-model="auth.email"
@@ -13,9 +14,10 @@
           reverse-fill-mask
           unmasked-value
           class="q-my-sm"
-          bg-color="white"
+          dark
+          placeholder="seu@email.com"
           :rules="[(val) => (val && val.length > 0) || 'Campo obrigatório']"
-        />
+        ><template #prepend><q-icon name="mail_outline" size="20px" /></template></q-input>
       </label-form>
       <label-form className="col-12" textLabel="Senha">
         <q-input
@@ -26,7 +28,8 @@
           reverse-fill-mask
           unmasked-value
           class="q-my-sm"
-          bg-color="white"
+          dark
+          placeholder="••••••••"
           :rules="[(val) => (val && val.length > 0) || 'Campo obrigatório']"
           :type="isPwd ? 'password' : 'text'"
         >
@@ -41,22 +44,10 @@
         </q-input>
       </label-form>
 
-      <div class="col-12" style="text-align-last: end">
-        <q-btn
-          padding="none"
-          flat
-          label="Esquece minha senha"
-          size="12px"
-          class="text-grey-5"
-          no-caps
-          @click="passwordReset = true"
-        />
-      </div>
-      <q-checkbox size="xs" v-model="auth.conectetion" label="Manter conectado" keep-color />
       <div class="col-12 q-mt-md">
         <q-btn
           color="primary"
-          label="Acessar Conta"
+          label="Entrar"
           type="submit"
           padding="md lg"
           size="lg"
@@ -64,17 +55,7 @@
           no-caps
           style="width: 100%; border-radius: 8px"
         />
-        <q-btn
-          color="primary"
-          flat
-          label="Ainda não tem uma conta? Cadastre aqui"
-          padding="md lg"
-          size="lg"
-          class="text-h7"
-          no-caps
-          style="width: 100%; border-radius: 8px"
-          @click.prevent.stop="router.push({ name: 'Register' })"
-        />
+        <q-btn flat label="Esqueceu sua senha?" size="12px" class="full-width q-mt-sm text-grey-5" no-caps @click="passwordReset = true" />
       </div>
     </q-form>
   </div>
@@ -82,15 +63,14 @@
 <script setup>
 import { defineComponent, ref } from 'vue'
 import { useAuthStore } from 'src/stores/auth'
-import { storeToRefs } from 'pinia'
 import { useRouter } from 'vue-router'
-import TitleAuth from 'src/components/Auth/TitleAuth.vue'
+import { storeToRefs } from 'pinia'
 import LabelForm from 'src/components/Form/LabelForm.vue'
 import useNotification from 'src/composables/global/useNotification'
 import { getApiErrorMessage } from 'src/services/apiError'
 
 const storeAuth = useAuthStore()
-const { selectedInitial, auth, passwordReset } = storeToRefs(storeAuth)
+const { auth, passwordReset } = storeToRefs(storeAuth)
 const router = useRouter()
 const { showLoading, hideLoading, successNotify, errorNotify } = useNotification()
 const emailRef = ref(null)
@@ -98,10 +78,6 @@ const passwordRef = ref(null)
 defineComponent({
   name: 'SignInLayout',
 })
-const backRouter = () => {
-  selectedInitial.value = false
-  router.push({ name: 'Selected' })
-}
 const isPwd = ref(true)
 const onSubmit = async () => {
   emailRef.value.validate()
@@ -112,7 +88,7 @@ const onSubmit = async () => {
     showLoading('Autenticando...')
     await storeAuth.loginAction({ email: auth.value.email, password: auth.value.password })
     successNotify('Bem-vindo!')
-    router.push({ name: 'Transações' })
+    router.push({ name: 'Clientes' })
   } catch (error) {
     errorNotify(getApiErrorMessage(error, 'Não foi possível entrar. Verifique suas credenciais.'))
   } finally {
@@ -120,3 +96,7 @@ const onSubmit = async () => {
   }
 }
 </script>
+<style scoped>
+.sa-sign-in__brand { text-align: center; font-size: 28px; font-weight: 700; }
+.sa-sign-in__subtitle { margin-top: 6px; text-align: center; color: rgba(255,255,255,.58); font-size: 13px; }
+</style>

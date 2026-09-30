@@ -1,5 +1,5 @@
 <template>
-  <q-banner inline-actions rounded class="entity-header q-ma-md border-pattern">
+  <q-banner inline-actions rounded class="entity-header q-ma-md">
     <div class="row items-center no-wrap">
       <q-avatar size="38px" :color="avatar ? undefined : 'blue-grey-1'" text-color="blue-grey-7" :icon="avatar ? undefined : 'person'">
         <q-img v-if="avatar" :src="avatar" :alt="name" />
@@ -41,8 +41,8 @@ const displayId = computed(() => props.shortId ? String(props.id).slice(0, 8) : 
 </script>
 
 <style scoped>
-.entity-header { min-height: 74px; }
+.entity-header { min-height: 86px; color: #fff; border: 1px solid rgba(255,255,255,.16); border-radius: 14px; background: linear-gradient(110deg, rgba(255,255,255,.08), rgba(255,255,255,.025)); box-shadow: 4px 4px 12px rgba(0,0,0,.2); }
 .entity-header__identity { min-width: 170px; max-width: 280px; }
-.entity-header__id { font-size: 12px; }
+.entity-header__id { color: rgba(255,255,255,.52) !important; font-size: 12px; }
 .entity-header__switcher { min-width: 360px; max-height: 480px; overflow-y: auto; padding: 4px; }
 </style>

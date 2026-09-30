@@ -1,20 +1,12 @@
 <template>
   <q-layout class="AuthView">
     <!-- :class="data ? data.login : ''" -->
-    <q-header class="bg-transparent text-white">
+    <q-header class="bg-transparent text-white auth-brand-header">
       <q-toolbar class="q-ma-sm">
         <CompletBrand />
       </q-toolbar>
     </q-header>
     <q-page-container padding>
-      <video autoplay muted loop class="auth-video" v-if="!finished">
-        <source src="media/authentication.mp4" type="video/mp4" />
-        Your browser does not support the video tag.
-      </video>
-      <video autoplay muted loop class="auth-video" v-else>
-        <source src="media/video-saida-auth.mp4" type="video/mp4" />
-        Your browser does not support the video tag.
-      </video>
       <initial-auth-layout v-if="!selectedInitial" />
       <router-view v-slot="{ Component }" v-else-if="selectedInitial && !finished">
         <transition name="fade" mode="out-in">
@@ -22,8 +14,8 @@
         </transition>
       </router-view>
     </q-page-container>
-    <q-footer class="q-pb-lg bg-transparent text-grey">
-      <p class="q-ml-md q-ma-sm">Strategy Analytics | Sistemas</p>
+    <q-footer class="q-pb-lg bg-transparent text-grey text-center">
+      <p class="q-ma-sm">© 2026 Strategy Analytics. Todos os direitos reservados.</p>
     </q-footer>
   </q-layout>
 </template>
@@ -66,8 +58,7 @@ onMounted(async () => {
   position: relative
   min-height: 100vh
   overflow: hidden
-  background: url('assets/images/Auth_loading_inicial.png') no-repeat center center
-  background-size: cover
+  background: radial-gradient(circle at 50% 45%, rgba(20, 92, 140, .52), transparent 36%), linear-gradient(135deg, #1a1e2d 0%, #111522 58%, #4e1723 100%)
 
   .auth-video
     position: fixed
@@ -78,6 +69,9 @@ onMounted(async () => {
     object-fit: cover
     z-index: -1
     pointer-events: none
+
+  .auth-brand-header
+    display: none
 
   .q-page-container
     position: relative // Garante que o conteúdo fique acima do vídeo

@@ -1,8 +1,9 @@
 <template>
-  <q-card class="CreateClientLayout">
+  <q-card class="CreateClientLayout sa-create-client">
     <title-card title="Criar Novo Cliente" @on-close="onClose" />
     <q-separator />
-    <q-form ref="formRef" class="q-pa-md" @submit.prevent.stop="onSubmit">
+    <q-form ref="formRef" class="q-pa-lg" @submit.prevent.stop="onSubmit">
+      <div class="sa-create-client__intro">Preencha os dados essenciais. As demais informações poderão ser adicionadas no perfil do cliente.</div>
       <label-form textLabel="Tipo de cliente">
         <q-select
           v-model="form.kind"
@@ -83,3 +84,9 @@ const onSubmit = async () => {
   }
 }
 </script>
+
+<style scoped>
+.sa-create-client { min-width: min(560px, 100vw); }
+.sa-create-client__intro { margin-bottom: 24px; color: rgba(255,255,255,.58); font-size: 13px; line-height: 1.5; }
+@media (max-width: 700px) { .sa-create-client { min-width: 100vw; } }
+</style>

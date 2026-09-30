@@ -94,14 +94,17 @@ body
   font-weight: 700 !important
   font-size: 17px !important
 .card-authentication
-  height: 75vh
+  min-height: calc(100vh - 80px)
   justify-items: center
   .card-auth
-    background: linear-gradient(183.42deg, rgba(255, 255, 255, 0.08) 2.82%, rgba(255, 255, 255, 0.01) 97.18%)
-    width: 534px
-    // height: 568px
-    border-radius: 8px
-    padding: 48px
+    background: linear-gradient(160deg, rgba(255, 255, 255, 0.10), rgba(255, 255, 255, 0.025))
+    width: min(448px, calc(100vw - 32px))
+    max-width: 448px
+    border: 1px solid rgba(255,255,255,.16)
+    box-shadow: 4px 4px 18px rgba(0,0,0,.28)
+    backdrop-filter: blur(20px)
+    border-radius: 14px
+    padding: 32px
     gap: 24px
 .notify-success
   border-radius: 8px

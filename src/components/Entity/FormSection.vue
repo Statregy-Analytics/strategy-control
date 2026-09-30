@@ -10,6 +10,6 @@ defineProps({ title: { type: String, default: '' }, caption: { type: String, def
 </script>
 <style scoped>
 .form-section { padding: 28px 0; }
-.form-section__title { font-size: 18px; font-weight: 700; }
-.form-section__caption { color: #757575; font-size: 13px; margin-top: 2px; }
+.form-section__title { color: inherit; font-size: 15px; font-weight: 700; letter-spacing: .02em; }
+.form-section__caption { color: rgba(255,255,255,.52); font-size: 12px; margin-top: 3px; }
 </style>
