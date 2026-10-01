@@ -4,19 +4,22 @@
     <q-banner v-if="error" class="bg-red-1 text-negative q-mt-md">{{ error }}<template #action><q-btn flat color="negative" label="Tentar novamente" @click="load" /></template></q-banner>
     <div v-if="loading" class="row justify-center q-pa-xl"><q-spinner color="primary" size="32px" /></div>
     <template v-else-if="!error">
-      <q-list bordered separator class="q-mt-md rounded-borders">
-        <q-item>
-          <q-item-section><q-item-label caption>Documentos cadastrados</q-item-label><q-item-label>{{ totalDocuments }}</q-item-label></q-item-section>
-        </q-item>
-        <q-item>
-          <q-item-section>
-            <q-item-label caption>Progresso documental</q-item-label>
-            <div class="row items-center q-gutter-sm"><q-linear-progress class="col" rounded :value="progressPercentage / 100" /><span class="text-caption text-grey-7">{{ progressPercentage }}%</span></div>
-          </q-item-section>
-        </q-item>
-      </q-list>
-      <div class="text-weight-medium q-mt-lg q-mb-sm">Requisitos</div><q-list v-if="requirements.length" bordered separator><q-item v-for="item in requirements" :key="item.id"><q-item-section><q-item-label>{{ typeName(item.documentTypeId) }}</q-item-label><q-item-label caption>Prazo: {{ formatDate(item.dueDate) }}</q-item-label></q-item-section><q-item-section side><q-badge :color="item.isSatisfied?'positive':'warning'">{{ item.isSatisfied?'Atendido':'Pendente' }}</q-badge></q-item-section></q-item></q-list><div v-else class="text-caption text-grey-7">Nenhum requisito cadastrado.</div>
-      <div class="text-weight-medium q-mt-lg q-mb-sm">Arquivos</div><q-table flat dense hide-pagination row-key="id" :rows="documents" :columns="columns"><template #body-cell-name="props"><q-td :props="props">{{ props.row.documentTypeName||typeName(props.row.documentTypeId) }}</q-td></template><template #body-cell-status="props"><q-td :props="props"><q-badge :color="statusColor(props.value)">{{ statusLabel(props.value) }}</q-badge></q-td></template><template #body-cell-actions="props"><q-td :props="props"><row-actions :actions="documentActions" @select="action=>runAction(action,props.row)" /></q-td></template><template #no-data><div class="full-width text-center text-grey-7 q-pa-lg">Nenhum documento enviado.</div></template></q-table>
+      <div class="panel-metrics q-mt-md">
+        <div class="panel-metric"><span>Documentos cadastrados</span><strong>{{ totalDocuments }}</strong></div>
+        <div class="panel-metric panel-metric--progress">
+          <div><span>Progresso documental</span><strong>{{ progressPercentage }}%</strong></div>
+          <q-linear-progress rounded :value="progressPercentage / 100" />
+        </div>
+      </div>
+      <section class="panel-section">
+        <h3>Requisitos</h3>
+        <q-list v-if="requirements.length" separator class="panel-list"><q-item v-for="item in requirements" :key="item.id"><q-item-section><q-item-label>{{ typeName(item.documentTypeId) }}</q-item-label><q-item-label caption>Prazo: {{ formatDate(item.dueDate) }}</q-item-label></q-item-section><q-item-section side><q-badge :color="item.isSatisfied?'positive':'warning'">{{ item.isSatisfied?'Atendido':'Pendente' }}</q-badge></q-item-section></q-item></q-list>
+        <div v-else class="panel-empty">Nenhum requisito cadastrado.</div>
+      </section>
+      <section class="panel-section">
+        <h3>Arquivos</h3>
+        <q-table class="panel-table" flat dense hide-pagination row-key="id" :rows="documents" :columns="columns"><template #body-cell-name="props"><q-td :props="props">{{ props.row.documentTypeName||typeName(props.row.documentTypeId) }}</q-td></template><template #body-cell-status="props"><q-td :props="props"><q-badge :color="statusColor(props.value)">{{ statusLabel(props.value) }}</q-badge></q-td></template><template #body-cell-actions="props"><q-td :props="props"><row-actions :actions="documentActions" @select="action=>runAction(action,props.row)" /></q-td></template><template #no-data><div class="panel-empty full-width text-center">Nenhum documento enviado.</div></template></q-table>
+      </section>
     </template>
 
     <q-dialog v-model="requirementDialog"><q-card class="form-dialog"><title-card title="Novo requisito documental" @on-close="requirementDialog=false" /><q-card-section><q-form ref="requirementForm" @submit.prevent="saveRequirement"><label-form text-label="Tipo documental"><q-select v-model="requirementDraft.documentTypeId" dense outlined emit-value map-options :options="typeOptions" :rules="requiredRules" /></label-form><label-form text-label="Prazo" class="q-mt-md"><q-input v-model="requirementDraft.dueDate" type="date" dense outlined /></label-form><div class="row justify-end q-mt-md"><q-btn type="submit" flat color="primary" icon="save" label="Criar requisito" no-caps :loading="saving" /></div></q-form></q-card-section></q-card></q-dialog>
@@ -37,4 +40,25 @@ const saveRequirement=async()=>{if(!await requirementForm.value.validate())retur
 const saveUpload=async()=>{if(!await uploadForm.value.validate())return;saving.value=true;try{const data=new FormData();data.append('file',uploadDraft.file);data.append('documentTypeId',uploadDraft.documentTypeId);if(uploadDraft.requirementId)data.append('requirementId',uploadDraft.requirementId);if(uploadDraft.countryId)data.append('countryId',uploadDraft.countryId);await uploadCustomerDocument(props.customerId,data);successNotify('Documento enviado.');uploadDialog.value=false;await refresh()}catch(e){errorNotify(getApiErrorMessage(e,'Não foi possível enviar o documento.'))}finally{saving.value=false}}
 const runAction=async(a,d)=>{target.value=d;if(a==='review'){Object.assign(reviewDraft,{status:'Approved',notes:''});reviewDialog.value=true;return}if(a==='delete'){deleteDialog.value=true;return}try{if(a==='download'){const r=await downloadDocument(d.id),u=URL.createObjectURL(r.data),link=document.createElement('a');link.href=u;link.download=d.fileName||'documento';link.click();URL.revokeObjectURL(u)}if(a==='url'){const r=await getDocumentTemporaryUrl(d.id),u=r.url||r.temporaryUrl;if(!u)throw new Error('URL ausente');window.open(u,'_blank','noopener')}if(a==='status')await changeDocumentStatus(d.id,'UnderReview');if(a==='status')await refresh()}catch(e){errorNotify(getApiErrorMessage(e,'Não foi possível concluir a ação.'))}}
 const saveReview=async()=>{saving.value=true;try{await reviewDocument(target.value.id,{...reviewDraft,notes:reviewDraft.notes||null});successNotify('Revisão concluída.');reviewDialog.value=false;await refresh()}catch(e){errorNotify(getApiErrorMessage(e,'Não foi possível revisar o documento.'))}finally{saving.value=false}},confirmDelete=async()=>{saving.value=true;try{await deleteDocument(target.value.id);successNotify('Documento excluído.');deleteDialog.value=false;await refresh()}catch(e){errorNotify(getApiErrorMessage(e,'Não foi possível excluir o documento.'))}finally{saving.value=false}},refresh=async()=>{await load();emit('updated')};watch(()=>props.customerId,load,{immediate:true})
-</script><style scoped>.form-dialog{width:min(620px,calc(100vw - 32px))}</style>
+</script><style scoped>
+.form-dialog { width: min(620px, calc(100vw - 32px)); color: #fff; border: 1px solid rgba(255,255,255,.14); border-radius: 14px; background: linear-gradient(145deg, rgba(8,12,24,.98), rgba(5,24,42,.98)); box-shadow: 0 24px 70px rgba(0,0,0,.48); backdrop-filter: blur(20px); }
+.form-dialog :deep(.q-field__native), .form-dialog :deep(.q-field__input), .form-dialog :deep(.q-field__label), .form-dialog :deep(.q-field__marginal) { color: #fff; }
+.form-dialog :deep(.q-field--outlined .q-field__control::before) { border-color: rgba(255,255,255,.28); }
+.form-dialog :deep(.q-field--highlighted .q-field__control::after) { color: #00a3ff; }
+.panel-metrics { display: grid; grid-template-columns: minmax(160px, .45fr) minmax(260px, 1fr); gap: 12px; }
+.panel-metric { min-height: 86px; padding: 16px; border: 1px solid rgba(127,127,127,.22); border-radius: 8px; background: rgba(127,127,127,.045); }
+.panel-metric span { display: block; font-size: 12px; opacity: .62; }
+.panel-metric strong { display: block; margin-top: 8px; font-size: 18px; font-weight: 600; }
+.panel-metric--progress { display: grid; align-content: center; gap: 12px; }
+.panel-metric--progress > div { display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+.panel-metric--progress strong { margin: 0; font-size: 14px; }
+.panel-section { margin-top: 24px; }
+.panel-section h3 { margin: 0 0 10px; font-size: 14px; font-weight: 600; }
+.panel-list, .panel-table { overflow: hidden; color: inherit; border: 1px solid rgba(127,127,127,.22); border-radius: 8px; background: rgba(127,127,127,.035); }
+.panel-list :deep(.q-item__label--caption), .panel-list :deep(.q-item__section--side) { color: inherit; opacity: .62; }
+.panel-table :deep(.q-table), .panel-table :deep(th), .panel-table :deep(td) { color: inherit; background: transparent; }
+.panel-table :deep(th) { font-size: 12px; opacity: .68; }
+.panel-table :deep(td), .panel-table :deep(th) { border-color: rgba(127,127,127,.18); }
+.panel-empty { padding: 24px 16px; border: 1px dashed rgba(127,127,127,.28); border-radius: 8px; font-size: 12px; opacity: .62; }
+@media (max-width: 700px) { .panel-metrics { grid-template-columns: 1fr; } }
+</style>

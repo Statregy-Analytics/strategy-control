@@ -15,7 +15,14 @@
         </div>
       </div>
       <q-space />
-      <q-btn outline no-caps icon="edit" label="Editar cadastro" class="client-profile-action" @click="editorOpen = true" />
+      <q-btn
+        outline
+        no-caps
+        :icon="registrationEditing ? 'close' : 'edit'"
+        :label="registrationEditing ? 'Fechar edição' : 'Editar dados'"
+        class="client-profile-action"
+        @click="toggleRegistrationEdit"
+      />
     </header>
 
     <div v-if="loading" class="client-profile-state"><q-spinner color="primary" size="48px" /></div>
@@ -27,14 +34,14 @@
     </q-banner>
     <q-banner v-else-if="errorMessage" rounded class="client-profile-message client-profile-message--error">
       {{ errorMessage }}
-      <template #action><q-btn flat color="negative" label="Tentar novamente" @click="loadCustomer" /></template>
+      <template #action><q-btn flat color="negative" label="Tentar novamente" @click="loadCustomer()" /></template>
     </q-banner>
 
     <template v-else>
       <q-banner v-if="partialWarning" rounded class="client-profile-warning">
         <template #avatar><q-icon name="warning_amber" /></template>
         {{ partialWarning }}
-        <template #action><q-btn flat color="warning" label="Tentar novamente" @click="loadCustomer" /></template>
+        <template #action><q-btn flat color="warning" label="Tentar novamente" @click="loadCustomer()" /></template>
       </q-banner>
 
       <main class="client-profile-grid">
@@ -45,16 +52,30 @@
                 <h2>Informações pessoais e cadastrais</h2>
                 <p>Dados de identificação e contato disponíveis no cadastro.</p>
               </div>
-              <q-btn flat dense round icon="edit" aria-label="Editar dados cadastrais" @click="editorOpen = true" />
+              <div class="row q-gutter-xs no-wrap">
+                <q-btn v-if="registrationEditing" flat dense no-caps color="grey-5" label="Cancelar" @click="cancelRegistrationEdit" />
+                <q-btn flat dense no-caps color="primary" :icon="registrationEditing ? 'close' : 'edit'" :label="registrationEditing ? 'Fechar edição' : 'Editar'" @click="toggleRegistrationEdit" />
+              </div>
             </div>
-            <div class="profile-data-grid">
-              <div><span>Nome</span><strong>{{ displayName }}</strong></div>
-              <div><span>Tipo de cliente</span><strong>{{ kindText || 'Não informado' }}</strong></div>
-              <div><span>E-mail</span><strong>{{ primaryEmail }}</strong></div>
-              <div><span>Telefone</span><strong>{{ primaryPhone }}</strong></div>
-              <div><span>Documento</span><strong>{{ header?.maskedDocument || 'Não informado' }}</strong></div>
-              <div><span>Cliente desde</span><strong>{{ formatDate(header?.customerSince || header?.createdAtUtc) }}</strong></div>
-            </div>
+            <q-slide-transition>
+              <div v-if="registrationEditing" class="inline-editor">
+                <client-registration-editor
+                  :key="`registration-${registrationEditSession}`"
+                  embedded
+                  :customer-id="route.params.id"
+                  :identification="identification"
+                  @updated="onRegistrationUpdated"
+                />
+              </div>
+              <div v-else class="profile-data-grid">
+                <div><span>Nome</span><strong>{{ displayName }}</strong></div>
+                <div><span>Tipo de cliente</span><strong>{{ kindText || 'Não informado' }}</strong></div>
+                <div><span>E-mail</span><strong>{{ primaryEmail }}</strong></div>
+                <div><span>Telefone</span><strong>{{ primaryPhone }}</strong></div>
+                <div><span>Documento</span><strong>{{ header?.maskedDocument || 'Não informado' }}</strong></div>
+                <div><span>Cliente desde</span><strong>{{ formatDate(header?.customerSince || header?.createdAtUtc) }}</strong></div>
+              </div>
+            </q-slide-transition>
           </section>
 
           <section class="profile-surface portfolio-section">
@@ -90,7 +111,17 @@
           </section>
 
           <section class="profile-surface embedded-panel">
-            <client-bank-accounts-panel :customer-id="route.params.id" @updated="loadCustomer" />
+            <client-bank-accounts-panel :customer-id="route.params.id" @updated="refreshCustomer" />
+          </section>
+
+          <section v-if="documentsOpen" class="profile-surface embedded-panel inline-management-section">
+            <q-btn flat round dense icon="close" class="inline-management-section__close" aria-label="Fechar gerenciamento de documentos" @click="documentsOpen = false" />
+            <client-documents-panel :customer-id="route.params.id" @updated="refreshCustomer" />
+          </section>
+
+          <section v-if="complianceOpen" class="profile-surface embedded-panel inline-management-section">
+            <q-btn flat round dense icon="close" class="inline-management-section__close" aria-label="Fechar gerenciamento de compliance" @click="complianceOpen = false" />
+            <client-compliance-panel :customer-id="route.params.id" @updated="refreshCustomer" />
           </section>
         </div>
 
@@ -103,7 +134,7 @@
                 <strong>{{ metric.value }}</strong><small>{{ metric.label }}</small>
               </div>
             </div>
-            <q-btn flat no-caps color="primary" icon-right="arrow_forward" label="Gerenciar documentos" class="full-width q-mt-md" @click="editorOpen = true" />
+            <q-btn flat no-caps color="primary" icon-right="arrow_forward" :label="documentsOpen ? 'Ocultar documentos' : 'Gerenciar documentos'" class="full-width q-mt-md" @click="documentsOpen = !documentsOpen" />
           </section>
           <section class="profile-surface compact-surface">
             <div class="profile-section-heading"><div><h2>Compliance e observações</h2><p>Condição atual retornada pela API.</p></div></div>
@@ -111,6 +142,7 @@
               <q-icon name="verified_user" size="22px" />
               <div><strong>{{ complianceLabel }}</strong><span>{{ complianceDescription }}</span></div>
             </div>
+            <q-btn flat no-caps color="primary" icon-right="arrow_forward" :label="complianceOpen ? 'Ocultar controles' : 'Gerenciar compliance'" class="full-width q-mt-md" @click="complianceOpen = !complianceOpen" />
           </section>
           <section class="profile-surface compact-surface">
             <div class="profile-section-heading"><div><h2>Resumo operacional</h2><p>Controles disponíveis para este cliente.</p></div></div>
@@ -124,9 +156,6 @@
       </main>
     </template>
 
-    <q-dialog v-model="editorOpen" position="right" full-height full-width maximized class="control-width">
-      <edit-client-layout :customer-id="route.params.id" @close="editorOpen = false" @updated="loadCustomer" />
-    </q-dialog>
   </q-page>
 </template>
 
@@ -134,8 +163,10 @@
 import { computed, onMounted, ref } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import ClientBankAccountsPanel from 'src/components/Clients/ClientBankAccountsPanel.vue'
-import EditClientLayout from 'src/layouts/Clients/EditClientLayout.vue'
-import { getCustomer, getCustomerCurrentFinancialProfile, getCustomerSummary } from 'src/services/customerService'
+import ClientCompliancePanel from 'src/components/Clients/ClientCompliancePanel.vue'
+import ClientDocumentsPanel from 'src/components/Clients/ClientDocumentsPanel.vue'
+import ClientRegistrationEditor from 'src/components/Clients/ClientRegistrationEditor.vue'
+import { getCustomer, getCustomerCurrentFinancialProfile, getCustomerDocumentSummary, getCustomerSummary } from 'src/services/customerService'
 import { getApiErrorMessage } from 'src/services/apiError'
 
 const route = useRoute()
@@ -144,19 +175,23 @@ const summary = ref(null)
 const header = ref(null)
 const identification = ref(null)
 const financialProfile = ref(null)
+const documentSummary = ref(null)
 const loading = ref(true)
 const notFound = ref(false)
 const errorMessage = ref('')
 const partialWarning = ref('')
-const editorOpen = ref(false)
+const registrationEditing = ref(false)
+const registrationEditSession = ref(0)
+const documentsOpen = ref(false)
+const complianceOpen = ref(false)
 const displayName = computed(() => header.value?.displayName || header.value?.primaryName || summary.value?.header?.displayName || summary.value?.header?.primaryName || identification.value?.names?.find((name) => name.isPrimary)?.displayName || identification.value?.primaryName?.displayName || 'Cliente')
 const primaryEmail = computed(() => identification.value?.primaryEmail?.value || identification.value?.primaryEmail || 'Não informado')
 const primaryPhone = computed(() => identification.value?.primaryPhone?.value || identification.value?.primaryPhone || 'Não informado')
 const kindText = computed(() => kindLabel(header.value?.kind || header.value?.customerKind))
-const documents = computed(() => summary.value?.documentSummary ?? {})
+const documents = computed(() => documentSummary.value ?? summary.value?.documentSummary ?? {})
 const documentMetrics = computed(() => [
   { label: 'Aprovados', value: documents.value.approved ?? 0, tone: 'positive' },
-  { label: 'Pendentes', value: documents.value.pending ?? 0, tone: 'warning' },
+  { label: 'Pendentes', value: Number(documents.value.pending ?? 0) + Number(documents.value.inReview ?? 0) + Number(documents.value.missing ?? 0), tone: 'warning' },
   { label: 'Rejeitados', value: documents.value.rejected ?? 0, tone: 'negative' },
 ])
 const complianceLabel = computed(() => summary.value?.compliance?.primaryAlert?.title || summary.value?.compliance?.status || 'Sem alertas registrados')
@@ -173,17 +208,24 @@ const kindLabel = (value) => ({ Person: 'Pessoa física', Organization: 'Pessoa 
 const booleanLabel = (value) => value === true ? 'Sim' : value === false ? 'Não' : 'Não informado'
 const formatDate = (value) => value ? new Intl.DateTimeFormat('pt-BR').format(new Date(value)) : 'Não informado'
 const money = (value, currency = 'BRL') => new Intl.NumberFormat('pt-BR', { style: 'currency', currency: currency || 'BRL' }).format(Number(value))
-const loadCustomer = async () => {
-  loading.value = true
+const cancelRegistrationEdit = () => { registrationEditing.value = false; registrationEditSession.value += 1 }
+const toggleRegistrationEdit = () => {
+  if (registrationEditing.value) cancelRegistrationEdit()
+  else registrationEditing.value = true
+}
+const onRegistrationUpdated = async () => { await refreshCustomer(); registrationEditSession.value += 1 }
+const loadCustomer = async (silent = false) => {
+  if (!silent) loading.value = true
   notFound.value = false
   errorMessage.value = ''
   partialWarning.value = ''
-  const [summaryResult, customerResult, financialResult] = await Promise.allSettled([
-    getCustomerSummary(route.params.id), getCustomer(route.params.id), getCustomerCurrentFinancialProfile(route.params.id),
+  const [summaryResult, customerResult, financialResult, documentResult] = await Promise.allSettled([
+    getCustomerSummary(route.params.id), getCustomer(route.params.id), getCustomerCurrentFinancialProfile(route.params.id), getCustomerDocumentSummary(route.params.id),
   ])
   if (summaryResult.status === 'fulfilled') summary.value = summaryResult.value
   else { summary.value = null; partialWarning.value = 'Parte do resumo operacional está temporariamente indisponível.' }
   financialProfile.value = financialResult.status === 'fulfilled' ? financialResult.value : null
+  documentSummary.value = documentResult.status === 'fulfilled' ? documentResult.value : null
   if (customerResult.status === 'fulfilled') {
     header.value = customerResult.value
     identification.value = customerResult.value
@@ -193,8 +235,9 @@ const loadCustomer = async () => {
     notFound.value = customerResult.reason?.response?.status === 404
     if (!notFound.value) errorMessage.value = getApiErrorMessage(customerResult.reason, 'Não foi possível carregar os dados do cliente.')
   }
-  loading.value = false
+  if (!silent) loading.value = false
 }
+const refreshCustomer = () => loadCustomer(true)
 onMounted(loadCustomer)
 </script>
 
@@ -221,6 +264,12 @@ onMounted(loadCustomer)
 .profile-data-grid > div { min-width: 0; padding: 16px; background: rgba(9,15,28,.8); }
 .profile-data-grid span, .operational-list span { display: block; margin-bottom: 5px; color: rgba(224,238,255,.52); font-size: 10px; text-transform: uppercase; letter-spacing: .045em; }
 .profile-data-grid strong { display: block; overflow: hidden; font-size: 13px; font-weight: 550; text-overflow: ellipsis; white-space: nowrap; }
+.inline-editor { padding-top: 4px; }
+.inline-editor :deep(.q-card) { color: #fff; background: transparent; }
+.inline-editor :deep(.text-grey-7) { color: rgba(224,238,255,.62) !important; }
+.inline-management-section { position: relative; scroll-margin-top: 104px; }
+.inline-management-section__close { position: absolute; top: 16px; right: 16px; z-index: 2; }
+.inline-management-section :deep(.text-grey-7) { color: rgba(224,238,255,.62) !important; }
 .integration-badge { flex: 0 0 auto; padding: 6px 9px; }
 .portfolio-metrics { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 14px; }
 .portfolio-metric { min-width: 0; padding: 18px; border: 1px solid rgba(255,255,255,.1); border-radius: 12px; background: rgba(255,255,255,.045); }

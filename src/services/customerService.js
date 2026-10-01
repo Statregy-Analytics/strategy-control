@@ -11,6 +11,7 @@ export async function lookupCustomers(params = {}) { return unwrap(await api.get
 export async function createCustomer(payload) { return unwrap(await api.post('/api/v1/admin/customers', payload)) }
 export async function getCustomer(id) { return unwrap(await api.get('/api/v1/admin/customers/' + id)) }
 export async function getCustomerSummary(id) { return unwrap(await api.get(`/api/v1/admin/customers/${id}/summary`)) }
+export async function getCustomerDocumentSummary(id) { return unwrap(await api.get(`/api/v1/admin/customers/${id}/documents/summary`)) }
 export async function getCustomerHeader(id) { return unwrap(await api.get(`/api/v1/admin/customers/${id}/header`)) }
 export async function getCustomerIdentification(id) { return unwrap(await api.get(`/api/v1/admin/customers/${id}/identification`)) }
 export async function getCustomerIdentificationContact(id) { return unwrap(await api.get('/api/v1/admin/customers/' + id + '/identification-contact')) }

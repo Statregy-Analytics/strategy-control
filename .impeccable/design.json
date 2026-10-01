@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-08-14T21:00:00-03:00",
+  "generatedAt": "2026-10-01T16:41:21-03:00",
   "title": "Design System: Strategy Administração",
   "extensions": {
     "colorMeta": {
@@ -112,10 +112,14 @@
     ],
     "rules": [
       { "name": "The One Accent Rule", "body": "O Azul Strategy identifica ação ou estado; não deve virar decoração ou preencher grandes áreas de conteúdo.", "section": "colors" },
+      { "name": "The Semantic Color Rule", "body": "Verde, vermelho, ciano e amarelo são reservados a sucesso, erro, informação e atenção; nunca substituem a cor de marca.", "section": "colors" },
       { "name": "The External Label Rule", "body": "Campos administrativos usam rótulos externos claros; placeholder não substitui label.", "section": "typography" },
+      { "name": "The Compact Hierarchy Rule", "body": "A hierarquia vem de peso, espaçamento e contraste, não de títulos excessivamente grandes.", "section": "typography" },
       { "name": "The Listing Context Rule", "body": "CRUD administrativo mantém a listagem visível e edita em painel lateral.", "section": "layout" },
       { "name": "The Vertical Editor Rule", "body": "Seções de um mesmo registro fluem de cima para baixo; não criar cards funcionais lado a lado.", "section": "layout" },
-      { "name": "The Flat-by-Default Rule", "body": "Não adicionar sombra a tabelas, seções ou cards em repouso; elevação só representa uma camada temporariamente acima da interface.", "section": "elevation" }
+      { "name": "The Independent Section Rule", "body": "Loading, vazio, erro e retry pertencem à seção afetada e não escondem as demais.", "section": "layout" },
+      { "name": "The Flat-by-Default Rule", "body": "Não adicionar sombra a tabelas, seções ou cards em repouso; elevação só representa uma camada temporariamente acima da interface.", "section": "elevation" },
+      { "name": "The Quiet Geometry Rule", "body": "Arredondamento organiza e suaviza controles, mas não transforma cada conteúdo em cápsula ou card destacado.", "section": "shapes" }
     ],
     "dos": [
       "Do comparar qualquer novo CRUD com Leads e Assessores antes de compor a tela.",
