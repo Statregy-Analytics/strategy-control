@@ -10,6 +10,35 @@ Status exibido: Suspenso
 
 > Escopo: este relatório registra somente falhas que exigem verificação ou correção no backend. Problemas já corrigidos no frontend não fazem parte deste documento.
 
+## Retorno do backend em 01/10/2026
+
+Status dos três casos: **reteste funcional autenticado aprovado em 01/10/2026, aproximadamente 21:21–21:22 (America/Sao_Paulo)**.
+
+Segundo a equipe de backend, a coluna `RelatedPepDescription` estava ausente no PostgreSQL. A migration que cria a coluna foi aplicada. Criação e leitura de flags, alertas, card e resumo dependiam dessa tabela; o histórico usa outra tabela. A equipe informou testes com criação retornando `201` e leituras retornando `200`. Esses resultados são do backend, ainda não confirmados neste reteste do frontend.
+
+O contrato de `evidence` foi esclarecido: aceita uma string contendo objeto JSON serializado ou `null`. Objeto enviado diretamente é inválido. A documentação de arquitetura anterior estava incorreta; o Swagger estava correto.
+
+Os novos erros informados são `request.body_invalid` (400), `request.parameter_invalid` (400) e `request.unsupported_media_type` (415), acompanhados de `requestId` e `correlationId`.
+
+### Reteste realizado no painel administrativo
+
+Cliente: `4ff8ec17-e9ea-416a-828c-b393d9b0119a` (Carlos Miguel, Suspenso).
+
+- Perfil e resumo carregaram sem o aviso de indisponibilidade.
+- Compliance carregou sem a mensagem de falha em card, flags ou alertas.
+- Criação com `evidence: null`: concluída; registro exibido na listagem e no histórico.
+- Criação com `evidence` contendo JSON serializado como string: concluída; registro exibido na listagem e no histórico.
+- O resumo voltou a carregar após cada criação e apresentou a observação recém-criada.
+
+Registros de homologação criados e mantidos no cliente:
+
+1. `QA 01/10/2026 — reteste sem evidence`.
+2. `QA 01/10/2026 — reteste evidence string`.
+
+Evidência preenchida no segundo teste: `"evidence": "{\"source\":\"manual\",\"purpose\":\"qa-reteste-2026-10-01\"}"`.
+
+Confirmação baseada no fluxo real do navegador e na listagem/histórico recarregados. Status HTTP exatos, requestId, correlationId e Idempotency-Key não foram capturados nesta verificação; os códigos 201/200 acima continuam sendo resultados informados pelo backend. As ocorrências abaixo permanecem como histórico dos erros originais.
+
 ## 1. Criação de flag de compliance
 
 ### Requisição
@@ -40,7 +69,7 @@ Payload enviado para uma nova observação manual com os valores padrão:
 }
 ```
 
-Quando preenchida, a implementação atual converte `evidence` de JSON textual para objeto antes do envio.
+Contrato confirmado pelo backend para evidência preenchida: `"evidence": "{\"source\":\"manual\"}"`. O payload acima é ilustrativo; os valores efetivamente preenchidos na tentativa original não foram capturados.
 
 ### Divergência de contrato
 
@@ -48,7 +77,7 @@ Quando preenchida, a implementação atual converte `evidence` de JSON textual p
 - A arquitetura em `tmp/data-intake-contracts/architecture/customer-admin-api.md` declara `evidence` como objeto JSON.
 - A coleção de referência envia `evidence: null` no exemplo de criação.
 
-Solicitação ao backend: confirmar o tipo efetivamente aceito para `evidence`, consultar os logs usando o horário aproximado e devolver `requestId`, `correlationId`, `Idempotency-Key` e a exceção interna associada ao erro 500.
+Esclarecimento recebido: `evidence` é `string | null`; a divergência documental foi corrigida pelo backend. A causa do erro interno foi atribuída à coluna ausente, conforme retorno registrado acima.
 
 ## 2. Falha ao carregar Compliance
 
