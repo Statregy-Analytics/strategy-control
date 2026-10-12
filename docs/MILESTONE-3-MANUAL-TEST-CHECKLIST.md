@@ -1,0 +1,45 @@
+# Marco 3 — checklist manual
+
+Última rodada: 12/10/2026. Admin localhost:8080; Portal localhost:9010 (origens CORS autorizadas).
+
+## Homologação administrativa integrada
+
+| Cenário                                           | Resultado                                  | Evidência                                                                                                            |
+| ------------------------------------------------- | ------------------------------------------ | -------------------------------------------------------------------------------------------------------------------- |
+| Login administrativo                              | Aprovado                                   | Sessão autenticada e acesso às páginas em 8080                                                                       |
+| Rascunho: criar, editar, reabrir e histórico      | Aprovado em 10/10                          | CTR-0EDD86A7, HOMOLOGAÇÃO M3 — 10/10/2026; criação e atualização persistidas                                         |
+| Listagem de rascunhos                             | Aprovado após correção frontend            | API exige registrationStatus=Draft; seletor permite alternar com contratos cadastrados                               |
+| Contratos cadastrados                             | Aprovado para consulta                     | Cinco contratos listados em 12/10; Alpha Hedge Fund com prazo, moeda, dois participantes e histórico                 |
+| Transações: listagem, detalhe, histórico e ledger | Aprovado para consulta                     | Depósito REQ-2026-D578DE0D, débito externo e crédito da carteira de R$ 50.000,00; histórico completo                 |
+| Observação administrativa                         | Aprovado                                   | Nota de homologação de 12/10 gravada e recarregada no depósito de teste                                              |
+| Criar depósito sem comprovante                    | Aprovado                                   | REQ-2026-ADB71B0D, R$ 1,00, criado em AwaitingReceipt                                                                |
+| Cancelar solicitação                              | Aprovado                                   | REQ-2026-ADB71B0D passou a Canceled; histórico registrado e ledger vazio                                             |
+| Carteira, composição e reserva                    | Aprovado                                   | Éric: saldo R$ 50.000,00, reserva R$ 2.500,00, disponível R$ 47.500,00; composição BRL/USD carregada                 |
+| Exportação de extrato CSV                         | Aprovado                                   | Download pelo botão; cabeçalho e linha conferidos, crédito e saldo após de R$ 50.000,00                              |
+| Patrimônio: lista, detalhe e salvar               | Aprovado no cenário sem mudança de valores | Honda Civic regravado mantendo R$ 120.000,00; formulário retornou sem erro; dois bens carregados                     |
+| Documentos existentes da transação                | Aprovado para consulta                     | Nome do comprovante do depósito exibido; conta bancária mascarada                                                    |
+| Aprovar/executar novas movimentações              | Não executado                              | Apenas histórico já existente foi conferido; teste de R$ 1,00 cancelado antes dessas etapas                          |
+| Saques e operações de contrato: criação           | Pendente                                   | Não foram criadas novas solicitações desses tipos nesta rodada                                                       |
+| Finalização, status e vínculos de contrato        | Pendente de escrita                        | Consulta validada; contratos cadastrados de terceiros preservados; rascunho novo sem unidade de prazo publicada      |
+| Universo de ativos                                | Bloqueado por dados                        | Catálogo retornou lista vazia em 10/10 e 12/10                                                                       |
+| Vincular documentos de transação                  | Pendente contrato HTTP                     | AttachTransactionDocumentRequest.role não enumera os valores aceitos; não enviar AttachDocument ao endpoint de ações |
+| Documentos de contrato/patrimônio e arquivamento  | Pendente de escrita                        | Estado vazio consultado; nenhum vínculo ou arquivamento realizado                                                    |
+
+## Correções frontend verificadas
+
+- Filtro explícito de rascunhos e ajuste do filtro após salvar/finalizar.
+- Ações de aprovação restritas a Validate/Approve/Reject/Execute/Cancel autorizadas pelo servidor.
+- AddObservation usa o endpoint observations e payload content; documentos possuem seção própria.
+- Traduções dos status reais encontrados e das origens/contas contábeis.
+
+## Portal e verificações locais anteriores
+
+Em 10/10, Home do Éric, depósito, composição e extrato reais foram aprovados em 9010. Os valores daquela rodada precedem a reserva de saque encontrada em 12/10. Revisão desktop/mobile com fixtures explicitamente identificadas e proteção do formulário de patrimônio durante PATCH lento aprovadas anteriormente. Home do Cláudio e documentos liberados no portal seguem sem homologação integrada nesta tarefa.
+
+## Bugs do backend
+
+Nenhum erro de execução do backend confirmado nesta rodada. Catálogos vazios e vocabulários ausentes são limitações de dados/contrato HTTP, descritas no checklist de implementação. Os erros encontrados no frontend foram corrigidos e não entram nesta tabela.
+
+## Registros deixados pela homologação
+
+Rascunho CTR-0EDD86A7; observação identificada no depósito de teste; solicitação REQ-2026-ADB71B0D cancelada. Nenhuma movimentação financeira nova foi aprovada ou executada. Não foram alterados os valores patrimoniais nem os contratos cadastrados.
