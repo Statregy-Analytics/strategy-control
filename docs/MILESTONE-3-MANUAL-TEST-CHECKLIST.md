@@ -1,6 +1,6 @@
 # Marco 3 — checklist manual
 
-Última rodada: 12/10/2026. Admin localhost:8080; Portal localhost:9010 (origens CORS autorizadas).
+Última rodada administrativa: 12/10/2026. Complemento do portal: 13/10/2026. Admin localhost:8080; Portal localhost:9010 (origens CORS autorizadas).
 
 ## Homologação administrativa integrada
 
@@ -34,7 +34,7 @@
 
 ## Portal e verificações locais anteriores
 
-Em 10/10, Home do Éric, depósito, composição e extrato reais foram aprovados em 9010. Os valores daquela rodada precedem a reserva de saque encontrada em 12/10. Revisão desktop/mobile com fixtures explicitamente identificadas e proteção do formulário de patrimônio durante PATCH lento aprovadas anteriormente. Home do Cláudio e documentos liberados no portal seguem sem homologação integrada nesta tarefa.
+Em 10/10, Home do Éric, depósito, composição e extrato reais foram aprovados em 9010. Os valores daquela rodada precedem a reserva de saque encontrada em 12/10. Revisão desktop/mobile com fixtures explicitamente identificadas e proteção do formulário de patrimônio durante PATCH lento aprovadas anteriormente. Home do Cláudio validada em 13/10, conforme complemento abaixo. Documentação permanece bloqueada.
 
 ## Bugs do backend
 
@@ -43,3 +43,7 @@ Nenhum erro de execução do backend confirmado nesta rodada. Catálogos vazios 
 ## Registros deixados pela homologação
 
 Rascunho CTR-0EDD86A7; observação identificada no depósito de teste; solicitação REQ-2026-ADB71B0D cancelada. Nenhuma movimentação financeira nova foi aprovada ou executada. Não foram alterados os valores patrimoniais nem os contratos cadastrados.
+
+## Complemento de 13/10/2026
+
+Home e carteira de Cláudio consultadas: BRL 25.000,00 em carteira e BRL 261.500,00 de capital contratado. Documentação segue bloqueada: API retorna documentLevel=1 e exige 2, com featureCode=Communication. A aprovação nível 2 informada pelo produto não aparece na resposta. Causa interna pendente de investigação. Consulte MARCO-3-DEVOLUTIVA-BACKEND.md para evidência sanitizada e critérios de reteste. A mensagem frontend que indicava depósito foi corrigida; isso não libera o guard do backend.
