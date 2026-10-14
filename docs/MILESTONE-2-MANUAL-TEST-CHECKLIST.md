@@ -130,13 +130,37 @@ Observações:
 
 ## 5. Abertura da edição do cliente
 
-Abrir o cliente pelo nome ou pelo menu de opções da linha.
+Abrir o perfil pelo nome do cliente. O menu de opções da linha mantém a edição
+lateral sobre a listagem.
+
+### Perfil consolidado — revisão visual em 14/10/2026
+
+Referência: Figma `i2jizg7UtPyg3KjAOvuFtI`, nó `1484:68035`.
+
+- [x] Perfil apresenta identificação/contato, profissional/financeiro, segurança,
+      preferências, carteira, contas bancárias e patrimônio em sequência vertical.
+- [x] Documentação por categoria e histórico recente aparecem na coluna lateral.
+- [x] Validado no Edge: Editar no perfil transforma identificação/contato e
+      profissional/financeiro em formulários dentro das próprias seções, sem drawer.
+- [x] Abertura individual e fechamento retornando ao resumo sem mudar a rota.
+- [ ] Revalidar salvamento de cada seção inline com dados descartáveis.
+- [x] Visualização em 390px usa uma coluna, sem overflow horizontal da página.
+- [x] Identificadores documentais e contatos permanecem mascarados no resumo.
+- [x] Cliente sem carteira, patrimônio ou conta de acesso apresenta estados vazios.
+- [ ] Revalidar escritas de cada seção com dados descartáveis de homologação.
+
+Os componentes de carteira e patrimônio já existentes no projeto passaram a ser
+exibidos neste perfil. Esta revisão não amplia o aceite histórico do Marco 2.
+O contrato disponível oferece exportação do extrato; a tabela de movimentações
+ilustrada no Figma não foi preenchida com dados fictícios. Campos documentais
+dependem dos documentos efetivamente retornados para o cliente. Nenhum dado
+real foi alterado durante a revisão visual.
 
 URL da listagem:
 
 `http://localhost:8080/dataManagement`
 
-- [x] Clicar no nome abre o cliente correto em um painel lateral.
+- [x] Clicar no nome abre o perfil consolidado do cliente correto.
 - [x] Menu de opções apresenta a ação “Editar”.
 - [x] Clicar em “Editar” abre o cliente correto em um painel lateral.
 - [x] A listagem permanece visível ao fundo.

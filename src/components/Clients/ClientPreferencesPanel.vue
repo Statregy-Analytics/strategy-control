@@ -1,5 +1,5 @@
 <template>
-  <div :class="hideStatus ? '' : 'row q-col-gutter-md'">
+  <div :class="[hideStatus ? '' : 'row q-col-gutter-md', { 'profile-preferences': profileLayout }]">
     <div v-if="!hideStatus" class="col-12 col-md-4">
       <q-card flat :bordered="!embedded">
         <q-card-section><div class="text-subtitle1 text-weight-bold">Status do cliente</div>
@@ -16,7 +16,7 @@
 
     <div :class="hideStatus ? 'col-12' : 'col-12 col-md-8'">
       <q-card flat :bordered="!embedded">
-        <q-card-section><div class="text-subtitle1 text-weight-bold">Preferências</div>
+        <q-card-section v-if="!profileLayout"><div class="text-subtitle1 text-weight-bold">Preferências</div>
           <div class="text-caption text-grey-7">Moeda, idioma, fuso horário e tema definidos pelo catálogo da API.</div></q-card-section>
         <q-separator v-if="!embedded" />
         <q-card-section v-if="loading" class="row justify-center q-pa-xl"><q-spinner color="primary" size="36px" /></q-card-section>
@@ -24,11 +24,14 @@
           <template #action><q-btn flat color="negative" label="Tentar novamente" @click="load" /></template>
         </q-banner>
         <q-card-section v-else class="row q-col-gutter-sm q-px-none q-py-sm">
-          <label-form class-name="col-12 col-md-4" text-label="Moeda principal"><q-select v-model="form.primaryCurrencyCode" :options="currencyOptions" emit-value map-options outlined dense /></label-form>
-          <label-form class-name="col-12 col-md-4" text-label="Moeda secundária"><q-select v-model="form.secondaryCurrencyCode" :options="currencyOptions" emit-value map-options clearable outlined dense /></label-form>
-          <label-form class-name="col-12 col-md-4" text-label="Idioma"><q-select v-model="form.languageCode" :options="languageOptions" emit-value map-options outlined dense /></label-form>
-          <label-form class-name="col-12 col-md-4" text-label="Fuso horário"><q-select v-model="form.timeZoneId" :options="timeZoneOptions" emit-value map-options outlined dense /></label-form>
-          <label-form class-name="col-12 col-md-4" text-label="Tema"><q-select v-model="form.theme" :options="themeOptions" emit-value map-options outlined dense /></label-form>
+          <label-form :class-name="preferenceColumn" text-label="Moeda principal"><q-select v-model="form.primaryCurrencyCode" :options="currencyOptions" emit-value map-options outlined dense aria-label="Moeda principal" /></label-form>
+          <label-form :class-name="preferenceColumn" text-label="Moeda secundária"><q-select v-model="form.secondaryCurrencyCode" :options="currencyOptions" emit-value map-options clearable outlined dense aria-label="Moeda secundária" /></label-form>
+          <label-form :class-name="preferenceColumn" text-label="Idioma"><q-select v-model="form.languageCode" :options="languageOptions" emit-value map-options outlined dense aria-label="Idioma" /></label-form>
+          <label-form :class-name="preferenceColumn" text-label="Fuso horário"><q-select v-model="form.timeZoneId" :options="timeZoneOptions" emit-value map-options outlined dense aria-label="Fuso horário" /></label-form>
+          <label-form v-if="profileLayout" class-name="col-12 q-mt-md" text-label="Tema do sistema">
+            <div class="preference-themes"><q-btn v-for="theme in themeOptions" :key="theme.value" :label="theme.label" :aria-pressed="form.theme === theme.value" :class="{ 'preference-theme--selected': form.theme === theme.value }" outline no-caps @click="form.theme = theme.value" /></div>
+          </label-form>
+          <label-form v-else class-name="col-12 col-md-4" text-label="Tema"><q-select v-model="form.theme" :options="themeOptions" emit-value map-options outlined dense /></label-form>
         </q-card-section>
         <q-card-actions v-if="!loading && !loadError" align="right" class="q-pa-none">
           <q-btn flat dense size="sm" color="primary" icon="save" label="Salvar preferências" no-caps :loading="savingPreferences" @click="savePreferences" />
@@ -49,12 +52,14 @@ const props = defineProps({
   customerId: { type: String, required: true },
   embedded: { type: Boolean, default: false },
   hideStatus: { type: Boolean, default: false },
+  profileLayout: { type: Boolean, default: false },
 })
 const emit = defineEmits(['updated'])
 const { successNotify, errorNotify } = useNotification()
 const loading = ref(true), loadError = ref(''), savingStatus = ref(false), savingPreferences = ref(false)
 const currentStatus = ref(''), selectedStatus = ref(''), catalog = ref({})
 const form = reactive({ primaryCurrencyCode: null, secondaryCurrencyCode: null, languageCode: '', timeZoneId: '', theme: '' })
+const preferenceColumn = computed(() => props.profileLayout ? 'col-12 col-sm-6 col-lg-3' : 'col-12 col-md-4')
 const statusOptions = [
   { label: 'Prospect', value: 'Prospect' }, { label: 'Ativo', value: 'Active' },
   { label: 'Suspenso', value: 'Suspended' }, { label: 'Arquivado', value: 'Archived' },
@@ -71,7 +76,7 @@ const themeOptions = computed(() => toOptions(catalog.value.themes, ['value', 'c
 const load = async () => {
   loading.value = true; loadError.value = ''
   try {
-    const [status, preferences, options] = await Promise.all([getCustomerStatus(props.customerId), getCustomerPreferences(props.customerId), getPreferenceCatalog()])
+    const [status, preferences, options] = await Promise.all([props.hideStatus ? Promise.resolve(null) : getCustomerStatus(props.customerId), getCustomerPreferences(props.customerId), getPreferenceCatalog()])
     currentStatus.value = status?.status ?? status
     selectedStatus.value = currentStatus.value
     Object.assign(form, {
@@ -97,3 +102,11 @@ const savePreferences = async () => {
 }
 onMounted(load)
 </script>
+<style scoped>
+.profile-preferences :deep(.q-card) { background: transparent; color: inherit; }
+.profile-preferences :deep(.LabelForm > span) { color: rgba(255,255,255,.68); font-size: 12px !important; text-transform: uppercase; letter-spacing: .6px; }
+.preference-themes { display: flex; gap: 16px; }
+.preference-themes .q-btn { flex: 1; min-height: 44px; color: rgba(255,255,255,.7); background: var(--sa-surface-soft); }
+.preference-themes .preference-theme--selected { color: #fff; background: rgba(255,255,255,.14); }
+@media (max-width: 600px) { .preference-themes { flex-direction: column; gap: 8px; } }
+</style>

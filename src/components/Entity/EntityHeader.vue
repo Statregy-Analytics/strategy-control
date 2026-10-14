@@ -5,8 +5,10 @@
         <q-img v-if="avatar" :src="avatar" :alt="name" />
       </q-avatar>
       <div class="q-ml-md entity-header__identity">
+        <slot name="identity">
         <span class="text-muted entity-header__id">ID #{{ displayId }}</span>
         <div class="text-subtitle1 text-weight-medium ellipsis">{{ name }}</div>
+        </slot>
       </div>
       <slot name="status" />
       <q-btn v-if="options.length" flat round dense color="grey-6" icon="keyboard_arrow_down" :aria-label="switchLabel">

@@ -1,13 +1,21 @@
 <template>
-  <div class="q-pt-md">
-    <label-form text-label="Cliente"><customer-select v-model="customerId" /></label-form>
+  <div :class="embedded ? 'profile-portfolio' : 'q-pt-md'">
+    <label-form v-if="!embedded" text-label="Cliente"><customer-select v-model="customerId" /></label-form>
     <p v-if="!customerId" class="text-muted q-mt-md">
       Selecione um cliente para consultar sua carteira.
     </p>
     <template v-else>
       <form-section title="Carteira consolidada"
         ><resource-state :state="portfolio.state" @retry="loadPortfolio"
-          ><q-table
+          ><div v-if="embedded" class="portfolio-currencies">
+            <p v-if="!portfolio.state.data?.currencies?.length" class="text-caption">Nenhuma posição disponível para este cliente.</p>
+            <div v-for="currency in portfolio.state.data?.currencies || []" :key="currency.currencyId" class="portfolio-metrics">
+              <div v-for="metric in metrics" :key="metric.key" class="portfolio-metric">
+                <div><span>{{ metric.label }}</span><small>{{ currency.currencyIsoCode }}</small></div>
+                <strong>{{ money(currency[metric.key], currency.currencyIsoCode) }}</strong>
+              </div>
+            </div>
+          </div><q-table v-else
             flat
             dense
             :rows="portfolio.state.data?.currencies || []"
@@ -71,7 +79,7 @@
           class="q-mt-md"
           @click="exportStatement"
       /></form-section>
-      <form-section title="Patrimônio declarado"
+      <form-section v-if="!embedded" title="Patrimônio declarado"
         ><customer-assets
           :key="customerId"
           :customer-id="customerId"
@@ -96,7 +104,10 @@ import {
   columns,
   financeLabel,
 } from 'src/services/financeService'
-const customerId = ref(null),
+const props = defineProps({ customerId: { type: String, default: null }, embedded: { type: Boolean, default: false } })
+const emit = defineEmits(['currencies'])
+const metrics = [{ key: 'baseEquity', label: 'Saldo base (patrimônio)' }, { key: 'invested', label: 'Saldo investido' }, { key: 'investable', label: 'Saldo investível' }, { key: 'total', label: 'Carteira total' }]
+const customerId = ref(props.customerId),
   dateFrom = ref(''),
   dateTo = ref(''),
   exporting = ref(false),
@@ -119,6 +130,8 @@ const loadComposition = () =>
   )
 const loadWallets = () =>
   wallets.load(async () => (await financeGet(`admin/customers/${customerId.value}/wallets`)).data)
+watch(() => props.customerId, (id) => { customerId.value = id })
+watch(() => portfolio.state.data, (value) => emit('currencies', value?.currencies || []))
 watch(customerId, () => {
   error.value = ''
   if (customerId.value) {
@@ -126,7 +139,7 @@ watch(customerId, () => {
     loadComposition()
     loadWallets()
   }
-})
+}, { immediate: true })
 const portfolioColumns = columns([
   ['currencyIsoCode', 'Moeda'],
   ['baseEquity', 'Patrimônio base', (r) => money(r.baseEquity, r.currencyIsoCode)],
@@ -170,4 +183,18 @@ async function exportStatement() {
     exporting.value = false
   }
 }
+defineExpose({ refresh: onAssetsChanged })
 </script>
+<style scoped>
+.profile-portfolio > :deep(.form-section) { padding: 24px 0; border-top: 1px solid rgba(255,255,255,.12); }
+.profile-portfolio > :deep(.form-section:first-child) { padding-top: 0; border: 0; }
+.profile-portfolio > :deep(.form-section:first-child .form-section__title) { display: none; }
+.profile-portfolio > :deep(.form-section:first-child .q-mt-md) { margin-top: 0; }
+.portfolio-metrics { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; margin-bottom: 16px; }
+.portfolio-metric { padding: 16px; border: 1px solid rgba(255,255,255,.12); border-radius: 8px; background: var(--sa-surface-soft); }
+.portfolio-metric > div { display: flex; justify-content: space-between; align-items: start; gap: 8px; color: rgba(255,255,255,.68); font-size: 11px; }
+.portfolio-metric small { padding: 2px 5px; border-radius: 4px; background: var(--sa-surface-soft); }
+.portfolio-metric strong { display: block; margin-top: 16px; font-size: 18px; font-weight: 600; font-variant-numeric: tabular-nums; overflow-wrap: anywhere; }
+@media(max-width: 1200px) { .portfolio-metrics { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media(max-width: 600px) { .portfolio-metrics { grid-template-columns: 1fr; } }
+</style>

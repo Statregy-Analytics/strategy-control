@@ -1,307 +1,994 @@
 <template>
   <q-page class="client-profile-page">
     <header class="client-profile-header">
-      <q-btn flat round dense icon="arrow_back" aria-label="Voltar para clientes" @click="router.push({ name: 'Clientes' })" />
-      <q-avatar size="52px" class="client-profile-avatar" icon="person" />
-      <div class="client-profile-identity">
-        <div class="row items-center q-gutter-sm">
-          <h1>{{ displayName }}</h1>
-          <q-badge v-if="header?.status" :color="statusColor" outline>{{ statusLabel(header.status) }}</q-badge>
-        </div>
-        <div class="client-profile-meta">
-          <span v-if="kindText">{{ kindText }}</span>
-          <span v-if="header?.maskedDocument">{{ header.maskedDocument }}</span>
-          <span v-if="header?.primaryContact">{{ header.primaryContact }}</span>
-        </div>
+      <q-btn
+        flat
+        round
+        dense
+        icon="arrow_back"
+        aria-label="Voltar para clientes"
+        @click="router.push({ name: 'Clientes' })"
+      />
+      <entity-header :id="customerId" :name="displayName" short-id class="profile-identity">
+        <template #identity>
+          <div class="profile-name">
+            <h1>{{ displayName }}</h1>
+            <q-badge outline>{{ kindLabel(customer.kind) }}</q-badge>
+          </div>
+          <div class="profile-meta">
+            <span>ID: {{ customerId.slice(0, 8) }}</span
+            ><span>Desde: {{ date(customer.createdAtUtc) }}</span
+            ><span v-if="operational.advisorName">Assessor: {{ operational.advisorName }}</span>
+          </div>
+        </template>
+      </entity-header>
+      <customer-select
+        class="profile-switcher"
+        :model-value="customerId"
+        :current="{ customerId, displayName }"
+        aria-label="Trocar cliente"
+        @update:model-value="switchCustomer"
+      />
+      <div class="profile-header-status">
+        <span>Status</span
+        ><q-badge outline :color="customer.status === 'Active' ? 'positive' : 'grey-5'">{{
+          statusLabel(customer.status)
+        }}</q-badge>
       </div>
-      <q-space />
       <q-btn
         outline
+        dense
         no-caps
-        :icon="registrationEditing ? 'close' : 'edit'"
-        :label="registrationEditing ? 'Fechar edição' : 'Editar dados'"
-        class="client-profile-action"
-        @click="toggleRegistrationEdit"
+        :icon="inlineEditing ? 'close' : 'edit'"
+        :label="inlineEditing ? 'Fechar edição' : 'Editar'"
+        :aria-label="inlineEditing ? 'Fechar edição do cliente' : 'Editar cliente'"
+        :disable="!customerResource.state.data"
+        @click="toggleInlineEditing"
       />
     </header>
-
-    <div v-if="loading" class="client-profile-state"><q-spinner color="primary" size="48px" /></div>
-    <q-banner v-else-if="notFound" rounded class="client-profile-message">
-      <template #avatar><q-icon name="person_off" size="30px" /></template>
-      <div class="text-subtitle1 text-weight-medium">Cliente não encontrado</div>
-      <div>O registro não existe ou não está disponível no workspace selecionado.</div>
-      <template #action><q-btn flat color="primary" label="Voltar" @click="router.push({ name: 'Clientes' })" /></template>
-    </q-banner>
-    <q-banner v-else-if="errorMessage" rounded class="client-profile-message client-profile-message--error">
-      {{ errorMessage }}
-      <template #action><q-btn flat color="negative" label="Tentar novamente" @click="loadCustomer()" /></template>
-    </q-banner>
-
-    <template v-else>
-      <q-banner v-if="partialWarning" rounded class="client-profile-warning">
-        <template #avatar><q-icon name="warning_amber" /></template>
-        {{ partialWarning }}
-        <template #action><q-btn flat color="warning" label="Tentar novamente" @click="loadCustomer()" /></template>
-      </q-banner>
-
-      <main class="client-profile-grid">
-        <div class="client-profile-main">
-          <section class="profile-surface profile-summary">
-            <div class="profile-section-heading">
-              <div>
-                <h2>Informações pessoais e cadastrais</h2>
-                <p>Dados de identificação e contato disponíveis no cadastro.</p>
-              </div>
-              <div class="row q-gutter-xs no-wrap">
-                <q-btn v-if="registrationEditing" flat dense no-caps color="grey-5" label="Cancelar" @click="cancelRegistrationEdit" />
-                <q-btn flat dense no-caps color="primary" :icon="registrationEditing ? 'close' : 'edit'" :label="registrationEditing ? 'Fechar edição' : 'Editar'" @click="toggleRegistrationEdit" />
-              </div>
+    <resource-state
+      :state="customerResource.state"
+      class="profile-customer-state"
+      @retry="loadCustomer"
+    />
+    <main v-if="customerResource.state.data" :key="customerId" class="client-profile-grid">
+      <div class="client-profile-main">
+        <profile-section
+          title="Identificação e contato"
+          icon-src="/icons/client-profile/identification.svg"
+        >
+          <template #actions
+            ><q-btn
+              flat
+              dense
+              size="sm"
+              no-caps
+              :icon="editingRegistration ? 'close' : 'edit'"
+              :label="editingRegistration ? 'Fechar edição' : 'Editar'"
+              :aria-expanded="editingRegistration"
+              @click="editingRegistration = !editingRegistration"
+          /></template>
+          <div v-if="editingRegistration" class="profile-inline-editor">
+            <p class="text-caption">Salve as alterações de cada grupo antes de fechar a edição.</p>
+            <client-registration-editor
+              embedded
+              :customer-id="customerId"
+              :identification="customer"
+              @updated="registrationUpdated"
+            />
+            <form-section title="Status do cliente">
+              <q-select
+                :model-value="customer.status"
+                :options="statusOptions"
+                emit-value
+                map-options
+                outlined
+                dense
+                aria-label="Status do cliente"
+                :loading="savingStatus"
+                :disable="savingStatus"
+                @update:model-value="saveStatus"
+              />
+            </form-section>
+          </div>
+          <resource-state v-else :state="identificationResource.state" @retry="loadIdentification">
+            <profile-fields :fields="personalFields" />
+            <div v-if="documentFields.length" class="profile-divider">
+              <profile-fields :fields="documentFields" />
             </div>
-            <q-slide-transition>
-              <div v-if="registrationEditing" class="inline-editor">
-                <client-registration-editor
-                  :key="`registration-${registrationEditSession}`"
-                  embedded
-                  :customer-id="route.params.id"
-                  :identification="identification"
-                  @updated="onRegistrationUpdated"
+            <div class="profile-divider"><profile-fields :fields="contactFields" /></div>
+            <div class="profile-divider"><profile-fields :fields="addressFields" /></div>
+          </resource-state>
+        </profile-section>
+        <profile-section
+          title="Profissional e financeiro"
+          icon-src="/icons/client-profile/professional.svg"
+        >
+          <template #actions
+            ><q-btn
+              flat
+              dense
+              size="sm"
+              no-caps
+              :icon="editingProfessional ? 'close' : 'edit'"
+              :label="editingProfessional ? 'Fechar edição' : 'Editar'"
+              :aria-expanded="editingProfessional"
+              @click="editingProfessional = !editingProfessional"
+          /></template>
+          <div v-if="editingProfessional" class="profile-inline-editor">
+            <p class="text-caption">Salve as alterações de cada grupo antes de fechar a edição.</p>
+            <client-professional-panel
+              embedded
+              :customer-id="customerId"
+              @updated="loadProfessional"
+            />
+            <div class="profile-divider">
+              <client-financial-security-panel
+                hide-security
+                :customer-id="customerId"
+                @updated="loadFinancial"
+              />
+            </div>
+          </div>
+          <template v-else>
+            <resource-state :state="professional.state" @retry="loadProfessional"
+              ><profile-fields :columns="2" :fields="professionalFields"
+            /></resource-state>
+            <div class="q-mt-lg">
+              <resource-state :state="financial.state" @retry="loadFinancial"
+                ><profile-fields :columns="3" :fields="financialFields"
+              /></resource-state>
+            </div>
+          </template>
+        </profile-section>
+        <profile-section title="Segurança da conta" icon-src="/icons/client-profile/security.svg">
+          <resource-state :state="security.state" @retry="loadSecurity">
+            <p v-if="security.state.data?.hasUserAccount === false" class="profile-empty">
+              Nenhuma conta de acesso vinculada.
+            </p>
+            <profile-fields v-else :fields="securityFields" />
+          </resource-state>
+        </profile-section>
+        <profile-section
+          title="Preferências do sistema"
+          icon-src="/icons/client-profile/preferences.svg"
+          ><client-preferences-panel
+            :key="customerId"
+            embedded
+            hide-status
+            profile-layout
+            :customer-id="customerId"
+        /></profile-section>
+        <profile-section
+          title="Visão consolidada da carteira"
+          icon-src="/icons/client-profile/portfolio.svg"
+          ><customer-portfolio
+            ref="portfolioRef"
+            embedded
+            :customer-id="customerId"
+            @currencies="currencies = $event"
+        /></profile-section>
+        <profile-section
+          title="Contas bancárias"
+          icon-src="/icons/client-profile/bank.svg"
+          caption="Contas para movimentações do cliente."
+          ><client-bank-accounts-panel :customer-id="customerId" class="profile-bank-panel"
+        /></profile-section>
+        <profile-section
+          title="Registro de patrimônio"
+          icon-src="/icons/client-profile/assets.svg"
+          caption="Ativos, bens e participações declarados pelo cliente."
+          ><customer-assets
+            :customer-id="customerId"
+            :currencies="currencies"
+            @changed="portfolioRef?.refresh()"
+        /></profile-section>
+      </div>
+      <aside class="client-profile-aside">
+        <profile-section title="Documentação" icon-src="/icons/client-profile/documents.svg">
+          <resource-state :state="documentTotals.state" @retry="loadDocumentTotals"
+            ><div class="document-totals">
+              <span v-for="item in documentMetrics" :key="item.label" :class="`text-${item.color}`"
+                >{{ item.value }} {{ item.label }}</span
+              >
+            </div></resource-state
+          >
+          <resource-state :state="documentOverview.state" @retry="loadDocuments">
+            <div v-if="!documentSections.length" class="profile-empty">
+              Nenhum documento cadastrado.
+            </div>
+            <q-expansion-item
+              v-for="section in documentSections"
+              :key="section.code || section.name"
+              :label="section.name || 'Documentos'"
+              default-opened
+              dense
+              class="document-category"
+            >
+              <button
+                v-for="item in section.items"
+                :key="item.documentId || item.documentTypeId"
+                class="document-row"
+                @click="editor = 'documents'"
+              >
+                <q-icon
+                  name="description"
+                  size="20px"
+                  :class="`text-${documentColor(item.status)}`"
                 />
-              </div>
-              <div v-else class="profile-data-grid">
-                <div><span>Nome</span><strong>{{ displayName }}</strong></div>
-                <div><span>Tipo de cliente</span><strong>{{ kindText || 'Não informado' }}</strong></div>
-                <div><span>E-mail</span><strong>{{ primaryEmail }}</strong></div>
-                <div><span>Telefone</span><strong>{{ primaryPhone }}</strong></div>
-                <div><span>Documento</span><strong>{{ header?.maskedDocument || 'Não informado' }}</strong></div>
-                <div><span>Cliente desde</span><strong>{{ formatDate(header?.customerSince || header?.createdAtUtc) }}</strong></div>
-              </div>
-            </q-slide-transition>
-          </section>
-
-          <section class="profile-surface portfolio-section">
-            <div class="profile-section-heading">
-              <div>
-                <h2>Visão consolidada da carteira</h2>
-                <p>Estrutura preparada para os saldos e movimentações consolidados do cliente.</p>
-              </div>
-              <q-badge outline color="info" class="integration-badge">Integração pendente</q-badge>
-            </div>
-            <div class="portfolio-metrics">
-              <article v-for="metric in balanceMetrics" :key="metric.label" class="portfolio-metric">
-                <div class="portfolio-metric__head"><span>{{ metric.label }}</span><q-icon :name="metric.icon" size="18px" /></div>
-                <strong>—</strong>
-                <small>Saldo ainda não fornecido pela API</small>
-              </article>
-            </div>
-            <div v-if="financialProfile?.declaredNetWorth != null" class="declared-worth">
-              <q-icon name="account_balance_wallet" size="18px" />
-              <div><span>Patrimônio declarado</span><strong>{{ money(financialProfile.declaredNetWorth, financialProfile.currencyCode) }}</strong></div>
-              <small>Informação declarada pelo cliente; não representa saldo consolidado.</small>
-            </div>
-            <div class="portfolio-empty-grid">
-              <div class="portfolio-empty">
-                <q-icon name="donut_large" size="28px" /><strong>Composição da carteira</strong>
-                <span>Classes e origens serão exibidas quando a integração financeira estiver disponível.</span>
-              </div>
-              <div class="portfolio-empty">
-                <q-icon name="receipt_long" size="28px" /><strong>Extrato da conta</strong>
-                <span>As movimentações ainda não fazem parte do contrato atual da API.</span>
-              </div>
-            </div>
-          </section>
-
-          <section class="profile-surface embedded-panel">
-            <client-bank-accounts-panel :customer-id="route.params.id" @updated="refreshCustomer" />
-          </section>
-
-          <section v-if="documentsOpen" class="profile-surface embedded-panel inline-management-section">
-            <q-btn flat round dense icon="close" class="inline-management-section__close" aria-label="Fechar gerenciamento de documentos" @click="documentsOpen = false" />
-            <client-documents-panel :customer-id="route.params.id" @updated="refreshCustomer" />
-          </section>
-
-          <section v-if="complianceOpen" class="profile-surface embedded-panel inline-management-section">
-            <q-btn flat round dense icon="close" class="inline-management-section__close" aria-label="Fechar gerenciamento de compliance" @click="complianceOpen = false" />
-            <client-compliance-panel :customer-id="route.params.id" @updated="refreshCustomer" />
-          </section>
-        </div>
-
-        <aside class="client-profile-aside">
-          <section class="profile-surface compact-surface">
-            <div class="profile-section-heading"><div><h2>Documentação</h2><p>Situação consolidada dos documentos.</p></div></div>
-            <div class="document-totals">
-              <div v-for="metric in documentMetrics" :key="metric.label">
-                <span class="document-dot" :class="`document-dot--${metric.tone}`" />
-                <strong>{{ metric.value }}</strong><small>{{ metric.label }}</small>
-              </div>
-            </div>
-            <q-btn flat no-caps color="primary" icon-right="arrow_forward" :label="documentsOpen ? 'Ocultar documentos' : 'Gerenciar documentos'" class="full-width q-mt-md" @click="documentsOpen = !documentsOpen" />
-          </section>
-          <section class="profile-surface compact-surface">
-            <div class="profile-section-heading"><div><h2>Compliance e observações</h2><p>Condição atual retornada pela API.</p></div></div>
-            <div class="compliance-status">
-              <q-icon name="verified_user" size="22px" />
-              <div><strong>{{ complianceLabel }}</strong><span>{{ complianceDescription }}</span></div>
-            </div>
-            <q-btn flat no-caps color="primary" icon-right="arrow_forward" :label="complianceOpen ? 'Ocultar controles' : 'Gerenciar compliance'" class="full-width q-mt-md" @click="complianceOpen = !complianceOpen" />
-          </section>
-          <section class="profile-surface compact-surface">
-            <div class="profile-section-heading"><div><h2>Resumo operacional</h2><p>Controles disponíveis para este cliente.</p></div></div>
-            <div class="operational-list">
-              <div><span>E-mail confirmado</span><strong>{{ booleanLabel(summary?.accountSecurity?.emailConfirmed) }}</strong></div>
-              <div><span>Contas bancárias</span><strong>{{ summary?.bankAccounts?.total ?? 0 }}</strong></div>
-              <div><span>Nível documental</span><strong>{{ header?.documentLevel || 'Não informado' }}</strong></div>
-            </div>
-          </section>
-        </aside>
-      </main>
-    </template>
-
+                <span
+                  ><strong>{{
+                    item.documentTypeName || item.documentTypeCode || 'Documento'
+                  }}</strong
+                  ><small
+                    >{{ documentStatus(item.status)
+                    }}<template v-if="item.submittedAtUtc">
+                      · {{ date(item.submittedAtUtc) }}</template
+                    ></small
+                  ></span
+                >
+                <q-icon name="chevron_right" size="16px" />
+              </button>
+            </q-expansion-item>
+          </resource-state>
+          <q-btn
+            flat
+            dense
+            no-caps
+            label="Gerenciar documentos"
+            icon-right="arrow_forward"
+            class="full-width q-mt-md"
+            @click="editor = 'documents'"
+          />
+        </profile-section>
+        <profile-section
+          title="Compliance e observações"
+          icon-src="/icons/client-profile/compliance.svg"
+        >
+          <resource-state :state="compliance.state" @retry="loadCompliance"
+            ><div
+              class="compliance-note"
+              :class="{ 'compliance-note--warning': complianceView.activeCount > 0 }"
+            >
+              <strong>{{ complianceView.status }}</strong>
+              <p
+                v-for="alert in complianceView.recentAlerts.slice(0, 2)"
+                :key="alert.id || alert.title"
+              >
+                {{ alert.description || alert.title }}
+              </p>
+            </div></resource-state
+          >
+          <q-btn
+            flat
+            dense
+            no-caps
+            label="Gerenciar compliance"
+            icon-right="arrow_forward"
+            class="full-width q-mt-md"
+            @click="editor = 'compliance'"
+          />
+          <div class="profile-divider">
+            <h3>Histórico recente</h3>
+            <resource-state :state="timeline.state" @retry="loadTimeline"
+              ><ol v-if="recentEvents.length" class="profile-timeline">
+                <li v-for="event in recentEvents" :key="event.id">
+                  <strong>{{ event.title || event.eventType }}</strong
+                  ><small
+                    >{{ event.actorName || 'Sistema' }} · {{ date(event.occurredAtUtc) }}</small
+                  >
+                </li>
+              </ol>
+              <p v-else class="profile-empty">Nenhum evento registrado.</p></resource-state
+            >
+            <q-btn
+              flat
+              dense
+              no-caps
+              label="Ver todo o histórico"
+              class="full-width"
+              @click="editor = 'history'"
+            />
+          </div>
+        </profile-section>
+      </aside>
+    </main>
+    <q-dialog
+      :model-value="!!editor"
+      position="right"
+      full-height
+      full-width
+      maximized
+      class="control-width"
+      @update:model-value="
+        (value) => {
+          if (!value) editor = null
+        }
+      "
+    >
+      <q-card class="profile-editor">
+        <title-card :title="editorTitle" @on-close="editor = null" />
+        <entity-header :id="customerId" :name="displayName" short-id />
+        <q-card-section>
+          <client-documents-panel
+            v-if="editor === 'documents'"
+            :customer-id="customerId"
+            @updated="documentsUpdated"
+          />
+          <client-compliance-panel
+            v-else-if="editor === 'compliance'"
+            :customer-id="customerId"
+            @updated="complianceUpdated"
+          />
+          <client-verification-timeline-panel
+            v-else-if="editor === 'history'"
+            :customer-id="customerId"
+            @updated="loadTimeline"
+          />
+        </q-card-section>
+      </q-card>
+    </q-dialog>
   </q-page>
 </template>
-
 <script setup>
-import { computed, onMounted, ref } from 'vue'
+import { computed, ref, watch } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
+import EntityHeader from 'src/components/Entity/EntityHeader.vue'
+import ProfileSection from 'src/components/Entity/ProfileSection.vue'
+import ProfileFields from 'src/components/Entity/ProfileFields.vue'
+import FormSection from 'src/components/Entity/FormSection.vue'
+import TitleCard from 'src/components/Card/TitleCard.vue'
+import ResourceState from 'src/components/Finance/ResourceState.vue'
+import CustomerSelect from 'src/components/Finance/CustomerSelect.vue'
+import CustomerPortfolio from 'src/components/Finance/CustomerPortfolio.vue'
+import CustomerAssets from 'src/components/Finance/CustomerAssets.vue'
 import ClientBankAccountsPanel from 'src/components/Clients/ClientBankAccountsPanel.vue'
 import ClientCompliancePanel from 'src/components/Clients/ClientCompliancePanel.vue'
 import ClientDocumentsPanel from 'src/components/Clients/ClientDocumentsPanel.vue'
 import ClientRegistrationEditor from 'src/components/Clients/ClientRegistrationEditor.vue'
-import { getCustomer, getCustomerCurrentFinancialProfile, getCustomerDocumentSummary, getCustomerSummary } from 'src/services/customerService'
+import ClientProfessionalPanel from 'src/components/Clients/ClientProfessionalPanel.vue'
+import ClientFinancialSecurityPanel from 'src/components/Clients/ClientFinancialSecurityPanel.vue'
+import ClientPreferencesPanel from 'src/components/Clients/ClientPreferencesPanel.vue'
+import ClientVerificationTimelinePanel from 'src/components/Clients/ClientVerificationTimelinePanel.vue'
+import { useFinanceResource } from 'src/composables/useFinanceResource'
+import useNotification from 'src/composables/global/useNotification'
+import {
+  getCustomer,
+  getCustomerIdentification,
+  getCustomerProfessionalProfile,
+  getCustomerCurrentFinancialProfile,
+  getCustomerAccountSecurity,
+  getCustomerDocumentSummary,
+  changeCustomerStatus,
+} from 'src/services/customerService'
+import { getCustomerDocumentOverview } from 'src/services/documentAdminService'
+import { getComplianceAlerts } from 'src/services/complianceService'
+import { summarizeCompliance } from 'src/services/complianceSummary'
+import { getCustomerTimeline } from 'src/services/verificationService'
+import { money } from 'src/services/financeService'
 import { getApiErrorMessage } from 'src/services/apiError'
-
-const route = useRoute()
-const router = useRouter()
-const summary = ref(null)
-const header = ref(null)
-const identification = ref(null)
-const financialProfile = ref(null)
-const documentSummary = ref(null)
-const loading = ref(true)
-const notFound = ref(false)
-const errorMessage = ref('')
-const partialWarning = ref('')
-const registrationEditing = ref(false)
-const registrationEditSession = ref(0)
-const documentsOpen = ref(false)
-const complianceOpen = ref(false)
-const displayName = computed(() => header.value?.displayName || header.value?.primaryName || summary.value?.header?.displayName || summary.value?.header?.primaryName || identification.value?.names?.find((name) => name.isPrimary)?.displayName || identification.value?.primaryName?.displayName || 'Cliente')
-const primaryEmail = computed(() => identification.value?.primaryEmail?.value || identification.value?.primaryEmail || 'Não informado')
-const primaryPhone = computed(() => identification.value?.primaryPhone?.value || identification.value?.primaryPhone || 'Não informado')
-const kindText = computed(() => kindLabel(header.value?.kind || header.value?.customerKind))
-const documents = computed(() => documentSummary.value ?? summary.value?.documentSummary ?? {})
-const documentMetrics = computed(() => [
-  { label: 'Aprovados', value: documents.value.approved ?? 0, tone: 'positive' },
-  { label: 'Pendentes', value: Number(documents.value.pending ?? 0) + Number(documents.value.inReview ?? 0) + Number(documents.value.missing ?? 0), tone: 'warning' },
-  { label: 'Rejeitados', value: documents.value.rejected ?? 0, tone: 'negative' },
-])
-const complianceLabel = computed(() => summary.value?.compliance?.primaryAlert?.title || summary.value?.compliance?.status || 'Sem alertas registrados')
-const complianceDescription = computed(() => summary.value?.compliance?.primaryAlert?.description || 'Nenhuma observação adicional foi retornada.')
-const statusColor = computed(() => header.value?.status === 'Active' ? 'positive' : 'grey')
-const balanceMetrics = [
-  { label: 'Saldo base (patrimônio)', icon: 'account_balance' },
-  { label: 'Saldo investido', icon: 'trending_up' },
-  { label: 'Saldo investível', icon: 'savings' },
-  { label: 'Carteira total', icon: 'pie_chart' },
+const route = useRoute(),
+  router = useRouter()
+const { successNotify, errorNotify } = useNotification()
+const customerId = computed(() => String(route.params.id))
+const customerResource = useFinanceResource(),
+  identificationResource = useFinanceResource(),
+  professional = useFinanceResource(),
+  financial = useFinanceResource(),
+  security = useFinanceResource(),
+  documentTotals = useFinanceResource(),
+  documentOverview = useFinanceResource(),
+  compliance = useFinanceResource(),
+  timeline = useFinanceResource()
+const editor = ref(null),
+  savingStatus = ref(false),
+  currencies = ref([]),
+  portfolioRef = ref(null)
+const editingRegistration = ref(false)
+const editingProfessional = ref(false)
+const inlineEditing = computed(() => editingRegistration.value || editingProfessional.value)
+const toggleInlineEditing = () => {
+  const editing = !inlineEditing.value
+  editingRegistration.value = editing
+  editingProfessional.value = editing
+}
+const customer = computed(() => customerResource.state.data || {})
+const identification = computed(() => identificationResource.state.data || {})
+const operational = computed(() => customer.value.operationalSummary || {})
+const displayName = computed(
+  () =>
+    customer.value.names?.find((n) => n.isPrimary)?.displayName ||
+    customer.value.names?.[0]?.displayName ||
+    identification.value.fullName ||
+    customer.value.primaryName ||
+    'Cliente',
+)
+const editorTitle = computed(
+  () =>
+    ({
+      documents: 'Documentação',
+      compliance: 'Compliance e observações',
+      history: 'Verificação e histórico',
+    })[editor.value] || 'Cliente',
+)
+const statusOptions = [
+  { label: 'Prospect', value: 'Prospect' },
+  { label: 'Ativo', value: 'Active' },
+  { label: 'Suspenso', value: 'Suspended' },
+  { label: 'Arquivado', value: 'Archived' },
 ]
-const statusLabel = (value) => ({ Prospect: 'Prospect', Active: 'Ativo', Suspended: 'Suspenso', Archived: 'Arquivado' })[value] || value
-const kindLabel = (value) => ({ Person: 'Pessoa física', Organization: 'Pessoa jurídica' })[value] || value || ''
-const booleanLabel = (value) => value === true ? 'Sim' : value === false ? 'Não' : 'Não informado'
-const formatDate = (value) => value ? new Intl.DateTimeFormat('pt-BR').format(new Date(value)) : 'Não informado'
-const money = (value, currency = 'BRL') => new Intl.NumberFormat('pt-BR', { style: 'currency', currency: currency || 'BRL' }).format(Number(value))
-const cancelRegistrationEdit = () => { registrationEditing.value = false; registrationEditSession.value += 1 }
-const toggleRegistrationEdit = () => {
-  if (registrationEditing.value) cancelRegistrationEdit()
-  else registrationEditing.value = true
+const statusLabel = (value) =>
+  statusOptions.find((s) => s.value === value)?.label || value || 'Não informado'
+const kindLabel = (value) =>
+  ({ Person: 'Pessoa física', Organization: 'Pessoa jurídica' })[value] || value || 'Cliente'
+const date = (value) => {
+  if (!value) return 'Não informado'
+  const parsed = new Date(value.length === 10 ? `${value}T12:00:00` : value)
+  return Number.isNaN(parsed.getTime())
+    ? 'Não informado'
+    : new Intl.DateTimeFormat('pt-BR').format(parsed)
 }
-const onRegistrationUpdated = async () => { await refreshCustomer(); registrationEditSession.value += 1 }
-const loadCustomer = async (silent = false) => {
-  if (!silent) loading.value = true
-  notFound.value = false
-  errorMessage.value = ''
-  partialWarning.value = ''
-  const [summaryResult, customerResult, financialResult, documentResult] = await Promise.allSettled([
-    getCustomerSummary(route.params.id), getCustomer(route.params.id), getCustomerCurrentFinancialProfile(route.params.id), getCustomerDocumentSummary(route.params.id),
-  ])
-  if (summaryResult.status === 'fulfilled') summary.value = summaryResult.value
-  else { summary.value = null; partialWarning.value = 'Parte do resumo operacional está temporariamente indisponível.' }
-  financialProfile.value = financialResult.status === 'fulfilled' ? financialResult.value : null
-  documentSummary.value = documentResult.status === 'fulfilled' ? documentResult.value : null
-  if (customerResult.status === 'fulfilled') {
-    header.value = customerResult.value
-    identification.value = customerResult.value
-  } else {
-    header.value = null
-    identification.value = null
-    notFound.value = customerResult.reason?.response?.status === 404
-    if (!notFound.value) errorMessage.value = getApiErrorMessage(customerResult.reason, 'Não foi possível carregar os dados do cliente.')
+const field = (label, value, wide = false) => ({ label, value: value === '' ? null : value, wide })
+const personalDocuments = computed(() => identification.value.documents || [])
+const documentOf = (code) =>
+  personalDocuments.value.find((d) => d.documentCode?.toUpperCase() === code) || {}
+const personalFields = computed(() => [
+  field('Nome completo', displayName.value),
+  field(
+    customer.value.kind === 'Organization' ? 'CNPJ' : 'CPF',
+    documentOf(customer.value.kind === 'Organization' ? 'CNPJ' : 'CPF').numberMasked,
+  ),
+  field('Data de nascimento', date(identification.value.birthDate || customer.value.birthDate)),
+  field('Nacionalidade', identification.value.nationality),
+])
+const documentFields = computed(() =>
+  personalDocuments.value
+    .filter((d) => !['CPF', 'CNPJ'].includes(d.documentCode?.toUpperCase()))
+    .flatMap((d) => [
+      field(d.documentCode, d.numberMasked),
+      field('Órgão emissor', d.issuer),
+      field('UF de emissão', d.issuerState),
+      field('Data de emissão', date(d.issuedOn)),
+      ...(d.documentCode?.toUpperCase() === 'CNH'
+        ? [field('Categoria', d.category), field('Validade CNH', date(d.expiresOn))]
+        : []),
+    ]),
+)
+const maskedContact = (contact) => {
+  if (!contact) return null
+  if (contact.valueMasked) return contact.valueMasked
+  const value = typeof contact === 'string' ? contact : contact.value
+  if (!value) return null
+  if (value.includes('@')) {
+    const [local, domain] = value.split('@')
+    return `${local.slice(0, 2)}•••@${domain}`
   }
-  if (!silent) loading.value = false
+  return `•••• ${value.slice(-4)}`
 }
-const refreshCustomer = () => loadCustomer(true)
-onMounted(loadCustomer)
+const contact = (...kinds) => {
+  const matches = (customer.value.contacts || []).filter((c) => kinds.includes(c.kind))
+  return matches.find((c) => c.isPrimary) || matches[0]
+}
+const contactFields = computed(() => [
+  field('E-mail principal', maskedContact(identification.value.primaryEmail || contact('Email'))),
+  field(
+    'Celular',
+    maskedContact(identification.value.mobilePhone || contact('MobilePhone', 'Mobile')),
+  ),
+  field(
+    'Telefone secundário',
+    maskedContact(identification.value.secondaryPhone || contact('SecondaryPhone', 'Phone')),
+  ),
+  field(
+    'Preferência',
+    { Email: 'E-mail', Phone: 'Telefone', MobilePhone: 'Celular' }[
+      identification.value.contactPreference
+    ] || identification.value.contactPreference,
+  ),
+])
+const addressFields = computed(() => {
+  const a =
+    identification.value.residentialAddress ||
+    customer.value.addresses?.find((a) => a.isPrimary) ||
+    customer.value.addresses?.[0] ||
+    {}
+  return [
+    field('Endereço residencial', a.line1, true),
+    field('Complemento', a.line2),
+    field('Município / UF', [a.city, a.stateOrProvince].filter(Boolean).join(' / ')),
+    field('CEP', a.postalCode),
+    field('País', a.countryIsoCode),
+  ]
+})
+const professionalFields = computed(() => [
+  field('Profissão', professional.state.data?.occupation),
+  field('Empresa', professional.state.data?.employerName),
+])
+const financialFields = computed(() => {
+  const f = financial.state.data || {}
+  return [
+    field(
+      'Renda mensal individual',
+      f.individualMonthlyIncome == null ? null : money(f.individualMonthlyIncome, f.currencyCode),
+    ),
+    field(
+      'Renda familiar',
+      f.householdMonthlyIncome == null ? null : money(f.householdMonthlyIncome, f.currencyCode),
+    ),
+    field(
+      'Patrimônio declarado',
+      f.declaredNetWorth == null ? null : money(f.declaredNetWorth, f.currencyCode),
+    ),
+  ]
+})
+const securityFields = computed(() => {
+  const s = security.state.data?.accountSecurity || security.state.data || {}
+  return [
+    field('Usuário', s.userName),
+    field(
+      'Status da senha',
+      { Active: 'Ativa', ResetRequired: 'Redefinição necessária' }[s.passwordStatus] ||
+        s.passwordStatus,
+    ),
+    field('Último login', date(s.lastLoginAtUtc)),
+    field(
+      'Autenticação em duas etapas',
+      s.twoFactorEnabled === true ? 'Ativa' : s.twoFactorEnabled === false ? 'Inativa' : null,
+    ),
+  ]
+})
+const documentMetrics = computed(() => {
+  const d = documentTotals.state.data || {}
+  return [
+    { label: 'Aprovados', value: d.approved ?? '—', color: 'positive' },
+    {
+      label: 'Pendentes',
+      value:
+        d.pending == null
+          ? '—'
+          : Number(d.pending) + Number(d.inReview || 0) + Number(d.missing || 0),
+      color: 'warning',
+    },
+    { label: 'Rejeitados', value: d.rejected ?? '—', color: 'negative' },
+  ]
+})
+const documentSections = computed(() => documentOverview.state.data?.sections || [])
+const documentColor = (value) =>
+  ({
+    Approved: 'positive',
+    Rejected: 'negative',
+    Missing: 'warning',
+    Pending: 'warning',
+    UnderReview: 'warning',
+  })[value] || 'grey-5'
+const documentStatus = (value) =>
+  ({
+    Approved: 'Aprovado',
+    Rejected: 'Rejeitado',
+    Missing: 'Aguardando envio',
+    Pending: 'Pendente',
+    UnderReview: 'Em análise',
+    InReview: 'Em análise',
+    Waived: 'Dispensado',
+  })[value] ||
+  value ||
+  'Aguardando envio'
+const complianceView = computed(() => summarizeCompliance(null, compliance.state.data))
+const recentEvents = computed(() => {
+  const result = timeline.state.data
+  const events = Array.isArray(result)
+    ? result
+    : result?.data || result?.items || result?.events || []
+  return [...events]
+    .sort((a, b) => new Date(b.occurredAtUtc) - new Date(a.occurredAtUtc))
+    .slice(0, 3)
+})
+const optional = async (request) => {
+  try {
+    return await request()
+  } catch (error) {
+    if (error?.response?.status === 404) return null
+    throw error
+  }
+}
+const loadCustomer = () => customerResource.load(() => getCustomer(customerId.value))
+const loadIdentification = () =>
+  identificationResource.load(() => getCustomerIdentification(customerId.value))
+const loadProfessional = () =>
+  professional.load(() => optional(() => getCustomerProfessionalProfile(customerId.value)))
+const loadFinancial = () =>
+  financial.load(() => optional(() => getCustomerCurrentFinancialProfile(customerId.value)))
+const loadSecurity = () => security.load(() => getCustomerAccountSecurity(customerId.value))
+const loadDocumentTotals = () =>
+  documentTotals.load(() => getCustomerDocumentSummary(customerId.value))
+const loadDocuments = () =>
+  documentOverview.load(() => getCustomerDocumentOverview(customerId.value))
+const loadCompliance = () => compliance.load(() => getComplianceAlerts(customerId.value))
+const loadTimeline = () =>
+  timeline.load(() => getCustomerTimeline(customerId.value, { page: 1, pageSize: 3 }))
+const refreshCustomer = async () => {
+  const id = customerId.value
+  try {
+    const result = await getCustomer(id)
+    if (id === customerId.value) customerResource.state.data = result
+  } catch (error) {
+    errorNotify(
+      getApiErrorMessage(
+        error,
+        'As alterações foram salvas, mas não foi possível atualizar o resumo.',
+      ),
+    )
+  }
+}
+const registrationUpdated = () => {
+  refreshCustomer()
+  loadIdentification()
+  loadTimeline()
+}
+const documentsUpdated = () => {
+  loadDocuments()
+  loadDocumentTotals()
+  loadIdentification()
+  loadTimeline()
+}
+const complianceUpdated = () => {
+  loadCompliance()
+  loadTimeline()
+}
+const switchCustomer = (id) => {
+  if (id && id !== customerId.value) router.push({ name: 'ClienteDetalhe', params: { id } })
+}
+const saveStatus = async (status) => {
+  if (status === customer.value.status) return
+  savingStatus.value = true
+  try {
+    await changeCustomerStatus(customerId.value, status)
+    successNotify('Status atualizado.')
+    await refreshCustomer()
+    loadTimeline()
+  } catch (error) {
+    errorNotify(getApiErrorMessage(error, 'Não foi possível alterar o status.'))
+  } finally {
+    savingStatus.value = false
+  }
+}
+watch(
+  customerId,
+  () => {
+    editor.value = null
+    editingRegistration.value = false
+    editingProfessional.value = false
+    currencies.value = []
+    loadCustomer()
+    loadIdentification()
+    loadProfessional()
+    loadFinancial()
+    loadSecurity()
+    loadDocumentTotals()
+    loadDocuments()
+    loadCompliance()
+    loadTimeline()
+  },
+  { immediate: true },
+)
 </script>
 
 <style scoped>
-.client-profile-page { min-height: 100vh; color: #fff; }
-.client-profile-header { position: sticky; top: 0; z-index: 4; display: flex; align-items: center; gap: 14px; min-height: 88px; padding: 14px 24px; border-bottom: 1px solid rgba(255,255,255,.14); background: linear-gradient(180deg, rgba(8,11,22,.88), rgba(8,11,22,.68)); box-shadow: 4px 4px 12px rgba(0,0,0,.13); backdrop-filter: blur(20px); }
-.client-profile-avatar { flex: 0 0 auto; color: rgba(255,255,255,.9); border: 1px solid rgba(255,255,255,.2); background: rgba(255,255,255,.07); }
-.client-profile-identity { min-width: 0; }
-.client-profile-identity h1 { overflow: hidden; margin: 0; font-size: 20px; font-weight: 650; line-height: 1.25; text-overflow: ellipsis; white-space: nowrap; }
-.client-profile-meta { display: flex; flex-wrap: wrap; gap: 6px 14px; margin-top: 5px; color: rgba(224,238,255,.62); font-size: 12px; }
-.client-profile-meta span + span::before { margin-right: 14px; color: rgba(255,255,255,.25); content: '•'; }
-.client-profile-action { border-color: rgba(255,255,255,.32); border-radius: 8px; }
-.client-profile-state { display: grid; min-height: 55vh; place-items: center; }
-.client-profile-message, .client-profile-warning { margin: 24px 32px; color: #fff; border: 1px solid rgba(255,255,255,.14); background: rgba(255,255,255,.07); }
-.client-profile-message--error { color: #ffb9b9; border-color: rgba(255,108,108,.35); }
-.client-profile-grid { display: grid; grid-template-columns: minmax(0, 1fr) 368px; gap: 24px; width: min(100%, 1600px); margin: 0 auto; padding: 32px; }
-.client-profile-main, .client-profile-aside { display: flex; min-width: 0; flex-direction: column; gap: 24px; }
-.profile-surface { overflow: hidden; border: 1px solid rgba(255,255,255,.12); border-radius: 14px; background: linear-gradient(150deg, rgba(5,8,18,.76), rgba(5,20,36,.58)); box-shadow: 4px 4px 12px rgba(0,0,0,.13); backdrop-filter: blur(20px); }
-.profile-summary, .portfolio-section, .embedded-panel, .compact-surface { padding: 24px; }
-.profile-section-heading { display: flex; align-items: flex-start; justify-content: space-between; gap: 20px; margin-bottom: 24px; }
-.profile-section-heading h2 { margin: 0; font-size: 16px; font-weight: 650; line-height: 1.35; }
-.profile-section-heading p { max-width: 68ch; margin: 5px 0 0; color: rgba(224,238,255,.58); font-size: 12px; line-height: 1.55; }
-.profile-data-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1px; overflow: hidden; border: 1px solid rgba(255,255,255,.1); border-radius: 10px; background: rgba(255,255,255,.1); }
-.profile-data-grid > div { min-width: 0; padding: 16px; background: rgba(9,15,28,.8); }
-.profile-data-grid span, .operational-list span { display: block; margin-bottom: 5px; color: rgba(224,238,255,.52); font-size: 10px; text-transform: uppercase; letter-spacing: .045em; }
-.profile-data-grid strong { display: block; overflow: hidden; font-size: 13px; font-weight: 550; text-overflow: ellipsis; white-space: nowrap; }
-.inline-editor { padding-top: 4px; }
-.inline-editor :deep(.q-card) { color: #fff; background: transparent; }
-.inline-editor :deep(.text-grey-7) { color: rgba(224,238,255,.62) !important; }
-.inline-management-section { position: relative; scroll-margin-top: 104px; }
-.inline-management-section__close { position: absolute; top: 16px; right: 16px; z-index: 2; }
-.inline-management-section :deep(.text-grey-7) { color: rgba(224,238,255,.62) !important; }
-.integration-badge { flex: 0 0 auto; padding: 6px 9px; }
-.portfolio-metrics { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 14px; }
-.portfolio-metric { min-width: 0; padding: 18px; border: 1px solid rgba(255,255,255,.1); border-radius: 12px; background: rgba(255,255,255,.045); }
-.portfolio-metric__head { display: flex; align-items: center; justify-content: space-between; gap: 8px; color: rgba(224,238,255,.62); font-size: 11px; }
-.portfolio-metric > strong { display: block; margin: 14px 0 5px; font-size: 25px; font-weight: 600; font-variant-numeric: tabular-nums; }
-.portfolio-metric small { color: rgba(224,238,255,.48); font-size: 10px; line-height: 1.4; }
-.declared-worth { display: grid; grid-template-columns: auto auto 1fr; align-items: center; gap: 12px; margin-top: 16px; padding: 14px 16px; border-radius: 10px; background: rgba(66,178,255,.08); }
-.declared-worth span, .declared-worth strong { display: block; }
-.declared-worth span { color: rgba(224,238,255,.58); font-size: 10px; text-transform: uppercase; }
-.declared-worth strong { margin-top: 2px; font-size: 15px; font-variant-numeric: tabular-nums; }
-.declared-worth small { justify-self: end; color: rgba(224,238,255,.52); font-size: 11px; text-align: right; }
-.portfolio-empty-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 24px; }
-.portfolio-empty { display: flex; min-height: 160px; align-items: center; justify-content: center; flex-direction: column; padding: 24px; border: 1px dashed rgba(255,255,255,.18); border-radius: 12px; color: rgba(224,238,255,.5); text-align: center; }
-.portfolio-empty strong { margin-top: 12px; color: rgba(255,255,255,.86); font-size: 13px; }
-.portfolio-empty span { max-width: 48ch; margin-top: 6px; font-size: 11px; line-height: 1.55; }
-.document-totals { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
-.document-totals > div { display: grid; grid-template-columns: auto 1fr; gap: 1px 7px; padding: 12px 8px; border-radius: 9px; background: rgba(255,255,255,.045); }
-.document-totals strong { font-size: 17px; font-variant-numeric: tabular-nums; }
-.document-totals small { grid-column: 2; color: rgba(224,238,255,.52); font-size: 9px; }
-.document-dot { width: 7px; height: 7px; align-self: center; border-radius: 50%; background: #78909c; }
-.document-dot--positive { background: #49c78e; }.document-dot--warning { background: #f1b84b; }.document-dot--negative { background: #ef6d78; }
-.compliance-status { display: flex; align-items: flex-start; gap: 12px; padding: 15px; border-radius: 10px; background: rgba(255,255,255,.045); }
-.compliance-status strong, .compliance-status span { display: block; }
-.compliance-status strong { font-size: 13px; }.compliance-status span { margin-top: 5px; color: rgba(224,238,255,.56); font-size: 11px; line-height: 1.5; }
-.operational-list { display: grid; gap: 1px; overflow: hidden; border-radius: 10px; background: rgba(255,255,255,.1); }
-.operational-list > div { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 13px 14px; background: rgba(9,15,28,.82); }
-.operational-list span { margin: 0; }.operational-list strong { font-size: 12px; font-weight: 600; text-align: right; }
-.embedded-panel :deep(.text-grey-7) { color: rgba(224,238,255,.56) !important; }
-.embedded-panel :deep(.q-table__container) { color: #fff; border: 1px solid rgba(255,255,255,.1); background: rgba(255,255,255,.025); }
-.client-profile-page :deep(*:focus-visible) { outline: 2px solid #51b8ff; outline-offset: 2px; }
-.client-profile-page ::selection { color: #fff; background: rgba(20,151,223,.65); }
-@media (max-width: 1180px) { .client-profile-grid { grid-template-columns: 1fr; }.client-profile-aside { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); }.portfolio-metrics { grid-template-columns: repeat(2, 1fr); } }
-@media (max-width: 780px) { .client-profile-header { padding: 12px 14px; }.client-profile-action :deep(.q-btn__content) { font-size: 0; }.client-profile-action :deep(.q-icon) { margin: 0; font-size: 20px; }.client-profile-grid { gap: 16px; padding: 16px; }.client-profile-aside { display: flex; }.profile-summary, .portfolio-section, .embedded-panel, .compact-surface { padding: 18px; }.profile-data-grid, .portfolio-empty-grid, .portfolio-metrics { grid-template-columns: 1fr; }.declared-worth { grid-template-columns: auto 1fr; }.declared-worth small { grid-column: 1 / -1; justify-self: start; text-align: left; } }
-@media (max-width: 520px) { .client-profile-avatar { display: none; }.client-profile-meta span + span::before { display: none; }.client-profile-meta { display: grid; gap: 2px; }.document-totals { grid-template-columns: 1fr; } }
+.client-profile-page {
+  color: var(--sa-text);
+  min-height: 100vh;
+}
+.client-profile-header {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  min-height: 88px;
+  padding: 12px 24px;
+  border-bottom: 1px solid var(--sa-border);
+  background: rgba(17, 21, 34, 0.6);
+  backdrop-filter: blur(20px);
+}
+.profile-identity {
+  flex: 1;
+  min-width: 0;
+  margin: 0;
+  padding: 0;
+  min-height: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+}
+.profile-identity :deep(.entity-header__identity) {
+  min-width: 0;
+  max-width: none;
+}
+.profile-identity :deep(.q-avatar) {
+  width: 52px;
+  height: 52px;
+  color: #fff !important;
+  background: var(--sa-surface-soft) !important;
+  border: 1px solid var(--sa-border);
+}
+.profile-name {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+h1 {
+  margin: 0;
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 27px;
+  overflow-wrap: anywhere;
+}
+.profile-name .q-badge {
+  font-size: 10px;
+  color: rgba(255, 255, 255, 0.72);
+}
+.profile-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 12px;
+  margin-top: 4px;
+  color: rgba(255, 255, 255, 0.65);
+  font-size: 11px;
+}
+.profile-switcher {
+  width: 256px;
+  margin-right: auto;
+}
+.profile-header-status {
+  display: grid;
+  gap: 4px;
+  justify-items: center;
+  margin: 0 12px;
+}
+.profile-header-status > span {
+  font-size: 10px;
+  text-transform: uppercase;
+  color: var(--sa-muted);
+}
+.profile-customer-state {
+  margin: 0 32px;
+}
+.client-profile-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 368px;
+  gap: 32px;
+  padding: 32px;
+}
+.client-profile-main,
+.client-profile-aside {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  gap: 24px;
+}
+.profile-divider {
+  margin-top: 28px;
+  padding-top: 28px;
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
+}
+.profile-empty {
+  margin: 0;
+  padding: 16px 0;
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.68);
+}
+.document-totals {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 12px;
+  padding-bottom: 20px;
+  font-size: 12px;
+  border-bottom: 1px solid var(--sa-border);
+}
+.document-totals .text-positive {
+  color: #8cdca8 !important;
+}
+.document-totals .text-negative {
+  color: #ff9ea7 !important;
+}
+.document-totals .text-warning {
+  color: #ffe19a !important;
+}
+.document-category {
+  margin-top: 16px;
+}
+.document-category :deep(.q-item) {
+  padding-left: 0;
+  padding-right: 0;
+  font-size: 12px;
+}
+.document-row {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  gap: 12px;
+  margin-top: 8px;
+  padding: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  color: inherit;
+  background: var(--sa-surface-soft);
+  text-align: left;
+  cursor: pointer;
+}
+.document-row:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+.document-row > span {
+  min-width: 0;
+  flex: 1;
+}
+.document-row strong,
+.document-row small {
+  display: block;
+  overflow-wrap: anywhere;
+}
+.document-row strong {
+  font-size: 13px;
+  font-weight: 500;
+}
+.document-row small {
+  margin-top: 4px;
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.68);
+}
+.compliance-note {
+  padding: 16px;
+  border: 1px solid var(--sa-border);
+  border-radius: 8px;
+  font-size: 13px;
+}
+.compliance-note--warning {
+  color: #ffe19a;
+  border-color: rgba(241, 184, 75, 0.4);
+  background: rgba(241, 184, 75, 0.08);
+}
+.compliance-note p {
+  margin: 8px 0 0;
+  font-size: 12px;
+  line-height: 1.6;
+}
+h3 {
+  margin: 0 0 20px;
+  font-size: 13px;
+  font-weight: 600;
+}
+.profile-timeline {
+  list-style: none;
+  margin: 0 0 16px 5px;
+  padding: 0 0 0 18px;
+  border-left: 1px solid var(--sa-border);
+}
+.profile-timeline li {
+  position: relative;
+  padding-bottom: 20px;
+}
+.profile-timeline li::before {
+  position: absolute;
+  left: -22px;
+  top: 5px;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #bbc6d4;
+  content: '';
+}
+.profile-timeline strong,
+.profile-timeline small {
+  display: block;
+}
+.profile-timeline strong {
+  font-size: 13px;
+  font-weight: 500;
+  overflow-wrap: anywhere;
+}
+.profile-timeline small {
+  margin-top: 5px;
+  color: rgba(255, 255, 255, 0.68);
+  font-size: 11px;
+}
+.profile-editor {
+  min-width: min(920px, 100vw);
+}
+.profile-inline-editor :deep(.q-card) {
+  color: inherit;
+  background: transparent;
+}
+.profile-inline-editor :deep(.q-separator) {
+  background: var(--sa-border);
+}
+.profile-inline-editor :deep(.form-section) {
+  padding-bottom: 0;
+}
+.profile-bank-panel > :deep(.text-subtitle1),
+.profile-bank-panel > :deep(.text-caption) {
+  display: none;
+}
+.client-profile-page :deep(.q-table__container) {
+  color: inherit;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.025);
+}
+.client-profile-page :deep(th),
+.client-profile-page :deep(td) {
+  border-color: rgba(255, 255, 255, 0.1);
+}
+.client-profile-page :deep(.text-grey-7) {
+  color: rgba(255, 255, 255, 0.68) !important;
+}
+.client-profile-page :deep(*:focus-visible) {
+  outline: 2px solid #51b8ff;
+  outline-offset: 3px;
+}
+.client-profile-page ::selection {
+  background: #175b7d;
+  color: white;
+}
+@media (max-width: 1400px) {
+  .client-profile-grid {
+    grid-template-columns: minmax(0, 1fr) 320px;
+    gap: 24px;
+    padding: 24px;
+  }
+  .profile-switcher {
+    width: 210px;
+  }
+}
+@media (max-width: 1100px) {
+  .client-profile-grid {
+    grid-template-columns: 1fr;
+  }
+  .client-profile-header {
+    flex-wrap: wrap;
+  }
+  .profile-switcher {
+    order: 5;
+    width: 100%;
+  }
+  .client-profile-aside {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: start;
+  }
+}
+@media (max-width: 700px) {
+  .client-profile-header {
+    padding: 12px;
+    gap: 8px;
+  }
+  h1 {
+    font-size: 17px;
+  }
+  .profile-name .q-badge {
+    display: none;
+  }
+  .profile-meta {
+    font-size: 10px;
+  }
+  .profile-header-status {
+    margin: 0;
+  }
+  .client-profile-grid {
+    padding: 16px;
+    gap: 16px;
+  }
+  .client-profile-aside {
+    display: flex;
+  }
+  .profile-identity :deep(.q-avatar) {
+    display: none;
+  }
+  .profile-identity :deep(.entity-header__identity) {
+    margin-left: 0;
+  }
+  .client-profile-main {
+    gap: 16px;
+  }
+}
 </style>

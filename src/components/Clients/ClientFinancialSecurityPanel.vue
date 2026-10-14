@@ -25,6 +25,7 @@
       <template #body-cell-period="props"><q-td :props="props">{{ date(props.row.effectiveFrom) }} — {{ date(props.row.effectiveTo) }}</q-td></template>
     </q-table>
 
+    <template v-if="!hideSecurity">
     <div class="text-subtitle1 text-weight-bold q-mt-xl">Segurança da conta</div>
     <div class="text-caption text-grey-7">Informações somente para consulta; nenhum segredo é exibido.</div>
     <div class="row q-col-gutter-sm q-mt-sm">
@@ -32,6 +33,7 @@
         <div class="text-caption text-grey-7">{{ item.label }}</div><div>{{ item.value }}</div>
       </div>
     </div>
+    </template>
   </div>
 </template>
 
@@ -42,7 +44,7 @@ import { createCustomerFinancialProfile, getCustomerAccountSecurity, getCustomer
 import { getApiErrorMessage } from 'src/services/apiError'
 import useNotification from 'src/composables/global/useNotification'
 
-const props = defineProps({ customerId: { type: String, required: true } })
+const props = defineProps({ customerId: { type: String, required: true }, hideSecurity: { type: Boolean, default: false } })
 const emit = defineEmits(['updated'])
 const { successNotify, errorNotify } = useNotification()
 const formRef = ref(null), loading = ref(true), saving = ref(false), loadError = ref('')
