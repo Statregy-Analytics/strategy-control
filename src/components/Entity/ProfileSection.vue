@@ -39,8 +39,8 @@ defineProps({
   align-items: center;
   justify-content: space-between;
   gap: 16px;
-  min-height: 75px;
-  padding: 20px 24px;
+  min-height: 52px;
+  padding: 12px 16px;
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 h2 {
@@ -48,7 +48,7 @@ h2 {
   align-items: center;
   gap: 8px;
   margin: 0;
-  font-size: 14px;
+  font-size: 13px;
   font-weight: 600;
   line-height: 20px;
 }
@@ -62,14 +62,14 @@ p {
   line-height: 18px;
 }
 .profile-section__body {
-  padding: 24px;
+  padding: 16px;
 }
 @media (max-width: 700px) {
   .profile-section__heading {
     padding: 16px;
   }
   .profile-section__body {
-    padding: 20px 16px;
+    padding: 16px;
   }
 }
 </style>

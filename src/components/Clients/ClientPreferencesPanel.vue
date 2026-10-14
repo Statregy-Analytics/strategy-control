@@ -2,39 +2,133 @@
   <div :class="[hideStatus ? '' : 'row q-col-gutter-md', { 'profile-preferences': profileLayout }]">
     <div v-if="!hideStatus" class="col-12 col-md-4">
       <q-card flat :bordered="!embedded">
-        <q-card-section><div class="text-subtitle1 text-weight-bold">Status do cliente</div>
-          <div class="text-caption text-grey-7">Controla o estado operacional do cadastro.</div></q-card-section>
+        <q-card-section
+          ><div class="text-subtitle1 text-weight-bold">Status do cliente</div>
+          <div class="text-caption text-grey-7">
+            Controla o estado operacional do cadastro.
+          </div></q-card-section
+        >
         <q-separator />
         <q-card-section>
-          <q-select v-model="selectedStatus" :options="statusOptions" emit-value map-options outlined label="Status" />
+          <q-select
+            v-model="selectedStatus"
+            :options="statusOptions"
+            emit-value
+            map-options
+            outlined
+            label="Status"
+          />
         </q-card-section>
         <q-card-actions align="right">
-          <q-btn color="primary" label="Alterar status" no-caps :loading="savingStatus" :disable="selectedStatus === currentStatus" @click="saveStatus" />
+          <q-btn
+            color="primary"
+            label="Alterar status"
+            no-caps
+            :loading="savingStatus"
+            :disable="selectedStatus === currentStatus"
+            @click="saveStatus"
+          />
         </q-card-actions>
       </q-card>
     </div>
 
     <div :class="hideStatus ? 'col-12' : 'col-12 col-md-8'">
       <q-card flat :bordered="!embedded">
-        <q-card-section v-if="!profileLayout"><div class="text-subtitle1 text-weight-bold">Preferências</div>
-          <div class="text-caption text-grey-7">Moeda, idioma, fuso horário e tema definidos pelo catálogo da API.</div></q-card-section>
+        <q-card-section v-if="!profileLayout"
+          ><div class="text-subtitle1 text-weight-bold">Preferências</div>
+          <div class="text-caption text-grey-7">
+            Moeda, idioma, fuso horário e tema definidos pelo catálogo da API.
+          </div></q-card-section
+        >
         <q-separator v-if="!embedded" />
-        <q-card-section v-if="loading" class="row justify-center q-pa-xl"><q-spinner color="primary" size="36px" /></q-card-section>
-        <q-banner v-else-if="loadError" class="bg-red-1 text-negative">{{ loadError }}
-          <template #action><q-btn flat color="negative" label="Tentar novamente" @click="load" /></template>
+        <q-card-section v-if="loading" class="row justify-center q-pa-xl"
+          ><q-spinner color="primary" size="36px"
+        /></q-card-section>
+        <q-banner v-else-if="loadError" class="bg-red-1 text-negative"
+          >{{ loadError }}
+          <template #action
+            ><q-btn flat color="negative" label="Tentar novamente" @click="load"
+          /></template>
         </q-banner>
         <q-card-section v-else class="row q-col-gutter-sm q-px-none q-py-sm">
-          <label-form :class-name="preferenceColumn" text-label="Moeda principal"><q-select v-model="form.primaryCurrencyCode" :options="currencyOptions" emit-value map-options outlined dense aria-label="Moeda principal" /></label-form>
-          <label-form :class-name="preferenceColumn" text-label="Moeda secundária"><q-select v-model="form.secondaryCurrencyCode" :options="currencyOptions" emit-value map-options clearable outlined dense aria-label="Moeda secundária" /></label-form>
-          <label-form :class-name="preferenceColumn" text-label="Idioma"><q-select v-model="form.languageCode" :options="languageOptions" emit-value map-options outlined dense aria-label="Idioma" /></label-form>
-          <label-form :class-name="preferenceColumn" text-label="Fuso horário"><q-select v-model="form.timeZoneId" :options="timeZoneOptions" emit-value map-options outlined dense aria-label="Fuso horário" /></label-form>
+          <label-form :class-name="preferenceColumn" text-label="Moeda principal"
+            ><q-select
+              v-model="form.primaryCurrencyCode"
+              :options="currencyOptions"
+              emit-value
+              map-options
+              outlined
+              dense
+              aria-label="Moeda principal"
+          /></label-form>
+          <label-form :class-name="preferenceColumn" text-label="Moeda secundária"
+            ><q-select
+              v-model="form.secondaryCurrencyCode"
+              :options="currencyOptions"
+              emit-value
+              map-options
+              clearable
+              outlined
+              dense
+              aria-label="Moeda secundária"
+          /></label-form>
+          <label-form :class-name="preferenceColumn" text-label="Idioma"
+            ><q-select
+              v-model="form.languageCode"
+              :options="languageOptions"
+              emit-value
+              map-options
+              outlined
+              dense
+              aria-label="Idioma"
+          /></label-form>
+          <label-form :class-name="preferenceColumn" text-label="Fuso horário"
+            ><q-select
+              v-model="form.timeZoneId"
+              :options="timeZoneOptions"
+              emit-value
+              map-options
+              outlined
+              dense
+              aria-label="Fuso horário"
+          /></label-form>
           <label-form v-if="profileLayout" class-name="col-12 q-mt-md" text-label="Tema do sistema">
-            <div class="preference-themes"><q-btn v-for="theme in themeOptions" :key="theme.value" :label="theme.label" :aria-pressed="form.theme === theme.value" :class="{ 'preference-theme--selected': form.theme === theme.value }" outline no-caps @click="form.theme = theme.value" /></div>
+            <div class="preference-themes">
+              <q-btn
+                v-for="theme in themeOptions"
+                :key="theme.value"
+                :label="theme.label"
+                :icon="themeIcon(theme)"
+                :aria-pressed="form.theme === theme.value"
+                :class="{ 'preference-theme--selected': form.theme === theme.value }"
+                outline
+                no-caps
+                @click="form.theme = theme.value"
+              />
+            </div>
           </label-form>
-          <label-form v-else class-name="col-12 col-md-4" text-label="Tema"><q-select v-model="form.theme" :options="themeOptions" emit-value map-options outlined dense /></label-form>
+          <label-form v-else class-name="col-12 col-md-4" text-label="Tema"
+            ><q-select
+              v-model="form.theme"
+              :options="themeOptions"
+              emit-value
+              map-options
+              outlined
+              dense
+          /></label-form>
         </q-card-section>
         <q-card-actions v-if="!loading && !loadError" align="right" class="q-pa-none">
-          <q-btn flat dense size="sm" color="primary" icon="save" label="Salvar preferências" no-caps :loading="savingPreferences" @click="savePreferences" />
+          <q-btn
+            flat
+            dense
+            size="sm"
+            color="primary"
+            icon="save"
+            label="Salvar preferências"
+            no-caps
+            :loading="savingPreferences"
+            @click="savePreferences"
+          />
         </q-card-actions>
       </q-card>
     </div>
@@ -43,7 +137,13 @@
 
 <script setup>
 import { computed, onMounted, reactive, ref } from 'vue'
-import { changeCustomerStatus, getCustomerPreferences, getCustomerStatus, getPreferenceCatalog, updateCustomerPreferences } from 'src/services/customerService'
+import {
+  changeCustomerStatus,
+  getCustomerPreferences,
+  getCustomerStatus,
+  getPreferenceCatalog,
+  updateCustomerPreferences,
+} from 'src/services/customerService'
 import { getApiErrorMessage } from 'src/services/apiError'
 import useNotification from 'src/composables/global/useNotification'
 import LabelForm from 'src/components/Form/LabelForm.vue'
@@ -56,27 +156,68 @@ const props = defineProps({
 })
 const emit = defineEmits(['updated'])
 const { successNotify, errorNotify } = useNotification()
-const loading = ref(true), loadError = ref(''), savingStatus = ref(false), savingPreferences = ref(false)
-const currentStatus = ref(''), selectedStatus = ref(''), catalog = ref({})
-const form = reactive({ primaryCurrencyCode: null, secondaryCurrencyCode: null, languageCode: '', timeZoneId: '', theme: '' })
-const preferenceColumn = computed(() => props.profileLayout ? 'col-12 col-sm-6 col-lg-3' : 'col-12 col-md-4')
+const loading = ref(true),
+  loadError = ref(''),
+  savingStatus = ref(false),
+  savingPreferences = ref(false)
+const currentStatus = ref(''),
+  selectedStatus = ref(''),
+  catalog = ref({})
+const form = reactive({
+  primaryCurrencyCode: null,
+  secondaryCurrencyCode: null,
+  languageCode: '',
+  timeZoneId: '',
+  theme: '',
+})
+const preferenceColumn = computed(() =>
+  props.profileLayout ? 'col-12 col-sm-6 col-lg-3' : 'col-12 col-md-4',
+)
 const statusOptions = [
-  { label: 'Prospect', value: 'Prospect' }, { label: 'Ativo', value: 'Active' },
-  { label: 'Suspenso', value: 'Suspended' }, { label: 'Arquivado', value: 'Archived' },
+  { label: 'Prospect', value: 'Prospect' },
+  { label: 'Ativo', value: 'Active' },
+  { label: 'Suspenso', value: 'Suspended' },
+  { label: 'Arquivado', value: 'Archived' },
 ]
-const toOptions = (items = [], valueKeys = ['code', 'id', 'value'], labelKeys = ['displayName', 'name', 'label']) =>
-  items.map((item) => typeof item === 'string' ? { label: item, value: item } : {
-    value: valueKeys.map((key) => item?.[key]).find(Boolean),
-    label: labelKeys.map((key) => item?.[key]).find(Boolean) || valueKeys.map((key) => item?.[key]).find(Boolean),
-  }).filter((item) => item.value)
+const toOptions = (
+  items = [],
+  valueKeys = ['code', 'id', 'value'],
+  labelKeys = ['displayName', 'name', 'label'],
+) =>
+  items
+    .map((item) =>
+      typeof item === 'string'
+        ? { label: item, value: item }
+        : {
+            value: valueKeys.map((key) => item?.[key]).find(Boolean),
+            label:
+              labelKeys.map((key) => item?.[key]).find(Boolean) ||
+              valueKeys.map((key) => item?.[key]).find(Boolean),
+          },
+    )
+    .filter((item) => item.value)
 const currencyOptions = computed(() => toOptions(catalog.value.currencies))
-const languageOptions = computed(() => toOptions(catalog.value.languages, ['code', 'languageCode', 'value']))
-const timeZoneOptions = computed(() => toOptions(catalog.value.timeZones || catalog.value.timezones, ['id', 'timeZoneId', 'value']))
+const languageOptions = computed(() =>
+  toOptions(catalog.value.languages, ['code', 'languageCode', 'value']),
+)
+const timeZoneOptions = computed(() =>
+  toOptions(catalog.value.timeZones || catalog.value.timezones, ['id', 'timeZoneId', 'value']),
+)
 const themeOptions = computed(() => toOptions(catalog.value.themes, ['value', 'code', 'id']))
+const themeIcon = (theme) => {
+  const key = String(theme.value).toLowerCase() + String(theme.label).toLowerCase()
+  const name = /light|claro/.test(key) ? 'light' : /dark|escuro/.test(key) ? 'dark' : 'auto'
+  return 'img:/icons/client-profile/theme-' + name + '.svg'
+}
 const load = async () => {
-  loading.value = true; loadError.value = ''
+  loading.value = true
+  loadError.value = ''
   try {
-    const [status, preferences, options] = await Promise.all([props.hideStatus ? Promise.resolve(null) : getCustomerStatus(props.customerId), getCustomerPreferences(props.customerId), getPreferenceCatalog()])
+    const [status, preferences, options] = await Promise.all([
+      props.hideStatus ? Promise.resolve(null) : getCustomerStatus(props.customerId),
+      getCustomerPreferences(props.customerId),
+      getPreferenceCatalog(),
+    ])
     currentStatus.value = status?.status ?? status
     selectedStatus.value = currentStatus.value
     Object.assign(form, {
@@ -87,26 +228,78 @@ const load = async () => {
       theme: preferences?.theme ?? '',
     })
     catalog.value = options || {}
-  } catch (error) { loadError.value = getApiErrorMessage(error, 'Não foi possível carregar status e preferências.') }
-  finally { loading.value = false }
+  } catch (error) {
+    loadError.value = getApiErrorMessage(error, 'Não foi possível carregar status e preferências.')
+  } finally {
+    loading.value = false
+  }
 }
 const saveStatus = async () => {
-  try { savingStatus.value = true; await changeCustomerStatus(props.customerId, selectedStatus.value); currentStatus.value = selectedStatus.value; successNotify('Status atualizado.'); emit('updated') }
-  catch (error) { errorNotify(getApiErrorMessage(error, 'Não foi possível alterar o status.')) }
-  finally { savingStatus.value = false }
+  try {
+    savingStatus.value = true
+    await changeCustomerStatus(props.customerId, selectedStatus.value)
+    currentStatus.value = selectedStatus.value
+    successNotify('Status atualizado.')
+    emit('updated')
+  } catch (error) {
+    errorNotify(getApiErrorMessage(error, 'Não foi possível alterar o status.'))
+  } finally {
+    savingStatus.value = false
+  }
 }
 const savePreferences = async () => {
-  try { savingPreferences.value = true; await updateCustomerPreferences(props.customerId, { ...form }); successNotify('Preferências atualizadas.'); emit('updated') }
-  catch (error) { errorNotify(getApiErrorMessage(error, 'Não foi possível salvar as preferências.')) }
-  finally { savingPreferences.value = false }
+  try {
+    savingPreferences.value = true
+    await updateCustomerPreferences(props.customerId, { ...form })
+    successNotify('Preferências atualizadas.')
+    emit('updated')
+  } catch (error) {
+    errorNotify(getApiErrorMessage(error, 'Não foi possível salvar as preferências.'))
+  } finally {
+    savingPreferences.value = false
+  }
 }
 onMounted(load)
 </script>
 <style scoped>
-.profile-preferences :deep(.q-card) { background: transparent; color: inherit; }
-.profile-preferences :deep(.LabelForm > span) { color: rgba(255,255,255,.68); font-size: 12px !important; text-transform: uppercase; letter-spacing: .6px; }
-.preference-themes { display: flex; gap: 16px; }
-.preference-themes .q-btn { flex: 1; min-height: 44px; color: rgba(255,255,255,.7); background: var(--sa-surface-soft); }
-.preference-themes .preference-theme--selected { color: #fff; background: rgba(255,255,255,.14); }
-@media (max-width: 600px) { .preference-themes { flex-direction: column; gap: 8px; } }
+.profile-preferences :deep(.q-card) {
+  background: transparent;
+  color: inherit;
+}
+.profile-preferences :deep(.LabelForm > span) {
+  color: rgba(255, 255, 255, 0.68);
+  font-size: 12px !important;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+}
+.preference-themes :deep(.q-icon) {
+  width: 16px;
+  height: 16px;
+  font-size: 16px;
+}
+.preference-themes {
+  display: flex;
+  gap: 12px;
+}
+.preference-themes .q-btn {
+  flex: 1;
+  min-height: 36px;
+  color: rgba(255, 255, 255, 0.7);
+  background: var(--sa-surface-soft);
+}
+.preference-themes .preference-theme--selected {
+  color: #fff;
+  background: rgba(255, 255, 255, 0.14);
+}
+@media (max-width: 600px) {
+  .preference-themes :deep(.q-icon) {
+    width: 16px;
+    height: 16px;
+    font-size: 16px;
+  }
+  .preference-themes {
+    flex-direction: column;
+    gap: 8px;
+  }
+}
 </style>

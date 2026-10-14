@@ -13,7 +13,7 @@ defineProps({ fields: { type: Array, required: true }, columns: { type: Number, 
 .profile-fields {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 24px;
+  gap: 16px;
   margin: 0;
 }
 .profile-fields--3 {
@@ -29,7 +29,7 @@ defineProps({ fields: { type: Array, required: true }, columns: { type: Number, 
   grid-column: span 2;
 }
 dt {
-  margin-bottom: 7px;
+  margin-bottom: 4px;
   color: rgba(255, 255, 255, 0.68);
   font-size: 12px;
   font-weight: 500;
@@ -40,7 +40,7 @@ dt {
 dd {
   margin: 0;
   overflow-wrap: anywhere;
-  font-size: 14px;
+  font-size: 13px;
   font-weight: 500;
   line-height: 20px;
 }

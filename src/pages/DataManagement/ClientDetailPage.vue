@@ -209,7 +209,7 @@
                 v-for="item in section.items"
                 :key="item.documentId || item.documentTypeId"
                 class="document-row"
-                @click="editor = 'documents'"
+                @click="managingDocuments = !managingDocuments"
               >
                 <q-icon
                   name="description"
@@ -235,10 +235,17 @@
             flat
             dense
             no-caps
-            label="Gerenciar documentos"
-            icon-right="arrow_forward"
+            :label="managingDocuments ? 'Fechar gerenciamento' : 'Gerenciar documentos'"
+            :aria-expanded="managingDocuments"
+            icon-right="expand_more"
             class="full-width q-mt-md"
-            @click="editor = 'documents'"
+            @click="managingDocuments = !managingDocuments"
+          />
+          <client-documents-panel
+            v-if="managingDocuments"
+            class="profile-management q-mt-md"
+            :customer-id="customerId"
+            @updated="documentsUpdated"
           />
         </profile-section>
         <profile-section
@@ -263,12 +270,19 @@
             flat
             dense
             no-caps
-            label="Gerenciar compliance"
-            icon-right="arrow_forward"
+            :label="managingCompliance ? 'Fechar gerenciamento' : 'Gerenciar compliance'"
+            :aria-expanded="managingCompliance"
+            icon-right="expand_more"
             class="full-width q-mt-md"
-            @click="editor = 'compliance'"
+            @click="managingCompliance = !managingCompliance"
           />
           <div class="profile-divider">
+            <client-compliance-panel
+              v-if="managingCompliance"
+              class="profile-management q-mb-md"
+              :customer-id="customerId"
+              @updated="complianceUpdated"
+            />
             <h3>Histórico recente</h3>
             <resource-state :state="timeline.state" @retry="loadTimeline"
               ><ol v-if="recentEvents.length" class="profile-timeline">
@@ -285,49 +299,20 @@
               flat
               dense
               no-caps
-              label="Ver todo o histórico"
+              :label="showHistory ? 'Recolher histórico' : 'Ver todo o histórico'"
+              :aria-expanded="showHistory"
               class="full-width"
-              @click="editor = 'history'"
+              @click="showHistory = !showHistory"
+            /><client-verification-timeline-panel
+              v-if="showHistory"
+              class="profile-management q-mt-md"
+              :customer-id="customerId"
+              @updated="loadTimeline"
             />
           </div>
         </profile-section>
       </aside>
     </main>
-    <q-dialog
-      :model-value="!!editor"
-      position="right"
-      full-height
-      full-width
-      maximized
-      class="control-width"
-      @update:model-value="
-        (value) => {
-          if (!value) editor = null
-        }
-      "
-    >
-      <q-card class="profile-editor">
-        <title-card :title="editorTitle" @on-close="editor = null" />
-        <entity-header :id="customerId" :name="displayName" short-id />
-        <q-card-section>
-          <client-documents-panel
-            v-if="editor === 'documents'"
-            :customer-id="customerId"
-            @updated="documentsUpdated"
-          />
-          <client-compliance-panel
-            v-else-if="editor === 'compliance'"
-            :customer-id="customerId"
-            @updated="complianceUpdated"
-          />
-          <client-verification-timeline-panel
-            v-else-if="editor === 'history'"
-            :customer-id="customerId"
-            @updated="loadTimeline"
-          />
-        </q-card-section>
-      </q-card>
-    </q-dialog>
   </q-page>
 </template>
 <script setup>
@@ -337,7 +322,6 @@ import EntityHeader from 'src/components/Entity/EntityHeader.vue'
 import ProfileSection from 'src/components/Entity/ProfileSection.vue'
 import ProfileFields from 'src/components/Entity/ProfileFields.vue'
 import FormSection from 'src/components/Entity/FormSection.vue'
-import TitleCard from 'src/components/Card/TitleCard.vue'
 import ResourceState from 'src/components/Finance/ResourceState.vue'
 import CustomerSelect from 'src/components/Finance/CustomerSelect.vue'
 import CustomerPortfolio from 'src/components/Finance/CustomerPortfolio.vue'
@@ -380,7 +364,9 @@ const customerResource = useFinanceResource(),
   documentOverview = useFinanceResource(),
   compliance = useFinanceResource(),
   timeline = useFinanceResource()
-const editor = ref(null),
+const managingDocuments = ref(false),
+  managingCompliance = ref(false),
+  showHistory = ref(false),
   savingStatus = ref(false),
   currencies = ref([]),
   portfolioRef = ref(null)
@@ -402,14 +388,6 @@ const displayName = computed(
     identification.value.fullName ||
     customer.value.primaryName ||
     'Cliente',
-)
-const editorTitle = computed(
-  () =>
-    ({
-      documents: 'Documentação',
-      compliance: 'Compliance e observações',
-      history: 'Verificação e histórico',
-    })[editor.value] || 'Cliente',
 )
 const statusOptions = [
   { label: 'Prospect', value: 'Prospect' },
@@ -655,7 +633,9 @@ const saveStatus = async (status) => {
 watch(
   customerId,
   () => {
-    editor.value = null
+    managingDocuments.value = false
+    managingCompliance.value = false
+    showHistory.value = false
     editingRegistration.value = false
     editingProfessional.value = false
     currencies.value = []
@@ -682,7 +662,7 @@ watch(
   display: flex;
   align-items: center;
   gap: 16px;
-  min-height: 88px;
+  min-height: 72px;
   padding: 12px 24px;
   border-bottom: 1px solid var(--sa-border);
   background: rgba(17, 21, 34, 0.6);
@@ -756,19 +736,19 @@ h1 {
 .client-profile-grid {
   display: grid;
   grid-template-columns: minmax(0, 1fr) 368px;
-  gap: 32px;
-  padding: 32px;
+  gap: 20px;
+  padding: 20px;
 }
 .client-profile-main,
 .client-profile-aside {
   display: flex;
   min-width: 0;
   flex-direction: column;
-  gap: 24px;
+  gap: 16px;
 }
 .profile-divider {
-  margin-top: 28px;
-  padding-top: 28px;
+  margin-top: 16px;
+  padding-top: 16px;
   border-top: 1px solid rgba(255, 255, 255, 0.12);
 }
 .profile-empty {
@@ -892,8 +872,25 @@ h3 {
   color: rgba(255, 255, 255, 0.68);
   font-size: 11px;
 }
-.profile-editor {
-  min-width: min(920px, 100vw);
+.profile-management {
+  min-width: 0;
+  border-top: 1px solid var(--sa-border);
+  padding-top: 16px;
+}
+.profile-management :deep(.panel-metrics) {
+  grid-template-columns: 1fr;
+  gap: 8px;
+}
+.profile-management :deep(.panel-metric) {
+  min-height: 0;
+  padding: 12px;
+}
+.profile-management :deep(.panel-section) {
+  margin-top: 16px;
+}
+.profile-management :deep(.q-table td) {
+  white-space: normal;
+  overflow-wrap: anywhere;
 }
 .profile-inline-editor :deep(.q-card) {
   color: inherit;
@@ -933,8 +930,8 @@ h3 {
 @media (max-width: 1400px) {
   .client-profile-grid {
     grid-template-columns: minmax(0, 1fr) 320px;
-    gap: 24px;
-    padding: 24px;
+    gap: 16px;
+    padding: 20px;
   }
   .profile-switcher {
     width: 210px;

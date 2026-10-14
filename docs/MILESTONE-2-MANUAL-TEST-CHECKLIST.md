@@ -144,6 +144,12 @@ Referência: Figma `i2jizg7UtPyg3KjAOvuFtI`, nó `1484:68035`.
       profissional/financeiro em formulários dentro das próprias seções, sem drawer.
 - [x] Abertura individual e fechamento retornando ao resumo sem mudar a rota.
 - [ ] Revalidar salvamento de cada seção inline com dados descartáveis.
+- [x] Revisão de densidade: cabeçalhos de seção reduzidos de 75px para 52px,
+      conteúdo com 16px de respiro e separadores com 16px.
+- [x] Documentação, compliance e histórico expandem na própria seção do perfil,
+      sem drawer; abertura e fechamento conferidos no Edge.
+- [x] Claro, Escuro e Automático exibem os SVGs do Figma em 16 × 16px.
+- [x] Perfil conferido em desktop e 390px, sem overflow horizontal da página.
 - [x] Visualização em 390px usa uma coluna, sem overflow horizontal da página.
 - [x] Identificadores documentais e contatos permanecem mascarados no resumo.
 - [x] Cliente sem carteira, patrimônio ou conta de acesso apresenta estados vazios.
