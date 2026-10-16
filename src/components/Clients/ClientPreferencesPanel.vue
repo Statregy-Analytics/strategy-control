@@ -50,7 +50,7 @@
             ><q-btn flat color="negative" label="Tentar novamente" @click="load"
           /></template>
         </q-banner>
-        <q-card-section v-else class="row q-col-gutter-sm q-px-none q-py-sm">
+        <q-card-section v-else class="preference-fields row q-col-gutter-sm q-px-none q-py-sm">
           <label-form :class-name="preferenceColumn" text-label="Moeda principal"
             ><q-select
               v-model="form.primaryCurrencyCode"
@@ -262,6 +262,11 @@ const savePreferences = async () => {
 onMounted(load)
 </script>
 <style scoped>
+.preference-fields :deep(.LabelForm) { min-width: 0; grid-template-columns: minmax(0, 1fr); }
+.preference-fields :deep(.q-field) { min-width: 0; width: 100%; max-width: 100%; }
+.preference-fields :deep(.q-field__control-container), .preference-fields :deep(.q-field__native) { min-width: 0; }
+.preference-fields :deep(.q-field__native) { flex-wrap: nowrap; }
+.preference-fields :deep(.q-field__native > span) { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .profile-preferences :deep(.q-card) {
   background: transparent;
   color: inherit;

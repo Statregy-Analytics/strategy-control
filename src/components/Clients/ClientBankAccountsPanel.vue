@@ -9,15 +9,15 @@
       <template #action><q-btn flat color="negative" label="Tentar novamente" @click="load" /></template>
     </q-banner>
     <template v-else>
-      <q-table flat dense hide-pagination row-key="id" class="q-mt-md" :rows="accounts" :columns="columns">
+      <q-table flat dense hide-pagination row-key="id" class="bank-accounts-table q-mt-md" :rows="accounts" :columns="columns">
         <template #no-data><div class="full-width text-center text-grey-7 q-pa-lg">Nenhuma conta bancária cadastrada.</div></template>
-        <template #body-cell-bank="props"><q-td :props="props">{{ bankName(props.row.bankId) }}</q-td></template>
+        <template #body-cell-bank="props"><q-td :props="props"><span class="bank-name" :title="bankName(props.row.bankId)">{{ bankName(props.row.bankId) }}</span></q-td></template>
         <template #body-cell-account="props"><q-td :props="props">{{ masked(props.row.accountNumberMasked) }}</q-td></template>
         <template #body-cell-holder="props"><q-td :props="props">{{ masked(props.row.holderDocumentMasked) }}</q-td></template>
         <template #body-cell-pix="props"><q-td :props="props">{{ masked(props.row.pixKeyMasked) }}</q-td></template>
         <template #body-cell-primary="props"><q-td :props="props"><q-badge v-if="props.row.isPrimary" outline color="primary" label="Principal" /></q-td></template>
         <template #body-cell-actions="props">
-          <q-td :props="props"><row-actions :actions="actionsFor(props.row)" @select="runAction($event, props.row)" /></q-td>
+          <q-td :props="props"><row-actions dark :actions="actionsFor(props.row)" @select="runAction($event, props.row)" /></q-td>
         </template>
       </q-table>
 
@@ -178,6 +178,15 @@ load()
 </script>
 
 <style scoped>
+.bank-accounts-table { min-width: 0; max-width: 100%; }
+.bank-accounts-table :deep(table) { table-layout: fixed; width: 100%; }
+.bank-accounts-table :deep(th), .bank-accounts-table :deep(td) { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.bank-accounts-table :deep(th:nth-child(2)) { width: 10%; }
+.bank-accounts-table :deep(th:nth-child(3)), .bank-accounts-table :deep(th:nth-child(4)) { width: 16%; }
+.bank-accounts-table :deep(th:nth-child(5)) { width: 12%; }
+.bank-accounts-table :deep(th:last-child) { width: 40px; }
+.bank-accounts-table :deep(td:last-child) { padding-left: 4px; padding-right: 4px; }
+.bank-name { display: block; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .bank-field { min-width: 0; }
 .bank-select {
   min-width: 0;

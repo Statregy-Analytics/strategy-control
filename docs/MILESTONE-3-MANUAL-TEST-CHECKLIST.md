@@ -67,3 +67,15 @@ Frontend: Saldo Investível usa availableBalance; Banking usa Free.available;
 saque permite apenas Free e recebe currencyId da API; mensagens traduzem os sete
 blockingCode documentados; Admin aceita prazo Day/Month/Year com os limites
 confirmados. Mesma composição visual e mesmas portas 8080/9010.
+
+## Correção visual do perfil administrativo — 15/10/2026
+
+- Nome longo de banco: coluna limitada, reticências e nome completo no título;
+  tabela sem rolagem horizontal no card (794/794 px no desktop, 308/308 px no celular).
+- Menu de três pontos: lista vertical compacta alinhada ao botão, com tema escuro
+  e contraste das ações. Abertura e fechamento conferidos no navegador.
+- Preferências: idioma e demais seletores limitados à coluna, sem sobreposição
+  com o fuso horário. Texto extenso recebe reticências; valor salvo é preservado.
+- Revisão no cliente da captura, em localhost:8080, incluindo largura móvel de
+  390 px; largura da página 375 px, sem overflow horizontal do fluxo afetado.
+- Nenhuma conta, preferência ou dado do cliente foi alterado nesta revisão.
