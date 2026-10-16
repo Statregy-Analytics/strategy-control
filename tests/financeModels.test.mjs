@@ -1,7 +1,7 @@
 import test from 'node:test'
 import assert from 'node:assert/strict'
 import { readFileSync } from 'node:fs'
-import { buildDraftPayload, buildTransactionPayload } from '../src/services/financeModels.js'
+import { buildDraftPayload, buildTransactionPayload, buildContractTerm } from '../src/services/financeModels.js'
 const schemas = JSON.parse(
   readFileSync(new URL('../docs/Api/milestone-3-swagger.json', import.meta.url)),
 ).components.schemas
@@ -43,7 +43,7 @@ test('nenhum valor inválido gera uma solicitação financeira', () => {
   for (const missing of ['clientId', 'currencyId', 'bankId'])
     assert.throws(() => buildTransactionPayload('withdrawals', { ...form, [missing]: null }))
 })
-test('transferência sem vocabulário publicado é bloqueada antes da escrita', () =>
+test('transferência sem fluxo integrado na interface é bloqueada antes da escrita', () =>
   assert.throws(
     () => buildTransactionPayload('wallet-transfers', form),
     /ainda não estão disponíveis/,
@@ -53,6 +53,17 @@ test('rascunho incompleto mantém campos nulos exigidos pelo contrato HTTP', () 
   matchesRequest(payload, 'SaveContractDraftRequest')
   assert.equal(payload.initialContractualCapital, null)
   assert.equal(payload.term, null)
+})
+
+test('prazo respeita unidades e limites confirmados pelo backend', () => {
+  for (const [unit, max] of [['Day', 36500], ['Month', 1200], ['Year', 100]]) {
+    assert.deepEqual(buildContractTerm({ value: max, unit }), { value: max, unit })
+    for (const value of [null, '', 0, -1, 1.5, max + 1, Infinity])
+      assert.throws(() => buildContractTerm({ value, unit }))
+  }
+  assert.throws(() => buildContractTerm({ value: 12, unit: 'Months' }))
+  assert.throws(() => buildContractTerm({ value: 12, unit: null }))
+  assert.equal(buildContractTerm(null), null)
 })
 test('participantes duplicados ou vazios não sobrescrevem alocações', () => {
   assert.throws(

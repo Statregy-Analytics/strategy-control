@@ -36,9 +36,23 @@ export function buildTransactionPayload(kind, form) {
     if (!form.contractId) throw new Error('Selecione o contrato de destino.')
     return { ...payload, destinationContractId: form.contractId }
   }
-  // Destination values are not enumerated by the published OpenAPI contract.
-  // Keep the operation unavailable until the backend publishes that vocabulary.
+  // The backend vocabulary is documented; this form still has no transfer flow.
+  // Keep it unavailable until the interface is defined in the approved design.
   throw new Error('Transferências entre carteiras ainda não estão disponíveis.')
+}
+export const contractTermOptions = [
+  { label: 'Dias', value: 'Day', max: 36500 },
+  { label: 'Meses', value: 'Month', max: 1200 },
+  { label: 'Anos', value: 'Year', max: 100 },
+]
+export function buildContractTerm(term) {
+  if (!term) return null
+  const option = contractTermOptions.find((option) => option.value === term.unit)
+  if (!option) throw new Error('Selecione dias, meses ou anos para o prazo.')
+  const value = Number(term.value)
+  if (!Number.isInteger(value) || value < 1 || value > option.max)
+    throw new Error(`Informe um prazo inteiro entre 1 e ${option.max} ${option.label.toLowerCase()}.`)
+  return { value, unit: option.value }
 }
 export function buildDraftPayload(form, term) {
   const allocations = form.clientAllocations || []
@@ -52,11 +66,9 @@ export function buildDraftPayload(form, term) {
       throw new Error('Informe um valor maior ou igual a zero.')
     return Number(value)
   }
-  if (term && (!term.unit || !Number.isInteger(Number(term.value))))
-    throw new Error('Informe um prazo inteiro e sua unidade.')
   return {
     name: form.name?.trim() || null,
-    term: term ? { value: positiveAmount(term.value), unit: term.unit } : null,
+    term: buildContractTerm(term),
     startDate: form.startDate || null,
     currencyId: form.currencyId || null,
     initialContractualCapital: nullableAmount(form.initialContractualCapital),

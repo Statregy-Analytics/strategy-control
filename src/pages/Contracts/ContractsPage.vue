@@ -86,6 +86,7 @@
                       v-model.number="termValue"
                       type="number"
                       min="1"
+                      :max="termOptions.find((option) => option.value === termUnit)?.max"
                       step="1"
                       outlined
                       dense
@@ -107,10 +108,6 @@
                     ><q-input v-model="endDate" type="date" outlined dense aria-label="Data final"
                   /></label-form>
                 </div>
-                <p v-if="!termOptions.length" class="text-caption q-mt-md">
-                  A definição de prazo ainda não está disponível para novos contratos. Você pode
-                  salvar o rascunho.
-                </p>
               </form-section>
               <form-section title="Capital e estratégia">
                 <resource-state :state="catalog.state" @retry="loadCatalog">
@@ -270,7 +267,7 @@ import CurrencySelect from 'src/components/Finance/CurrencySelect.vue'
 import CustomerSelect from 'src/components/Finance/CustomerSelect.vue'
 import ContractSections from 'src/components/Finance/ContractSections.vue'
 import { useFinanceResource } from 'src/composables/useFinanceResource'
-import { buildDraftPayload } from 'src/services/financeModels'
+import { buildDraftPayload, buildContractTerm, contractTermOptions } from 'src/services/financeModels'
 import { financeGet, financeWrite, money, financeLabel, columns } from 'src/services/financeService'
 const $q = useQuasar(),
   table = ref(),
@@ -291,11 +288,7 @@ const detail = useFinanceResource(),
   termUnit = ref(null),
   endDate = ref(null)
 const draft = computed(() => !id.value || detail.state.data?.registrationStatus === 'Draft')
-const termOptions = computed(() =>
-  detail.state.data?.term?.unit
-    ? [{ label: financeLabel(detail.state.data.term.unit), value: detail.state.data.term.unit }]
-    : [],
-)
+const termOptions = contractTermOptions
 const contractColumns = columns([
   ['publicCode', 'Contrato'],
   ['name', 'Nome'],
@@ -375,7 +368,11 @@ async function save() {
   saving.value = true
   error.value = ''
   try {
-    const term = termValue.value ? { value: Number(termValue.value), unit: termUnit.value } : null
+    const term = buildContractTerm(
+      termUnit.value || (termValue.value != null && termValue.value !== '')
+        ? { value: termValue.value, unit: termUnit.value }
+        : null,
+    )
     const payload = draft.value
       ? buildDraftPayload(form.value, term)
       : {
@@ -407,7 +404,7 @@ async function save() {
 function confirmFinalize() {
   if (!termUnit.value || !termValue.value) {
     error.value =
-      'Defina o prazo antes de finalizar. A disponibilidade das unidades de prazo depende da atualização do serviço.'
+      'Defina o prazo e sua unidade antes de finalizar.'
     return
   }
   $q.dialog({

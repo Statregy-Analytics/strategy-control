@@ -47,3 +47,23 @@ Rascunho CTR-0EDD86A7; observação identificada no depósito de teste; solicita
 ## Complemento de 13/10/2026
 
 Home e carteira de Cláudio consultadas: BRL 25.000,00 em carteira e BRL 261.500,00 de capital contratado. Documentação segue bloqueada: API retorna documentLevel=1 e exige 2, com featureCode=Communication. A aprovação nível 2 informada pelo produto não aparece na resposta. Causa interna pendente de investigação. Consulte MARCO-3-DEVOLUTIVA-BACKEND.md para evidência sanitizada e critérios de reteste. A mensagem frontend que indicava depósito foi corrigida; isso não libera o guard do backend.
+
+## Complemento de 15/10/2026
+
+Resposta do backend recebida: PRs #200 (currencyId da carteira) e #201 (guard da
+listagem documental) informados como publicados. Reteste com Cláudio confirmou
+listagem de documentos 200 e carteira Free BRL 25.000,00 com currencyId. Resumo
+segue nível documental 1; são cálculos diferentes do nível de verificação Admin.
+A Home agora responde PreferencesRequired; não foi alterado o cadastro para
+contornar a exigência. Valores de saldo e mensagens foram conferidos no portal.
+
+Os vocabulários de prazo, transferência, patrimônio e função de documento estão
+esclarecidos. As pendências antigas de contrato HTTP acima são registros históricos,
+não a situação atual. A nova rodada mantém sem homologação as escritas não
+executadas. Catálogo de ativos informado como populado pelo backend; aplicação a
+contratos ainda pendente. Motor de variação pertence ao Marco 4.
+
+Frontend: Saldo Investível usa availableBalance; Banking usa Free.available;
+saque permite apenas Free e recebe currencyId da API; mensagens traduzem os sete
+blockingCode documentados; Admin aceita prazo Day/Month/Year com os limites
+confirmados. Mesma composição visual e mesmas portas 8080/9010.

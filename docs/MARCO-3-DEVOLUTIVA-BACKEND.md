@@ -151,3 +151,50 @@ Responder aos itens 1–4 com regras/payloads e dados de teste, executar os cen�
 registrar resultado por operação e só então revisar o status de aprovação do Marco 3.
 Este relatório não autoriza alterar níveis, aprovar documentos ou movimentar fundos para
 contornar bloqueios.
+
+## Atualização após resposta do backend — 15/10/2026
+
+A resposta recebida em 15/10 esclarece os itens 1–4. O contrato HTTP orienta os
+payloads; o Figma e os fluxos aprovados continuam determinando os espaços visuais.
+Capacidades extras da API não autorizam novos cards, abas, tabelas ou ações.
+
+- Documentação de Cláudio: login e listagem retestados; GET de documentos retorna
+  200. O resumo continua documentLevel=1. O backend esclareceu que o catálogo de
+  verificação do Admin e o cálculo documental do portal são diferentes. A definição
+  de um nível oficial unificado continua pendente do produto.
+- Home de Cláudio: no reteste desta data retorna 403 PreferencesRequired,
+  feature DashboardHome, current.preferencesCompleted=false. Carteiras retornam
+  200, Free BRL 25.000,00, disponível 25.000,00 e currencyId presente. O frontend
+  mantém a mensagem de preferências e o Banking independente. Não alterou cadastro
+  ou permissões para liberar a Home.
+- Saque: currencyId já vem da carteira. O formulário existente consome esse campo,
+  restringe a origem a Free e usa somente currencyId, destinationBankAccountId e
+  amount. Solicitação, aprovação e execução não foram realizadas nesta rodada.
+- Saldo Investível: campo existente recebe summaries.availableBalance quando
+  Available, por moeda. Banking usa Free.available, descontando reservas.
+  Investimentos continua contractedCapital. Nenhuma soma em moedas distintas.
+- Carteira Total: continua currentPosition. A alternativa de mostrar soma sem
+  rendimento com outro rótulo é sugestão do backend, ainda sem aprovação de
+  produto/design; não foi aplicada.
+- Posição, resultado, gráfico, rendimento, variação e próxima distribuição dependem
+  do motor previsto para Marco 4. Não são falhas ou impeditivos de aprovação do
+  escopo correspondente do Marco 3. Permanecem sem valores simulados.
+- Prazo: unidades Day, Month e Year e limites 36.500/1.200/100 aplicados no seletor
+  e validação já existentes do Admin. Nenhuma finalização foi executada.
+- Transferência, criação de patrimônio e vínculos de documento: vocabulários
+  esclarecidos (Wallet/Contract; RealEstate/Vehicle/Consortium/Investment;
+  PaidOff/Financed/UnderReview; Receipt/SupportingDocument/ExecutionProof).
+  Deixam de ser dúvidas de contrato HTTP. Fluxos ainda ausentes não serão criados
+  apenas porque existe endpoint: dependem de composição prevista/aprovada no Figma.
+- Universo de ativos: backend informa catálogo de teste cadastrado. Vínculos e
+  aplicação de conjuntos em contratos não foram executados nesta rodada.
+
+A leitura do nó Figma 1828:21088 foi tentada novamente, mas o conector não retornou
+contexto e a captura expirou. A base visual preservada é a implementação existente;
+fidelidade contra o arquivo Figma não foi certificada nesta rodada.
+
+A homologação continua parcial: correção de leitura de documentos confirmada;
+novas escritas financeiras e demais cenários do item 6 continuam sem aprovação
+integrada. Resolver contrato HTTP não equivale a homologar a operação.
+
+Reteste da Home de Éric em 15/10: 200; disponível BRL 47.500,00, capital BRL 0,00 e USD 250.000,00. Moedas mantidas separadas.
