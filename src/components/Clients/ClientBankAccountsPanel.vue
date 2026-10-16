@@ -15,9 +15,19 @@
         <template #body-cell-account="props"><q-td :props="props">{{ masked(props.row.accountNumberMasked) }}</q-td></template>
         <template #body-cell-holder="props"><q-td :props="props">{{ masked(props.row.holderDocumentMasked) }}</q-td></template>
         <template #body-cell-pix="props"><q-td :props="props">{{ masked(props.row.pixKeyMasked) }}</q-td></template>
-        <template #body-cell-primary="props"><q-td :props="props"><q-badge v-if="props.row.isPrimary" outline color="primary" label="Principal" /></q-td></template>
+        <template #body-cell-primary="props">
+          <q-td :props="props" class="text-center">
+            <q-icon v-if="props.row.isPrimary" name="img:/icons/client-profile/bank-primary.svg" size="16px" aria-label="Conta principal"><q-tooltip>Conta principal</q-tooltip></q-icon>
+            <q-btn v-else flat round dense size="sm" icon="radio_button_unchecked" aria-label="Definir como principal" :disable="saving || actionSaving" @click="runAction('primary', props.row)"><q-tooltip>Definir como principal</q-tooltip></q-btn>
+          </q-td>
+        </template>
         <template #body-cell-actions="props">
-          <q-td :props="props"><row-actions dark :actions="actionsFor(props.row)" @select="runAction($event, props.row)" /></q-td>
+          <q-td :props="props">
+            <div class="bank-row-actions">
+              <q-btn flat round dense size="sm" aria-label="Editar conta" :disable="saving || actionSaving" @click="runAction('edit', props.row)"><q-icon name="img:/icons/client-profile/bank-edit.svg" size="16px" /><q-tooltip>Editar conta</q-tooltip></q-btn>
+              <q-btn flat round dense size="sm" aria-label="Arquivar conta" :disable="saving || actionSaving" @click="runAction('archive', props.row)"><q-icon name="img:/icons/client-profile/bank-archive.svg" size="16px" /><q-tooltip>Arquivar conta</q-tooltip></q-btn>
+            </div>
+          </q-td>
         </template>
       </q-table>
 
@@ -84,8 +94,7 @@
 <script setup>
 import { nextTick, reactive, ref } from 'vue'
 import LabelForm from 'src/components/Form/LabelForm.vue'
-import RowActions from 'src/components/Entity/RowActions.vue'
-import { archiveCustomerBankAccount, changeCustomerBankAccountStatus, createCustomerBankAccount, getCustomerBankAccount, listBanks, listCustomerBankAccounts, setPrimaryCustomerBankAccount, updateCustomerBankAccount } from 'src/services/customerService'
+import { archiveCustomerBankAccount, createCustomerBankAccount, getCustomerBankAccount, listBanks, listCustomerBankAccounts, setPrimaryCustomerBankAccount, updateCustomerBankAccount } from 'src/services/customerService'
 import { getApiErrorMessage } from 'src/services/apiError'
 import useNotification from 'src/composables/global/useNotification'
 
@@ -111,7 +120,7 @@ const columns = [
   { name: 'account', label: 'Conta', field: 'accountNumberMasked', align: 'left' },
   { name: 'holder', label: 'Documento', field: 'holderDocumentMasked', align: 'left' },
   { name: 'pix', label: 'Chave Pix', field: 'pixKeyMasked', align: 'left' },
-  { name: 'primary', label: '', field: 'isPrimary', align: 'left' },
+  { name: 'primary', label: 'Principal', field: 'isPrimary', align: 'center' },
   { name: 'actions', label: '', field: 'id', align: 'right' },
 ]
 const required = (value) => !!value || 'Campo obrigatório'
@@ -131,12 +140,6 @@ const filterBanks = (value, update) => {
       : bankOptions.value
   })
 }
-const actionsFor = (account) => [
-  { name: 'edit', label: 'Editar', icon: 'edit', color: 'grey-7' },
-  ...(!account.isPrimary ? [{ name: 'primary', label: 'Definir como principal', icon: 'star_outline', color: 'primary' }] : []),
-  { name: 'status', label: account.status === 'Active' ? 'Desativar conta' : 'Ativar conta', icon: 'toggle_on' },
-  { name: 'archive', label: 'Arquivar conta', icon: 'archive', color: 'negative' },
-]
 const load = async () => {
   loading.value = true; loadError.value = ''
   const [banksResult, accountsResult] = await Promise.allSettled([
@@ -164,13 +167,15 @@ const save = async () => {
   finally { saving.value = false }
 }
 const runAction = async (action, account) => {
+  if (saving.value || actionSaving.value) return
   try {
     if (action === 'edit') { await startEdit(account); return }
-    if (action === 'primary') await setPrimaryCustomerBankAccount(props.customerId, account.id)
-    if (action === 'status') await changeCustomerBankAccountStatus(props.customerId, account.id, account.status === 'Active' ? 'Inactive' : 'Active')
     if (action === 'archive') { archiveTarget.value = account; archiveDialog.value = true; return }
+    actionSaving.value = true
+    if (action === 'primary') await setPrimaryCustomerBankAccount(props.customerId, account.id)
     successNotify('Conta bancária atualizada.'); await load(); emit('updated')
   } catch (error) { errorNotify(getApiErrorMessage(error, 'Não foi possível atualizar a conta bancária.')) }
+  finally { actionSaving.value = false }
 }
 const confirmArchive = async () => { try { actionSaving.value = true; await archiveCustomerBankAccount(props.customerId, archiveTarget.value.id); archiveDialog.value = false; archiveTarget.value = null; successNotify('Conta bancária arquivada.'); await load(); emit('updated') } catch (error) { errorNotify(getApiErrorMessage(error, 'Não foi possível arquivar a conta bancária.')) } finally { actionSaving.value = false } }
 
@@ -184,8 +189,9 @@ load()
 .bank-accounts-table :deep(th:nth-child(2)) { width: 10%; }
 .bank-accounts-table :deep(th:nth-child(3)), .bank-accounts-table :deep(th:nth-child(4)) { width: 16%; }
 .bank-accounts-table :deep(th:nth-child(5)) { width: 12%; }
-.bank-accounts-table :deep(th:last-child) { width: 40px; }
-.bank-accounts-table :deep(td:last-child) { padding-left: 4px; padding-right: 4px; }
+.bank-accounts-table :deep(th:last-child) { width: 76px; }
+.bank-accounts-table :deep(td:nth-child(5)), .bank-accounts-table :deep(td:last-child) { padding-left: 4px; padding-right: 4px; }
+.bank-row-actions { display: flex; justify-content: flex-end; align-items: center; gap: 4px; }
 .bank-name { display: block; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .bank-field { min-width: 0; }
 .bank-select {

@@ -95,3 +95,13 @@ bancárias inline e não possui estado específico desse menu; portanto, a compa
 é com o padrão visual de menu C17, sem alegar equivalência integral da tabela.
 Nome longo e idioma permanecem contidos, conforme correção anterior. Nenhuma
 conta ou preferência foi modificada na validação.
+
+## Ações bancárias na linha — 16/10/2026
+
+A pedido do usuário, a tabela de contas bancárias passou a seguir as ações inline
+mostradas no C02: indicação de principal, editar e arquivar. O menu de três pontos
+foi retirado somente dessa tabela; o componente compartilhado continua disponível
+nos demais fluxos. A situação da conta pode ser alterada no formulário de edição.
+Ícones originais extraídos dos nós 1484:68299, 1484:68302 e 1484:68304, salvos em
+public/icons/client-profile, com dimensões de 16 × 16 px. Nome longo permanece
+truncado e a tabela mantém largura limitada ao card. Nenhuma conta foi alterada.
