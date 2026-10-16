@@ -6,3 +6,4 @@ export const getVerificationCatalog = async () => unwrap(await api.get('/api/v1/
 export const getCustomerVerificationLevel = async (customerId) => unwrap(await api.get(`/api/v1/admin/customers/${customerId}/verification-level`))
 export const updateCustomerVerificationArea = async (customerId, areaId, payload) => unwrap(await api.put(`/api/v1/admin/customers/${customerId}/verification-areas/${areaId}/status`, payload))
 export const getCustomerTimeline = async (customerId, params = {}) => unwrap(await api.get(`/api/v1/admin/customers/${customerId}/timeline`, { params }))
+export const getCustomerTimelinePage = async (customerId, params = {}) => (await api.get(`/api/v1/admin/customers/${customerId}/timeline`, { params })).data

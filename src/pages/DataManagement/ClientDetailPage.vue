@@ -30,6 +30,18 @@
         @update:model-value="switchCustomer"
       />
       <div class="profile-header-status">
+        <span>Risco</span
+        ><q-badge outline>{{ operational.riskClassification || 'Não informado' }}</q-badge>
+      </div>
+      <div class="profile-header-status">
+        <span>Compliance</span
+        ><q-badge outline>{{
+          { Pending: 'Pendente', Clear: 'OK', Approved: 'OK' }[operational.complianceStatus] ||
+          operational.complianceStatus ||
+          'Não informado'
+        }}</q-badge>
+      </div>
+      <div class="profile-header-status">
         <span>Status</span
         ><q-badge outline :color="customer.status === 'Active' ? 'positive' : 'grey-5'">{{
           statusLabel(customer.status)
@@ -57,17 +69,6 @@
           title="Identificação e contato"
           icon-src="/icons/client-profile/identification.svg"
         >
-          <template #actions
-            ><q-btn
-              flat
-              dense
-              size="sm"
-              no-caps
-              :icon="editingRegistration ? 'close' : 'edit'"
-              :label="editingRegistration ? 'Fechar edição' : 'Editar'"
-              :aria-expanded="editingRegistration"
-              @click="editingRegistration = !editingRegistration"
-          /></template>
           <div v-if="editingRegistration" class="profile-inline-editor">
             <p class="text-caption">Salve as alterações de cada grupo antes de fechar a edição.</p>
             <client-registration-editor
@@ -104,17 +105,6 @@
           title="Profissional e financeiro"
           icon-src="/icons/client-profile/professional.svg"
         >
-          <template #actions
-            ><q-btn
-              flat
-              dense
-              size="sm"
-              no-caps
-              :icon="editingProfessional ? 'close' : 'edit'"
-              :label="editingProfessional ? 'Fechar edição' : 'Editar'"
-              :aria-expanded="editingProfessional"
-              @click="editingProfessional = !editingProfessional"
-          /></template>
           <div v-if="editingProfessional" class="profile-inline-editor">
             <p class="text-caption">Salve as alterações de cada grupo antes de fechar a edição.</p>
             <client-professional-panel
@@ -146,7 +136,19 @@
             <p v-if="security.state.data?.hasUserAccount === false" class="profile-empty">
               Nenhuma conta de acesso vinculada.
             </p>
-            <profile-fields v-else :fields="securityFields" />
+            <template v-else>
+              <profile-fields :columns="5" :fields="securityFields" />
+              <q-expansion-item
+                dense
+                label="Gerenciamento de status de login"
+                icon="manage_accounts"
+                class="login-management q-mt-lg"
+              >
+                <p class="profile-empty q-pa-md">
+                  O histórico de sessões deste cliente ainda não está disponível.
+                </p>
+              </q-expansion-item>
+            </template>
           </resource-state>
         </profile-section>
         <profile-section
@@ -160,7 +162,7 @@
             :customer-id="customerId"
         /></profile-section>
         <profile-section
-          title="Visão consolidada da carteira"
+          title="Visão consolidada (carteira)"
           icon-src="/icons/client-profile/portfolio.svg"
           ><customer-portfolio
             ref="portfolioRef"
@@ -168,24 +170,39 @@
             :customer-id="customerId"
             @currencies="currencies = $event"
         /></profile-section>
-        <profile-section
-          title="Contas bancárias"
-          icon-src="/icons/client-profile/bank.svg"
-          caption="Contas para movimentações do cliente."
-          ><client-bank-accounts-panel :customer-id="customerId" class="profile-bank-panel"
+        <profile-section title="Dados bancários" icon-src="/icons/client-profile/bank.svg"
+          ><template #actions
+            ><q-btn
+              flat
+              dense
+              no-caps
+              size="sm"
+              icon="add"
+              color="primary"
+              label="Adicionar conta"
+              @click="bankPanel?.addAccount()"
+          /></template>
+          <client-bank-accounts-panel
+            ref="bankPanel"
+            embedded
+            :customer-id="customerId"
+            class="profile-bank-panel"
         /></profile-section>
         <profile-section
           title="Registro de patrimônio"
           icon-src="/icons/client-profile/assets.svg"
           caption="Ativos, bens e participações declarados pelo cliente."
-          ><customer-assets
+          ><client-asset-registry
             :customer-id="customerId"
             :currencies="currencies"
             @changed="portfolioRef?.refresh()"
         /></profile-section>
       </div>
       <aside class="client-profile-aside">
-        <profile-section title="Documentação" icon-src="/icons/client-profile/documents.svg">
+        <profile-section
+          title="Documentação pessoal"
+          icon-src="/icons/client-profile/documents.svg"
+        >
           <resource-state :state="documentTotals.state" @retry="loadDocumentTotals"
             ><div class="document-totals">
               <span v-for="item in documentMetrics" :key="item.label" :class="`text-${item.color}`"
@@ -200,53 +217,21 @@
             <q-expansion-item
               v-for="section in documentSections"
               :key="section.code || section.name"
-              :label="section.name || 'Documentos'"
-              default-opened
+              :label="section.label"
+              :default-opened="section.order < 3"
               dense
               class="document-category"
             >
-              <button
+              <p v-if="!section.items.length" class="profile-empty">Nenhum documento cadastrado.</p>
+              <profile-document-item
                 v-for="item in section.items"
                 :key="item.documentId || item.documentTypeId"
-                class="document-row"
-                @click="managingDocuments = !managingDocuments"
-              >
-                <q-icon
-                  name="description"
-                  size="20px"
-                  :class="`text-${documentColor(item.status)}`"
-                />
-                <span
-                  ><strong>{{
-                    item.documentTypeName || item.documentTypeCode || 'Documento'
-                  }}</strong
-                  ><small
-                    >{{ documentStatus(item.status)
-                    }}<template v-if="item.submittedAtUtc">
-                      · {{ date(item.submittedAtUtc) }}</template
-                    ></small
-                  ></span
-                >
-                <q-icon name="chevron_right" size="16px" />
-              </button>
+                :item="item"
+                :customer-id="customerId"
+                @updated="documentsUpdated"
+              />
             </q-expansion-item>
           </resource-state>
-          <q-btn
-            flat
-            dense
-            no-caps
-            :label="managingDocuments ? 'Fechar gerenciamento' : 'Gerenciar documentos'"
-            :aria-expanded="managingDocuments"
-            icon-right="expand_more"
-            class="full-width q-mt-md"
-            @click="managingDocuments = !managingDocuments"
-          />
-          <client-documents-panel
-            v-if="managingDocuments"
-            class="profile-management q-mt-md"
-            :customer-id="customerId"
-            @updated="documentsUpdated"
-          />
         </profile-section>
         <profile-section
           title="Compliance e observações"
@@ -258,31 +243,12 @@
               :class="{ 'compliance-note--warning': complianceView.activeCount > 0 }"
             >
               <strong>{{ complianceView.status }}</strong>
-              <p
-                v-for="alert in complianceView.recentAlerts.slice(0, 2)"
-                :key="alert.id || alert.title"
-              >
-                {{ alert.description || alert.title }}
+              <p v-for="note in complianceNotes" :key="note">
+                {{ note }}
               </p>
             </div></resource-state
           >
-          <q-btn
-            flat
-            dense
-            no-caps
-            :label="managingCompliance ? 'Fechar gerenciamento' : 'Gerenciar compliance'"
-            :aria-expanded="managingCompliance"
-            icon-right="expand_more"
-            class="full-width q-mt-md"
-            @click="managingCompliance = !managingCompliance"
-          />
           <div class="profile-divider">
-            <client-compliance-panel
-              v-if="managingCompliance"
-              class="profile-management q-mb-md"
-              :customer-id="customerId"
-              @updated="complianceUpdated"
-            />
             <h3>Histórico recente</h3>
             <resource-state :state="timeline.state" @retry="loadTimeline"
               ><ol v-if="recentEvents.length" class="profile-timeline">
@@ -302,12 +268,7 @@
               :label="showHistory ? 'Recolher histórico' : 'Ver todo o histórico'"
               :aria-expanded="showHistory"
               class="full-width"
-              @click="showHistory = !showHistory"
-            /><client-verification-timeline-panel
-              v-if="showHistory"
-              class="profile-management q-mt-md"
-              :customer-id="customerId"
-              @updated="loadTimeline"
+              @click="toggleHistory"
             />
           </div>
         </profile-section>
@@ -325,15 +286,13 @@ import FormSection from 'src/components/Entity/FormSection.vue'
 import ResourceState from 'src/components/Finance/ResourceState.vue'
 import CustomerSelect from 'src/components/Finance/CustomerSelect.vue'
 import CustomerPortfolio from 'src/components/Finance/CustomerPortfolio.vue'
-import CustomerAssets from 'src/components/Finance/CustomerAssets.vue'
+import ClientAssetRegistry from 'src/components/Clients/ClientAssetRegistry.vue'
 import ClientBankAccountsPanel from 'src/components/Clients/ClientBankAccountsPanel.vue'
-import ClientCompliancePanel from 'src/components/Clients/ClientCompliancePanel.vue'
-import ClientDocumentsPanel from 'src/components/Clients/ClientDocumentsPanel.vue'
+import ProfileDocumentItem from 'src/components/Clients/ProfileDocumentItem.vue'
 import ClientRegistrationEditor from 'src/components/Clients/ClientRegistrationEditor.vue'
 import ClientProfessionalPanel from 'src/components/Clients/ClientProfessionalPanel.vue'
 import ClientFinancialSecurityPanel from 'src/components/Clients/ClientFinancialSecurityPanel.vue'
 import ClientPreferencesPanel from 'src/components/Clients/ClientPreferencesPanel.vue'
-import ClientVerificationTimelinePanel from 'src/components/Clients/ClientVerificationTimelinePanel.vue'
 import { useFinanceResource } from 'src/composables/useFinanceResource'
 import useNotification from 'src/composables/global/useNotification'
 import {
@@ -348,7 +307,7 @@ import {
 import { getCustomerDocumentOverview } from 'src/services/documentAdminService'
 import { getComplianceAlerts } from 'src/services/complianceService'
 import { summarizeCompliance } from 'src/services/complianceSummary'
-import { getCustomerTimeline } from 'src/services/verificationService'
+import { getCustomerTimeline, getCustomerTimelinePage } from 'src/services/verificationService'
 import { money } from 'src/services/financeService'
 import { getApiErrorMessage } from 'src/services/apiError'
 const route = useRoute(),
@@ -364,12 +323,11 @@ const customerResource = useFinanceResource(),
   documentOverview = useFinanceResource(),
   compliance = useFinanceResource(),
   timeline = useFinanceResource()
-const managingDocuments = ref(false),
-  managingCompliance = ref(false),
-  showHistory = ref(false),
+const showHistory = ref(false),
   savingStatus = ref(false),
   currencies = ref([]),
-  portfolioRef = ref(null)
+  portfolioRef = ref(null),
+  bankPanel = ref(null)
 const editingRegistration = ref(false)
 const editingProfessional = ref(false)
 const inlineEditing = computed(() => editingRegistration.value || editingProfessional.value)
@@ -406,6 +364,13 @@ const date = (value) => {
     ? 'Não informado'
     : new Intl.DateTimeFormat('pt-BR').format(parsed)
 }
+const dateTime = (value) => {
+  if (!value) return 'Não informado'
+  const parsed = new Date(value)
+  return Number.isNaN(parsed.getTime())
+    ? 'Não informado'
+    : new Intl.DateTimeFormat('pt-BR', { dateStyle: 'short', timeStyle: 'short' }).format(parsed)
+}
 const field = (label, value, wide = false) => ({ label, value: value === '' ? null : value, wide })
 const personalDocuments = computed(() => identification.value.documents || [])
 const documentOf = (code) =>
@@ -417,20 +382,27 @@ const personalFields = computed(() => [
     documentOf(customer.value.kind === 'Organization' ? 'CNPJ' : 'CPF').numberMasked,
   ),
   field('Data de nascimento', date(identification.value.birthDate || customer.value.birthDate)),
-  field('Nacionalidade', identification.value.nationality),
+  ...(customer.value.kind !== 'Organization'
+    ? [
+        field('Estado civil', null),
+        field('Nacionalidade', identification.value.nationality),
+        field('Nome da mãe', null),
+        field('Nome do pai', null),
+      ]
+    : []),
 ])
 const documentFields = computed(() =>
-  personalDocuments.value
-    .filter((d) => !['CPF', 'CNPJ'].includes(d.documentCode?.toUpperCase()))
-    .flatMap((d) => [
-      field(d.documentCode, d.numberMasked),
-      field('Órgão emissor', d.issuer),
-      field('UF de emissão', d.issuerState),
-      field('Data de emissão', date(d.issuedOn)),
-      ...(d.documentCode?.toUpperCase() === 'CNH'
-        ? [field('Categoria', d.category), field('Validade CNH', date(d.expiresOn))]
-        : []),
-    ]),
+  customer.value.kind === 'Organization'
+    ? []
+    : [
+        field('RG', documentOf('RG').numberMasked),
+        field('Órgão emissor', documentOf('RG').issuer),
+        field('UF emissão', documentOf('RG').issuerState),
+        field('Data emissão', date(documentOf('RG').issuedOn)),
+        field('CNH', documentOf('CNH').numberMasked),
+        field('Categoria', documentOf('CNH').category),
+        field('Validade CNH', date(documentOf('CNH').expiresOn)),
+      ],
 )
 const maskedContact = (contact) => {
   if (!contact) return null
@@ -473,9 +445,9 @@ const addressFields = computed(() => {
   return [
     field('Endereço residencial', a.line1, true),
     field('Complemento', a.line2),
+    field('Bairro', null),
     field('Município / UF', [a.city, a.stateOrProvince].filter(Boolean).join(' / ')),
     field('CEP', a.postalCode),
-    field('País', a.countryIsoCode),
   ]
 })
 const professionalFields = computed(() => [
@@ -503,14 +475,15 @@ const securityFields = computed(() => {
   const s = security.state.data?.accountSecurity || security.state.data || {}
   return [
     field('Usuário', s.userName),
+    field('Senha', s.passwordStatus ? '••••••••' : null),
     field(
       'Status da senha',
       { Active: 'Ativa', ResetRequired: 'Redefinição necessária' }[s.passwordStatus] ||
         s.passwordStatus,
     ),
-    field('Último login', date(s.lastLoginAtUtc)),
+    field('Último login', dateTime(s.lastLoginAtUtc)),
     field(
-      'Autenticação em duas etapas',
+      '2FA',
       s.twoFactorEnabled === true ? 'Ativa' : s.twoFactorEnabled === false ? 'Inativa' : null,
     ),
   ]
@@ -530,28 +503,32 @@ const documentMetrics = computed(() => {
     { label: 'Rejeitados', value: d.rejected ?? '—', color: 'negative' },
   ]
 })
-const documentSections = computed(() => documentOverview.state.data?.sections || [])
-const documentColor = (value) =>
-  ({
-    Approved: 'positive',
-    Rejected: 'negative',
-    Missing: 'warning',
-    Pending: 'warning',
-    UnderReview: 'warning',
-  })[value] || 'grey-5'
-const documentStatus = (value) =>
-  ({
-    Approved: 'Aprovado',
-    Rejected: 'Rejeitado',
-    Missing: 'Aguardando envio',
-    Pending: 'Pendente',
-    UnderReview: 'Em análise',
-    InReview: 'Em análise',
-    Waived: 'Dispensado',
-  })[value] ||
-  value ||
-  'Aguardando envio'
+const documentSections = computed(() => {
+  const sections = documentOverview.state.data?.sections || []
+  return [
+    { code: 'PERSONAL', name: 'Documentação pessoal', codes: ['PERSONAL'] },
+    { code: 'FISCAL', name: 'Contábil / fiscal', codes: ['FISCAL', 'ACCOUNTING'] },
+    { code: 'PLATFORM', name: 'Plataforma', codes: ['PLATFORM'] },
+    { code: 'CONTRACTS', name: 'Contratos', codes: ['CONTRACTS'] },
+  ].map((section, index) => ({
+    ...section,
+    order: index + 1,
+    label: `${index + 1}. ${section.name}`,
+    items: sections
+      .filter((item) => section.codes.includes(item.code))
+      .flatMap((item) => item.items || []),
+  }))
+})
 const complianceView = computed(() => summarizeCompliance(null, compliance.state.data))
+const complianceNotes = computed(() =>
+  [
+    ...new Set(
+      complianceView.value.recentAlerts
+        .slice(0, 2)
+        .map((alert) => alert.description || alert.title),
+    ),
+  ].filter((note) => note && note !== complianceView.value.status),
+)
 const recentEvents = computed(() => {
   const result = timeline.state.data
   const events = Array.isArray(result)
@@ -559,7 +536,7 @@ const recentEvents = computed(() => {
     : result?.data || result?.items || result?.events || []
   return [...events]
     .sort((a, b) => new Date(b.occurredAtUtc) - new Date(a.occurredAtUtc))
-    .slice(0, 3)
+    .slice(0, showHistory.value ? undefined : 2)
 })
 const optional = async (request) => {
   try {
@@ -582,8 +559,29 @@ const loadDocumentTotals = () =>
 const loadDocuments = () =>
   documentOverview.load(() => getCustomerDocumentOverview(customerId.value))
 const loadCompliance = () => compliance.load(() => getComplianceAlerts(customerId.value))
-const loadTimeline = () =>
-  timeline.load(() => getCustomerTimeline(customerId.value, { page: 1, pageSize: 3 }))
+const loadTimeline = () => {
+  const id = customerId.value
+  const expanded = showHistory.value
+  return timeline.load(async () => {
+    if (!expanded) return getCustomerTimeline(id, { page: 1, pageSize: 2 })
+    const events = []
+    let page = 1
+    let totalPages = 1
+    do {
+      const result = await getCustomerTimelinePage(id, { page, pageSize: 100 })
+      events.push(
+        ...(Array.isArray(result.data) ? result.data : result.data?.items || result.items || []),
+      )
+      totalPages = Number(result.pagination?.totalPages || 1)
+      page += 1
+    } while (page <= totalPages)
+    return events
+  })
+}
+const toggleHistory = () => {
+  showHistory.value = !showHistory.value
+  loadTimeline()
+}
 const refreshCustomer = async () => {
   const id = customerId.value
   try {
@@ -609,10 +607,6 @@ const documentsUpdated = () => {
   loadIdentification()
   loadTimeline()
 }
-const complianceUpdated = () => {
-  loadCompliance()
-  loadTimeline()
-}
 const switchCustomer = (id) => {
   if (id && id !== customerId.value) router.push({ name: 'ClienteDetalhe', params: { id } })
 }
@@ -633,8 +627,6 @@ const saveStatus = async (status) => {
 watch(
   customerId,
   () => {
-    managingDocuments.value = false
-    managingCompliance.value = false
     showHistory.value = false
     editingRegistration.value = false
     editingProfessional.value = false
@@ -961,6 +953,9 @@ h3 {
   }
   h1 {
     font-size: 17px;
+  }
+  .profile-identity {
+    flex: 1 1 calc(100% - 48px);
   }
   .profile-name .q-badge {
     display: none;

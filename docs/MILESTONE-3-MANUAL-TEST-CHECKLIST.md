@@ -105,3 +105,19 @@ nos demais fluxos. A situação da conta pode ser alterada no formulário de edi
 Ícones originais extraídos dos nós 1484:68299, 1484:68302 e 1484:68304, salvos em
 public/icons/client-profile, com dimensões de 16 × 16 px. Nome longo permanece
 truncado e a tabela mantém largura limitada ao card. Nenhuma conta foi alterada.
+
+
+## Perfil administrativo conforme Figma — 16/10/2026
+
+Revisados C02, C08–C14 e C19–C23 no arquivo i2jizg7UtPyg3KjAOvuFtI.
+Corrigida a composição de identificação, preferências, carteira, bancos,
+documentação, compliance e patrimônio. Ações de gerenciamento fora do desenho
+foram removidas do perfil. O histórico não abre mais o gerenciamento de verificação.
+Formulários patrimoniais usam apenas campos previstos e preservam metadados
+não editáveis. Lint, build e testes de payload verificam as alterações; revisão
+visual em desktop e 390 px, incluindo nome longo de banco e abertura/cancelamento
+de inclusão. Nenhuma escrita na conta do cliente foi executada.
+
+Pendências de contrato e limites da integração estão no adendo de 16/10 da
+MARCO-3-DEVOLUTIVA-BACKEND.md. Esta revisão não aprova as operações financeiras
+pendentes nem declara equivalência integral de estados dependentes desses dados.

@@ -51,7 +51,7 @@
           /></template>
         </q-banner>
         <q-card-section v-else class="preference-fields row q-col-gutter-sm q-px-none q-py-sm">
-          <label-form :class-name="preferenceColumn" text-label="Moeda principal"
+          <label-form :class-name="preferenceColumn" text-label="Moeda primária"
             ><q-select
               v-model="form.primaryCurrencyCode"
               :options="currencyOptions"
@@ -72,7 +72,7 @@
               dense
               aria-label="Moeda secundária"
           /></label-form>
-          <label-form :class-name="preferenceColumn" text-label="Idioma"
+          <label-form :class-name="preferenceColumn" text-label="Idioma do sistema"
             ><q-select
               v-model="form.languageCode"
               :options="languageOptions"
@@ -262,11 +262,28 @@ const savePreferences = async () => {
 onMounted(load)
 </script>
 <style scoped>
-.preference-fields :deep(.LabelForm) { min-width: 0; grid-template-columns: minmax(0, 1fr); }
-.preference-fields :deep(.q-field) { min-width: 0; width: 100%; max-width: 100%; }
-.preference-fields :deep(.q-field__control-container), .preference-fields :deep(.q-field__native) { min-width: 0; }
-.preference-fields :deep(.q-field__native) { flex-wrap: nowrap; }
-.preference-fields :deep(.q-field__native > span) { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.preference-fields :deep(.LabelForm) {
+  min-width: 0;
+  grid-template-columns: minmax(0, 1fr);
+}
+.preference-fields :deep(.q-field) {
+  min-width: 0;
+  width: 100%;
+  max-width: 100%;
+}
+.preference-fields :deep(.q-field__control-container),
+.preference-fields :deep(.q-field__native) {
+  min-width: 0;
+}
+.preference-fields :deep(.q-field__native) {
+  flex-wrap: nowrap;
+}
+.preference-fields :deep(.q-field__native > span) {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
 .profile-preferences :deep(.q-card) {
   background: transparent;
   color: inherit;

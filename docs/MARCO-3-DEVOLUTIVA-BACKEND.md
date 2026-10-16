@@ -198,3 +198,42 @@ novas escritas financeiras e demais cenários do item 6 continuam sem aprovaçã
 integrada. Resolver contrato HTTP não equivale a homologar a operação.
 
 Reteste da Home de Éric em 15/10: 200; disponível BRL 47.500,00, capital BRL 0,00 e USD 250.000,00. Moedas mantidas separadas.
+
+
+## Perfil administrativo × Figma — 16/10/2026
+
+Referência visual: arquivo i2jizg7UtPyg3KjAOvuFtI, C02 (1484:68035), C08,
+C09, C10 e editores C11–C14, C19 e estados C20–C23. O desenho define os campos
+e ações; os endpoints adicionais não justificam novos blocos no perfil.
+
+Ajustes no front: identificação e documentos pessoais na ordem do desenho;
+segurança com senha apenas mascarada e data/hora do login; preferências com
+rótulos do desenho; composição com valor, origem e última atualização;
+retirada da tabela adicional de carteiras e dos filtros adicionais de exportação;
+documentação em quatro categorias, visualização/upload por documento;
+retirada dos gerenciamentos extras de documentos/compliance e da edição por seção;
+bancos com as colunas do desenho e inclusão no cabeçalho; patrimônio em quatro
+grupos com formulários específicos, sem campo genérico de moeda, cor ou status.
+
+Dependências objetivas para concluir a integração do desenho:
+
+| Elemento do desenho | Contrato observado / ajuste necessário |
+| --- | --- |
+| Estado civil, nome da mãe e nome do pai | Ausentes de CustomerIdentificationResponse; definir leitura e escrita. |
+| Bairro residencial | Ausente de CustomerIdentificationAddressResponse e CustomerAddressRequest. Não confundir com o bairro de imóveis, que existe. |
+| Sessões do cliente e Deslogar (C19) | Só há /users/me/sessions, que é do administrador autenticado. Necessário contrato administrativo por cliente; não usar sessões do admin nesta seção. |
+| Extrato da conta com saldo após lançamento | Há exportação administrativa e listagem de solicitações. Falta consulta administrativa de lançamentos executados com carteira, direção, valor, moeda e balanceAfter. Solicitação não substitui lançamento. |
+| Códigos CART e contratos atrelados à carteira (C08) | PortfolioCurrencyResponse contém totais e contagem agregada; não fornece os códigos/contratos e condições desenhados. Definir projeção sem reconstrução por suposição. |
+| Identificador de moeda para primeiro patrimônio | Criação exige currencyId; cliente sem carteiras/posição não fornece esse UUID. Catálogo de preferências fornece códigos. Disponibilizar resolução de BRL mesmo sem saldo; não exigir novo campo visual. |
+| ID interno do imóvel e fotos de bens | CustomerAssetResponse não tem código interno editável nem contrato específico de fotos/posições. Não fabricar códigos nem tratar qualquer documento como foto. |
+| Documentos do bem, obrigatoriedade e substituição | Lista de vínculos existe; faltam catálogo/requisitos por tipo e contrato administrativo de substituição para montar os cartões ausentes do desenho. Arquivos existentes podem ser visualizados. |
+| Contratos na documentação (C23) | Itens do overview não trazem agrupamento por contrato. Necessária identificação do contrato no item/projeção. |
+| Tipos e situação de cota nos seletores patrimoniais | Os campos são strings sem catálogo no OpenAPI; confirmar vocabulário para substituir entradas textuais por seletores do desenho. |
+
+Os campos de identificação sem contrato aparecem sem valor, os demais recursos
+usam estados de indisponibilidade. Os formulários de patrimônio preservam cor
+existente e status UnderReview, omitem remainingBalance quando não Financed,
+e enviam somente o detalhe do tipo correto. Novas escritas não foram certificadas
+em homologação nesta revisão visual; nenhum saldo, bem ou documento foi alterado.
+A consulta de histórico expandida percorre as páginas disponíveis sem abrir
+controles de verificação. A comparação detalhada permanece no fluxo da listagem.

@@ -16,6 +16,9 @@ defineProps({ fields: { type: Array, required: true }, columns: { type: Number, 
   gap: 16px;
   margin: 0;
 }
+.profile-fields--5 {
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+}
 .profile-fields--3 {
   grid-template-columns: repeat(3, minmax(0, 1fr));
 }
