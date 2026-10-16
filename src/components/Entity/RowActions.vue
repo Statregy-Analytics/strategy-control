@@ -22,10 +22,24 @@ defineProps({
 const emit = defineEmits(['select'])
 </script>
 <style>
-.row-actions-menu { min-width: 208px; max-width: calc(100vw - 32px); border-radius: 8px; }
-.row-actions-menu.q-menu--dark { background: var(--sa-bg); color: var(--sa-text); border: 1px solid var(--sa-border); }
-.row-actions-menu .row-action { min-height: 38px; font-size: 14px; }
+.row-actions-menu { min-width: 208px; max-width: calc(100vw - 32px); border-radius: 12px; }
+.row-actions-menu .q-list { display: flex; flex-direction: column; gap: 3px; padding: 6px; }
+.row-actions-menu.q-menu--dark {
+  background: rgba(255, 255, 255, 0.06);
+  color: var(--sa-text);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(20px);
+  box-shadow: 4px 4px 12px rgba(0, 0, 0, 0.13);
+}
+.row-actions-menu .row-action { min-height: 36px; padding: 0 10px; border: 1px solid transparent; border-radius: 8px; font-size: 14px; }
+.row-actions-menu.q-menu--dark .row-action { background: rgba(255, 255, 255, 0.02); }
+.row-actions-menu.q-menu--dark .row-action:hover,
+.row-actions-menu.q-menu--dark .row-action:focus {
+  border-color: rgba(255, 255, 255, 0.2);
+  background: linear-gradient(90deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.03), rgba(255, 255, 255, 0.07));
+}
 .row-actions-menu .row-action .q-item__section--avatar { min-width: 30px; padding-right: 8px; }
 .row-actions-menu.q-menu--dark .row-action.text-grey-7 { color: var(--sa-text) !important; }
+.row-actions-menu.q-menu--dark .row-action.text-primary .q-item__section--main { color: var(--sa-text); }
 .row-actions-menu.q-menu--dark .row-action.text-negative { color: #ff6b78 !important; }
 </style>

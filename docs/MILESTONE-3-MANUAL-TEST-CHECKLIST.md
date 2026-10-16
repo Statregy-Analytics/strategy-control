@@ -79,3 +79,19 @@ confirmados. Mesma composição visual e mesmas portas 8080/9010.
 - Revisão no cliente da captura, em localhost:8080, incluindo largura móvel de
   390 px; largura da página 375 px, sem overflow horizontal do fluxo afetado.
 - Nenhuma conta, preferência ou dado do cliente foi alterado nesta revisão.
+
+## Conferência com a referência Figma — 15/10/2026
+
+Arquivo i2jizg7UtPyg3KjAOvuFtI: página Piloto · Fluxo (1484:66875), seção
+Clientes (1484:67093), perfil F02 (1484:68034) e estado C17 (1484:69103).
+O nó informado era a página completa; a leitura direta não retornava seleção.
+Após localizar os filhos, o estado C17 foi obtido com código e captura.
+
+O acabamento do menu de ações foi alinhado ao padrão de menus da referência:
+vidro branco a 6%, desfoque de 20 px, borda branca a 20%, raio de 12 px,
+preenchimento de 6 px, intervalo de 3 px e opções de 36 px com raio de 8 px.
+Mantido o gatilho de três pontos pedido pelo usuário. O quadro C02 mostra ações
+bancárias inline e não possui estado específico desse menu; portanto, a comparação
+é com o padrão visual de menu C17, sem alegar equivalência integral da tabela.
+Nome longo e idioma permanecem contidos, conforme correção anterior. Nenhuma
+conta ou preferência foi modificada na validação.
