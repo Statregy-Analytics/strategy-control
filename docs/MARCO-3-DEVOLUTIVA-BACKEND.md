@@ -237,3 +237,35 @@ e enviam somente o detalhe do tipo correto. Novas escritas não foram certificad
 em homologação nesta revisão visual; nenhum saldo, bem ou documento foi alterado.
 A consulta de histórico expandida percorre as páginas disponíveis sem abrir
 controles de verificação. A comparação detalhada permanece no fluxo da listagem.
+
+
+## Reteste de carteira, contratos e documentos — Éric/Cláudio, 16/10/2026
+
+Resolvido no front: ACCOUNTING_FISCAL estava ausente do agrupamento do perfil;
+os arquivos de ambos agora aparecem em Contábil / fiscal. O contador usa
+GET /admin/customers/{id}/documents/overview, mesma fonte dos itens, e mostra
+um pendente para cada cliente. Visualização dos dois PDFs confirmada.
+
+Divergência a conferir no backend: /documents/summary retorna documentCount=1,
+requirementCount=0 e pending=0; /documents/overview retorna total=1 e pending=1.
+O front não combina esses contratos de contagem para produzir o resumo visual.
+
+C08 parcialmente desbloqueado: GET /admin/contracts?clientId=... e o detalhe
+permitem mostrar os contratos, código público, vigência, status e alocação/percentual
+reais do participante. Éric tem USD 200.000,00 + 50.000,00, ambos 40%; Cláudio
+tem BRL 261.500,00, 100%, status Encerrado. A seleção no Saldo investido abre esses
+cartões sem acrescentar controles ao desenho. Ver contrato abre o painel existente.
+Isso resolve a pendência anterior de listagem de contratos do adendo do perfil.
+
+Permanecem faltando: códigos CART, projeção de valor base/atual/bloqueado por
+participação e dívidas vinculadas do C08. initialConsolidatedCapital e currentBalance
+são do contrato inteiro; não substituem os campos financeiros do participante.
+Nenhuma dívida foi fabricada, e os valores ausentes permanecem indisponíveis.
+
+Regra de negócio a confirmar: /portfolio de Cláudio ainda inclui BRL 261.500,00
+como investido, embora Beta Growth Spec esteja Encerrado e tenha término em
+01/06/2026. O front exibe fielmente ambos os estados, sem remover a alocação ou
+simular resgate. Os documentos vinculados dos três contratos retornam listas vazias.
+
+A leitura integrada de carteira e documentos foi retestada com sucesso após as
+correções. As lacunas acima e os testes de escrita financeira não estão aprovados.

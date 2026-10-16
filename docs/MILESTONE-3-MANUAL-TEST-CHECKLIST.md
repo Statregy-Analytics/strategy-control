@@ -121,3 +121,42 @@ de inclusão. Nenhuma escrita na conta do cliente foi executada.
 Pendências de contrato e limites da integração estão no adendo de 16/10 da
 MARCO-3-DEVOLUTIVA-BACKEND.md. Esta revisão não aprova as operações financeiras
 pendentes nem declara equivalência integral de estados dependentes desses dados.
+
+
+## Reteste dos perfis de Éric e Cláudio — 16/10/2026
+
+Leitura administrativa em localhost:8080, confrontada com API de homologação.
+Nenhum saldo, contrato, documento, preferência ou cadastro foi alterado.
+
+| Cliente / moeda | Saldo base | Investido | Investível | Carteira total | Contratos |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| Éric / BRL | 370.000,00 | 0,00 | 47.500,00 | 417.500,00 | 0 |
+| Éric / USD | 0,00 | 250.000,00 | 0,00 | 250.000,00 | 2 |
+| Cláudio / BRL | 0,00 | 261.500,00 | 25.000,00 | 286.500,00 | 1 |
+
+Éric: BRL 50.000,00 de saldo, BRL 2.500,00 reservados; disponível 47.500,00.
+Patrimônio BRL 370.000,00 corresponde a imóvel 250.000,00 e veículo 120.000,00.
+Contratos em USD: Legacy Prime, alocação do cliente 200.000,00 / 40%;
+Alpha Hedge Fund, alocação 50.000,00 / 40%. Os capitais totais dos contratos
+(500.000,00 e 125.000,00) não foram exibidos como saldo do cliente.
+Cláudio: Beta Growth Spec, BRL 261.500,00 / 100%, status Encerrado retornado
+pelo backend. O front preserva o saldo investido que /portfolio ainda informa.
+
+Documentação: cada cliente tem um arquivo Pending em ACCOUNTING_FISCAL,
+tipo Extratos Bancários, enviado em 09/10/2026. Os arquivos de teste de depósito
+foram abertos pela ação Visualizar em ambos os perfis. Os três contratos
+retornam lista vazia de documentos vinculados; a categoria Contratos vazia é
+coerente com essas respostas e não deve receber cópias dos documentos fiscais.
+
+Correções de front reexecutadas: categoria ACCOUNTING_FISCAL reconhecida;
+contadores passam a usar o mesmo overview dos itens, inclusive documentos sem
+requisito individual; contratos aparecem ao selecionar Saldo investido, por moeda,
+no bloco C08. Ver contrato abre o painel administrativo do contrato selecionado.
+Removida a paginação automática excedente das tabelas de composição no perfil.
+Moedas permanecem separadas. Valor base, atual e bloqueado por participação
+continuam indisponíveis, sem aproximações com o capital global do contrato.
+
+Comparação visual com C08 (1484:68911), mantendo as quatro métricas e a composição
+do perfil. Ícones locais conferidos em suas dimensões originais 14/20/12/12 px.
+Layout desktop sem overflow: página 1897/1897 px. Lint, build e testes de regressão
+validam a alteração. A homologação de escritas financeiras continua fora desta rodada.

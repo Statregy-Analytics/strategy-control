@@ -253,7 +253,8 @@
   </q-page>
 </template>
 <script setup>
-import { computed, ref } from 'vue'
+import { computed, ref, watch } from 'vue'
+import { useRoute } from 'vue-router'
 import { useQuasar } from 'quasar'
 import TitlePage from 'src/components/TitlePage.vue'
 import TitleCard from 'src/components/Card/TitleCard.vue'
@@ -429,4 +430,8 @@ function confirmFinalize() {
     }
   })
 }
+const route = useRoute()
+watch(() => route.query.contractId, value => {
+  if (typeof value === 'string' && /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(value)) open(value)
+}, { immediate: true })
 </script>

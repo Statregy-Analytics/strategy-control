@@ -16,15 +16,42 @@
             <div
               v-for="currency in portfolio.state.data?.currencies || []"
               :key="currency.currencyId"
-              class="portfolio-metrics"
+              class="portfolio-currency"
             >
-              <div v-for="metric in metrics" :key="metric.key" class="portfolio-metric">
-                <div>
-                  <span>{{ metric.label }}</span
-                  ><small>{{ currency.currencyIsoCode }}</small>
-                </div>
-                <strong>{{ money(currency[metric.key], currency.currencyIsoCode) }}</strong>
+              <div class="portfolio-metrics">
+                <component
+                  :is="metric.key === 'invested' ? 'button' : 'div'"
+                  v-for="metric in metrics"
+                  :key="metric.key"
+                  class="portfolio-metric"
+                  :class="{
+                    'portfolio-metric--selected':
+                      metric.key === 'invested' && selectedCurrency === currency.currencyId,
+                  }"
+                  :type="metric.key === 'invested' ? 'button' : undefined"
+                  :aria-label="
+                    metric.key === 'invested'
+                      ? `Contratos do saldo investido em ${currency.currencyIsoCode}`
+                      : undefined
+                  "
+                  :aria-expanded="
+                    metric.key === 'invested' ? selectedCurrency === currency.currencyId : undefined
+                  "
+                  @click="metric.key === 'invested' && toggleContracts(currency.currencyId)"
+                >
+                  <div>
+                    <span>{{ metric.label }}</span
+                    ><small>{{ currency.currencyIsoCode }}</small>
+                  </div>
+                  <strong>{{ money(currency[metric.key], currency.currencyIsoCode) }}</strong>
+                </component>
               </div>
+              <client-portfolio-contracts
+                v-if="selectedCurrency === currency.currencyId"
+                :customer-id="customerId"
+                :currency-id="currency.currencyId"
+                :currency-code="currency.currencyIsoCode"
+              />
             </div>
           </div>
           <q-table
@@ -52,6 +79,8 @@
             <q-table
               flat
               dense
+              :hide-bottom="embedded"
+              :pagination="embedded ? { rowsPerPage: 0 } : undefined"
               :rows="currency.items"
               :columns="compositionColumns(currency.currencyIsoCode)"
               row-key="classCode"
@@ -124,6 +153,7 @@
 </template>
 <script setup>
 import { ref, watch } from 'vue'
+import ClientPortfolioContracts from 'src/components/Clients/ClientPortfolioContracts.vue'
 import CustomerSelect from './CustomerSelect.vue'
 import ResourceState from './ResourceState.vue'
 import CustomerAssets from './CustomerAssets.vue'
@@ -142,6 +172,10 @@ const props = defineProps({
   embedded: { type: Boolean, default: false },
 })
 const emit = defineEmits(['currencies'])
+const selectedCurrency = ref(null)
+const toggleContracts = (id) => {
+  selectedCurrency.value = selectedCurrency.value === id ? null : id
+}
 const metrics = [
   { key: 'baseEquity', label: 'Saldo base (patrimônio)' },
   { key: 'invested', label: 'Saldo investido' },
@@ -185,6 +219,7 @@ watch(
   customerId,
   () => {
     error.value = ''
+    selectedCurrency.value = null
     if (customerId.value) {
       loadPortfolio()
       loadComposition()
@@ -296,6 +331,18 @@ defineExpose({ refresh: onAssetsChanged })
 .profile-statement th,
 .profile-statement td {
   white-space: normal;
+}
+.portfolio-metric--selected {
+  border-bottom: 4px solid #51b8ff !important;
+}
+button.portfolio-metric {
+  color: inherit;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+button.portfolio-metric:hover {
+  background: rgba(255, 255, 255, 0.1);
 }
 .portfolio-metric {
   padding: 16px;

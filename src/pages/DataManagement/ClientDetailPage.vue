@@ -203,14 +203,12 @@
           title="Documentação pessoal"
           icon-src="/icons/client-profile/documents.svg"
         >
-          <resource-state :state="documentTotals.state" @retry="loadDocumentTotals"
+          <resource-state :state="documentOverview.state" @retry="loadDocuments"
             ><div class="document-totals">
               <span v-for="item in documentMetrics" :key="item.label" :class="`text-${item.color}`"
                 >{{ item.value }} {{ item.label }}</span
               >
-            </div></resource-state
-          >
-          <resource-state :state="documentOverview.state" @retry="loadDocuments">
+            </div>
             <div v-if="!documentSections.length" class="profile-empty">
               Nenhum documento cadastrado.
             </div>
@@ -301,7 +299,6 @@ import {
   getCustomerProfessionalProfile,
   getCustomerCurrentFinancialProfile,
   getCustomerAccountSecurity,
-  getCustomerDocumentSummary,
   changeCustomerStatus,
 } from 'src/services/customerService'
 import { getCustomerDocumentOverview } from 'src/services/documentAdminService'
@@ -309,6 +306,10 @@ import { getComplianceAlerts } from 'src/services/complianceService'
 import { summarizeCompliance } from 'src/services/complianceSummary'
 import { getCustomerTimeline, getCustomerTimelinePage } from 'src/services/verificationService'
 import { money } from 'src/services/financeService'
+import {
+  profileDocumentSections,
+  profileDocumentMetrics,
+} from 'src/services/clientProfileProjection'
 import { getApiErrorMessage } from 'src/services/apiError'
 const route = useRoute(),
   router = useRouter()
@@ -319,7 +320,6 @@ const customerResource = useFinanceResource(),
   professional = useFinanceResource(),
   financial = useFinanceResource(),
   security = useFinanceResource(),
-  documentTotals = useFinanceResource(),
   documentOverview = useFinanceResource(),
   compliance = useFinanceResource(),
   timeline = useFinanceResource()
@@ -488,37 +488,8 @@ const securityFields = computed(() => {
     ),
   ]
 })
-const documentMetrics = computed(() => {
-  const d = documentTotals.state.data || {}
-  return [
-    { label: 'Aprovados', value: d.approved ?? '—', color: 'positive' },
-    {
-      label: 'Pendentes',
-      value:
-        d.pending == null
-          ? '—'
-          : Number(d.pending) + Number(d.inReview || 0) + Number(d.missing || 0),
-      color: 'warning',
-    },
-    { label: 'Rejeitados', value: d.rejected ?? '—', color: 'negative' },
-  ]
-})
-const documentSections = computed(() => {
-  const sections = documentOverview.state.data?.sections || []
-  return [
-    { code: 'PERSONAL', name: 'Documentação pessoal', codes: ['PERSONAL'] },
-    { code: 'FISCAL', name: 'Contábil / fiscal', codes: ['FISCAL', 'ACCOUNTING'] },
-    { code: 'PLATFORM', name: 'Plataforma', codes: ['PLATFORM'] },
-    { code: 'CONTRACTS', name: 'Contratos', codes: ['CONTRACTS'] },
-  ].map((section, index) => ({
-    ...section,
-    order: index + 1,
-    label: `${index + 1}. ${section.name}`,
-    items: sections
-      .filter((item) => section.codes.includes(item.code))
-      .flatMap((item) => item.items || []),
-  }))
-})
+const documentMetrics = computed(() => profileDocumentMetrics(documentOverview.state.data))
+const documentSections = computed(() => profileDocumentSections(documentOverview.state.data))
 const complianceView = computed(() => summarizeCompliance(null, compliance.state.data))
 const complianceNotes = computed(() =>
   [
@@ -554,8 +525,6 @@ const loadProfessional = () =>
 const loadFinancial = () =>
   financial.load(() => optional(() => getCustomerCurrentFinancialProfile(customerId.value)))
 const loadSecurity = () => security.load(() => getCustomerAccountSecurity(customerId.value))
-const loadDocumentTotals = () =>
-  documentTotals.load(() => getCustomerDocumentSummary(customerId.value))
 const loadDocuments = () =>
   documentOverview.load(() => getCustomerDocumentOverview(customerId.value))
 const loadCompliance = () => compliance.load(() => getComplianceAlerts(customerId.value))
@@ -603,7 +572,6 @@ const registrationUpdated = () => {
 }
 const documentsUpdated = () => {
   loadDocuments()
-  loadDocumentTotals()
   loadIdentification()
   loadTimeline()
 }
@@ -636,7 +604,6 @@ watch(
     loadProfessional()
     loadFinancial()
     loadSecurity()
-    loadDocumentTotals()
     loadDocuments()
     loadCompliance()
     loadTimeline()
