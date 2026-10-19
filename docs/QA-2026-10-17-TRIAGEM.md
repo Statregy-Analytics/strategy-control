@@ -27,11 +27,11 @@ Atualizado em 19/10/2026. Referência: feedback de homologação enviado pelo us
 | 8 | Confirmado: nome acompanha a conta, mas resumo, ajustes e sessões ainda contêm exemplos. | Integrar dados próprios, revisão cadastral, estados pendentes e bloqueio de edição conforme o Figma. |
 | 9 | Três correções de texto concluídas. | Foto de perfil ainda precisa de validação e correção. |
 | 10 | Pendente de revisão integrada do fluxo de aprovação. | Defaults e aprovação/reprovação precisam do estado correto no backend; implementar as telas C25–C28. |
-| 11 | Pendente de correção visual/funcional. | Preservar todos os campos de identificação durante edição. |
-| 12 | Pendente de correção visual. | Preservar a composição profissional/financeira na edição. |
-| 13 | Pendente, vinculado ao item 15. | Remover ação de salvamento isolada ao migrar preferências para edição por seção. |
+| 11 | Campos de identificação preservados durante edição, no mesmo bloco. | Edição de documentos e dados pessoais sem contrato de escrita continua bloqueada; ver QA-2026-10-19-EDICAO-POR-SECAO.md. |
+| 12 | Composição profissional/financeira mantida, com cinco campos do Figma C24. | Salvamento integrado e restauração dos dados fictícios conferidos em 8080. |
+| 13 | Preferências migradas para edição por seção, sem salvamento isolado. | Preservar país e demais metadados da API sem criar campos adicionais. |
 | 14 | Corrigido e retestado em 19/10 no Admin local e publicado: Jane com quatro saldos zero, composição e extrato vazios conforme C29; depósito e saldo do Cláudio conferidos. | Deploy 8c64763 confirmado. Evidências e limites em QA-2026-10-19-CARTEIRA-VAZIA.md. |
-| 15 | Nova referência C24 requer implementação. | Substituir edição global por uma seção por vez, com alterações pendentes, descarte e estados de salvamento. |
+| 15 | Edição global substituída por uma seção por vez: rascunho, salvar, descartar, bloqueio e proteção de saída implementados conforme C24. | Limites de escrita de identificação/segurança/compliance documentados; aprovação integral depende desses contratos e reteste do QA. |
 | 16 | Transações e Contratos incluídos no menu. | Dashboard, módulos restantes, Crédito, Comunicados e seleção de sistema continuam pendentes; não estão aprovados. |
 | 17 | Correção de data sem horário aplicada. | E-mail duplicado exige unicidade no servidor; tradução do histórico e catálogo de países ainda pendentes no front. |
 | 18 | Proteções de identidade e concorrência implementadas e testadas. Incidente original não reproduzido. | Correlacionar logs de autenticação e acesso do QA em 17/10 às 18:16 e retestar no deploy corrigido. Não solicitar senha pessoal do QA. |

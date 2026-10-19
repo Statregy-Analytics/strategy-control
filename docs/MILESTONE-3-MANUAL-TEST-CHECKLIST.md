@@ -184,3 +184,10 @@ Swagger consultado. Demais itens do QA não estão aprovados por esta rodada.
 - [x] Loading, erro e resposta incompleta não viram vazio; consultas antigas são descartadas ao trocar cliente/sair da tela. Desktop e celular revisados.
 - [x] 35 testes, lint, build e diff dos arquivos do lote aprovados. Detalhes em [QA-2026-10-19-CARTEIRA-VAZIA.md](QA-2026-10-19-CARTEIRA-VAZIA.md).
 - [x] Deploy 8c64763 conferido no domínio administrativo: Jane zerada e depósito real do Cláudio visíveis. Upload e ativação aprovados na execução 39299774726. As demais pendências da triagem continuam abertas.
+
+## Edição por seção — QA 11, 12, 13 e 15, 19/10/2026
+
+- [x] Referência C24: sem Editar global, uma seção por vez, campos na composição original, Salvar desabilitado antes de alterações, Descartar e confirmação de saída.
+- [x] Jane: escrita e restauração de empresa, renda familiar, preferência de tema e complemento; validação local de renda e campos somente leitura preservados. Sem transação financeira ou aprovação documental.
+- [x] Cláudio: composição profissional/financeira carregada com dados reais; início sem mudanças não permite salvar. Desktop/celular revisados.
+- [ ] Homologação de todos os campos do desenho: depende de contratos de escrita para documentos/dados pessoais, segurança e observações livres de compliance. Limites e evidências em [QA-2026-10-19-EDICAO-POR-SECAO.md](QA-2026-10-19-EDICAO-POR-SECAO.md).

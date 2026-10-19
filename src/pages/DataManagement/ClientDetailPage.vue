@@ -47,16 +47,6 @@
           statusLabel(customer.status)
         }}</q-badge>
       </div>
-      <q-btn
-        outline
-        dense
-        no-caps
-        :icon="inlineEditing ? 'close' : 'edit'"
-        :label="inlineEditing ? 'Fechar edição' : 'Editar'"
-        :aria-label="inlineEditing ? 'Fechar edição do cliente' : 'Editar cliente'"
-        :disable="!customerResource.state.data"
-        @click="toggleInlineEditing"
-      />
     </header>
     <resource-state
       :state="customerResource.state"
@@ -69,75 +59,121 @@
           title="Identificação e contato"
           icon-src="/icons/client-profile/identification.svg"
         >
-          <div v-if="editingRegistration" class="profile-inline-editor">
-            <p class="text-caption">Salve as alterações de cada grupo antes de fechar a edição.</p>
-            <client-registration-editor
-              embedded
-              :customer-id="customerId"
-              :identification="customer"
-              @updated="registrationUpdated"
+          <template #actions
+            ><section-edit-actions
+              v-bind="actionProps('identification')"
+              @edit="editor.controller.start('identification')"
+              @save="editor.controller.save"
+              @discard="discardSection"
+          /></template>
+          <p
+            v-if="editor.state.errorSection === 'identification' && editor.state.error"
+            role="alert"
+            class="section-edit-error"
+          >
+            {{ editor.state.error }}
+          </p>
+          <q-linear-progress
+            v-if="editor.state.active === 'identification' && editor.state.loading"
+            indeterminate
+            aria-label="Carregando edição"
+          />
+          <resource-state :state="identificationResource.state" @retry="loadIdentification">
+            <profile-fields
+              :fields="personalEditFields"
+              v-bind="fieldEditProps('identification')"
+              @update:values="editor.state.draft = $event"
             />
-            <form-section title="Status do cliente">
-              <q-select
-                :model-value="customer.status"
-                :options="statusOptions"
-                emit-value
-                map-options
-                outlined
-                dense
-                aria-label="Status do cliente"
-                :loading="savingStatus"
-                :disable="savingStatus"
-                @update:model-value="saveStatus"
-              />
-            </form-section>
-          </div>
-          <resource-state v-else :state="identificationResource.state" @retry="loadIdentification">
-            <profile-fields :fields="personalFields" />
             <div v-if="documentFields.length" class="profile-divider">
-              <profile-fields :fields="documentFields" />
+              <profile-fields :fields="documentFields" v-bind="fieldEditProps('identification')" />
             </div>
-            <div class="profile-divider"><profile-fields :fields="contactFields" /></div>
-            <div class="profile-divider"><profile-fields :fields="addressFields" /></div>
+            <div class="profile-divider">
+              <profile-fields
+                :fields="contactEditFields"
+                v-bind="fieldEditProps('identification')"
+                @update:values="editor.state.draft = $event"
+              />
+            </div>
+            <div class="profile-divider">
+              <profile-fields
+                :fields="addressEditFields"
+                v-bind="fieldEditProps('identification')"
+                @update:values="editor.state.draft = $event"
+              />
+            </div>
           </resource-state>
         </profile-section>
         <profile-section
           title="Profissional e financeiro"
           icon-src="/icons/client-profile/professional.svg"
         >
-          <div v-if="editingProfessional" class="profile-inline-editor">
-            <p class="text-caption">Salve as alterações de cada grupo antes de fechar a edição.</p>
-            <client-professional-panel
-              embedded
-              :customer-id="customerId"
-              @updated="loadProfessional"
-            />
-            <div class="profile-divider">
-              <client-financial-security-panel
-                hide-security
-                :customer-id="customerId"
-                @updated="loadFinancial"
-              />
-            </div>
-          </div>
-          <template v-else>
-            <resource-state :state="professional.state" @retry="loadProfessional"
-              ><profile-fields :columns="2" :fields="professionalFields"
+          <template #actions
+            ><section-edit-actions
+              v-bind="actionProps('professional')"
+              @edit="editor.controller.start('professional')"
+              @save="editor.controller.save"
+              @discard="discardSection"
+          /></template>
+          <p
+            v-if="editor.state.errorSection === 'professional' && editor.state.error"
+            role="alert"
+            class="section-edit-error"
+          >
+            {{ editor.state.error }}
+          </p>
+          <q-linear-progress
+            v-if="editor.state.active === 'professional' && editor.state.loading"
+            indeterminate
+            aria-label="Carregando edição"
+          />
+          <resource-state :state="professional.state" @retry="loadProfessional"
+            ><profile-fields
+              :columns="2"
+              :fields="professionalEditFields"
+              v-bind="fieldEditProps('professional')"
+              @update:values="editor.state.draft = $event"
+          /></resource-state>
+          <div class="q-mt-lg">
+            <resource-state :state="financial.state" @retry="loadFinancial"
+              ><profile-fields
+                :columns="3"
+                :fields="financialEditFields"
+                v-bind="fieldEditProps('professional')"
+                @update:values="editor.state.draft = $event"
             /></resource-state>
-            <div class="q-mt-lg">
-              <resource-state :state="financial.state" @retry="loadFinancial"
-                ><profile-fields :columns="3" :fields="financialFields"
-              /></resource-state>
-            </div>
-          </template>
+          </div>
         </profile-section>
         <profile-section title="Segurança da conta" icon-src="/icons/client-profile/security.svg">
+          <template #actions
+            ><section-edit-actions
+              v-bind="actionProps('security')"
+              @edit="editor.controller.start('security')"
+              @save="editor.controller.save"
+              @discard="discardSection"
+          /></template>
+          <p
+            v-if="editor.state.errorSection === 'security' && editor.state.error"
+            role="alert"
+            class="section-edit-error"
+          >
+            {{ editor.state.error }}
+          </p>
+          <q-linear-progress
+            v-if="editor.state.active === 'security' && editor.state.loading"
+            indeterminate
+            aria-label="Carregando edição"
+          />
           <resource-state :state="security.state" @retry="loadSecurity">
             <p v-if="security.state.data?.hasUserAccount === false" class="profile-empty">
               Nenhuma conta de acesso vinculada.
             </p>
             <template v-else>
-              <profile-fields :columns="5" :fields="securityFields" />
+              <profile-fields
+                :columns="5"
+                :fields="securityEditFields"
+                v-bind="fieldEditProps('security')"
+                @update:values="editor.state.draft = $event"
+              />
               <q-expansion-item
                 dense
                 label="Gerenciamento de status de login"
@@ -154,12 +190,38 @@
         <profile-section
           title="Preferências do sistema"
           icon-src="/icons/client-profile/preferences.svg"
-          ><client-preferences-panel
+          ><template #actions
+            ><section-edit-actions
+              v-bind="actionProps('preferences')"
+              @edit="editor.controller.start('preferences')"
+              @save="editor.controller.save"
+              @discard="discardSection"
+          /></template>
+          <p
+            v-if="editor.state.errorSection === 'preferences' && editor.state.error"
+            role="alert"
+            class="section-edit-error"
+          >
+            {{ editor.state.error }}
+          </p>
+          <q-linear-progress
+            v-if="editor.state.active === 'preferences' && editor.state.loading"
+            indeterminate
+            aria-label="Carregando edição" /><client-preferences-panel
+            ref="preferencesPanel"
             :key="customerId"
             embedded
             hide-status
             profile-layout
+            controlled
             :customer-id="customerId"
+            :editing="editor.state.active === 'preferences' && Boolean(editor.state.draft)"
+            :external-value="editor.state.draft"
+            :original="editor.state.original"
+            :busy="editor.state.saving || editor.state.loading"
+            :field-errors="editor.state.fields"
+            @update:external-value="editor.state.draft = $event"
+            @ready="preferencesReady = $event"
         /></profile-section>
         <profile-section
           title="Visão consolidada (carteira)"
@@ -240,13 +302,46 @@
           title="Compliance e observações"
           icon-src="/icons/client-profile/compliance.svg"
         >
+          <template #actions
+            ><section-edit-actions
+              v-bind="actionProps('compliance')"
+              @edit="editor.controller.start('compliance')"
+              @save="editor.controller.save"
+              @discard="discardSection"
+          /></template>
+          <p
+            v-if="editor.state.errorSection === 'compliance' && editor.state.error"
+            role="alert"
+            class="section-edit-error"
+          >
+            {{ editor.state.error }}
+          </p>
+          <q-linear-progress
+            v-if="editor.state.active === 'compliance' && editor.state.loading"
+            indeterminate
+            aria-label="Carregando edição"
+          />
           <resource-state :state="compliance.state" @retry="loadCompliance"
             ><div
               class="compliance-note"
               :class="{ 'compliance-note--warning': complianceView.activeCount > 0 }"
             >
               <strong>{{ complianceView.status }}</strong>
-              <p v-for="note in complianceNotes" :key="note">
+              <q-input
+                v-if="editor.state.active === 'compliance' && editor.state.draft"
+                outlined
+                dense
+                type="textarea"
+                aria-label="Observações"
+                v-model="editor.state.draft.description"
+                :disable="editor.state.saving"
+                :error="Boolean(editor.state.fields.description)"
+                :error-message="editor.state.fields.description"
+              />
+              <p
+                v-for="note in editor.state.active === 'compliance' ? [] : complianceNotes"
+                :key="note"
+              >
                 {{ note }}
               </p>
             </div></resource-state
@@ -277,24 +372,48 @@
         </profile-section>
       </aside>
     </main>
+    <q-dialog v-model="confirmOpen" @hide="finishConfirm(false)">
+      <q-card class="section-discard-dialog"
+        ><q-card-section
+          ><h2>Descartar alterações?</h2>
+          <p>
+            As alterações em {{ sectionLabels[editor.state.active] }} ainda não foram salvas. Se
+            sair agora, elas serão perdidas.
+          </p>
+          <p v-if="editor.state.partial">
+            As alterações já confirmadas pelo servidor serão mantidas.
+          </p></q-card-section
+        ><q-card-actions align="right"
+          ><q-btn
+            outline
+            dense
+            no-caps
+            label="Continuar editando"
+            @click="finishConfirm(false)" /><q-btn
+            outline
+            dense
+            no-caps
+            color="negative"
+            label="Descartar"
+            @click="finishConfirm(true)" /></q-card-actions
+      ></q-card>
+    </q-dialog>
   </q-page>
 </template>
 <script setup>
-import { computed, ref, watch } from 'vue'
-import { useRoute, useRouter } from 'vue-router'
+import { computed, ref, watch, onMounted, onScopeDispose } from 'vue'
+import { useRoute, useRouter, onBeforeRouteLeave, onBeforeRouteUpdate } from 'vue-router'
+import SectionEditActions from 'src/components/Entity/SectionEditActions.vue'
+import { useClientSectionEditor } from 'src/composables/useClientSectionEditor'
 import EntityHeader from 'src/components/Entity/EntityHeader.vue'
 import ProfileSection from 'src/components/Entity/ProfileSection.vue'
 import ProfileFields from 'src/components/Entity/ProfileFields.vue'
-import FormSection from 'src/components/Entity/FormSection.vue'
 import ResourceState from 'src/components/Finance/ResourceState.vue'
 import CustomerSelect from 'src/components/Finance/CustomerSelect.vue'
 import CustomerPortfolio from 'src/components/Finance/CustomerPortfolio.vue'
 import ClientAssetRegistry from 'src/components/Clients/ClientAssetRegistry.vue'
 import ClientBankAccountsPanel from 'src/components/Clients/ClientBankAccountsPanel.vue'
 import ProfileDocumentItem from 'src/components/Clients/ProfileDocumentItem.vue'
-import ClientRegistrationEditor from 'src/components/Clients/ClientRegistrationEditor.vue'
-import ClientProfessionalPanel from 'src/components/Clients/ClientProfessionalPanel.vue'
-import ClientFinancialSecurityPanel from 'src/components/Clients/ClientFinancialSecurityPanel.vue'
 import ClientPreferencesPanel from 'src/components/Clients/ClientPreferencesPanel.vue'
 import { useFinanceResource } from 'src/composables/useFinanceResource'
 import useNotification from 'src/composables/global/useNotification'
@@ -304,7 +423,6 @@ import {
   getCustomerProfessionalProfile,
   getCustomerCurrentFinancialProfile,
   getCustomerAccountSecurity,
-  changeCustomerStatus,
 } from 'src/services/customerService'
 import { getCustomerDocumentOverview } from 'src/services/documentAdminService'
 import { getComplianceAlerts } from 'src/services/complianceService'
@@ -318,7 +436,7 @@ import {
 import { getApiErrorMessage } from 'src/services/apiError'
 const route = useRoute(),
   router = useRouter()
-const { successNotify, errorNotify } = useNotification()
+const { errorNotify } = useNotification()
 const customerId = computed(() => String(route.params.id))
 const customerResource = useFinanceResource(),
   identificationResource = useFinanceResource(),
@@ -329,19 +447,98 @@ const customerResource = useFinanceResource(),
   compliance = useFinanceResource(),
   timeline = useFinanceResource()
 const showHistory = ref(false),
-  savingStatus = ref(false),
   currencies = ref([]),
   portfolioCalculated = ref(false),
   portfolioRef = ref(null),
   bankPanel = ref(null)
-const editingRegistration = ref(false)
-const editingProfessional = ref(false)
-const inlineEditing = computed(() => editingRegistration.value || editingProfessional.value)
-const toggleInlineEditing = () => {
-  const editing = !inlineEditing.value
-  editingRegistration.value = editing
-  editingProfessional.value = editing
+const preferencesPanel = ref(null),
+  preferencesReady = ref(false),
+  confirmOpen = ref(false)
+const sectionLabels = {
+  identification: 'Identificação e contato',
+  professional: 'Profissional e financeiro',
+  security: 'Segurança da conta',
+  preferences: 'Preferências do sistema',
+  compliance: 'Compliance e observações',
 }
+const refreshSection = async (key) => {
+  if (key === 'identification')
+    await Promise.all([refreshCustomer(), loadIdentification(), loadTimeline()])
+  if (key === 'professional')
+    await Promise.all([loadProfessional(), loadFinancial(), loadTimeline()])
+  if (key === 'preferences') await Promise.all([preferencesPanel.value?.reload(), loadTimeline()])
+  if (key === 'security') await Promise.all([loadSecurity(), loadTimeline()])
+  if (key === 'compliance') await Promise.all([loadCompliance(), loadTimeline()])
+}
+const editor = useClientSectionEditor(customerId, refreshSection)
+const blocked = (key) =>
+  key === 'identification'
+    ? !identificationResource.state.data
+    : key === 'professional'
+      ? !professional.state.data || !financial.state.data
+      : key === 'preferences'
+        ? !preferencesReady.value
+        : key === 'security'
+          ? !security.state.data?.accountSecurity?.userId
+          : !complianceView.value.recentAlerts?.length
+const actionProps = (key) => ({
+  label: sectionLabels[key],
+  activeLabel: sectionLabels[editor.state.active],
+  editing: editor.state.active === key,
+  locked: Boolean(editor.state.active && editor.state.active !== key),
+  blocked: blocked(key),
+  blockedReason:
+    key === 'compliance'
+      ? 'A API exige uma observação vinculada a um alerta existente.'
+      : 'Dados da seção ainda indisponíveis.',
+  changed: editor.controller.dirty(),
+  busy: editor.state.saving,
+  loading: editor.state.loading,
+  saved: editor.savedSection.value === key,
+})
+const fieldEditProps = (key) => ({
+  editing: editor.state.active === key && Boolean(editor.state.draft),
+  busy: editor.state.saving,
+  values: editor.state.draft,
+  original: editor.state.original,
+  errors: editor.state.fields,
+  editable: editor.state.editable,
+})
+let confirmResolve
+const finishConfirm = (accepted) => {
+  const resolve = confirmResolve
+  confirmResolve = null
+  confirmOpen.value = false
+  resolve?.(accepted)
+}
+const confirmDiscard = () =>
+  new Promise((resolve) => {
+    if (confirmResolve) {
+      resolve(false)
+      return
+    }
+    confirmResolve = resolve
+    confirmOpen.value = true
+  })
+const discardSection = async () => {
+  if (editor.state.saving) return false
+  if (editor.controller.dirty() && !(await confirmDiscard())) return false
+  return editor.controller.discard()
+}
+const leaveProfile = async () => !editor.state.active || (await discardSection())
+onBeforeRouteLeave(leaveProfile)
+onBeforeRouteUpdate((to, from) => (to.params.id !== from.params.id ? leaveProfile() : true))
+const beforeUnload = (event) => {
+  if (editor.controller.dirty() || editor.state.saving) {
+    event.preventDefault()
+    event.returnValue = ''
+  }
+}
+onMounted(() => window.addEventListener('beforeunload', beforeUnload))
+onScopeDispose(() => {
+  window.removeEventListener('beforeunload', beforeUnload)
+  finishConfirm(false)
+})
 const customer = computed(() => customerResource.state.data || {})
 const identification = computed(() => identificationResource.state.data || {})
 const operational = computed(() => customer.value.operationalSummary || {})
@@ -494,6 +691,36 @@ const securityFields = computed(() => {
     ),
   ]
 })
+const mapEdit = (fields, keys, types = {}) =>
+  fields.map((item, index) => ({
+    ...item,
+    editKey: keys[index],
+    inputType: types[keys[index]] || 'text',
+  }))
+const personalEditFields = computed(() =>
+  mapEdit(personalFields.value, ['fullName', null, 'birthDate'], { birthDate: 'date' }),
+)
+const contactEditFields = computed(() =>
+  mapEdit(contactFields.value, ['primaryEmail', 'mobilePhone', 'secondaryPhone']),
+)
+const addressEditFields = computed(() =>
+  mapEdit(addressFields.value, ['line1', 'line2', null, 'cityState', 'postalCode']),
+)
+const professionalEditFields = computed(() =>
+  mapEdit(professionalFields.value, ['occupation', 'employerName']),
+)
+const financialEditFields = computed(() =>
+  mapEdit(
+    financialFields.value,
+    ['individualMonthlyIncome', 'householdMonthlyIncome', 'declaredNetWorth'],
+    {
+      individualMonthlyIncome: 'number',
+      householdMonthlyIncome: 'number',
+      declaredNetWorth: 'number',
+    },
+  ),
+)
+const securityEditFields = computed(() => mapEdit(securityFields.value, ['userName']))
 const documentMetrics = computed(() => profileDocumentMetrics(documentOverview.state.data))
 const documentSections = computed(() => profileDocumentSections(documentOverview.state.data))
 const complianceView = computed(() => summarizeCompliance(null, compliance.state.data))
@@ -571,11 +798,6 @@ const refreshCustomer = async () => {
     )
   }
 }
-const registrationUpdated = () => {
-  refreshCustomer()
-  loadIdentification()
-  loadTimeline()
-}
 const documentsUpdated = () => {
   loadDocuments()
   loadIdentification()
@@ -584,26 +806,12 @@ const documentsUpdated = () => {
 const switchCustomer = (id) => {
   if (id && id !== customerId.value) router.push({ name: 'ClienteDetalhe', params: { id } })
 }
-const saveStatus = async (status) => {
-  if (status === customer.value.status) return
-  savingStatus.value = true
-  try {
-    await changeCustomerStatus(customerId.value, status)
-    successNotify('Status atualizado.')
-    await refreshCustomer()
-    loadTimeline()
-  } catch (error) {
-    errorNotify(getApiErrorMessage(error, 'Não foi possível alterar o status.'))
-  } finally {
-    savingStatus.value = false
-  }
-}
 watch(
   customerId,
   () => {
     showHistory.value = false
-    editingRegistration.value = false
-    editingProfessional.value = false
+    editor.controller.dispose()
+    preferencesReady.value = false
     currencies.value = []
     portfolioCalculated.value = false
     loadCustomer()
@@ -620,6 +828,40 @@ watch(
 </script>
 
 <style scoped>
+.section-edit-error {
+  padding: 8px 12px;
+  margin: 0 0 16px;
+  border: 1px solid rgba(231, 0, 11, 0.45);
+  border-radius: 8px;
+  background: rgba(231, 0, 11, 0.12);
+  color: #ff9e9e;
+  font-size: 13px;
+}
+.section-discard-dialog {
+  width: 440px;
+  max-width: calc(100vw - 32px);
+  background: var(--sa-bg);
+  color: var(--sa-text);
+  border: 1px solid var(--sa-border);
+  border-radius: 12px;
+}
+.section-discard-dialog h2 {
+  font-size: 16px;
+  margin: 0 0 12px;
+}
+.section-discard-dialog p {
+  font-size: 14px;
+  line-height: 20px;
+  color: var(--sa-muted);
+}
+.section-discard-dialog .q-btn {
+  border-radius: 8px;
+  font-size: 12px;
+}
+.client-profile-page :deep(.profile-section__heading) {
+  flex-wrap: wrap;
+}
+
 .client-profile-page {
   color: var(--sa-text);
   min-height: 100vh;

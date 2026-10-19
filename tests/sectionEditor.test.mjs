@@ -1,0 +1,297 @@
+import test from 'node:test'
+import assert from 'node:assert/strict'
+import { createSectionEditor } from '../src/services/sectionEditor.js'
+import {
+  sectionValues,
+  sectionPlan,
+  sectionValidation,
+  sectionEditable,
+} from '../src/services/clientSectionModel.js'
+
+const setup = (overrides = {}) => {
+  const state = {},
+    writes = [],
+    refreshed = [],
+    saved = []
+  const controller = createSectionEditor(state, {
+    read: async () => ({
+      source: {},
+      values: { occupation: 'Analista' },
+      editable: ['occupation'],
+    }),
+    validate: () => ({}),
+    plan: () => [{ method: 'put', path: 'first', payload: {} }],
+    write: async (step) => writes.push(step),
+    errorMessage: (error) => error.message,
+    refresh: async (key) => refreshed.push(key),
+    saved: (key) => saved.push(key),
+    ...overrides,
+  })
+  return { state, controller, writes, refreshed, saved }
+}
+test('only one section; unchanged drafts never write; discard keeps original independent', async () => {
+  const { state, controller, writes } = setup()
+  assert.equal(await controller.start('professional'), true)
+  assert.equal(await controller.start('preferences'), false)
+  assert.equal(await controller.save(), false)
+  state.draft.occupation = 'Engenheiro'
+  assert.equal(state.original.occupation, 'Analista')
+  assert.equal(controller.dirty(), true)
+  await controller.discard()
+  assert.equal(state.active, null)
+  assert.deepEqual(state.editable, [])
+  assert.equal(writes.length, 0)
+})
+test('late reads after dispose cannot reopen a former customer', async () => {
+  let resolve
+  const { state, controller } = setup({ read: () => new Promise((done) => (resolve = done)) })
+  const pending = controller.start('professional')
+  controller.dispose()
+  resolve({ source: {}, values: { occupation: 'Late' } })
+  assert.equal(await pending, false)
+  assert.equal(state.draft, null)
+})
+test('late successful write cannot announce success after dispose', async () => {
+  let resolve
+  const { state, controller, saved, refreshed } = setup({
+    write: () => new Promise((done) => (resolve = done)),
+  })
+  await controller.start('professional')
+  state.draft.occupation = 'Outro'
+  const pending = controller.save()
+  controller.dispose()
+  resolve()
+  assert.equal(await pending, false)
+  assert.equal(state.active, null)
+  assert.deepEqual(saved, [])
+  assert.deepEqual(refreshed, [])
+})
+test('saving locks discard and other sections and validates before writing', async () => {
+  let resolve
+  const { state, controller } = setup({ write: () => new Promise((done) => (resolve = done)) })
+  await controller.start('professional')
+  state.draft.occupation = 'Engenheiro'
+  const pending = controller.save()
+  assert.equal(state.saving, true)
+  assert.equal(await controller.discard(), false)
+  assert.equal(await controller.start('preferences'), false)
+  resolve()
+  assert.equal(await pending, true)
+  assert.equal(state.active, null)
+  const invalid = setup({ validate: () => ({ occupation: 'Informe a profissão.' }) })
+  await invalid.controller.start('professional')
+  invalid.state.draft.occupation = ''
+  assert.equal(await invalid.controller.save(), false)
+  assert.match(invalid.state.error, /Revise/)
+  assert.equal(invalid.writes.length, 0)
+})
+test('partial saves retain draft; retry skips accepted operation and maps server field', async () => {
+  let fail = true
+  const calls = []
+  const { state, controller, saved } = setup({
+    plan: () => ['put', 'post'].map((method) => ({ method, path: method, payload: {} })),
+    write: async (step) => {
+      calls.push(step.method)
+      if (step.method === 'post' && fail)
+        throw Object.assign(Error('Falha'), {
+          response: { data: { errors: [{ field: 'Profile.Occupation', message: 'Inválido' }] } },
+        })
+    },
+  })
+  await controller.start('professional')
+  state.draft.occupation = 'Engenheiro'
+  assert.equal(await controller.save(), false)
+  assert.match(state.error, /Parte das alterações/)
+  assert.equal(state.fields.occupation, 'Inválido')
+  assert.equal(state.draft.occupation, 'Engenheiro')
+  assert.deepEqual(saved, [])
+  fail = false
+  assert.equal(await controller.save(), true)
+  assert.deepEqual(calls, ['put', 'post', 'post'])
+  assert.deepEqual(saved, ['professional'])
+})
+test('discard after partial save refreshes real server data without claiming success', async () => {
+  const { state, controller, refreshed, saved } = setup({
+    plan: () => [{ path: 'accepted' }, { path: 'failed' }],
+    write: async ({ path }) => {
+      if (path === 'failed') throw Error('Falha')
+    },
+  })
+  await controller.start('professional')
+  state.draft.occupation = 'Outro'
+  await controller.save()
+  await controller.discard()
+  assert.deepEqual(refreshed, ['professional'])
+  assert.deepEqual(saved, [])
+})
+test('accepted fields become the baseline so a partial save can be corrected back', async () => {
+  const calls = []
+  let fail = true
+  const { state, controller } = setup({
+    read: async () => ({ source: {}, values: { occupation: 'A', employerName: 'Original' } }),
+    plan: (_key, _source, draft, original) =>
+      Object.keys(draft)
+        .filter((field) => draft[field] !== original[field])
+        .map((field) => ({ path: field, payload: { [field]: draft[field] }, fields: [field] })),
+    write: async (step) => {
+      calls.push(step.payload)
+      if (step.path === 'employerName' && fail) throw Error('Falha')
+    },
+  })
+  await controller.start('professional')
+  Object.assign(state.draft, { occupation: 'B', employerName: 'Nova' })
+  await controller.save()
+  assert.equal(state.original.occupation, 'B')
+  assert.equal(state.original.employerName, 'Original')
+  state.draft.occupation = 'A'
+  fail = false
+  assert.equal(await controller.save(), true)
+  assert.deepEqual(calls, [
+    { occupation: 'B' },
+    { employerName: 'Nova' },
+    { occupation: 'A' },
+    { employerName: 'Nova' },
+  ])
+})
+
+const professional = {
+  customerId: 'customer',
+  professional: {
+    occupation: 'Analista',
+    employerName: 'Empresa',
+    validFrom: '2026-01-01',
+    validTo: null,
+    isCurrent: true,
+  },
+  financial: {
+    individualMonthlyIncome: 0,
+    householdMonthlyIncome: 100,
+    declaredNetWorth: null,
+    currencyCode: 'BRL',
+    effectiveFrom: '2026-01-01',
+    effectiveTo: null,
+  },
+}
+test('financial save preserves zero, null, currency and dates without adding UI fields', () => {
+  const original = sectionValues('professional', professional)
+  const draft = { ...original, householdMonthlyIncome: 200 }
+  const steps = sectionPlan('professional', professional, draft, original)
+  assert.equal(steps.length, 1)
+  assert.equal(steps[0].method, 'post')
+  assert.deepEqual(steps[0].payload, { ...professional.financial, householdMonthlyIncome: 200 })
+  assert.equal(Object.keys(original).length, 5)
+  assert.ok(
+    sectionValidation('professional', { ...draft, householdMonthlyIncome: -1 })
+      .householdMonthlyIncome,
+  )
+  assert.throws(
+    () => sectionPlan('professional', { ...professional, financial: {} }, draft, original),
+    /Moeda e vigência/,
+  )
+})
+test('professional, preferences, account and compliance preserve required hidden metadata', () => {
+  const original = sectionValues('professional', professional)
+  assert.deepEqual(
+    sectionPlan('professional', professional, { ...original, employerName: 'Nova' }, original)[0]
+      .payload,
+    { ...professional.professional, employerName: 'Nova' },
+  )
+  const preferences = {
+    customerId: 'customer',
+    countryId: 'BR',
+    primaryCurrencyCode: 'BRL',
+    secondaryCurrencyCode: null,
+    languageCode: 'pt-BR',
+    timeZoneId: 'America/Sao_Paulo',
+    theme: 'Dark',
+  }
+  assert.equal(
+    sectionPlan('preferences', preferences, {
+      ...sectionValues('preferences', preferences),
+      theme: 'Light',
+    })[0].payload.countryId,
+    'BR',
+  )
+  const user = { id: 'user', name: 'Teste', email: 'test@example.com', workspaceId: 'workspace' }
+  assert.deepEqual(sectionPlan('security', user, { userName: 'Outro' })[0].payload, {
+    name: 'Outro',
+    email: user.email,
+    workspaceId: 'workspace',
+  })
+  const flag = {
+    customerId: 'customer',
+    id: 'flag',
+    severity: 'Low',
+    status: 'Open',
+    description: 'Nota',
+    monitoringFrequency: 'Annual',
+    relatedPepDescription: null,
+    relatedPepRelationship: null,
+  }
+  const payload = sectionPlan('compliance', flag, { description: 'Outra' })[0].payload
+  assert.equal(payload.severity, 'Low')
+  assert.equal(payload.status, 'Open')
+  assert.equal(payload.description, 'Outra')
+})
+test('identification replaces collections without dropping secondary records or sending documents', () => {
+  const source = {
+    customerId: 'customer',
+    kind: 'Person',
+    birthDate: null,
+    names: [
+      {
+        id: 'name',
+        kind: 'Legal',
+        displayName: 'Teste',
+        validFrom: '2026-01-01',
+        validTo: null,
+        isPrimary: true,
+      },
+    ],
+    personalDocuments: [{ value: 'never-send' }],
+    contacts: [
+      { id: 'email', kind: 'Email', value: 'old@example.com', isPrimary: true },
+      { id: 'other', kind: 'Phone', value: '123', isPrimary: false },
+    ],
+    addresses: [
+      {
+        id: 'home',
+        kind: 'Residential',
+        line1: 'Rua',
+        line2: null,
+        city: 'São Paulo',
+        stateOrProvince: 'SP',
+        postalCode: '01000',
+        countryId: 'BR',
+        isPrimary: true,
+      },
+      { id: 'work', kind: 'Commercial', line1: 'Empresa', countryId: 'BR', isPrimary: false },
+    ],
+  }
+  const original = sectionValues('identification', source)
+  const draft = {
+    ...original,
+    fullName: 'Teste Dois',
+    primaryEmail: 'new@example.com',
+    line2: 'Ap 1',
+  }
+  const steps = sectionPlan('identification', source, draft, original)
+  assert.equal(steps.length, 3)
+  assert.equal(steps[0].payload.names[0].validFrom, '2026-01-01')
+  assert.deepEqual(steps[1].payload.contacts[1], source.contacts[1])
+  assert.equal(steps[2].payload.addresses[0].countryId, 'BR')
+  assert.equal(steps[2].payload.addresses[1].id, 'work')
+  assert.ok(!JSON.stringify(steps).includes('never-send'))
+  assert.equal(source.addresses[0].line2, null)
+  const accepted = { ...original, primaryEmail: 'accepted@example.com' }
+  const retry = sectionPlan('identification', source, { ...accepted, mobilePhone: '456' }, accepted)
+  assert.equal(
+    retry[0].payload.contacts.find((row) => row.id === 'email').value,
+    'accepted@example.com',
+  )
+  assert.ok(!sectionEditable('identification', { ...source, addresses: [] }).includes('line1'))
+  assert.deepEqual(
+    sectionValidation('identification', { ...original, fullName: '' }, { names: [] }),
+    {},
+  )
+})

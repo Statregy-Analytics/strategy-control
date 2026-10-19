@@ -53,7 +53,16 @@
         <q-card-section v-else class="preference-fields row q-col-gutter-sm q-px-none q-py-sm">
           <label-form :class-name="preferenceColumn" text-label="Moeda primária"
             ><q-select
-              v-model="form.primaryCurrencyCode"
+              :model-value="values.primaryCurrencyCode"
+              @update:model-value="setField('primaryCurrencyCode', $event)"
+              :readonly="controlled && !editing"
+              :disable="busy"
+              :error="Boolean(fieldErrors?.primaryCurrencyCode)"
+              :error-message="fieldErrors?.primaryCurrencyCode"
+              :class="{
+                'preference-field--changed':
+                  controlled && editing && changed('primaryCurrencyCode'),
+              }"
               :options="currencyOptions"
               emit-value
               map-options
@@ -63,7 +72,16 @@
           /></label-form>
           <label-form :class-name="preferenceColumn" text-label="Moeda secundária"
             ><q-select
-              v-model="form.secondaryCurrencyCode"
+              :model-value="values.secondaryCurrencyCode"
+              @update:model-value="setField('secondaryCurrencyCode', $event)"
+              :readonly="controlled && !editing"
+              :disable="busy"
+              :error="Boolean(fieldErrors?.secondaryCurrencyCode)"
+              :error-message="fieldErrors?.secondaryCurrencyCode"
+              :class="{
+                'preference-field--changed':
+                  controlled && editing && changed('secondaryCurrencyCode'),
+              }"
               :options="currencyOptions"
               emit-value
               map-options
@@ -74,7 +92,15 @@
           /></label-form>
           <label-form :class-name="preferenceColumn" text-label="Idioma do sistema"
             ><q-select
-              v-model="form.languageCode"
+              :model-value="values.languageCode"
+              @update:model-value="setField('languageCode', $event)"
+              :readonly="controlled && !editing"
+              :disable="busy"
+              :error="Boolean(fieldErrors?.languageCode)"
+              :error-message="fieldErrors?.languageCode"
+              :class="{
+                'preference-field--changed': controlled && editing && changed('languageCode'),
+              }"
               :options="languageOptions"
               emit-value
               map-options
@@ -84,7 +110,15 @@
           /></label-form>
           <label-form :class-name="preferenceColumn" text-label="Fuso horário"
             ><q-select
-              v-model="form.timeZoneId"
+              :model-value="values.timeZoneId"
+              @update:model-value="setField('timeZoneId', $event)"
+              :readonly="controlled && !editing"
+              :disable="busy"
+              :error="Boolean(fieldErrors?.timeZoneId)"
+              :error-message="fieldErrors?.timeZoneId"
+              :class="{
+                'preference-field--changed': controlled && editing && changed('timeZoneId'),
+              }"
               :options="timeZoneOptions"
               emit-value
               map-options
@@ -99,11 +133,12 @@
                 :key="theme.value"
                 :label="theme.label"
                 :icon="themeIcon(theme)"
-                :aria-pressed="form.theme === theme.value"
-                :class="{ 'preference-theme--selected': form.theme === theme.value }"
+                :aria-pressed="values.theme === theme.value"
+                :class="{ 'preference-theme--selected': values.theme === theme.value }"
                 outline
                 no-caps
-                @click="form.theme = theme.value"
+                :disable="busy || (controlled && !editing)"
+                @click="setField('theme', theme.value)"
               />
             </div>
           </label-form>
@@ -117,7 +152,11 @@
               dense
           /></label-form>
         </q-card-section>
-        <q-card-actions v-if="!loading && !loadError" align="right" class="q-pa-none">
+        <q-card-actions
+          v-if="!controlled && !loading && !loadError"
+          align="right"
+          class="q-pa-none"
+        >
           <q-btn
             flat
             dense
@@ -136,7 +175,7 @@
 </template>
 
 <script setup>
-import { computed, onMounted, reactive, ref } from 'vue'
+import { computed, onMounted, onScopeDispose, reactive, ref } from 'vue'
 import {
   changeCustomerStatus,
   getCustomerPreferences,
@@ -153,8 +192,14 @@ const props = defineProps({
   embedded: { type: Boolean, default: false },
   hideStatus: { type: Boolean, default: false },
   profileLayout: { type: Boolean, default: false },
+  controlled: Boolean,
+  editing: Boolean,
+  externalValue: Object,
+  original: Object,
+  busy: Boolean,
+  fieldErrors: Object,
 })
-const emit = defineEmits(['updated'])
+const emit = defineEmits(['updated', 'ready', 'update:externalValue'])
 const { successNotify, errorNotify } = useNotification()
 const loading = ref(true),
   loadError = ref(''),
@@ -170,6 +215,16 @@ const form = reactive({
   timeZoneId: '',
   theme: '',
 })
+const values = computed(() =>
+  props.controlled && props.editing && props.externalValue ? props.externalValue : form,
+)
+const setField = (key, value) => {
+  if (props.controlled) {
+    if (props.editing && !props.busy)
+      emit('update:externalValue', { ...values.value, [key]: value })
+  } else form[key] = value
+}
+const changed = (key) => values.value[key] !== props.original?.[key]
 const preferenceColumn = computed(() =>
   props.profileLayout ? 'col-12 col-sm-6 col-lg-3' : 'col-12 col-md-4',
 )
@@ -209,8 +264,12 @@ const themeIcon = (theme) => {
   const name = /light|claro/.test(key) ? 'light' : /dark|escuro/.test(key) ? 'dark' : 'auto'
   return 'img:/icons/client-profile/theme-' + name + '.svg'
 }
+let loadRevision = 0
+onScopeDispose(() => loadRevision++)
 const load = async () => {
+  const revision = ++loadRevision
   loading.value = true
+  emit('ready', false)
   loadError.value = ''
   try {
     const [status, preferences, options] = await Promise.all([
@@ -218,6 +277,7 @@ const load = async () => {
       getCustomerPreferences(props.customerId),
       getPreferenceCatalog(),
     ])
+    if (revision !== loadRevision) return
     currentStatus.value = status?.status ?? status
     selectedStatus.value = currentStatus.value
     Object.assign(form, {
@@ -228,10 +288,12 @@ const load = async () => {
       theme: preferences?.theme ?? '',
     })
     catalog.value = options || {}
+    emit('ready', true)
   } catch (error) {
+    if (revision !== loadRevision) return
     loadError.value = getApiErrorMessage(error, 'Não foi possível carregar status e preferências.')
   } finally {
-    loading.value = false
+    if (revision === loadRevision) loading.value = false
   }
 }
 const saveStatus = async () => {
@@ -259,9 +321,16 @@ const savePreferences = async () => {
     savingPreferences.value = false
   }
 }
+defineExpose({ reload: load })
 onMounted(load)
 </script>
 <style scoped>
+.preference-field--changed :deep(.q-field__control) {
+  background: rgba(190, 219, 255, 0.08);
+}
+.preference-field--changed :deep(.q-field__control:before) {
+  border-color: rgba(190, 219, 255, 0.5);
+}
 .preference-fields :deep(.LabelForm) {
   min-width: 0;
   grid-template-columns: minmax(0, 1fr);
