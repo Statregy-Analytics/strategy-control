@@ -523,10 +523,10 @@ defineExpose({ refresh: onAssetsChanged })
   white-space: normal;
 }
 .profile-statement--entries :deep(table) {
-  min-width: 560px;
+  min-width: 590px;
 }
 .profile-statement--entries th:nth-last-child(-n + 2) {
-  width: 128px;
+  width: 112px;
 }
 .profile-statement--entries th:first-child {
   width: 110px;
