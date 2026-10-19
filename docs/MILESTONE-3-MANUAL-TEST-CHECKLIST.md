@@ -160,3 +160,19 @@ Comparação visual com C08 (1484:68911), mantendo as quatro métricas e a compo
 do perfil. Ícones locais conferidos em suas dimensões originais 14/20/12/12 px.
 Layout desktop sem overflow: página 1897/1897 px. Lint, build e testes de regressão
 validam a alteração. A homologação de escritas financeiras continua fora desta rodada.
+
+## Preferências do portal — retomada em 19/10/2026
+
+Seletores de moedas, idioma e fuso integrados à API, conforme Figma `1:68237`,
+sem botão de salvar ou campo de país adicional. Salvamento feito pela tela em
+9010, usando Cláudio: o país ausente nas preferências foi reaproveitado do seu
+único endereço residencial principal cadastrado. A API confirmou preferências
+e país completos; Home e contratos HTTP 200, Banking BRL 25.000,00, investimento
+BRL 261.500,00 e Beta Growth Spec visíveis. Persistência conferida após recarga.
+
+A pendência de contrato encerrado no investimento permanece no backend. A
+verificação telefônica também continua pendente no status geral, sem bloquear
+a Home nesta resposta. Nenhuma escrita financeira ou aprovação documental foi
+realizada. Estados vazios de Comunicação aplicados na Home e página própria;
+integração de publicações depende de contrato HTTP ainda não disponível no
+Swagger consultado. Demais itens do QA não estão aprovados por esta rodada.

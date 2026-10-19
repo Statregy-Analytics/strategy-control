@@ -18,11 +18,11 @@ Atualizado em 19/10/2026. Referência: feedback de homologação enviado pelo us
 | QA | Situação em 19/10 | Próximo passo |
 | --- | --- | --- |
 | 1 | Redirecionamento corrigido; login com Éric e Cláudio abre a Home. | Repetir o fluxo completo de registro e confirmação no ambiente do QA; cadastro novo não foi criado neste lote. |
-| 2 | Pendente. Cláudio recebeu `PreferencesRequired` na carteira consolidada e contratos, embora Banking retorne R$ 25.000,00. | Integrar preferências e alinhar com o backend a liberação de leitura para contas novas. Exibir zero apenas quando a API confirmar saldo zero. |
+| 2 | Preferências integradas no segundo lote de 19/10; Cláudio desbloqueado após salvar o país já registrado no endereço residencial principal. Home e contratos HTTP 200. | Estados e comparações de conta nova continuam pendentes. País ausente também no cadastro exige o fluxo do Figma ou correção na origem, sem campo extra em Preferências. Exibir zero apenas quando confirmado pela API. |
 | 3 | Pendente de implementação dos estados e regras de período. | Conferir o novo Figma e dados de criação da conta/primeiro depósito; não confundir série indisponível com ausência de depósito. |
 | 4 | Pendente do convite e ação no estado vazio. | Seguir o Figma e confirmar o destino de Solicitar contrato. |
 | 5 | Pendente da distinção entre dívida inexistente e consulta indisponível. | Ocultar somente quando ausência de dívida for confirmada. |
-| 6 | Confirmado: comunicação ainda usa conteúdo demonstrativo. | Retirar mocks das duas superfícies e aplicar o estado vazio do Figma, sem filtros/contadores fictícios. |
+| 6 | Estado vazio do Figma aplicado na página e na Home; mocks, filtros e contadores fictícios retirados das listagens. | Integração de publicações depende de contrato HTTP; o Swagger consultado não contém endpoint de conteúdo. |
 | 7 | Novo fluxo de sete etapas ainda não implementado. | Conferir Figma e contrato para persistência, retomada, países, documentos e aceite versionado. Não inventar payloads. |
 | 8 | Confirmado: nome acompanha a conta, mas resumo, ajustes e sessões ainda contêm exemplos. | Integrar dados próprios, revisão cadastral, estados pendentes e bloqueio de edição conforme o Figma. |
 | 9 | Três correções de texto concluídas. | Foto de perfil ainda precisa de validação e correção. |
@@ -49,6 +49,18 @@ Atualizado em 19/10/2026. Referência: feedback de homologação enviado pelo us
 - Os arquivos alterados do portal foram avaliados com as regras essenciais compatíveis do plugin Vue: nenhum erro. `git diff --check` passou nos arquivos deste lote. O comando global ainda aponta finais de linha em três arquivos que já estavam modificados antes deste trabalho e foram preservados.
 
 ## Encaminhamento ao backend
+
+### Ambientes do QA e conferência do deploy em 19/10
+
+O usuário confirmou os endereços: portal `https://hml.strategyanalytics.com.br/` e Admin `https://admin.strategyanalytics.com.br/`.
+
+- Sem sessão, `/landing-page` no Admin redirecionou para `/auth`. Com a conta administrativa, `/edit-lp` abriu o editor. A listagem de Transações foi acessada pelo novo menu.
+- Éric entrou diretamente na Home; investimento USD 250.000,00, saldo investível BRL 47.500,00 e os dois contratos foram exibidos. O resumo identificou Éric, mas preserva os dados demonstrativos já apontados no item 8.
+- Após logout do Éric, Cláudio entrou diretamente na Home e seu nome foi confirmado no resumo. Banking exibiu BRL 25.000,00; carteira consolidada e contratos exibiram o bloqueio de preferências. Não houve troca indevida de identidade nesse cenário; isso não reproduz nem encerra a investigação do incidente original.
+- Os assets públicos consultados contêm os marcadores das proteções: `ERR_SESSION_CHANGED` e validação de identidade no portal; `requiresAdmin` e negativa de acesso administrativo no Admin. Isso confirma a presença dessas proteções no deploy consultado, sem atestar que os 19 itens estejam resolvidos.
+- Não foram realizadas operações financeiras, alterações cadastrais ou aprovações documentais nesta conferência.
+
+### Pendências do servidor
 
 1. Investigar o incidente de identidade de 17/10 às 18:16, correlacionando login, refresh, usuário autenticado e último acesso. O endurecimento do front não prova a causa do incidente.
 2. Definir o contrato de sessão HttpOnly para Admin e portal: criação e remoção por `Set-Cookie`, refresh/logout, `/auth/me`, credenciais CORS para 8080/9010 e proteção CSRF adequada à implantação. O front não consegue criar cookies HttpOnly.
