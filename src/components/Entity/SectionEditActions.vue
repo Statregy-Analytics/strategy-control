@@ -69,11 +69,15 @@ defineEmits(['edit', 'save', 'discard'])
   width: 32px;
   padding: 0;
 }
-.section-pencil img,
-.section-saved img,
-.section-spinner {
+.section-pencil img {
   width: 16px;
   height: 16px;
+  flex: none;
+}
+.section-saved img,
+.section-spinner {
+  width: 14px;
+  height: 14px;
   flex: none;
 }
 .section-actions .section-save {
