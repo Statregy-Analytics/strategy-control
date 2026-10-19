@@ -98,16 +98,9 @@ const routes = [
 
   {
     path: '/',
-    component: () => import('../views/AuthView.vue'),
-    props: true,
-    children: [
-      {
-        path: '',
-        name: 'Selected',
-        redirect: { name: 'Clientes' },
-        meta: { requiresAuth: true },
-      },
-    ],
+    name: 'Selected',
+    component: () => import('pages/Authentication/SystemSelectionPage.vue'),
+    meta: { requiresAuth: true },
   },
   {
     path: '/auth',

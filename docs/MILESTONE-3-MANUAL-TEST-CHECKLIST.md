@@ -208,3 +208,12 @@ Swagger consultado. Demais itens do QA não estão aprovados por esta rodada.
 - [x] Testes automatizados de tradução, preservação de texto, catálogo paginado, países inativos, falha e ausência de país. Sem escritas cadastrais ou financeiras neste lote.
 - [x] 65 testes, lint e build aprovados; revisão visual em desktop e celular sem transbordamento no histórico. Nenhum erro de console observado na validação local.
 - [ ] Unicidade do e-mail no servidor permanece pendente. Encaminhamento consolidado em [Pendências do backend](PENDENCIAS-BACKEND-QA.md).
+
+## Menu administrativo e seleção de sistema — QA 16, 19/10/2026
+
+- [x] Menu comparado aos sidebars 1484:85381/1484:69989; seleção comparada a A02 (1484:66973). Ícones e logo fornecidos pelo Figma, sem campos ou ações novos nas telas de destino.
+- [x] Clientes, Contratos e Transações abertos com dados da API. Configurações oferece os acessos existentes a Formulários, Bancos e Configuração documental; carregamento real conferido nos três.
+- [x] Destaque da seção, recolher/expandir, rodapé sem sobreposição e ausência de barra horizontal no menu conferidos em desktop. No celular, menu abre e fecha após navegação; seleção usa uma coluna sem transbordar.
+- [x] Trocar Sistema abre A02 e consulta `/me/systems`. Inserção de Dados abre Clientes; editor de LP permanece indisponível por ainda não persistir alterações. Carregamento/erro não habilitam destinos fictícios.
+- [x] 70 testes automatizados aprovados, incluindo rotas existentes, destaque por seção, proteção da seleção e mapeamento de sistemas sem seguir URLs arbitrárias da API.
+- [ ] QA 16 integral: Dashboard, módulos ainda sem integração e editor de LP continuam pendentes. Dependências confirmadas e limitações de frontend em [Pendências do backend](PENDENCIAS-BACKEND-QA.md).

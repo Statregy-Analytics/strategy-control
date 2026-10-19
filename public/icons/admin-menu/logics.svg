@@ -1,0 +1,11 @@
+<svg preserveAspectRatio="none" overflow="visible" style="display: block;" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="ChartPie" clip-path="url(#clip0_0_22)">
+<path id="Vector" d="M17.5 10C17.96 10 18.3375 9.62583 18.2917 9.16833C18.0995 7.25514 17.2517 5.46725 15.8919 4.10777C14.5321 2.74829 12.7441 1.90086 10.8308 1.70917C10.3725 1.66333 9.99917 2.04083 9.99917 2.50083V9.1675C9.99917 9.38851 10.087 9.60048 10.2432 9.75676C10.3995 9.91304 10.6115 10.0008 10.8325 10.0008L17.5 10Z" stroke-width="1.66667" stroke-linecap="round" stroke-linejoin="round" stroke="white"/>
+<path id="Vector_2" d="M17.675 13.2417C17.1449 14.4954 16.3157 15.6002 15.2599 16.4594C14.2041 17.3187 12.954 17.9062 11.6187 18.1707C10.2834 18.4351 8.90369 18.3685 7.60012 17.9765C6.29656 17.5845 5.10885 16.8792 4.14085 15.9222C3.17284 14.9652 2.45401 13.7856 2.0472 12.4866C1.64038 11.1876 1.55797 9.80874 1.80716 8.47053C2.05636 7.13232 2.62958 5.87552 3.4767 4.81002C4.32383 3.74453 5.41907 2.90276 6.66667 2.35833" stroke-width="1.66667" stroke-linecap="round" stroke-linejoin="round" stroke="white"/>
+</g>
+<defs>
+<clipPath id="clip0_0_22">
+<rect width="20" height="20" fill="white"/>
+</clipPath>
+</defs>
+</svg>
