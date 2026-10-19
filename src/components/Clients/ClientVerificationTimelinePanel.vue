@@ -27,7 +27,7 @@
     <q-banner v-if="timelineError" class="bg-red-1 text-negative q-mb-md">{{ timelineError }}<template #action><q-btn flat color="negative" label="Tentar novamente" @click="loadTimeline" /></template></q-banner>
     <div v-if="timelineLoading" class="row justify-center q-pa-lg"><q-spinner color="primary" size="30px" /></div>
     <template v-else>
-      <q-list v-if="sortedTimeline.length" bordered separator class="history-list" role="region" tabindex="0" aria-label="Eventos administrativos"><q-item v-for="event in sortedTimeline" :key="event.id || `${eventTypeOf(event)}-${eventDate(event)}`"><q-item-section avatar><q-icon name="history" color="primary" /></q-item-section><q-item-section><q-item-label>{{ event.title || event.description || eventTypeOf(event) }}</q-item-label><q-item-label caption>{{ event.entityType || event.entityName || 'Cliente' }} · {{ formatDate(eventDate(event)) }}</q-item-label></q-item-section></q-item></q-list>
+      <q-list v-if="sortedTimeline.length" bordered separator class="history-list" role="region" tabindex="0" aria-label="Eventos administrativos"><q-item v-for="event in sortedTimeline" :key="event.id || `${eventTypeOf(event)}-${eventDate(event)}`"><q-item-section avatar><q-icon name="history" color="primary" /></q-item-section><q-item-section><q-item-label>{{ customerTimelineTitle({ ...event, title: event.title || event.description }) }}</q-item-label><q-item-label caption>{{ event.entityType || event.entityName || 'Cliente' }} · {{ formatDate(eventDate(event)) }}</q-item-label></q-item-section></q-item></q-list>
       <div v-else class="text-caption text-grey-7 q-pa-md">Nenhum evento encontrado.</div>
       <entity-table-footer :page="page" :page-size="pageSize" :total-items="totalItems" :total-pages="totalPages" :first-item="firstItem" :last-item="lastItem" :page-size-options="[5,10,20]" @page="changePage" @page-size="changePageSize" />
     </template>
@@ -43,6 +43,7 @@ import TitleCard from 'src/components/Card/TitleCard.vue'
 import LabelForm from 'src/components/Form/LabelForm.vue'
 import useNotification from 'src/composables/global/useNotification'
 import { getApiErrorMessage } from 'src/services/apiError'
+import { customerTimelineTitle } from 'src/services/customerTimelinePresentation'
 import { getCustomerTimeline, getCustomerVerificationLevel, getVerificationCatalog, updateCustomerVerificationArea } from 'src/services/verificationService'
 
 const props = defineProps({ customerId: { type: String, required: true } })

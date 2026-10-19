@@ -353,7 +353,7 @@
             <resource-state :state="timeline.state" @retry="loadTimeline"
               ><ol v-if="recentEvents.length" class="profile-timeline">
                 <li v-for="event in recentEvents" :key="event.id">
-                  <strong>{{ event.title || event.eventType }}</strong
+                  <strong>{{ customerTimelineTitle(event) }}</strong
                   ><small
                     >{{ event.actorName || 'Sistema' }} · {{ date(event.occurredAtUtc) }}</small
                   >
@@ -436,6 +436,7 @@ import {
   profileDocumentMetrics,
 } from 'src/services/clientProfileProjection'
 import { getApiErrorMessage } from 'src/services/apiError'
+import { customerTimelineTitle } from 'src/services/customerTimelinePresentation'
 const route = useRoute(),
   router = useRouter()
 const { errorNotify } = useNotification()

@@ -199,3 +199,12 @@ Swagger consultado. Demais itens do QA não estão aprovados por esta rodada.
 - [x] Dois arquivos descartáveis de homologação: rejeitado com notas e aprovado pela tela; contadores e download conferidos. Arquivos de QA removidos e documento original do Cláudio preservado pendente.
 - [x] Desktop/celular e testes automatizados de permissão, validação, concorrência e respostas antigas. Detalhes em [QA-2026-10-19-APROVACAO-DOCUMENTOS.md](QA-2026-10-19-APROVACAO-DOCUMENTOS.md).
 - [ ] C25–C26 completos, defaults, reenvio e desbloqueio cadastral após aprovação: dependem dos estados e efeitos confirmados no backend. Este lote não aprova integralmente o item 10.
+
+## Histórico e países dos bancos — QA 17
+
+- [x] Histórico recente/completo do Cláudio em português, incluindo cadastro, preferências, profissão, finanças e documentos. Data, autor, ordem e observações preservados; arquivamento não é confundido com revisão documental.
+- [x] Catálogo de bancos mostra Brasil no lugar do UUID. Campo País usa o catálogo existente, com Brasil e Portugal; país inativo não aparece entre as opções. Seleção testada e cancelada sem cadastrar banco.
+- [x] Primeira e segunda páginas exibem os dez registros recebidos, em concordância com o rodapé. Não há paginação local de cinco linhas escondendo metade da página do servidor.
+- [x] Testes automatizados de tradução, preservação de texto, catálogo paginado, países inativos, falha e ausência de país. Sem escritas cadastrais ou financeiras neste lote.
+- [x] 65 testes, lint e build aprovados; revisão visual em desktop e celular sem transbordamento no histórico. Nenhum erro de console observado na validação local.
+- [ ] Unicidade do e-mail no servidor permanece pendente. Encaminhamento consolidado em [Pendências do backend](PENDENCIAS-BACKEND-QA.md).
