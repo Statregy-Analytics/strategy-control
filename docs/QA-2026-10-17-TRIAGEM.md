@@ -1,0 +1,60 @@
+# QA de 17/10 — triagem e primeiro lote de correções
+
+Atualizado em 19/10/2026. Referência: feedback de homologação enviado pelo usuário, com 19 itens. Este registro não aprova integralmente o Marco 3 nem substitui o checklist de homologação integrada.
+
+## Correções deste lote
+
+- Portal: `/system/` redireciona para a Home; login confirmado entra diretamente na Home.
+- Portal: nova tentativa de login limpa o estado anterior; antes de entrar, compara o e-mail digitado e o usuário do login com `/auth/me`, e valida `/client/auth/ping`.
+- Portal: respostas e renovações de token de uma sessão anterior são rejeitadas. Uma renovação antiga não pode sobrescrever cookies de outro login nem encerrar a nova sessão. Requisições simultâneas compartilham uma renovação.
+- Portal: logout e falha de validação limpam o estado do usuário; foi removido o log bruto do erro de logout.
+- Portal: textos do campo de senha, link de cadastro e banner corrigidos conforme o QA.
+- Admin: `/landing-page` e `/edit-lp` exigem sessão e papel `Admin`, consultado em `/auth/me`. Isso protege a navegação; a autorização dos endpoints continua obrigatória no servidor.
+- Admin: removidos logs de query da autenticação; menu inclui Transações e Contratos existentes.
+- Admin: datas sem horário preservam o dia informado pela API na listagem de clientes. Datas com horário continuam respeitando o fuso local.
+
+## Situação por item
+
+| QA | Situação em 19/10 | Próximo passo |
+| --- | --- | --- |
+| 1 | Redirecionamento corrigido; login com Éric e Cláudio abre a Home. | Repetir o fluxo completo de registro e confirmação no ambiente do QA; cadastro novo não foi criado neste lote. |
+| 2 | Pendente. Cláudio recebeu `PreferencesRequired` na carteira consolidada e contratos, embora Banking retorne R$ 25.000,00. | Integrar preferências e alinhar com o backend a liberação de leitura para contas novas. Exibir zero apenas quando a API confirmar saldo zero. |
+| 3 | Pendente de implementação dos estados e regras de período. | Conferir o novo Figma e dados de criação da conta/primeiro depósito; não confundir série indisponível com ausência de depósito. |
+| 4 | Pendente do convite e ação no estado vazio. | Seguir o Figma e confirmar o destino de Solicitar contrato. |
+| 5 | Pendente da distinção entre dívida inexistente e consulta indisponível. | Ocultar somente quando ausência de dívida for confirmada. |
+| 6 | Confirmado: comunicação ainda usa conteúdo demonstrativo. | Retirar mocks das duas superfícies e aplicar o estado vazio do Figma, sem filtros/contadores fictícios. |
+| 7 | Novo fluxo de sete etapas ainda não implementado. | Conferir Figma e contrato para persistência, retomada, países, documentos e aceite versionado. Não inventar payloads. |
+| 8 | Confirmado: nome acompanha a conta, mas resumo, ajustes e sessões ainda contêm exemplos. | Integrar dados próprios, revisão cadastral, estados pendentes e bloqueio de edição conforme o Figma. |
+| 9 | Três correções de texto concluídas. | Foto de perfil ainda precisa de validação e correção. |
+| 10 | Pendente de revisão integrada do fluxo de aprovação. | Defaults e aprovação/reprovação precisam do estado correto no backend; implementar as telas C25–C28. |
+| 11 | Pendente de correção visual/funcional. | Preservar todos os campos de identificação durante edição. |
+| 12 | Pendente de correção visual. | Preservar a composição profissional/financeira na edição. |
+| 13 | Pendente, vinculado ao item 15. | Remover ação de salvamento isolada ao migrar preferências para edição por seção. |
+| 14 | Pendente de reteste com resposta válida de carteira vazia. | Tratar listas vazias/saldos zero; preservar erro quando houver negativa ou indisponibilidade. |
+| 15 | Nova referência C24 requer implementação. | Substituir edição global por uma seção por vez, com alterações pendentes, descarte e estados de salvamento. |
+| 16 | Transações e Contratos incluídos no menu. | Dashboard, módulos restantes, Crédito, Comunicados e seleção de sistema continuam pendentes; não estão aprovados. |
+| 17 | Correção de data sem horário aplicada. | E-mail duplicado exige unicidade no servidor; tradução do histórico e catálogo de países ainda pendentes no front. |
+| 18 | Proteções de identidade e concorrência implementadas e testadas. Incidente original não reproduzido. | Correlacionar logs de autenticação e acesso do QA em 17/10 às 18:16 e retestar no deploy corrigido. Não solicitar senha pessoal do QA. |
+| 19 | Rotas de LP protegidas no front por sessão e papel. Tokens ainda usam o transporte atual. | Validar autorização da API e implementar sessão com cookies HttpOnly no servidor/BFF, seguida da adaptação dos dois fronts. |
+
+## Validações deste lote
+
+- Admin na porta 8080; portal na porta 9010.
+- Portal: login do Éric abriu a Home e exibiu investimento em USD 250.000,00 e saldo investível BRL 47.500,00. Resumo do perfil identificou Éric.
+- Portal: após sair, login do Cláudio abriu a Home e exibiu Banking BRL 25.000,00. Carteira consolidada e contratos ficaram bloqueados por `PreferencesRequired`; não foram considerados aprovados.
+- Admin: acesso sem sessão à LP redirecionou para autenticação; sessão administrativa e atalhos conferidos no navegador.
+- Testes automatizados: 5 cenários no Admin (acesso administrativo e data no fuso de São Paulo); 13 cenários/testes no portal, incluindo os existentes e 7 novos de isolamento de sessão. Todos passaram.
+- `npm run build`: aprovado nos dois projetos, com avisos preexistentes de dependências/chunks/fontes.
+- `npm run lint`: aprovado no Admin. No portal, a configuração legada é incompatível com ESLint 9 e eslint-plugin-vue 10 instalados. A avaliação temporária com configuração compatível também revelou 18 erros preexistentes em outros componentes. A configuração e esses componentes não foram alterados neste lote; o lint global do portal permanece pendente.
+- Os arquivos alterados do portal foram avaliados com as regras essenciais compatíveis do plugin Vue: nenhum erro. `git diff --check` passou nos arquivos deste lote. O comando global ainda aponta finais de linha em três arquivos que já estavam modificados antes deste trabalho e foram preservados.
+
+## Encaminhamento ao backend
+
+1. Investigar o incidente de identidade de 17/10 às 18:16, correlacionando login, refresh, usuário autenticado e último acesso. O endurecimento do front não prova a causa do incidente.
+2. Definir o contrato de sessão HttpOnly para Admin e portal: criação e remoção por `Set-Cookie`, refresh/logout, `/auth/me`, credenciais CORS para 8080/9010 e proteção CSRF adequada à implantação. O front não consegue criar cookies HttpOnly.
+3. Confirmar autorização administrativa nos endpoints de LP, com negativa para visitante e cliente comum. Fechar a rota não substitui isso.
+4. Confirmar como resolver `PreferencesRequired` e como consultar contas novas com saldos efetivamente zero, sem ocultar saldos existentes.
+5. Garantir unicidade de e-mail no servidor e revisar dados duplicados existentes.
+6. Confirmar contratos HTTP dos fluxos novos: cadastro por etapas, retomada, aceite, revisão de documentos, defaults de risco/compliance/preferências e permissões de edição após aprovação.
+
+O Figma é a referência da interface; disponibilidade de endpoints adicionais não autoriza criar campos ou ações fora do desenho.

@@ -58,6 +58,8 @@ const selectedWorkspace = ref(LocalStorage.getItem(WORKSPACE_KEY) || null)
 const navigationItems = [
   { label: 'Clientes', icon: 'group', to: '/dataManagement' },
   { label: 'Formulários', icon: 'description', to: '/dataManagement/forms' },
+  { label: 'Transações', icon: 'swap_horiz', to: '/transaction' },
+  { label: 'Contratos', icon: 'article', to: '/contracts' },
 ]
 const collection = (value) => Array.isArray(value) ? value : value?.systems || value?.items || value?.data || []
 const workspaces = computed(() => systems.value.flatMap((system) => system.workspaces || system.workspaceIds || []).map((workspace) => typeof workspace === 'string' ? { id: workspace, name: workspace } : workspace))

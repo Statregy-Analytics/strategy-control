@@ -36,13 +36,6 @@ onMounted(async () => {
   if (route.name === 'Auth' || route.name === 'Register') {
     storeLogin.selectedInitial = true
   }
-  console.log(route.query)
-  if (route.query.q) {
-    console.log(route.name)
-    // await stateAuth(route.query.q, route.name);
-  } else if (route.query.recovery) {
-    console.log('Amigo estou aqui!!!')
-  }
 })
 </script>
 <style scoped lang="sass">

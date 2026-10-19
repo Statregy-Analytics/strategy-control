@@ -212,7 +212,11 @@ const compareSelected = () => { compareDialog.value = true }
 const clearFilters = () => { status.value = null; kind.value = null; contact.value = ''; document.value = ''; reload() }
 const statusLabel = (status) => ({ Prospect: 'Prospect', Active: 'Ativo', Suspended: 'Suspenso', Archived: 'Arquivado' })[status] || status
 const statusClass = (status) => ({ Prospect: 'text-info', Active: 'text-positive', Suspended: 'text-warning', Archived: 'text-grey-7' })[status] || 'text-grey-8'
-const formatDate = (value) => value ? new Intl.DateTimeFormat('pt-BR').format(new Date(value)) : '—'
+const formatDate = (value) => {
+  if (!value) return '—'
+  const date = new Date(/^\d{4}-\d{2}-\d{2}$/.test(value) ? `${value}T12:00:00` : value)
+  return Number.isNaN(date.getTime()) ? '—' : new Intl.DateTimeFormat('pt-BR').format(date)
+}
 const formatDateTime = (value) => value ? new Intl.DateTimeFormat('pt-BR', { dateStyle: 'short', timeStyle: 'short' }).format(new Date(value)) : 'Não informado'
 const csvValue = (value) => `"${String(value ?? '').replaceAll('"', '""')}"`
 const exportTable = () => {

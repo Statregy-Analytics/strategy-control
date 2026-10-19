@@ -83,8 +83,9 @@ const routes = [
     component: () => import('layouts/MainLayout.vue'),
     props: true,
     meta: {
-      requiresAuth: false,
+      requiresAuth: true,
       painel: 'Edição de LP',
+      requiresAdmin: true,
     },
     children: [
       {
