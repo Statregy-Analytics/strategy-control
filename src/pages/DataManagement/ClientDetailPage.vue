@@ -164,11 +164,16 @@
         <profile-section
           title="Visão consolidada (carteira)"
           icon-src="/icons/client-profile/portfolio.svg"
+          ><template #actions
+            ><q-badge v-if="portfolioCalculated" outline class="text-muted"
+              >Calculado automaticamente</q-badge
+            ></template
           ><customer-portfolio
             ref="portfolioRef"
             embedded
             :customer-id="customerId"
             @currencies="currencies = $event"
+            @calculated="portfolioCalculated = $event"
         /></profile-section>
         <profile-section title="Dados bancários" icon-src="/icons/client-profile/bank.svg"
           ><template #actions
@@ -326,6 +331,7 @@ const customerResource = useFinanceResource(),
 const showHistory = ref(false),
   savingStatus = ref(false),
   currencies = ref([]),
+  portfolioCalculated = ref(false),
   portfolioRef = ref(null),
   bankPanel = ref(null)
 const editingRegistration = ref(false)
@@ -599,6 +605,7 @@ watch(
     editingRegistration.value = false
     editingProfessional.value = false
     currencies.value = []
+    portfolioCalculated.value = false
     loadCustomer()
     loadIdentification()
     loadProfessional()

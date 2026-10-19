@@ -30,7 +30,7 @@ Atualizado em 19/10/2026. Referência: feedback de homologação enviado pelo us
 | 11 | Pendente de correção visual/funcional. | Preservar todos os campos de identificação durante edição. |
 | 12 | Pendente de correção visual. | Preservar a composição profissional/financeira na edição. |
 | 13 | Pendente, vinculado ao item 15. | Remover ação de salvamento isolada ao migrar preferências para edição por seção. |
-| 14 | Pendente de reteste com resposta válida de carteira vazia. | Tratar listas vazias/saldos zero; preservar erro quando houver negativa ou indisponibilidade. |
+| 14 | Corrigido e retestado em 19/10 com conta real zerada no Admin local: quatro saldos zero, composição e extrato vazios conforme C29; extrato real do Cláudio conferido. | Conferir o deploy administrativo. Evidências e limites em QA-2026-10-19-CARTEIRA-VAZIA.md. |
 | 15 | Nova referência C24 requer implementação. | Substituir edição global por uma seção por vez, com alterações pendentes, descarte e estados de salvamento. |
 | 16 | Transações e Contratos incluídos no menu. | Dashboard, módulos restantes, Crédito, Comunicados e seleção de sistema continuam pendentes; não estão aprovados. |
 | 17 | Correção de data sem horário aplicada. | E-mail duplicado exige unicidade no servidor; tradução do histórico e catálogo de países ainda pendentes no front. |

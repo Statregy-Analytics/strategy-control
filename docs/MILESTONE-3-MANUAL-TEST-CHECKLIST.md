@@ -176,3 +176,11 @@ a Home nesta resposta. Nenhuma escrita financeira ou aprovação documental foi
 realizada. Estados vazios de Comunicação aplicados na Home e página própria;
 integração de publicações depende de contrato HTTP ainda não disponível no
 Swagger consultado. Demais itens do QA não estão aprovados por esta rodada.
+
+## Carteira consolidada vazia — QA item 14, 19/10/2026
+
+- [x] Cadastro de teste Jane Austin Doe: portfolio, composição e carteiras vazios consultados; quatro métricas R$ 0,00, “Nenhuma composição ainda” e “Nenhum lançamento ainda” conforme Figma C29.
+- [x] Cláudio: valores consolidados preservados e depósito real exibido no extrato com saldo após o lançamento. Saldo atual zero não é usado para presumir histórico vazio.
+- [x] Loading, erro e resposta incompleta não viram vazio; consultas antigas são descartadas ao trocar cliente/sair da tela. Desktop e celular revisados.
+- [x] 35 testes, lint, build e diff dos arquivos do lote aprovados. Detalhes em [QA-2026-10-19-CARTEIRA-VAZIA.md](QA-2026-10-19-CARTEIRA-VAZIA.md).
+- [ ] Conferir o deploy administrativo deste lote. As demais pendências da triagem continuam abertas.

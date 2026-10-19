@@ -10,44 +10,58 @@
       <form-section title="Carteira consolidada"
         ><resource-state :state="portfolio.state" @retry="loadPortfolio"
           ><div v-if="embedded" class="portfolio-currencies">
-            <p v-if="!portfolio.state.data?.currencies?.length" class="text-caption">
+            <p v-if="!displayCurrencies.length" class="text-caption">
               Nenhuma posição disponível para este cliente.
             </p>
             <div
-              v-for="currency in portfolio.state.data?.currencies || []"
+              v-for="currency in displayCurrencies"
               :key="currency.currencyId"
               class="portfolio-currency"
             >
               <div class="portfolio-metrics">
                 <component
-                  :is="metric.key === 'invested' ? 'button' : 'div'"
+                  :is="metric.key === 'invested' && !currency.empty ? 'button' : 'div'"
                   v-for="metric in metrics"
                   :key="metric.key"
                   class="portfolio-metric"
                   :class="{
                     'portfolio-metric--selected':
-                      metric.key === 'invested' && selectedCurrency === currency.currencyId,
+                      !currency.empty &&
+                      metric.key === 'invested' &&
+                      selectedCurrency === currency.currencyId,
                   }"
                   :type="metric.key === 'invested' ? 'button' : undefined"
                   :aria-label="
-                    metric.key === 'invested'
+                    metric.key === 'invested' && !currency.empty
                       ? `Contratos do saldo investido em ${currency.currencyIsoCode}`
                       : undefined
                   "
                   :aria-expanded="
-                    metric.key === 'invested' ? selectedCurrency === currency.currencyId : undefined
+                    metric.key === 'invested' && !currency.empty
+                      ? selectedCurrency === currency.currencyId
+                      : undefined
                   "
-                  @click="metric.key === 'invested' && toggleContracts(currency.currencyId)"
+                  @click="
+                    metric.key === 'invested' &&
+                    !currency.empty &&
+                    toggleContracts(currency.currencyId)
+                  "
                 >
                   <div>
                     <span>{{ metric.label }}</span
-                    ><small>{{ currency.currencyIsoCode }}</small>
+                    ><small v-if="!currency.empty">{{ currency.currencyIsoCode }}</small>
                   </div>
                   <strong>{{ money(currency[metric.key], currency.currencyIsoCode) }}</strong>
+                  <img
+                    v-if="currency.empty && metric.key === 'total'"
+                    src="/icons/client-profile/portfolio-empty.svg"
+                    alt=""
+                    class="portfolio-empty-ring"
+                  />
                 </component>
               </div>
               <client-portfolio-contracts
-                v-if="selectedCurrency === currency.currencyId"
+                v-if="!currency.empty && selectedCurrency === currency.currencyId"
                 :customer-id="customerId"
                 :currency-id="currency.currencyId"
                 :currency-code="currency.currencyIsoCode"
@@ -58,16 +72,40 @@
             v-else
             flat
             dense
-            :rows="portfolio.state.data?.currencies || []"
+            :rows="displayCurrencies"
             :columns="portfolioColumns"
             row-key="currencyId"
             no-data-label="Nenhuma posição disponível" /></resource-state
       ></form-section>
-      <form-section :title="embedded ? 'Composição da carteira' : 'Composição por classe e origem'"
+      <form-section
+        class="portfolio-composition-section"
+        :title="embedded ? 'Composição da carteira' : 'Composição por classe e origem'"
         ><resource-state :state="composition.state" @retry="loadComposition"
-          ><p v-if="!composition.state.data?.currencies?.length">
-            Nenhuma composição disponível para este cliente.
-          </p>
+          ><q-markup-table
+            v-if="!composition.state.data?.currencies?.length"
+            flat
+            dense
+            class="portfolio-composition-empty"
+          >
+            <thead>
+              <tr>
+                <th
+                  v-for="column in compositionColumns('BRL')"
+                  :key="column.name"
+                  class="text-left"
+                >
+                  {{ column.label }}
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td :colspan="compositionColumns('BRL').length">
+                  <div class="portfolio-empty-message">Nenhuma composição ainda</div>
+                </td>
+              </tr>
+            </tbody>
+          </q-markup-table>
           <div
             v-for="currency in composition.state.data?.currencies || []"
             :key="currency.currencyId"
@@ -84,7 +122,7 @@
               :rows="currency.items"
               :columns="compositionColumns(currency.currencyIsoCode)"
               row-key="classCode"
-              no-data-label="Nenhuma composição disponível"
+              no-data-label="Nenhuma composição ainda"
             /></div></resource-state
       ></form-section>
       <form-section v-if="!embedded" title="Saldos por carteira"
@@ -97,27 +135,58 @@
             row-key="id"
             no-data-label="Nenhuma carteira disponível" /></resource-state
       ></form-section>
-      <form-section :title="embedded ? 'Extrato da conta' : 'Extrato'">
-        <q-markup-table v-if="embedded" flat dense class="profile-statement">
-          <thead>
-            <tr>
-              <th
-                v-for="label in ['Data e hora', 'Tipo', 'Carteira', 'Descrição', 'Valor', 'Saldo']"
-                :key="label"
-                class="text-left"
-              >
-                {{ label }}
-              </th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td colspan="6" class="text-center text-muted">
-                A consulta dos lançamentos ainda não está disponível. Use a exportação do extrato.
-              </td>
-            </tr>
-          </tbody>
-        </q-markup-table>
+      <form-section :title="embedded ? '' : 'Extrato'">
+        <div v-if="embedded" class="statement-heading">
+          <img src="/icons/client-profile/statement.svg" alt="" /><span>Extrato da conta</span
+          ><q-btn
+            flat
+            dense
+            no-caps
+            label="Exportar"
+            :loading="exporting"
+            @click="exportStatement"
+          />
+        </div>
+        <resource-state v-if="embedded" :state="statement.state" @retry="loadStatement">
+          <q-markup-table flat dense class="profile-statement">
+            <thead>
+              <tr>
+                <th
+                  v-for="label in [
+                    'Data e hora',
+                    'Tipo',
+                    'Carteira',
+                    'Descrição',
+                    'Valor',
+                    'Saldo',
+                  ]"
+                  :key="label"
+                  class="text-left"
+                >
+                  {{ label }}
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr v-if="!statement.state.data?.length">
+                <td colspan="6" class="text-center text-muted statement-empty">
+                  Nenhum lançamento ainda
+                </td>
+              </tr>
+              <tr v-for="entry in statement.state.data || []" :key="entry.key">
+                <td>{{ new Date(entry.occurredAtUtc).toLocaleString('pt-BR') }}</td>
+                <td>{{ financeLabel(entry.type) }}</td>
+                <td>{{ financeLabel(entry.wallet) }}</td>
+                <td>{{ entry.requestNumber || '—' }}</td>
+                <td>
+                  {{ entry.direction === 'Debit' ? '−' : ''
+                  }}{{ money(entry.amount, entry.currencyIsoCode) }}
+                </td>
+                <td>{{ money(entry.balanceAfter, entry.currencyIsoCode) }}</td>
+              </tr>
+            </tbody>
+          </q-markup-table>
+        </resource-state>
         <div v-else class="row q-col-gutter-md">
           <label-form class="col-12 col-sm-6" text-label="De"
             ><q-input
@@ -132,6 +201,7 @@
         </div>
         <q-banner v-if="error" role="alert">{{ error }}</q-banner
         ><q-btn
+          v-if="!embedded"
           flat
           dense
           no-caps
@@ -152,7 +222,11 @@
   </div>
 </template>
 <script setup>
-import { ref, watch } from 'vue'
+import { computed, onScopeDispose, ref, watch } from 'vue'
+import {
+  portfolioCurrencies,
+  readCustomerStatement,
+} from 'src/services/customerPortfolioPresentation'
 import ClientPortfolioContracts from 'src/components/Clients/ClientPortfolioContracts.vue'
 import CustomerSelect from './CustomerSelect.vue'
 import ResourceState from './ResourceState.vue'
@@ -171,7 +245,7 @@ const props = defineProps({
   customerId: { type: String, default: null },
   embedded: { type: Boolean, default: false },
 })
-const emit = defineEmits(['currencies'])
+const emit = defineEmits(['currencies', 'calculated'])
 const selectedCurrency = ref(null)
 const toggleContracts = (id) => {
   selectedCurrency.value = selectedCurrency.value === id ? null : id
@@ -189,22 +263,46 @@ const customerId = ref(props.customerId),
   error = ref('')
 const portfolio = useFinanceResource(),
   composition = useFinanceResource(),
-  wallets = useFinanceResource()
+  wallets = useFinanceResource(),
+  statement = useFinanceResource()
+let revision = 0
+const displayCurrencies = computed(() =>
+  portfolioCurrencies(portfolio.state, composition.state, wallets.state),
+)
+const loadStatement = () => {
+  const version = revision
+  const id = customerId.value
+  return statement.load(async () => {
+    const values = await loadWallets()
+    return readCustomerStatement(
+      values,
+      (walletId, params) =>
+        financeGet(`admin/wallets/${encodeURIComponent(walletId)}/statement`, params),
+      () => {
+        if (version !== revision || id !== customerId.value) throw new Error('Consulta encerrada.')
+      },
+    )
+  })
+}
 function onAssetsChanged() {
   loadPortfolio()
   loadComposition()
 }
-const loadPortfolio = () =>
-  portfolio.load(
-    async () => (await financeGet(`admin/customers/${customerId.value}/portfolio`)).data,
-  )
-const loadComposition = () =>
-  composition.load(
-    async () =>
-      (await financeGet(`admin/customers/${customerId.value}/portfolio/composition`)).data,
-  )
+const readPortfolio = async (suffix) => {
+  const id = customerId.value
+  const data = (await financeGet(`admin/customers/${id}/${suffix}`)).data
+  if (data?.customerId !== id || !Array.isArray(data?.currencies))
+    throw new Error('Não foi possível confirmar a carteira deste cliente.')
+  return data
+}
+const loadPortfolio = () => portfolio.load(() => readPortfolio('portfolio'))
+const loadComposition = () => composition.load(() => readPortfolio('portfolio/composition'))
 const loadWallets = () =>
-  wallets.load(async () => (await financeGet(`admin/customers/${customerId.value}/wallets`)).data)
+  wallets.load(async () => {
+    const data = (await financeGet(`admin/customers/${customerId.value}/wallets`)).data
+    if (!Array.isArray(data)) throw new Error('Não foi possível confirmar as carteiras.')
+    return data
+  })
 watch(
   () => props.customerId,
   (id) => {
@@ -213,21 +311,31 @@ watch(
 )
 watch(
   () => portfolio.state.data,
-  (value) => emit('currencies', value?.currencies || []),
+  (value) => {
+    emit('currencies', value?.currencies || [])
+    emit('calculated', value?.isAutomaticallyCalculated === true)
+  },
 )
 watch(
   customerId,
   () => {
+    revision++
+    ;[portfolio, composition, wallets, statement].forEach((resource) => resource.reset())
     error.value = ''
     selectedCurrency.value = null
     if (customerId.value) {
       loadPortfolio()
       loadComposition()
-      if (!props.embedded) loadWallets()
+      if (props.embedded) loadStatement()
+      else loadWallets()
     }
   },
   { immediate: true },
 )
+onScopeDispose(() => {
+  revision++
+  ;[portfolio, composition, wallets, statement].forEach((resource) => resource.reset())
+})
 const portfolioColumns = columns([
   ['currencyIsoCode', 'Moeda'],
   ['baseEquity', 'Patrimônio base', (r) => money(r.baseEquity, r.currencyIsoCode)],
@@ -293,6 +401,83 @@ async function exportStatement() {
 defineExpose({ refresh: onAssetsChanged })
 </script>
 <style scoped>
+.portfolio-metric {
+  position: relative;
+  min-height: 102px;
+}
+.portfolio-metric:has(.portfolio-empty-ring) {
+  padding-right: 76px;
+  color: var(--sa-muted);
+}
+.portfolio-empty-ring {
+  position: absolute;
+  right: 16px;
+  top: 24px;
+  width: 52px;
+  height: 52px;
+}
+.profile-portfolio > :deep(.form-section.portfolio-composition-section) {
+  padding: 0;
+  border: 1px solid var(--sa-border);
+  border-radius: 10px;
+  background: var(--sa-surface-soft);
+  overflow: hidden;
+}
+.profile-portfolio :deep(.portfolio-composition-section .form-section__title) {
+  padding: 8px 16px;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  color: var(--sa-muted);
+  border-bottom: 1px solid var(--sa-border);
+}
+.profile-portfolio :deep(.portfolio-composition-section .q-mt-md) {
+  margin-top: 0;
+}
+.portfolio-empty-message {
+  width: 100%;
+  min-height: 118px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: var(--sa-muted);
+  font-size: 14px;
+}
+.portfolio-composition-empty :deep(.q-table__bottom) {
+  padding: 0;
+}
+.profile-portfolio :deep(th) {
+  height: 40px;
+  color: var(--sa-muted);
+  font-size: 12px;
+  text-transform: uppercase;
+  white-space: normal;
+}
+.statement-heading {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 16px;
+  text-transform: uppercase;
+  letter-spacing: 0.7px;
+  font-size: 14px;
+}
+.statement-heading img {
+  width: 16px;
+  height: 16px;
+}
+.statement-heading .q-btn {
+  margin-left: auto;
+  text-transform: none;
+  border: 1px solid var(--sa-border);
+  border-radius: 8px;
+  padding: 4px 10px;
+  font-size: 12px;
+}
+.profile-statement .statement-empty {
+  height: 300px;
+  font-size: 14px;
+}
 .profile-portfolio > :deep(.form-section) {
   padding: 24px 0;
   border-top: 1px solid rgba(255, 255, 255, 0.12);
@@ -309,7 +494,7 @@ defineExpose({ refresh: onAssetsChanged })
 }
 .portfolio-metrics {
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 230px), 1fr));
   gap: 16px;
   margin-bottom: 16px;
 }
