@@ -270,12 +270,14 @@
           title="Documentação pessoal"
           icon-src="/icons/client-profile/documents.svg"
         >
-          <resource-state :state="documentOverview.state" @retry="loadDocuments"
+          <template #summary
             ><div class="document-totals">
               <span v-for="item in documentMetrics" :key="item.label" :class="`text-${item.color}`"
                 >{{ item.value }} {{ item.label }}</span
               >
-            </div>
+            </div></template
+          >
+          <resource-state :state="documentOverview.state" @retry="loadDocuments">
             <div v-if="!documentSections.length" class="profile-empty">
               Nenhum documento cadastrado.
             </div>
@@ -721,7 +723,13 @@ const financialEditFields = computed(() =>
   ),
 )
 const securityEditFields = computed(() => mapEdit(securityFields.value, ['userName']))
-const documentMetrics = computed(() => profileDocumentMetrics(documentOverview.state.data))
+const documentMetrics = computed(() =>
+  profileDocumentMetrics(
+    documentOverview.state.loading || documentOverview.state.error
+      ? null
+      : documentOverview.state.data,
+  ),
+)
 const documentSections = computed(() => profileDocumentSections(documentOverview.state.data))
 const complianceView = computed(() => summarizeCompliance(null, compliance.state.data))
 const complianceNotes = computed(() =>
@@ -802,6 +810,7 @@ const documentsUpdated = () => {
   loadDocuments()
   loadIdentification()
   loadTimeline()
+  refreshCustomer()
 }
 const switchCustomer = (id) => {
   if (id && id !== customerId.value) router.push({ name: 'ClienteDetalhe', params: { id } })
@@ -969,9 +978,13 @@ h1 {
   display: flex;
   flex-wrap: wrap;
   gap: 8px 12px;
-  padding-bottom: 20px;
+  margin-top: 8px;
   font-size: 12px;
-  border-bottom: 1px solid var(--sa-border);
+}
+.document-totals span + span::before {
+  content: '|';
+  margin-right: 12px;
+  color: var(--sa-muted);
 }
 .document-totals .text-positive {
   color: #8cdca8 !important;

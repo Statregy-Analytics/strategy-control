@@ -10,6 +10,7 @@
           />{{ title }}
         </h2>
         <p v-if="caption">{{ caption }}</p>
+        <slot name="summary" />
       </div>
       <slot name="actions" />
     </header>

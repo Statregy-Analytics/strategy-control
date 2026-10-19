@@ -26,7 +26,7 @@ Atualizado em 19/10/2026. Referência: feedback de homologação enviado pelo us
 | 7 | Novo fluxo de sete etapas ainda não implementado. | Conferir Figma e contrato para persistência, retomada, países, documentos e aceite versionado. Não inventar payloads. |
 | 8 | Confirmado: nome acompanha a conta, mas resumo, ajustes e sessões ainda contêm exemplos. | Integrar dados próprios, revisão cadastral, estados pendentes e bloqueio de edição conforme o Figma. |
 | 9 | Três correções de texto concluídas. | Foto de perfil ainda precisa de validação e correção. |
-| 10 | Pendente de revisão integrada do fluxo de aprovação. | Defaults e aprovação/reprovação precisam do estado correto no backend; implementar as telas C25–C28. |
+| 10 | C27–C28 implementadas e integradas: Aprovar/Reprovar no documento pendente, motivo obrigatório, mensagem, atualização de contadores e download. Testados com arquivos descartáveis. | C25–C26 e desbloqueio cadastral ainda dependem de estado explícito do cadastro e efeito da revisão no servidor. Motivo/mensagem usam notes; falta catálogo de motivos. Ver QA-2026-10-19-APROVACAO-DOCUMENTOS.md. |
 | 11 | Campos de identificação preservados durante edição, no mesmo bloco. | Edição de documentos e dados pessoais sem contrato de escrita continua bloqueada; ver QA-2026-10-19-EDICAO-POR-SECAO.md. |
 | 12 | Composição profissional/financeira mantida, com cinco campos do Figma C24. | Salvamento integrado e restauração dos dados fictícios conferidos em 8080. |
 | 13 | Preferências migradas para edição por seção, sem salvamento isolado. | Preservar país e demais metadados da API sem criar campos adicionais. |

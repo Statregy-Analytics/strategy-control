@@ -29,13 +29,7 @@ export function profileDocumentMetrics(overview) {
       color: 'positive',
     },
     {
-      label:
-        Number(summary.pending || 0) +
-          Number(summary.inReview || 0) +
-          Number(summary.missing || 0) ===
-        1
-          ? 'Pendente'
-          : 'Pendentes',
+      label: 'Aguardando',
       value:
         summary.pending == null
           ? '—'

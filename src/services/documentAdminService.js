@@ -1,4 +1,5 @@
 import { api } from 'src/boot/axios'
+import { financeWrite } from './financeService'
 
 const unwrap = (response) => response.data?.data ?? response.data
 const base = '/api/v1/admin/document-types'
@@ -24,7 +25,7 @@ export const listCustomerDocuments = async (customerId, params = {}) => unwrap(a
 export const getCustomerDocumentOverview = async (customerId) => unwrap(await api.get(`/api/v1/admin/customers/${customerId}/documents/overview`))
 export const getCustomerDocumentProgress = async (customerId) => unwrap(await api.get(`/api/v1/admin/customers/${customerId}/documents/progress`))
 export const uploadCustomerDocument = async (customerId, data) => unwrap(await api.post(`/api/v1/admin/customers/${customerId}/documents`, data))
-export const reviewDocument = async (id, payload) => unwrap(await api.post(`/api/v1/admin/documents/${id}/reviews`, payload))
+export const reviewDocument = (id, payload) => financeWrite('post', `admin/documents/${id}/reviews`, payload)
 export const changeDocumentStatus = async (id, status) => unwrap(await api.patch(`/api/v1/admin/documents/${id}/status`, { status }))
 export const deleteDocument = async (id) => unwrap(await api.delete(`/api/v1/admin/documents/${id}`))
 export const downloadDocument = async (id) => api.get(`/api/v1/admin/documents/${id}/download`, { responseType: 'blob' })

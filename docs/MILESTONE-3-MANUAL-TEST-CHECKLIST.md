@@ -191,3 +191,11 @@ Swagger consultado. Demais itens do QA não estão aprovados por esta rodada.
 - [x] Jane: escrita e restauração de empresa, renda familiar, preferência de tema e complemento; validação local de renda e campos somente leitura preservados. Sem transação financeira ou aprovação documental.
 - [x] Cláudio: composição profissional/financeira carregada com dados reais; início sem mudanças não permite salvar. Desktop/celular revisados.
 - [ ] Homologação de todos os campos do desenho: depende de contratos de escrita para documentos/dados pessoais, segurança e observações livres de compliance. Limites e evidências em [QA-2026-10-19-EDICAO-POR-SECAO.md](QA-2026-10-19-EDICAO-POR-SECAO.md).
+
+## Aprovação documental no perfil — parte do QA 10, 19/10/2026
+
+- [x] C27: contadores no cabeçalho, aguardando aprovação, visualização/download e Aprovar/Reprovar conforme permissões reais.
+- [x] C28: somente motivo obrigatório e mensagem para o cliente; cancelar sem escrita, erro sem falso sucesso e bloqueio de gravação concorrente.
+- [x] Dois arquivos descartáveis de homologação: rejeitado com notas e aprovado pela tela; contadores e download conferidos. Arquivos de QA removidos e documento original do Cláudio preservado pendente.
+- [x] Desktop/celular e testes automatizados de permissão, validação, concorrência e respostas antigas. Detalhes em [QA-2026-10-19-APROVACAO-DOCUMENTOS.md](QA-2026-10-19-APROVACAO-DOCUMENTOS.md).
+- [ ] C25–C26 completos, defaults, reenvio e desbloqueio cadastral após aprovação: dependem dos estados e efeitos confirmados no backend. Este lote não aprova integralmente o item 10.

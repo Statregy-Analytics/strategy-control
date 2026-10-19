@@ -1,32 +1,139 @@
 <template>
-  <div class="profile-document" :class="`profile-document--${item.status}`">
-    <q-icon :name="statusIcon" :color="statusColor" size="22px" />
-    <div class="profile-document__identity">
-      <strong>{{ item.documentTypeName || item.documentTypeCode || 'Documento' }}</strong>
-      <small>{{ subtitle }}</small>
+  <div
+    class="profile-document-entry"
+    :aria-busy="reviewState.saving"
+    :data-document-id="documentId"
+  >
+    <div class="profile-document" :class="`profile-document--${item.status}`">
+      <span v-if="pending" class="profile-document__pending-icon"
+        ><img src="/icons/document-review/pending.svg" alt=""
+      /></span>
+      <q-icon v-else :name="statusIcon" :color="statusColor" size="22px" />
+      <div class="profile-document__identity">
+        <strong>{{ item.documentTypeName || item.documentTypeCode || 'Documento' }}</strong>
+        <small>{{ subtitle }}</small>
+      </div>
+      <q-btn
+        v-if="documentId"
+        flat
+        round
+        dense
+        size="sm"
+        :aria-label="`Visualizar ${name}`"
+        :loading="busy"
+        :disable="reviewState.saving"
+        @click="view"
+        ><img src="/icons/document-review/view.svg" alt="" /><q-tooltip
+          >Visualizar</q-tooltip
+        ></q-btn
+      >
+      <q-btn
+        v-if="documentAction(item, 'Download')"
+        flat
+        round
+        dense
+        size="sm"
+        :aria-label="`Baixar ${name}`"
+        :loading="downloading"
+        :disable="reviewState.saving"
+        @click="download"
+        ><img src="/icons/document-review/download.svg" alt="" /><q-tooltip
+          >Baixar</q-tooltip
+        ></q-btn
+      >
+      <q-btn
+        v-else-if="canUpload"
+        flat
+        dense
+        no-caps
+        icon="upload"
+        label="Upload"
+        size="sm"
+        @click="uploadOpen = true"
+      />
     </div>
-    <q-btn
-      v-if="documentId"
-      flat
-      round
-      dense
-      icon="visibility"
-      size="sm"
-      :aria-label="`Visualizar ${name}`"
-      :loading="busy"
-      @click="view"
-      ><q-tooltip>Visualizar</q-tooltip></q-btn
+    <span v-if="pending" class="document-awaiting">Aguardando aprovação</span>
+    <p
+      v-if="item.status === 'Rejected' && item.latestReview?.notes"
+      class="document-rejection-notes"
     >
-    <q-btn
-      v-else-if="canUpload"
-      flat
-      dense
-      no-caps
-      icon="upload"
-      label="Upload"
-      size="sm"
-      @click="uploadOpen = true"
-    />
+      {{ item.latestReview.notes }}
+    </p>
+    <p v-if="reviewState.error && !rejectOpen" role="alert" class="document-review-error">
+      {{ reviewState.error }}
+    </p>
+    <div v-if="reviewable" class="document-review-actions">
+      <q-btn
+        outline
+        no-caps
+        dense
+        label="Reprovar"
+        class="document-reject-button"
+        :disable="busy || reviewState.saving"
+        @click="openRejection"
+      />
+      <q-btn
+        outline
+        no-caps
+        dense
+        label="Aprovar"
+        class="document-approve-button"
+        :disable="busy || reviewState.saving"
+        :loading="reviewState.saving && !rejectOpen"
+        @click="reviewer.submit('Approved')"
+      />
+    </div>
+    <q-dialog v-model="rejectOpen" :persistent="reviewState.saving">
+      <q-card class="document-reject-dialog">
+        <h2>Reprovar documento</h2>
+        <p>O cliente vê o motivo e a mensagem e pode enviar o documento de novo.</p>
+        <p v-if="reviewState.error" role="alert" class="document-review-error">
+          {{ reviewState.error }}
+        </p>
+        <label-form text-label="Motivo"
+          ><q-select
+            v-model="rejection.reason"
+            :options="rejectionReasons"
+            outlined
+            dense
+            aria-label="Motivo"
+            :disable="reviewState.saving"
+            :error="Boolean(reviewState.reasonError)"
+            :error-message="reviewState.reasonError"
+            hide-bottom-space
+            dropdown-icon="img:/icons/document-review/chevron.svg"
+        /></label-form>
+        <label-form text-label="Mensagem para o cliente"
+          ><q-input
+            v-model="rejection.message"
+            type="textarea"
+            rows="3"
+            outlined
+            aria-label="Mensagem para o cliente"
+            :disable="reviewState.saving"
+            placeholder="Ex.: a foto ficou cortada. Envie de novo mostrando o documento inteiro."
+        /></label-form>
+        <div class="document-review-actions">
+          <q-btn
+            outline
+            dense
+            no-caps
+            label="Cancelar"
+            :disable="reviewState.saving"
+            @click="rejectOpen = false"
+          /><q-btn
+            outline
+            dense
+            no-caps
+            label="Reprovar documento"
+            class="document-reject-button"
+            :loading="reviewState.saving"
+            :disable="reviewState.saving"
+            @click="reviewer.submit('Rejected', rejection.reason, rejection.message)"
+          />
+        </div>
+      </q-card>
+    </q-dialog>
     <q-dialog v-model="uploadOpen" :persistent="busy">
       <q-card class="profile-document-dialog">
         <title-card
@@ -56,11 +163,22 @@
   </div>
 </template>
 <script setup>
-import { computed, ref } from 'vue'
+import { computed, ref, reactive, watch, onScopeDispose } from 'vue'
 import TitleCard from 'src/components/Card/TitleCard.vue'
 import LabelForm from 'src/components/Form/LabelForm.vue'
 import useNotification from 'src/composables/global/useNotification'
-import { getDocumentTemporaryUrl, uploadCustomerDocument } from 'src/services/documentAdminService'
+import {
+  getDocumentTemporaryUrl,
+  uploadCustomerDocument,
+  downloadDocument,
+  reviewDocument,
+} from 'src/services/documentAdminService'
+import {
+  documentAction,
+  canReviewDocument,
+  createDocumentReviewer,
+  rejectionReasons,
+} from 'src/services/documentReview'
 import { getApiErrorMessage } from 'src/services/apiError'
 const props = defineProps({
   item: { type: Object, required: true },
@@ -71,6 +189,42 @@ const { errorNotify, successNotify } = useNotification()
 const busy = ref(false),
   uploadOpen = ref(false),
   file = ref(null)
+const downloading = ref(false),
+  rejectOpen = ref(false)
+const rejection = reactive({ reason: null, message: '' })
+const reviewState = reactive({})
+let revision = 0
+const reviewer = createDocumentReviewer(reviewState, {
+  item: () => props.item,
+  write: reviewDocument,
+  errorMessage: (error) => getApiErrorMessage(error, 'Não foi possível revisar o documento.'),
+  updated: (status) => {
+    rejectOpen.value = false
+    successNotify(status === 'Approved' ? 'Documento aprovado.' : 'Documento reprovado.')
+    emit('updated')
+  },
+})
+const pending = computed(() => ['Pending', 'UnderReview', 'InReview'].includes(props.item.status))
+const reviewable = computed(() => canReviewDocument(props.item) && !reviewState.completed)
+const openRejection = () => {
+  Object.assign(rejection, { reason: null, message: '' })
+  reviewState.error = ''
+  reviewState.reasonError = ''
+  rejectOpen.value = true
+}
+watch(
+  () => [props.customerId, props.item.documentId || props.item.document?.id, props.item.status],
+  () => {
+    revision++
+    reviewer.reset()
+    rejectOpen.value = false
+    uploadOpen.value = false
+  },
+)
+onScopeDispose(() => {
+  revision++
+  reviewer.reset()
+})
 const name = computed(() => props.item.documentTypeName || 'documento')
 const documentId = computed(() => props.item.documentId || props.item.document?.id)
 const canUpload = computed(() =>
@@ -96,7 +250,7 @@ const subtitle = computed(() => {
   }
   const date = props.item.submittedAtUtc
   return [
-    labels[props.item.status] || props.item.status,
+    pending.value ? null : labels[props.item.status] || props.item.status,
     date ? `Enviado em ${new Date(date).toLocaleDateString('pt-BR')}` : null,
   ]
     .filter(Boolean)
@@ -109,16 +263,39 @@ const fileRules = [
 ]
 const rejectFile = () => errorNotify('Use PDF, JPEG ou PNG com até 25 MB.')
 async function view() {
+  const operation = revision
   busy.value = true
   try {
     const result = await getDocumentTemporaryUrl(documentId.value)
+    if (operation !== revision) return
     const url = result.url || result.temporaryUrl
     if (!url || !/^https?:\/\//i.test(url)) throw new Error('URL indisponível')
     window.open(url, '_blank', 'noopener,noreferrer')
   } catch (error) {
+    if (operation !== revision) return
     errorNotify(getApiErrorMessage(error, 'Não foi possível abrir o documento.'))
   } finally {
-    busy.value = false
+    if (operation === revision) busy.value = false
+  }
+}
+async function download() {
+  if (downloading.value) return
+  const operation = revision
+  downloading.value = true
+  try {
+    const response = await downloadDocument(documentId.value)
+    if (operation !== revision) return
+    const url = URL.createObjectURL(response.data),
+      link = document.createElement('a')
+    link.href = url
+    link.download = props.item.document?.file?.fileName || 'documento'
+    link.click()
+    setTimeout(() => URL.revokeObjectURL(url), 1000)
+  } catch (error) {
+    if (operation === revision)
+      errorNotify(getApiErrorMessage(error, 'Não foi possível baixar o documento.'))
+  } finally {
+    if (operation === revision) downloading.value = false
   }
 }
 async function upload() {
@@ -142,6 +319,134 @@ async function upload() {
 }
 </script>
 <style scoped>
+.profile-document-entry {
+  min-width: 0;
+}
+.profile-document img {
+  width: 16px;
+  height: 16px;
+  flex: none;
+}
+.profile-document__pending-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: none;
+  width: 32px;
+  height: 32px;
+  border: 1px solid rgba(254, 230, 133, 0.5);
+  border-radius: 4px;
+  background: rgba(254, 230, 133, 0.14);
+}
+.document-awaiting {
+  display: inline-block;
+  margin-top: 12px;
+  padding: 3px 8px;
+  color: #fee685;
+  border: 1px solid rgba(254, 230, 133, 0.55);
+  border-radius: 6px;
+  background: rgba(254, 230, 133, 0.14);
+  font-size: 12px;
+}
+.document-review-actions {
+  display: flex;
+  gap: 8px;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+  margin-top: 12px;
+}
+.document-review-actions .q-btn {
+  min-height: 32px;
+  padding: 0 16px;
+  border-radius: 8px;
+  font-size: 12px;
+  background: rgba(255, 255, 255, 0.06);
+}
+.document-review-actions .document-reject-button {
+  color: #ff9e9e;
+  background: rgba(231, 0, 11, 0.14);
+}
+.document-reject-button:before {
+  border-color: rgba(231, 0, 11, 0.55);
+}
+.document-approve-button:before {
+  border-color: rgba(0, 166, 62, 0.5);
+}
+.document-review-actions .document-approve-button {
+  color: #99f2b2;
+  background: rgba(0, 166, 62, 0.14);
+}
+.document-review-error {
+  color: #ff9e9e;
+  font-size: 12px;
+}
+.document-rejection-notes {
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  font-size: 12px;
+  color: var(--sa-muted);
+}
+.document-reject-dialog {
+  width: 440px;
+  max-width: calc(100vw - 32px);
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  color: var(--sa-text);
+  background: var(--sa-bg);
+  border: 1px solid var(--sa-border);
+  border-radius: 12px;
+  box-shadow: 4px 4px 12px rgba(0, 0, 0, 0.13);
+}
+.document-reject-dialog h2 {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: normal;
+}
+.document-reject-dialog p {
+  margin: 0;
+  font-size: 14px;
+  line-height: 20px;
+  color: var(--sa-muted);
+}
+.document-reject-dialog :deep(.LabelForm > span) {
+  font-size: 12px !important;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  font-weight: 500;
+  color: var(--sa-muted);
+}
+.document-reject-dialog :deep(.q-field__native),
+.document-reject-dialog :deep(.q-field__input) {
+  color: var(--sa-text);
+  font-size: 14px;
+}
+.document-reject-dialog :deep(.q-field__control) {
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.04);
+}
+.document-reject-dialog :deep(.q-field__control:before) {
+  border-color: rgba(255, 255, 255, 0.2);
+}
+.document-reject-dialog :deep(.q-select__dropdown-icon) {
+  width: 16px;
+  height: 16px;
+  font-size: 16px;
+}
+.document-reject-dialog :deep(.q-textarea .q-field__control) {
+  min-height: 88px;
+  height: 88px;
+}
+.document-reject-dialog :deep(textarea) {
+  min-height: 64px;
+  padding-top: 10px;
+  resize: none;
+}
+.document-reject-dialog .document-review-actions {
+  margin-top: 0;
+}
 .profile-document {
   display: flex;
   align-items: center;
@@ -162,8 +467,9 @@ small {
   overflow-wrap: anywhere;
 }
 strong {
-  font-size: 12px;
+  font-size: 14px;
   font-weight: 500;
+  line-height: 20px;
 }
 small {
   margin-top: 4px;
