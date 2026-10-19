@@ -183,4 +183,4 @@ Swagger consultado. Demais itens do QA não estão aprovados por esta rodada.
 - [x] Cláudio: valores consolidados preservados e depósito real exibido no extrato com saldo após o lançamento. Saldo atual zero não é usado para presumir histórico vazio.
 - [x] Loading, erro e resposta incompleta não viram vazio; consultas antigas são descartadas ao trocar cliente/sair da tela. Desktop e celular revisados.
 - [x] 35 testes, lint, build e diff dos arquivos do lote aprovados. Detalhes em [QA-2026-10-19-CARTEIRA-VAZIA.md](QA-2026-10-19-CARTEIRA-VAZIA.md).
-- [ ] Conferir o deploy administrativo deste lote. As demais pendências da triagem continuam abertas.
+- [x] Deploy 8c64763 conferido no domínio administrativo: Jane zerada e depósito real do Cláudio visíveis. Upload e ativação aprovados na execução 39299774726. As demais pendências da triagem continuam abertas.

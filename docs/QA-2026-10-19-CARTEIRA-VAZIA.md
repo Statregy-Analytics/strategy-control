@@ -28,7 +28,15 @@ Revisão em desktop, desktop amplo e celular 390 px: quatro/duas/uma colunas con
 
 35 testes aprovados, incluindo 7 novos de confirmação de vazio, ativos existentes, histórico com saldo atual zero, paginação, moedas, falhas e invalidação. Lint, build e checagem de espaços dos arquivos do lote aprovados. As alterações anteriores em outros arquivos foram preservadas.
 
-Essa rodada valida o item 14 localmente contra a API de homologação. O deploy administrativo resultante ainda deve ser conferido. Edição por seção (itens 11–13/15), fluxo cadastral de sete etapas, aprovação documental e demais itens da matriz não estão aprovados por esta rodada.
+Essa rodada valida o item 14 contra a API de homologação; a conferência do deploy está registrada abaixo. Edição por seção (itens 11–13/15), fluxo cadastral de sete etapas, aprovação documental e demais itens da matriz não estão aprovados por esta rodada.
+
+## Conferência do deploy administrativo — 19/10
+
+O commit `8c64763` foi publicado em `https://admin.strategyanalytics.com.br/`. A execução [39299774726](https://github.com/Statregy-Analytics/strategy-control/actions/runs/39299774726) concluiu lint, build, upload e ativação com sucesso.
+
+Na interface publicada, Jane apresentou quatro métricas R$ 0,00, “Nenhuma composição ainda” e “Nenhum lançamento ainda”. Os ícones de gráfico vazio (52 px) e extrato (16 px) carregaram corretamente. Cláudio apresentou o depósito REQ-2026-E0320E63, de 09/10/2026 às 10:47:44, com valor e saldo após lançamento R$ 25.000,00. O investimento de R$ 261.500,00 e o total de R$ 286.500,00 foram preservados; a pendência do contrato encerrado no saldo investido continua no backend. Nenhum erro foi registrado no console durante a conferência.
+
+A inspeção visual identificou quebra do último dígito do saldo em largura intermediária. O complemento mantém as colunas Valor/Saldo alinhadas à direita e sem quebra, reserva espaço para a data e permite rolagem dentro da tabela preenchida no celular. A tabela vazia conserva seu encaixe sem largura mínima extra. Ajuste conferido localmente com o lançamento real, sem campo ou ação adicional e sem escrita financeira.
 
 ## Home publicada do portal
 

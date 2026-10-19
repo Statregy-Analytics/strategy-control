@@ -148,11 +148,16 @@
           />
         </div>
         <resource-state v-if="embedded" :state="statement.state" @retry="loadStatement">
-          <q-markup-table flat dense class="profile-statement">
+          <q-markup-table
+            flat
+            dense
+            class="profile-statement"
+            :class="{ 'profile-statement--entries': statement.state.data?.length }"
+          >
             <thead>
               <tr>
                 <th
-                  v-for="label in [
+                  v-for="(label, index) in [
                     'Data e hora',
                     'Tipo',
                     'Carteira',
@@ -161,7 +166,7 @@
                     'Saldo',
                   ]"
                   :key="label"
-                  class="text-left"
+                  :class="index >= 4 ? 'text-right' : 'text-left'"
                 >
                   {{ label }}
                 </th>
@@ -178,11 +183,11 @@
                 <td>{{ financeLabel(entry.type) }}</td>
                 <td>{{ financeLabel(entry.wallet) }}</td>
                 <td>{{ entry.requestNumber || '—' }}</td>
-                <td>
+                <td class="text-right">
                   {{ entry.direction === 'Debit' ? '−' : ''
                   }}{{ money(entry.amount, entry.currencyIsoCode) }}
                 </td>
-                <td>{{ money(entry.balanceAfter, entry.currencyIsoCode) }}</td>
+                <td class="text-right">{{ money(entry.balanceAfter, entry.currencyIsoCode) }}</td>
               </tr>
             </tbody>
           </q-markup-table>
@@ -516,6 +521,23 @@ defineExpose({ refresh: onAssetsChanged })
 .profile-statement th,
 .profile-statement td {
   white-space: normal;
+}
+.profile-statement--entries :deep(table) {
+  min-width: 560px;
+}
+.profile-statement th:nth-last-child(-n + 2) {
+  width: 128px;
+}
+.profile-statement th:first-child {
+  width: 110px;
+}
+.profile-statement td:not([colspan]):first-child {
+  overflow-wrap: normal;
+}
+.profile-statement td:not([colspan]):nth-last-child(-n + 2) {
+  white-space: nowrap;
+  overflow-wrap: normal;
+  font-variant-numeric: tabular-nums;
 }
 .portfolio-metric--selected {
   border-bottom: 4px solid #51b8ff !important;
