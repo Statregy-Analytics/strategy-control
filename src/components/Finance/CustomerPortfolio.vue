@@ -525,10 +525,10 @@ defineExpose({ refresh: onAssetsChanged })
 .profile-statement--entries :deep(table) {
   min-width: 560px;
 }
-.profile-statement th:nth-last-child(-n + 2) {
+.profile-statement--entries th:nth-last-child(-n + 2) {
   width: 128px;
 }
-.profile-statement th:first-child {
+.profile-statement--entries th:first-child {
   width: 110px;
 }
 .profile-statement td:not([colspan]):first-child {
