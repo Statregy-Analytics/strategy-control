@@ -369,6 +369,7 @@ import {
   setPrimaryCustomerBankAccount,
   updateCustomerBankAccount,
 } from 'src/services/customerService'
+import { readBankCatalog } from 'src/services/bankCatalog'
 import { getApiErrorMessage } from 'src/services/apiError'
 import useNotification from 'src/composables/global/useNotification'
 
@@ -499,14 +500,23 @@ const load = async () => {
   loading.value = true
   loadError.value = ''
   const [banksResult, accountsResult] = await Promise.allSettled([
-    listBanks({ page: 1, pageSize: 200, isActive: true }),
+    readBankCatalog((params) => listBanks({ ...params, isActive: true })),
     listCustomerBankAccounts(props.customerId, { page: 1, pageSize: 100 }),
   ])
-  if (banksResult.status === 'fulfilled')
-    bankOptions.value = (banksResult.value?.data ?? []).map((bank) => ({
+  if (banksResult.status === 'fulfilled') {
+    bankOptions.value = banksResult.value.map((bank) => ({
       label: bank.code ? `${bank.code} — ${bank.name}` : bank.name,
       value: bank.id,
     }))
+    filteredBankOptions.value = bankOptions.value
+  } else {
+    bankOptions.value = []
+    filteredBankOptions.value = []
+    loadError.value = getApiErrorMessage(
+      banksResult.reason,
+      'Não foi possível carregar o catálogo de bancos.',
+    )
+  }
   if (accountsResult.status === 'fulfilled') accounts.value = accountsResult.value?.data ?? []
   else
     loadError.value = getApiErrorMessage(

@@ -19,6 +19,9 @@ Nenhuma outra pendência do perfil com contrato suficiente e independente do bac
 
 ## Estado atual do Admin — QA 10 a 19
 
+- [x] Perfil/Admin: catálogo completo de bancos (513 instituições em três páginas), pesquisa sem acentos e nomes de bancos após a primeira página. Falha do catálogo usa o erro/retentativa existentes, sem expor opções parciais. 91 testes locais, lint e build aprovados; seletor conferido na porta 8080.
+- [ ] Reteste desta correção bancária no deploy de homologação (publicação em andamento).
+
 - [x] Listagem de clientes respeita a última consulta e distingue erro/vazio; reteste de filtros, cartões/tabela e paginação publicado em 00d601f (85 testes locais).
 - [x] Estrutura de edição por seção C24, cinco campos profissionais/financeiros, preferências no mesmo bloco, catálogo de bancos/países, datas e histórico traduzido preservados nas rodadas registradas abaixo.
 - [x] Carteira zerada/extrato e documentos de onboarding/revisão retestados nas rodadas próprias; decisões já concluídas não devem constar como falta de implementação de Aprovar/Reprovar.
@@ -492,3 +495,11 @@ Este lote não encerra a divergência entre histórico financeiro e consulta vig
 - [x] Diff de código/documentos sem erros; swagger preexistente não incluído. Evidência admin-lista-clientes-vazia-validada.png.
 
 Nenhum cadastro ou dado financeiro alterado. Falhas e respostas fora de ordem exercitadas automaticamente; não provocar falhas do backend para validar apresentação. Unicidade de e-mail e investigação do login com identidade divergente continuam pendências independentes.
+
+## Rodada 20/10 — catálogo bancário do perfil no Admin
+
+- Defeito de frontend: a seção consultava apenas 200 dos 513 bancos ativos. O mesmo catálogo já corrigido no portal agora é lido por inteiro no Admin, preservando o formulário e as ações do desenho.
+- A publicação das opções só ocorre após confirmar todas as páginas e os totais; falha de uma página não aparece como lista vazia ou resultado completo. O banner com Tentar novamente existente recupera a seção.
+- Na porta 8080, a pesquisa `orama` encontrou o banco 325 — Órama, presente na terceira página. Formulário apenas consultado, sem cadastrar conta nem realizar operação financeira.
+- Testes: seis novos cenários cobrem 513 registros, catálogo vazio, falha/retry, paginação inconsistente e integração com os nomes/erro da seção. Suíte completa: 91 aprovados.
+- Não depende de endpoint novo. Pendências contratuais anteriores permanecem abertas.
