@@ -1,6 +1,23 @@
 # Marco 3 — checklist manual
 
-Última rodada administrativa: 12/10/2026. Complemento do portal: 13/10/2026. Admin localhost:8080; Portal localhost:9010 (origens CORS autorizadas).
+Atualizado em 20/10/2026. Rodadas iniciais: Admin em 12/10 e portal em 13/10. Admin localhost:8080; Portal localhost:9010 (origens CORS autorizadas).
+
+## Estado atual do perfil — QA 8 e 9
+
+Esta seção consolida as rodadas abaixo. Registros históricos descrevem o estado observado naquela data e não reabrem correções já retestadas.
+
+- [x] Dados reais no resumo, Perfil Completo e Ajustes; contatos/documentos mascarados, ausência real e zero distintos; validação de data e descarte sem gravação.
+- [x] Aprovação e reprovação documental, motivo no portal, reenvio e liberação da edição retestados. Aprovação da CNH pelo usuário levou a 100%/LEVEL_1. Isso não equivale ao envio final do cadastro nem à aprovação de todos os arquivos.
+- [x] Estados de loading/erro/vazio, recuperação de salvamentos parciais, sessões e proteção contra respostas antigas corrigidos. Validação das falhas controladas coberta automaticamente.
+- [x] Preferências nos controles existentes; catálogo bancário completo de 513 instituições e formulário mobile sem overflow. Nenhum campo/ação adicional criado.
+- [x] Publicação atual 027257b: pipeline 39489262330 aprovada em lint, 189 testes, build, upload e ativação. Reteste de leitura nesta revisão confirmou conta própria, duas sessões reais, 100% documental e Editar liberado após carregar.
+- [ ] Backend: seleção do financeiro vigente após salvar renda; campos/catálogos do desenho; contatos de confiança sem relationship adicional; patrimônio próprio; contexto dos termos; projeção de compartilhamento; estado oficial de envio/revisão; regras CNH e vínculo/metadados do replace.
+- [ ] Dados de homologação: foto válida disponível na API para verificar o carregamento real; fallback sem imagem quebrada já implementado. Não criar upload fora do Figma.
+- [ ] QA: revalidação independente dos cenários corrigidos. Não equivale a uma pendência de implementação nem à homologação integral do Marco 3.
+
+Nenhuma outra pendência do perfil com contrato suficiente e independente do backend foi identificada nesta revisão. Não houve alteração de runtime nem novo deploy nesta rodada; a publicação atual já foi confirmada. Detalhes contratuais em PENDENCIAS-BACKEND-QA.md.
+
+## Histórico das rodadas
 
 ## Homologação administrativa integrada
 
@@ -232,10 +249,10 @@ Swagger consultado. Demais itens do QA não estão aprovados por esta rodada.
 
 - [x] Usuário confirmou criação e recebimento de código; sessão autenticada acessou etapa 3.
 - [x] Nascimento/cidade, endereço/filiação e financeiro fictícios persistidos pelas operações do cliente. Decimal/zero e recarga conferidos. Consultas do Admin foram somente leitura.
-- [!] Fluxo sequencial bloqueado na etapa 4 por 403 na consulta documental após endereço salvo; repetição confirmou o bloqueio. Endpoint do fluxo: GET /api/v1/client/profile/document-types. Sem upload executado; requestId/correlationId e blockingCode não visíveis na mensagem da tela. Pedida investigação/alinhamento do guard para conta nova, sem afirmar causa interna.
-- [ ] Documento/upload e cadastro completo enviados para análise: não homologados. Etapas 5–7 verificadas separadamente, sem considerar isso um avanço sequencial completo.
+- Registro histórico superado: a rodada inicial encontrou 403 na consulta de tipos documentais. O backend identificou ausência de perfil profissional; antecipar sua gravação para a etapa 4 corrigiu o fluxo, e os uploads foram retestados na etapa 5. Não é bloqueio atual de frontend nem pedido de remover o guard.
+- Registro histórico superado parcialmente: upload documental foi retestado nas rodadas posteriores de 20/10, incluindo aprovação, reprovação, motivo e reenvio. O envio final do cadastro continua dependente do contrato oficial; não considerar as sete etapas integralmente homologadas.
 
-O 403 está registrado como bloqueio de integração a investigar, não como defeito interno comprovado. Catálogos/relationship/campos ausentes são pendências de contrato/configuração, detalhadas em PENDENCIAS-BACKEND-QA.md. Retomada de Número no campo separado foi registrada no checklist como ajuste de frontend e não entrou na seção de bugs do backend. Nenhuma nova movimentação financeira ou aprovação documental foi executada.
+O 403 foi inicialmente investigado como bloqueio de integração e depois resolvido pela sequência autorizada do frontend, conforme retestes abaixo. Catálogos/relationship/campos ausentes são pendências de contrato/configuração, detalhadas em PENDENCIAS-BACKEND-QA.md. Retomada de Número no campo separado foi registrada no checklist como ajuste de frontend e não entrou na seção de bugs do backend. Nenhuma nova movimentação financeira ou aprovação documental foi executada.
 
 ## Reteste de retomada do Número — 20/10/2026
 
@@ -297,7 +314,7 @@ Corrigido o mapeamento de categoria no frontend: GET /admin/customers/{id}/docum
 - [x] Regressão cobre dois arquivos do mesmo tipo RG, sem requirementId, com IDs distintos e ações Review/Download retornadas pela API. Doze testes de projeção/revisão aprovados; lint, build e diff do lote aprovados.
 - [x] Admin 4fd3faf publicado, pipeline 39474455430 aprovada em lint/build/upload/ativação. Local 8080 e perfil do usuário em admin.strategyanalytics.com.br conferidos.
 - [x] Após recarga, aparecem dois RGs na seção Documentação pessoal; contador 2 Aguardando coerente; ambos com Visualizar, Baixar, Aprovar e Reprovar. Evidência: admin-documentos-jorge-aprovacao.png.
-- [ ] Aprovação/reprovação efetiva e reflexos no portal/edição do perfil não executados nesta rodada. Os arquivos fictícios permanecem Pending para revisão do usuário; esta correção não comprova liberação cadastral posterior.
+- Registro histórico: nesta rodada inicial ainda não houve decisão e os arquivos estavam Pending. Superado pelos retestes posteriores de aprovação, reprovação/motivo, reenvio e edição do perfil descritos abaixo; não manter como pendência atual de frontend.
 
 A ausência das linhas era defeito do frontend, encerrado após o reteste publicado. Nenhum novo bloqueio/bug de backend foi aberto por esse cenário.
 
@@ -312,7 +329,7 @@ Teste autorizado pelo usuário nas versões já publicadas: Admin 4fd3faf (corre
 - [x] Edição integrada comprovada em Localização: complemento fictício alterado para Unidade de teste QA aprovação, salvo e confirmado após recarga completa. Em seguida, restaurado para Unidade de teste pelo mesmo formulário e confirmado em tela. Nenhum dado pessoal real ou valor financeiro alterado.
 - [x] Aba Documentação mostra os dois nomes de arquivos fictícios com Aprovado, mantendo os controles existentes. A mudança do Admin foi recebida pela API do portal, sem alteração manual de nível, guard ou permissão.
 - [!] Progresso ainda 0%: a API devolve currentLevel null, nextLevel LEVEL_1, approvedRequirements 0, requiredRequirements 1 e documentComplianceStatus Pending. A configuração traz RG isRequired false e CNH isRequired true, pendente/sem arquivo. Portanto os arquivos RG estão aprovados, mas não completam o requisito atualmente configurado. Alinhar regra/configuração de nível às alternativas do fluxo aprovado do Figma; não criar campo CNH obrigatório nem simular 100% no front.
-- [ ] Edição de documentos na seção Dados Pessoais continua direcionada à aba Documentação, conforme implementação existente. Contatos sem vínculo/cadastro continuam bloqueados pela pendência já conhecida. Este teste não homologa reenvio/reprovação, contatos, envio cadastral final ou progressão de nível.
+- Regra preservada: edição documental usa a aba Documentação. Reprovação/reenvio e progressão após CNH foram retestados posteriormente. Contatos sem vínculo e envio final continuam nas pendências de contrato; não são novos campos/ações a criar na tela.
 
 **Resultado:** aprovação dos dois arquivos, atualização visual do portal e gravação de edição de localização aprovadas. Nenhum defeito novo do frontend reproduzido; sem mudança de runtime ou deploy novo. Permanece alinhamento da configuração documental no backend. Evidências: admin-dois-documentos-aprovados.png e cliente-documentos-aprovados.png; sem e-mail, token ou identificador pessoal integral neste registro.
 

@@ -300,3 +300,12 @@ Revisão visual do catálogo revelou um segundo defeito de frontend: no celular,
 
 
 Publicação final 027257b / pipeline 39489262330 aprovada (lint, 189 testes, build e deploy). Banco da terceira página confirmado no seletor real; formulário cancelado e resumo bancário vazio da conta conferido, sem gravação. Mobile: card com clientWidth/scrollWidth 317/317 px; campo respeita a largura, com reticências existentes. DocumentWidth 378 px para viewport 390 px. Evidência cliente-perfil-banco-mobile-sem-overflow.png. Pendências anteriores do backend permanecem abertas, sem novo contrato solicitado.
+
+
+## Consolidação do perfil — leitura atual, 20/10
+
+Revisão do QA 8/9 não identificou outra pendência de implementação do perfil independente das dependências já documentadas. Checklist manual agora abre com o estado consolidado, separando funcionalidades retestadas, bloqueios de contrato/configuração, foto válida para reteste e revalidação independente pelo QA. Marcas históricas de upload/aprovação/reprovação/liberação não devem ser tratadas como pendências atuais.
+
+Versão publicada 027257b e pipeline 39489262330 novamente conferidas; nenhuma mudança de runtime e nenhum novo deploy nesta rodada. Navegação real da conta do usuário confirmou dados próprios, duas sessões reais, 100% documental e Editar habilitado após carregar, sem escrita. O Swagger atual não resolve as lacunas de context dos termos, projeção pública completa ou patrimônio próprio. A divergência financeira fica aberta até resposta/correção e reteste do backend; não foi repetida escrita de renda nesta revisão.
+
+Próximo passo do perfil é a revalidação pelo QA dos cenários liberados e o retorno do backend para os cenários bloqueados, preservando o Figma. Não representa aprovação integral do cadastro, segurança ou Marco 3.

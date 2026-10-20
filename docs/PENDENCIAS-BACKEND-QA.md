@@ -4,9 +4,9 @@ A interface segue o Figma e as alterações de ordem/campos expressamente autori
 
 ## Aprovação de documentos e edição do perfil
 
-O front de Aprovar/Reprovar documentos está integrado conforme C27–C28. Falta confirmar:
+O front de Aprovar/Reprovar documentos está integrado conforme C27–C28. Situação atual confirmada em 20/10:
 
-- Confirmado em 20/10 na conta nova: aprovação dos dois RGs removeu a pendência dos arquivos e habilitou edição de Dados Básicos/Localização/Atividade no portal. Salvamento de Localização e persistência após recarga validados; progressão de nível continua pendente por configuração CNH, descrita abaixo.
+- Confirmado em 20/10 na conta nova: aprovação dos dois RGs removeu a pendência dos arquivos e habilitou edição de Dados Básicos/Localização/Atividade no portal. Salvamento de Localização e persistência após recarga validados. Após aprovação da CNH pelo usuário, progresso chegou a 100%/LEVEL_1; permanece o alinhamento da exigência de CNH às alternativas do Figma, não um bloqueio atual de porcentagem nessa conta.
 - Como consultar o estado da revisão cadastral, a data de envio e a permissão de edição, para apresentar C26 corretamente?
 - Confirmado em 20/10: motivo e mensagem enviados juntos em `notes` chegam no overview/latestReview e aparecem no portal após correção do adaptador (bbbebd8). Reenvio aceito e nova revisão disponível; vínculo de substituição/metadados continuam pendentes abaixo.
 - Qual é o catálogo de motivos de reprovação? O front usa apenas “Foto ilegível”, confirmado no Figma.
@@ -244,3 +244,12 @@ Nome de banco longo também causava overflow no formulário mobile; corrigido no
 
 
 Publicação final 027257b confirmada pela pipeline 39489262330 aprovada (189 testes). Reteste real mostrou banco da terceira página e ausência de overflow mobile; formulário cancelado e estado bancário original preservado. Nenhuma nova conta ou operação foi realizada. Não acrescenta bloqueio ao backend nem encerra os anteriores.
+
+
+## Consolidação atual do perfil — 20/10
+
+As correções conhecidas de frontend com contrato suficiente estão publicadas em 027257b; reteste de leitura confirmou conta própria, sessões reais, 100% documental e edição liberada. Não há nova solicitação ao backend nesta revisão. Foram retiradas marcações históricas ambíguas do checklist manual que ainda pareciam bloquear aprovação/reprovação, upload e desbloqueio já retestados.
+
+Continuam abertos os contratos/configurações dos itens próprios: financeiro vigente, campos/catálogos, contatos sem vínculo extra, patrimônio, contexto dos termos, compartilhamento, envio/revisão cadastral e regras/versionamento documental. Swagger atual novamente consultado: consent context permanece string sem valores documentados; PublicProfileResponse contém apenas customerId/avatarUrl; não foi identificado catálogo dos seletores pessoais nem rota de patrimônio próprio que resolva as lacunas indicadas; o catálogo de preferências continua disponível. Não preencher o desenho com endpoints administrativos, valores inventados ou campos novos.
+
+Foto válida continua dependência de dados para reteste; não justifica criar upload fora do Figma. A revalidação independente pelo QA segue necessária. Sem alteração de runtime ou novo deploy nesta revisão documental.
