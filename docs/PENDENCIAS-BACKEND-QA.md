@@ -202,3 +202,8 @@ A regra ainda considera CNH obrigatória e RG opcional. Portanto permanece o ped
 O e-mail existente não aparecia no perfil porque a interface tratava primaryEmail/mobilePhone do resumo como texto, embora sejam objetos com valueMasked. Corrigido em 639bd6f, publicado na pipeline 39480681134 aprovada: máscara na consulta, valores reais dos contatos principais do perfil completo na edição e validação antes da escrita para impedir limpeza por objeto inválido. Teste integrado de alteração/restauração da naturalidade manteve todos os contatos, confirmado por comparação independente na API. Não solicitar novo campo/endpoint ou preenchimento fictício para resolver esse defeito do frontend. Ausência real de celular segue exibida como não informado.
 
 Isso não encerra as pendências de relationship/ausência de contatos de confiança, unicidade de e-mail no servidor, aceite/envio final, catálogos e demais contratos já descritos.
+
+
+### Perfil financeiro opcional — validação do frontend corrigida, 20/10
+
+O contrato existente aceita null em rendas/bens. O front impunha preenchimento dos três campos e regravava o profissional sem alteração. Corrigido/publicado em b42b66d (pipeline 39481860662 aprovada, 170 testes), sem criar campos/ações. Reteste na conta do usuário confirmou gravação de renda familiar vazia como null, decimal e zero preservados, metadados intactos e restauração dos valores originais pela edição. Perfil profissional permaneceu idêntico em leitura independente. Não solicitar endpoint novo nem mudar obrigatoriedade no backend por esse defeito do front. Os demais bloqueios contratuais continuam nos itens próprios.

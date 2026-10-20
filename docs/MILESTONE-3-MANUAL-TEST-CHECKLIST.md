@@ -361,3 +361,16 @@ O usuário realizou a aprovação no Admin. Reteste na mesma conta e nas versõe
 - [x] Desktop/celular 390 px conferidos sem overflow. Layout/campos/ações existentes preservados; não houve alteração de documentos aprovados, níveis ou permissões. Evidência: cliente-perfil-contatos-api-corrigidos.png.
 
 Falha do frontend encerrada; não é pendência de cadastro/campo de contato no backend. O checklist geral foi atualizado para não repetir como abertos os retestes documentais e de edição já feitos. Os bloqueios contratuais/configuração e homologação final pelo QA permanecem separados no documento consolidado.
+
+
+## QA do perfil — valores financeiros opcionais e gravação por seção, 20/10
+
+Próximo ajuste independente do backend no QA 8: a edição de Atividade Trabalhista exigia preencher todos os valores financeiros, embora o contrato aceite null, e regravava o profissional mesmo quando só uma renda era alterada. O perfil agora aceita ausência explícita sem transformá-la em zero, mantém zero e decimais e envia apenas o perfil que efetivamente mudou. Valores inválidos/negativos são validados antes de iniciar as escritas. Comparação decimal não converte strings para float no payload; moeda/vigências e metadados profissionais são preservados.
+
+- [x] Portal b42b66d publicado; pipeline 39481860662 aprovada em lint, 170 testes, build, upload e ativação. Testes incluem null/zero/decimais, formatação equivalente sem escrita, limpeza intencional, alteração profissional isolada e validação antes da gravação.
+- [x] Na conta do usuário em homologação, valor negativo rejeitado com erro na seção e rascunho preservado. Corrigido para valor fictício válido, renda familiar apagada e bens zero mantidos; salvamento concluiu e recarga confirmou decimal, ausência e zero distintos.
+- [x] Consulta administrativa independente confirmou householdMonthlyIncome null, declaredNetWorth 0 e valor decimal salvo; moeda/vigências preservadas e perfil profissional integralmente idêntico à leitura anterior.
+- [x] Valores fictícios originais restaurados pela mesma edição e recarregados. Nova leitura administrativa confirmou rendas/bens/moeda/vigências iguais ao início e profissional intacto. Nenhuma transação financeira, contrato, documento ou permissão foi alterado.
+- [x] Desktop e edição a 390 px conferidos; conteúdo 378 px para viewport 390, sem overflow. Descartar fechou a edição sem nova gravação; viewport restaurado. Campos, botões, seletor e composição existentes do Figma preservados; não foi criado campo técnico ou ação adicional.
+
+Defeito do frontend encerrado, sem novo endpoint ou ajuste do servidor. Ausência real de dado continua Não informado; este teste não libera catálogos, escrita de contatos sem vínculo, termos/envio final nem o replace documental. Evidência: cliente-perfil-financeiro-validado.png (valores já restaurados).
