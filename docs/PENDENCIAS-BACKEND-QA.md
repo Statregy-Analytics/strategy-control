@@ -78,16 +78,29 @@ O bloqueio de lint global do portal foi corrigido; 52 testes e build passaram. A
 
 ## Cadastro de sete etapas — primeira tela local, 20/10
 
-A Etapa 1 possui tela e validações locais conforme 4:25513, isoladas em prévia de desenvolvimento. O cadastro integrado atual não foi substituído. País de residência (incluindo o tratamento dos agrupamentos do Figma), URLs/textos/versões legais e registro do aceite continuam sem contrato confirmado; não serão descartados nem enviados como campos presumidos.
+A Etapa 1 possui tela e validações locais conforme 4:25513, inicialmente isoladas em desenvolvimento e agora acessíveis em homologação nas rotas /cadastro/etapa-*. O cadastro integrado atual não foi substituído. País de residência (incluindo o tratamento dos agrupamentos do Figma), URLs/textos/versões legais e registro do aceite continuam sem contrato confirmado; não serão descartados nem enviados como campos presumidos.
 
-Acompanhar tela, validações, integração e homologação de cada etapa no [Checklist do cadastro](CHECKLIST-CADASTRO-SETE-ETAPAS.md). Etapas 1 e 2 possuem telas e validações locais; etapas 3 a 7 e retomada integrada permanecem abertas.
+Acompanhar tela, validações, integração e homologação de cada etapa no [Checklist do cadastro](CHECKLIST-CADASTRO-SETE-ETAPAS.md). Etapas 1 a 3 possuem telas e validações locais; catálogos/obrigatórios da etapa 3, etapas 4 a 7 e retomada integrada permanecem abertos.
 
 ## Cadastro de sete etapas — confirmação de e-mail, 20/10
 
-A tela 2/7 (4:25620) reutiliza os serviços públicos POST /auth/email-confirmation/confirm e /request sob /api/v1, sem campo de e-mail adicional. A lógica é compartilhada com a confirmação pública atual. A prévia local bloqueia o transporte; envio/recebimento e retomada reais ainda não foram homologados neste lote.
+A tela 2/7 (4:25620) reutiliza os serviços públicos POST /auth/email-confirmation/confirm e /request sob /api/v1, sem campo de e-mail adicional. A lógica é compartilhada com a confirmação pública atual. A tela de homologação da etapa 2 bloqueia o transporte de apresentação; envio/recebimento e retomada reais ainda não foram homologados neste lote.
 
 - Definir como a confirmação bem-sucedida permite continuar à etapa 3: a resposta documentada contém somente succeeded/message, sem sessão ou estado de progresso. Precisamos do contrato de sessão de cadastro, consulta/gravação e próxima etapa, sem pedir senha novamente ou criar campo/ação fora do Figma. O front não armazena a senha para fazer login automático.
 - O código é string sem tamanho/formato documentado. Se houver restrição, informar a regra; o placeholder 000000 do desenho não foi transformado em validação arbitrária.
 - Permanecem as dependências da etapa 1: país real/agrupamentos, textos/URLs/versões legais e aceite versionado. O fluxo integrado atual não foi substituído por prévias.
 
 Evidências no portal: docs/QA-2026-10-20-CADASTRO-ETAPA-2.md. Checklist atualizado com a separação entre validação local e homologação integrada.
+## Cadastro de sete etapas — dados pessoais, 20/10
+
+Tela 3/7 conforme 6:25562, com os seis campos/grupos do desenho e somente Adicionar outra nacionalidade, Voltar e Continuar. Estrutura e componentes existentes reutilizados. A prévia não consulta endpoints administrativos nem grava um perfil parcial como se concluísse o cadastro.
+
+- Disponibilizar catálogos acessíveis na sessão do cadastro para gênero, estado civil, nacionalidades e países de nascimento, com rótulos e valores aceitos. No Swagger consultado, países só tem catálogo administrativo; o catálogo de preferências não contém essas opções. Não serão criadas listas ou IDs presumidos no front.
+- Confirmar campo/ID de país de nascimento: UpdateClientPersonalDetailsRequest não o possui. País do endereço/residência e birthState não substituem esse dado.
+- Confirmar leitura e escrita de múltiplas nacionalidades. O Figma permite adicionar outra, enquanto personalDetails.nationality é apenas uma string. Não concatenar valores arbitrariamente nem criar campo adicional na tela.
+- Informar os obrigatórios e regras da etapa 3, inclusive eventual idade mínima. As propriedades do perfil são anuláveis e não confirmam regras do onboarding. O front valida data real/não futura e escolhas recebidas, sem inventar restrições.
+- Confirmar gravação/consulta/retomada do rascunho e avanço para etapa 4 sob a sessão de cadastro. PATCH /client/profile atual não define esse progresso e não acomoda todos os dados do desenho. Preservar os demais dados e a revisão existente.
+
+Validação local: 77 testes aprovados e conferência desktop/celular. Catálogos vazios e Continuar mostram indisponibilidade sem simular gravação; rascunho apenas em memória. A integração permanece aberta. Evidências no portal: docs/QA-2026-10-20-CADASTRO-ETAPA-3.md. Próxima tela incremental: etapa 4.
+
+Publicação em homologação: por solicitação do usuário, as telas 1–3 passaram a integrar o build e ficam em /cadastro/etapa-1, /cadastro/etapa-2 e /cadastro/etapa-3 no hml.strategyanalytics.com.br. Os bloqueios HTTP acima continuam documentados e visíveis, sem impedir a publicação visual para o QA. Os aliases /dev mantêm links anteriores compatíveis.

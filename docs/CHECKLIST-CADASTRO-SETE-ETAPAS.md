@@ -6,9 +6,9 @@ Atualizado em 20/10/2026. Referência: Figma BaDXlWpxbIoY4azOaQnXgv, seção 4:2
 
 | Etapa | Tela e validação local | Integração e homologação |
 | --- | --- | --- |
-| 1 · Criar conta | Pronta em prévia local | Pendente: residência, documentos legais e aceite versionado |
-| 2 · Confirmar e-mail | Pronta em prévia local; lógica pública reutilizada | Serviços existentes reutilizados; envio real e sessão para etapa 3 pendentes |
-| 3 · Dados pessoais | Pendente | Catálogos, gravação e retomada pendentes |
+| 1 · Criar conta | Tela disponível em homologação | Pendente: residência, documentos legais e aceite versionado |
+| 2 · Confirmar e-mail | Tela disponível em homologação; lógica pública reutilizada | Serviços existentes reutilizados; envio real e sessão para etapa 3 pendentes |
+| 3 · Dados pessoais | Tela e validações locais prontas; opções/obrigatórios pendentes | Catálogos, país de nascimento, múltiplas nacionalidades, gravação e retomada pendentes |
 | 4 · Documento e endereço | Pendente, oito variantes | País real, endereços/documentos e uploads pendentes |
 | 5 · Atividade trabalhista | Pendente | Gravação e retomada pendentes |
 | 6 · Contatos de confiança | Pendente | Resolver relationship obrigatório sem campo extra |
@@ -27,7 +27,7 @@ Atualizado em 20/10/2026. Referência: Figma BaDXlWpxbIoY4azOaQnXgv, seção 4:2
 
 Validações locais conferidas: vazio, senha divergente, aceite ausente, residência única e preenchimento válido. Fonte local licenciada preserva as bandeiras do Figma também no Windows. Assets de logo/máscara/seta existentes reutilizados nos tamanhos originais. Nenhum dado foi enviado ao servidor.
 
-A prévia de desenvolvimento fica em http://localhost:9010/dev/cadastro/etapa-1. Não chama a API, não cria conta, não transmite aceite e não avança como se tivesse salvado. Ela não existe no build de produção; o cadastro atual permanece preservado até a integração suficiente.
+A tela de homologação fica em http://localhost:9010/cadastro/etapa-1. Não chama a API, não cria conta, não transmite aceite e não avança como se tivesse salvado. Ela está incluída no build de homologação; o cadastro integrado atual permanece preservado até a integração suficiente.
 
 ## 2. Confirmar e-mail — Figma 4:25620
 
@@ -39,16 +39,22 @@ A prévia de desenvolvimento fica em http://localhost:9010/dev/cadastro/etapa-1.
 
 - [x] Conferir desktop/celular, código obrigatório, entrada alfanumérica, reenvio bloqueado na prévia e retorno à etapa 1; 70 testes, lint, build e diff aprovados.
 
-Prévia: http://localhost:9010/dev/cadastro/etapa-2. Usa endereço demonstrativo mascarado e bloqueia o transporte; não envia e-mail, não confirma código nem simula sucesso/avanço. A rota não existe em produção. A confirmação pública atual permanece disponível e usa a mesma lógica e os mesmos serviços HTTP. O placeholder 000000 não define tamanho/formato do código; o contrato aceita string sem restrição documentada.
+Prévia: http://localhost:9010/cadastro/etapa-2. Usa endereço demonstrativo mascarado e bloqueia o transporte; não envia e-mail, não confirma código nem simula sucesso/avanço. A rota está incluída no build publicado em homologação. A confirmação pública atual permanece disponível e usa a mesma lógica e os mesmos serviços HTTP. O placeholder 000000 não define tamanho/formato do código; o contrato aceita string sem restrição documentada.
 
-A próxima tela incremental é a etapa 3. A confirmação real e a sessão para continuar o cadastro ainda precisam ser homologadas; a resposta de confirmação atual contém somente succeeded/message.
+A próxima tela incremental é a etapa 4. A confirmação real e a sessão para continuar o cadastro ainda precisam ser homologadas; a resposta de confirmação atual contém somente succeeded/message.
 
 ## 3. Dados pessoais — Figma 6:25562
 
-- [ ] Implementar nascimento, gênero, estado civil, nacionalidades, país e cidade de nascimento conforme desenho.
-- [ ] Validar datas e obrigatórios confirmados, adicionar nacionalidade apenas pela ação existente, sem inventar catálogos/valores HTTP.
-- [ ] Validar avançar/voltar e preservação do rascunho em memória.
+- [x] Implementar nascimento, gênero, estado civil, nacionalidades, país e cidade de nascimento conforme desenho, reutilizando estrutura, rótulos, inputs e assets existentes.
+- [x] Validar data real, ano bissexto e ausência de data futura; conferir escolhas contra opções fornecidas e impedir nacionalidades repetidas.
+- [x] Adicionar nacionalidade somente pela ação do desenho, após preencher a anterior; linha adicional vazia não bloqueia o formulário, pois não há ação de remoção no Figma.
+- [ ] Confirmar catálogos e obrigatórios do cadastro. O perfil aceita campos nulos e não define essas regras; a tela recebe as regras por propriedades, sem assumir obrigatoriedade ou idade mínima.
+- [x] Validar Voltar para etapa 2 e retorno à etapa 3 preservando o rascunho somente em memória, sem armazenamento, URL ou chamada HTTP.
+- [x] Conferir desktop/celular, teclado/foco, opções indisponíveis e Continuação bloqueada com aviso; 77 testes, lint, build e diff do lote aprovados.
+- [ ] Homologar avanço integrado para etapa 4 após persistência real; a prévia não simula conclusão.
 - [ ] Integrar leitura, gravação e retomada; homologar dados próprios e erros sem perda do rascunho.
+
+Tela de homologação: http://localhost:9010/cadastro/etapa-3, incluída no build publicado. Nenhuma opção fictícia foi colocada nos seletores; fixture de catálogo existe apenas nos testes automatizados. A composição aceita opções e obrigatórios confirmados por propriedades. O botão Continuar não avança nem informa gravação quando os catálogos estão ausentes. Não foi alterado o cadastro integrado ou o perfil atual.
 
 ## 4. Documento e endereço — Figma 37:27141
 
@@ -96,3 +102,9 @@ A próxima tela incremental é a etapa 3. A confirmação real e a sessão para 
 - [ ] Reteste do QA com conta de homologação e evidência registrada.
 
 Dependências consolidadas em [Pendências do backend](PENDENCIAS-BACKEND-QA.md). O aceite legal e o envio final não são executados automaticamente nesta rodada de telas/validações locais.
+
+## Publicação em homologação — decisão de 20/10
+
+A pedido do usuário, as telas implementadas 1–3 estão incluídas no build publicado e acessíveis em https://hml.strategyanalytics.com.br/cadastro/etapa-1, /cadastro/etapa-2 e /cadastro/etapa-3. Os endereços antigos /dev/cadastro/etapa-* permanecem como aliases para não quebrar links já usados. Não é necessário executar o servidor local para o QA conferir as telas.
+
+Os avisos de homologação identificam as dependências sem criar novos campos/ações no card. Essa publicação não confirma persistência: etapas 1 e 2 ainda usam os adaptadores de apresentação já documentados; etapa 3 aguarda catálogos e contrato de gravação/progresso. O cadastro integrado existente continua em /register.

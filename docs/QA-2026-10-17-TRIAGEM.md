@@ -94,3 +94,10 @@ Criado [checklist por etapa](CHECKLIST-CADASTRO-SETE-ETAPAS.md). Etapa 1 (4:2551
 Etapa 2 (4:25620) com campo de código, e-mail mascarado e ações do Figma. Serviços/lógica de confirmação e reenvio reutilizados da confirmação pública, que permanece disponível. Conferidos obrigatórios, celular/desktop e Voltar; 70 testes, lint e build aprovados. Corrigido no reteste um erro de temporizador que interrompia a desmontagem/navegação.
 
 A prévia de desenvolvimento bloqueia chamadas HTTP e não simula sucesso. O item de cadastro segue parcial: telas/validações locais das etapas 1–2 prontas, etapas 3–7 abertas; criação, aceite, sessão após confirmação e retomada integrada pendentes. Nenhuma mensagem real foi enviada. Ver [checklist](CHECKLIST-CADASTRO-SETE-ETAPAS.md) e [pendências](PENDENCIAS-BACKEND-QA.md).
+## Cadastro incremental — etapa 3, 20/10
+
+Tela Dados pessoais (6:25562) implementada para homologação, reutilizando estrutura, LabelField, inputWhite e assets do cadastro. Campos/ações limitados ao Figma. Validados calendário, bissextos, data futura, escolhas contra catálogo, nacionalidades repetidas e preservação do rascunho em memória ao navegar. 77 testes, lint e build aprovados; desktop/celular sem overflow.
+
+O QA do cadastro continua parcial: faltam catálogos/obrigatórios do onboarding, país de nascimento, múltiplas nacionalidades e contrato de persistência/progresso. Nenhuma lista fictícia ou gravação presumida foi colocada no fluxo; a prévia não avança sem opções reais. Etapas 4–7 ainda aguardam implementação. Ver checklist e documento consolidado de pendências.
+
+Publicação das telas do cadastro: o usuário pediu disponibilidade no ambiente de homologação. As etapas 1–3 estão no build em /cadastro/etapa-1, /cadastro/etapa-2 e /cadastro/etapa-3; /dev/cadastro/etapa-* permanece como alias. As telas podem ser conferidas pelo QA no ambiente publicado, mantendo os avisos de operações ainda não integradas. Isso não altera a situação dos contratos HTTP pendentes nem substitui /register.
