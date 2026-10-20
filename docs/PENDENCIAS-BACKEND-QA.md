@@ -109,8 +109,14 @@ O número que voltava concatenado ao Logradouro foi corrigido no adaptador do po
 
 ### Revisão do QA — falhas de leitura no front, 20/10
 
-Corrigida a substituição de rascunhos por dados vazios quando uma consulta da revisão falhava. Falha profissional, financeira e de contatos agora permanece independente e aparece na linha existente, sem campos ou ações adicionais. Esse defeito era do front; não é uma solicitação nova ao backend. O 403 documental, os catálogos/campos e o envio final acima continuam pendentes. Consulta CEP Brasil concluída no front reutilizando validator-cep; conferência de retomada após novo login permanece no checklist.
+Corrigida a substituição de rascunhos por dados vazios quando uma consulta da revisão falhava. Falha profissional, financeira e de contatos agora permanece independente e aparece na linha existente, sem campos ou ações adicionais. Esse defeito era do front; não é uma solicitação nova ao backend. O 403 documental, os catálogos/campos e o envio final acima continuam pendentes. Consulta CEP Brasil concluída no front reutilizando validator-cep; retomada no mesmo navegador após novo login concluída no front; progresso entre dispositivos/rascunho completo continua abaixo.
 
 ### CEP Brasil — frontend concluído, 20/10
 
 A etapa 4 reutiliza a consulta pública validator-cep existente, sem exigir novo endpoint do backend do Marco 3. Logradouro/Bairro/Cidade/Estado são preenchidos; Número/Complemento permanecem manuais. A falta de bairro separado no payload cadastral permanece pendente, apesar do preenchimento local. O serviço de CEP não fornece catálogo de UF de expedição nem libera documentos; 403 e envio final continuam abertos.
+
+### Progresso do cadastro — retomada no front e limite do contrato, 20/10
+
+O front retoma a última rota visitada das etapas 3–7 no mesmo navegador/origem, separada por usuário autenticado, sem persistir dados pessoais, senha, token ou arquivos no marcador. Login carrega os dados suportados da API; não presume campos enviados a partir do rascunho em memória. Isso corrige o retorno sempre à Home e não exige endpoint novo para a navegação local.
+
+Para cumprir integralmente o progresso salvo do Figma entre dispositivos, confirmar consulta/gravação da etapa atual e do rascunho cadastral, vinculadas ao cliente, e estado explícito de envio/revisão/finalização para encerrar a retomada. GET /client/onboarding/status, conferido no OpenAPI atual, retorna requisitos/features e flags; não contém etapa atual nem comprova envio final. Não inferir cadastro enviado de profileCompleted/documentLevel, nem exigir campos/ações extras na interface. Não estamos solicitando recriar os endpoints existentes de perfil/financeiro/contatos/documentos.

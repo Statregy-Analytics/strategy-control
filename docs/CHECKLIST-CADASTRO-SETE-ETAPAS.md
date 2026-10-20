@@ -99,7 +99,7 @@ A regravação sem duplicar Número foi validada por testes automatizados, sem r
 ### Próximos itens do front e retestes
 
 - [x] Preenchimento por CEP Brasil implementado e testado com a consulta existente, preservando campos manuais, Número/Complemento e o desenho. Ver lote de CEP abaixo.
-- [ ] Conferir retomada da etapa após saída e novo login contra o progresso realmente disponível; não inferir cadastro enviado a partir de campos preenchidos.
+- [x] Retomada da última etapa no mesmo navegador implementada por usuário, com dados suportados recarregados da API; saída/novo login e troca de conta conferidos localmente. Ver lote de retomada abaixo; progresso entre dispositivos e rascunho completo continuam pendentes.
 - [ ] Reexecutar upload, contatos novos e envio final somente após alinhamento dos bloqueios documentados; esses cenários continuam sem aprovação integrada.
 
 Detalhes do lote: Strategy-analytics-v2/docs/QA-2026-10-20-CADASTRO-FALHAS-PARCIAIS.md. Este ajuste é do frontend e não entra na tabela de bugs do backend. A homologação completa do cadastro e dos 19 itens do QA permanece aberta.
@@ -122,3 +122,20 @@ A consulta fornece Bairro para o rascunho, mas a persistência continua sem camp
 ### Publicação e reteste do CEP em homologação
 
 Portal aae0e31 publicado; pipeline 39453639953 concluiu lint, 135 testes, build, upload e ativação com sucesso. Na sessão da conta do usuário, em nova aba de hml.strategyanalytics.com.br/cadastro/etapa-4/br?review=1, o CEP público 01001-000 preencheu Praça da Sé, Sé, São Paulo e Estado São Paulo; Número 100 e Complemento Unidade de teste foram preservados. Teste somente no rascunho: nenhum Continuar, PATCH cadastral, documento ou envio final. Aba original com documentos não enviados preservada. CEP concluído no front; próximo item permanece retomada após novo login.
+
+## Retomada após sair e fazer login — 20/10
+
+- [x] Login comum e Login com sessão válida retomam a última rota autenticada visitada, limitada às etapas 3–7 e variantes existentes da etapa 4. Nenhuma tela/ação/campo novo.
+- [x] Marcador contém somente rota por usuário autenticado. Home e logout preservam; navegação cancelada/anônima/fora do cadastro não sobrescreve. Conta sem marcador entra na Home.
+- [x] Não guardar e-mail, senha, código, token, dados pessoais/financeiros, arquivos ou aceite no marcador. Storage indisponível/corrompido não quebra o login.
+- [x] Depois de novo login, descartar rascunhos da sessão anterior e consultar os dados suportados da API, inclusive para o mesmo cliente; refresh normal não é tratado como outro login. Escrita de uma aba de sessão antiga exige recarga.
+- [x] 145 testes, lint/build e diff do lote aprovados; incluem autenticação/router reais com serviços simulados, isolamento de contas e dados da sessão anterior.
+- [x] Local 9010, no Edge: Cláudio abriu etapa 5, saiu pela ação existente e fez login em /login sem next. Retornou à etapa 5 com Analista e valores salvos 12.000/18.000/450.000. Logout/login de Éric abriu Home sem herdar o marcador.
+
+**Limites:** concluída a retomada de rota no mesmo navegador/origem. Não equivale a autosave de todo o formulário, retomada em outro dispositivo ou cadastro enviado. Campos não gravados e arquivos não são guardados em storage; sem marcador anterior, o front não inventa a etapa. O status atual do backend não retorna etapa atual/rascunho nem confirmação de envio para encerrar o fluxo. Esses contratos continuam pendentes; reteste documental ainda depende da liberação do 403. Detalhes no portal: docs/QA-2026-10-20-CADASTRO-RETOMADA.md.
+
+### Publicação e reteste da retomada em homologação
+
+Portal 4a4076b publicado; pipeline 39455314973 concluiu lint, 145 testes, build, upload e ativação com sucesso. No Edge, Cláudio abriu etapa 4/br; reabrir /login com sessão válida retornou à mesma etapa. Depois, Home → Sair pela ação existente → /login sem next → novo login retornou automaticamente à etapa 4/br, com endereço/complemento/cidade/Estado recarregados da API. Nenhum Continuar, alteração cadastral, arquivo, aceite ou envio final realizado. Sessão e aba original do usuário no navegador integrado preservadas, sem logout/recarga nessa aba. Evidência visual salva somente do cabeçalho da etapa retomada.
+
+Retomada no mesmo navegador aprovada; autosave completo, progresso entre dispositivos e envio/revisão permanecem abertos conforme os limites acima. Não aprova o cadastro de ponta a ponta nem remove o bloqueio documental.

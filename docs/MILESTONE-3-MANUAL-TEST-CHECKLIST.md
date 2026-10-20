@@ -259,3 +259,10 @@ Checklist ativo: CHECKLIST-CADASTRO-SETE-ETAPAS.md; evidência técnica no porta
 Consulta existente do legado reutilizada no Brasil, sem novas ações/campos. Em 9010, CEP público 01001-000 preencheu Logradouro/Bairro/Cidade/Estado e manteve Número/Complemento. CEP inexistente mostrou orientação no campo sem apagar endereço; CEP válido recuperou o preenchimento. Desktop e 390 px sem overflow; 135 testes, lint/build aprovados. Não foi clicado Continuar nem gravado perfil/documentos. Falhas/concorrência cobertas em testes; nenhuma falha nova do backend adicionada à tabela de bugs. Limites e publicação em CHECKLIST-CADASTRO-SETE-ETAPAS.md.
 
 Reteste publicado: aae0e31, pipeline 39453639953 aprovada. Mesmo preenchimento por CEP confirmado no navegador de homologação, em aba separada na sessão da conta nova; Número/Complemento preservados, sem salvar perfil ou documentos.
+
+
+## Cadastro — retomada após logout/login, 20/10
+
+Frontend: marcador somente de rota das etapas autenticadas, por usuário e na mesma origem/navegador. Logout/Home mantêm, outra conta não herda; dados suportados reconsultados da API e rascunhos de sessão anterior descartados. 145 testes, lint/build/diff do lote aprovados. Em 9010, Cláudio saiu pelo botão existente e /login sem next retomou etapa 5 com seus dados; após logout, Éric entrou na Home. Nenhum perfil/documento ou operação financeira foi gravado. Progresso no servidor, rascunho completo, retomada entre dispositivos e envio final continuam sem homologação; não é ocorrência nova para a tabela de bugs do backend. Publicação e reteste no checklist de cadastro.
+
+Reteste publicado: 4a4076b/pipeline 39455314973 aprovada. Em homologação no Edge, Cláudio: etapa 4/br → Home → Sair → /login sem next → login → etapa 4/br com dados da API. /login com sessão válida também retornou à etapa salva. Nenhuma escrita cadastral/financeira/documental; conta e rascunho originais do usuário no navegador integrado preservados. Somente retomada local aprovada, sem homologar progresso entre dispositivos/envio final.
