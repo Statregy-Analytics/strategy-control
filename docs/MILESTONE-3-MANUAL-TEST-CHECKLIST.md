@@ -20,7 +20,7 @@ Nenhuma outra pendência do perfil com contrato suficiente e independente do bac
 ## Estado atual do Admin — QA 10 a 19
 
 - [x] Identificação: data de nascimento impossível/futura bloqueada antes das escritas da seção, usando erro no topo/campo existentes. Sem idade mínima nem novo campo. 95 testes, lint/build e teste local em 8080 aprovados; descarte preservou o nascimento original.
-- [ ] Reteste da validação de nascimento no Admin de homologação após publicação.
+- [x] Nascimento publicado em 60423d3: pipeline 39501477543 concluída com sucesso. Data futura bloqueada em homologação; descarte/reabertura preservaram o original e limparam o erro. Mobile 390 px sem overflow. Conteúdo cadastral conferido por hash antes/depois, sem mudança.
 
 - [x] Registro de patrimônio: anos, quartos/banheiros, parcelas e prazo em meses validados como inteiros no input e antes do HTTP, respeitando os tipos já publicados. Opcionais e zero preservados; valores e áreas continuam decimais. 93 testes locais aprovados; ano fracionado/correção retestados em 8080, sem gravação.
 - [x] Patrimônio publicado em 9d10d93, pipeline 39500642230 aprovada em lint/build/upload/ativação. Em homologação: anos fracionados rejeitados, correção para inteiro e opcional vazio aceitos, Valor FIPE decimal preservado e mobile 390 px sem overflow; formulário descartado sem gravação.
@@ -527,4 +527,4 @@ Reteste publicado desta rodada: banco Órama selecionado em `https://admin.strat
 - O erro usa o resumo e o campo existentes; todos os campos continuam na seção e os demais lápis ficam bloqueados durante a edição, conforme C24.
 - Suíte completa com 95 testes aprovada, incluindo nascimento futuro/impossível, hoje, anos bissextos e opcionais. Teste com o controlador real comprovou zero escritas ao reprovar a data e salvamento permitido após correção.
 - Em 8080, data futura 2099-01-01 bloqueada no Salvar. Descarte e reabertura restauraram a data original da API, sem erro e sem mudanças habilitadas. Nenhum dado da conta de teste foi gravado nesta rodada.
-- Publicação/reteste em homologação pendentes de conclusão do deploy. Não é bug do backend nem exige campos ou endpoints novos.
+- Publicação 60423d3 confirmada na pipeline 39501477543 (lint/build/upload/ativação aprovados). Em homologação, nascimento futuro bloqueado; descarte/reabertura restauraram o original, limparam o erro e mantiveram Salvar desabilitado sem mudança. Em 390 px, documento com 375 px e seção com largura interna/rolável de 342 px, sem overflow. Conteúdo de identification-contact integralmente igual por hash antes/depois do reteste, excluindo requestId/correlationId transitórios do envelope. Evidência: `admin-perfil-validacao-nascimento.png`. Não é bug do backend nem exige campos ou endpoints novos.

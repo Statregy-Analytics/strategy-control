@@ -344,4 +344,4 @@ Na revisão funcional dos controles existentes do perfil, corrigida a aceitaçã
 
 ### Rodada 20/10 — validação do nascimento no Admin
 
-Revisão de QA 11/15: corrigida a validação de nascimento impossível ou futuro na edição por seção. Usa os erros já existentes e mantém a composição C24. 95 testes locais, lint e build aprovados; data futura rejeitada em 8080, com descarte/reabertura preservando o dado original. Sem escrita de dados nem campos/ações adicionais. Publicação e reteste serão registrados no checklist manual.
+Revisão de QA 11/15: corrigida a validação de nascimento impossível ou futuro na edição por seção. Usa os erros já existentes e mantém a composição C24. 95 testes locais, lint e build aprovados; data futura rejeitada em 8080, com descarte/reabertura preservando o dado original. Sem escrita de dados nem campos/ações adicionais. Publicação 60423d3/pipeline 39501477543 aprovada; bloqueio, descarte, reabertura e mobile 390 px retestados em homologação. Conteúdo cadastral permaneceu integralmente igual por hash antes/depois; evidência no checklist manual.
