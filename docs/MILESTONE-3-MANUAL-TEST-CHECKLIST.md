@@ -19,6 +19,9 @@ Nenhuma outra pendência do perfil com contrato suficiente e independente do bac
 
 ## Estado atual do Admin — QA 10 a 19
 
+- [x] Configuração documental (QA 16): removido o corte interno de cinco linhas das duas tabelas com paginação oculta. Em 8080, os 30 tipos reais aparecem; busca RG, vazio e abertura do último tipo validados sem gravar configuração. 95 testes, lint e build aprovados.
+- [ ] Reteste da listagem documental completa no Admin publicado após deploy.
+
 - [x] Identificação: data de nascimento impossível/futura bloqueada antes das escritas da seção, usando erro no topo/campo existentes. Sem idade mínima nem novo campo. 95 testes, lint/build e teste local em 8080 aprovados; descarte preservou o nascimento original.
 - [x] Nascimento publicado em 60423d3: pipeline 39501477543 concluída com sucesso. Data futura bloqueada em homologação; descarte/reabertura preservaram o original e limparam o erro. Mobile 390 px sem overflow. Conteúdo cadastral conferido por hash antes/depois, sem mudança.
 
@@ -528,3 +531,12 @@ Reteste publicado desta rodada: banco Órama selecionado em `https://admin.strat
 - Suíte completa com 95 testes aprovada, incluindo nascimento futuro/impossível, hoje, anos bissextos e opcionais. Teste com o controlador real comprovou zero escritas ao reprovar a data e salvamento permitido após correção.
 - Em 8080, data futura 2099-01-01 bloqueada no Salvar. Descarte e reabertura restauraram a data original da API, sem erro e sem mudanças habilitadas. Nenhum dado da conta de teste foi gravado nesta rodada.
 - Publicação 60423d3 confirmada na pipeline 39501477543 (lint/build/upload/ativação aprovados). Em homologação, nascimento futuro bloqueado; descarte/reabertura restauraram o original, limparam o erro e mantiveram Salvar desabilitado sem mudança. Em 390 px, documento com 375 px e seção com largura interna/rolável de 342 px, sem overflow. Conteúdo de identification-contact integralmente igual por hash antes/depois do reteste, excluindo requestId/correlationId transitórios do envelope. Evidência: `admin-perfil-validacao-nascimento.png`. Não é bug do backend nem exige campos ou endpoints novos.
+
+## Rodada 20/10 — configuração documental acessível pelo menu
+
+- Conferência em homologação: Contratos abriu cinco registros pelo menu; Transações abriu seis e Bancos exibiu os dez registros da página. Configurações mantém os acessos existentes a Formulários, Bancos e Configuração documental. Sem novos módulos ou ações.
+- Reprovação documental sem motivo foi bloqueada no modal existente; teste cancelado sem revisar arquivo. Evidência: `admin-qa-motivo-obrigatorio-revalidado.png`.
+- Durante essa conferência, encontrada falha de frontend: Configuração documental recebia 30 tipos da API, mas QTable exibia apenas cinco e escondia sua paginação. Corrigida a paginação interna para mostrar todos os registros recebidos, como já ocorre na gestão de bancos; a tabela de schemas recebeu o mesmo ajuste. Nenhum botão ou campo foi criado.
+- Em 8080, 30 ações de Configurar tipo documental disponíveis; pesquisa RG retorna um registro, busca inexistente mostra o vazio, limpar restaura os 30 e o último tipo abre o editor existente. Editor fechado sem alterações. Não foram criados tipos, categorias, schemas ou associações.
+- Validação automática: suíte existente com 95 testes aprovada, lint/build/diff-check aprovados. Não foi criado teste que apenas replique os atributos da tabela. A massa real com mais de cinco schemas não foi alterada/criada para esta conferência; o ajuste remove o corte local sobre a página já recebida, sem modificar o contrato HTTP.
+- Publicação e reteste desta correção em homologação serão registrados após deploy. Os módulos e estados sem contrato continuam no documento de pendências do backend.

@@ -281,3 +281,7 @@ A validação local de anos, quartos/banheiros, parcelas e prazo foi ajustada ao
 ## Esclarecimento 20/10 — nascimento no editor administrativo
 
 A validação de data de nascimento impossível/futura foi corrigida no front do Admin, usando o mesmo campo e os estados de erro previstos. Não requer endpoint ou campo adicional. Campo opcional continua opcional; não foi criada regra de idade mínima. Pendências de escrita dos demais dados pessoais permanecem abertas.
+
+## Esclarecimento 20/10 — listagem da configuração documental
+
+O endpoint já devolve 30 tipos. O limite visual de cinco registros sem navegação era imposto pela tabela do front e foi removido, inclusive o corte interno da tabela de schemas sobre a página recebida. Não é solicitação de API, campos ou ações adicionais. Os bloqueios de módulos e estados listados acima permanecem.
