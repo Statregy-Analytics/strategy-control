@@ -17,6 +17,15 @@ Esta seção consolida as rodadas abaixo. Registros históricos descrevem o esta
 
 Nenhuma outra pendência do perfil com contrato suficiente e independente do backend foi identificada nesta revisão. Não houve alteração de runtime nem novo deploy nesta rodada; a publicação atual já foi confirmada. Detalhes contratuais em PENDENCIAS-BACKEND-QA.md.
 
+## Estado atual do Admin — QA 10 a 19
+
+- [x] Estrutura de edição por seção C24, cinco campos profissionais/financeiros, preferências no mesmo bloco, catálogo de bancos/países, datas e histórico traduzido preservados nas rodadas registradas abaixo.
+- [x] Carteira zerada/extrato e documentos de onboarding/revisão retestados nas rodadas próprias; decisões já concluídas não devem constar como falta de implementação de Aprovar/Reprovar.
+- [x] Precisão decimal no input/plano financeiro, comparação por valor e validações corrigidas em 96ebd34; suíte local completa com 78 testes aprovada. Lint/build/deploy aprovados na pipeline 39497171684.
+- [x] Reteste de edição por seção em homologação: formatação equivalente não habilita Salvar; mudança efetiva habilita e destaca só o campo alterado; negativo bloqueado e descarte confirmado. Profissional e histórico financeiro permaneceram integralmente iguais ao baseline de leitura.
+- [ ] Contratos do backend: campos de identificação/documentos, efeitos/estado oficial do cadastro, segurança e observações sem alerta; módulos sem API e persistência (Lógicas, Crédito, Comunicados, Leads, Assessores e LP); unicidade de e-mail, sessão HttpOnly e investigação do incidente de identidade.
+- [ ] Revalidação independente pelo QA dos cenários administrativos liberados; homologação integrada da consulta financeira vigente continua aberta. Não simular defaults de risco/compliance nem criar campos/ações para contornar bloqueios.
+
 ## Histórico das rodadas
 
 ## Homologação administrativa integrada
@@ -452,3 +461,18 @@ Reteste planejado somente de leitura/seleção e cancelamento do formulário exi
 - [x] Formulário cancelado e resumo de Contas Bancárias em Ajustes conferido com o estado vazio real da conta. Nenhuma conta criada/editada/arquivada; nenhuma alteração de titularidade, principal ou valores. Viewport restaurado.
 - [x] Lint/build de portal e Admin e diff dos commits/documentos desta rodada conferidos. Alterações preexistentes de PRODUCT.md, MILESTONE-3-INTEGRATION.md e swagger administrativo mantidas fora dos commits.
 - [x] Evidências: cliente-perfil-catalogo-bancos-completo.png e cliente-perfil-banco-mobile-sem-overflow.png. Falha intermediária/paginação inconsistente e troca de sessão exercitadas automaticamente, sem induzir falhas na API publicada.
+
+
+## Admin — QA 12/15: edição financeira sem arredondamento ou gravação equivalente, 20/10
+
+- [x] Input preserva string decimal até o plano HTTP; sem Number no transporte do valor digitado. Plano mantém moeda/vigências e distingue null/zero.
+- [x] Dirty e destaque da seção usam comparação decimal normalizada; formatação equivalente permanece sem alteração e não anuncia salvamento nem cria registro.
+- [x] 78 testes completos aprovados com a flag experimental-vm-modules: inclui template Vue real até plano HTTP, decimais além da precisão segura do float, negativos/invalidade, zero/null e ausência de escrita em formatação equivalente.
+- [x] Deploy final 96ebd34 confirmado na pipeline 39497171684 (lint, build, upload e ativação); 78 testes completos executados localmente com experimental-vm-modules, não pelo npm test legado.
+- [x] No Admin publicado, os cinco campos existentes foram mantidos. Formatações 01234.5600, 2345.670 e 0.00 não destacaram campos nem habilitaram Salvar. Decimal distinto habilitou o botão e destacou somente o campo alterado.
+- [x] Valor grande digitado permaneceu exato após blur, sem envio à API. Negativo mostrou validação local, preservou rascunho e não gravou. Descartar abriu o diálogo do Figma e encerrou a edição após confirmação.
+- [x] Mobile 390 px: documento 375 px e seção 344 px, sem overflow; zero equivalente não habilitou Salvar. Viewport restaurado, edição encerrada e ficha recarregada com os valores originais.
+- [x] Leitura administrativa independente e comparação por hash confirmaram perfil profissional e histórico financeiro integralmente idênticos ao baseline. Nenhum registro financeiro ou profissional novo, movimentação, documento, decisão ou permissão alterados.
+- [x] Diff dos commits e documentos sem erros; swagger administrativo preexistente preservado fora dos commits. Evidência admin-financeiro-formatacao-sem-gravacao.png.
+
+Este lote não encerra a divergência entre histórico financeiro e consulta vigente do backend. Teste integrado planejado de leitura/validação/descarte, sem criar histórico financeiro para contornar a consulta. Valores grandes são fixtures automatizadas, nunca enviados para a API.

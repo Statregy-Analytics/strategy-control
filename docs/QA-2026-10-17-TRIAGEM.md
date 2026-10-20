@@ -28,7 +28,7 @@ Atualizado em 20/10/2026. Referência: feedback de homologação enviado pelo us
 | 9 | Três textos corrigidos; avatar usa a URL da API e ícone neutro quando ausente ou com falha, sem imagem quebrada ou foto demonstrativa. | Carregamento de uma foto válida depende de URL/arquivo real disponível para reteste. Não exigir cadastro ou upload de foto fora do Figma. |
 | 10 | Aprovar/Reprovar e reenvio testados no Admin/portal. Motivo/mensagem exibidos após correção do front; contadores atualizados. CNH aprovada pelo usuário levou a 100%/LEVEL_1; edição retestada com escrita e recarga. | Alinhar CNH obrigatória ao Figma; replace mantém antigo rejeitado e retorna metadados vazios no novo. Estado oficial de envio/revisão cadastral C25–C26 e catálogo adicional de motivos seguem não homologados. |
 | 11 | Campos de identificação preservados durante edição, no mesmo bloco. | Edição de documentos e dados pessoais sem contrato de escrita continua bloqueada; ver QA-2026-10-19-EDICAO-POR-SECAO.md. |
-| 12 | Composição profissional/financeira mantida, com cinco campos do Figma C24. | Salvamento integrado e restauração dos dados fictícios conferidos em 8080. |
+| 12 | Composição profissional/financeira mantida com cinco campos do Figma C24. Precisão decimal preservada desde o input até o payload; formatação equivalente não habilita gravação (0fe6f92/96ebd34). | 96ebd34 publicado; formatação, validação, destaque e descarte retestados em homologação, sem novos registros. Consulta financeira vigente continua pendência do backend. |
 | 13 | Preferências migradas para edição por seção, sem salvamento isolado. | Preservar país e demais metadados da API sem criar campos adicionais. |
 | 14 | Corrigido e retestado em 19/10 no Admin local e publicado: Jane com quatro saldos zero, composição e extrato vazios conforme C29; depósito e saldo do Cláudio conferidos. | Deploy 8c64763 confirmado. Evidências e limites em QA-2026-10-19-CARTEIRA-VAZIA.md. |
 | 15 | Edição global substituída por uma seção por vez: rascunho, salvar, descartar, bloqueio e proteção de saída implementados conforme C24. | Limites de escrita de identificação/segurança/compliance documentados; aprovação integral depende desses contratos e reteste do QA. |
@@ -309,3 +309,17 @@ Revisão do QA 8/9 não identificou outra pendência de implementação do perfi
 Versão publicada 027257b e pipeline 39489262330 novamente conferidas; nenhuma mudança de runtime e nenhum novo deploy nesta rodada. Navegação real da conta do usuário confirmou dados próprios, duas sessões reais, 100% documental e Editar habilitado após carregar, sem escrita. O Swagger atual não resolve as lacunas de context dos termos, projeção pública completa ou patrimônio próprio. A divergência financeira fica aberta até resposta/correção e reteste do backend; não foi repetida escrita de renda nesta revisão.
 
 Próximo passo do perfil é a revalidação pelo QA dos cenários liberados e o retorno do backend para os cenários bloqueados, preservando o Figma. Não representa aprovação integral do cadastro, segurança ou Marco 3.
+
+
+## Admin — QA 12 e 15: precisão e alteração efetiva do financeiro, 20/10
+
+Revisão encontrou conversão para Number no input de ProfileFields e no plano da seção profissional/financeira. Valores decimais fornecidos como string podiam perder precisão; comparação por tipo/formatação também podia tratar valores equivalentes como alteração. Corrigido em 0fe6f92/96ebd34: texto decimal preservado, payload financeiro em string decimal admitida pelo contrato, normalização apenas para comparar e enviar, null e zero distintos. Mudança só de formatação não destaca alteração nem habilita Salvar.
+
+Mantidos os cinco campos do C24, ações Salvar/Descartar, edição de uma seção por vez, mensagens e metadados de moeda/vigência. Regra existente de renda familiar versus individual preservada e comparada sem float. Validação de inválidos/negativos ocorre antes da escrita. Nenhum valor grande foi enviado ao ambiente para testar precisão: teste automatizado usa o template Vue real e o controlador/plano reais com escrita simulada.
+
+Suite completa: 78 testes com node --experimental-vm-modules --test tests/*.test.mjs. A execução inicial sem a flag exigida pelos testes de rota falhou em vm.SyntheticModule; repetição com a configuração correta passou integralmente. A pipeline administrativa atual valida lint e build; os 78 testes foram executados localmente, sem confundir npm test legado com a suíte.
+
+
+Publicação final 96ebd34 / pipeline 39497171684 confirmada em lint, build, upload e ativação; 78 testes completos aprovados localmente. Na ficha real de homologação, formatação equivalente manteve Salvar desabilitado; mudança de valor habilitou e destacou o campo; negativo bloqueado e descarte pelo diálogo existente. Cinco campos mantidos, mobile 390 px sem overflow. Ficha encerrada sem rascunhos e recarregada.
+
+Comparação independente por hash confirmou profissional e histórico financeiro idênticos ao início: nenhuma nova escrita de registro ou movimentação para este teste. A aprovação é da correção do front e do fluxo de validação/descarte; não encerra a consulta financeira vigente nem os bloqueios dos demais itens do Admin. Checklist manual recebeu estado atual do Admin separado do histórico. Evidência admin-financeiro-formatacao-sem-gravacao.png.

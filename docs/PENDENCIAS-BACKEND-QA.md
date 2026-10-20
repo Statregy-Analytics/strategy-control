@@ -253,3 +253,11 @@ As correções conhecidas de frontend com contrato suficiente estão publicadas 
 Continuam abertos os contratos/configurações dos itens próprios: financeiro vigente, campos/catálogos, contatos sem vínculo extra, patrimônio, contexto dos termos, compartilhamento, envio/revisão cadastral e regras/versionamento documental. Swagger atual novamente consultado: consent context permanece string sem valores documentados; PublicProfileResponse contém apenas customerId/avatarUrl; não foi identificado catálogo dos seletores pessoais nem rota de patrimônio próprio que resolva as lacunas indicadas; o catálogo de preferências continua disponível. Não preencher o desenho com endpoints administrativos, valores inventados ou campos novos.
 
 Foto válida continua dependência de dados para reteste; não justifica criar upload fora do Figma. A revalidação independente pelo QA segue necessária. Sem alteração de runtime ou novo deploy nesta revisão documental.
+
+
+### Admin — precisão financeira e comparação de alterações, 20/10
+
+0fe6f92/96ebd34 corrigem arredondamento no frontend e comparação de valores equivalentes. Contrato existente já aceita string decimal, portanto não requer campo ou endpoint adicional. Moeda/vigências preservadas fora da interface e os cinco campos do Figma mantidos. A divergência de seleção do financeiro vigente permanece separada e aberta; esta correção do envio não resolve a consulta do servidor.
+
+
+Admin 96ebd34 publicado (pipeline 39497171684). Formatação/validação/descarte conferidos na ficha real; hash independente confirmou perfil profissional e histórico financeiro sem alterações. Precisão verificada no template real até o plano de envio em testes automatizados, sem enviar valores grandes à API. Não há novo pedido ao backend por essa correção; seleção do financeiro vigente e os demais contratos administrativos continuam abertos.
