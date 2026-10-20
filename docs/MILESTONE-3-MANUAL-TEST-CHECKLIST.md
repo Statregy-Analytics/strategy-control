@@ -20,7 +20,7 @@ Nenhuma outra pendência do perfil com contrato suficiente e independente do bac
 ## Estado atual do Admin — QA 10 a 19
 
 - [x] Perfil/Admin: catálogo completo de bancos (513 instituições em três páginas), pesquisa sem acentos e nomes de bancos após a primeira página. Falha do catálogo usa o erro/retentativa existentes, sem expor opções parciais. 91 testes locais, lint e build aprovados; seletor conferido na porta 8080.
-- [ ] Reteste desta correção bancária no deploy de homologação (publicação em andamento).
+- [x] Publicação ddfb04d confirmada: pipeline 39499746938 aprovada em lint/build/upload/ativação. Em homologação, busca `orama` encontrou e selecionou o banco 325 da terceira página; formulário cancelado sem cadastrar conta. Em 390 px, página e card sem overflow horizontal.
 
 - [x] Listagem de clientes respeita a última consulta e distingue erro/vazio; reteste de filtros, cartões/tabela e paginação publicado em 00d601f (85 testes locais).
 - [x] Estrutura de edição por seção C24, cinco campos profissionais/financeiros, preferências no mesmo bloco, catálogo de bancos/países, datas e histórico traduzido preservados nas rodadas registradas abaixo.
@@ -503,3 +503,5 @@ Nenhum cadastro ou dado financeiro alterado. Falhas e respostas fora de ordem ex
 - Na porta 8080, a pesquisa `orama` encontrou o banco 325 — Órama, presente na terceira página. Formulário apenas consultado, sem cadastrar conta nem realizar operação financeira.
 - Testes: seis novos cenários cobrem 513 registros, catálogo vazio, falha/retry, paginação inconsistente e integração com os nomes/erro da seção. Suíte completa: 91 aprovados.
 - Não depende de endpoint novo. Pendências contratuais anteriores permanecem abertas.
+
+Reteste publicado desta rodada: banco Órama selecionado em `https://admin.strategyanalytics.com.br/` após recarga do deploy ddfb04d. Em 390 px, documento com 375 px e card com largura interna/rolável de 326 px; nome longo limitado ao campo. Formulário cancelado, perfil permaneceu sem conta bancária. Evidência: `admin-perfil-catalogo-bancario-completo.png`. Nenhuma operação financeira executada.

@@ -336,4 +336,4 @@ Publicação 00d601f confirmada na pipeline 39498456402 (lint/build/upload/ativa
 
 ### Rodada 20/10 — catálogo bancário do Admin
 
-Correção do front, sem campos/ações adicionais: seletor e nomes da seção bancária usam todas as páginas do catálogo existente, em vez de apenas 200 registros. Banco Órama encontrado por busca sem acento em 8080. Falhas intermediárias e recuperação testadas; suíte completa com 91 cenários aprovada, lint/build aprovados. Reteste do deploy será registrado no checklist manual após publicação. Nenhuma conta criada.
+Correção do front, sem campos/ações adicionais: seletor e nomes da seção bancária usam todas as páginas do catálogo existente, em vez de apenas 200 registros. Banco Órama encontrado por busca sem acento em 8080. Falhas intermediárias e recuperação testadas; suíte completa com 91 cenários aprovada, lint/build aprovados. Deploy ddfb04d/pipeline 39499746938 concluído; busca e seleção do banco Órama retestadas em homologação, formulário cancelado sem gravação e mobile 390 px sem overflow. Evidência no checklist manual. Nenhuma conta criada.
