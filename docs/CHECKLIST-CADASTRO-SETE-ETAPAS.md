@@ -64,7 +64,7 @@ O usuário concluiu a criação e confirmou recebimento do código. Autorizou da
 | 3 · Gravação e retomada | Nascimento e cidade fictícios persistiram e reapareceram após recarga | Aprovado nesses campos |
 | 3 · Seletores | Gênero, estado civil e nacionalidade sem opções; países Brazil/Portugal disponíveis. País de nascimento selecionado não reapareceu após recarga, conforme lacuna do payload | Parcial; catálogos e campo de nascimento pendentes |
 | 4 · Endereço e filiação | Endereço residencial, país e filiação fictícios gravados; retorno pela API confirmado. Endereço também conferido em consulta administrativa somente leitura | Gravação parcial aprovada |
-| 4 · Retomada dos campos | Logradouro/número voltam concatenados em line1; Número separado vazio. Bairro também não retorna; API não possui campo de bairro | Ajuste de adaptação do front para Número; bairro depende de contrato |
+| 4 · Retomada dos campos | Número corrigido no adaptador e retestado após recarga na conta do usuário; Logradouro e Número separados. Bairro continua sem campo próprio na API | Número aprovado em homologação; bairro depende de contrato |
 | 4 · Documento | Após endereço persistido, consulta documental negada com 403; repetição manteve o bloqueio. Nenhum arquivo foi enviado, CPF real ou sintético válido não foi gerado | Fluxo normal bloqueado aqui; causa/guard a confirmar com backend |
 | 5 · Financeiro independente | Renda individual 1.234,56; familiar 2.345,67; bens 0 gravados em BRL. Conferidos em leitura da API e na revisão após recarga; negativo rejeitado localmente | Financeiro aprovado; atividade sem catálogo não homologada |
 | 6 · Contato novo | Vazio rejeitado; contato fictício preservado na tela e não enviado porque falta relationship exigido pelo contrato | Inclusão bloqueada; nenhum parentesco inventado |
@@ -73,6 +73,17 @@ O usuário concluiu a criação e confirmou recebimento do código. Autorizou da
 
 **Limite da rodada:** o fluxo sequencial parou na etapa 4. As etapas 5–7 foram acessadas separadamente para testar operações independentes já autorizadas; isso não contorna o guard documental e não aprova o cadastro de ponta a ponta. Nenhuma permissão, aprovação documental, verificação, depósito ou status foi alterado pelo Admin.
 
-**Ajuste do front identificado:** separar corretamente Logradouro e Número na retomada do endereço gravado em line1. Não foi classificado como erro do backend nem marcado aprovado. Consulta automática de CEP continua indisponível no front; não houve requisição postal nesta rodada, portanto não foi registrada como falha HTTP nova.
+**Ajuste do front corrigido em 20/10:** Logradouro e Número agora são retomados separadamente do endereço gravado em line1. Reteste em homologação aprovado conforme registro abaixo; não é pendência do backend. Consulta automática de CEP continua indisponível no front; não houve requisição postal nesta rodada, portanto não foi registrada como falha HTTP nova.
 
 Os dados fictícios pessoais, endereço/filiação e financeiro desta rodada permaneceram na conta de homologação para reteste. Contato fictício e rascunho documental não foram persistidos; nenhum arquivo pessoal foi enviado e nenhuma conta adicional foi criada. Evidências detalhadas no portal: docs/QA-2026-10-20-CADASTRO-CONTA-NOVA.md.
+
+## Reteste — retomada do Número corrigida, 20/10
+
+- [x] Correção somente no adaptador de leitura, sem mudar campos, ações, layout ou assets do Figma. Variantes sem Número separado continuam com endereço integral.
+- [x] 121 testes, lint, build e diff do lote aprovados. Regressão cobre regravação sem duplicar o número, vírgulas no logradouro, sufixos/zero/s/n, linhas sem número e preservação das outras variantes.
+- [x] Portal fdb07ab publicado; pipeline 39449807714 concluiu upload e ativação com sucesso.
+- [x] Conta do usuário conferida em nova aba com a mesma sessão: Logradouro Rua Fictícia de Homologação e Número 100 separados. Voltar à revisão, Editar Endereço e recarga da página preservaram a separação.
+- [x] Nenhum formulário foi enviado no reteste. Comparação das leituras administrativas antes/depois confirmou que o endereço salvo não mudou.
+- [x] Aba original com dados/documentos e arquivos ainda não enviados preservada, sem recarregar ou perder o rascunho. Evidência visual inclui somente os campos do endereço necessários para a correção.
+
+A regravação sem duplicar Número foi validada por testes automatizados, sem reenviar dados/documentos da conta real pelo Continuar. O 403 documental, bairro, catálogos e as demais pendências do backend continuam abertos; esta aprovação é somente da retomada do Número. Evidência técnica no portal: docs/QA-2026-10-20-CADASTRO-NUMERO-ENDERECO.md.

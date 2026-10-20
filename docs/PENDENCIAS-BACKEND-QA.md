@@ -102,3 +102,7 @@ Criação e recebimento do código confirmados pelo usuário; sessão cliente e 
 - **Finalização:** revisão carrega dados reais persistidos, mas não foi possível iniciar análise cadastral nem obter recibo/status de envio pelo fluxo confirmado. A leitura de status não equivale a submissão. Termos/Política e aceite versionado continuam sem homologação, apesar da conta criada.
 
 Financeiro com perfil inicialmente vazio foi criado e consultado com valores decimais e zero explícito em BRL. Não é pendência de endpoint nem de vigência do backend. A etapa profissional permanece parcial apenas pela falta das opções de atividade.
+
+### Retomada do Número — correção do frontend publicada em 20/10
+
+O número que voltava concatenado ao Logradouro foi corrigido no adaptador do portal (fdb07ab), sem alterar payload ou campos. Reteste na conta do usuário confirmou Logradouro e Número separados após recarga e retorno pela revisão, sem gravar o formulário nem alterar o endereço salvo. Removido das pendências ativas do frontend e não é solicitação ao backend. Bairro sem campo próprio e o bloqueio documental 403 permanecem separados e abertos.

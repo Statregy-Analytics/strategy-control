@@ -236,3 +236,10 @@ Swagger consultado. Demais itens do QA não estão aprovados por esta rodada.
 - [ ] Documento/upload e cadastro completo enviados para análise: não homologados. Etapas 5–7 verificadas separadamente, sem considerar isso um avanço sequencial completo.
 
 O 403 está registrado como bloqueio de integração a investigar, não como defeito interno comprovado. Catálogos/relationship/campos ausentes são pendências de contrato/configuração, detalhadas em PENDENCIAS-BACKEND-QA.md. Retomada de Número no campo separado foi registrada no checklist como ajuste de frontend e não entrou na seção de bugs do backend. Nenhuma nova movimentação financeira ou aprovação documental foi executada.
+
+## Reteste de retomada do Número — 20/10/2026
+
+- [x] Portal fdb07ab publicado com pipeline 39449807714 aprovada. Na conta do usuário, Logradouro e Número retomados separadamente; recarga e reabertura pela revisão conferidas.
+- [x] Dados salvos inalterados em comparação antes/depois; nenhuma escrita do formulário/documento neste reteste. Aba original com rascunho/arquivos preservada.
+
+Correção exclusivamente do frontend; não acrescenta item à tabela de bugs do backend. As pendências documentais/cadastrais anteriores continuam sem aprovação integrada.
