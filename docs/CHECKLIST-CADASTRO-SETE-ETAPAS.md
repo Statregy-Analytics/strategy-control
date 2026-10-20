@@ -144,3 +144,5 @@ Publicação conferida em 20/10: portal 8d3bb93, pipeline 39428877610 concluída
 Publicação da etapa 4 conferida em 20/10: portal ff59268, pipeline 39432053951 concluída com sucesso. Brasil e Japão abriram em hml.strategyanalytics.com.br/cadastro/etapa-4 e /cadastro/etapa-4/jp. Passaporte trocou para um arquivo e os quatro campos; data inválida exibiu erro e foco. Persistência, envio real e avanço integrado continuam pendentes, conforme descrito acima.
 
 Publicação da etapa 5 conferida em 20/10: portal 1128214, pipeline 39433453584 concluída com sucesso. /cadastro/etapa-5 abriu em homologação; valor negativo gerou erro/foco, zero explícito foi aceito e Voltar abriu etapa 4. Retorno e recarga conferidos. Catálogo, gravação, vigências e progresso integrado permanecem pendentes.
+
+Publicação da etapa 6 conferida em 20/10: portal da66807, pipeline 39438056084 concluída com sucesso. /cadastro/etapa-6 abriu em homologação; vazio exibiu erros/foco, ausência desabilitou campos/adição e manteve a etapa com aviso. Voltar abriu etapa 5; retorno e recarga conferidos. Gravação real, relationship, ausência persistida e progresso continuam pendentes.
