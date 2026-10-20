@@ -8,8 +8,8 @@
           </q-input>
         </div>
         <div class="col-12 col-lg-6 row justify-end items-center q-gutter-xs clients-toolbar__actions">
-          <q-btn color="white" no-caps label="Exportar" flat size="sm" @click="exportTable" />
-          <q-btn size="sm" padding="xs sm" no-caps outline label="Comparar Clientes" :disable="selected.length < 2"
+          <q-btn color="white" no-caps label="Exportar" flat size="sm" :disable="resultsUnavailable" @click="exportTable" />
+          <q-btn size="sm" padding="xs sm" no-caps outline label="Comparar Clientes" :disable="selected.length < 2 || resultsUnavailable"
             :class="selected.length < 2 ? 'text-muted' : 'text-primary'" @click="compareSelected" />
           <q-btn flat dense no-caps color="white" icon="tune" :label="filterButtonLabel" aria-label="Mostrar filtros e ordenação" @click="filtersOpen = !filtersOpen" />
           <q-btn size="md" padding="xs" outline :color="viewMode === 'cards' ? 'primary' : 'grey-7'" :icon="$filtersString.resolveUrl('img:icons/layout-cards.svg')"
@@ -48,9 +48,11 @@
       </q-slide-transition>
     </div>
 
+    <resource-state :state="{ loading: false, error: listResource.state.error }" @retry="reloadCurrentPage">
     <q-table v-if="viewMode === 'table'" v-model:pagination="tablePagination" v-model:selected="selected" flat dense hide-pagination
       class="my-sticky-header-column-table" row-key="id" selection="multiple" :rows="data" :columns="columns"
       :loading="loading" @request="onRequest">
+      <template #no-data><span v-if="!loading">Nenhum cliente encontrado.</span></template>
       <template #body-cell-primaryName="props">
         <q-td :props="props">
           <q-item dense clickable class="q-pa-none" @click="openCustomer(props.row.id)">
@@ -108,9 +110,10 @@
         </div>
       </div>
     </template>
-    <entity-table-footer :page="pagination.page" :page-size="pagination.pageSize" :total-items="pagination.totalItems"
+    <entity-table-footer v-if="!loading" :page="pagination.page" :page-size="pagination.pageSize" :total-items="pagination.totalItems"
       :total-pages="pagination.totalPages" :first-item="firstItemIndex" :last-item="lastItemIndex"
       @page="changePage" @page-size="changeRowsPerPage" />
+    </resource-state>
     <q-dialog
       v-model="editDialog"
       position="right"
@@ -135,23 +138,29 @@
 </template>
 
 <script setup>
-import { computed, onMounted, ref } from 'vue'
+import { computed, onMounted, onScopeDispose, ref } from 'vue'
 import { useRouter } from 'vue-router'
 import { exportFile } from 'quasar'
 import { storeToRefs } from 'pinia'
 import { useClientStore } from 'src/stores/client'
-import { getApiErrorMessage } from 'src/services/apiError'
 import useNotification from 'src/composables/global/useNotification'
 import EditClientLayout from 'src/layouts/Clients/EditClientLayout.vue'
 import EntityTableFooter from 'src/components/Entity/EntityTableFooter.vue'
 import RowActions from 'src/components/Entity/RowActions.vue'
 import LabelForm from 'src/components/Form/LabelForm.vue'
 import ClientComparisonPanel from 'src/components/Clients/ClientComparisonPanel.vue'
-import { listCustomerCards } from 'src/services/customerService'
+import { listCustomerCards, listCustomers } from 'src/services/customerService'
+import { useFinanceResource } from 'src/composables/useFinanceResource'
+import ResourceState from 'src/components/Finance/ResourceState.vue'
 
 const store = useClientStore()
 const router = useRouter()
-const { data, loading, pagination } = storeToRefs(store)
+const { data, pagination } = storeToRefs(store)
+const listResource = useFinanceResource()
+const loading = computed(() => listResource.state.loading)
+const resultsUnavailable = computed(() => loading.value || Boolean(listResource.state.error))
+let active = true, loadRevision = 0
+onScopeDispose(() => { active = false; listResource.reset() })
 const { errorNotify } = useNotification()
 const search = ref('')
 const status = ref(null), kind = ref(null), contact = ref(''), document = ref(''), sortBy = ref('name'), sortDirection = ref('asc'), viewMode = ref('cards'), filtersOpen = ref(false)
@@ -189,14 +198,15 @@ const columns = [
   { name: 'actions', label: '', field: 'id', align: 'right' },
 ]
 const load = async (params = {}) => {
-  try {
-    const query = { page: params.page ?? pagination.value.page, pageSize: params.pageSize ?? pagination.value.pageSize, name: search.value || undefined, status: status.value || undefined, kind: kind.value || undefined, contact: contact.value || undefined, document: document.value || undefined, sortBy: sortBy.value, sortDirection: sortDirection.value }
-    if (viewMode.value === 'cards') { store.loading = true; const response = await listCustomerCards(query); store.data = response?.data ?? []; store.pagination = { ...store.pagination, ...(response?.pagination ?? {}) }; store.loading = false }
-    else await store.fetchCustomers(query)
-  } catch (error) {
-    store.loading = false
-    errorNotify(getApiErrorMessage(error, 'Não foi possível carregar os clientes.'))
-  }
+  if (!active) return
+  const revision = ++loadRevision
+  const query = { page: params.page ?? pagination.value.page, pageSize: params.pageSize ?? pagination.value.pageSize, name: search.value || undefined, status: status.value || undefined, kind: kind.value || undefined, contact: contact.value || undefined, document: document.value || undefined, sortBy: sortBy.value, sortDirection: sortDirection.value }
+  const read = viewMode.value === 'cards' ? listCustomerCards : listCustomers
+  store.data = []
+  const response = await listResource.load(() => read(query))
+  if (!active || revision !== loadRevision || response === undefined) return
+  store.data = response?.data ?? []
+  store.pagination = { ...store.pagination, ...(response?.pagination ?? {}) }
 }
 const onRequest = ({ pagination: requested }) => load({ page: requested.page, pageSize: requested.rowsPerPage })
 const reload = () => load({ page: 1 })
@@ -207,8 +217,8 @@ const openCustomer = (id) => router.push({ name: 'ClienteDetalhe', params: { id 
 const editCustomer = (id) => { selectedCustomerId.value = id; editDialog.value = true }
 const handleRowAction = (action, row) => { if (action === 'edit') editCustomer(row.id) }
 const closeEditor = () => { editDialog.value = false; selectedCustomerId.value = null }
-const changeViewMode = (mode) => { if (viewMode.value === mode) return; viewMode.value = mode; reload() }
-const compareSelected = () => { compareDialog.value = true }
+const changeViewMode = (mode) => { if (viewMode.value === mode) return; viewMode.value = mode; return reload() }
+const compareSelected = () => { if (!resultsUnavailable.value && selected.value.length >= 2) compareDialog.value = true }
 const clearFilters = () => { status.value = null; kind.value = null; contact.value = ''; document.value = ''; reload() }
 const statusLabel = (status) => ({ Prospect: 'Prospect', Active: 'Ativo', Suspended: 'Suspenso', Archived: 'Arquivado' })[status] || status
 const statusClass = (status) => ({ Prospect: 'text-info', Active: 'text-positive', Suspended: 'text-warning', Archived: 'text-grey-7' })[status] || 'text-grey-8'
@@ -220,6 +230,7 @@ const formatDate = (value) => {
 const formatDateTime = (value) => value ? new Intl.DateTimeFormat('pt-BR', { dateStyle: 'short', timeStyle: 'short' }).format(new Date(value)) : 'Não informado'
 const csvValue = (value) => `"${String(value ?? '').replaceAll('"', '""')}"`
 const exportTable = () => {
+  if (resultsUnavailable.value) return
   const headers = ['Cliente', 'Contato', 'Tipo', 'Status', 'Atualizado em']
   const rows = data.value.map((customer) => [
     customer.primaryName || customer.displayName || 'Sem nome',
