@@ -134,3 +134,12 @@ Permanecem: catálogos dos demais seletores/UF, país de nascimento e múltiplas
 Na conta nova de homologação do usuário, o wizard publicou e gravou o profissional, financeiro e as duas moedas antes de documentos (46d5bc5). A consulta de tipos deixou de retornar ProfileIncomplete e o fluxo alcançou a validação de arquivos ausentes. A Home carregou saldos zero e estados vazios sem PreferencesRequired. Esses dois bloqueios não devem continuar sendo cobrados como defeitos atuais do backend nesta conta. Nenhum arquivo foi enviado; isso não homologa upload, revisão/aprovação nem cadastro enviado.
 
 Continuam abertas apenas as outras lacunas descritas acima. O requisito de perfil profissional antes dos documentos foi mantido; a correção foi feita na ordem e nos campos autorizados do frontend.
+
+
+### Etapa 5 — upload RG Brasil validado, 20/10
+
+Na conta nova do usuário, o portal publicado enviou frente e verso fictícios pelo fluxo existente e avançou à etapa 6. Leitura administrativa confirmou dois arquivos RG/BR Uploaded, privados e disponíveis, e um documento tipado ProvidedDocument/Active com duas evidências Uploaded. Upload e vínculo não devem continuar sendo solicitados como endpoints ausentes ou bloqueados por 403 nesta conta. Não foi realizada aprovação nem envio cadastral final.
+
+UF de expedição continuou sem opções, porém a definição aceitou ausência: issuerState retornou null. Confirmar a fonte das opções/regras para preencher o campo existente do Figma; não tratar como erro de upload reproduzido. Bairro separado e demais países/tipos continuam pendentes nos limites já descritos.
+
+A recarga da etapa 5 não repôs número/emissor/expedição, apesar do registro confirmado no servidor; é necessário confrontar a leitura do cliente com o adaptador antes de atribuir ao backend. O texto ainda não enviado mostrado ao voltar com arquivos já enviados é apresentação do frontend e fica fora da lista de bugs da API. Detalhes e próximos retestes no checklist de cadastro.

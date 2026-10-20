@@ -276,3 +276,10 @@ Profissional/financeiro/moedas antecipados para etapa 4; documentos/endereço ag
 ### Reteste publicado — profissional antes dos documentos
 
 Portal 46d5bc5, pipeline 39468374725 tentativa 2 aprovada (152 testes). Conta nova do usuário com dados fictícios: PUT profissional + PUT financeiro + PATCH duas moedas concluíram antes da etapa 5. Continuar documental alcançou a mensagem de arquivos ausentes após consultar tipos; 403 ProfileIncomplete anterior não se repetiu. Home mostrou saldos zero/estados vazios, sem PreferencesRequired. Profissional e moedas retomados pela API após recarga; nenhum arquivo/documento tipado, CPF real, transação ou aprovação enviados. Bloqueios antigos superados nesse cenário por adequação do front à regra confirmada, sem abrir bug novo do backend nem homologar upload/envio final. Aba original do usuário preservada.
+
+
+### Etapa 5 — upload fictício aprovado em homologação, 20/10
+
+Portal 46d5bc5, conta nova do usuário: dois PNGs claramente fictícios selecionados no formulário e enviados; avanço real à etapa 6. Leitura administrativa confirmou dois RG/BR Uploaded, arquivos Private/Available e um ProvidedDocument/Active com duas evidências Uploaded. Não houve 403 nem aprovação documental. UF sem catálogo não bloqueou este RG; issuerState null aceito pela definição. Sem alteração de layout/código, contato, aceite ou envio final.
+
+Recarga manteve endereço/número/complemento/filiação, mas não repôs campos do RG. Antes da recarga, Voltar preservou arquivos em memória com texto incorreto ainda não enviado. Retomada e apresentação ficam abertas no checklist principal; não adicionadas como bugs do backend sem atribuição confirmada. Cadastro completo e aprovação seguem parciais. Evidência: cadastro-etapa-5-envio-concluido.png.

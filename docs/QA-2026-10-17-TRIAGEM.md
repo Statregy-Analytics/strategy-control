@@ -155,3 +155,10 @@ Designer/QA e usuário autorizaram profissional/financeiro/moedas na etapa 4 e d
 ### Nova ordem publicada e bloqueios retestados
 
 46d5bc5/pipeline 39468374725 tentativa 2 aprovada. Na conta nova, wizard criou profissional e salvou moedas, avançou para documentos na etapa 5; consulta de tipos chegou à orientação de selecionar arquivos, sem repetir ProfileIncomplete. Home zerada carregou sem PreferencesRequired. Recarga confirmou os sete campos da etapa 4 pela API. Nenhum arquivo/CPF enviado, transação financeira ou aprovação realizada; upload e envio final continuam sem homologação. Os bloqueios anteriores de profissional/moedas nesta conta estão superados, sem alterar a regra do backend.
+
+
+### Etapa 5 — upload fictício aprovado em homologação, 20/10
+
+Portal 46d5bc5, conta nova do usuário: dois PNGs claramente fictícios selecionados no formulário e enviados; avanço real à etapa 6. Leitura administrativa confirmou dois RG/BR Uploaded, arquivos Private/Available e um ProvidedDocument/Active com duas evidências Uploaded. Não houve 403 nem aprovação documental. UF sem catálogo não bloqueou este RG; issuerState null aceito pela definição. Sem alteração de layout/código, contato, aceite ou envio final.
+
+Recarga manteve endereço/número/complemento/filiação, mas não repôs campos do RG. Antes da recarga, Voltar preservou arquivos em memória com texto incorreto ainda não enviado. Retomada e apresentação ficam abertas no checklist principal; não adicionadas como bugs do backend sem atribuição confirmada. Cadastro completo e aprovação seguem parciais. Evidência: cadastro-etapa-5-envio-concluido.png.

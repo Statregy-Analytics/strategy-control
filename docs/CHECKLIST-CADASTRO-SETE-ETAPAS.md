@@ -10,7 +10,7 @@ Atualizado em 20/10/2026 após a mudança de ordem e campos autorizada pelo desi
 | 2 · Confirmar e-mail | Confirmação e reenvio reais; após confirmação usa login existente para continuar na etapa 3; sem senha em storage/URL | Criação/código confirmados pelo usuário e sessão na etapa 3 observada; aceite versionado continua pendente |
 | 3 · Dados pessoais | GET/PATCH do perfil; nascimento, gênero, estado civil, uma nacionalidade e cidade; preserva dados externos à etapa | País de nascimento e múltiplas nacionalidades não existem no payload; catálogos dos seletores não disponibilizados |
 | 4 · Atividade trabalhista e moedas | Ocupação obrigatória em texto livre; Empregador opcional; rendas/bens; duas moedas do catálogo. PUT profissional e financeiro + PATCH preferências antes de avançar | Criação profissional, moedas e financeiro validados na conta nova; ocupação não exige catálogo. Defaults de idioma/fuso/tema ausentes ainda exigiriam alinhamento |
-| 5 · Documento e endereço | Endereço/filiação, CEP, tipos/definições e serviços documentais existentes. Entrada exige profissional/financeiro e moedas; links antigos e retomada migrados | Bairro separado, tipos por país, UF de expedição e reteste de upload. ProfileIncomplete anterior superado no reteste após criar profissional; upload não homologado |
+| 5 · Documento e endereço | Endereço/filiação, CEP, tipos/definições e serviços documentais existentes. Entrada exige profissional/financeiro e moedas; links antigos e retomada migrados | Upload RG Brasil e vínculo das duas evidências aprovados nesta conta; Uploaded não significa aprovado. Retomada dos campos documentais após recarga pendente; bairro, UF e outros países continuam parciais |
 | 6 · Contatos de confiança | GET real e PUT de existentes preservando relationship/e-mail; valida todos antes de escrever | Inclusão exige relationship não presente no Figma; declaração de ausência sem operação de persistência |
 | 7 · Revisão e envio | Revisa dados carregados da API e alterações locais; Editar por etapa; confirmação; consulta real de onboarding | Operação final/recibo de envio e revisão cadastral não identificados; Data Intake atual contém apenas formulários patrimoniais |
 
@@ -18,14 +18,14 @@ Atualizado em 20/10/2026 após a mudança de ordem e campos autorizada pelo desi
 
 - [x] Preservar campos, composição, assets e ações existentes do Figma; retirar avisos globais de prévia das etapas integradas.
 - [x] Usar clientApi, autenticação existente e idempotência; rotas 3–7 protegidas, com retorno à etapa após login.
-- [x] Retomar pela API os dados suportados após recarga; manter rascunhos não salvos apenas em memória.
+- [x] Retomar endereço/filiação e dados profissionais/financeiros pela API após recarga; manter rascunhos não salvos apenas em memória. Retomada documental permanece parcial conforme reteste abaixo.
 - [x] Preservar nomes/contatos/endereços secundários, metadados profissionais/financeiros e campos fora da seção.
 - [x] Não inventar relacionamento, listas de opções, IDs de país/documento, conversão de moeda, aceite ou status de envio.
 - [x] Guardar IDs de contatos existentes; não transformar edição em inclusão e não apagar contatos ao marcar ausência.
 - [x] Tratar falha parcial mantendo rascunho; uploads confirmados reaproveitados em repetição e isolados por cliente.
 - [x] Máscaras na revisão, sem senhas/códigos/nomes de arquivos no resumo; senha temporária descartada ao confirmar/sair do fluxo.
 - [x] Criação e recebimento do código confirmados pelo usuário; sessão autenticada e acesso à etapa 3 observados em homologação. Leitura e registro versionado do aceite continuam pendentes.
-- [ ] Retestar upload/dados tipados com arquivos descartáveis e conta nova após os requisitos cadastrais.
+- [x] Retestar upload RG Brasil/dados tipados com dois arquivos fictícios na conta nova após os requisitos cadastrais; vínculo confirmado pela leitura administrativa. Outros tipos/países e aprovação não homologados.
 - [ ] Homologar inclusão de contatos, ausência persistida e envio final após correção/confirmação dos contratos.
 - [ ] Aprovação completa pelo QA: continua aberta; integração parcial não equivale a cadastro concluído de ponta a ponta.
 
@@ -170,3 +170,20 @@ O usuário confirmou a inversão das etapas e aprovou explicitamente os quatro c
 - [x] Prévia em PNG da tela real salva para compartilhar com designer/QA, com os dados fictícios. Nova aba publicada mantida; aba original com arquivos/rascunho não enviados preservada, sem recarga/logout.
 
 **Concluído neste cenário:** ordem profissional antes dos documentos e preenchimento das moedas; consulta documental e Home liberadas pelos requisitos reais, sem bypass do guard. **Ainda não homologado:** upload/documento tipado, conclusão das etapas pendentes e envio/revisão final. As demais lacunas de contrato continuam no documento do backend.
+
+
+## Etapa 5 — envio de arquivos fictícios em homologação, 20/10
+
+Teste na conta do usuário, na versão publicada 46d5bc5, preservando o layout aprovado. Dois PNGs novos, identificados como ARQUIVO FICTÍCIO / HOMOLOGAÇÃO / SEM VALIDADE COMO DOCUMENTO, sem fotografia, CPF ou documento pessoal real. A aba antiga com arquivos do usuário permaneceu intacta.
+
+- [x] Etapa 4 com profissional/financeiro/moedas já salvos avançou à etapa 5 normalmente.
+- [x] Número QA-TESTE-0001, emissor ORGAO TESTE QA e expedição 01/01/2025 preenchidos no formulário existente; CPF permaneceu vazio. Não foram gerados identificadores pessoais válidos.
+- [x] Frente e verso selecionados pelo seletor real de arquivos: documento-teste-frente.png (16.471 bytes) e documento-teste-verso.png (16.420 bytes).
+- [x] Continuar salvou endereço/filiação fictícios, consultou tipos/definição, concluiu os dois uploads e o documento tipado, avançando à etapa 6 — Contatos de confiança. Nenhuma negativa de API apareceu; o 403 anterior não se repetiu.
+- [x] Leitura administrativa independente confirmou exatamente dois documentos RG/BR com status Uploaded; arquivos image/png, Private e Available, tamanhos correspondentes aos selecionados. Identificação confirmou um RG de origem ProvidedDocument, registro Active, data/emissor de teste e evidenceSummary.count = 2, latestStatus = Uploaded. Active é estado do registro tipado, não aprovação das evidências.
+- [x] Voltar à etapa 5 preservou o rascunho em memória. Recarga confirmou endereço, Número 100, Complemento e filiação; os arquivos locais não são persistidos pelo navegador.
+- [ ] Retomada documental: após recarga Número do documento, Órgão emissor e Data de expedição voltaram vazios, embora o RG e as duas evidências existam no servidor. Atribuição ainda depende de confrontar o contrato de leitura do cliente com a adaptação do front; não classificar automaticamente como defeito do backend. Não repetido o envio após recarga, para evitar duplicação.
+- [ ] Texto do front ao voltar antes da recarga: os arquivos já enviados ainda mostravam Selecionado localmente, ainda não enviado. Corrigir a apresentação do estado no componente existente, sem novas ações/campos. Não é bloqueio da API.
+- [!] UF de expedição continuou sem opções; não foi inventado valor. A definição atual permitiu RG sem UF (issuerState retornou null). Portanto a falta de catálogo é lacuna para completar esse campo do desenho, mas não bloqueou este envio.
+
+**Resultado:** envio RG Brasil e vínculo das duas evidências aprovados nesta conta. Não houve bloqueio atual do backend nesse percurso. Nenhuma aprovação/reprovação, criação de contato, aceite ou envio final foi executado. Outros documentos/países e o cadastro de ponta a ponta permanecem sem homologação. Evidência visual: cadastro-etapa-5-envio-concluido.png, mostrando o avanço à etapa 6. Nenhuma alteração de código/layout foi feita nesta rodada; os dois pontos de retomada/apresentação acima continuam abertos.
