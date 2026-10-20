@@ -217,3 +217,16 @@ Teste integrado autorizado na mesma conta. Os dois arquivos já aprovados foram 
 fb15804 complementa bbbebd8: na conferência a 390 px, motivo longo sobrepunha as ações existentes. Em telas pequenas, as mesmas ações passam abaixo do texto; sem novos controles e sem mudar o desktop. Reteste real publicado confirmou motivo/orientação legíveis e sem sobreposição; documentElement.scrollWidth 378 para viewport 390. Override removido ao terminar. Evidência: cliente-reprovacao-mobile.png.
 
 Pipeline 39476881643 tentativa 2 concluída com lint, 162 testes, build, upload e ativação aprovados. A tentativa 1 passou nos checks, mas falhou no upload por timeout SSH/exit 255; repetição publicou sem alterar a aplicação. As duas ocorrências corrigidas do frontend estão encerradas (motivo ausente e sobreposição mobile). Os pontos de vínculo/versionamento e metadata do replace permanecem no documento do backend. Nenhuma nova aprovação do arquivo reenviado foi realizada.
+
+
+## CNH aprovada pelo usuário — progresso e edição retestados, 20/10
+
+O usuário realizou a aprovação no Admin. Reteste na mesma conta e nas versões já publicadas, sem alterar o Figma, campos, ações, guards ou permissões.
+
+- [x] GET administrativo de progresso confirmou progressPercentage 100, approvedRequirements 1, requiredRequirements 1, currentLevel LEVEL_1, nextLevel null, documentClassification A e documentComplianceStatus OK.
+- [x] Requisito CNH: Approved, Complete, countsAsComplete true e isRequired true. O RG mais recente continua Uploaded/Pending/opcional. Overview tem 5 registros: 3 aprovados, 1 pendente e 1 rejeitado. Assim 100% é conclusão dos requisitos configurados, não aprovação de todos os arquivos nem envio final do cadastro.
+- [x] Área do Cliente mostrou 100% concluído e CNH aprovada após recarga/abertura de Documentação; leitura visual e resposta do servidor coerentes.
+- [x] Dados Básicos, Localização e Atividade Trabalhista com Editar habilitado. Teste de escrita em Localização: complemento fictício Unidade de teste → Unidade de teste QA CNH; Salvar, recarga completa e persistência confirmada. Valor original Unidade de teste restaurado pelo formulário e confirmado após nova recarga; edição permaneceu habilitada.
+- [x] Nenhuma falha nova do front reproduzida; nenhuma alteração de runtime, layout ou publicação nova necessária. Somente documentação atualizada. Evidência: cliente-cnh-aprovada-progresso-100.png.
+
+**Encerrado:** reteste da porcentagem após aprovação da CNH e gravação/persistência da edição de Localização. **Backend ainda aberto:** alinhar CNH obrigatória às alternativas do Figma (não exigir documento adicional ao RG/passaporte previsto), vínculo/metadados no replace e as demais lacunas já registradas. Não cobrar 0% como falha atual desta conta nem confundir nível documental completo com todas as sete etapas concluídas.

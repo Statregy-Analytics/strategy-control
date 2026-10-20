@@ -157,7 +157,9 @@ UF não preenchida anteriormente, catálogos, bairro e demais lacunas contratuai
 Os dois arquivos fictícios do cadastro já eram retornados pelo overview com permissão Review, em PERSONAL_DOCUMENTS. O front não reconhecia esse código e escondia as linhas; corrigido em 4fd3faf e validado no Admin publicado, pipeline 39474455430 aprovada. Ambos aparecem com ações de revisão e contador coerente. Não pedir endpoint/permissão nova ao backend para esse problema. Permanecem as confirmações já descritas sobre efeitos da aprovação, liberação da edição e revisão cadastral; nenhuma decisão documental foi enviada nesta rodada.
 
 
-## Cadastro — RG aprovado, nível pendente por CNH obrigatória (20/10)
+## Cadastro — CNH obrigatória divergente do Figma (20/10)
+
+**Situação atual após aprovação da CNH pelo usuário:** progresso confirmado em 100%, LEVEL_1 concluído, 1 de 1 requisitos aprovado e compliance documental OK. Edição de Localização salvou e persistiu após recarga, com dado fictício restaurado. Não há bloqueio atual de porcentagem/edição nessa conta. A solicitação que continua aberta é alinhar a regra/configuração às alternativas do Figma, sem exigir CNH extra. A evidência de 0% abaixo é anterior à aprovação da CNH.
 
 **Reproduzido em homologação após Aprovar os dois arquivos fictícios no Admin.** Overview: total 2, approved 2, pending 0. Área do Cliente mostra os dois Aprovado; edição de localização salvou e persistiu, com dado fictício restaurado ao final. Aprovação, atualização do portal e essa edição não devem continuar sendo cobradas como bloqueios gerais.
 
@@ -186,3 +188,10 @@ A apresentação móvel do motivo também foi corrigida em fb15804 e validada na
 ### CNH — upload isolado retestado, 20/10
 
 A pedido do usuário, CNH fictícia enviada pelo endpoint existente e exibida como Enviado no portal. Progresso permaneceu 0%; requisito CNH com documentStatus Uploaded, progressState Pending e countsAsComplete false (0 de 1 requisitos aprovados). Nenhuma aprovação dessa CNH foi executada. Isso confirma que upload não equivale a conclusão, sem resolver a configuração que exige CNH fora das alternativas do Figma. Não há novo bug de upload nem necessidade de criar campo adicional.
+
+
+### Reteste da CNH aprovada — 100% confirmado, 20/10
+
+Após aprovação feita pelo usuário, API e Área do Cliente mostram 100%; CNH Approved/Complete/countsAsComplete true, currentLevel LEVEL_1, nextLevel null e documentComplianceStatus OK. PATCH de Localização pelo portal salvou complemento fictício, persistiu após recarga e permitiu restaurar o original, também persistido. Essas leituras/escritas e a porcentagem não devem permanecer como bloqueios atuais da conta. Não houve alteração adicional do frontend.
+
+A regra ainda considera CNH obrigatória e RG opcional. Portanto permanece o pedido de alinhar a configuração às alternativas do fluxo aprovado do Figma, sem documentos/campos extras. Total documental segue 5 (3 aprovados, 1 pendente, 1 rejeitado), pois 100% mede requisitos configurados; não comprova todos os arquivos aprovados nem envio final. Os pontos de versionamento/metadados do replace continuam independentes e abertos.

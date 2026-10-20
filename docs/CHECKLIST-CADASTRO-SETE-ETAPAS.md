@@ -260,6 +260,19 @@ A pedido do usuário, enviado arquivo novo cnh-ficticia-teste-progresso.png, mar
 
 - [x] Upload confirmado como Uploaded; arquivo apareceu na Área do Cliente como Enviado.
 - [x] Progresso antes/depois do envio: 0%. API retorna approvedRequirements 0, requiredRequirements 1; CNH Uploaded, progressState Pending, countsAsComplete false.
-- [ ] Aprovar a CNH e medir a progressão de nível não executado nesta rodada de envio. Não inferir 100% de um upload aceito.
+- [x] Aprovação realizada posteriormente pelo usuário; reteste confirmou 100% e LEVEL_1 conforme seção atual abaixo. O upload isolado anterior não era conclusão.
 
 O teste confirma que apenas enviar a CNH não completa a exigência; revisão continua pendente. O conflito da CNH obrigatória com as alternativas do Figma permanece. A senha definida pelo usuário ao criar a conta não foi fornecida ao agente; nenhuma tentativa de obtenção, redefinição ou alteração de credencial foi realizada. Evidência: cliente-cnh-enviada-progresso.png.
+
+
+## CNH aprovada pelo usuário — progresso e edição retestados, 20/10
+
+O usuário realizou a aprovação no Admin. Reteste na mesma conta e nas versões já publicadas, sem alterar o Figma, campos, ações, guards ou permissões.
+
+- [x] GET administrativo de progresso confirmou progressPercentage 100, approvedRequirements 1, requiredRequirements 1, currentLevel LEVEL_1, nextLevel null, documentClassification A e documentComplianceStatus OK.
+- [x] Requisito CNH: Approved, Complete, countsAsComplete true e isRequired true. O RG mais recente continua Uploaded/Pending/opcional. Overview tem 5 registros: 3 aprovados, 1 pendente e 1 rejeitado. Assim 100% é conclusão dos requisitos configurados, não aprovação de todos os arquivos nem envio final do cadastro.
+- [x] Área do Cliente mostrou 100% concluído e CNH aprovada após recarga/abertura de Documentação; leitura visual e resposta do servidor coerentes.
+- [x] Dados Básicos, Localização e Atividade Trabalhista com Editar habilitado. Teste de escrita em Localização: complemento fictício Unidade de teste → Unidade de teste QA CNH; Salvar, recarga completa e persistência confirmada. Valor original Unidade de teste restaurado pelo formulário e confirmado após nova recarga; edição permaneceu habilitada.
+- [x] Nenhuma falha nova do front reproduzida; nenhuma alteração de runtime, layout ou publicação nova necessária. Somente documentação atualizada. Evidência: cliente-cnh-aprovada-progresso-100.png.
+
+**Encerrado:** reteste da porcentagem após aprovação da CNH e gravação/persistência da edição de Localização. **Backend ainda aberto:** alinhar CNH obrigatória às alternativas do Figma (não exigir documento adicional ao RG/passaporte previsto), vínculo/metadados no replace e as demais lacunas já registradas. Não cobrar 0% como falha atual desta conta nem confundir nível documental completo com todas as sete etapas concluídas.
