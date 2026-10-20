@@ -1,7 +1,7 @@
 export function profileDocumentSections(overview) {
   const sections = overview?.sections || []
   return [
-    { code: 'PERSONAL', name: 'Documentação pessoal', codes: ['PERSONAL'] },
+    { code: 'PERSONAL', name: 'Documentação pessoal', codes: ['PERSONAL', 'PERSONAL_DOCUMENTS'] },
     {
       code: 'FISCAL',
       name: 'Contábil / fiscal',

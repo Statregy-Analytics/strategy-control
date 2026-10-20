@@ -5,6 +5,7 @@ import {
   profileDocumentSections,
   projectClientContract,
 } from '../src/services/clientProfileProjection.js'
+import { canReviewDocument } from '../src/services/documentReview.js'
 
 test('fiscal documents returned under ACCOUNTING_FISCAL remain in the designed second group', () => {
   const overview = {
@@ -55,4 +56,21 @@ test('closed contracts and zero allocations are preserved as returned', () => {
   assert.equal(projection.initialValue, 0)
   assert.equal(projection.percentage, 0)
   assert.equal(projection.status, 'Encerrado')
+})
+
+
+test('onboarding personal documents without requirements remain individually reviewable in the first Figma group', () => {
+  const items = ['front', 'back'].map((documentId) => ({
+    documentId, documentTypeId: 'rg', requirementId: null, status: 'Pending',
+    allowedActions: ['Download', 'Review'], document: { id: documentId, status: 'Uploaded' },
+  }))
+  const overview = { summary: { pending: 2, approved: 0, rejected: 0 }, sections: [{ code: 'PERSONAL_DOCUMENTS', items }] }
+  const sections = profileDocumentSections(overview)
+  assert.equal(sections.length, 4)
+  assert.equal(sections[0].label, '1. Documentação pessoal')
+  assert.deepEqual(sections[0].items.map((item) => item.documentId), ['front', 'back'])
+  assert.equal(sections[0].items.every(canReviewDocument), true)
+  assert.equal(sections.slice(1).every((section) => section.items.length === 0), true)
+  assert.equal(profileDocumentMetrics(overview)[1].value, 2)
+  assert.deepEqual(profileDocumentSections({ sections: [{ code: 'PERSONAL', items }] })[0].items, items)
 })
