@@ -2,7 +2,7 @@
 
 Atualizado em 19/10/2026. Referência: feedback de homologação enviado pelo usuário, com 19 itens. Este registro não aprova integralmente o Marco 3 nem substitui o checklist de homologação integrada.
 
-## Correções deste lote
+## Primeira rodada — registro histórico
 
 - Portal: `/system/` redireciona para a Home; login confirmado entra diretamente na Home.
 - Portal: nova tentativa de login limpa o estado anterior; antes de entrar, compara o e-mail digitado e o usuário do login com `/auth/me`, e valida `/client/auth/ping`.
@@ -18,26 +18,26 @@ Atualizado em 19/10/2026. Referência: feedback de homologação enviado pelo us
 | QA | Situação em 19/10 | Próximo passo |
 | --- | --- | --- |
 | 1 | Redirecionamento corrigido; login com Éric e Cláudio abre a Home. | Repetir o fluxo completo de registro e confirmação no ambiente do QA; cadastro novo não foi criado neste lote. |
-| 2 | Preferências integradas no segundo lote de 19/10; Cláudio desbloqueado após salvar o país já registrado no endereço residencial principal. Home e contratos HTTP 200. | Estados e comparações de conta nova continuam pendentes. País ausente também no cadastro exige o fluxo do Figma ou correção na origem, sem campo extra em Preferências. Exibir zero apenas quando confirmado pela API. |
-| 3 | Pendente de implementação dos estados e regras de período. | Conferir o novo Figma e dados de criação da conta/primeiro depósito; não confundir série indisponível com ausência de depósito. |
-| 4 | Pendente do convite e ação no estado vazio. | Seguir o Figma e confirmar o destino de Solicitar contrato. |
-| 5 | Pendente da distinção entre dívida inexistente e consulta indisponível. | Ocultar somente quando ausência de dívida for confirmada. |
+| 2 | Preferências integradas; Cláudio desbloqueado e conta real sem movimentos validada com zeros após concluir preferências. Erro e resposta incompleta não viram zero. | Comparação entre períodos continua sem fonte na API. Evidências atuais no portal: docs/QA-2026-10-19-HOME.md e docs/QA-2026-10-19-PREFERENCIAS.md. |
+| 3 | Estado sem depósito e regras de períodos implementados. Datas de execução e série real são preservadas; gráfico indisponível não é tratado como conta vazia. | Motor/série seguem indisponíveis na API; Fazer primeiro depósito reutiliza o aviso existente porque não há iniciação de depósito do cliente confirmada. |
+| 4 | Estado sem contratos implementado e validado com conta real vazia. Solicitar contrato abre a página de Contratos existente, conforme orientação do usuário. | Não envia pedido ao backend; nenhum fluxo adicional foi criado. |
+| 5 | Resumo demonstrativo de empréstimos removido da Home. | Sem fonte de dívida no contrato atual para homologar presença/ausência de empréstimos. Não simular ausência de dívida após erro. |
 | 6 | Estado vazio do Figma aplicado na página e na Home; mocks, filtros e contadores fictícios retirados das listagens. | Integração de publicações depende de contrato HTTP; o Swagger consultado não contém endpoint de conteúdo. |
 | 7 | Novo fluxo de sete etapas ainda não implementado. | Conferir Figma e contrato para persistência, retomada, países, documentos e aceite versionado. Não inventar payloads. |
-| 8 | Confirmado: nome acompanha a conta, mas resumo, ajustes e sessões ainda contêm exemplos. | Integrar dados próprios, revisão cadastral, estados pendentes e bloqueio de edição conforme o Figma. |
-| 9 | Três correções de texto concluídas. | Foto de perfil ainda precisa de validação e correção. |
+| 8 | Exemplos retirados do resumo, perfil e ajustes; dados próprios da API, sessões reais e bloqueio por identificação pendente integrados. | Revisão cadastral, campos sem catálogo/escrita, patrimônio próprio, termos e compartilhamento aguardam alinhamento. Cliente com identificação aprovada ainda precisa de reteste integrado. Ver pendências consolidadas e docs/QA-2026-10-19-PERFIL.md no portal. |
+| 9 | Três textos corrigidos; avatar usa a URL da API e ícone neutro quando ausente ou com falha, sem imagem quebrada ou foto demonstrativa. | Carregamento de uma foto válida depende de URL/arquivo real disponível para reteste. Não exigir cadastro ou upload de foto fora do Figma. |
 | 10 | C27–C28 implementadas e integradas: Aprovar/Reprovar no documento pendente, motivo obrigatório, mensagem, atualização de contadores e download. Testados com arquivos descartáveis. | C25–C26 e desbloqueio cadastral ainda dependem de estado explícito do cadastro e efeito da revisão no servidor. Motivo/mensagem usam notes; falta catálogo de motivos. Ver QA-2026-10-19-APROVACAO-DOCUMENTOS.md. |
 | 11 | Campos de identificação preservados durante edição, no mesmo bloco. | Edição de documentos e dados pessoais sem contrato de escrita continua bloqueada; ver QA-2026-10-19-EDICAO-POR-SECAO.md. |
 | 12 | Composição profissional/financeira mantida, com cinco campos do Figma C24. | Salvamento integrado e restauração dos dados fictícios conferidos em 8080. |
 | 13 | Preferências migradas para edição por seção, sem salvamento isolado. | Preservar país e demais metadados da API sem criar campos adicionais. |
 | 14 | Corrigido e retestado em 19/10 no Admin local e publicado: Jane com quatro saldos zero, composição e extrato vazios conforme C29; depósito e saldo do Cláudio conferidos. | Deploy 8c64763 confirmado. Evidências e limites em QA-2026-10-19-CARTEIRA-VAZIA.md. |
 | 15 | Edição global substituída por uma seção por vez: rascunho, salvar, descartar, bloqueio e proteção de saída implementados conforme C24. | Limites de escrita de identificação/segurança/compliance documentados; aprovação integral depende desses contratos e reteste do QA. |
-| 16 | Menu do Figma com Clientes, Contratos e Transações; telas integradas de Formulários, Bancos e Configuração documental acessíveis em Configurações. Trocar Sistema consulta a API e abre a seleção A02. | Parcial: Dashboard sem página; Lógicas, Leads, Assessores e editor de LP ainda são protótipos; Crédito e Comunicados sem implementação. Contratos HTTP desses fluxos ainda precisam ser confirmados. Ver PENDENCIAS-BACKEND-QA.md. |
+| 16 | Menu e seleção A02 implementados; telas integradas acessíveis. Entrada legada /dashboard abre Clientes e /landing-page mostra A02 com exigência de administrador, eliminando as duas entradas vazias. | Parcial: Lógicas, Leads, Assessores e editor de LP ainda são protótipos; Crédito e Comunicados sem integração. Nenhum dashboard novo foi criado. Contratos HTTP dos módulos permanecem em PENDENCIAS-BACKEND-QA.md. |
 | 17 | Data sem horário preservada; histórico atual traduzido para português; países dos bancos resolvidos pelo catálogo real, sem UUID na tela. Paginação do catálogo ajustada para exibir a página recebida inteira. | Unicidade de e-mail continua no servidor. Observações e auditoria são preservadas; títulos novos sem tradução mantêm o texto fornecido. |
 | 18 | Proteções de identidade e concorrência implementadas e testadas. Incidente original não reproduzido. | Correlacionar logs de autenticação e acesso do QA em 17/10 às 18:16 e retestar no deploy corrigido. Não solicitar senha pessoal do QA. |
 | 19 | Rotas de LP protegidas no front por sessão e papel. Tokens ainda usam o transporte atual. | Validar autorização da API e implementar sessão com cookies HttpOnly no servidor/BFF, seguida da adaptação dos dois fronts. |
 
-## Validações deste lote
+## Validações da primeira rodada — registro histórico
 
 - Admin na porta 8080; portal na porta 9010.
 - Portal: login do Éric abriu a Home e exibiu investimento em USD 250.000,00 e saldo investível BRL 47.500,00. Resumo do perfil identificou Éric.

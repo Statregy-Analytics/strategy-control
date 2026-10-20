@@ -216,4 +216,14 @@ Swagger consultado. Demais itens do QA não estão aprovados por esta rodada.
 - [x] Destaque da seção, recolher/expandir, rodapé sem sobreposição e ausência de barra horizontal no menu conferidos em desktop. No celular, menu abre e fecha após navegação; seleção usa uma coluna sem transbordar.
 - [x] Trocar Sistema abre A02 e consulta `/me/systems`. Inserção de Dados abre Clientes; editor de LP permanece indisponível por ainda não persistir alterações. Carregamento/erro não habilitam destinos fictícios.
 - [x] 70 testes automatizados aprovados, incluindo rotas existentes, destaque por seção, proteção da seleção e mapeamento de sistemas sem seguir URLs arbitrárias da API.
-- [ ] QA 16 integral: Dashboard, módulos ainda sem integração e editor de LP continuam pendentes. Dependências confirmadas e limitações de frontend em [Pendências do backend](PENDENCIAS-BACKEND-QA.md).
+- [ ] QA 16 integral: módulos ainda sem integração e editor de LP continuam pendentes. A entrada vazia de Dashboard foi tratada no complemento abaixo. Dependências confirmadas e limitações de frontend em [Pendências do backend](PENDENCIAS-BACKEND-QA.md).
+
+## Entradas vazias e conciliação da triagem — QA 16, 19/10/2026
+
+- [x] `/dashboard` abre a listagem integrada de Clientes; não deixa somente o shell vazio nem cria métricas fora do desenho.
+- [x] `/landing-page` renderiza a seleção A02 existente e exige sessão administrativa. `/edit-lp` preserva a proteção do editor; a seleção não oferece acesso ao protótipo sem persistência.
+- [x] Testes de regressão usam a resolução real do Vue Router para a entrada de Clientes e verificam as negativas para visitante, cliente comum e papéis não confirmados nas duas rotas de LP.
+- [x] Triagem dos itens 2–5, 8 e 9 conciliada com os registros posteriores do portal. Não foi realizada nova homologação desses fluxos neste lote; as evidências e limites anteriores foram preservados.
+- [x] Documento único ampliado com lacunas do perfil, cadastro e Home do portal. Separados contratos pendentes do servidor e implementação pendente no front; nenhum item integralmente aprovado por inferência.
+- [x] Seleção A02 revisada em desktop e celular de 390 px, sem transbordamento; ícones locais de 32/24 px carregados. Retorno a Clientes conferido. 72 testes, lint, build e diff dos arquivos do lote aprovados.
+- [ ] QA 16 completo e cadastro de sete etapas: continuam pendentes; consultar a triagem e o documento consolidado.

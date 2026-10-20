@@ -9,6 +9,10 @@ const routes = [
     },
     children: [
       {
+        path: '',
+        redirect: { name: 'Clientes' },
+      },
+      {
         path: '/transaction',
         name: 'Transações',
         component: () => import('pages/TransctionPage.vue'),
@@ -79,7 +83,7 @@ const routes = [
   },
 
   {
-    path: '/landing-page',
+    path: '/edit-lp',
     component: () => import('layouts/MainLayout.vue'),
     props: true,
     meta: {
@@ -89,13 +93,19 @@ const routes = [
     },
     children: [
       {
-        path: '/edit-lp',
+        path: '',
         name: 'Edição de LP',
         component: () => import('pages/LandingPage/EditLandingPage.vue'),
       },
     ],
   },
 
+  {
+    path: '/landing-page',
+    name: 'Seleção administrativa',
+    component: () => import('pages/Authentication/SystemSelectionPage.vue'),
+    meta: { requiresAuth: true, requiresAdmin: true },
+  },
   {
     path: '/',
     name: 'Selected',

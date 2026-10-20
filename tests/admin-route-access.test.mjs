@@ -28,12 +28,13 @@ async function harness({ token = true, roles = ['Admin'], unavailable = false } 
   modules.set('./routes', routes)
   const router = new vm.SourceTextModule(await readFile(new URL('../src/router/index.js', import.meta.url), 'utf8'), { context })
   await router.link(spec => modules.get(spec)); await router.evaluate(); router.namespace.default()
-  const parent = routes.namespace.default.find(route => route.path === '/landing-page')
+  const parent = routes.namespace.default.find(route => route.path === '/edit-lp')
+  const selection = routes.namespace.default.find(route => route.path === '/landing-page')
   return {
-    parent, notifications,
+    parent, selection, notifications,
     enter: async (child = false) => {
       let result = 'not-called'
-      await guard({ name: 'Edição de LP', matched: child ? [parent, parent.children[0]] : [parent] }, {}, value => { result = value ?? 'allowed' })
+      await guard({ name: 'Edição de LP', matched: child ? [parent, parent.children[0]] : [selection] }, {}, value => { result = value ?? 'allowed' })
       return result
     },
     calls: () => calls,
@@ -44,15 +45,18 @@ test('both landing page routes require authentication and administrator access',
   const h = await harness({ token: false })
   assert.equal(h.parent.meta.requiresAuth, true)
   assert.equal(h.parent.meta.requiresAdmin, true)
+  assert.equal(h.selection.meta.requiresAuth, true)
+  assert.equal(h.selection.meta.requiresAdmin, true)
   for (const child of [false, true]) assert.equal((await h.enter(child)).name, 'Auth')
   assert.equal(h.calls(), 0)
 })
 
 test('a customer token cannot open LP editing', async () => {
   const h = await harness({ roles: ['Client'] })
+  assert.equal((await h.enter()).name, 'Auth')
   assert.equal((await h.enter(true)).name, 'Auth')
-  assert.equal(h.calls(), 1)
-  assert.equal(h.notifications.length, 1)
+  assert.equal(h.calls(), 2)
+  assert.equal(h.notifications.length, 2)
 })
 
 test('administrator role comes from auth/me and allows editing', async () => {
