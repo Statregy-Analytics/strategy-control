@@ -1,6 +1,6 @@
 # QA de 17/10 — triagem e primeiro lote de correções
 
-Atualizado em 19/10/2026. Referência: feedback de homologação enviado pelo usuário, com 19 itens. Este registro não aprova integralmente o Marco 3 nem substitui o checklist de homologação integrada.
+Atualizado em 20/10/2026. Referência: feedback de homologação enviado pelo usuário, com 19 itens. Este registro não aprova integralmente o Marco 3 nem substitui o checklist de homologação integrada.
 
 ## Primeira rodada — registro histórico
 
@@ -70,3 +70,11 @@ O usuário confirmou os endereços: portal `https://hml.strategyanalytics.com.br
 6. Confirmar contratos HTTP dos fluxos novos: cadastro por etapas, retomada, aceite, revisão de documentos, defaults de risco/compliance/preferências e permissões de edição após aprovação.
 
 O Figma é a referência da interface; disponibilidade de endpoints adicionais não autoriza criar campos ou ações fora do desenho.
+
+## Complemento técnico de 20/10 — validação do portal desbloqueada
+
+O bloqueio de lint global registrado nas rodadas anteriores foi resolvido no portal: configuração migrada para ESLint 9 sem atualizar dependências ou desativar regras essenciais. Corrigidos os 17 erros encontrados e referências ausentes em dois gráficos legados. Lint, 52 testes e build aprovados; o deploy passa a executar lint/testes antes de publicar.
+
+Os três novos testes verificam inicialização/reatividade dos gráficos e isolamento dos defaults por instância. Login/Home/perfil do Cláudio retestados localmente com os dados e bloqueios reais preservados. Detalhes em Strategy-analytics-v2/docs/QA-2026-10-20-VALIDACAO-FRONT.md.
+
+Este complemento não altera o status funcional dos itens dependentes de contrato HTTP. Não homologa os protótipos de crédito/distribuição nem o cadastro de sete etapas.
