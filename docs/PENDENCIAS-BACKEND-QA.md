@@ -57,7 +57,7 @@ O login da seção nova (4:25438) foi concluído no front usando a autenticaçã
 - Confirmar consulta e operações do patrimônio próprio do cliente. As seções não mostram bens fictícios e não usam endpoints administrativos para contornar autorização.
 - Informar o `context` correto dos consentimentos/termos do perfil. A consulta sem contexto retorna HTTP 400; o Swagger não enumera os valores. Não assumir um contexto de cadastro nem adicionar seletor.
 - Confirmar Compartilhar Perfil: a projeção pública documentada só contém `customerId` e `avatarUrl`; não permite reproduzir o conteúdo completo do desenho.
-- Confirmar persistência/retomada das sete etapas, aceite versionado, documentos por país e estado de envio/revisão cadastral. As sete telas e validações locais estão implementadas; integração, retomada e homologação completa ainda exigem trabalho no front após confirmação dos contratos.
+- Confirmar persistência/retomada das sete etapas, aceite versionado, documentos por país e estado de envio/revisão cadastral. As sete telas já usam os endpoints existentes; dados suportados são retomados pela API. O checklist atual separa lacunas reais de contrato, bloqueio documental 403 e retestes ainda abertos do front.
 
 Referência de evidências: repositório Strategy-analytics-v2, `docs/QA-2026-10-19-PERFIL.md`. Avatar já usa a URL recebida e fallback neutro; uma foto válida precisa estar disponível na API para homologar seu carregamento, sem criar upload fora do Figma.
 
@@ -106,3 +106,7 @@ Financeiro com perfil inicialmente vazio foi criado e consultado com valores dec
 ### Retomada do Número — correção do frontend publicada em 20/10
 
 O número que voltava concatenado ao Logradouro foi corrigido no adaptador do portal (fdb07ab), sem alterar payload ou campos. Reteste na conta do usuário confirmou Logradouro e Número separados após recarga e retorno pela revisão, sem gravar o formulário nem alterar o endereço salvo. Removido das pendências ativas do frontend e não é solicitação ao backend. Bairro sem campo próprio e o bloqueio documental 403 permanecem separados e abertos.
+
+### Revisão do QA — falhas de leitura no front, 20/10
+
+Corrigida a substituição de rascunhos por dados vazios quando uma consulta da revisão falhava. Falha profissional, financeira e de contatos agora permanece independente e aparece na linha existente, sem campos ou ações adicionais. Esse defeito era do front; não é uma solicitação nova ao backend. O 403 documental, os catálogos/campos e o envio final acima continuam pendentes. Consulta de CEP e conferência de retomada da etapa após novo login permanecem explicitamente no checklist do front.

@@ -243,3 +243,12 @@ O 403 está registrado como bloqueio de integração a investigar, não como def
 - [x] Dados salvos inalterados em comparação antes/depois; nenhuma escrita do formulário/documento neste reteste. Aba original com rascunho/arquivos preservada.
 
 Correção exclusivamente do frontend; não acrescenta item à tabela de bugs do backend. As pendências documentais/cadastrais anteriores continuam sem aprovação integrada.
+
+
+## QA do cadastro — revisão com falhas parciais, 20/10
+
+Defeito do frontend corrigido no portal: leitura profissional/financeira ou de contatos com falha não substitui rascunhos por valores vazios. Seções independentes preservadas, erro indicado na linha existente e aviso limpo após recuperação. Não foi adicionada ocorrência à tabela de bugs do backend.
+
+126 testes, lint/build e diff do lote aprovados. Revisão local 9010 conferida em desktop e 390 px efetivos, sem overflow horizontal. Enviar sem confirmação mostra erro e foca o checkbox, sem escrita. Falhas/retry verificados por testes automatizados com serviços simulados, sem provocar erros na API. Não homologa upload bloqueado por 403, contatos novos ou envio final.
+
+Checklist ativo: CHECKLIST-CADASTRO-SETE-ETAPAS.md; evidência técnica no portal em docs/QA-2026-10-20-CADASTRO-FALHAS-PARCIAIS.md.

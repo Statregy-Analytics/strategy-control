@@ -13,17 +13,17 @@ Atualizado em 20/10/2026. Referência: feedback de homologação enviado pelo us
 - Admin: removidos logs de query da autenticação; menu inclui Transações e Contratos existentes.
 - Admin: datas sem horário preservam o dia informado pela API na listagem de clientes. Datas com horário continuam respeitando o fuso local.
 
-## Situação por item
+## Situação por item — leitura atual; histórico das rodadas abaixo
 
-| QA | Situação em 19/10 | Próximo passo |
+| QA | Situação atualizada em 20/10 | Próximo passo |
 | --- | --- | --- |
-| 1 | Redirecionamento corrigido; login com Éric e Cláudio abre a Home. | Repetir o fluxo completo de registro e confirmação no ambiente do QA; cadastro novo não foi criado neste lote. |
+| 1 | Redirecionamento corrigido; login com Éric e Cláudio abre a Home. | Criação/código confirmados pelo usuário e sessão na etapa 3 observada em conta nova. Cadastro de sete etapas ainda não concluído por bloqueios documentais/envio; não aprovar ponta a ponta. |
 | 2 | Preferências integradas; Cláudio desbloqueado e conta real sem movimentos validada com zeros após concluir preferências. Erro e resposta incompleta não viram zero. | Comparação entre períodos continua sem fonte na API. Evidências atuais no portal: docs/QA-2026-10-19-HOME.md e docs/QA-2026-10-19-PREFERENCIAS.md. |
 | 3 | Estado sem depósito e regras de períodos implementados. Datas de execução e série real são preservadas; gráfico indisponível não é tratado como conta vazia. | Motor/série seguem indisponíveis na API; Fazer primeiro depósito reutiliza o aviso existente porque não há iniciação de depósito do cliente confirmada. |
 | 4 | Estado sem contratos implementado e validado com conta real vazia. Solicitar contrato abre a página de Contratos existente, conforme orientação do usuário. | Não envia pedido ao backend; nenhum fluxo adicional foi criado. |
 | 5 | Resumo demonstrativo de empréstimos removido da Home. | Sem fonte de dívida no contrato atual para homologar presença/ausência de empréstimos. Não simular ausência de dívida após erro. |
 | 6 | Estado vazio do Figma aplicado na página e na Home; mocks, filtros e contadores fictícios retirados das listagens. | Integração de publicações depende de contrato HTTP; o Swagger consultado não contém endpoint de conteúdo. |
-| 7 | Login da seção nova implementado conforme 4:25438; autenticação, erro, teclado e acessos existentes retestados. Sete telas e validações locais disponíveis para homologação; persistência, progresso, envio e retomada integrados continuam pendentes. | Persistência, retomada, residência/países, documentos e aceite versionado continuam pendentes de contrato; depois integrar as etapas. Evidências no portal: docs/QA-2026-10-20-LOGIN.md. |
+| 7 | Login e sete telas do Figma implementados. Endpoints existentes de conta/e-mail, perfil, financeiro, contatos e documentos integrados; dados suportados retomados pela API. Falhas parciais na revisão corrigidas e celular conferido. | Parcial: 403 documental de conta nova, catálogos/campos não suportados, contatos sem relationship, aceite e envio final. CEP e retomada da etapa após novo login ainda precisam de trabalho/conferência do front. Ver CHECKLIST-CADASTRO-SETE-ETAPAS.md; não solicitar endpoints existentes como ausentes. |
 | 8 | Exemplos retirados do resumo, perfil e ajustes; dados próprios da API, sessões reais e bloqueio por identificação pendente integrados. | Revisão cadastral, campos sem catálogo/escrita, patrimônio próprio, termos e compartilhamento aguardam alinhamento. Cliente com identificação aprovada ainda precisa de reteste integrado. Ver pendências consolidadas e docs/QA-2026-10-19-PERFIL.md no portal. |
 | 9 | Três textos corrigidos; avatar usa a URL da API e ícone neutro quando ausente ou com falha, sem imagem quebrada ou foto demonstrativa. | Carregamento de uma foto válida depende de URL/arquivo real disponível para reteste. Não exigir cadastro ou upload de foto fora do Figma. |
 | 10 | C27–C28 implementadas e integradas: Aprovar/Reprovar no documento pendente, motivo obrigatório, mensagem, atualização de contadores e download. Testados com arquivos descartáveis. | C25–C26 e desbloqueio cadastral ainda dependem de estado explícito do cadastro e efeito da revisão no servidor. Motivo/mensagem usam notes; falta catálogo de motivos. Ver QA-2026-10-19-APROVACAO-DOCUMENTOS.md. |
@@ -129,3 +129,9 @@ Revisão e envio (9:25964): cinco grupos do desenho alimentados pelos rascunhos 
 ## Cadastro — integração dos endpoints existentes, 20/10
 
 As etapas deixaram de ser apenas prévias: registro/confirmar e-mail, sessão com retorno à etapa, GET/PATCH de perfil, preferências para país único disponível, perfil profissional/financeiro, contatos existentes e operações documentais usam clientApi. Revisão carrega os dados suportados da API. Retirado o bloqueio geral por falta de catálogo; lacunas de campos/opções são tratadas separadamente. Inclusão de contatos e envio final permanecem limitados pelos contratos descritos no documento consolidado. O item 7 continua parcial até os retestes e resolução dessas incompatibilidades, sem atribuir trabalho de integração do front ao backend.
+
+## Consolidação do cadastro — falhas parciais, 20/10
+
+As seções incrementais acima registram a situação na data de cada implementação; não devem ser lidas como ausência atual de integração. O checklist do cadastro reúne os resultados posteriores, incluindo a conta nova e o 403 documental real. Corrigida no front a perda de rascunhos em falhas de leitura; revisão mantém os cinco grupos e ações do Figma e distingue indisponibilidade de ausência. 126 testes/lint/build aprovados; desktop e celular de 390 px conferidos localmente, sem gravação. CEP e retomada da etapa após novo login permanecem como trabalho/conferência do front, separados das pendências reais do backend.
+
+Portal 8784ab8 publicado com sucesso (pipeline 39452089997). Revisão conferida em homologação na sessão da conta nova, somente leitura, com os dados suportados retomados. Os demais bloqueios continuam abertos no checklist.

@@ -7,10 +7,10 @@ Atualizado em 20/10/2026 após integração dos endpoints existentes. Figma BaDX
 | Etapa | Implementado no front | Pendência real da API ou homologação |
 | --- | --- | --- |
 | 1 · Criar conta | POST /auth/register; nome, e-mail, senha e indicação; chave estável no retry; /register abre o fluxo Figma | Texto/versão e registro do aceite antes da autenticação; residência regional não identifica um país |
-| 2 · Confirmar e-mail | Confirmação e reenvio reais; após confirmação usa login existente para continuar na etapa 3; sem senha em storage/URL | Ciclo com e-mail recebido ainda precisa de reteste manual; não é ausência de endpoint |
+| 2 · Confirmar e-mail | Confirmação e reenvio reais; após confirmação usa login existente para continuar na etapa 3; sem senha em storage/URL | Criação/código confirmados pelo usuário e sessão na etapa 3 observada; aceite versionado continua pendente |
 | 3 · Dados pessoais | GET/PATCH do perfil; nascimento, gênero, estado civil, uma nacionalidade e cidade; preserva dados externos à etapa | País de nascimento e múltiplas nacionalidades não existem no payload; catálogos dos seletores não disponibilizados |
-| 4 · Documento e endereço | Endereço/filiação via PATCH; tipos/definições reais; upload e dados tipados para correspondências disponíveis; retry de arquivos sem duplicar upload concluído | Bairro separado, catálogo de estados/UF e tipos/esquemas das demais variantes; permissões/documentos de cliente novo precisam de reteste |
-| 5 · Atividade trabalhista | GET/PUT profissional e financeiro; valores precisos em BRL; preserva vigências e empresa; datas iniciais na data de criação | Catálogo de atividade para novas escolhas; gravação com conta existente validada, criação sem perfil ainda precisa de reteste |
+| 4 · Documento e endereço | Endereço/filiação via PATCH; tipos/definições reais; upload e dados tipados para correspondências disponíveis; retry de arquivos sem duplicar upload concluído | Bairro separado, catálogo de estados/UF e tipos/esquemas das demais variantes; cliente novo bloqueado por 403 na consulta de tipos; upload aguarda liberação |
+| 5 · Atividade trabalhista | GET/PUT profissional e financeiro; valores precisos em BRL; preserva vigências e empresa; datas iniciais na data de criação | Catálogo de atividade para novas escolhas; criação financeira sem perfil validada com conta nova; atividade aguarda catálogo |
 | 6 · Contatos de confiança | GET real e PUT de existentes preservando relationship/e-mail; valida todos antes de escrever | Inclusão exige relationship não presente no Figma; declaração de ausência sem operação de persistência |
 | 7 · Revisão e envio | Revisa dados carregados da API e alterações locais; Editar por etapa; confirmação; consulta real de onboarding | Operação final/recibo de envio e revisão cadastral não identificados; Data Intake atual contém apenas formulários patrimoniais |
 
@@ -87,3 +87,23 @@ Os dados fictícios pessoais, endereço/filiação e financeiro desta rodada per
 - [x] Aba original com dados/documentos e arquivos ainda não enviados preservada, sem recarregar ou perder o rascunho. Evidência visual inclui somente os campos do endereço necessários para a correção.
 
 A regravação sem duplicar Número foi validada por testes automatizados, sem reenviar dados/documentos da conta real pelo Continuar. O 403 documental, bairro, catálogos e as demais pendências do backend continuam abertos; esta aprovação é somente da retomada do Número. Evidência técnica no portal: docs/QA-2026-10-20-CADASTRO-NUMERO-ENDERECO.md.
+
+## Revisão do QA — falhas parciais e celular, 20/10
+
+- [x] Corrigida perda de rascunhos ao abrir a revisão quando a leitura profissional/financeira ou dos contatos falha. Somente respostas bem-sucedidas hidratam cada grupo; renda zero real continua zero.
+- [x] Na mesma linha do resumo, consulta com falha é indicada como indisponível, sem ser confundida com Não informado. Sem campos, botões ou seções adicionais.
+- [x] Erros simultâneos ficam no aviso existente; recuperar a consulta limpa o aviso e preserva as edições dos grupos já carregados.
+- [x] 126 testes, lint e build aprovados; falhas e recuperação cobertas pelo composable real com serviços simulados, sem provocar falhas na API de homologação.
+- [x] Revisão conferida no navegador local 9010 em desktop e viewport efetivo de 390 px. Cinco grupos e Editar preservados; sem overflow horizontal. Enviar sem confirmação mantém a etapa, mostra erro e foca o checkbox; nenhuma escrita realizada.
+
+### Próximos itens do front e retestes
+
+- [ ] Implementar/conferir preenchimento por CEP da variante Brasil reutilizando o serviço existente, sem substituir campos manuais nem adicionar ações.
+- [ ] Conferir retomada da etapa após saída e novo login contra o progresso realmente disponível; não inferir cadastro enviado a partir de campos preenchidos.
+- [ ] Reexecutar upload, contatos novos e envio final somente após alinhamento dos bloqueios documentados; esses cenários continuam sem aprovação integrada.
+
+Detalhes do lote: Strategy-analytics-v2/docs/QA-2026-10-20-CADASTRO-FALHAS-PARCIAIS.md. Este ajuste é do frontend e não entra na tabela de bugs do backend. A homologação completa do cadastro e dos 19 itens do QA permanece aberta.
+
+### Publicação deste lote
+
+Portal 8784ab8 publicado; pipeline 39452089997 concluída com lint/testes/build/upload/ativação aprovados. Conferência somente leitura em hml.strategyanalytics.com.br/cadastro/etapa-7, na sessão da conta do usuário: cinco grupos presentes, dados pessoais/endereço retomados e renda individual 1.234,56, familiar 2.345,67 e bens 0 disponíveis. Nenhum envio ou escrita feito nesta conferência; aba original documental preservada. Não foi reproduzida falha de rede no servidor para obter evidência visual artificial.
