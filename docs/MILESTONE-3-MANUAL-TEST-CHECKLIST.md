@@ -19,6 +19,9 @@ Nenhuma outra pendência do perfil com contrato suficiente e independente do bac
 
 ## Estado atual do Admin — QA 10 a 19
 
+- [x] Catálogo de bancos (QA 16/17): busca por código/nome passa a considerar todas as páginas recebidas, com paginação/contadores sobre o resultado filtrado. Em 8080, banco 325 encontrado, pesquisa sem acentos, vazio e retorno da página 52 validados. 99 testes aprovados.
+- [ ] Reteste da busca completa de bancos em homologação após deploy.
+
 - [x] Configuração documental (QA 16): removido o corte interno de cinco linhas das duas tabelas com paginação oculta. Em 8080, os 30 tipos reais aparecem; busca RG, vazio e abertura do último tipo validados sem gravar configuração. 95 testes, lint e build aprovados.
 - [x] Configuração documental publicada em 2eea460, pipeline 39502645633 aprovada. Em homologação, lista completa de 30 tipos, categoria pessoal com sete, busca RG, vazio, limpeza dos filtros e editor do último tipo validados; nenhuma configuração gravada.
 
@@ -540,3 +543,12 @@ Reteste publicado desta rodada: banco Órama selecionado em `https://admin.strat
 - Em 8080, 30 ações de Configurar tipo documental disponíveis; pesquisa RG retorna um registro, busca inexistente mostra o vazio, limpar restaura os 30 e o último tipo abre o editor existente. Editor fechado sem alterações. Não foram criados tipos, categorias, schemas ou associações.
 - Validação automática: suíte existente com 95 testes aprovada, lint/build/diff-check aprovados. Não foi criado teste que apenas replique os atributos da tabela. A massa real com mais de cinco schemas não foi alterada/criada para esta conferência; o ajuste remove o corte local sobre a página já recebida, sem modificar o contrato HTTP.
 - Publicação 2eea460 confirmada na pipeline 39502645633, com lint/build/upload/ativação aprovados. A versão anterior exibiu cinco ações; após recarregar a publicação, 30 tipos exibidos. Categoria Documentação Pessoal mostrou sete, busca RG um, busca sem correspondência mostrou vazio e limpar filtros restaurou os 30. Editor do último tipo aberto e fechado sem gravação. Em 390 px, página com 375 px e rolagem horizontal restrita à tabela de 343 px (conteúdo 848 px), sem overflow da página. Evidência: `admin-configuracao-documental-lista-completa.png`. Os módulos e estados sem contrato continuam no documento de pendências do backend.
+
+## Rodada 20/10 — busca global no catálogo de bancos
+
+- Falha reproduzida em homologação: pesquisar 325 na primeira página mostrava Nenhum banco encontrado, com rodapé ainda indicando 513 registros, embora o banco Órama esteja na última página. A busca filtrava apenas os dez bancos já carregados.
+- Reutilizada readBankCatalog para consultar integralmente as três páginas existentes da API. Busca normaliza acentos/maiúsculas e filtra o conjunto completo antes de aplicar a paginação existente. Pesquisar/trocar tamanho volta à página 1; rodapé conta somente o resultado filtrado. Somente ativos continua usando o filtro existente da API.
+- Falha intermediária não publica catálogo parcial; loading/erro não exibem rodapé ou vazio enganoso. A retentativa e os erros por país permanecem independentes. Nenhum campo, coluna, ação ou endpoint foi criado.
+- Em 8080: código 325 encontrou Órama e país Brasil, rodapé 1 a 1 de 1; pesquisa sem acento encontrou o mesmo banco; busca inexistente mostrou 0 a 0 de 0; limpar restaurou 513; página 52 mostrou 511 a 513 e nova pesquisa retornou à página 1. Nenhum banco cadastrado.
+- 99 testes aprovados, incluindo quatro novos testes funcionais do componente para busca completa, contagens/paginação, falha/retry e filtro de ativos. Lint/build e revisão visual aprovados. Publicação/reteste serão registrados após deploy.
+- Não há solicitação de alteração da API para esta correção.

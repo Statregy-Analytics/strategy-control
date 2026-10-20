@@ -285,3 +285,7 @@ A validação de data de nascimento impossível/futura foi corrigida no front do
 ## Esclarecimento 20/10 — listagem da configuração documental
 
 O endpoint já devolve 30 tipos. O limite visual de cinco registros sem navegação era imposto pela tabela do front e foi removido, inclusive o corte interno da tabela de schemas sobre a página recebida. Não é solicitação de API, campos ou ações adicionais. Os bloqueios de módulos e estados listados acima permanecem.
+
+## Esclarecimento 20/10 — busca do catálogo bancário
+
+A busca da gestão de bancos filtrava somente a página visível. O front foi corrigido para consultar as páginas já disponíveis e buscar/paginar o resultado completo no mesmo controle. Não precisamos acrescentar parâmetro, campo ou ação ao backend para esse ajuste. Os bloqueios contratuais anteriores permanecem.
