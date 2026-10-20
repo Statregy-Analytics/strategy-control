@@ -194,3 +194,26 @@ Teste autorizado pelo usuário nas versões já publicadas: Admin 4fd3faf (corre
 - [ ] Edição de documentos na seção Dados Pessoais continua direcionada à aba Documentação, conforme implementação existente. Contatos sem vínculo/cadastro continuam bloqueados pela pendência já conhecida. Este teste não homologa reenvio/reprovação, contatos, envio cadastral final ou progressão de nível.
 
 **Resultado:** aprovação dos dois arquivos, atualização visual do portal e gravação de edição de localização aprovadas. Nenhum defeito novo do frontend reproduzido; sem mudança de runtime ou deploy novo. Permanece alinhamento da configuração documental no backend. Evidências: admin-dois-documentos-aprovados.png e cliente-documentos-aprovados.png; sem e-mail, token ou identificador pessoal integral neste registro.
+
+
+## Reprovação e reenvio de arquivo fictício — 20/10
+
+Teste integrado autorizado na mesma conta. Os dois arquivos já aprovados foram preservados; um PNG claramente fictício adicional foi criado pelo endpoint administrativo de upload apenas para preparar o cenário. Reprovação e substituição foram feitas pelas telas existentes.
+
+- [x] No Admin, reprovar o único arquivo novo Pending com Foto ilegível e mensagem Teste de homologação: reenvie somente o arquivo fictício, com o texto legível. Resultado: 2 Aprovados / 0 Aguardando / 1 Rejeitado; motivo e orientação visíveis no Admin.
+- [x] Defeito do frontend reproduzido: portal mostrava Rejeitado/Substituir, mas não mostrava o motivo porque lia apenas rejectionReason da lista; a revisão retornada no overview contém latestReview.notes.
+- [x] Correção portal bbbebd8 publicada; pipeline 39476133451 aprovada em lint, 162 testes, build, upload e ativação. Motivo associado pelo ID do arquivo e pelo ID/status da revisão, nunca somente por tipo RG; não aparece em outro arquivo aprovado ou reenviado. Datas originais preenchidas nos campos existentes ao abrir Substituir. Uploaded passa a exibir Enviado. Nenhum campo, ação ou composição novos.
+- [x] Na versão publicada, a Área do Cliente exibiu Foto ilegível e a orientação no arquivo correto. Formulário de substituição manteve emissão 01/01/2025 e validade vazia, sem inventar datas.
+- [x] Reenvio real pelo seletor/Enviar da Área do Cliente: documento-ficticio-qa-reenvio.png, também fictício. A tela fechou o formulário e mostrou o arquivo novo como Enviado, sem aplicar nele o motivo antigo.
+- [x] Admin atualizado mostrou 2 Aprovados / 1 Aguardando / 1 Rejeitado, com uma nova ação Aprovar/Reprovar. Consulta administrativa independente confirmou o novo documento Uploaded/Pending, arquivo diferente, mesmo tipo RG e emissão preservada. Os dois registros aprovados anteriores não foram alterados.
+- [!] Semântica do replace a alinhar com backend: POST /client/profile/documents/{id}/replace criou outro documentId e manteve o original Rejected, não arquivado e presente no overview/lista. Assim total passou de 3 para 4; o motivo permanece no registro antigo. A resposta não expõe vínculo de substituição. Não ocultar registros por tipo ou fingir que a pendência antiga foi encerrada.
+- [!] Metadados: original tinha issuer/documentNumber fictícios; novo registro veio com metadata = {}. O contrato multipart do replace aceita arquivo/datas, sem campo de metadata. Confirmar preservação dos metadados e vínculo/versionamento no servidor; não enviar campos extras não documentados pelo front.
+
+**Resultado:** reprovação, motivo no cliente e reenvio para nova revisão aprovados nos limites observados. Fica parcial o encerramento/substituição lógica do registro rejeitado e a preservação de metadados; esses pontos estão no documento do backend. O novo arquivo foi deixado Pending para revisão; não foi aprovado automaticamente. CNH obrigatória/progresso 0% e envio cadastral final seguem separados. Evidências: cliente-motivo-reprovacao.png e cliente-reprovacao-e-reenvio-detalhe.png.
+
+
+### Reprovação — conferência final responsiva e publicação
+
+fb15804 complementa bbbebd8: na conferência a 390 px, motivo longo sobrepunha as ações existentes. Em telas pequenas, as mesmas ações passam abaixo do texto; sem novos controles e sem mudar o desktop. Reteste real publicado confirmou motivo/orientação legíveis e sem sobreposição; documentElement.scrollWidth 378 para viewport 390. Override removido ao terminar. Evidência: cliente-reprovacao-mobile.png.
+
+Pipeline 39476881643 tentativa 2 concluída com lint, 162 testes, build, upload e ativação aprovados. A tentativa 1 passou nos checks, mas falhou no upload por timeout SSH/exit 255; repetição publicou sem alterar a aplicação. As duas ocorrências corrigidas do frontend estão encerradas (motivo ausente e sobreposição mobile). Os pontos de vínculo/versionamento e metadata do replace permanecem no documento do backend. Nenhuma nova aprovação do arquivo reenviado foi realizada.

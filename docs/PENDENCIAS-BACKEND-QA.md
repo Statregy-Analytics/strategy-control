@@ -8,7 +8,7 @@ O front de Aprovar/Reprovar documentos está integrado conforme C27–C28. Falta
 
 - Confirmado em 20/10 na conta nova: aprovação dos dois RGs removeu a pendência dos arquivos e habilitou edição de Dados Básicos/Localização/Atividade no portal. Salvamento de Localização e persistência após recarga validados; progressão de nível continua pendente por configuração CNH, descrita abaixo.
 - Como consultar o estado da revisão cadastral, a data de envio e a permissão de edição, para apresentar C26 corretamente?
-- Na reprovação, motivo e mensagem chegam ao cliente e permitem reenvio? Hoje enviamos os dois juntos em `notes`, pois esse é o contrato disponível.
+- Confirmado em 20/10: motivo e mensagem enviados juntos em `notes` chegam no overview/latestReview e aparecem no portal após correção do adaptador (bbbebd8). Reenvio aceito e nova revisão disponível; vínculo de substituição/metadados continuam pendentes abaixo.
 - Qual é o catálogo de motivos de reprovação? O front usa apenas “Foto ilegível”, confirmado no Figma.
 
 Confirmar também os defaults do cliente novo em C25: risco sem classificação, compliance pendente, status Prospect e preferências do sistema. O front preserva os valores reais retornados e não simula desbloqueio ou classificação.
@@ -166,3 +166,18 @@ GET /admin/customers/{id}/documents/progress devolve currentLevel null, nextLeve
 **Solicitação:** alinhar a configuração/regra de conclusão do nível às alternativas do cadastro aprovado no Figma (documento de identificação/passaporte), sem acrescentar exigência ou campo CNH à tela. Confirmar como representar alternativas aceitas, de modo que a aprovação da documentação prevista complete o requisito correto, e qual estado oficial comprova envio/revisão/conclusão cadastral. Não foi alterada a configuração do servidor nem enviado documento adicional para contornar a regra.
 
 Não atribuímos o 0% a erro aritmético: ele corresponde à CNH obrigatória atual; o conflito é de configuração/regra com o fluxo aprovado. Reprovação/reenvio e conclusão de cadastro continuam não homologados.
+
+
+## Reenvio após reprovação — vínculo e metadados (20/10)
+
+**Validado:** Admin reprovou arquivo fictício, motivo Foto ilegível + mensagem chegaram no overview e foram exibidos no portal. O defeito que escondia o texto era do frontend e foi corrigido/publicado em bbbebd8, pipeline 39476133451 aprovada (162 testes). O cliente usou Substituir/Enviar com outro PNG fictício; API aceitou e o Admin recebeu o arquivo novo Pending para revisão. Não solicitar endpoint novo para o motivo ou upload.
+
+**Alinhar no replace existente:**
+
+- POST /client/profile/documents/{documentId}/replace criou outro documento Uploaded e manteve o anterior Rejected/archivedAtUtc null. Overview passou a total 4 (2 aprovados, 1 pendente, 1 rejeitado), sem vínculo de substituição exposto. Confirmar se o original deve continuar como pendência ativa ou somente histórico e como o cliente/Admin devem identificar a versão vigente. O front não deve deduzir pelo tipo, pois há vários arquivos RG legítimos.
+- O original tinha metadata com issuer/documentNumber fictícios; o novo veio com {}. Tipo RG e emissão 01/01/2025 foram preservados. O multipart documentado aceita somente arquivo/issuedOn/expiresOn, sem metadata. Confirmar preservação dos dados/vínculo no servidor ou fornecer o contrato correto para esse reenvio, sem adicionar campos à interface.
+
+Esses são limites reais do fluxo integrado; não confundem o motivo histórico com o motivo do novo envio, nem autorizam esconder o registro rejeitado. Os dois documentos aprovados anteriores foram preservados. O novo ficou aguardando revisão. A exigência de CNH/progresso e o envio final continuam nos itens próprios.
+
+
+A apresentação móvel do motivo também foi corrigida em fb15804 e validada na versão publicada (pipeline 39476881643, tentativa 2, aprovada). Isso não altera os dois pontos de contrato do replace acima. Reprovação/motivo/reenvio foram retestados com arquivos fictícios, sem documentos pessoais reais.
