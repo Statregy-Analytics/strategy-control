@@ -20,7 +20,7 @@ Nenhuma outra pendência do perfil com contrato suficiente e independente do bac
 ## Estado atual do Admin — QA 10 a 19
 
 - [x] Registro de patrimônio: anos, quartos/banheiros, parcelas e prazo em meses validados como inteiros no input e antes do HTTP, respeitando os tipos já publicados. Opcionais e zero preservados; valores e áreas continuam decimais. 93 testes locais aprovados; ano fracionado/correção retestados em 8080, sem gravação.
-- [ ] Reteste da validação de inteiros no patrimônio em homologação após publicação.
+- [x] Patrimônio publicado em 9d10d93, pipeline 39500642230 aprovada em lint/build/upload/ativação. Em homologação: anos fracionados rejeitados, correção para inteiro e opcional vazio aceitos, Valor FIPE decimal preservado e mobile 390 px sem overflow; formulário descartado sem gravação.
 
 - [x] Perfil/Admin: catálogo completo de bancos (513 instituições em três páginas), pesquisa sem acentos e nomes de bancos após a primeira página. Falha do catálogo usa o erro/retentativa existentes, sem expor opções parciais. 91 testes locais, lint e build aprovados; seletor conferido na porta 8080.
 - [x] Publicação ddfb04d confirmada: pipeline 39499746938 aprovada em lint/build/upload/ativação. Em homologação, busca `orama` encontrou e selecionou o banco 325 da terceira página; formulário cancelado sem cadastrar conta. Em 390 px, página e card sem overflow horizontal.
@@ -515,4 +515,4 @@ Reteste publicado desta rodada: banco Órama selecionado em `https://admin.strat
 - Corrigidos os campos existentes: ano de fabricação/modelo, quartos/banheiros, total de parcelas/pagas e prazo em meses. Regra reutilizada no formulário e no payload; opcionais vazios permanecem nulos e zero continua válido. O prazo mantém o texto até validar, sem arredondar frações muito pequenas. Nenhum campo/ação foi acrescentado.
 - Dinheiro e áreas permanecem decimais; não foram criados limites de ano/calendário ou outras regras de negócio além do contrato de inteiros já publicado.
 - Testes: frações (inclusive além da precisão numérica), negativos, não finitos e limite int32; opcionais, zero e áreas decimais preservados. Suíte completa: 93 aprovados. No navegador em 8080, ano 2020.5 exibe erro e 2020 remove o erro; formulário descartado sem gravar.
-- Defeito corrigido no front, não incluído na tabela de bugs do backend. Publicação e reteste em homologação serão registrados após o deploy.
+- Defeito corrigido no front, não incluído na tabela de bugs do backend. Publicação 9d10d93 confirmada na pipeline 39500642230 (sucesso). Reteste no Admin publicado rejeitou 2020.5/2021.5 nos dois anos; correção para 2020 removeu o erro, ano modelo vazio foi aceito e Valor FIPE 1234.56 preservado. Em 390 px, documento com 390 px e card com largura interna/rolável de 374 px, sem overflow horizontal. Formulário descartado sem gravar. Evidência: `admin-patrimonio-validacao-inteiros.png`.
