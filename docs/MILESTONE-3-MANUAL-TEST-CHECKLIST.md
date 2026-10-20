@@ -227,3 +227,12 @@ Swagger consultado. Demais itens do QA não estão aprovados por esta rodada.
 - [x] Documento único ampliado com lacunas do perfil, cadastro e Home do portal. Separados contratos pendentes do servidor e implementação pendente no front; nenhum item integralmente aprovado por inferência.
 - [x] Seleção A02 revisada em desktop e celular de 390 px, sem transbordamento; ícones locais de 32/24 px carregados. Retorno a Clientes conferido. 72 testes, lint, build e diff dos arquivos do lote aprovados.
 - [ ] QA 16 completo e cadastro de sete etapas: continuam pendentes; consultar a triagem e o documento consolidado.
+
+## Reteste de cadastro com conta nova — 20/10/2026
+
+- [x] Usuário confirmou criação e recebimento de código; sessão autenticada acessou etapa 3.
+- [x] Nascimento/cidade, endereço/filiação e financeiro fictícios persistidos pelas operações do cliente. Decimal/zero e recarga conferidos. Consultas do Admin foram somente leitura.
+- [!] Fluxo sequencial bloqueado na etapa 4 por 403 na consulta documental após endereço salvo; repetição confirmou o bloqueio. Endpoint do fluxo: GET /api/v1/client/profile/document-types. Sem upload executado; requestId/correlationId e blockingCode não visíveis na mensagem da tela. Pedida investigação/alinhamento do guard para conta nova, sem afirmar causa interna.
+- [ ] Documento/upload e cadastro completo enviados para análise: não homologados. Etapas 5–7 verificadas separadamente, sem considerar isso um avanço sequencial completo.
+
+O 403 está registrado como bloqueio de integração a investigar, não como defeito interno comprovado. Catálogos/relationship/campos ausentes são pendências de contrato/configuração, detalhadas em PENDENCIAS-BACKEND-QA.md. Retomada de Número no campo separado foi registrada no checklist como ajuste de frontend e não entrou na seção de bugs do backend. Nenhuma nova movimentação financeira ou aprovação documental foi executada.

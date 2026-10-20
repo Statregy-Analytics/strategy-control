@@ -90,3 +90,15 @@ O front passou a usar os endpoints existentes de registro, confirmação/reenvio
 **Não são pendências do backend:** conectar serviços existentes ao front (realizado neste lote), escolha técnica da data inicial na criação dos perfis, preservação de metadados existentes, autenticação/interceptors/idempotência, testes de falha/retry e execução dos retestes do QA. As vigências existentes são preservadas; novos perfis usam a data de criação, sem campos extras no desenho. Financeiro em outra moeda é preservado e não convertido silenciosamente para BRL.
 
 As evidências de tela/integração e os retestes ainda não executados ficam no checklist; somente falhas reais de API devem entrar na tabela de bugs do checklist manual.
+
+## Evidência com conta recém-criada — 20/10
+
+Criação e recebimento do código confirmados pelo usuário; sessão cliente e campos pessoais básicos funcionando. Endereço/filiação e financeiro da conta nova foram persistidos pelo próprio portal. As próximas solicitações não devem ser tratadas como ausência geral desses endpoints.
+
+- **Bloqueio documental reproduzido:** etapa 4 persiste endereço/filiação, mas a consulta de tipos de documento seguinte no fluxo recebe 403 para esta conta nova; repetir não liberou o acesso. Confirmar o blockingCode, quais requisitos faltam e como concluí-los nos campos do Figma antes de enviar documentos. Não assumimos que todo 403 seja defeito: falta alinhar o guard com o onboarding. RequestId/correlationId não foram expostos pela mensagem da tela; não foram inventados. Nenhum arquivo chegou ao upload.
+- **Catálogos e dados pessoais:** gênero/estado civil/nacionalidade/atividade e Estado/UF sem opções nas telas. País de nascimento selecionado não volta após recarga; o payload documentado não possui esse campo. Nascimento e cidade, que possuem campos próprios, persistem corretamente.
+- **Endereço:** bairro digitado não retorna porque falta campo separado; complemento permanece independente. O número concatenado em line1 e não reposto no campo Número foi registrado como ajuste de adaptação do front, sem atribuí-lo automaticamente ao backend.
+- **Contatos:** exigência de relationship bloqueia o envio de nome/telefone de contato novo antes do POST; ausência declarada fica apenas em memória. Não foram criados campos extras nem relacionamento fictício.
+- **Finalização:** revisão carrega dados reais persistidos, mas não foi possível iniciar análise cadastral nem obter recibo/status de envio pelo fluxo confirmado. A leitura de status não equivale a submissão. Termos/Política e aceite versionado continuam sem homologação, apesar da conta criada.
+
+Financeiro com perfil inicialmente vazio foi criado e consultado com valores decimais e zero explícito em BRL. Não é pendência de endpoint nem de vigência do backend. A etapa profissional permanece parcial apenas pela falta das opções de atividade.

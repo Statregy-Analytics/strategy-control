@@ -24,7 +24,7 @@ Atualizado em 20/10/2026 após integração dos endpoints existentes. Figma BaDX
 - [x] Guardar IDs de contatos existentes; não transformar edição em inclusão e não apagar contatos ao marcar ausência.
 - [x] Tratar falha parcial mantendo rascunho; uploads confirmados reaproveitados em repetição e isolados por cliente.
 - [x] Máscaras na revisão, sem senhas/códigos/nomes de arquivos no resumo; senha temporária descartada ao confirmar/sair do fluxo.
-- [ ] Retestar criação → recebimento de e-mail → confirmação com usuário responsável pelo código/aceite legal.
+- [x] Criação e recebimento do código confirmados pelo usuário; sessão autenticada e acesso à etapa 3 observados em homologação. Leitura e registro versionado do aceite continuam pendentes.
 - [ ] Retestar upload/dados tipados com arquivos descartáveis e conta nova após os requisitos cadastrais.
 - [ ] Homologar inclusão de contatos, ausência persistida e envio final após correção/confirmação dos contratos.
 - [ ] Aprovação completa pelo QA: continua aberta; integração parcial não equivale a cadastro concluído de ponta a ponta.
@@ -52,3 +52,27 @@ Solicitado pelo usuário com seu e-mail; endereço integral omitido do repositó
 - [ ] Registrar dados pessoais, endereço/documentos, profissional/financeiro, contatos e revisão desta conta conforme resultados reais. Nenhuma dessas etapas foi aprovada antecipadamente.
 
 A tela ficou aberta para participação do usuário. Não foi criada conta nem solicitado código nesta preparação. Não foram inventados dados pessoais, residência, patrimônio ou arquivos para o e-mail real do usuário.
+
+## Continuação do teste acompanhado — conta nova, 20/10
+
+O usuário concluiu a criação e confirmou recebimento do código. Autorizou dados fictícios sem documentos pessoais reais. Sessão autenticada na etapa 3 e vínculo com a conta solicitada conferidos; nenhum e-mail integral, senha, código ou identificador pessoal foi incluído neste registro. Esta seção substitui a situação de preparação acima.
+
+| Etapa/cenário | Resultado observado | Situação |
+| --- | --- | --- |
+| 1–2 · Criação, código e sessão | Criação/recebimento relatados pelo usuário; continuação autenticada na etapa 3 e cliente correspondente consultado, sem contornar permissões | Aprovado para o que foi observado; aceite versionado não homologado |
+| 3 · Validações locais | Data impossível rejeitada com erro/foco; data válida aceita | Aprovado |
+| 3 · Gravação e retomada | Nascimento e cidade fictícios persistiram e reapareceram após recarga | Aprovado nesses campos |
+| 3 · Seletores | Gênero, estado civil e nacionalidade sem opções; países Brazil/Portugal disponíveis. País de nascimento selecionado não reapareceu após recarga, conforme lacuna do payload | Parcial; catálogos e campo de nascimento pendentes |
+| 4 · Endereço e filiação | Endereço residencial, país e filiação fictícios gravados; retorno pela API confirmado. Endereço também conferido em consulta administrativa somente leitura | Gravação parcial aprovada |
+| 4 · Retomada dos campos | Logradouro/número voltam concatenados em line1; Número separado vazio. Bairro também não retorna; API não possui campo de bairro | Ajuste de adaptação do front para Número; bairro depende de contrato |
+| 4 · Documento | Após endereço persistido, consulta documental negada com 403; repetição manteve o bloqueio. Nenhum arquivo foi enviado, CPF real ou sintético válido não foi gerado | Fluxo normal bloqueado aqui; causa/guard a confirmar com backend |
+| 5 · Financeiro independente | Renda individual 1.234,56; familiar 2.345,67; bens 0 gravados em BRL. Conferidos em leitura da API e na revisão após recarga; negativo rejeitado localmente | Financeiro aprovado; atividade sem catálogo não homologada |
+| 6 · Contato novo | Vazio rejeitado; contato fictício preservado na tela e não enviado porque falta relationship exigido pelo contrato | Inclusão bloqueada; nenhum parentesco inventado |
+| 6 · Ausência | Abre revisão com aviso de declaração somente local; após recarga volta Não informado | Comportamento local conferido; persistência pendente |
+| 7 · Revisão/envio | Dados suportados da API reaparecem; confirmação obrigatória funciona; ação final consulta status e informa ausência de envio cadastral confirmado, sem tela de sucesso/status inventado | Revisão parcial aprovada; envio para análise não homologado |
+
+**Limite da rodada:** o fluxo sequencial parou na etapa 4. As etapas 5–7 foram acessadas separadamente para testar operações independentes já autorizadas; isso não contorna o guard documental e não aprova o cadastro de ponta a ponta. Nenhuma permissão, aprovação documental, verificação, depósito ou status foi alterado pelo Admin.
+
+**Ajuste do front identificado:** separar corretamente Logradouro e Número na retomada do endereço gravado em line1. Não foi classificado como erro do backend nem marcado aprovado. Consulta automática de CEP continua indisponível no front; não houve requisição postal nesta rodada, portanto não foi registrada como falha HTTP nova.
+
+Os dados fictícios pessoais, endereço/filiação e financeiro desta rodada permaneceram na conta de homologação para reteste. Contato fictício e rascunho documental não foram persistidos; nenhum arquivo pessoal foi enviado e nenhuma conta adicional foi criada. Evidências detalhadas no portal: docs/QA-2026-10-20-CADASTRO-CONTA-NOVA.md.
