@@ -80,4 +80,14 @@ O bloqueio de lint global do portal foi corrigido; 52 testes e build passaram. A
 
 A Etapa 1 possui tela e validações locais conforme 4:25513, isoladas em prévia de desenvolvimento. O cadastro integrado atual não foi substituído. País de residência (incluindo o tratamento dos agrupamentos do Figma), URLs/textos/versões legais e registro do aceite continuam sem contrato confirmado; não serão descartados nem enviados como campos presumidos.
 
-Acompanhar tela, validações, integração e homologação de cada etapa no [Checklist do cadastro](CHECKLIST-CADASTRO-SETE-ETAPAS.md). A etapa 2 é a próxima tela do trabalho incremental. Etapas 2 a 7 e retomada integrada permanecem abertas.
+Acompanhar tela, validações, integração e homologação de cada etapa no [Checklist do cadastro](CHECKLIST-CADASTRO-SETE-ETAPAS.md). Etapas 1 e 2 possuem telas e validações locais; etapas 3 a 7 e retomada integrada permanecem abertas.
+
+## Cadastro de sete etapas — confirmação de e-mail, 20/10
+
+A tela 2/7 (4:25620) reutiliza os serviços públicos POST /auth/email-confirmation/confirm e /request sob /api/v1, sem campo de e-mail adicional. A lógica é compartilhada com a confirmação pública atual. A prévia local bloqueia o transporte; envio/recebimento e retomada reais ainda não foram homologados neste lote.
+
+- Definir como a confirmação bem-sucedida permite continuar à etapa 3: a resposta documentada contém somente succeeded/message, sem sessão ou estado de progresso. Precisamos do contrato de sessão de cadastro, consulta/gravação e próxima etapa, sem pedir senha novamente ou criar campo/ação fora do Figma. O front não armazena a senha para fazer login automático.
+- O código é string sem tamanho/formato documentado. Se houver restrição, informar a regra; o placeholder 000000 do desenho não foi transformado em validação arbitrária.
+- Permanecem as dependências da etapa 1: país real/agrupamentos, textos/URLs/versões legais e aceite versionado. O fluxo integrado atual não foi substituído por prévias.
+
+Evidências no portal: docs/QA-2026-10-20-CADASTRO-ETAPA-2.md. Checklist atualizado com a separação entre validação local e homologação integrada.

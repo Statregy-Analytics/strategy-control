@@ -7,7 +7,7 @@ Atualizado em 20/10/2026. Referência: Figma BaDXlWpxbIoY4azOaQnXgv, seção 4:2
 | Etapa | Tela e validação local | Integração e homologação |
 | --- | --- | --- |
 | 1 · Criar conta | Pronta em prévia local | Pendente: residência, documentos legais e aceite versionado |
-| 2 · Confirmar e-mail | Pendente do novo desenho; confirmação pública atual já existe | Reutilizar API atual; confirmação real e passagem à etapa 3 pendentes |
+| 2 · Confirmar e-mail | Pronta em prévia local; lógica pública reutilizada | Serviços existentes reutilizados; envio real e sessão para etapa 3 pendentes |
 | 3 · Dados pessoais | Pendente | Catálogos, gravação e retomada pendentes |
 | 4 · Documento e endereço | Pendente, oito variantes | País real, endereços/documentos e uploads pendentes |
 | 5 · Atividade trabalhista | Pendente | Gravação e retomada pendentes |
@@ -31,11 +31,17 @@ A prévia de desenvolvimento fica em http://localhost:9010/dev/cadastro/etapa-1.
 
 ## 2. Confirmar e-mail — Figma 4:25620
 
-- [ ] Implementar a composição e o progresso 2/7 usando somente campos/ações do desenho.
-- [ ] Reutilizar confirmação/reenvio públicos existentes; validar código e tratar inválido, expirado, já usado e limites de tentativa/reenvio.
-- [ ] Preservar endereço em memória e limpar o código ao concluir/sair; não expor código em URL/logs.
+- [x] Implementar a composição e o progresso 2/7 usando somente campos/ações do desenho.
+- [x] Reutilizar serviços e lógica de confirmação/reenvio públicos existentes; validar código e tratar inválido, expirado, já usado e limites de tentativa/reenvio, com transporte controlado nos testes.
+- [x] Preservar endereço em memória e limpar o código ao concluir/sair; descartar respostas tardias e impedir pedidos simultâneos, sem código em URL/logs.
 - [ ] Confirmar a sessão após o e-mail e o encaminhamento à etapa 3, sem abrir a Home antes da conclusão exigida.
 - [ ] Homologar envio/recebimento e retomada real.
+
+- [x] Conferir desktop/celular, código obrigatório, entrada alfanumérica, reenvio bloqueado na prévia e retorno à etapa 1; 70 testes, lint, build e diff aprovados.
+
+Prévia: http://localhost:9010/dev/cadastro/etapa-2. Usa endereço demonstrativo mascarado e bloqueia o transporte; não envia e-mail, não confirma código nem simula sucesso/avanço. A rota não existe em produção. A confirmação pública atual permanece disponível e usa a mesma lógica e os mesmos serviços HTTP. O placeholder 000000 não define tamanho/formato do código; o contrato aceita string sem restrição documentada.
+
+A próxima tela incremental é a etapa 3. A confirmação real e a sessão para continuar o cadastro ainda precisam ser homologadas; a resposta de confirmação atual contém somente succeeded/message.
 
 ## 3. Dados pessoais — Figma 6:25562
 

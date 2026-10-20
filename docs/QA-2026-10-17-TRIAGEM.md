@@ -88,3 +88,9 @@ Cadastro de sete etapas, retomada, aceite e revisão continuam pendentes; este l
 ## Cadastro incremental de sete etapas — 20/10
 
 Criado [checklist por etapa](CHECKLIST-CADASTRO-SETE-ETAPAS.md). Etapa 1 (4:25513): componentes, campos e validações locais implementados; prévia identificada, sem chamada HTTP, criação de conta ou aceite transmitido, somente em desenvolvimento. Etapas 2–7 seguem abertas. O cadastro atual em produção permanece integrado e não foi substituído por uma simulação.
+
+## Cadastro incremental — etapa 2, 20/10
+
+Etapa 2 (4:25620) com campo de código, e-mail mascarado e ações do Figma. Serviços/lógica de confirmação e reenvio reutilizados da confirmação pública, que permanece disponível. Conferidos obrigatórios, celular/desktop e Voltar; 70 testes, lint e build aprovados. Corrigido no reteste um erro de temporizador que interrompia a desmontagem/navegação.
+
+A prévia de desenvolvimento bloqueia chamadas HTTP e não simula sucesso. O item de cadastro segue parcial: telas/validações locais das etapas 1–2 prontas, etapas 3–7 abertas; criação, aceite, sessão após confirmação e retomada integrada pendentes. Nenhuma mensagem real foi enviada. Ver [checklist](CHECKLIST-CADASTRO-SETE-ETAPAS.md) e [pendências](PENDENCIAS-BACKEND-QA.md).
