@@ -25,7 +25,7 @@
             $emit('update:values', {
               ...values,
               [field.editKey]:
-                field.inputType === 'number' ? ($event === '' ? null : Number($event)) : $event,
+                field.inputType === 'number' && $event === '' ? null : $event,
             })
           "
           ><q-tooltip v-if="!editable.includes(field.editKey)"
