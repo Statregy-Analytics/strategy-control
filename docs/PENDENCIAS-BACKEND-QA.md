@@ -75,3 +75,9 @@ As paletas e o relógio dos Ajustes preservam a persistência local existente. S
 ## Situação do frontend — atualização de 20/10
 
 O bloqueio de lint global do portal foi corrigido; 52 testes e build passaram. A pipeline passa a validar lint e testes antes da publicação. Não há solicitação nova ao backend decorrente desse lote técnico. As dependências acima continuam abertas; as correções de sintaxe/reatividade nos componentes legados não homologam os protótipos.
+
+## Cadastro de sete etapas — primeira tela local, 20/10
+
+A Etapa 1 possui tela e validações locais conforme 4:25513, isoladas em prévia de desenvolvimento. O cadastro integrado atual não foi substituído. País de residência (incluindo o tratamento dos agrupamentos do Figma), URLs/textos/versões legais e registro do aceite continuam sem contrato confirmado; não serão descartados nem enviados como campos presumidos.
+
+Acompanhar tela, validações, integração e homologação de cada etapa no [Checklist do cadastro](CHECKLIST-CADASTRO-SETE-ETAPAS.md). A etapa 2 é a próxima tela do trabalho incremental. Etapas 2 a 7 e retomada integrada permanecem abertas.
