@@ -143,3 +143,10 @@ Na conta nova do usuário, o portal publicado enviou frente e verso fictícios p
 UF de expedição continuou sem opções, porém a definição aceitou ausência: issuerState retornou null. Confirmar a fonte das opções/regras para preencher o campo existente do Figma; não tratar como erro de upload reproduzido. Bairro separado e demais países/tipos continuam pendentes nos limites já descritos.
 
 A recarga da etapa 5 não repôs número/emissor/expedição, apesar do registro confirmado no servidor; é necessário confrontar a leitura do cliente com o adaptador antes de atribuir ao backend. O texto ainda não enviado mostrado ao voltar com arquivos já enviados é apresentação do frontend e fica fora da lista de bugs da API. Detalhes e próximos retestes no checklist de cadastro.
+
+
+### Retomada documental resolvida no front — 20/10
+
+Correção beb01b2 publicada (pipeline 39471786647 aprovada): o wizard retoma número mascarado, emissor, UF disponível e datas pela identificação do perfil. Campos sem retorno integral não são preenchidos com dados inventados. Documento/evidências vigentes sem edição permitem avançar sem reenviar; edição/reenvio exige número completo quando só há máscara. O texto ainda não enviado também foi corrigido nos componentes existentes. Conta do usuário avançou à etapa 6; leitura administrativa manteve os mesmos dois anexos e um RG, sem duplicação. Essas duas ocorrências deixam de ser pendências abertas/atribuíveis ao backend.
+
+UF não preenchida anteriormente, catálogos, bairro e demais lacunas contratuais seguem conforme descrito. Aprovação documental e envio cadastral final continuam sem homologação; Uploaded não representa aprovação. Não é necessário criar campos/ações novos no Figma para essa correção.

@@ -283,3 +283,8 @@ Portal 46d5bc5, pipeline 39468374725 tentativa 2 aprovada (152 testes). Conta no
 Portal 46d5bc5, conta nova do usuário: dois PNGs claramente fictícios selecionados no formulário e enviados; avanço real à etapa 6. Leitura administrativa confirmou dois RG/BR Uploaded, arquivos Private/Available e um ProvidedDocument/Active com duas evidências Uploaded. Não houve 403 nem aprovação documental. UF sem catálogo não bloqueou este RG; issuerState null aceito pela definição. Sem alteração de layout/código, contato, aceite ou envio final.
 
 Recarga manteve endereço/número/complemento/filiação, mas não repôs campos do RG. Antes da recarga, Voltar preservou arquivos em memória com texto incorreto ainda não enviado. Retomada e apresentação ficam abertas no checklist principal; não adicionadas como bugs do backend sem atribuição confirmada. Cadastro completo e aprovação seguem parciais. Evidência: cadastro-etapa-5-envio-concluido.png.
+
+
+### Retomada documental corrigida e publicada — 20/10
+
+beb01b2, pipeline 39471786647 aprovada; 158 testes/lint/build. Perfil do usuário em homologação repôs número mascarado/emissor/expedição e indicação de evidências nos campos/slots existentes, inclusive em nova aba sem arquivos locais. Continuar avançou à etapa 6; conferência administrativa manteve dois anexos com os mesmos IDs e um RG com duas evidências. Máscara não é enviada como número real; sem alterações usa o registro confirmado, sem novo upload. Texto ainda não enviado corrigido. Ocorrências de frontend encerradas, sem novo bug da API; UF/catálogos, bairro, contatos e envio final permanecem nos respectivos limites. Evidência: cadastro-documentos-retomada-hml.png.
