@@ -252,3 +252,10 @@ Defeito do frontend corrigido no portal: leitura profissional/financeira ou de c
 126 testes, lint/build e diff do lote aprovados. Revisão local 9010 conferida em desktop e 390 px efetivos, sem overflow horizontal. Enviar sem confirmação mostra erro e foca o checkbox, sem escrita. Falhas/retry verificados por testes automatizados com serviços simulados, sem provocar erros na API. Não homologa upload bloqueado por 403, contatos novos ou envio final.
 
 Checklist ativo: CHECKLIST-CADASTRO-SETE-ETAPAS.md; evidência técnica no portal em docs/QA-2026-10-20-CADASTRO-FALHAS-PARCIAIS.md.
+
+
+## Etapa 4 — QA do preenchimento por CEP, 20/10
+
+Consulta existente do legado reutilizada no Brasil, sem novas ações/campos. Em 9010, CEP público 01001-000 preencheu Logradouro/Bairro/Cidade/Estado e manteve Número/Complemento. CEP inexistente mostrou orientação no campo sem apagar endereço; CEP válido recuperou o preenchimento. Desktop e 390 px sem overflow; 135 testes, lint/build aprovados. Não foi clicado Continuar nem gravado perfil/documentos. Falhas/concorrência cobertas em testes; nenhuma falha nova do backend adicionada à tabela de bugs. Limites e publicação em CHECKLIST-CADASTRO-SETE-ETAPAS.md.
+
+Reteste publicado: aae0e31, pipeline 39453639953 aprovada. Mesmo preenchimento por CEP confirmado no navegador de homologação, em aba separada na sessão da conta nova; Número/Complemento preservados, sem salvar perfil ou documentos.

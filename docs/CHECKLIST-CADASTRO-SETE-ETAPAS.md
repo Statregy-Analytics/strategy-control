@@ -9,7 +9,7 @@ Atualizado em 20/10/2026 após integração dos endpoints existentes. Figma BaDX
 | 1 · Criar conta | POST /auth/register; nome, e-mail, senha e indicação; chave estável no retry; /register abre o fluxo Figma | Texto/versão e registro do aceite antes da autenticação; residência regional não identifica um país |
 | 2 · Confirmar e-mail | Confirmação e reenvio reais; após confirmação usa login existente para continuar na etapa 3; sem senha em storage/URL | Criação/código confirmados pelo usuário e sessão na etapa 3 observada; aceite versionado continua pendente |
 | 3 · Dados pessoais | GET/PATCH do perfil; nascimento, gênero, estado civil, uma nacionalidade e cidade; preserva dados externos à etapa | País de nascimento e múltiplas nacionalidades não existem no payload; catálogos dos seletores não disponibilizados |
-| 4 · Documento e endereço | Endereço/filiação via PATCH; tipos/definições reais; upload e dados tipados para correspondências disponíveis; retry de arquivos sem duplicar upload concluído | Bairro separado, catálogo de estados/UF e tipos/esquemas das demais variantes; cliente novo bloqueado por 403 na consulta de tipos; upload aguarda liberação |
+| 4 · Documento e endereço | Endereço/filiação via PATCH; CEP Brasil com consulta existente e preenchimento automático; tipos/definições reais; upload e dados tipados para correspondências disponíveis; retry de arquivos sem duplicar upload concluído | Bairro separado, catálogo de estados/UF e tipos/esquemas das demais variantes; cliente novo bloqueado por 403 na consulta de tipos; upload aguarda liberação |
 | 5 · Atividade trabalhista | GET/PUT profissional e financeiro; valores precisos em BRL; preserva vigências e empresa; datas iniciais na data de criação | Catálogo de atividade para novas escolhas; criação financeira sem perfil validada com conta nova; atividade aguarda catálogo |
 | 6 · Contatos de confiança | GET real e PUT de existentes preservando relationship/e-mail; valida todos antes de escrever | Inclusão exige relationship não presente no Figma; declaração de ausência sem operação de persistência |
 | 7 · Revisão e envio | Revisa dados carregados da API e alterações locais; Editar por etapa; confirmação; consulta real de onboarding | Operação final/recibo de envio e revisão cadastral não identificados; Data Intake atual contém apenas formulários patrimoniais |
@@ -98,7 +98,7 @@ A regravação sem duplicar Número foi validada por testes automatizados, sem r
 
 ### Próximos itens do front e retestes
 
-- [ ] Implementar/conferir preenchimento por CEP da variante Brasil reutilizando o serviço existente, sem substituir campos manuais nem adicionar ações.
+- [x] Preenchimento por CEP Brasil implementado e testado com a consulta existente, preservando campos manuais, Número/Complemento e o desenho. Ver lote de CEP abaixo.
 - [ ] Conferir retomada da etapa após saída e novo login contra o progresso realmente disponível; não inferir cadastro enviado a partir de campos preenchidos.
 - [ ] Reexecutar upload, contatos novos e envio final somente após alinhamento dos bloqueios documentados; esses cenários continuam sem aprovação integrada.
 
@@ -107,3 +107,18 @@ Detalhes do lote: Strategy-analytics-v2/docs/QA-2026-10-20-CADASTRO-FALHAS-PARCI
 ### Publicação deste lote
 
 Portal 8784ab8 publicado; pipeline 39452089997 concluída com lint/testes/build/upload/ativação aprovados. Conferência somente leitura em hml.strategyanalytics.com.br/cadastro/etapa-7, na sessão da conta do usuário: cinco grupos presentes, dados pessoais/endereço retomados e renda individual 1.234,56, familiar 2.345,67 e bens 0 disponíveis. Nenhum envio ou escrita feito nesta conferência; aba original documental preservada. Não foi reproduzida falha de rede no servidor para obter evidência visual artificial.
+
+## Etapa 4 — preenchimento automático por CEP, 20/10
+
+- [x] Reutilizar validator-cep do cadastro antigo por serviço compartilhado; consulta pública sem cookies/tokens, sem endpoint novo nem chamada documental.
+- [x] Ao sair do CEP válido, preencher Logradouro, Bairro, Cidade e Estado; preservar Número/Complemento. Máscara/teclado numérico no campo existente, sem novas ações.
+- [x] CEP inválido/inexistente, resposta incompleta e falha deixam preenchimento manual disponível; erro no campo e retry ao sair novamente. Não apagar rua/bairro ausentes de CEP genérico.
+- [x] Ignorar resposta antiga após troca de CEP/saída; preservar campos editados durante a consulta; evitar blur repetido sobrescrevendo correção manual.
+- [x] 135 testes, lint/build e diff do lote aprovados. Consulta real em 9010 preencheu endereço do CEP público 01001-000; CEP 99999-999 mostrou erro sem apagar os campos e recuperação funcionou.
+- [x] Desktop/celular 390 px conferidos sem overflow; nenhuma alteração no perfil ou arquivo enviado pelo teste. Aba original com documentos/rascunho preservada.
+
+A consulta fornece Bairro para o rascunho, mas a persistência continua sem campo próprio no contrato. Não resolve UF de expedição, 403 documental ou envio final. Próximo item do front: retomada da etapa após novo login. Evidências no portal: docs/QA-2026-10-20-CADASTRO-CEP.md.
+
+### Publicação e reteste do CEP em homologação
+
+Portal aae0e31 publicado; pipeline 39453639953 concluiu lint, 135 testes, build, upload e ativação com sucesso. Na sessão da conta do usuário, em nova aba de hml.strategyanalytics.com.br/cadastro/etapa-4/br?review=1, o CEP público 01001-000 preencheu Praça da Sé, Sé, São Paulo e Estado São Paulo; Número 100 e Complemento Unidade de teste foram preservados. Teste somente no rascunho: nenhum Continuar, PATCH cadastral, documento ou envio final. Aba original com documentos não enviados preservada. CEP concluído no front; próximo item permanece retomada após novo login.
