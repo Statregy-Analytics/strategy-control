@@ -202,3 +202,15 @@ Portal beb01b2 publicado em homologação; pipeline 39471786647 aprovada em lint
 - [x] Revisão da composição existente e evidência visual da versão publicada: cadastro-documentos-retomada-hml.png. Aba antiga do usuário com rascunhos pessoais preservada. Nenhum contato, aprovação, aceite ou envio cadastral final executado.
 
 **Pendências reais restantes:** catálogos/UF não gravada anteriormente, bairro, tipos/países adicionais, contatos e envio/revisão final conforme documento consolidado. Número integral não retornado pela API de perfil é uma proteção do contrato; a retomada usa a máscara. Não cobrar novamente o 403 superado, upload RG ou esses dois ajustes do frontend como bloqueios atuais.
+
+
+## Admin — documentos do cadastro visíveis para revisão, 20/10
+
+Corrigido o mapeamento de categoria no frontend: GET /admin/customers/{id}/documents/overview retornava summary.pending = 2 e dois itens Pending/Review em PERSONAL_DOCUMENTS. A projeção só reconhecia PERSONAL e escondia as linhas, embora o contador estivesse correto. PERSONAL_DOCUMENTS agora usa a primeira seção já existente do Figma; alias antigo e demais seções preservados. Nenhum campo, ação, layout ou permissão novos.
+
+- [x] Regressão cobre dois arquivos do mesmo tipo RG, sem requirementId, com IDs distintos e ações Review/Download retornadas pela API. Doze testes de projeção/revisão aprovados; lint, build e diff do lote aprovados.
+- [x] Admin 4fd3faf publicado, pipeline 39474455430 aprovada em lint/build/upload/ativação. Local 8080 e perfil do usuário em admin.strategyanalytics.com.br conferidos.
+- [x] Após recarga, aparecem dois RGs na seção Documentação pessoal; contador 2 Aguardando coerente; ambos com Visualizar, Baixar, Aprovar e Reprovar. Evidência: admin-documentos-jorge-aprovacao.png.
+- [ ] Aprovação/reprovação efetiva e reflexos no portal/edição do perfil não executados nesta rodada. Os arquivos fictícios permanecem Pending para revisão do usuário; esta correção não comprova liberação cadastral posterior.
+
+A ausência das linhas era defeito do frontend, encerrado após o reteste publicado. Nenhum novo bloqueio/bug de backend foi aberto por esse cenário.

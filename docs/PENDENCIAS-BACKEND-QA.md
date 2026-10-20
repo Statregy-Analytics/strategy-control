@@ -150,3 +150,8 @@ A recarga da etapa 5 não repôs número/emissor/expedição, apesar do registro
 Correção beb01b2 publicada (pipeline 39471786647 aprovada): o wizard retoma número mascarado, emissor, UF disponível e datas pela identificação do perfil. Campos sem retorno integral não são preenchidos com dados inventados. Documento/evidências vigentes sem edição permitem avançar sem reenviar; edição/reenvio exige número completo quando só há máscara. O texto ainda não enviado também foi corrigido nos componentes existentes. Conta do usuário avançou à etapa 6; leitura administrativa manteve os mesmos dois anexos e um RG, sem duplicação. Essas duas ocorrências deixam de ser pendências abertas/atribuíveis ao backend.
 
 UF não preenchida anteriormente, catálogos, bairro e demais lacunas contratuais seguem conforme descrito. Aprovação documental e envio cadastral final continuam sem homologação; Uploaded não representa aprovação. Não é necessário criar campos/ações novos no Figma para essa correção.
+
+
+### Lista documental do Admin — correção do front, 20/10
+
+Os dois arquivos fictícios do cadastro já eram retornados pelo overview com permissão Review, em PERSONAL_DOCUMENTS. O front não reconhecia esse código e escondia as linhas; corrigido em 4fd3faf e validado no Admin publicado, pipeline 39474455430 aprovada. Ambos aparecem com ações de revisão e contador coerente. Não pedir endpoint/permissão nova ao backend para esse problema. Permanecem as confirmações já descritas sobre efeitos da aprovação, liberação da edição e revisão cadastral; nenhuma decisão documental foi enviada nesta rodada.
