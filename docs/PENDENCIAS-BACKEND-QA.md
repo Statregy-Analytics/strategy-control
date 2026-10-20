@@ -76,80 +76,17 @@ As paletas e o relógio dos Ajustes preservam a persistência local existente. S
 
 O bloqueio de lint global do portal foi corrigido; 52 testes e build passaram. A pipeline passa a validar lint e testes antes da publicação. Não há solicitação nova ao backend decorrente desse lote técnico. As dependências acima continuam abertas; as correções de sintaxe/reatividade nos componentes legados não homologam os protótipos.
 
-## Cadastro de sete etapas — primeira tela local, 20/10
+## Cadastro de sete etapas — pendências reais após integração, 20/10
 
-A Etapa 1 possui tela e validações locais conforme 4:25513, inicialmente isoladas em desenvolvimento e agora acessíveis em homologação nas rotas /cadastro/etapa-*. O cadastro integrado atual não foi substituído. País de residência (incluindo o tratamento dos agrupamentos do Figma), URLs/textos/versões legais e registro do aceite continuam sem contrato confirmado; não serão descartados nem enviados como campos presumidos.
+O front passou a usar os endpoints existentes de registro, confirmação/reenvio, perfil, preferências/país, perfil profissional/financeiro, contatos, documentos e status. Não estamos solicitando recriar essas operações. Mantemos os campos/ações do Figma.
 
-Acompanhar tela, validações, integração e homologação de cada etapa no [Checklist do cadastro](CHECKLIST-CADASTRO-SETE-ETAPAS.md). Etapas 1 a 3 possuem telas e validações locais; catálogos/obrigatórios da etapa 3, etapas 4 a 7 e retomada integrada permanecem abertos.
+1. **Aceite legal da etapa 1:** fornecer texto/URL e versão dos Termos/Política e forma de vincular o aceite ao registro sem sessão prévia. /auth/register aceita somente name/email/password/referralCode. /client/consents/requirements requer contexto (consulta sem contexto retorna 400) e o fluxo cliente é autenticado; confirmar contexto e vínculo corretos.
+2. **Dados pessoais:** UpdateClientPersonalDetailsRequest possui nationality singular e não possui país de nascimento. Definir gravação/consulta das múltiplas nacionalidades e país já desenhados. Disponibilizar opções de gênero/estado civil/nacionalidade/atividade e estados/UF; /preferences/catalog consultado retorna moedas/idiomas/fusos/temas e países BR/PT, não esses catálogos. Valores atuais da API são preservados, sem opções inventadas.
+3. **Residência e endereço:** escolha regional do Figma (Europa, África etc.) não determina um país real; confirmar resolução sem acrescentar campo. CustomerAddressRequest não tem bairro separado; complemento permanece em line2, sem misturar os dois. Países únicos disponíveis podem ser associados pelo ID real do catálogo, preservando preferências.
+4. **Documentos por país:** APIs de tipos, definição de dados, upload e provided-documents existem e estão conectadas. Na consulta de BR, CPF e RG têm definição válida; confirmar equivalência do Documento de identificação genérico do Figma com o tipo apropriado e completar tipos/esquemas das demais variantes. Não atribuir o país do frame a todos os países da região. Confirmar liberação para cliente novo: operações documentais exigem perfil completo, conforme devolutiva anterior. Isso requer reteste integrado, não criação de outro endpoint de upload.
+5. **Contatos novos e ausência:** POST exige relationship, ausente no desenho. Permitir gravação com nome/telefone ou indicar regra válida sem acrescentar campo. GET/PUT de existentes já preservam o relacionamento real. Falta estado explícito de Não possuo contato de confiança; lista vazia não prova a declaração e não autoriza apagar contatos.
+6. **Envio final/revisão:** confirmar operação que vincula dados/documentos/confirmação e inicia análise, com consulta do envio/data/recibo, correção/reenvio e permissão de edição. GET /client/onboarding/status existe, mas não explicita esse envio. Em homologação, GET /data-intake/forms retornou ASSET-CONSORTIUM, ASSET-INVESTMENT, ASSET-VEHICLE e PATRIMONIO-IMOVEL; não há formulário cadastral identificado para reutilizar submit/resubmit. Não fabricar cadastro enviado, aprovação ou desbloqueio.
 
-## Cadastro de sete etapas — confirmação de e-mail, 20/10
+**Não são pendências do backend:** conectar serviços existentes ao front (realizado neste lote), escolha técnica da data inicial na criação dos perfis, preservação de metadados existentes, autenticação/interceptors/idempotência, testes de falha/retry e execução dos retestes do QA. As vigências existentes são preservadas; novos perfis usam a data de criação, sem campos extras no desenho. Financeiro em outra moeda é preservado e não convertido silenciosamente para BRL.
 
-A tela 2/7 (4:25620) reutiliza os serviços públicos POST /auth/email-confirmation/confirm e /request sob /api/v1, sem campo de e-mail adicional. A lógica é compartilhada com a confirmação pública atual. A tela de homologação da etapa 2 bloqueia o transporte de apresentação; envio/recebimento e retomada reais ainda não foram homologados neste lote.
-
-- Definir como a confirmação bem-sucedida permite continuar à etapa 3: a resposta documentada contém somente succeeded/message, sem sessão ou estado de progresso. Precisamos do contrato de sessão de cadastro, consulta/gravação e próxima etapa, sem pedir senha novamente ou criar campo/ação fora do Figma. O front não armazena a senha para fazer login automático.
-- O código é string sem tamanho/formato documentado. Se houver restrição, informar a regra; o placeholder 000000 do desenho não foi transformado em validação arbitrária.
-- Permanecem as dependências da etapa 1: país real/agrupamentos, textos/URLs/versões legais e aceite versionado. O fluxo integrado atual não foi substituído por prévias.
-
-Evidências no portal: docs/QA-2026-10-20-CADASTRO-ETAPA-2.md. Checklist atualizado com a separação entre validação local e homologação integrada.
-## Cadastro de sete etapas — dados pessoais, 20/10
-
-Tela 3/7 conforme 6:25562, com os seis campos/grupos do desenho e somente Adicionar outra nacionalidade, Voltar e Continuar. Estrutura e componentes existentes reutilizados. A prévia não consulta endpoints administrativos nem grava um perfil parcial como se concluísse o cadastro.
-
-- Disponibilizar catálogos acessíveis na sessão do cadastro para gênero, estado civil, nacionalidades e países de nascimento, com rótulos e valores aceitos. No Swagger consultado, países só tem catálogo administrativo; o catálogo de preferências não contém essas opções. Não serão criadas listas ou IDs presumidos no front.
-- Confirmar campo/ID de país de nascimento: UpdateClientPersonalDetailsRequest não o possui. País do endereço/residência e birthState não substituem esse dado.
-- Confirmar leitura e escrita de múltiplas nacionalidades. O Figma permite adicionar outra, enquanto personalDetails.nationality é apenas uma string. Não concatenar valores arbitrariamente nem criar campo adicional na tela.
-- Informar os obrigatórios e regras da etapa 3, inclusive eventual idade mínima. As propriedades do perfil são anuláveis e não confirmam regras do onboarding. O front valida data real/não futura e escolhas recebidas, sem inventar restrições.
-- Confirmar gravação/consulta/retomada do rascunho e avanço para etapa 4 sob a sessão de cadastro. PATCH /client/profile atual não define esse progresso e não acomoda todos os dados do desenho. Preservar os demais dados e a revisão existente.
-
-Validação local: 77 testes aprovados e conferência desktop/celular. Catálogos vazios e Continuar mostram indisponibilidade sem simular gravação; rascunho apenas em memória. A integração permanece aberta. Evidências no portal: docs/QA-2026-10-20-CADASTRO-ETAPA-3.md. Próxima tela incremental: etapa 4.
-
-Publicação em homologação: por solicitação do usuário, as telas 1–3 passaram a integrar o build e ficam em /cadastro/etapa-1, /cadastro/etapa-2 e /cadastro/etapa-3 no hml.strategyanalytics.com.br. Os bloqueios HTTP acima continuam documentados e visíveis, sem impedir a publicação visual para o QA. Os aliases /dev mantêm links anteriores compatíveis.
-
-## Cadastro de sete etapas — documento e endereço, 20/10
-
-As oito variações da etapa 4 estão implementadas conforme os frames, com componentes reutilizáveis de campo e seleção local de arquivo. Publicação em /cadastro/etapa-4 e suas variações. Não foram acrescentados comprovante de endereço, seletor de país ou ações fora do desenho.
-
-- Confirmar país real herdado da etapa 1 e sua relação com os agrupamentos. Os frames regionais são Argentina, Portugal e África do Sul; o frame EUA/Canadá exibe EUA. Não presumir IDs ou aplicar formatos de um país a todo o grupo.
-- Confirmar leitura/escrita separada de logradouro, número, complemento, bairro/distrito, cidade e estado/província no rascunho do cadastro. Não reinterpretar complemento como bairro nem concatenar campos por conta própria. Confirmar catálogos de regiões e países emissores acessíveis na sessão de cadastro.
-- Informar consulta postal para Brasil/Japão ou indicar serviço aprovado já existente. O Figma prevê preenchimento automático; hoje a tela informa indisponibilidade e mantém entrada manual, sem enviar códigos a terceiros.
-- Confirmar mapeamento de cada tipo do Figma para documentTypeId/countryId/requirementId e metadados aceitos. Já existem listagem de tipos, data-definition e uploadClientDocument no portal: não é pedido de criar um novo endpoint genérico. Precisamos das regras para este onboarding e do vínculo com o progresso.
-- POST /client/profile/documents recebe um file por chamada. Confirmar como vincular frente e verso ao mesmo documento, substituir cada lado e tratar reenvio/falha parcial sem duplicar exigências. Passaporte usa somente a página com os dados. Não gerar PDF combinado nem mandar um segundo documento por suposição.
-- Confirmar número fiscal, dados de emissão/validade e metadados específicos por país, obrigatórios, formatos/dígitos, limites/MIME dos arquivos e política de documento vencido. Placeholders do Figma não foram transformados em regras HTTP não documentadas.
-- Confirmar Filiação 1/2 e Não consta no meu documento. Não assumir que a ordem significa mãe/pai, nem perder a declaração de ausência ao mapear para motherName/fatherName.
-- Confirmar gravação/retomada e avanço à etapa 5 sob sessão de cadastro. Seleção de arquivo é local, com aviso explícito, sem envio/sucesso fictício; o legado DocumentUpload simula envio e não foi reaproveitado.
-
-Checklist diferencia conferência das oito telas de homologação integrada, que permanece aberta. Evidências no portal: docs/QA-2026-10-20-CADASTRO-ETAPA-4.md.
-
-## Cadastro de sete etapas — atividade trabalhista, 20/10
-
-Etapa 5 conforme 9:25789 publicada em /cadastro/etapa-5, com somente atividade e os três valores em reais. Inputs, estrutura e assets existentes reutilizados; sem empresa, datas, classificações ou seletor de moeda adicionais.
-
-- Confirmar catálogo acessível no cadastro para Atividade trabalhista e seu mapeamento para occupation. O contrato atual usa string livre; não define as opções do seletor do Figma.
-- Confirmar obrigatórios, precisão/limites aceitos e significado de ausência/zero nos três valores. A tela mantém valores vazios até entrada explícita; não fabrica renda, patrimônio ou faixas. A entrada local em reais usa centavos sem conversão monetária ou arredondamento silencioso.
-- Os serviços GET/PUT /client/profile/professional-profile e /financial-profile já existem. Para usá-los no onboarding, definir validFrom/validTo/isCurrent e effectiveFrom/effectiveTo/currencyCode sem pedir novos campos ao usuário. Não presumir data atual, BRL como moeda de uma conversão, ou sobrescrever metadados do perfil existente. O desenho identifica os valores em R$; confirmar currencyCode correspondente no fluxo.
-- Confirmar como gravar as duas partes e retomar após falha parcial, sem apresentar sucesso integral quando somente uma foi salva. Definir consulta/progresso e avanço à etapa 6 sob a sessão do cadastro.
-
-A tela e validações locais estão disponíveis para QA. Nenhuma renda/perfil real foi gravado neste lote; a integração e homologação dos valores persistidos permanecem abertas. Evidências no portal: docs/QA-2026-10-20-CADASTRO-ETAPA-5.md. Checklist atualizado; próxima tela incremental: etapa 6.
-
-## Cadastro de sete etapas — contatos de confiança, 20/10
-
-Etapa 6 conforme 9:25883 em /cadastro/etapa-6: nome/telefone, adição de outro contato, declaração de ausência e Voltar/Continuar. Campos e estrutura existentes reutilizados. Sem parentesco, e-mail, remoção ou ações extras.
-
-- GET/POST/PUT/DELETE /client/profile/trusted-contacts já existem e têm serviços no portal. UpsertClientTrustedContactRequest exige name, relationship, phoneNumber e email (anulável). Confirmar a escrita com somente nome/telefone do Figma sem inventar relationship nem pedir parentesco. email poderá ser nulo quando o contrato do onboarding estiver confirmado; não criar campo na tela.
-- Definir registro/consulta de Não possuo contato de confiança e sua reversão. Lista vazia não distingue ausência declarada de etapa ainda não preenchida. Marcar a opção não deve disparar DELETE de contatos existentes por suposição.
-- Confirmar gravação/retomada de múltiplos contatos, limites se houver e tratamento de falha parcial/idempotência. Não presumir substituição da lista, apagar registros ou duplicar contatos em reenvio.
-- Confirmar formatos/tamanhos/normalização de telefone e como obter o país/DDI no cadastro sem acrescentar seletor ao desenho. O placeholder brasileiro não autoriza impor +55 ou rejeitar números internacionais. A tela valida preenchimento/caracteres usuais, preservando a string digitada.
-- Confirmar vínculo com a sessão e progresso para a etapa 7. O serviço atual trata contatos individuais, sem conclusão/ausência do passo do cadastro.
-
-Conferência local: múltiplos registros, incompletos, ausência reversível e navegação; 98 testes aprovados. Nenhum contato real foi criado, alterado ou removido. A tela está publicada para QA; integração/retomada continuam abertas. Evidências no portal: docs/QA-2026-10-20-CADASTRO-ETAPA-6.md.
-
-## Cadastro de sete etapas — revisão e envio, 20/10
-
-Etapa 7 (9:25964) implementada com os cinco resumos, Editar, confirmação e Voltar/Enviar cadastro. Estado enviado (9:26067) disponível apenas como referência visual identificada, sem transição de sucesso simulada. Não acrescentar campos/ações para acomodar os contratos abaixo.
-
-- Confirmar operação/payload de envio final do onboarding, sessão autorizada, identificação/versão do rascunho e vínculo dos dados, documentos e confirmação de veracidade. As operações /data-intake/submissions/{id}/submit e /resubmit existem, mas não estão confirmadas como envio do cadastro do cliente; não serão reutilizadas por suposição.
-- GET /client/onboarding/status existe e informa requisitos/features e bloqueios; falta confirmar como consultar envio para análise, data/recibo, pendências, aprovação/reprovação e permissão de edição. O contrato consultado não explicita a versão do rascunho ou o recibo final das sete etapas.
-- Definir idempotência, pedidos simultâneos, falha parcial, repetição segura e retomada após recarga. Confirmar se a gravação é por etapa ou parte do envio final, incluindo referências dos arquivos já persistidos.
-- Confirmar quando apresentar Cadastro enviado para análise e o estado Pendente no perfil, como a aprovação documental libera edição e como a reprovação permite correção/reenvio sem perder os dados. O bloqueio existente por aprovação do perfil foi preservado; nenhum status é alterado localmente.
-
-106 testes, lint e build aprovados. Nenhum dado/documento real foi enviado. Após os contratos, ainda será necessário integrar o transporte no front e homologar o ciclo completo. Evidências no portal: docs/QA-2026-10-20-CADASTRO-ETAPA-7.md.
+As evidências de tela/integração e os retestes ainda não executados ficam no checklist; somente falhas reais de API devem entrar na tabela de bugs do checklist manual.
