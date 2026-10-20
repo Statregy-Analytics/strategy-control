@@ -374,3 +374,18 @@ Próximo ajuste independente do backend no QA 8: a edição de Atividade Trabalh
 - [x] Desktop e edição a 390 px conferidos; conteúdo 378 px para viewport 390, sem overflow. Descartar fechou a edição sem nova gravação; viewport restaurado. Campos, botões, seletor e composição existentes do Figma preservados; não foi criado campo técnico ou ação adicional.
 
 Defeito do frontend encerrado, sem novo endpoint ou ajuste do servidor. Ausência real de dado continua Não informado; este teste não libera catálogos, escrita de contatos sem vínculo, termos/envio final nem o replace documental. Evidência: cliente-perfil-financeiro-validado.png (valores já restaurados).
+
+
+## Perfil — falhas parciais e divergência após salvar, 20/10
+
+- [x] Correção do frontend e2997fd: mantém base de edição separada de consultas; não repete uma escrita já confirmada ao tentar novamente após falha parcial.
+- [x] Testes automatizados: falha na segunda escrita preserva rascunho/primeira confirmação; falha na primeira não envia a segunda; troca de sessão interrompe a sequência. Total 173 testes aprovados.
+- [x] Correção a41ae98: usa a mensagem de erro existente para avisar quando a consulta após salvar retorna valores diferentes dos enviados. Mesmo layout, campos e ações.
+- [ ] Homologação integrada do financeiro: backend grava novos valores no histórico, mas consulta atual retorna registro anterior. Pendência real detalhada em PENDENCIAS-BACKEND-QA.md; não considerar este cenário aprovado só pelo PUT aceito.
+
+A aprovação anterior de leitura financeira integral foi revista por este reteste. Os cenários independentes de contatos, documentos e edição de localização não foram reabertos.
+
+- [x] Deploy final a41ae98 / pipeline 39483544799 aprovado em lint, 173 testes, build, upload e ativação. Reteste com renda fictícia 1234.59 mostrou o aviso real de consulta divergente; campo consultado permaneceu com 1234.56. Falha parcial/troca de sessão cobertas por testes automatizados, sem induzir falha no servidor.
+- [x] Valores originais restaurados por POST administrativo de teste ao endpoint existente de perfis financeiros, pois a consulta do portal já estava desatualizada. Histórico mais recente e consulta atual conferidos com rendas/bens/moeda/vigências originais; perfil profissional integralmente idêntico ao início. Não houve movimentação financeira.
+- [x] Revisão visual: aviso existente visível e legível; 390 px com conteúdo 378 px, sem overflow. Viewport restaurado e perfil recarregado com os dados originais. Evidência: cliente-perfil-divergencia-financeira.png e cliente-perfil-aviso-consulta.png.
+- [x] Lint/build do portal e do Admin aprovados; diff das alterações desta rodada sem erros. O diff global do portal ainda aponta whitespace em PRODUCT.md e docs/MILESTONE-3-INTEGRATION.md preexistentes, preservados fora destes commits.

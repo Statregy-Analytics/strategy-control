@@ -207,3 +207,14 @@ Isso não encerra as pendências de relationship/ausência de contatos de confia
 ### Perfil financeiro opcional — validação do frontend corrigida, 20/10
 
 O contrato existente aceita null em rendas/bens. O front impunha preenchimento dos três campos e regravava o profissional sem alteração. Corrigido/publicado em b42b66d (pipeline 39481860662 aprovada, 170 testes), sem criar campos/ações. Reteste na conta do usuário confirmou gravação de renda familiar vazia como null, decimal e zero preservados, metadados intactos e restauração dos valores originais pela edição. Perfil profissional permaneceu idêntico em leitura independente. Não solicitar endpoint novo nem mudar obrigatoriedade no backend por esse defeito do front. Os demais bloqueios contratuais continuam nos itens próprios.
+
+
+### Perfil financeiro — escrita no histórico não refletida na consulta atual, 20/10
+
+**Aberto; homologação integrada do QA 8 financeiro bloqueada.** Na conta de homologação do usuário, alteração fictícia de renda pela interface é aceita e gera registro no GET /api/v1/admin/customers/{id}/financial-profiles, com createdAtUtc posterior. Entretanto GET /api/v1/client/profile/financial-profile e GET /api/v1/admin/customers/{id}/financial-profile/current continuam devolvendo renda de registro anterior.
+
+Evidência sem identificadores pessoais: renda original 1234.56; escritas de teste 1234.57 e 1234.58 presentes no histórico às 19:24:57 e 19:25:32 UTC de 20/10. Registros retornados têm effectiveFrom e effectiveTo em 2026-10-20; o frontend preserva essas vigências recebidas, sem adicionar campos ao Figma. Confirmar a semântica do PUT de autosserviço, vigência e desempate da consulta atual; não pedir datas ou controles adicionais ao cliente para contornar a seleção do servidor.
+
+O front corrigiu recuperação de falhas parciais e agora avisa quando a releitura não confirma os valores enviados. Sucesso HTTP/histórico não encerra esse bloqueio. Reteste atual substitui a conclusão anterior de persistência integral; a escrita opcional/null foi aceita, mas a consulta vigente precisa ser corrigida ou ter sua regra esclarecida. Nenhuma transação ou movimentação financeira foi realizada.
+
+Após o reteste, dados fictícios originais restaurados pelo endpoint administrativo existente; consulta atual e registro mais recente conferidos com os valores iniciais. Isso não corrige nem encerra a divergência de seleção observada nas escritas do autosserviço. Front a41ae98 publicado na pipeline 39483544799 aprovada; aviso conferido em tela, sem campos/ações extras.
