@@ -218,3 +218,11 @@ Evidência sem identificadores pessoais: renda original 1234.56; escritas de tes
 O front corrigiu recuperação de falhas parciais e agora avisa quando a releitura não confirma os valores enviados. Sucesso HTTP/histórico não encerra esse bloqueio. Reteste atual substitui a conclusão anterior de persistência integral; a escrita opcional/null foi aceita, mas a consulta vigente precisa ser corrigida ou ter sua regra esclarecida. Nenhuma transação ou movimentação financeira foi realizada.
 
 Após o reteste, dados fictícios originais restaurados pelo endpoint administrativo existente; consulta atual e registro mais recente conferidos com os valores iniciais. Isso não corrige nem encerra a divergência de seleção observada nas escritas do autosserviço. Front a41ae98 publicado na pipeline 39483544799 aprovada; aviso conferido em tela, sem campos/ações extras.
+
+
+### Perfil — validações e estados do front, 20/10
+
+Validação de data de nascimento futura/inexistente, limpeza de erro ao descartar e ausência falsa após erro no resumo foram corrigidas no frontend (ded785c/916fc56). Reutilizam regra de data do cadastro e os controles existentes; não requerem novo endpoint, campo ou regra de idade no backend. Não reabrir esses pontos como falta de contrato HTTP. Continuam abertos a seleção do financeiro vigente, campos/catálogos, contatos de confiança sem vínculo, aceite/envio final e regras/versionamento documentais já descritos.
+
+
+Publicação final 916fc56 confirmada na pipeline 39486635711 aprovada, com 177 testes. Bloqueio de data futura e descarte retestados com a conta do usuário, preservando os valores originais e sem escrita cadastral. Nenhum novo bloqueio do backend foi introduzido nesta rodada; não encerra a divergência financeira vigente descrita acima.

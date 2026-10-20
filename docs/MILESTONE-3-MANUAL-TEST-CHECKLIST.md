@@ -389,3 +389,18 @@ A aprovação anterior de leitura financeira integral foi revista por este retes
 - [x] Valores originais restaurados por POST administrativo de teste ao endpoint existente de perfis financeiros, pois a consulta do portal já estava desatualizada. Histórico mais recente e consulta atual conferidos com rendas/bens/moeda/vigências originais; perfil profissional integralmente idêntico ao início. Não houve movimentação financeira.
 - [x] Revisão visual: aviso existente visível e legível; 390 px com conteúdo 378 px, sem overflow. Viewport restaurado e perfil recarregado com os dados originais. Evidência: cliente-perfil-divergencia-financeira.png e cliente-perfil-aviso-consulta.png.
 - [x] Lint/build do portal e do Admin aprovados; diff das alterações desta rodada sem erros. O diff global do portal ainda aponta whitespace em PRODUCT.md e docs/MILESTONE-3-INTEGRATION.md preexistentes, preservados fora destes commits.
+
+
+## QA 8 — validação da data e estados de erro do perfil, 20/10
+
+- [x] Data de nascimento futura/inexistente bloqueada antes da criação do PATCH, com regra reutilizada do cadastro. Sem nova idade mínima/obrigatoriedade e sem alterações de catálogo ou layout.
+- [x] Testes de payload preservam contatos/endereços e recusam 29/02 inválido, mês/dia impossível, ano zero e data futura; aceitam ano bissexto, dia local atual e ausência permitida pelo contrato.
+- [x] Templates reais do resumo e ProfileResourceState testados: erro em profissional ou financeiro mantém mensagem/retry sem campos de ausência/zero falsos; demais seções seguem visíveis. Loading e retorno bem-sucedido também conferidos.
+- [x] Descartar limpa a mensagem da edição cancelada, sem novo campo/ação.
+- [x] Portal 916fc56 publicado; pipeline 39486635711 aprovada em lint, 177 testes, build, upload e ativação. Pipeline intermediária ded785c cancelada em favor da versão final.
+- [x] Na conta do usuário, data futura bloqueada com erro no mesmo bloco; rascunho preservado e demais inputs idênticos aos anteriores. Descartar fechou a edição e zerou os erros; reabertura trouxe os dados originais consultados e Salvar desabilitado, sem envio de alteração cadastral.
+- [x] Celular 390 px: conteúdo 378 px, mensagem 313 px, sem estouro. Repetidos bloqueio local e descarte; viewport restaurado. Resumo de Ajustes conferido com dados reais, renda e bens zero preservados; Perfil Completo deixado aberto.
+- [x] Lint/build local do portal e Admin aprovados; diff dos commits desta rodada sem erros. Alterações preexistentes em PRODUCT.md, MILESTONE-3-INTEGRATION.md e swagger administrativo preservadas fora dos commits.
+- [x] Evidências: cliente-perfil-validacao-nascimento.png e cliente-resumo-perfil-api-validado.png. Estados de falha de consulta verificados nos templates por teste automatizado; sem provocação de falhas no backend.
+
+Não simular falhas do servidor em homologação para testar a apresentação: os cenários de erro estão cobertos por teste automatizado de renderização. O bug de consulta financeira vigente permanece bloqueio do backend, independente destas correções.
