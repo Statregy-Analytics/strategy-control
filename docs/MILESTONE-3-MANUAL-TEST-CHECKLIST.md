@@ -404,3 +404,17 @@ A aprovação anterior de leitura financeira integral foi revista por este retes
 - [x] Evidências: cliente-perfil-validacao-nascimento.png e cliente-resumo-perfil-api-validado.png. Estados de falha de consulta verificados nos templates por teste automatizado; sem provocação de falhas no backend.
 
 Não simular falhas do servidor em homologação para testar a apresentação: os cenários de erro estão cobertos por teste automatizado de renderização. O bug de consulta financeira vigente permanece bloqueio do backend, independente destas correções.
+
+
+## QA 8 — erro, vazio e concorrência na consulta de sessões, 20/10
+
+- [x] Nenhuma sessão disponível aparece apenas em sucesso vazio; erro e loading não simulam conta sem sessões. Mantidos tabela, colunas e controle Tentar novamente existentes.
+- [x] Erro de consulta antiga não substitui sucesso mais recente; sucesso antigo não apaga erro atual. Respostas após troca de sessão ou desmontagem não atualizam o estado da conta.
+- [x] Script real e template Vue testados; nova tentativa limpa o erro e retorna linhas reais formatadas com IP mascarado. Total 183 testes aprovados.
+- [x] Publicação final 587e4ba confirmada na pipeline 39487751656 aprovada em lint, 183 testes, build, upload e ativação. Rodapé/contagem também ficam ocultos quando os dados estão indisponíveis, preservando a paginação normal após sucesso.
+- [x] Na conta do usuário, duas sessões reais renderizadas, sem erro nem mensagem de vazio e com IP mascarado. Ação Deslogar preservada e não acionada; nenhuma sessão foi revogada.
+- [x] Revisão desktop/celular: viewport 390 px e documento 378 px; tabela permanece com rolagem horizontal interna, sem alargar a página. Viewport restaurado; Ajustes mantido aberto.
+- [x] Lint/build local de portal e Admin aprovados; diff das alterações desta rodada sem erros. Modificações preexistentes de PRODUCT.md, MILESTONE-3-INTEGRATION.md e swagger administrativo preservadas.
+- [x] Evidência: cliente-perfil-sessoes-validadas.png. Vazio, loading, erro, retry e concorrência testados automaticamente no script/template reais, sem simular respostas dentro do aplicativo publicado.
+
+Sem revogação de sessões, logout ou alteração de preferências/perfil nesta rodada. Falhas e concorrência são cenários automatizados com respostas injetadas somente no teste.

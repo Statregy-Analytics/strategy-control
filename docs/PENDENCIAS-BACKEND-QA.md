@@ -226,3 +226,11 @@ Validação de data de nascimento futura/inexistente, limpeza de erro ao descart
 
 
 Publicação final 916fc56 confirmada na pipeline 39486635711 aprovada, com 177 testes. Bloqueio de data futura e descarte retestados com a conta do usuário, preservando os valores originais e sem escrita cadastral. Nenhum novo bloqueio do backend foi introduzido nesta rodada; não encerra a divergência financeira vigente descrita acima.
+
+
+### Sessões do perfil — apresentação e concorrência corrigidas no frontend, 20/10
+
+1efe6c5 separa falha/carregamento de resultado vazio e impede erro de consulta antiga de sobrescrever resultado recente. Mantém endpoint, colunas e ações existentes; não exige contrato novo do backend. Casos de erro, troca de conta e retry cobertos automaticamente. Pendências de financeiro vigente, catálogos/campos, documentos e envio final permanecem nos itens próprios; este ajuste não as encerra.
+
+
+Publicação final das sessões 587e4ba confirmada na pipeline 39487751656 aprovada (183 testes). Duas sessões reais da conta do usuário conferidas com IP mascarado; nenhuma revogada. Rodapé não informa contagem zero durante erro/loading; estado vazio e falhas cobertos automaticamente. Nenhuma nova solicitação ao backend nesta rodada.
