@@ -1,6 +1,6 @@
 # Cadastro de sete etapas — checklist de conclusão
 
-Atualizado em 20/10/2026 após integração dos endpoints existentes. Figma BaDXlWpxbIoY4azOaQnXgv. Este registro substitui a situação anterior das prévias: publicar uma tela não significa homologar o cadastro completo.
+Atualizado em 20/10/2026 após a mudança de ordem e campos autorizada pelo designer/QA e confirmada pelo usuário. **Ordem vigente: etapa 4 profissional/financeiro/moedas; etapa 5 documentos/endereço.** As rodadas anteriores abaixo registram a sequência anterior. Figma BaDXlWpxbIoY4azOaQnXgv. Este registro substitui a situação anterior das prévias: publicar uma tela não significa homologar o cadastro completo.
 
 ## Situação atual por etapa
 
@@ -9,8 +9,8 @@ Atualizado em 20/10/2026 após integração dos endpoints existentes. Figma BaDX
 | 1 · Criar conta | POST /auth/register; nome, e-mail, senha e indicação; chave estável no retry; /register abre o fluxo Figma | Texto/versão e registro do aceite antes da autenticação; residência regional não identifica um país |
 | 2 · Confirmar e-mail | Confirmação e reenvio reais; após confirmação usa login existente para continuar na etapa 3; sem senha em storage/URL | Criação/código confirmados pelo usuário e sessão na etapa 3 observada; aceite versionado continua pendente |
 | 3 · Dados pessoais | GET/PATCH do perfil; nascimento, gênero, estado civil, uma nacionalidade e cidade; preserva dados externos à etapa | País de nascimento e múltiplas nacionalidades não existem no payload; catálogos dos seletores não disponibilizados |
-| 4 · Documento e endereço | Endereço/filiação via PATCH; CEP Brasil com consulta existente e preenchimento automático; tipos/definições reais; upload e dados tipados para correspondências disponíveis; retry de arquivos sem duplicar upload concluído | Bairro separado, catálogo de estados/UF e tipos/esquemas das demais variantes; cliente novo bloqueado por 403 na consulta de tipos; upload aguarda liberação |
-| 5 · Atividade trabalhista | GET/PUT profissional e financeiro; valores precisos em BRL; preserva vigências e empresa; datas iniciais na data de criação | Catálogo de atividade para novas escolhas; criação financeira sem perfil validada com conta nova; atividade aguarda catálogo |
+| 4 · Atividade trabalhista e moedas | Ocupação obrigatória em texto livre; Empregador opcional; rendas/bens; duas moedas do catálogo. PUT profissional e financeiro + PATCH preferências antes de avançar | Criação profissional, moedas e financeiro validados na conta nova; ocupação não exige catálogo. Defaults de idioma/fuso/tema ausentes ainda exigiriam alinhamento |
+| 5 · Documento e endereço | Endereço/filiação, CEP, tipos/definições e serviços documentais existentes. Entrada exige profissional/financeiro e moedas; links antigos e retomada migrados | Bairro separado, tipos por país, UF de expedição e reteste de upload. ProfileIncomplete anterior superado no reteste após criar profissional; upload não homologado |
 | 6 · Contatos de confiança | GET real e PUT de existentes preservando relationship/e-mail; valida todos antes de escrever | Inclusão exige relationship não presente no Figma; declaração de ausência sem operação de persistência |
 | 7 · Revisão e envio | Revisa dados carregados da API e alterações locais; Editar por etapa; confirmação; consulta real de onboarding | Operação final/recibo de envio e revisão cadastral não identificados; Data Intake atual contém apenas formulários patrimoniais |
 
@@ -139,3 +139,34 @@ Portal aae0e31 publicado; pipeline 39453639953 concluiu lint, 135 testes, build,
 Portal 4a4076b publicado; pipeline 39455314973 concluiu lint, 145 testes, build, upload e ativação com sucesso. No Edge, Cláudio abriu etapa 4/br; reabrir /login com sessão válida retornou à mesma etapa. Depois, Home → Sair pela ação existente → /login sem next → novo login retornou automaticamente à etapa 4/br, com endereço/complemento/cidade/Estado recarregados da API. Nenhum Continuar, alteração cadastral, arquivo, aceite ou envio final realizado. Sessão e aba original do usuário no navegador integrado preservadas, sem logout/recarga nessa aba. Evidência visual salva somente do cabeçalho da etapa retomada.
 
 Retomada no mesmo navegador aprovada; autosave completo, progresso entre dispositivos e envio/revisão permanecem abertos conforme os limites acima. Não aprova o cadastro de ponta a ponta nem remove o bloqueio documental.
+
+## Ordem e campos autorizados pelo designer/QA — 20/10
+
+O usuário confirmou a inversão das etapas e aprovou explicitamente os quatro campos Ocupação, Empregador (opcional), Moeda principal e Moeda secundária, mantendo as três informações financeiras existentes. Esta autorização altera a sequência anterior do Figma; componentes, cores e Voltar/Continuar preservados.
+
+1. Criar conta.
+2. Confirmar e-mail.
+3. Dados pessoais.
+4. Atividade trabalhista: Ocupação, Empregador opcional, renda individual, renda familiar, bens, moeda principal e secundária.
+5. Documento e endereço por país.
+6. Contatos de confiança.
+7. Revisão e envio.
+
+- [x] Ocupação como texto livre obrigatório, compatível com occupation string no OpenAPI; não depende de catálogo ausente. Empresa opcional nullable, sem vigência/status técnico na tela.
+- [x] Continuar salva profissional, financeiro e preferências com as duas moedas do catálogo real; só depois entra em documentos. Preserva país/idioma/fuso/tema e metadados profissionais/financeiros, sem defaults fictícios.
+- [x] Falha mantém etapa/rascunho. Retry não repete partes idênticas já confirmadas; valores financeiros ausentes continuam null e zero explícito preservado.
+- [x] Etapas, Voltar/Continuar, Editar na revisão, links antigos com variante e retomada por usuário ajustados. Marcadores v1 de documentos 4/trabalho 5 migram para 5/4. Documentos sem pré-requisitos retornam à etapa 4.
+- [x] 152 testes, lint/build e diff do lote aprovados; ocupação vazia com erro/foco conferida em 9010, sem escrita. Desktop/390 px sem overflow e composição com os sete campos aprovada no reteste visual.
+
+**Devolutiva do backend incorporada:** o 403 era ProfileIncomplete pela falta de profissional, não ausência de endpoint nem defeito de autorização confirmado. A sequência anterior tentava documentos antes de criar o profissional. Moedas vazias também passam a ser tratadas no front. Reteste publicado e limites abaixo; upload e envio final não são aprovados por esta mudança.
+
+### Publicação e reteste integrado da nova ordem
+
+- [x] Portal 46d5bc5 publicado; pipeline 39468374725, tentativa 2, concluiu lint, 152 testes, build, upload e ativação. A primeira tentativa de upload teve timeout SSH; a repetição concluiu. Ajuste do isolamento VM dos testes eliminou a queda do Node na pipeline, com a mesma suíte aprovada também em Node 20.20.2 local, sem remover testes/assertivas.
+- [x] Local 9010 com API de homologação, Cláudio: regravados os valores fictícios existentes, profissional/financeiro/preferências concluídos e avanço para Documento/endereço na nova etapa 5. Voltar abriu etapa 4; recarga confirmou os valores da API. Nenhuma transação financeira/documento.
+- [x] Na conta nova do usuário, em nova aba de homologação: Ocupação Analista de testes, Empregador Empresa Fictícia QA, BRL e USD selecionados e salvos; rendas 1.234,56/2.345,67 e bens 0 preservados. Após a gravação dos três serviços, avançou à etapa 5. Recarga posterior da etapa 4 confirmou todos esses valores pela API. E-mail integral omitido.
+- [x] Repetido o cenário que retornava 403: Continuar na etapa 5 salvou endereço/filiação fictícios e a consulta de tipos passou; a mensagem foi Endereço salvo. Selecione os arquivos do documento para concluir esta etapa. Essa mensagem só é alcançada após obter os tipos e localizar o tipo esperado; ProfileIncomplete não voltou nesse cenário. Nenhum CPF, arquivo ou documento tipado foi enviado.
+- [x] Home da mesma conta mostrou saldos R$ 0,00 / USD 0.00, Sua jornada começa aqui e Você ainda não tem contratos, sem PreferencesRequired. Não houve depósito, saque, transferência, contrato ou mudança de permissões.
+- [x] Prévia em PNG da tela real salva para compartilhar com designer/QA, com os dados fictícios. Nova aba publicada mantida; aba original com arquivos/rascunho não enviados preservada, sem recarga/logout.
+
+**Concluído neste cenário:** ordem profissional antes dos documentos e preenchimento das moedas; consulta documental e Home liberadas pelos requisitos reais, sem bypass do guard. **Ainda não homologado:** upload/documento tipado, conclusão das etapas pendentes e envio/revisão final. As demais lacunas de contrato continuam no documento do backend.

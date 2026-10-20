@@ -266,3 +266,13 @@ Reteste publicado: aae0e31, pipeline 39453639953 aprovada. Mesmo preenchimento p
 Frontend: marcador somente de rota das etapas autenticadas, por usuário e na mesma origem/navegador. Logout/Home mantêm, outra conta não herda; dados suportados reconsultados da API e rascunhos de sessão anterior descartados. 145 testes, lint/build/diff do lote aprovados. Em 9010, Cláudio saiu pelo botão existente e /login sem next retomou etapa 5 com seus dados; após logout, Éric entrou na Home. Nenhum perfil/documento ou operação financeira foi gravado. Progresso no servidor, rascunho completo, retomada entre dispositivos e envio final continuam sem homologação; não é ocorrência nova para a tabela de bugs do backend. Publicação e reteste no checklist de cadastro.
 
 Reteste publicado: 4a4076b/pipeline 39455314973 aprovada. Em homologação no Edge, Cláudio: etapa 4/br → Home → Sair → /login sem next → login → etapa 4/br com dados da API. /login com sessão válida também retornou à etapa salva. Nenhuma escrita cadastral/financeira/documental; conta e rascunho originais do usuário no navegador integrado preservados. Somente retomada local aprovada, sem homologar progresso entre dispositivos/envio final.
+
+
+## Cadastro — nova ordem autorizada e pré-requisitos, 20/10
+
+Profissional/financeiro/moedas antecipados para etapa 4; documentos/endereço agora etapa 5. Ampliação autorizada pelo designer/QA e confirmada pelo usuário: Ocupação, Empregador opcional, Moeda principal/secundária. 152 testes/lint/build/diff aprovados; ocupação vazia e edição pela revisão conferidas, desktop/390 px sem overflow. O backend esclareceu o 403 anterior como ProfileIncomplete pela ausência de profissional: a correção de sequência é do front, sem remover o guard. Preservada a evidência histórica; não aberta nova ocorrência de backend por esta alteração. Publicação/reteste no checklist de cadastro.
+
+
+### Reteste publicado — profissional antes dos documentos
+
+Portal 46d5bc5, pipeline 39468374725 tentativa 2 aprovada (152 testes). Conta nova do usuário com dados fictícios: PUT profissional + PUT financeiro + PATCH duas moedas concluíram antes da etapa 5. Continuar documental alcançou a mensagem de arquivos ausentes após consultar tipos; 403 ProfileIncomplete anterior não se repetiu. Home mostrou saldos zero/estados vazios, sem PreferencesRequired. Profissional e moedas retomados pela API após recarga; nenhum arquivo/documento tipado, CPF real, transação ou aprovação enviados. Bloqueios antigos superados nesse cenário por adequação do front à regra confirmada, sem abrir bug novo do backend nem homologar upload/envio final. Aba original do usuário preservada.

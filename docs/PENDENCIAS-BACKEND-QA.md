@@ -1,6 +1,6 @@
 # Pendências do backend para homologação
 
-A interface segue o Figma. Precisamos dos estados e operações abaixo sem acrescentar campos ou ações às telas.
+A interface segue o Figma e as alterações de ordem/campos expressamente autorizadas pelo designer/QA e pelo usuário. **Na ordem atual, profissional/financeiro/moedas é etapa 4 e documentos/endereço é etapa 5.** Precisamos dos estados e operações abaixo sem acrescentar campos ou ações às telas.
 
 ## Aprovação de documentos e edição do perfil
 
@@ -52,7 +52,7 @@ As entradas vazias eram falhas de navegação do front: `/dashboard` agora abre 
 
 O login da seção nova (4:25438) foi concluído no front usando a autenticação existente, sem contrato novo. As telas do perfil já usam dados próprios, sem exemplos; o que falta abaixo deve preencher os campos e fluxos do Figma, sem seletores extras:
 
-- Confirmar campo de bairro e catálogos/valores aceitos de gênero, estado civil, nacionalidade e atividade. Os seletores preservam o valor recebido enquanto não houver opções confirmadas.
+- Confirmar campo de bairro e catálogos/valores aceitos de gênero, estado civil e nacionalidade. Ocupação usa texto livre do contrato profissional confirmado, com ampliação autorizada da tela. Os seletores preservam o valor recebido enquanto não houver opções confirmadas.
 - Contatos de confiança: o Figma pede nome e telefone, mas a escrita exige `relationship`. Confirmar a gravação e múltiplos contatos sem acrescentar esse campo à interface.
 - Confirmar consulta e operações do patrimônio próprio do cliente. As seções não mostram bens fictícios e não usam endpoints administrativos para contornar autorização.
 - Informar o `context` correto dos consentimentos/termos do perfil. A consulta sem contexto retorna HTTP 400; o Swagger não enumera os valores. Não assumir um contexto de cadastro nem adicionar seletor.
@@ -81,9 +81,9 @@ O bloqueio de lint global do portal foi corrigido; 52 testes e build passaram. A
 O front passou a usar os endpoints existentes de registro, confirmação/reenvio, perfil, preferências/país, perfil profissional/financeiro, contatos, documentos e status. Não estamos solicitando recriar essas operações. Mantemos os campos/ações do Figma.
 
 1. **Aceite legal da etapa 1:** fornecer texto/URL e versão dos Termos/Política e forma de vincular o aceite ao registro sem sessão prévia. /auth/register aceita somente name/email/password/referralCode. /client/consents/requirements requer contexto (consulta sem contexto retorna 400) e o fluxo cliente é autenticado; confirmar contexto e vínculo corretos. Na consulta administrativa de homologação em 20/10, GET /admin/consents e GET /admin/consent-policies retornaram listas vazias; além da definição do fluxo, falta configuração desses documentos/políticas no ambiente.
-2. **Dados pessoais:** UpdateClientPersonalDetailsRequest possui nationality singular e não possui país de nascimento. Definir gravação/consulta das múltiplas nacionalidades e país já desenhados. Disponibilizar opções de gênero/estado civil/nacionalidade/atividade e estados/UF; /preferences/catalog consultado retorna moedas/idiomas/fusos/temas e países BR/PT, não esses catálogos. Valores atuais da API são preservados, sem opções inventadas.
+2. **Dados pessoais:** UpdateClientPersonalDetailsRequest possui nationality singular e não possui país de nascimento. Definir gravação/consulta das múltiplas nacionalidades e país já desenhados. Disponibilizar opções de gênero/estado civil/nacionalidade e estados/UF; /preferences/catalog consultado retorna moedas/idiomas/fusos/temas e países BR/PT, não esses catálogos. Valores atuais da API são preservados, sem opções inventadas.
 3. **Residência e endereço:** escolha regional do Figma (Europa, África etc.) não determina um país real; confirmar resolução sem acrescentar campo. CustomerAddressRequest não tem bairro separado; complemento permanece em line2, sem misturar os dois. Países únicos disponíveis podem ser associados pelo ID real do catálogo, preservando preferências.
-4. **Documentos por país:** APIs de tipos, definição de dados, upload e provided-documents existem e estão conectadas. Na consulta de BR, CPF e RG têm definição válida; confirmar equivalência do Documento de identificação genérico do Figma com o tipo apropriado e completar tipos/esquemas das demais variantes. Não atribuir o país do frame a todos os países da região. Confirmar liberação para cliente novo: operações documentais exigem perfil completo, conforme devolutiva anterior. Isso requer reteste integrado, não criação de outro endpoint de upload.
+4. **Documentos por país:** APIs de tipos, definição de dados, upload e provided-documents existem e estão conectadas. Na consulta de BR, CPF e RG têm definição válida; confirmar equivalência do Documento de identificação genérico do Figma com o tipo apropriado e completar tipos/esquemas das demais variantes. Não atribuir o país do frame a todos os países da região. O requisito de perfil completo foi esclarecido: faltava profissional. Com a nova etapa 4, a consulta de tipos foi liberada no reteste da conta nova; não solicitar remoção do guard. Upload/dados tipados ainda exigem reteste próprio, não criação de outro endpoint de upload.
 5. **Contatos novos e ausência:** POST exige relationship, ausente no desenho. Permitir gravação com nome/telefone ou indicar regra válida sem acrescentar campo. GET/PUT de existentes já preservam o relacionamento real. Falta estado explícito de Não possuo contato de confiança; lista vazia não prova a declaração e não autoriza apagar contatos.
 6. **Envio final/revisão:** confirmar operação que vincula dados/documentos/confirmação e inicia análise, com consulta do envio/data/recibo, correção/reenvio e permissão de edição. GET /client/onboarding/status existe, mas não explicita esse envio. Em homologação, GET /data-intake/forms retornou ASSET-CONSORTIUM, ASSET-INVESTMENT, ASSET-VEHICLE e PATRIMONIO-IMOVEL; não há formulário cadastral identificado para reutilizar submit/resubmit. Não fabricar cadastro enviado, aprovação ou desbloqueio.
 
@@ -120,3 +120,17 @@ A etapa 4 reutiliza a consulta pública validator-cep existente, sem exigir novo
 O front retoma a última rota visitada das etapas 3–7 no mesmo navegador/origem, separada por usuário autenticado, sem persistir dados pessoais, senha, token ou arquivos no marcador. Login carrega os dados suportados da API; não presume campos enviados a partir do rascunho em memória. Isso corrige o retorno sempre à Home e não exige endpoint novo para a navegação local.
 
 Para cumprir integralmente o progresso salvo do Figma entre dispositivos, confirmar consulta/gravação da etapa atual e do rascunho cadastral, vinculadas ao cliente, e estado explícito de envio/revisão/finalização para encerrar a retomada. GET /client/onboarding/status, conferido no OpenAPI atual, retorna requisitos/features e flags; não contém etapa atual nem comprova envio final. Não inferir cadastro enviado de profileCompleted/documentLevel, nem exigir campos/ações extras na interface. Não estamos solicitando recriar os endpoints existentes de perfil/financeiro/contatos/documentos.
+
+### ProfileIncomplete esclarecido e ordem corrigida — 20/10
+
+O backend identificou que a conta nova não tinha registro profissional; a consulta documental exigia esse registro e o financeiro/endereço. A regra foi aceita pelo usuário com autorização do designer/QA: Atividade trabalhista passa à etapa 4 e Documento/endereço à etapa 5. Foram autorizados Ocupação, Empregador opcional e duas moedas, com escrita nos endpoints já existentes antes dos documentos. Não estamos pedindo remover o guard nem criar outro endpoint profissional.
+
+Occupation é string no OpenAPI, sem enum: o campo passa a aceitar texto livre, deixando de depender de catálogo de ocupações. As duas moedas vêm do catálogo existente e são enviadas pelo front, preservando as demais preferências. Essas duas correções são de fluxo/integração do frontend, não pendências novas do servidor. Os registros anteriores do 403 são evidências da ordem antiga; o reteste atual consta no checklist.
+
+Permanecem: catálogos dos demais seletores/UF, país de nascimento e múltiplas nacionalidades, bairro, países/tipos documentais ainda sem correspondência confirmada, contatos sem relationship/ausência, termos/aceite, progresso entre dispositivos e envio/revisão final. Uma negativa residual após os pré-requisitos deve ser documentada com seu código real, sem presumir novo bug do backend.
+
+### Reteste após antecipar o profissional — bloqueios anteriores superados
+
+Na conta nova de homologação do usuário, o wizard publicou e gravou o profissional, financeiro e as duas moedas antes de documentos (46d5bc5). A consulta de tipos deixou de retornar ProfileIncomplete e o fluxo alcançou a validação de arquivos ausentes. A Home carregou saldos zero e estados vazios sem PreferencesRequired. Esses dois bloqueios não devem continuar sendo cobrados como defeitos atuais do backend nesta conta. Nenhum arquivo foi enviado; isso não homologa upload, revisão/aprovação nem cadastro enviado.
+
+Continuam abertas apenas as outras lacunas descritas acima. O requisito de perfil profissional antes dos documentos foi mantido; a correção foi feita na ordem e nos campos autorizados do frontend.
