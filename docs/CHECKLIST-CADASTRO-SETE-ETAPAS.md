@@ -108,3 +108,5 @@ Dependências consolidadas em [Pendências do backend](PENDENCIAS-BACKEND-QA.md)
 A pedido do usuário, as telas implementadas 1–3 estão incluídas no build publicado e acessíveis em https://hml.strategyanalytics.com.br/cadastro/etapa-1, /cadastro/etapa-2 e /cadastro/etapa-3. Os endereços antigos /dev/cadastro/etapa-* permanecem como aliases para não quebrar links já usados. Não é necessário executar o servidor local para o QA conferir as telas.
 
 Os avisos de homologação identificam as dependências sem criar novos campos/ações no card. Essa publicação não confirma persistência: etapas 1 e 2 ainda usam os adaptadores de apresentação já documentados; etapa 3 aguarda catálogos e contrato de gravação/progresso. O cadastro integrado existente continua em /register.
+
+Publicação conferida em 20/10: portal 8d3bb93, pipeline 39428877610 concluída com sucesso. As três rotas /cadastro/etapa-1, /cadastro/etapa-2 e /cadastro/etapa-3 abriram em homologação. Data inválida da etapa 3 mostrou erro/foco; Voltar abriu as etapas 2 e 1 nos endereços normais. Essa conferência confirma publicação e validação local, mantendo a gravação/progresso como pendências.
