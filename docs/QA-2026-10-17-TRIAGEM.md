@@ -352,4 +352,4 @@ Conferência pelos acessos existentes revelou truncamento local de 30 tipos para
 
 ### Rodada 20/10 — busca no catálogo bancário
 
-QA 16/17: reproduzido falso vazio ao procurar banco de outra página (325/Órama). Busca agora reutiliza a leitura completa da API e pagina os resultados filtrados, sem controles adicionais. País e estado de erro/retentativa preservados; 99 testes, lint/build e cenários locais aprovados. Evidências de publicação/reteste no checklist manual. Nenhum banco criado.
+QA 16/17: reproduzido falso vazio ao procurar banco de outra página (325/Órama). Busca agora reutiliza a leitura completa da API e pagina os resultados filtrados, sem controles adicionais. País e estado de erro/retentativa preservados; 99 testes, lint/build e cenários locais aprovados. Deploy funcional 3ea3c43 e contraste 62babcf confirmados (pipelines 39503676010/39503972684). Busca/código/nome sem acento, vazio, limpar, paginação, ativos e mobile 390 px retestados em homologação. Evidências no checklist manual. Nenhum banco criado.
