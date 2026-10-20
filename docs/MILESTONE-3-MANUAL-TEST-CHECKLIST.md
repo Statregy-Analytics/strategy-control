@@ -351,3 +351,13 @@ O usuário realizou a aprovação no Admin. Reteste na mesma conta e nas versõe
 - [x] Nenhuma falha nova do front reproduzida; nenhuma alteração de runtime, layout ou publicação nova necessária. Somente documentação atualizada. Evidência: cliente-cnh-aprovada-progresso-100.png.
 
 **Encerrado:** reteste da porcentagem após aprovação da CNH e gravação/persistência da edição de Localização. **Backend ainda aberto:** alinhar CNH obrigatória às alternativas do Figma (não exigir documento adicional ao RG/passaporte previsto), vínculo/metadados no replace e as demais lacunas já registradas. Não cobrar 0% como falha atual desta conta nem confundir nível documental completo com todas as sete etapas concluídas.
+
+
+## Perfil — contatos reais e preservação na edição básica, 20/10
+
+- [x] QA 8: corrigida leitura de primaryEmail/mobilePhone estruturados no resumo. Consulta mostra a máscara real em vez de Não informado; edição usa valores dos contatos principais obtidos no perfil completo, nunca o objeto ou a máscara.
+- [x] Escrita rejeita objeto inválido de contato e leitura recusa primários ambíguos antes de abrir edição. Testes verificam máscaras, preservação de contatos/endereço e alteração independente de dado pessoal.
+- [x] Portal 639bd6f/pipeline 39480681134 aprovado em lint, 165 testes, build, upload e ativação. Na conta do usuário, naturalidade fictícia editada/salva/retomada e restaurada/retomada. Hash independente confirmou todos os contatos idênticos ao estado anterior. Nenhum dado de contato integral ou senha registrado.
+- [x] Desktop/celular 390 px conferidos sem overflow. Layout/campos/ações existentes preservados; não houve alteração de documentos aprovados, níveis ou permissões. Evidência: cliente-perfil-contatos-api-corrigidos.png.
+
+Falha do frontend encerrada; não é pendência de cadastro/campo de contato no backend. O checklist geral foi atualizado para não repetir como abertos os retestes documentais e de edição já feitos. Os bloqueios contratuais/configuração e homologação final pelo QA permanecem separados no documento consolidado.

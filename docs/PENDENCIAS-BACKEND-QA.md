@@ -195,3 +195,10 @@ A pedido do usuário, CNH fictícia enviada pelo endpoint existente e exibida co
 Após aprovação feita pelo usuário, API e Área do Cliente mostram 100%; CNH Approved/Complete/countsAsComplete true, currentLevel LEVEL_1, nextLevel null e documentComplianceStatus OK. PATCH de Localização pelo portal salvou complemento fictício, persistiu após recarga e permitiu restaurar o original, também persistido. Essas leituras/escritas e a porcentagem não devem permanecer como bloqueios atuais da conta. Não houve alteração adicional do frontend.
 
 A regra ainda considera CNH obrigatória e RG opcional. Portanto permanece o pedido de alinhar a configuração às alternativas do fluxo aprovado do Figma, sem documentos/campos extras. Total documental segue 5 (3 aprovados, 1 pendente, 1 rejeitado), pois 100% mede requisitos configurados; não comprova todos os arquivos aprovados nem envio final. Os pontos de versionamento/metadados do replace continuam independentes e abertos.
+
+
+### Contatos estruturados do perfil — defeito do front encerrado, 20/10
+
+O e-mail existente não aparecia no perfil porque a interface tratava primaryEmail/mobilePhone do resumo como texto, embora sejam objetos com valueMasked. Corrigido em 639bd6f, publicado na pipeline 39480681134 aprovada: máscara na consulta, valores reais dos contatos principais do perfil completo na edição e validação antes da escrita para impedir limpeza por objeto inválido. Teste integrado de alteração/restauração da naturalidade manteve todos os contatos, confirmado por comparação independente na API. Não solicitar novo campo/endpoint ou preenchimento fictício para resolver esse defeito do frontend. Ausência real de celular segue exibida como não informado.
+
+Isso não encerra as pendências de relationship/ausência de contatos de confiança, unicidade de e-mail no servidor, aceite/envio final, catálogos e demais contratos já descritos.
