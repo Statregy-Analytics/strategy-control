@@ -10,7 +10,7 @@ Atualizado em 20/10/2026 após a mudança de ordem e campos autorizada pelo desi
 | 2 · Confirmar e-mail | Confirmação e reenvio reais; após confirmação usa login existente para continuar na etapa 3; sem senha em storage/URL | Criação/código confirmados pelo usuário e sessão na etapa 3 observada; aceite versionado continua pendente |
 | 3 · Dados pessoais | GET/PATCH do perfil; nascimento, gênero, estado civil, uma nacionalidade e cidade; preserva dados externos à etapa | País de nascimento e múltiplas nacionalidades não existem no payload; catálogos dos seletores não disponibilizados |
 | 4 · Atividade trabalhista e moedas | Ocupação obrigatória em texto livre; Empregador opcional; rendas/bens; duas moedas do catálogo. PUT profissional e financeiro + PATCH preferências antes de avançar | Criação profissional, moedas e financeiro validados na conta nova; ocupação não exige catálogo. Defaults de idioma/fuso/tema ausentes ainda exigiriam alinhamento |
-| 5 · Documento e endereço | Endereço/filiação, CEP, tipos/definições e serviços documentais existentes. Entrada exige profissional/financeiro e moedas; links antigos e retomada migrados | Upload RG Brasil e vínculo das duas evidências aprovados nesta conta; Uploaded não significa aprovado. Retomada de número mascarado/emissor/datas e indicação de evidências corrigidas e validadas em homologação; bairro, UF e outros países continuam parciais |
+| 5 · Documento e endereço | Endereço/filiação, CEP, tipos/definições e serviços documentais existentes. Entrada exige profissional/financeiro e moedas; links antigos e retomada migrados | Upload RG Brasil, vínculo e aprovação das duas evidências validados nesta conta; portal mostra Aprovado. Retomada de número mascarado/emissor/datas e indicação de evidências corrigidas e validadas em homologação; bairro, UF e outros países continuam parciais |
 | 6 · Contatos de confiança | GET real e PUT de existentes preservando relationship/e-mail; valida todos antes de escrever | Inclusão exige relationship não presente no Figma; declaração de ausência sem operação de persistência |
 | 7 · Revisão e envio | Revisa dados carregados da API e alterações locais; Editar por etapa; confirmação; consulta real de onboarding | Operação final/recibo de envio e revisão cadastral não identificados; Data Intake atual contém apenas formulários patrimoniais |
 
@@ -214,3 +214,18 @@ Corrigido o mapeamento de categoria no frontend: GET /admin/customers/{id}/docum
 - [ ] Aprovação/reprovação efetiva e reflexos no portal/edição do perfil não executados nesta rodada. Os arquivos fictícios permanecem Pending para revisão do usuário; esta correção não comprova liberação cadastral posterior.
 
 A ausência das linhas era defeito do frontend, encerrado após o reteste publicado. Nenhum novo bloqueio/bug de backend foi aberto por esse cenário.
+
+
+## Aprovação integrada dos arquivos fictícios e edição do cliente — 20/10
+
+Teste autorizado pelo usuário nas versões já publicadas: Admin 4fd3faf (correção documental) e portal beb01b2. Nenhuma alteração de layout, campo ou ação foi necessária nesta rodada.
+
+- [x] No Admin, Aprovar foi acionado separadamente nos dois arquivos fictícios RG. Primeiro resultado: 1 Aprovado / 1 Aguardando; segundo: 2 Aprovados / 0 Aguardando / 0 Rejeitados. Ações de decisão deixaram de aparecer nos arquivos concluídos; nenhuma revisão duplicada.
+- [x] Consulta administrativa independente confirmou summary.total = 2, approved = 2, pending = 0, rejected = 0. Progresso identifica RG Approved, progressState Complete e countsAsComplete true.
+- [x] Área do Cliente, mesma conta: Dados Básicos, Localização e Atividade Trabalhista com Editar habilitado. Aviso de análise documental e badges Pendente removidos conforme as leituras atuais.
+- [x] Edição integrada comprovada em Localização: complemento fictício alterado para Unidade de teste QA aprovação, salvo e confirmado após recarga completa. Em seguida, restaurado para Unidade de teste pelo mesmo formulário e confirmado em tela. Nenhum dado pessoal real ou valor financeiro alterado.
+- [x] Aba Documentação mostra os dois nomes de arquivos fictícios com Aprovado, mantendo os controles existentes. A mudança do Admin foi recebida pela API do portal, sem alteração manual de nível, guard ou permissão.
+- [!] Progresso ainda 0%: a API devolve currentLevel null, nextLevel LEVEL_1, approvedRequirements 0, requiredRequirements 1 e documentComplianceStatus Pending. A configuração traz RG isRequired false e CNH isRequired true, pendente/sem arquivo. Portanto os arquivos RG estão aprovados, mas não completam o requisito atualmente configurado. Alinhar regra/configuração de nível às alternativas do fluxo aprovado do Figma; não criar campo CNH obrigatório nem simular 100% no front.
+- [ ] Edição de documentos na seção Dados Pessoais continua direcionada à aba Documentação, conforme implementação existente. Contatos sem vínculo/cadastro continuam bloqueados pela pendência já conhecida. Este teste não homologa reenvio/reprovação, contatos, envio cadastral final ou progressão de nível.
+
+**Resultado:** aprovação dos dois arquivos, atualização visual do portal e gravação de edição de localização aprovadas. Nenhum defeito novo do frontend reproduzido; sem mudança de runtime ou deploy novo. Permanece alinhamento da configuração documental no backend. Evidências: admin-dois-documentos-aprovados.png e cliente-documentos-aprovados.png; sem e-mail, token ou identificador pessoal integral neste registro.

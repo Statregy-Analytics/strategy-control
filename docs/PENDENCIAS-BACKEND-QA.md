@@ -6,7 +6,7 @@ A interface segue o Figma e as alterações de ordem/campos expressamente autori
 
 O front de Aprovar/Reprovar documentos está integrado conforme C27–C28. Falta confirmar:
 
-- Aprovar o documento do cadastro remove a pendência e libera a edição do perfil?
+- Confirmado em 20/10 na conta nova: aprovação dos dois RGs removeu a pendência dos arquivos e habilitou edição de Dados Básicos/Localização/Atividade no portal. Salvamento de Localização e persistência após recarga validados; progressão de nível continua pendente por configuração CNH, descrita abaixo.
 - Como consultar o estado da revisão cadastral, a data de envio e a permissão de edição, para apresentar C26 corretamente?
 - Na reprovação, motivo e mensagem chegam ao cliente e permitem reenvio? Hoje enviamos os dois juntos em `notes`, pois esse é o contrato disponível.
 - Qual é o catálogo de motivos de reprovação? O front usa apenas “Foto ilegível”, confirmado no Figma.
@@ -155,3 +155,14 @@ UF não preenchida anteriormente, catálogos, bairro e demais lacunas contratuai
 ### Lista documental do Admin — correção do front, 20/10
 
 Os dois arquivos fictícios do cadastro já eram retornados pelo overview com permissão Review, em PERSONAL_DOCUMENTS. O front não reconhecia esse código e escondia as linhas; corrigido em 4fd3faf e validado no Admin publicado, pipeline 39474455430 aprovada. Ambos aparecem com ações de revisão e contador coerente. Não pedir endpoint/permissão nova ao backend para esse problema. Permanecem as confirmações já descritas sobre efeitos da aprovação, liberação da edição e revisão cadastral; nenhuma decisão documental foi enviada nesta rodada.
+
+
+## Cadastro — RG aprovado, nível pendente por CNH obrigatória (20/10)
+
+**Reproduzido em homologação após Aprovar os dois arquivos fictícios no Admin.** Overview: total 2, approved 2, pending 0. Área do Cliente mostra os dois Aprovado; edição de localização salvou e persistiu, com dado fictício restaurado ao final. Aprovação, atualização do portal e essa edição não devem continuar sendo cobradas como bloqueios gerais.
+
+GET /admin/customers/{id}/documents/progress devolve currentLevel null, nextLevel LEVEL_1, progressPercentage 0, approvedRequirements 0, requiredRequirements 1 e documentComplianceStatus Pending. Em PERSONAL_DOCUMENTS, RG está Approved/Complete/countsAsComplete true, mas isRequired false; CNH está isRequired true/Pending, sem documento. O portal exibe os 0% recebidos, sem fabricar conclusão.
+
+**Solicitação:** alinhar a configuração/regra de conclusão do nível às alternativas do cadastro aprovado no Figma (documento de identificação/passaporte), sem acrescentar exigência ou campo CNH à tela. Confirmar como representar alternativas aceitas, de modo que a aprovação da documentação prevista complete o requisito correto, e qual estado oficial comprova envio/revisão/conclusão cadastral. Não foi alterada a configuração do servidor nem enviado documento adicional para contornar a regra.
+
+Não atribuímos o 0% a erro aritmético: ele corresponde à CNH obrigatória atual; o conflito é de configuração/regra com o fluxo aprovado. Reprovação/reenvio e conclusão de cadastro continuam não homologados.
