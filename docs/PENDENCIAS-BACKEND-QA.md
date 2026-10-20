@@ -277,3 +277,7 @@ O endpoint administrativo já retorna os 513 bancos ativos em três páginas. A 
 ## Esclarecimento 20/10 — campos inteiros do patrimônio no Admin
 
 A validação local de anos, quartos/banheiros, parcelas e prazo foi ajustada aos tipos int32 já publicados. Era um problema do frontend, sem necessidade de endpoint, campo ou regra adicional no backend. Dinheiro e áreas continuam decimais; pendências anteriores deste documento permanecem abertas.
+
+## Esclarecimento 20/10 — nascimento no editor administrativo
+
+A validação de data de nascimento impossível/futura foi corrigida no front do Admin, usando o mesmo campo e os estados de erro previstos. Não requer endpoint ou campo adicional. Campo opcional continua opcional; não foi criada regra de idade mínima. Pendências de escrita dos demais dados pessoais permanecem abertas.

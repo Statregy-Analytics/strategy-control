@@ -341,3 +341,7 @@ Correção do front, sem campos/ações adicionais: seletor e nomes da seção b
 ### Rodada 20/10 — validação do patrimônio no Admin
 
 Na revisão funcional dos controles existentes do perfil, corrigida a aceitação de frações em anos, contagens e prazo. O contrato HTTP já define esses campos como int32: não exige alteração do backend nem novos controles. Validação no input e antes do envio; campos monetários/áreas seguem decimais. 93 testes locais aprovados; rejeição e correção do ano retestadas em 8080, sem criar patrimônio. Deploy 9d10d93/pipeline 39500642230 concluído: rejeição dos dois anos fracionados, correção, opcional vazio, valor decimal e mobile 390 px retestados em homologação. Formulário descartado sem gravação; evidência no checklist manual. Os bloqueios contratuais da edição por seção permanecem abertos.
+
+### Rodada 20/10 — validação do nascimento no Admin
+
+Revisão de QA 11/15: corrigida a validação de nascimento impossível ou futuro na edição por seção. Usa os erros já existentes e mantém a composição C24. 95 testes locais, lint e build aprovados; data futura rejeitada em 8080, com descarte/reabertura preservando o dado original. Sem escrita de dados nem campos/ações adicionais. Publicação e reteste serão registrados no checklist manual.

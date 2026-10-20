@@ -19,6 +19,9 @@ Nenhuma outra pendência do perfil com contrato suficiente e independente do bac
 
 ## Estado atual do Admin — QA 10 a 19
 
+- [x] Identificação: data de nascimento impossível/futura bloqueada antes das escritas da seção, usando erro no topo/campo existentes. Sem idade mínima nem novo campo. 95 testes, lint/build e teste local em 8080 aprovados; descarte preservou o nascimento original.
+- [ ] Reteste da validação de nascimento no Admin de homologação após publicação.
+
 - [x] Registro de patrimônio: anos, quartos/banheiros, parcelas e prazo em meses validados como inteiros no input e antes do HTTP, respeitando os tipos já publicados. Opcionais e zero preservados; valores e áreas continuam decimais. 93 testes locais aprovados; ano fracionado/correção retestados em 8080, sem gravação.
 - [x] Patrimônio publicado em 9d10d93, pipeline 39500642230 aprovada em lint/build/upload/ativação. Em homologação: anos fracionados rejeitados, correção para inteiro e opcional vazio aceitos, Valor FIPE decimal preservado e mobile 390 px sem overflow; formulário descartado sem gravação.
 
@@ -516,3 +519,12 @@ Reteste publicado desta rodada: banco Órama selecionado em `https://admin.strat
 - Dinheiro e áreas permanecem decimais; não foram criados limites de ano/calendário ou outras regras de negócio além do contrato de inteiros já publicado.
 - Testes: frações (inclusive além da precisão numérica), negativos, não finitos e limite int32; opcionais, zero e áreas decimais preservados. Suíte completa: 93 aprovados. No navegador em 8080, ano 2020.5 exibe erro e 2020 remove o erro; formulário descartado sem gravar.
 - Defeito corrigido no front, não incluído na tabela de bugs do backend. Publicação 9d10d93 confirmada na pipeline 39500642230 (sucesso). Reteste no Admin publicado rejeitou 2020.5/2021.5 nos dois anos; correção para 2020 removeu o erro, ano modelo vazio foi aceito e Valor FIPE 1234.56 preservado. Em 390 px, documento com 390 px e card com largura interna/rolável de 374 px, sem overflow horizontal. Formulário descartado sem gravar. Evidência: `admin-patrimonio-validacao-inteiros.png`.
+
+## Rodada 20/10 — nascimento na identificação administrativa
+
+- Na revisão funcional dos itens QA 11/15, identificada ausência de validação de nascimento no editor administrativo. O portal já rejeitava datas impossíveis ou futuras.
+- Correção na validação da seção: formato de calendário, anos bissextos e comparação com o dia local atual, sem criar idade mínima ou obrigatoriedade adicional. Campo vazio permanece permitido pelo contrato atual.
+- O erro usa o resumo e o campo existentes; todos os campos continuam na seção e os demais lápis ficam bloqueados durante a edição, conforme C24.
+- Suíte completa com 95 testes aprovada, incluindo nascimento futuro/impossível, hoje, anos bissextos e opcionais. Teste com o controlador real comprovou zero escritas ao reprovar a data e salvamento permitido após correção.
+- Em 8080, data futura 2099-01-01 bloqueada no Salvar. Descarte e reabertura restauraram a data original da API, sem erro e sem mudanças habilitadas. Nenhum dado da conta de teste foi gravado nesta rodada.
+- Publicação/reteste em homologação pendentes de conclusão do deploy. Não é bug do backend nem exige campos ou endpoints novos.

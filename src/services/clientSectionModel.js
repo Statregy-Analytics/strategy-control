@@ -72,7 +72,24 @@ export function sectionEditable(key, source) {
   if (address?.id && address.countryId) keys.push('line1', 'line2', 'cityState', 'postalCode')
   return keys
 }
-export function sectionValidation(key, value, source) {
+const validBirthDate = (value, today) => {
+  const match = /^(\d{4})-(\d{2})-(\d{2})$/.exec(value)
+  if (!match) return false
+  const [, year, month, day] = match.map(Number)
+  if (year < 1) return false
+  const parsed = new Date(0)
+  parsed.setFullYear(year, month - 1, day)
+  parsed.setHours(0, 0, 0, 0)
+  const end = new Date(today)
+  end.setHours(0, 0, 0, 0)
+  return (
+    parsed.getFullYear() === year &&
+    parsed.getMonth() === month - 1 &&
+    parsed.getDate() === day &&
+    parsed <= end
+  )
+}
+export function sectionValidation(key, value, source, today = new Date()) {
   const errors = {}
   if (key === 'professional') {
     if (!value.occupation?.trim()) errors.occupation = 'Informe a profissão.'
@@ -89,6 +106,12 @@ export function sectionValidation(key, value, source) {
       errors.householdMonthlyIncome = 'Não pode ser menor que a renda individual'
   }
   if (key === 'identification') {
+    if (
+      value.birthDate != null &&
+      value.birthDate !== '' &&
+      !validBirthDate(value.birthDate, today)
+    )
+      errors.birthDate = 'Informe uma data de nascimento válida, sem ser no futuro.'
     if (primary(source?.names) && !value.fullName.trim())
       errors.fullName = 'Informe o nome completo.'
     if (value.primaryEmail && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value.primaryEmail))

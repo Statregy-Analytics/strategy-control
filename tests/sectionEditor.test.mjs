@@ -347,3 +347,63 @@ test('format-only financial editing stays clean and never writes or announces a 
   assert.equal(await h.controller.save(), true)
   assert.equal(h.writes[0].payload.householdMonthlyIncome, '100.01')
 })
+
+test('identification rejects impossible and future birth dates without changing optionality', () => {
+  const today = new Date(2026, 9, 20, 15, 0)
+  for (const birthDate of [
+    '2026-10-21',
+    '2027-01-01',
+    '2025-02-29',
+    '1900-02-29',
+    '2026-04-31',
+    '2026-13-01',
+    '0000-01-01',
+    '20/10/2026',
+    'invalid',
+  ]) {
+    assert.match(
+      sectionValidation('identification', { birthDate }, {}, today).birthDate,
+      /nascimento válida/,
+    )
+  }
+  for (const birthDate of [
+    null,
+    undefined,
+    '',
+    '2026-10-20',
+    '2000-02-29',
+    '1989-01-01',
+    '0099-01-01',
+  ])
+    assert.equal(sectionValidation('identification', { birthDate }, {}, today).birthDate, undefined)
+})
+test('birth date validation blocks all section writes and correction can then be saved', async () => {
+  const source = {
+    customerId: 'customer',
+    kind: 'Person',
+    birthDate: '1989-01-01',
+    names: [],
+    contacts: [],
+    addresses: [],
+  }
+  const { state, controller, writes } = setup({
+    read: async () => ({
+      source,
+      values: sectionValues('identification', source),
+      editable: ['birthDate'],
+    }),
+    validate: (key, value, source) => sectionValidation(key, value, source, new Date(2026, 9, 20)),
+    plan: sectionPlan,
+  })
+  await controller.start('identification')
+  state.draft.birthDate = '2026-10-21'
+  assert.equal(await controller.save(), false)
+  assert.equal(writes.length, 0)
+  assert.match(state.fields.birthDate, /sem ser no futuro/)
+  assert.equal(state.active, 'identification')
+  state.draft.birthDate = '1990-01-01'
+  assert.equal(await controller.save(), true)
+  assert.equal(writes.length, 1)
+  assert.equal(writes[0].payload.birthDate, '1990-01-01')
+  assert.equal(source.birthDate, '1989-01-01')
+})
