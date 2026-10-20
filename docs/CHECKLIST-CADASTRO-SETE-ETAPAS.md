@@ -12,7 +12,7 @@ Atualizado em 20/10/2026. Referência: Figma BaDXlWpxbIoY4azOaQnXgv, seção 4:2
 | 4 · Documento e endereço | Oito variações do Figma prontas para conferência em homologação | País real, catálogos, gravação, consulta postal e envio dos arquivos pendentes |
 | 5 · Atividade trabalhista | Tela e validações monetárias prontas em homologação | Catálogo, obrigatórios, datas de vigência, gravação e retomada pendentes |
 | 6 · Contatos de confiança | Tela, múltiplos contatos e ausência validados em homologação | relationship, registro da ausência, gravação e progresso pendentes |
-| 7 · Revisão e envio | Pendente | Envio, estado da revisão e bloqueio de edição pendentes |
+| 7 · Revisão e envio | Tela, cinco resumos, edição por etapa e validação local prontas | Envio, recibo, retomada, estado da revisão e bloqueio integrado pendentes |
 
 ## 1. Criar conta — Figma 4:25513
 
@@ -41,7 +41,7 @@ A tela de homologação fica em http://localhost:9010/cadastro/etapa-1. Não cha
 
 Prévia: http://localhost:9010/cadastro/etapa-2. Usa endereço demonstrativo mascarado e bloqueia o transporte; não envia e-mail, não confirma código nem simula sucesso/avanço. A rota está incluída no build publicado em homologação. A confirmação pública atual permanece disponível e usa a mesma lógica e os mesmos serviços HTTP. O placeholder 000000 não define tamanho/formato do código; o contrato aceita string sem restrição documentada.
 
-A próxima tela incremental é a etapa 7. A confirmação real e a sessão para continuar o cadastro ainda precisam ser homologadas; a resposta de confirmação atual contém somente succeeded/message.
+As sete telas incrementais estão implementadas; o próximo trabalho é integrar e homologar os contratos confirmados. A confirmação real e a sessão para continuar o cadastro ainda precisam ser homologadas; a resposta de confirmação atual contém somente succeeded/message.
 
 ## 3. Dados pessoais — Figma 6:25562
 
@@ -117,11 +117,17 @@ URL de conferência: https://hml.strategyanalytics.com.br/cadastro/etapa-6. Não
 
 ## 7. Revisão e envio — Figma 9:25964; enviado 9:26067
 
-- [ ] Apresentar somente os dados das etapas anteriores e ações do desenho, com documentos mascarados e sem senha.
-- [ ] Impedir envio com pendências e concorrência; preservar rascunho após erro.
+- [x] Apresentar somente os cinco grupos do desenho com dados dos rascunhos anteriores, documentos/telefones mascarados, sem senha, códigos, nomes de arquivos ou exemplos iniciais.
+- [x] Editar abre a etapa correspondente; Voltar retorna à revisão preservando os dados em memória e desmarca a confirmação. Variante documental ativa preservada.
+- [x] Exigir confirmação explícita e apontar grupos vazios/inválidos com os validadores existentes. Sem transporte confirmado, manter a revisão com aviso, sem simular sucesso.
+- [x] Conferir desktop, teclado/foco, cinco retornos e assets; 106 testes, lint, build e diff do lote aprovados.
+- [ ] Concluir conferência visual em celular: o recurso de viewport manteve 1280 px apesar da solicitação de 390 px; não registrar aprovação móvel sem evidência.
+- [ ] Homologar concorrência, falha/reenvio e preservação do rascunho com transporte real.
 - [ ] Integrar envio final e ler o estado real da revisão, sem fabricar Cadastro enviado para análise.
 - [ ] Exibir Pendente e bloquear edição no perfil conforme a resposta confirmada do servidor.
 - [ ] Homologar revisão/aprovação/reprovação e reenvio sem perder o progresso.
+
+Tela: https://hml.strategyanalytics.com.br/cadastro/etapa-7. Os cinco grupos são Dados pessoais, Endereço, Documento, Atividade trabalhista e Contatos de confiança. Rascunhos ficam somente em memória; recarga limpa o contexto. /cadastro/enviado reproduz 9:26067 como referência visual explicitamente identificada; Enviar cadastro não navega para ela. Nenhum envio, recibo ou mudança de status é fabricado.
 
 ## Critério para fechar cada etapa
 

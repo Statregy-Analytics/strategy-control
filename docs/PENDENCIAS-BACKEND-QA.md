@@ -57,7 +57,7 @@ O login da seção nova (4:25438) foi concluído no front usando a autenticaçã
 - Confirmar consulta e operações do patrimônio próprio do cliente. As seções não mostram bens fictícios e não usam endpoints administrativos para contornar autorização.
 - Informar o `context` correto dos consentimentos/termos do perfil. A consulta sem contexto retorna HTTP 400; o Swagger não enumera os valores. Não assumir um contexto de cadastro nem adicionar seletor.
 - Confirmar Compartilhar Perfil: a projeção pública documentada só contém `customerId` e `avatarUrl`; não permite reproduzir o conteúdo completo do desenho.
-- Confirmar persistência/retomada das sete etapas, aceite versionado, documentos por país e estado de envio/revisão cadastral. O cadastro de sete etapas também continua pendente de implementação no front; não é falha exclusivamente do backend.
+- Confirmar persistência/retomada das sete etapas, aceite versionado, documentos por país e estado de envio/revisão cadastral. As sete telas e validações locais estão implementadas; integração, retomada e homologação completa ainda exigem trabalho no front após confirmação dos contratos.
 
 Referência de evidências: repositório Strategy-analytics-v2, `docs/QA-2026-10-19-PERFIL.md`. Avatar já usa a URL recebida e fallback neutro; uma foto válida precisa estar disponível na API para homologar seu carregamento, sem criar upload fora do Figma.
 
@@ -142,3 +142,14 @@ Etapa 6 conforme 9:25883 em /cadastro/etapa-6: nome/telefone, adição de outro 
 - Confirmar vínculo com a sessão e progresso para a etapa 7. O serviço atual trata contatos individuais, sem conclusão/ausência do passo do cadastro.
 
 Conferência local: múltiplos registros, incompletos, ausência reversível e navegação; 98 testes aprovados. Nenhum contato real foi criado, alterado ou removido. A tela está publicada para QA; integração/retomada continuam abertas. Evidências no portal: docs/QA-2026-10-20-CADASTRO-ETAPA-6.md.
+
+## Cadastro de sete etapas — revisão e envio, 20/10
+
+Etapa 7 (9:25964) implementada com os cinco resumos, Editar, confirmação e Voltar/Enviar cadastro. Estado enviado (9:26067) disponível apenas como referência visual identificada, sem transição de sucesso simulada. Não acrescentar campos/ações para acomodar os contratos abaixo.
+
+- Confirmar operação/payload de envio final do onboarding, sessão autorizada, identificação/versão do rascunho e vínculo dos dados, documentos e confirmação de veracidade. As operações /data-intake/submissions/{id}/submit e /resubmit existem, mas não estão confirmadas como envio do cadastro do cliente; não serão reutilizadas por suposição.
+- GET /client/onboarding/status existe e informa requisitos/features e bloqueios; falta confirmar como consultar envio para análise, data/recibo, pendências, aprovação/reprovação e permissão de edição. O contrato consultado não explicita a versão do rascunho ou o recibo final das sete etapas.
+- Definir idempotência, pedidos simultâneos, falha parcial, repetição segura e retomada após recarga. Confirmar se a gravação é por etapa ou parte do envio final, incluindo referências dos arquivos já persistidos.
+- Confirmar quando apresentar Cadastro enviado para análise e o estado Pendente no perfil, como a aprovação documental libera edição e como a reprovação permite correção/reenvio sem perder os dados. O bloqueio existente por aprovação do perfil foi preservado; nenhum status é alterado localmente.
+
+106 testes, lint e build aprovados. Nenhum dado/documento real foi enviado. Após os contratos, ainda será necessário integrar o transporte no front e homologar o ciclo completo. Evidências no portal: docs/QA-2026-10-20-CADASTRO-ETAPA-7.md.
