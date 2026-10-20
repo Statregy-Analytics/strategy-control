@@ -136,3 +136,5 @@ Os avisos de homologação identificam as dependências sem criar novos campos/a
 Publicação conferida em 20/10: portal 8d3bb93, pipeline 39428877610 concluída com sucesso. As três rotas /cadastro/etapa-1, /cadastro/etapa-2 e /cadastro/etapa-3 abriram em homologação. Data inválida da etapa 3 mostrou erro/foco; Voltar abriu as etapas 2 e 1 nos endereços normais. Essa conferência confirma publicação e validação local, mantendo a gravação/progresso como pendências.
 
 Publicação da etapa 4 conferida em 20/10: portal ff59268, pipeline 39432053951 concluída com sucesso. Brasil e Japão abriram em hml.strategyanalytics.com.br/cadastro/etapa-4 e /cadastro/etapa-4/jp. Passaporte trocou para um arquivo e os quatro campos; data inválida exibiu erro e foco. Persistência, envio real e avanço integrado continuam pendentes, conforme descrito acima.
+
+Publicação da etapa 5 conferida em 20/10: portal 1128214, pipeline 39433453584 concluída com sucesso. /cadastro/etapa-5 abriu em homologação; valor negativo gerou erro/foco, zero explícito foi aceito e Voltar abriu etapa 4. Retorno e recarga conferidos. Catálogo, gravação, vigências e progresso integrado permanecem pendentes.
