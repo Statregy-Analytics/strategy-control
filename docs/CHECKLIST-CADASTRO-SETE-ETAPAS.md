@@ -11,7 +11,7 @@ Atualizado em 20/10/2026. Referência: Figma BaDXlWpxbIoY4azOaQnXgv, seção 4:2
 | 3 · Dados pessoais | Tela e validações locais prontas; opções/obrigatórios pendentes | Catálogos, país de nascimento, múltiplas nacionalidades, gravação e retomada pendentes |
 | 4 · Documento e endereço | Oito variações do Figma prontas para conferência em homologação | País real, catálogos, gravação, consulta postal e envio dos arquivos pendentes |
 | 5 · Atividade trabalhista | Tela e validações monetárias prontas em homologação | Catálogo, obrigatórios, datas de vigência, gravação e retomada pendentes |
-| 6 · Contatos de confiança | Pendente | Resolver relationship obrigatório sem campo extra |
+| 6 · Contatos de confiança | Tela, múltiplos contatos e ausência validados em homologação | relationship, registro da ausência, gravação e progresso pendentes |
 | 7 · Revisão e envio | Pendente | Envio, estado da revisão e bloqueio de edição pendentes |
 
 ## 1. Criar conta — Figma 4:25513
@@ -41,7 +41,7 @@ A tela de homologação fica em http://localhost:9010/cadastro/etapa-1. Não cha
 
 Prévia: http://localhost:9010/cadastro/etapa-2. Usa endereço demonstrativo mascarado e bloqueia o transporte; não envia e-mail, não confirma código nem simula sucesso/avanço. A rota está incluída no build publicado em homologação. A confirmação pública atual permanece disponível e usa a mesma lógica e os mesmos serviços HTTP. O placeholder 000000 não define tamanho/formato do código; o contrato aceita string sem restrição documentada.
 
-A próxima tela incremental é a etapa 6. A confirmação real e a sessão para continuar o cadastro ainda precisam ser homologadas; a resposta de confirmação atual contém somente succeeded/message.
+A próxima tela incremental é a etapa 7. A confirmação real e a sessão para continuar o cadastro ainda precisam ser homologadas; a resposta de confirmação atual contém somente succeeded/message.
 
 ## 3. Dados pessoais — Figma 6:25562
 
@@ -104,10 +104,16 @@ URL de conferência: https://hml.strategyanalytics.com.br/cadastro/etapa-5. R$ 0
 
 ## 6. Contatos de confiança — Figma 9:25883
 
-- [ ] Implementar nome/telefone, múltiplos contatos e Não possuo contato de confiança conforme desenho.
-- [ ] Validar registros incompletos e coerência com a opção de ausência; preservar contatos ao navegar.
+- [x] Implementar somente nome/telefone, Adicionar outro contato, Não possuo contato de confiança e Voltar/Continuar conforme 9:25883, reutilizando componentes e assets existentes.
+- [x] Exigir nome e telefone nos registros iniciados; sem contatos, exigir preenchimento ou ausência explícita. Não inventar tamanho/DDI/máscara por país nem exigir sobrenome por contagem de palavras.
+- [x] Adicionar uma linha por vez após completar a anterior; tolerar linha adicional inteiramente vazia, pois não há remoção no Figma. Erros independentes e foco no campo afetado.
+- [x] Ausência desabilita campos e adição, sem apagar o rascunho; desmarcar restaura os dados. Nenhuma exclusão HTTP é executada.
+- [x] Preservar múltiplos contatos/ausência em memória ao voltar à etapa 5 e retornar. Conferidos desktop/celular sem overflow, teclado de telefone, assets e opção de ausência.
+- [x] 98 testes, lint, build e diff do lote aprovados. Rota /cadastro/etapa-6 incluída no build publicado.
 - [ ] Resolver a exigência de relationship no backend sem criar campo adicional.
 - [ ] Integrar gravação e retomada; homologar ausência e múltiplos contatos reais.
+
+URL de conferência: https://hml.strategyanalytics.com.br/cadastro/etapa-6. Não há parentesco, e-mail, remoção ou limite arbitrário de contatos. A API existente requer relationship e não documenta ausência declarada/progresso; Continuar mantém os dados na etapa com aviso, sem simular gravação. Regras de telefone por país e normalização ainda precisam de confirmação.
 
 ## 7. Revisão e envio — Figma 9:25964; enviado 9:26067
 

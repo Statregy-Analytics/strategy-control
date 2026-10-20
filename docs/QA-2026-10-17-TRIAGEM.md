@@ -113,3 +113,9 @@ Documento e endereço com oito frames do Figma, publicados por rotas /cadastro/e
 Atividade trabalhista (9:25789) em /cadastro/etapa-5: somente os quatro campos, orientação da renda familiar e Voltar/Continuar. Reutilizados shell, primitiva de campo e assets. Entrada monetária valida agrupamento e centavos sem Number/float, distingue vazio/zero e mantém rascunho em memória.
 
 91 testes, lint e build aprovados. Desktop/celular sem overflow; erros independentes e foco, zero, catálogo ausente e retorno à etapa 4 conferidos. A homologação integrada segue pendente: catálogo, obrigatórios, vigências/moeda dos serviços existentes, falha parcial e progresso. Nenhum perfil real foi alterado. Etapas 6–7 ainda aguardam implementação; ver checklist e pendências consolidadas.
+
+## Cadastro incremental — etapa 6, 20/10
+
+Contatos de confiança (9:25883) em /cadastro/etapa-6, com somente nome/telefone repetidos, adição, ausência e Voltar/Continuar. Campos existentes e assets reutilizados; nenhum parentesco/e-mail/remoção acrescentado. Rascunhos e ausência reversível ficam somente em memória.
+
+98 testes, lint e build aprovados. Conferidos vazio/incompleto, segundo contato, bloqueio de linhas vazias repetidas, ausência, foco, retorno à etapa 5 e celular sem overflow. Integração pendente: relationship obrigatório, declaração de ausência, telefone por país, múltiplas escritas/retomada e progresso. Nenhum contato real alterado. Próxima tela incremental: revisão/envio da etapa 7; ver checklist e pendências consolidadas.

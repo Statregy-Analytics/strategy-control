@@ -130,3 +130,15 @@ Etapa 5 conforme 9:25789 publicada em /cadastro/etapa-5, com somente atividade e
 - Confirmar como gravar as duas partes e retomar após falha parcial, sem apresentar sucesso integral quando somente uma foi salva. Definir consulta/progresso e avanço à etapa 6 sob a sessão do cadastro.
 
 A tela e validações locais estão disponíveis para QA. Nenhuma renda/perfil real foi gravado neste lote; a integração e homologação dos valores persistidos permanecem abertas. Evidências no portal: docs/QA-2026-10-20-CADASTRO-ETAPA-5.md. Checklist atualizado; próxima tela incremental: etapa 6.
+
+## Cadastro de sete etapas — contatos de confiança, 20/10
+
+Etapa 6 conforme 9:25883 em /cadastro/etapa-6: nome/telefone, adição de outro contato, declaração de ausência e Voltar/Continuar. Campos e estrutura existentes reutilizados. Sem parentesco, e-mail, remoção ou ações extras.
+
+- GET/POST/PUT/DELETE /client/profile/trusted-contacts já existem e têm serviços no portal. UpsertClientTrustedContactRequest exige name, relationship, phoneNumber e email (anulável). Confirmar a escrita com somente nome/telefone do Figma sem inventar relationship nem pedir parentesco. email poderá ser nulo quando o contrato do onboarding estiver confirmado; não criar campo na tela.
+- Definir registro/consulta de Não possuo contato de confiança e sua reversão. Lista vazia não distingue ausência declarada de etapa ainda não preenchida. Marcar a opção não deve disparar DELETE de contatos existentes por suposição.
+- Confirmar gravação/retomada de múltiplos contatos, limites se houver e tratamento de falha parcial/idempotência. Não presumir substituição da lista, apagar registros ou duplicar contatos em reenvio.
+- Confirmar formatos/tamanhos/normalização de telefone e como obter o país/DDI no cadastro sem acrescentar seletor ao desenho. O placeholder brasileiro não autoriza impor +55 ou rejeitar números internacionais. A tela valida preenchimento/caracteres usuais, preservando a string digitada.
+- Confirmar vínculo com a sessão e progresso para a etapa 7. O serviço atual trata contatos individuais, sem conclusão/ausência do passo do cadastro.
+
+Conferência local: múltiplos registros, incompletos, ausência reversível e navegação; 98 testes aprovados. Nenhum contato real foi criado, alterado ou removido. A tela está publicada para QA; integração/retomada continuam abertas. Evidências no portal: docs/QA-2026-10-20-CADASTRO-ETAPA-6.md.
