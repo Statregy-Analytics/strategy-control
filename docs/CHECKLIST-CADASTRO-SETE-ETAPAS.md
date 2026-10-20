@@ -9,7 +9,7 @@ Atualizado em 20/10/2026. Referência: Figma BaDXlWpxbIoY4azOaQnXgv, seção 4:2
 | 1 · Criar conta | Tela disponível em homologação | Pendente: residência, documentos legais e aceite versionado |
 | 2 · Confirmar e-mail | Tela disponível em homologação; lógica pública reutilizada | Serviços existentes reutilizados; envio real e sessão para etapa 3 pendentes |
 | 3 · Dados pessoais | Tela e validações locais prontas; opções/obrigatórios pendentes | Catálogos, país de nascimento, múltiplas nacionalidades, gravação e retomada pendentes |
-| 4 · Documento e endereço | Pendente, oito variantes | País real, endereços/documentos e uploads pendentes |
+| 4 · Documento e endereço | Oito variações do Figma prontas para conferência em homologação | País real, catálogos, gravação, consulta postal e envio dos arquivos pendentes |
 | 5 · Atividade trabalhista | Pendente | Gravação e retomada pendentes |
 | 6 · Contatos de confiança | Pendente | Resolver relationship obrigatório sem campo extra |
 | 7 · Revisão e envio | Pendente | Envio, estado da revisão e bloqueio de edição pendentes |
@@ -41,7 +41,7 @@ A tela de homologação fica em http://localhost:9010/cadastro/etapa-1. Não cha
 
 Prévia: http://localhost:9010/cadastro/etapa-2. Usa endereço demonstrativo mascarado e bloqueia o transporte; não envia e-mail, não confirma código nem simula sucesso/avanço. A rota está incluída no build publicado em homologação. A confirmação pública atual permanece disponível e usa a mesma lógica e os mesmos serviços HTTP. O placeholder 000000 não define tamanho/formato do código; o contrato aceita string sem restrição documentada.
 
-A próxima tela incremental é a etapa 4. A confirmação real e a sessão para continuar o cadastro ainda precisam ser homologadas; a resposta de confirmação atual contém somente succeeded/message.
+A próxima tela incremental é a etapa 5. A confirmação real e a sessão para continuar o cadastro ainda precisam ser homologadas; a resposta de confirmação atual contém somente succeeded/message.
 
 ## 3. Dados pessoais — Figma 6:25562
 
@@ -58,18 +58,37 @@ Tela de homologação: http://localhost:9010/cadastro/etapa-3, incluída no buil
 
 ## 4. Documento e endereço — Figma 37:27141
 
-- [ ] Brasil (6:25690): endereço/CEP, CPF, identificação ou passaporte e filiação conforme desenho.
-- [ ] Estados Unidos e Canadá (37:27142).
-- [ ] América do Sul (37:27262).
-- [ ] Japão (37:27382).
-- [ ] China (37:27502).
-- [ ] Europa (37:27622).
-- [ ] África (37:27742).
-- [ ] Austrália (37:27862).
-- [ ] Aplicar somente os campos/formatos de cada variante; documento de identidade ou passaporte, sem solicitar documentos extras.
-- [ ] Validar campos e arquivos pelos requisitos confirmados; permitir Não consta no meu documento para filiação conforme Figma.
-- [ ] Reutilizar consulta de CEP se disponível, sem reinterpretar complemento como bairro.
+- [x] Brasil (6:25690): endereço/CEP, CPF, identificação ou passaporte e filiação conforme desenho.
+- [x] Estados Unidos e Canadá (37:27142).
+- [x] América do Sul (37:27262).
+- [x] Japão (37:27382).
+- [x] China (37:27502).
+- [x] Europa (37:27622).
+- [x] África (37:27742).
+- [x] Austrália (37:27862).
+- [x] Aplicar somente os campos/formatos de cada variante; documento de identidade ou passaporte, sem solicitar documentos extras.
+- [x] Validar calendário nos três formatos, expedição não futura e validade não anterior à expedição. Filiação ausente desabilita o campo sem perder o rascunho ao desmarcar.
+- [x] Seleção local de um arquivo por lado; rejeitar vazio/múltiplos, sem upload/progresso fictício. Limites e MIME entram por regras confirmadas, sem impor restrições arbitrárias.
+- [x] Preservar campos/arquivos por tipo e país em memória; passaporte tem os quatro campos descritos no desenho e uma página, sem misturar arquivos da identificação.
+- [x] Conferir oito telas desktop, Brasil/Japão no celular, foco/teclado, troca de tipo e retorno à etapa 3. 85 testes, lint, build e diff do lote aprovados.
+- [ ] Confirmar obrigatórios, formatos fiscais/dígitos, política de validade e limites/tipos de arquivos no contexto do cadastro.
+- [ ] Integrar consulta postal Brasil/Japão. Não há consulta reutilizável confirmada; ao sair do campo, o aviso informa indisponibilidade e permite preenchimento manual. Complemento e bairro permanecem separados.
 - [ ] Integrar país real, número fiscal, endereço, documentos/upload e retomada; homologar falha/reenvio sem duplicação.
+
+URLs de conferência no hml.strategyanalytics.com.br (sem seletor extra na tela):
+
+| Variação desenhada | Caminho |
+| --- | --- |
+| Brasil | /cadastro/etapa-4 (ou /br) |
+| Estados Unidos, frame EUA/Canadá | /cadastro/etapa-4/us-ca |
+| Argentina, referência América do Sul | /cadastro/etapa-4/south-america |
+| Japão | /cadastro/etapa-4/jp |
+| China | /cadastro/etapa-4/cn |
+| Portugal, referência Europa | /cadastro/etapa-4/europe |
+| África do Sul, referência África | /cadastro/etapa-4/africa |
+| Austrália | /cadastro/etapa-4/au |
+
+Essas URLs selecionam frames para QA, não IDs reais nem a residência autenticada do cliente. O frame EUA/Canadá mostra campos dos Estados Unidos; não foi inventada uma adaptação canadense. Os grupos regionais não autorizam aplicar regras do país de referência a todos os países. Continuar mantém a etapa com aviso de integração, sem simular gravação ou envio.
 
 ## 5. Atividade trabalhista — Figma 9:25789
 

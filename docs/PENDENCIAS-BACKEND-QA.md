@@ -104,3 +104,18 @@ Tela 3/7 conforme 6:25562, com os seis campos/grupos do desenho e somente Adicio
 Validação local: 77 testes aprovados e conferência desktop/celular. Catálogos vazios e Continuar mostram indisponibilidade sem simular gravação; rascunho apenas em memória. A integração permanece aberta. Evidências no portal: docs/QA-2026-10-20-CADASTRO-ETAPA-3.md. Próxima tela incremental: etapa 4.
 
 Publicação em homologação: por solicitação do usuário, as telas 1–3 passaram a integrar o build e ficam em /cadastro/etapa-1, /cadastro/etapa-2 e /cadastro/etapa-3 no hml.strategyanalytics.com.br. Os bloqueios HTTP acima continuam documentados e visíveis, sem impedir a publicação visual para o QA. Os aliases /dev mantêm links anteriores compatíveis.
+
+## Cadastro de sete etapas — documento e endereço, 20/10
+
+As oito variações da etapa 4 estão implementadas conforme os frames, com componentes reutilizáveis de campo e seleção local de arquivo. Publicação em /cadastro/etapa-4 e suas variações. Não foram acrescentados comprovante de endereço, seletor de país ou ações fora do desenho.
+
+- Confirmar país real herdado da etapa 1 e sua relação com os agrupamentos. Os frames regionais são Argentina, Portugal e África do Sul; o frame EUA/Canadá exibe EUA. Não presumir IDs ou aplicar formatos de um país a todo o grupo.
+- Confirmar leitura/escrita separada de logradouro, número, complemento, bairro/distrito, cidade e estado/província no rascunho do cadastro. Não reinterpretar complemento como bairro nem concatenar campos por conta própria. Confirmar catálogos de regiões e países emissores acessíveis na sessão de cadastro.
+- Informar consulta postal para Brasil/Japão ou indicar serviço aprovado já existente. O Figma prevê preenchimento automático; hoje a tela informa indisponibilidade e mantém entrada manual, sem enviar códigos a terceiros.
+- Confirmar mapeamento de cada tipo do Figma para documentTypeId/countryId/requirementId e metadados aceitos. Já existem listagem de tipos, data-definition e uploadClientDocument no portal: não é pedido de criar um novo endpoint genérico. Precisamos das regras para este onboarding e do vínculo com o progresso.
+- POST /client/profile/documents recebe um file por chamada. Confirmar como vincular frente e verso ao mesmo documento, substituir cada lado e tratar reenvio/falha parcial sem duplicar exigências. Passaporte usa somente a página com os dados. Não gerar PDF combinado nem mandar um segundo documento por suposição.
+- Confirmar número fiscal, dados de emissão/validade e metadados específicos por país, obrigatórios, formatos/dígitos, limites/MIME dos arquivos e política de documento vencido. Placeholders do Figma não foram transformados em regras HTTP não documentadas.
+- Confirmar Filiação 1/2 e Não consta no meu documento. Não assumir que a ordem significa mãe/pai, nem perder a declaração de ausência ao mapear para motherName/fatherName.
+- Confirmar gravação/retomada e avanço à etapa 5 sob sessão de cadastro. Seleção de arquivo é local, com aviso explícito, sem envio/sucesso fictício; o legado DocumentUpload simula envio e não foi reaproveitado.
+
+Checklist diferencia conferência das oito telas de homologação integrada, que permanece aberta. Evidências no portal: docs/QA-2026-10-20-CADASTRO-ETAPA-4.md.

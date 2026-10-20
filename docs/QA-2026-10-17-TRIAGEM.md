@@ -101,3 +101,9 @@ Tela Dados pessoais (6:25562) implementada para homologação, reutilizando estr
 O QA do cadastro continua parcial: faltam catálogos/obrigatórios do onboarding, país de nascimento, múltiplas nacionalidades e contrato de persistência/progresso. Nenhuma lista fictícia ou gravação presumida foi colocada no fluxo; a prévia não avança sem opções reais. Etapas 4–7 ainda aguardam implementação. Ver checklist e documento consolidado de pendências.
 
 Publicação das telas do cadastro: o usuário pediu disponibilidade no ambiente de homologação. As etapas 1–3 estão no build em /cadastro/etapa-1, /cadastro/etapa-2 e /cadastro/etapa-3; /dev/cadastro/etapa-* permanece como alias. As telas podem ser conferidas pelo QA no ambiente publicado, mantendo os avisos de operações ainda não integradas. Isso não altera a situação dos contratos HTTP pendentes nem substitui /register.
+
+## Cadastro incremental — etapa 4, 20/10
+
+Documento e endereço com oito frames do Figma, publicados por rotas /cadastro/etapa-4 e /cadastro/etapa-4/:variant. Mantidos somente campos/ações desenhados; sem seletor extra, comprovante adicional, remoção de arquivos ou upload simulado. Brasil inclui filiação com ausência; passaporte troca campos específicos e usa um único arquivo.
+
+85 testes, lint e build aprovados. Oito variações conferidas no desktop, Brasil/Japão no celular sem overflow; seleção local, arquivo vazio, troca de tipo, calendário, foco e retorno com memória conferidos. A situação integrada continua parcial pelos mapeamentos de país/tipo/metadados, catálogos, endereço/consulta postal, frente/verso, filiação e progresso. Próxima tela incremental: etapa 5. Ver checklist e pendências consolidadas.
