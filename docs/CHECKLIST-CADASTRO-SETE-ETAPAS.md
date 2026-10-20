@@ -10,7 +10,7 @@ Atualizado em 20/10/2026. Referência: Figma BaDXlWpxbIoY4azOaQnXgv, seção 4:2
 | 2 · Confirmar e-mail | Tela disponível em homologação; lógica pública reutilizada | Serviços existentes reutilizados; envio real e sessão para etapa 3 pendentes |
 | 3 · Dados pessoais | Tela e validações locais prontas; opções/obrigatórios pendentes | Catálogos, país de nascimento, múltiplas nacionalidades, gravação e retomada pendentes |
 | 4 · Documento e endereço | Oito variações do Figma prontas para conferência em homologação | País real, catálogos, gravação, consulta postal e envio dos arquivos pendentes |
-| 5 · Atividade trabalhista | Pendente | Gravação e retomada pendentes |
+| 5 · Atividade trabalhista | Tela e validações monetárias prontas em homologação | Catálogo, obrigatórios, datas de vigência, gravação e retomada pendentes |
 | 6 · Contatos de confiança | Pendente | Resolver relationship obrigatório sem campo extra |
 | 7 · Revisão e envio | Pendente | Envio, estado da revisão e bloqueio de edição pendentes |
 
@@ -41,7 +41,7 @@ A tela de homologação fica em http://localhost:9010/cadastro/etapa-1. Não cha
 
 Prévia: http://localhost:9010/cadastro/etapa-2. Usa endereço demonstrativo mascarado e bloqueia o transporte; não envia e-mail, não confirma código nem simula sucesso/avanço. A rota está incluída no build publicado em homologação. A confirmação pública atual permanece disponível e usa a mesma lógica e os mesmos serviços HTTP. O placeholder 000000 não define tamanho/formato do código; o contrato aceita string sem restrição documentada.
 
-A próxima tela incremental é a etapa 5. A confirmação real e a sessão para continuar o cadastro ainda precisam ser homologadas; a resposta de confirmação atual contém somente succeeded/message.
+A próxima tela incremental é a etapa 6. A confirmação real e a sessão para continuar o cadastro ainda precisam ser homologadas; a resposta de confirmação atual contém somente succeeded/message.
 
 ## 3. Dados pessoais — Figma 6:25562
 
@@ -92,10 +92,15 @@ Essas URLs selecionam frames para QA, não IDs reais nem a residência autentica
 
 ## 5. Atividade trabalhista — Figma 9:25789
 
-- [ ] Implementar atividade, renda média mensal individual/familiar e valor aproximado dos bens.
-- [ ] Validar preenchimento e números sem inventar faixas, classificações ou conversões monetárias.
-- [ ] Preservar valores ao voltar/avançar e integrar gravação/retomada.
+- [x] Implementar somente atividade, renda média mensal individual/familiar e valor aproximado dos bens, com texto de orientação e ações do Figma.
+- [x] Validar valores em formato brasileiro, não negativos e com até duas casas de centavos; rejeitar formatos ambíguos sem arredondar ou converter moeda. Distinguir campo vazio de zero explícito e preservar precisão decimal como texto.
+- [x] Reutilizar estrutura, primitiva de campo, estilos e assets existentes; conferir desktop/celular, foco, catálogo indisponível e retorno à etapa 4. 91 testes, lint, build e diff do lote aprovados.
+- [ ] Confirmar catálogo/valores aceitos de atividade e obrigatórios do onboarding; não inventar opções, faixas de renda ou relação mínima entre os valores.
+- [x] Preservar os valores digitados em memória ao voltar à etapa 4 e retornar, sem localStorage, URL ou envio HTTP.
+- [ ] Integrar leitura/gravação/retomada e avanço à etapa 6, preservando metadados existentes e sem acrescentar campos de vigência à tela.
 - [ ] Homologar moeda e valores efetivamente persistidos.
+
+URL de conferência: https://hml.strategyanalytics.com.br/cadastro/etapa-5. R$ 0,00 é placeholder, não saldo/renda inicial. Os serviços de perfil profissional/financeiro já existem; o catálogo da atividade e o contexto de datas/progresso do cadastro ainda precisam de confirmação. Continuar mostra a pendência e mantém os dados na etapa, sem simular gravação.
 
 ## 6. Contatos de confiança — Figma 9:25883
 

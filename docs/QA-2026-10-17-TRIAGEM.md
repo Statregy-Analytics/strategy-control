@@ -107,3 +107,9 @@ Publicação das telas do cadastro: o usuário pediu disponibilidade no ambiente
 Documento e endereço com oito frames do Figma, publicados por rotas /cadastro/etapa-4 e /cadastro/etapa-4/:variant. Mantidos somente campos/ações desenhados; sem seletor extra, comprovante adicional, remoção de arquivos ou upload simulado. Brasil inclui filiação com ausência; passaporte troca campos específicos e usa um único arquivo.
 
 85 testes, lint e build aprovados. Oito variações conferidas no desktop, Brasil/Japão no celular sem overflow; seleção local, arquivo vazio, troca de tipo, calendário, foco e retorno com memória conferidos. A situação integrada continua parcial pelos mapeamentos de país/tipo/metadados, catálogos, endereço/consulta postal, frente/verso, filiação e progresso. Próxima tela incremental: etapa 5. Ver checklist e pendências consolidadas.
+
+## Cadastro incremental — etapa 5, 20/10
+
+Atividade trabalhista (9:25789) em /cadastro/etapa-5: somente os quatro campos, orientação da renda familiar e Voltar/Continuar. Reutilizados shell, primitiva de campo e assets. Entrada monetária valida agrupamento e centavos sem Number/float, distingue vazio/zero e mantém rascunho em memória.
+
+91 testes, lint e build aprovados. Desktop/celular sem overflow; erros independentes e foco, zero, catálogo ausente e retorno à etapa 4 conferidos. A homologação integrada segue pendente: catálogo, obrigatórios, vigências/moeda dos serviços existentes, falha parcial e progresso. Nenhum perfil real foi alterado. Etapas 6–7 ainda aguardam implementação; ver checklist e pendências consolidadas.

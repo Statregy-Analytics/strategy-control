@@ -119,3 +119,14 @@ As oito variações da etapa 4 estão implementadas conforme os frames, com comp
 - Confirmar gravação/retomada e avanço à etapa 5 sob sessão de cadastro. Seleção de arquivo é local, com aviso explícito, sem envio/sucesso fictício; o legado DocumentUpload simula envio e não foi reaproveitado.
 
 Checklist diferencia conferência das oito telas de homologação integrada, que permanece aberta. Evidências no portal: docs/QA-2026-10-20-CADASTRO-ETAPA-4.md.
+
+## Cadastro de sete etapas — atividade trabalhista, 20/10
+
+Etapa 5 conforme 9:25789 publicada em /cadastro/etapa-5, com somente atividade e os três valores em reais. Inputs, estrutura e assets existentes reutilizados; sem empresa, datas, classificações ou seletor de moeda adicionais.
+
+- Confirmar catálogo acessível no cadastro para Atividade trabalhista e seu mapeamento para occupation. O contrato atual usa string livre; não define as opções do seletor do Figma.
+- Confirmar obrigatórios, precisão/limites aceitos e significado de ausência/zero nos três valores. A tela mantém valores vazios até entrada explícita; não fabrica renda, patrimônio ou faixas. A entrada local em reais usa centavos sem conversão monetária ou arredondamento silencioso.
+- Os serviços GET/PUT /client/profile/professional-profile e /financial-profile já existem. Para usá-los no onboarding, definir validFrom/validTo/isCurrent e effectiveFrom/effectiveTo/currencyCode sem pedir novos campos ao usuário. Não presumir data atual, BRL como moeda de uma conversão, ou sobrescrever metadados do perfil existente. O desenho identifica os valores em R$; confirmar currencyCode correspondente no fluxo.
+- Confirmar como gravar as duas partes e retomar após falha parcial, sem apresentar sucesso integral quando somente uma foi salva. Definir consulta/progresso e avanço à etapa 6 sob a sessão do cadastro.
+
+A tela e validações locais estão disponíveis para QA. Nenhuma renda/perfil real foi gravado neste lote; a integração e homologação dos valores persistidos permanecem abertas. Evidências no portal: docs/QA-2026-10-20-CADASTRO-ETAPA-5.md. Checklist atualizado; próxima tela incremental: etapa 6.
