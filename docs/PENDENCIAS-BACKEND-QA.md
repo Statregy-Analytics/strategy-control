@@ -261,3 +261,11 @@ Foto válida continua dependência de dados para reteste; não justifica criar u
 
 
 Admin 96ebd34 publicado (pipeline 39497171684). Formatação/validação/descarte conferidos na ficha real; hash independente confirmou perfil profissional e histórico financeiro sem alterações. Precisão verificada no template real até o plano de envio em testes automatizados, sem enviar valores grandes à API. Não há novo pedido ao backend por essa correção; seleção do financeiro vigente e os demais contratos administrativos continuam abertos.
+
+
+### Admin — concorrência da listagem corrigida no frontend, 20/10
+
+00d601f impede resposta antiga de substituir consulta recente ao buscar/filtrar/trocar cartões e tabela. Erro e retentativa usam os componentes existentes; não há endpoint/campo novo solicitado ao backend. O problema era controle das leituras no frontend. Unicidade de e-mail no servidor e causa do incidente de identidade no login continuam abertos e não são encerrados por esse ajuste.
+
+
+Admin 00d601f publicado pela pipeline 39498456402 aprovada. Busca/filtro, cartões/tabela, vazio e paginação real retestados sem escrita; mobile sem alargar a página. Correção de frontend encerrada nos limites descritos, sem nova dependência do backend e sem encerrar unicidade/HttpOnly/incidente de identidade.

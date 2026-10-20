@@ -19,6 +19,7 @@ Nenhuma outra pendência do perfil com contrato suficiente e independente do bac
 
 ## Estado atual do Admin — QA 10 a 19
 
+- [x] Listagem de clientes respeita a última consulta e distingue erro/vazio; reteste de filtros, cartões/tabela e paginação publicado em 00d601f (85 testes locais).
 - [x] Estrutura de edição por seção C24, cinco campos profissionais/financeiros, preferências no mesmo bloco, catálogo de bancos/países, datas e histórico traduzido preservados nas rodadas registradas abaixo.
 - [x] Carteira zerada/extrato e documentos de onboarding/revisão retestados nas rodadas próprias; decisões já concluídas não devem constar como falta de implementação de Aprovar/Reprovar.
 - [x] Precisão decimal no input/plano financeiro, comparação por valor e validações corrigidas em 96ebd34; suíte local completa com 78 testes aprovada. Lint/build/deploy aprovados na pipeline 39497171684.
@@ -476,3 +477,18 @@ Reteste planejado somente de leitura/seleção e cancelamento do formulário exi
 - [x] Diff dos commits e documentos sem erros; swagger administrativo preexistente preservado fora dos commits. Evidência admin-financeiro-formatacao-sem-gravacao.png.
 
 Este lote não encerra a divergência entre histórico financeiro e consulta vigente do backend. Teste integrado planejado de leitura/validação/descarte, sem criar histórico financeiro para contornar a consulta. Valores grandes são fixtures automatizadas, nunca enviados para a API.
+
+
+## Admin — QA 17: última consulta e estados da lista de clientes, 20/10
+
+- [x] Somente a busca/filtro/visualização mais recente atualiza linhas/paginação; resposta antiga ou após saída não repõe dados anteriores. Callback tardio após desmontagem não inicia consulta nem limpa outra tela.
+- [x] Erro reutiliza ResourceState/retentativa existentes; não vira vazio legítimo ou exportação dos dados anteriores. Exportar/Comparar bloqueados durante carregamento/erro, com controles de negócio preservados.
+- [x] Script real do componente testado com respostas concorrentes/controladas e retry; 85 testes completos aprovados localmente com a flag experimental-vm-modules. Lint/build aprovados.
+- [x] Deploy 00d601f confirmado na pipeline 39498456402 em lint, build, upload e ativação. Suite local completa: 85 testes aprovados; não atribuir essa suíte ao npm test legado da pipeline.
+- [x] Homologação: busca Jorge e filtro Prospect retornaram somente a ficha correspondente em tabela e cartões; exportação voltou a ficar disponível após leitura concluída. Nenhum arquivo de clientes exportado.
+- [x] Busca sem correspondência mostrou Nenhum cliente encontrado e contagem 0 a 0 de 0; não tratada como falha. Limpar filtros/busca retomou os 12 registros; página 2 exibiu os dois restantes e footer 11 a 12 de 12.
+- [x] Mobile 390 px: documento 375 px, sem alargamento horizontal da página. Tabela, controles e estado vazio revisados; viewport restaurado e lista voltou a cartões, sem filtros ou busca.
+- [x] Erro/retry e respostas fora de ordem cobertos automaticamente no script real e no recurso existente; não foram provocadas falhas na API de homologação. Cadastros, documentos, decisões, saldos e permissões preservados.
+- [x] Diff de código/documentos sem erros; swagger preexistente não incluído. Evidência admin-lista-clientes-vazia-validada.png.
+
+Nenhum cadastro ou dado financeiro alterado. Falhas e respostas fora de ordem exercitadas automaticamente; não provocar falhas do backend para validar apresentação. Unicidade de e-mail e investigação do login com identidade divergente continuam pendências independentes.
