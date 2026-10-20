@@ -42,6 +42,27 @@ Nenhuma outra pendência do perfil com contrato suficiente e independente do bac
 - [ ] Contratos do backend: campos de identificação/documentos, efeitos/estado oficial do cadastro, segurança e observações sem alerta; módulos sem API e persistência (Lógicas, Crédito, Comunicados, Leads, Assessores e LP); unicidade de e-mail, sessão HttpOnly e investigação do incidente de identidade.
 - [ ] Revalidação independente pelo QA dos cenários administrativos liberados; homologação integrada da consulta financeira vigente continua aberta. Não simular defaults de risco/compliance nem criar campos/ações para contornar bloqueios.
 
+## Revisão final do escopo original do QA — Admin, 20/10
+
+Nesta revisão não foi identificado outro item do QA original (10–19) com implementação pendente que possa avançar apenas no frontend. Isso não aprova integralmente o Admin: há integração futura de frontend bloqueada por contratos/estados do servidor e revalidação independente do QA. As correções adicionais encontradas durante as revisões estão publicadas e registradas nas rodadas abaixo.
+
+| QA | Parte do front disponível para revalidação | O que ainda impede concluir o item |
+| --- | --- | --- |
+| 10 | Aprovar/Reprovar, motivo obrigatório, atualização de contadores e integração com o portal. | Estado/data oficiais do envio cadastral, defaults risco/compliance, regra CNH e vínculo/metadados do reenvio. |
+| 11 | Campos preservados no mesmo bloco; validação de nascimento; escrita apenas dos campos suportados. | Contratos de escrita dos dados pessoais e documentos ainda somente leitura; integrar esses campos após definição do backend. |
+| 12 | Cinco campos profissionais/financeiros, precisão, validação, destaque e descarte. | Consulta financeira vigente ainda retorna registro anterior após escrita no histórico. |
+| 13 | Preferências com edição e ações da seção, sem botão isolado. | Revalidação do QA; metadados existentes preservados. |
+| 14 | Carteira zerada, composição e extrato vazios; consulta do Cláudio. | Revalidação do QA; valores indevidos de contrato encerrado permanecem questão de cálculo do servidor. |
+| 15 | Uma seção por vez; salvar só após mudança; descarte/saída; loading/erro/sucesso. | Escritas de identificação, segurança e observações livres não disponíveis; integração futura depende desses contratos. |
+| 16 | Menu/seleção de sistema e acessos integrados; listagem documental completa e busca bancária completa. | Definir APIs/persistência de Lógicas, Crédito, Comunicados, Leads, Assessores e LP; depois ainda implementar a integração do front conforme Figma. Protótipos não são considerados integrados. |
+| 17 | Datas, histórico em português, países legíveis e catálogo/pesquisa de bancos. | Unicidade de e-mail no servidor e revalidação do QA. |
+| 18 | Proteções de identidade/sessão/concorrência implementadas. | Logs do incidente de 17/10 às 18:16 e reteste do QA; a causa original não foi confirmada nem o item encerrado. |
+| 19 | Rotas de LP exigem sessão e papel administrativo no front. | Autorização da API e sessão HttpOnly no backend/BFF; depois adaptar o transporte dos dois fronts e retestar. |
+
+Conferência atual: Swagger público sem novas rotas em relação ao snapshot anterior; UpdateCustomerRequest continua apenas kind/birthDate. Homologação carregou identificação e profissional, confirmou Salvar desabilitado sem mudanças, bloqueio dos outros lápis durante edição e estado civil somente leitura. Seção encerrada sem alterações. Compliance sem alerta continua bloqueado pelo contrato, sem criar flag para contornar.
+
+Validação desta revisão: 99 testes locais, lint e build aprovados. Runtime de homologação 62babcf e publicação documental 8a27522 confirmados em pipelines concluídas. Esta rodada atualiza a documentação e não altera o runtime; sua publicação não representa implementação dos módulos bloqueados nem homologação integral.
+
 ## Histórico das rodadas
 
 ## Homologação administrativa integrada

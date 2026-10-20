@@ -289,3 +289,15 @@ O endpoint já devolve 30 tipos. O limite visual de cinco registros sem navegaç
 ## Esclarecimento 20/10 — busca do catálogo bancário
 
 A busca da gestão de bancos filtrava somente a página visível. O front foi corrigido para consultar as páginas já disponíveis e buscar/paginar o resultado completo no mesmo controle. Não precisamos acrescentar parâmetro, campo ou ação ao backend para esse ajuste. Os bloqueios contratuais anteriores permanecem.
+
+## Próximo lote do Admin — revisão do escopo original do QA
+
+Não há outra correção independente do backend identificada nesta revisão dos itens originais 10–19. Isso não encerra a entrega: após receber os contratos/estados abaixo, ainda haverá integração do frontend conforme os mesmos campos e ações do Figma.
+
+1. Estados/data de envio e análise cadastral, defaults e regras/vínculos documentais.
+2. Escrita dos dados pessoais/documentos, segurança da conta e observações livres já desenhados.
+3. Consulta do financeiro vigente e cálculo do contrato encerrado.
+4. APIs/persistência de Lógicas, Crédito, Comunicados, Leads, Assessores e LP, para integrar os protótipos existentes.
+5. Unicidade de e-mail; logs do incidente de identidade; sessão HttpOnly e autorização da API, seguidas da adaptação dos fronts.
+
+Swagger atual conferido sem novas rotas; UpdateCustomerRequest permanece kind/birthDate. Revalidação independente do QA não é pendência de backend e está separada no checklist manual. Esta revisão não solicita nem autoriza campos ou ações fora do desenho.
