@@ -20,7 +20,7 @@ Nenhuma outra pendência do perfil com contrato suficiente e independente do bac
 ## Estado atual do Admin — QA 10 a 19
 
 - [x] Catálogo de bancos (QA 16/17): busca por código/nome passa a considerar todas as páginas recebidas, com paginação/contadores sobre o resultado filtrado. Em 8080, banco 325 encontrado, pesquisa sem acentos, vazio e retorno da página 52 validados. 99 testes aprovados.
-- [ ] Reteste da busca completa de bancos em homologação após deploy.
+- [ ] Reteste final da busca completa de bancos e do contraste do campo em homologação após deploy.
 
 - [x] Configuração documental (QA 16): removido o corte interno de cinco linhas das duas tabelas com paginação oculta. Em 8080, os 30 tipos reais aparecem; busca RG, vazio e abertura do último tipo validados sem gravar configuração. 95 testes, lint e build aprovados.
 - [x] Configuração documental publicada em 2eea460, pipeline 39502645633 aprovada. Em homologação, lista completa de 30 tipos, categoria pessoal com sete, busca RG, vazio, limpeza dos filtros e editor do último tipo validados; nenhuma configuração gravada.
@@ -552,3 +552,5 @@ Reteste publicado desta rodada: banco Órama selecionado em `https://admin.strat
 - Em 8080: código 325 encontrou Órama e país Brasil, rodapé 1 a 1 de 1; pesquisa sem acento encontrou o mesmo banco; busca inexistente mostrou 0 a 0 de 0; limpar restaurou 513; página 52 mostrou 511 a 513 e nova pesquisa retornou à página 1. Nenhum banco cadastrado.
 - 99 testes aprovados, incluindo quatro novos testes funcionais do componente para busca completa, contagens/paginação, falha/retry e filtro de ativos. Lint/build e revisão visual aprovados. Publicação/reteste serão registrados após deploy.
 - Não há solicitação de alteração da API para esta correção.
+
+Complemento visual desta rodada: no primeiro deploy 3ea3c43, busca por 325 e contagem filtrada passaram, mas o texto global branco do input estava sobre superfície clara. Aplicado o contexto dark já usado nas tabelas integradas do Admin à tabela, busca e filtro existentes. Sem nova paleta, coluna ou ação; reteste final será registrado após o deploy do complemento.

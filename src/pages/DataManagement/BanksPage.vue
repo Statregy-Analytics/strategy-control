@@ -12,11 +12,11 @@
         {{ loadError || countryError }}
         <template #action><q-btn flat color="negative" label="Tentar novamente" @click="load" /></template>
       </q-banner>
-      <q-table flat dense hide-pagination row-key="id" :rows-per-page-options="[0]" :pagination="{ rowsPerPage: 0 }" class="my-sticky-header-column-table" :rows="displayedBanks" :columns="columns" :loading="loading">
+      <q-table dark flat dense hide-pagination row-key="id" :rows-per-page-options="[0]" :pagination="{ rowsPerPage: 0 }" class="my-sticky-header-column-table" :rows="displayedBanks" :columns="columns" :loading="loading">
         <template #top>
           <div class="row col-12 items-center justify-between q-col-gutter-md">
-            <div class="col-12 col-sm-5 col-md-4"><q-input v-model="search" dense outlined clearable debounce="300" placeholder="Pesquisar por código ou nome"><template #prepend><q-icon name="search" size="1.2rem" /></template></q-input></div>
-            <q-toggle v-model="onlyActive" label="Somente ativos" color="primary" />
+            <div class="col-12 col-sm-5 col-md-4"><q-input dark v-model="search" dense outlined clearable debounce="300" placeholder="Pesquisar por código ou nome"><template #prepend><q-icon name="search" size="1.2rem" /></template></q-input></div>
+            <q-toggle dark v-model="onlyActive" label="Somente ativos" color="primary" />
           </div>
         </template>
         <template #body-cell-name="props"><q-td :props="props"><q-item dense class="q-pa-none"><q-item-section avatar><q-avatar size="32px" color="blue-grey-1" text-color="blue-grey-7" icon="account_balance" /></q-item-section><q-item-section><q-item-label>{{ props.row.name }}</q-item-label><q-item-label caption>{{ props.row.code || 'Sem código' }}</q-item-label></q-item-section></q-item></q-td></template>
