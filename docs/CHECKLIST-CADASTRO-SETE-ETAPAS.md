@@ -252,3 +252,14 @@ Teste integrado autorizado na mesma conta. Os dois arquivos já aprovados foram 
 fb15804 complementa bbbebd8: na conferência a 390 px, motivo longo sobrepunha as ações existentes. Em telas pequenas, as mesmas ações passam abaixo do texto; sem novos controles e sem mudar o desktop. Reteste real publicado confirmou motivo/orientação legíveis e sem sobreposição; documentElement.scrollWidth 378 para viewport 390. Override removido ao terminar. Evidência: cliente-reprovacao-mobile.png.
 
 Pipeline 39476881643 tentativa 2 concluída com lint, 162 testes, build, upload e ativação aprovados. A tentativa 1 passou nos checks, mas falhou no upload por timeout SSH/exit 255; repetição publicou sem alterar a aplicação. As duas ocorrências corrigidas do frontend estão encerradas (motivo ausente e sobreposição mobile). Os pontos de vínculo/versionamento e metadata do replace permanecem no documento do backend. Nenhuma nova aprovação do arquivo reenviado foi realizada.
+
+
+## CNH fictícia — efeito somente do upload, 20/10
+
+A pedido do usuário, enviado arquivo novo cnh-ficticia-teste-progresso.png, marcado CNH FICTÍCIA / HOMOLOGAÇÃO / SEM VALIDADE, sem dados pessoais reais. Usado endpoint administrativo existente, tipo/countryId reais do catálogo BR, metadados de teste compatíveis com a definição (categoria B, número claramente fictício), emissão 01/01/2025 e validade 01/01/2030. Nenhum campo/ação novo na interface.
+
+- [x] Upload confirmado como Uploaded; arquivo apareceu na Área do Cliente como Enviado.
+- [x] Progresso antes/depois do envio: 0%. API retorna approvedRequirements 0, requiredRequirements 1; CNH Uploaded, progressState Pending, countsAsComplete false.
+- [ ] Aprovar a CNH e medir a progressão de nível não executado nesta rodada de envio. Não inferir 100% de um upload aceito.
+
+O teste confirma que apenas enviar a CNH não completa a exigência; revisão continua pendente. O conflito da CNH obrigatória com as alternativas do Figma permanece. A senha definida pelo usuário ao criar a conta não foi fornecida ao agente; nenhuma tentativa de obtenção, redefinição ou alteração de credencial foi realizada. Evidência: cliente-cnh-enviada-progresso.png.

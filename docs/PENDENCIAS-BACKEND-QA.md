@@ -181,3 +181,8 @@ Esses são limites reais do fluxo integrado; não confundem o motivo histórico 
 
 
 A apresentação móvel do motivo também foi corrigida em fb15804 e validada na versão publicada (pipeline 39476881643, tentativa 2, aprovada). Isso não altera os dois pontos de contrato do replace acima. Reprovação/motivo/reenvio foram retestados com arquivos fictícios, sem documentos pessoais reais.
+
+
+### CNH — upload isolado retestado, 20/10
+
+A pedido do usuário, CNH fictícia enviada pelo endpoint existente e exibida como Enviado no portal. Progresso permaneceu 0%; requisito CNH com documentStatus Uploaded, progressState Pending e countsAsComplete false (0 de 1 requisitos aprovados). Nenhuma aprovação dessa CNH foi executada. Isso confirma que upload não equivale a conclusão, sem resolver a configuração que exige CNH fora das alternativas do Figma. Não há novo bug de upload nem necessidade de criar campo adicional.
