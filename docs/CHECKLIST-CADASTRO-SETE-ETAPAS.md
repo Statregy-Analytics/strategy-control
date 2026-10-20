@@ -34,3 +34,7 @@ Atualizado em 20/10/2026 após integração dos endpoints existentes. Figma BaDX
 Somente as incompatibilidades descritas no [documento consolidado](PENDENCIAS-BACKEND-QA.md#cadastro-de-sete-etapas--pendências-reais-após-integração-2010). Cadastro, confirmação, perfil, arquivos, dados profissionais/financeiros, contatos e status já possuem endpoints; não devem ser solicitados novamente como ausentes.
 
 As rotas /cadastro/etapa-1 a /cadastro/etapa-7 estão no build. /cadastro/enviado continua sendo referência visual identificada; não é exibida como sucesso sem confirmação do servidor. Evidências atuais no portal: docs/QA-2026-10-20-CADASTRO-INTEGRADO.md. Registros anteriores de telas ficam nos documentos por etapa.
+
+## Publicação e conferência integrada
+
+Portal b163763 publicado em homologação; pipeline 39444891206 com lint, 117 testes, build, upload e ativação aprovados. Integração principal em 388175f. Em hml.strategyanalytics.com.br, Cláudio entrou com retorno à etapa 5, regravou profissional/financeiro mantendo os valores e avançou à etapa 6. Etapa 3 gravou cidade de teste; a versão final limpou o campo pelo próprio formulário e a recarga da revisão confirmou a persistência da limpeza. Dados financeiros permaneceram disponíveis após recarga. Dado temporário restaurado. Ciclo de e-mail/aceite e upload de arquivos novos continuam como retestes não executados, separados das incompatibilidades reais da API.
