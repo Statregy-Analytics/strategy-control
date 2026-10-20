@@ -1,4 +1,6 @@
 import { copy, equal } from './sectionEditor.js'
+import { profileDecimal, compareProfileDecimals } from './profileDecimal.js'
+const amountFields = ['individualMonthlyIncome', 'householdMonthlyIncome', 'declaredNetWorth']
 const date = (value) => value?.slice(0, 10) || null
 const selected = (rows, test) => {
   const choices = (rows || []).filter(test)
@@ -74,19 +76,15 @@ export function sectionValidation(key, value, source) {
   const errors = {}
   if (key === 'professional') {
     if (!value.occupation?.trim()) errors.occupation = 'Informe a profissão.'
-    for (const field of ['individualMonthlyIncome', 'householdMonthlyIncome', 'declaredNetWorth'])
-      if (
-        value[field] !== null &&
-        value[field] !== '' &&
-        (!Number.isFinite(Number(value[field])) || Number(value[field]) < 0)
-      )
-        errors[field] = 'Informe um valor igual ou maior que zero.'
+    for (const field of amountFields) {
+      try { profileDecimal(value[field]) }
+      catch { errors[field] = 'Informe um valor válido igual ou maior que zero.' }
+    }
     if (
-      value.householdMonthlyIncome !== null &&
-      value.householdMonthlyIncome !== '' &&
-      value.individualMonthlyIncome !== null &&
-      value.individualMonthlyIncome !== '' &&
-      Number(value.householdMonthlyIncome) < Number(value.individualMonthlyIncome)
+      !errors.individualMonthlyIncome && !errors.householdMonthlyIncome &&
+      profileDecimal(value.householdMonthlyIncome) !== null &&
+      profileDecimal(value.individualMonthlyIncome) !== null &&
+      compareProfileDecimals(value.householdMonthlyIncome, value.individualMonthlyIncome) < 0
     )
       errors.householdMonthlyIncome = 'Não pode ser menor que a renda individual'
   }
@@ -130,18 +128,13 @@ export function sectionPlan(key, source, draft, original) {
       })
     }
     if (
-      ['individualMonthlyIncome', 'householdMonthlyIncome', 'declaredNetWorth'].some(
-        (k) => draft[k] !== original[k],
-      )
+      amountFields.some((k) => profileDecimal(draft[k]) !== profileDecimal(original[k]))
     ) {
       if (!f.currencyCode || !f.effectiveFrom)
         throw Error('Moeda e vigência do perfil financeiro não foram informadas pela API.')
       add('post', base + '/financial-profiles', {
         ...Object.fromEntries(
-          ['individualMonthlyIncome', 'householdMonthlyIncome', 'declaredNetWorth'].map((k) => [
-            k,
-            draft[k] === null || draft[k] === '' ? null : Number(draft[k]),
-          ]),
+          amountFields.map((k) => [k, profileDecimal(draft[k])]),
         ),
         currencyCode: f.currencyCode,
         effectiveFrom: date(f.effectiveFrom),
@@ -223,4 +216,14 @@ export function sectionPlan(key, source, draft, original) {
   }
   return steps
 }
-export const sectionChanged = (current, original, key) => !equal(current?.[key], original?.[key])
+export const sectionChanged = (current, original, key) => {
+  if (amountFields.includes(key)) {
+    try { return profileDecimal(current?.[key]) !== profileDecimal(original?.[key]) }
+    catch { return true }
+  }
+  return !equal(current?.[key], original?.[key])
+}
+export const sectionHasChanges = (key, current, original) =>
+  key === 'professional'
+    ? Object.keys(current).some((field) => sectionChanged(current, original, field))
+    : !equal(current, original)

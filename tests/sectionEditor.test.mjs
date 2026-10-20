@@ -6,6 +6,8 @@ import {
   sectionPlan,
   sectionValidation,
   sectionEditable,
+  sectionHasChanges,
+  sectionChanged,
 } from '../src/services/clientSectionModel.js'
 
 const setup = (overrides = {}) => {
@@ -178,7 +180,7 @@ test('financial save preserves zero, null, currency and dates without adding UI 
   const steps = sectionPlan('professional', professional, draft, original)
   assert.equal(steps.length, 1)
   assert.equal(steps[0].method, 'post')
-  assert.deepEqual(steps[0].payload, { ...professional.financial, householdMonthlyIncome: 200 })
+  assert.deepEqual(steps[0].payload, { ...professional.financial, individualMonthlyIncome: '0', householdMonthlyIncome: '200' })
   assert.equal(Object.keys(original).length, 5)
   assert.ok(
     sectionValidation('professional', { ...draft, householdMonthlyIncome: -1 })
@@ -294,4 +296,54 @@ test('identification replaces collections without dropping secondary records or 
     sectionValidation('identification', { ...original, fullName: '' }, { names: [] }),
     {},
   )
+})
+
+
+test('financial strings retain decimal precision without rewriting equivalent formatting', () => {
+  const source = { ...professional, financial: {
+    ...professional.financial, individualMonthlyIncome: '9007199254740993.01',
+    householdMonthlyIncome: '9007199254740993.02', declaredNetWorth: null,
+  } }
+  const original = sectionValues('professional', source)
+  const equivalent = { ...original, individualMonthlyIncome: '09007199254740993.0100', declaredNetWorth: '' }
+  assert.equal(sectionHasChanges('professional', equivalent, original), false)
+  assert.equal(sectionChanged(equivalent, original, 'individualMonthlyIncome'), false)
+  assert.deepEqual(sectionPlan('professional', source, equivalent, original), [])
+  const changed = { ...original, individualMonthlyIncome: '9007199254740993.02' }
+  const [step] = sectionPlan('professional', source, changed, original)
+  assert.equal(step.payload.individualMonthlyIncome, '9007199254740993.02')
+  assert.equal(step.payload.householdMonthlyIncome, '9007199254740993.02')
+  assert.equal(step.payload.declaredNetWorth, null)
+  assert.equal(step.payload.currencyCode, source.financial.currencyCode)
+  assert.equal(step.payload.effectiveFrom, source.financial.effectiveFrom)
+})
+test('decimal validation preserves the existing household rule without floating point rounding', () => {
+  const values = { ...sectionValues('professional', professional),
+    individualMonthlyIncome: '9007199254740993.02', householdMonthlyIncome: '9007199254740993.01' }
+  assert.match(sectionValidation('professional', values).householdMonthlyIncome, /menor/)
+  for (const bad of ['-1', '1,23', 'abc', Infinity, {}, true]) {
+    const draft = { ...values, individualMonthlyIncome: bad }
+    assert.ok(sectionValidation('professional', draft).individualMonthlyIncome)
+    assert.equal(sectionHasChanges('professional', draft, values), true)
+  }
+})
+test('format-only financial editing stays clean and never writes or announces a save', async () => {
+  const values = sectionValues('professional', professional)
+  const h = setup({
+    read: async () => ({ source: professional, values, editable: Object.keys(values) }),
+    plan: sectionPlan, validate: sectionValidation, hasChanges: sectionHasChanges,
+  })
+  await h.controller.start('professional')
+  h.state.draft.individualMonthlyIncome = '0.00'
+  h.state.draft.householdMonthlyIncome = '00100.000'
+  h.state.draft.declaredNetWorth = ''
+  assert.equal(h.controller.dirty(), false)
+  assert.equal(await h.controller.save(), false)
+  assert.equal(h.writes.length, 0)
+  assert.deepEqual(h.saved, [])
+  assert.deepEqual(h.refreshed, [])
+  h.state.draft.householdMonthlyIncome = '100.01'
+  assert.equal(h.controller.dirty(), true)
+  assert.equal(await h.controller.save(), true)
+  assert.equal(h.writes[0].payload.householdMonthlyIncome, '100.01')
 })

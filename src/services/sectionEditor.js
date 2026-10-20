@@ -2,7 +2,7 @@ export const copy = (value) => JSON.parse(JSON.stringify(value))
 export const equal = (a, b) => JSON.stringify(a) === JSON.stringify(b)
 export function createSectionEditor(
   state,
-  { read, plan, write, validate, errorMessage, saved, refresh },
+  { read, plan, write, validate, errorMessage, saved, refresh, hasChanges },
 ) {
   let revision = 0
   const completed = new Set()
@@ -23,7 +23,9 @@ export function createSectionEditor(
     })
     completed.clear()
   }
-  const dirty = () => Boolean(state.draft && !equal(state.draft, state.original))
+  const dirty = () => Boolean(state.draft && (
+    hasChanges ? hasChanges(state.active, state.draft, state.original) : !equal(state.draft, state.original)
+  ))
   const start = async (key) => {
     if (state.active || state.saving) return false
     clear()

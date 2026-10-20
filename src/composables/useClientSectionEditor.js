@@ -16,6 +16,7 @@ import {
   sectionEditable,
   sectionPlan,
   sectionValidation,
+  sectionHasChanges,
 } from 'src/services/clientSectionModel'
 export function useClientSectionEditor(customerId, refresh) {
   const state = reactive({
@@ -72,6 +73,7 @@ export function useClientSectionEditor(customerId, refresh) {
     },
     plan: sectionPlan,
     validate: sectionValidation,
+    hasChanges: sectionHasChanges,
     write: (step) => {
       if (state.source?.customerId !== customerId.value) throw Error('O cliente foi alterado.')
       return financeWrite(step.method, step.path, step.payload)
