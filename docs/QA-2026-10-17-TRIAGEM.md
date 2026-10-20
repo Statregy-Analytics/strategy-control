@@ -23,7 +23,7 @@ Atualizado em 20/10/2026. Referência: feedback de homologação enviado pelo us
 | 4 | Estado sem contratos implementado e validado com conta real vazia. Solicitar contrato abre a página de Contratos existente, conforme orientação do usuário. | Não envia pedido ao backend; nenhum fluxo adicional foi criado. |
 | 5 | Resumo demonstrativo de empréstimos removido da Home. | Sem fonte de dívida no contrato atual para homologar presença/ausência de empréstimos. Não simular ausência de dívida após erro. |
 | 6 | Estado vazio do Figma aplicado na página e na Home; mocks, filtros e contadores fictícios retirados das listagens. | Integração de publicações depende de contrato HTTP; o Swagger consultado não contém endpoint de conteúdo. |
-| 7 | Novo fluxo de sete etapas ainda não implementado. | Conferir Figma e contrato para persistência, retomada, países, documentos e aceite versionado. Não inventar payloads. |
+| 7 | Login da seção nova implementado conforme 4:25438; autenticação, erro, teclado e acessos existentes retestados. As sete etapas ainda não foram implementadas. | Persistência, retomada, residência/países, documentos e aceite versionado continuam pendentes de contrato; depois integrar as etapas. Evidências no portal: docs/QA-2026-10-20-LOGIN.md. |
 | 8 | Exemplos retirados do resumo, perfil e ajustes; dados próprios da API, sessões reais e bloqueio por identificação pendente integrados. | Revisão cadastral, campos sem catálogo/escrita, patrimônio próprio, termos e compartilhamento aguardam alinhamento. Cliente com identificação aprovada ainda precisa de reteste integrado. Ver pendências consolidadas e docs/QA-2026-10-19-PERFIL.md no portal. |
 | 9 | Três textos corrigidos; avatar usa a URL da API e ícone neutro quando ausente ou com falha, sem imagem quebrada ou foto demonstrativa. | Carregamento de uma foto válida depende de URL/arquivo real disponível para reteste. Não exigir cadastro ou upload de foto fora do Figma. |
 | 10 | C27–C28 implementadas e integradas: Aprovar/Reprovar no documento pendente, motivo obrigatório, mensagem, atualização de contadores e download. Testados com arquivos descartáveis. | C25–C26 e desbloqueio cadastral ainda dependem de estado explícito do cadastro e efeito da revisão no servidor. Motivo/mensagem usam notes; falta catálogo de motivos. Ver QA-2026-10-19-APROVACAO-DOCUMENTOS.md. |
@@ -78,3 +78,9 @@ O bloqueio de lint global registrado nas rodadas anteriores foi resolvido no por
 Os três novos testes verificam inicialização/reatividade dos gráficos e isolamento dos defaults por instância. Login/Home/perfil do Cláudio retestados localmente com os dados e bloqueios reais preservados. Detalhes em Strategy-analytics-v2/docs/QA-2026-10-20-VALIDACAO-FRONT.md.
 
 Este complemento não altera o status funcional dos itens dependentes de contrato HTTP. Não homologa os protótipos de crédito/distribuição nem o cadastro de sete etapas.
+
+## Complemento funcional de 20/10 — login do Figma
+
+Tela 4:25438 implementada reutilizando autenticação/inputs existentes. Card, campos e ações seguem o desenho; recuperação, cadastro e confirmação abrem seus fluxos existentes. Campos vazios e senha inválida conferidos; entrada pelo teclado com Cláudio abriu a Home real e logout retornou ao login. Desktop/celular sem transbordamento e assets locais nas dimensões originais. Não foi enviada recuperação nem alterada senha.
+
+Cadastro de sete etapas, retomada, aceite e revisão continuam pendentes; este lote não os homologa. Nenhum endpoint novo foi presumido. Detalhes no portal: docs/QA-2026-10-20-LOGIN.md.
