@@ -38,3 +38,17 @@ As rotas /cadastro/etapa-1 a /cadastro/etapa-7 estão no build. /cadastro/enviad
 ## Publicação e conferência integrada
 
 Portal b163763 publicado em homologação; pipeline 39444891206 com lint, 117 testes, build, upload e ativação aprovados. Integração principal em 388175f. Em hml.strategyanalytics.com.br, Cláudio entrou com retorno à etapa 5, regravou profissional/financeiro mantendo os valores e avançou à etapa 6. Etapa 3 gravou cidade de teste; a versão final limpou o campo pelo próprio formulário e a recarga da revisão confirmou a persistência da limpeza. Dados financeiros permaneceram disponíveis após recarga. Dado temporário restaurado. Ciclo de e-mail/aceite e upload de arquivos novos continuam como retestes não executados, separados das incompatibilidades reais da API.
+
+## Teste acompanhado com conta pessoal — 20/10
+
+Solicitado pelo usuário com seu e-mail; endereço integral omitido do repositório. Estado desta rodada: etapa 1 preparada em homologação, ainda sem submissão.
+
+- [x] /cadastro/etapa-1 abriu no ambiente publicado, preservando campos e ações do Figma.
+- [x] Nome/e-mail preenchidos na tela, sem transmitir senha, aceite ou cadastro.
+- [!] Leitura dos Termos de Uso e da Política de Privacidade indisponível: os dois botões exibem aviso de texto/versão não disponibilizados. Pendência já consolidada do backend/configuração. O aviso da interface não foi confundido com uma nova chamada HTTP.
+- [ ] Definir residência e senha pelo próprio usuário e decidir sobre o aceite na tela. Participação necessária pelas regras de controle do navegador; não é bug nem pendência do backend.
+- [ ] Submeter criação e confirmar resultado; envio/recebimento do código ainda não testados nesta conta.
+- [ ] Confirmar e-mail com o usuário, validar sessão e continuar nas etapas permitidas.
+- [ ] Registrar dados pessoais, endereço/documentos, profissional/financeiro, contatos e revisão desta conta conforme resultados reais. Nenhuma dessas etapas foi aprovada antecipadamente.
+
+A tela ficou aberta para participação do usuário. Não foi criada conta nem solicitado código nesta preparação. Não foram inventados dados pessoais, residência, patrimônio ou arquivos para o e-mail real do usuário.
