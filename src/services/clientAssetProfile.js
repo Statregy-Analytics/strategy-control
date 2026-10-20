@@ -124,6 +124,28 @@ const detailKey = {
   Consortium: 'consortium',
   Investment: 'investment',
 }
+const integerFields = new Set([
+  'manufactureYear',
+  'modelYear',
+  'bedrooms',
+  'bathrooms',
+  'totalInstallments',
+  'paidInstallments',
+  'termMonths',
+])
+export const isAssetIntegerField = (key) => integerFields.has(key)
+export const assetIntegerRule = (value) => {
+  if (value == null || String(value).trim() === '') return true
+  const number = Number(value)
+  return (
+    ((typeof value === 'number' || typeof value === 'string') &&
+      /^\+?\d+(?:\.0+)?$/.test(String(value).trim()) &&
+      Number.isInteger(number) &&
+      number >= 0 &&
+      number <= 2147483647) ||
+    'Informe um número inteiro válido.'
+  )
+}
 export const assetFormSections = (type) => sections[type] || []
 export function assetDraft(asset, type) {
   return {
@@ -138,7 +160,9 @@ export function assetDraft(asset, type) {
 export function assetPayload(draft, type, currencyId, existing) {
   if (!detailKey[type]) throw new Error('Tipo de patrimônio inválido.')
   const numeric = (key) => {
-    if (draft[key] === '' || draft[key] == null) return null
+    if (draft[key] == null || String(draft[key]).trim() === '') return null
+    if (isAssetIntegerField(key) && assetIntegerRule(draft[key]) !== true)
+      throw new Error(assetIntegerRule(draft[key]))
     const value = Number(draft[key])
     if (!Number.isFinite(value) || value < 0) throw new Error('Informe valores numéricos válidos.')
     return value

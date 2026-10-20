@@ -19,6 +19,9 @@ Nenhuma outra pendência do perfil com contrato suficiente e independente do bac
 
 ## Estado atual do Admin — QA 10 a 19
 
+- [x] Registro de patrimônio: anos, quartos/banheiros, parcelas e prazo em meses validados como inteiros no input e antes do HTTP, respeitando os tipos já publicados. Opcionais e zero preservados; valores e áreas continuam decimais. 93 testes locais aprovados; ano fracionado/correção retestados em 8080, sem gravação.
+- [ ] Reteste da validação de inteiros no patrimônio em homologação após publicação.
+
 - [x] Perfil/Admin: catálogo completo de bancos (513 instituições em três páginas), pesquisa sem acentos e nomes de bancos após a primeira página. Falha do catálogo usa o erro/retentativa existentes, sem expor opções parciais. 91 testes locais, lint e build aprovados; seletor conferido na porta 8080.
 - [x] Publicação ddfb04d confirmada: pipeline 39499746938 aprovada em lint/build/upload/ativação. Em homologação, busca `orama` encontrou e selecionou o banco 325 da terceira página; formulário cancelado sem cadastrar conta. Em 390 px, página e card sem overflow horizontal.
 
@@ -505,3 +508,11 @@ Nenhum cadastro ou dado financeiro alterado. Falhas e respostas fora de ordem ex
 - Não depende de endpoint novo. Pendências contratuais anteriores permanecem abertas.
 
 Reteste publicado desta rodada: banco Órama selecionado em `https://admin.strategyanalytics.com.br/` após recarga do deploy ddfb04d. Em 390 px, documento com 375 px e card com largura interna/rolável de 326 px; nome longo limitado ao campo. Formulário cancelado, perfil permaneceu sem conta bancária. Evidência: `admin-perfil-catalogo-bancario-completo.png`. Nenhuma operação financeira executada.
+
+## Rodada 20/10 — validação de inteiros no patrimônio administrativo
+
+- Defeito de frontend: campos de contagem/anos usavam passo livre e conversão numérica genérica, permitindo montar payload com frações incompatíveis com os campos int32 do Swagger atual.
+- Corrigidos os campos existentes: ano de fabricação/modelo, quartos/banheiros, total de parcelas/pagas e prazo em meses. Regra reutilizada no formulário e no payload; opcionais vazios permanecem nulos e zero continua válido. O prazo mantém o texto até validar, sem arredondar frações muito pequenas. Nenhum campo/ação foi acrescentado.
+- Dinheiro e áreas permanecem decimais; não foram criados limites de ano/calendário ou outras regras de negócio além do contrato de inteiros já publicado.
+- Testes: frações (inclusive além da precisão numérica), negativos, não finitos e limite int32; opcionais, zero e áreas decimais preservados. Suíte completa: 93 aprovados. No navegador em 8080, ano 2020.5 exibe erro e 2020 remove o erro; formulário descartado sem gravar.
+- Defeito corrigido no front, não incluído na tabela de bugs do backend. Publicação e reteste em homologação serão registrados após o deploy.

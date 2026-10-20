@@ -273,3 +273,7 @@ Admin 00d601f publicado pela pipeline 39498456402 aprovada. Busca/filtro, cartõ
 ## Esclarecimento 20/10 — catálogo bancário no Admin
 
 O endpoint administrativo já retorna os 513 bancos ativos em três páginas. A leitura incompleta no perfil era um defeito do front e foi corrigida com paginação completa e erro/retentativa existentes; não é uma solicitação de nova API. Campos e ações do Figma foram preservados. As pendências contratuais listadas acima continuam abertas.
+
+## Esclarecimento 20/10 — campos inteiros do patrimônio no Admin
+
+A validação local de anos, quartos/banheiros, parcelas e prazo foi ajustada aos tipos int32 já publicados. Era um problema do frontend, sem necessidade de endpoint, campo ou regra adicional no backend. Dinheiro e áreas continuam decimais; pendências anteriores deste documento permanecem abertas.

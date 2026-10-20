@@ -1,6 +1,11 @@
 import test from 'node:test'
 import assert from 'node:assert/strict'
-import { assetDraft, assetPayload } from '../src/services/clientAssetProfile.js'
+import {
+  assetDraft,
+  assetPayload,
+  assetIntegerRule,
+  isAssetIntegerField,
+} from '../src/services/clientAssetProfile.js'
 
 test('financed asset preserves debt and only its own detail block', () => {
   const result = assetPayload(
@@ -79,11 +84,56 @@ test('invalid financial values and contradictory installments fail before HTTP',
   )
 })
 test('consortium derives settlement from the designed debt field', () => {
-  const draft = { declaredValue: 100, remainingBalance: 20, paidInstallments: 2, totalInstallments: 10 }
+  const draft = {
+    declaredValue: 100,
+    remainingBalance: 20,
+    paidInstallments: 2,
+    totalInstallments: 10,
+  }
   const financed = assetPayload(draft, 'Consortium', 'currency')
   assert.equal(financed.status, 'Financed')
   assert.equal(financed.remainingBalance, 20)
   const settled = assetPayload({ ...draft, remainingBalance: 0 }, 'Consortium', 'currency')
   assert.equal(settled.status, 'PaidOff')
   assert.ok(!Object.hasOwn(settled, 'remainingBalance'))
+})
+
+test('integer-only asset fields reject fractional and out-of-range input before HTTP', () => {
+  for (const [type, key] of [
+    ['Vehicle', 'manufactureYear'],
+    ['Vehicle', 'modelYear'],
+    ['RealEstate', 'bedrooms'],
+    ['RealEstate', 'bathrooms'],
+    ['Consortium', 'totalInstallments'],
+    ['Consortium', 'paidInstallments'],
+    ['Investment', 'termMonths'],
+  ]) {
+    assert.equal(isAssetIntegerField(key), true)
+    for (const value of ['2.5', '2.00000000000000000001', 2147483648, -1, 'NaN', 'Infinity']) {
+      assert.notEqual(assetIntegerRule(value), true)
+      assert.throws(
+        () =>
+          assetPayload(
+            { declaredValue: 100, paidOff: true, hasFixedTerm: true, [key]: value },
+            type,
+            'currency',
+          ),
+        /inteiro/,
+      )
+    }
+  }
+})
+test('optional whole counts preserve null and zero; supported int32 boundary is accepted', () => {
+  for (const value of [null, undefined, '', ' ', 0, '0', '2', '2.0', 2147483647])
+    assert.equal(assetIntegerRule(value), true)
+  const payload = assetPayload(
+    { declaredValue: 10, bedrooms: 0, bathrooms: '', landAreaSquareMeters: '10.5', paidOff: true },
+    'RealEstate',
+    'currency',
+  )
+  assert.equal(payload.realEstate.bedrooms, 0)
+  assert.equal(payload.realEstate.bathrooms, null)
+  assert.equal(payload.realEstate.landAreaSquareMeters, 10.5)
+  assert.equal(isAssetIntegerField('declaredValue'), false)
+  assert.equal(isAssetIntegerField('landAreaSquareMeters'), false)
 })

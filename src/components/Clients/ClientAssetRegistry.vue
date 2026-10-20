@@ -119,9 +119,15 @@
                       outlined
                       dense
                       :type="field.type || 'text'"
-                      :rules="field.required ? [required] : []"
+                      :rules="fieldRules(field)"
                       :min="field.type === 'number' ? 0 : undefined"
-                      :step="field.type === 'number' ? 'any' : undefined"
+                      :step="
+                        field.type === 'number'
+                          ? isAssetIntegerField(field.key)
+                            ? 1
+                            : 'any'
+                          : undefined
+                      "
                     />
                   </label-form>
                 </div>
@@ -145,8 +151,9 @@
                     /></label-form>
                     <label-form class="col-12 col-sm-6" text-label="Prazo em meses (opcional)"
                       ><q-input
-                        v-model.number="draft.termMonths"
+                        v-model="draft.termMonths"
                         aria-label="Prazo em meses"
+                        :rules="[assetIntegerRule]"
                         type="number"
                         min="1"
                         outlined
@@ -219,7 +226,13 @@ import { useFinanceResource } from 'src/composables/useFinanceResource'
 import { financeGet, financeWrite, financeLabel, money } from 'src/services/financeService'
 import { getApiErrorMessage } from 'src/services/apiError'
 import useNotification from 'src/composables/global/useNotification'
-import { assetFormSections, assetPayload, assetDraft } from 'src/services/clientAssetProfile'
+import {
+  assetFormSections,
+  assetPayload,
+  assetDraft,
+  isAssetIntegerField,
+  assetIntegerRule,
+} from 'src/services/clientAssetProfile'
 const props = defineProps({
   customerId: { type: String, required: true },
   currencies: { type: Array, default: () => [] },
@@ -290,6 +303,10 @@ const status = (asset) =>
       : financeLabel(asset.status)
 const required = (v) =>
   (v !== null && v !== undefined && String(v).trim() !== '') || 'Campo obrigatório'
+const fieldRules = (field) => [
+  ...(field.required ? [required] : []),
+  ...(isAssetIntegerField(field.key) ? [assetIntegerRule] : []),
+]
 const formSections = computed(() => assetFormSections(selectedGroup.value?.type))
 const base = () => `admin/customers/${props.customerId}/assets`
 const load = () =>
