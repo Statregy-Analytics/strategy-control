@@ -418,3 +418,20 @@ Não simular falhas do servidor em homologação para testar a apresentação: o
 - [x] Evidência: cliente-perfil-sessoes-validadas.png. Vazio, loading, erro, retry e concorrência testados automaticamente no script/template reais, sem simular respostas dentro do aplicativo publicado.
 
 Sem revogação de sessões, logout ou alteração de preferências/perfil nesta rodada. Falhas e concorrência são cenários automatizados com respostas injetadas somente no teste.
+
+
+## QA 8 — paginação do catálogo bancário no perfil, 20/10
+
+- [x] Consulta real do catálogo: 513 instituições, 3 páginas (200/200/113). Banco Órama, código 325, presente na terceira página e ausente da lista anterior limitada à primeira.
+- [x] Resumo de Contas Bancárias e Perfil Completo usam o mesmo carregamento completo, preservando campos, ações e filtro existente de bancos ativos.
+- [x] Testes validam todas as páginas, vazio real, falha intermediária sem lista parcial, metadados ausentes/inconsistentes, IDs repetidos e interrupção após troca de sessão. Total 189 testes aprovados.
+- [x] Publicação final 027257b confirmada na pipeline 39489262330 aprovada em lint, 189 testes, build, upload e ativação. Banco Órama (325), da terceira página, novamente selecionado no controle existente; formulário cancelado sem salvar.
+
+Reteste planejado somente de leitura/seleção e cancelamento do formulário existente, sem criar conta bancária, alterar titularidade, definir principal, arquivar ou movimentar valores. Não requer novo endpoint ou campo no backend.
+
+- [x] Catálogo 97f5e72 publicado na pipeline 39488689472 aprovada. Banco Órama (325), opção de índice 512 oriunda da terceira página, localizado e selecionado no formulário existente; Cancelar fechou o rascunho e a conta continuou sem contas cadastradas.
+- [x] Diagnóstico mobile identificou campo com largura mínima de 455 px, causando overflow no formulário estreito. Correção 027257b restringe o grid interno dos campos ao espaço disponível e reutiliza a truncagem nativa do QSelect.
+- [x] Reteste mobile final: viewport 390 px, documento 378 px, card clientWidth/scrollWidth ambos 317 px; campo 237 px, texto natural 401 px truncado no espaço disponível de 183 px. Sem rolagem horizontal no formulário, sem ocultar controles.
+- [x] Formulário cancelado e resumo de Contas Bancárias em Ajustes conferido com o estado vazio real da conta. Nenhuma conta criada/editada/arquivada; nenhuma alteração de titularidade, principal ou valores. Viewport restaurado.
+- [x] Lint/build de portal e Admin e diff dos commits/documentos desta rodada conferidos. Alterações preexistentes de PRODUCT.md, MILESTONE-3-INTEGRATION.md e swagger administrativo mantidas fora dos commits.
+- [x] Evidências: cliente-perfil-catalogo-bancos-completo.png e cliente-perfil-banco-mobile-sem-overflow.png. Falha intermediária/paginação inconsistente e troca de sessão exercitadas automaticamente, sem induzir falhas na API publicada.

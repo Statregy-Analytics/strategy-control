@@ -234,3 +234,13 @@ Publicação final 916fc56 confirmada na pipeline 39486635711 aprovada, com 177 
 
 
 Publicação final das sessões 587e4ba confirmada na pipeline 39487751656 aprovada (183 testes). Duas sessões reais da conta do usuário conferidas com IP mascarado; nenhuma revogada. Rodapé não informa contagem zero durante erro/loading; estado vazio e falhas cobertos automaticamente. Nenhuma nova solicitação ao backend nesta rodada.
+
+
+### Catálogo bancário do perfil — paginação corrigida no frontend, 20/10
+
+Endpoint existente retorna 513 bancos em 3 páginas. O front carregava apenas os primeiros 200. Correção 97f5e72 usa a paginação já fornecida no resumo e no Perfil Completo, sem novos campos ou ações. Não solicitar outro endpoint nem ampliar pageSize como contorno: o contrato atual é suficiente. Falha intermediária é erro da consulta, não lista vazia ou parcial. Pendências de financeiro vigente e demais itens anteriores permanecem independentes.
+
+Nome de banco longo também causava overflow no formulário mobile; corrigido no frontend em 027257b, sem reduzir o conteúdo do catálogo nem acrescentar controles. Não é limite de nome ou de payload a ser imposto no backend.
+
+
+Publicação final 027257b confirmada pela pipeline 39489262330 aprovada (189 testes). Reteste real mostrou banco da terceira página e ausência de overflow mobile; formulário cancelado e estado bancário original preservado. Nenhuma nova conta ou operação foi realizada. Não acrescenta bloqueio ao backend nem encerra os anteriores.
