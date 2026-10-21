@@ -2,6 +2,48 @@
 
 Atualizado em 20/10/2026. Referência: feedback de homologação enviado pelo usuário, com 19 itens. Este registro não aprova integralmente o Marco 3 nem substitui o checklist de homologação integrada.
 
+## Devolutiva atual — lista complementar de 16 itens, em 21/10/2026
+
+Esta seção responde à lista complementar de 16 apontamentos enviada pelo
+usuário. Sua numeração é diferente dos 19 itens históricos abaixo. Não representa
+aprovação integral do cadastro ou resolução das pendências de backend.
+
+| Item da lista complementar | Situação atual | Resposta / próximo passo |
+| --- | --- | --- |
+| 1. Tokens acessíveis por JavaScript | Pendente — frontend + backend | Migrar a sessão dos dois projetos para cookies emitidos pelo servidor com HttpOnly, Secure, SameSite adequado e proteção CSRF; adaptar login, renovação e logout e remover tokens do armazenamento JavaScript. Definir arquitetura entre os domínios da API e dos frontends. O risco não comprova exploração existente. |
+| 2. Envio final do cadastro | Parcial | Mensagem técnica corrigida. Falta contrato de envio para análise e persistência da declaração de veracidade, seguido da integração frontend. |
+| 3. Não possuo contato de confiança | Parcial | Mensagens corrigidas; contatos existentes são preservados. Declaração de ausência ainda depende de persistência no backend. |
+| 4. Documento que completa o cadastro | Pendente de regra e homologação | Progresso 0% não se reproduziu na conta retestada, que já tinha documentos aprovados. Confirmar alternativas RG/CNH/passaporte e validar cada uma em conta nova; passaporte não homologado. |
+| 5. Moedas, idioma e fuso da conta nova | Pendente — produto + backend | Definir e fornecer defaults válidos antes de remover os campos. Resolver moeda secundária quando a principal for USD e confirmar países/moedas atendidos. |
+| 6. Ficha do cliente novo no admin | Pendente | Definir defaults de risco/compliance, estado e data reais de envio, campos retornados e vínculo de frente/verso. Não fabricar estado Pendente nem agrupar arquivos sem vínculo confiável. |
+| 7. Validação de CPF e documentos | Parcial; retomada do CPF resolvida | Máscara/dígitos do CPF, erro no campo, telefone, valores monetários e limites fornecidos pela definição documental implementados. A retomada do CPF foi corrigida e retestada em a7fa18d: indicação mascarada, manutenção ao avançar/reabrir e bloqueio de CPF inválido. Validação da API segue independente; não adotar comparação do 9º dígito com residência nem restringir todos os documentos a números. |
+| 8. Busca de clientes por e-mail | Resolvido e homologado | Corrigido em 07d34ad: usar contact em vez de name. E-mail completo, trecho sem arroba no modo E-mail / contato, cartões, tabela e ausência de resultados validados na versão publicada. |
+| 9. Data de expedição na etapa 5 | Resolvido e homologado | CPF não recebe a data do RG. CPF + RG fictícios e arquivos gravados; expedição 15/01/2025 persistiu ao reabrir e no perfil. |
+| 10. UF de expedição | Corrigido | Lista brasileira com 27 UFs disponível e verificada. Persistência de seleção de UF não foi exercitada no último teste documental. |
+| 11. Adicionar contato na etapa 6 | Resolvido e homologado | POST para novos e PUT com ID válido para existentes. Cadastro, edição e persistência confirmados; removida chamada com undefined. |
+| 12. Mensagens técnicas na tela | Corrigido nos fluxos revisados | Textos destinados ao cliente; revisão distingue arquivo selecionado de arquivo efetivamente enviado. |
+| 13. Nacionalidade repetida | Resolvido e homologado | País escolhido não é oferecido no outro campo, preservando a seleção atual. |
+| 14. Enviar documento no perfil sem tipos | Não reproduzido no reteste | RG e CNH disponíveis na conta testada. Não extrapolar para todos os países/contas nem considerar passaporte aprovado. |
+| 15. Catálogo de países | Pendente — produto + backend | Confirmar cobertura e disponibilizar países atendidos com rótulos em português. Catálogo observado limitado a Brazil e Portugal. |
+| 16. Histórico em inglês | Resolvido para os eventos tratados | Tradução dos eventos conhecidos de contatos implementada. Cadastro e atualização confirmados no admin; textos livres preservados. |
+
+### Fechamento das duas pendências retestadas
+
+- **CPF na retomada:** resolvido na versão `a7fa18d`, publicada em
+  https://hml.strategyanalytics.com.br. O valor protegido aparece como indicação
+  do CPF cadastrado; a entrada vazia preserva o registro e não reenvia a máscara.
+  Não foi exercitada a substituição por outro CPF válido nesta rodada.
+  Evidência detalhada: `Strategy-analytics-v2/docs/MILESTONE-2-CLIENT-MANUAL-TEST-CHECKLIST.md`,
+  seção Retomada do CPF — reteste em 21/10/2026.
+- **Busca por e-mail:** resolvida na versão `07d34ad`, publicada em
+  https://admin.strategyanalytics.com.br. Evidência no
+  [checklist manual](MILESTONE-2-MANUAL-TEST-CHECKLIST.md), seção Busca por e-mail — reteste em 21/10/2026.
+
+Os dois deploys terminaram com sucesso. As verificações técnicas anteriores à
+publicação passaram: lint, build, diff dos arquivos alterados, 259 testes no
+portal e 104 no admin. Capturas locais não versionadas:
+`qa-cpf-retomada-publicada.png` e `qa-email-busca-corrigida-publicada.png`.
+
 ## Primeira rodada — registro histórico
 
 - Portal: `/system/` redireciona para a Home; login confirmado entra diretamente na Home.

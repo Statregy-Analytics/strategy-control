@@ -852,6 +852,28 @@ Resultado final:
 > na tabela abaixo e cenários manuais que exigem códigos de confirmação, uploads
 > e dados descartáveis de homologação.
 
+## Busca por e-mail — reteste em 21/10/2026
+
+Ambiente validado: https://admin.strategyanalytics.com.br/dataManagement.
+Versão publicada: `07d34ad`.
+[Deploy concluído com sucesso](https://github.com/Statregy-Analytics/strategy-control/actions/runs/39629820625).
+
+- [x] Reproduzida a falha anterior: busca geral por e-mail não encontrava o
+  cliente, enquanto o filtro Contato encontrava o mesmo registro.
+- [x] Na versão corrigida, e-mail completo na busca geral encontrou a conta
+  fictícia usada no teste.
+- [x] Seleção E-mail / contato e busca por trecho sem arroba encontraram a conta.
+- [x] Resultado confirmado nas visualizações de cartões e tabela.
+- [x] Termo inexistente mostrou Nenhum cliente encontrado, sem erro de consulta.
+- [x] Ao retornar ao trecho válido, a conta voltou a aparecer.
+
+Causa corrigida no frontend: texto de e-mail era enviado no parâmetro `name`;
+agora usa `contact`, sem adicionar simultaneamente uma restrição de nome.
+Não é um bug de backend e não foi incluído na tabela abaixo. Evidência pela UI,
+sem captura de payloads ou códigos HTTP; nenhum dado do cliente foi alterado.
+Captura local não versionada: `qa-email-busca-corrigida-publicada.png`.
+Lint, build e 104 testes automatizados aprovados antes da publicação.
+
 ## Bugs encontrados
 
 |  Nº | Tela/fluxo                          | Passos para reproduzir                                                  | Endpoint                                                         | HTTP | Request ID / Correlation ID                                                         | Situação                                                                    |
