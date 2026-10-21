@@ -387,3 +387,10 @@ Publicação 2b07793 / pipeline 39528553525 aprovada com 215 testes, lint e buil
 Sete cenários reproduzidos antes da correção no componente/template reais: chamadas repetidas nas escritas, campos editáveis durante envio e publicação tardia de consultas/detalhes. Corrigidos sem campos/ações extras. Validação faz parte do bloqueio de Salvar; falhas mantêm rascunho, sucesso limpa dados integrais e só libera após recarregar; sessão/saída da aba impedem notificações e dados atrasados.
 
 Publicação 154080a / pipeline 39529228159 aprovada, com 224 testes, lint e build. Na conta do usuário, carregamento/lista vazia, abertura, validação obrigatória, cancelamento/reabertura e fechamento conferidos em desktop/mobile sem overflow. Nenhuma conta criada, priorizada ou arquivada. Caminhos de escrita/erro/troca de sessão validados automaticamente com respostas controladas, sem induzir falhas no backend. Checklist distingue essa cobertura da homologação integral das escritas bancárias.
+
+
+### QA 8/10 — envio documental e instruções antigas, 20/10
+
+Corrigidos seis cenários reproduzidos antes da alteração: duplo envio/substituição, orientações de tipo/país antigo, resultado de consulta anterior e notificações após saída/troca de sessão. Campos e fechamento bloqueados durante envio; falha mantém arquivo/datas para retry, sucesso ou cancelamento limpa a memória. Nenhum campo, ação ou metadado HTTP adicional.
+
+Publicação 60c799d / pipeline 39530256286 aprovada com 231 testes, lint e build. Conta do usuário em homologação: cinco documentos/100% e revisões preservados; tipo/arquivo obrigatórios recusados, troca RG/CNH e cancelamento/reabertura limpos. Substituição retomou emissão e bloqueou arquivo vazio, depois cancelada. Desktop/mobile sem overflow; nenhum upload/substituição/revisão/link temporário efetuado. Escritas/concorrência e orientações por país cobertas automaticamente; regra CNH e vínculo/metadados do replace seguem separados como dependências reais.

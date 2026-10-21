@@ -10,6 +10,7 @@ Esta seção consolida as rodadas abaixo. Registros históricos descrevem o esta
 - [x] Aprovação e reprovação documental, motivo no portal, reenvio e liberação da edição retestados. Aprovação da CNH pelo usuário levou a 100%/LEVEL_1. Isso não equivale ao envio final do cadastro nem à aprovação de todos os arquivos.
 - [x] Estados de loading/erro/vazio, recuperação de salvamentos parciais, sessões e proteção contra respostas antigas corrigidos. Validação das falhas controladas coberta automaticamente.
 - [x] Preferências nos controles existentes; catálogo bancário completo de 513 instituições e formulário mobile sem overflow. Nenhum campo/ação adicional criado.
+- [x] Documentação: duplicidade de envio/substituição e orientações antigas corrigidas em 60c799d, com 231 testes. Formulários/validação/cancelamento e desktop/mobile retestados sem novos uploads.
 - [x] Contas bancárias: envios concorrentes e respostas tardias corrigidos em 154080a, com 224 testes. Validação/cancelamento e desktop/mobile conferidos sem cadastro bancário.
 - [x] Concorrência em Contratos e Termos corrigida em 2b07793; estados independentes, retentativa e desktop/mobile conferidos, com 215 testes do portal. Contexto de consentimentos permanece pendente.
 - [x] Ocupação do perfil liberada como texto livre em a5104f2; salvamento/recarga/restauração e desktop/mobile retestados. Não depende de catálogo de ocupações.
@@ -632,3 +633,18 @@ Concorrência/falhas provocadas somente nos testes automatizados. O contexto dos
 - [x] Evidências cliente-conta-bancaria-formulario-hml.png e cliente-conta-bancaria-formulario-mobile-hml.png. Nenhuma conta criada/priorizada/arquivada.
 
 Escritas e respostas fora de ordem controladas nos testes automatizados. Reteste visual sem cadastrar, priorizar ou arquivar conta; não representa homologação integral das escritas financeiras.
+
+
+## QA 8/10 — envio/substituição documental e orientações, 20/10
+
+- [x] Seis falhas reproduzidas no script real antes da correção: envios repetidos, orientações antigas e respostas/notificações tardias.
+- [x] Enviar/Substituir bloqueiam repetição antes de validar; campos e fechamento ficam bloqueados durante envio. Erro conserva arquivo/rascunho e sucesso limpa antes da recarga.
+- [x] Orientações vinculadas ao tipo/país/abertura atuais; fechar/sair/trocar sessão invalida respostas antigas.
+- [x] Consulta documental atual prevalece; guard e erro reais continuam impedindo upload.
+- [x] 231 testes do portal, lint/build/diff-check do lote aprovados. Campos, ações, limites e payload existentes preservados.
+- [x] Publicação 60c799d / pipeline 39530256286 aprovada. Conta do usuário preservou cinco documentos, 100% e três aprovados/um enviado/um rejeitado, com motivo visível.
+- [x] Tipo/arquivo obrigatórios recusados antes de enviar; troca RG/CNH, cancelamento e reabertura limpa. Substituição retomou emissão existente e recusou arquivo vazio; cancelada sem substituir.
+- [x] Desktop 1366 px/mobile 390 px, documento/diálogo com largura útil/rolagem 378/378 px. Viewport restaurado e diálogos fechados; nenhum novo upload/revisão/link temporário.
+- [x] Evidências cliente-envio-documentos-formulario-hml.png e cliente-envio-documentos-formulario-mobile-hml.png.
+
+Envios/erros/concorrência validados com respostas controladas nos testes, sem novos uploads no servidor. Regra CNH e vínculo/metadados do replace continuam no documento do backend e não foram simulados pelo front.
