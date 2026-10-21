@@ -1,5 +1,8 @@
 // Translate server-generated labels, never audit data or customer-entered text.
 const titles = {
+  'Trusted contact created': 'Contato de confiança cadastrado',
+  'Trusted contact updated': 'Contato de confiança atualizado',
+  'Trusted contact deleted': 'Contato de confiança excluído',
   'Customer created': 'Cliente cadastrado',
   'Customer profile updated': 'Perfil do cliente atualizado',
   'Customer personal details updated': 'Dados pessoais do cliente atualizados',
