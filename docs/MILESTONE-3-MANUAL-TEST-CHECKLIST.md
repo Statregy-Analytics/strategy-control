@@ -10,12 +10,13 @@ Esta seção consolida as rodadas abaixo. Registros históricos descrevem o esta
 - [x] Aprovação e reprovação documental, motivo no portal, reenvio e liberação da edição retestados. Aprovação da CNH pelo usuário levou a 100%/LEVEL_1. Isso não equivale ao envio final do cadastro nem à aprovação de todos os arquivos.
 - [x] Estados de loading/erro/vazio, recuperação de salvamentos parciais, sessões e proteção contra respostas antigas corrigidos. Validação das falhas controladas coberta automaticamente.
 - [x] Preferências nos controles existentes; catálogo bancário completo de 513 instituições e formulário mobile sem overflow. Nenhum campo/ação adicional criado.
-- [x] Publicação atual 027257b: pipeline 39489262330 aprovada em lint, 189 testes, build, upload e ativação. Reteste de leitura nesta revisão confirmou conta própria, duas sessões reais, 100% documental e Editar liberado após carregar.
-- [ ] Backend: seleção do financeiro vigente após salvar renda; campos/catálogos do desenho; contatos de confiança sem relationship adicional; patrimônio próprio; contexto dos termos; projeção de compartilhamento; estado oficial de envio/revisão; regras CNH e vínculo/metadados do replace.
+- [x] Ocupação do perfil liberada como texto livre em a5104f2; salvamento/recarga/restauração e desktop/mobile retestados. Não depende de catálogo de ocupações.
+- [x] Retorno do backend integrado em d65939b: renda atual retestada, catálogos/campos pessoais, bairro, patrimônio próprio e Basic/Full. Contatos vazios/múltiplos corrigidos em 2591a8b; portal com 207 testes. Detalhes e limites nas rodadas próprias.
+- [ ] Backend/negócio: currencyId patrimonial para conta sem carteira; declaração persistida de ausência de contato; contexto dos termos/aceite versionado; estado oficial de envio/revisão; regra CNH e vínculo/metadados do replace. Renda vigente, catálogos/campos disponibilizados, contato sem relationship, rotas patrimoniais e Basic/Full não são mais endpoints ausentes.
 - [ ] Dados de homologação: foto válida disponível na API para verificar o carregamento real; fallback sem imagem quebrada já implementado. Não criar upload fora do Figma.
 - [ ] QA: revalidação independente dos cenários corrigidos. Não equivale a uma pendência de implementação nem à homologação integral do Marco 3.
 
-Nenhuma outra pendência do perfil com contrato suficiente e independente do backend foi identificada nesta revisão. Não houve alteração de runtime nem novo deploy nesta rodada; a publicação atual já foi confirmada. Detalhes contratuais em PENDENCIAS-BACKEND-QA.md.
+O retorno recente do backend permitiu novas correções locais, registradas abaixo. Esta consolidação prevalece sobre os relatos históricos de contrato ausente; a revalidação independente pelo QA continua aberta. Detalhes contratuais em PENDENCIAS-BACKEND-QA.md.
 
 ## Estado atual do Admin — QA 10 a 19
 
@@ -40,7 +41,7 @@ Nenhuma outra pendência do perfil com contrato suficiente e independente do bac
 - [x] Precisão decimal no input/plano financeiro, comparação por valor e validações corrigidas em 96ebd34; suíte local completa com 78 testes aprovada. Lint/build/deploy aprovados na pipeline 39497171684.
 - [x] Reteste de edição por seção em homologação: formatação equivalente não habilita Salvar; mudança efetiva habilita e destaca só o campo alterado; negativo bloqueado e descarte confirmado. Profissional e histórico financeiro permaneceram integralmente iguais ao baseline de leitura.
 - [ ] Contratos do backend: campos de identificação/documentos, efeitos/estado oficial do cadastro, segurança e observações sem alerta; módulos sem API e persistência (Lógicas, Crédito, Comunicados, Leads, Assessores e LP); unicidade de e-mail, sessão HttpOnly e investigação do incidente de identidade.
-- [ ] Revalidação independente pelo QA dos cenários administrativos liberados; homologação integrada da consulta financeira vigente continua aberta. Não simular defaults de risco/compliance nem criar campos/ações para contornar bloqueios.
+- [ ] Revalidação independente pelo QA dos cenários administrativos liberados. A correção da seleção financeira foi retestada no portal após o retorno do backend; repetir o cenário financeiro administrativo na rodada do QA. Não simular defaults de risco/compliance nem criar campos/ações para contornar bloqueios.
 
 ## Revisão final do escopo original do QA — Admin, 20/10
 
@@ -588,3 +589,16 @@ Complemento visual desta rodada: no primeiro deploy 3ea3c43, busca por 325 e con
 - [ ] Reteste manual de lista múltipla em conta aprovada pelo QA; cobertura automática de múltiplos contatos e falha parcial concluída.
 
 Esta é uma correção do frontend e não entra na tabela de bugs do backend. A declaração persistida de ausência de contato e as demais pendências cadastrais continuam separadas.
+
+
+## QA 8 — ocupação do perfil sem catálogo, 20/10
+
+- [x] Reproduzido no portal publicado: Editar abria a seção, mas a ocupação permanecia um seletor desabilitado. A API profissional já aceita texto livre.
+- [x] Reutilizado o QInput existente, mantendo campo, rótulo, posição e ações. Gênero/estado civil/nacionalidades continuam nos catálogos reais.
+- [x] 207 testes existentes, lint, build e diff-check do lote aprovados. Preservação de empregador/vigências e não envio do financeiro em mudança só profissional já possuem cobertura funcional.
+- [x] Publicação a5104f2 / pipeline 39527846327 aprovada. Na conta do usuário em homologação: ocupação vazia recusada; ocupação fictícia salva e retomada após recarga; valor original restaurado pelo formulário.
+- [x] Consulta independente do Admin confirmou restauração, empregador/vigência/isCurrent preservados e histórico financeiro integralmente igual ao baseline.
+- [x] Desktop 1366 px/mobile 390 px revisados, largura útil/rolagem 378/378 px no mobile. Viewport restaurado; reabertura sem mudanças manteve Salvar desabilitado, e edição encerrada por Descartar.
+- [x] Evidências cliente-ocupacao-editavel-hml.png e cliente-ocupacao-editavel-mobile-hml.png.
+
+Não solicitar catálogo de ocupações como bloqueio da edição. A revalidação independente do QA e as pendências reais de moeda, documentos e revisão continuam separadas.
