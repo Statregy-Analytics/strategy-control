@@ -2,6 +2,10 @@
 
 A interface segue o Figma e as alterações de ordem/campos expressamente autorizadas pelo designer/QA e pelo usuário. **Na ordem atual, profissional/financeiro/moedas é etapa 4 e documentos/endereço é etapa 5.** Precisamos dos estados e operações abaixo sem acrescentar campos ou ações às telas.
 
+## Atualização após o retorno do backend, 20/10
+
+Consulte [integração e retestes do retorno](QA-2026-10-20-RETORNO-BACKEND.md). Esta atualização prevalece sobre os relatos históricos abaixo: renda atual, catálogos de gênero/estado civil, bairro, nacionalidades, contato sem relationship, patrimônio próprio e Basic/Full já têm contrato e integração no front. Não solicitar esses endpoints novamente. Bairro também foi habilitado no Admin. Permanecem os contratos administrativos de outros dados pessoais, moeda patrimonial sem carteira e os limites listados no reteste.
+
 ## Aprovação de documentos e edição do perfil
 
 O front de Aprovar/Reprovar documentos está integrado conforme C27–C28. Situação atual confirmada em 20/10:
@@ -17,7 +21,7 @@ Referência: [Figma C25 a C28](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuF
 
 ## Edição dos campos existentes no perfil
 
-- Confirmar escrita para documentos tipados, estado civil, nacionalidade, filiação, bairro e preferência de contato que já aparecem no desenho. Os campos sem operação confirmada permanecem somente leitura.
+- Confirmar escrita para documentos tipados, estado civil, nacionalidade, filiação e preferência de contato que já aparecem no desenho. Os campos sem operação confirmada permanecem somente leitura.
 - Definir edição das observações de compliance sem obrigar a criação de um alerta. Hoje só é possível alterar a descrição de um alerta existente.
 - Confirmar as operações previstas para segurança e sessões. O front não altera senha, 2FA ou status por meio de endpoints de outro domínio.
 

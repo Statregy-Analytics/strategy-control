@@ -407,3 +407,21 @@ test('birth date validation blocks all section writes and correction can then be
   assert.equal(writes[0].payload.birthDate, '1990-01-01')
   assert.equal(source.birthDate, '1989-01-01')
 })
+
+test('neighborhood edits use the existing address contract and preserve secondary addresses', () => {
+  const source = {customerId:'customer',kind:'Person',names:[],contacts:[],addresses:[
+    {id:'home',kind:'Residential',isPrimary:true,countryId:'br',line1:'Rua',line2:'Sala',neighborhood:'Centro',city:'Cidade',postalCode:'123'},
+    {id:'other',kind:'Work',isPrimary:false,countryId:'pt',line1:'Outra',neighborhood:'Bairro secundário'},
+  ]}
+  const original=sectionValues('identification',source)
+  const draft={...original,neighborhood:'Bairro QA'}
+  assert.ok(sectionEditable('identification',source).includes('neighborhood'))
+  assert.equal(sectionValidation('identification',draft,source).neighborhood,undefined)
+  assert.ok(sectionValidation('identification',{...draft,neighborhood:'a'.repeat(121)},source).neighborhood)
+  const [step]=sectionPlan('identification',source,draft,original)
+  assert.equal(step.payload.addresses[0].neighborhood,'Bairro QA')
+  assert.equal(step.payload.addresses[0].line2,'Sala')
+  assert.equal(step.payload.addresses[1].neighborhood,'Bairro secundário')
+  assert.ok(step.fields.includes('neighborhood'))
+  assert.equal(source.addresses[0].neighborhood,'Centro')
+})

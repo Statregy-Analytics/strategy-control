@@ -2,16 +2,20 @@
 
 Atualizado em 20/10/2026 após a mudança de ordem e campos autorizada pelo designer/QA e confirmada pelo usuário. **Ordem vigente: etapa 4 profissional/financeiro/moedas; etapa 5 documentos/endereço.** As rodadas anteriores abaixo registram a sequência anterior. Figma BaDXlWpxbIoY4azOaQnXgv. Este registro substitui a situação anterior das prévias: publicar uma tela não significa homologar o cadastro completo.
 
+## Atualização do retorno do backend
+
+[Integração e retestes](QA-2026-10-20-RETORNO-BACKEND.md): renda corrigida; profissional antes dos documentos já integrado; catálogos, país de nascimento, até três nacionalidades, bairro e contato sem relacionamento agora suportados. Relatos históricos de ausência desses contratos estão superados.
+
 ## Situação atual por etapa
 
 | Etapa | Implementado no front | Pendência real da API ou homologação |
 | --- | --- | --- |
 | 1 · Criar conta | POST /auth/register; nome, e-mail, senha e indicação; chave estável no retry; /register abre o fluxo Figma | Texto/versão e registro do aceite antes da autenticação; residência regional não identifica um país |
 | 2 · Confirmar e-mail | Confirmação e reenvio reais; após confirmação usa login existente para continuar na etapa 3; sem senha em storage/URL | Criação/código confirmados pelo usuário e sessão na etapa 3 observada; aceite versionado continua pendente |
-| 3 · Dados pessoais | GET/PATCH do perfil; nascimento, gênero, estado civil, uma nacionalidade e cidade; preserva dados externos à etapa | País de nascimento e múltiplas nacionalidades não existem no payload; catálogos dos seletores não disponibilizados |
+| 3 · Dados pessoais | GET/PATCH do perfil; nascimento, gênero/estado civil do catálogo, país de nascimento, até três nacionalidades e cidade; preserva dados externos à etapa | Novos campos e catálogos integrados e cobertos por testes; reteste manual completo pelo QA ainda aberto |
 | 4 · Atividade trabalhista e moedas | Ocupação obrigatória em texto livre; Empregador opcional; rendas/bens; duas moedas do catálogo. PUT profissional e financeiro + PATCH preferências antes de avançar | Criação profissional, moedas e financeiro validados na conta nova; ocupação não exige catálogo. Defaults de idioma/fuso/tema ausentes ainda exigiriam alinhamento |
-| 5 · Documento e endereço | Endereço/filiação, CEP, tipos/definições e serviços documentais existentes. Entrada exige profissional/financeiro e moedas; links antigos e retomada migrados | Upload, aprovação, reprovação/motivo e reenvio RG validados; vínculo de substituição/metadados continuam parciais. Retomada de número mascarado/emissor/datas e indicação de evidências corrigidas e validadas em homologação; bairro, UF e outros países continuam parciais |
-| 6 · Contatos de confiança | GET real e PUT de existentes preservando relationship/e-mail; valida todos antes de escrever | Inclusão exige relationship não presente no Figma; declaração de ausência sem operação de persistência |
+| 5 · Documento e endereço | Endereço/filiação, CEP, tipos/definições e serviços documentais existentes. Entrada exige profissional/financeiro e moedas; links antigos e retomada migrados | Upload, aprovação, reprovação/motivo e reenvio RG validados; vínculo de substituição/metadados continuam parciais. Retomada de número mascarado/emissor/datas e indicação de evidências corrigidas e validadas em homologação; bairro separado integrado; UF e outros países continuam parciais |
+| 6 · Contatos de confiança | GET real e PUT de existentes preservando relationship/e-mail; valida todos antes de escrever | Inclusão sem relationship integrada; declaração de ausência sem operação de persistência |
 | 7 · Revisão e envio | Revisa dados carregados da API e alterações locais; Editar por etapa; confirmação; consulta real de onboarding | Operação final/recibo de envio e revisão cadastral não identificados; Data Intake atual contém apenas formulários patrimoniais |
 
 ## Concluído neste lote

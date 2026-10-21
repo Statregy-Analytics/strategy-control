@@ -23,6 +23,7 @@ const addressKeys = [
   'kind',
   'line1',
   'line2',
+  'neighborhood',
   'city',
   'stateOrProvince',
   'postalCode',
@@ -59,6 +60,7 @@ export function sectionValues(key, source) {
     secondaryPhone: contact(source, 'SecondaryPhone')?.value || '',
     line1: address?.line1 || '',
     line2: address?.line2 || '',
+    neighborhood: address?.neighborhood || '',
     cityState: [address?.city, address?.stateOrProvince].filter(Boolean).join(' / '),
     postalCode: address?.postalCode || '',
   }
@@ -69,7 +71,7 @@ export function sectionEditable(key, source) {
   const keys = ['birthDate', 'primaryEmail', 'mobilePhone', 'secondaryPhone']
   if (primary(source.names)) keys.push('fullName')
   const address = selected(source.addresses, (x) => x.kind === 'Residential')
-  if (address?.id && address.countryId) keys.push('line1', 'line2', 'cityState', 'postalCode')
+  if (address?.id && address.countryId) keys.push('line1', 'line2', 'neighborhood', 'cityState', 'postalCode')
   return keys
 }
 const validBirthDate = (value, today) => {
@@ -106,6 +108,7 @@ export function sectionValidation(key, value, source, today = new Date()) {
       errors.householdMonthlyIncome = 'Não pode ser menor que a renda individual'
   }
   if (key === 'identification') {
+    if (String(value.neighborhood ?? '').trim().length > 120) errors.neighborhood = 'O bairro deve ter até 120 caracteres.'
     if (
       value.birthDate != null &&
       value.birthDate !== '' &&
@@ -206,7 +209,7 @@ export function sectionPlan(key, source, draft, original) {
       }
       add('put', base + '/contacts', { contacts: contacts.map((x) => pick(x, contactKeys)) })
     }
-    if (['line1', 'line2', 'cityState', 'postalCode'].some((k) => draft[k] !== original[k])) {
+    if (['line1', 'line2', 'neighborhood', 'cityState', 'postalCode'].some((k) => draft[k] !== original[k])) {
       const addresses = copy(source.addresses),
         row = selected(addresses, (x) => x.kind === 'Residential')
       if (!row?.countryId) throw Error('O país do endereço não foi informado pela API.')
@@ -214,6 +217,7 @@ export function sectionPlan(key, source, draft, original) {
       Object.assign(row, {
         line1: draft.line1.trim(),
         line2: draft.line2.trim() || null,
+        neighborhood: draft.neighborhood?.trim() || null,
         city: slash < 0 ? draft.cityState.trim() : draft.cityState.slice(0, slash).trim(),
         stateOrProvince: slash < 0 ? row.stateOrProvince : draft.cityState.slice(slash + 1).trim(),
         postalCode: draft.postalCode.trim() || null,
@@ -233,7 +237,7 @@ export function sectionPlan(key, source, draft, original) {
             : step.path.endsWith('/contacts')
               ? ['primaryEmail', 'mobilePhone', 'secondaryPhone']
               : step.path.endsWith('/addresses')
-                ? ['line1', 'line2', 'cityState', 'postalCode']
+                ? ['line1', 'line2', 'neighborhood', 'cityState', 'postalCode']
                 : ['birthDate']
           : Object.keys(draft)
   }

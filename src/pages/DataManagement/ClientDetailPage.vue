@@ -651,7 +651,7 @@ const addressFields = computed(() => {
   return [
     field('Endereço residencial', a.line1, true),
     field('Complemento', a.line2),
-    field('Bairro', null),
+    field('Bairro', a.neighborhood),
     field('Município / UF', [a.city, a.stateOrProvince].filter(Boolean).join(' / ')),
     field('CEP', a.postalCode),
   ]
@@ -707,7 +707,7 @@ const contactEditFields = computed(() =>
   mapEdit(contactFields.value, ['primaryEmail', 'mobilePhone', 'secondaryPhone']),
 )
 const addressEditFields = computed(() =>
-  mapEdit(addressFields.value, ['line1', 'line2', null, 'cityState', 'postalCode']),
+  mapEdit(addressFields.value, ['line1', 'line2', 'neighborhood', 'cityState', 'postalCode']),
 )
 const professionalEditFields = computed(() =>
   mapEdit(professionalFields.value, ['occupation', 'employerName']),
