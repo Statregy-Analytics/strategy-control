@@ -874,6 +874,38 @@ sem captura de payloads ou códigos HTTP; nenhum dado do cliente foi alterado.
 Captura local não versionada: `qa-email-busca-corrigida-publicada.png`.
 Lint, build e 104 testes automatizados aprovados antes da publicação.
 
+## QA complementar 17, 19 e 20 — homologação em 21/10/2026
+
+Ambiente: https://admin.strategyanalytics.com.br.
+Versão publicada: `43a63fd`.
+[Deploy concluído com sucesso](https://github.com/Statregy-Analytics/strategy-control/actions/runs/39649054785).
+Conta administrativa existente; preferências exercitadas no cliente fictício
+`Client Preferred Name` (`client@example.com`). Numeração da lista complementar
+“Mais apontamentos · 21/10”, distinta da lista histórica de 17/10.
+
+- [x] **17:** salvar Dólar Americano (USD) como moeda principal e Real Brasileiro
+  (BRL) como secundária; confirmar os valores no estado carregado após salvar.
+- [x] Restaurar BRL principal / USD secundária e confirmar a restauração na tela.
+- [x] **19:** abrir Adicionar conta sem texto de busca: mostrar a orientação
+  “Digite o código ou nome do banco.”, sem listar todo o catálogo.
+- [x] Buscar `325`: encontrar Órama; selecionar e manter o nome completo no campo.
+- [x] Buscar `orama`, sem acento: encontrar o mesmo banco.
+- [x] Cancelar e confirmar fechamento, sem criar conta bancária.
+- [x] **20:** confirmar visualmente as três amostras de tema sem texto visível,
+  com indicação do tema automático selecionado e nomes acessíveis preservados.
+- [x] Nenhum erro capturado no console das abas durante o reteste.
+
+Auditoria, testes, lint, build, upload e ativação passaram no deploy. Antes da
+publicação, suíte de 107 testes aprovada; as seis combinações distintas entre
+BRL/USD/EUR foram cobertas automaticamente. Na UI publicada, esta rodada testou
+USD/BRL e a restauração BRL/USD, não todas as combinações nem a persistência de
+uma troca de tema. Não houve novo teste mobile nesta rodada.
+
+Evidência funcional pela UI, sem captura de payloads ou status HTTP. Captura
+local não versionada: `qa21-hml-usd-brl.png`. Não foi observado novo erro de
+backend nesses cenários. Pendências 18 e 24 e os limites do portal estão na
+[lista atualizada do QA](QA-2026-10-17-TRIAGEM.md#lote-complementar-17-a-24--publicação-e-reteste-em-21102026).
+
 ## Bugs encontrados
 
 |  Nº | Tela/fluxo                          | Passos para reproduzir                                                  | Endpoint                                                         | HTTP | Request ID / Correlation ID                                                         | Situação                                                                    |

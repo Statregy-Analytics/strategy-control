@@ -1,6 +1,6 @@
 # QA de 17/10 — triagem e primeiro lote de correções
 
-Atualizado em 20/10/2026. Referência: feedback de homologação enviado pelo usuário, com 19 itens. Este registro não aprova integralmente o Marco 3 nem substitui o checklist de homologação integrada.
+Atualizado em 21/10/2026. Referência: feedback original de homologação com 19 itens e lista complementar ampliada para 24 itens. Este registro não aprova integralmente o Marco 3 nem substitui o checklist de homologação integrada.
 
 ## Devolutiva atual — lista complementar de 16 itens, em 21/10/2026
 
@@ -43,6 +43,61 @@ Os dois deploys terminaram com sucesso. As verificações técnicas anteriores �
 publicação passaram: lint, build, diff dos arquivos alterados, 259 testes no
 portal e 104 no admin. Capturas locais não versionadas:
 `qa-cpf-retomada-publicada.png` e `qa-email-busca-corrigida-publicada.png`.
+
+## Lote complementar 17 a 24 — publicação e reteste em 21/10/2026
+
+Continuação dos 16 itens complementares acima, conforme “Mais apontamentos ·
+21/10”. Não confundir com os itens 17 a 19 da lista histórica original.
+Admin `43a63fd` e portal `45aec78` publicados; ambos os deploys concluídos com
+sucesso, com auditoria, testes, lint e build aprovados (107 testes admin,
+266 portal). Documentos e Swagger não foram incluídos nos commits de código.
+
+| Item | Situação atual | Evidência / limite |
+| --- | --- | --- |
+| 17. Dólar principal com Real secundário | Corrigido e homologado no cenário reportado | Catálogo usa código da moeda, sem enviar UUID como código. USD/BRL salvo na UI publicada; BRL/USD restaurado e confirmado. Seis combinações distintas cobertas automaticamente, não todas pela UI. |
+| 18. Conta somente do próprio cliente | Pendente — backend, depois frontend e reteste | Servidor deve derivar nome/documento do cliente autenticado e impedir titular diferente. Campos ainda presentes até contrato permitir omiti-los. Não marcar como corrigido pela mudança de layout. |
+| 19. Banco com busca no admin | Corrigido e homologado | Campo vazio não lista todo o catálogo; busca por 325 e orama encontrou Órama e manteve nome após seleção. Formulário cancelado sem criar conta. |
+| 20. Tema sem texto | Correção visual homologada | Três amostras de cor sem texto visível, indicação da seleção e nomes acessíveis mantidos. Não testada nova gravação de tema nesta rodada. |
+| 21. Documentação do cliente | Layout corrigido; homologação parcial | Faixa de níveis/progresso, tabela e reenvio por linha conferidos; reenvio aberto e cancelado, sem upload. Grupos reais seguem catálogo; frente/verso explícitos, quatro grupos finais e última atualização dependem de dados/contrato. Data ausente não é inventada. |
+| 22. Contas bancárias do cliente | Layout corrigido; homologação parcial | Estado vazio, botão no fim, formulário em linha, alinhamento desktop e descarte conferidos. Lista com contas e escritas não retestadas nesta conta vazia; simplificação de titularidade depende do item 18. |
+| 23. Formulário e imagens do patrimônio | Formulário corrigido; imagens pendentes de validação integrada | Imóvel fictício EUR editado na seção, salvo sem mudar valores e reaberto; EUR 325.000,75 e quatro quartos preservados. Cadastro de veículo aberto/descartado. Galeria vazia conferida; prévias cobertas automaticamente, sem anexos disponíveis para confirmação visual em homologação. |
+| 24. Moeda automática do patrimônio | Pendente — backend, depois frontend e reteste | Seletor mantido. Definir moeda principal na criação e preservar moeda original nas edições/mudanças de preferência; apresentar símbolo da moeda gravada no admin e portal. Não converter valores automaticamente. |
+
+### Solicitações ao backend — itens 18 e 24
+
+**18:** na escrita de conta bancária do cliente, obter titular e documento da
+identidade autenticada; rejeitar tentativa de outro titular. Documentar payload
+sem esses campos, tratamento do cadastro sem documento válido e resposta de erro
+para o front. Depois do contrato, remover campos e retestar inclusão/edição e
+rejeição no servidor. Não basta preencher ou esconder campos no navegador.
+
+**24:** definir no contrato a moeda principal ativa usada na criação do bem,
+resolvida sem depender de carteira; preservar a moeda original em PATCH e quando
+as preferências mudarem; retornar `currencyId` e código na consulta do patrimônio
+para ambos os frontends. Definir erro para preferência/moeda ausente ou inativa.
+Após integrar, testar criação, edição, troca de preferência e exibição no admin,
+sem conversão implícita. O catálogo com IDs já resolveu o bloqueio anterior de
+conta sem carteira; esta pendência é a nova regra, não a falta daqueles IDs.
+
+### Pendência de teste — imagens do patrimônio
+
+- [ ] Disponibilizar um patrimônio fictício com imagem vinculada e testar em
+  homologação a miniatura, abertura do arquivo e reapresentação após recarga.
+- [ ] Confirmar o comportamento integrado quando a imagem/URL estiver indisponível.
+
+Há cobertura automatizada de prévia, URL inválida e resposta tardia após saída;
+o único estado visual integrado confirmado foi “Nenhum documento vinculado”.
+Não registrar imagens como homologadas nem presumir falha de backend.
+
+Evidências detalhadas no [checklist administrativo](MILESTONE-2-MANUAL-TEST-CHECKLIST.md)
+e em `Strategy-analytics-v2/docs/MILESTONE-2-CLIENT-MANUAL-TEST-CHECKLIST.md`,
+seções QA complementar de 21/10. Capturas locais não versionadas:
+`qa21-hml-usd-brl.png` e `qa21-hml-documentacao.png`.
+[Deploy admin](https://github.com/Statregy-Analytics/strategy-control/actions/runs/39649054785)
+e [deploy portal](https://github.com/WillTbn/Strategy-analytics-v2/actions/runs/39649080709).
+Nenhum teste mobile novo nem novo upload executado nesta rodada. Os resultados
+anteriores de CPF, e-mail e matriz de patrimônios continuam com suas evidências
+originais; não são revalidações deste lote.
 
 ## Primeira rodada — registro histórico
 
