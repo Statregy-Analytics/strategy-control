@@ -373,3 +373,10 @@ Publicação 2591a8b / pipeline 39526079478 aprovada com lint, 207 testes e buil
 Removida a dependência indevida de catálogo no campo existente Atividade Trabalhista Atual. Usa o input do próprio perfil e o serviço profissional já disponível, sem campos ou ações adicionais. Publicação a5104f2 / pipeline 39527846327 aprovada com 207 testes, lint e build.
 
 Teste na conta do usuário: vazio bloqueado antes da escrita, valor fictício salvo/retomado e original restaurado. Leitura administrativa confirmou empregador/vigência preservados e histórico financeiro integralmente igual. Desktop/mobile sem overflow, rascunho final descartado. Checklist atual do perfil e matriz QA 7/8/12 atualizados para não manter renda/catálogos/relationship já resolvidos como endpoints ausentes; pendências históricas não representam o estado atual.
+
+
+### QA 8 — concorrência documental do perfil, 20/10
+
+Cinco falhas reproduzidas antes da correção nos scripts reais: respostas/erros antigos sobrescreviam o resultado novo ou encerravam o carregamento, e paginação superada continuava consultando. Cada seção agora publica somente a tentativa atual da mesma sessão; saída da tela invalida consultas. Preservados todos os campos, ações e layout.
+
+Publicação 2b07793 / pipeline 39528553525 aprovada com 215 testes, lint e build. Em homologação: contratos vazios da conta do usuário confirmados, erro de Termos/retentativa independente e troca de abas conferidos; desktop/mobile sem overflow. Concorrência/falha parcial cobertas automaticamente, sem induzir falha do backend. Nenhum arquivo real baixado nesta conta sem documentos contratuais. Contexto dos termos continua pendente; a correção local não o substitui.

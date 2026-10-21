@@ -10,6 +10,7 @@ Esta seção consolida as rodadas abaixo. Registros históricos descrevem o esta
 - [x] Aprovação e reprovação documental, motivo no portal, reenvio e liberação da edição retestados. Aprovação da CNH pelo usuário levou a 100%/LEVEL_1. Isso não equivale ao envio final do cadastro nem à aprovação de todos os arquivos.
 - [x] Estados de loading/erro/vazio, recuperação de salvamentos parciais, sessões e proteção contra respostas antigas corrigidos. Validação das falhas controladas coberta automaticamente.
 - [x] Preferências nos controles existentes; catálogo bancário completo de 513 instituições e formulário mobile sem overflow. Nenhum campo/ação adicional criado.
+- [x] Concorrência em Contratos e Termos corrigida em 2b07793; estados independentes, retentativa e desktop/mobile conferidos, com 215 testes do portal. Contexto de consentimentos permanece pendente.
 - [x] Ocupação do perfil liberada como texto livre em a5104f2; salvamento/recarga/restauração e desktop/mobile retestados. Não depende de catálogo de ocupações.
 - [x] Retorno do backend integrado em d65939b: renda atual retestada, catálogos/campos pessoais, bairro, patrimônio próprio e Basic/Full. Contatos vazios/múltiplos corrigidos em 2591a8b; portal com 207 testes. Detalhes e limites nas rodadas próprias.
 - [ ] Backend/negócio: currencyId patrimonial para conta sem carteira; declaração persistida de ausência de contato; contexto dos termos/aceite versionado; estado oficial de envio/revisão; regra CNH e vínculo/metadados do replace. Renda vigente, catálogos/campos disponibilizados, contato sem relationship, rotas patrimoniais e Basic/Full não são mais endpoints ausentes.
@@ -602,3 +603,17 @@ Esta é uma correção do frontend e não entra na tabela de bugs do backend. A 
 - [x] Evidências cliente-ocupacao-editavel-hml.png e cliente-ocupacao-editavel-mobile-hml.png.
 
 Não solicitar catálogo de ocupações como bloqueio da edição. A revalidação independente do QA e as pendências reais de moeda, documentos e revisão continuam separadas.
+
+
+## QA 8 — concorrência de Contratos e Termos, 20/10
+
+- [x] Cinco falhas de concorrência reproduzidas pelo script real do componente antes da correção.
+- [x] Apenas a consulta atual publica arquivos/erro/loading de cada seção; paginação antiga interrompida, saída/troca de sessão invalida resultados.
+- [x] Arquivos disponíveis preservados em falha parcial; erro de termos não bloqueia Contratos nem vira vazio falso.
+- [x] Nenhum campo, ação ou composição visual alterados. Baixar/Tentar novamente e os estados existentes preservados.
+- [x] 215 testes do portal aprovados, com oito cenários novos; lint/build/diff-check do lote aprovados.
+- [x] Publicação 2b07793 / pipeline 39528553525 aprovada. Na conta do usuário, Contratos vazio após consulta bem-sucedida, Termos indisponível com retentativa independente; saída/retorno à aba conferidos.
+- [x] Desktop 1366 px e mobile 390 px revisados; largura útil/rolagem 378/378 px, viewport restaurado. Sem gravação cadastral/aceite; conta sem documentos contratuais, portanto sem download real nesta rodada.
+- [x] Evidências cliente-contratos-termos-estados-hml.png e cliente-contratos-termos-estados-mobile-hml.png.
+
+Concorrência/falhas provocadas somente nos testes automatizados. O contexto dos consentimentos permanece dependência real do backend; não foi inventado nem o erro tratado como ausência de termos.
