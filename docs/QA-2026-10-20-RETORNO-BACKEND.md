@@ -16,7 +16,7 @@ Este registro atualiza a situação das rodadas anteriores. Os campos necessári
 
 ## Evidências e limites
 
-Portal: 201 testes automatizados; Admin: 100. Lint e build de ambos executados. Criação e retomada de veículo fictício do Cláudio verificadas pela interface local na porta 9010, com backend de homologação. Os demais subtipos têm testes de payload, mas não foram todos criados manualmente nesta rodada. Edição do veículo também confirmada pela API após salvar na tela. O único registro fictício criado foi arquivado pelo endpoint administrativo após o teste; não há ação de arquivar no portal. Upload de documentos patrimoniais não foi exercitado nesta rodada. Publicação será registrada após a pipeline.
+Portal: 201 testes automatizados; Admin: 100. Lint e build de ambos executados. Criação e retomada de veículo fictício do Cláudio verificadas pela interface local na porta 9010, com backend de homologação. Os demais subtipos têm testes de payload, mas não foram todos criados manualmente nesta rodada. Edição do veículo também confirmada pela API após salvar na tela. O único registro fictício criado foi arquivado pelo endpoint administrativo após o teste; não há ação de arquivar no portal. Upload de documentos patrimoniais não foi exercitado nesta rodada. Publicação do commit 7648262 concluída: [pipeline](https://github.com/Statregy-Analytics/strategy-control/actions/runs/39524117575) com sucesso. Versões recarregadas nas URLs de homologação.
 
 ## Pendências reais preservadas
 
@@ -28,3 +28,13 @@ Portal: 201 testes automatizados; Admin: 100. Lint e build de ambos executados. 
 - Contexto dos consentimentos do perfil, segurança/sessões, valores por participante e contrato encerrado no investido continuam sujeitos às pendências consolidadas.
 
 Não são mais solicitações de endpoint: renda atual, catálogo de gênero/estado civil, bairro, nacionalidades, contato sem relacionamento, patrimônio do cliente e escopos Basic/Full.
+
+
+## Reteste publicado na conta do usuário
+
+- Catálogo de gênero abriu as quatro opções reais; edição descartada sem alterar os dados pessoais.
+- Patrimônio carregou os quatro estados vazios e abriu o veículo com os campos obrigatórios. Confirmado o bloqueio de moeda: esta conta sem carteiras não recebe currencyId. Salvar permanece desabilitado; nada fictício foi criado nela.
+- Na virada do dia UTC, a conta voltou a ProfileIncomplete: o último registro financeiro do histórico tinha effectiveTo=2026-10-20. Pela operação administrativa documentada foram repetidos os valores da última versão do histórico, com nova vigência e sem data final. O perfil voltou a carregar e habilitar edição no portal. Não é uma nova falha do PUT corrigido; é saneamento dos dados antigos. Outros cadastros gravados com vigência vencida podem precisar do mesmo tratamento.
+- A tentativa de repor valores pela seção do Admin foi impedida pela ausência de moeda/vigência no perfil atual vazio; rascunho descartado. O histórico administrativo forneceu os dados para a recuperação. Melhorar a criação a partir de perfil financeiro ausente exige fonte de moeda/vigência definida, sem inventar valores.
+
+- Bairro em homologação: gravação fictícia pela seção do Admin confirmada no portal após recarga; valor original vazio restaurado ao final. Nenhum outro campo da seção foi alterado.
