@@ -57,7 +57,7 @@ As entradas vazias eram falhas de navegação do front: `/dashboard` agora abre 
 O login da seção nova (4:25438) foi concluído no front usando a autenticação existente, sem contrato novo. As telas do perfil já usam dados próprios, sem exemplos; o que falta abaixo deve preencher os campos e fluxos do Figma, sem seletores extras:
 
 - Confirmar campo de bairro e catálogos/valores aceitos de gênero, estado civil e nacionalidade. Ocupação usa texto livre do contrato profissional confirmado, com ampliação autorizada da tela. Os seletores preservam o valor recebido enquanto não houver opções confirmadas.
-- Contatos de confiança: o Figma pede nome e telefone, mas a escrita exige `relationship`. Confirmar a gravação e múltiplos contatos sem acrescentar esse campo à interface.
+- Contatos de confiança: inclusão sem `relationship` e edição dos contatos existentes já integradas no portal, inclusive lista vazia/múltipla. Resta confirmar persistência da declaração de ausência no cadastro; não é necessário criar campo de relacionamento.
 - Confirmar consulta e operações do patrimônio próprio do cliente. As seções não mostram bens fictícios e não usam endpoints administrativos para contornar autorização.
 - Informar o `context` correto dos consentimentos/termos do perfil. A consulta sem contexto retorna HTTP 400; o Swagger não enumera os valores. Não assumir um contexto de cadastro nem adicionar seletor.
 - Confirmar Compartilhar Perfil: a projeção pública documentada só contém `customerId` e `avatarUrl`; não permite reproduzir o conteúdo completo do desenho.

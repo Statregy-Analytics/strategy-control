@@ -359,3 +359,10 @@ QA 16/17: reproduzido falso vazio ao procurar banco de outra página (325/Órama
 Revisados os itens originais 10–19 e o Swagger atual, sem novas rotas nem mudança de UpdateCustomerRequest (kind/birthDate). Não foi identificado outro item original com implementação independente do backend nesta rodada. O checklist manual contém a matriz por item com o front já disponível e os bloqueios reais. Isso não considera concluídos os módulos ainda sem API: sua integração no front continua futura e depende do contrato. Segurança/identidade permanecem abertas até evidência do servidor e reteste do QA.
 
 Perfil em homologação conferido sem gravação: seções carregadas, Salvar desabilitado sem mudanças, exclusividade da edição, campos sem escrita somente leitura e compliance sem alerta bloqueado. 99 testes, lint e build aprovados; runtime publicado confirmado. Rodada somente documental, sem alteração visual, campos ou ações adicionais.
+
+
+### QA 8 — contatos vazios e múltiplos no perfil, 20/10
+
+Após relationship tornar-se opcional no backend, removido o bloqueio local que só liberava Editar para um único contato. O portal reutiliza nome/telefone e os controles da seção; lista vazia cadastra o primeiro e lista múltipla edita registros existentes, preservando IDs e metadados. Validação completa antes de escrever e retry parcial sem repetir sucesso confirmado; sem ações novas de adicionar/remover linhas.
+
+Publicação 2591a8b / pipeline 39526079478 aprovada com lint, 207 testes e build. Homologação real do adaptador com Cláudio criou/editou/removeu contato descartável e preservou a lista original. Na conta do usuário, abertura, validação de telefone, descarte/reabertura e desktop/mobile conferidos sem gravação. Múltiplos contatos e falhas parciais cobertos automaticamente; reteste manual de lista múltipla permanece ao QA. A declaração de ausência de contato continua dependente de contrato separado.

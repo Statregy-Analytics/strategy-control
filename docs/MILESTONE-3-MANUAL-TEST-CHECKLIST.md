@@ -575,3 +575,16 @@ Reteste publicado desta rodada: banco Órama selecionado em `https://admin.strat
 - Não há solicitação de alteração da API para esta correção.
 
 Complemento visual desta rodada: no primeiro deploy 3ea3c43, busca por 325 e contagem filtrada passaram, mas o texto global branco do input estava sobre superfície clara. Aplicado o contexto dark já usado nas tabelas integradas do Admin à tabela, busca e filtro existentes. Sem nova paleta, coluna ou ação. Reteste final de 62babcf confirmado: texto branco sobre superfície escura, com busca visível. Em 390 px, documento com 390 px e campo com 310 px, sem overflow horizontal da página. Formulários de cadastro não utilizados.
+
+
+## QA 8 — contatos do perfil após o retorno do backend, 20/10
+
+- [x] Retirar a restrição local que permitia Editar somente uma lista de exatamente um contato.
+- [x] Reutilizar nome/telefone e Editar/Salvar/Descartar; lista vazia cadastra o primeiro contato e lista múltipla edita os registros recebidos. Sem adicionar/remover linhas ou expor relationship/e-mail.
+- [x] Preservar IDs e metadados ocultos, validar a seção antes de escrever e retentar somente atualizações pendentes após falha parcial.
+- [x] Portal: 207 testes, lint e build aprovados. Teste integrado do mesmo adaptador com Cláudio criou/editou contato fictício, confirmou leitura e removeu o registro descartável; lista original preservada.
+- [x] Publicação 2591a8b / pipeline 39526079478 aprovada no portal. Na conta do usuário, lista vazia abriu a edição; nome/telefone inválidos recusados, descarte/reabertura limpos, sem criar contato.
+- [x] Desktop 1366 px e mobile 390 px conferidos; largura útil/rolagem 378/378 px no mobile. Viewport restaurado; evidências cliente-contatos-primeiro-editor-hml.png e cliente-contatos-primeiro-editor-mobile-hml.png.
+- [ ] Reteste manual de lista múltipla em conta aprovada pelo QA; cobertura automática de múltiplos contatos e falha parcial concluída.
+
+Esta é uma correção do frontend e não entra na tabela de bugs do backend. A declaração persistida de ausência de contato e as demais pendências cadastrais continuam separadas.
