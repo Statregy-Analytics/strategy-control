@@ -23,7 +23,6 @@
           dense
           outlined
           dropdown-icon="keyboard_arrow_down"
-          @geOptionValue="listHistoric = listHistoric.filter((item) => item.filter === value)"
         />
       </div>
     </q-card-section>

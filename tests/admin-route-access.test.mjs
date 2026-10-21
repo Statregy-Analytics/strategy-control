@@ -11,7 +11,7 @@ async function harness({ token = true, roles = ['Admin'], unavailable = false } 
   const synthetic = (name, values) => modules.set(name, new vm.SyntheticModule(Object.keys(values), function () {
     for (const [key, value] of Object.entries(values)) this.setExport(key, value)
   }, { context }))
-  synthetic('#q-app/wrappers', { defineRouter: fn => fn })
+  synthetic('#q-app', { defineRouter: fn => fn })
   synthetic('vue-router', {
     createRouter: () => ({ beforeEach: fn => { guard = fn } }),
     createMemoryHistory() {}, createWebHistory() {}, createWebHashHistory() {},
@@ -26,7 +26,7 @@ async function harness({ token = true, roles = ['Admin'], unavailable = false } 
   const routes = new vm.SourceTextModule(await readFile(new URL('../src/router/routes.js', import.meta.url), 'utf8'), { context })
   await routes.link(() => { throw new Error('Unexpected import') }); await routes.evaluate()
   modules.set('./routes', routes)
-  const router = new vm.SourceTextModule(await readFile(new URL('../src/router/index.js', import.meta.url), 'utf8'), { context })
+  const router = new vm.SourceTextModule(await readFile(new URL('../src/router/index.js', import.meta.url), 'utf8'), { context, initializeImportMeta: meta => { meta.env = { QUASAR_SERVER: false, QUASAR_VUE_ROUTER_MODE: 'history', QUASAR_VUE_ROUTER_BASE: '/' } } })
   await router.link(spec => modules.get(spec)); await router.evaluate(); router.namespace.default()
   const parent = routes.namespace.default.find(route => route.path === '/edit-lp')
   const selection = routes.namespace.default.find(route => route.path === '/landing-page')
