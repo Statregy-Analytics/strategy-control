@@ -4,6 +4,7 @@ import vm from 'node:vm'
 import { readFileSync } from 'node:fs'
 import { ref, computed, reactive, toRef } from 'vue'
 import { useFinanceResource } from '../src/composables/useFinanceResource.js'
+import { customerSearchParams } from '../src/services/customerSearch.js'
 
 const source = readFileSync(new URL('../src/components/Table/Clients/ClientsTable.vue', import.meta.url), 'utf8')
   .match(/<script setup>([\s\S]*?)<\/script>/)[1]
@@ -13,6 +14,7 @@ async function harness() {
   const store = reactive({ data: [], pagination: { page: 1, pageSize: 10, totalItems: 0, totalPages: 0 } })
   const read = (mode) => (query) => new Promise((resolve, reject) => calls.push({ mode, query, resolve, reject }))
   const values = {
+    'src/services/customerSearch': { customerSearchParams },
     vue: { ref, computed, onMounted() {}, onScopeDispose: (fn) => disposed.push(fn) },
     'vue-router': { useRouter: () => ({ push() {} }) },
     quasar: { exportFile: (...args) => { exported.push(args); return true } },
@@ -22,7 +24,7 @@ async function harness() {
     'src/services/customerService': { listCustomerCards: read('cards'), listCustomers: read('table') },
     'src/composables/useFinanceResource': { useFinanceResource },
   }
-  const mod = new vm.SourceTextModule(source + '\nexport { load, reload, changeViewMode, search, status, listResource, loading, resultsUnavailable, selected, compareDialog, compareSelected, exportTable };', { context })
+  const mod = new vm.SourceTextModule(source + '\nexport { load, reload, changeViewMode, search, searchField, status, listResource, loading, resultsUnavailable, selected, compareDialog, compareSelected, exportTable };', { context })
   await mod.link((name) => {
     const exports = name.endsWith('.vue') ? { default: {} } : values[name]
     assert.ok(exports, 'Unexpected import: ' + name)
@@ -34,6 +36,25 @@ async function harness() {
   return { model: mod.namespace, calls, store, exported, dispose: () => disposed.forEach((fn) => fn()) }
 }
 const response = (name, page = 1, totalItems = 1) => ({ data: [{ id: name, primaryName: name }], pagination: { page, pageSize: 10, totalItems, totalPages: Math.ceil(totalItems / 10) } })
+test('email queries use contact in cards and table and restart pagination', async () => {
+  const h = await harness()
+  h.store.pagination.page = 3
+  h.model.search.value = ' client@example.com '
+  const cards = h.model.reload()
+  assert.equal(h.calls[0].query.contact, 'client@example.com')
+  assert.equal(h.calls[0].query.name, undefined)
+  assert.equal(h.calls[0].query.page, 1)
+  h.calls[0].resolve(response('client'))
+  await cards
+  h.model.searchField.value = 'contact'
+  h.model.search.value = 'example'
+  const table = h.model.changeViewMode('table')
+  assert.equal(h.calls[1].mode, 'table')
+  assert.equal(h.calls[1].query.contact, 'example')
+  assert.equal(h.calls[1].query.name, undefined)
+  h.calls[1].resolve(response('client'))
+  await table
+})
 test('rapid searches publish only the newest rows and pagination', async () => {
   const h = await harness()
   h.model.search.value = 'old'

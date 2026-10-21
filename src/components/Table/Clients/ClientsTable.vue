@@ -3,7 +3,8 @@
     <div class="clients-toolbar q-mb-md">
       <div class="row items-center q-col-gutter-sm">
         <div class="col-12 col-md-6">
-          <q-input v-model="search" dense outlined dark debounce="400" clearable placeholder="Buscar cliente por nome, documento, e-mail, ID ou assessor" aria-label="Pesquisar clientes" @update:model-value="reload">
+          <q-select v-model="searchField" dense outlined emit-value map-options :options="searchFields" aria-label="Buscar clientes por" class="q-mb-sm" @update:model-value="reload" />
+          <q-input v-model="search" dense outlined dark debounce="400" clearable :placeholder="searchField === 'contact' ? 'E-mail completo ou parte do e-mail' : 'Nome ou e-mail completo'" aria-label="Pesquisar clientes" @update:model-value="reload">
             <template #prepend><q-icon name="search" size="1.2rem" /></template>
           </q-input>
         </div>
@@ -138,6 +139,7 @@
 </template>
 
 <script setup>
+import { customerSearchParams } from 'src/services/customerSearch'
 import { computed, onMounted, onScopeDispose, ref } from 'vue'
 import { useRouter } from 'vue-router'
 import { exportFile } from 'quasar'
@@ -163,6 +165,8 @@ let active = true, loadRevision = 0
 onScopeDispose(() => { active = false; listResource.reset() })
 const { errorNotify } = useNotification()
 const search = ref('')
+const searchField = ref('name')
+const searchFields = [{ label: 'Nome ou e-mail', value: 'name' }, { label: 'E-mail / contato', value: 'contact' }]
 const status = ref(null), kind = ref(null), contact = ref(''), document = ref(''), sortBy = ref('name'), sortDirection = ref('asc'), viewMode = ref('cards'), filtersOpen = ref(false)
 const statusOptions = [{ label: 'Prospect', value: 'Prospect' }, { label: 'Ativo', value: 'Active' }, { label: 'Suspenso', value: 'Suspended' }, { label: 'Arquivado', value: 'Archived' }]
 const kindOptions = [{ label: 'Pessoa física', value: 'Person' }, { label: 'Pessoa jurídica', value: 'Organization' }]
@@ -200,7 +204,7 @@ const columns = [
 const load = async (params = {}) => {
   if (!active) return
   const revision = ++loadRevision
-  const query = { page: params.page ?? pagination.value.page, pageSize: params.pageSize ?? pagination.value.pageSize, name: search.value || undefined, status: status.value || undefined, kind: kind.value || undefined, contact: contact.value || undefined, document: document.value || undefined, sortBy: sortBy.value, sortDirection: sortDirection.value }
+  const query = { page: params.page ?? pagination.value.page, pageSize: params.pageSize ?? pagination.value.pageSize, ...customerSearchParams(search.value, searchField.value, contact.value), status: status.value || undefined, kind: kind.value || undefined, document: document.value || undefined, sortBy: sortBy.value, sortDirection: sortDirection.value }
   const read = viewMode.value === 'cards' ? listCustomerCards : listCustomers
   store.data = []
   const response = await listResource.load(() => read(query))
