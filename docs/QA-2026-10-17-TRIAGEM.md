@@ -380,3 +380,10 @@ Teste na conta do usuário: vazio bloqueado antes da escrita, valor fictício sa
 Cinco falhas reproduzidas antes da correção nos scripts reais: respostas/erros antigos sobrescreviam o resultado novo ou encerravam o carregamento, e paginação superada continuava consultando. Cada seção agora publica somente a tentativa atual da mesma sessão; saída da tela invalida consultas. Preservados todos os campos, ações e layout.
 
 Publicação 2b07793 / pipeline 39528553525 aprovada com 215 testes, lint e build. Em homologação: contratos vazios da conta do usuário confirmados, erro de Termos/retentativa independente e troca de abas conferidos; desktop/mobile sem overflow. Concorrência/falha parcial cobertas automaticamente, sem induzir falha do backend. Nenhum arquivo real baixado nesta conta sem documentos contratuais. Contexto dos termos continua pendente; a correção local não o substitui.
+
+
+### QA 8 — concorrência e ações bancárias, 20/10
+
+Sete cenários reproduzidos antes da correção no componente/template reais: chamadas repetidas nas escritas, campos editáveis durante envio e publicação tardia de consultas/detalhes. Corrigidos sem campos/ações extras. Validação faz parte do bloqueio de Salvar; falhas mantêm rascunho, sucesso limpa dados integrais e só libera após recarregar; sessão/saída da aba impedem notificações e dados atrasados.
+
+Publicação 154080a / pipeline 39529228159 aprovada, com 224 testes, lint e build. Na conta do usuário, carregamento/lista vazia, abertura, validação obrigatória, cancelamento/reabertura e fechamento conferidos em desktop/mobile sem overflow. Nenhuma conta criada, priorizada ou arquivada. Caminhos de escrita/erro/troca de sessão validados automaticamente com respostas controladas, sem induzir falhas no backend. Checklist distingue essa cobertura da homologação integral das escritas bancárias.

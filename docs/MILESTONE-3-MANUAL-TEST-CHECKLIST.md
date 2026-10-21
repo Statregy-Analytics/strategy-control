@@ -10,6 +10,7 @@ Esta seção consolida as rodadas abaixo. Registros históricos descrevem o esta
 - [x] Aprovação e reprovação documental, motivo no portal, reenvio e liberação da edição retestados. Aprovação da CNH pelo usuário levou a 100%/LEVEL_1. Isso não equivale ao envio final do cadastro nem à aprovação de todos os arquivos.
 - [x] Estados de loading/erro/vazio, recuperação de salvamentos parciais, sessões e proteção contra respostas antigas corrigidos. Validação das falhas controladas coberta automaticamente.
 - [x] Preferências nos controles existentes; catálogo bancário completo de 513 instituições e formulário mobile sem overflow. Nenhum campo/ação adicional criado.
+- [x] Contas bancárias: envios concorrentes e respostas tardias corrigidos em 154080a, com 224 testes. Validação/cancelamento e desktop/mobile conferidos sem cadastro bancário.
 - [x] Concorrência em Contratos e Termos corrigida em 2b07793; estados independentes, retentativa e desktop/mobile conferidos, com 215 testes do portal. Contexto de consentimentos permanece pendente.
 - [x] Ocupação do perfil liberada como texto livre em a5104f2; salvamento/recarga/restauração e desktop/mobile retestados. Não depende de catálogo de ocupações.
 - [x] Retorno do backend integrado em d65939b: renda atual retestada, catálogos/campos pessoais, bairro, patrimônio próprio e Basic/Full. Contatos vazios/múltiplos corrigidos em 2591a8b; portal com 207 testes. Detalhes e limites nas rodadas próprias.
@@ -617,3 +618,17 @@ Não solicitar catálogo de ocupações como bloqueio da edição. A revalidaç�
 - [x] Evidências cliente-contratos-termos-estados-hml.png e cliente-contratos-termos-estados-mobile-hml.png.
 
 Concorrência/falhas provocadas somente nos testes automatizados. O contexto dos consentimentos permanece dependência real do backend; não foi inventado nem o erro tratado como ausência de termos.
+
+
+## QA 8 — operações das contas bancárias do portal, 20/10
+
+- [x] Sete cenários de falha reproduzidos no componente/template reais antes da correção.
+- [x] Salvar, Principal e Arquivar não disparam chamadas duplicadas; campos/cancelamento bloqueados durante envio. Falha preserva o rascunho; sucesso limpa dados integrais antes de recarregar.
+- [x] Consulta atual prevalece, lista anterior é limpa ao carregar; erro não vira vazio e Adicionar não usa catálogo indisponível.
+- [x] Saída da aba/troca de sessão impedem formulário, lista ou notificação tardios.
+- [x] 224 testes do portal, lint, build e diff-check do lote aprovados; nenhum campo ou ação novo.
+- [x] Publicação 154080a / pipeline 39529228159 aprovada. Conta do usuário: carregamento bloqueou Adicionar até concluir, vazio confirmado, Salvar sem dados recusado, Cancelar/Fechar e reabertura limpa conferidos.
+- [x] Desktop 1366 px e mobile 390 px conferidos; documento/diálogo com largura útil/rolagem 378/378 px no mobile. Viewport restaurado; formulário encerrado e lista permaneceu vazia.
+- [x] Evidências cliente-conta-bancaria-formulario-hml.png e cliente-conta-bancaria-formulario-mobile-hml.png. Nenhuma conta criada/priorizada/arquivada.
+
+Escritas e respostas fora de ordem controladas nos testes automatizados. Reteste visual sem cadastrar, priorizar ou arquivar conta; não representa homologação integral das escritas financeiras.
