@@ -10,6 +10,7 @@ Esta seção consolida as rodadas abaixo. Registros históricos descrevem o esta
 - [x] Aprovação e reprovação documental, motivo no portal, reenvio e liberação da edição retestados. Aprovação da CNH pelo usuário levou a 100%/LEVEL_1. Isso não equivale ao envio final do cadastro nem à aprovação de todos os arquivos.
 - [x] Estados de loading/erro/vazio, recuperação de salvamentos parciais, sessões e proteção contra respostas antigas corrigidos. Validação das falhas controladas coberta automaticamente.
 - [x] Preferências nos controles existentes; catálogo bancário completo de 513 instituições e formulário mobile sem overflow. Nenhum campo/ação adicional criado.
+- [x] Descrições do perfil: catálogo ausente/parcial não representa nacionalidade salva como ausente; fallback em português corrigido em 0e0de79, com 236 testes. Leitura desktop/mobile conferida sem alterar cadastro.
 - [x] Documentação: duplicidade de envio/substituição e orientações antigas corrigidas em 60c799d, com 231 testes. Formulários/validação/cancelamento e desktop/mobile retestados sem novos uploads.
 - [x] Contas bancárias: envios concorrentes e respostas tardias corrigidos em 154080a, com 224 testes. Validação/cancelamento e desktop/mobile conferidos sem cadastro bancário.
 - [x] Concorrência em Contratos e Termos corrigida em 2b07793; estados independentes, retentativa e desktop/mobile conferidos, com 215 testes do portal. Contexto de consentimentos permanece pendente.
@@ -648,3 +649,16 @@ Escritas e respostas fora de ordem controladas nos testes automatizados. Reteste
 - [x] Evidências cliente-envio-documentos-formulario-hml.png e cliente-envio-documentos-formulario-mobile-hml.png.
 
 Envios/erros/concorrência validados com respostas controladas nos testes, sem novos uploads no servidor. Regra CNH e vínculo/metadados do replace continuam no documento do backend e não foram simulados pelo front.
+
+
+## QA 8 — nacionalidade e descrições indisponíveis, 20/10
+
+- [x] Três falhas de apresentação reproduzidas: ID de nacionalidade salvo sem descrição aparecia como Não informado; catálogo parcial omitindo nacionalidades; PreferNotToSay sem tradução de fallback.
+- [x] Países resolvidos preservados e descrição indisponível explícita para o restante, sem mostrar UUIDs ou gravar dados. Recuperação do catálogo restaura os nomes.
+- [x] Ausência cadastral real, nacionalidade legada e labels oficiais do catálogo preservados.
+- [x] 236 testes do portal, lint/build/diff-check do lote aprovados; nenhum campo ou ação novo.
+- [x] Publicação 0e0de79 / pipeline 39531180021 aprovada. Conta do usuário manteve a ausência legítima de gênero/nacionalidade; catálogo abriu quatro labels reais em português, edição descartada sem gravar.
+- [x] Desktop 1366 px/mobile 390 px conferidos, largura útil/rolagem 378/378 px, viewport restaurado.
+- [x] Evidências cliente-perfil-descricoes-hml.png e cliente-perfil-descricoes-mobile-hml.png.
+
+Falha/parcialidade do catálogo cobertas automaticamente, sem modificar o catálogo ou induzir erro na API. A conta usada na revisão tem nacionalidade realmente vazia; deve manter Não informado.

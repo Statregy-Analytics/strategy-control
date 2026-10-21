@@ -394,3 +394,10 @@ Publicação 154080a / pipeline 39529228159 aprovada, com 224 testes, lint e bui
 Corrigidos seis cenários reproduzidos antes da alteração: duplo envio/substituição, orientações de tipo/país antigo, resultado de consulta anterior e notificações após saída/troca de sessão. Campos e fechamento bloqueados durante envio; falha mantém arquivo/datas para retry, sucesso ou cancelamento limpa a memória. Nenhum campo, ação ou metadado HTTP adicional.
 
 Publicação 60c799d / pipeline 39530256286 aprovada com 231 testes, lint e build. Conta do usuário em homologação: cinco documentos/100% e revisões preservados; tipo/arquivo obrigatórios recusados, troca RG/CNH e cancelamento/reabertura limpos. Substituição retomou emissão e bloqueou arquivo vazio, depois cancelada. Desktop/mobile sem overflow; nenhum upload/substituição/revisão/link temporário efetuado. Escritas/concorrência e orientações por país cobertas automaticamente; regra CNH e vínculo/metadados do replace seguem separados como dependências reais.
+
+
+### QA 8 — descrições de países e fallback de gênero, 20/10
+
+Corrigidas três falhas reproduzidas nos testes: nacionalidade salva aparecia ausente quando o catálogo faltava, países não resolvidos eram omitidos em resposta parcial, e PreferNotToSay aparecia sem tradução quando não havia label. O mapeamento comum preserva nomes conhecidos e sinaliza Descrição indisponível, sem UUID, gravação ou campos novos. Ausência real e texto legado permanecem.
+
+Publicação 0e0de79 / pipeline 39531180021 aprovada com 236 testes, lint e build. Leitura da conta do usuário, labels oficiais no editor e desktop/mobile sem overflow conferidos; edição descartada sem alteração. Catálogo ausente/parcial foi exercitado automaticamente, não induzido no servidor; a conta revisada não possui nacionalidade preenchida.
