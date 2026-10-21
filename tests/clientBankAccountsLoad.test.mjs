@@ -55,7 +55,7 @@ async function harness(failSecondPage = false) {
   })
   const mod = new vm.SourceTextModule(
     source +
-      '\nexport { ready, load, loading, loadError, bankOptions, filteredBankOptions, bankName, accounts };',
+      '\nexport { ready, load, loading, loadError, bankOptions, filteredBankOptions, bankName, bankOptionLabel, filterBanks, accounts };',
     { context },
   )
   await mod.link((name) => {
@@ -82,7 +82,7 @@ async function harness(failSecondPage = false) {
 test('bank section resolves row and selected bank labels from subsequent catalog pages', async () => {
   const { model, calls } = await harness()
   assert.equal(model.bankName(model.accounts.value[0].bankId), '2 — Bank 2')
-  assert.equal(model.filteredBankOptions.value.length, 2)
+  assert.equal(model.filteredBankOptions.value.length, 0)
   assert.equal(model.loading.value, false)
   assert.equal(model.loadError.value, '')
   assert.ok(calls.every((params) => params.isActive === true))
@@ -98,3 +98,15 @@ test('catalog failure shows existing section error and retry restores the comple
   assert.equal(model.loadError.value, '')
   assert.equal(model.bankOptions.value.length, 2)
 })
+
+test('bank suggestions require text, search code/name and retain selected labels', async () => {
+  const { model } = await harness();
+  model.filterBanks('   ', callback => callback());
+  assert.equal(model.filteredBankOptions.value.length, 0);
+  model.filterBanks('Bank 2', callback => callback());
+  assert.equal(model.filteredBankOptions.value[0].value, 'bank-2');
+  model.filterBanks('1', callback => callback());
+  assert.equal(model.filteredBankOptions.value[0].value, 'bank-1');
+  model.filterBanks('', callback => callback());
+  assert.equal(model.bankOptionLabel('bank-2'), '2 — Bank 2');
+});

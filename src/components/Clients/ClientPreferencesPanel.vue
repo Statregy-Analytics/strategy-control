@@ -131,11 +131,13 @@
               <q-btn
                 v-for="theme in themeOptions"
                 :key="theme.value"
-                :label="theme.label"
-                :icon="themeIcon(theme)"
+                :aria-label="theme.label"
                 :aria-pressed="values.theme === theme.value"
-                :class="{ 'preference-theme--selected': values.theme === theme.value }"
-                outline
+                :class="[
+                  `preference-theme--${themeName(theme)}`,
+                  { 'preference-theme--selected': values.theme === theme.value },
+                ]"
+                unelevated
                 no-caps
                 :disable="busy || (controlled && !editing)"
                 @click="setField('theme', theme.value)"
@@ -251,7 +253,7 @@ const toOptions = (
           },
     )
     .filter((item) => item.value)
-const currencyOptions = computed(() => toOptions(catalog.value.currencies))
+const currencyOptions = computed(() => toOptions(catalog.value.currencies, ['code', 'value']))
 const languageOptions = computed(() =>
   toOptions(catalog.value.languages, ['code', 'languageCode', 'value']),
 )
@@ -259,10 +261,10 @@ const timeZoneOptions = computed(() =>
   toOptions(catalog.value.timeZones || catalog.value.timezones, ['id', 'timeZoneId', 'value']),
 )
 const themeOptions = computed(() => toOptions(catalog.value.themes, ['value', 'code', 'id']))
-const themeIcon = (theme) => {
+const themeName = (theme) => {
   const key = String(theme.value).toLowerCase() + String(theme.label).toLowerCase()
   const name = /light|claro/.test(key) ? 'light' : /dark|escuro/.test(key) ? 'dark' : 'auto'
-  return 'img:/icons/client-profile/theme-' + name + '.svg'
+  return name
 }
 let loadRevision = 0
 onScopeDispose(() => loadRevision++)
@@ -373,14 +375,27 @@ onMounted(load)
   gap: 12px;
 }
 .preference-themes .q-btn {
+  border: 1px solid rgba(128, 128, 128, 0.5);
   flex: 1;
   min-height: 36px;
   color: rgba(255, 255, 255, 0.7);
   background: var(--sa-surface-soft);
 }
+.preference-themes .preference-theme--light {
+  background: #fafafa;
+}
+.preference-themes .preference-theme--dark {
+  background: #202020;
+}
+.preference-themes .preference-theme--auto {
+  background: linear-gradient(90deg, #fafafa 50%, #202020 50%);
+}
 .preference-themes .preference-theme--selected {
   color: #fff;
-  background: rgba(255, 255, 255, 0.14);
+  box-shadow: 0 0 0 2px var(--q-primary);
+}
+.preference-themes .q-btn:focus-visible {
+  box-shadow: 0 0 0 3px var(--q-primary);
 }
 @media (max-width: 600px) {
   .preference-themes :deep(.q-icon) {

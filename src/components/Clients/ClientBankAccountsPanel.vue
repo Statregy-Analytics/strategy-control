@@ -169,6 +169,7 @@
                     v-model="form.bankId"
                     class="bank-select"
                     :options="filteredBankOptions"
+                    :option-label="bankOptionLabel"
                     emit-value
                     map-options
                     use-input
@@ -186,9 +187,11 @@
                   >
                     <template #no-option
                       ><q-item
-                        ><q-item-section class="text-grey-7"
-                          >Nenhum banco encontrado.</q-item-section
-                        ></q-item
+                        ><q-item-section class="text-grey-7">{{
+                          bankSearch
+                            ? 'Nenhum banco encontrado.'
+                            : 'Digite o código ou nome do banco.'
+                        }}</q-item-section></q-item
                       ></template
                     >
                   </q-select>
@@ -484,16 +487,19 @@ const normalizeSearch = (value) =>
     .replace(/[\u0300-\u036f]/g, '')
     .toLocaleLowerCase('pt-BR')
 const onBankSelected = async () => {
-  filteredBankOptions.value = bankOptions.value
+  filteredBankOptions.value = []
   await nextTick()
   bankSelectRef.value?.hidePopup()
 }
+const bankSearch = ref('')
+const bankOptionLabel = (option) => (typeof option === 'object' ? option.label : bankName(option))
 const filterBanks = (value, update) => {
+  bankSearch.value = String(value || '').trim()
   update(() => {
-    const search = normalizeSearch(value)
+    const search = normalizeSearch(value).trim()
     filteredBankOptions.value = search
       ? bankOptions.value.filter((bank) => normalizeSearch(bank.label).includes(search))
-      : bankOptions.value
+      : []
   })
 }
 const load = async () => {
@@ -508,7 +514,7 @@ const load = async () => {
       label: bank.code ? `${bank.code} — ${bank.name}` : bank.name,
       value: bank.id,
     }))
-    filteredBankOptions.value = bankOptions.value
+    filteredBankOptions.value = []
   } else {
     bankOptions.value = []
     filteredBankOptions.value = []
