@@ -6,7 +6,7 @@ Atualizado em 22/10/2026. Rodadas iniciais: Admin em 12/10 e portal em 13/10. Ad
 
 - [x] Compatibilidade bancária do cliente (titular automático), moeda patrimonial automática, etapa 4 sem moedas, declaração persistida de contatos, submit com confirmação, bloqueio oficial e países por idioma implementados. Busca Admin usa search nos cartões e tabela.
 - [x] 274 testes portal e 107 Admin; lint, build e diff das alterações aprovados.
-- [ ] Publicação e conferência visual desta rodada em acompanhamento.
+- [x] Portal 3392626 / pipeline 39856647893 e Admin c4f7849 / pipeline 39856658075 publicados com sucesso. Leitura do perfil, formulário bancário sem titular, moedas dos bens existentes, etapas 4/6/7 e busca por e-mail em cartões/tabela conferidos sem gravação. Revisão responsiva Admin 390 px sem overflow; nova rodada mobile portal e salvamentos integrados ficam ao QA.
 - [ ] Homologação integrada dos novos fluxos; imagens patrimoniais, agrupamento/visualização de ambos os arquivos e ficha recém-enviada ainda exigem trabalho/conferência do front. Endpoints foram liberados; não pedir novamente como inexistentes. Ver [relatório e limites](QA-2026-10-22-RETORNO-BACKEND.md).
 
 Esta seção prevalece sobre as rodadas históricas abaixo sobre CNH exclusiva, declaração/submit e currencyId ausentes.

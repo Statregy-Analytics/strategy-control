@@ -14,7 +14,19 @@
 
 ## Validação
 
-274 testes do portal e 107 do Admin aprovados; lint, build e diff das alterações aprovados. Testes automatizados cobrem os contratos e regressões. Publicação e conferência visual em andamento. Arquivos prévios PRODUCT.md, MILESTONE-3-INTEGRATION.md e snapshot do Swagger do Admin preservados fora do commit.
+274 testes do portal e 107 do Admin aprovados; lint, build e diff das alterações aprovados. Testes automatizados cobrem os contratos e regressões. Publicado: portal 3392626, pipeline 39856647893; Admin c4f7849, pipeline 39856658075. Ambas concluídas com sucesso em upload e ativação.
+
+Conferência em homologação com a sessão existente do Jorge:
+
+- Perfil carregou dados reais e manteve edição disponível conforme bloqueio oficial.
+- Nova conta bancária abriu com os oito controles restantes, sem tipo/nome/documento do titular; formulário descartado sem gravação.
+- Patrimônios existentes exibiram BRL, USD e EUR por currencyCode; veículo EUR abriu para edição sem seletor de moeda e foi descartado, preservando dados.
+- Etapa 4 exibiu apenas ocupação, empregador e três valores financeiros reais, sem moedas. Etapa 6 leu contato/declaração sem erro. Etapa 7 carregou revisão, checkbox e botão existentes, sem submeter o cadastro.
+- Busca do Admin pelo e-mail do Jorge encontrou o mesmo cliente em cartões e tabela; busca limpa e visualização em cartões restauradas. Admin em 390 px: largura do documento 375 px, sem overflow horizontal. Portal conferido no desktop; a nova rodada mobile do portal permanece ao QA.
+
+Não houve novas contas bancárias, patrimônios, uploads, aceite de termos ou envio final durante a revisão no navegador. Os salvamentos e conflitos desta rodada foram cobertos em testes controlados, não apresentados como homologação integrada.
+
+Evidências: retorno-backend-22-conta-bancaria-hml.png e retorno-backend-22-etapa-4-hml.png na pasta de evidências desta conversa. Arquivos prévios PRODUCT.md, MILESTONE-3-INTEGRATION.md e snapshot do Swagger do Admin preservados fora do commit.
 
 ## O que não está homologado integralmente
 
