@@ -36,12 +36,12 @@ async function harness() {
   return { model: mod.namespace, calls, store, exported, dispose: () => disposed.forEach((fn) => fn()) }
 }
 const response = (name, page = 1, totalItems = 1) => ({ data: [{ id: name, primaryName: name }], pagination: { page, pageSize: 10, totalItems, totalPages: Math.ceil(totalItems / 10) } })
-test('email queries use contact in cards and table and restart pagination', async () => {
+test('email queries use unified search in cards and table and restart pagination', async () => {
   const h = await harness()
   h.store.pagination.page = 3
   h.model.search.value = ' client@example.com '
   const cards = h.model.reload()
-  assert.equal(h.calls[0].query.contact, 'client@example.com')
+  assert.equal(h.calls[0].query.search, 'client@example.com')
   assert.equal(h.calls[0].query.name, undefined)
   assert.equal(h.calls[0].query.page, 1)
   h.calls[0].resolve(response('client'))
@@ -50,7 +50,7 @@ test('email queries use contact in cards and table and restart pagination', asyn
   h.model.search.value = 'example'
   const table = h.model.changeViewMode('table')
   assert.equal(h.calls[1].mode, 'table')
-  assert.equal(h.calls[1].query.contact, 'example')
+  assert.equal(h.calls[1].query.search, 'example')
   assert.equal(h.calls[1].query.name, undefined)
   h.calls[1].resolve(response('client'))
   await table

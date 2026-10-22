@@ -1,6 +1,15 @@
 # Marco 3 — checklist manual
 
-Atualizado em 20/10/2026. Rodadas iniciais: Admin em 12/10 e portal em 13/10. Admin localhost:8080; Portal localhost:9010 (origens CORS autorizadas).
+Atualizado em 22/10/2026. Rodadas iniciais: Admin em 12/10 e portal em 13/10. Admin localhost:8080; Portal localhost:9010 (origens CORS autorizadas).
+
+## Integração do retorno de 22/10
+
+- [x] Compatibilidade bancária do cliente (titular automático), moeda patrimonial automática, etapa 4 sem moedas, declaração persistida de contatos, submit com confirmação, bloqueio oficial e países por idioma implementados. Busca Admin usa search nos cartões e tabela.
+- [x] 274 testes portal e 107 Admin; lint, build e diff das alterações aprovados.
+- [ ] Publicação e conferência visual desta rodada em acompanhamento.
+- [ ] Homologação integrada dos novos fluxos; imagens patrimoniais, agrupamento/visualização de ambos os arquivos e ficha recém-enviada ainda exigem trabalho/conferência do front. Endpoints foram liberados; não pedir novamente como inexistentes. Ver [relatório e limites](QA-2026-10-22-RETORNO-BACKEND.md).
+
+Esta seção prevalece sobre as rodadas históricas abaixo sobre CNH exclusiva, declaração/submit e currencyId ausentes.
 
 ## Estado atual do perfil — QA 8 e 9
 
@@ -18,7 +27,7 @@ Esta seção consolida as rodadas abaixo. Registros históricos descrevem o esta
 - [x] Concorrência em Contratos e Termos corrigida em 2b07793; estados independentes, retentativa e desktop/mobile conferidos, com 215 testes do portal. Contexto de consentimentos permanece pendente.
 - [x] Ocupação do perfil liberada como texto livre em a5104f2; salvamento/recarga/restauração e desktop/mobile retestados. Não depende de catálogo de ocupações.
 - [x] Retorno do backend integrado em d65939b: renda atual retestada, catálogos/campos pessoais, bairro, patrimônio próprio e Basic/Full. Contatos vazios/múltiplos corrigidos em 2591a8b; portal com 207 testes. Detalhes e limites nas rodadas próprias.
-- [ ] Backend/negócio: currencyId patrimonial para conta sem carteira; declaração persistida de ausência de contato; contexto dos termos/aceite versionado; estado oficial de envio/revisão; regra CNH e vínculo/metadados do replace. Renda vigente, catálogos/campos disponibilizados, contato sem relationship, rotas patrimoniais e Basic/Full não são mais endpoints ausentes.
+- [ ] Backend/negócio restante: contexto dos termos/aceite versionado e vínculo/metadados do replace aguardam reteste específico. Atualização de 22/10 resolve contratos de declaração, submit/estado, identidade alternativa e moeda patrimonial; integração/homologação não se confunde com ausência de API. Renda vigente, catálogos/campos disponibilizados, contato sem relationship, rotas patrimoniais e Basic/Full não são mais endpoints ausentes.
 - [ ] Dados de homologação: foto válida disponível na API para verificar o carregamento real; fallback sem imagem quebrada já implementado. Não criar upload fora do Figma.
 - [ ] QA: revalidação independente dos cenários corrigidos. Não equivale a uma pendência de implementação nem à homologação integral do Marco 3.
 

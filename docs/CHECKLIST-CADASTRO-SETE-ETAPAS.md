@@ -1,6 +1,16 @@
 # Cadastro de sete etapas — checklist de conclusão
 
-Atualizado em 20/10/2026 após a mudança de ordem e campos autorizada pelo designer/QA e confirmada pelo usuário. **Ordem vigente: etapa 4 profissional/financeiro/moedas; etapa 5 documentos/endereço.** As rodadas anteriores abaixo registram a sequência anterior. Figma BaDXlWpxbIoY4azOaQnXgv. Este registro substitui a situação anterior das prévias: publicar uma tela não significa homologar o cadastro completo.
+Atualizado em 22/10/2026 após a mudança de ordem e campos autorizada pelo designer/QA e confirmada pelo usuário. **Ordem vigente: etapa 4 profissional/financeiro; etapa 5 documentos/endereço.** As rodadas anteriores abaixo registram a sequência anterior. Figma BaDXlWpxbIoY4azOaQnXgv. Este registro substitui a situação anterior das prévias: publicar uma tela não significa homologar o cadastro completo.
+
+## Atualização de 22/10
+
+- [x] Moedas removidas da etapa 4 e de sua escrita; backend define por residência. Ocupação/empregador e valores financeiros preservados.
+- [x] Checkbox de ausência integrado ao GET/PUT da declaração, com recuperação após sessão e preservação de contatos existentes.
+- [x] Botão/checkbox existentes da etapa 7 ligados ao POST onboarding/submit; confirmação obrigatória, idempotência, erro sem perder rascunho e limpeza da retomada após sucesso.
+- [x] Estado oficial profileEditingLocked controla edição; wizard envia Front/Back com evidenceDocumentIds e países seguem idioma pelo isoCode.
+- [ ] Homologação integrada de envio final com consentimentos, nova sessão, recusa e aprovação de identidade; frente/verso agrupados nas projeções do Admin e portal. Endpoints disponíveis; não classificar como ausência de backend.
+
+Referência: [Retorno de 22/10](QA-2026-10-22-RETORNO-BACKEND.md). As tabelas/rodadas de 20/10 abaixo são histórico e não representam contratos ausentes hoje.
 
 ## Atualização do retorno do backend
 

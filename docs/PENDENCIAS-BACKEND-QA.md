@@ -1,6 +1,14 @@
 # Pendências do backend para homologação
 
-A interface segue o Figma e as alterações de ordem/campos expressamente autorizadas pelo designer/QA e pelo usuário. **Na ordem atual, profissional/financeiro/moedas é etapa 4 e documentos/endereço é etapa 5.** Precisamos dos estados e operações abaixo sem acrescentar campos ou ações às telas.
+A interface segue o Figma e as alterações de ordem/campos expressamente autorizadas pelo designer/QA e pelo usuário. **Na ordem atual, profissional/financeiro é etapa 4 e documentos/endereço é etapa 5.** Precisamos dos estados e operações abaixo sem acrescentar campos ou ações às telas.
+
+## Atualização de 22/10 — prevalece sobre os relatos históricos
+
+O retorno libera envio final, declaração de ausência de contato, RG/CNH/passaporte como alternativas, moeda automática de patrimônio/conta e status/data/bloqueio do cadastro. Esses contratos **não devem mais ser pedidos como ausentes**. Compatibilidade bancária (sem campos de titular), declaração, envio final, bloqueio oficial, países por idioma e moeda automática integrados nesta rodada. Detalhes, testes e limites em [Retorno de 22/10](QA-2026-10-22-RETORNO-BACKEND.md).
+
+Separar trabalho restante do front/homologação de bloqueios do servidor: imagens do patrimônio, visualização de ambos os arquivos e projeção da ficha recém-enviada já possuem endpoints. Consentimentos/contexto e aceite versionado ainda precisam de integração/reteste; a existência do submit não confirma automaticamente a aceitação dos termos. Valores de contratos, reenvio/metadados, sessão HttpOnly, incidente de identidade e módulos sem contrato continuam sujeitos aos retestes próprios.
+
+Os itens abaixo são registros anteriores. Onde contrariem os contratos informados em 22/10, a atualização acima prevalece.
 
 ## Atualização após o retorno do backend, 20/10
 

@@ -1,5 +1,10 @@
 # QA de 17/10 — triagem e primeiro lote de correções
 
+## Consolidação de 22/10
+
+O retorno de 22/10 substitui relatos anteriores de submit, declaração, CNH exclusiva e currencyId sem carteira. Compatibilidade bancária, declaração/submit/bloqueio, moeda automática e países por idioma integrados; busca universal do Admin usa search. 274 testes portal e 107 Admin aprovados. Publicação em acompanhamento. Imagens patrimoniais, files frente/verso e ficha recém-enviada têm contrato e precisam de integração/conferência do front, não nova API. [Detalhamento](QA-2026-10-22-RETORNO-BACKEND.md).
+
+
 Atualizado em 21/10/2026. Referência: feedback original de homologação com 19 itens e lista complementar ampliada para 24 itens. Este registro não aprova integralmente o Marco 3 nem substitui o checklist de homologação integrada.
 
 ## Devolutiva atual — lista complementar de 16 itens, em 21/10/2026

@@ -2,12 +2,13 @@ import { test } from 'node:test'
 import assert from 'node:assert/strict'
 import { customerSearchParams } from '../src/services/customerSearch.js'
 
-test('email uses contact without a simultaneous name constraint', () => {
-  assert.deepEqual(customerSearchParams(' qa@example.com '), { name: undefined, contact: 'qa@example.com' })
-  assert.deepEqual(customerSearchParams('qa', 'contact'), { name: undefined, contact: 'qa' })
-  assert.deepEqual(customerSearchParams('@example', 'name'), { name: undefined, contact: '@example' })
+test('unified search sends names, emails, customer IDs and document numbers without intersecting a name filter', () => {
+  for (const value of ['qa@example.com', 'Ana', 'customer-id', '00000000000', 'Assessor QA']) {
+    assert.deepEqual(customerSearchParams(` ${value} `), { search: value, contact: undefined })
+  }
+  assert.deepEqual(customerSearchParams('qa', 'contact'), { search: 'qa', contact: undefined })
 })
-test('names retain the independent contact filter; clearing search removes its constraint', () => {
-  assert.deepEqual(customerSearchParams(' Ana ', 'name', ' example.com '), { name: 'Ana', contact: 'example.com' })
-  assert.deepEqual(customerSearchParams(null, 'contact'), { name: undefined, contact: undefined })
+test('independent contact filter and empty search retain their existing semantics', () => {
+  assert.deepEqual(customerSearchParams(' Ana ', 'name', ' example.com '), { search: 'Ana', contact: 'example.com' })
+  assert.deepEqual(customerSearchParams(null, 'contact'), { search: undefined, contact: undefined })
 })
