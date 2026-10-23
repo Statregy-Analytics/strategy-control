@@ -313,3 +313,14 @@ Próximo ajuste independente do backend no QA 8: a edição de Atividade Trabalh
 - [x] Desktop e edição a 390 px conferidos; conteúdo 378 px para viewport 390, sem overflow. Descartar fechou a edição sem nova gravação; viewport restaurado. Campos, botões, seletor e composição existentes do Figma preservados; não foi criado campo técnico ou ação adicional.
 
 Defeito do frontend encerrado, sem novo endpoint ou ajuste do servidor. Ausência real de dado continua Não informado; este teste não libera catálogos, escrita de contatos sem vínculo, termos/envio final nem o replace documental. Evidência: cliente-perfil-financeiro-validado.png (valores já restaurados).
+
+
+## Envio final com consentimentos — 22/10/2026
+
+- [x] Aceite dos Termos de Uso e da Política de Privacidade reutilizado na etapa 7 com autorização do usuário, mantendo o padrão visual aprovado. Textos reais/versões disponíveis por links existentes; sem aceite automático de marketing/cookies.
+- [x] Implementação publicada no portal (fdd90d2; pipeline 39889717046: testes, lint, build, upload e ativação aprovados). 283 testes aprovados; desktop e 390 px conferidos.
+- [x] Consulta versionada precede o envio. Versão alterada exige novo aceite. Tela de sucesso só aparece com submissão confirmada e suporta recarga; link direto sem envio volta à revisão.
+- [ ] Aceite e envio real da conta fictícia client@example.com: aguardando confirmação do usuário para aceitar os dois termos 1.0.
+- [ ] Após o envio real: testar 409 durante análise, rejeição/desbloqueio e aprovação/desbloqueio e nova sessão. Não confundir testes automatizados aprovados com homologação integrada.
+
+Detalhes e evidências: [QA-2026-10-22-ENVIO-CONSENTIMENTOS.md](QA-2026-10-22-ENVIO-CONSENTIMENTOS.md). Pendência backend confirmada: requiredConsentsCompleted=true diverge de isSatisfied=false/termos Pending na consulta versionada. O front não usa a flag legada como comprovante de aceite.

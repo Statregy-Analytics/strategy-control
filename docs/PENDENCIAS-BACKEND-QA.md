@@ -313,3 +313,12 @@ Não há outra correção independente do backend identificada nesta revisão do
 5. Unicidade de e-mail; logs do incidente de identidade; sessão HttpOnly e autorização da API, seguidas da adaptação dos fronts.
 
 Swagger atual conferido sem novas rotas; UpdateCustomerRequest permanece kind/birthDate. Revalidação independente do QA não é pendência de backend e está separada no checklist manual. Esta revisão não solicita nem autoriza campos ou ações fora do desenho.
+
+
+## Reteste do envio/consentimentos — 22/10/2026
+
+Consulta autenticada dos termos foi integrada na etapa 7, autorizada pelo usuário. Não solicitar mais consulta pública para este fluxo aprovado. Envio final e consentimentos possuem endpoints e integração; o teste completo aguarda o aceite explícito das versões 1.0 na conta fictícia. Não classificar ausência desse aceite como falha do backend.
+
+Pendência confirmada: na mesma conta client@example.com, GET /client/onboarding/status retorna requiredConsentsCompleted=true, enquanto GET /client/consents/requirements?context=Onboarding&locale=pt-BR retorna isSatisfied=false e os dois acordos Pending. Alinhar as projeções; o front já consulta a versão atual antes de enviar. Não acrescentar campos/ações para contornar a divergência.
+
+RG/CNH/passaporte alternativos e moedas automáticas foram disponibilizados no retorno mais recente; as observações históricas anteriores sobre contratos ausentes não são a situação atual desses endpoints. Ver relatório QA-2026-10-22-ENVIO-CONSENTIMENTOS.md para o escopo e limites do reteste.
