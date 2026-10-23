@@ -5,10 +5,23 @@
     :data-document-id="documentId"
   >
     <div class="profile-document" :class="`profile-document--${item.status}`">
-      <span v-if="pending" class="profile-document__pending-icon"
-        ><img src="/icons/document-review/pending.svg" alt=""
-      /></span>
-      <q-icon v-else :name="statusIcon" :color="statusColor" size="22px" />
+      <span class="profile-document__icon">
+        <img
+          v-if="pending"
+          src="/icons/client-selection/document-pending.svg"
+          alt=""
+          width="16"
+          height="16"
+        />
+        <img
+          v-else-if="item.status === 'Approved'"
+          src="/icons/client-selection/document-approved.svg"
+          alt=""
+          width="16"
+          height="16"
+        />
+        <q-icon v-else :name="statusIcon" :color="statusColor" size="16px" />
+      </span>
       <div class="profile-document__identity">
         <strong>{{ item.documentTypeName || item.documentTypeCode || 'Documento' }}</strong>
         <small>{{ subtitle }}</small>
@@ -496,5 +509,22 @@ small {
 }
 .profile-document-dialog :deep(.q-field--outlined .q-field__control::before) {
   border-color: rgba(255, 255, 255, 0.28);
+}
+.profile-document__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: none;
+  width: 36px;
+  height: 36px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 4px;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.08),
+    rgba(255, 255, 255, 0.03),
+    rgba(255, 255, 255, 0.07)
+  );
+  backdrop-filter: blur(20px);
 }
 </style>

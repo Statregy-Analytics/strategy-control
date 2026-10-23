@@ -377,22 +377,30 @@ onMounted(load)
 .preference-themes .q-btn {
   border: 1px solid rgba(128, 128, 128, 0.5);
   flex: 1;
-  min-height: 36px;
+  min-height: 46px;
+  border-radius: 10px;
   color: rgba(255, 255, 255, 0.7);
   background: var(--sa-surface-soft);
 }
 .preference-themes .preference-theme--light {
-  background: #fafafa;
+  background: linear-gradient(182.41deg, #631721 2.6783%, #041725 47.872%, #0e486f 99.455%);
 }
 .preference-themes .preference-theme--dark {
-  background: #202020;
+  background: linear-gradient(182.41deg, #464646 2.6783%, #333 40.109%, #000 99.455%);
 }
 .preference-themes .preference-theme--auto {
-  background: linear-gradient(90deg, #fafafa 50%, #202020 50%);
+  background: linear-gradient(
+    182.41deg,
+    #0c0712 3.5126%,
+    #1d243f 50.476%,
+    #39506d 69.497%,
+    #755364 82.811%,
+    #39506d 99.455%
+  );
 }
 .preference-themes .preference-theme--selected {
   color: #fff;
-  box-shadow: 0 0 0 2px var(--q-primary);
+  border: 2px solid #00a3ff;
 }
 .preference-themes .q-btn:focus-visible {
   box-shadow: 0 0 0 3px var(--q-primary);

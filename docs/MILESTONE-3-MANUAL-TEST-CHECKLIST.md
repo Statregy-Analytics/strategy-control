@@ -699,3 +699,8 @@ Confirmação final em 23/10: ajuste 76d2b06, pipeline 39892601211 aprovada, ind
 - [x] Aprovação única pela tela do Admin aprovou os dois lados; progresso 100%, onboarding Approved e edição liberada. Recarga manteve os nomes novos e os status aprovados. O controle de reenvio do perfil deixa de ser pendência não testada.
 
 Relatório: QA-2026-10-23-REENVIO-PERFIL.md. Pendência real do backend: substituição de identificação histórica pode afetar progresso/onboarding atual; caminho removido do front e detalhado no documento consolidado. Não cobrar perda de metadados ou vínculo no reenvio atual, pois foram preservados no teste.
+
+
+## QA de seleção e ficha — 23/10
+
+Checklist visual, binds, cenários e dependências: [Seleção e ficha do cliente](QA-2026-10-23-SELECAO-FICHA.md). Os bloqueios de API estão separados dos ajustes do front; esta rodada não encerra as demais pendências históricas do Marco 3.

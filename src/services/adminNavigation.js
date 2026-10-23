@@ -1,6 +1,11 @@
 const asset = (name) => `/icons/admin-menu/${name}.svg`
 export const adminNavigation = [
-  { label: 'Clientes', icon: asset('clients'), to: '/dataManagement' },
+  {
+    label: 'Clientes',
+    icon: asset('clients'),
+    activeIcon: '/icons/client-selection/clients-active.svg',
+    to: '/dataManagement',
+  },
   {
     label: 'Contratos',
     icon: asset('contracts'),

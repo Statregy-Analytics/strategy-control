@@ -32,9 +32,14 @@
         >
         <template #body-cell-bank="props"
           ><q-td :props="props"
-            ><span class="bank-name" :title="bankName(props.row.bankId)">{{
-              bankName(props.row.bankId)
-            }}</span></q-td
+            ><div class="bank-identity">
+              <span v-if="embedded" class="bank-initials" aria-hidden="true">{{
+                bankInitials(props.row.bankId)
+              }}</span
+              ><span class="bank-name" :title="bankName(props.row.bankId)">{{
+                bankName(props.row.bankId)
+              }}</span>
+            </div></q-td
           ></template
         >
         <template #body-cell-account="props"
@@ -50,7 +55,9 @@
           ><q-td :props="props">{{ masked(props.row.holderDocumentMasked) }}</q-td></template
         >
         <template #body-cell-pix="props"
-          ><q-td :props="props">{{ masked(props.row.pixKeyMasked) }}</q-td></template
+          ><q-td :props="props" class="bank-pix">{{
+            masked(props.row.pixKeyMasked)
+          }}</q-td></template
         >
         <template #body-cell-primary="props">
           <q-td :props="props" class="text-center">
@@ -62,7 +69,7 @@
               ><q-tooltip>Conta principal</q-tooltip></q-icon
             >
             <q-btn
-              v-else
+              v-else-if="accounts.length > 1"
               flat
               round
               dense
@@ -110,12 +117,19 @@
             <dl>
               <div v-for="column in columns.filter((c) => c.name !== 'actions')" :key="column.name">
                 <dt>{{ column.label }}</dt>
-                <dd>{{ mobileValue(p.row, column) }}</dd>
+                <dd>
+                  <q-icon
+                    v-if="column.name === 'primary' && p.row.isPrimary"
+                    name="img:/icons/client-profile/bank-primary.svg"
+                    size="16px"
+                    aria-label="Conta principal"
+                  /><template v-else>{{ mobileValue(p.row, column) }}</template>
+                </dd>
               </div>
             </dl>
             <div class="bank-row-actions">
               <q-btn
-                v-if="!p.row.isPrimary"
+                v-if="!p.row.isPrimary && accounts.length > 1"
                 flat
                 dense
                 no-caps
@@ -458,21 +472,11 @@ const columns = computed(() => [
             accountTypeOptions.find((o) => o.value === r.accountType)?.label || 'Não informado',
           align: 'left',
         },
-        {
-          name: 'ownership',
-          label: 'Titularidade',
-          field: (r) =>
-            holderTypeOptions.find((o) => o.value === r.holderType)?.label || 'Não informado',
-          align: 'left',
-        },
       ]
     : []),
-  {
-    name: 'holder',
-    label: props.embedded ? 'CPF/CNPJ titular' : 'Documento',
-    field: 'holderDocumentMasked',
-    align: 'left',
-  },
+  ...(!props.embedded
+    ? [{ name: 'holder', label: 'Documento', field: 'holderDocumentMasked', align: 'left' }]
+    : []),
   { name: 'pix', label: 'Chave Pix', field: 'pixKeyMasked', align: 'left' },
   { name: 'primary', label: 'Principal', field: 'isPrimary', align: 'center' },
   { name: 'actions', label: '', field: 'id', align: 'right' },
@@ -481,6 +485,24 @@ const required = (value) => !!value || 'Campo obrigatório'
 const masked = (value) => value || 'Não informado'
 const bankName = (id) =>
   bankOptions.value.find((bank) => bank.value === id)?.label || 'Banco não identificado'
+const bankInitials = (id) => {
+  const words = bankName(id)
+    .replace(/^\d+\s*[—-]\s*/, '')
+    .split(/\s+/)
+    .filter(
+      (word) =>
+        word &&
+        !['banco', 'de', 'do', 'da', 'dos', 'das', 's.a.', 's.a'].includes(word.toLowerCase()),
+    )
+  return (
+    words.length === 1
+      ? words[0].slice(0, 2)
+      : words
+          .slice(0, 2)
+          .map((word) => word[0])
+          .join('')
+  ).toUpperCase()
+}
 const normalizeSearch = (value) =>
   String(value || '')
     .normalize('NFD')
@@ -724,7 +746,7 @@ load()
   width: 76px !important;
 }
 .bank-accounts-table--profile :deep(th:nth-last-child(2)) {
-  width: 9% !important;
+  width: 72px !important;
 }
 .bank-profile-dialog .bank-profile-fields > * {
   width: 100%;
@@ -769,5 +791,29 @@ load()
 }
 .bank-mobile-account dl > div:first-child {
   grid-column: 1 / -1;
+}
+.bank-identity {
+  display: flex;
+  align-items: center;
+  min-width: 0;
+  gap: 8px;
+}
+.bank-initials {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: none;
+  width: 24px;
+  height: 24px;
+  font-size: 9px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 4px;
+  background: rgba(255, 255, 255, 0.06);
+}
+.bank-accounts-table :deep(td.bank-pix) {
+  white-space: normal;
+  overflow: visible;
+  text-overflow: clip;
+  overflow-wrap: anywhere;
 }
 </style>

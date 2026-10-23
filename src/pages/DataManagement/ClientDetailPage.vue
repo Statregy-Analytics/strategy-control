@@ -128,7 +128,7 @@
           />
           <resource-state :state="professional.state" @retry="loadProfessional"
             ><profile-fields
-              :columns="2"
+              :columns="3"
               :fields="professionalEditFields"
               v-bind="fieldEditProps('professional')"
               @update:values="editor.state.draft = $event"
@@ -177,12 +177,27 @@
               <q-expansion-item
                 dense
                 label="Gerenciamento de status de login"
-                icon="manage_accounts"
+                icon="img:/icons/client-selection/login-sessions.svg"
                 class="login-management q-mt-lg"
               >
-                <p class="profile-empty q-pa-md">
-                  O histórico de sessões deste cliente ainda não está disponível.
-                </p>
+                <q-markup-table flat class="profile-sessions-table">
+                  <thead>
+                    <tr>
+                      <th>Data e hora</th>
+                      <th>IP</th>
+                      <th>Local</th>
+                      <th>Equipamento</th>
+                      <th>Deslogar</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td colspan="5" class="profile-empty">
+                        O histórico de sessões deste cliente ainda não está disponível.
+                      </td>
+                    </tr>
+                  </tbody>
+                </q-markup-table>
               </q-expansion-item>
             </template>
           </resource-state>
@@ -245,7 +260,8 @@
               no-caps
               size="sm"
               icon="add"
-              color="primary"
+              color="white"
+              class="profile-glass-action"
               label="Adicionar conta"
               @click="bankPanel?.addAccount()"
           /></template>
@@ -267,6 +283,7 @@
       </div>
       <aside class="client-profile-aside">
         <profile-section
+          class="profile-documents-section"
           title="Documentação pessoal"
           icon-src="/icons/client-profile/documents.svg"
         >
@@ -301,6 +318,7 @@
           </resource-state>
         </profile-section>
         <profile-section
+          class="profile-compliance-section"
           title="Compliance e observações"
           icon-src="/icons/client-profile/compliance.svg"
         >
@@ -328,7 +346,15 @@
               class="compliance-note"
               :class="{ 'compliance-note--warning': complianceView.activeCount > 0 }"
             >
-              <strong>{{ complianceView.status }}</strong>
+              <strong :class="{ 'compliance-pep': compliance.state.data?.hasRelatedPep }"
+                ><q-icon
+                  v-if="compliance.state.data?.hasRelatedPep"
+                  name="warning_amber"
+                  size="14px"
+                />{{
+                  compliance.state.data?.hasRelatedPep ? 'PEP relacionado' : complianceView.status
+                }}</strong
+              >
               <q-input
                 v-if="editor.state.active === 'compliance' && editor.state.draft"
                 outlined
@@ -367,7 +393,7 @@
               no-caps
               :label="showHistory ? 'Recolher histórico' : 'Ver todo o histórico'"
               :aria-expanded="showHistory"
-              class="full-width"
+              class="full-width profile-glass-action"
               @click="toggleHistory"
             />
           </div>
@@ -404,6 +430,7 @@
 </template>
 <script setup>
 import { computed, ref, watch, onMounted, onScopeDispose } from 'vue'
+import { customerStatusLabel as statusLabel } from 'src/services/customerPresentation'
 import { useRoute, useRouter, onBeforeRouteLeave, onBeforeRouteUpdate } from 'vue-router'
 import SectionEditActions from 'src/components/Entity/SectionEditActions.vue'
 import { useClientSectionEditor } from 'src/composables/useClientSectionEditor'
@@ -553,14 +580,6 @@ const displayName = computed(
     customer.value.primaryName ||
     'Cliente',
 )
-const statusOptions = [
-  { label: 'Prospect', value: 'Prospect' },
-  { label: 'Ativo', value: 'Active' },
-  { label: 'Suspenso', value: 'Suspended' },
-  { label: 'Arquivado', value: 'Archived' },
-]
-const statusLabel = (value) =>
-  statusOptions.find((s) => s.value === value)?.label || value || 'Não informado'
 const kindLabel = (value) =>
   ({ Person: 'Pessoa física', Organization: 'Pessoa jurídica' })[value] || value || 'Cliente'
 const date = (value) => {
@@ -1047,7 +1066,7 @@ h1 {
 }
 .compliance-note--warning {
   color: #ffe19a;
-  border-color: rgba(241, 184, 75, 0.4);
+  border-color: #fee685;
   background: rgba(241, 184, 75, 0.08);
 }
 .compliance-note p {
@@ -1072,10 +1091,10 @@ h3 {
 }
 .profile-timeline li::before {
   position: absolute;
-  left: -22px;
+  left: -24.5px;
   top: 5px;
-  width: 7px;
-  height: 7px;
+  width: 12px;
+  height: 12px;
   border-radius: 50%;
   background: #bbc6d4;
   content: '';
@@ -1212,5 +1231,54 @@ h3 {
   .client-profile-main {
     gap: 16px;
   }
+}
+.profile-sessions-table {
+  color: inherit;
+  background: transparent;
+}
+.profile-sessions-table :deep(th) {
+  text-align: left;
+  font-size: 11px;
+}
+.profile-sessions-table :deep(td.profile-empty) {
+  white-space: normal;
+}
+.login-management {
+  border: 0;
+}
+.login-management :deep(.q-item__section--avatar) {
+  min-width: 28px;
+}
+.login-management :deep(.q-icon) {
+  font-size: 16px;
+}
+.profile-documents-section {
+  background: rgba(255, 255, 255, 0.06);
+  border-color: rgba(255, 255, 255, 0.2);
+  box-shadow: 4px 4px 12px rgba(0, 0, 0, 0.13);
+  backdrop-filter: blur(20px);
+}
+.profile-compliance-section {
+  border-left: 2px solid #fee685;
+}
+.profile-glass-action {
+  min-height: 32px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 8px;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.08),
+    rgba(255, 255, 255, 0.03),
+    rgba(255, 255, 255, 0.07)
+  );
+}
+.compliance-pep {
+  display: inline-flex;
+  gap: 6px;
+  align-items: center;
+  color: #fee685;
+  text-transform: uppercase;
+  font-size: 12px;
+  letter-spacing: 0.3px;
 }
 </style>

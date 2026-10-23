@@ -8,13 +8,16 @@
           dense
           no-caps
           size="sm"
-          color="primary"
+          color="white"
+          class="asset-add"
           icon="add"
           :label="`Adicionar ${group.singular}`"
           @click="edit(null, group)"
         />
       </header>
-      <p v-if="!rowsFor(group).length" class="text-muted q-pa-md">Nenhum registro cadastrado.</p>
+      <p v-if="!rowsFor(group).length" class="asset-empty">
+        Nenhum {{ group.singular }} registrado ainda.
+      </p>
       <q-expansion-item
         v-for="asset in rowsFor(group)"
         :key="asset.id"
@@ -475,10 +478,52 @@ h4 {
     grid-template-columns: 1fr;
   }
 }
+.asset-add {
+  padding: 4px 8px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 6px;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.08),
+    rgba(255, 255, 255, 0.03),
+    rgba(255, 255, 255, 0.07)
+  );
+}
+.asset-empty {
+  margin: 12px 0 0;
+  padding: 24px;
+  text-align: center;
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.04);
+}
 </style>
 <style>
 .asset-registry-dialog .q-dialog__inner {
   width: min(900px, 100vw) !important;
   max-width: 100vw !important;
+}
+.asset-add {
+  padding: 4px 8px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 6px;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.08),
+    rgba(255, 255, 255, 0.03),
+    rgba(255, 255, 255, 0.07)
+  );
+}
+.asset-empty {
+  margin: 12px 0 0;
+  padding: 24px;
+  text-align: center;
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.04);
 }
 </style>

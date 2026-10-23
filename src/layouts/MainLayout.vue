@@ -269,6 +269,7 @@ const onLogout = async () => {
   min-height: 0;
   flex: 1;
   overflow-y: auto;
+  overflow-x: hidden;
   padding: 16px 12px;
 }
 .sa-sidebar__item {
@@ -285,6 +286,10 @@ const onLogout = async () => {
   min-width: 32px;
   padding-right: 12px;
 }
+.sa-sidebar__item .q-item__section--main {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
 .sa-sidebar img {
   flex: none;
 }
@@ -294,7 +299,7 @@ const onLogout = async () => {
   height: 20px;
 }
 .sa-sidebar__item--active {
-  color: #51b8ff;
+  color: #00a3ff;
   border-color: rgba(255, 255, 255, 0.72);
   background: linear-gradient(90deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.04));
 }
@@ -304,6 +309,7 @@ const onLogout = async () => {
   border-top: 1px solid rgba(255, 255, 255, 0.12);
   max-height: 65%;
   overflow-y: auto;
+  overflow-x: hidden;
 }
 .sa-sidebar__settings-links {
   padding-left: 16px;

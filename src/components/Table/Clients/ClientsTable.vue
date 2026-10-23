@@ -1,278 +1,732 @@
 <template>
   <div class="ClientsTable">
-    <div class="clients-toolbar q-mb-md">
-      <div class="row items-center q-col-gutter-sm">
-        <div class="col-12 col-md-6">
-          <q-select v-model="searchField" dense outlined emit-value map-options :options="searchFields" aria-label="Buscar clientes por" class="q-mb-sm" @update:model-value="reload" />
-          <q-input v-model="search" dense outlined dark debounce="400" clearable :placeholder="searchField === 'contact' ? 'E-mail completo ou parte do e-mail' : 'Nome ou e-mail completo'" aria-label="Pesquisar clientes" @update:model-value="reload">
-            <template #prepend><q-icon name="search" size="1.2rem" /></template>
-          </q-input>
+    <div class="clients-toolbar">
+      <q-input
+        v-model="search"
+        outlined
+        dark
+        clearable
+        debounce="400"
+        class="clients-search"
+        placeholder="Buscar cliente por nome, documento, e-mail, ID ou assessor"
+        aria-label="Buscar cliente por nome, documento, e-mail, ID ou assessor"
+        @update:model-value="reload"
+      >
+        <template #prepend
+          ><img src="/icons/client-selection/search.svg" alt="" width="16" height="16"
+        /></template>
+      </q-input>
+      <div class="clients-toolbar__bottom">
+        <div class="clients-filters">
+          <span class="clients-filters__label"
+            ><img
+              src="/icons/client-selection/filter.svg"
+              alt=""
+              width="16"
+              height="16"
+            />Filtros</span
+          >
+          <q-select
+            v-model="status"
+            outlined
+            dense
+            dark
+            dropdown-icon="img:/icons/client-selection/dropdown.svg"
+            clearable
+            emit-value
+            map-options
+            :options="customerStatusOptions"
+            label="Status"
+            aria-label="Filtrar por status"
+            @update:model-value="reload"
+          />
+          <q-select
+            v-model="classification"
+            outlined
+            dense
+            dark
+            dropdown-icon="img:/icons/client-selection/dropdown.svg"
+            clearable
+            emit-value
+            :options="classificationOptions"
+            label="Classificação"
+            aria-label="Filtrar por classificação"
+            @update:model-value="reload"
+          />
+          <q-select
+            v-model="compliance"
+            outlined
+            dense
+            dark
+            dropdown-icon="img:/icons/client-selection/dropdown.svg"
+            clearable
+            emit-value
+            map-options
+            :options="complianceOptions"
+            label="Compliance"
+            aria-label="Filtrar por compliance"
+            @update:model-value="reload"
+          />
+          <q-select
+            v-model="level"
+            outlined
+            dense
+            dark
+            dropdown-icon="img:/icons/client-selection/dropdown.svg"
+            clearable
+            emit-value
+            map-options
+            :options="levelOptions"
+            label="Nível Doc."
+            aria-label="Filtrar por nível documental"
+            @update:model-value="reload"
+          />
         </div>
-        <div class="col-12 col-lg-6 row justify-end items-center q-gutter-xs clients-toolbar__actions">
-          <q-btn color="white" no-caps label="Exportar" flat size="sm" :disable="resultsUnavailable" @click="exportTable" />
-          <q-btn size="sm" padding="xs sm" no-caps outline label="Comparar Clientes" :disable="selected.length < 2 || resultsUnavailable"
-            :class="selected.length < 2 ? 'text-muted' : 'text-primary'" @click="compareSelected" />
-          <q-btn flat dense no-caps color="white" icon="tune" :label="filterButtonLabel" aria-label="Mostrar filtros e ordenação" @click="filtersOpen = !filtersOpen" />
-          <q-btn size="md" padding="xs" outline :color="viewMode === 'cards' ? 'primary' : 'grey-7'" :icon="$filtersString.resolveUrl('img:icons/layout-cards.svg')"
-            aria-label="Visualizar clientes em cartões" @click="changeViewMode('cards')" />
-          <q-btn size="md" padding="xs" outline :color="viewMode === 'table' ? 'primary' : 'grey-7'" :icon="$filtersString.resolveUrl('img:icons/list.svg')"
-            aria-label="Visualizar clientes em tabela" @click="changeViewMode('table')" />
-        </div>
-      </div>
-
-      <q-slide-transition>
-        <div v-show="filtersOpen" class="clients-filters border-pattern q-pa-md q-mt-sm">
-          <div class="row q-col-gutter-sm items-end">
-            <label-form class-name="col-12 col-sm-6 col-md-3" text-label="Status">
-              <q-select v-model="status" dense outlined clearable emit-value map-options :options="statusOptions" @update:model-value="reload" />
-            </label-form>
-            <label-form class-name="col-12 col-sm-6 col-md-3" text-label="Tipo de cliente">
-              <q-select v-model="kind" dense outlined clearable emit-value map-options :options="kindOptions" @update:model-value="reload" />
-            </label-form>
-            <label-form class-name="col-12 col-sm-6 col-md-3" text-label="Contato">
-              <q-input v-model.trim="contact" dense outlined clearable debounce="400" @update:model-value="reload" />
-            </label-form>
-            <label-form class-name="col-12 col-sm-6 col-md-3" text-label="Documento">
-              <q-input v-model.trim="document" dense outlined clearable debounce="400" @update:model-value="reload" />
-            </label-form>
-            <label-form class-name="col-12 col-sm-6 col-md-3" text-label="Ordenar por">
-              <q-select v-model="sortBy" dense outlined emit-value map-options :options="sortOptions" @update:model-value="reload" />
-            </label-form>
-            <label-form class-name="col-12 col-sm-6 col-md-3" text-label="Direção">
-              <q-select v-model="sortDirection" dense outlined emit-value map-options :options="sortDirectionOptions" @update:model-value="reload" />
-            </label-form>
-            <div class="col row justify-end">
-              <q-btn v-if="activeFilterCount" flat dense no-caps color="grey-7" icon="filter_alt_off" label="Limpar filtros" @click="clearFilters" />
-            </div>
+        <div class="clients-view-controls">
+          <div class="clients-view-toggle">
+            <q-btn
+              flat
+              dense
+              :class="{ selected: viewMode === 'table' }"
+              aria-label="Visualizar clientes em lista"
+              :aria-pressed="viewMode === 'table'"
+              @click="changeViewMode('table')"
+              ><img src="/icons/client-selection/layout-list.svg" alt="" width="16" height="16"
+            /></q-btn>
+            <q-btn
+              flat
+              dense
+              :class="{ selected: viewMode === 'cards' }"
+              aria-label="Visualizar clientes em grade"
+              :aria-pressed="viewMode === 'cards'"
+              @click="changeViewMode('cards')"
+              ><img src="/icons/client-selection/layout-grid.svg" alt="" width="16" height="16"
+            /></q-btn>
           </div>
-        </div>
-      </q-slide-transition>
-    </div>
-
-    <resource-state :state="{ loading: false, error: listResource.state.error }" @retry="reloadCurrentPage">
-    <q-table v-if="viewMode === 'table'" v-model:pagination="tablePagination" v-model:selected="selected" flat dense hide-pagination
-      class="my-sticky-header-column-table" row-key="id" selection="multiple" :rows="data" :columns="columns"
-      :loading="loading" @request="onRequest">
-      <template #no-data><span v-if="!loading">Nenhum cliente encontrado.</span></template>
-      <template #body-cell-primaryName="props">
-        <q-td :props="props">
-          <q-item dense clickable class="q-pa-none" @click="openCustomer(props.row.id)">
-            <q-item-section avatar><q-avatar size="32px" color="blue-grey-1" text-color="blue-grey-7" icon="person" /></q-item-section>
-            <q-item-section align="left">
-              <q-item-label>{{ props.row.primaryName || 'Sem nome' }}</q-item-label>
-              <q-item-label caption>{{ props.row.primaryContact || 'Sem contato principal' }}</q-item-label>
-            </q-item-section>
-          </q-item>
-        </q-td>
-      </template>
-      <template #body-cell-status="props">
-        <q-td :props="props"><span class="text-weight-medium" :class="statusClass(props.value)">{{ statusLabel(props.value) }}</span></q-td>
-      </template>
-      <template #body-cell-updatedAtUtc="props">
-        <q-td :props="props">{{ formatDate(props.value || props.row.createdAtUtc) }}</q-td>
-      </template>
-      <template #body-cell-actions="props">
-        <q-td :props="props">
-          <RowActions :actions="rowActions" aria-label="Opções do cliente" @select="handleRowAction($event, props.row)" />
-        </q-td>
-      </template>
-    </q-table>
-    <template v-else>
-      <div v-if="loading" class="row justify-center q-pa-xl"><q-spinner color="primary" size="36px" /></div>
-      <div v-else-if="!data.length" class="text-center text-grey-5 q-pa-xl">Nenhum cliente encontrado.</div>
-      <div v-else>
-        <div class="clients-result-count">Exibindo {{ data.length }} clientes</div>
-        <div class="row q-col-gutter-md q-mb-md">
-        <div v-for="customer in data" :key="customer.id || customer.customerId" class="col-12 col-md-6">
-          <q-card flat class="customer-card cursor-pointer" tabindex="0" role="button"
-            @click="openCustomer(customer.id || customer.customerId)" @keydown.enter="openCustomer(customer.id || customer.customerId)" @keydown.space.prevent="openCustomer(customer.id || customer.customerId)">
-            <q-card-section>
-              <div class="row items-start no-wrap">
-                <q-avatar size="56px" class="customer-card__avatar" icon="person" />
-                <div class="q-ml-md col min-width-0">
-                  <div class="row items-center q-gutter-xs"><q-badge outline color="grey-5">{{ columns[1].format(customer.kind || customer.customerKind) }}</q-badge><q-badge :color="customer.status === 'Active' ? 'positive' : 'grey-7'">{{ statusLabel(customer.status) }}</q-badge></div>
-                  <div class="customer-card__name ellipsis">{{ customer.displayName || customer.primaryName || 'Sem nome' }}</div>
-                  <div class="customer-card__contact ellipsis">{{ customer.primaryContact || 'Sem contato principal' }}</div>
-                </div>
-                <q-icon name="chevron_right" size="20px" color="grey-4" />
-              </div>
-              <div class="customer-card__facts">
-                <div><span>ASSESSOR</span><strong>{{ customer.advisorName || 'Sem assessor' }}</strong></div>
-                <div><span>ÚLTIMO ACESSO</span><strong>{{ formatDateTime(customer.lastAccessAtUtc) }}</strong></div>
-              </div>
-              <div class="customer-card__metrics">
-                <span>Compliance: <strong>{{ customer.complianceStatus || customer.documentComplianceStatus || 'Não informado' }}</strong></span>
-                <span>Nível doc.: <strong>{{ customer.documentLevel || '—' }}</strong></span>
-              </div>
-              <div class="customer-card__footer"><q-icon name="schedule" size="14px" /> Cliente desde {{ formatDate(customer.customerSince || customer.createdAtUtc) }}</div>
-            </q-card-section>
-          </q-card>
-        </div>
+          <q-select
+            v-model="sortDirection"
+            outlined
+            dense
+            dark
+            dropdown-icon="img:/icons/client-selection/dropdown.svg"
+            emit-value
+            map-options
+            :options="sortOptions"
+            aria-label="Ordenar clientes"
+            prefix="Ordenar por:"
+            @update:model-value="reload"
+          />
         </div>
       </div>
-    </template>
-    <entity-table-footer v-if="!loading" :page="pagination.page" :page-size="pagination.pageSize" :total-items="pagination.totalItems"
-      :total-pages="pagination.totalPages" :first-item="firstItemIndex" :last-item="lastItemIndex"
-      @page="changePage" @page-size="changeRowsPerPage" />
-    </resource-state>
-    <q-dialog
-      v-model="editDialog"
-      position="right"
-      full-height
-      full-width
-      maximized
-      class="control-width"
-      @hide="closeEditor"
+    </div>
+    <resource-state
+      :state="{ loading: false, error: listResource.state.error }"
+      @retry="reloadCurrentPage"
     >
-      <edit-client-layout
-        v-if="selectedCustomerId"
-        :customer-id="selectedCustomerId"
-        @close="closeEditor"
-        @select="selectedCustomerId = $event"
-        @updated="reloadCurrentPage"
-      />
-    </q-dialog>
-    <q-dialog v-model="compareDialog" position="right" full-height full-width maximized class="control-width-compare">
-      <client-comparison-panel :customers="selected" @close="compareDialog = false" />
-    </q-dialog>
+      <div v-if="loading" class="row justify-center q-pa-xl" aria-label="Carregando clientes">
+        <q-spinner color="primary" size="36px" />
+      </div>
+      <template v-else>
+        <div class="clients-result-count" aria-live="polite">
+          Exibindo {{ pagination.totalItems }}
+          {{ pagination.totalItems === 1 ? 'cliente' : 'clientes' }}
+        </div>
+        <p v-if="!data.length" class="text-center text-grey-5 q-pa-xl">
+          Nenhum cliente encontrado.
+        </p>
+        <q-table
+          v-else-if="viewMode === 'table'"
+          v-model:pagination="tablePagination"
+          flat
+          hide-pagination
+          class="customer-list"
+          row-key="customerId"
+          :rows="data"
+          :columns="columns"
+          @request="onRequest"
+        >
+          <template #body-cell-customer="props"
+            ><q-td :props="props"
+              ><button class="customer-list__identity" @click="openCustomer(customerId(props.row))">
+                <span class="customer-avatar"
+                  ><img :src="avatarIcon(props.row, 'list')" alt="" width="20" height="20" /></span
+                ><span
+                  ><strong>{{ customerName(props.row) }}</strong
+                  ><small class="customer-id"
+                    >ID: {{ customerId(props.row)?.slice(0, 8) }}</small
+                  ></span
+                >
+              </button></q-td
+            ></template
+          >
+          <template #body-cell-classification="props"
+            ><q-td :props="props"
+              ><customer-indicators
+                type="classification"
+                :value="props.row.documentClassification" /></q-td
+          ></template>
+          <template #body-cell-status="props"
+            ><q-td :props="props"
+              ><div class="customer-list__status">
+                <customer-indicators type="status" :value="props.row.status" /><customer-indicators
+                  type="compliance"
+                  :value="props.row.complianceStatus"
+                /></div></q-td
+          ></template>
+          <template #body-cell-level="props"
+            ><q-td :props="props"
+              ><customer-indicators type="level" :value="props.row.documentLevel" /></q-td
+          ></template>
+          <template #body-cell-dates="props"
+            ><q-td :props="props"
+              ><div class="customer-list__dates">
+                <span>Último acesso: {{ formatDateTime(props.row.lastAccessAtUtc) }}</span
+                ><small
+                  >Cliente desde:
+                  {{ formatDate(props.row.customerSince || props.row.createdAtUtc) }}</small
+                >
+              </div></q-td
+            ></template
+          >
+          <template #body-cell-open="props"
+            ><q-td :props="props"
+              ><q-btn
+                flat
+                round
+                dense
+                :aria-label="`Abrir perfil de ${customerName(props.row)}`"
+                @click="openCustomer(customerId(props.row))"
+                ><img
+                  src="/icons/client-selection/arrow-list.svg"
+                  alt=""
+                  width="16"
+                  height="16" /></q-btn></q-td
+          ></template>
+        </q-table>
+        <div v-else class="customer-grid">
+          <button
+            v-for="customer in data"
+            :key="customerId(customer)"
+            class="customer-card"
+            @click="openCustomer(customerId(customer))"
+          >
+            <div class="customer-card__identity">
+              <span class="customer-avatar"
+                ><img :src="avatarIcon(customer, 'card')" alt="" width="28" height="28"
+              /></span>
+              <div class="customer-card__heading">
+                <div class="customer-card__badges">
+                  <span class="customer-kind">{{
+                    isOrganization(customer) ? 'Pessoa jurídica' : 'Pessoa física'
+                  }}</span
+                  ><customer-indicators type="status" :value="customer.status" />
+                </div>
+                <strong class="customer-card__name">{{ customerName(customer) }}</strong
+                ><span class="customer-card__document">{{
+                  customerMaskedDocument(customer.maskedDocument)
+                }}</span>
+              </div>
+              <img
+                class="customer-card__arrow"
+                src="/icons/client-selection/arrow-card.svg"
+                alt=""
+                width="20"
+                height="20"
+              />
+            </div>
+            <div class="customer-card__facts">
+              <div>
+                <span>ASSESSOR</span><strong>{{ customer.advisorName || 'Sem assessor' }}</strong>
+              </div>
+              <div>
+                <span>ÚLTIMO ACESSO</span
+                ><strong>{{ formatDateTime(customer.lastAccessAtUtc) }}</strong>
+              </div>
+            </div>
+            <div class="customer-card__metrics">
+              <div>
+                <span>CLASSIFICAÇÃO</span
+                ><customer-indicators
+                  type="classification"
+                  :value="customer.documentClassification"
+                />
+              </div>
+              <div>
+                <span>COMPLIANCE</span
+                ><customer-indicators type="compliance" :value="customer.complianceStatus" />
+              </div>
+              <div>
+                <span>NÍVEL DOC.</span
+                ><customer-indicators type="level" :value="customer.documentLevel" />
+              </div>
+            </div>
+            <div class="customer-card__footer">
+              <img src="/icons/client-selection/clock.svg" alt="" width="14" height="14" />Cliente
+              desde {{ formatDate(customer.customerSince || customer.createdAtUtc) }}
+            </div>
+          </button>
+        </div>
+        <entity-table-footer
+          variant="customer-selection"
+          :page="pagination.page"
+          :page-size="pagination.pageSize"
+          :total-items="pagination.totalItems"
+          :total-pages="pagination.totalPages"
+          :first-item="firstItemIndex"
+          :last-item="lastItemIndex"
+          @page="changePage"
+        />
+      </template>
+    </resource-state>
   </div>
 </template>
-
 <script setup>
-import { customerSearchParams } from 'src/services/customerSearch'
 import { computed, onMounted, onScopeDispose, ref } from 'vue'
 import { useRouter } from 'vue-router'
-import { exportFile } from 'quasar'
 import { storeToRefs } from 'pinia'
 import { useClientStore } from 'src/stores/client'
-import useNotification from 'src/composables/global/useNotification'
-import EditClientLayout from 'src/layouts/Clients/EditClientLayout.vue'
 import EntityTableFooter from 'src/components/Entity/EntityTableFooter.vue'
-import RowActions from 'src/components/Entity/RowActions.vue'
-import LabelForm from 'src/components/Form/LabelForm.vue'
-import ClientComparisonPanel from 'src/components/Clients/ClientComparisonPanel.vue'
-import { listCustomerCards, listCustomers } from 'src/services/customerService'
+import CustomerIndicators from 'src/components/Clients/CustomerIndicators.vue'
+import { listCustomerCards } from 'src/services/customerService'
+import {
+  customerStatusOptions,
+  customerMaskedDocument,
+  readCustomerSelection,
+} from 'src/services/customerPresentation'
 import { useFinanceResource } from 'src/composables/useFinanceResource'
 import ResourceState from 'src/components/Finance/ResourceState.vue'
-
-const store = useClientStore()
-const router = useRouter()
+const store = useClientStore(),
+  router = useRouter()
 const { data, pagination } = storeToRefs(store)
 const listResource = useFinanceResource()
 const loading = computed(() => listResource.state.loading)
-const resultsUnavailable = computed(() => loading.value || Boolean(listResource.state.error))
-let active = true, loadRevision = 0
-onScopeDispose(() => { active = false; listResource.reset() })
-const { errorNotify } = useNotification()
-const search = ref('')
-const searchField = ref('name')
-const searchFields = [{ label: 'Nome ou e-mail', value: 'name' }, { label: 'E-mail / contato', value: 'contact' }]
-const status = ref(null), kind = ref(null), contact = ref(''), document = ref(''), sortBy = ref('name'), sortDirection = ref('asc'), viewMode = ref('cards'), filtersOpen = ref(false)
-const statusOptions = [{ label: 'Prospect', value: 'Prospect' }, { label: 'Ativo', value: 'Active' }, { label: 'Suspenso', value: 'Suspended' }, { label: 'Arquivado', value: 'Archived' }]
-const kindOptions = [{ label: 'Pessoa física', value: 'Person' }, { label: 'Pessoa jurídica', value: 'Organization' }]
-const sortOptions = [{ label: 'Nome', value: 'name' }, { label: 'Criação', value: 'createdAt' }, { label: 'Atualização', value: 'updatedAt' }, { label: 'Status', value: 'status' }]
-const sortDirectionOptions = [{ label: 'Crescente', value: 'asc' }, { label: 'Decrescente', value: 'desc' }]
-const activeFilterCount = computed(() => [status.value, kind.value, contact.value, document.value].filter(Boolean).length)
-const filterButtonLabel = computed(() => activeFilterCount.value ? `Filtros (${activeFilterCount.value})` : 'Filtros')
-const selected = ref([])
-const compareDialog = ref(false)
-const editDialog = ref(false)
-const selectedCustomerId = ref(null)
-const rowActions = [{ name: 'edit', label: 'Editar', icon: 'edit', color: 'grey-7' }]
+let active = true,
+  loadRevision = 0
+onScopeDispose(() => {
+  active = false
+  loadRevision++
+  listResource.reset()
+})
+const search = ref(''),
+  status = ref(null),
+  classification = ref(null),
+  compliance = ref(null),
+  level = ref(null),
+  sortDirection = ref('asc'),
+  viewMode = ref('cards')
+// The classification is supplied by the API; never substitute risk or invent a level.
+const classificationOptions = ref([])
+const complianceOptions = [
+  { label: 'OK', value: 'Ok' },
+  { label: 'Pendente', value: 'Pending' },
+  { label: 'Bloqueado', value: 'Blocked' },
+]
+const levelOptions = [0, 1, 2, 3].map((value) => ({ label: `Nível ${value}`, value }))
+const sortOptions = [
+  { label: 'A-Z', value: 'asc' },
+  { label: 'Z-A', value: 'desc' },
+]
 const tablePagination = computed({
   get: () => ({
     page: pagination.value.page,
     rowsPerPage: pagination.value.pageSize,
     rowsNumber: pagination.value.totalItems,
   }),
-  set: ({ page, rowsPerPage, rowsNumber }) => {
-    pagination.value = {
-      ...pagination.value,
-      page,
-      pageSize: rowsPerPage,
-      totalItems: rowsNumber,
-    }
-  },
+  set: () => {},
 })
 const columns = [
-  { name: 'primaryName', label: 'Cliente', field: 'primaryName', align: 'left' },
-  { name: 'kind', label: 'Tipo', field: 'kind', align: 'left', format: (v) => v === 'Person' ? 'Pessoa física' : v === 'Organization' ? 'Pessoa jurídica' : v },
-  { name: 'status', label: 'Status', field: 'status', align: 'left' },
-  { name: 'updatedAtUtc', label: 'Atualizado em', field: 'updatedAtUtc', align: 'left' },
-  { name: 'actions', label: '', field: 'id', align: 'right' },
+  { name: 'customer', label: 'Cliente / ID', field: 'displayName', align: 'left' },
+  {
+    name: 'classification',
+    label: 'Classificação',
+    field: 'documentClassification',
+    align: 'left',
+  },
+  {
+    name: 'advisor',
+    label: 'Assessor',
+    field: (row) => row.advisorName || 'Sem assessor',
+    align: 'left',
+  },
+  { name: 'status', label: 'Status / Compliance', field: 'status', align: 'left' },
+  { name: 'level', label: 'Nível Doc.', field: 'documentLevel', align: 'left' },
+  { name: 'dates', label: 'Datas', field: 'customerSince', align: 'left' },
+  { name: 'open', label: '', field: 'customerId', align: 'right' },
 ]
 const load = async (params = {}) => {
   if (!active) return
   const revision = ++loadRevision
-  const query = { page: params.page ?? pagination.value.page, pageSize: params.pageSize ?? pagination.value.pageSize, ...customerSearchParams(search.value, searchField.value, contact.value), status: status.value || undefined, kind: kind.value || undefined, document: document.value || undefined, sortBy: sortBy.value, sortDirection: sortDirection.value }
-  const read = viewMode.value === 'cards' ? listCustomerCards : listCustomers
+  const filters = {
+    inactive: status.value === 'Inactive',
+    classification: classification.value,
+    compliance: compliance.value,
+    level: level.value,
+  }
+  const query = {
+    page: params.page ?? pagination.value.page,
+    pageSize: params.pageSize ?? pagination.value.pageSize,
+    search: search.value.trim() || undefined,
+    status: filters.inactive ? undefined : status.value || undefined,
+    sortBy: 'name',
+    sortDirection: sortDirection.value,
+  }
   store.data = []
-  const response = await listResource.load(() => read(query))
+  const response = await listResource.load(() =>
+    readCustomerSelection(
+      listCustomerCards,
+      query,
+      filters,
+      () => active && revision === loadRevision,
+    ),
+  )
   if (!active || revision !== loadRevision || response === undefined) return
-  store.data = response?.data ?? []
-  store.pagination = { ...store.pagination, ...(response?.pagination ?? {}) }
+  store.data = response.data || []
+  store.pagination = { ...store.pagination, ...(response.pagination || {}) }
+  classificationOptions.value = [
+    ...new Set([...classificationOptions.value, ...(response.classifications || [])]),
+  ].sort()
 }
-const onRequest = ({ pagination: requested }) => load({ page: requested.page, pageSize: requested.rowsPerPage })
+const onRequest = ({ pagination: requested }) =>
+  load({ page: requested.page, pageSize: requested.rowsPerPage })
 const reload = () => load({ page: 1 })
-const changeRowsPerPage = (pageSize) => load({ page: 1, pageSize })
 const changePage = (page) => load({ page })
 const reloadCurrentPage = () => load()
+const changeViewMode = (mode) => {
+  if (viewMode.value === mode) return
+  viewMode.value = mode
+  return reload()
+}
+const customerId = (row) => row.customerId || row.id
+const customerName = (row) => row.displayName || row.primaryName || 'Sem nome'
+const isOrganization = (row) => (row.customerKind || row.kind) === 'Organization'
+const avatarIcon = (row, mode) =>
+  `/icons/client-selection/${isOrganization(row) ? 'business' : 'person'}-${mode}.svg`
 const openCustomer = (id) => router.push({ name: 'ClienteDetalhe', params: { id } })
-const editCustomer = (id) => { selectedCustomerId.value = id; editDialog.value = true }
-const handleRowAction = (action, row) => { if (action === 'edit') editCustomer(row.id) }
-const closeEditor = () => { editDialog.value = false; selectedCustomerId.value = null }
-const changeViewMode = (mode) => { if (viewMode.value === mode) return; viewMode.value = mode; return reload() }
-const compareSelected = () => { if (!resultsUnavailable.value && selected.value.length >= 2) compareDialog.value = true }
-const clearFilters = () => { status.value = null; kind.value = null; contact.value = ''; document.value = ''; reload() }
-const statusLabel = (status) => ({ Prospect: 'Prospect', Active: 'Ativo', Suspended: 'Suspenso', Archived: 'Arquivado' })[status] || status
-const statusClass = (status) => ({ Prospect: 'text-info', Active: 'text-positive', Suspended: 'text-warning', Archived: 'text-grey-7' })[status] || 'text-grey-8'
 const formatDate = (value) => {
   if (!value) return '—'
   const date = new Date(/^\d{4}-\d{2}-\d{2}$/.test(value) ? `${value}T12:00:00` : value)
   return Number.isNaN(date.getTime()) ? '—' : new Intl.DateTimeFormat('pt-BR').format(date)
 }
-const formatDateTime = (value) => value ? new Intl.DateTimeFormat('pt-BR', { dateStyle: 'short', timeStyle: 'short' }).format(new Date(value)) : 'Não informado'
-const csvValue = (value) => `"${String(value ?? '').replaceAll('"', '""')}"`
-const exportTable = () => {
-  if (resultsUnavailable.value) return
-  const headers = ['Cliente', 'Contato', 'Tipo', 'Status', 'Atualizado em']
-  const rows = data.value.map((customer) => [
-    customer.primaryName || customer.displayName || 'Sem nome',
-    customer.primaryContact || '',
-    columns[1].format(customer.kind),
-    statusLabel(customer.status),
-    formatDate(customer.updatedAtUtc || customer.createdAtUtc),
-  ])
-  const content = [headers, ...rows].map((row) => row.map(csvValue).join(',')).join('\r\n')
-  const result = exportFile(`clientes-${new Date().toISOString().slice(0, 10)}.csv`, content, 'text/csv;charset=utf-8')
-  if (result !== true) errorNotify('O navegador bloqueou o download da lista de clientes.')
+const formatDateTime = (value) => {
+  const date = value ? new Date(value) : null
+  return date && !Number.isNaN(date.getTime())
+    ? new Intl.DateTimeFormat('pt-BR', { dateStyle: 'short', timeStyle: 'short' }).format(date)
+    : 'Não informado'
 }
-const firstItemIndex = computed(() => pagination.value.totalItems ? (pagination.value.page - 1) * pagination.value.pageSize + 1 : 0)
-const lastItemIndex = computed(() => Math.min(pagination.value.page * pagination.value.pageSize, pagination.value.totalItems))
+const firstItemIndex = computed(() =>
+  pagination.value.totalItems ? (pagination.value.page - 1) * pagination.value.pageSize + 1 : 0,
+)
+const lastItemIndex = computed(() =>
+  Math.min(pagination.value.page * pagination.value.pageSize, pagination.value.totalItems),
+)
 onMounted(load)
 </script>
 <style scoped>
-.ClientsTable { padding: 0 32px 32px; color: #fff; }
-.clients-toolbar { min-width: 0; padding-bottom: 16px; border-bottom: 1px solid rgba(255,255,255,.14); }
-.clients-filters { width: 100%; }
-.clients-result-count { padding: 18px 0 14px; color: rgba(255,255,255,.56); font-size: 12px; }
-.customer-card { height: 100%; min-height: 245px; color: #fff; border: 1px solid rgba(255,255,255,.16); border-radius: 14px; background: linear-gradient(120deg, rgba(6,9,18,.76), rgba(9,24,39,.58)); box-shadow: 4px 4px 12px rgba(0,0,0,.24); backdrop-filter: blur(20px); transition: border-color .2s, transform .2s, background .2s; }
-.customer-card:hover,
-.customer-card:focus-visible { border-color: rgba(81,184,255,.72); outline: none; transform: translateY(-2px); background: linear-gradient(120deg, rgba(8,14,28,.88), rgba(8,55,82,.64)); }
-.customer-card__avatar { color: #fff; border: 1px solid rgba(255,255,255,.20); background: rgba(255,255,255,.06); }
-.customer-card__name { margin-top: 8px; font-size: 17px; }
-.customer-card__contact { margin-top: 2px; color: rgba(255,255,255,.56); font-size: 12px; }
-.customer-card__facts { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 24px; }
-.customer-card__facts > div { padding: 12px; border: 1px solid rgba(255,255,255,.13); border-radius: 10px; background: rgba(255,255,255,.05); }
-.customer-card__facts span { display: block; margin-bottom: 5px; color: rgba(255,255,255,.52); font-size: 9px; letter-spacing: .05em; }
-.customer-card__facts strong { display: block; font-size: 12px; font-weight: 500; }
-.customer-card__metrics { display: flex; justify-content: space-between; gap: 16px; margin-top: 14px; color: rgba(255,255,255,.5); font-size: 10px; text-transform: uppercase; }
-.customer-card__metrics strong { color: rgba(255,255,255,.84); font-weight: 600; }
-.customer-card__footer { display: flex; align-items: center; gap: 6px; margin-top: 18px; padding-top: 12px; border-top: 1px solid rgba(255,255,255,.08); color: rgba(255,255,255,.5); font-size: 11px; }
-.min-width-0 { min-width: 0; }
-:deep(.q-table__container) { color: #fff; border: 1px solid rgba(255,255,255,.16); border-radius: 14px; background: rgba(5,10,20,.55); box-shadow: 4px 4px 12px rgba(0,0,0,.24); }
-:deep(.q-table thead), :deep(.q-table tbody), :deep(.q-table tr), :deep(.q-table th), :deep(.q-table td) { color: inherit; background: transparent; border-color: rgba(255,255,255,.08); }
-:deep(.q-table th) { color: rgba(255,255,255,.58); font-size: 10px; text-transform: uppercase; }
-@media (max-width: 700px) { .ClientsTable { padding: 0 16px 24px; } .customer-card__facts { grid-template-columns: 1fr; } }
-@media (max-width: 1200px) { .clients-toolbar__actions { justify-content: flex-start; padding-top: 10px; } }
+.ClientsTable {
+  padding: 0 56px 32px;
+  color: #fff;
+}
+.clients-toolbar {
+  padding: 16px 0 24px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+}
+.clients-search {
+  width: min(672px, 100%);
+}
+.clients-search :deep(.q-field__control) {
+  height: 44px;
+  min-height: 44px;
+}
+.clients-toolbar__bottom,
+.clients-filters,
+.clients-view-controls {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.clients-toolbar__bottom {
+  justify-content: space-between;
+  flex-wrap: wrap;
+  margin-top: 20px;
+  gap: 16px;
+}
+.clients-filters {
+  flex-wrap: wrap;
+}
+.clients-filters__label {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.6);
+}
+.clients-filters .q-select {
+  width: 140px;
+}
+.clients-view-controls > .q-select {
+  width: 170px;
+}
+.clients-toolbar :deep(.q-field__control) {
+  border-radius: 8px;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.12),
+    rgba(255, 255, 255, 0.05),
+    rgba(255, 255, 255, 0.1)
+  );
+}
+.clients-toolbar :deep(.q-field--dense .q-field__control) {
+  min-height: 36px;
+  height: 36px;
+}
+.clients-toolbar :deep(.q-field__native),
+.clients-toolbar :deep(.q-field__prefix),
+.clients-toolbar :deep(.q-field__label) {
+  font-size: 12px;
+}
+.clients-search :deep(.q-field__native) {
+  font-size: 14px;
+}
+.clients-view-toggle {
+  display: flex;
+  padding: 3px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 8px;
+}
+.clients-view-toggle .q-btn {
+  width: 32px;
+  min-height: 28px;
+  border-radius: 5px;
+  opacity: 0.5;
+}
+.clients-view-toggle .q-btn.selected {
+  opacity: 1;
+  background: rgba(255, 255, 255, 0.12);
+}
+.clients-result-count {
+  padding: 24px 0 16px;
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 12px;
+}
+.customer-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 24px;
+}
+.customer-card {
+  width: 100%;
+  min-width: 0;
+  padding: 24px;
+  text-align: left;
+  font: inherit;
+  color: inherit;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 14px;
+  background:
+    linear-gradient(135deg, rgba(255, 255, 255, 0.04), rgba(255, 255, 255, 0.01)),
+    linear-gradient(120deg, rgba(6, 9, 18, 0.48), rgba(9, 24, 39, 0.28));
+  box-shadow: 4px 4px 12px rgba(0, 0, 0, 0.24);
+  backdrop-filter: blur(20px);
+  cursor: pointer;
+}
+.customer-card:hover {
+  border-color: rgba(255, 255, 255, 0.4);
+}
+.customer-card:focus-visible,
+.customer-list__identity:focus-visible {
+  outline: 2px solid #00a3ff;
+  outline-offset: 3px;
+}
+.customer-card__identity {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+}
+.customer-avatar {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: none;
+  width: 64px;
+  height: 64px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 50%;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.08),
+    rgba(255, 255, 255, 0.03),
+    rgba(255, 255, 255, 0.07)
+  );
+}
+.customer-card__heading {
+  min-width: 0;
+  flex: 1;
+}
+.customer-card__badges {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+.customer-kind {
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 6px;
+  padding: 2px 6px;
+  font-size: 10px;
+  color: rgba(255, 255, 255, 0.72);
+}
+.customer-card__name {
+  display: block;
+  margin-top: 6px;
+  font-size: 18px;
+  line-height: 28px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-weight: 600;
+}
+.customer-card__document {
+  display: block;
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 12px;
+}
+.customer-card__arrow {
+  flex: none;
+}
+.customer-card__facts {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+  margin-top: 20px;
+}
+.customer-card__facts > div {
+  padding: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 10px;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.08),
+    rgba(255, 255, 255, 0.03),
+    rgba(255, 255, 255, 0.07)
+  );
+}
+.customer-card__facts span,
+.customer-card__metrics > div > span:first-child {
+  display: block;
+  margin-bottom: 6px;
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 10px;
+  letter-spacing: 0.3px;
+}
+.customer-card__facts strong {
+  display: block;
+  overflow-wrap: anywhere;
+  font-size: 12px;
+  font-weight: 500;
+}
+.customer-card__metrics {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+  margin-top: 16px;
+}
+.customer-card__footer {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 16px;
+  padding-top: 12px;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 12px;
+}
+.customer-list {
+  color: inherit;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 14px;
+}
+.customer-list :deep(th) {
+  color: rgba(255, 255, 255, 0.6);
+  text-transform: uppercase;
+  font-size: 10px;
+  height: 44px;
+}
+.customer-list :deep(td) {
+  height: 100px;
+  font-size: 12px;
+}
+.customer-list :deep(th),
+.customer-list :deep(td) {
+  padding: 16px;
+  border-color: rgba(255, 255, 255, 0.08);
+}
+.customer-list__identity {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  text-align: left;
+  background: none;
+  border: 0;
+  color: inherit;
+  cursor: pointer;
+  padding: 0;
+}
+.customer-list__identity .customer-avatar {
+  width: 36px;
+  height: 36px;
+}
+.customer-list__identity strong {
+  display: block;
+  max-width: 240px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-size: 14px;
+}
+.customer-id {
+  display: inline-block;
+  margin-top: 6px;
+  padding: 2px 6px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 4px;
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 10px;
+}
+.customer-list__status {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.customer-list__dates small {
+  display: block;
+  margin-top: 8px;
+  color: rgba(255, 255, 255, 0.6);
+}
+@media (max-width: 1200px) {
+  .ClientsTable {
+    padding: 0 24px 24px;
+  }
+}
+@media (max-width: 800px) {
+  .customer-grid {
+    grid-template-columns: 1fr;
+  }
+  .ClientsTable {
+    padding: 0 16px 24px;
+  }
+  .clients-filters {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    width: 100%;
+  }
+  .clients-filters__label {
+    grid-column: 1/-1;
+  }
+  .clients-filters .q-select {
+    width: 100%;
+  }
+  .customer-card {
+    padding: 16px;
+  }
+}
 </style>

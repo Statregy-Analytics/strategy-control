@@ -2,6 +2,10 @@
 
 A interface segue o Figma e as alterações de ordem/campos expressamente autorizadas pelo designer/QA e pelo usuário. **Na ordem atual, profissional/financeiro é etapa 4 e documentos/endereço é etapa 5.** Precisamos dos estados e operações abaixo sem acrescentar campos ou ações às telas.
 
+## Seleção e ficha — atualização de 23/10
+
+Detalhes e checklist: [QA seleção/ficha](QA-2026-10-23-SELECAO-FICHA.md). Restam maskedDocument vazio nos cards apesar do CPF na identificação, API administrativa das sessões por cliente, declaração PEP do perfil e regra de conta única principal no servidor. Confirmar também a classificação G/I recebida versus os exemplos A/AA/AAA do desenho. Os filtros já funcionam no front sobre todas as páginas; suporte server-side é melhoria de escala. O bind visual de status foi autorizado: Active/Ativo, Suspended/Bloqueado e Prospect+Archived/Inativo, sem mudar os enums ou o estado cadastral real.
+
 ## Atualização de 22/10 — prevalece sobre os relatos históricos
 
 O retorno libera envio final, declaração de ausência de contato, RG/CNH/passaporte como alternativas, moeda automática de patrimônio/conta e status/data/bloqueio do cadastro. Esses contratos **não devem mais ser pedidos como ausentes**. Compatibilidade bancária (sem campos de titular), declaração, envio final, bloqueio oficial, países por idioma e moeda automática integrados nesta rodada. Detalhes, testes e limites em [Retorno de 22/10](QA-2026-10-22-RETORNO-BACKEND.md).
