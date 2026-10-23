@@ -328,3 +328,14 @@ Detalhes e evidências: [QA-2026-10-22-ENVIO-CONSENTIMENTOS.md](QA-2026-10-22-EN
 - [x] RG aprovado sozinho elevou o progresso documental a 100%; CNH existente não foi aprovada e nenhum passaporte foi enviado. API confirma grupo alternativo IDENTITY, 1/1 requisito. Corrigida no front a indicação individual de obrigatório para os documentos alternativos; obrigações independentes continuam identificadas. 284 testes, lint/build e revisão local aprovados. Commit do ajuste: 76d2b06; confirmação do deploy registrada no relatório da rodada.
 
 Confirmação final em 23/10: ajuste 76d2b06, pipeline 39892601211 aprovada, indicação de passaporte obrigatório removida em homologação e progresso 100% mantido. Envio/bloqueio/análise concluídos neste roteiro; pendências de arquivos e reenvio pela tela permanecem separadas.
+
+
+## Upload de reenvio pela Área do Cliente — 23/10/2026
+
+- [x] Versões históricas da identificação não oferecem reenvio; arquivos antigos não reaparecem como anexos soltos. Frente/verso mantidos sob a identificação atual, nas mesmas colunas e ações.
+- [x] Estado atual reconsultado antes de substituir: identificação alterada ou arquivo já aprovado bloqueia a escrita e mantém o arquivo selecionado. Testes cobrem os dois cenários e sessão.
+- [x] Publicado 65fc601; pipeline 39894409091 aprovada. 288 testes, lint, build e diff aprovados.
+- [x] Frente e verso fictícios reenviados pelo seletor real do navegador em homologação. Enviar sem arquivo validado; novos IDs/Front/Back/vínculo atual conferidos. Metadados da identificação preservados por comparação antes/depois.
+- [x] Aprovação única pela tela do Admin aprovou os dois lados; progresso 100%, onboarding Approved e edição liberada. Recarga manteve os nomes novos e os status aprovados. O controle de reenvio do perfil deixa de ser pendência não testada.
+
+Relatório: QA-2026-10-23-REENVIO-PERFIL.md. Pendência real do backend: substituição de identificação histórica pode afetar progresso/onboarding atual; caminho removido do front e detalhado no documento consolidado. Não cobrar perda de metadados ou vínculo no reenvio atual, pois foram preservados no teste.

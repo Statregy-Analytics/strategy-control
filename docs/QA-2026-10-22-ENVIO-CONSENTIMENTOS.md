@@ -53,3 +53,5 @@ Após aprovação do RG, a Área do Cliente exibiu 100% de progresso, sem aprova
 Ajuste visual 76d2b06 publicado: pipeline 39892601211 concluída com sucesso em testes/lint/build/upload/ativação. Na versão publicada, Documentação manteve 100% com RG aprovado e o passaporte deixou de aparecer como obrigação individual. Evidência adicional: rg-aprovado-progresso-100-hml.png. Perfil liberado registrado em perfil-liberado-apos-aprovacao-hml.png. Sem novos campos ou ações.
 
 Concluído o cenário integrado de envio, bloqueio e desbloqueio após análise. Não equivale à aprovação de todo o QA: continuam separados o agrupamento/visualização de arquivos e o reenvio pelo controle do perfil. O roteiro não alterou a conta pessoal do usuário, contratos ou transações.
+
+Atualização de 23/10: o controle de reenvio pelo upload do perfil foi homologado posteriormente; ver QA-2026-10-23-REENVIO-PERFIL.md para correções, envios reais pelo navegador, aprovação e pendência histórica da API.

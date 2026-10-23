@@ -326,3 +326,12 @@ RG/CNH/passaporte alternativos e moedas automáticas foram disponibilizados no r
 Após aceite real, a conta fictícia passou a retornar isSatisfied=true e ambos os termos Accepted, alinhados ao status. A divergência registrada acima foi observada antes desse aceite e permanece solicitação de alinhamento da projeção inicial/legada; não impede o fluxo integrado atualizado. Cookies e marketing permaneceram Pending.
 
 Reteste da identificação alternativa concluído: somente RG aprovado completou 100% (1/1 requisito) e liberou o perfil, sem CNH/passaporte extra. A API já informa alternativeGroup=IDENTITY; a etiqueta individual equivocada era do front e foi corrigida. Não encaminhar essa etiqueta ou a antiga obrigatoriedade exclusiva da CNH como bug atual de API.
+
+
+## Reenvio pelo perfil — 23/10/2026
+
+Fluxo atual homologado: POST de substituição pelo upload do perfil preservou Front/Back e providedDocumentId. Após reenviar os dois lados, a aprovação única no Admin aprovou ambos; progresso 100%, onboarding Approved e edição liberada. Número mascarado, emissor/UF, datas, país e versão da identificação foram preservados. Não solicitar campos extras nem tratar esses dados como perdidos nesta rodada.
+
+Pendência confirmada de histórico: antes da correção visual, substituir o arquivo rejeitado 9954cee1-cb83-4f8f-b354-84e6001561fb (provided-document antigo 60c4c5da-716d-48f2-91df-ecd176b9df8e) criou 7f1824b2-5502-4799-8f00-904e77364dd7 e fez progresso cair de 100% para 0%, onboarding UnderReview/lock=true. O perfil mantinha a identificação atual b532bff0-eac0-437c-b557-0bddc15fc091 com evidências aprovadas. Validar se a API deve rejeitar substituição de versão histórica e calcular progresso/onboarding apenas pela identificação vigente. O front passou a usar o perfil/overview atual e não oferece mais esse reenvio histórico. Não é necessário acrescentar campo ou ação ao desenho.
+
+Detalhes e limites: QA-2026-10-23-REENVIO-PERFIL.md. Conta utilizada client@example.com, dados/arquivos fictícios; conta pessoal do usuário preservada.
