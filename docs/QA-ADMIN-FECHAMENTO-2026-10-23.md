@@ -17,7 +17,7 @@ Escopo: itens administrativos do feedback de 17/10 (10–19), complementos admin
 - [x] Histórico: tradução dos eventos atuais Trusted contact removed e Provided document updated, preservando texto livre e auditoria original.
 - [x] Configuração documental (tipos e schemas): vazio só aparece após leitura concluída sem erro; não mostra lista vazia durante carregamento ou falha.
 - [x] Configuração documental e catálogo de bancos: filtros/edição ignoram respostas antigas; fechar/reabrir e validação pendente não afetam outro formulário.
-- [ ] Publicação e regressão final em homologação — registrar resultado abaixo.
+- [x] Publicação e regressão final em homologação — resultado abaixo.
 - [ ] Aceite independente do QA/designer sobre o conjunto publicado.
 
 ## Matriz para devolver ao QA
@@ -56,10 +56,10 @@ Renda atual de Jorge coincide com o registro mais recente: effectiveTo nulo. A m
 
 ## Validação técnica e limites
 
-162 testes automatizados aprovados no fechamento, incluindo atraso/reordenação de respostas, cancelamento durante validação, saída da tela, proteção de download e criação sem carteira. Registrar resultado final, lint/build/diff e regressão publicada abaixo. Falhas simuladas nos testes não equivalem a provocar indisponibilidade em homologação. Não executar novas movimentações financeiras para demonstrar telas.
+162 testes automatizados aprovados no fechamento, incluindo atraso/reordenação de respostas, cancelamento durante validação, saída da tela, proteção de download e criação sem carteira. Lint, build e diff dos arquivos alterados/staged aprovados; publicação e regressão abaixo. Falhas simuladas nos testes não equivalem a provocar indisponibilidade em homologação. Não executar novas movimentações financeiras para demonstrar telas.
 
 
-## Regressão do lote publicado — em andamento
+## Regressão do lote publicado
 
 Primeiro runtime 549e5b7, pipeline 39978542515 concluída com auditoria, 160 testes, lint, build, upload e ativação. Entradas JS do HTML publicado conferidas com o build local.
 
@@ -69,4 +69,22 @@ Primeiro runtime 549e5b7, pipeline 39978542515 concluída com auditoria, 160 tes
 - [x] Histórico expandido/recolhido; busca bancária orama encontra 325 na terceira página do catálogo; cadastro cancelado sem gravar conta.
 - [x] Jane: quatro totais zero, composição e extrato vazios e quatro categorias patrimoniais vazias. Nenhuma escrita.
 - [x] Regressão encontrou dois rótulos não traduzidos e falha de drawer ao reduzir a tela com formulário aberto; ambos corrigidos antes do fechamento. Mobile local 390px, menu 255px e documento 375px sem overflow, incluindo abrir o menu e cancelar o formulário.
-- [ ] Publicação final desses dois ajustes e conferência no Admin publicado.
+- [x] Publicação final dos ajustes encontrados durante a regressão e conferência no Admin publicado.
+
+
+## Fechamento da publicação e entrega ao QA
+
+Runtime final **92f6ccc**, [pipeline 39980294903](https://github.com/Statregy-Analytics/strategy-control/actions/runs/39980294903) aprovada integralmente: auditoria, **162 testes**, lint, build, upload e ativação. Arquivos de entrada do site conferidos contra o build final (`index-CUSI9eZD.js`). Os commits intermediários deste mesmo lote também tiveram deploy bem-sucedido; este é o runtime de referência da devolutiva.
+
+- [x] Em homologação final, renda negativa mostra erro local; retornar ao valor original desabilita Salvar. Outros lápis ficam bloqueados durante edição. Edição encerrada sem gravar.
+- [x] Preferências: sem mudança não salva; alterar o tema habilita Salvar; descarte exige confirmação e restaura Automático. Moedas/idioma/fuso existentes preservados. Nenhuma preferência foi gravada.
+- [x] Redução de desktop para 390px com formulário bancário aberto: drawer passa a mobile, padding esquerdo zero, documento 375px e formulário 325px sem overflow. Menu aberto mede 255px sem overflow; cancelar/abrir menu funcionam. Viewport restaurado.
+- [x] Configuração documental final: carregamento de tipos e schemas sem mensagem vazia prematura. Busca RG, seleção Brasil, schema publicado e definição de upload consultados; nenhuma associação/schema alterado.
+- [x] Cláudio mostra Contato de confiança excluído em português. Nova abertura do PNG fictício de CNH de Jorge conferida e aba temporária encerrada. Sem nova aprovação/reprovação/upload de identidade neste lote; esses fluxos mantêm as evidências das rodadas anteriores.
+- [x] Contratos e Transações carregam as listagens integradas pelo menu. Nenhuma transação, aprovação financeira ou mudança de contrato foi executada.
+- [x] Console consultado sem TypeError, ReferenceError, SyntaxError ou exceção não tratada. Houve oscilação transitória de conexão/520 no início da revisão; retentativa recuperou o catálogo, sem reproduzir falha permanente no fechamento.
+- [x] Snapshot Swagger preexistente preservado fora dos commits. O aviso de whitespace desse arquivo não pertence às alterações entregues.
+
+Não restou outro item conhecido desta devolutiva com implementação exclusivamente frontend a executar. Isso não aprova os módulos sem persistência nem encerra os bloqueios de dados/contrato desta matriz. O próximo passo é o QA reexecutar os cenários liberados no runtime acima e o backend responder aos itens separados. Reenvio/versões/progresso documental e investigação de identidade continuam com evidência/reteste próprio; não foram declarados resolvidos por esta regressão administrativa.
+
+Evidências locais: `admin-lote-qa-patrimonio-sem-carteira-hml.png` e `admin-lote-qa-final-hml.png`, na pasta de evidências desta conversa. Só o registro patrimonial fictício descrito foi criado/arquivado; os demais exercícios foram consultas, validações ou descarte.

@@ -8,6 +8,10 @@ Consultar a [matriz consolidada](QA-ADMIN-FECHAMENTO-2026-10-23.md) antes de enc
 
 **Não reenviar como pendentes:** renda atual (consistente com o último histórico em 23/10), UUID da moeda patrimonial (catálogo já fornece; front integrado neste lote), valor base do participante (`baseAmount` integrado), CNH exclusiva, submit/declaração de contatos e defaults já liberados em 22/10. Aprovar/Reprovar e imagens do patrimônio já foram integrados e exercitados; pendências de versões documentais têm reteste próprio e não significam falta dessas ações.
 
+## Histórico de evidências — não encaminhar como lista atual
+
+As seções datadas abaixo preservam o que foi observado em cada rodada. A matriz de fechamento acima prevalece para o Admin; o portal mantém checklist próprio e não foi revalidado por este lote. Relatos antigos de endpoints ausentes ou bugs já corrigidos não são solicitações atuais.
+
 ## Seleção e ficha — atualização de 23/10
 
 Detalhes e checklist: [QA seleção/ficha](QA-2026-10-23-SELECAO-FICHA.md). Restam maskedDocument vazio nos 13 cards apesar do CPF na identificação, API administrativa das sessões por cliente, declaração PEP do perfil e regra de conta única principal no servidor (três de cinco clientes com conta única ainda retornaram isPrimary=false; Cláudio está correto). Confirmar também a classificação G/I recebida versus os exemplos A/AA/AAA do desenho. Os filtros já funcionam no front sobre todas as páginas; suporte server-side é melhoria de escala. O bind visual de status foi autorizado: Active/Ativo, Suspended/Bloqueado e Prospect+Archived/Inativo, sem mudar os enums ou o estado cadastral real.
