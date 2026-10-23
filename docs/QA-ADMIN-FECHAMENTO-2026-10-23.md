@@ -13,6 +13,8 @@ Escopo: itens administrativos do feedback de 17/10 (10–19), complementos admin
 - [x] Extrato: exportação em andamento não baixa arquivo do cliente anterior depois de trocar de ficha; erros tardios não contaminam a nova ficha.
 - [x] Patrimônio: imagens integradas nas rodadas anteriores; moeda de exibição vem do bem. Criação sem carteira agora resolve o UUID de BRL pelo catálogo existente, sem seletor novo ou UUID inventado.
 - [x] Contratos: Valor base agora usa `participants[].baseAmount`, já disponível. Ausência permanece indisponível; zero é exibido. Saldo global do contrato não é reutilizado como saldo do cliente.
+- [x] Menu mobile: comportamento do drawer acompanha o breakpoint mesmo quando há um formulário aberto durante a redução da tela; sem deslocamento de desktop no mobile.
+- [x] Histórico: tradução dos eventos atuais Trusted contact removed e Provided document updated, preservando texto livre e auditoria original.
 - [x] Configuração documental e catálogo de bancos: filtros/edição ignoram respostas antigas; fechar/reabrir e validação pendente não afetam outro formulário.
 - [ ] Publicação e regressão final em homologação — registrar resultado abaixo.
 - [ ] Aceite independente do QA/designer sobre o conjunto publicado.
@@ -35,6 +37,7 @@ Escopo: itens administrativos do feedback de 17/10 (10–19), complementos admin
 | 28 — contas | Layout, iniciais, PIX, principal real e botões corrigidos. | Três contas únicas ainda retornam isPrimary=false. Normalização é do servidor. |
 | 29 — PEP | Sem pergunta ou ação fictícia. | Falta contrato de declaração e projeção para compliance; não criar novo campo sem persistência. |
 | 30–33 — seleção | Badges, modos, filtros, busca, ordenação, criação e rodapé implementados. | maskedDocument vazio nos 13 cards. Classificação G/I não deve ser convertida para A/AA/AAA sem regra. |
+| Complementos 19/20/23/24/25/26 | Busca de bancos, temas, imagens, moeda, projeção do cadastro e edição por seção integrados nas telas existentes. | Mesmos bloqueios de dados/contratos discriminados nesta matriz; sem exigir ações extras. |
 | 34–38 — ficha | Menu, glass/ícones, compliance/histórico, cinco campos e botões patrimoniais corrigidos. | Dados ausentes não são simulados. |
 
 ## Bloqueios atuais e verificações da API
@@ -52,4 +55,17 @@ Renda atual de Jorge coincide com o registro mais recente: effectiveTo nulo. A m
 
 ## Validação técnica e limites
 
-160 testes automatizados previstos para o fechamento, incluindo atraso/reordenação de respostas, cancelamento durante validação, saída da tela, proteção de download e criação sem carteira. Registrar resultado final, lint/build/diff e regressão publicada abaixo. Falhas simuladas nos testes não equivalem a provocar indisponibilidade em homologação. Não executar novas movimentações financeiras para demonstrar telas.
+161 testes automatizados aprovados no fechamento, incluindo atraso/reordenação de respostas, cancelamento durante validação, saída da tela, proteção de download e criação sem carteira. Registrar resultado final, lint/build/diff e regressão publicada abaixo. Falhas simuladas nos testes não equivalem a provocar indisponibilidade em homologação. Não executar novas movimentações financeiras para demonstrar telas.
+
+
+## Regressão do lote publicado — em andamento
+
+Primeiro runtime 549e5b7, pipeline 39978542515 concluída com auditoria, 160 testes, lint, build, upload e ativação. Entradas JS do HTML publicado conferidas com o build local.
+
+- [x] Seleção publicada: 13 clientes, página 2 de 2 com três registros; troca para lista retoma página 1; Inativo retorna seis e Todos restaura 13. Cabeçalhos e status/compliance do desenho presentes.
+- [x] Conta Homologação Pessoa Física sem carteiras e sem BRL no portfolio: aplicação fictícia de R$ 125 criada pelo formulário publicado, recarregada e confirmada na API com currencyCode BRL. ID 13118905-f763-4e54-9b10-2e4f02ba8513 arquivado pela operação administrativa existente, archivedAtUtc confirmado e status Inactive. Portfolio retornou somente USD/400.000 original e nenhuma carteira foi criada. O registro arquivado permanece no histórico; não foi apagado. Jane não foi usada nessa escrita.
+- [x] Cláudio: contrato CTR-403B56CC aparece Encerrado; Valor inicial e Valor base mostram R$ 261.500,00; atual/bloqueado permanecem indisponíveis. Investido ainda 261.500 conforme API, sem subtração artificial. Extrato exportado com cabeçalho CSV e um lançamento de 25.000.
+- [x] Histórico expandido/recolhido; busca bancária orama encontra 325 na terceira página do catálogo; cadastro cancelado sem gravar conta.
+- [x] Jane: quatro totais zero, composição e extrato vazios e quatro categorias patrimoniais vazias. Nenhuma escrita.
+- [x] Regressão encontrou dois rótulos não traduzidos e falha de drawer ao reduzir a tela com formulário aberto; ambos corrigidos antes do fechamento. Mobile local 390px, menu 255px e documento 375px sem overflow, incluindo abrir o menu e cancelar o formulário.
+- [ ] Publicação final desses dois ajustes e conferência no Admin publicado.

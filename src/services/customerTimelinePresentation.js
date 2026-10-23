@@ -2,6 +2,7 @@
 const titles = {
   'Trusted contact created': 'Contato de confiança cadastrado',
   'Trusted contact updated': 'Contato de confiança atualizado',
+  'Trusted contact removed': 'Contato de confiança excluído',
   'Trusted contact deleted': 'Contato de confiança excluído',
   'Customer created': 'Cliente cadastrado',
   'Customer profile updated': 'Perfil do cliente atualizado',
@@ -19,6 +20,7 @@ const titles = {
   'Document uploaded': 'Documento enviado',
   'Document reviewed': 'Documento revisado',
   'Document archived': 'Documento arquivado',
+  'Provided document updated': 'Dados do documento atualizados',
   'Provided document created': 'Dados do documento cadastrados',
 }
 const types = {

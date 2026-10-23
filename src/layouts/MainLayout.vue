@@ -5,6 +5,7 @@
       show-if-above
       :width="256"
       :breakpoint="900"
+      :behavior="$q.screen.width < 900 ? 'mobile' : 'desktop'"
       :mini="mini"
       :mini-width="72"
       bordered
@@ -184,7 +185,10 @@ watch(
 watch(
   () => $q.screen.width,
   (width) => {
-    if (width < 900) mini.value = false
+    if (width < 900) {
+      mini.value = false
+      drawerOpen.value = false
+    }
   },
 )
 const systems = ref([])
