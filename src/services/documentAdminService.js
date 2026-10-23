@@ -30,3 +30,5 @@ export const changeDocumentStatus = async (id, status) => unwrap(await api.patch
 export const deleteDocument = async (id) => unwrap(await api.delete(`/api/v1/admin/documents/${id}`))
 export const downloadDocument = async (id) => api.get(`/api/v1/admin/documents/${id}/download`, { responseType: 'blob' })
 export const getDocumentTemporaryUrl = async (id, expiresInMinutes = 15) => unwrap(await api.get(`/api/v1/admin/documents/${id}/temporary-url`, { params: { expiresInMinutes } }))
+
+export const getAdminDocument = async (id) => unwrap(await api.get(`/api/v1/admin/documents/${id}`))

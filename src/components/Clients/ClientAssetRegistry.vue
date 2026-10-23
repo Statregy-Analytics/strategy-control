@@ -194,6 +194,15 @@
                   /></label-form>
                 </template>
               </form-section>
+              <asset-photo-gallery
+                v-if="['RealEstate', 'Vehicle'].includes(selectedGroup.type)"
+                ref="photos"
+                :key="photoEditorKey"
+                :customer-id="customerId"
+                :asset-id="selected?.id || null"
+                :asset-type="selectedGroup.type"
+                :disabled="saving"
+              />
               <div class="row justify-end q-gutter-sm q-mt-lg">
                 <q-btn
                   flat
@@ -221,6 +230,7 @@
 import { computed, ref, watch } from 'vue'
 import ResourceState from 'src/components/Finance/ResourceState.vue'
 import ProfileDocumentItem from './ProfileDocumentItem.vue'
+import AssetPhotoGallery from './AssetPhotoGallery.vue'
 import EntityTableFooter from 'src/components/Entity/EntityTableFooter.vue'
 import FormSection from 'src/components/Entity/FormSection.vue'
 import TitleCard from 'src/components/Card/TitleCard.vue'
@@ -245,6 +255,8 @@ const { successNotify, errorNotify } = useNotification()
 const resource = useFinanceResource(),
   editor = useFinanceResource(),
   documentResources = new Map()
+const photos = ref(null),
+  photoEditorKey = ref(0)
 const page = ref(1),
   pageSize = ref(100),
   dialog = ref(false),
@@ -330,6 +342,7 @@ function documentResource(id) {
 const loadDocuments = (id) =>
   documentResource(id).load(async () => (await financeGet(`${base()}/${id}/documents`)).data)
 async function edit(asset, group) {
+  photoEditorKey.value++
   selected.value = asset
   selectedGroup.value = group
   draft.value = null
@@ -361,11 +374,20 @@ async function save() {
       currencyId,
       selected.value ? editor.state.data : null,
     )
-    await financeWrite(
+    const saved = await financeWrite(
       selected.value ? 'patch' : 'post',
       `${base()}${selected.value ? `/${selected.value.id}` : ''}`,
       payload,
     )
+    // A partial photo failure must retry against the created asset, not create another one.
+    const savedId = selected.value?.id || saved?.id || saved?.assetId
+    if (!savedId) throw new Error('O salvamento não retornou o identificador do patrimônio.')
+    if (!selected.value) {
+      selected.value = { ...saved, id: savedId, currencyId }
+      editor.state.data = { ...payload, ...saved }
+    }
+    await photos.value?.save(savedId)
+    documentResources.delete(savedId)
     dialog.value = false
     await load()
     emit('changed')
