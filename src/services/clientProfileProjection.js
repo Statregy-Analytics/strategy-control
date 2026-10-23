@@ -19,9 +19,24 @@ export function profileDocumentSections(overview) {
   }))
 }
 
-// Counters and rows must describe the same overview, including files without requirements.
+// Count the four displayed Figma groups; asset photos belong to the asset registry.
+// Files without individual requirements still count when present in those groups.
 export function profileDocumentMetrics(overview) {
-  const summary = overview?.summary || {}
+  let summary = overview?.summary || {}
+  if (Array.isArray(overview?.sections)) {
+    summary = { approved: 0, pending: 0, inReview: 0, missing: 0, rejected: 0 }
+    for (const item of profileDocumentSections(overview).flatMap((section) => section.items)) {
+      const key = {
+        Approved: 'approved',
+        Rejected: 'rejected',
+        Pending: 'pending',
+        UnderReview: 'inReview',
+        InReview: 'inReview',
+        Missing: 'missing',
+      }[item.status]
+      if (key) summary[key]++
+    }
+  }
   return [
     {
       label: Number(summary.approved) === 1 ? 'Aprovado' : 'Aprovados',

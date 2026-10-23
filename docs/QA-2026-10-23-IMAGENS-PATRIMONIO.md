@@ -19,9 +19,11 @@ Escopo: item 23 da devolutiva. Usar somente arquivos fictícios, os controles do
 - [x] Cinco posições do veículo retomadas pelos metadados; todas as miniaturas carregadas. Foto do chassi aberta com sucesso pela URL da API.
 - [x] TXT fictício rejeitado no seletor do imóvel; imagem já persistida preservada. Nenhuma alteração dos valores monetários dos bens.
 - [x] Layout de fotos em 390px sem overflow (largura e scrollWidth de 342px); viewport restaurado. Controle desktop revisado.
-- [x] 123 testes aprovados, incluindo falha parcial de vínculo, resposta após fechamento, posição por metadados, renovação de URL e indisponibilidade independente do catálogo. Lint e build aprovados; diff do lote sem erros.
+- [x] 124 testes aprovados, incluindo falha parcial de vínculo, resposta após fechamento, posição por metadados, renovação de URL e indisponibilidade independente do catálogo. Lint e build aprovados; diff do lote sem erros.
 
 - [x] Novo imóvel: selecionar foto, Descartar e reabrir retomou zero seleções, sem criar outro bem. Retentativa após criação com falha de foto coberta em teste controlado; não apresentada como falha provocada no servidor.
+
+- [x] Contador lateral calcula somente os quatro grupos exibidos no Figma. Fotos PATRIMONIO continuam no bem e não inflam Aguardando da documentação pessoal. API local: resumo geral com 10 pendentes, mas card correto com 1 aguardando; aprovados/rejeitados mantidos em 3/3.
 
 ## Publicação e reteste
 

@@ -74,3 +74,28 @@ test('onboarding personal documents without requirements remain individually rev
   assert.equal(profileDocumentMetrics(overview)[1].value, 2)
   assert.deepEqual(profileDocumentSections({ sections: [{ code: 'PERSONAL', items }] })[0].items, items)
 })
+
+test('asset photo uploads do not inflate counters of the four displayed document groups', () => {
+  const overview = {
+    summary: { approved: 3, pending: 10, rejected: 3 },
+    sections: [
+      {
+        code: 'PERSONAL_DOCUMENTS',
+        items: [
+          ...Array.from({ length: 3 }, () => ({ status: 'Approved' })),
+          ...Array.from({ length: 3 }, () => ({ status: 'Rejected' })),
+        ],
+      },
+      { code: 'ACCOUNTING_FISCAL', items: [{ status: 'Pending' }] },
+      { code: 'PATRIMONIO', items: Array.from({ length: 9 }, () => ({ status: 'Pending' })) },
+    ],
+  }
+  assert.deepEqual(
+    profileDocumentMetrics(overview).map((item) => item.value),
+    [3, 1, 3],
+  )
+  assert.deepEqual(
+    profileDocumentMetrics({ sections: [] }).map((item) => item.value),
+    [0, 0, 0],
+  )
+})
