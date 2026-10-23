@@ -31,7 +31,7 @@ Evidências: retorno-backend-22-conta-bancaria-hml.png e retorno-backend-22-etap
 ## O que não está homologado integralmente
 
 - Envio final real depende de requisitos/consentimentos aceitos. Não registrar aceite legal por conta própria, nem considerar mocks como submissão real. Fluxo final, nova sessão e recusa precisam de rodada integrada com conta própria de teste.
-- Imagens patrimoniais: endpoints de upload/vínculo/remoção existem; a galeria atual é de leitura. Integração das ações previstas no desenho ainda é trabalho do front, não endpoint ausente.
+- Imagens patrimoniais: endpoints de upload/vínculo/remoção existem. Atualização de 23/10: Admin integrado e testado com fotos fictícias nos editores C11/C12, sem ações extras; [relatório](QA-2026-10-23-IMAGENS-PATRIMONIO.md). O fluxo de envio da Área do Cliente não foi revalidado nessa rodada. Não solicitar nova API para os casos concluídos no Admin.
 - Frente/verso: payload do wizard adaptado; conferir a projeção files e a visualização dos dois arquivos no Admin/portal, além da aprovação única. Não marcar a homologação integrada como concluída só pelo envio dos IDs.
 - Ficha do Admin: defaults, status e data de envio agora são devolvidos; conferir a projeção no desenho aprovado com cliente recém-enviado. Não solicitar novamente esses contratos como inexistentes.
 - Busca de banco completa já disponível no front; o uso opcional de search do servidor não exige novo campo. Validar código/nome nos dois ambientes.

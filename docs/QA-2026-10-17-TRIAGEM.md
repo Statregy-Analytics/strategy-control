@@ -65,7 +65,7 @@ sucesso, com auditoria, testes, lint e build aprovados (107 testes admin,
 | 20. Tema sem texto | Correção visual homologada | Três amostras de cor sem texto visível, indicação da seleção e nomes acessíveis mantidos. Não testada nova gravação de tema nesta rodada. |
 | 21. Documentação do cliente | Layout corrigido; homologação parcial | Faixa de níveis/progresso, tabela e reenvio por linha conferidos; reenvio aberto e cancelado, sem upload. Grupos reais seguem catálogo; frente/verso explícitos, quatro grupos finais e última atualização dependem de dados/contrato. Data ausente não é inventada. |
 | 22. Contas bancárias do cliente | Layout corrigido; homologação parcial | Estado vazio, botão no fim, formulário em linha, alinhamento desktop e descarte conferidos. Lista com contas e escritas não retestadas nesta conta vazia; simplificação de titularidade depende do item 18. |
-| 23. Formulário e imagens do patrimônio | Formulário corrigido; imagens pendentes de validação integrada | Imóvel fictício EUR editado na seção, salvo sem mudar valores e reaberto; EUR 325.000,75 e quatro quartos preservados. Cadastro de veículo aberto/descartado. Galeria vazia conferida; prévias cobertas automaticamente, sem anexos disponíveis para confirmação visual em homologação. |
+| 23. Formulário e imagens do patrimônio | Admin integrado e testado em 23/10; portal não revalidado nesse lote | Fotos fictícias de imóvel e veículo enviadas pelo Admin publicado, retomadas após recarga e abertas pela API. Posições da vistoria preservadas, sem mudar valores dos bens. [Relatório e limites](QA-2026-10-23-IMAGENS-PATRIMONIO.md). |
 | 24. Moeda automática do patrimônio | Pendente — backend, depois frontend e reteste | Seletor mantido. Definir moeda principal na criação e preservar moeda original nas edições/mudanças de preferência; apresentar símbolo da moeda gravada no admin e portal. Não converter valores automaticamente. |
 
 ### Solicitações ao backend — itens 18 e 24
@@ -84,7 +84,9 @@ Após integrar, testar criação, edição, troca de preferência e exibição n
 sem conversão implícita. O catálogo com IDs já resolveu o bloqueio anterior de
 conta sem carteira; esta pendência é a nova regra, não a falta daqueles IDs.
 
-### Pendência de teste — imagens do patrimônio
+### Imagens do patrimônio — relato de 21/10, atualizado em 23/10
+
+Atualização: o escopo Admin abaixo foi integrado e validado com arquivos fictícios, publicação 6eab47c. [Evidências e limites atuais](QA-2026-10-23-IMAGENS-PATRIMONIO.md). Os pontos seguintes preservam o relato anterior e não invalidam o reteste posterior do Admin.
 
 - [ ] Disponibilizar um patrimônio fictício com imagem vinculada e testar em
   homologação a miniatura, abertura do arquivo e reapresentação após recarga.

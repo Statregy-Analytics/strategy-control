@@ -8,6 +8,10 @@ Detalhes e checklist: [QA seleção/ficha](QA-2026-10-23-SELECAO-FICHA.md). Rest
 
 Complemento do front em 23/10: Todos no status, Alerta no filtro/badge, prefixo Compliance na lista e cores dos badges da ficha corrigidos sem novo contrato HTTP. Esses ajustes não devem ser encaminhados como demandas do backend. Os bloqueios de dados/API acima continuam separados.
 
+## Imagens do patrimônio no Admin — reteste de 23/10
+
+Upload, vínculo, retomada de posições e abertura por URL temporária passaram com arquivos fictícios no Admin publicado (6eab47c / pipeline 39959274171 aprovada). Não há bloqueio de backend nos cenários de imagens exercitados. O contador de documentação pessoal foi ajustado no front para não somar fotos patrimoniais; isso não é demanda do backend. Escopo e limites no [relatório](QA-2026-10-23-IMAGENS-PATRIMONIO.md). O fluxo do portal não foi revalidado neste lote.
+
 ## Atualização de 22/10 — prevalece sobre os relatos históricos
 
 O retorno libera envio final, declaração de ausência de contato, RG/CNH/passaporte como alternativas, moeda automática de patrimônio/conta e status/data/bloqueio do cadastro. Esses contratos **não devem mais ser pedidos como ausentes**. Compatibilidade bancária (sem campos de titular), declaração, envio final, bloqueio oficial, países por idioma e moeda automática integrados nesta rodada. Detalhes, testes e limites em [Retorno de 22/10](QA-2026-10-22-RETORNO-BACKEND.md).

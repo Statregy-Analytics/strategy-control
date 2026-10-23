@@ -713,9 +713,9 @@ Checklist visual, binds, cenários e dependências: [Seleção e ficha do client
 - [x] 115 testes, lint/build e verificação do diff do lote aprovados.
 - [x] Publicado 525dfe2 / pipeline 39953877234 aprovada. Menu, Inativo → Todos, prefixo de compliance na lista e badges da ficha de Carlos conferidos no Admin publicado, sem gravação. Alerta com massa controlada nos testes e vazio legítimo local; não houve cliente real nesse estado nesta rodada.
 
-Detalhes e limites no [relatório da seleção/ficha](QA-2026-10-23-SELECAO-FICHA.md#complemento--filtros-c04-e-indicadores-de-compliance). Mantidas as pendências reais do backend; não considerar encerrada a integração/homologação das imagens patrimoniais.
+Detalhes e limites no [relatório da seleção/ficha](QA-2026-10-23-SELECAO-FICHA.md#complemento--filtros-c04-e-indicadores-de-compliance). Mantidas as pendências reais do backend. Atualização posterior de 23/10: imagens no Admin integradas e testadas; ver relatório abaixo, sem encerrar o fluxo da Área do Cliente.
 
 
 ## Imagens do patrimônio no Admin — 23/10
 
-Integração C11/C12 e testes fictícios: [relatório de imagens patrimoniais](QA-2026-10-23-IMAGENS-PATRIMONIO.md). Upload, vínculo, posições da vistoria e visualização passaram localmente na porta 8080; publicação/reteste registrados nesse relatório. Endpoints existentes utilizados, sem novos campos ou ações.
+Integração C11/C12 e testes fictícios: [relatório de imagens patrimoniais](QA-2026-10-23-IMAGENS-PATRIMONIO.md). Upload, vínculo, posições da vistoria e visualização passaram localmente na porta 8080 e no Admin publicado (6eab47c / pipeline 39959274171 aprovada, 124 testes, lint/build/diff). Arquivos fictícios persistiram após recarga, prévias carregaram e o contador lateral excluiu as fotos do patrimônio. Endpoints existentes utilizados, sem novos campos ou ações.
