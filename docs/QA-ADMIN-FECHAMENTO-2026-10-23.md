@@ -15,7 +15,7 @@ Escopo: itens administrativos do feedback de 17/10 (10–19), complementos admin
 - [x] Contratos: Valor base agora usa `participants[].baseAmount`, já disponível. Ausência permanece indisponível; zero é exibido. Saldo global do contrato não é reutilizado como saldo do cliente.
 - [x] Menu mobile: comportamento do drawer acompanha o breakpoint mesmo quando há um formulário aberto durante a redução da tela; sem deslocamento de desktop no mobile.
 - [x] Histórico: tradução dos eventos atuais Trusted contact removed e Provided document updated, preservando texto livre e auditoria original.
-- [x] Configuração documental: vazio só aparece após leitura concluída sem erro; não mostra lista vazia durante carregamento ou falha.
+- [x] Configuração documental (tipos e schemas): vazio só aparece após leitura concluída sem erro; não mostra lista vazia durante carregamento ou falha.
 - [x] Configuração documental e catálogo de bancos: filtros/edição ignoram respostas antigas; fechar/reabrir e validação pendente não afetam outro formulário.
 - [ ] Publicação e regressão final em homologação — registrar resultado abaixo.
 - [ ] Aceite independente do QA/designer sobre o conjunto publicado.
@@ -56,7 +56,7 @@ Renda atual de Jorge coincide com o registro mais recente: effectiveTo nulo. A m
 
 ## Validação técnica e limites
 
-161 testes automatizados aprovados no fechamento, incluindo atraso/reordenação de respostas, cancelamento durante validação, saída da tela, proteção de download e criação sem carteira. Registrar resultado final, lint/build/diff e regressão publicada abaixo. Falhas simuladas nos testes não equivalem a provocar indisponibilidade em homologação. Não executar novas movimentações financeiras para demonstrar telas.
+162 testes automatizados aprovados no fechamento, incluindo atraso/reordenação de respostas, cancelamento durante validação, saída da tela, proteção de download e criação sem carteira. Registrar resultado final, lint/build/diff e regressão publicada abaixo. Falhas simuladas nos testes não equivalem a provocar indisponibilidade em homologação. Não executar novas movimentações financeiras para demonstrar telas.
 
 
 ## Regressão do lote publicado — em andamento

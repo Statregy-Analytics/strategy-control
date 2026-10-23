@@ -17,7 +17,7 @@
 
     <q-dialog v-model="editorDialog" position="right" full-height><q-card class="editor-dialog column no-wrap"><title-card title="Configurar tipo documental" @on-close="editorDialog=false" /><q-separator /><entity-header v-if="selectedType" :id="selectedType.id" :name="selectedType.name" short-id><template #status><q-badge outline color="primary" class="q-ml-md">{{ selectedType.code }}</q-badge></template></entity-header><q-card-section class="scroll col">
       <form-section title="Países" caption="Associe o país e selecione-o para configurar schemas e definições."><div class="row q-col-gutter-md items-start"><label-form class-name="col-12 col-md-9" text-label="UUID do país"><q-input v-model.trim="countryIdDraft" dense outlined :rules="uuidRules" /></label-form><div class="col-12 col-md-3 q-pt-lg"><q-btn flat dense color="primary" icon="add" label="Associar" no-caps :loading="countrySaving" @click="saveCountry" /></div></div><q-list bordered separator class="q-mt-md"><q-item v-for="country in countries" :key="country.countryId||country.id" clickable :active="countryKey(country)===selectedCountryId" active-class="bg-blue-1 text-primary" @click="selectCountry(country)"><q-item-section><q-item-label>{{ country.name||country.countryName||countryKey(country) }}</q-item-label><q-item-label caption>{{ countryKey(country) }}</q-item-label></q-item-section><q-item-section side><q-badge :color="country.isActive===false?'grey':'positive'">{{ country.isActive===false?'Inativo':'Ativo' }}</q-badge></q-item-section></q-item></q-list></form-section>
-      <form-section title="Schemas de metadados" caption="Crie, valide, publique ou retire versões do schema." class="q-mt-lg"><q-banner v-if="!selectedCountryId" rounded class="bg-blue-1 text-primary">Selecione um país para continuar.</q-banner><template v-else><div class="row justify-end q-mb-sm"><q-btn flat dense color="primary" icon="add" label="Novo schema" no-caps @click="schemaDialog=true" /></div><q-table flat dense hide-pagination row-key="id" :rows-per-page-options="[0]" :pagination="{ rowsPerPage: 0 }" :rows="schemas" :columns="schemaColumns" :loading="schemaLoading"><template #body-cell-status="props"><q-td :props="props"><q-badge :color="schemaColor(props.value)">{{ props.value }}</q-badge></q-td></template><template #body-cell-actions="props"><q-td :props="props"><row-actions :actions="schemaActions(props.row)" @select="action => runSchemaAction(action, props.row)" /></q-td></template><template #no-data><div class="full-width text-center q-pa-lg text-grey-7">Nenhum schema configurado.</div></template></q-table><div class="row q-gutter-sm q-mt-md"><q-btn flat dense color="primary" icon="cloud_upload" label="Definição de upload" no-caps @click="loadDefinition('upload')" /><q-btn flat dense color="primary" icon="data_object" label="Definição de dados" no-caps @click="loadDefinition('data')" /></div><q-input v-if="definitionText" class="q-mt-md" :model-value="definitionText" type="textarea" autogrow readonly outlined dense label="Definição retornada" /></template></form-section>
+      <form-section title="Schemas de metadados" caption="Crie, valide, publique ou retire versões do schema." class="q-mt-lg"><q-banner v-if="!selectedCountryId" rounded class="bg-blue-1 text-primary">Selecione um país para continuar.</q-banner><template v-else><div class="row justify-end q-mb-sm"><q-btn flat dense color="primary" icon="add" label="Novo schema" no-caps @click="schemaDialog=true" /></div><q-table flat dense hide-pagination row-key="id" :rows-per-page-options="[0]" :pagination="{ rowsPerPage: 0 }" :rows="schemas" :columns="schemaColumns" :loading="schemaLoading"><template #body-cell-status="props"><q-td :props="props"><q-badge :color="schemaColor(props.value)">{{ props.value }}</q-badge></q-td></template><template #body-cell-actions="props"><q-td :props="props"><row-actions :actions="schemaActions(props.row)" @select="action => runSchemaAction(action, props.row)" /></q-td></template><template #no-data><div v-if="!schemaLoading && !schemaError" class="full-width text-center q-pa-lg text-grey-7">Nenhum schema configurado.</div></template></q-table><div class="row q-gutter-sm q-mt-md"><q-btn flat dense color="primary" icon="cloud_upload" label="Definição de upload" no-caps @click="loadDefinition('upload')" /><q-btn flat dense color="primary" icon="data_object" label="Definição de dados" no-caps @click="loadDefinition('data')" /></div><q-input v-if="definitionText" class="q-mt-md" :model-value="definitionText" type="textarea" autogrow readonly outlined dense label="Definição retornada" /></template></form-section>
     </q-card-section></q-card></q-dialog>
 
     <q-dialog v-model="schemaDialog"><q-card class="schema-dialog"><title-card title="Novo schema de metadados" @on-close="schemaDialog=false" /><q-separator /><q-card-section><q-form ref="schemaForm" @submit.prevent="saveSchema"><label-form text-label="JSON Schema"><q-input v-model="schemaDraft.schema" type="textarea" rows="10" outlined dense :rules="jsonRules" /></label-form><label-form text-label="UI Schema (opcional)" class="q-mt-md"><q-input v-model="schemaDraft.uiSchema" type="textarea" rows="5" outlined dense :rules="optionalJsonRules" /></label-form><label-form text-label="Resumo da alteração" class="q-mt-md"><q-input v-model.trim="schemaDraft.changeSummary" outlined dense /></label-form><div class="row justify-end q-mt-md"><q-btn type="submit" flat color="primary" icon="save" label="Criar schema" no-caps :loading="saving" /></div></q-form></q-card-section></q-card></q-dialog>
@@ -60,6 +60,7 @@ const categories = ref([]),
   schemas = ref([]),
   loading = ref(false),
   schemaLoading = ref(false),
+  schemaError = ref(false),
   saving = ref(false),
   countrySaving = ref(false),
   loadError = ref(''),
@@ -324,6 +325,7 @@ const loadSchemas = async () => {
     typeId = selectedType.value.id,
     countryId = selectedCountryId.value
   schemaLoading.value = true
+  schemaError.value = false
   schemas.value = []
   try {
     const result = collection(
@@ -331,8 +333,10 @@ const loadSchemas = async () => {
     )
     if (active() && version === schemaRevision) schemas.value = result
   } catch (e) {
-    if (active() && version === schemaRevision)
+    if (active() && version === schemaRevision) {
+      schemaError.value = true
       errorNotify(getApiErrorMessage(e, 'Não foi possível carregar os schemas.'))
+    }
   } finally {
     if (active() && version === schemaRevision) schemaLoading.value = false
   }
@@ -419,6 +423,7 @@ const loadDefinition = async (kind) => {
     version = ++definitionRevision,
     typeId = selectedType.value.id,
     countryId = selectedCountryId.value
+  definitionText.value = ''
   try {
     const d =
       kind === 'upload'

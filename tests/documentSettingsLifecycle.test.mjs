@@ -27,7 +27,7 @@ async function setup(overrides = {}) {
       'src/services/documentAdminService': service,
     },
     exports:
-      'loadTypes, types, categoryFilter, openType, countries, editorDialog, selectedType, selectedCountryId, loadDefinition, definitionText, saveCountry, countryIdDraft, countrySaving',
+      'loadTypes, types, categoryFilter, openType, countries, editorDialog, selectedType, selectedCountryId, loadDefinition, definitionText, saveCountry, countryIdDraft, countrySaving, loadSchemas, schemaError, schemaLoading',
   })
   await h.ready
   return h
@@ -96,4 +96,9 @@ test('late country association does not clear another editor draft or announce s
   assert.equal(h.m.countryIdDraft.value, 'new-draft')
   assert.equal(h.notices.length, 0)
   h.dispose()
+})
+
+
+test('a failed schema consultation is not treated as an empty successful catalog and retry recovers',async()=>{
+ let fail=true;const h=await setup({listMetadataSchemas:async()=>{if(fail)throw Error('network');return []}});await h.m.openType({id:'type'});h.m.selectedCountryId.value='country';await h.m.loadSchemas();assert.equal(h.m.schemaError.value,true);assert.equal(h.m.schemaLoading.value,false);fail=false;await h.m.loadSchemas();assert.equal(h.m.schemaError.value,false);h.dispose()
 })
