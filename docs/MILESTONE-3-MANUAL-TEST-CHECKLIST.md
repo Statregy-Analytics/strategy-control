@@ -1,6 +1,6 @@
 # Marco 3 — checklist manual
 
-Atualizado em 22/10/2026. Rodadas iniciais: Admin em 12/10 e portal em 13/10. Admin localhost:8080; Portal localhost:9010 (origens CORS autorizadas).
+Atualizado em 23/10/2026. Rodadas iniciais: Admin em 12/10 e portal em 13/10. Admin localhost:8080; Portal localhost:9010 (origens CORS autorizadas).
 
 ## Integração do retorno de 22/10
 
@@ -732,4 +732,4 @@ Integração C11/C12 e testes fictícios: [relatório de imagens patrimoniais](Q
 
 - [x] Respostas pendentes invalidadas ao fechar, trocar de cliente ou sair; salvamento/fotos vinculados ao contexto original. Mesmos editores do Figma.
 - [x] 132 testes, lint/build e diff do lote aprovados; descarte/reabertura sem gravação conferidos na porta 8080.
-- [ ] Publicação/reteste conforme [ciclo de edição do patrimônio](QA-2026-10-23-EDITOR-PATRIMONIO.md).
+- [x] Publicado 073253d; pipeline 39970596392 aprovada na tentativa 2 (a primeira falhou por timeout SSH). Descarte/reabertura e troca Jorge → Cláudio → Jorge conferidos no Admin publicado, sem gravação e mantendo os editores do Figma. Atrasos/falhas de salvamento cobertos em testes controlados. [Ciclo de edição do patrimônio](QA-2026-10-23-EDITOR-PATRIMONIO.md).

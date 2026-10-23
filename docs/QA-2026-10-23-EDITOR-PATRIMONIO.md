@@ -8,6 +8,8 @@ Correção adicional dos itens 15/17: impedir que respostas pendentes do editor 
 - [x] Troca de cliente e saída invalidam os recursos de lista, editor e documentação já iniciados. Retentativa de falha parcial das fotos mantém a proteção contra duplicação do bem.
 - [x] 132 testes aprovados; seis cenários novos controlam respostas atrasadas, falha/sucesso após troca, envio das fotos em andamento e saída da tela. Lint, build e diff do lote aprovados.
 - [x] Local 8080: apelido fictício digitado e descartado; reabertura retomou o original. Abrir/fechar veículo e reabrir imóvel manteve o tipo e dados corretos. Nenhuma escrita enviada no navegador.
-- [ ] Publicação e reteste no Admin de homologação.
+- [x] Runtime **073253d** publicado; [pipeline 39970596392](https://github.com/Statregy-Analytics/strategy-control/actions/runs/39970596392), tentativa 2, aprovada com auditoria, 132 testes, lint/build, upload e ativação. A primeira tentativa passou nas verificações de código, mas falhou no SSH com Connection timed out/255; repetição do mesmo commit resolveu, sem alterar segurança ou configuração SSH.
+- [x] Admin publicado: rascunho fictício no apelido do imóvel EUR descartado; reabertura retomou o nome original e 325000.75. Editor fechado, cliente alterado pelo seletor para Cláudio: painel anterior ausente e nenhum rascunho/bem do Jorge na seção carregada. Voltar ao Jorge e reabrir o imóvel manteve os dados originais.
+- [x] Nenhuma gravação cadastral/financeira no navegador. Console sem erros de execução. Evidência local: admin-editor-patrimonio-retomada-hml-23-10.png.
 
 Limites: os atrasos/falhas foram controlados nos testes, sem provocar indisponibilidade no backend. A proteção não desfaz uma escrita que o servidor já recebeu; impede etapas posteriores e efeitos de tela fora do contexto original. Não há nova exigência de endpoint nem homologação integral do Admin por estes cenários.
