@@ -225,19 +225,21 @@ const openRejection = () => {
   reviewState.reasonError = ''
   rejectOpen.value = true
 }
-watch(
-  () => [props.customerId, props.item.documentId || props.item.document?.id, props.item.status],
-  () => {
-    revision++
-    reviewer.reset()
-    rejectOpen.value = false
-    uploadOpen.value = false
-  },
-)
-onScopeDispose(() => {
+function resetDocumentContext() {
   revision++
   reviewer.reset()
-})
+  busy.value = false
+  downloading.value = false
+  rejectOpen.value = false
+  uploadOpen.value = false
+  file.value = null
+}
+watch(
+  () => [props.customerId, props.item.documentId || props.item.document?.id, props.item.status],
+  resetDocumentContext,
+  { flush: 'sync' },
+)
+onScopeDispose(resetDocumentContext)
 const name = computed(() => props.item.documentTypeName || 'documento')
 const documentId = computed(() => props.item.documentId || props.item.document?.id)
 const canUpload = computed(() =>
@@ -312,7 +314,8 @@ async function download() {
   }
 }
 async function upload() {
-  if (!file.value || busy.value) return
+  if (!file.value || busy.value || !canUpload.value) return
+  const operation = revision
   busy.value = true
   try {
     const data = new FormData()
@@ -320,14 +323,16 @@ async function upload() {
     data.append('documentTypeId', props.item.documentTypeId)
     if (props.item.requirementId) data.append('requirementId', props.item.requirementId)
     await uploadCustomerDocument(props.customerId, data)
+    if (operation !== revision) return
     successNotify('Documento enviado.')
     uploadOpen.value = false
     file.value = null
     emit('updated')
   } catch (error) {
-    errorNotify(getApiErrorMessage(error, 'Não foi possível enviar o documento.'))
+    if (operation === revision)
+      errorNotify(getApiErrorMessage(error, 'Não foi possível enviar o documento.'))
   } finally {
-    busy.value = false
+    if (operation === revision) busy.value = false
   }
 }
 </script>
