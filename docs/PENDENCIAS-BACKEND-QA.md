@@ -317,8 +317,12 @@ Swagger atual conferido sem novas rotas; UpdateCustomerRequest permanece kind/bi
 
 ## Reteste do envio/consentimentos — 22/10/2026
 
-Consulta autenticada dos termos foi integrada na etapa 7, autorizada pelo usuário. Não solicitar mais consulta pública para este fluxo aprovado. Envio final e consentimentos possuem endpoints e integração; o teste completo aguarda o aceite explícito das versões 1.0 na conta fictícia. Não classificar ausência desse aceite como falha do backend.
+Consulta autenticada dos termos foi integrada na etapa 7, autorizada pelo usuário. Não solicitar mais consulta pública para este fluxo aprovado. Envio final e consentimentos possuem endpoints e integração; o teste integrado foi concluído após autorização explícita do usuário: envio, bloqueio, rejeição/desbloqueio, reenvio/novo bloqueio, aprovação/desbloqueio e nova sessão. Não há bloqueio de API confirmado nesses cenários. A preparação dos novos arquivos foi via API, sem homologar o controle de reenvio do perfil.
 
 Pendência confirmada: na mesma conta client@example.com, GET /client/onboarding/status retorna requiredConsentsCompleted=true, enquanto GET /client/consents/requirements?context=Onboarding&locale=pt-BR retorna isSatisfied=false e os dois acordos Pending. Alinhar as projeções; o front já consulta a versão atual antes de enviar. Não acrescentar campos/ações para contornar a divergência.
 
 RG/CNH/passaporte alternativos e moedas automáticas foram disponibilizados no retorno mais recente; as observações históricas anteriores sobre contratos ausentes não são a situação atual desses endpoints. Ver relatório QA-2026-10-22-ENVIO-CONSENTIMENTOS.md para o escopo e limites do reteste.
+
+Após aceite real, a conta fictícia passou a retornar isSatisfied=true e ambos os termos Accepted, alinhados ao status. A divergência registrada acima foi observada antes desse aceite e permanece solicitação de alinhamento da projeção inicial/legada; não impede o fluxo integrado atualizado. Cookies e marketing permaneceram Pending.
+
+Reteste da identificação alternativa concluído: somente RG aprovado completou 100% (1/1 requisito) e liberou o perfil, sem CNH/passaporte extra. A API já informa alternativeGroup=IDENTITY; a etiqueta individual equivocada era do front e foi corrigida. Não encaminhar essa etiqueta ou a antiga obrigatoriedade exclusiva da CNH como bug atual de API.

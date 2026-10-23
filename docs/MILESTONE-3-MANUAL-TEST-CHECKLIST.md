@@ -680,7 +680,11 @@ Falha/parcialidade do catálogo cobertas automaticamente, sem modificar o catál
 - [x] Aceite dos Termos de Uso e da Política de Privacidade reutilizado na etapa 7 com autorização do usuário, mantendo o padrão visual aprovado. Textos reais/versões disponíveis por links existentes; sem aceite automático de marketing/cookies.
 - [x] Implementação publicada no portal (fdd90d2; pipeline 39889717046: testes, lint, build, upload e ativação aprovados). 283 testes aprovados; desktop e 390 px conferidos.
 - [x] Consulta versionada precede o envio. Versão alterada exige novo aceite. Tela de sucesso só aparece com submissão confirmada e suporta recarga; link direto sem envio volta à revisão.
-- [ ] Aceite e envio real da conta fictícia client@example.com: aguardando confirmação do usuário para aceitar os dois termos 1.0.
-- [ ] Após o envio real: testar 409 durante análise, rejeição/desbloqueio e aprovação/desbloqueio e nova sessão. Não confundir testes automatizados aprovados com homologação integrada.
+- [x] Usuário autorizou o aceite dos dois termos 1.0. Envio real concluído pela etapa 7 da conta fictícia client@example.com; cookies/marketing permaneceram Pending.
+- [x] Integrado: UnderReview/lock=true e PUT profissional 409; reprovação no Admin → UpdateRequired/lock=false e PUT 200; motivo visível no cliente; reenvio fictício via API → novo bloqueio; aprovação única dos dois lados no Admin → Approved/lock=false e PUT 200. Edição real pela tela salva/retomada/restaurada. Logout e novo login mantiveram status e confirmação de envio. Ver relatório para separar preparo via API das ações efetivamente testadas na tela.
 
 Detalhes e evidências: [QA-2026-10-22-ENVIO-CONSENTIMENTOS.md](QA-2026-10-22-ENVIO-CONSENTIMENTOS.md). Pendência backend confirmada: requiredConsentsCompleted=true diverge de isSatisfied=false/termos Pending na consulta versionada. O front não usa a flag legada como comprovante de aceite.
+
+- [x] RG aprovado sozinho elevou o progresso documental a 100%; CNH existente não foi aprovada e nenhum passaporte foi enviado. API confirma grupo alternativo IDENTITY, 1/1 requisito. Corrigida no front a indicação individual de obrigatório para os documentos alternativos; obrigações independentes continuam identificadas. 284 testes, lint/build e revisão local aprovados. Commit do ajuste: 76d2b06; confirmação do deploy registrada no relatório da rodada.
+
+Confirmação final em 23/10: ajuste 76d2b06, pipeline 39892601211 aprovada, indicação de passaporte obrigatório removida em homologação e progresso 100% mantido. Envio/bloqueio/análise concluídos neste roteiro; pendências de arquivos e reenvio pela tela permanecem separadas.
