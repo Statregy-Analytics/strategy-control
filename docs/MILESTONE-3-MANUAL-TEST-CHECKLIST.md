@@ -4,7 +4,7 @@ Atualizado em 23/10/2026. Rodadas iniciais: Admin em 12/10 e portal em 13/10. Ad
 
 ## Fechamento consolidado do Admin — 23/10
 
-A situação atual dos itens 10–19 e 27–38 está no [checklist consolidado](QA-ADMIN-FECHAMENTO-2026-10-23.md). Essa matriz prevalece sobre os quadros históricos abaixo. Renda atual/histórico conferidos consistentes; CNH exclusiva, defaults e endpoints liberados em 22/10 não são pendências atuais. Valor base do contrato e criação patrimonial sem carteira foram integrados com os campos já existentes da API. Runtime final 92f6ccc, pipeline 39980294903 aprovada com 162 testes; regressão desktop/mobile, patrimônio sem carteira, valor base, extrato e descarte registrados no relatório consolidado, sem homologação automática dos bloqueios de servidor ou do portal.
+A situação atual dos itens 10–19 e 27–38 está no [checklist consolidado](QA-ADMIN-FECHAMENTO-2026-10-23.md). Essa matriz prevalece sobre os quadros históricos abaixo. Renda atual/histórico conferidos consistentes; CNH exclusiva, defaults e endpoints liberados em 22/10 não são pendências atuais. Valor base do contrato e criação patrimonial sem carteira foram integrados com os campos já existentes da API. Runtime final 8a00cb4, pipeline 39981438642 aprovada com 162 testes; regressão desktop/mobile, patrimônio sem carteira, valor base, extrato e descarte registrados no relatório consolidado, sem homologação automática dos bloqueios de servidor ou do portal.
 
 ## Integração do retorno de 22/10
 

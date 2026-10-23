@@ -75,7 +75,7 @@ Primeiro runtime 549e5b7, pipeline 39978542515 concluída com auditoria, 160 tes
 
 ## Fechamento da publicação e entrega ao QA
 
-Runtime final **92f6ccc**, [pipeline 39980294903](https://github.com/Statregy-Analytics/strategy-control/actions/runs/39980294903) aprovada integralmente: auditoria, **162 testes**, lint, build, upload e ativação. Arquivos de entrada do site conferidos contra o build final (`index-CUSI9eZD.js`). Os commits intermediários deste mesmo lote também tiveram deploy bem-sucedido; este é o runtime de referência da devolutiva.
+Runtime final **8a00cb4**, [pipeline 39981438642](https://github.com/Statregy-Analytics/strategy-control/actions/runs/39981438642) aprovada integralmente: auditoria, **162 testes**, lint, build, upload e ativação. Arquivos de entrada do site conferidos contra o build final (`index-v-FTYFvx.js`). Os commits intermediários deste mesmo lote também tiveram deploy bem-sucedido; este é o runtime de referência da devolutiva.
 
 - [x] Em homologação final, renda negativa mostra erro local; retornar ao valor original desabilita Salvar. Outros lápis ficam bloqueados durante edição. Edição encerrada sem gravar.
 - [x] Preferências: sem mudança não salva; alterar o tema habilita Salvar; descarte exige confirmação e restaura Automático. Moedas/idioma/fuso existentes preservados. Nenhuma preferência foi gravada.
