@@ -31,7 +31,7 @@
       />
       <div class="profile-header-status">
         <span class="profile-header-status__label">Risco</span
-        ><q-badge outline>{{ operational.riskClassification || 'Não informado' }}</q-badge>
+        ><q-badge outline>{{ operational.riskClassification || '—' }}</q-badge>
       </div>
       <div class="profile-header-status">
         <span class="profile-header-status__label">Compliance</span>

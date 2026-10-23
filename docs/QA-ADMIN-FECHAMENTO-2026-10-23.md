@@ -5,6 +5,7 @@ Escopo: itens administrativos do feedback de 17/10 (10–19), complementos admin
 ## Checklist de entrega do frontend
 
 - [x] Seleção: grade/lista, busca pelo texto aprovado, filtros, Todos, classificação/compliance/nível, A–Z, badges e paginação. API sem documento não gera CPF/CNPJ fictício.
+- [x] Ficha: risco sem classificação usa “—”, conforme o desenho, sem simular uma classificação.
 - [x] Ficha: navegação sem overflow, cores/glass, documentos com ícones e revisão, histórico com linha/bolinhas, temas, botões bancários/patrimoniais existentes.
 - [x] Edição por seção: uma seção por vez, validações, valores decimais/zero, Salvar só após mudança, descarte confirmado e preservação das coleções.
 - [x] Bancos: catálogo completo, busca sem acentos, país legível, iniciais no ícone, PIX completo, principal conforme API e ações na linha. Nenhuma coluna Titularidade extra.
