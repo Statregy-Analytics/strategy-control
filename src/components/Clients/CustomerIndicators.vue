@@ -13,11 +13,11 @@
   >
     <img
       v-if="compliance.tone !== 'inactive'"
-      :src="`/icons/client-selection/compliance-${compliance.tone}.svg`"
+      :src="`/icons/client-selection/compliance-${compliance.tone === 'alert' ? 'pending' : compliance.tone}.svg`"
       alt=""
       width="12"
       height="12"
-    />{{ compliance.label }}
+    />{{ prefix }}{{ compliance.label }}
   </span>
   <span
     v-else
@@ -40,6 +40,7 @@ import {
 } from 'src/services/customerPresentation'
 const props = defineProps({
   type: { type: String, required: true },
+  prefix: { type: String, default: '' },
   value: { type: [String, Number], default: null },
 })
 const compliance = computed(() => compliancePresentation(props.value))
@@ -66,6 +67,11 @@ const compliance = computed(() => compliancePresentation(props.value))
   color: #fee685;
   border-color: rgba(254, 230, 133, 0.4);
   background: rgba(254, 230, 133, 0.12);
+}
+.customer-badge--alert {
+  color: #fee685;
+  border: 0.8px solid #fee685;
+  background: rgba(187, 77, 0, 0.2);
 }
 .customer-badge--blocked {
   color: #ffc9c9;

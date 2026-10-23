@@ -48,7 +48,8 @@ async function harness() {
     'src/composables/useFinanceResource': { useFinanceResource },
   }
   const mod = new vm.SourceTextModule(
-    source + '\nexport { load, reload, changeViewMode, search, status, listResource, loading };',
+    source +
+      '\nexport { load, reload, changeViewMode, search, status, classification, compliance, listResource, loading };',
     { context },
   )
   await mod.link((name) => {
@@ -189,4 +190,58 @@ test('a newer query started between resource resolution and publication invalida
   h.calls[1].resolve(response('latest'))
   await latest
   assert.equal(h.store.data[0].id, 'latest')
+})
+
+test('Todos clears the server status filter, restarts pagination, and preserves other filters', async () => {
+  const h = await harness()
+  h.model.search.value = 'retained search'
+  h.model.status.value = 'Suspended'
+  h.model.classification.value = 'G'
+  h.model.compliance.value = 'Pending'
+  const filtered = h.model.reload()
+  assert.equal(h.calls[0].query.status, 'Suspended')
+  h.calls[0].resolve({
+    data: [
+      {
+        id: 'blocked',
+        status: 'Suspended',
+        documentClassification: 'G',
+        complianceStatus: 'Pending',
+      },
+    ],
+    pagination: { totalPages: 1 },
+  })
+  await filtered
+  h.store.pagination.page = 2
+  h.model.status.value = null
+  const all = h.model.reload()
+  assert.equal(h.calls[1].query.status, undefined)
+  assert.equal(h.calls[1].query.search, 'retained search')
+  assert.equal(h.calls[1].query.page, 1)
+  h.calls[1].resolve({
+    data: [
+      { id: 'active', status: 'Active', documentClassification: 'G', complianceStatus: 'Pending' },
+      {
+        id: 'prospect',
+        status: 'Prospect',
+        documentClassification: 'G',
+        complianceStatus: 'Pending',
+      },
+      {
+        id: 'other-class',
+        status: 'Active',
+        documentClassification: 'I',
+        complianceStatus: 'Pending',
+      },
+    ],
+    pagination: { totalPages: 1 },
+  })
+  await all
+  assert.deepEqual(
+    [...h.store.data].map((row) => row.id),
+    ['active', 'prospect'],
+  )
+  assert.equal(h.store.pagination.page, 1)
+  assert.equal(h.model.classification.value, 'G')
+  assert.equal(h.model.compliance.value, 'Pending')
 })

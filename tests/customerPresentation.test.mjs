@@ -2,6 +2,7 @@ import test from 'node:test'
 import assert from 'node:assert/strict'
 import {
   customerStatusLabel,
+  compliancePresentation,
   customerMaskedDocument,
   readCustomerSelection,
 } from '../src/services/customerPresentation.js'
@@ -96,4 +97,38 @@ test('superseded queries stop requesting subsequent pages', async () => {
   )
   assert.equal(result, undefined)
   assert.equal(calls.length, 1)
+})
+
+test('compliance presentation distinguishes alert from pending and keeps missing values unknown', () => {
+  for (const value of ['Alert', 'Warning', 'Attention'])
+    assert.deepEqual(compliancePresentation(value), { label: 'Alerta', tone: 'alert' })
+  for (const value of ['Ok', 'Clear', 'Approved'])
+    assert.deepEqual(compliancePresentation(value), { label: 'OK', tone: 'ok' })
+  assert.deepEqual(compliancePresentation('Pending'), { label: 'Pendente', tone: 'pending' })
+  assert.deepEqual(compliancePresentation('Blocked'), { label: 'Bloqueado', tone: 'blocked' })
+  assert.deepEqual(compliancePresentation(null), { label: '—', tone: 'inactive' })
+  assert.deepEqual(compliancePresentation('NewServerStatus'), {
+    label: 'NewServerStatus',
+    tone: 'inactive',
+  })
+})
+test('alert filter searches every page and preserves original server status values', async () => {
+  const rows = ['Warning', 'Pending', 'Alert', 'Attention'].map((complianceStatus, index) => ({
+    customerId: String(index),
+    complianceStatus,
+  }))
+  const calls = []
+  const result = await readCustomerSelection(
+    async (query) => {
+      calls.push(query)
+      return { data: [rows[query.page - 1]], pagination: { totalPages: 4, pageSize: 1 } }
+    },
+    { page: 2, pageSize: 2, search: 'term' },
+    { compliance: 'Alert' },
+  )
+  assert.equal(result.pagination.totalItems, 3)
+  assert.equal(result.pagination.totalPages, 2)
+  assert.deepEqual(result.data, [rows[3]])
+  assert.equal(result.data[0].complianceStatus, 'Attention')
+  assert.ok(calls.every((query) => query.search === 'term' && query.complianceStatus === undefined))
 })

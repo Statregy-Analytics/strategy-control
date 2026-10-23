@@ -1,8 +1,9 @@
 // API values stay unchanged in requests and stored records.
 export const customerStatusOptions = [
+  { label: 'Todos', value: null },
   { label: 'Ativo', value: 'Active' },
-  { label: 'Inativo', value: 'Inactive' },
   { label: 'Bloqueado', value: 'Suspended' },
+  { label: 'Inativo', value: 'Inactive' },
 ]
 export const customerStatusLabel = (status) =>
   ({
@@ -14,15 +15,24 @@ export const customerStatusLabel = (status) =>
   })[status] || '—'
 export const customerStatusTone = (status) =>
   status === 'Active' ? 'ok' : status === 'Suspended' ? 'blocked' : 'inactive'
+// Compatibility is presentation-only: these aliases are never sent to the API.
+export const complianceFilterValue = (value) =>
+  ({ Clear: 'Ok', Approved: 'Ok', Attention: 'Alert', Warning: 'Alert' })[value] || value
+export const customerComplianceOptions = [
+  { label: 'OK', value: 'Ok' },
+  { label: 'Pendente', value: 'Pending' },
+  { label: 'Alerta', value: 'Alert' },
+  { label: 'Bloqueado', value: 'Blocked' },
+]
 export function compliancePresentation(value) {
   const known = {
     Ok: ['OK', 'ok'],
     Pending: ['Pendente', 'pending'],
     Blocked: ['Bloqueado', 'blocked'],
     Rejected: ['Rejeitado', 'blocked'],
-    Attention: ['Atenção', 'pending'],
+    Alert: ['Alerta', 'alert'],
   }
-  const [label, tone] = known[value] || [value || '—', 'inactive']
+  const [label, tone] = known[complianceFilterValue(value)] || [value || '—', 'inactive']
   return { label, tone }
 }
 export function customerMaskedDocument(value) {
@@ -40,7 +50,8 @@ export function customerMatches(customer, filters) {
   return (
     (!filters.inactive || ['Prospect', 'Archived'].includes(customer.status)) &&
     (!filters.classification || customer.documentClassification === filters.classification) &&
-    (!filters.compliance || customer.complianceStatus === filters.compliance) &&
+    (!filters.compliance ||
+      complianceFilterValue(customer.complianceStatus) === filters.compliance) &&
     (filters.level == null || customer.documentLevel === filters.level)
   )
 }

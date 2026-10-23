@@ -45,3 +45,19 @@ A apresentação usa Active → Ativo; Suspended → Bloqueado; Archived e Prosp
 - Evidências visuais salvas localmente: admin-selecao-clientes-hml-23-10.png e admin-banco-patrimonio-hml-23-10.png. Nenhuma escrita de dados de cliente nesta rodada.
 
 A validação visual/funcional do front não encerra os bloqueios de API e dados listados acima nem as demais pendências históricas do QA.
+
+
+## Complemento — filtros C04 e indicadores de compliance
+
+Revisão dos itens 30–32/34: a primeira publicação não contemplava Todos no menu de status, Alerta no filtro/badge e o prefixo Compliance na lista. Esses pontos são correções do front, não pendências de API.
+
+- [x] Menu Status com Todos, Ativo, Bloqueado e Inativo, na ordem C04; opção selecionada com check, curvas e superfície do desenho. Ícones 16×16 e curvas 120×7, sem dependência dos URLs temporários do Figma.
+- [x] Todos remove só o filtro de status, preserva busca/classificação/compliance e retoma a página 1. Não envia Todos, null ou Inactive como enum HTTP.
+- [x] Alerta separado de Pendente na apresentação e no filtro, com o ícone e fundo alaranjado do C01. Compatibilidade de leitura para Alert/Warning/Attention; valores da API preservados. Clear/Approved continuam apresentados como OK.
+- [x] Lista identifica Compliance OK/Pendente/Alerta/Bloqueado; cards mantêm os rótulos originais do desenho.
+- [x] Cabeçalho da ficha reutiliza os mesmos badges para compliance/status. CSS dos rótulos não sobrescreve as cores dos badges.
+- [x] 115 testes, lint, build e diff dos arquivos alterados aprovados. Cobertura inclui filtro Alerta em várias páginas e retorno para Todos preservando os demais filtros.
+- [x] Local 8080: Bloqueado retornou Carlos, Todos restaurou os 13 clientes e Alerta mostrou vazio legítimo, sem erro. Lista mostrou Compliance Pendente/OK; ficha de Carlos exibiu Pendente amarelo e Bloqueado vermelho. Menu e ficha em 390px sem overflow, com os quatro itens acessíveis e seleção correta; viewport restaurado. Nenhum alerta cadastral foi criado para produzir massa de teste.
+- [ ] Confirmar publicação e reteste em homologação.
+
+Limite: não havia cliente com compliance Alerta na massa consultada; suas variantes e paginação foram exercitadas com respostas controladas nos testes. Não apresentar esse caso como revisão integrada de um alerta real. A integração/homologação de imagens do patrimônio do item 23 permanece uma próxima frente do front; os endpoints já existem.

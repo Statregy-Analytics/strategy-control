@@ -30,22 +30,16 @@
         @update:model-value="switchCustomer"
       />
       <div class="profile-header-status">
-        <span>Risco</span
+        <span class="profile-header-status__label">Risco</span
         ><q-badge outline>{{ operational.riskClassification || 'Não informado' }}</q-badge>
       </div>
       <div class="profile-header-status">
-        <span>Compliance</span
-        ><q-badge outline>{{
-          { Pending: 'Pendente', Clear: 'OK', Approved: 'OK' }[operational.complianceStatus] ||
-          operational.complianceStatus ||
-          'Não informado'
-        }}</q-badge>
+        <span class="profile-header-status__label">Compliance</span>
+        <customer-indicators type="compliance" :value="operational.complianceStatus" />
       </div>
       <div class="profile-header-status">
-        <span>Status</span
-        ><q-badge outline :color="customer.status === 'Active' ? 'positive' : 'grey-5'">{{
-          statusLabel(customer.status)
-        }}</q-badge>
+        <span class="profile-header-status__label">Status</span>
+        <customer-indicators type="status" :value="customer.status" />
       </div>
     </header>
     <resource-state
@@ -430,7 +424,7 @@
 </template>
 <script setup>
 import { computed, ref, watch, onMounted, onScopeDispose } from 'vue'
-import { customerStatusLabel as statusLabel } from 'src/services/customerPresentation'
+import CustomerIndicators from 'src/components/Clients/CustomerIndicators.vue'
 import { useRoute, useRouter, onBeforeRouteLeave, onBeforeRouteUpdate } from 'vue-router'
 import SectionEditActions from 'src/components/Entity/SectionEditActions.vue'
 import { useClientSectionEditor } from 'src/composables/useClientSectionEditor'
@@ -962,7 +956,7 @@ h1 {
   justify-items: center;
   margin: 0 12px;
 }
-.profile-header-status > span {
+.profile-header-status__label {
   font-size: 10px;
   text-transform: uppercase;
   color: var(--sa-muted);

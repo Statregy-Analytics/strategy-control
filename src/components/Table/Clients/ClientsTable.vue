@@ -31,15 +31,41 @@
             outlined
             dense
             dark
-            dropdown-icon="img:/icons/client-selection/dropdown.svg"
-            clearable
+            dropdown-icon="img:/icons/client-selection/status-dropdown.svg"
+            popup-content-class="customer-status-menu"
+            options-selected-class="customer-status-option--selected"
             emit-value
             map-options
             :options="customerStatusOptions"
-            label="Status"
+            :display-value="status === null ? 'Status' : undefined"
             aria-label="Filtrar por status"
             @update:model-value="reload"
-          />
+          >
+            <template #option="scope">
+              <q-item
+                v-bind="scope.itemProps"
+                class="customer-status-option"
+                :class="{ 'customer-status-option--selected': scope.opt.value === status }"
+                :aria-selected="scope.opt.value === status"
+              >
+                <img
+                  class="customer-status-option__curve"
+                  :src="`/icons/client-selection/${scope.opt.value === status ? 'status-option-selected' : 'status-option-curve'}.svg`"
+                  alt=""
+                  width="120"
+                  height="7"
+                />
+                <q-item-section>{{ scope.opt.label }}</q-item-section>
+                <q-item-section v-if="scope.opt.value === status" side
+                  ><img
+                    src="/icons/client-selection/status-selected.svg"
+                    alt=""
+                    width="16"
+                    height="16"
+                /></q-item-section>
+              </q-item>
+            </template>
+          </q-select>
           <q-select
             v-model="classification"
             outlined
@@ -170,6 +196,7 @@
               ><div class="customer-list__status">
                 <customer-indicators type="status" :value="props.row.status" /><customer-indicators
                   type="compliance"
+                  prefix="Compliance "
                   :value="props.row.complianceStatus"
                 /></div></q-td
           ></template>
@@ -290,6 +317,7 @@ import CustomerIndicators from 'src/components/Clients/CustomerIndicators.vue'
 import { listCustomerCards } from 'src/services/customerService'
 import {
   customerStatusOptions,
+  customerComplianceOptions,
   customerMaskedDocument,
   readCustomerSelection,
 } from 'src/services/customerPresentation'
@@ -316,11 +344,7 @@ const search = ref(''),
   viewMode = ref('cards')
 // The classification is supplied by the API; never substitute risk or invent a level.
 const classificationOptions = ref([])
-const complianceOptions = [
-  { label: 'OK', value: 'Ok' },
-  { label: 'Pendente', value: 'Pending' },
-  { label: 'Bloqueado', value: 'Blocked' },
-]
+const complianceOptions = customerComplianceOptions
 const levelOptions = [0, 1, 2, 3].map((value) => ({ label: `Nível ${value}`, value }))
 const sortOptions = [
   { label: 'A-Z', value: 'asc' },
@@ -733,5 +757,56 @@ onMounted(load)
   .customer-card {
     padding: 16px;
   }
+}
+</style>
+
+<style>
+/* QSelect teleports its menu outside the page; scope it by its dedicated class. */
+.customer-status-menu {
+  width: 142px;
+  padding: 10px;
+  color: #fff;
+  border: 0.8px solid rgba(255, 255, 255, 0.2);
+  border-radius: 8px;
+  background: linear-gradient(
+    86.19deg,
+    rgba(24, 33, 51, 0.2),
+    rgba(24, 33, 51, 0.15),
+    rgba(24, 33, 51, 0.2)
+  );
+  backdrop-filter: blur(1.5px);
+  box-shadow: 4px 4px 12px rgba(0, 0, 0, 0.13);
+}
+.customer-status-menu .q-virtual-scroll__content {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+.customer-status-menu .customer-status-option {
+  position: relative;
+  width: 120px;
+  min-height: 26px;
+  padding: 3px 10px;
+  border-radius: 0 0 6px 6px;
+  color: #fff;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 20px;
+}
+.customer-status-menu .customer-status-option--selected {
+  background: rgba(255, 255, 255, 0.12);
+}
+.customer-status-option__curve {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  pointer-events: none;
+}
+.customer-status-menu .q-item__section {
+  position: relative;
+  min-width: 0;
+}
+.customer-status-menu .q-item__section--side {
+  padding-left: 4px;
 }
 </style>

@@ -704,3 +704,13 @@ Relatório: QA-2026-10-23-REENVIO-PERFIL.md. Pendência real do backend: substit
 ## QA de seleção e ficha — 23/10
 
 Checklist visual, binds, cenários e dependências: [Seleção e ficha do cliente](QA-2026-10-23-SELECAO-FICHA.md). Os bloqueios de API estão separados dos ajustes do front; esta rodada não encerra as demais pendências históricas do Marco 3.
+
+
+## Complemento C04 e compliance — 23/10
+
+- [x] Todos no filtro Status e estados de seleção conforme C04.
+- [x] Alerta no filtro/badge, prefixo Compliance na lista e badges consistentes no cabeçalho da ficha.
+- [x] 115 testes, lint/build e verificação do diff do lote aprovados.
+- [ ] Publicação e reteste integrado deste complemento.
+
+Detalhes e limites no [relatório da seleção/ficha](QA-2026-10-23-SELECAO-FICHA.md#complemento--filtros-c04-e-indicadores-de-compliance). Mantidas as pendências reais do backend; não considerar encerrada a integração/homologação das imagens patrimoniais.

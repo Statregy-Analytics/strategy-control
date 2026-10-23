@@ -6,6 +6,8 @@ A interface segue o Figma e as alterações de ordem/campos expressamente autori
 
 Detalhes e checklist: [QA seleção/ficha](QA-2026-10-23-SELECAO-FICHA.md). Restam maskedDocument vazio nos 13 cards apesar do CPF na identificação, API administrativa das sessões por cliente, declaração PEP do perfil e regra de conta única principal no servidor (três de cinco clientes com conta única ainda retornaram isPrimary=false; Cláudio está correto). Confirmar também a classificação G/I recebida versus os exemplos A/AA/AAA do desenho. Os filtros já funcionam no front sobre todas as páginas; suporte server-side é melhoria de escala. O bind visual de status foi autorizado: Active/Ativo, Suspended/Bloqueado e Prospect+Archived/Inativo, sem mudar os enums ou o estado cadastral real.
 
+Complemento do front em 23/10: Todos no status, Alerta no filtro/badge, prefixo Compliance na lista e cores dos badges da ficha corrigidos sem novo contrato HTTP. Esses ajustes não devem ser encaminhados como demandas do backend. Os bloqueios de dados/API acima continuam separados.
+
 ## Atualização de 22/10 — prevalece sobre os relatos históricos
 
 O retorno libera envio final, declaração de ausência de contato, RG/CNH/passaporte como alternativas, moeda automática de patrimônio/conta e status/data/bloqueio do cadastro. Esses contratos **não devem mais ser pedidos como ausentes**. Compatibilidade bancária (sem campos de titular), declaração, envio final, bloqueio oficial, países por idioma e moeda automática integrados nesta rodada. Detalhes, testes e limites em [Retorno de 22/10](QA-2026-10-22-RETORNO-BACKEND.md).
