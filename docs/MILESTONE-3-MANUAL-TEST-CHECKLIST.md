@@ -711,6 +711,6 @@ Checklist visual, binds, cenários e dependências: [Seleção e ficha do client
 - [x] Todos no filtro Status e estados de seleção conforme C04.
 - [x] Alerta no filtro/badge, prefixo Compliance na lista e badges consistentes no cabeçalho da ficha.
 - [x] 115 testes, lint/build e verificação do diff do lote aprovados.
-- [ ] Publicação e reteste integrado deste complemento.
+- [x] Publicado 525dfe2 / pipeline 39953877234 aprovada. Menu, Inativo → Todos, prefixo de compliance na lista e badges da ficha de Carlos conferidos no Admin publicado, sem gravação. Alerta com massa controlada nos testes e vazio legítimo local; não houve cliente real nesse estado nesta rodada.
 
 Detalhes e limites no [relatório da seleção/ficha](QA-2026-10-23-SELECAO-FICHA.md#complemento--filtros-c04-e-indicadores-de-compliance). Mantidas as pendências reais do backend; não considerar encerrada a integração/homologação das imagens patrimoniais.

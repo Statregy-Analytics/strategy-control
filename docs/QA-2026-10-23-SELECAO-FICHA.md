@@ -58,6 +58,8 @@ Revisão dos itens 30–32/34: a primeira publicação não contemplava Todos no
 - [x] Cabeçalho da ficha reutiliza os mesmos badges para compliance/status. CSS dos rótulos não sobrescreve as cores dos badges.
 - [x] 115 testes, lint, build e diff dos arquivos alterados aprovados. Cobertura inclui filtro Alerta em várias páginas e retorno para Todos preservando os demais filtros.
 - [x] Local 8080: Bloqueado retornou Carlos, Todos restaurou os 13 clientes e Alerta mostrou vazio legítimo, sem erro. Lista mostrou Compliance Pendente/OK; ficha de Carlos exibiu Pendente amarelo e Bloqueado vermelho. Menu e ficha em 390px sem overflow, com os quatro itens acessíveis e seleção correta; viewport restaurado. Nenhum alerta cadastral foi criado para produzir massa de teste.
-- [ ] Confirmar publicação e reteste em homologação.
+- [x] Publicado **525dfe2**; [pipeline 39953877234](https://github.com/Statregy-Analytics/strategy-control/actions/runs/39953877234) aprovada com auditoria, 115 testes, lint, build, upload e ativação.
+- [x] Admin em homologação: menu C04 com quatro opções e check correto; Inativo retornou seis clientes e Todos restaurou 13. Lista mostrou Compliance Pendente/OK. Ficha do Carlos manteve Pendente amarelo e Bloqueado vermelho; os três rótulos do cabeçalho usam 10px, sem sobrescrever a cor dos badges. Console sem erros e nenhuma escrita cadastral.
+- [x] Evidências locais: admin-filtro-status-c04-hml-23-10.png e admin-badges-ficha-hml-23-10.png. O reteste publicado foi desktop; a conferência de 390px deste complemento foi local.
 
 Limite: não havia cliente com compliance Alerta na massa consultada; suas variantes e paginação foram exercitadas com respostas controladas nos testes. Não apresentar esse caso como revisão integrada de um alerta real. A integração/homologação de imagens do patrimônio do item 23 permanece uma próxima frente do front; os endpoints já existem.
