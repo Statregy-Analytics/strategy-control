@@ -24,10 +24,10 @@ A apresentação usa Active → Ativo; Suspended → Bloqueado; Archived e Prosp
 
 ## Dependências reais do backend
 
-1. **CPF/CNPJ dos cards:** maskedDocument veio vazio na consulta, inclusive para Jorge, que possui CPF mascarado na identificação. Preencher a projeção dos cards com o documento fiscal mascarado. O front nunca tenta reconstruir dígitos já ocultados e também oculta os três primeiros e três últimos na apresentação.
+1. **CPF/CNPJ dos cards:** maskedDocument veio vazio nos 13 cards consultados, inclusive para Jorge, que possui CPF mascarado na identificação. Preencher a projeção dos cards com o documento fiscal mascarado. O front nunca tenta reconstruir dígitos já ocultados e também oculta os três primeiros e três últimos na apresentação.
 2. **Sessões:** Swagger só expõe users/me/sessions; precisamos de leitura/encerramento por cliente no Admin. Não usar as sessões do administrador como se fossem as do cliente.
 3. **PEP:** ainda não há contrato de declaração no perfil/onboarding. A pergunta nova do item 29 depende da escrita/leitura da declaração e de sua projeção para os alertas; não foi criado campo sem persistência.
-4. **Conta única principal:** respeitar isPrimary da API e normalizar a conta única no servidor, conforme item 28. Não marcar visualmente uma conta como principal se o servidor informa false.
+4. **Conta única principal:** respeitar isPrimary da API e normalizar a conta única no servidor, conforme item 28. Não marcar visualmente uma conta como principal se o servidor informa false. Conferidos cinco clientes com conta única: Cláudio tem check válido; três ainda retornaram isPrimary=false.
 5. **Classificação:** os cards retornaram G/I; o desenho exemplifica A/AA/AAA. A UI exibe a classificação real com o badge previsto. Confirmar catálogo/regra antes de qualquer conversão semântica.
 6. Filtros de classificação/compliance/nível não constam dos parâmetros HTTP atuais. O front funciona consultando o resultado completo; filtros server-side permanecem melhoria de escala, sem bloquear este cenário.
 

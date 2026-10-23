@@ -484,6 +484,11 @@ onMounted(load)
 .clients-toolbar :deep(.q-field__label) {
   font-size: 12px;
 }
+.clients-toolbar :deep(.q-select__dropdown-icon) {
+  width: 16px;
+  height: 16px;
+  font-size: 16px;
+}
 .clients-search :deep(.q-field__native) {
   font-size: 14px;
 }
