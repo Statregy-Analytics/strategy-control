@@ -8,6 +8,10 @@ Detalhes e checklist: [QA seleção/ficha](QA-2026-10-23-SELECAO-FICHA.md). Rest
 
 Complemento do front em 23/10: Todos no status, Alerta no filtro/badge, prefixo Compliance na lista e cores dos badges da ficha corrigidos sem novo contrato HTTP. Esses ajustes não devem ser encaminhados como demandas do backend. Os bloqueios de dados/API acima continuam separados.
 
+## Ciclo das ações documentais — reteste de 23/10
+
+Loading e arquivo/diálogos por cliente/documento foram corrigidos no front, incluindo conclusão tardia de upload (eb53be3). Pipeline 39973080495 aprovada, 137 testes; leitura do PNG fictício, cancelamento da revisão e troca de cliente conferidos no Admin publicado. Não exige novo contrato HTTP. As regras de progresso/versões documentais do servidor permanecem separadas desta correção. [Relatório e limites](QA-2026-10-23-CICLO-DOCUMENTOS.md).
+
 ## Ciclo do editor de patrimônio — reteste de 23/10
 
 Respostas tardias após fechar o painel, trocar de cliente ou sair foram protegidas no front (073253d). Reteste publicado de descarte e alternância Jorge/Cláudio concluído, com 132 testes e pipeline 39970596392 aprovada na tentativa 2. Não exige mudança de API nem desfaz requisições já recebidas pelo servidor. [Evidências e limites](QA-2026-10-23-EDITOR-PATRIMONIO.md). O timeout SSH da primeira publicação foi resolvido na repetição e não é bug dos endpoints do backend.

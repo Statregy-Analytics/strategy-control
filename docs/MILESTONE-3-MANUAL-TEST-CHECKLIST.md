@@ -739,4 +739,4 @@ Integração C11/C12 e testes fictícios: [relatório de imagens patrimoniais](Q
 
 - [x] Loading/arquivo/diálogos isolados por cliente/documento; retorno de upload antigo não afeta o card atual. Controles do Figma mantidos.
 - [x] 137 testes, lint/build/diff aprovados; consulta do PNG fictício e liberação dos controles conferidas em 8080.
-- [ ] Publicação/reteste conforme [ciclo das ações documentais](QA-2026-10-23-CICLO-DOCUMENTOS.md).
+- [x] Publicado eb53be3; pipeline 39973080495 aprovada. PNG fictício abriu, controles liberaram ao concluir, reprovação cancelada e troca Jorge/Cláudio conferida sem alterações documentais. Concorrência/upload/download cobertos de forma controlada. [Ciclo das ações documentais](QA-2026-10-23-CICLO-DOCUMENTOS.md).
