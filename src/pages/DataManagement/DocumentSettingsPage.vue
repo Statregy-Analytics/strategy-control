@@ -8,7 +8,7 @@
         <template #body-cell-name="props"><q-td :props="props"><q-item dense class="q-pa-none"><q-item-section avatar><q-avatar size="32px" color="blue-grey-1" text-color="blue-grey-7" icon="description" /></q-item-section><q-item-section><q-item-label>{{ props.row.name }}</q-item-label><q-item-label caption>{{ props.row.code }}</q-item-label></q-item-section></q-item></q-td></template>
         <template #body-cell-categoryId="props"><q-td :props="props">{{ categoryName(props.value) }}</q-td></template>
         <template #body-cell-actions="props"><q-td :props="props"><q-btn flat round dense icon="edit" color="primary" aria-label="Configurar tipo documental" @click.stop="openType(props.row)" /></q-td></template>
-        <template #no-data><div class="full-width row flex-center q-pa-xl text-grey-7">Nenhum tipo documental encontrado.</div></template>
+        <template #no-data><div v-if="!loading && !loadError" class="full-width row flex-center q-pa-xl text-grey-7">Nenhum tipo documental encontrado.</div></template>
       </q-table>
     </div>
 
