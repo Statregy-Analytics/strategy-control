@@ -227,7 +227,7 @@
   </resource-state>
 </template>
 <script setup>
-import { computed, ref, watch } from 'vue'
+import { computed, ref, watch, onScopeDispose } from 'vue'
 import ResourceState from 'src/components/Finance/ResourceState.vue'
 import ProfileDocumentItem from './ProfileDocumentItem.vue'
 import AssetPhotoGallery from './AssetPhotoGallery.vue'
@@ -266,6 +266,16 @@ const page = ref(1),
   selectedGroup = ref(null),
   draft = ref(null),
   error = ref('')
+let editorRevision = 0
+function invalidateEditor() {
+  editorRevision++
+  editor.reset()
+  draft.value = null
+  error.value = ''
+  saving.value = false
+}
+const activeEditor = (revision, customerId) =>
+  revision === editorRevision && customerId === props.customerId && dialog.value
 const groups = [
   { type: 'RealEstate', title: 'Imóveis', singular: 'imóvel', icon: 'home' },
   { type: 'Vehicle', title: 'Veículos', singular: 'veículo', icon: 'directions_car' },
@@ -340,9 +350,12 @@ function documentResource(id) {
   if (!documentResources.has(id)) documentResources.set(id, useFinanceResource())
   return documentResources.get(id)
 }
-const loadDocuments = (id) =>
-  documentResource(id).load(async () => (await financeGet(`${base()}/${id}/documents`)).data)
+const loadDocuments = (id, customerId = props.customerId) =>
+  documentResource(id).load(
+    async () => (await financeGet(`admin/customers/${customerId}/assets/${id}/documents`)).data,
+  )
 async function edit(asset, group) {
+  if (saving.value) return
   photoEditorKey.value++
   selected.value = asset
   selectedGroup.value = group
@@ -352,13 +365,24 @@ async function edit(asset, group) {
   await loadEditor()
 }
 async function loadEditor() {
+  if (!dialog.value || !selectedGroup.value) return
+  const revision = ++editorRevision,
+    customerId = props.customerId
+  const asset = selected.value,
+    type = selectedGroup.value.type
   const result = await editor.load(async () =>
-    selected.value ? (await financeGet(`${base()}/${selected.value.id}`)).data : {},
+    asset ? (await financeGet(`admin/customers/${customerId}/assets/${asset.id}`)).data : {},
   )
-  if (result) draft.value = assetDraft(result, selectedGroup.value.type)
+  if (result && activeEditor(revision, customerId)) draft.value = assetDraft(result, type)
 }
 async function save() {
-  if (saving.value) return
+  if (saving.value || !dialog.value || !draft.value || !selectedGroup.value) return
+  const revision = editorRevision,
+    customerId = props.customerId
+  const asset = selected.value,
+    photoEditor = photos.value
+  const assetBase = `admin/customers/${customerId}/assets`
+  const active = () => activeEditor(revision, customerId)
   const currencyId =
     selected.value?.currencyId ||
     props.currencies.find((c) => c.currencyIsoCode === 'BRL')?.currencyId
@@ -377,39 +401,58 @@ async function save() {
     )
     const saved = await financeWrite(
       selected.value ? 'patch' : 'post',
-      `${base()}${selected.value ? `/${selected.value.id}` : ''}`,
+      `${assetBase}${asset ? `/${asset.id}` : ''}`,
       payload,
     )
+    if (!active()) return
     // A partial photo failure must retry against the created asset, not create another one.
-    const savedId = selected.value?.id || saved?.id || saved?.assetId
+    const savedId = asset?.id || saved?.id || saved?.assetId
     if (!savedId) throw new Error('O salvamento não retornou o identificador do patrimônio.')
     if (!selected.value) {
       selected.value = { ...saved, id: savedId, currencyId }
       editor.state.data = { ...payload, ...saved }
     }
-    await photos.value?.save(savedId)
-    await loadDocuments(savedId)
-    dialog.value = false
-    await load()
-    emit('changed')
+    await photoEditor?.save(savedId)
+    if (!active()) return
+    await loadDocuments(savedId, customerId)
+    if (!active()) return
     successNotify('Patrimônio salvo.')
+    emit('changed')
+    dialog.value = false
+    if (customerId === props.customerId) await load()
   } catch (e) {
+    if (!active()) return
     error.value = getApiErrorMessage(e, 'Não foi possível salvar o patrimônio.')
     errorNotify(error.value)
   } finally {
-    saving.value = false
+    if (active()) saving.value = false
   }
 }
 watch(
+  dialog,
+  (open) => {
+    if (!open) invalidateEditor()
+  },
+  { flush: 'sync' },
+)
+watch(
   () => props.customerId,
   () => {
+    invalidateEditor()
+    resource.reset()
+    documentResources.forEach((item) => item.reset())
     documentResources.clear()
     dialog.value = false
     page.value = 1
     load()
   },
-  { immediate: true },
+  { immediate: true, flush: 'sync' },
 )
+onScopeDispose(() => {
+  invalidateEditor()
+  resource.reset()
+  documentResources.forEach((item) => item.reset())
+})
 </script>
 <style scoped>
 .asset-group + .asset-group {

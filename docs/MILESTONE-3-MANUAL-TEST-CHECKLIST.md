@@ -726,3 +726,10 @@ Integração C11/C12 e testes fictícios: [relatório de imagens patrimoniais](Q
 - [x] Exibir os valores pela moeda persistida do bem, independente do carregamento da carteira, preservando o Figma.
 - [x] 126 testes, lint/build e diff do lote aprovados; leitura local em BRL/EUR/USD e descarte do editor sem gravação.
 - [x] Publicado 9909326 + complemento responsivo 3dbdb4c; pipelines 39968080972 e 39968642647 aprovadas. Valores dos 12 bens em BRL/EUR/USD e nomes legíveis em 390px conferidos no Admin, sem gravações. [Relatório da moeda patrimonial](QA-2026-10-23-MOEDA-PATRIMONIO.md).
+
+
+## Ciclo do editor de patrimônio — QA 15/17, 23/10
+
+- [x] Respostas pendentes invalidadas ao fechar, trocar de cliente ou sair; salvamento/fotos vinculados ao contexto original. Mesmos editores do Figma.
+- [x] 132 testes, lint/build e diff do lote aprovados; descarte/reabertura sem gravação conferidos na porta 8080.
+- [ ] Publicação/reteste conforme [ciclo de edição do patrimônio](QA-2026-10-23-EDITOR-PATRIMONIO.md).

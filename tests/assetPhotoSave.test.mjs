@@ -14,7 +14,7 @@ test('new asset photo failure retries against created asset without a duplicate 
     reads = []
   let fail = true
   const modules = {
-    vue: { computed, ref, watch() {} },
+    vue: { computed, ref, watch() {}, onScopeDispose() {} },
     'src/services/clientAssetProfile': model,
     'src/services/financeService': {
       financeGet: async (path) => {
@@ -33,7 +33,7 @@ test('new asset photo failure retries against created asset without a duplicate 
       default: () => ({ successNotify() {}, errorNotify() {} }),
     },
     'src/composables/useFinanceResource': {
-      useFinanceResource: () => ({ state: { data: null }, load: async (fn) => fn() }),
+      useFinanceResource: () => ({ state: { data: null }, load: async (fn) => fn(), reset() {} }),
     },
   }
   const context = vm.createContext({
@@ -44,7 +44,7 @@ test('new asset photo failure retries against created asset without a duplicate 
     defineEmits: () => () => {},
   })
   const mod = new vm.SourceTextModule(
-    source + '\nexport {photos,selectedGroup,draft,selected,save,error};',
+    source + '\nexport {photos,selectedGroup,draft,selected,save,error,dialog};',
     { context },
   )
   await mod.link((name) => {
@@ -60,6 +60,7 @@ test('new asset photo failure retries against created asset without a duplicate 
   })
   await mod.evaluate()
   const m = mod.namespace
+  m.dialog.value = true
   m.selectedGroup.value = { type: 'RealEstate', singular: 'imóvel' }
   m.draft.value = { nickname: 'QA fictício', declaredValue: 0, paidOff: true }
   m.photos.value = {
