@@ -26,7 +26,7 @@
       >
         <template #header>
           <q-item-section avatar><q-icon :name="group.icon" /></q-item-section>
-          <q-item-section
+          <q-item-section class="asset-identity"
             ><q-item-label class="asset-name">{{ asset.nickname }}</q-item-label
             ><q-item-label caption>{{ description(asset) }}</q-item-label></q-item-section
           >
@@ -493,6 +493,10 @@ h4 {
   .asset-row :deep(.q-item) {
     flex-wrap: wrap;
     gap: 8px;
+  }
+  .asset-identity {
+    flex: 1 1 calc(100% - 64px);
+    min-width: 0;
   }
   .asset-value {
     margin-left: 0;
