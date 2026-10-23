@@ -387,7 +387,7 @@ async function save() {
       editor.state.data = { ...payload, ...saved }
     }
     await photos.value?.save(savedId)
-    documentResources.delete(savedId)
+    await loadDocuments(savedId)
     dialog.value = false
     await load()
     emit('changed')

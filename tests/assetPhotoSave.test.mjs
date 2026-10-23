@@ -10,13 +10,17 @@ const source = readFileSync(
 ).match(/<script setup>([\s\S]*?)<\/script>/)[1]
 test('new asset photo failure retries against created asset without a duplicate create', async () => {
   const writes = [],
-    photoIds = []
+    photoIds = [],
+    reads = []
   let fail = true
   const modules = {
     vue: { computed, ref, watch() {} },
     'src/services/clientAssetProfile': model,
     'src/services/financeService': {
-      financeGet: async () => ({ data: [] }),
+      financeGet: async (path) => {
+        reads.push(path)
+        return { data: [] }
+      },
       financeLabel: (x) => x,
       money: (x) => x,
       financeWrite: async (method, path, payload) => {
@@ -75,4 +79,5 @@ test('new asset photo failure retries against created asset without a duplicate 
   )
   assert.equal(writes[1].path, 'admin/customers/customer/assets/created')
   assert.deepEqual(photoIds, ['created', 'created'])
+  assert.ok(reads.includes('admin/customers/customer/assets/created/documents'))
 })
