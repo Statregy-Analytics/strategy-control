@@ -35,4 +35,13 @@ A apresentação usa Active → Ativo; Suspended → Bloqueado; Archived e Prosp
 
 112 testes automatizados aprovados, lint e build aprovados durante implementação. Revisão local na porta 8080 com API de homologação: grade/lista, filtro Inativo (6 resultados), paginação de 13 clientes (10 + 3), busca por Cláudio e ficha de Jorge/Cláudio; conta principal do Cláudio com check verde e vazios das quatro categorias de patrimônio conferidos; largura móvel de 390px sem overflow da página ou do menu. Não houve gravação de dados de clientes nesta rodada; formulário bancário aberto/fechado sem salvar. Console sem erros de execução. O diff desta alteração passa sem whitespace; o snapshot Swagger preexistente foi preservado fora do commit, incluindo seu aviso de whitespace.
 
-Publicação e reteste em homologação: em andamento.
+## Publicação e reteste em homologação
+
+- Runtime publicado: **7c4b5fa** (implementação principal b1e6ebf e ajuste das dimensões dos ícones). [Pipeline final 39950966237](https://github.com/Statregy-Analytics/strategy-control/actions/runs/39950966237) concluída com sucesso, incluindo auditoria, 112 testes, lint, build, upload e ativação.
+- Em https://admin.strategyanalytics.com.br/dataManagement, grade com 13 resultados e lista com 10 linhas na primeira página; colunas, badges e navegação à ficha de Cláudio conferidas. Cinco ícones de dropdown renderizados em 16×16; nenhum ícone quebrado e menu sem overflow horizontal.
+- Ficha publicada do Cláudio: tabela bancária apenas com Banco/Agência-conta/Tipo/Chave Pix/Principal/ações existentes, check verde real, PIX quebrando sem corte, botão glass; quatro estados vazios patrimoniais e fundos/seleção do tema conferidos. Abrir/fechar cadastro bancário sem salvar preservou os dados.
+- Gerenciamento de login mostra os cabeçalhos C19 e o estado indisponível real. Sem sessões fictícias ou ações de encerramento sem contrato.
+- Seleção em viewport de 390px sem overflow da página ou dos cards; viewport restaurado ao tamanho normal. Console sem erros de execução.
+- Evidências visuais salvas localmente: admin-selecao-clientes-hml-23-10.png e admin-banco-patrimonio-hml-23-10.png. Nenhuma escrita de dados de cliente nesta rodada.
+
+A validação visual/funcional do front não encerra os bloqueios de API e dados listados acima nem as demais pendências históricas do QA.
