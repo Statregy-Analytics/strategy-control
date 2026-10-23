@@ -1,6 +1,7 @@
 import test from 'node:test'
 import assert from 'node:assert/strict'
 import {
+  assetCurrencyCode,
   assetDraft,
   assetPayload,
   assetIntegerRule,
@@ -136,4 +137,28 @@ test('optional whole counts preserve null and zero; supported int32 boundary is 
   assert.equal(payload.realEstate.landAreaSquareMeters, 10.5)
   assert.equal(isAssetIntegerField('declaredValue'), false)
   assert.equal(isAssetIntegerField('landAreaSquareMeters'), false)
+})
+
+test('asset currency remains available before wallet loading and after preference changes', () => {
+  const asset = { currencyId: 'eur', currencyCode: 'EUR' }
+  assert.equal(assetCurrencyCode(asset, []), 'EUR')
+  assert.equal(assetCurrencyCode(asset, [{ currencyId: 'brl', currencyIsoCode: 'BRL' }]), 'EUR')
+  assert.equal(assetCurrencyCode(asset, [{ currencyId: 'eur', currencyIsoCode: 'USD' }]), 'EUR')
+})
+test('legacy currency lookup only matches an explicit asset ID and never assumes BRL', () => {
+  assert.equal(
+    assetCurrencyCode({ currencyId: 'usd' }, [{ currencyId: 'usd', currencyIsoCode: 'USD' }]),
+    'USD',
+  )
+  assert.equal(
+    assetCurrencyCode({ currencyId: 'missing' }, [{ currencyId: 'brl', currencyIsoCode: 'BRL' }]),
+    null,
+  )
+  assert.equal(assetCurrencyCode({}, [{ currencyIsoCode: 'BRL' }]), null)
+  assert.equal(
+    assetCurrencyCode({ currencyCode: 'invalid', currencyId: 'brl' }, [
+      { currencyId: 'brl', currencyIsoCode: 'BRL' },
+    ]),
+    null,
+  )
 })

@@ -719,3 +719,10 @@ Detalhes e limites no [relatório da seleção/ficha](QA-2026-10-23-SELECAO-FICH
 ## Imagens do patrimônio no Admin — 23/10
 
 Integração C11/C12 e testes fictícios: [relatório de imagens patrimoniais](QA-2026-10-23-IMAGENS-PATRIMONIO.md). Upload, vínculo, posições da vistoria e visualização passaram localmente na porta 8080 e no Admin publicado (6eab47c / pipeline 39959274171 aprovada, 124 testes, lint/build/diff). Arquivos fictícios persistiram após recarga, prévias carregaram e o contador lateral excluiu as fotos do patrimônio. Endpoints existentes utilizados, sem novos campos ou ações.
+
+
+## Moeda do patrimônio no Admin — 23/10
+
+- [x] Exibir os valores pela moeda persistida do bem, independente do carregamento da carteira, preservando o Figma.
+- [x] 126 testes, lint/build e diff do lote aprovados; leitura local em BRL/EUR/USD e descarte do editor sem gravação.
+- [ ] Publicação/reteste conforme [relatório da moeda patrimonial](QA-2026-10-23-MOEDA-PATRIMONIO.md).

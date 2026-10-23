@@ -240,6 +240,7 @@ import { financeGet, financeWrite, financeLabel, money } from 'src/services/fina
 import { getApiErrorMessage } from 'src/services/apiError'
 import useNotification from 'src/composables/global/useNotification'
 import {
+  assetCurrencyCode,
   assetFormSections,
   assetPayload,
   assetDraft,
@@ -283,8 +284,8 @@ const total = computed(() =>
 const rowsFor = (group) =>
   rows.value.filter((row) => row.assetType === group.type && !row.archivedAtUtc)
 const value = (asset, key = 'declaredValue') => {
-  const currency = props.currencies.find((c) => c.currencyId === asset.currencyId)
-  return currency ? money(asset[key], currency.currencyIsoCode) : 'Moeda não informada'
+  const currency = assetCurrencyCode(asset, props.currencies)
+  return currency ? money(asset[key], currency) : 'Moeda não informada'
 }
 const description = (asset) =>
   asset.realEstate

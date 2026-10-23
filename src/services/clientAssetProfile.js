@@ -219,3 +219,17 @@ export function assetPayload(draft, type, currencyId, existing) {
   if (!existing) payload.assetType = type
   return payload
 }
+
+// The asset's persisted currency is independent from wallet loading/preferences.
+export function assetCurrencyCode(asset, currencies = []) {
+  if (asset?.currencyCode != null && typeof asset.currencyCode !== 'string') return null
+  const stored = asset?.currencyCode?.trim()
+  if (stored) return /^[A-Za-z]{3}$/.test(stored) ? stored.toUpperCase() : null
+  if (!asset?.currencyId) return null
+  const legacy = currencies.find(
+    (currency) => currency.currencyId === asset.currencyId,
+  )?.currencyIsoCode
+  return typeof legacy === 'string' && /^[A-Za-z]{3}$/.test(legacy.trim())
+    ? legacy.trim().toUpperCase()
+    : null
+}
