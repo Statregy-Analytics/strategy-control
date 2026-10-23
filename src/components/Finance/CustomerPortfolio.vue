@@ -313,6 +313,7 @@ watch(
   (id) => {
     customerId.value = id
   },
+  { flush: 'sync' },
 )
 watch(
   () => portfolio.state.data,
@@ -325,6 +326,7 @@ watch(
   customerId,
   () => {
     revision++
+    exporting.value = false
     ;[portfolio, composition, wallets, statement].forEach((resource) => resource.reset())
     error.value = ''
     selectedCurrency.value = null
@@ -335,7 +337,7 @@ watch(
       else loadWallets()
     }
   },
-  { immediate: true },
+  { immediate: true, flush: 'sync' },
 )
 onScopeDispose(() => {
   revision++
@@ -385,6 +387,10 @@ const walletColumns = columns([
   ['available', 'Disponível', (r) => money(r.available, r.currencyIsoCode)],
 ])
 async function exportStatement() {
+  if (exporting.value) return
+  const version = revision,
+    id = customerId.value
+  const active = () => version === revision && id === customerId.value
   error.value = ''
   if (dateFrom.value && dateTo.value && dateFrom.value > dateTo.value) {
     error.value = 'A data final deve ser posterior à inicial.'
@@ -393,14 +399,15 @@ async function exportStatement() {
   exporting.value = true
   try {
     await financeExport(
-      `admin/customers/${customerId.value}/statement/export`,
+      `admin/customers/${id}/statement/export`,
       { format: 'csv', dateFrom: dateFrom.value || undefined, dateTo: dateTo.value || undefined },
       'extrato.csv',
+      active,
     )
   } catch {
-    error.value = 'Não foi possível exportar o extrato.'
+    if (active()) error.value = 'Não foi possível exportar o extrato.'
   } finally {
-    exporting.value = false
+    if (active()) exporting.value = false
   }
 }
 defineExpose({ refresh: onAssetsChanged })

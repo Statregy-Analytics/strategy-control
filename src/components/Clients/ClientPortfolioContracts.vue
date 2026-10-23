@@ -59,7 +59,8 @@
   </section>
 </template>
 <script setup>
-import { computed, reactive, watch } from 'vue'
+import { computed, reactive, watch, onScopeDispose } from 'vue'
+import { createRequestContext, readCurrentPages } from 'src/services/requestContext'
 import ProfileFields from 'src/components/Entity/ProfileFields.vue'
 import ResourceState from 'src/components/Finance/ResourceState.vue'
 import { useFinanceResource } from 'src/composables/useFinanceResource'
@@ -70,6 +71,9 @@ const props = defineProps({
   currencyId: { type: String, required: true },
   currencyCode: { type: String, required: true },
 })
+const context = createRequestContext(
+  () => `${props.customerId}:${props.currencyId}:${props.currencyCode}`,
+)
 const listing = useFinanceResource(),
   details = reactive({})
 const emptyState = { data: null, loading: true, error: '' }
@@ -92,15 +96,20 @@ const fields = (value) => [
   },
 ]
 async function loadDetail(id, customerId = props.customerId) {
+  const active = context.capture()
+  if (!active()) return
   const resource = (details[id] ||= useFinanceResource())
   await resource.load(async () => {
     const result = (await financeGet(`admin/contracts/${id}`)).data
+    if (!active()) return null
     if (!result?.participants?.some((item) => item.clientId === customerId))
       throw new Error('Participação indisponível')
     return result
   })
 }
 async function load() {
+  context.invalidate()
+  const active = context.capture()
   const customerId = props.customerId
   const currencyCode = props.currencyCode
   for (const id of Object.keys(details)) {
@@ -108,29 +117,40 @@ async function load() {
     delete details[id]
   }
   const result = await listing.load(async () => {
-    const rows = []
-    let page = 1,
-      totalPages = 1
-    do {
-      const result = await financeGet('admin/contracts', {
-        clientId: customerId,
-        page,
-        pageSize: 100,
-      })
-      rows.push(...(result.data || []))
-      totalPages = Number(result.pagination?.totalPages || 1)
-      page += 1
-    } while (page <= totalPages)
+    const rows = await readCurrentPages(
+      (page) =>
+        financeGet('admin/contracts', {
+          clientId: customerId,
+          page,
+          pageSize: 100,
+        }),
+      active,
+    )
+    if (!rows) return null
     return rows.filter((row) => row.clients?.some((client) => client.clientId === customerId))
   })
-  if (!result || props.customerId !== customerId || props.currencyCode !== currencyCode) return
+  if (
+    !active() ||
+    !result ||
+    props.customerId !== customerId ||
+    props.currencyCode !== currencyCode
+  )
+    return
   await Promise.allSettled(
     result
       .filter((row) => row.currencyCode === currencyCode)
       .map((row) => loadDetail(row.id, customerId)),
   )
 }
-watch(() => [props.customerId, props.currencyId], load, { immediate: true })
+watch(() => [props.customerId, props.currencyId, props.currencyCode], load, {
+  immediate: true,
+  flush: 'sync',
+})
+onScopeDispose(() => {
+  context.dispose()
+  listing.reset()
+  Object.values(details).forEach((item) => item.reset())
+})
 </script>
 <style scoped>
 .portfolio-contracts {

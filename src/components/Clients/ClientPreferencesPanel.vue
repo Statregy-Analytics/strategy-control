@@ -177,7 +177,7 @@
 </template>
 
 <script setup>
-import { computed, onMounted, onScopeDispose, reactive, ref } from 'vue'
+import { computed, onMounted, onScopeDispose, reactive, ref, watch } from 'vue'
 import {
   changeCustomerStatus,
   getCustomerPreferences,
@@ -187,6 +187,7 @@ import {
 } from 'src/services/customerService'
 import { getApiErrorMessage } from 'src/services/apiError'
 import useNotification from 'src/composables/global/useNotification'
+import { createRequestContext } from 'src/services/requestContext'
 import LabelForm from 'src/components/Form/LabelForm.vue'
 
 const props = defineProps({
@@ -266,10 +267,15 @@ const themeName = (theme) => {
   const name = /light|claro/.test(key) ? 'light' : /dark|escuro/.test(key) ? 'dark' : 'auto'
   return name
 }
+const context = createRequestContext(() => props.customerId)
 let loadRevision = 0
-onScopeDispose(() => loadRevision++)
+onScopeDispose(() => {
+  context.dispose()
+  loadRevision++
+})
 const load = async () => {
-  const revision = ++loadRevision
+  const revision = ++loadRevision,
+    active = context.capture()
   loading.value = true
   emit('ready', false)
   loadError.value = ''
@@ -279,7 +285,7 @@ const load = async () => {
       getCustomerPreferences(props.customerId),
       getPreferenceCatalog(),
     ])
-    if (revision !== loadRevision) return
+    if (revision !== loadRevision || !active()) return
     currentStatus.value = status?.status ?? status
     selectedStatus.value = currentStatus.value
     Object.assign(form, {
@@ -292,37 +298,68 @@ const load = async () => {
     catalog.value = options || {}
     emit('ready', true)
   } catch (error) {
-    if (revision !== loadRevision) return
+    if (revision !== loadRevision || !active()) return
     loadError.value = getApiErrorMessage(error, 'Não foi possível carregar status e preferências.')
   } finally {
-    if (revision === loadRevision) loading.value = false
+    if (revision === loadRevision && active()) loading.value = false
   }
 }
 const saveStatus = async () => {
+  if (savingStatus.value) return
+  const active = context.capture(),
+    id = props.customerId,
+    status = selectedStatus.value
   try {
     savingStatus.value = true
-    await changeCustomerStatus(props.customerId, selectedStatus.value)
-    currentStatus.value = selectedStatus.value
+    await changeCustomerStatus(id, status)
+    if (!active()) return
+    currentStatus.value = status
     successNotify('Status atualizado.')
     emit('updated')
   } catch (error) {
-    errorNotify(getApiErrorMessage(error, 'Não foi possível alterar o status.'))
+    if (active()) errorNotify(getApiErrorMessage(error, 'Não foi possível alterar o status.'))
   } finally {
-    savingStatus.value = false
+    if (active()) savingStatus.value = false
   }
 }
 const savePreferences = async () => {
+  if (savingPreferences.value || props.controlled) return
+  const active = context.capture(),
+    id = props.customerId,
+    payload = { ...form }
   try {
     savingPreferences.value = true
-    await updateCustomerPreferences(props.customerId, { ...form })
+    await updateCustomerPreferences(id, payload)
+    if (!active()) return
     successNotify('Preferências atualizadas.')
     emit('updated')
   } catch (error) {
-    errorNotify(getApiErrorMessage(error, 'Não foi possível salvar as preferências.'))
+    if (active()) errorNotify(getApiErrorMessage(error, 'Não foi possível salvar as preferências.'))
   } finally {
-    savingPreferences.value = false
+    if (active()) savingPreferences.value = false
   }
 }
+watch(
+  () => props.customerId,
+  () => {
+    context.invalidate()
+    loadRevision++
+    savingStatus.value = false
+    savingPreferences.value = false
+    currentStatus.value = ''
+    selectedStatus.value = ''
+    catalog.value = {}
+    Object.assign(form, {
+      primaryCurrencyCode: null,
+      secondaryCurrencyCode: null,
+      languageCode: '',
+      timeZoneId: '',
+      theme: '',
+    })
+    load()
+  },
+  { flush: 'sync' },
+)
 defineExpose({ reload: load })
 onMounted(load)
 </script>

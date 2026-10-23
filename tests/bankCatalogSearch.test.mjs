@@ -4,6 +4,7 @@ import vm from 'node:vm'
 import { readFileSync } from 'node:fs'
 import { ref, reactive, computed, watch, nextTick } from 'vue'
 import { readBankCatalog } from '../src/services/bankCatalog.js'
+import * as requestContext from '../src/services/requestContext.js'
 import * as countryCatalog from '../src/services/countryCatalog.js'
 const source = readFileSync(
   new URL('../src/pages/DataManagement/BanksPage.vue', import.meta.url),
@@ -63,6 +64,7 @@ async function harness(fail = false) {
       }),
     },
     'src/services/countryCatalog': countryCatalog,
+    'src/services/requestContext': requestContext,
     'src/services/bankCatalog': { readBankCatalog },
     'src/services/apiError': { getApiErrorMessage: (_, fallback) => fallback },
     'src/composables/global/useNotification': {

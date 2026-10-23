@@ -424,6 +424,7 @@
 </template>
 <script setup>
 import { computed, ref, watch, onMounted, onScopeDispose } from 'vue'
+import { createRequestContext, readCurrentPages } from 'src/services/requestContext'
 import CustomerIndicators from 'src/components/Clients/CustomerIndicators.vue'
 import { useRoute, useRouter, onBeforeRouteLeave, onBeforeRouteUpdate } from 'vue-router'
 import SectionEditActions from 'src/components/Entity/SectionEditActions.vue'
@@ -462,6 +463,8 @@ const route = useRoute(),
   router = useRouter()
 const { errorNotify } = useNotification()
 const customerId = computed(() => String(route.params.id))
+const profileContext = createRequestContext(() => customerId.value)
+let historyRevision = 0
 const customerResource = useFinanceResource(),
   identificationResource = useFinanceResource(),
   professional = useFinanceResource(),
@@ -560,6 +563,18 @@ const beforeUnload = (event) => {
 }
 onMounted(() => window.addEventListener('beforeunload', beforeUnload))
 onScopeDispose(() => {
+  profileContext.dispose()
+  historyRevision++
+  ;[
+    customerResource,
+    identificationResource,
+    professional,
+    financial,
+    security,
+    documentOverview,
+    compliance,
+    timeline,
+  ].forEach((item) => item.reset())
   window.removeEventListener('beforeunload', beforeUnload)
   finishConfirm(false)
 })
@@ -785,21 +800,18 @@ const loadDocuments = () =>
 const loadCompliance = () => compliance.load(() => getComplianceAlerts(customerId.value))
 const loadTimeline = () => {
   const id = customerId.value
-  const expanded = showHistory.value
+  const expanded = showHistory.value,
+    version = ++historyRevision,
+    ownerActive = profileContext.capture()
+  const active = () => ownerActive() && version === historyRevision
   return timeline.load(async () => {
     if (!expanded) return getCustomerTimeline(id, { page: 1, pageSize: 2 })
-    const events = []
-    let page = 1
-    let totalPages = 1
-    do {
-      const result = await getCustomerTimelinePage(id, { page, pageSize: 100 })
-      events.push(
-        ...(Array.isArray(result.data) ? result.data : result.data?.items || result.items || []),
-      )
-      totalPages = Number(result.pagination?.totalPages || 1)
-      page += 1
-    } while (page <= totalPages)
-    return events
+    return readCurrentPages(
+      (page) => getCustomerTimelinePage(id, { page, pageSize: 100 }),
+      active,
+      (result) =>
+        Array.isArray(result.data) ? result.data : result.data?.items || result.items || [],
+    )
   })
 }
 const toggleHistory = () => {
@@ -807,11 +819,13 @@ const toggleHistory = () => {
   loadTimeline()
 }
 const refreshCustomer = async () => {
+  const active = profileContext.capture()
   const id = customerId.value
   try {
     const result = await getCustomer(id)
-    if (id === customerId.value) customerResource.state.data = result
+    if (active()) customerResource.state.data = result
   } catch (error) {
+    if (!active()) return
     errorNotify(
       getApiErrorMessage(
         error,
@@ -832,6 +846,8 @@ const switchCustomer = (id) => {
 watch(
   customerId,
   () => {
+    profileContext.invalidate()
+    historyRevision++
     showHistory.value = false
     editor.controller.dispose()
     preferencesReady.value = false
@@ -846,7 +862,7 @@ watch(
     loadCompliance()
     loadTimeline()
   },
-  { immediate: true },
+  { immediate: true, flush: 'sync' },
 )
 </script>
 

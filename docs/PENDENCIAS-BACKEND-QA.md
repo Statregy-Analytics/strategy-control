@@ -2,6 +2,12 @@
 
 A interface segue o Figma e as alterações de ordem/campos expressamente autorizadas pelo designer/QA e pelo usuário. **Na ordem atual, profissional/financeiro é etapa 4 e documentos/endereço é etapa 5.** Precisamos dos estados e operações abaixo sem acrescentar campos ou ações às telas.
 
+## Lista atual para devolutiva do Admin — 23/10
+
+Consultar a [matriz consolidada](QA-ADMIN-FECHAMENTO-2026-10-23.md) antes de encaminhar os relatos históricos. Permanecem: documento mascarado nos cards; escritas administrativas de dados pessoais existentes; sessões do cliente; declaração PEP/observação sem alerta; normalização de conta única principal; valores atual/bloqueado por participante e regra do contrato encerrado no investido; classificação G/I versus Figma; sessão HttpOnly/investigação de identidade e contratos dos módulos ainda sem persistência.
+
+**Não reenviar como pendentes:** renda atual (consistente com o último histórico em 23/10), UUID da moeda patrimonial (catálogo já fornece; front integrado neste lote), valor base do participante (`baseAmount` integrado), CNH exclusiva, submit/declaração de contatos e defaults já liberados em 22/10. Aprovar/Reprovar e imagens do patrimônio já foram integrados e exercitados; pendências de versões documentais têm reteste próprio e não significam falta dessas ações.
+
 ## Seleção e ficha — atualização de 23/10
 
 Detalhes e checklist: [QA seleção/ficha](QA-2026-10-23-SELECAO-FICHA.md). Restam maskedDocument vazio nos 13 cards apesar do CPF na identificação, API administrativa das sessões por cliente, declaração PEP do perfil e regra de conta única principal no servidor (três de cinco clientes com conta única ainda retornaram isPrimary=false; Cláudio está correto). Confirmar também a classificação G/I recebida versus os exemplos A/AA/AAA do desenho. Os filtros já funcionam no front sobre todas as páginas; suporte server-side é melhoria de escala. O bind visual de status foi autorizado: Active/Ativo, Suspended/Bloqueado e Prospect+Archived/Inativo, sem mudar os enums ou o estado cadastral real.

@@ -50,38 +50,98 @@
 
 <script setup>
 import { computed, onMounted, onScopeDispose, reactive, ref, watch } from 'vue'
+import { createRequestContext } from 'src/services/requestContext'
 import TitlePage from 'src/components/TitlePage.vue'
 import LabelForm from 'src/components/Form/LabelForm.vue'
 import FormSection from 'src/components/Entity/FormSection.vue'
 import EntityTableFooter from 'src/components/Entity/EntityTableFooter.vue'
 import { createBank, listBanks, listCountries } from 'src/services/customerService'
-import { bankCountryName, bankCountryOptions, readCountryCatalog } from 'src/services/countryCatalog'
+import {
+  bankCountryName,
+  bankCountryOptions,
+  readCountryCatalog,
+} from 'src/services/countryCatalog'
 import { readBankCatalog } from 'src/services/bankCatalog'
 import { getApiErrorMessage } from 'src/services/apiError'
 import useNotification from 'src/composables/global/useNotification'
 
 const { successNotify, errorNotify } = useNotification()
-const banks = ref([]), loading = ref(false), loadError = ref(''), search = ref(''), onlyActive = ref(false), createDialog = ref(false), saving = ref(false), form = ref(null)
-const countries = ref([]), countriesLoading = ref(false), countryError = ref('')
-let banksRevision = 0, countryRevision = 0
-onScopeDispose(() => { banksRevision++; countryRevision++ })
+const banks = ref([]),
+  loading = ref(false),
+  loadError = ref(''),
+  search = ref(''),
+  onlyActive = ref(false),
+  createDialog = ref(false),
+  saving = ref(false),
+  form = ref(null)
+const countries = ref([]),
+  countriesLoading = ref(false),
+  countryError = ref('')
+const context = createRequestContext()
+let banksRevision = 0,
+  countryRevision = 0
+onScopeDispose(() => {
+  context.dispose()
+  banksRevision++
+  countryRevision++
+})
 const pagination = reactive({ page: 1, pageSize: 10 })
 const draft = reactive({ code: '', name: '', countryId: null, isActive: true })
 const breadcrumbs = [{ label: 'Gestão de Dados' }, { label: 'Bancos' }]
-const formatDate = (value) => { const date = value ? new Date(value) : null; return date && !Number.isNaN(date.getTime()) && date.getUTCFullYear() >= 2000 ? new Intl.DateTimeFormat('pt-BR').format(date) : '—' }
-const columns = [{ name: 'name', label: 'Banco', field: 'name', align: 'left' }, { name: 'countryId', label: 'País', field: (bank) => countriesLoading.value ? 'Carregando…' : bankCountryName(bank, countries.value), align: 'left' }, { name: 'isActive', label: 'Status', field: 'isActive', align: 'left' }, { name: 'createdAtUtc', label: 'Cadastrado em', field: 'createdAtUtc', align: 'left', format: formatDate }]
+const formatDate = (value) => {
+  const date = value ? new Date(value) : null
+  return date && !Number.isNaN(date.getTime()) && date.getUTCFullYear() >= 2000
+    ? new Intl.DateTimeFormat('pt-BR').format(date)
+    : '—'
+}
+const columns = [
+  { name: 'name', label: 'Banco', field: 'name', align: 'left' },
+  {
+    name: 'countryId',
+    label: 'País',
+    field: (bank) =>
+      countriesLoading.value ? 'Carregando…' : bankCountryName(bank, countries.value),
+    align: 'left',
+  },
+  { name: 'isActive', label: 'Status', field: 'isActive', align: 'left' },
+  {
+    name: 'createdAtUtc',
+    label: 'Cadastrado em',
+    field: 'createdAtUtc',
+    align: 'left',
+    format: formatDate,
+  },
+]
 const requiredRules = [(value) => Boolean(String(value || '').trim()) || 'Campo obrigatório']
 const countryOptions = computed(() => bankCountryOptions(countries.value))
-const countryRules = [(value) => countryOptions.value.some((country) => country.value === value) || 'Selecione um país.']
-const normalizeSearch = (value) => String(value || '').normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLocaleLowerCase('pt-BR')
+const countryRules = [
+  (value) =>
+    countryOptions.value.some((country) => country.value === value) || 'Selecione um país.',
+]
+const normalizeSearch = (value) =>
+  String(value || '')
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .toLocaleLowerCase('pt-BR')
 const filteredBanks = computed(() => {
   const term = normalizeSearch(search.value).trim()
-  return term ? banks.value.filter((bank) => normalizeSearch(`${bank.code || ''} ${bank.name || ''}`).includes(term)) : banks.value
+  return term
+    ? banks.value.filter((bank) =>
+        normalizeSearch(`${bank.code || ''} ${bank.name || ''}`).includes(term),
+      )
+    : banks.value
 })
 const totalItems = computed(() => filteredBanks.value.length)
 const totalPages = computed(() => Math.max(1, Math.ceil(totalItems.value / pagination.pageSize)))
-const displayedBanks = computed(() => filteredBanks.value.slice((pagination.page - 1) * pagination.pageSize, pagination.page * pagination.pageSize))
-const firstItem = computed(() => totalItems.value ? (pagination.page - 1) * pagination.pageSize + 1 : 0)
+const displayedBanks = computed(() =>
+  filteredBanks.value.slice(
+    (pagination.page - 1) * pagination.pageSize,
+    pagination.page * pagination.pageSize,
+  ),
+)
+const firstItem = computed(() =>
+  totalItems.value ? (pagination.page - 1) * pagination.pageSize + 1 : 0,
+)
 const lastItem = computed(() => Math.min(pagination.page * pagination.pageSize, totalItems.value))
 const loadCountries = async () => {
   if (countriesLoading.value) return
@@ -96,27 +156,87 @@ const loadCountries = async () => {
       countries.value = []
       countryError.value = getApiErrorMessage(error, 'Não foi possível carregar os países.')
     }
-  } finally { if (operation === countryRevision) countriesLoading.value = false }
+  } finally {
+    if (operation === countryRevision) countriesLoading.value = false
+  }
 }
 const load = async () => {
   const operation = ++banksRevision
   const isActive = onlyActive.value || undefined
   if (!countries.value.length || countryError.value) loadCountries()
-  loading.value = true; loadError.value = ''; banks.value = []
+  loading.value = true
+  loadError.value = ''
+  banks.value = []
   try {
-    const result = await readBankCatalog((params) => listBanks({ ...params, isActive }), () => { if (operation !== banksRevision) throw Error('Consulta encerrada.') })
+    const result = await readBankCatalog(
+      (params) => listBanks({ ...params, isActive }),
+      () => {
+        if (operation !== banksRevision) throw Error('Consulta encerrada.')
+      },
+    )
     if (operation !== banksRevision) return
     banks.value = result
+  } catch (error) {
+    if (operation === banksRevision)
+      loadError.value = getApiErrorMessage(error, 'Não foi possível carregar o catálogo de bancos.')
+  } finally {
+    if (operation === banksRevision) loading.value = false
   }
-  catch (error) { if (operation === banksRevision) loadError.value = getApiErrorMessage(error, 'Não foi possível carregar o catálogo de bancos.') }
-  finally { if (operation === banksRevision) loading.value = false }
 }
-const openCreate = () => { Object.assign(draft, { code: '', name: '', countryId: countryOptions.value[0]?.value ?? null, isActive: true }); createDialog.value = true }
-const save = async () => { if (saving.value || countriesLoading.value || countryError.value || !await form.value.validate()) return; saving.value = true; try { await createBank({ ...draft, code: draft.code || null }); successNotify('Banco cadastrado.'); createDialog.value = false; pagination.page = 1; await load() } catch (error) { errorNotify(error?.response?.status === 409 ? 'Já existe um banco com esse código.' : getApiErrorMessage(error, 'Não foi possível cadastrar o banco.')) } finally { saving.value = false } }
-const changePage = (page) => { pagination.page = page }
-const changePageSize = (pageSize) => { pagination.page = 1; pagination.pageSize = pageSize }
-watch(search, () => { pagination.page = 1 })
-watch(onlyActive, () => { pagination.page = 1; load() })
+const openCreate = () => {
+  Object.assign(draft, {
+    code: '',
+    name: '',
+    countryId: countryOptions.value[0]?.value ?? null,
+    isActive: true,
+  })
+  createDialog.value = true
+}
+watch(
+  createDialog,
+  () => {
+    context.invalidate()
+    saving.value = false
+  },
+  { flush: 'sync' },
+)
+const save = async () => {
+  if (saving.value || countriesLoading.value || countryError.value) return
+  const active = context.capture()
+  saving.value = true
+  try {
+    if (!(await form.value.validate()) || !active()) return
+    await createBank({ ...draft, code: draft.code || null })
+    if (!active()) return
+    successNotify('Banco cadastrado.')
+    createDialog.value = false
+    pagination.page = 1
+    await load()
+  } catch (error) {
+    if (active())
+      errorNotify(
+        error?.response?.status === 409
+          ? 'Já existe um banco com esse código.'
+          : getApiErrorMessage(error, 'Não foi possível cadastrar o banco.'),
+      )
+  } finally {
+    if (active()) saving.value = false
+  }
+}
+const changePage = (page) => {
+  pagination.page = page
+}
+const changePageSize = (pageSize) => {
+  pagination.page = 1
+  pagination.pageSize = pageSize
+}
+watch(search, () => {
+  pagination.page = 1
+})
+watch(onlyActive, () => {
+  pagination.page = 1
+  load()
+})
 onMounted(load)
 </script>
 

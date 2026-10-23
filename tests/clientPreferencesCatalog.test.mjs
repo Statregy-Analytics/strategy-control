@@ -1,6 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import vm from 'node:vm';
+import * as requestContext from '../src/services/requestContext.js';
 import { readFileSync } from 'node:fs';
 import { ref, reactive, computed } from 'vue';
 const source = readFileSync(new URL('../src/components/Clients/ClientPreferencesPanel.vue', import.meta.url), 'utf8').match(/<script setup>([\s\S]*?)<\/script>/)[1];
@@ -9,7 +10,8 @@ async function harness(controlled = false) {
   const props = { customerId: 'test', hideStatus: true, controlled, editing: true, externalValue: { primaryCurrencyCode: 'BRL', secondaryCurrencyCode: 'EUR' } };
   const options = ['BRL','USD','EUR'].map(code => ({ id: `uuid-${code}`, value: code, label: code }));
   const values = {
-    vue: { ref, reactive, computed, onMounted: fn => mounted.push(fn), onScopeDispose() {} },
+    vue: { ref, reactive, computed, onMounted: fn => mounted.push(fn), onScopeDispose() {}, watch() {} },
+    'src/services/requestContext': requestContext,
     'src/services/customerService': {
       changeCustomerStatus() {}, getCustomerStatus() {},
       getCustomerPreferences: async () => ({ primaryCurrencyCode: 'BRL', secondaryCurrencyCode: 'EUR' }),

@@ -228,6 +228,7 @@
 </template>
 <script setup>
 import { computed, ref, watch, onScopeDispose } from 'vue'
+import { getPreferenceCatalog } from 'src/services/customerService'
 import ResourceState from 'src/components/Finance/ResourceState.vue'
 import ProfileDocumentItem from './ProfileDocumentItem.vue'
 import AssetPhotoGallery from './AssetPhotoGallery.vue'
@@ -383,16 +384,18 @@ async function save() {
     photoEditor = photos.value
   const assetBase = `admin/customers/${customerId}/assets`
   const active = () => activeEditor(revision, customerId)
-  const currencyId =
+  let currencyId =
     selected.value?.currencyId ||
     props.currencies.find((c) => c.currencyIsoCode === 'BRL')?.currencyId
-  if (!currencyId) {
-    error.value = 'Não foi possível identificar a moeda BRL para este cadastro.'
-    return
-  }
   saving.value = true
   error.value = ''
   try {
+    if (!currencyId) {
+      const catalog = await getPreferenceCatalog()
+      if (!active()) return
+      currencyId = catalog?.currencies?.find((item) => (item.code || item.value) === 'BRL')?.id
+    }
+    if (!currencyId) throw Error('Não foi possível identificar a moeda BRL para este cadastro.')
     const payload = assetPayload(
       draft.value,
       selectedGroup.value.type,

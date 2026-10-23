@@ -3,6 +3,7 @@ import assert from 'node:assert/strict'
 import vm from 'node:vm'
 import { readFileSync } from 'node:fs'
 import { computed, nextTick, reactive, ref } from 'vue'
+import * as requestContext from '../src/services/requestContext.js'
 import { readBankCatalog } from '../src/services/bankCatalog.js'
 const source = readFileSync(
   new URL('../src/components/Clients/ClientBankAccountsPanel.vue', import.meta.url),
@@ -39,9 +40,10 @@ async function harness(failSecondPage = false) {
     data: [{ id: 'account', bankId: 'bank-2', accountNumberMasked: '****' }],
   })
   const values = {
-    vue: { computed, nextTick, reactive, ref },
+    vue: { computed, nextTick, reactive, ref, watch() {}, onScopeDispose() {} },
     quasar: { QDialog: {}, QExpansionItem: {} },
     'src/services/customerService': service,
+    'src/services/requestContext': requestContext,
     'src/services/bankCatalog': { readBankCatalog },
     'src/services/apiError': { getApiErrorMessage: (_, fallback) => fallback },
     'src/composables/global/useNotification': {

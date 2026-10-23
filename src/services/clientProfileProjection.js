@@ -75,7 +75,7 @@ export function projectClientContract(contract, customerId) {
     initialValue: participant.allocatedAmount,
     percentage: participant.allocationPercentage,
     // Whole-contract capital/currentBalance is not a participant's balance.
-    baseValue: null,
+    baseValue: participant.baseAmount ?? null,
     currentValue: null,
     blockedValue: null,
   }

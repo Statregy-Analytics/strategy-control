@@ -99,3 +99,11 @@ test('asset photo uploads do not inflate counters of the four displayed document
     [0, 0, 0],
   )
 })
+
+
+test('participant base amount uses the API value including zero without borrowing whole-contract balances',()=>{
+ for(const amount of [0,261500]){
+ const projection=projectClientContract({capital:999999,currentBalance:888888,participants:[{clientId:'client',baseAmount:amount,allocatedAmount:123}]},'client')
+ assert.equal(projection.baseValue,amount);assert.equal(projection.currentValue,null);assert.equal(projection.blockedValue,null)
+ }
+})

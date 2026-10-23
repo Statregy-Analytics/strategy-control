@@ -17,14 +17,16 @@ export const financeWrite = createIdempotentWriter(
     return data?.data ?? data
   },
 )
-export async function financeExport(path, params, filename) {
+export async function financeExport(path, params, filename, active = () => true) {
   const { data } = await api.get(`/api/v1/${path}`, { params, responseType: 'blob' })
+  if (!active()) return false
   const url = URL.createObjectURL(data)
   const link = document.createElement('a')
   link.href = url
   link.download = filename
   link.click()
   setTimeout(() => URL.revokeObjectURL(url), 1000)
+  return true
 }
 export function money(value, currency = 'BRL') {
   if (value === null || value === undefined || value === '' || !Number.isFinite(Number(value)))

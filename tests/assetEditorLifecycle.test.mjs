@@ -55,6 +55,7 @@ async function harness({
     },
     'src/composables/useFinanceResource': { useFinanceResource },
     'src/services/clientAssetProfile': assetModel,
+    'src/services/customerService': { getPreferenceCatalog: async () => ({ currencies: [] }) },
     'src/services/financeService': {
       financeLabel: (x) => x,
       money: (x) => x,

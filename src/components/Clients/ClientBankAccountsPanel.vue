@@ -373,7 +373,8 @@
 </template>
 
 <script setup>
-import { computed, nextTick, reactive, ref } from 'vue'
+import { computed, nextTick, reactive, ref, watch, onScopeDispose } from 'vue'
+import { createRequestContext } from 'src/services/requestContext'
 import { QDialog, QExpansionItem } from 'quasar'
 import TitleCard from 'src/components/Card/TitleCard.vue'
 import LabelForm from 'src/components/Form/LabelForm.vue'
@@ -524,13 +525,24 @@ const filterBanks = (value, update) => {
       : []
   })
 }
+const context = createRequestContext(() => props.customerId)
+const formContext = createRequestContext(() => props.customerId)
+let loadRevision = 0
 const load = async () => {
+  const version = ++loadRevision,
+    ownerActive = context.capture(),
+    customerId = props.customerId
+  const active = () => ownerActive() && version === loadRevision
   loading.value = true
   loadError.value = ''
   const [banksResult, accountsResult] = await Promise.allSettled([
-    readBankCatalog((params) => listBanks({ ...params, isActive: true })),
-    listCustomerBankAccounts(props.customerId, { page: 1, pageSize: 100 }),
+    readBankCatalog((params) => {
+      if (!active()) throw Error('Consulta encerrada.')
+      return listBanks({ ...params, isActive: true })
+    }),
+    listCustomerBankAccounts(customerId, { page: 1, pageSize: 100 }),
   ])
+  if (!active()) return
   if (banksResult.status === 'fulfilled') {
     bankOptions.value = banksResult.value.map((bank) => ({
       label: bank.code ? `${bank.code} — ${bank.name}` : bank.name,
@@ -554,6 +566,8 @@ const load = async () => {
   loading.value = false
 }
 const closeForm = () => {
+  formContext.invalidate()
+  saving.value = false
   bankAccountInput.value = ''
   Object.assign(form, emptyForm())
   Object.assign(editingMasks, { accountNumber: '', holderDocument: '', pixKey: '' })
@@ -562,9 +576,13 @@ const closeForm = () => {
   formOpen.value = false
 }
 const startEdit = async (account) => {
+  formContext.invalidate()
+  const active = formContext.capture(),
+    customerId = props.customerId
   try {
     saving.value = true
-    const detail = await getCustomerBankAccount(props.customerId, account.id)
+    const detail = await getCustomerBankAccount(customerId, account.id)
+    if (!active()) return
     editingId.value = account.id
     Object.assign(form, {
       bankId: detail.bankId,
@@ -587,15 +605,20 @@ const startEdit = async (account) => {
     })
     formOpen.value = true
   } catch (error) {
-    errorNotify(getApiErrorMessage(error, 'Não foi possível abrir a conta bancária.'))
+    if (active()) errorNotify(getApiErrorMessage(error, 'Não foi possível abrir a conta bancária.'))
   } finally {
-    saving.value = false
+    if (active()) saving.value = false
   }
 }
 const save = async () => {
-  if (!(await formRef.value.validate())) return
+  if (saving.value || actionSaving.value) return
+  const active = formContext.capture(),
+    ownerActive = context.capture(),
+    customerId = props.customerId,
+    accountId = editingId.value
+  saving.value = true
   try {
-    saving.value = true
+    if (!(await formRef.value.validate()) || !active()) return
     const payload = {
       ...form,
       accountDigit: form.accountDigit || null,
@@ -604,20 +627,24 @@ const save = async () => {
       pixKey: form.pixKey || null,
       pixKeyType: form.pixKeyType || null,
     }
-    if (editingId.value) await updateCustomerBankAccount(props.customerId, editingId.value, payload)
-    else await createCustomerBankAccount(props.customerId, payload)
-    successNotify(editingId.value ? 'Conta bancária atualizada.' : 'Conta bancária adicionada.')
+    if (accountId) await updateCustomerBankAccount(customerId, accountId, payload)
+    else await createCustomerBankAccount(customerId, payload)
+    if (!active()) return
+    successNotify(accountId ? 'Conta bancária atualizada.' : 'Conta bancária adicionada.')
     closeForm()
     await load()
-    emit('updated')
+    if (ownerActive()) emit('updated')
   } catch (error) {
-    errorNotify(getApiErrorMessage(error, 'Não foi possível adicionar a conta bancária.'))
+    if (active())
+      errorNotify(getApiErrorMessage(error, 'Não foi possível adicionar a conta bancária.'))
   } finally {
-    saving.value = false
+    if (active()) saving.value = false
   }
 }
 const runAction = async (action, account) => {
   if (saving.value || actionSaving.value) return
+  const active = context.capture(),
+    customerId = props.customerId
   try {
     if (action === 'edit') {
       await startEdit(account)
@@ -629,29 +656,37 @@ const runAction = async (action, account) => {
       return
     }
     actionSaving.value = true
-    if (action === 'primary') await setPrimaryCustomerBankAccount(props.customerId, account.id)
+    if (action === 'primary') await setPrimaryCustomerBankAccount(customerId, account.id)
+    if (!active()) return
     successNotify('Conta bancária atualizada.')
     await load()
-    emit('updated')
+    if (active()) emit('updated')
   } catch (error) {
-    errorNotify(getApiErrorMessage(error, 'Não foi possível atualizar a conta bancária.'))
+    if (active())
+      errorNotify(getApiErrorMessage(error, 'Não foi possível atualizar a conta bancária.'))
   } finally {
-    actionSaving.value = false
+    if (active()) actionSaving.value = false
   }
 }
 const confirmArchive = async () => {
+  if (saving.value || actionSaving.value || !archiveTarget.value) return
+  const active = context.capture(),
+    customerId = props.customerId,
+    accountId = archiveTarget.value.id
   try {
     actionSaving.value = true
-    await archiveCustomerBankAccount(props.customerId, archiveTarget.value.id)
+    await archiveCustomerBankAccount(customerId, accountId)
+    if (!active()) return
     archiveDialog.value = false
     archiveTarget.value = null
     successNotify('Conta bancária arquivada.')
     await load()
-    emit('updated')
+    if (active()) emit('updated')
   } catch (error) {
-    errorNotify(getApiErrorMessage(error, 'Não foi possível arquivar a conta bancária.'))
+    if (active())
+      errorNotify(getApiErrorMessage(error, 'Não foi possível arquivar a conta bancária.'))
   } finally {
-    actionSaving.value = false
+    if (active()) actionSaving.value = false
   }
 }
 
@@ -664,9 +699,36 @@ const mobileValue = (row, column) => {
 }
 defineExpose({
   addAccount: () => {
+    if (saving.value || actionSaving.value) return
     closeForm()
     formOpen.value = true
   },
+})
+function resetContext() {
+  context.invalidate()
+  loadRevision++
+  closeForm()
+  accounts.value = []
+  bankOptions.value = []
+  filteredBankOptions.value = []
+  archiveDialog.value = false
+  archiveTarget.value = null
+  saving.value = false
+  actionSaving.value = false
+  loadError.value = ''
+}
+watch(
+  () => props.customerId,
+  () => {
+    resetContext()
+    load()
+  },
+  { flush: 'sync' },
+)
+onScopeDispose(() => {
+  resetContext()
+  context.dispose()
+  formContext.dispose()
 })
 load()
 </script>

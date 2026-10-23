@@ -2,6 +2,10 @@
 
 Atualizado em 23/10/2026. Rodadas iniciais: Admin em 12/10 e portal em 13/10. Admin localhost:8080; Portal localhost:9010 (origens CORS autorizadas).
 
+## Fechamento consolidado do Admin — 23/10
+
+A situação atual dos itens 10–19 e 27–38 está no [checklist consolidado](QA-ADMIN-FECHAMENTO-2026-10-23.md). Essa matriz prevalece sobre os quadros históricos abaixo. Renda atual/histórico conferidos consistentes; CNH exclusiva, defaults e endpoints liberados em 22/10 não são pendências atuais. Valor base do contrato e criação patrimonial sem carteira foram integrados com os campos já existentes da API. Publicação/regressão final registrada no relatório consolidado, sem homologação automática dos bloqueios de servidor ou do portal.
+
 ## Integração do retorno de 22/10
 
 - [x] Compatibilidade bancária do cliente (titular automático), moeda patrimonial automática, etapa 4 sem moedas, declaração persistida de contatos, submit com confirmação, bloqueio oficial e países por idioma implementados. Busca Admin usa search nos cartões e tabela.

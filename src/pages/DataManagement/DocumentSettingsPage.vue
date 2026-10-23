@@ -26,27 +26,411 @@
 </template>
 
 <script setup>
-import { computed, onMounted, reactive, ref } from 'vue'
-import TitlePage from 'src/components/TitlePage.vue'; import TitleCard from 'src/components/Card/TitleCard.vue'; import LabelForm from 'src/components/Form/LabelForm.vue'; import FormSection from 'src/components/Entity/FormSection.vue'; import EntityHeader from 'src/components/Entity/EntityHeader.vue'; import RowActions from 'src/components/Entity/RowActions.vue'
-import useNotification from 'src/composables/global/useNotification'; import { getApiErrorMessage } from 'src/services/apiError'
-import { createDocumentCategory, createDocumentType, createMetadataSchema, getDocumentDataDefinition, getDocumentUploadDefinition, listDocumentCategories, listDocumentTypeCountries, listDocumentTypes, listMetadataSchemas, publishMetadataSchema, retireMetadataSchema, setDocumentTypeCountry, validateMetadataInstance, validateMetadataSchema } from 'src/services/documentAdminService'
-const { successNotify,errorNotify }=useNotification(); const breadcrumbs=[{label:'Gestão de Dados'},{label:'Configuração documental'}]
-const categories=ref([]),types=ref([]),countries=ref([]),schemas=ref([]),loading=ref(false),schemaLoading=ref(false),saving=ref(false),countrySaving=ref(false),loadError=ref(''),search=ref(''),categoryFilter=ref(null),categoryDialog=ref(false),typeDialog=ref(false),editorDialog=ref(false),schemaDialog=ref(false),instanceDialog=ref(false),selectedType=ref(null),selectedCountryId=ref(null),countryIdDraft=ref(''),definitionText=ref(''),instanceSchema=ref(null),categoryForm=ref(null),typeForm=ref(null),schemaForm=ref(null)
-const categoryDraft=reactive({code:'',name:''}),typeDraft=reactive({categoryId:null,code:'',name:'',requiresExpirationDate:false}),schemaDraft=reactive({schema:'{\n  "type": "object",\n  "properties": {}\n}',uiSchema:'',changeSummary:''}),instanceDraft=reactive({metadata:'{}',issuedOn:null,expiresOn:null})
-const collection=v=>Array.isArray(v)?v:v?.data||v?.items||[]; const categoryOptions=computed(()=>categories.value.map(c=>({label:`${c.code||''} — ${c.name}`.replace(/^ — /,''),value:c.id}))); const categoryName=id=>categoryOptions.value.find(x=>x.value===id)?.label||id||'—'; const categoryKey=t=>t.categoryId||t.category?.id
-const filteredTypes=computed(()=>{const term=search.value.trim().toLowerCase();return types.value.filter(t=>(!categoryFilter.value||categoryKey(t)===categoryFilter.value)&&(!term||`${t.code} ${t.name}`.toLowerCase().includes(term)))}); const columns=[{name:'name',label:'Tipo documental',field:'name',align:'left'},{name:'categoryId',label:'Categoria',field:categoryKey,align:'left'},{name:'requiresExpirationDate',label:'Exige validade',field:'requiresExpirationDate',format:v=>v?'Sim':'Não',align:'left'},{name:'actions',label:'',field:'id',align:'right'}]; const schemaColumns=[{name:'version',label:'Versão',field:'version',align:'left'},{name:'status',label:'Status',field:'status',align:'left'},{name:'changeSummary',label:'Resumo',field:'changeSummary',align:'left'},{name:'actions',label:'',field:'id',align:'right'}]
-const requiredRules=[v=>Boolean(String(v||'').trim())||'Campo obrigatório'],uuidRules=[...requiredRules,v=>/^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i.test(v||'')||'UUID inválido']; const validJson=v=>{try{JSON.parse(v);return true}catch{return 'JSON inválido'}}; const jsonRules=[...requiredRules,validJson],optionalJsonRules=[v=>!v||validJson(v)]
-const load=async()=>{loading.value=true;loadError.value='';try{categories.value=collection(await listDocumentCategories());await loadTypes()}catch(e){loadError.value=getApiErrorMessage(e,'Não foi possível carregar a configuração documental.')}finally{loading.value=false}}; const loadTypes=async()=>{types.value=collection(await listDocumentTypes(categoryFilter.value?{categoryId:categoryFilter.value}:{}))}
-const saveCategory=async()=>{if(!await categoryForm.value.validate())return;saving.value=true;try{await createDocumentCategory({...categoryDraft});successNotify('Categoria criada.');categoryDialog.value=false;Object.assign(categoryDraft,{code:'',name:''});await load()}catch(e){errorNotify(getApiErrorMessage(e,'Não foi possível criar a categoria.'))}finally{saving.value=false}}
-const saveType=async()=>{if(!await typeForm.value.validate())return;saving.value=true;try{await createDocumentType({...typeDraft});successNotify('Tipo documental criado.');typeDialog.value=false;Object.assign(typeDraft,{categoryId:null,code:'',name:'',requiresExpirationDate:false});await loadTypes()}catch(e){errorNotify(getApiErrorMessage(e,'Não foi possível criar o tipo documental.'))}finally{saving.value=false}}
-const openType=async row=>{selectedType.value=row;selectedCountryId.value=null;countries.value=[];schemas.value=[];definitionText.value='';editorDialog.value=true;try{countries.value=collection(await listDocumentTypeCountries(row.id))}catch(e){errorNotify(getApiErrorMessage(e,'Não foi possível carregar os países.'))}}
-const countryKey=c=>c.countryId||c.id; const saveCountry=async()=>{if(!uuidRules.every(rule=>rule(countryIdDraft.value)===true))return errorNotify('Informe um UUID de país válido.');countrySaving.value=true;try{await setDocumentTypeCountry(selectedType.value.id,countryIdDraft.value,{isActive:true});successNotify('País associado.');countryIdDraft.value='';countries.value=collection(await listDocumentTypeCountries(selectedType.value.id))}catch(e){errorNotify(getApiErrorMessage(e,'Não foi possível associar o país.'))}finally{countrySaving.value=false}}
-const selectCountry=async c=>{selectedCountryId.value=countryKey(c);definitionText.value='';await loadSchemas()}; const loadSchemas=async()=>{schemaLoading.value=true;try{schemas.value=collection(await listMetadataSchemas(selectedType.value.id,selectedCountryId.value,{page:1,pageSize:100}))}catch(e){errorNotify(getApiErrorMessage(e,'Não foi possível carregar os schemas.'))}finally{schemaLoading.value=false}}
-const saveSchema=async()=>{if(!await schemaForm.value.validate())return;saving.value=true;try{await createMetadataSchema(selectedType.value.id,selectedCountryId.value,{schema:schemaDraft.schema,uiSchema:schemaDraft.uiSchema||null,changeSummary:schemaDraft.changeSummary||null});successNotify('Schema criado.');schemaDialog.value=false;await loadSchemas()}catch(e){errorNotify(getApiErrorMessage(e,'Não foi possível criar o schema.'))}finally{saving.value=false}}
-const schemaColor=s=>({Published:'positive',Draft:'grey',Retired:'warning'}[s]||'grey'); const schemaActions=s=>[{name:'validate',label:'Validar schema',icon:'rule'},{name:'instance',label:'Validar instância',icon:'fact_check'},...(s.status==='Published'?[]:[{name:'publish',label:'Publicar',icon:'publish'}]),...(s.status==='Retired'?[]:[{name:'retire',label:'Retirar',icon:'archive'}])]
-const runSchemaAction=async(action,s)=>{if(action==='instance'){instanceSchema.value=s;instanceDialog.value=true;return}try{if(action==='validate')await validateMetadataSchema(selectedType.value.id,selectedCountryId.value,s.id);if(action==='publish')await publishMetadataSchema(selectedType.value.id,selectedCountryId.value,s.id);if(action==='retire')await retireMetadataSchema(selectedType.value.id,selectedCountryId.value,s.id);successNotify('Ação concluída.');await loadSchemas()}catch(e){errorNotify(getApiErrorMessage(e,'Não foi possível concluir a ação.'))}}
-const validateInstance=async()=>{try{await validateMetadataInstance(selectedType.value.id,selectedCountryId.value,instanceSchema.value.id,{...instanceDraft,issuedOn:instanceDraft.issuedOn||null,expiresOn:instanceDraft.expiresOn||null});successNotify('Instância válida.');instanceDialog.value=false}catch(e){errorNotify(getApiErrorMessage(e,'A instância não é válida.'))}}
-const loadDefinition=async kind=>{try{const d=kind==='upload'?await getDocumentUploadDefinition(selectedType.value.id,selectedCountryId.value):await getDocumentDataDefinition(selectedType.value.id,selectedCountryId.value);definitionText.value=JSON.stringify(d,null,2)}catch(e){errorNotify(getApiErrorMessage(e,'Não foi possível carregar a definição.'))}}
+import { computed, onMounted, onScopeDispose, reactive, ref, watch } from 'vue'
+import { createRequestContext } from 'src/services/requestContext'
+import TitlePage from 'src/components/TitlePage.vue'
+import TitleCard from 'src/components/Card/TitleCard.vue'
+import LabelForm from 'src/components/Form/LabelForm.vue'
+import FormSection from 'src/components/Entity/FormSection.vue'
+import EntityHeader from 'src/components/Entity/EntityHeader.vue'
+import RowActions from 'src/components/Entity/RowActions.vue'
+import useNotification from 'src/composables/global/useNotification'
+import { getApiErrorMessage } from 'src/services/apiError'
+import {
+  createDocumentCategory,
+  createDocumentType,
+  createMetadataSchema,
+  getDocumentDataDefinition,
+  getDocumentUploadDefinition,
+  listDocumentCategories,
+  listDocumentTypeCountries,
+  listDocumentTypes,
+  listMetadataSchemas,
+  publishMetadataSchema,
+  retireMetadataSchema,
+  setDocumentTypeCountry,
+  validateMetadataInstance,
+  validateMetadataSchema,
+} from 'src/services/documentAdminService'
+const { successNotify, errorNotify } = useNotification()
+const breadcrumbs = [{ label: 'Gestão de Dados' }, { label: 'Configuração documental' }]
+const categories = ref([]),
+  types = ref([]),
+  countries = ref([]),
+  schemas = ref([]),
+  loading = ref(false),
+  schemaLoading = ref(false),
+  saving = ref(false),
+  countrySaving = ref(false),
+  loadError = ref(''),
+  search = ref(''),
+  categoryFilter = ref(null),
+  categoryDialog = ref(false),
+  typeDialog = ref(false),
+  editorDialog = ref(false),
+  schemaDialog = ref(false),
+  instanceDialog = ref(false),
+  selectedType = ref(null),
+  selectedCountryId = ref(null),
+  countryIdDraft = ref(''),
+  definitionText = ref(''),
+  instanceSchema = ref(null),
+  categoryForm = ref(null),
+  typeForm = ref(null),
+  schemaForm = ref(null)
+const categoryDraft = reactive({ code: '', name: '' }),
+  typeDraft = reactive({ categoryId: null, code: '', name: '', requiresExpirationDate: false }),
+  schemaDraft = reactive({
+    schema: '{\n  "type": "object",\n  "properties": {}\n}',
+    uiSchema: '',
+    changeSummary: '',
+  }),
+  instanceDraft = reactive({ metadata: '{}', issuedOn: null, expiresOn: null })
+const collection = (v) => (Array.isArray(v) ? v : v?.data || v?.items || [])
+const categoryOptions = computed(() =>
+  categories.value.map((c) => ({
+    label: `${c.code || ''} — ${c.name}`.replace(/^ — /, ''),
+    value: c.id,
+  })),
+)
+const categoryName = (id) => categoryOptions.value.find((x) => x.value === id)?.label || id || '—'
+const categoryKey = (t) => t.categoryId || t.category?.id
+const filteredTypes = computed(() => {
+  const term = search.value.trim().toLowerCase()
+  return types.value.filter(
+    (t) =>
+      (!categoryFilter.value || categoryKey(t) === categoryFilter.value) &&
+      (!term || `${t.code} ${t.name}`.toLowerCase().includes(term)),
+  )
+})
+const columns = [
+  { name: 'name', label: 'Tipo documental', field: 'name', align: 'left' },
+  { name: 'categoryId', label: 'Categoria', field: categoryKey, align: 'left' },
+  {
+    name: 'requiresExpirationDate',
+    label: 'Exige validade',
+    field: 'requiresExpirationDate',
+    format: (v) => (v ? 'Sim' : 'Não'),
+    align: 'left',
+  },
+  { name: 'actions', label: '', field: 'id', align: 'right' },
+]
+const schemaColumns = [
+  { name: 'version', label: 'Versão', field: 'version', align: 'left' },
+  { name: 'status', label: 'Status', field: 'status', align: 'left' },
+  { name: 'changeSummary', label: 'Resumo', field: 'changeSummary', align: 'left' },
+  { name: 'actions', label: '', field: 'id', align: 'right' },
+]
+const requiredRules = [(v) => Boolean(String(v || '').trim()) || 'Campo obrigatório'],
+  uuidRules = [
+    ...requiredRules,
+    (v) =>
+      /^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i.test(v || '') ||
+      'UUID inválido',
+  ]
+const validJson = (v) => {
+  try {
+    JSON.parse(v)
+    return true
+  } catch {
+    return 'JSON inválido'
+  }
+}
+const jsonRules = [...requiredRules, validJson],
+  optionalJsonRules = [(v) => !v || validJson(v)]
+const context = createRequestContext()
+let loadRevision = 0,
+  typesRevision = 0,
+  editorRevision = 0,
+  schemaRevision = 0,
+  definitionRevision = 0,
+  modalRevision = 0
+const editorActive = () => {
+  const active = context.capture(),
+    version = editorRevision,
+    id = selectedType.value?.id
+  return () =>
+    active() && version === editorRevision && editorDialog.value && selectedType.value?.id === id
+}
+const countryActive = () => {
+  const active = editorActive(),
+    id = selectedCountryId.value
+  return () => active() && selectedCountryId.value === id
+}
+const formActive = (base = context.capture()) => {
+  const version = modalRevision
+  return () => base() && version === modalRevision
+}
+watch(
+  [categoryDialog, typeDialog, editorDialog, schemaDialog, instanceDialog],
+  () => {
+    modalRevision++
+    saving.value = false
+    countrySaving.value = false
+  },
+  { flush: 'sync' },
+)
+watch(
+  editorDialog,
+  (open) => {
+    if (!open) {
+      editorRevision++
+      schemaRevision++
+      definitionRevision++
+      schemaLoading.value = false
+    }
+  },
+  { flush: 'sync' },
+)
+onScopeDispose(() => {
+  context.dispose()
+  loadRevision++
+  typesRevision++
+  editorRevision++
+  schemaRevision++
+  definitionRevision++
+})
+const load = async () => {
+  const active = context.capture(),
+    version = ++loadRevision
+  loading.value = true
+  loadError.value = ''
+  let typesStarted = false
+  try {
+    const result = collection(await listDocumentCategories())
+    if (!active() || version !== loadRevision) return
+    categories.value = result
+    typesStarted = true
+    await loadTypes()
+  } catch (e) {
+    if (active() && version === loadRevision)
+      loadError.value = getApiErrorMessage(
+        e,
+        'Não foi possível carregar a configuração documental.',
+      )
+  } finally {
+    if (!typesStarted && active() && version === loadRevision) loading.value = false
+  }
+}
+const loadTypes = async () => {
+  const active = context.capture(),
+    version = ++typesRevision,
+    categoryId = categoryFilter.value
+  loading.value = true
+  loadError.value = ''
+  try {
+    const result = collection(await listDocumentTypes(categoryId ? { categoryId } : {}))
+    if (active() && version === typesRevision) types.value = result
+  } catch (e) {
+    if (active() && version === typesRevision) {
+      types.value = []
+      loadError.value = getApiErrorMessage(e, 'Não foi possível carregar os tipos documentais.')
+    }
+  } finally {
+    if (active() && version === typesRevision) loading.value = false
+  }
+}
+const saveCategory = async () => {
+  if (saving.value) return
+  const active = formActive()
+  saving.value = true
+  try {
+    if (!(await categoryForm.value.validate()) || !active()) return
+    await createDocumentCategory({ ...categoryDraft })
+    if (!active()) return
+    successNotify('Categoria criada.')
+    categoryDialog.value = false
+    Object.assign(categoryDraft, { code: '', name: '' })
+    await load()
+  } catch (e) {
+    if (active()) errorNotify(getApiErrorMessage(e, 'Não foi possível criar a categoria.'))
+  } finally {
+    if (active()) saving.value = false
+  }
+}
+const saveType = async () => {
+  if (saving.value) return
+  const active = formActive()
+  saving.value = true
+  try {
+    if (!(await typeForm.value.validate()) || !active()) return
+    await createDocumentType({ ...typeDraft })
+    if (!active()) return
+    successNotify('Tipo documental criado.')
+    typeDialog.value = false
+    Object.assign(typeDraft, {
+      categoryId: null,
+      code: '',
+      name: '',
+      requiresExpirationDate: false,
+    })
+    await loadTypes()
+  } catch (e) {
+    if (active()) errorNotify(getApiErrorMessage(e, 'Não foi possível criar o tipo documental.'))
+  } finally {
+    if (active()) saving.value = false
+  }
+}
+const openType = async (row) => {
+  editorRevision++
+  schemaRevision++
+  definitionRevision++
+  selectedType.value = row
+  countryIdDraft.value = ''
+  selectedCountryId.value = null
+  countries.value = []
+  schemas.value = []
+  definitionText.value = ''
+  editorDialog.value = true
+  const active = editorActive()
+  try {
+    const result = collection(await listDocumentTypeCountries(row.id))
+    if (active()) countries.value = result
+  } catch (e) {
+    if (active()) errorNotify(getApiErrorMessage(e, 'Não foi possível carregar os países.'))
+  }
+}
+const countryKey = (c) => c.countryId || c.id
+const saveCountry = async () => {
+  if (countrySaving.value) return
+  const active = formActive(editorActive()),
+    typeId = selectedType.value.id,
+    countryId = countryIdDraft.value
+  if (!uuidRules.every((rule) => rule(countryIdDraft.value) === true))
+    return errorNotify('Informe um UUID de país válido.')
+  countrySaving.value = true
+  try {
+    await setDocumentTypeCountry(typeId, countryId, { isActive: true })
+    if (!active()) return
+    successNotify('País associado.')
+    countryIdDraft.value = ''
+    const result = collection(await listDocumentTypeCountries(typeId))
+    if (active()) countries.value = result
+  } catch (e) {
+    if (active()) errorNotify(getApiErrorMessage(e, 'Não foi possível associar o país.'))
+  } finally {
+    if (active()) countrySaving.value = false
+  }
+}
+const selectCountry = async (c) => {
+  selectedCountryId.value = countryKey(c)
+  definitionRevision++
+  definitionText.value = ''
+  await loadSchemas()
+}
+const loadSchemas = async () => {
+  const active = countryActive(),
+    version = ++schemaRevision,
+    typeId = selectedType.value.id,
+    countryId = selectedCountryId.value
+  schemaLoading.value = true
+  schemas.value = []
+  try {
+    const result = collection(
+      await listMetadataSchemas(typeId, countryId, { page: 1, pageSize: 100 }),
+    )
+    if (active() && version === schemaRevision) schemas.value = result
+  } catch (e) {
+    if (active() && version === schemaRevision)
+      errorNotify(getApiErrorMessage(e, 'Não foi possível carregar os schemas.'))
+  } finally {
+    if (active() && version === schemaRevision) schemaLoading.value = false
+  }
+}
+const saveSchema = async () => {
+  if (saving.value) return
+  const active = formActive(countryActive()),
+    typeId = selectedType.value.id,
+    countryId = selectedCountryId.value
+  saving.value = true
+  try {
+    if (!(await schemaForm.value.validate()) || !active()) return
+    await createMetadataSchema(typeId, countryId, {
+      schema: schemaDraft.schema,
+      uiSchema: schemaDraft.uiSchema || null,
+      changeSummary: schemaDraft.changeSummary || null,
+    })
+    if (!active()) return
+    successNotify('Schema criado.')
+    schemaDialog.value = false
+    await loadSchemas()
+  } catch (e) {
+    if (active()) errorNotify(getApiErrorMessage(e, 'Não foi possível criar o schema.'))
+  } finally {
+    if (active()) saving.value = false
+  }
+}
+const schemaColor = (s) =>
+  ({ Published: 'positive', Draft: 'grey', Retired: 'warning' })[s] || 'grey'
+const schemaActions = (s) => [
+  { name: 'validate', label: 'Validar schema', icon: 'rule' },
+  { name: 'instance', label: 'Validar instância', icon: 'fact_check' },
+  ...(s.status === 'Published' ? [] : [{ name: 'publish', label: 'Publicar', icon: 'publish' }]),
+  ...(s.status === 'Retired' ? [] : [{ name: 'retire', label: 'Retirar', icon: 'archive' }]),
+]
+const runSchemaAction = async (action, s) => {
+  if (saving.value) return
+  if (action === 'instance') {
+    instanceSchema.value = s
+    instanceDialog.value = true
+    return
+  }
+  const active = formActive(countryActive()),
+    typeId = selectedType.value.id,
+    countryId = selectedCountryId.value
+  saving.value = true
+  try {
+    if (action === 'validate') await validateMetadataSchema(typeId, countryId, s.id)
+    if (action === 'publish') await publishMetadataSchema(typeId, countryId, s.id)
+    if (action === 'retire') await retireMetadataSchema(typeId, countryId, s.id)
+    if (!active()) return
+    successNotify('Ação concluída.')
+    await loadSchemas()
+  } catch (e) {
+    if (active()) errorNotify(getApiErrorMessage(e, 'Não foi possível concluir a ação.'))
+  } finally {
+    if (active()) saving.value = false
+  }
+}
+const validateInstance = async () => {
+  if (saving.value) return
+  const active = formActive(countryActive()),
+    typeId = selectedType.value.id,
+    countryId = selectedCountryId.value,
+    schemaId = instanceSchema.value.id
+  saving.value = true
+  try {
+    await validateMetadataInstance(typeId, countryId, schemaId, {
+      ...instanceDraft,
+      issuedOn: instanceDraft.issuedOn || null,
+      expiresOn: instanceDraft.expiresOn || null,
+    })
+    if (!active()) return
+    successNotify('Instância válida.')
+    instanceDialog.value = false
+  } catch (e) {
+    if (active()) errorNotify(getApiErrorMessage(e, 'A instância não é válida.'))
+  } finally {
+    if (active()) saving.value = false
+  }
+}
+const loadDefinition = async (kind) => {
+  const active = countryActive(),
+    version = ++definitionRevision,
+    typeId = selectedType.value.id,
+    countryId = selectedCountryId.value
+  try {
+    const d =
+      kind === 'upload'
+        ? await getDocumentUploadDefinition(typeId, countryId)
+        : await getDocumentDataDefinition(typeId, countryId)
+    if (active() && version === definitionRevision)
+      definitionText.value = JSON.stringify(d, null, 2)
+  } catch (e) {
+    if (active() && version === definitionRevision)
+      errorNotify(getApiErrorMessage(e, 'Não foi possível carregar a definição.'))
+  }
+}
 onMounted(load)
 </script>
 <style scoped>.side-dialog{width:min(620px,100vw)}.editor-dialog{width:min(900px,100vw)}.schema-dialog{width:min(720px,calc(100vw - 32px))}</style>
