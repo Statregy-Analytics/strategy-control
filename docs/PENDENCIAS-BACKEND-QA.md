@@ -8,6 +8,10 @@ Detalhes e checklist: [QA seleção/ficha](QA-2026-10-23-SELECAO-FICHA.md). Rest
 
 Complemento do front em 23/10: Todos no status, Alerta no filtro/badge, prefixo Compliance na lista e cores dos badges da ficha corrigidos sem novo contrato HTTP. Esses ajustes não devem ser encaminhados como demandas do backend. Os bloqueios de dados/API acima continuam separados.
 
+## Exibição da moeda patrimonial — reteste de 23/10
+
+O Admin passou a usar currencyCode já devolvido no bem, sem depender das moedas da carteira. Correção de front publicada em 9909326/3dbdb4c, com leitura BRL/EUR/USD e mobile conferidos. Não solicitar novo campo/endpoint para essa exibição. A ausência/falha da carteira foi coberta em teste controlado, não induzida no servidor. [Evidências e limites](QA-2026-10-23-MOEDA-PATRIMONIO.md).
+
 ## Imagens do patrimônio no Admin — reteste de 23/10
 
 Upload, vínculo, retomada de posições e abertura por URL temporária passaram com arquivos fictícios no Admin publicado (6eab47c / pipeline 39959274171 aprovada). Não há bloqueio de backend nos cenários de imagens exercitados. O contador de documentação pessoal foi ajustado no front para não somar fotos patrimoniais; isso não é demanda do backend. Escopo e limites no [relatório](QA-2026-10-23-IMAGENS-PATRIMONIO.md). O fluxo do portal não foi revalidado neste lote.

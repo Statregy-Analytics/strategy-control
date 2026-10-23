@@ -66,7 +66,7 @@ sucesso, com auditoria, testes, lint e build aprovados (107 testes admin,
 | 21. Documentação do cliente | Layout corrigido; homologação parcial | Faixa de níveis/progresso, tabela e reenvio por linha conferidos; reenvio aberto e cancelado, sem upload. Grupos reais seguem catálogo; frente/verso explícitos, quatro grupos finais e última atualização dependem de dados/contrato. Data ausente não é inventada. |
 | 22. Contas bancárias do cliente | Layout corrigido; homologação parcial | Estado vazio, botão no fim, formulário em linha, alinhamento desktop e descarte conferidos. Lista com contas e escritas não retestadas nesta conta vazia; simplificação de titularidade depende do item 18. |
 | 23. Formulário e imagens do patrimônio | Admin integrado e testado em 23/10; portal não revalidado nesse lote | Fotos fictícias de imóvel e veículo enviadas pelo Admin publicado, retomadas após recarga e abertas pela API. Posições da vistoria preservadas, sem mudar valores dos bens. [Relatório e limites](QA-2026-10-23-IMAGENS-PATRIMONIO.md). |
-| 24. Moeda automática do patrimônio | Pendente — backend, depois frontend e reteste | Seletor mantido. Definir moeda principal na criação e preservar moeda original nas edições/mudanças de preferência; apresentar símbolo da moeda gravada no admin e portal. Não converter valores automaticamente. |
+| 24. Moeda automática do patrimônio | Contrato liberado em 22/10; exibição no Admin corrigida/retestada em 23/10 | Admin usa currencyCode do bem, sem depender da carteira ou converter valores. 12 bens em BRL/EUR/USD conferidos, com nomes legíveis no mobile. Criação e troca de preferência não revalidadas nesse lote. [Relatório](QA-2026-10-23-MOEDA-PATRIMONIO.md). |
 
 ### Solicitações ao backend — itens 18 e 24
 
