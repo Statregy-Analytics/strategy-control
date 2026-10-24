@@ -291,7 +291,7 @@ test('identification replaces collections without dropping secondary records or 
     retry[0].payload.contacts.find((row) => row.id === 'email').value,
     'accepted@example.com',
   )
-  assert.ok(!sectionEditable('identification', { ...source, addresses: [] }).includes('line1'))
+  assert.ok(sectionEditable('identification', { ...source, addresses: [] }).includes('line1'))
   assert.deepEqual(
     sectionValidation('identification', { ...original, fullName: '' }, { names: [] }),
     {},

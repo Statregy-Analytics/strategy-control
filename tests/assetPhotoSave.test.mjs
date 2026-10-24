@@ -14,6 +14,7 @@ test('new asset photo failure retries against created asset without a duplicate 
     reads = []
   let fail = true
   const modules = {
+    quasar: { QInput: {} },
     vue: { computed, ref, watch() {}, onScopeDispose() {} },
     'src/services/clientAssetProfile': model,
     'src/services/customerService': { getPreferenceCatalog: async () => ({ currencies: [] }) },

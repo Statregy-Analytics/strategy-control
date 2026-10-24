@@ -4,6 +4,8 @@ A interface segue o Figma e as alterações de ordem/campos expressamente autori
 
 ## Atualização vigente — 24/10
 
+Lote [QA Admin 56–60](QA-2026-10-24-ADMIN-56-60.md): novos C32/C33/C35 e adequação C09/C10–C19. Permanecem contratos administrativos dos campos pessoais/documentais e de segurança (status da senha/2FA/link de redefinição), tipo CND de condomínio, características adicionais do imóvel e fatos de consórcio ausentes no DTO. Busca/contas bancárias, documentos e fotos já têm integração; não pedir esses endpoints novamente.
+
 Complemento [QA Admin 39–55](QA-2026-10-24-ADMIN-39-55.md): ajustes de apresentação da seleção/ficha. Risco do Jorge conferido em ficha e header: null; o front deve mostrar “—”. A escala A/AA/AAA segue como decisão de produto, não conversão local.
 
 [Reteste de cards, sessões e conta principal](QA-2026-10-24-CARDS-SESSOES-CONTA-PRINCIPAL.md) prevalece sobre os relatos de 23/10 abaixo. Documento mascarado nos cards e sessões por cliente já têm API; as três contas únicas apontadas agora retornam isPrimary=true. Integração de Deslogar por linha e máscara do sufixo no front neste lote. Não pedir novamente essas três entregas como endpoints/dados ausentes.

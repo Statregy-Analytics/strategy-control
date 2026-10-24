@@ -29,13 +29,12 @@
               dense
               no-caps
               class="session-logout"
-              icon="logout"
-              label="Deslogar"
               :aria-label="`Deslogar sessão de ${row.date}`"
               :loading="busyId === row.id"
               :disable="Boolean(busyId) || !row.id"
               @click="revoke(row.id)"
-            />
+              ><IconLogout :size="14" aria-hidden="true" /><span>Deslogar</span></q-btn
+            >
           </td>
         </tr>
         <tr v-if="!rows.length">
@@ -46,6 +45,7 @@
   </resource-state>
 </template>
 <script setup>
+import { IconLogout } from '@tabler/icons-vue'
 import { computed, onMounted, onScopeDispose, ref, watch } from 'vue'
 import ResourceState from 'src/components/Finance/ResourceState.vue'
 import { useFinanceResource } from 'src/composables/useFinanceResource'
@@ -135,8 +135,14 @@ onMounted(load)
   color: #ff8a8a;
   font-size: 12px;
 }
-.session-logout :deep(.q-icon) {
+.session-logout :deep(.q-btn__content) {
+  gap: 6px;
+}
+.session-logout :deep(svg) {
   font-size: 16px;
+  width: 16px;
+  height: 16px;
+  flex: none;
 }
 .profile-sessions-table :deep(td:first-child) {
   white-space: nowrap;

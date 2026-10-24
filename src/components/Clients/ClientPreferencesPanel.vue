@@ -52,7 +52,7 @@
         </q-banner>
         <q-card-section v-else class="preference-fields row q-col-gutter-sm q-px-none q-py-sm">
           <label-form :class-name="preferenceColumn" text-label="Moeda primária"
-            ><q-select
+            ><glass-select
               :model-value="values.primaryCurrencyCode"
               @update:model-value="setField('primaryCurrencyCode', $event)"
               :readonly="controlled && !editing"
@@ -71,7 +71,7 @@
               aria-label="Moeda principal"
           /></label-form>
           <label-form :class-name="preferenceColumn" text-label="Moeda secundária"
-            ><q-select
+            ><glass-select
               :model-value="values.secondaryCurrencyCode"
               @update:model-value="setField('secondaryCurrencyCode', $event)"
               :readonly="controlled && !editing"
@@ -91,7 +91,7 @@
               aria-label="Moeda secundária"
           /></label-form>
           <label-form :class-name="preferenceColumn" text-label="Idioma do sistema"
-            ><q-select
+            ><glass-select
               :model-value="values.languageCode"
               @update:model-value="setField('languageCode', $event)"
               :readonly="controlled && !editing"
@@ -109,7 +109,7 @@
               aria-label="Idioma"
           /></label-form>
           <label-form :class-name="preferenceColumn" text-label="Fuso horário"
-            ><q-select
+            ><glass-select
               :model-value="values.timeZoneId"
               @update:model-value="setField('timeZoneId', $event)"
               :readonly="controlled && !editing"
@@ -194,6 +194,7 @@ import {
 import { getApiErrorMessage } from 'src/services/apiError'
 import useNotification from 'src/composables/global/useNotification'
 import { createRequestContext } from 'src/services/requestContext'
+import GlassSelect from 'src/components/Entity/GlassSelect.vue'
 import LabelForm from 'src/components/Form/LabelForm.vue'
 
 const props = defineProps({

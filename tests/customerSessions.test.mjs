@@ -1,3 +1,4 @@
+import { IconLogout } from '@tabler/icons-vue'
 import test from 'node:test'
 import assert from 'node:assert/strict'
 import vm from 'node:vm'
@@ -18,6 +19,7 @@ async function setup(service = {}) {
   const h = await componentModel('src/components/Clients/ClientSessionsPanel.vue', {
     props: { customerId: 'one' },
     modules: {
+      '@tabler/icons-vue': { IconLogout },
       'src/composables/useFinanceResource': { useFinanceResource },
       'src/services/requestContext': context,
       'src/services/customerSessionPresentation': presentation,

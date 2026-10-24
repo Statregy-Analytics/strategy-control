@@ -233,3 +233,119 @@ export function assetCurrencyCode(asset, currencies = []) {
     ? legacy.trim().toUpperCase()
     : null
 }
+
+// Layout projection for C11-C14, independent of the HTTP payload projection above.
+export function assetEditorSections(type) {
+  const source = assetFormSections(type).map((s) => ({
+    ...s,
+    fields: s.fields.map((f) => ({ ...f })),
+  }))
+  const field = (key, label, type = 'text', extra = {}) => ({ key, label, type, ...extra })
+  const finance = {
+    title: type === 'RealEstate' ? 'Valor e situação financeira' : 'Situação financeira',
+    icon: 'financial',
+    fields: [
+      field('declaredValue', type === 'RealEstate' ? 'Valor estimado' : 'Valor FIPE', 'number', {
+        required: true,
+        currency: true,
+      }),
+      field('paidOff', 'Está quitado?', 'toggle'),
+      field('remainingBalance', 'Restante para quitação', 'number', { debt: true }),
+    ],
+  }
+  const icons = {
+    'Identificação do imóvel': 'identification',
+    'Identificação do veículo': 'identification',
+    Localização: 'location',
+    'Registro imobiliário': 'registration',
+    'Características físicas': 'features',
+    'Identificação do consórcio': 'identification',
+    'Valores financeiros': 'financial',
+    Parcelamento: 'installments',
+    'Situação da cota': 'quota',
+    'Identificação da aplicação': 'identification',
+    'Informações financeiras': 'financial',
+  }
+  source.forEach((s) => {
+    s.icon = icons[s.title] || 'identification'
+    s.fields.forEach((f) => {
+      if (
+        [
+          'propertyType',
+          'vehicleType',
+          'quotaStatus',
+          'contemplationMethod',
+          'investmentType',
+        ].includes(f.key)
+      )
+        f.select = true
+      if (['declaredValue', 'initialAmount'].includes(f.key)) f.currency = true
+    })
+  })
+  if (type === 'RealEstate') {
+    source[0].fields.splice(1, 0, field('internalId', 'ID interno', 'text', { readonly: true }))
+    source[2].fields = source[2].fields.filter((f) => !['city', 'state'].includes(f.key))
+    source[2].fields.push(field('cityState', 'Cidade / UF', 'text', { required: true }))
+    return [
+      source[0],
+      finance,
+      source[2],
+      { ...source[3], narrow: true },
+      { ...source[4], narrow: true },
+    ]
+  }
+  if (type === 'Vehicle') return [source[0], finance]
+  if (type === 'Consortium') {
+    source[1].fields.push(field('remainingBalance', 'Saldo devedor', 'number'))
+    source[1].narrow = true
+    source[2].fields.push(field('remainingInstallments', 'Restantes', 'number', { readonly: true }))
+    source[2].narrow = true
+    return source
+  }
+  if (type === 'Investment')
+    return [
+      source[0],
+      { ...source[1], narrow: true },
+      {
+        title: 'Prazo e vencimento',
+        icon: 'term',
+        narrow: true,
+        fields: [
+          field('hasFixedTerm', 'Prazo determinado', 'toggle'),
+          field('maturityDate', 'Data de vencimento', 'date', { term: true }),
+          field('termMonths', 'Prazo em meses (opcional)', 'number', { term: true }),
+        ],
+      },
+    ]
+  return source
+}
+export function assetExpandedFacts(asset) {
+  if (asset.assetType !== 'Consortium') return []
+  const c = asset.consortium || {},
+    missing = 'Não informado'
+  const facts = [
+    ['Valor da carta', asset.declaredValue, 'money'],
+    ['Início', c.startDate || missing],
+    ['Prazo', c.totalInstallments == null ? missing : `${c.totalInstallments} meses`],
+    [
+      'Parcelas',
+      c.paidInstallments == null || c.totalInstallments == null
+        ? missing
+        : `${c.paidInstallments} / ${c.totalInstallments}`,
+    ],
+    ['Valor pago', c.amountPaid, 'money'],
+    ['Saldo devedor', asset.remainingBalance, 'money'],
+  ]
+  const contemplated = ['Contemplated', 'Contemplado'].includes(c.quotaStatus)
+  return [
+    ...facts,
+    ...(contemplated
+      ? [
+          ['Data contemplação', c.contemplationDate || missing],
+          ['Carta liberada', c.releasedCredit ?? null, 'money'],
+          ['Status utilização', c.utilizationStatus || missing],
+          ['Tipo contemplação', c.contemplationMethod || missing],
+        ]
+      : [['Situação', c.quotaStatus || missing]]),
+  ].map(([label, value, format]) => ({ label, value, format }))
+}

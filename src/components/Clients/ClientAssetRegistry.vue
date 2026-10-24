@@ -8,71 +8,258 @@
           dense
           no-caps
           size="sm"
-          color="white"
           class="asset-add"
           icon="add"
           :label="`Adicionar ${group.singular}`"
+          :disable="saving || dialog"
           @click="edit(null, group)"
         />
       </header>
-      <p v-if="!rowsFor(group).length" class="asset-empty">
-        Nenhum {{ group.singular }} registrado ainda.
-      </p>
-      <q-expansion-item
-        v-for="asset in rowsFor(group)"
-        :key="asset.id"
-        class="asset-row"
-        @show="loadDocuments(asset.id)"
-      >
-        <template #header>
-          <q-item-section avatar><q-icon :name="group.icon" /></q-item-section>
-          <q-item-section class="asset-identity"
-            ><q-item-label class="asset-name">{{ asset.nickname }}</q-item-label
-            ><q-item-label caption>{{ description(asset) }}</q-item-label></q-item-section
-          >
-          <q-item-section side class="asset-value"
-            ><strong>{{ value(asset) }}</strong
-            ><small v-if="asset.status === 'Financed'"
-              >Resta {{ value(asset, 'remainingBalance') }}</small
-            ></q-item-section
-          >
-          <q-item-section side
-            ><q-badge outline :color="asset.status === 'PaidOff' ? 'positive' : 'warning'">{{
-              status(asset)
-            }}</q-badge></q-item-section
-          >
-          <q-item-section side
-            ><q-btn
-              flat
-              round
-              dense
-              size="sm"
-              icon="edit"
-              :aria-label="`Editar ${asset.nickname}`"
-              :disable="!!asset.archivedAtUtc"
-              @click.stop="edit(asset, group)"
-          /></q-item-section>
-        </template>
-        <div class="asset-documents">
-          <header><h4>Documentação vinculada</h4></header>
-          <resource-state
-            :state="documentResource(asset.id).state"
-            @retry="loadDocuments(asset.id)"
-          >
-            <div class="asset-documents__grid">
-              <profile-document-item
-                v-for="doc in documentResource(asset.id).state.data || []"
-                :key="doc.documentId"
-                :customer-id="customerId"
-                :item="{ ...doc, status: doc.documentStatus, allowedActions: [] }"
+      <section v-if="dialog && selectedGroup?.type === group.type" class="asset-registry-inline">
+        <q-card flat class="asset-editor">
+          <header class="asset-editor-header">
+            <span class="asset-editor-icon"
+              ><img :src="`/icons/asset-editor/${editorIcon}.svg`" alt=""
+            /></span>
+            <div>
+              <h3>{{ selected ? 'Editar' : 'Adicionar' }} {{ selectedGroup.singular }}</h3>
+              <p>{{ editorCaption }}</p>
+            </div>
+            <div class="asset-editor-actions">
+              <q-btn
+                outline
+                dense
+                no-caps
+                label="Descartar"
+                :disable="saving"
+                @click="dialog = false"
+              /><q-btn
+                outline
+                dense
+                no-caps
+                :label="`Salvar ${selectedGroup.singular}`"
+                :loading="saving"
+                type="submit"
+                :form="`asset-editor-${customerId}-${group.type}`"
               />
             </div>
-            <p v-if="!documentResource(asset.id).state.data?.length" class="text-muted">
-              Nenhum documento vinculado.
-            </p>
-          </resource-state>
-        </div>
-      </q-expansion-item>
+          </header>
+          <q-card-section>
+            <resource-state :state="editor.state" @retry="loadEditor">
+              <q-form
+                v-if="draft"
+                :id="`asset-editor-${customerId}-${group.type}`"
+                @submit.prevent="save"
+              >
+                <q-banner v-if="error" role="alert">{{ error }}</q-banner>
+                <div class="asset-editor-grid">
+                  <form-section
+                    v-for="section in formSections"
+                    :key="section.title"
+                    :title="section.title"
+                    class="asset-editor-section"
+                    :class="{ 'asset-editor-section--narrow': section.narrow }"
+                  >
+                    <template #icon
+                      ><img :src="`/icons/asset-editor/${section.icon}.svg`" alt=""
+                    /></template>
+                    <div
+                      class="asset-editor-fields"
+                      :class="`asset-editor-fields--${selectedGroup.type}`"
+                    >
+                      <label-form
+                        v-for="field in section.fields"
+                        :key="field.key"
+                        :text-label="field.label"
+                        :class="[`asset-field--${field.key}`, { 'asset-field--wide': field.wide }]"
+                      >
+                        <q-toggle
+                          v-if="field.type === 'toggle'"
+                          v-model="draft[field.key]"
+                          :aria-label="field.label"
+                          :label="
+                            field.key === 'paidOff'
+                              ? draft.paidOff
+                                ? 'Sim'
+                                : 'Não'
+                              : 'O ativo possui data de vencimento?'
+                          "
+                          color="positive"
+                          :disable="saving"
+                        />
+                        <component
+                          v-else
+                          :is="field.select ? GlassSelect : QInput"
+                          :model-value="editorValue(field)"
+                          @update:model-value="setEditorValue(field, $event)"
+                          outlined
+                          dense
+                          hide-bottom-space
+                          :aria-label="field.label"
+                          :type="field.type || 'text'"
+                          :options="field.select ? fieldOptions(field) : undefined"
+                          :use-input="field.select"
+                          :fill-input="field.select"
+                          :hide-selected="field.select"
+                          @new-value="addOption"
+                          :readonly="
+                            field.readonly ||
+                            (field.debt && draft.paidOff) ||
+                            (field.term && !draft.hasFixedTerm)
+                          "
+                          :disable="saving"
+                          :rules="
+                            field.readonly ||
+                            (field.debt && draft.paidOff) ||
+                            (field.term && !draft.hasFixedTerm)
+                              ? []
+                              : fieldRules(field)
+                          "
+                          :min="field.type === 'number' ? 0 : undefined"
+                          :step="
+                            field.type === 'number'
+                              ? isAssetIntegerField(field.key)
+                                ? 1
+                                : 'any'
+                              : undefined
+                          "
+                        >
+                          <template v-if="field.currency" #append
+                            ><glass-select
+                              class="asset-currency-select"
+                              v-model="draft.currencyId"
+                              :display-value="editorCurrencyCode"
+                              :options="currencyOptions"
+                              :readonly="Boolean(selected)"
+                              aria-label="Moeda do patrimônio"
+                              @popup-show="loadCurrencies"
+                          /></template>
+                        </component>
+                      </label-form>
+                      <div v-if="section.title === 'Parcelamento'" class="asset-installments">
+                        <q-linear-progress :value="installmentProgress" color="grey-4" /><small
+                          >{{ Math.round(installmentProgress * 100) }}% quitado</small
+                        >
+                      </div>
+                      <q-btn
+                        v-if="section.title === 'Características físicas'"
+                        flat
+                        dense
+                        no-caps
+                        label="+ Adicionar característica"
+                        disable
+                        class="asset-extra-feature"
+                        ><q-tooltip
+                          >A API ainda não oferece características adicionais.</q-tooltip
+                        ></q-btn
+                      >
+                    </div>
+                  </form-section>
+                </div>
+                <asset-document-collection
+                  :ref="setAssetDocuments"
+                  :key="photoEditorKey"
+                  :customer-id="customerId"
+                  :asset-id="editorAssetId"
+                  :asset-type="selectedGroup.type"
+                  editing
+                  :disabled="saving"
+                />
+                <asset-photo-gallery
+                  v-if="['RealEstate', 'Vehicle'].includes(selectedGroup.type)"
+                  :ref="setPhotos"
+                  :key="photoEditorKey"
+                  :customer-id="customerId"
+                  :asset-id="editorAssetId"
+                  :asset-type="selectedGroup.type"
+                  :disabled="saving"
+                />
+              </q-form>
+            </resource-state>
+          </q-card-section>
+        </q-card>
+      </section>
+      <template v-if="!(dialog && selectedGroup?.type === group.type)">
+        <p v-if="!rowsFor(group).length" class="asset-empty">
+          Nenhum {{ group.singular }} registrado ainda.
+        </p>
+        <q-expansion-item
+          v-for="asset in rowsFor(group)"
+          :key="asset.id"
+          class="asset-row"
+          switch-toggle-side
+          expand-icon="img:/icons/asset-editor/collapse.svg"
+          expanded-icon="img:/icons/asset-editor/collapse.svg"
+          @show="loadDocuments(asset.id)"
+        >
+          <template #header>
+            <q-item-section avatar class="asset-row-icon"
+              ><img :src="`/icons/asset-editor/${assetIcon(group.type)}.svg`" alt=""
+            /></q-item-section>
+            <q-item-section class="asset-identity"
+              ><q-item-label class="asset-name">{{ asset.nickname }}</q-item-label
+              ><q-item-label caption>{{ description(asset) }}</q-item-label></q-item-section
+            >
+            <q-item-section side class="asset-value"
+              ><strong>{{ value(asset) }}</strong
+              ><small v-if="asset.status === 'Financed'"
+                >Resta {{ value(asset, 'remainingBalance') }}</small
+              ></q-item-section
+            >
+            <q-item-section side
+              ><q-badge outline :color="statusTone(asset)">{{
+                status(asset)
+              }}</q-badge></q-item-section
+            >
+            <q-item-section side
+              ><span class="asset-doc-count"
+                ><img src="/icons/asset-editor/linked-documents.svg" alt="" />{{
+                  documentCount(asset.id)
+                }}</span
+              ></q-item-section
+            >
+            <q-item-section side
+              ><q-btn
+                flat
+                round
+                dense
+                size="sm"
+                :aria-label="`Ações de ${asset.nickname}`"
+                @click.stop
+                ><img src="/icons/asset-editor/more.svg" alt="" /><q-menu class="profile-glass-menu"
+                  ><q-list
+                    ><q-item clickable v-close-popup :disable="dialog" @click="edit(asset, group)"
+                      ><q-item-section>Editar</q-item-section></q-item
+                    ></q-list
+                  ></q-menu
+                ></q-btn
+              ></q-item-section
+            >
+          </template>
+          <div class="asset-documents">
+            <dl v-if="expandedFacts(asset).length" class="asset-expanded-facts">
+              <div v-for="fact in expandedFacts(asset)" :key="fact.label">
+                <dt>{{ fact.label }}</dt>
+                <dd>
+                  {{
+                    fact.format === 'money'
+                      ? fact.value == null
+                        ? 'Não informado'
+                        : value({ ...asset, declaredValue: fact.value })
+                      : fact.value
+                  }}
+                </dd>
+              </div>
+            </dl>
+            <asset-document-collection
+              :customer-id="customerId"
+              :asset-id="asset.id"
+              :asset-type="group.type"
+              @changed="loadDocuments(asset.id)"
+            />
+          </div>
+        </q-expansion-item>
+      </template>
     </section>
     <entity-table-footer
       v-if="total > pageSize"
@@ -85,156 +272,18 @@
       @page="changePage"
       @page-size="changeSize"
     />
-    <q-dialog
-      v-model="dialog"
-      position="right"
-      full-height
-      full-width
-      maximized
-      class="control-width asset-registry-dialog"
-      :persistent="saving"
-    >
-      <q-card class="asset-editor">
-        <title-card
-          :title="`${selected ? 'Editar' : 'Adicionar'} ${selectedGroup?.singular || 'patrimônio'}`"
-          :disable-close="saving"
-          @on-close="dialog = false"
-        />
-        <q-card-section>
-          <resource-state :state="editor.state" @retry="loadEditor">
-            <q-form v-if="draft" @submit.prevent="save">
-              <q-banner v-if="error" class="q-mb-md" role="alert">{{ error }}</q-banner>
-              <form-section
-                v-for="section in formSections"
-                :key="section.title"
-                :title="section.title"
-              >
-                <div class="row q-col-gutter-md">
-                  <label-form
-                    v-for="field in section.fields"
-                    :key="field.key"
-                    :text-label="field.label"
-                    :class="field.wide ? 'col-12' : 'col-12 col-sm-6'"
-                  >
-                    <q-input
-                      v-model="draft[field.key]"
-                      :aria-label="field.label"
-                      outlined
-                      dense
-                      :type="field.type || 'text'"
-                      :rules="fieldRules(field)"
-                      :min="field.type === 'number' ? 0 : undefined"
-                      :step="
-                        field.type === 'number'
-                          ? isAssetIntegerField(field.key)
-                            ? 1
-                            : 'any'
-                          : undefined
-                      "
-                    />
-                  </label-form>
-                </div>
-              </form-section>
-              <form-section
-                :title="
-                  selectedGroup.type === 'Investment' ? 'Prazo e vencimento' : 'Situação financeira'
-                "
-              >
-                <template v-if="selectedGroup.type === 'Investment'">
-                  <q-toggle v-model="draft.hasFixedTerm" label="Prazo determinado" />
-                  <div v-if="draft.hasFixedTerm" class="row q-col-gutter-md">
-                    <label-form class="col-12 col-sm-6" text-label="Data de vencimento"
-                      ><q-input
-                        v-model="draft.maturityDate"
-                        aria-label="Data de vencimento"
-                        type="date"
-                        outlined
-                        dense
-                        :rules="[required]"
-                    /></label-form>
-                    <label-form class="col-12 col-sm-6" text-label="Prazo em meses (opcional)"
-                      ><q-input
-                        v-model="draft.termMonths"
-                        aria-label="Prazo em meses"
-                        :rules="[assetIntegerRule]"
-                        type="number"
-                        min="1"
-                        outlined
-                        dense
-                    /></label-form>
-                  </div>
-                </template>
-                <label-form
-                  v-else-if="selectedGroup.type === 'Consortium'"
-                  text-label="Saldo devedor"
-                >
-                  <q-input
-                    v-model.number="draft.remainingBalance"
-                    aria-label="Saldo devedor"
-                    type="number"
-                    min="0"
-                    step="0.01"
-                    outlined
-                    dense
-                    :rules="[required]"
-                  />
-                </label-form>
-                <template v-else>
-                  <q-toggle v-model="draft.paidOff" label="Está quitado?" />
-                  <label-form v-if="!draft.paidOff" text-label="Restante para quitação"
-                    ><q-input
-                      v-model.number="draft.remainingBalance"
-                      aria-label="Restante para quitação"
-                      type="number"
-                      min="0.01"
-                      step="0.01"
-                      outlined
-                      dense
-                      :rules="[(v) => Number(v) > 0 || 'Informe um saldo devedor maior que zero']"
-                  /></label-form>
-                </template>
-              </form-section>
-              <asset-photo-gallery
-                v-if="['RealEstate', 'Vehicle'].includes(selectedGroup.type)"
-                ref="photos"
-                :key="photoEditorKey"
-                :customer-id="customerId"
-                :asset-id="selected?.id || null"
-                :asset-type="selectedGroup.type"
-                :disabled="saving"
-              />
-              <div class="row justify-end q-gutter-sm q-mt-lg">
-                <q-btn
-                  flat
-                  no-caps
-                  label="Descartar"
-                  :disable="saving"
-                  @click="dialog = false"
-                /><q-btn
-                  type="submit"
-                  flat
-                  no-caps
-                  color="primary"
-                  :label="`Salvar ${selectedGroup.singular}`"
-                  :loading="saving"
-                />
-              </div>
-            </q-form>
-          </resource-state>
-        </q-card-section>
-      </q-card>
-    </q-dialog>
   </resource-state>
 </template>
 <script setup>
+import { QInput } from 'quasar'
+import GlassSelect from 'src/components/Entity/GlassSelect.vue'
+import AssetDocumentCollection from './AssetDocuments.vue'
 import { computed, ref, watch, onScopeDispose } from 'vue'
 import { getPreferenceCatalog } from 'src/services/customerService'
 import ResourceState from 'src/components/Finance/ResourceState.vue'
-import ProfileDocumentItem from './ProfileDocumentItem.vue'
 import AssetPhotoGallery from './AssetPhotoGallery.vue'
 import EntityTableFooter from 'src/components/Entity/EntityTableFooter.vue'
 import FormSection from 'src/components/Entity/FormSection.vue'
-import TitleCard from 'src/components/Card/TitleCard.vue'
 import LabelForm from 'src/components/Form/LabelForm.vue'
 import { useFinanceResource } from 'src/composables/useFinanceResource'
 import { financeGet, financeWrite, financeLabel, money } from 'src/services/financeService'
@@ -242,7 +291,8 @@ import { getApiErrorMessage } from 'src/services/apiError'
 import useNotification from 'src/composables/global/useNotification'
 import {
   assetCurrencyCode,
-  assetFormSections,
+  assetEditorSections,
+  assetExpandedFacts,
   assetPayload,
   assetDraft,
   isAssetIntegerField,
@@ -257,6 +307,15 @@ const { successNotify, errorNotify } = useNotification()
 const resource = useFinanceResource(),
   editor = useFinanceResource(),
   documentResources = new Map()
+const currencyCatalog = ref([])
+const assetDocuments = ref(null),
+  editorAssetId = ref(null)
+const setAssetDocuments = (el) => {
+  assetDocuments.value = el
+}
+const setPhotos = (el) => {
+  photos.value = el
+}
 const photos = ref(null),
   photoEditorKey = ref(0)
 const page = ref(1),
@@ -270,6 +329,8 @@ const page = ref(1),
 let editorRevision = 0
 function invalidateEditor() {
   editorRevision++
+  assetDocuments.value = null
+  photos.value = null
   editor.reset()
   draft.value = null
   error.value = ''
@@ -349,7 +410,105 @@ const fieldRules = (field) => [
   ...(field.required ? [required] : []),
   ...(isAssetIntegerField(field.key) ? [assetIntegerRule] : []),
 ]
-const formSections = computed(() => assetFormSections(selectedGroup.value?.type))
+const formSections = computed(() => assetEditorSections(selectedGroup.value?.type))
+
+const assetIcon = (type) =>
+  ({
+    RealEstate: 'real-estate',
+    Vehicle: 'vehicle',
+    Consortium: 'consortium',
+    Investment: 'investment',
+  })[type]
+const editorIcon = computed(() => assetIcon(selectedGroup.value?.type))
+const editorCaption = computed(
+  () =>
+    ({
+      RealEstate: 'Preencha os dados completos do patrimônio.',
+      Vehicle: 'Preencha os dados completos do veículo.',
+      Consortium: 'Gerencie cotas de consórcios imobiliários, veiculares e serviços.',
+      Investment: 'Registre ativos financeiros externos para consolidação patrimonial.',
+    })[selectedGroup.value?.type],
+)
+const currencyOptions = computed(() =>
+  [
+    ...props.currencies.map((c) => ({ label: c.currencyIsoCode, value: c.currencyId })),
+    ...currencyCatalog.value
+      .filter((c) => c.id)
+      .map((c) => ({ label: c.code || c.value, value: c.id })),
+  ].filter((o, i, all) => all.findIndex((x) => x.value === o.value) === i),
+)
+const editorCurrencyCode = computed(
+  () =>
+    currencyOptions.value.find((c) => c.value === draft.value?.currencyId)?.label ||
+    assetCurrencyCode(selected.value, props.currencies) ||
+    'BRL',
+)
+async function loadCurrencies() {
+  const version = editorRevision,
+    customerId = props.customerId
+  try {
+    const catalog = await getPreferenceCatalog()
+    if (activeEditor(version, customerId)) currencyCatalog.value = catalog?.currencies || []
+  } catch (e) {
+    if (activeEditor(version, customerId))
+      error.value = getApiErrorMessage(e, 'Não foi possível carregar as moedas.')
+  }
+}
+const installmentProgress = computed(() =>
+  draft.value?.totalInstallments > 0
+    ? Math.min(1, Number(draft.value.paidInstallments || 0) / Number(draft.value.totalInstallments))
+    : 0,
+)
+const expandedFacts = assetExpandedFacts
+const statusTone = (asset) =>
+  asset.assetType === 'Investment'
+    ? 'grey-4'
+    : asset.assetType === 'Consortium'
+      ? ['Contemplated', 'Contemplado'].includes(asset.consortium?.quotaStatus)
+        ? 'positive'
+        : 'grey-4'
+      : asset.status === 'PaidOff'
+        ? 'positive'
+        : 'warning'
+const documentCount = (id) => {
+  const state = documentResources.get(id)?.state
+  return state?.data ? `${state.data.length} ${state.data.length === 1 ? 'doc' : 'docs'}` : 'Docs'
+}
+function editorValue(field) {
+  if (field.key === 'internalId') return selected.value?.id?.slice(0, 8) || 'Gerado ao salvar'
+  if (field.key === 'remainingInstallments')
+    return Math.max(
+      0,
+      Number(draft.value.totalInstallments || 0) - Number(draft.value.paidInstallments || 0),
+    )
+  if (field.key === 'cityState')
+    return [draft.value.city, draft.value.state].filter(Boolean).join(' / ')
+  return draft.value[field.key]
+}
+function setEditorValue(field, value) {
+  if (field.readonly) return
+  if (field.key === 'cityState') {
+    const i = String(value).lastIndexOf('/')
+    draft.value.city = i < 0 ? value : value.slice(0, i).trim()
+    if (i >= 0) draft.value.state = value.slice(i + 1).trim()
+    return
+  }
+  draft.value[field.key] = value
+}
+function fieldOptions(field) {
+  const key = {
+    RealEstate: 'realEstate',
+    Vehicle: 'vehicle',
+    Consortium: 'consortium',
+    Investment: 'investment',
+  }[selectedGroup.value?.type]
+  const options = rows.value.map((a) => a[key]?.[field.key]).filter(Boolean)
+  if (draft.value?.[field.key]) options.push(draft.value[field.key])
+  if (field.key === 'quotaStatus') options.push('Contemplado', 'Não contemplado')
+  return [...new Set(options)]
+}
+const addOption = (value, done) => done(value, 'add-unique')
+
 const base = () => `admin/customers/${props.customerId}/assets`
 const load = () =>
   resource.load(() => financeGet(base(), { page: page.value, pageSize: pageSize.value }))
@@ -372,7 +531,10 @@ const loadDocuments = (id, customerId = props.customerId) =>
   )
 async function edit(asset, group) {
   if (saving.value) return
+  photos.value = null
+  assetDocuments.value = null
   photoEditorKey.value++
+  editorAssetId.value = asset?.id || null
   selected.value = asset
   selectedGroup.value = group
   draft.value = null
@@ -389,17 +551,26 @@ async function loadEditor() {
   const result = await editor.load(async () =>
     asset ? (await financeGet(`admin/customers/${customerId}/assets/${asset.id}`)).data : {},
   )
-  if (result && activeEditor(revision, customerId)) draft.value = assetDraft(result, type)
+  if (result && activeEditor(revision, customerId))
+    draft.value = {
+      ...assetDraft(result, type),
+      currencyId:
+        result.currencyId ||
+        props.currencies.find((c) => c.currencyIsoCode === 'BRL')?.currencyId ||
+        null,
+    }
 }
 async function save() {
   if (saving.value || !dialog.value || !draft.value || !selectedGroup.value) return
   const revision = editorRevision,
     customerId = props.customerId
   const asset = selected.value,
-    photoEditor = photos.value
+    photoEditor = photos.value,
+    documentEditor = assetDocuments.value
   const assetBase = `admin/customers/${customerId}/assets`
   const active = () => activeEditor(revision, customerId)
   let currencyId =
+    draft.value?.currencyId ||
     selected.value?.currencyId ||
     props.currencies.find((c) => c.currencyIsoCode === 'BRL')?.currencyId
   saving.value = true
@@ -430,6 +601,8 @@ async function save() {
       selected.value = { ...saved, id: savedId, currencyId }
       editor.state.data = { ...payload, ...saved }
     }
+    await documentEditor?.save(savedId)
+    if (!active()) return
     await photoEditor?.save(savedId)
     if (!active()) return
     await loadDocuments(savedId, customerId)
@@ -587,31 +760,259 @@ h4 {
   border-radius: 10px;
   background: rgba(255, 255, 255, 0.04);
 }
-</style>
-<style>
-.asset-registry-dialog .q-dialog__inner {
-  width: min(900px, 100vw) !important;
-  max-width: 100vw !important;
+.asset-registry-inline {
+  margin-top: 12px;
 }
-.asset-add {
-  padding: 4px 8px;
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  border-radius: 6px;
-  background: linear-gradient(
-    135deg,
-    rgba(255, 255, 255, 0.08),
-    rgba(255, 255, 255, 0.03),
-    rgba(255, 255, 255, 0.07)
-  );
+.asset-editor {
+  border: 1px solid var(--sa-border);
+  border-radius: 14px;
+  background: linear-gradient(160deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.02));
 }
-.asset-empty {
-  margin: 12px 0 0;
+.asset-editor-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
   padding: 24px;
-  text-align: center;
-  color: rgba(255, 255, 255, 0.6);
+  border-bottom: 1px solid var(--sa-border);
+}
+.asset-editor-header h3 {
+  margin: 0 0 4px;
+  font-size: 20px;
+  font-weight: 600;
+  text-transform: capitalize;
+}
+.asset-editor-header p {
+  margin: 0;
   font-size: 12px;
-  border: 1px solid rgba(255, 255, 255, 0.16);
+  color: var(--sa-muted);
+}
+.asset-editor-icon,
+.asset-row-icon :deep(img) {
+  flex: none;
+}
+.asset-editor-icon {
+  padding: 10px;
+  border: 1px solid var(--sa-border);
   border-radius: 10px;
-  background: rgba(255, 255, 255, 0.04);
+  background: rgba(255, 255, 255, 0.06);
+}
+.asset-editor-actions {
+  display: flex;
+  gap: 8px;
+  margin-left: auto;
+}
+.asset-editor-actions .q-btn {
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.06);
+  font-size: 11px;
+  padding: 6px 12px;
+}
+.asset-editor > .q-card__section {
+  padding: 24px;
+}
+.asset-editor-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 20px;
+}
+.asset-editor-section {
+  grid-column: span 2;
+  min-width: 0;
+}
+.asset-editor-section--narrow {
+  grid-column: span 1;
+}
+.asset-editor :deep(.form-section) {
+  padding: 0;
+}
+.asset-editor :deep(.form-section__title) {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 10px;
+  font-weight: 500;
+  color: var(--sa-muted);
+}
+.asset-editor-section :deep(.q-mt-md) {
+  padding: 16px;
+  border: 1px solid var(--sa-border);
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.025);
+}
+.asset-editor-fields {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  gap: 12px;
+}
+.asset-editor-fields > * {
+  grid-column: span 4;
+  min-width: 0;
+}
+.asset-editor-fields > .asset-field--nickname {
+  grid-column: span 6;
+}
+.asset-editor-fields > .asset-field--internalId,
+.asset-editor-fields > .asset-field--propertyType,
+.asset-editor-fields > .asset-field--licensePlate,
+.asset-editor-fields > .asset-field--manufactureYear,
+.asset-editor-fields > .asset-field--modelYear {
+  grid-column: span 3;
+}
+.asset-editor-fields--Vehicle > .asset-field--vehicleType {
+  grid-column: span 3;
+}
+.asset-editor-fields > .asset-field--postalCode {
+  grid-column: span 3;
+}
+.asset-editor-fields > .asset-field--addressLine {
+  grid-column: span 9;
+}
+.asset-editor-fields > .asset-field--number {
+  grid-column: span 2;
+}
+.asset-editor-fields > .asset-field--neighborhood {
+  grid-column: span 6;
+}
+.asset-editor-fields > .asset-field--cityState,
+.asset-editor-fields > .asset-field--productName {
+  grid-column: span 12;
+}
+.asset-editor-fields > .asset-field--administrator,
+.asset-editor-fields > .asset-field--institution {
+  grid-column: span 8;
+}
+.asset-editor-fields > .asset-field--broker {
+  grid-column: span 6;
+}
+.asset-editor-fields > .asset-field--groupNumber,
+.asset-editor-fields > .asset-field--quotaNumber {
+  grid-column: span 3;
+}
+.asset-editor-section--narrow .asset-editor-fields > * {
+  grid-column: span 12;
+}
+.asset-editor-fields :deep(.q-field__control) {
+  border-radius: 8px;
+  background: rgba(0, 0, 0, 0.1);
+}
+.asset-editor-fields :deep(.LabelForm > .row > span) {
+  color: var(--sa-muted);
+  font-size: 11px !important;
+  font-weight: 400 !important;
+}
+.asset-editor-fields :deep(.q-field__native) {
+  font-size: 12px;
+}
+.asset-currency-select {
+  width: 75px;
+  font-size: 10px;
+}
+.asset-currency-select :deep(.q-field__control) {
+  min-height: 24px !important;
+  height: 24px !important;
+  padding: 0 4px;
+}
+.asset-currency-select :deep(.q-field__marginal) {
+  height: 24px;
+  font-size: 12px;
+}
+.asset-currency-select :deep(.q-field__native) {
+  min-height: 24px;
+  font-size: 10px;
+  padding: 0;
+}
+.asset-currency {
+  padding: 2px 6px;
+  font-size: 10px;
+  color: #fff;
+  background: rgba(255, 255, 255, 0.12);
+  border-radius: 5px;
+}
+.asset-editor .asset-document-collection,
+.asset-editor .asset-photos {
+  margin-top: 28px;
+}
+.asset-installments {
+  padding-top: 8px;
+  color: var(--sa-muted);
+  font-size: 10px;
+}
+.asset-installments small {
+  display: block;
+  text-align: right;
+  margin-top: 6px;
+}
+.asset-extra-feature {
+  justify-self: start;
+  font-size: 11px;
+}
+.asset-row :deep(.q-expansion-item__toggle-icon) {
+  width: 16px;
+  height: 16px;
+  font-size: 16px;
+}
+.asset-row.q-expansion-item--collapsed :deep(.q-expansion-item__toggle-icon) {
+  transform: rotate(180deg);
+}
+.asset-doc-count {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  white-space: nowrap;
+  border: 1px solid var(--sa-border);
+  border-radius: 6px;
+  font-size: 10px;
+  padding: 4px 6px;
+}
+.asset-expanded-facts {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+  margin: 0 0 20px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid var(--sa-border);
+}
+.asset-expanded-facts dt {
+  color: var(--sa-muted);
+  font-size: 11px;
+}
+.asset-expanded-facts dd {
+  margin: 4px 0 0;
+  font-size: 12px;
+  overflow-wrap: anywhere;
+}
+@media (max-width: 900px) {
+  .asset-editor-header {
+    flex-wrap: wrap;
+    padding: 16px;
+  }
+  .asset-editor-actions {
+    width: 100%;
+    justify-content: flex-end;
+  }
+  .asset-editor > .q-card__section {
+    padding: 16px;
+  }
+  .asset-editor-section--narrow {
+    grid-column: span 2;
+  }
+  .asset-editor-fields > * {
+    grid-column: span 6 !important;
+  }
+  .asset-editor-fields > .asset-field--cityState,
+  .asset-editor-fields > .asset-field--productName {
+    grid-column: span 12 !important;
+  }
+}
+@media (max-width: 600px) {
+  .asset-editor-fields > * {
+    grid-column: span 12 !important;
+  }
+  .asset-expanded-facts {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .asset-documents {
+    padding: 12px;
+  }
 }
 </style>

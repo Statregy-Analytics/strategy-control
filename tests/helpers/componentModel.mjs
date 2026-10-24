@@ -28,6 +28,7 @@ export async function componentModel(
   const owner = vue.reactive(props)
   let exposed = {}
   const bindings = {
+    quasar: { QInput: {} },
     vue: {
       ...vue,
       onMounted: (fn) => mounted.push(fn),

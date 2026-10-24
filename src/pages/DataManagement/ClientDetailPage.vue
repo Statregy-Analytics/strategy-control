@@ -74,27 +74,36 @@
           />
           <resource-state :state="identificationResource.state" @retry="loadIdentification">
             <profile-fields
-              :fields="personalEditFields"
+              v-if="fieldEditProps('identification').editing"
+              :fields="identificationEditorFields"
               v-bind="fieldEditProps('identification')"
               @update:values="editor.state.draft = $event"
             />
-            <div v-if="documentFields.length" class="profile-divider">
-              <profile-fields :fields="documentFields" v-bind="fieldEditProps('identification')" />
-            </div>
-            <div class="profile-divider profile-contact-band">
+            <template v-else>
               <profile-fields
-                :fields="contactEditFields"
+                :fields="personalEditFields"
                 v-bind="fieldEditProps('identification')"
-                @update:values="editor.state.draft = $event"
-              />
-            </div>
-            <div class="profile-divider">
-              <profile-fields
-                :fields="addressEditFields"
-                v-bind="fieldEditProps('identification')"
-                @update:values="editor.state.draft = $event"
-              />
-            </div>
+                @update:values="editor.state.draft = $event" />
+              <div v-if="documentFields.length" class="profile-divider">
+                <profile-fields
+                  :fields="documentFields"
+                  v-bind="fieldEditProps('identification')"
+                />
+              </div>
+              <div class="profile-divider profile-contact-band">
+                <profile-fields
+                  :fields="contactEditFields"
+                  v-bind="fieldEditProps('identification')"
+                  @update:values="editor.state.draft = $event"
+                />
+              </div>
+              <div class="profile-divider">
+                <profile-fields
+                  :fields="addressEditFields"
+                  v-bind="fieldEditProps('identification')"
+                  @update:values="editor.state.draft = $event"
+                /></div
+            ></template>
           </resource-state>
         </profile-section>
         <profile-section
@@ -163,8 +172,8 @@
             </p>
             <template v-else>
               <profile-fields
-                :columns="5"
-                :fields="securityEditFields"
+                :columns="fieldEditProps('security').editing ? 4 : 5"
+                :fields="securityEditorFields"
                 v-bind="fieldEditProps('security')"
                 @update:values="editor.state.draft = $event"
               />
@@ -254,6 +263,8 @@
             ref="bankPanel"
             embedded
             :customer-id="customerId"
+            :customer-kind="customer.kind"
+            :customer-name="identification.fullName || displayName"
             class="profile-bank-panel"
         /></profile-section>
         <profile-section
@@ -435,6 +446,7 @@ import { useFinanceResource } from 'src/composables/useFinanceResource'
 import useNotification from 'src/composables/global/useNotification'
 import {
   getCustomer,
+  getPreferenceCatalog,
   getCustomerIdentification,
   getCustomerProfessionalProfile,
   getCustomerCurrentFinancialProfile,
@@ -571,6 +583,16 @@ onScopeDispose(() => {
   window.removeEventListener('beforeunload', beforeUnload)
   finishConfirm(false)
 })
+const editCatalog = ref({})
+onMounted(async () => {
+  const active = profileContext.capture()
+  try {
+    const result = await getPreferenceCatalog()
+    if (active()) editCatalog.value = result
+  } catch {
+    /* Existing read-only values remain visible when the catalogue is unavailable. */
+  }
+})
 const customer = computed(() => customerResource.state.data || {})
 const identification = computed(() => identificationResource.state.data || {})
 const operational = computed(() => customer.value.operationalSummary || {})
@@ -616,10 +638,15 @@ const personalFields = computed(() => [
   field('Data de nascimento', date(identification.value.birthDate || customer.value.birthDate)),
   ...(customer.value.kind !== 'Organization'
     ? [
-        field('Estado civil', null),
+        field(
+          'Estado civil',
+          catalogOptions('maritalStatuses').find(
+            (o) => o.value === identification.value.personalDetails?.maritalStatus,
+          )?.label || identification.value.personalDetails?.maritalStatus,
+        ),
         field('Nacionalidade', identification.value.nationality),
-        field('Nome da mãe', null),
-        field('Nome do pai', null),
+        field('Nome da mãe', identification.value.personalDetails?.motherName),
+        field('Nome do pai', identification.value.personalDetails?.fatherName),
       ]
     : []),
 ])
@@ -770,7 +797,7 @@ const financialEditFields = computed(() =>
     },
   ),
 )
-const securityEditFields = computed(() => mapEdit(securityFields.value, ['userName']))
+const securityReadEditFields = computed(() => mapEdit(securityFields.value, ['userName']))
 const documentMetrics = computed(() =>
   profileDocumentMetrics(
     documentOverview.state.loading || documentOverview.state.error
@@ -806,6 +833,140 @@ const optional = async (request) => {
     throw error
   }
 }
+
+const countryOptions = computed(() =>
+  (editCatalog.value.countries || []).map((c) => ({
+    label: c.name || c.label || c.isoCode,
+    value: c.id,
+  })),
+)
+const catalogOptions = (key) =>
+  (editCatalog.value[key] || []).map((c) => ({
+    label: c.label || c.name || c.value,
+    value: c.value || c.code || c.id,
+  }))
+const editField = (label, editKey, value, options) => ({ label, editKey, value, options })
+const currentOption = (value) => (value ? [{ label: value, value }] : [])
+const identificationEditorFields = computed(() => {
+  const p = identification.value.personalDetails || {},
+    a = identification.value.residentialAddress || {},
+    d = editor.state.draft || {}
+  const option = (key, value) => catalogOptions(key).find((o) => o.value === value)?.label || value
+  const readonly = (label, value, options) => editField(label, null, value, options)
+  return [
+    editField('Nome completo', 'fullName', displayName.value),
+    readonly(
+      customer.value.kind === 'Organization' ? 'CNPJ' : 'CPF',
+      documentOf(customer.value.kind === 'Organization' ? 'CNPJ' : 'CPF').numberMasked,
+    ),
+    {
+      ...editField('Data de nascimento', 'birthDate', date(customer.value.birthDate)),
+      inputType: 'date',
+    },
+    readonly(
+      'Estado civil',
+      option('maritalStatuses', p.maritalStatus),
+      catalogOptions('maritalStatuses'),
+    ),
+    readonly('Gênero', option('genders', p.gender), catalogOptions('genders')),
+    readonly(
+      'Nacionalidades',
+      (p.nationalityCountryIds || [])
+        .map((id) => countryOptions.value.find((o) => o.value === id)?.label)
+        .filter(Boolean)
+        .join(', ') || p.nationality,
+      countryOptions.value,
+    ),
+    readonly(
+      'País de nascimento',
+      countryOptions.value.find((o) => o.value === p.birthCountryId)?.label,
+      countryOptions.value,
+    ),
+    readonly('Cidade de nascimento', p.birthCity),
+    readonly('Nome da mãe', p.motherName),
+    readonly('Nome do pai', p.fatherName),
+    readonly('Documento de identificação', documentOf('RG').numberMasked),
+    readonly('Órgão emissor', documentOf('RG').issuer),
+    readonly(
+      'UF emissão',
+      documentOf('RG').issuerState,
+      currentOption(documentOf('RG').issuerState),
+    ),
+    readonly('Data emissão', date(documentOf('RG').issuedOn)),
+    readonly('CNH', documentOf('CNH').numberMasked),
+    readonly('Categoria', documentOf('CNH').category, currentOption(documentOf('CNH').category)),
+    readonly('Validade CNH', date(documentOf('CNH').expiresOn)),
+    editField('E-mail principal', 'primaryEmail'),
+    editField('Celular', 'mobilePhone'),
+    editField('Telefone secundário', 'secondaryPhone'),
+    readonly(
+      'Preferência',
+      contactFields.value[3]?.value,
+      currentOption(contactFields.value[3]?.value),
+    ),
+    editField('País de residência', 'countryId', a.countryId, countryOptions.value),
+    editField('Endereço residencial', 'line1'),
+    editField('Complemento', 'line2'),
+    editField('Bairro', 'neighborhood'),
+    editField('Município', 'city'),
+    editField(
+      'UF',
+      'stateOrProvince',
+      d.stateOrProvince,
+      [
+        ...new Set(
+          [
+            'AC',
+            'AL',
+            'AP',
+            'AM',
+            'BA',
+            'CE',
+            'DF',
+            'ES',
+            'GO',
+            'MA',
+            'MT',
+            'MS',
+            'MG',
+            'PA',
+            'PB',
+            'PR',
+            'PE',
+            'PI',
+            'RJ',
+            'RN',
+            'RS',
+            'RO',
+            'RR',
+            'SC',
+            'SP',
+            'SE',
+            'TO',
+            d.stateOrProvince,
+          ].filter(Boolean),
+        ),
+      ].map((value) => ({ label: value, value })),
+    ),
+    editField('CEP', 'postalCode'),
+  ].map((field) =>
+    field.editKey === 'stateOrProvince' ? { ...field, allowNewValue: true } : field,
+  )
+})
+const securityEditorFields = computed(() =>
+  securityReadEditFields.value.map((f, index) => {
+    if (index === 1)
+      return {
+        ...f,
+        action: 'Redefinir',
+        actionDisabled: true,
+        actionReason: 'O envio de link de redefinição pelo Admin ainda não está disponível na API.',
+      }
+    if (index === 2 || index === 4) return { ...f, options: currentOption(f.value) }
+    return f
+  }),
+)
+
 const loadCustomer = () => customerResource.load(() => getCustomer(customerId.value))
 const loadIdentification = () =>
   identificationResource.load(() => getCustomerIdentification(customerId.value))
@@ -1020,6 +1181,13 @@ h1 {
   margin-top: 16px;
   padding-top: 16px;
   border-top: 1px solid rgba(255, 255, 255, 0.12);
+}
+.client-profile-main :deep(.profile-section:has(.profile-field-editor) .profile-section__heading) {
+  min-height: 75px;
+  padding: 16px 24px;
+}
+.client-profile-main :deep(.profile-section:has(.profile-field-editor) .profile-section__body) {
+  padding: 24px;
 }
 .profile-contact-band {
   margin-top: 28px;

@@ -34,9 +34,14 @@
           ><q-td :props="props"
             ><div class="bank-identity">
               <img
-                v-if="embedded && bankLogo(bankCode(props.row.bankId))"
+                v-if="embedded && bankBrand(props.row.bankId)"
                 class="bank-logo"
-                :src="bankLogo(bankCode(props.row.bankId))"
+                :class="{
+                  'bank-logo--white': ['077', '033', '748'].includes(
+                    String(bankCode(props.row.bankId)).padStart(3, '0'),
+                  ),
+                }"
+                :src="bankBrand(props.row.bankId)"
                 alt=""
                 width="24"
                 height="24"
@@ -128,9 +133,14 @@
                 <dd>
                   <span v-if="column.name === 'bank'" class="bank-identity">
                     <img
-                      v-if="bankLogo(bankCode(p.row.bankId))"
+                      v-if="bankBrand(p.row.bankId)"
                       class="bank-logo"
-                      :src="bankLogo(bankCode(p.row.bankId))"
+                      :class="{
+                        'bank-logo--white': ['077', '033', '748'].includes(
+                          String(bankCode(p.row.bankId)).padStart(3, '0'),
+                        ),
+                      }"
+                      :src="bankBrand(p.row.bankId)"
                       alt=""
                       width="24"
                       height="24"
@@ -190,20 +200,30 @@
         header-class="text-primary q-mt-md"
       >
         <q-card :class="embedded ? 'bank-profile-dialog' : 'bank-inline-form'" flat>
-          <title-card
-            v-if="embedded"
-            :title="editingId ? 'Editar conta' : 'Adicionar conta'"
-            :disable-close="saving"
-            @on-close="closeForm"
-          />
+          <header v-if="embedded" class="bank-modal-heading">
+            <div>
+              <h2>{{ editingId ? 'Editar Conta Bancária' : 'Adicionar Conta Bancária' }}</h2>
+              <p>Insira os dados da conta abaixo. Só são aceitas contas no nome do cliente.</p>
+            </div>
+            <q-btn
+              flat
+              round
+              dense
+              icon="close"
+              aria-label="Fechar conta bancária"
+              :disable="saving"
+              @click="closeForm"
+            />
+          </header>
           <q-card-section>
             <q-form ref="formRef" class="q-pt-sm" @submit.prevent="save">
               <div class="row q-col-gutter-sm bank-profile-fields">
                 <label-form class-name="col-12 col-md-4 bank-field" text-label="Banco">
-                  <q-select
+                  <glass-select
                     ref="bankSelectRef"
                     v-model="form.bankId"
                     class="bank-select"
+                    :placeholder="embedded ? 'Digite o número ou o nome do banco' : undefined"
                     :options="filteredBankOptions"
                     :option-label="bankOptionLabel"
                     emit-value
@@ -230,11 +250,22 @@
                         }}</q-item-section></q-item
                       ></template
                     >
-                  </q-select>
+                    <template v-if="embedded" #prepend
+                      ><img
+                        src="/icons/client-profile/bank-search.svg"
+                        alt=""
+                        width="14"
+                        height="14"
+                    /></template>
+                  </glass-select>
                 </label-form>
-                <label-form class-name="col-12 col-md-4" text-label="Tipo de conta">
-                  <q-select
+                <label-form
+                  class-name="col-12 col-md-4"
+                  :text-label="embedded ? 'Tipo' : 'Tipo de conta'"
+                >
+                  <glass-select
                     v-model="form.accountType"
+                    aria-label="Tipo de conta"
                     :options="accountTypeOptions"
                     emit-value
                     map-options
@@ -284,7 +315,7 @@
                   ><q-input v-model.trim="form.accountDigit" outlined dense maxlength="4"
                 /></label-form>
 
-                <label-form class-name="col-12 col-md-4" text-label="Titularidade">
+                <label-form v-if="!embedded" class-name="col-12 col-md-4" text-label="Titularidade">
                   <q-select
                     v-model="form.holderType"
                     :options="holderTypeOptions"
@@ -302,7 +333,10 @@
                   text-label="Nome do titular"
                   ><q-input v-model.trim="form.holderName" outlined dense
                 /></label-form>
-                <label-form class-name="col-12 col-md-4" text-label="Documento do titular"
+                <label-form
+                  v-if="!embedded"
+                  class-name="col-12 col-md-4"
+                  text-label="Documento do titular"
                   ><q-input
                     :model-value="editingId ? editingMasks.holderDocument : form.holderDocument"
                     outlined
@@ -342,7 +376,8 @@
                     outlined
                     dense
                 /></label-form>
-                <div class="col-12 col-md-4 row items-center">
+                <div class="col-12 col-md-4 row items-center bank-primary-field">
+                  <span v-if="embedded" class="bank-primary-label">Principal</span>
                   <q-toggle
                     v-if="embedded"
                     v-model="form.isPrimary"
@@ -350,7 +385,7 @@
                   /><q-checkbox v-else v-model="form.isPrimary" label="Definir como principal" />
                 </div>
               </div>
-              <div class="row justify-end q-gutter-sm q-mt-sm">
+              <div class="row justify-end q-gutter-sm q-mt-sm bank-modal-actions">
                 <q-btn flat dense size="sm" label="Cancelar" no-caps @click="closeForm" />
                 <q-btn
                   type="submit"
@@ -358,8 +393,8 @@
                   dense
                   size="sm"
                   color="primary"
-                  icon="save"
-                  :label="editingId ? 'Salvar alterações' : embedded ? 'Salvar conta' : 'Adicionar'"
+                  :icon="embedded ? undefined : 'save'"
+                  :label="embedded ? 'Salvar conta' : editingId ? 'Salvar alterações' : 'Adicionar'"
                   no-caps
                   :loading="saving"
                 />
@@ -395,11 +430,11 @@
 </template>
 
 <script setup>
+import GlassSelect from 'src/components/Entity/GlassSelect.vue'
 import { bankLogo } from 'src/services/bankBrand'
 import { computed, nextTick, reactive, ref, watch, onScopeDispose } from 'vue'
 import { createRequestContext } from 'src/services/requestContext'
 import { QDialog, QExpansionItem } from 'quasar'
-import TitleCard from 'src/components/Card/TitleCard.vue'
 import LabelForm from 'src/components/Form/LabelForm.vue'
 import {
   archiveCustomerBankAccount,
@@ -414,7 +449,12 @@ import { readBankCatalog } from 'src/services/bankCatalog'
 import { getApiErrorMessage } from 'src/services/apiError'
 import useNotification from 'src/composables/global/useNotification'
 
-const props = defineProps({ customerId: { type: String, required: true }, embedded: Boolean })
+const props = defineProps({
+  customerId: { type: String, required: true },
+  embedded: Boolean,
+  customerKind: String,
+  customerName: String,
+})
 const emit = defineEmits(['updated'])
 const { successNotify, errorNotify } = useNotification()
 const formRef = ref(null),
@@ -510,6 +550,7 @@ const masked = (value) => value || 'Não informado'
 const bankCode = (id) => bankOptions.value.find((bank) => bank.value === id)?.code
 const bankName = (id) =>
   bankOptions.value.find((bank) => bank.value === id)?.label || 'Banco não identificado'
+const bankBrand = (id) => bankLogo(bankCode(id), bankName(id).replace(/^\d+\s*[—-]\s*/, ''))
 const bankInitials = (id) => {
   const words = bankName(id)
     .replace(/^\d+\s*[—-]\s*/, '')
@@ -644,10 +685,18 @@ const save = async () => {
   saving.value = true
   try {
     if (!(await formRef.value.validate()) || !active()) return
+    if (props.embedded && !accountId && !['Person', 'Organization'].includes(props.customerKind))
+      throw Error('O tipo do cliente ainda não foi informado pela API.')
     const payload = {
       ...form,
+      holderType:
+        props.embedded && !accountId
+          ? props.customerKind === 'Organization'
+            ? 'Organization'
+            : 'Individual'
+          : form.holderType,
       accountDigit: form.accountDigit || null,
-      holderName: form.holderName || null,
+      holderName: (props.embedded && !accountId ? props.customerName : form.holderName) || null,
       holderDocument: form.holderDocument || null,
       pixKey: form.pixKey || null,
       pixKeyType: form.pixKeyType || null,
@@ -902,6 +951,84 @@ load()
   overflow: visible;
   text-overflow: clip;
   overflow-wrap: anywhere;
+}
+.bank-modal-heading {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 24px 24px 14px;
+  border-bottom: 1px solid rgba(38, 158, 214, 0.18);
+}
+.bank-modal-heading h2 {
+  font-size: 20px;
+  font-weight: 600;
+  margin: 0 0 4px;
+}
+.bank-modal-heading p {
+  font-size: 12px;
+  color: var(--sa-muted);
+  margin: 0;
+  max-width: 380px;
+}
+.bank-profile-dialog {
+  width: min(500px, calc(100vw - 32px));
+  min-height: min(560px, calc(100dvh - 32px));
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 12px;
+  background: linear-gradient(150deg, rgba(24, 29, 43, 0.98), rgba(10, 39, 56, 0.98));
+}
+.bank-profile-dialog > .q-card__section {
+  padding: 16px 24px 20px;
+}
+.bank-profile-dialog form {
+  display: flex;
+  flex-direction: column;
+  min-height: 390px;
+}
+.bank-profile-dialog .bank-profile-fields {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.bank-profile-dialog .bank-profile-fields > :deep(.LabelForm) {
+  display: grid;
+  grid-template-columns: 104px minmax(0, 1fr);
+  align-items: center;
+  gap: 16px;
+  width: 100%;
+  padding-top: 0;
+}
+.bank-profile-dialog .bank-profile-fields :deep(.LabelForm > span),
+.bank-primary-label {
+  font-size: 10px !important;
+  text-transform: uppercase;
+  text-align: right;
+  color: var(--sa-muted);
+}
+.bank-profile-dialog .bank-profile-fields :deep(.q-field__control) {
+  border-radius: 12px;
+  min-height: 40px;
+  background: rgba(0, 0, 0, 0.15);
+}
+.bank-profile-dialog .bank-primary-field {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 104px minmax(0, 1fr);
+  gap: 16px;
+}
+.bank-profile-dialog .bank-modal-actions {
+  margin-top: auto;
+  padding-top: 40px;
+}
+.bank-profile-dialog .bank-modal-actions .q-btn {
+  padding: 8px 20px;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  border-radius: 12px;
+  color: #fff !important;
+  background: rgba(255, 255, 255, 0.06);
+}
+.bank-logo--white {
+  background: #fff;
 }
 .bank-logo {
   flex: none;

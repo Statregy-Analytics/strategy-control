@@ -2,7 +2,14 @@
   <dl class="profile-fields" :class="`profile-fields--${columns}`">
     <div v-for="field in fields" :key="field.label" :class="{ 'profile-fields__wide': field.wide }">
       <label-form v-if="editing" :text-label="field.label" class="profile-field-editor">
-        <q-input
+        <component
+          :is="field.options ? GlassSelect : QInput"
+          :options="field.options"
+          :multiple="field.multiple"
+          :use-input="field.allowNewValue"
+          :fill-input="field.allowNewValue"
+          :hide-selected="field.allowNewValue"
+          @new-value="(value, done) => done(value, 'add-unique')"
           outlined
           dense
           hide-bottom-space
@@ -13,9 +20,10 @@
           "
           :type="editable.includes(field.editKey) ? field.inputType || 'text' : 'text'"
           :readonly="!editable.includes(field.editKey)"
-          :disable="busy"
+          :disable="busy || (!editable.includes(field.editKey) && Boolean(field.options))"
           :aria-label="field.label"
           :class="{
+            'profile-field-editor--readonly': !editable.includes(field.editKey),
             'profile-field-editor--changed':
               editable.includes(field.editKey) && changed(field.editKey),
           }"
@@ -27,9 +35,20 @@
               [field.editKey]: field.inputType === 'number' && $event === '' ? null : $event,
             })
           "
+          ><template v-if="field.action" #append
+            ><q-btn
+              flat
+              dense
+              no-caps
+              :label="field.action"
+              size="sm"
+              :disable="field.actionDisabled || busy"
+              @click="$emit('field-action', field.editKey)"
+              ><q-tooltip>{{ field.actionReason }}</q-tooltip></q-btn
+            ></template
           ><q-tooltip v-if="!editable.includes(field.editKey)"
             >Edição indisponível na API atual.</q-tooltip
-          ></q-input
+          ></component
         >
       </label-form>
       <template v-else>
@@ -60,6 +79,8 @@
   </dl>
 </template>
 <script setup>
+import { QInput } from 'quasar'
+import GlassSelect from './GlassSelect.vue'
 import LabelForm from 'src/components/Form/LabelForm.vue'
 import { sectionChanged } from 'src/services/clientSectionModel'
 const props = defineProps({
@@ -72,10 +93,26 @@ const props = defineProps({
   errors: Object,
   editable: { type: Array, default: () => [] },
 })
-defineEmits(['update:values'])
+defineEmits(['update:values', 'field-action'])
 const changed = (key) => sectionChanged(props.values, props.original, key)
 </script>
 <style scoped>
+.profile-field-editor {
+  gap: 8px !important;
+}
+.profile-field-editor > :deep(span:first-child) {
+  font-size: 12px !important;
+  font-weight: 500 !important;
+  color: var(--sa-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+}
+.profile-field-editor :deep(.q-field__control),
+.profile-field-editor :deep(.q-field__marginal) {
+  height: 36px;
+  min-height: 36px;
+}
+
 .profile-field-editor :deep(.LabelForm > span),
 .profile-field-editor :deep(span) {
   font-size: 12px;
@@ -85,6 +122,23 @@ const changed = (key) => sectionChanged(props.values, props.original, key)
 }
 .profile-field-editor--changed :deep(.q-field__control:before) {
   border-color: rgba(190, 219, 255, 0.5);
+}
+.profile-field-editor :deep(.q-field__control) {
+  min-height: 36px;
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.04);
+}
+.profile-field-editor :deep(.q-field__control:before) {
+  border-color: rgba(255, 255, 255, 0.2);
+}
+.profile-field-editor :deep(.q-field__control-container) {
+  padding-top: 0;
+}
+.profile-field-editor--readonly :deep(.q-field__control) {
+  background: rgba(255, 255, 255, 0.02);
+}
+.profile-field-editor--readonly :deep(.q-field__native) {
+  color: rgba(255, 255, 255, 0.4);
 }
 .profile-field-editor :deep(.q-field__native) {
   font-size: 13px;

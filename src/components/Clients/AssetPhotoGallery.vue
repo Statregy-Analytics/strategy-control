@@ -2,10 +2,9 @@
   <section class="asset-photos" :aria-label="title" :aria-busy="loading || disabled">
     <header>
       <h4>
-        <img
-          :src="`/icons/asset-photos/${vehicle ? 'vehicle' : 'real-estate'}-section.svg`"
-          alt=""
-        />{{ title }}
+        <img :src="`/icons/asset-editor/${vehicle ? 'vehicle-photos' : 'photos'}.svg`" alt="" />{{
+          title
+        }}
       </h4>
       <span v-if="!vehicle"
         >{{ items.length }}

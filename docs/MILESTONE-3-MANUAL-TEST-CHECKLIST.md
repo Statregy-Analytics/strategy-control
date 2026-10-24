@@ -2,6 +2,10 @@
 
 Atualizado em 24/10/2026. Rodadas iniciais: Admin em 12/10 e portal em 13/10. Admin localhost:8080; Portal localhost:9010 (origens CORS autorizadas).
 
+## Devolutiva Admin — 24/10 — itens 56–60
+
+Implementação, validações e bloqueios reais em [QA Admin 56–60](QA-2026-10-24-ADMIN-56-60.md). C32/C33, selects glass, ícone Deslogar, modal bancário C09/C30/logos C35 e editores patrimoniais C10–14. Não inclui o estudo futuro de países/preferências. Impacto estimado em [escopo e horas](IMPACTO-ESCOPO-QA-56-60.md).
+
 ## Devolutiva Admin — 24/10 — itens 39–55
 
 Checklist e evidências atuais em [QA Admin 39–55](QA-2026-10-24-ADMIN-39-55.md). Ajustes de seleção/ficha conforme C01/C02/C03/C04, sem novos campos/ações. Risco continua refletindo a API (Cláudio A, Jorge “—”); a escala A/AA/AAA aguarda decisão de produto. Esta rodada complementa o fechamento anterior. Runtime final 8e9b29c publicado, pipeline 40130800983 aprovada com 174 testes; seleção/ficha conferidas em homologação, incluindo responsivo e extrato.

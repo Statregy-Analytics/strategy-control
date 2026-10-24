@@ -57,7 +57,7 @@ export function useClientSectionEditor(customerId, refresh) {
         if (!overview.hasUserAccount || !security?.userId)
           throw Error('Nenhuma conta de acesso vinculada.')
         source = (await financeGet('admin/users/' + security.userId)).data
-        if (source?.id !== security.userId || source.name !== security.userName)
+        if (source?.id !== security.userId)
           throw Error('Não foi possível confirmar o usuário vinculado.')
       }
       if (key === 'compliance') {

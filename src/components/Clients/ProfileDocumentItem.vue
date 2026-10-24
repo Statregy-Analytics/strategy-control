@@ -1,13 +1,37 @@
 <template>
   <div
     class="profile-document-entry"
+    :class="variant ? `profile-document-entry--${variant}` : ''"
     :aria-busy="reviewState.saving"
     :data-document-id="documentId"
   >
     <div class="profile-document" :class="`profile-document--${item.status}`">
+      <span
+        v-if="variant === 'asset-editor'"
+        class="asset-document-status"
+        :class="`asset-document-status--${item.status}`"
+        ><img
+          v-if="['Approved', 'Uploaded'].includes(item.status)"
+          src="/icons/asset-editor/check.svg"
+          alt=""
+        /><img
+          v-else-if="['Pending', 'UnderReview', 'InReview'].includes(item.status)"
+          src="/icons/asset-editor/pending-status.svg"
+          alt=""
+        />{{ assetStatus }}</span
+      >
       <span class="profile-document__icon">
+        <img v-if="variant === 'asset-editor'" src="/icons/asset-editor/file.svg" alt="" />
         <img
-          v-if="pending"
+          v-else-if="
+            variant === 'asset-expanded' &&
+            ['Approved', 'Pending', 'Rejected', 'UnderReview', 'InReview'].includes(item.status)
+          "
+          :src="`/icons/asset-editor/asset-${item.status === 'Approved' ? 'approved' : item.status === 'Rejected' ? 'rejected' : 'pending'}.svg`"
+          alt=""
+        />
+        <img
+          v-else-if="pending"
           src="/icons/client-selection/document-pending.svg"
           alt=""
           width="16"
@@ -24,21 +48,24 @@
       </span>
       <div class="profile-document__identity">
         <strong>{{ item.documentTypeName || item.documentTypeCode || 'Documento' }}</strong>
-        <small>{{ subtitle }}</small>
+        <small>{{ caption || subtitle }}</small>
       </div>
       <q-btn
         v-if="documentId"
         flat
-        round
+        :round="!variant"
+        no-caps
         dense
         size="sm"
         :aria-label="`Visualizar ${name}`"
         :loading="busy"
         :disable="reviewState.saving"
         @click="view"
-        ><img src="/icons/document-review/view.svg" alt="" /><q-tooltip
-          >Visualizar</q-tooltip
-        ></q-btn
+        ><img
+          :src="variant ? '/icons/asset-editor/view.svg' : '/icons/document-review/view.svg'"
+          alt=""
+        /><q-tooltip>Visualizar</q-tooltip
+        ><span v-if="variant">{{ variant === 'asset-editor' ? 'Ver' : 'Visualizar' }}</span></q-btn
       >
       <q-btn
         v-if="documentAction(item, 'Download')"
@@ -65,7 +92,7 @@
         @click="uploadOpen = true"
       />
     </div>
-    <span v-if="pending" class="document-awaiting">Aguardando aprovação</span>
+    <span v-if="pending && !variant" class="document-awaiting">Aguardando aprovação</span>
     <p
       v-if="item.status === 'Rejected' && item.latestReview?.notes"
       class="document-rejection-notes"
@@ -194,6 +221,8 @@ import {
 } from 'src/services/documentReview'
 import { getApiErrorMessage } from 'src/services/apiError'
 const props = defineProps({
+  variant: { type: String, default: '' },
+  caption: { type: String, default: '' },
   item: { type: Object, required: true },
   customerId: { type: String, required: true },
 })
@@ -217,6 +246,19 @@ const reviewer = createDocumentReviewer(reviewState, {
     emit('updated')
   },
 })
+const assetStatus = computed(
+  () =>
+    ({
+      Approved: 'Validado',
+      Uploaded: 'Enviado',
+      Pending: 'Pendente',
+      Rejected: 'Rejeitado',
+      UnderReview: 'Em análise',
+      InReview: 'Em análise',
+    })[props.item.status] ||
+    props.item.status ||
+    'Enviado',
+)
 const pending = computed(() => ['Pending', 'UnderReview', 'InReview'].includes(props.item.status))
 const reviewable = computed(() => canReviewDocument(props.item) && !reviewState.completed)
 const openRejection = () => {
@@ -255,6 +297,7 @@ const statusColor = computed(
 )
 const subtitle = computed(() => {
   const labels = {
+    Uploaded: 'Enviado',
     Approved: 'Aprovado',
     Rejected: 'Rejeitado',
     UnderReview: 'Em análise',
@@ -531,5 +574,66 @@ small {
     rgba(255, 255, 255, 0.07)
   );
   backdrop-filter: blur(20px);
+}
+.asset-document-status {
+  position: absolute;
+  top: 0;
+  right: 0;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 6px;
+  padding: 1px 6px;
+  font-size: 10px;
+  text-transform: uppercase;
+}
+.asset-document-status--Approved,
+.asset-document-status--Uploaded {
+  color: #74ffa0;
+  border-color: rgba(116, 255, 160, 0.5);
+}
+.asset-document-status--Pending,
+.asset-document-status--UnderReview,
+.asset-document-status--InReview {
+  color: #fee685;
+}
+.asset-document-status--Rejected {
+  color: #ff9d9d;
+}
+.profile-document-entry--asset-editor .profile-document {
+  position: relative;
+  min-height: 160px;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  padding: 0;
+  background: transparent;
+  border: 0;
+}
+.profile-document-entry--asset-editor .profile-document__icon {
+  align-self: flex-start;
+}
+.profile-document-entry--asset-editor .profile-document__identity {
+  margin-bottom: 28px;
+}
+.profile-document-entry--asset-editor .profile-document > .q-btn {
+  margin-top: auto;
+  margin-right: 36px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 7px;
+}
+.profile-document-entry--asset-expanded .profile-document__icon {
+  border-radius: 50%;
+}
+.profile-document-entry--asset-expanded .profile-document {
+  min-height: 70px;
+  border-radius: 10px;
+}
+.profile-document-entry--asset-expanded .profile-document > .q-btn {
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  padding: 4px 8px;
+  border-radius: 6px;
+}
+.profile-document-entry--asset-editor :deep(.q-btn__content),
+.profile-document-entry--asset-expanded :deep(.q-btn__content) {
+  gap: 6px;
 }
 </style>

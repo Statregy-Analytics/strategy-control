@@ -41,6 +41,7 @@ async function harness({
     stops = []
   let unmount
   const modules = {
+    quasar: { QInput: {} },
     vue: {
       computed,
       ref,

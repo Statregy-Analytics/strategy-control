@@ -62,6 +62,9 @@ export function sectionValues(key, source) {
     line2: address?.line2 || '',
     neighborhood: address?.neighborhood || '',
     cityState: [address?.city, address?.stateOrProvince].filter(Boolean).join(' / '),
+    city: address?.city || '',
+    stateOrProvince: address?.stateOrProvince || '',
+    countryId: address?.countryId || null,
     postalCode: address?.postalCode || '',
   }
 }
@@ -71,7 +74,17 @@ export function sectionEditable(key, source) {
   const keys = ['birthDate', 'primaryEmail', 'mobilePhone', 'secondaryPhone']
   if (primary(source.names)) keys.push('fullName')
   const address = selected(source.addresses, (x) => x.kind === 'Residential')
-  if (address?.id && address.countryId) keys.push('line1', 'line2', 'neighborhood', 'cityState', 'postalCode')
+  if (!address || address.id)
+    keys.push(
+      'line1',
+      'line2',
+      'neighborhood',
+      'cityState',
+      'city',
+      'stateOrProvince',
+      'countryId',
+      'postalCode',
+    )
   return keys
 }
 const validBirthDate = (value, today) => {
@@ -96,11 +109,15 @@ export function sectionValidation(key, value, source, today = new Date()) {
   if (key === 'professional') {
     if (!value.occupation?.trim()) errors.occupation = 'Informe a profissão.'
     for (const field of amountFields) {
-      try { profileDecimal(value[field]) }
-      catch { errors[field] = 'Informe um valor válido igual ou maior que zero.' }
+      try {
+        profileDecimal(value[field])
+      } catch {
+        errors[field] = 'Informe um valor válido igual ou maior que zero.'
+      }
     }
     if (
-      !errors.individualMonthlyIncome && !errors.householdMonthlyIncome &&
+      !errors.individualMonthlyIncome &&
+      !errors.householdMonthlyIncome &&
       profileDecimal(value.householdMonthlyIncome) !== null &&
       profileDecimal(value.individualMonthlyIncome) !== null &&
       compareProfileDecimals(value.householdMonthlyIncome, value.individualMonthlyIncome) < 0
@@ -108,7 +125,8 @@ export function sectionValidation(key, value, source, today = new Date()) {
       errors.householdMonthlyIncome = 'Não pode ser menor que a renda individual'
   }
   if (key === 'identification') {
-    if (String(value.neighborhood ?? '').trim().length > 120) errors.neighborhood = 'O bairro deve ter até 120 caracteres.'
+    if (String(value.neighborhood ?? '').trim().length > 120)
+      errors.neighborhood = 'O bairro deve ter até 120 caracteres.'
     if (
       value.birthDate != null &&
       value.birthDate !== '' &&
@@ -119,7 +137,25 @@ export function sectionValidation(key, value, source, today = new Date()) {
       errors.fullName = 'Informe o nome completo.'
     if (value.primaryEmail && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value.primaryEmail))
       errors.primaryEmail = 'Informe um e-mail válido.'
-    if (value.line1 && !value.cityState?.trim()) errors.cityState = 'Informe município e UF.'
+    const original = sectionValues('identification', source || {})
+    const addressChanged = [
+      'line1',
+      'line2',
+      'neighborhood',
+      'cityState',
+      'city',
+      'stateOrProvince',
+      'countryId',
+      'postalCode',
+    ].some((k) => Object.hasOwn(value, k) && value[k] !== original[k])
+    if (addressChanged) {
+      if (!(value.countryId || original.countryId))
+        errors.countryId = 'Informe o país de residência.'
+      if (!(value.line1 ?? original.line1)?.trim()) errors.line1 = 'Informe o endereço residencial.'
+      const city =
+        value.city !== original.city ? value.city : value.cityState?.split('/')[0] || original.city
+      if (!city?.trim()) errors.city = 'Informe o município.'
+    }
   }
   if (key === 'security' && !value.userName?.trim()) errors.userName = 'Informe o usuário.'
   return errors
@@ -153,15 +189,11 @@ export function sectionPlan(key, source, draft, original) {
         isCurrent: p.isCurrent,
       })
     }
-    if (
-      amountFields.some((k) => profileDecimal(draft[k]) !== profileDecimal(original[k]))
-    ) {
+    if (amountFields.some((k) => profileDecimal(draft[k]) !== profileDecimal(original[k]))) {
       if (!f.currencyCode || !f.effectiveFrom)
         throw Error('Moeda e vigência do perfil financeiro não foram informadas pela API.')
       add('post', base + '/financial-profiles', {
-        ...Object.fromEntries(
-          amountFields.map((k) => [k, profileDecimal(draft[k])]),
-        ),
+        ...Object.fromEntries(amountFields.map((k) => [k, profileDecimal(draft[k])])),
         currencyCode: f.currencyCode,
         effectiveFrom: date(f.effectiveFrom),
         effectiveTo: date(f.effectiveTo),
@@ -209,17 +241,44 @@ export function sectionPlan(key, source, draft, original) {
       }
       add('put', base + '/contacts', { contacts: contacts.map((x) => pick(x, contactKeys)) })
     }
-    if (['line1', 'line2', 'neighborhood', 'cityState', 'postalCode'].some((k) => draft[k] !== original[k])) {
-      const addresses = copy(source.addresses),
-        row = selected(addresses, (x) => x.kind === 'Residential')
-      if (!row?.countryId) throw Error('O país do endereço não foi informado pela API.')
+    if (
+      [
+        'line1',
+        'line2',
+        'neighborhood',
+        'cityState',
+        'city',
+        'stateOrProvince',
+        'countryId',
+        'postalCode',
+      ].some((k) => draft[k] !== original[k])
+    ) {
+      const addresses = copy(source.addresses || [])
+      let row = selected(addresses, (x) => x.kind === 'Residential')
+      if (!row) {
+        row = { id: null, kind: 'Residential', isPrimary: addresses.length === 0 }
+        addresses.push(row)
+      }
+      if (!draft.countryId && !row.countryId)
+        throw Error('O país do endereço não foi informado pela API.')
       const slash = draft.cityState.lastIndexOf('/')
       Object.assign(row, {
         line1: draft.line1.trim(),
         line2: draft.line2.trim() || null,
         neighborhood: draft.neighborhood?.trim() || null,
-        city: slash < 0 ? draft.cityState.trim() : draft.cityState.slice(0, slash).trim(),
-        stateOrProvince: slash < 0 ? row.stateOrProvince : draft.cityState.slice(slash + 1).trim(),
+        city:
+          draft.city !== original.city
+            ? draft.city.trim()
+            : slash < 0
+              ? draft.cityState.trim()
+              : draft.cityState.slice(0, slash).trim(),
+        stateOrProvince:
+          draft.stateOrProvince !== original.stateOrProvince
+            ? draft.stateOrProvince.trim() || null
+            : slash < 0
+              ? row.stateOrProvince
+              : draft.cityState.slice(slash + 1).trim(),
+        countryId: draft.countryId || row.countryId,
         postalCode: draft.postalCode.trim() || null,
       })
       add('put', base + '/addresses', { addresses: addresses.map((x) => pick(x, addressKeys)) })
@@ -237,7 +296,16 @@ export function sectionPlan(key, source, draft, original) {
             : step.path.endsWith('/contacts')
               ? ['primaryEmail', 'mobilePhone', 'secondaryPhone']
               : step.path.endsWith('/addresses')
-                ? ['line1', 'line2', 'neighborhood', 'cityState', 'postalCode']
+                ? [
+                    'line1',
+                    'line2',
+                    'neighborhood',
+                    'cityState',
+                    'city',
+                    'stateOrProvince',
+                    'countryId',
+                    'postalCode',
+                  ]
                 : ['birthDate']
           : Object.keys(draft)
   }
@@ -245,8 +313,11 @@ export function sectionPlan(key, source, draft, original) {
 }
 export const sectionChanged = (current, original, key) => {
   if (amountFields.includes(key)) {
-    try { return profileDecimal(current?.[key]) !== profileDecimal(original?.[key]) }
-    catch { return true }
+    try {
+      return profileDecimal(current?.[key]) !== profileDecimal(original?.[key])
+    } catch {
+      return true
+    }
   }
   return !equal(current?.[key], original?.[key])
 }

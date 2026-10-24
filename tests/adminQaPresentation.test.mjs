@@ -15,6 +15,8 @@ test('bank branding uses the catalogue code and leaves unknown banks to initials
   assert.equal(bankLogo('349'), null)
   assert.equal(bankLogo(null), null)
   assert.equal(bankLogo('Itaú'), null)
+  assert.equal(bankLogo('999', 'Galleria Bank'), '/icons/banks/galleria.png')
+  assert.equal(bankLogo('999', 'Outra Galleria Investimentos'), null)
 })
 test('statement types use distinct presentations without treating every contract operation as a lock', () => {
   assert.equal(statementTypePresentation('Deposit').tone, 'contribution')

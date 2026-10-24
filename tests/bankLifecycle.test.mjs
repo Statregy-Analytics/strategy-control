@@ -23,7 +23,12 @@ async function bank(overrides = {}) {
     ...overrides,
   }
   const h = await componentModel(path, {
-    props: { customerId: 'one', embedded: true },
+    props: {
+      customerId: 'one',
+      embedded: true,
+      customerKind: 'Person',
+      customerName: 'Pessoa Fictícia QA',
+    },
     modules: {
       quasar: { QDialog: {}, QExpansionItem: {} },
       'src/services/requestContext': scope,
