@@ -1,10 +1,10 @@
 # Marco 3 — checklist manual
 
-Atualizado em 23/10/2026. Rodadas iniciais: Admin em 12/10 e portal em 13/10. Admin localhost:8080; Portal localhost:9010 (origens CORS autorizadas).
+Atualizado em 24/10/2026. Rodadas iniciais: Admin em 12/10 e portal em 13/10. Admin localhost:8080; Portal localhost:9010 (origens CORS autorizadas).
 
 ## Devolutiva Admin — 24/10 — itens 39–55
 
-Checklist e evidências atuais em [QA Admin 39–55](QA-2026-10-24-ADMIN-39-55.md). Ajustes de seleção/ficha conforme C01/C02/C03/C04, sem novos campos/ações. Risco continua refletindo a API (Cláudio A, Jorge “—”); a escala A/AA/AAA aguarda decisão de produto. Esta rodada complementa o fechamento anterior.
+Checklist e evidências atuais em [QA Admin 39–55](QA-2026-10-24-ADMIN-39-55.md). Ajustes de seleção/ficha conforme C01/C02/C03/C04, sem novos campos/ações. Risco continua refletindo a API (Cláudio A, Jorge “—”); a escala A/AA/AAA aguarda decisão de produto. Esta rodada complementa o fechamento anterior. Runtime final 8e9b29c publicado, pipeline 40130800983 aprovada com 174 testes; seleção/ficha conferidas em homologação, incluindo responsivo e extrato.
 
 ## Fechamento consolidado do Admin — 23/10
 
