@@ -4,19 +4,19 @@ const zero = (value) =>
 export function confirmedEmptyPortfolio(portfolio, composition, wallets) {
   return Boolean(
     ready(portfolio) &&
-      ready(composition) &&
-      ready(wallets) &&
-      Array.isArray(portfolio.data.currencies) &&
-      portfolio.data.currencies.length === 0 &&
-      Array.isArray(composition.data.currencies) &&
-      composition.data.currencies.every(
-        (currency) =>
-          zero(currency.total) &&
-          Array.isArray(currency.items) &&
-          currency.items.every((item) => zero(item.value)),
-      ) &&
-      Array.isArray(wallets.data) &&
-      wallets.data.length === 0,
+    ready(composition) &&
+    ready(wallets) &&
+    Array.isArray(portfolio.data.currencies) &&
+    portfolio.data.currencies.length === 0 &&
+    Array.isArray(composition.data.currencies) &&
+    composition.data.currencies.every(
+      (currency) =>
+        zero(currency.total) &&
+        Array.isArray(currency.items) &&
+        currency.items.every((item) => zero(item.value)),
+    ) &&
+    Array.isArray(wallets.data) &&
+    wallets.data.length === 0,
   )
 }
 export function portfolioCurrencies(portfolio, composition, wallets) {
@@ -85,4 +85,20 @@ export async function readCustomerStatement(wallets, read, assertCurrent = () =>
     if (count !== total) throw new Error('Extrato incompleto.')
   }
   return rows.sort((a, b) => Date.parse(b.occurredAtUtc) - Date.parse(a.occurredAtUtc))
+}
+
+// Unknown operation types keep their server label and a neutral appearance.
+export function statementTypePresentation(type) {
+  const known = {
+    Deposit: ['Aporte', 'contribution'],
+    Withdrawal: ['Resgate', 'withdrawal'],
+    WalletTransfer: ['Transferência', 'transfer'],
+    Yield: ['Rendimento', 'yield'],
+    Lock: ['Bloqueio', 'lock'],
+  }
+  const [label, icon] = known[type] || [
+    type === 'ContractOperation' ? 'Operação de contrato' : type || '—',
+    null,
+  ]
+  return { label, icon, tone: icon || 'neutral' }
 }

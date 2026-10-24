@@ -4,6 +4,8 @@ A interface segue o Figma e as alterações de ordem/campos expressamente autori
 
 ## Atualização vigente — 24/10
 
+Complemento [QA Admin 39–55](QA-2026-10-24-ADMIN-39-55.md): ajustes de apresentação da seleção/ficha. Risco do Jorge conferido em ficha e header: null; o front deve mostrar “—”. A escala A/AA/AAA segue como decisão de produto, não conversão local.
+
 [Reteste de cards, sessões e conta principal](QA-2026-10-24-CARDS-SESSOES-CONTA-PRINCIPAL.md) prevalece sobre os relatos de 23/10 abaixo. Documento mascarado nos cards e sessões por cliente já têm API; as três contas únicas apontadas agora retornam isPrimary=true. Integração de Deslogar por linha e máscara do sufixo no front neste lote. Não pedir novamente essas três entregas como endpoints/dados ausentes.
 
 Restam: escritas administrativas de dados pessoais existentes; declaração PEP/observação sem alerta; valores atual/bloqueado por participante e regra do contrato encerrado no investido; decisão de produto sobre as escalas de classificação (detalhada abaixo); sessão HttpOnly/investigação de identidade e contratos dos módulos ainda sem persistência. A localização da sessão não é fornecida e o catálogo não tem CNPJ para empresas; separar esses limites dos cenários de documento pessoal e encerramento individual já liberados.

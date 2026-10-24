@@ -75,3 +75,12 @@ export async function readCustomerSelection(read, query, filters, isCurrent = ()
     pagination: { page, pageSize: query.pageSize, totalItems: filtered.length, totalPages },
   }
 }
+
+// Formatting is presentation-only; API names and edit values are preserved.
+export function customerDisplayName(value) {
+  if (!String(value || '').trim()) return 'Sem nome'
+  return String(value)
+    .trim()
+    .toLocaleLowerCase('pt-BR')
+    .replace(/(^|[^\p{L}\p{M}])\p{L}/gu, (word) => word.toLocaleUpperCase('pt-BR'))
+}

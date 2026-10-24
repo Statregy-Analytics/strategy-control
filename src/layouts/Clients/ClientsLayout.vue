@@ -73,7 +73,11 @@ const openCreateClient = () => {
   padding: 0 12px;
   background: rgba(255, 255, 255, 0.06) !important;
   color: #fff !important;
-  border: 1px solid rgba(255, 255, 255, 0.28);
+  border: 0;
+  opacity: 0.8;
+}
+.clients-page-header__action:before {
+  border-color: rgba(255, 255, 255, 0.34);
 }
 @media (max-width: 1200px) {
   .clients-page-header {

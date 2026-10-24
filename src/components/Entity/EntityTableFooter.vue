@@ -99,10 +99,22 @@ const emit = defineEmits(['page', 'page-size'])
 .selection-footer__buttons :deep(.q-btn) {
   border-radius: 6px;
   min-height: 32px;
+  height: 32px;
+  min-width: 32px;
   font-size: 12px;
   background: rgba(255, 255, 255, 0.06);
 }
 .selection-footer__buttons :deep(.q-btn:before) {
   border-color: rgba(255, 255, 255, 0.2);
+}
+.selection-footer__buttons :deep(.q-pagination .q-btn) {
+  color: #fff !important;
+}
+.selection-footer__buttons :deep(.q-pagination .q-btn.bg-primary) {
+  color: #fff !important;
+  background: linear-gradient(110deg, rgba(0, 163, 255, 0.27), rgba(0, 163, 255, 0.1)) !important;
+}
+.selection-footer__buttons :deep(.q-pagination .q-btn.bg-primary:before) {
+  border: 1px solid rgba(255, 255, 255, 0.7);
 }
 </style>

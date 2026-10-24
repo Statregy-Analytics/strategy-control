@@ -26,84 +26,34 @@
               height="16"
             />Filtros</span
           >
-          <q-select
+          <customer-filter-select
             v-model="status"
-            outlined
-            dense
-            dark
-            dropdown-icon="img:/icons/client-selection/status-dropdown.svg"
-            popup-content-class="customer-status-menu"
-            options-selected-class="customer-status-option--selected"
-            emit-value
-            map-options
             :options="customerStatusOptions"
-            :display-value="status === null ? 'Status' : undefined"
+            placeholder="Status"
             aria-label="Filtrar por status"
             @update:model-value="reload"
-          >
-            <template #option="scope">
-              <q-item
-                v-bind="scope.itemProps"
-                class="customer-status-option"
-                :class="{ 'customer-status-option--selected': scope.opt.value === status }"
-                :aria-selected="scope.opt.value === status"
-              >
-                <img
-                  class="customer-status-option__curve"
-                  :src="`/icons/client-selection/${scope.opt.value === status ? 'status-option-selected' : 'status-option-curve'}.svg`"
-                  alt=""
-                  width="120"
-                  height="7"
-                />
-                <q-item-section>{{ scope.opt.label }}</q-item-section>
-                <q-item-section v-if="scope.opt.value === status" side
-                  ><img
-                    src="/icons/client-selection/status-selected.svg"
-                    alt=""
-                    width="16"
-                    height="16"
-                /></q-item-section>
-              </q-item>
-            </template>
-          </q-select>
-          <q-select
+          />
+          <customer-filter-select
             v-model="classification"
-            outlined
-            dense
-            dark
-            dropdown-icon="img:/icons/client-selection/dropdown.svg"
-            clearable
-            emit-value
             :options="classificationOptions"
-            label="Classificação"
+            placeholder="Classificação"
+            clearable
             aria-label="Filtrar por classificação"
             @update:model-value="reload"
           />
-          <q-select
+          <customer-filter-select
             v-model="compliance"
-            outlined
-            dense
-            dark
-            dropdown-icon="img:/icons/client-selection/dropdown.svg"
-            clearable
-            emit-value
-            map-options
             :options="complianceOptions"
-            label="Compliance"
+            placeholder="Compliance"
+            clearable
             aria-label="Filtrar por compliance"
             @update:model-value="reload"
           />
-          <q-select
+          <customer-filter-select
             v-model="level"
-            outlined
-            dense
-            dark
-            dropdown-icon="img:/icons/client-selection/dropdown.svg"
-            clearable
-            emit-value
-            map-options
             :options="levelOptions"
-            label="Nível Doc."
+            placeholder="Nível Doc."
+            clearable
             aria-label="Filtrar por nível documental"
             @update:model-value="reload"
           />
@@ -129,17 +79,11 @@
               ><img src="/icons/client-selection/layout-grid.svg" alt="" width="16" height="16"
             /></q-btn>
           </div>
-          <q-select
+          <customer-filter-select
             v-model="sortDirection"
-            outlined
-            dense
-            dark
-            dropdown-icon="img:/icons/client-selection/dropdown.svg"
-            emit-value
-            map-options
             :options="sortOptions"
-            aria-label="Ordenar clientes"
             prefix="Ordenar por:"
+            aria-label="Ordenar clientes"
             @update:model-value="reload"
           />
         </div>
@@ -196,7 +140,7 @@
               ><div class="customer-list__status">
                 <customer-indicators type="status" :value="props.row.status" /><customer-indicators
                   type="compliance"
-                  prefix="Compliance "
+                  plain
                   :value="props.row.complianceStatus"
                 /></div></q-td
           ></template>
@@ -207,11 +151,10 @@
           <template #body-cell-dates="props"
             ><q-td :props="props"
               ><div class="customer-list__dates">
-                <span>Último acesso: {{ formatDateTime(props.row.lastAccessAtUtc) }}</span
-                ><small
-                  >Cliente desde:
-                  {{ formatDate(props.row.customerSince || props.row.createdAtUtc) }}</small
-                >
+                <span>ÚLTIMO ACESSO</span>
+                <strong>{{ formatDateTime(props.row.lastAccessAtUtc) }}</strong>
+                <span>CLIENTE DESDE</span>
+                <strong>{{ formatDate(props.row.customerSince || props.row.createdAtUtc) }}</strong>
               </div></q-td
             ></template
           >
@@ -243,9 +186,10 @@
               /></span>
               <div class="customer-card__heading">
                 <div class="customer-card__badges">
-                  <span class="customer-kind">{{
-                    isOrganization(customer) ? 'Pessoa jurídica' : 'Pessoa física'
-                  }}</span
+                  <span
+                    class="customer-kind"
+                    :class="{ 'customer-kind--organization': isOrganization(customer) }"
+                    >{{ isOrganization(customer) ? 'Pessoa Jurídica' : 'Pessoa Física' }}</span
                   ><customer-indicators type="status" :value="customer.status" />
                 </div>
                 <strong class="customer-card__name">{{ customerName(customer) }}</strong
@@ -313,12 +257,14 @@ import { useRouter } from 'vue-router'
 import { storeToRefs } from 'pinia'
 import { useClientStore } from 'src/stores/client'
 import EntityTableFooter from 'src/components/Entity/EntityTableFooter.vue'
+import CustomerFilterSelect from 'src/components/Entity/CustomerFilterSelect.vue'
 import CustomerIndicators from 'src/components/Clients/CustomerIndicators.vue'
 import { listCustomerCards } from 'src/services/customerService'
 import {
   customerStatusOptions,
   customerComplianceOptions,
   customerMaskedDocument,
+  customerDisplayName,
   readCustomerSelection,
 } from 'src/services/customerPresentation'
 import { useFinanceResource } from 'src/composables/useFinanceResource'
@@ -421,7 +367,7 @@ const changeViewMode = (mode) => {
   return reload()
 }
 const customerId = (row) => row.customerId || row.id
-const customerName = (row) => row.displayName || row.primaryName || 'Sem nome'
+const customerName = (row) => customerDisplayName(row.displayName || row.primaryName)
 const isOrganization = (row) => (row.customerKind || row.kind) === 'Organization'
 const avatarIcon = (row, mode) =>
   `/icons/client-selection/${isOrganization(row) ? 'business' : 'person'}-${mode}.svg`
@@ -678,7 +624,7 @@ onMounted(load)
 .customer-list :deep(th) {
   color: rgba(255, 255, 255, 0.6);
   text-transform: uppercase;
-  font-size: 10px;
+  font-size: 12px;
   height: 44px;
 }
 .customer-list :deep(td) {
@@ -726,10 +672,36 @@ onMounted(load)
   flex-direction: column;
   gap: 8px;
 }
-.customer-list__dates small {
-  display: block;
-  margin-top: 8px;
+.customer-list__dates {
+  display: grid;
+  gap: 4px;
+}
+.customer-list__dates span {
   color: rgba(255, 255, 255, 0.6);
+  font-size: 10px;
+  letter-spacing: 0.3px;
+}
+.customer-list__dates strong {
+  color: #fff;
+  font-size: 12px;
+  font-weight: 500;
+}
+.customer-list__dates strong + span {
+  margin-top: 8px;
+}
+.customer-list__status :deep(.customer-badge) {
+  width: 92px;
+  justify-content: center;
+}
+.customer-kind--organization {
+  background: rgba(255, 255, 255, 0.16);
+  color: #fff;
+  border-color: rgba(255, 255, 255, 0.4);
+}
+.customer-avatar {
+  box-shadow:
+    inset 0 0 0 3px rgba(255, 255, 255, 0.04),
+    inset 0 0 0 4px rgba(255, 255, 255, 0.2);
 }
 @media (max-width: 1200px) {
   .ClientsTable {
@@ -757,56 +729,5 @@ onMounted(load)
   .customer-card {
     padding: 16px;
   }
-}
-</style>
-
-<style>
-/* QSelect teleports its menu outside the page; scope it by its dedicated class. */
-.customer-status-menu {
-  width: 142px;
-  padding: 10px;
-  color: #fff;
-  border: 0.8px solid rgba(255, 255, 255, 0.2);
-  border-radius: 8px;
-  background: linear-gradient(
-    86.19deg,
-    rgba(24, 33, 51, 0.2),
-    rgba(24, 33, 51, 0.15),
-    rgba(24, 33, 51, 0.2)
-  );
-  backdrop-filter: blur(1.5px);
-  box-shadow: 4px 4px 12px rgba(0, 0, 0, 0.13);
-}
-.customer-status-menu .q-virtual-scroll__content {
-  display: flex;
-  flex-direction: column;
-  gap: 5px;
-}
-.customer-status-menu .customer-status-option {
-  position: relative;
-  width: 120px;
-  min-height: 26px;
-  padding: 3px 10px;
-  border-radius: 0 0 6px 6px;
-  color: #fff;
-  font-size: 14px;
-  font-weight: 400;
-  line-height: 20px;
-}
-.customer-status-menu .customer-status-option--selected {
-  background: rgba(255, 255, 255, 0.12);
-}
-.customer-status-option__curve {
-  position: absolute;
-  left: 0;
-  bottom: 0;
-  pointer-events: none;
-}
-.customer-status-menu .q-item__section {
-  position: relative;
-  min-width: 0;
-}
-.customer-status-menu .q-item__section--side {
-  padding-left: 4px;
 }
 </style>

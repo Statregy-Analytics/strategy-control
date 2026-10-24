@@ -141,7 +141,13 @@
                 no-caps
                 :disable="busy || (controlled && !editing)"
                 @click="setField('theme', theme.value)"
-              />
+                ><img
+                  v-if="values.theme === theme.value"
+                  src="/icons/client-profile/theme-selected.svg"
+                  alt=""
+                  width="18"
+                  height="18"
+              /></q-btn>
             </div>
           </label-form>
           <label-form v-else class-name="col-12 col-md-4" text-label="Tema"

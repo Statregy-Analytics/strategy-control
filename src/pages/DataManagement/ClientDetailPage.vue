@@ -18,7 +18,7 @@
           <div class="profile-meta">
             <span>ID: {{ customerId.slice(0, 8) }}</span
             ><span>Desde: {{ date(customer.createdAtUtc) }}</span
-            ><span v-if="operational.advisorName">Assessor: {{ operational.advisorName }}</span>
+            ><span>Assessor: {{ operational.advisorName || 'Sem assessor' }}</span>
           </div>
         </template>
       </entity-header>
@@ -81,7 +81,7 @@
             <div v-if="documentFields.length" class="profile-divider">
               <profile-fields :fields="documentFields" v-bind="fieldEditProps('identification')" />
             </div>
-            <div class="profile-divider">
+            <div class="profile-divider profile-contact-band">
               <profile-fields
                 :fields="contactEditFields"
                 v-bind="fieldEditProps('identification')"
@@ -234,7 +234,10 @@
             @currencies="currencies = $event"
             @calculated="portfolioCalculated = $event"
         /></profile-section>
-        <profile-section title="Dados bancários" icon-src="/icons/client-profile/bank.svg"
+        <profile-section
+          title="Dados bancários"
+          class="profile-bank-section"
+          icon-src="/icons/client-profile/bank.svg"
           ><template #actions
             ><q-btn
               flat
@@ -595,7 +598,12 @@ const dateTime = (value) => {
     ? 'Não informado'
     : new Intl.DateTimeFormat('pt-BR', { dateStyle: 'short', timeStyle: 'short' }).format(parsed)
 }
-const field = (label, value, wide = false) => ({ label, value: value === '' ? null : value, wide })
+const field = (label, value, wide = false, presentation = {}) => ({
+  label,
+  value: value === '' ? null : value,
+  wide,
+  ...presentation,
+})
 const personalDocuments = computed(() => identification.value.documents || [])
 const documentOf = (code) =>
   personalDocuments.value.find((d) => d.documentCode?.toUpperCase() === code) || {}
@@ -644,20 +652,31 @@ const contact = (...kinds) => {
   return matches.find((c) => c.isPrimary) || matches[0]
 }
 const contactFields = computed(() => [
-  field('E-mail principal', maskedContact(identification.value.primaryEmail || contact('Email'))),
+  field(
+    'E-mail principal',
+    maskedContact(identification.value.primaryEmail || contact('Email')),
+    false,
+    { iconSrc: '/icons/client-profile/contact-email.svg' },
+  ),
   field(
     'Celular',
     maskedContact(identification.value.mobilePhone || contact('MobilePhone', 'Mobile')),
+    false,
+    { iconSrc: '/icons/client-profile/contact-mobile.svg' },
   ),
   field(
     'Telefone secundário',
     maskedContact(identification.value.secondaryPhone || contact('SecondaryPhone', 'Phone')),
+    false,
+    { iconSrc: '/icons/client-profile/contact-phone.svg' },
   ),
   field(
     'Preferência',
     { Email: 'E-mail', Phone: 'Telefone', MobilePhone: 'Celular' }[
       identification.value.contactPreference
     ] || identification.value.contactPreference,
+    false,
+    { badge: Boolean(identification.value.contactPreference) },
   ),
 ])
 const addressFields = computed(() => {
@@ -667,7 +686,9 @@ const addressFields = computed(() => {
     customer.value.addresses?.[0] ||
     {}
   return [
-    field('Endereço residencial', a.line1, true),
+    field('Endereço residencial', a.line1, true, {
+      iconSrc: '/icons/client-profile/contact-address.svg',
+    }),
     field('Complemento', a.line2),
     field('Bairro', a.neighborhood),
     field('Município / UF', [a.city, a.stateOrProvince].filter(Boolean).join(' / ')),
@@ -704,11 +725,19 @@ const securityFields = computed(() => {
       'Status da senha',
       { Active: 'Ativa', ResetRequired: 'Redefinição necessária' }[s.passwordStatus] ||
         s.passwordStatus,
+      false,
+      {
+        tone: s.passwordStatus === 'Active' ? 'ok' : s.passwordStatus ? 'pending' : null,
+        valueIconSrc:
+          s.passwordStatus === 'Active' ? '/icons/client-profile/password-active.svg' : null,
+      },
     ),
     field('Último login', dateTime(s.lastLoginAtUtc)),
     field(
       '2FA',
-      s.twoFactorEnabled === true ? 'Ativa' : s.twoFactorEnabled === false ? 'Inativa' : null,
+      s.twoFactorEnabled === true ? 'Ativo' : s.twoFactorEnabled === false ? 'Inativo' : null,
+      false,
+      { badge: s.twoFactorEnabled != null, tone: s.twoFactorEnabled === true ? 'ok' : 'inactive' },
     ),
   ]
 })
@@ -907,7 +936,7 @@ watch(
   backdrop-filter: blur(20px);
 }
 .profile-identity {
-  flex: 1;
+  flex: 0 1 auto;
   min-width: 0;
   margin: 0;
   padding: 0;
@@ -954,6 +983,9 @@ h1 {
   font-size: 11px;
 }
 .profile-switcher {
+  flex-shrink: 0;
+  padding-left: 24px;
+  border-left: 1px solid rgba(255, 255, 255, 0.4);
   width: 256px;
   margin-right: auto;
 }
@@ -988,6 +1020,11 @@ h1 {
   margin-top: 16px;
   padding-top: 16px;
   border-top: 1px solid rgba(255, 255, 255, 0.12);
+}
+.profile-contact-band {
+  margin-top: 28px;
+  padding-top: 28px;
+  padding-bottom: 12px;
 }
 .profile-empty {
   margin: 0;
@@ -1144,6 +1181,9 @@ h3 {
 .profile-inline-editor :deep(.form-section) {
   padding-bottom: 0;
 }
+.profile-bank-section :deep(.profile-section__heading) {
+  border-bottom: 0;
+}
 .profile-bank-panel > :deep(.text-subtitle1),
 .profile-bank-panel > :deep(.text-caption) {
   display: none;
@@ -1187,6 +1227,8 @@ h3 {
     flex-wrap: wrap;
   }
   .profile-switcher {
+    padding-left: 0;
+    border-left: 0;
     order: 5;
     width: 100%;
   }

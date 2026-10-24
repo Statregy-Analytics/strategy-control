@@ -24,8 +24,7 @@
           @update:model-value="
             $emit('update:values', {
               ...values,
-              [field.editKey]:
-                field.inputType === 'number' && $event === '' ? null : $event,
+              [field.editKey]: field.inputType === 'number' && $event === '' ? null : $event,
             })
           "
           ><q-tooltip v-if="!editable.includes(field.editKey)"
@@ -34,8 +33,28 @@
         >
       </label-form>
       <template v-else>
-        <dt>{{ field.label }}</dt>
-        <dd>{{ field.value ?? 'Não informado' }}</dd>
+        <dt>
+          <img v-if="field.iconSrc" :src="field.iconSrc" alt="" width="14" height="14" />{{
+            field.label
+          }}
+        </dt>
+        <dd>
+          <span
+            :class="[
+              { 'profile-field-badge': field.badge },
+              field.tone ? `profile-field--${field.tone}` : '',
+            ]"
+          >
+            <img
+              v-if="field.valueIconSrc"
+              :src="field.valueIconSrc"
+              alt=""
+              width="12"
+              height="12"
+            />
+            {{ field.value ?? 'Não informado' }}
+          </span>
+        </dd>
       </template>
     </div>
   </dl>
@@ -92,6 +111,9 @@ const changed = (key) => sectionChanged(props.values, props.original, key)
   grid-column: span 2;
 }
 dt {
+  display: flex;
+  align-items: center;
+  gap: 6px;
   margin-bottom: 4px;
   color: rgba(255, 255, 255, 0.68);
   font-size: 12px;
@@ -106,6 +128,36 @@ dd {
   font-size: 13px;
   font-weight: 500;
   line-height: 20px;
+}
+dd > span {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  max-width: 100%;
+}
+dt img,
+dd img {
+  flex: none;
+}
+.profile-field-badge {
+  padding: 1px 6px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.08);
+  font-size: 11px;
+}
+.profile-field--ok {
+  color: #74ffa0;
+}
+.profile-field-badge.profile-field--ok {
+  border-color: rgba(116, 255, 160, 0.4);
+  background: rgba(0, 200, 80, 0.12);
+}
+.profile-field--pending {
+  color: #fee685;
+}
+.profile-field--inactive {
+  color: rgba(255, 255, 255, 0.65);
 }
 @media (max-width: 1200px) {
   .profile-fields {

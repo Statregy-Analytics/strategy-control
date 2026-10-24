@@ -2,7 +2,7 @@
   <resource-state :state="resource.state" @retry="load">
     <section v-for="group in groups" :key="group.type" class="asset-group">
       <header>
-        <h3><q-icon :name="group.icon" size="18px" />{{ group.title }}</h3>
+        <h3><q-icon :name="group.icon" size="16px" />{{ group.title }}</h3>
         <q-btn
           flat
           dense
@@ -278,14 +278,29 @@ function invalidateEditor() {
 const activeEditor = (revision, customerId) =>
   revision === editorRevision && customerId === props.customerId && dialog.value
 const groups = [
-  { type: 'RealEstate', title: 'Imóveis', singular: 'imóvel', icon: 'home' },
-  { type: 'Vehicle', title: 'Veículos', singular: 'veículo', icon: 'directions_car' },
-  { type: 'Consortium', title: 'Consórcios', singular: 'consórcio', icon: 'receipt_long' },
+  {
+    type: 'RealEstate',
+    title: 'Imóveis',
+    singular: 'imóvel',
+    icon: 'img:/icons/client-profile/asset-real-estate.svg',
+  },
+  {
+    type: 'Vehicle',
+    title: 'Veículos',
+    singular: 'veículo',
+    icon: 'img:/icons/client-profile/asset-vehicle.svg',
+  },
+  {
+    type: 'Consortium',
+    title: 'Consórcios',
+    singular: 'consórcio',
+    icon: 'img:/icons/client-profile/asset-consortium.svg',
+  },
   {
     type: 'Investment',
     title: 'Investimentos (ativos externos)',
     singular: 'investimento',
-    icon: 'trending_up',
+    icon: 'img:/icons/client-profile/asset-investment.svg',
   },
 ]
 const rows = computed(() => resource.state.data?.data || [])

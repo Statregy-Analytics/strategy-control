@@ -2,6 +2,10 @@
 
 Atualizado em 23/10/2026. Rodadas iniciais: Admin em 12/10 e portal em 13/10. Admin localhost:8080; Portal localhost:9010 (origens CORS autorizadas).
 
+## Devolutiva Admin — 24/10 — itens 39–55
+
+Checklist e evidências atuais em [QA Admin 39–55](QA-2026-10-24-ADMIN-39-55.md). Ajustes de seleção/ficha conforme C01/C02/C03/C04, sem novos campos/ações. Risco continua refletindo a API (Cláudio A, Jorge “—”); a escala A/AA/AAA aguarda decisão de produto. Esta rodada complementa o fechamento anterior.
+
 ## Fechamento consolidado do Admin — 23/10
 
 A situação atual dos itens 10–19 e 27–38 está no [checklist consolidado](QA-ADMIN-FECHAMENTO-2026-10-23.md). Essa matriz prevalece sobre os quadros históricos abaixo. Renda atual/histórico conferidos consistentes; CNH exclusiva, defaults e endpoints liberados em 22/10 não são pendências atuais. Valor base do contrato e criação patrimonial sem carteira foram integrados com os campos já existentes da API. Runtime final 8a00cb4, pipeline 39981438642 aprovada com 162 testes; regressão desktop/mobile, patrimônio sem carteira, valor base, extrato e descarte registrados no relatório consolidado, sem homologação automática dos bloqueios de servidor ou do portal.

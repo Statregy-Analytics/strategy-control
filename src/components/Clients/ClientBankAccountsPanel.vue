@@ -33,7 +33,15 @@
         <template #body-cell-bank="props"
           ><q-td :props="props"
             ><div class="bank-identity">
-              <span v-if="embedded" class="bank-initials" aria-hidden="true">{{
+              <img
+                v-if="embedded && bankLogo(bankCode(props.row.bankId))"
+                class="bank-logo"
+                :src="bankLogo(bankCode(props.row.bankId))"
+                alt=""
+                width="24"
+                height="24"
+              />
+              <span v-else-if="embedded" class="bank-initials" aria-hidden="true">{{
                 bankInitials(props.row.bankId)
               }}</span
               ><span class="bank-name" :title="bankName(props.row.bankId)">{{
@@ -118,8 +126,22 @@
               <div v-for="column in columns.filter((c) => c.name !== 'actions')" :key="column.name">
                 <dt>{{ column.label }}</dt>
                 <dd>
+                  <span v-if="column.name === 'bank'" class="bank-identity">
+                    <img
+                      v-if="bankLogo(bankCode(p.row.bankId))"
+                      class="bank-logo"
+                      :src="bankLogo(bankCode(p.row.bankId))"
+                      alt=""
+                      width="24"
+                      height="24"
+                    />
+                    <span v-else class="bank-initials" aria-hidden="true">{{
+                      bankInitials(p.row.bankId)
+                    }}</span>
+                    <span>{{ bankName(p.row.bankId) }}</span>
+                  </span>
                   <q-icon
-                    v-if="column.name === 'primary' && p.row.isPrimary"
+                    v-else-if="column.name === 'primary' && p.row.isPrimary"
                     name="img:/icons/client-profile/bank-primary.svg"
                     size="16px"
                     aria-label="Conta principal"
@@ -373,6 +395,7 @@
 </template>
 
 <script setup>
+import { bankLogo } from 'src/services/bankBrand'
 import { computed, nextTick, reactive, ref, watch, onScopeDispose } from 'vue'
 import { createRequestContext } from 'src/services/requestContext'
 import { QDialog, QExpansionItem } from 'quasar'
@@ -484,6 +507,7 @@ const columns = computed(() => [
 ])
 const required = (value) => !!value || 'Campo obrigatório'
 const masked = (value) => value || 'Não informado'
+const bankCode = (id) => bankOptions.value.find((bank) => bank.value === id)?.code
 const bankName = (id) =>
   bankOptions.value.find((bank) => bank.value === id)?.label || 'Banco não identificado'
 const bankInitials = (id) => {
@@ -547,6 +571,7 @@ const load = async () => {
     bankOptions.value = banksResult.value.map((bank) => ({
       label: bank.code ? `${bank.code} — ${bank.name}` : bank.name,
       value: bank.id,
+      code: bank.code,
     }))
     filteredBankOptions.value = []
   } else {
@@ -877,5 +902,10 @@ load()
   overflow: visible;
   text-overflow: clip;
   overflow-wrap: anywhere;
+}
+.bank-logo {
+  flex: none;
+  object-fit: contain;
+  border-radius: 6px;
 }
 </style>

@@ -180,7 +180,21 @@
               </tr>
               <tr v-for="entry in statement.state.data || []" :key="entry.key">
                 <td>{{ new Date(entry.occurredAtUtc).toLocaleString('pt-BR') }}</td>
-                <td>{{ financeLabel(entry.type) }}</td>
+                <td>
+                  <span
+                    class="statement-type"
+                    :class="`statement-type--${statementTypePresentation(entry.type).tone}`"
+                  >
+                    <img
+                      v-if="statementTypePresentation(entry.type).icon"
+                      :src="`/icons/client-profile/statement-${statementTypePresentation(entry.type).icon}.svg`"
+                      alt=""
+                      width="12"
+                      height="12"
+                    />
+                    {{ statementTypePresentation(entry.type).label }}
+                  </span>
+                </td>
                 <td>{{ financeLabel(entry.wallet) }}</td>
                 <td>{{ entry.requestNumber || '—' }}</td>
                 <td class="text-right">
@@ -230,6 +244,7 @@
 import { computed, onScopeDispose, ref, watch } from 'vue'
 import {
   portfolioCurrencies,
+  statementTypePresentation,
   readCustomerStatement,
 } from 'src/services/customerPortfolioPresentation'
 import ClientPortfolioContracts from 'src/components/Clients/ClientPortfolioContracts.vue'
@@ -530,7 +545,7 @@ defineExpose({ refresh: onAssetsChanged })
   white-space: normal;
 }
 .profile-statement--entries :deep(table) {
-  min-width: 590px;
+  min-width: 720px;
 }
 .profile-statement--entries th:nth-last-child(-n + 2) {
   width: 112px;
@@ -594,5 +609,52 @@ button.portfolio-metric:hover {
   .portfolio-metrics {
     grid-template-columns: 1fr;
   }
+}
+.profile-portfolio :deep(.q-table tr),
+.profile-portfolio :deep(.q-table td),
+.profile-portfolio :deep(.q-table th) {
+  border-radius: 0 !important;
+}
+.profile-portfolio :deep(.portfolio-composition-section .q-table__container) {
+  border-radius: 0;
+}
+.statement-type {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  width: max-content;
+  max-width: 100%;
+  padding: 2px 6px;
+  border: 0.8px solid rgba(255, 255, 255, 0.2);
+  border-radius: 8px;
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0.08),
+    rgba(255, 255, 255, 0.03),
+    rgba(255, 255, 255, 0.07)
+  );
+  font-size: 10px;
+  line-height: 14px;
+}
+.statement-type img {
+  flex: none;
+}
+.statement-type--yield {
+  color: #74ffa0;
+}
+.statement-type--contribution {
+  color: #00a3ff;
+}
+.statement-type--lock {
+  color: #b7beca;
+}
+.statement-type--transfer {
+  color: #c58aff;
+}
+.statement-type--withdrawal {
+  color: #ff7e89;
+}
+.profile-statement--entries th:nth-child(2) {
+  width: 140px;
 }
 </style>

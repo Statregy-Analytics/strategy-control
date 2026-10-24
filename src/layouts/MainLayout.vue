@@ -323,6 +323,11 @@ const onLogout = async () => {
   padding-right: 12px;
 }
 .sa-sidebar__collapse {
+  min-width: 24px;
+  padding: 0;
+  flex: 0 0 24px;
+  aspect-ratio: 1;
+  border-radius: 50%;
   position: absolute;
   right: -12px;
   top: 50%;

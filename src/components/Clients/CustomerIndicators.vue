@@ -9,7 +9,7 @@
   <span
     v-else-if="type === 'compliance'"
     class="customer-badge"
-    :class="`customer-badge--${compliance.tone}`"
+    :class="[`customer-badge--${compliance.tone}`, { 'customer-compliance--plain': plain }]"
   >
     <img
       v-if="compliance.tone !== 'inactive'"
@@ -40,6 +40,7 @@ import {
 } from 'src/services/customerPresentation'
 const props = defineProps({
   type: { type: String, required: true },
+  plain: Boolean,
   prefix: { type: String, default: '' },
   value: { type: [String, Number], default: null },
 })
@@ -112,5 +113,13 @@ const compliance = computed(() => compliancePresentation(props.value))
 }
 .document-level__bars i.filled {
   background: #fff;
+}
+.customer-compliance--plain {
+  padding: 0;
+  border: 0;
+  background: transparent;
+}
+.customer-compliance--plain.customer-badge--alert {
+  color: #ffb86a;
 }
 </style>

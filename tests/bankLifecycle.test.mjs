@@ -1,3 +1,4 @@
+import { bankLogo } from '../src/services/bankBrand.js'
 import test from 'node:test'
 import assert from 'node:assert/strict'
 import { componentModel, deferred, tick } from './helpers/componentModel.mjs'
@@ -27,6 +28,7 @@ async function bank(overrides = {}) {
       quasar: { QDialog: {}, QExpansionItem: {} },
       'src/services/requestContext': scope,
       'src/services/bankCatalog': { readBankCatalog },
+      'src/services/bankBrand': { bankLogo },
       'src/services/customerService': service,
     },
     transform: (s) => s.replace(/\nload\(\)\n/, '\nconst initial=load()\n'),

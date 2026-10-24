@@ -1,3 +1,4 @@
+import { bankLogo } from '../src/services/bankBrand.js'
 import test from 'node:test'
 import assert from 'node:assert/strict'
 import vm from 'node:vm'
@@ -42,6 +43,7 @@ async function harness(failSecondPage = false) {
   const values = {
     vue: { computed, nextTick, reactive, ref, watch() {}, onScopeDispose() {} },
     quasar: { QDialog: {}, QExpansionItem: {} },
+    'src/services/bankBrand': { bankLogo },
     'src/services/customerService': service,
     'src/services/requestContext': requestContext,
     'src/services/bankCatalog': { readBankCatalog },
@@ -102,13 +104,13 @@ test('catalog failure shows existing section error and retry restores the comple
 })
 
 test('bank suggestions require text, search code/name and retain selected labels', async () => {
-  const { model } = await harness();
-  model.filterBanks('   ', callback => callback());
-  assert.equal(model.filteredBankOptions.value.length, 0);
-  model.filterBanks('Bank 2', callback => callback());
-  assert.equal(model.filteredBankOptions.value[0].value, 'bank-2');
-  model.filterBanks('1', callback => callback());
-  assert.equal(model.filteredBankOptions.value[0].value, 'bank-1');
-  model.filterBanks('', callback => callback());
-  assert.equal(model.bankOptionLabel('bank-2'), '2 — Bank 2');
-});
+  const { model } = await harness()
+  model.filterBanks('   ', (callback) => callback())
+  assert.equal(model.filteredBankOptions.value.length, 0)
+  model.filterBanks('Bank 2', (callback) => callback())
+  assert.equal(model.filteredBankOptions.value[0].value, 'bank-2')
+  model.filterBanks('1', (callback) => callback())
+  assert.equal(model.filteredBankOptions.value[0].value, 'bank-1')
+  model.filterBanks('', (callback) => callback())
+  assert.equal(model.bankOptionLabel('bank-2'), '2 — Bank 2')
+})
