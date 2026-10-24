@@ -532,7 +532,7 @@ defineExpose({ refresh: onAssetsChanged })
   border-radius: 8px;
 }
 .profile-statement :deep(table) {
-  table-layout: fixed;
+  table-layout: auto;
   width: 100%;
 }
 .profile-statement :deep(th),
@@ -545,7 +545,7 @@ defineExpose({ refresh: onAssetsChanged })
   white-space: normal;
 }
 .profile-statement--entries :deep(table) {
-  min-width: 720px;
+  min-width: 590px;
 }
 .profile-statement--entries th:nth-last-child(-n + 2) {
   width: 112px;
@@ -623,7 +623,7 @@ button.portfolio-metric:hover {
   align-items: center;
   gap: 4px;
   width: max-content;
-  max-width: 100%;
+  white-space: nowrap;
   padding: 2px 6px;
   border: 0.8px solid rgba(255, 255, 255, 0.2);
   border-radius: 8px;
@@ -654,7 +654,8 @@ button.portfolio-metric:hover {
 .statement-type--withdrawal {
   color: #ff7e89;
 }
-.profile-statement--entries th:nth-child(2) {
-  width: 140px;
+.profile-statement th {
+  overflow-wrap: normal;
+  white-space: nowrap;
 }
 </style>
