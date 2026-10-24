@@ -4,7 +4,7 @@ Atualizado em 24/10/2026. Rodadas iniciais: Admin em 12/10 e portal em 13/10. Ad
 
 ## Devolutiva Admin — 24/10 — itens 56–60
 
-Implementação, validações e bloqueios reais em [QA Admin 56–60](QA-2026-10-24-ADMIN-56-60.md). C32/C33, selects glass, ícone Deslogar, modal bancário C09/C30/logos C35 e editores patrimoniais C10–14. Não inclui o estudo futuro de países/preferências. Impacto estimado em [escopo e horas](IMPACTO-ESCOPO-QA-56-60.md).
+Implementação, validações e bloqueios reais em [QA Admin 56–60](QA-2026-10-24-ADMIN-56-60.md). C32/C33, selects glass, ícone Deslogar, modal bancário C09/C30/logos C35 e editores patrimoniais C10–14. Não inclui o estudo futuro de países/preferências. Impacto estimado em [escopo e horas](IMPACTO-ESCOPO-QA-56-60.md). Runtime 33b238e publicado; pipeline 40136130908 aprovada com 180 testes, auditoria, lint, build, upload e ativação. Ficha, C09, preferências e patrimônio conferidos em homologação; responsivo em 390 px sem overflow. Campos sem contrato continuam apontados no checklist, sem aprovação integrada fictícia.
 
 ## Devolutiva Admin — 24/10 — itens 39–55
 
