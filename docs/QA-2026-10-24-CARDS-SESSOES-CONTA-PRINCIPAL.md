@@ -38,5 +38,18 @@ Os demais bloqueios anteriores de edição administrativa, PEP/observações, co
 - [x] Lint, build e diff das alterações aprovados antes da publicação.
 - [x] Local 8080: conta fictícia client@example.com, sessão de teste criada com user-agent identificável, removida pela ação da tabela; GET confirmou a sessão removida e as 24 anteriores preservadas. Sessões de Jorge/Admin não encerradas.
 - [x] Mobile local 390px: documento 375px; tabela rola dentro do card e não estoura a página. Desktop revisado com a imagem C19; cores e padding corrigidos no mesmo lote.
-- [ ] Publicação e regressão no Admin de homologação.
+- [x] Publicação e regressão no Admin de homologação.
 - [ ] Aceite independente do QA sobre os cenários liberados.
+
+
+## Publicação e reteste concluídos
+
+Runtime **5ef50f4**, [pipeline 40057494980](https://github.com/Statregy-Analytics/strategy-control/actions/runs/40057494980) aprovada em auditoria, **171 testes**, lint, build, upload e ativação. Entrada publicada index-DXIvJmOp.js conferida contra o build local. Os oito testes do estudo futuro não entraram no commit/deploy.
+
+- [x] Grade publicada mostra os quatro caracteres de sufixo recebidos e ausência real. Conferência da Jane com documento mascarado, sem reconstituir prefixo ou aplicar a máscara antiga.
+- [x] Conta fictícia client@example.com: tabela carregou sessões dos usuários vinculados. Encerradas duas sessões nessa conta durante o reteste publicado (a sessão fictícia criada nesta rodada e uma sessão anterior de teste). GET confirmou a remoção da sessão nova 0c5961ae-2280-46b3-bb32-4e26b8ee3946, com 23 sessões restantes. Não foi acionado encerramento em massa nem revogação na conta de Jorge ou no Admin.
+- [x] Jane: API sem sessões e conta vinculada; tabela mostrou Nenhuma sessão ativa vinculada a este cliente, sem erro ou linhas demonstrativas.
+- [x] Desktop 1280px: documento 1265px e tabela 597px sem overflow interno. Mobile 390px: documento 375px, tabela 307px com conteúdo de 560px rolando somente dentro da tabela. Viewport restaurado.
+- [x] Leitura da ficha de Jorge para conferir a mesma integração sem encerrar suas sessões.
+
+A UI de logout foi retestada sem alterar nome, documentos, preferências, saldos ou contas bancárias. A migração de conta principal veio do backend; nenhuma gravação administrativa tentou substituir esse resultado. Evidência visual final: admin-sessoes-cliente-hml-24-10.png, na pasta de evidências desta conversa.
