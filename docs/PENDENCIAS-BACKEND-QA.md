@@ -6,9 +6,25 @@ A interface segue o Figma e as alterações de ordem/campos expressamente autori
 
 [Reteste de cards, sessões e conta principal](QA-2026-10-24-CARDS-SESSOES-CONTA-PRINCIPAL.md) prevalece sobre os relatos de 23/10 abaixo. Documento mascarado nos cards e sessões por cliente já têm API; as três contas únicas apontadas agora retornam isPrimary=true. Integração de Deslogar por linha e máscara do sufixo no front neste lote. Não pedir novamente essas três entregas como endpoints/dados ausentes.
 
-Restam: escritas administrativas de dados pessoais existentes; declaração PEP/observação sem alerta; valores atual/bloqueado por participante e regra do contrato encerrado no investido; classificação G/I versus Figma; sessão HttpOnly/investigação de identidade e contratos dos módulos ainda sem persistência. A localização da sessão não é fornecida e o catálogo não tem CNPJ para empresas; separar esses limites dos cenários de documento pessoal e encerramento individual já liberados.
+Restam: escritas administrativas de dados pessoais existentes; declaração PEP/observação sem alerta; valores atual/bloqueado por participante e regra do contrato encerrado no investido; decisão de produto sobre as escalas de classificação (detalhada abaixo); sessão HttpOnly/investigação de identidade e contratos dos módulos ainda sem persistência. A localização da sessão não é fornecida e o catálogo não tem CNPJ para empresas; separar esses limites dos cenários de documento pessoal e encerramento individual já liberados.
 
 Renda atual, UUID da moeda patrimonial, valor base do participante, alternativas documentais, submit/declaração de contatos e defaults liberados não devem voltar como pendências antigas. O estudo futuro de moedas/idioma/fuso/países ficou adiado e não faz parte desta correção.
+
+## Decisão de classificação e declaração PEP — retorno complementar de 24/10
+
+| Indicador | Escala informada pelo backend | Origem |
+| --- | --- | --- |
+| Classificação do card | A/E/G/I | Quantidade de documentos |
+| Progresso documental | A/B/C/I | Percentual de requisitos cumpridos |
+| Risco | A/B/C | Alertas de compliance |
+
+A/AA/AAA do Figma não existe nas regras atuais. A sugestão do backend de usar a classificação do progresso documental no card aguarda decisão de Éric/produto; não é conversão autorizada. Até lá, mostrar o valor real de cada domínio. Não traduzir G para outra letra nem igualar risco e classificação documental no front. Consulta atual dos 13 cards encontrou G/I.
+
+Filtros de classificação/compliance/nível no servidor aguardam essa decisão e não bloqueiam o cenário atual: o front consulta o resultado completo antes de filtrar/paginar. São evolução de escala, não falha atual de filtro.
+
+Declaração PEP continua pendente de implementação do backend: gravação e leitura no perfil/onboarding e reflexo nos alertas. A integração da pergunta no fluxo aprovado depende desse contrato; não criar declaração local ou alerta substituto.
+
+Máscara atual conferida: seis asteriscos e quatro caracteres finais em três dos 13 cards; null nos demais. O front passa a preservar o prefixo mascarado efetivamente recebido, sem reconstruir conteúdo oculto. CNPJ próprio para empresas e localização das sessões continuam como limites separados. Os itens de sessões/conta única já homologados não foram reabertos.
 
 ## Histórico de evidências — não encaminhar como lista atual
 

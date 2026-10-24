@@ -53,3 +53,12 @@ Runtime **5ef50f4**, [pipeline 40057494980](https://github.com/Statregy-Analytic
 - [x] Leitura da ficha de Jorge para conferir a mesma integração sem encerrar suas sessões.
 
 A UI de logout foi retestada sem alterar nome, documentos, preferências, saldos ou contas bancárias. A migração de conta principal veio do backend; nenhuma gravação administrativa tentou substituir esse resultado. Evidência visual final: admin-sessoes-cliente-hml-24-10.png, na pasta de evidências desta conversa.
+
+
+## Retorno complementar — escalas e máscara
+
+Nova conferência de GET /admin/customers/cards em 24/10: 13 registros, três com máscara de seis asteriscos mais quatro caracteres finais, demais null; classificações observadas G/I. O adaptador foi ajustado para preservar a máscara válida recebida (inclusive seis asteriscos), mantendo compatibilidade com a máscara anterior e limitando a quatro caracteres caso chegue conteúdo inesperadamente sem máscara.
+
+A escala dos cards (A/E/G/I, quantidade de documentos), a do progresso (A/B/C/I, percentual de requisitos) e a de risco (A/B/C, compliance) não devem ser convertidas entre si pelo frontend. A/AA/AAA do desenho precisa de decisão de produto. A sugestão de alinhar o card ao progresso aguarda aprovação; nenhum mapeamento foi aplicado. Filtros server-side aguardam a mesma definição; os filtros atuais seguem o resultado completo. Declaração PEP continua dependendo de gravação/leitura/reflexo nos alertas no backend e de integração no fluxo aprovado.
+
+A conferência complementar é de leitura; não repetiu revogações de sessão nem escritas em contas. Ver [pendências vigentes](PENDENCIAS-BACKEND-QA.md) para a separação entre decisão de negócio, implementação do backend e entregas já testadas.

@@ -39,9 +39,11 @@ export function customerMaskedDocument(value) {
   if (!value) return 'Documento não informado'
   // Preserve the visible suffix supplied by the server; never reconstruct hidden characters.
   // If an unexpected unmasked value arrives, still expose at most its last four characters.
-  const compact = String(value).replace(/[^a-z0-9*]/gi, '')
+  const received = String(value).trim()
+  if (/^\*{2,}[a-z0-9]{1,4}$/i.test(received)) return received
+  const compact = received.replace(/[^a-z0-9*]/gi, '')
   const suffix = compact.split('*').at(-1).slice(-4)
-  return `****${suffix}`
+  return `******${suffix}`
 }
 export function customerMatches(customer, filters) {
   return (
