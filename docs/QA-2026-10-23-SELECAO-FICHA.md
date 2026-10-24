@@ -1,5 +1,7 @@
 # QA — seleção e ficha do cliente, 23/10
 
+> Atualização vigente de 24/10: documento mascarado nos cards, sessões administrativas por cliente e normalização das três contas únicas foram conferidos. Ver [retorno e checklist atualizado](QA-2026-10-24-CARDS-SESSOES-CONTA-PRINCIPAL.md). As menções abaixo à ausência dessas entregas são evidências de 23/10, superadas pelo reteste; outros bloqueios permanecem separados.
+
 Referências: devolutiva de 22/10 (itens 27–38), [C01](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI/S.A?node-id=1484-67207), [C03](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI/S.A?node-id=1484-67626), [C02](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI/S.A?node-id=1484-68035), [C19](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI/S.A?node-id=1484-69131), [C31](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI/S.A?node-id=1973-281).
 
 ## Checklist do front

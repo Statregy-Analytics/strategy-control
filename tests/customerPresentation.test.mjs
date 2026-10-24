@@ -12,11 +12,14 @@ test('presentation binds Figma status names without changing API values', () => 
   assert.equal(customerStatusLabel('Archived'), 'Inativo')
   assert.equal(customerStatusLabel('Prospect'), 'Inativo')
 })
-test('document masking preserves server redaction and hides both ends', () => {
-  assert.equal(customerMaskedDocument('123.456.789-01'), '***.456.78*-**')
-  assert.equal(customerMaskedDocument('***.***.***-01'), '***.***.***-**')
+test('document masking preserves the server suffix without reconstructing hidden characters', () => {
+  assert.equal(customerMaskedDocument('123.456.789-01'), '****8901')
+  assert.equal(customerMaskedDocument('***.***.***-01'), '****01')
+  assert.equal(customerMaskedDocument('****6789'), '****6789')
+  assert.equal(customerMaskedDocument('****X123'), '****X123')
+  assert.equal(customerMaskedDocument('********'), '****')
   assert.equal(customerMaskedDocument(null), 'Documento não informado')
-  assert.equal(customerMaskedDocument('12.345.678/0001-90'), '**.*45.678/000*-**')
+  assert.equal(customerMaskedDocument('12.345.678/0001-90'), '****0190')
 })
 test('filters search every server page, combine criteria, and paginate matching rows', async () => {
   const calls = []

@@ -37,14 +37,11 @@ export function compliancePresentation(value) {
 }
 export function customerMaskedDocument(value) {
   if (!value) return 'Documento não informado'
-  // Never reconstruct a server-masked document. Also mask the first/last three
-  // positions locally when an endpoint returns more visible digits than needed.
-  const characters = [...String(value)]
-  const positions = characters
-    .map((char, index) => (/[\d*]/.test(char) ? index : -1))
-    .filter((index) => index >= 0)
-  for (const index of [...positions.slice(0, 3), ...positions.slice(-3)]) characters[index] = '*'
-  return characters.join('')
+  // Preserve the visible suffix supplied by the server; never reconstruct hidden characters.
+  // If an unexpected unmasked value arrives, still expose at most its last four characters.
+  const compact = String(value).replace(/[^a-z0-9*]/gi, '')
+  const suffix = compact.split('*').at(-1).slice(-4)
+  return `****${suffix}`
 }
 export function customerMatches(customer, filters) {
   return (

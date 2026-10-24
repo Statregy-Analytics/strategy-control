@@ -2,11 +2,13 @@
 
 A interface segue o Figma e as alterações de ordem/campos expressamente autorizadas pelo designer/QA e pelo usuário. **Na ordem atual, profissional/financeiro é etapa 4 e documentos/endereço é etapa 5.** Precisamos dos estados e operações abaixo sem acrescentar campos ou ações às telas.
 
-## Lista atual para devolutiva do Admin — 23/10
+## Atualização vigente — 24/10
 
-Consultar a [matriz consolidada](QA-ADMIN-FECHAMENTO-2026-10-23.md) antes de encaminhar os relatos históricos. Permanecem: documento mascarado nos cards; escritas administrativas de dados pessoais existentes; sessões do cliente; declaração PEP/observação sem alerta; normalização de conta única principal; valores atual/bloqueado por participante e regra do contrato encerrado no investido; classificação G/I versus Figma; sessão HttpOnly/investigação de identidade e contratos dos módulos ainda sem persistência.
+[Reteste de cards, sessões e conta principal](QA-2026-10-24-CARDS-SESSOES-CONTA-PRINCIPAL.md) prevalece sobre os relatos de 23/10 abaixo. Documento mascarado nos cards e sessões por cliente já têm API; as três contas únicas apontadas agora retornam isPrimary=true. Integração de Deslogar por linha e máscara do sufixo no front neste lote. Não pedir novamente essas três entregas como endpoints/dados ausentes.
 
-**Não reenviar como pendentes:** renda atual (consistente com o último histórico em 23/10), UUID da moeda patrimonial (catálogo já fornece; front integrado neste lote), valor base do participante (`baseAmount` integrado), CNH exclusiva, submit/declaração de contatos e defaults já liberados em 22/10. Aprovar/Reprovar e imagens do patrimônio já foram integrados e exercitados; pendências de versões documentais têm reteste próprio e não significam falta dessas ações.
+Restam: escritas administrativas de dados pessoais existentes; declaração PEP/observação sem alerta; valores atual/bloqueado por participante e regra do contrato encerrado no investido; classificação G/I versus Figma; sessão HttpOnly/investigação de identidade e contratos dos módulos ainda sem persistência. A localização da sessão não é fornecida e o catálogo não tem CNPJ para empresas; separar esses limites dos cenários de documento pessoal e encerramento individual já liberados.
+
+Renda atual, UUID da moeda patrimonial, valor base do participante, alternativas documentais, submit/declaração de contatos e defaults liberados não devem voltar como pendências antigas. O estudo futuro de moedas/idioma/fuso/países ficou adiado e não faz parte desta correção.
 
 ## Histórico de evidências — não encaminhar como lista atual
 

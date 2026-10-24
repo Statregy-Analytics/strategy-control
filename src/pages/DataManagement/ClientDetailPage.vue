@@ -170,28 +170,16 @@
               />
               <q-expansion-item
                 dense
+                v-model="sessionsOpen"
                 label="Gerenciamento de status de login"
                 icon="img:/icons/client-selection/login-sessions.svg"
                 class="login-management q-mt-lg"
               >
-                <q-markup-table flat class="profile-sessions-table">
-                  <thead>
-                    <tr>
-                      <th>Data e hora</th>
-                      <th>IP</th>
-                      <th>Local</th>
-                      <th>Equipamento</th>
-                      <th>Deslogar</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td colspan="5" class="profile-empty">
-                        O histórico de sessões deste cliente ainda não está disponível.
-                      </td>
-                    </tr>
-                  </tbody>
-                </q-markup-table>
+                <client-sessions-panel
+                  v-if="sessionsOpen"
+                  :key="customerId"
+                  :customer-id="customerId"
+                />
               </q-expansion-item>
             </template>
           </resource-state>
@@ -425,6 +413,7 @@
 <script setup>
 import { computed, ref, watch, onMounted, onScopeDispose } from 'vue'
 import { createRequestContext, readCurrentPages } from 'src/services/requestContext'
+import ClientSessionsPanel from 'src/components/Clients/ClientSessionsPanel.vue'
 import CustomerIndicators from 'src/components/Clients/CustomerIndicators.vue'
 import { useRoute, useRouter, onBeforeRouteLeave, onBeforeRouteUpdate } from 'vue-router'
 import SectionEditActions from 'src/components/Entity/SectionEditActions.vue'
@@ -464,6 +453,7 @@ const route = useRoute(),
 const { errorNotify } = useNotification()
 const customerId = computed(() => String(route.params.id))
 const profileContext = createRequestContext(() => customerId.value)
+const sessionsOpen = ref(false)
 let historyRevision = 0
 const customerResource = useFinanceResource(),
   identificationResource = useFinanceResource(),
@@ -848,6 +838,7 @@ watch(
   () => {
     profileContext.invalidate()
     historyRevision++
+    sessionsOpen.value = false
     showHistory.value = false
     editor.controller.dispose()
     preferencesReady.value = false
@@ -1241,17 +1232,6 @@ h3 {
   .client-profile-main {
     gap: 16px;
   }
-}
-.profile-sessions-table {
-  color: inherit;
-  background: transparent;
-}
-.profile-sessions-table :deep(th) {
-  text-align: left;
-  font-size: 11px;
-}
-.profile-sessions-table :deep(td.profile-empty) {
-  white-space: normal;
 }
 .login-management {
   border: 0;

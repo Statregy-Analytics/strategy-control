@@ -1,5 +1,7 @@
 # Admin — devolutiva consolidada do QA, 23/10/2026
 
+> Atualização vigente de 24/10: documento mascarado nos cards, sessões administrativas por cliente e normalização das três contas únicas foram conferidos. Ver [retorno e checklist atualizado](QA-2026-10-24-CARDS-SESSOES-CONTA-PRINCIPAL.md). As menções abaixo à ausência dessas entregas são evidências de 23/10, superadas pelo reteste; outros bloqueios permanecem separados.
+
 Escopo: itens administrativos do feedback de 17/10 (10–19), complementos administrativos e seleção/ficha de 22/10 (27–38). A referência visual continua sendo o Figma aprovado. Este lote não acrescenta campos, botões, módulos ou fluxos. Itens do portal/cadastro têm checklist próprio e não são aprovados por esta revisão.
 
 ## Checklist de entrega do frontend
