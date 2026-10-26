@@ -1,10 +1,11 @@
 <template>
   <q-page class="q-pa-md">
     <title-page title="Transações e carteiras" />
+    <wallet-overview :details="false" initial-type="total" @select="selectWallet" />
     <q-tabs v-model="tab" align="left" dense active-color="primary"
       ><q-tab name="transactions" label="Transações" no-caps /><q-tab
-        name="portfolio"
-        label="Carteira do cliente"
+        name="wallets"
+        label="Carteiras"
         no-caps
     /></q-tabs>
     <q-separator />
@@ -30,19 +31,60 @@
           />
         </div>
       </div>
-      <finance-table
-        ref="table"
-        path="admin/transactions"
-        :params="{ search: search || undefined }"
-        :columns="transactionColumns"
-        ><template #body-cell-actions="p"
-          ><q-td :props="p"
-            ><row-actions
-              :actions="[{ name: 'open', label: 'Abrir solicitação', icon: 'visibility' }]"
-              @select="open(p.row.id)" /></q-td></template
-      ></finance-table>
+      <form-section title="Solicitações pendentes">
+        <finance-table
+          ref="pendingTable"
+          path="admin/transactions"
+          :params="{ attentionRequired: true, search: search || undefined }"
+          :columns="transactionColumns"
+        >
+          <template #body-cell-actions="p"
+            ><q-td :props="p"
+              ><row-actions
+                :actions="[{ name: 'open', label: 'Abrir solicitação', icon: 'visibility' }]"
+                @select="open(p.row.id)" /></q-td
+          ></template>
+        </finance-table>
+      </form-section>
+      <form-section title="Histórico de transações">
+        <finance-table
+          ref="table"
+          path="admin/transactions"
+          :params="{ search: search || undefined }"
+          :columns="transactionColumns"
+          ><template #body-cell-actions="p"
+            ><q-td :props="p"
+              ><row-actions
+                :actions="[{ name: 'open', label: 'Abrir solicitação', icon: 'visibility' }]"
+                @select="open(p.row.id)" /></q-td></template
+        ></finance-table>
+        <p class="text-caption q-mt-md">
+          Aportes e resgates de contratos, rendimentos e inclusão/remoção de patrimônio serão
+          registrados automaticamente. A consulta desses novos lançamentos aguarda a liberação do
+          serviço.
+        </p>
+      </form-section>
     </div>
-    <customer-portfolio v-else />
+    <div v-else-if="tab === 'wallets'">
+      <wallet-directory :type="walletType" @open="openPortfolio" /><q-btn
+        class="q-mt-md"
+        outline
+        no-caps
+        label="Consultar carteiras de um cliente"
+        @click="openPortfolio(null)"
+      />
+    </div>
+    <q-dialog
+      v-model="portfolioOpen"
+      position="right"
+      full-height
+      full-width
+      maximized
+      class="control-width"
+      ><q-card
+        ><title-card title="Carteiras do cliente" /><q-card-section
+          ><customer-portfolio :customer-id="portfolioCustomer" /></q-card-section></q-card
+    ></q-dialog>
     <q-dialog
       v-model="createOpen"
       :persistent="createBusy"
@@ -201,6 +243,22 @@
   </q-page>
 </template>
 <script setup>
+function selectWallet(type) {
+  walletType.value = type
+  tab.value = 'wallets'
+}
+function openPortfolio(id) {
+  portfolioCustomer.value = id
+  portfolioOpen.value = true
+}
+
+const walletType = ref('total'),
+  portfolioCustomer = ref(null),
+  portfolioOpen = ref(false)
+
+import WalletDirectory from 'src/components/Finance/WalletDirectory.vue'
+import WalletOverview from 'src/components/Finance/WalletOverview.vue'
+
 import { computed, ref } from 'vue'
 import { useQuasar } from 'quasar'
 import TitlePage from 'src/components/TitlePage.vue'
@@ -228,6 +286,7 @@ const $q = useQuasar(),
   tab = ref('transactions'),
   search = ref(''),
   table = ref(),
+  pendingTable = ref(),
   dialog = ref(false),
   createOpen = ref(false),
   createBusy = ref(false),
@@ -237,8 +296,18 @@ const $q = useQuasar(),
   reason = ref('')
 const observation = ref('')
 const workflowActions = computed(() =>
-  (detail.state.data?.availableActions || []).filter((action) =>
-    ['Validate', 'Approve', 'Reject', 'Execute', 'Cancel'].includes(action),
+  (detail.state.data?.availableActions || []).filter(
+    (action) =>
+      ['Validate', 'Approve', 'Reject', 'Execute', 'Cancel'].includes(action) &&
+      (![
+        'WalletTransfer',
+        'ContractContribution',
+        'ContractRedemption',
+        'Yield',
+        'AssetAdded',
+        'AssetRemoved',
+      ].includes(detail.state.data?.type) ||
+        action === 'Cancel'),
   ),
 )
 const transactionColumns = columns([
@@ -266,6 +335,7 @@ const loadDetail = () =>
 function onCreated(value) {
   createOpen.value = false
   table.value?.reload()
+  pendingTable.value?.reload()
   open(value)
 }
 function open(value) {
@@ -312,6 +382,7 @@ function confirmAction(action) {
       reason.value = ''
       await loadDetail()
       table.value?.reload()
+      pendingTable.value?.reload()
     } catch (e) {
       error.value =
         e.response?.status === 409

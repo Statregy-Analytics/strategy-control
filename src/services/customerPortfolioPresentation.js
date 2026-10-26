@@ -90,10 +90,14 @@ export async function readCustomerStatement(wallets, read, assertCurrent = () =>
 // Unknown operation types keep their server label and a neutral appearance.
 export function statementTypePresentation(type) {
   const known = {
-    Deposit: ['Aporte', 'contribution'],
-    Withdrawal: ['Resgate', 'withdrawal'],
-    WalletTransfer: ['Transferência', 'transfer'],
+    Deposit: ['Depósito', 'contribution'],
+    Withdrawal: ['Saque', 'withdrawal'],
+    WalletTransfer: ['Transferência entre Carteiras', 'transfer'],
     Yield: ['Rendimento', 'yield'],
+    ContractContribution: ['Aporte em Contrato', 'contribution'],
+    ContractRedemption: ['Resgate de Contrato', 'withdrawal'],
+    AssetAdded: ['Patrimônio incluído', null],
+    AssetRemoved: ['Patrimônio removido', null],
     Lock: ['Bloqueio', 'lock'],
   }
   const [label, icon] = known[type] || [

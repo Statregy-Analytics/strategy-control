@@ -7,134 +7,37 @@
       Selecione um cliente para consultar sua carteira.
     </p>
     <template v-else>
-      <form-section title="Carteira consolidada"
-        ><resource-state :state="portfolio.state" @retry="loadPortfolio"
-          ><div v-if="embedded" class="portfolio-currencies">
-            <p v-if="!displayCurrencies.length" class="text-caption">
-              Nenhuma posição disponível para este cliente.
-            </p>
-            <div
-              v-for="currency in displayCurrencies"
-              :key="currency.currencyId"
-              class="portfolio-currency"
-            >
-              <div class="portfolio-metrics">
-                <component
-                  :is="metric.key === 'invested' && !currency.empty ? 'button' : 'div'"
-                  v-for="metric in metrics"
-                  :key="metric.key"
-                  class="portfolio-metric"
-                  :class="{
-                    'portfolio-metric--selected':
-                      !currency.empty &&
-                      metric.key === 'invested' &&
-                      selectedCurrency === currency.currencyId,
-                  }"
-                  :type="metric.key === 'invested' ? 'button' : undefined"
-                  :aria-label="
-                    metric.key === 'invested' && !currency.empty
-                      ? `Contratos do saldo investido em ${currency.currencyIsoCode}`
-                      : undefined
-                  "
-                  :aria-expanded="
-                    metric.key === 'invested' && !currency.empty
-                      ? selectedCurrency === currency.currencyId
-                      : undefined
-                  "
-                  @click="
-                    metric.key === 'invested' &&
-                    !currency.empty &&
-                    toggleContracts(currency.currencyId)
-                  "
-                >
-                  <div>
-                    <span>{{ metric.label }}</span
-                    ><small v-if="!currency.empty">{{ currency.currencyIsoCode }}</small>
-                  </div>
-                  <strong>{{ money(currency[metric.key], currency.currencyIsoCode) }}</strong>
-                  <img
-                    v-if="currency.empty && metric.key === 'total'"
-                    src="/icons/client-profile/portfolio-empty.svg"
-                    alt=""
-                    class="portfolio-empty-ring"
-                  />
-                </component>
-              </div>
-              <client-portfolio-contracts
-                v-if="!currency.empty && selectedCurrency === currency.currencyId"
-                :customer-id="customerId"
-                :currency-id="currency.currencyId"
-                :currency-code="currency.currencyIsoCode"
-              />
-            </div>
-          </div>
-          <q-table
-            v-else
-            flat
-            dense
-            :rows="displayCurrencies"
-            :columns="portfolioColumns"
-            row-key="currencyId"
-            no-data-label="Nenhuma posição disponível" /></resource-state
-      ></form-section>
-      <form-section
-        class="portfolio-composition-section"
-        :title="embedded ? 'Composição da carteira' : 'Composição por classe e origem'"
-        ><resource-state :state="composition.state" @retry="loadComposition"
-          ><q-markup-table
-            v-if="!composition.state.data?.currencies?.length"
-            flat
-            dense
-            class="portfolio-composition-empty"
-          >
-            <thead>
-              <tr>
-                <th
-                  v-for="column in compositionColumns('BRL')"
-                  :key="column.name"
-                  class="text-left"
-                >
-                  {{ column.label }}
-                </th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td :colspan="compositionColumns('BRL').length">
-                  <div class="portfolio-empty-message">Nenhuma composição ainda</div>
-                </td>
-              </tr>
-            </tbody>
-          </q-markup-table>
-          <div
-            v-for="currency in composition.state.data?.currencies || []"
-            :key="currency.currencyId"
-            class="q-mb-md"
-          >
-            <div class="text-weight-medium">
-              {{ currency.currencyIsoCode }} · {{ money(currency.total, currency.currencyIsoCode) }}
-            </div>
-            <q-table
-              flat
-              dense
-              :hide-bottom="embedded"
-              :pagination="embedded ? { rowsPerPage: 0 } : undefined"
-              :rows="currency.items"
-              :columns="compositionColumns(currency.currencyIsoCode)"
-              row-key="classCode"
-              no-data-label="Nenhuma composição ainda"
-            /></div></resource-state
-      ></form-section>
-      <form-section v-if="!embedded" title="Saldos por carteira"
-        ><resource-state :state="wallets.state" @retry="loadWallets"
-          ><q-table
-            flat
-            dense
-            :rows="wallets.state.data || []"
-            :columns="walletColumns"
-            row-key="id"
-            no-data-label="Nenhuma carteira disponível" /></resource-state
-      ></form-section>
+      <form-section title="Visão consolidada (Carteira)">
+        <wallet-overview :model="walletModel">
+          <template #contracts
+            ><resource-state :state="portfolio.state" @retry="loadPortfolio">
+              <p
+                v-if="!displayCurrencies.some((currency) => currency.currencyId)"
+                class="text-caption"
+              >
+                Nenhuma posição de contrato disponível.
+              </p>
+              <q-expansion-item
+                v-for="currency in displayCurrencies.filter((currency) => currency.currencyId)"
+                :key="currency.currencyId"
+                :label="'Contratos · ' + currency.currencyIsoCode"
+                dense
+              >
+                <client-portfolio-contracts
+                  :customer-id="customerId"
+                  :currency-id="currency.currencyId"
+                  :currency-code="currency.currencyIsoCode"
+                /> </q-expansion-item
+            ></resource-state>
+          </template>
+          <template #assets
+            ><customer-assets
+              :key="customerId"
+              :customer-id="customerId"
+              @changed="onAssetsChanged"
+          /></template>
+        </wallet-overview>
+      </form-section>
       <form-section :title="embedded ? '' : 'Extrato'">
         <div v-if="embedded" class="statement-heading">
           <img src="/icons/client-profile/statement.svg" alt="" /><span>Extrato da conta</span
@@ -230,13 +133,6 @@
           class="q-mt-md"
           @click="exportStatement"
       /></form-section>
-      <form-section v-if="!embedded" title="Patrimônio declarado"
-        ><customer-assets
-          :key="customerId"
-          :customer-id="customerId"
-          :currencies="portfolio.state.data?.currencies || []"
-          @changed="onAssetsChanged"
-      /></form-section>
     </template>
   </div>
 </template>
@@ -247,6 +143,7 @@ import {
   statementTypePresentation,
   readCustomerStatement,
 } from 'src/services/customerPortfolioPresentation'
+import WalletOverview from './WalletOverview.vue'
 import ClientPortfolioContracts from 'src/components/Clients/ClientPortfolioContracts.vue'
 import CustomerSelect from './CustomerSelect.vue'
 import ResourceState from './ResourceState.vue'
@@ -254,28 +151,13 @@ import CustomerAssets from './CustomerAssets.vue'
 import FormSection from 'src/components/Entity/FormSection.vue'
 import LabelForm from 'src/components/Form/LabelForm.vue'
 import { useFinanceResource } from 'src/composables/useFinanceResource'
-import {
-  financeGet,
-  financeExport,
-  money,
-  columns,
-  financeLabel,
-} from 'src/services/financeService'
+import { financeGet, financeExport, money, financeLabel } from 'src/services/financeService'
 const props = defineProps({
   customerId: { type: String, default: null },
   embedded: { type: Boolean, default: false },
+  walletModel: { type: Object, default: null },
 })
 const emit = defineEmits(['currencies', 'calculated'])
-const selectedCurrency = ref(null)
-const toggleContracts = (id) => {
-  selectedCurrency.value = selectedCurrency.value === id ? null : id
-}
-const metrics = [
-  { key: 'baseEquity', label: 'Saldo base (patrimônio)' },
-  { key: 'invested', label: 'Saldo investido' },
-  { key: 'investable', label: 'Saldo investível' },
-  { key: 'total', label: 'Carteira total' },
-]
 const customerId = ref(props.customerId),
   dateFrom = ref(''),
   dateTo = ref(''),
@@ -344,7 +226,6 @@ watch(
     exporting.value = false
     ;[portfolio, composition, wallets, statement].forEach((resource) => resource.reset())
     error.value = ''
-    selectedCurrency.value = null
     if (customerId.value) {
       loadPortfolio()
       loadComposition()
@@ -358,49 +239,6 @@ onScopeDispose(() => {
   revision++
   ;[portfolio, composition, wallets, statement].forEach((resource) => resource.reset())
 })
-const portfolioColumns = columns([
-  ['currencyIsoCode', 'Moeda'],
-  ['baseEquity', 'Patrimônio base', (r) => money(r.baseEquity, r.currencyIsoCode)],
-  ['invested', 'Investido', (r) => money(r.invested, r.currencyIsoCode)],
-  ['investable', 'Investível', (r) => money(r.investable, r.currencyIsoCode)],
-  ['total', 'Total', (r) => money(r.total, r.currencyIsoCode)],
-])
-const compositionColumns = (currency) =>
-  columns(
-    props.embedded
-      ? [
-          ['className', 'Tipo de carteira / classe'],
-          ['value', 'Valor', (r) => money(r.value, currency)],
-          ['origin', 'Origem', (r) => financeLabel(r.origin)],
-          [
-            'lastUpdatedAtUtc',
-            'Última atualização',
-            (r) =>
-              r.lastUpdatedAtUtc
-                ? new Date(r.lastUpdatedAtUtc).toLocaleString('pt-BR', {
-                    dateStyle: 'short',
-                    timeStyle: 'short',
-                  })
-                : 'Não informado',
-          ],
-        ]
-      : [
-          ['className', 'Classe'],
-          ['origin', 'Origem', (r) => financeLabel(r.origin)],
-          ['value', 'Valor', (r) => money(r.value, currency)],
-          [
-            'sharePercentage',
-            'Participação',
-            (r) => (r.sharePercentage == null ? '—' : `${r.sharePercentage}%`),
-          ],
-        ],
-  )
-const walletColumns = columns([
-  ['type', 'Carteira', (r) => financeLabel(r.type)],
-  ['balance', 'Saldo', (r) => money(r.balance, r.currencyIsoCode)],
-  ['reserved', 'Reservado', (r) => money(r.reserved, r.currencyIsoCode)],
-  ['available', 'Disponível', (r) => money(r.available, r.currencyIsoCode)],
-])
 async function exportStatement() {
   if (exporting.value) return
   const version = revision,
