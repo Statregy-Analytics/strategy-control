@@ -287,25 +287,20 @@
         </span>
       </div>
       <div class="row justify-center q-mt-md">
-        <q-pagination
-          v-model="pagination.page"
-          color="primary"
-          :max="pagesNumber"
-          :max-pages="6"
-          size="sm"
-          direction-links
-        />
+        <entity-pagination v-model="pagination.page" :max="pagesNumber" />
       </div>
     </div>
   </div>
 </template>
 
 <script>
+import EntityPagination from 'src/components/Entity/EntityPagination.vue'
 import { ref, computed, defineComponent } from 'vue'
 import useVariablesGlobal from 'src/composables/Fakes/useVariablesGlobal'
 import useMovement from 'src/composables/Fakes/useMovement'
 
 export default defineComponent({
+  components: { EntityPagination },
   name: 'TransactionHistoric',
   setup() {
     const { tiposOptions, statusOptions } = useVariablesGlobal()

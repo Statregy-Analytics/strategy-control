@@ -176,20 +176,14 @@
         </span>
       </div>
       <div class="row justify-center q-mt-md">
-        <q-pagination
-          v-model="pagination.page"
-          color="primary"
-          :max="pagesNumber"
-          :max-pages="6"
-          size="sm"
-          direction-links
-        />
+        <entity-pagination v-model="pagination.page" :max="pagesNumber" />
       </div>
     </div>
   </div>
 </template>
 
 <script setup>
+import EntityPagination from 'src/components/Entity/EntityPagination.vue'
 import { ref, computed, defineComponent } from 'vue'
 import { exportFile, useQuasar } from 'quasar'
 import { useLayoutStore } from 'src/stores/layout'

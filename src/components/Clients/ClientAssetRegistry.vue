@@ -38,6 +38,7 @@
                 dense
                 no-caps
                 :label="`Salvar ${selectedGroup.singular}`"
+                icon="img:/icons/section-edit/save-check.svg"
                 :loading="saving"
                 type="submit"
                 :form="`asset-editor-${customerId}-${group.type}`"
@@ -68,28 +69,49 @@
                       :class="`asset-editor-fields--${selectedGroup.type}`"
                     >
                       <label-form
-                        v-for="field in section.fields"
+                        v-for="field in section.fields.filter(
+                          (item) => !item.debt || !draft.paidOff,
+                        )"
                         :key="field.key"
                         :text-label="field.label"
-                        :class="[`asset-field--${field.key}`, { 'asset-field--wide': field.wide }]"
+                        :class="[
+                          `asset-field--${field.key}`,
+                          {
+                            'asset-field--wide': field.wide,
+                            'asset-field--settled': field.key === 'paidOff' && draft.paidOff,
+                          },
+                        ]"
                       >
-                        <q-toggle
-                          v-if="field.type === 'toggle'"
-                          v-model="draft[field.key]"
-                          :aria-label="field.label"
-                          :label="
-                            field.key === 'paidOff'
-                              ? draft.paidOff
-                                ? 'Sim'
-                                : 'Não'
-                              : 'O ativo possui data de vencimento?'
-                          "
-                          color="positive"
-                          :disable="saving"
-                        />
+                        <div v-if="field.type === 'toggle'">
+                          <q-toggle
+                            v-if="field.type === 'toggle'"
+                            v-model="draft[field.key]"
+                            :aria-label="field.label"
+                            :label="
+                              field.key === 'paidOff'
+                                ? draft.paidOff
+                                  ? 'Sim'
+                                  : 'Não'
+                                : 'O ativo possui data de vencimento?'
+                            "
+                            color="positive"
+                            :disable="saving"
+                          />
+                          <small v-if="field.key === 'paidOff'" class="asset-settlement-help"
+                            >Quitado: sem saldo devedor. Se desativado, aparece o campo Restante
+                            para Quitação.</small
+                          >
+                        </div>
                         <component
                           v-else
-                          :is="field.select ? GlassSelect : QInput"
+                          :is="
+                            field.select
+                              ? GlassSelect
+                              : moneyFields.includes(field.key)
+                                ? MoneyInput
+                                : QInput
+                          "
+                          :currency="editorCurrencyCode || 'BRL'"
                           :model-value="editorValue(field)"
                           @update:model-value="setEditorValue(field, $event)"
                           outlined
@@ -276,6 +298,14 @@
 </template>
 <script setup>
 import { QInput } from 'quasar'
+import MoneyInput from 'src/components/Form/MoneyInput.vue'
+const moneyFields = [
+  'declaredValue',
+  'remainingBalance',
+  'initialAmount',
+  'amountPaid',
+  'releasedCredit',
+]
 import GlassSelect from 'src/components/Entity/GlassSelect.vue'
 import AssetDocumentCollection from './AssetDocuments.vue'
 import { computed, ref, watch, onScopeDispose } from 'vue'
@@ -407,7 +437,10 @@ const status = (asset) =>
 const required = (v) =>
   (v !== null && v !== undefined && String(v).trim() !== '') || 'Campo obrigatório'
 const fieldRules = (field) => [
-  ...(field.required ? [required] : []),
+  ...(field.required || field.debt ? [required] : []),
+  ...(field.debt
+    ? [(value) => Number(value) > 0 || 'Informe o saldo devedor maior que zero.']
+    : []),
   ...(isAssetIntegerField(field.key) ? [assetIntegerRule] : []),
 ]
 const formSections = computed(() => assetEditorSections(selectedGroup.value?.type))
@@ -802,10 +835,29 @@ h4 {
   margin-left: auto;
 }
 .asset-editor-actions .q-btn {
+  width: 120px;
+  min-height: 32px;
+  height: 32px;
   border-radius: 8px;
   background: rgba(255, 255, 255, 0.06);
   font-size: 11px;
-  padding: 6px 12px;
+  padding: 0 8px;
+  color: rgba(255, 255, 255, 0.72);
+}
+.asset-editor-actions .q-btn:before {
+  border-color: rgba(255, 255, 255, 0.12);
+}
+.asset-editor-actions .q-btn:last-child {
+  color: #fff;
+}
+.asset-editor-actions .q-btn:last-child:before {
+  border-color: rgba(255, 255, 255, 0.28);
+}
+.asset-editor-actions .q-btn.disabled {
+  opacity: 0.4 !important;
+}
+.asset-editor-actions :deep(.q-icon) {
+  font-size: 16px;
 }
 .asset-editor > .q-card__section {
   padding: 24px;
@@ -850,6 +902,15 @@ h4 {
 }
 .asset-editor-fields > .asset-field--nickname {
   grid-column: span 6;
+}
+.asset-editor-fields > .asset-field--settled {
+  grid-column: span 8;
+}
+.asset-settlement-help {
+  display: block;
+  color: var(--sa-muted);
+  font-size: 11px;
+  line-height: 1.5;
 }
 .asset-editor-fields > .asset-field--internalId,
 .asset-editor-fields > .asset-field--propertyType,

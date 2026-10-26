@@ -1,7 +1,7 @@
 <template>
   <span
     v-if="type === 'status'"
-    class="customer-badge"
+    class="customer-badge customer-badge--status"
     :class="`customer-badge--${customerStatusTone(value)}`"
     >{{ customerStatusLabel(value) }}</span
   >
@@ -76,8 +76,12 @@ const compliance = computed(() => compliancePresentation(props.value))
 }
 .customer-badge--blocked {
   color: #ffc9c9;
-  border-color: rgba(255, 100, 100, 0.4);
-  background: rgba(255, 40, 40, 0.2);
+  border-color: #ffc9c9;
+  background: rgba(194, 0, 8, 0.2);
+}
+.customer-badge--status {
+  text-transform: uppercase;
+  font-weight: 700;
 }
 .customer-badge--inactive {
   color: rgba(255, 255, 255, 0.6);

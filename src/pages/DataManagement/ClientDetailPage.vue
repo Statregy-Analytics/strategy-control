@@ -791,9 +791,9 @@ const financialEditFields = computed(() =>
     financialFields.value,
     ['individualMonthlyIncome', 'householdMonthlyIncome', 'declaredNetWorth'],
     {
-      individualMonthlyIncome: 'number',
-      householdMonthlyIncome: 'number',
-      declaredNetWorth: 'number',
+      individualMonthlyIncome: 'money',
+      householdMonthlyIncome: 'money',
+      declaredNetWorth: 'money',
     },
   ),
 )

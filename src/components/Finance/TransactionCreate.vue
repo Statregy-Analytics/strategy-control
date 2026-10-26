@@ -21,11 +21,15 @@
           solicitação podem ser utilizados.</q-banner
         ><form-section v-else title="Dados da movimentação">
           <label-form v-if="kind !== 'contract-operations'" text-label="Moeda"
-            ><currency-select v-model="currencyId" :customer-id="clientId"
+            ><currency-select
+              v-model="currencyId"
+              :customer-id="clientId"
+              @currency-code="currencyCode = $event"
           /></label-form>
           <label-form text-label="Valor" class="q-mt-md"
-            ><q-input
-              v-model.number="amount"
+            ><money-input
+              v-model="amount"
+              :currency="currencyCode"
               type="number"
               step="0.01"
               min="0.01"
@@ -94,6 +98,7 @@
   ></q-card>
 </template>
 <script setup>
+import MoneyInput from 'src/components/Form/MoneyInput.vue'
 import { ref, watch } from 'vue'
 import TitleCard from 'src/components/Card/TitleCard.vue'
 import FormSection from 'src/components/Entity/FormSection.vue'
@@ -107,6 +112,7 @@ import { buildTransactionPayload } from 'src/services/financeModels'
 import { financeGet, financeWrite } from 'src/services/financeService'
 const emit = defineEmits(['created', 'busy'])
 const receiptDocumentId = ref(null)
+const currencyCode = ref('BRL')
 const kind = ref('deposits'),
   clientId = ref(null),
   currencyId = ref(null),

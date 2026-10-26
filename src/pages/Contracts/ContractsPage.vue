@@ -115,16 +115,17 @@
                     <label-form class="col-12 col-md-4" text-label="Moeda"
                       ><currency-select
                         v-model="form.currencyId"
+                        @currency-code="currencyCode = $event"
                         :customer-id="form.clientAllocations[0]?.clientId"
                         :current="detail.state.data?.currency"
                         :disable="!draft"
                     /></label-form>
                     <label-form class="col-12 col-md-4" text-label="Capital inicial"
-                      ><q-input
-                        v-model.number="form.initialContractualCapital"
+                      ><money-input
+                        :currency="currencyCode"
+                        v-model="form.initialContractualCapital"
                         outlined
                         dense
-                        type="number"
                         min="0"
                         step="0.01"
                         :disable="!draft"
@@ -192,9 +193,9 @@
                       :current="participantOption(allocation.clientId)"
                   /></label-form>
                   <label-form class="col" text-label="Valor alocado"
-                    ><q-input
-                      v-model.number="allocation.allocatedAmount"
-                      type="number"
+                    ><money-input
+                      :currency="currencyCode"
+                      v-model="allocation.allocatedAmount"
                       min="0"
                       step="0.01"
                       outlined
@@ -253,6 +254,7 @@
   </q-page>
 </template>
 <script setup>
+import MoneyInput from 'src/components/Form/MoneyInput.vue'
 import { computed, ref, watch } from 'vue'
 import { useRoute } from 'vue-router'
 import { useQuasar } from 'quasar'
@@ -268,7 +270,11 @@ import CurrencySelect from 'src/components/Finance/CurrencySelect.vue'
 import CustomerSelect from 'src/components/Finance/CustomerSelect.vue'
 import ContractSections from 'src/components/Finance/ContractSections.vue'
 import { useFinanceResource } from 'src/composables/useFinanceResource'
-import { buildDraftPayload, buildContractTerm, contractTermOptions } from 'src/services/financeModels'
+import {
+  buildDraftPayload,
+  buildContractTerm,
+  contractTermOptions,
+} from 'src/services/financeModels'
 import { financeGet, financeWrite, money, financeLabel, columns } from 'src/services/financeService'
 const $q = useQuasar(),
   table = ref(),
@@ -278,6 +284,7 @@ const $q = useQuasar(),
   saving = ref(false),
   error = ref('')
 const registrationStatus = ref(null)
+const currencyCode = ref('BRL')
 const registrationOptions = [
   { label: 'Contratos cadastrados', value: null },
   { label: 'Rascunhos', value: 'Draft' },
@@ -404,8 +411,7 @@ async function save() {
 }
 function confirmFinalize() {
   if (!termUnit.value || !termValue.value) {
-    error.value =
-      'Defina o prazo e sua unidade antes de finalizar.'
+    error.value = 'Defina o prazo e sua unidade antes de finalizar.'
     return
   }
   $q.dialog({
@@ -431,7 +437,15 @@ function confirmFinalize() {
   })
 }
 const route = useRoute()
-watch(() => route.query.contractId, value => {
-  if (typeof value === 'string' && /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(value)) open(value)
-}, { immediate: true })
+watch(
+  () => route.query.contractId,
+  (value) => {
+    if (
+      typeof value === 'string' &&
+      /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(value)
+    )
+      open(value)
+  },
+  { immediate: true },
+)
 </script>

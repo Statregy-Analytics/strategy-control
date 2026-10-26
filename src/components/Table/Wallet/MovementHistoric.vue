@@ -307,14 +307,7 @@
         </span>
       </div>
       <div class="row justify-center q-mt-md">
-        <q-pagination
-          v-model="pagination.page"
-          color="primary"
-          :max="pagesNumber"
-          :max-pages="6"
-          size="sm"
-          direction-links
-        />
+        <entity-pagination v-model="pagination.page" :max="pagesNumber" />
       </div>
     </div>
 
@@ -332,6 +325,7 @@
 </template>
 
 <script>
+import EntityPagination from 'src/components/Entity/EntityPagination.vue'
 import { ref, computed, defineComponent } from 'vue'
 import { storeToRefs } from 'pinia'
 import useVariablesGlobal from 'src/composables/Fakes/useVariablesGlobal'
@@ -341,9 +335,7 @@ import { useLayoutStore } from 'src/stores/layout'
 
 export default defineComponent({
   name: 'MovementHistoric',
-  components: {
-    OpenDepositLayout,
-  },
+  components: { EntityPagination, OpenDepositLayout },
   setup() {
     const { tiposOptions, statusOptions, tiposOptionsDeposito } = useVariablesGlobal()
     const { rowsMovement, columnsMovement, getRowsMovement } = useMovement()

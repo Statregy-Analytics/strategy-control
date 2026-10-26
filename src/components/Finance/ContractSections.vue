@@ -38,9 +38,9 @@
     ></q-list>
     <customer-select v-model="participantId" class="q-mt-md" />
     <label-form text-label="Valor alocado" class="q-mt-md"
-      ><q-input
-        v-model.number="allocation"
-        type="number"
+      ><money-input
+        :currency="detail?.currency?.isoCode || 'BRL'"
+        v-model="allocation"
         min="0"
         step="0.01"
         outlined
@@ -198,6 +198,7 @@
   /></form-section>
 </template>
 <script setup>
+import MoneyInput from 'src/components/Form/MoneyInput.vue'
 import { ref } from 'vue'
 import { useQuasar } from 'quasar'
 import FormSection from 'src/components/Entity/FormSection.vue'

@@ -13,9 +13,13 @@
         :disable="!changed || loading || busy"
         @click="$emit('save')"
       >
-        <img v-if="busy" src="/icons/section-edit/loading.svg" alt="" class="section-spinner" />{{
-          busy ? 'Salvando…' : 'Salvar'
-        }}
+        <img v-if="busy" src="/icons/section-edit/loading.svg" alt="" class="section-spinner" /><img
+          v-else
+          src="/icons/section-edit/save-check.svg"
+          alt=""
+          width="16"
+          height="16"
+        />{{ busy ? 'Salvando…' : 'Salvar' }}
       </q-btn>
     </template>
     <template v-else>
@@ -60,10 +64,22 @@ defineEmits(['edit', 'save', 'discard'])
 }
 .section-actions .q-btn {
   min-height: 32px;
+  height: 32px;
+  width: 120px;
+  color: rgba(255, 255, 255, 0.72);
   border-radius: 8px;
   padding: 0 12px;
   font-size: 12px;
   background: rgba(255, 255, 255, 0.06);
+}
+.section-actions .q-btn:before {
+  border-color: rgba(255, 255, 255, 0.12);
+}
+.section-actions .q-btn.disabled {
+  opacity: 0.4 !important;
+}
+.section-save :deep(.q-btn__content) {
+  gap: 6px;
 }
 .section-actions .section-pencil {
   width: 32px;
@@ -81,8 +97,10 @@ defineEmits(['edit', 'save', 'discard'])
   flex: none;
 }
 .section-actions .section-save {
-  color: rgba(191, 219, 255, 0.92);
-  background: rgba(190, 219, 255, 0.08);
+  color: #fff;
+}
+.section-actions .section-save:before {
+  border-color: rgba(255, 255, 255, 0.28);
 }
 .section-lock {
   color: var(--sa-muted);

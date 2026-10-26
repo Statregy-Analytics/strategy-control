@@ -24,7 +24,7 @@
               alt=""
               width="16"
               height="16"
-            />Filtros</span
+            />Filtros:</span
           >
           <customer-filter-select
             v-model="status"
@@ -129,6 +129,11 @@
               </button></q-td
             ></template
           >
+          <template #body-cell-advisor="props">
+            <q-td :props="props" :class="{ 'customer-advisor--empty': !props.row.advisorName }">
+              {{ props.row.advisorName || 'Sem assessor' }}
+            </q-td>
+          </template>
           <template #body-cell-classification="props"
             ><q-td :props="props"
               ><customer-indicators
@@ -141,6 +146,7 @@
                 <customer-indicators type="status" :value="props.row.status" /><customer-indicators
                   type="compliance"
                   plain
+                  prefix="Compliance "
                   :value="props.row.complianceStatus"
                 /></div></q-td
           ></template>
@@ -207,7 +213,10 @@
             </div>
             <div class="customer-card__facts">
               <div>
-                <span>ASSESSOR</span><strong>{{ customer.advisorName || 'Sem assessor' }}</strong>
+                <span>ASSESSOR</span
+                ><strong :class="{ 'customer-advisor--empty': !customer.advisorName }">{{
+                  customer.advisorName || 'Sem assessor'
+                }}</strong>
               </div>
               <div>
                 <span>ÚLTIMO ACESSO</span
@@ -427,7 +436,7 @@ onMounted(load)
   display: flex;
   gap: 8px;
   align-items: center;
-  font-size: 12px;
+  font-size: 14px;
   color: rgba(255, 255, 255, 0.6);
 }
 .clients-filters .q-select {
@@ -448,6 +457,16 @@ onMounted(load)
 .clients-toolbar :deep(.q-field--dense .q-field__control) {
   min-height: 36px;
   height: 36px;
+}
+.clients-filters :deep(.q-field__control:before) {
+  border-color: rgba(255, 255, 255, 0.34);
+}
+.clients-filters :deep(.q-field__control-container),
+.clients-filters :deep(.q-field__native),
+.clients-filters :deep(.q-field__marginal) {
+  min-height: 36px;
+  height: 36px;
+  align-items: center;
 }
 .clients-toolbar :deep(.q-field__native),
 .clients-toolbar :deep(.q-field__prefix),
@@ -518,13 +537,14 @@ onMounted(load)
   align-items: center;
 }
 .customer-avatar {
+  position: relative;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   flex: none;
   width: 64px;
   height: 64px;
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  border: 0.8px solid rgba(255, 255, 255, 0.2);
   border-radius: 50%;
   background: linear-gradient(
     135deg,
@@ -648,8 +668,8 @@ onMounted(load)
   padding: 0;
 }
 .customer-list__identity .customer-avatar {
-  width: 36px;
-  height: 36px;
+  width: 40px;
+  height: 40px;
 }
 .customer-list__identity strong {
   display: block;
@@ -671,6 +691,7 @@ onMounted(load)
   display: flex;
   flex-direction: column;
   gap: 8px;
+  min-width: 202px;
 }
 .customer-list__dates {
   display: grid;
@@ -689,19 +710,46 @@ onMounted(load)
 .customer-list__dates strong + span {
   margin-top: 8px;
 }
-.customer-list__status :deep(.customer-badge) {
-  width: 92px;
-  justify-content: center;
+.customer-list__status :deep(.customer-badge--status) {
+  width: 100%;
+  height: 20px;
+  padding: 0 8px;
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0.08),
+    rgba(255, 255, 255, 0.03),
+    rgba(255, 255, 255, 0.07)
+  );
+}
+.customer-list__status :deep(.customer-badge--status.customer-badge--blocked) {
+  color: #ff2e36;
+  border-color: #ff2e36;
+}
+.customer-list__status :deep(.customer-compliance--plain) {
+  color: #fff;
+  justify-content: flex-start;
+}
+.customer-advisor--empty {
+  color: rgba(255, 255, 255, 0.6);
+  font-style: italic;
 }
 .customer-kind--organization {
   background: rgba(255, 255, 255, 0.16);
   color: #fff;
   border-color: rgba(255, 255, 255, 0.4);
 }
-.customer-avatar {
-  box-shadow:
-    inset 0 0 0 3px rgba(255, 255, 255, 0.04),
-    inset 0 0 0 4px rgba(255, 255, 255, 0.2);
+.customer-avatar::before {
+  content: '';
+  position: absolute;
+  width: 60px;
+  height: 60px;
+  border: 0.8px solid rgba(255, 255, 255, 0.2);
+  border-radius: 50%;
+  pointer-events: none;
+}
+.customer-list__identity .customer-avatar::before {
+  width: 38px;
+  height: 38px;
 }
 @media (max-width: 1200px) {
   .ClientsTable {

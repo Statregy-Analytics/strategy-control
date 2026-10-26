@@ -34,7 +34,7 @@ const props = defineProps({
   modelValue: { type: String, default: null },
   current: { type: Object, default: null },
 })
-defineEmits(['update:modelValue'])
+const emit = defineEmits(['update:modelValue', 'currency-code'])
 const resource = useFinanceResource()
 const options = computed(() => {
   const items = (resource.state.data || []).map((w) => ({
@@ -49,4 +49,9 @@ const load = () =>
     props.customerId ? (await financeGet(`admin/customers/${props.customerId}/wallets`)).data : [],
   )
 watch(() => props.customerId, load, { immediate: true })
+watch(
+  () => options.value.find((option) => option.id === props.modelValue)?.name || 'BRL',
+  (code) => emit('currency-code', code),
+  { immediate: true },
+)
 </script>

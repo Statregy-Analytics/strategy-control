@@ -49,21 +49,23 @@
                     ><label-form class="col-12 col-md-4" text-label="Moeda"
                       ><currency-select
                         v-model="form.currencyId"
+                        @currency-code="currencyCode = $event"
                         :customer-id="customerId"
                         :current="currencyOption" /></label-form
                     ><label-form class="col-12 col-md-4" text-label="Valor declarado"
-                      ><q-input
-                        v-model.number="form.declaredValue"
+                      ><money-input
+                        :currency="currencyCode"
+                        v-model="form.declaredValue"
                         outlined
                         dense
-                        type="number"
                         min="0"
                         step="0.01"
                         aria-label="Valor declarado"
                         :rules="[nonNegative]" /></label-form
                     ><label-form class="col-12 col-md-4" text-label="Saldo devedor"
-                      ><q-input
-                        v-model.number="form.remainingBalance"
+                      ><money-input
+                        :currency="currencyCode"
+                        v-model="form.remainingBalance"
                         outlined
                         dense
                         type="number"
@@ -126,6 +128,7 @@
   </div>
 </template>
 <script setup>
+import MoneyInput from 'src/components/Form/MoneyInput.vue'
 import { computed, ref } from 'vue'
 import { useQuasar } from 'quasar'
 import FinanceTable from './FinanceTable.vue'
@@ -147,6 +150,7 @@ const emit = defineEmits(['changed']),
   $q = useQuasar(),
   detail = useFinanceResource(),
   documents = useFinanceResource()
+const currencyCode = ref('BRL')
 const id = ref(null),
   dialog = ref(false),
   table = ref(),

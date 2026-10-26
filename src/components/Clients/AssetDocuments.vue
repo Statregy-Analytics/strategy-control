@@ -82,7 +82,9 @@
                 editing ? '/icons/asset-editor/file.svg' : '/icons/asset-editor/asset-missing.svg'
               "
               alt="" /></span
-          ><span v-if="editing" class="asset-document-missing">Não enviado</span
+          ><span v-if="editing" class="asset-document-missing"
+            ><img src="/icons/asset-editor/upload-missing.svg" alt="" width="12" height="12" />Não
+            enviado</span
           ><span class="asset-missing-identity"
             ><strong>{{ slot.label }}</strong
             ><small>Nenhum arquivo</small></span
@@ -335,12 +337,20 @@ h4 img {
   background: rgba(255, 255, 255, 0.05);
 }
 .asset-document-missing {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  width: 108px;
+  height: 21px;
+  justify-content: center;
   display: inline-flex;
   align-items: center;
   gap: 4px;
   align-self: flex-end;
-  font-size: 10px;
-  border: 1px solid rgba(255, 255, 255, 0.3);
+  font-size: 12px;
+  color: #fff;
+  background: rgba(0, 0, 0, 0.2);
+  border: 0.5px solid #fff;
   border-radius: 7px;
   padding: 1px 8px;
 }

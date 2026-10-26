@@ -52,7 +52,7 @@ defineEmits(['update:modelValue'])
 .profile-glass-menu {
   padding: 6px;
   color: #d8e2ee;
-  background: rgba(20, 31, 45, 0.94);
+  background: rgba(255, 255, 255, 0.06);
   border: 1px solid rgba(255, 255, 255, 0.2);
   border-radius: 12px;
   backdrop-filter: blur(20px);

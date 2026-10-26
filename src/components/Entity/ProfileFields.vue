@@ -3,7 +3,7 @@
     <div v-for="field in fields" :key="field.label" :class="{ 'profile-fields__wide': field.wide }">
       <label-form v-if="editing" :text-label="field.label" class="profile-field-editor">
         <component
-          :is="field.options ? GlassSelect : QInput"
+          :is="field.options ? GlassSelect : field.inputType === 'money' ? MoneyInput : QInput"
           :options="field.options"
           :multiple="field.multiple"
           :use-input="field.allowNewValue"
@@ -60,7 +60,11 @@
         <dd>
           <span
             :class="[
-              { 'profile-field-badge': field.badge },
+              {
+                'profile-field-badge': field.badge,
+                'profile-field--password': field.label === 'Status da senha',
+                'profile-field--two-factor': field.label === '2FA',
+              },
               field.tone ? `profile-field--${field.tone}` : '',
             ]"
           >
@@ -80,6 +84,7 @@
 </template>
 <script setup>
 import { QInput } from 'quasar'
+import MoneyInput from 'src/components/Form/MoneyInput.vue'
 import GlassSelect from './GlassSelect.vue'
 import LabelForm from 'src/components/Form/LabelForm.vue'
 import { sectionChanged } from 'src/services/clientSectionModel'
@@ -212,6 +217,24 @@ dd img {
 }
 .profile-field--inactive {
   color: rgba(255, 255, 255, 0.65);
+}
+.profile-field--password {
+  font-size: 14px;
+}
+.profile-field--password.profile-field--ok {
+  color: #00a63e;
+}
+.profile-field--two-factor {
+  min-width: 46px;
+  height: 22px;
+  justify-content: center;
+  border-radius: 8px;
+  font-size: 12px;
+}
+.profile-field--two-factor.profile-field--ok {
+  color: #73ffa1;
+  border-color: #73ffa1;
+  background: rgba(0, 122, 84, 0.2);
 }
 @media (max-width: 1200px) {
   .profile-fields {
