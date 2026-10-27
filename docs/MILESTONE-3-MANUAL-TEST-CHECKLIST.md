@@ -752,3 +752,63 @@ Integração C11/C12 e testes fictícios: [relatório de imagens patrimoniais](Q
 - [x] Loading/arquivo/diálogos isolados por cliente/documento; retorno de upload antigo não afeta o card atual. Controles do Figma mantidos.
 - [x] 137 testes, lint/build/diff aprovados; consulta do PNG fictício e liberação dos controles conferidas em 8080.
 - [x] Publicado eb53be3; pipeline 39973080495 aprovada. PNG fictício abriu, controles liberaram ao concluir, reprovação cancelada e troca Jorge/Cláudio conferida sem alterações documentais. Concorrência/upload/download cobertos de forma controlada. [Ciclo das ações documentais](QA-2026-10-23-CICLO-DOCUMENTOS.md).
+
+## Reteste visual do admin — QA 93–105 (27/10/2026)
+
+Publicado no admin em 27/10/2026: runtime `c3b1edd`, [deploy 40557196455](https://github.com/Statregy-Analytics/strategy-control/actions/runs/40557196455) concluído com sucesso. Revisão com os componentes reais em página
+isolada temporária, dados de demonstração e adaptador que bloqueia todas as escritas.
+A página e o adaptador foram removidos após a conferência. Após renovação da sessão,
+a revisão autenticada descrita abaixo foi concluída. Gravações integradas não foram
+executadas neste lote.
+
+| Item | Entrega / verificação local |
+| --- | --- |
+| 93 | Salvar 120×32, check 16×16 e intervalo de 8 px medidos no DOM; tooltip glass de 32 px. |
+| 94 | Removido o accordion que escondia os contratos; preservados título, ícone e contagem do componente existente. |
+| 95 | Estado inicial sem seleção e composição total em tabela; clicar novamente desmarca; zeros somente quando os três totais são confirmados. Cinco linhas de composição multimoeda conferidas com dados de teste. |
+| 96 | Barras dos quatro tipos com altura de 92 px e ícones em caixas de 40 px; badges e contagem documental. |
+| 97 | Valor, toggle e saldo devedor alinhados na mesma linha no estado não quitado; conferido em imóvel e veículo. |
+| 98 | Grade, rótulos, controles e mensagens de validação padronizados. Salvar vazio destaca todos os obrigatórios. Alturas das cinco seções do imóvel permaneceram iguais antes/depois dos erros. |
+| 99 | Seletor de moeda interno com caixa 53×25, fonte 12 e seta 10. |
+| 100 | Toggle em card de apoio, pista 40×22 e indicador branco de 16 px; estados Sim/Não conferidos. |
+| 101 | Áreas em duas colunas e contadores de quartos/banheiros; decremento bloqueado no zero. Link de característica adicional mantido, sem persistência por falta de suporte no contrato atual. |
+| 102 | Documento recebido sem aprovação usa PENDENTE amarelo; aprovado usa VALIDADO verde; ausência permanece Não enviado em card tracejado. Conferidos os três estados na edição. |
+| 103 | Total de parcelas acima; pagas/restantes lado a lado; barra de 10 px. 120 totais e 30 pagas resultaram em 90 restantes e 25%. |
+| 104 | Status e forma de contemplação em duas colunas iguais com ajuda contextual. |
+| 105 | Informações financeiras e prazo em cards adjacentes no desktop; toggle habilita os campos; prazo livre exibe a indicação correspondente. |
+
+Revisão responsiva em 390 px sem transbordamento da página; tabela de composição
+mantém rolagem horizontal própria. Botão de salvar investimento sem quebra do rótulo.
+
+Dependências: o item 95 ainda precisa do contrato/adapter das novas carteiras de
+Jaquiel para homologação com dados reais (moeda principal, totais convertidos,
+contratos/saldo parado, contagem de bens, origem e atualização). Dados ausentes
+não são convertidos em saldos zero. O link de características adicionais do item
+101 depende de definição de persistência no backend. Nenhum endpoint foi inventado.
+
+Verificações automatizadas: 198 testes aprovados, lint e build aprovados.
+`git diff --check` das alterações deste lote sem erros; o check global aponta
+whitespace no Swagger já modificado antes deste lote, preservado sem alteração.
+
+
+### Complemento — revisão autenticada dos itens 93–105
+
+Sessão renovada pelo usuário. Conferência na ficha de Homologação Pessoa Física,
+sem salvar registros e com todos os rascunhos descartados ao final:
+
+- Botão Salvar por seção: 120×32, ícone 16×16 e intervalo de 8 px confirmados.
+- Carteira Total seleciona/desmarca; Strategy exibiu dois contratos abertos, com
+  título e contagem, sem accordion. A nova composição mantém os dados indisponíveis
+  enquanto não existe adapter para o contrato novo, sem produzir zeros fictícios.
+- Imóvel: obrigatórios destacados ao tentar salvar o formulário vazio; as cinco
+  seções mantiveram exatamente as alturas anteriores. Nenhum cadastro foi enviado.
+- Imóvel e veículo não quitados: valor, toggle e saldo devedor com a mesma posição
+  vertical e larguras iguais. Documentação carregou o catálogo existente.
+- Consórcio: 120 parcelas / 30 pagas produziram 90 restantes e 25%; status e forma
+  de contemplação com a mesma largura e posição vertical.
+- Investimento: prazo livre apresenta a indicação; ativar prazo determinado
+  habilita vencimento e remove a indicação de prazo livre.
+- A ficha não possui bens cadastrados: barras e badges de documentos existentes
+  continuam conferidos com os dados locais de teste, sem homologação de gravação.
+
+A conferência não exigiu alteração adicional de código. Publicação concluída: auditoria, 190 testes versionados, lint, build, upload e ativação aprovados. Os 198 testes locais incluem oito testes do estudo futuro, não incluídos nesta entrega. Admin e rota /dataManagement responderam HTTP 200; hashes dos arquivos de entrada JS/CSS publicados conferem com o build local.
