@@ -17,18 +17,13 @@
               >
                 Nenhuma posição de contrato disponível.
               </p>
-              <q-expansion-item
+              <client-portfolio-contracts
                 v-for="currency in displayCurrencies.filter((currency) => currency.currencyId)"
                 :key="currency.currencyId"
-                :label="'Contratos · ' + currency.currencyIsoCode"
-                dense
-              >
-                <client-portfolio-contracts
-                  :customer-id="customerId"
-                  :currency-id="currency.currencyId"
-                  :currency-code="currency.currencyIsoCode"
-                /> </q-expansion-item
-            ></resource-state>
+                :customer-id="customerId"
+                :currency-id="currency.currencyId"
+                :currency-code="currency.currencyIsoCode"
+            /></resource-state>
           </template>
           <template #assets
             ><customer-assets

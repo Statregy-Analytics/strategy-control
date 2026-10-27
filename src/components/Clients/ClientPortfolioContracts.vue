@@ -1,5 +1,5 @@
 <template>
-  <section class="portfolio-contracts" aria-label="Contratos atrelados à carteira">
+  <section class="portfolio-contracts" aria-label="Contratos Atrelados à Carteira">
     <header>
       <h3>
         <img src="/icons/client-profile/portfolio-contract-heading.svg" alt="" />Contratos atrelados

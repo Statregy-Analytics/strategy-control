@@ -24,7 +24,7 @@
     </template>
     <template v-else>
       <span v-if="locked" class="section-lock">Conclua a edição de {{ activeLabel }}</span>
-      <span :title="blocked ? blockedReason : locked ? 'Conclua a edição atual.' : 'Editar seção'">
+      <span :title="blocked ? blockedReason : locked ? 'Conclua a edição atual.' : undefined">
         <q-btn
           outline
           dense
@@ -33,7 +33,11 @@
           :aria-label="'Editar ' + label"
           @click="$emit('edit')"
         >
-          <img src="/icons/section-edit/pencil.svg" alt="" /><q-tooltip>Editar seção</q-tooltip>
+          <img src="/icons/section-edit/pencil.svg" alt="" /><q-tooltip
+            class="section-edit-tooltip"
+            :offset="[0, 8]"
+            >Editar seção</q-tooltip
+          >
         </q-btn>
       </span>
     </template>
@@ -79,7 +83,9 @@ defineEmits(['edit', 'save', 'discard'])
   opacity: 0.4 !important;
 }
 .section-save :deep(.q-btn__content) {
-  gap: 6px;
+  gap: 8px;
+  align-items: center;
+  flex-wrap: nowrap;
 }
 .section-actions .section-pencil {
   width: 32px;
@@ -118,8 +124,27 @@ defineEmits(['edit', 'save', 'discard'])
   font-size: 12px;
 }
 .section-spinner {
-  margin-right: 6px;
   animation: section-spin 1s linear infinite;
+}
+.section-save img {
+  display: block;
+  width: 16px;
+  height: 16px;
+  flex: none;
+}
+.section-edit-tooltip {
+  height: 32px;
+  display: flex;
+  align-items: center;
+  padding: 0 12px;
+  border-radius: 8px;
+  border: 1px solid #ffffff33;
+  background: linear-gradient(120deg, #243549ee, #263041ee);
+  backdrop-filter: blur(40px);
+  font:
+    500 12px Inter,
+    sans-serif;
+  color: white;
 }
 @keyframes section-spin {
   to {

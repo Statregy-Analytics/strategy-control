@@ -139,3 +139,51 @@ export function consolidatedWalletTotal(model) {
   if (totals.some((value) => value === null)) return null
   return totals.reduce((sum, value) => sum + Math.round(value * 100), 0) / 100
 }
+
+// Presentation projection only; the new wallet HTTP adapter is still pending.
+export function walletIsEmpty(model) {
+  return (
+    consolidatedWalletTotal(model) === 0 &&
+    ['deposit', 'strategy', 'assets'].every((type) => finiteMoney(model?.[type]?.total) === 0)
+  )
+}
+export function walletCompositionRows(model) {
+  const rows = []
+  for (const type of ['deposit', 'strategy']) {
+    for (const row of model?.[type]?.currencies || []) {
+      if (!WALLET_CURRENCIES.some((item) => item.code === row.currency)) continue
+      const parts =
+        type === 'deposit'
+          ? [['balance', 'Depósito', 'Disponível']]
+          : [
+              ['contracted', 'Strategy', 'Em contratos'],
+              ['idle', 'Strategy', 'Parado, rendendo'],
+            ]
+      for (const [key, wallet, situation] of parts) {
+        if (!(finiteMoney(row[key]) > 0)) continue
+        rows.push({
+          key: `${type}-${row.currency}-${key}`,
+          wallet: `${wallet} · ${row.currency}`,
+          situation,
+          value: row[key],
+          currency: row.currency,
+          origin: type === 'deposit' ? 'Sem rendimento' : row.yieldOrigin || '—',
+          updatedAt: row.updatedAt,
+        })
+      }
+    }
+  }
+  if (finiteMoney(model?.assets?.total) > 0)
+    rows.push({
+      key: 'assets',
+      wallet: 'Patrimônio',
+      situation: Number.isInteger(model.assets.count)
+        ? `${model.assets.count} bens`
+        : 'Bens vinculados',
+      value: model.assets.total,
+      currency: model.principalCurrency,
+      origin: 'Valorização dos bens',
+      updatedAt: model.assets.updatedAt,
+    })
+  return rows
+}

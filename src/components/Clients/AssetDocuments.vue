@@ -48,6 +48,7 @@
             }"
           />
           <div v-else class="asset-document-queued">
+            <span class="asset-document-pending">PENDENTE</span>
             <span class="asset-document-file"
               ><img src="/icons/asset-editor/file.svg" alt="" /></span
             ><strong>{{ slot.label }}</strong
@@ -432,5 +433,16 @@ h4 img {
   .asset-document-collection > header {
     flex-wrap: wrap;
   }
+}
+.asset-document-pending {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  font-size: 10px;
+  border: 1px solid #fee685;
+  border-radius: 6px;
+  color: #fee685;
+  background: #bb4d0033;
+  padding: 1px 6px;
 }
 </style>

@@ -10,12 +10,8 @@
         v-if="variant === 'asset-editor'"
         class="asset-document-status"
         :class="`asset-document-status--${item.status}`"
-        ><img
-          v-if="['Approved', 'Uploaded'].includes(item.status)"
-          src="/icons/asset-editor/check.svg"
-          alt=""
-        /><img
-          v-else-if="['Pending', 'UnderReview', 'InReview'].includes(item.status)"
+        ><img v-if="item.status === 'Approved'" src="/icons/asset-editor/check.svg" alt="" /><img
+          v-else-if="['Uploaded', 'Pending', 'UnderReview', 'InReview'].includes(item.status)"
           src="/icons/asset-editor/pending-status.svg"
           alt=""
         />{{ assetStatus }}</span
@@ -250,11 +246,11 @@ const assetStatus = computed(
   () =>
     ({
       Approved: 'Validado',
-      Uploaded: 'Enviado',
+      Uploaded: 'Pendente',
       Pending: 'Pendente',
       Rejected: 'Rejeitado',
-      UnderReview: 'Em análise',
-      InReview: 'Em análise',
+      UnderReview: 'Pendente',
+      InReview: 'Pendente',
     })[props.item.status] ||
     props.item.status ||
     'Enviado',
@@ -585,15 +581,18 @@ small {
   font-size: 10px;
   text-transform: uppercase;
 }
-.asset-document-status--Approved,
-.asset-document-status--Uploaded {
+.asset-document-status--Approved {
+  background: #007a5533;
   color: #74ffa0;
-  border-color: rgba(116, 255, 160, 0.5);
+  border-color: #74ffa0;
 }
+.asset-document-status--Uploaded,
 .asset-document-status--Pending,
 .asset-document-status--UnderReview,
 .asset-document-status--InReview {
   color: #fee685;
+  border-color: #fee685;
+  background: #bb4d0033;
 }
 .asset-document-status--Rejected {
   color: #ff9d9d;

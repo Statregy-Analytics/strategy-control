@@ -167,3 +167,56 @@ test('consolidated total includes patrimony and never sums native currency balan
     0,
   )
 })
+
+test('empty portfolio requires all three confirmed zero totals and a known principal currency', async () => {
+  const { walletIsEmpty } = await import('../src/services/walletModel.js')
+  const model = {
+    principalCurrency: 'BRL',
+    deposit: { total: 0 },
+    strategy: { total: 0 },
+    assets: { total: 0 },
+  }
+  assert.equal(walletIsEmpty(model), true)
+  for (const missing of [
+    null,
+    {},
+    { ...model, assets: null },
+    { ...model, principalCurrency: null },
+  ])
+    assert.equal(walletIsEmpty(missing), false)
+  assert.equal(walletIsEmpty({ ...model, deposit: { total: 10 }, strategy: { total: -10 } }), false)
+})
+
+test('total composition preserves currencies and contract/idle split without invented example rows', async () => {
+  const { walletCompositionRows } = await import('../src/services/walletModel.js')
+  assert.deepEqual(walletCompositionRows(null), [])
+  const rows = walletCompositionRows({
+    principalCurrency: 'BRL',
+    deposit: {
+      currencies: [
+        { currency: 'BRL', balance: 25 },
+        { currency: 'EUR', balance: 0 },
+      ],
+    },
+    strategy: {
+      currencies: [
+        { currency: 'BRL', contracted: 100, idle: 20 },
+        { currency: 'USD', idle: 5 },
+        { currency: 'XYZ', idle: 99 },
+      ],
+    },
+    assets: { total: 200, count: 2 },
+  })
+  assert.equal(rows.length, 5)
+  assert.deepEqual(
+    rows.map((row) => [row.value, row.currency]),
+    [
+      [25, 'BRL'],
+      [100, 'BRL'],
+      [20, 'BRL'],
+      [5, 'USD'],
+      [200, 'BRL'],
+    ],
+  )
+  assert.equal(rows[4].situation, '2 bens')
+})

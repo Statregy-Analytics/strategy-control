@@ -31,23 +31,44 @@
       principal.
     </p>
     <template v-if="details">
-      <template v-if="selected === 'total'">
-        <h3>Composição da Carteira Total</h3>
-        <p>Uma Carteira de Depósito, uma Carteira Strategy e um Patrimônio por cliente.</p>
-        <p v-if="!model?.total" class="wallet-help">
-          O total consolidado com patrimônio e cotação diária ainda não está disponível.
-        </p>
-        <dl v-for="item in WALLET_TYPES.slice(0, 3)" :key="item.key" class="total-composition">
-          <dt>{{ item.label }}</dt>
-          <dd>
-            {{
-              walletMoney(
-                item.key === 'total' ? consolidatedWalletTotal(model) : model?.[item.key]?.total,
-                model?.principalCurrency,
-              )
-            }}
-          </dd>
-        </dl>
+      <p class="wallet-help">
+        {{
+          selected
+            ? 'Clique de novo no card para desmarcar'
+            : 'Clique em uma carteira para ver só a composição dela'
+        }}
+      </p>
+      <template v-if="!selected || selected === 'total'">
+        <h3>Composição da Carteira Total · Depósito + Strategy + Patrimônio</h3>
+        <div class="wallet-table-scroll">
+          <table>
+            <thead>
+              <tr>
+                <th>Carteira / situação</th>
+                <th>Valor</th>
+                <th>Rendimento / origem</th>
+                <th>Última atualização</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr v-for="row in walletCompositionRows(model)" :key="row.key">
+                <td>{{ row.wallet }} · {{ row.situation }}</td>
+                <td>{{ walletMoney(row.value, row.currency) }}</td>
+                <td>{{ row.origin }}</td>
+                <td>{{ displayDate(row.updatedAt) }}</td>
+              </tr>
+              <tr v-if="!walletCompositionRows(model).length">
+                <td colspan="4" class="wallet-empty" role="status">
+                  {{
+                    walletIsEmpty(model)
+                      ? 'Nenhuma composição ainda'
+                      : 'A composição das carteiras ainda não está disponível.'
+                  }}
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </template>
       <template v-else-if="selected === 'assets'">
         <h3>Patrimônio · bens vinculados</h3>
@@ -95,7 +116,10 @@
               </tr>
             </thead>
             <tbody>
-              <tr v-for="row in walletRows(model, selected)" :key="row.currency">
+              <tr
+                v-for="row in walletIsEmpty(model) ? [] : walletRows(model, selected)"
+                :key="row.currency"
+              >
                 <td>{{ row.currency }}</td>
                 <td>{{ walletMoney(row.balance, row.currency) }}</td>
                 <template v-if="selected === 'deposit'"
@@ -108,6 +132,11 @@
                     {{ row.yieldOrigin || row.reference + ' · índice a confirmar' }}
                   </td></template
                 >
+              </tr>
+              <tr v-if="walletIsEmpty(model)">
+                <td :colspan="selected === 'deposit' ? 4 : 5" class="wallet-empty">
+                  Nenhuma composição ainda
+                </td>
               </tr>
             </tbody>
           </table>
@@ -122,8 +151,7 @@
         <p v-if="!model?.[selected]" class="wallet-help" role="status">
           Os saldos e movimentos deste modelo de carteira ainda não estão disponíveis.
         </p>
-        <template v-if="selected === 'strategy'"
-          ><h3>Contratos atrelados à carteira</h3>
+        <template v-if="selected === 'strategy'">
           <slot name="contracts"
             ><p class="wallet-help">Selecione um cliente para consultar os contratos.</p></slot
           ></template
@@ -139,10 +167,12 @@ import {
   WALLET_TYPES,
   YIELD_DESCRIPTION,
   walletRows,
+  walletCompositionRows,
+  walletIsEmpty,
   walletMoney,
 } from 'src/services/walletModel'
 const props = defineProps({
-  initialType: { type: String, default: 'strategy' },
+  initialType: { type: String, default: null },
   model: { type: Object, default: null },
   details: { type: Boolean, default: true },
 })
@@ -152,8 +182,8 @@ const orderedTypes = computed(() =>
 const emit = defineEmits(['select'])
 const selected = ref(props.initialType)
 function selectWallet(type) {
-  selected.value = type
-  emit('select', type)
+  selected.value = props.details && selected.value === type ? null : type
+  emit('select', selected.value)
 }
 const displayDate = (value) =>
   value && !Number.isNaN(Date.parse(value)) ? new Date(value).toLocaleString('pt-BR') : '—'
@@ -223,6 +253,7 @@ h3 {
   border-radius: 10px;
 }
 table {
+  color: var(--sa-text, #fff);
   width: 100%;
   border-collapse: collapse;
   white-space: nowrap;
@@ -294,5 +325,11 @@ dd {
   width: 100px;
   height: 100px;
   opacity: 0.1;
+}
+.wallet-empty {
+  padding: 40px 16px;
+  text-align: center;
+  color: #ffffff99;
+  white-space: normal;
 }
 </style>

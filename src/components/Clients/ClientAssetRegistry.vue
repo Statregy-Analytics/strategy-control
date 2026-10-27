@@ -49,10 +49,23 @@
             <resource-state :state="editor.state" @retry="loadEditor">
               <q-form
                 v-if="draft"
+                greedy
                 :id="`asset-editor-${customerId}-${group.type}`"
                 @submit.prevent="save"
+                @validation-error="validationAttempted = true"
               >
-                <q-banner v-if="error" role="alert">{{ error }}</q-banner>
+                <div
+                  class="asset-validation-notice"
+                  :class="{ 'asset-validation-notice--visible': error || hasInvalidFields }"
+                  role="alert"
+                >
+                  {{
+                    error ||
+                    (hasInvalidFields
+                      ? 'Não foi possível salvar. Revise os campos destacados.'
+                      : '')
+                  }}
+                </div>
                 <div class="asset-editor-grid">
                   <form-section
                     v-for="section in formSections"
@@ -82,25 +95,57 @@
                           },
                         ]"
                       >
-                        <div v-if="field.type === 'toggle'">
+                        <div v-if="field.type === 'toggle'" class="asset-toggle-card">
                           <q-toggle
                             v-if="field.type === 'toggle'"
                             v-model="draft[field.key]"
                             :aria-label="field.label"
-                            :label="
-                              field.key === 'paidOff'
-                                ? draft.paidOff
-                                  ? 'Sim'
-                                  : 'Não'
-                                : 'O ativo possui data de vencimento?'
-                            "
+                            :label="draft[field.key] ? 'Sim' : 'Não'"
                             color="positive"
                             :disable="saving"
                           />
-                          <small v-if="field.key === 'paidOff'" class="asset-settlement-help"
-                            >Quitado: sem saldo devedor. Se desativado, aparece o campo Restante
-                            para Quitação.</small
-                          >
+                          <small class="asset-settlement-help">{{
+                            field.key === 'paidOff'
+                              ? draft.paidOff
+                                ? 'Quitado: sem saldo devedor. Se desativado, aparece o campo Restante para Quitação.'
+                                : 'Informe o saldo devedor ao lado.'
+                              : 'O ativo possui data de vencimento?'
+                          }}</small>
+                        </div>
+                        <div
+                          v-else-if="['bedrooms', 'bathrooms'].includes(field.key)"
+                          class="asset-counter"
+                        >
+                          <q-btn
+                            flat
+                            dense
+                            icon="remove"
+                            :aria-label="`Diminuir ${field.label}`"
+                            :disable="saving || !(Number(draft[field.key]) > 0)"
+                            @click="
+                              draft[field.key] = Math.max(0, Number(draft[field.key] || 0) - 1)
+                            "
+                          />
+                          <q-input
+                            :model-value="editorValue(field) ?? 0"
+                            @update:model-value="setEditorValue(field, $event)"
+                            :aria-label="field.label"
+                            type="number"
+                            min="0"
+                            step="1"
+                            dense
+                            borderless
+                            :disable="saving"
+                            :rules="fieldRules(field)"
+                          />
+                          <q-btn
+                            flat
+                            dense
+                            icon="add"
+                            :aria-label="`Aumentar ${field.label}`"
+                            :disable="saving"
+                            @click="draft[field.key] = Number(draft[field.key] || 0) + 1"
+                          />
                         </div>
                         <component
                           v-else
@@ -116,7 +161,9 @@
                           @update:model-value="setEditorValue(field, $event)"
                           outlined
                           dense
-                          hide-bottom-space
+                          :hide-bottom-space="false"
+                          bottom-slots
+                          reactive-rules
                           :aria-label="field.label"
                           :type="field.type || 'text'"
                           :options="field.select ? fieldOptions(field) : undefined"
@@ -157,11 +204,22 @@
                               @popup-show="loadCurrencies"
                           /></template>
                         </component>
-                      </label-form>
-                      <div v-if="section.title === 'Parcelamento'" class="asset-installments">
-                        <q-linear-progress :value="installmentProgress" color="grey-4" /><small
-                          >{{ Math.round(installmentProgress * 100) }}% quitado</small
+                        <small v-if="field.key === 'contemplationMethod'" class="asset-field-help"
+                          >Informe como ocorreu a contemplação para histórico.</small
                         >
+                      </label-form>
+                      <span
+                        v-if="section.title === 'Prazo e vencimento' && !draft.hasFixedTerm"
+                        class="asset-free-term"
+                        >Ativo com liquidez / Prazo livre</span
+                      >
+                      <div v-if="section.title === 'Parcelamento'" class="asset-installments">
+                        <q-linear-progress
+                          :value="installmentProgress"
+                          color="grey-4"
+                          size="10px"
+                          rounded
+                        /><small>{{ Math.round(installmentProgress * 100) }}% quitado</small>
                       </div>
                       <q-btn
                         v-if="section.title === 'Características físicas'"
@@ -229,9 +287,13 @@
               ></q-item-section
             >
             <q-item-section side
-              ><q-badge outline :color="statusTone(asset)">{{
-                status(asset)
-              }}</q-badge></q-item-section
+              ><q-badge
+                outline
+                class="asset-status"
+                :class="`asset-status--${statusTone(asset)}`"
+                :color="statusTone(asset)"
+                >{{ status(asset) }}</q-badge
+              ></q-item-section
             >
             <q-item-section side
               ><span class="asset-doc-count"
@@ -434,15 +496,36 @@ const status = (asset) =>
     : asset.assetType === 'Consortium'
       ? asset.consortium?.quotaStatus || financeLabel(asset.status)
       : financeLabel(asset.status)
-const required = (v) =>
-  (v !== null && v !== undefined && String(v).trim() !== '') || 'Campo obrigatório'
+const validationAttempted = ref(false)
+const requiredMessage = (field) =>
+  field.key === 'propertyType'
+    ? 'Escolha um tipo na lista (ex.: Apartamento)'
+    : field.label === 'Valor estimado'
+      ? 'Informe o valor estimado, ex.: R$ 1.800.000,00'
+      : `Informe ${field.label.toLocaleLowerCase('pt-BR')}.`
+const required = (field) => (v) =>
+  (v !== null && v !== undefined && String(v).trim() !== '') || requiredMessage(field)
 const fieldRules = (field) => [
-  ...(field.required || field.debt ? [required] : []),
+  ...(field.required || field.debt ? [required(field)] : []),
   ...(field.debt
     ? [(value) => Number(value) > 0 || 'Informe o saldo devedor maior que zero.']
     : []),
   ...(isAssetIntegerField(field.key) ? [assetIntegerRule] : []),
 ]
+const hasInvalidFields = computed(
+  () =>
+    validationAttempted.value &&
+    draft.value &&
+    formSections.value.some((section) =>
+      section.fields.some(
+        (field) =>
+          !field.readonly &&
+          !(field.debt && draft.value.paidOff) &&
+          !(field.term && !draft.value.hasFixedTerm) &&
+          fieldRules(field).some((rule) => rule(editorValue(field)) !== true),
+      ),
+    ),
+)
 const formSections = computed(() => assetEditorSections(selectedGroup.value?.type))
 
 const assetIcon = (type) =>
@@ -564,6 +647,7 @@ const loadDocuments = (id, customerId = props.customerId) =>
   )
 async function edit(asset, group) {
   if (saving.value) return
+  validationAttempted.value = false
   photos.value = null
   assetDocuments.value = null
   photoEditorKey.value++
@@ -849,6 +933,16 @@ h4 {
 }
 .asset-editor-actions .q-btn:last-child {
   color: #fff;
+  width: auto;
+  min-width: 120px;
+}
+.asset-editor-actions :deep(.q-btn__content) {
+  flex-wrap: nowrap;
+  gap: 8px;
+  white-space: nowrap;
+}
+.asset-editor-actions :deep(.q-icon.on-left) {
+  margin-right: 0;
 }
 .asset-editor-actions .q-btn:last-child:before {
   border-color: rgba(255, 255, 255, 0.28);
@@ -885,8 +979,8 @@ h4 {
   font-weight: 500;
   color: var(--sa-muted);
 }
-.asset-editor-section :deep(.q-mt-md) {
-  padding: 16px;
+.asset-editor-section :deep(> .q-mt-md) {
+  padding: 20px;
   border: 1px solid var(--sa-border);
   border-radius: 10px;
   background: rgba(255, 255, 255, 0.025);
@@ -894,7 +988,8 @@ h4 {
 .asset-editor-fields {
   display: grid;
   grid-template-columns: repeat(12, minmax(0, 1fr));
-  gap: 12px;
+  gap: 16px 12px;
+  align-items: start;
 }
 .asset-editor-fields > * {
   grid-column: span 4;
@@ -956,30 +1051,32 @@ h4 {
   border-radius: 8px;
   background: rgba(0, 0, 0, 0.1);
 }
-.asset-editor-fields :deep(.LabelForm > .row > span) {
+.asset-editor-fields :deep(.LabelForm > span) {
   color: var(--sa-muted);
-  font-size: 11px !important;
-  font-weight: 400 !important;
+  font-size: 10px !important;
+  font-weight: 500 !important;
+  color: #ffffffb8;
 }
 .asset-editor-fields :deep(.q-field__native) {
   font-size: 12px;
 }
 .asset-currency-select {
-  width: 75px;
-  font-size: 10px;
+  width: 53px;
+  flex: none;
+  font-size: 12px;
 }
 .asset-currency-select :deep(.q-field__control) {
-  min-height: 24px !important;
-  height: 24px !important;
+  min-height: 25px !important;
+  height: 25px !important;
   padding: 0 4px;
 }
 .asset-currency-select :deep(.q-field__marginal) {
-  height: 24px;
-  font-size: 12px;
+  height: 25px;
+  font-size: 10px;
 }
 .asset-currency-select :deep(.q-field__native) {
-  min-height: 24px;
-  font-size: 10px;
+  min-height: 25px;
+  font-size: 12px;
   padding: 0;
 }
 .asset-currency {
@@ -1042,6 +1139,202 @@ h4 {
   font-size: 12px;
   overflow-wrap: anywhere;
 }
+
+.asset-validation-notice {
+  min-height: 40px;
+  padding: 8px 12px;
+  margin-bottom: 16px;
+  border: 1px solid transparent;
+  border-radius: 8px;
+  font-size: 12px;
+}
+.asset-validation-notice--visible {
+  color: #ff9e9e;
+  border-color: #e7000b55;
+  background: #e7000b14;
+}
+.asset-editor-fields :deep(.LabelForm) {
+  align-content: start;
+}
+.asset-editor-fields :deep(.q-field--with-bottom) {
+  padding-bottom: 0;
+}
+.asset-editor-fields :deep(.q-field__bottom) {
+  height: 24px;
+  min-height: 24px;
+  padding: 4px 0 0;
+  font-size: 11px;
+  font-weight: 500;
+  line-height: 16px;
+}
+.asset-editor-fields :deep(.q-field--error .q-field__bottom) {
+  color: #ff9e9e;
+}
+.asset-editor-fields :deep(.q-field--error .q-field__control:before),
+.asset-editor-fields :deep(.q-field--error .q-field__control:after) {
+  border: 1px solid #e7000b;
+}
+.asset-editor-fields :deep(.q-field__control),
+.asset-editor-fields :deep(.q-field__marginal) {
+  min-height: 40px;
+  height: 40px;
+}
+.asset-toggle-card {
+  border: 1px solid #ffffff1f;
+  border-radius: 8px;
+  background: #ffffff0d;
+  padding: 12px;
+}
+.asset-toggle-card :deep(.q-toggle__inner) {
+  width: 40px;
+  height: 22px;
+  min-width: 40px;
+  padding: 0;
+  margin-right: 8px;
+}
+.asset-toggle-card :deep(.q-toggle__track) {
+  width: 40px;
+  height: 22px;
+  border: 1px solid #ffffff66;
+  border-radius: 11px;
+  opacity: 1;
+  background: #ffffff1a;
+}
+.asset-toggle-card :deep(.q-toggle__inner--truthy .q-toggle__track) {
+  background: #26cc7d;
+}
+.asset-toggle-card :deep(.q-toggle__thumb) {
+  top: 3px;
+  left: 3px;
+  width: 16px;
+  height: 16px;
+  color: white;
+}
+.asset-toggle-card :deep(.q-toggle__inner--truthy .q-toggle__thumb) {
+  left: 21px;
+}
+.asset-toggle-card :deep(.q-toggle__label) {
+  font-size: 12px;
+}
+.asset-toggle-card .asset-settlement-help {
+  margin-top: 8px;
+}
+.asset-editor-section--narrow .asset-editor-fields > .asset-field--landAreaSquareMeters,
+.asset-editor-section--narrow .asset-editor-fields > .asset-field--builtAreaSquareMeters,
+.asset-editor-section--narrow .asset-editor-fields > .asset-field--bedrooms,
+.asset-editor-section--narrow .asset-editor-fields > .asset-field--bathrooms,
+.asset-editor-section--narrow .asset-editor-fields > .asset-field--paidInstallments,
+.asset-editor-section--narrow .asset-editor-fields > .asset-field--remainingInstallments,
+.asset-editor-fields > .asset-field--quotaStatus,
+.asset-editor-fields > .asset-field--contemplationMethod {
+  grid-column: span 6;
+}
+.asset-editor-fields > .asset-field--hasFixedTerm,
+.asset-editor-fields > .asset-free-term,
+.asset-editor-fields > .asset-installments {
+  grid-column: span 12;
+}
+.asset-field-help {
+  font-size: 11px;
+  color: #ffffff99;
+}
+.asset-counter {
+  display: flex;
+  align-items: flex-start;
+  height: 64px;
+  position: relative;
+}
+.asset-counter:before {
+  content: '';
+  position: absolute;
+  inset: 0 0 24px;
+  border: 1px solid #ffffff47;
+  border-radius: 8px;
+}
+.asset-counter .q-btn {
+  width: 36px;
+  height: 40px;
+  flex: none;
+}
+.asset-counter :deep(input) {
+  text-align: center;
+  appearance: textfield;
+}
+.asset-counter :deep(input::-webkit-inner-spin-button) {
+  appearance: none;
+}
+.asset-counter :deep(.q-field__control) {
+  background: transparent;
+}
+.asset-currency-select :deep(.q-field__control) {
+  background: #ffffff14;
+  border: 1px solid #ffffff29;
+  border-radius: 6px;
+}
+.asset-currency-select :deep(.q-field__native) {
+  color: #ffffffd9;
+  justify-content: center;
+  font-weight: 500;
+}
+.asset-currency-select :deep(.q-select__dropdown-icon) {
+  width: 10px;
+  height: 10px;
+  font-size: 10px;
+}
+.asset-currency-select :deep(.q-field__marginal) {
+  min-height: 25px;
+  height: 25px;
+  padding-left: 2px;
+}
+.asset-installments :deep(.q-linear-progress) {
+  color: #ffffffb8 !important;
+  background: #ffffff1a;
+}
+.asset-installments :deep(.q-linear-progress__track) {
+  opacity: 0;
+}
+.asset-free-term {
+  justify-self: start;
+  padding: 6px 10px;
+  border: 1px solid #ffffff33;
+  border-radius: 6px;
+  font-size: 11px;
+  color: #ffffffb8;
+}
+.asset-row :deep(> .q-expansion-item__container > .q-item) {
+  min-height: 92px;
+  padding: 16px;
+}
+.asset-row-icon {
+  min-width: 52px;
+  padding-right: 12px;
+}
+.asset-row-icon img {
+  width: 40px;
+  height: 40px;
+  padding: 10px;
+  border: 1px solid #ffffff29;
+  border-radius: 8px;
+  background: linear-gradient(120deg, #ffffff14, #ffffff08);
+}
+.asset-identity .asset-name {
+  font-size: 14px;
+  line-height: 20px;
+}
+.asset-identity :deep(.q-item__label--caption) {
+  margin-top: 6px;
+  font-size: 11px;
+}
+.asset-status--positive {
+  color: #74ffa0 !important;
+  border-color: #74ffa0;
+  background: #007a5533;
+}
+.asset-doc-count {
+  color: white;
+  border-color: #ffffff66;
+}
+
 @media (max-width: 900px) {
   .asset-editor-header {
     flex-wrap: wrap;
@@ -1066,6 +1359,12 @@ h4 {
   }
 }
 @media (max-width: 600px) {
+  .asset-validation-notice {
+    min-height: 64px;
+  }
+  .asset-editor-actions {
+    flex-wrap: wrap;
+  }
   .asset-editor-fields > * {
     grid-column: span 12 !important;
   }
