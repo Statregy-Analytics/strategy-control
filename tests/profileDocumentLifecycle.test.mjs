@@ -226,3 +226,28 @@ test('upload respects API permission and double submit does not send another fil
   await first
   h.dispose()
 })
+
+test('CPF and NIF upload preserve the API type, requirement and country without inventing identity metadata', async () => {
+  for (const code of ['CPF', 'NIF']) {
+    let payload
+    const h = await harness({
+      uploadCustomerDocument: async (_id, data) => {
+        payload = data
+        return { id: 'new' }
+      },
+    })
+    Object.assign(h.props.item, {
+      documentTypeId: code + '-type',
+      countryId: code === 'CPF' ? 'br' : 'pt',
+      allowedActions: ['Upload', 'Download'],
+    })
+    h.m.file.value = fakeFile()
+    await h.m.upload()
+    assert.equal(payload.get('documentTypeId'), code + '-type')
+    assert.equal(payload.get('countryId'), code === 'CPF' ? 'br' : 'pt')
+    assert.equal(payload.get('requirementId'), 'req')
+    assert.equal(payload.has('metadata'), false)
+    assert.equal(h.updates.length, 1)
+    h.dispose()
+  }
+})

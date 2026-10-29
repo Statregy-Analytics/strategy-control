@@ -91,7 +91,7 @@
         ></q-btn
       >
       <q-btn
-        v-else-if="canUpload"
+        v-if="canUpload"
         flat
         dense
         no-caps
@@ -374,6 +374,8 @@ async function upload() {
     data.append('file', file.value)
     data.append('documentTypeId', props.item.documentTypeId)
     if (props.item.requirementId) data.append('requirementId', props.item.requirementId)
+    const countryId = props.item.countryId || props.item.document?.countryId
+    if (countryId) data.append('countryId', countryId)
     await uploadCustomerDocument(props.customerId, data)
     if (operation !== revision) return
     successNotify('Documento enviado.')
