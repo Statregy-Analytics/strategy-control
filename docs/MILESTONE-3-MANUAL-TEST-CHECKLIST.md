@@ -812,3 +812,20 @@ sem salvar registros e com todos os rascunhos descartados ao final:
   continuam conferidos com os dados locais de teste, sem homologação de gravação.
 
 A conferência não exigiu alteração adicional de código. Publicação concluída: auditoria, 190 testes versionados, lint, build, upload e ativação aprovados. Os 198 testes locais incluem oito testes do estudo futuro, não incluídos nesta entrega. Admin e rota /dataManagement responderam HTTP 200; hashes dos arquivos de entrada JS/CSS publicados conferem com o build local.
+
+## Reteste de 29/10 — itens 93 atualizado e 110–118
+
+Publicado em 29/10/2026: Admin `3c50c0d` ([deploy 40878783606](https://github.com/Statregy-Analytics/strategy-control/actions/runs/40878783606)) e Área do Cliente `2c7440c` ([deploy 40878792036](https://github.com/WillTbn/Strategy-analytics-v2/actions/runs/40878792036)). Auditoria, testes, lint, build, upload e ativação aprovados nos dois pipelines. Admin em https://admin.strategyanalytics.com.br; Área do Cliente em https://hml.strategyanalytics.com.br. As duas origens e rotas verificadas responderam HTTP 200; entradas JS coincidem com o build do CI e favicon confere byte a byte. O domínio institucional strategyanalytics.com.br não é o destino deste deploy do portal.
+
+- Admin: check do Salvar centralizado dentro do próprio SVG e alinhado ao texto no componente compartilhado (93); botões de patrimônio sem ícone, 36 px e texto 12 semibold (114); modal bancário, logos no seletor/lista, toggle e botões (115); diálogo de descarte compartilhado (116); catálogo documental completo a partir dos tipos/categorias reais, status e contagem só de arquivos enviados (117); favicon SVG quadrado com os três paths originais do símbolo do Figma (118).
+- Área do Cliente: mesma geometria do cabeçalho nos três temas e relógio compacto 122×43 no Perfil (110); selects e menus de preferências (111); campos brancos sem pseudo-bordas/sombra inferior (112); toggle 44×22 com thumb branco 18 (113); mesmo favicon (118).
+- Verificação: lint e build dos dois projetos; 199 testes no admin e 301 no portal. Diff dos arquivos deste lote sem erros. O diff global contém whitespace anterior no Swagger do admin e em PRODUCT.md/docs de integração do portal, preservado.
+- Sessão real: Identificação/Profissional, abertura de patrimônio (Salvar Imóvel 36 px e zero ícones), modal bancário com busca Itaú e logo, toggle 38×22/16, digitação 123456 preservada sem barra e cancelada; diálogo de descarte sem salvar; catálogo com ausentes e resumo 3 aprovados/1 pendente/3 rejeitados no cliente de homologação. Portal: três temas com header 80 px e relógio 122×43, toggle 44×22/18, inputs de edição 40 px com borda uniforme #DCDCDC e sem pseudo-elementos; revisão móvel a 390 px sem overflow horizontal.
+
+### Dependência confirmada neste lote
+
+O CPF consta no catálogo e aparece como Aguardando envio, porém não oferece Upload na resposta/capacidade atual da API. NIF também aparece sem essa capacidade. Para atender à solicitação de Upload para CPF, Jaquiel deve ajustar a definição/permissão documental correspondente (`allowsFileUpload` no catálogo e/ou `allowedActions` no overview). O frontend respeita as ações já retornadas para cada cliente; não força permissão nem inventa IDs. Os demais tipos pessoais/fiscais do Figma estão disponíveis no catálogo e foram listados. Não foi necessário endpoint novo para o catálogo.
+
+Nenhuma nova dependência de backend foi identificada para 93, 110–116 e 118. O campo Ag/Conta continua exigindo a separação informada pelo usuário para montar os campos HTTP distintos, mas não insere barra automaticamente. Homologação de gravações/uploads não foi refeita nesta revisão visual.
+
+A primeira tentativa de publicação foi interrompida pela auditoria de dependências. Atualizamos o plugin de tradução para 11.2.8 e dependências corrigidas, sem desabilitar a auditoria. Auditoria final: zero vulnerabilidades. CI aprovou 191 testes versionados no admin (os 199 locais incluem oito testes não publicados do estudo de preferências) e 301 no portal. Nenhuma movimentação financeira ou upload de documentos foi executado nesta publicação.
