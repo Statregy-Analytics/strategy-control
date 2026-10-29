@@ -17,18 +17,16 @@
         /><span>{{
           !details && item.key === 'assets' ? 'Carteira de Patrimônio' : item.label
         }}</span
-        ><strong>{{
-          walletMoney(
-            item.key === 'total' ? consolidatedWalletTotal(model) : model?.[item.key]?.total,
-            model?.principalCurrency,
-          )
-        }}</strong>
+        ><strong v-for="amount in walletDisplayAmounts(model, item.key)" :key="amount.currency">{{
+          walletMoney(amount.balance, amount.currency)
+        }}</strong
+        ><strong v-if="!walletDisplayAmounts(model, item.key).length">—</strong>
         <q-tooltip>{{ item.description }}</q-tooltip>
       </button>
     </div>
     <p class="wallet-help">
-      Total = Depósito + Strategy + Patrimônio. Conversão diária somente para exibição na moeda
-      principal.
+      Total = Depósito + Strategy + Patrimônio, por moeda. Valores de moedas diferentes não são
+      somados.
     </p>
     <template v-if="details">
       <p class="wallet-help">
@@ -72,7 +70,21 @@
       </template>
       <template v-else-if="selected === 'assets'">
         <h3>Patrimônio · bens vinculados</h3>
-        <div class="asset-metrics">
+        <template v-if="model?.source === 'marco3'">
+          <div v-for="row in model.assets.currencies" :key="row.currency" class="asset-metrics">
+            <span
+              >Valor declarado · {{ row.currency
+              }}<strong>{{ walletMoney(row.declared, row.currency) }}</strong></span
+            >
+            <span
+              >Saldo devedor<strong>{{ walletMoney(row.financed, row.currency) }}</strong></span
+            >
+            <span
+              >Patrimônio<strong>{{ walletMoney(row.balance, row.currency) }}</strong></span
+            >
+          </div>
+        </template>
+        <div v-else class="asset-metrics">
           <span
             >Valor declarado<strong>{{
               walletMoney(model?.assets?.declared, model?.principalCurrency)
@@ -110,7 +122,7 @@
                   <th>Último saque</th></template
                 ><template v-else
                   ><th>Em contratos</th>
-                  <th>Parado, rendendo</th>
+                  <th>{{ model?.yieldAvailable === false ? 'Parado' : 'Parado, rendendo' }}</th>
                   <th>Rendimento / origem</th></template
                 >
               </tr>
@@ -161,9 +173,9 @@
   </section>
 </template>
 <script setup>
+import { walletDisplayAmounts } from 'src/services/portfolioProjection'
 import { computed, ref } from 'vue'
 import {
-  consolidatedWalletTotal,
   WALLET_TYPES,
   YIELD_DESCRIPTION,
   walletRows,
@@ -215,6 +227,7 @@ const displayDate = (value) =>
   margin-bottom: 19px;
 }
 .wallet-cards strong {
+  display: block;
   font-size: 20px;
   overflow-wrap: anywhere;
 }

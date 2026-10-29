@@ -18,7 +18,7 @@ export const WALLET_TYPES = [
     key: 'strategy',
     label: 'Carteira Strategy',
     description:
-      'Valores em contratos e saldo parado rendendo. Transferência de volta para Depósito em até 30 dias corridos.',
+      'Valores em contratos e saldo parado. Transferência de volta para Depósito em até 30 dias corridos.',
   },
   {
     key: 'assets',
@@ -29,12 +29,11 @@ export const WALLET_TYPES = [
   {
     key: 'total',
     label: 'Carteira Total',
-    description:
-      'Depósito + Strategy + Patrimônio. Conversão pela cotação diária, somente para exibição na moeda principal.',
+    description: 'Depósito + Strategy + Patrimônio, por moeda. Moedas diferentes não são somadas.',
   },
 ]
 export const YIELD_DESCRIPTION =
-  'Saldo parado na Strategy: até 60 dias, 70% do índice; de 61 a 180 dias, 85%; acima de 180 dias, 100%. Cada entrada tem sua própria idade. Rendimento composto em dias úteis (base 252), a partir do primeiro dia útil seguinte à entrada. Índices por moeda sujeitos à confirmação.'
+  'Saldo parado na Strategy. Os rendimentos ainda não estão disponíveis.'
 export const finiteMoney = (value) =>
   value !== null && value !== undefined && value !== '' && Number.isFinite(Number(value))
     ? Number(value)
@@ -54,6 +53,7 @@ export function walletMoney(value, currency) {
 // Presentation-only model. No HTTP schema is inferred here. A future API adapter
 // must explicitly supply per-wallet balances, daily FX totals and instructions.
 export function walletRows(model, type) {
+  if (model?.source === 'marco3') return model[type]?.currencies || []
   return WALLET_CURRENCIES.map((currency) => {
     const row = model?.[type]?.currencies?.find((row) => row.currency === currency.code)
     return {
@@ -65,6 +65,8 @@ export function walletRows(model, type) {
   })
 }
 export function walletBalance(model, type, currency) {
+  if (model?.source === 'marco3')
+    return finiteMoney(model[type]?.currencies?.find((row) => row.currency === currency)?.available)
   return walletRows(model, type).find((row) => row.currency === currency)?.balance ?? null
 }
 export function balanceAfter(balance, amount) {
@@ -142,6 +144,7 @@ export function consolidatedWalletTotal(model) {
 
 // Presentation projection only; the new wallet HTTP adapter is still pending.
 export function walletIsEmpty(model) {
+  if (model?.source === 'marco3') return model.empty === true
   return (
     consolidatedWalletTotal(model) === 0 &&
     ['deposit', 'strategy', 'assets'].every((type) => finiteMoney(model?.[type]?.total) === 0)
@@ -154,10 +157,15 @@ export function walletCompositionRows(model) {
       if (!WALLET_CURRENCIES.some((item) => item.code === row.currency)) continue
       const parts =
         type === 'deposit'
-          ? [['balance', 'Depósito', 'Disponível']]
+          ? model?.source === 'marco3'
+            ? [
+                ['available', 'Depósito', 'Disponível'],
+                ['reserved', 'Depósito', 'Reservado'],
+              ]
+            : [['balance', 'Depósito', 'Disponível']]
           : [
               ['contracted', 'Strategy', 'Em contratos'],
-              ['idle', 'Strategy', 'Parado, rendendo'],
+              ['idle', 'Strategy', model?.yieldAvailable === false ? 'Parado' : 'Parado, rendendo'],
             ]
       for (const [key, wallet, situation] of parts) {
         if (!(finiteMoney(row[key]) > 0)) continue
@@ -172,6 +180,22 @@ export function walletCompositionRows(model) {
         })
       }
     }
+  }
+  if (model?.source === 'marco3') {
+    for (const row of model.assets?.currencies || [])
+      if (finiteMoney(row.balance) !== null && (row.balance !== 0 || row.count > 0))
+        rows.push({
+          key: `assets-${row.currency}`,
+          wallet: `Patrimônio · ${row.currency}`,
+          situation: Number.isInteger(row.count)
+            ? `${row.count} bens declarados`
+            : 'Bens declarados',
+          value: row.balance,
+          currency: row.currency,
+          origin: 'Patrimônio declarado',
+          updatedAt: row.updatedAt,
+        })
+    return rows
   }
   if (finiteMoney(model?.assets?.total) > 0)
     rows.push({

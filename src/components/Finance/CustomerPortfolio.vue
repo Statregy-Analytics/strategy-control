@@ -8,30 +8,31 @@
     </p>
     <template v-else>
       <form-section title="Visão consolidada (Carteira)">
-        <wallet-overview :model="walletModel">
-          <template #contracts
-            ><resource-state :state="portfolio.state" @retry="loadPortfolio">
-              <p
-                v-if="!displayCurrencies.some((currency) => currency.currencyId)"
-                class="text-caption"
-              >
-                Nenhuma posição de contrato disponível.
-              </p>
-              <client-portfolio-contracts
-                v-for="currency in displayCurrencies.filter((currency) => currency.currencyId)"
-                :key="currency.currencyId"
+        <resource-state :state="portfolio.state" @retry="loadPortfolio"
+          ><wallet-overview :model="resolvedWalletModel">
+            <template #contracts
+              ><resource-state :state="portfolio.state" @retry="loadPortfolio">
+                <p
+                  v-if="!displayCurrencies.some((currency) => currency.currencyId)"
+                  class="text-caption"
+                >
+                  Nenhuma posição de contrato disponível.
+                </p>
+                <client-portfolio-contracts
+                  v-for="currency in displayCurrencies.filter((currency) => currency.currencyId)"
+                  :key="currency.currencyId"
+                  :customer-id="customerId"
+                  :currency-id="currency.currencyId"
+                  :currency-code="currency.currencyIsoCode"
+              /></resource-state>
+            </template>
+            <template #assets
+              ><customer-assets
+                :key="customerId"
                 :customer-id="customerId"
-                :currency-id="currency.currencyId"
-                :currency-code="currency.currencyIsoCode"
-            /></resource-state>
-          </template>
-          <template #assets
-            ><customer-assets
-              :key="customerId"
-              :customer-id="customerId"
-              @changed="onAssetsChanged"
-          /></template>
-        </wallet-overview>
+                @changed="onAssetsChanged"
+            /></template> </wallet-overview
+        ></resource-state>
       </form-section>
       <form-section :title="embedded ? '' : 'Extrato'">
         <div v-if="embedded" class="statement-heading">
@@ -134,10 +135,10 @@
 <script setup>
 import { computed, onScopeDispose, ref, watch } from 'vue'
 import {
-  portfolioCurrencies,
   statementTypePresentation,
   readCustomerStatement,
 } from 'src/services/customerPortfolioPresentation'
+import { projectPortfolio } from 'src/services/portfolioProjection'
 import WalletOverview from './WalletOverview.vue'
 import ClientPortfolioContracts from 'src/components/Clients/ClientPortfolioContracts.vue'
 import CustomerSelect from './CustomerSelect.vue'
@@ -159,13 +160,13 @@ const customerId = ref(props.customerId),
   exporting = ref(false),
   error = ref('')
 const portfolio = useFinanceResource(),
-  composition = useFinanceResource(),
   wallets = useFinanceResource(),
   statement = useFinanceResource()
-let revision = 0
-const displayCurrencies = computed(() =>
-  portfolioCurrencies(portfolio.state, composition.state, wallets.state),
+const resolvedWalletModel = computed(
+  () => props.walletModel || projectPortfolio(portfolio.state.data),
 )
+let revision = 0
+const displayCurrencies = computed(() => portfolio.state.data?.currencies || [])
 const loadStatement = () => {
   const version = revision
   const id = customerId.value
@@ -183,17 +184,19 @@ const loadStatement = () => {
 }
 function onAssetsChanged() {
   loadPortfolio()
-  loadComposition()
 }
 const readPortfolio = async (suffix) => {
   const id = customerId.value
   const data = (await financeGet(`admin/customers/${id}/${suffix}`)).data
-  if (data?.customerId !== id || !Array.isArray(data?.currencies))
+  if (
+    data?.customerId !== id ||
+    !Array.isArray(data?.currencies) ||
+    (suffix === 'portfolio' && !projectPortfolio(data))
+  )
     throw new Error('Não foi possível confirmar a carteira deste cliente.')
   return data
 }
 const loadPortfolio = () => portfolio.load(() => readPortfolio('portfolio'))
-const loadComposition = () => composition.load(() => readPortfolio('portfolio/composition'))
 const loadWallets = () =>
   wallets.load(async () => {
     const data = (await financeGet(`admin/customers/${customerId.value}/wallets`)).data
@@ -219,11 +222,10 @@ watch(
   () => {
     revision++
     exporting.value = false
-    ;[portfolio, composition, wallets, statement].forEach((resource) => resource.reset())
+    ;[portfolio, wallets, statement].forEach((resource) => resource.reset())
     error.value = ''
     if (customerId.value) {
       loadPortfolio()
-      loadComposition()
       if (props.embedded) loadStatement()
       else loadWallets()
     }
@@ -232,7 +234,7 @@ watch(
 )
 onScopeDispose(() => {
   revision++
-  ;[portfolio, composition, wallets, statement].forEach((resource) => resource.reset())
+  ;[portfolio, wallets, statement].forEach((resource) => resource.reset())
 })
 async function exportStatement() {
   if (exporting.value) return
