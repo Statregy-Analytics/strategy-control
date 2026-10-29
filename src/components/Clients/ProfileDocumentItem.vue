@@ -46,6 +46,19 @@
         <strong>{{ item.documentTypeName || item.documentTypeCode || 'Documento' }}</strong>
         <small>{{ caption || subtitle }}</small>
       </div>
+      <q-badge
+        v-if="documentId && !variant"
+        outline
+        :color="statusColor"
+        class="profile-document-status"
+        >{{
+          item.status === 'Approved'
+            ? 'Aprovado'
+            : item.status === 'Rejected'
+              ? 'Rejeitado'
+              : 'Pendente'
+        }}</q-badge
+      >
       <q-btn
         v-if="documentId"
         flat
@@ -88,7 +101,7 @@
         @click="uploadOpen = true"
       />
     </div>
-    <span v-if="pending && !variant" class="document-awaiting">Aguardando aprovação</span>
+
     <p
       v-if="item.status === 'Rejected' && item.latestReview?.notes"
       class="document-rejection-notes"

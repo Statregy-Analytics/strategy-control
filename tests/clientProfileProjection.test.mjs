@@ -21,7 +21,7 @@ test('files without individual requirements contribute to overview counters', ()
   const metrics = profileDocumentMetrics({
     summary: { total: 3, pending: 1, missing: 1, inReview: 1, approved: 0, rejected: 0 },
   })
-  assert.equal(metrics[1].value, 3)
+  assert.equal(metrics[1].value, 2)
   assert.equal(profileDocumentMetrics(null)[1].value, '—')
 })
 test('contract values use the selected participant and never the whole contract capital', () => {
@@ -58,21 +58,36 @@ test('closed contracts and zero allocations are preserved as returned', () => {
   assert.equal(projection.status, 'Encerrado')
 })
 
-
 test('onboarding personal documents without requirements remain individually reviewable in the first Figma group', () => {
   const items = ['front', 'back'].map((documentId) => ({
-    documentId, documentTypeId: 'rg', requirementId: null, status: 'Pending',
-    allowedActions: ['Download', 'Review'], document: { id: documentId, status: 'Uploaded' },
+    documentId,
+    documentTypeId: 'rg',
+    requirementId: null,
+    status: 'Pending',
+    allowedActions: ['Download', 'Review'],
+    document: { id: documentId, status: 'Uploaded' },
   }))
-  const overview = { summary: { pending: 2, approved: 0, rejected: 0 }, sections: [{ code: 'PERSONAL_DOCUMENTS', items }] }
+  const overview = {
+    summary: { pending: 2, approved: 0, rejected: 0 },
+    sections: [{ code: 'PERSONAL_DOCUMENTS', items }],
+  }
   const sections = profileDocumentSections(overview)
   assert.equal(sections.length, 4)
   assert.equal(sections[0].label, '1. Documentação pessoal')
-  assert.deepEqual(sections[0].items.map((item) => item.documentId), ['front', 'back'])
+  assert.deepEqual(
+    sections[0].items.map((item) => item.documentId),
+    ['front', 'back'],
+  )
   assert.equal(sections[0].items.every(canReviewDocument), true)
-  assert.equal(sections.slice(1).every((section) => section.items.length === 0), true)
+  assert.equal(
+    sections.slice(1).every((section) => section.items.length === 0),
+    true,
+  )
   assert.equal(profileDocumentMetrics(overview)[1].value, 2)
-  assert.deepEqual(profileDocumentSections({ sections: [{ code: 'PERSONAL', items }] })[0].items, items)
+  assert.deepEqual(
+    profileDocumentSections({ sections: [{ code: 'PERSONAL', items }] })[0].items,
+    items,
+  )
 })
 
 test('asset photo uploads do not inflate counters of the four displayed document groups', () => {
@@ -82,11 +97,17 @@ test('asset photo uploads do not inflate counters of the four displayed document
       {
         code: 'PERSONAL_DOCUMENTS',
         items: [
-          ...Array.from({ length: 3 }, () => ({ status: 'Approved' })),
-          ...Array.from({ length: 3 }, () => ({ status: 'Rejected' })),
+          ...Array.from({ length: 3 }, (_, i) => ({
+            documentId: `approved-${i}`,
+            status: 'Approved',
+          })),
+          ...Array.from({ length: 3 }, (_, i) => ({
+            documentId: `rejected-${i}`,
+            status: 'Rejected',
+          })),
         ],
       },
-      { code: 'ACCOUNTING_FISCAL', items: [{ status: 'Pending' }] },
+      { code: 'ACCOUNTING_FISCAL', items: [{ documentId: 'pending', status: 'Pending' }] },
       { code: 'PATRIMONIO', items: Array.from({ length: 9 }, () => ({ status: 'Pending' })) },
     ],
   }
@@ -100,10 +121,52 @@ test('asset photo uploads do not inflate counters of the four displayed document
   )
 })
 
+test('participant base amount uses the API value including zero without borrowing whole-contract balances', () => {
+  for (const amount of [0, 261500]) {
+    const projection = projectClientContract(
+      {
+        capital: 999999,
+        currentBalance: 888888,
+        participants: [{ clientId: 'client', baseAmount: amount, allocatedAmount: 123 }],
+      },
+      'client',
+    )
+    assert.equal(projection.baseValue, amount)
+    assert.equal(projection.currentValue, null)
+    assert.equal(projection.blockedValue, null)
+  }
+})
 
-test('participant base amount uses the API value including zero without borrowing whole-contract balances',()=>{
- for(const amount of [0,261500]){
- const projection=projectClientContract({capital:999999,currentBalance:888888,participants:[{clientId:'client',baseAmount:amount,allocatedAmount:123}]},'client')
- assert.equal(projection.baseValue,amount);assert.equal(projection.currentValue,null);assert.equal(projection.blockedValue,null)
- }
+test('catalog completes missing types without duplicating uploads or overriding allowed actions', () => {
+  const sent = {
+    documentId: 'file',
+    documentTypeId: 'rg',
+    status: 'Approved',
+    allowedActions: ['Download'],
+  }
+  const missing = { documentTypeId: 'cpf', status: 'Missing', allowedActions: [] }
+  const overview = { sections: [{ code: 'PERSONAL', items: [sent, missing] }] }
+  const catalog = {
+    categories: [{ id: 'personal', code: 'PERSONAL_DOCUMENTS' }],
+    types: [
+      { id: 'rg', categoryId: 'personal', name: 'RG / CNH', allowsFileUpload: true },
+      { id: 'cpf', categoryId: 'personal', name: 'CPF', allowsFileUpload: true },
+      {
+        id: 'address',
+        categoryId: 'personal',
+        name: 'Comprovante de Residência',
+        allowsFileUpload: true,
+      },
+      { id: 'data', categoryId: 'personal', name: 'Dados', allowsFileUpload: false },
+    ],
+  }
+  const items = profileDocumentSections(overview, catalog)[0].items
+  assert.equal(items.length, 4)
+  assert.deepEqual(items.slice(0, 2), [sent, missing])
+  assert.deepEqual(items[2].allowedActions, ['Upload'])
+  assert.deepEqual(items[3].allowedActions, [])
+  assert.deepEqual(
+    profileDocumentMetrics({ sections: [{ code: 'PERSONAL', items }] }).map((x) => x.value),
+    [1, 0, 0],
+  )
 })

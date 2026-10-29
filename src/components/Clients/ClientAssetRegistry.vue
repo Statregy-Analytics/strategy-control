@@ -37,8 +37,7 @@
                 outline
                 dense
                 no-caps
-                :label="`Salvar ${selectedGroup.singular}`"
-                icon="img:/icons/section-edit/save-check.svg"
+                :label="`Salvar ${selectedGroup.singular.charAt(0).toUpperCase() + selectedGroup.singular.slice(1)}`"
                 :loading="saving"
                 type="submit"
                 :form="`asset-editor-${customerId}-${group.type}`"
@@ -1374,5 +1373,11 @@ h4 {
   .asset-documents {
     padding: 12px;
   }
+}
+.asset-editor-actions .q-btn {
+  min-height: 36px;
+  height: 36px;
+  font-size: 12px;
+  font-weight: 600;
 }
 </style>

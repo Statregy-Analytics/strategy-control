@@ -210,6 +210,7 @@
               round
               dense
               icon="close"
+              class="bank-modal-close"
               aria-label="Fechar conta bancária"
               :disable="saving"
               @click="closeForm"
@@ -250,12 +251,28 @@
                         }}</q-item-section></q-item
                       ></template
                     >
+                    <template #option="scope">
+                      <q-item v-bind="scope.itemProps" class="profile-glass-option">
+                        <q-item-section v-if="bankBrand(scope.opt.value)" avatar
+                          ><img
+                            :src="bankBrand(scope.opt.value)"
+                            alt=""
+                            width="24"
+                            height="24"
+                            class="bank-logo"
+                        /></q-item-section>
+                        <q-item-section>{{ bankOptionLabel(scope.opt) }}</q-item-section>
+                        <q-item-section v-if="scope.selected" side
+                          ><q-icon name="check" size="14px"
+                        /></q-item-section>
+                      </q-item>
+                    </template>
                     <template v-if="embedded" #prepend
                       ><img
-                        src="/icons/client-profile/bank-search.svg"
+                        :src="bankBrand(form.bankId) || '/icons/client-profile/bank-search.svg'"
                         alt=""
-                        width="14"
-                        height="14"
+                        :width="form.bankId ? 24 : 14"
+                        :height="form.bankId ? 24 : 14"
                     /></template>
                   </glass-select>
                 </label-form>
@@ -381,7 +398,8 @@
                   <q-toggle
                     v-if="embedded"
                     v-model="form.isPrimary"
-                    label="Definir como conta principal"
+                    class="bank-primary-toggle"
+                    label="Conta principal"
                   /><q-checkbox v-else v-model="form.isPrimary" label="Definir como principal" />
                 </div>
               </div>
@@ -394,7 +412,7 @@
                   size="sm"
                   color="primary"
                   :icon="embedded ? undefined : 'save'"
-                  :label="embedded ? 'Salvar conta' : editingId ? 'Salvar alterações' : 'Adicionar'"
+                  :label="embedded ? 'Salvar Conta' : editingId ? 'Salvar alterações' : 'Adicionar'"
                   no-caps
                   :loading="saving"
                 />
@@ -1034,5 +1052,80 @@ load()
   flex: none;
   object-fit: contain;
   border-radius: 6px;
+}
+.bank-profile-dialog {
+  background: linear-gradient(135deg, #ffffff10, #ffffff03), #0e1420f5;
+  border-color: #ffffff1f;
+  backdrop-filter: blur(40px);
+}
+.bank-modal-heading h2 {
+  font-size: 16px;
+  font-weight: 600;
+  margin: 0 0 4px;
+  line-height: 22px;
+}
+.bank-modal-heading p {
+  font-size: 12px;
+  color: #ffffffb8;
+  margin: 0;
+}
+.bank-modal-heading .bank-modal-close {
+  width: 24px;
+  height: 24px;
+  min-height: 24px;
+  flex: 0 0 24px;
+  align-self: flex-start;
+  border-radius: 0;
+  background: none;
+}
+.bank-modal-close :deep(.q-focus-helper) {
+  display: none;
+}
+.bank-modal-close:focus-visible {
+  outline: 2px solid #00a3ff;
+}
+.bank-profile-dialog .bank-modal-actions .q-btn {
+  height: 32px;
+  min-height: 32px;
+  padding: 0 12px;
+  border-radius: 8px;
+  border-color: #ffffff47;
+  font-size: 12px;
+  font-weight: 600;
+}
+.bank-primary-toggle :deep(.q-toggle__inner) {
+  width: 38px;
+  height: 22px;
+  min-width: 38px;
+  padding: 0;
+  margin-right: 8px;
+}
+.bank-primary-toggle :deep(.q-toggle__track) {
+  width: 38px;
+  height: 22px;
+  border-radius: 12px;
+  border: 1px solid #ffffff80;
+  background: #ffffff33;
+  opacity: 1;
+}
+.bank-primary-toggle :deep(.q-toggle__inner--truthy .q-toggle__track) {
+  background: #26cc7d;
+  border-color: white;
+}
+.bank-primary-toggle :deep(.q-toggle__thumb) {
+  width: 16px;
+  height: 16px;
+  top: 3px;
+  left: 3px;
+}
+.bank-primary-toggle :deep(.q-toggle__inner--truthy .q-toggle__thumb) {
+  left: 19px;
+}
+.bank-primary-toggle :deep(.q-toggle__thumb:after) {
+  background: white;
+  box-shadow: none;
+}
+.bank-primary-toggle :deep(.q-toggle__thumb:before) {
+  display: none;
 }
 </style>

@@ -1,6 +1,6 @@
 <svg preserveAspectRatio="none" overflow="visible" style="display: block;" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
 <g id="Check" clip-path="url(#clip0_0_6)">
-<path id="Vector" d="M0 3.5L3 6.5L9 0" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" stroke="white"/>
+<path transform="translate(3.5 4.75)" id="Vector" d="M0 3.5L3 6.5L9 0" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" stroke="white"/>
 </g>
 <defs>
 <clipPath id="clip0_0_6">

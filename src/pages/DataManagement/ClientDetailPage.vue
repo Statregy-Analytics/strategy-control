@@ -290,6 +290,14 @@
               >
             </div></template
           >
+          <p v-if="documentCatalog.state.loading" role="status" class="profile-empty">
+            Carregando catálogo documental…
+          </p>
+          <div v-if="documentCatalog.state.error" role="alert" class="profile-empty">
+            Não foi possível completar o catálogo documental. Os documentos já carregados continuam
+            disponíveis.
+            <q-btn flat no-caps label="Tentar novamente" @click="loadDocumentCatalog" />
+          </div>
           <resource-state :state="documentOverview.state" @retry="loadDocuments">
             <div v-if="!documentSections.length" class="profile-empty">
               Nenhum documento cadastrado.
@@ -452,7 +460,11 @@ import {
   getCustomerCurrentFinancialProfile,
   getCustomerAccountSecurity,
 } from 'src/services/customerService'
-import { getCustomerDocumentOverview } from 'src/services/documentAdminService'
+import {
+  getCustomerDocumentOverview,
+  listDocumentTypes,
+  listDocumentCategories,
+} from 'src/services/documentAdminService'
 import { getComplianceAlerts } from 'src/services/complianceService'
 import { summarizeCompliance } from 'src/services/complianceSummary'
 import { getCustomerTimeline, getCustomerTimelinePage } from 'src/services/verificationService'
@@ -476,6 +488,7 @@ const customerResource = useFinanceResource(),
   financial = useFinanceResource(),
   security = useFinanceResource(),
   documentOverview = useFinanceResource(),
+  documentCatalog = useFinanceResource(),
   compliance = useFinanceResource(),
   timeline = useFinanceResource()
 const showHistory = ref(false),
@@ -577,6 +590,7 @@ onScopeDispose(() => {
     financial,
     security,
     documentOverview,
+    documentCatalog,
     compliance,
     timeline,
   ].forEach((item) => item.reset())
@@ -805,7 +819,9 @@ const documentMetrics = computed(() =>
       : documentOverview.state.data,
   ),
 )
-const documentSections = computed(() => profileDocumentSections(documentOverview.state.data))
+const documentSections = computed(() =>
+  profileDocumentSections(documentOverview.state.data, documentCatalog.state.data || {}),
+)
 const complianceView = computed(() => summarizeCompliance(null, compliance.state.data))
 const complianceNotes = computed(() =>
   [
@@ -975,8 +991,19 @@ const loadProfessional = () =>
 const loadFinancial = () =>
   financial.load(() => optional(() => getCustomerCurrentFinancialProfile(customerId.value)))
 const loadSecurity = () => security.load(() => getCustomerAccountSecurity(customerId.value))
+const loadDocumentCatalog = () =>
+  documentCatalog.load(async () => {
+    const [types, categories] = await Promise.all([listDocumentTypes(), listDocumentCategories()])
+    return {
+      types: Array.isArray(types) ? types : types.items || [],
+      categories: Array.isArray(categories) ? categories : categories.items || [],
+    }
+  })
 const loadDocuments = () =>
-  documentOverview.load(() => getCustomerDocumentOverview(customerId.value))
+  Promise.all([
+    documentOverview.load(() => getCustomerDocumentOverview(customerId.value)),
+    loadDocumentCatalog(),
+  ])
 const loadCompliance = () => compliance.load(() => getComplianceAlerts(customerId.value))
 const loadTimeline = () => {
   const id = customerId.value
@@ -1480,5 +1507,46 @@ h3 {
   text-transform: uppercase;
   font-size: 12px;
   letter-spacing: 0.3px;
+}
+.section-discard-dialog {
+  padding: 24px;
+  background: linear-gradient(135deg, #ffffff10, #ffffff03), #0e1420f5;
+  border-color: #ffffff1f;
+  backdrop-filter: blur(40px);
+  color: white;
+}
+.section-discard-dialog > .q-card__section {
+  padding: 0;
+}
+.section-discard-dialog h2 {
+  font-weight: 600;
+  line-height: 22px;
+}
+.section-discard-dialog p {
+  margin: 0 0 12px;
+  color: #ffffffb8;
+}
+.section-discard-dialog > .q-card__actions {
+  padding: 0;
+  gap: 8px;
+}
+.section-discard-dialog .q-btn {
+  margin: 0;
+  height: 32px;
+  min-height: 32px;
+  padding: 0 12px;
+  background: #ffffff0f;
+  color: white;
+  font-weight: 600;
+}
+.section-discard-dialog .q-btn:before {
+  border-color: #ffffff47;
+}
+.section-discard-dialog .q-btn.text-negative {
+  background: #e7000b24;
+  color: #ff9e9e !important;
+}
+.section-discard-dialog .q-btn.text-negative:before {
+  border-color: #e7000b8c;
 }
 </style>

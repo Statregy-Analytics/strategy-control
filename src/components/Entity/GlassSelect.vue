@@ -17,17 +17,18 @@
     @update:model-value="$emit('update:modelValue', $event)"
   >
     <template v-if="$slots.prepend" #prepend><slot name="prepend" /></template>
-    <template #option="scope">
-      <q-item
-        v-bind="scope.itemProps"
-        class="profile-glass-option"
-        :class="{ 'profile-glass-option--selected': scope.selected }"
-      >
-        <q-item-section>{{ optionText(scope.opt) }}</q-item-section>
-        <q-item-section v-if="scope.selected" side
-          ><q-icon name="check" size="14px"
-        /></q-item-section>
-      </q-item>
+    <template #option="scope"
+      ><slot name="option" v-bind="scope">
+        <q-item
+          v-bind="scope.itemProps"
+          class="profile-glass-option"
+          :class="{ 'profile-glass-option--selected': scope.selected }"
+        >
+          <q-item-section>{{ optionText(scope.opt) }}</q-item-section>
+          <q-item-section v-if="scope.selected" side
+            ><q-icon name="check" size="14px"
+          /></q-item-section> </q-item
+      ></slot>
     </template>
     <template #no-option
       ><slot name="no-option"

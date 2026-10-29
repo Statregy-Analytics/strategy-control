@@ -1,4 +1,4 @@
-export function profileDocumentSections(overview) {
+export function profileDocumentSections(overview, catalog = {}) {
   const sections = overview?.sections || []
   return [
     { code: 'PERSONAL', name: 'Documentação pessoal', codes: ['PERSONAL', 'PERSONAL_DOCUMENTS'] },
@@ -13,10 +13,39 @@ export function profileDocumentSections(overview) {
     ...section,
     order: index + 1,
     label: `${index + 1}. ${section.name}`,
-    items: sections
-      .filter((item) => section.codes.includes(item.code))
-      .flatMap((item) => item.items || []),
+    items: completeDocumentItems(
+      sections
+        .filter((item) => section.codes.includes(item.code))
+        .flatMap((item) => item.items || []),
+      (catalog.types || []).filter((type) => {
+        const category = (catalog.categories || []).find((entry) => entry.id === type.categoryId)
+        return (
+          section.codes.includes(category?.code) ||
+          sections.some(
+            (entry) => entry.categoryId === type.categoryId && section.codes.includes(entry.code),
+          )
+        )
+      }),
+    ),
   }))
+}
+
+function completeDocumentItems(items, types) {
+  const result = [...items]
+  for (const type of types) {
+    if (!type.id || result.some((item) => item.documentTypeId === type.id)) continue
+    result.push({
+      documentTypeId: type.id,
+      documentTypeCode: type.code,
+      documentTypeName: type.name,
+      documentId: null,
+      requirementId: null,
+      status: 'Missing',
+      // Upload capability comes from the API catalog; existing per-client actions take precedence.
+      allowedActions: type.allowsFileUpload === true ? ['Upload'] : [],
+    })
+  }
+  return result
 }
 
 // Count the four displayed Figma groups; asset photos belong to the asset registry.
@@ -26,13 +55,14 @@ export function profileDocumentMetrics(overview) {
   if (Array.isArray(overview?.sections)) {
     summary = { approved: 0, pending: 0, inReview: 0, missing: 0, rejected: 0 }
     for (const item of profileDocumentSections(overview).flatMap((section) => section.items)) {
+      if (!item.documentId && !item.document?.id) continue
       const key = {
         Approved: 'approved',
         Rejected: 'rejected',
         Pending: 'pending',
         UnderReview: 'inReview',
         InReview: 'inReview',
-        Missing: 'missing',
+        Uploaded: 'pending',
       }[item.status]
       if (key) summary[key]++
     }
@@ -44,11 +74,12 @@ export function profileDocumentMetrics(overview) {
       color: 'positive',
     },
     {
-      label: 'Aguardando',
+      label:
+        Number(summary.pending || 0) + Number(summary.inReview || 0) === 1
+          ? 'Pendente'
+          : 'Pendentes',
       value:
-        summary.pending == null
-          ? '—'
-          : Number(summary.pending) + Number(summary.inReview || 0) + Number(summary.missing || 0),
+        summary.pending == null ? '—' : Number(summary.pending) + Number(summary.inReview || 0),
       color: 'warning',
     },
     {

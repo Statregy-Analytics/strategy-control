@@ -19,7 +19,7 @@
           alt=""
           width="16"
           height="16"
-        />{{ busy ? 'Salvando…' : 'Salvar' }}
+        /><span>{{ busy ? 'Salvando…' : 'Salvar' }}</span>
       </q-btn>
     </template>
     <template v-else>
@@ -155,5 +155,10 @@ defineEmits(['edit', 'save', 'discard'])
   .section-spinner {
     animation: none;
   }
+}
+.section-save :deep(.q-btn__content) {
+  display: flex;
+  justify-content: center;
+  line-height: 16px;
 }
 </style>
