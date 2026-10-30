@@ -829,3 +829,21 @@ O CPF consta no catálogo e aparece como Aguardando envio, porém não oferece U
 Nenhuma nova dependência de backend foi identificada para 93, 110–116 e 118. O campo Ag/Conta continua exigindo a separação informada pelo usuário para montar os campos HTTP distintos, mas não insere barra automaticamente. Homologação de gravações/uploads não foi refeita nesta revisão visual.
 
 A primeira tentativa de publicação foi interrompida pela auditoria de dependências. Atualizamos o plugin de tradução para 11.2.8 e dependências corrigidas, sem desabilitar a auditoria. Auditoria final: zero vulnerabilidades. CI aprovou 191 testes versionados no admin (os 199 locais incluem oito testes não publicados do estudo de preferências) e 301 no portal. Nenhuma movimentação financeira ou upload de documentos foi executado nesta publicação.
+
+## Reteste visual de 30/10/2026 — itens 96–105, 114 e 119
+
+- [x] 96: cabeçalho expandido medido com 92 px; moldura do ícone 40×40; contagem real de documentos após expansão.
+- [x] 97/100: imóvel e veículo quitados/não quitados; toggle no card, apoio e saldo devedor condicional.
+- [x] 98: erro em Adicionar imóvel sem alterar a altura das cinco seções; correção do apelido remove o erro do campo. Campos e reservas de erro mantidos nos quatro editores.
+- [x] 99: seletor de moeda compacto preservado dentro do valor.
+- [x] 101 (visual): áreas lado a lado, números visíveis nos contadores, incremento de quartos conferido sem salvar.
+- [x] 102: seleção de PNG fictício em consórcio mostra PENDENTE com ícone e cores corretas; arquivo descartado sem envio. Renderização compartilhada pelos quatro tipos; status Validado continua vinculado à aprovação recebida da API.
+- [x] 103/104: total de parcelas, pagas/restantes lado a lado, barra de 10 px, percentual e selects de situação da cota.
+- [x] 105: financeiro e prazos em cards equivalentes; sub-card com título/apoio e toggle à direita; estado livre/determinado conferido em adicionar e editar investimento.
+- [x] 114: salvar sem check, ao lado de descartar, nos quatro formulários.
+- [x] 119: linhas pessoais ausentes/enviadas medidas com 61 px; ícones amarelo/verde; botão Upload abre o modal existente. Aprovação/reprovação continua explícita fora da linha do arquivo.
+- [x] Desktop e área de edição estreita: seções empilham conforme largura disponível; campos e botões preservados.
+
+Pendência funcional do item 101: “Adicionar característica” permanece desabilitado até definição do modelo de características extras e contrato de persistência do backend. Não foi inventado endpoint nem formato novo.
+
+Verificação: 205 testes passaram (inclui 8 testes locais preexistentes), lint e build aprovados. `git diff --check -- src` passou; a verificação global aponta whitespace preexistente em `docs/Api/milestone-3-swagger.json`, preservado. Alterações locais, sem commit/publicação nesta rodada. Não foram regravados bens nem aprovados documentos.

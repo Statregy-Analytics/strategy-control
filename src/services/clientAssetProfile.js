@@ -307,11 +307,11 @@ export function assetEditorSections(type) {
       source[0],
       { ...source[1], narrow: true },
       {
-        title: 'Prazo e vencimento',
+        title: 'Prazos e Vencimento',
         icon: 'term',
         narrow: true,
         fields: [
-          field('hasFixedTerm', 'Prazo determinado', 'toggle'),
+          field('hasFixedTerm', 'Prazo Determinado', 'toggle'),
           field('maturityDate', 'Data de vencimento', 'date', { term: true }),
           field('termMonths', 'Prazo em meses (opcional)', 'number', { term: true }),
         ],

@@ -48,7 +48,9 @@
             }"
           />
           <div v-else class="asset-document-queued">
-            <span class="asset-document-pending">PENDENTE</span>
+            <span class="asset-document-pending"
+              ><img src="/icons/asset-editor/pending-status.svg" alt="" />PENDENTE</span
+            >
             <span class="asset-document-file"
               ><img src="/icons/asset-editor/file.svg" alt="" /></span
             ><strong>{{ slot.label }}</strong
@@ -313,6 +315,8 @@ h4 img {
   background: rgba(255, 255, 255, 0.04);
 }
 .asset-document-card--empty {
+  background: #ffffff08;
+  border-color: #ffffff4d;
   border-style: dashed;
   display: flex;
   flex-direction: column;
@@ -331,6 +335,7 @@ h4 img {
 }
 .asset-document-file {
   align-self: start;
+  justify-self: start;
   display: inline-flex;
   padding: 8px;
   border: 1px solid var(--sa-border);
@@ -435,6 +440,9 @@ h4 img {
   }
 }
 .asset-document-pending {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
   position: absolute;
   top: 16px;
   right: 16px;
@@ -444,5 +452,9 @@ h4 img {
   color: #fee685;
   background: #bb4d0033;
   padding: 1px 6px;
+}
+.asset-document-pending img {
+  width: 12px;
+  height: 12px;
 }
 </style>

@@ -1,7 +1,11 @@
 <template>
   <div
     class="profile-document-entry"
-    :class="variant ? `profile-document-entry--${variant}` : ''"
+    :class="
+      variant
+        ? `profile-document-entry--${variant}`
+        : ['profile-document-entry--personal', { 'profile-document-entry--missing': !documentId }]
+    "
     :aria-busy="reviewState.saving"
     :data-document-id="documentId"
   >
@@ -27,14 +31,14 @@
           alt=""
         />
         <img
-          v-else-if="pending"
+          v-else-if="!variant && !documentId"
           src="/icons/client-selection/document-pending.svg"
           alt=""
           width="16"
           height="16"
         />
         <img
-          v-else-if="item.status === 'Approved'"
+          v-else-if="(!variant && documentId) || item.status === 'Approved'"
           src="/icons/client-selection/document-approved.svg"
           alt=""
           width="16"
@@ -43,22 +47,11 @@
         <q-icon v-else :name="statusIcon" :color="statusColor" size="16px" />
       </span>
       <div class="profile-document__identity">
-        <strong>{{ item.documentTypeName || item.documentTypeCode || 'Documento' }}</strong>
+        <strong :title="item.documentTypeName || item.documentTypeCode">{{
+          item.documentTypeName || item.documentTypeCode || 'Documento'
+        }}</strong>
         <small>{{ caption || subtitle }}</small>
       </div>
-      <q-badge
-        v-if="documentId && !variant"
-        outline
-        :color="statusColor"
-        class="profile-document-status"
-        >{{
-          item.status === 'Approved'
-            ? 'Aprovado'
-            : item.status === 'Rejected'
-              ? 'Rejeitado'
-              : 'Pendente'
-        }}</q-badge
-      >
       <q-btn
         v-if="documentId"
         flat
@@ -92,6 +85,7 @@
       >
       <q-btn
         v-if="canUpload"
+        class="profile-document-upload"
         flat
         dense
         no-caps
@@ -101,6 +95,20 @@
         @click="uploadOpen = true"
       />
     </div>
+
+    <q-badge
+      v-if="documentId && !variant"
+      outline
+      :color="statusColor"
+      class="profile-document-status"
+      >{{
+        item.status === 'Approved'
+          ? 'Aprovado'
+          : item.status === 'Rejected'
+            ? 'Rejeitado'
+            : 'Pendente'
+      }}</q-badge
+    >
 
     <p
       v-if="item.status === 'Rejected' && item.latestReview?.notes"
@@ -316,6 +324,10 @@ const subtitle = computed(() => {
     Waived: 'Dispensado',
   }
   const date = props.item.submittedAtUtc
+  if (!props.variant) {
+    if (!documentId.value) return props.item.status === 'Waived' ? 'Dispensado' : 'Aguardando envio'
+    return date ? `Enviado em ${new Date(date).toLocaleDateString('pt-BR')}` : 'Enviado'
+  }
   return [
     pending.value ? null : labels[props.item.status] || props.item.status,
     date ? `Enviado em ${new Date(date).toLocaleDateString('pt-BR')}` : null,
@@ -649,5 +661,52 @@ small {
 .profile-document-entry--asset-editor :deep(.q-btn__content),
 .profile-document-entry--asset-expanded :deep(.q-btn__content) {
   gap: 6px;
+}
+.profile-document-entry--personal .profile-document {
+  min-height: 61px;
+  padding: 10px 12px;
+  border: 0.8px solid #ffffff33;
+  border-radius: 10px;
+  background: linear-gradient(120deg, #ffffff14, #ffffff08, #ffffff12);
+  color: #fff;
+}
+.profile-document-entry--personal .profile-document__icon {
+  width: 32px;
+  height: 32px;
+}
+.profile-document-entry--personal strong {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.profile-document-entry--personal small {
+  color: #ffffff99;
+}
+.profile-document-entry--personal .profile-document-upload {
+  flex: none;
+  width: 90px;
+  height: 28px;
+  min-height: 28px;
+  border-radius: 8px;
+  border: 0.5px solid #bedbff38;
+  background: #2b7fff0d;
+  color: #bedbffd6;
+  font-size: 12px;
+}
+.profile-document-entry--missing .profile-document {
+  border: 0.5px solid #bedbff24;
+  background: #2b7fff08;
+}
+.profile-document-entry--personal > .profile-document-status {
+  margin-top: 6px;
+}
+.asset-document-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+.asset-document-status img {
+  width: 12px;
+  height: 12px;
 }
 </style>

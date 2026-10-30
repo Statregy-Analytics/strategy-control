@@ -85,7 +85,7 @@
                           (item) => !item.debt || !draft.paidOff,
                         )"
                         :key="field.key"
-                        :text-label="field.label"
+                        :text-label="field.type === 'toggle' ? '' : field.label"
                         :class="[
                           `asset-field--${field.key}`,
                           {
@@ -94,22 +94,34 @@
                           },
                         ]"
                       >
-                        <div v-if="field.type === 'toggle'" class="asset-toggle-card">
+                        <div
+                          v-if="field.type === 'toggle'"
+                          class="asset-toggle-card"
+                          :class="{ 'asset-toggle-card--term': field.key === 'hasFixedTerm' }"
+                        >
+                          <div class="asset-toggle-copy">
+                            <strong>{{ field.label }}</strong>
+                            <small class="asset-settlement-help">{{
+                              field.key === 'paidOff'
+                                ? draft.paidOff
+                                  ? 'Quitado: sem saldo devedor. Se desativado, aparece o campo Restante para Quitação.'
+                                  : 'Informe o saldo devedor ao lado.'
+                                : 'O ativo possui data de vencimento?'
+                            }}</small>
+                          </div>
                           <q-toggle
-                            v-if="field.type === 'toggle'"
                             v-model="draft[field.key]"
                             :aria-label="field.label"
-                            :label="draft[field.key] ? 'Sim' : 'Não'"
+                            :label="
+                              field.key === 'paidOff'
+                                ? draft[field.key]
+                                  ? 'Sim'
+                                  : 'Não'
+                                : undefined
+                            "
                             color="positive"
                             :disable="saving"
                           />
-                          <small class="asset-settlement-help">{{
-                            field.key === 'paidOff'
-                              ? draft.paidOff
-                                ? 'Quitado: sem saldo devedor. Se desativado, aparece o campo Restante para Quitação.'
-                                : 'Informe o saldo devedor ao lado.'
-                              : 'O ativo possui data de vencimento?'
-                          }}</small>
                         </div>
                         <div
                           v-else-if="['bedrooms', 'bathrooms'].includes(field.key)"
@@ -208,7 +220,7 @@
                         >
                       </label-form>
                       <span
-                        v-if="section.title === 'Prazo e vencimento' && !draft.hasFixedTerm"
+                        v-if="section.title === 'Prazos e Vencimento' && !draft.hasFixedTerm"
                         class="asset-free-term"
                         >Ativo com liquidez / Prazo livre</span
                       >
@@ -273,8 +285,9 @@
         >
           <template #header>
             <q-item-section avatar class="asset-row-icon"
-              ><img :src="`/icons/asset-editor/${assetIcon(group.type)}.svg`" alt=""
-            /></q-item-section>
+              ><span class="asset-row-icon-box"
+                ><img :src="`/icons/asset-editor/${assetIcon(group.type)}.svg`" alt="" /></span
+            ></q-item-section>
             <q-item-section class="asset-identity"
               ><q-item-label class="asset-name">{{ asset.nickname }}</q-item-label
               ><q-item-label caption>{{ description(asset) }}</q-item-label></q-item-section
@@ -958,7 +971,7 @@ h4 {
 .asset-editor-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 20px;
+  gap: 24px;
 }
 .asset-editor-section {
   grid-column: span 2;
@@ -966,6 +979,11 @@ h4 {
 }
 .asset-editor-section--narrow {
   grid-column: span 1;
+  display: flex;
+  flex-direction: column;
+}
+.asset-editor-section--narrow :deep(.q-mt-md) {
+  flex: 1;
 }
 .asset-editor :deep(.form-section) {
   padding: 0;
@@ -978,11 +996,12 @@ h4 {
   font-weight: 500;
   color: var(--sa-muted);
 }
-.asset-editor-section :deep(> .q-mt-md) {
+.asset-editor-section :deep(.q-mt-md) {
   padding: 20px;
   border: 1px solid var(--sa-border);
   border-radius: 10px;
-  background: rgba(255, 255, 255, 0.025);
+  background: rgba(255, 255, 255, 0.06);
+  box-shadow: 0 4px 6px #0000001a;
 }
 .asset-editor-fields {
   display: grid;
@@ -1051,7 +1070,6 @@ h4 {
   background: rgba(0, 0, 0, 0.1);
 }
 .asset-editor-fields :deep(.LabelForm > span) {
-  color: var(--sa-muted);
   font-size: 10px !important;
   font-weight: 500 !important;
   color: #ffffffb8;
@@ -1183,6 +1201,11 @@ h4 {
   border-radius: 8px;
   background: #ffffff0d;
   padding: 12px;
+  min-height: 63px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
 }
 .asset-toggle-card :deep(.q-toggle__inner) {
   width: 40px;
@@ -1194,7 +1217,7 @@ h4 {
 .asset-toggle-card :deep(.q-toggle__track) {
   width: 40px;
   height: 22px;
-  border: 1px solid #ffffff66;
+  border: 1px solid #ffffff;
   border-radius: 11px;
   opacity: 1;
   background: #ffffff1a;
@@ -1216,7 +1239,66 @@ h4 {
   font-size: 12px;
 }
 .asset-toggle-card .asset-settlement-help {
-  margin-top: 8px;
+  margin-top: 4px;
+  font-size: 10px;
+}
+.asset-toggle-copy strong {
+  font-size: 12px;
+  font-weight: 600;
+  color: #ffffffb8;
+}
+.asset-toggle-card .q-toggle {
+  flex: none;
+}
+.asset-field--paidOff :deep(> span),
+.asset-field--hasFixedTerm :deep(> span) {
+  display: none;
+}
+.asset-field--paidOff .asset-toggle-card {
+  display: grid;
+  gap: 8px;
+  justify-content: stretch;
+}
+.asset-field--paidOff .asset-toggle-copy {
+  display: contents;
+}
+.asset-field--paidOff .asset-toggle-copy strong {
+  grid-row: 1;
+  font-size: 10px;
+  font-weight: 500;
+}
+.asset-field--paidOff .q-toggle {
+  grid-row: 2;
+  justify-self: start;
+}
+.asset-field--paidOff .asset-settlement-help {
+  grid-row: 3;
+  margin: 0;
+  color: #ffffff80;
+}
+.asset-toggle-card--term .asset-toggle-copy strong {
+  display: block;
+  line-height: 18px;
+}
+.asset-toggle-card--term .asset-settlement-help {
+  line-height: 15px;
+}
+.asset-toggle-card--term {
+  border: 0.6px solid #ffffff;
+  border-radius: 9px;
+}
+.asset-toggle-card--term :deep(.q-toggle__inner),
+.asset-toggle-card--term :deep(.q-toggle__track) {
+  width: 42px;
+  min-width: 42px;
+  margin: 0;
+}
+.asset-toggle-card--term :deep(.q-toggle__inner--truthy .q-toggle__thumb) {
+  left: 23px;
+}
+.asset-counter > .q-field {
+  flex: 1;
+  min-width: 0;
 }
 .asset-editor-section--narrow .asset-editor-fields > .asset-field--landAreaSquareMeters,
 .asset-editor-section--narrow .asset-editor-fields > .asset-field--builtAreaSquareMeters,
@@ -1296,8 +1378,9 @@ h4 {
   justify-self: start;
   padding: 6px 10px;
   border: 1px solid #ffffff33;
-  border-radius: 6px;
-  font-size: 11px;
+  border-radius: 13px;
+  font-size: 10px;
+  text-align: center;
   color: #ffffffb8;
 }
 .asset-row :deep(> .q-expansion-item__container > .q-item) {
@@ -1308,10 +1391,12 @@ h4 {
   min-width: 52px;
   padding-right: 12px;
 }
-.asset-row-icon img {
+.asset-row-icon-box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   width: 40px;
   height: 40px;
-  padding: 10px;
   border: 1px solid #ffffff29;
   border-radius: 8px;
   background: linear-gradient(120deg, #ffffff14, #ffffff08);
@@ -1334,6 +1419,26 @@ h4 {
   border-color: #ffffff66;
 }
 
+.asset-editor {
+  container-type: inline-size;
+}
+@container (max-width: 760px) {
+  .asset-editor-section--narrow {
+    grid-column: span 2;
+  }
+  .asset-editor-header {
+    flex-wrap: wrap;
+  }
+  .asset-editor-actions {
+    width: 100%;
+    justify-content: flex-end;
+  }
+}
+@container (max-width: 520px) {
+  .asset-editor-fields > * {
+    grid-column: span 12 !important;
+  }
+}
 @media (max-width: 900px) {
   .asset-editor-header {
     flex-wrap: wrap;
@@ -1348,13 +1453,6 @@ h4 {
   }
   .asset-editor-section--narrow {
     grid-column: span 2;
-  }
-  .asset-editor-fields > * {
-    grid-column: span 6 !important;
-  }
-  .asset-editor-fields > .asset-field--cityState,
-  .asset-editor-fields > .asset-field--productName {
-    grid-column: span 12 !important;
   }
 }
 @media (max-width: 600px) {
