@@ -1,3 +1,4 @@
+import { cloneCharacteristics, characteristicsPayload } from './realEstateCharacteristics.js'
 // Only fields present in the profile's Figma asset editors belong in this projection.
 const fields = (definitions) =>
   definitions.map(([key, label, type = 'text', required = false]) => ({
@@ -150,6 +151,9 @@ export const assetFormSections = (type) => sections[type] || []
 export function assetDraft(asset, type) {
   return {
     ...asset[detailKey[type]],
+    ...(type === 'RealEstate'
+      ? { characteristics: cloneCharacteristics(asset.realEstate?.characteristics) }
+      : {}),
     nickname: asset.nickname || '',
     declaredValue: asset.declaredValue ?? null,
     remainingBalance: asset.remainingBalance ?? (type === 'Consortium' ? 0 : null),
@@ -168,6 +172,10 @@ export function assetPayload(draft, type, currencyId, existing) {
     return value
   }
   const detail = {}
+  if (type === 'RealEstate')
+    detail.characteristics = characteristicsPayload(
+      draft.characteristics ?? existing?.realEstate?.characteristics,
+    )
   // Preserve backend-supported metadata omitted from the designer's editor.
   if (type === 'Vehicle' && existing?.vehicle) detail.color = existing.vehicle.color
   for (const field of assetFormSections(type).flatMap((section) => section.fields)) {

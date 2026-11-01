@@ -1,5 +1,8 @@
+import { characteristicErrors } from './realEstateCharacteristics.js'
 const messagesByCode = {
-  internal_server_error: 'O servidor não conseguiu concluir a operação. Tente novamente mais tarde.',
+  ...characteristicErrors,
+  internal_server_error:
+    'O servidor não conseguiu concluir a operação. Tente novamente mais tarde.',
   validation_error: 'Revise os campos informados.',
   invalid_request: 'Os dados enviados não são válidos.',
   conflict: 'A operação conflita com o estado atual do cadastro.',
@@ -9,6 +12,8 @@ const messagesByCode = {
 }
 
 export function getApiErrorMessage(error, fallback = 'Algo deu errado. Tente novamente.') {
+  const directCode = error?.response?.data?.code
+  if (characteristicErrors[directCode]) return characteristicErrors[directCode]
   const errors = error?.response?.data?.errors
   if (Array.isArray(errors) && errors.length) {
     const messages = errors.map((item) => messagesByCode[item.code] || item.message).filter(Boolean)

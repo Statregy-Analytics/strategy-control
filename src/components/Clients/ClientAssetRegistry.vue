@@ -232,18 +232,11 @@
                           rounded
                         /><small>{{ Math.round(installmentProgress * 100) }}% quitado</small>
                       </div>
-                      <q-btn
+                      <property-characteristics
                         v-if="section.title === 'Características físicas'"
-                        flat
-                        dense
-                        no-caps
-                        label="+ Adicionar característica"
-                        disable
-                        class="asset-extra-feature"
-                        ><q-tooltip
-                          >A API ainda não oferece características adicionais.</q-tooltip
-                        ></q-btn
-                      >
+                        v-model="draft.characteristics"
+                        :disabled="saving"
+                      />
                     </div>
                   </form-section>
                 </div>
@@ -347,6 +340,12 @@
                 </dd>
               </div>
             </dl>
+            <dl v-if="asset.realEstate?.characteristics?.length" class="asset-expanded-facts">
+              <div v-for="(item, index) in asset.realEstate.characteristics" :key="index">
+                <dt>{{ item.name }}</dt>
+                <dd>{{ item.value }}</dd>
+              </div>
+            </dl>
             <asset-document-collection
               :customer-id="customerId"
               :asset-id="asset.id"
@@ -371,6 +370,7 @@
   </resource-state>
 </template>
 <script setup>
+import PropertyCharacteristics from './PropertyCharacteristics.vue'
 import { QInput } from 'quasar'
 import MoneyInput from 'src/components/Form/MoneyInput.vue'
 const moneyFields = [
@@ -1477,5 +1477,8 @@ h4 {
   height: 36px;
   font-size: 12px;
   font-weight: 600;
+}
+.asset-editor-fields > .property-characteristics {
+  grid-column: 1 / -1;
 }
 </style>

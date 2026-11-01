@@ -847,3 +847,13 @@ A primeira tentativa de publicação foi interrompida pela auditoria de dependê
 Pendência funcional do item 101: “Adicionar característica” permanece desabilitado até definição do modelo de características extras e contrato de persistência do backend. Não foi inventado endpoint nem formato novo.
 
 Verificação: 205 testes passaram (inclui 8 testes locais preexistentes), lint e build aprovados. `git diff --check -- src` passou; a verificação global aponta whitespace preexistente em `docs/Api/milestone-3-swagger.json`, preservado. Alterações locais, sem commit/publicação nesta rodada. Não foram regravados bens nem aprovados documentos.
+
+## Item 101 — características adicionais do imóvel — 01/11/2026
+
+- Implementado seletor com as oito opções sugeridas pelo backend e Personalizada, somente para imóvel, nos dois projetos.
+- Nome e valor obrigatórios, limites de 80/120 caracteres e máximo de cinco itens. Mensagens dos cinco códigos 400 traduzidas.
+- POST/PATCH usam realEstate.characteristics; PATCH envia lista completa, preserva ordem e envia [] ao remover todas.
+- Perfil da Área do Cliente usa /client/profile/assets. Este editor não depende de nova versão do Data Intake.
+- Validação integrada em homologação: Admin gravou opção padrão e portal a leu; portal gravou personalizada e Admin a leu; portal removeu toda a lista. Dados fictícios do teste removidos.
+- Verificação visual dos dois editores e bloqueio de campos vazios/limite de cinco no Admin. Lint e build passaram em ambos; Admin 208 testes e portal 311 testes passaram. Diff de src/tests sem erros de whitespace.
+- Alterações locais, ainda não publicadas nesta rodada.
