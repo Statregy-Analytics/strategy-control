@@ -4,7 +4,7 @@ Atualizado em 04/11/2026. Rodadas iniciais: Admin em 12/10 e portal em 13/10. Ad
 
 ## Reteste vigente — 04/11 — itens 121–130
 
-Matriz de telas, ações, estados e integração em [Perfil e Documentação 121–130](QA-2026-11-04-PERFIL-DOCUMENTACAO-121-130.md). Inclui tema Aurora, grupos documentais, edição branca na linha e anexos patrimoniais. Níveis, catálogo novo, suítes e compatibilidade do POST com os formulários reduzidos continuam discriminados como contratos pendentes. Não representa homologação integral do Marco 3.
+Matriz de telas, ações, estados e integração em [Perfil e Documentação 121–130](QA-2026-11-04-PERFIL-DOCUMENTACAO-121-130.md). Inclui tema Aurora, grupos documentais, edição branca na linha e anexos patrimoniais. Níveis, catálogo novo, suítes e compatibilidade do POST com os formulários reduzidos continuam discriminados como contratos pendentes. Runtime portal 988d7fc / pipeline 41930363128 e Admin 82bd3ec / pipeline 41930348144 publicados com sucesso; 318 e 200 testes versionados, respectivamente. Documentação, tema e estados vazios/arquivo retomado conferidos em homologação. Não representa homologação integral do Marco 3.
 
 ## Devolutiva Admin — 24/10 — itens 56–60
 

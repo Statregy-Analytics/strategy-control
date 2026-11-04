@@ -35,8 +35,19 @@ Devolutiva recebida em 04/11. Ambiente local Admin :8080 e portal :9010, ambos i
 
 ## Evidência técnica e limites
 
-Portal: 318 testes aprovados; Admin: 208 locais (8 do estudo adiado ficam fora da publicação, total versionado 200). Lint, build e diff das alterações aprovados antes do push. Publicação e confirmação de versão serão anotadas abaixo após o deploy.
+Portal: 318 testes aprovados; Admin: 208 locais (8 do estudo adiado ficam fora da publicação, total versionado 200). Lint, build e diff das alterações aprovados antes do push. Publicação e confirmação registradas ao final deste documento.
 
 O conector Figma leu cabeçalho/níveis/tabela/contas bancárias e tema 3, depois atingiu o limite de consultas do plano. Edição documental, patrimonial e C02 novo foram orientados pela devolutiva detalhada e pelas composições existentes; não certificar comparação pixel a pixel dos nós não lidos. O detector mecânico foi executado uma vez: avisos de Inter, tamanhos, raios, cores e borda esquerda são decisões explícitas do Figma/devolutiva, não autorização para redesenhar.
 
 Alterações locais anteriores em PRODUCT.md, estudo futuro de preferências/países, Swagger e notas não relacionadas ficam preservadas e fora do commit deste lote.
+
+## Publicação e confirmação
+
+- Portal runtime **988d7fc**: [pipeline 41930363128](https://github.com/WillTbn/Strategy-analytics-v2/actions/runs/41930363128) concluída com sucesso, 318 testes, lint, build e deploy.
+- Admin runtime **82bd3ec**: [pipeline 41930348144](https://github.com/Statregy-Analytics/strategy-control/actions/runs/41930348144) concluída com sucesso, 200 testes versionados, auditoria, lint, build, upload e ativação.
+- Portal publicado conferido em `https://hml.strategyanalytics.com.br/system/config/profile?tab=documentation`: quatro grupos, PDF fictício retomado como Enviado, atualização em 04/11/2026, contador 2/5, imagens válidas e cabeçalho Aurora. Preferência anterior de tema restaurada após o teste.
+- Admin publicado conferido na conta Cláudio: cinco grupos e o imóvel fictício no grupo Patrimônios, com “Nenhum documento enviado” após a remoção do vínculo. Consulta final sem erro de anexos. A revisão de documentos anteriores não foi acionada.
+- A primeira sessão do portal foi aberta durante a troca de release e encontrou chunks antigos indisponíveis. Uma navegação completa para a versão nova e novo login resolveram a conferência. A sessão da versão atual foi validada; não é erro de credencial nem reprovação do build.
+- Observação visual preexistente fora deste lote: em 1280 px, valores longos nos cards da carteira do Admin podem quebrar linha. Não foi alterado neste reteste de Documentação.
+
+Aprovação integrada dos itens de backend continua pendente nos pontos da matriz. O QA pode retestar o front publicado sem interpretar esses limites como regras já entregues.
