@@ -137,3 +137,28 @@ export function projectClientContract(contract, customerId) {
     blockedValue: null,
   }
 }
+
+// A linked file must never inherit another file's review state or identity.
+export function assetDocumentOverviewItem(doc, overview) {
+  const id = doc.documentId
+  const item = (overview?.sections || [])
+    .flatMap((section) => section.items || [])
+    .find(
+      (entry) =>
+        entry.documentId === id ||
+        entry.document?.id === id ||
+        entry.files?.some((file) => file.id === id),
+    )
+  const file = item?.files?.find((file) => file.id === id)
+  return {
+    ...(item || {}),
+    documentId: id,
+    document: file || (item?.document?.id === id ? item.document : null),
+    files: file ? [file] : [],
+    documentTypeName: doc.documentTypeName || item?.documentTypeName || doc.fileName,
+    status: doc.documentStatus || file?.status || item?.status || 'Missing',
+    latestReview:
+      file?.latestReview || (item?.latestReview?.documentId === id ? item.latestReview : null),
+    allowedActions: file?.allowedActions || item?.allowedActions || [],
+  }
+}

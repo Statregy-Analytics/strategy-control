@@ -170,3 +170,40 @@ test('catalog completes missing types without duplicating uploads or overriding 
     [1, 0, 0],
   )
 })
+
+test('linked asset files retain their own review state and never show another file', async () => {
+  const { assetDocumentOverviewItem } = await import('../src/services/clientProfileProjection.js')
+  const overview = {
+    sections: [
+      {
+        items: [
+          {
+            documentId: 'first',
+            status: 'Approved',
+            allowedActions: ['Download'],
+            latestReview: { documentId: 'first', notes: 'unrelated' },
+            files: [
+              { id: 'first', status: 'Approved' },
+              { id: 'second', status: 'Pending', allowedActions: ['Review'] },
+            ],
+          },
+        ],
+      },
+    ],
+  }
+  const item = assetDocumentOverviewItem(
+    { documentId: 'second', documentTypeName: 'IPTU' },
+    overview,
+  )
+  assert.equal(item.documentId, 'second')
+  assert.equal(item.document.id, 'second')
+  assert.equal(item.files.length, 1)
+  assert.equal(item.status, 'Pending')
+  assert.equal(item.latestReview, null)
+  assert.deepEqual(item.allowedActions, ['Review'])
+  assert.deepEqual(
+    assetDocumentOverviewItem({ documentId: 'missing', documentStatus: 'Pending' }, overview)
+      .allowedActions,
+    [],
+  )
+})

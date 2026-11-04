@@ -33,6 +33,7 @@ import { ref, watch, onScopeDispose } from 'vue'
 import { financeGet } from 'src/services/financeService'
 import { getApiErrorMessage } from 'src/services/apiError'
 import ProfileDocumentItem from './ProfileDocumentItem.vue'
+import { assetDocumentOverviewItem } from 'src/services/clientProfileProjection'
 const props = defineProps({
   customerId: { type: String, required: true },
   overview: { type: Object, default: () => ({}) },
@@ -116,18 +117,7 @@ async function load() {
   }
 }
 function itemFor(doc) {
-  const id = doc.documentId
-  const item = (props.overview?.sections || [])
-    .flatMap((section) => section.items || [])
-    .find((item) => item.documentId === id || item.files?.some((file) => file.id === id))
-  return item
-    ? { ...item, documentId: id, documentTypeName: doc.documentTypeName || item.documentTypeName }
-    : {
-        documentId: id,
-        documentTypeName: doc.documentTypeName || doc.fileName,
-        status: doc.documentStatus,
-        allowedActions: [],
-      }
+  return assetDocumentOverviewItem(doc, props.overview)
 }
 async function updated(asset) {
   emit('updated')
