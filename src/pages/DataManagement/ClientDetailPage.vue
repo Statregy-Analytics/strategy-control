@@ -280,7 +280,7 @@
       <aside class="client-profile-aside">
         <profile-section
           class="profile-documents-section"
-          title="Documentação pessoal"
+          title="Documentação"
           icon-src="/icons/client-profile/documents.svg"
         >
           <template #summary
@@ -307,13 +307,27 @@
               :key="section.code || section.name"
               :label="section.label"
               :default-opened="section.order < 3"
+              @show="section.assets && assetDocumentOverview?.load()"
               dense
               class="document-category"
             >
-              <p v-if="!section.items.length" class="profile-empty">Nenhum documento cadastrado.</p>
+              <client-asset-document-overview
+                v-if="section.assets"
+                :ref="
+                  (el) => {
+                    if (el) assetDocumentOverview = el
+                  }
+                "
+                :customer-id="customerId"
+                :overview="documentOverview.state.data"
+                @updated="documentsUpdated"
+              />
+              <p v-else-if="!section.items.length" class="profile-empty">
+                Nenhum documento cadastrado.
+              </p>
               <profile-document-item
-                v-for="item in section.items"
-                :key="item.documentId || item.documentTypeId"
+                v-for="item in section.assets ? [] : section.items"
+                :key="item.documentId || item.documentTypeId || item.documentTypeCode"
                 :item="item"
                 :customer-id="customerId"
                 @updated="documentsUpdated"
@@ -433,6 +447,7 @@
   </q-page>
 </template>
 <script setup>
+import ClientAssetDocumentOverview from 'src/components/Clients/ClientAssetDocumentOverview.vue'
 import { computed, ref, watch, onMounted, onScopeDispose } from 'vue'
 import { createRequestContext, readCurrentPages } from 'src/services/requestContext'
 import ClientSessionsPanel from 'src/components/Clients/ClientSessionsPanel.vue'
@@ -819,6 +834,7 @@ const documentMetrics = computed(() =>
       : documentOverview.state.data,
   ),
 )
+const assetDocumentOverview = ref(null)
 const documentSections = computed(() =>
   profileDocumentSections(documentOverview.state.data, documentCatalog.state.data || {}),
 )
@@ -1429,7 +1445,7 @@ h3 {
   }
   .client-profile-aside {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
     align-items: start;
   }
 }
@@ -1459,6 +1475,7 @@ h3 {
   }
   .client-profile-aside {
     display: flex;
+    align-items: stretch;
   }
   .profile-identity :deep(.q-avatar) {
     display: none;

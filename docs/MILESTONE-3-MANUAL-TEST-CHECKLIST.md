@@ -1,6 +1,10 @@
 # Marco 3 — checklist manual
 
-Atualizado em 24/10/2026. Rodadas iniciais: Admin em 12/10 e portal em 13/10. Admin localhost:8080; Portal localhost:9010 (origens CORS autorizadas).
+Atualizado em 04/11/2026. Rodadas iniciais: Admin em 12/10 e portal em 13/10. Admin localhost:8080; Portal localhost:9010 (origens CORS autorizadas).
+
+## Reteste vigente — 04/11 — itens 121–130
+
+Matriz de telas, ações, estados e integração em [Perfil e Documentação 121–130](QA-2026-11-04-PERFIL-DOCUMENTACAO-121-130.md). Inclui tema Aurora, grupos documentais, edição branca na linha e anexos patrimoniais. Níveis, catálogo novo, suítes e compatibilidade do POST com os formulários reduzidos continuam discriminados como contratos pendentes. Não representa homologação integral do Marco 3.
 
 ## Devolutiva Admin — 24/10 — itens 56–60
 

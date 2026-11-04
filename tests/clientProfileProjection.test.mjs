@@ -13,7 +13,7 @@ test('fiscal documents returned under ACCOUNTING_FISCAL remain in the designed s
     sections: [{ code: 'ACCOUNTING_FISCAL', items: [{ documentId: 'file', status: 'Pending' }] }],
   }
   const sections = profileDocumentSections(overview)
-  assert.equal(sections.length, 4)
+  assert.equal(sections.length, 5)
   assert.equal(sections[1].items[0].documentId, 'file')
   assert.equal(profileDocumentMetrics(overview)[1].value, 1)
 })
@@ -72,7 +72,7 @@ test('onboarding personal documents without requirements remain individually rev
     sections: [{ code: 'PERSONAL_DOCUMENTS', items }],
   }
   const sections = profileDocumentSections(overview)
-  assert.equal(sections.length, 4)
+  assert.equal(sections.length, 5)
   assert.equal(sections[0].label, '1. Documentação pessoal')
   assert.deepEqual(
     sections[0].items.map((item) => item.documentId),

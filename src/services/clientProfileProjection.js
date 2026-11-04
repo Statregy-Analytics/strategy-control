@@ -7,6 +7,7 @@ export function profileDocumentSections(overview, catalog = {}) {
       name: 'Contábil / fiscal',
       codes: ['ACCOUNTING_FISCAL', 'FISCAL', 'ACCOUNTING'],
     },
+    { code: 'ASSETS', name: 'Patrimônios', codes: ['PATRIMONIO', 'ASSETS'], assets: true },
     { code: 'PLATFORM', name: 'Plataforma', codes: ['PLATFORM'] },
     { code: 'CONTRACTS', name: 'Contratos', codes: ['CONTRACTS'] },
   ].map((section, index) => ({
@@ -30,9 +31,18 @@ export function profileDocumentSections(overview, catalog = {}) {
   }))
 }
 
+const qaFiscalTypes = [
+  ['HOLERITE', 'Holerite / Contracheque (3 meses)'],
+  ['DECLARACAO_AUTONOMO', 'Declaração de autônomo'],
+  ['RPA', 'Recibo autônomo (RPA)'],
+  ['CONTRATO_PRESTACAO_SERVICOS', 'Contrato + comprovantes'],
+  ['DECORE', 'Decore'],
+]
 function completeDocumentItems(items, types) {
-  const result = [...items]
+  const excluded = ['CPF', 'NIF', 'COMPROVANTE_RENDA', 'COMPROVANTE_PATRIMONIAL']
+  const result = items.filter((item) => !excluded.includes(item.documentTypeCode))
   for (const type of types) {
+    if (excluded.includes(type.code)) continue
     if (!type.id || result.some((item) => item.documentTypeId === type.id)) continue
     result.push({
       documentTypeId: type.id,
@@ -45,10 +55,26 @@ function completeDocumentItems(items, types) {
       allowedActions: type.allowsFileUpload === true ? ['Upload'] : [],
     })
   }
+  const fiscal =
+    items.some((item) =>
+      ['DECLARACAO_IRPF', 'RECIBO_IRPF', 'EXTRATOS_BANCARIOS', 'INFORME_RENDIMENTOS'].includes(
+        item.documentTypeCode,
+      ),
+    ) || types.some((type) => ['DECLARACAO_IRPF', 'RECIBO_IRPF'].includes(type.code))
+  if (fiscal)
+    for (const [code, name] of qaFiscalTypes) {
+      if (!result.some((item) => item.documentTypeCode === code))
+        result.push({
+          documentTypeCode: code,
+          documentTypeName: name,
+          status: 'Missing',
+          allowedActions: [],
+        })
+    }
   return result
 }
 
-// Count the four displayed Figma groups; asset photos belong to the asset registry.
+// Count real files in the five displayed Figma groups; never count missing catalog placeholders.
 // Files without individual requirements still count when present in those groups.
 export function profileDocumentMetrics(overview) {
   let summary = overview?.summary || {}

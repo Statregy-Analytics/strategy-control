@@ -124,7 +124,7 @@
                           />
                         </div>
                         <div
-                          v-else-if="['bedrooms', 'bathrooms'].includes(field.key)"
+                          v-else-if="['bedrooms', 'bathrooms', 'suites'].includes(field.key)"
                           class="asset-counter"
                         >
                           <q-btn
@@ -132,13 +132,14 @@
                             dense
                             icon="remove"
                             :aria-label="`Diminuir ${field.label}`"
-                            :disable="saving || !(Number(draft[field.key]) > 0)"
+                            :disable="saving || field.readonly || !(Number(draft[field.key]) > 0)"
                             @click="
                               draft[field.key] = Math.max(0, Number(draft[field.key] || 0) - 1)
                             "
                           />
                           <q-input
-                            :model-value="editorValue(field) ?? 0"
+                            :model-value="editorValue(field) ?? (field.readonly ? null : 0)"
+                            :placeholder="field.readonly ? 'Indisponível' : undefined"
                             @update:model-value="setEditorValue(field, $event)"
                             :aria-label="field.label"
                             type="number"
@@ -146,15 +147,15 @@
                             step="1"
                             dense
                             borderless
-                            :disable="saving"
-                            :rules="fieldRules(field)"
+                            :disable="saving || field.readonly"
+                            :rules="field.readonly ? [] : fieldRules(field)"
                           />
                           <q-btn
                             flat
                             dense
                             icon="add"
                             :aria-label="`Aumentar ${field.label}`"
-                            :disable="saving"
+                            :disable="saving || field.readonly"
                             @click="draft[field.key] = Number(draft[field.key] || 0) + 1"
                           />
                         </div>

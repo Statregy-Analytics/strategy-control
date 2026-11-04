@@ -248,6 +248,10 @@ export function assetEditorSections(type) {
     ...s,
     fields: s.fields.map((f) => ({ ...f })),
   }))
+  if (type === 'RealEstate')
+    source
+      .find((s) => s.title === 'Características físicas')
+      .fields.push({ key: 'suites', label: 'Suítes', type: 'number', readonly: true })
   const field = (key, label, type = 'text', extra = {}) => ({ key, label, type, ...extra })
   const finance = {
     title: type === 'RealEstate' ? 'Valor e situação financeira' : 'Situação financeira',

@@ -2,7 +2,11 @@
 
 A interface segue o Figma e as alterações de ordem/campos expressamente autorizadas pelo designer/QA e pelo usuário. **Na ordem atual, profissional/financeiro é etapa 4 e documentos/endereço é etapa 5.** Precisamos dos estados e operações abaixo sem acrescentar campos ou ações às telas.
 
-## Atualização vigente — 24/10
+## Reteste vigente — 04/11 — QA 121–130
+
+Ver a [matriz de Perfil e Documentação](QA-2026-11-04-PERFIL-DOCUMENTACAO-121-130.md): faltam a regra unificada de níveis (5 documentos não recusados + 3 patrimônios), cinco novos tipos de renda, alternativas de estado civil, suítes e início do consórcio. O POST ainda exige dados além dos formulários reduzidos do QA; confirmar compatibilidade sem inventar dados. Leitura e upload de arquivos, vínculo/desvínculo de patrimônio e análise dos anexos já têm endpoints; não reabrir como rotas ausentes. Características de imóvel já foram liberadas e integradas em 9551a03 / c37df91, substituindo a pendência histórica abaixo.
+
+## Atualização histórica — 24/10
 
 Lote [QA Admin 56–60](QA-2026-10-24-ADMIN-56-60.md): novos C32/C33/C35 e adequação C09/C10–C19. Permanecem contratos administrativos dos campos pessoais/documentais e de segurança (status da senha/2FA/link de redefinição), tipo CND de condomínio, características adicionais do imóvel e fatos de consórcio ausentes no DTO. Busca/contas bancárias, documentos e fotos já têm integração; não pedir esses endpoints novamente.
 
