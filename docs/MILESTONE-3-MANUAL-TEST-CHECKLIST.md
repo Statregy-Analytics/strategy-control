@@ -1,5 +1,8 @@
 # Marco 3 — checklist manual
 
+> Revisão complementar QA 121–130: reenvio por lado, versão vigente, PIX protegido, dimensões dos níveis, selects/estados de patrimônio e retomada de aba corrigidos. [Matriz e evidências](QA-2026-11-04-PERFIL-DOCUMENTACAO-121-130.md). Regras oficiais de nível e campos/tipos não suportados continuam sem aprovação integrada; não devolver como checklist todo verde.
+
+
 Atualizado em 04/11/2026. Rodadas iniciais: Admin em 12/10 e portal em 13/10. Admin localhost:8080; Portal localhost:9010 (origens CORS autorizadas).
 
 ## Reteste vigente — 04/11 — itens 121–130

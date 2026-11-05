@@ -6,6 +6,12 @@ A interface segue o Figma e as alterações de ordem/campos expressamente autori
 
 Ver a [matriz de Perfil e Documentação](QA-2026-11-04-PERFIL-DOCUMENTACAO-121-130.md): faltam a regra unificada de níveis (5 documentos não recusados + 3 patrimônios), cinco novos tipos de renda, alternativas de estado civil, suítes e início do consórcio. O POST ainda exige dados além dos formulários reduzidos do QA; confirmar compatibilidade sem inventar dados. Leitura e upload de arquivos, vínculo/desvínculo de patrimônio e análise dos anexos já têm endpoints; não reabrir como rotas ausentes. Características de imóvel já foram liberadas e integradas em 9551a03 / c37df91, substituindo a pendência histórica abaixo.
 
+Reteste complementar: recusa → motivo no portal → reenvio → aprovação passou com IRPF fictício do Cláudio. O overview administrativo continua retornando a versão antiga rejeitada e a nova aprovada como itens separados, incluindo ambas nos contadores; corrigir a identificação da versão vigente/obsolescência no servidor. O front impede reenvio da antiga quando uma linha de documento único tem upload mais recente comprovado por createdAtUtc; não altera nível/permissões.
+
+Não tratar o 409 bancário do Cláudio como defeito: a conta não possui documento fiscal cadastrado. O formulário manteve os dados e exibiu a orientação correta. É massa/pré-condição para testar o sucesso integrado de cadastro/edição bancária, sem inventar CPF ou adicionar upload fora do Figma.
+
+Consulta/download de termos já corrigidos no front reutilizando requirements de Onboarding e os arquivos da categoria Plataforma. Não depende de criar endpoint ou configurar contexto adicional no backend. Contadores de patrimônio também corrigidos no front com os vínculos ativos existentes; arquivos desvinculados não são mais contados. Permanecem a versão antiga rejeitada no overview e as regras/campos/tipos citados na matriz.
+
 ## Atualização histórica — 24/10
 
 Lote [QA Admin 56–60](QA-2026-10-24-ADMIN-56-60.md): novos C32/C33/C35 e adequação C09/C10–C19. Permanecem contratos administrativos dos campos pessoais/documentais e de segurança (status da senha/2FA/link de redefinição), tipo CND de condomínio, características adicionais do imóvel e fatos de consórcio ausentes no DTO. Busca/contas bancárias, documentos e fotos já têm integração; não pedir esses endpoints novamente.
