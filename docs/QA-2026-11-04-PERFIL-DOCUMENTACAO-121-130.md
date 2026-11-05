@@ -6,7 +6,7 @@ Devolutiva recebida em 04/11. Ambiente local Admin :8080 e portal :9010, ambos i
 
 Esta seção substitui os limites de teste da primeira publicação abaixo. Não representa aprovação das regras novas de nível ainda ausentes na API.
 
-**Publicado e conferido:** portal 6ac3a76, Admin d8b7a8b. Lint/build aprovados nos dois projetos; 324 testes do portal e 203 testes versionados do Admin (211 locais, incluindo 8 do estudo adiado, que não foram enviados).
+**Publicado e conferido:** portal 6ac3a76, Admin d8b7a8b. Lint/build aprovados nos dois projetos; 324 testes do portal e 203 testes versionados do Admin (211 locais, incluindo 8 do estudo adiado, que não foram enviados). O diff de whitespace do lote passou. A verificação global do worktree ainda encontra espaços finais anteriores no Swagger do Admin e em PRODUCT.md do portal; esses arquivos não relacionados foram preservados fora dos commits.
 
 - [x] Conferir as referências diretas do Figma e os estados de leitura/edição disponíveis.
 - [x] Corrigir e testar reenvio, validações, descarte, falhas parciais, retomada e proteção de sessão.
