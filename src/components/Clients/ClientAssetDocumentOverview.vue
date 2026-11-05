@@ -29,7 +29,7 @@
   </div>
 </template>
 <script setup>
-import { ref, watch, onScopeDispose } from 'vue'
+import { ref, watch, onMounted, onScopeDispose } from 'vue'
 import { financeGet } from 'src/services/financeService'
 import { getApiErrorMessage } from 'src/services/apiError'
 import ProfileDocumentItem from './ProfileDocumentItem.vue'
@@ -38,7 +38,7 @@ const props = defineProps({
   customerId: { type: String, required: true },
   overview: { type: Object, default: () => ({}) },
 })
-const emit = defineEmits(['updated'])
+const emit = defineEmits(['updated', 'loaded'])
 const assets = ref([]),
   documents = ref({}),
   errors = ref({}),
@@ -56,6 +56,7 @@ async function loadDocuments(asset) {
     if (active && version === revision) {
       documents.value = { ...documents.value, [asset.id]: result.data || [] }
       errors.value = { ...errors.value, [asset.id]: '' }
+      if (!loading.value) publishLinks()
     }
   } catch (e) {
     if (active && version === revision)
@@ -70,6 +71,7 @@ async function load() {
   const version = ++revision,
     path = base()
   loading.value = true
+  emit('loaded', { customerId: props.customerId, ids: null })
   error.value = ''
   assets.value = []
   documents.value = {}
@@ -108,13 +110,33 @@ async function load() {
     if (rows.length !== totalItems) throw Error('Consulta patrimonial incompleta.')
     assets.value = rows.filter((row) => row.status !== 'Archived')
     await Promise.all(assets.value.map(loadDocuments))
-    if (active && version === revision) loaded.value = true
+    if (active && version === revision) {
+      loaded.value = true
+      publishLinks()
+    }
   } catch (e) {
     if (active && version === revision)
       error.value = getApiErrorMessage(e, 'Não foi possível carregar os patrimônios.')
   } finally {
     if (active && version === revision) loading.value = false
   }
+}
+function publishLinks() {
+  const complete = assets.value.every(
+    (asset) => Array.isArray(documents.value[asset.id]) && !errors.value[asset.id],
+  )
+  emit('loaded', {
+    customerId: props.customerId,
+    ids: complete
+      ? [
+          ...new Set(
+            Object.values(documents.value)
+              .flat()
+              .map((doc) => doc.documentId),
+          ),
+        ]
+      : null,
+  })
 }
 function itemFor(doc) {
   return assetDocumentOverviewItem(doc, props.overview)
@@ -141,6 +163,7 @@ onScopeDispose(() => {
   active = false
   revision++
 })
+onMounted(load)
 defineExpose({ load })
 </script>
 <style scoped>

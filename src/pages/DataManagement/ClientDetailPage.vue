@@ -320,6 +320,7 @@
                 "
                 :customer-id="customerId"
                 :overview="documentOverview.state.data"
+                @loaded="assetLinksLoaded"
                 @updated="documentsUpdated"
               />
               <p v-else-if="!section.items.length" class="profile-empty">
@@ -827,11 +828,16 @@ const financialEditFields = computed(() =>
   ),
 )
 const securityReadEditFields = computed(() => mapEdit(securityFields.value, ['userName']))
+const assetLinksSnapshot = ref({ customerId: null, ids: null })
+function assetLinksLoaded(snapshot) {
+  if (snapshot.customerId === customerId.value) assetLinksSnapshot.value = snapshot
+}
 const documentMetrics = computed(() =>
   profileDocumentMetrics(
     documentOverview.state.loading || documentOverview.state.error
       ? null
       : documentOverview.state.data,
+    assetLinksSnapshot.value.customerId === customerId.value ? assetLinksSnapshot.value.ids : null,
   ),
 )
 const assetDocumentOverview = ref(null)

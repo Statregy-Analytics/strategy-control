@@ -228,3 +228,30 @@ test('uploaded linked asset remains reviewable only with explicit overview permi
   assert.equal(canReviewDocument(assetDocumentOverviewItem(doc, overview)), true)
   assert.equal(canReviewDocument(assetDocumentOverviewItem(doc, {})), false)
 })
+
+test('document counters exclude unlinked asset uploads and stay unknown while links are loading', () => {
+  const overview = {
+    sections: [
+      { code: 'FISCAL', items: [{ documentId: 'irpf', status: 'Approved' }] },
+      {
+        code: 'PATRIMONIO',
+        items: [
+          { documentId: 'linked', status: 'Approved' },
+          { documentId: 'orphan', status: 'Pending' },
+        ],
+      },
+    ],
+  }
+  assert.deepEqual(
+    profileDocumentMetrics(overview, ['linked']).map((x) => x.value),
+    [2, 0, 0],
+  )
+  assert.deepEqual(
+    profileDocumentMetrics(overview, []).map((x) => x.value),
+    [1, 0, 0],
+  )
+  assert.deepEqual(
+    profileDocumentMetrics(overview, null).map((x) => x.value),
+    ['—', '—', '—'],
+  )
+})

@@ -76,11 +76,27 @@ function completeDocumentItems(items, types) {
 
 // Count real files in the five displayed Figma groups; never count missing catalog placeholders.
 // Files without individual requirements still count when present in those groups.
-export function profileDocumentMetrics(overview) {
+export function profileDocumentMetrics(overview, activeAssetIds) {
+  const sections = profileDocumentSections(overview)
+  if (
+    activeAssetIds === null &&
+    sections.some(
+      (section) =>
+        section.assets && section.items.some((item) => item.documentId || item.document?.id),
+    )
+  )
+    return profileDocumentMetrics(null)
+
   let summary = overview?.summary || {}
   if (Array.isArray(overview?.sections)) {
     summary = { approved: 0, pending: 0, inReview: 0, missing: 0, rejected: 0 }
-    for (const item of profileDocumentSections(overview).flatMap((section) => section.items)) {
+    for (const item of sections.flatMap((section) =>
+      section.assets && Array.isArray(activeAssetIds)
+        ? section.items.filter((item) =>
+            activeAssetIds.includes(item.documentId || item.document?.id),
+          )
+        : section.items,
+    )) {
       if (!item.documentId && !item.document?.id) continue
       const key = {
         Approved: 'approved',
