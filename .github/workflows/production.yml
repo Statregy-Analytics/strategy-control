@@ -76,7 +76,8 @@ jobs:
             "$SSH_USER@$SSH_HOST" \
             "mkdir -p '$SSH_DEPLOY_PATH/releases/$GITHUB_SHA'"
 
-          rsync -az --delete \
+          # Reuse unchanged assets on the server; keep each release independent.
+          rsync -az --checksum --copy-dest=../../current --stats --delete \
             -e "ssh -i $RUNNER_TEMP/ssh/deploy_key -o UserKnownHostsFile=$RUNNER_TEMP/ssh/known_hosts -p $SSH_PORT" \
             dist/spa/ \
             "$SSH_USER@$SSH_HOST:$SSH_DEPLOY_PATH/releases/$GITHUB_SHA/"
