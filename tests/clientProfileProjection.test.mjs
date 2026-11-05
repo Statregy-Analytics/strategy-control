@@ -207,3 +207,24 @@ test('linked asset files retain their own review state and never show another fi
     [],
   )
 })
+
+test('uploaded linked asset remains reviewable only with explicit overview permission', async () => {
+  const { assetDocumentOverviewItem } = await import('../src/services/clientProfileProjection.js')
+  const { canReviewDocument } = await import('../src/services/documentReview.js')
+  const doc = { documentId: 'photo', documentStatus: 'Uploaded' }
+  const overview = {
+    sections: [
+      {
+        items: [
+          {
+            documentId: 'photo',
+            status: 'Pending',
+            allowedActions: ['Download', 'Review'],
+          },
+        ],
+      },
+    ],
+  }
+  assert.equal(canReviewDocument(assetDocumentOverviewItem(doc, overview)), true)
+  assert.equal(canReviewDocument(assetDocumentOverviewItem(doc, {})), false)
+})

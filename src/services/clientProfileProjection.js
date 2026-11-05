@@ -150,13 +150,14 @@ export function assetDocumentOverviewItem(doc, overview) {
         entry.files?.some((file) => file.id === id),
     )
   const file = item?.files?.find((file) => file.id === id)
+  const status = doc.documentStatus || file?.status || item?.status || 'Missing'
   return {
     ...(item || {}),
     documentId: id,
     document: file || (item?.document?.id === id ? item.document : null),
     files: file ? [file] : [],
     documentTypeName: doc.documentTypeName || item?.documentTypeName || doc.fileName,
-    status: doc.documentStatus || file?.status || item?.status || 'Missing',
+    status: status === 'Uploaded' ? 'Pending' : status,
     latestReview:
       file?.latestReview || (item?.latestReview?.documentId === id ? item.latestReview : null),
     allowedActions: file?.allowedActions || item?.allowedActions || [],
