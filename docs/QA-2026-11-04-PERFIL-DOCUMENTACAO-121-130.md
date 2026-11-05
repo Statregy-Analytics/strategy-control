@@ -14,7 +14,13 @@ Esta seção substitui os limites de teste da primeira publicação abaixo. Não
 - [x] Exercitar criação dos quatro tipos de patrimônio, alterações financeiras e anexos fictícios.
 - [x] Conferir publicação, documentos/termos, desktop 1920 px e mobile 390 px.
 - [ ] Aprovar a regra integrada dos níveis, os tipos ausentes e os campos não suportados: dependem do backend.
-- [ ] Aprovar sucesso bancário integrado nesta conta: falta documento fiscal na massa do Cláudio; a validação é correta, não bug do backend.
+- [x] Validar cadastro, edição, cancelamento e confirmação de arquivamento bancário em homologação. Cenário de sucesso executado com a massa fictícia do Éric.
+
+Em 05/11, o item 126 passou pelo portal publicado com o Éric e um CPF fictício temporário. Cadastro e edição persistiram após recarregar. O formulário bloqueou a edição sem redigitar o PIX, e o cancelamento do arquivamento preservou o registro. Ao confirmar, a API gravou `Archived`, mas a conta reapareceu no portal. O front passou a filtrar arquivados no perfil completo e resumido. Após a publicação, recarreguei o perfil completo e conferi o resumo. A conta arquivada ficou fora das duas listas e as duas contas anteriores permaneceram visíveis. O CPF temporário foi arquivado. A ausência de documento fiscal do Cláudio continua sendo uma condição da massa dele.
+
+A publicação do portal em 05/11 passou com 325 testes, lint e build. [Execução do deploy](https://github.com/WillTbn/Strategy-analytics-v2/actions/runs/42032691714).
+
+A consulta à API em 05/11 confirmou progresso oficial de 0% no Cláudio, as duas versões do IRPF no Admin, ausência dos tipos novos no catálogo e ausência de suítes e início de consórcio no contrato de gravação.
 
 | Item | Resultado da revisão complementar |
 | --- | --- |
