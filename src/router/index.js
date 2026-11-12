@@ -9,6 +9,7 @@ import { LocalStorage, Notify } from 'quasar'
 import routes from './routes'
 import { TOKEN_KEY } from 'src/boot/axios'
 import { getCurrentUser } from 'src/services/authService'
+import { clearRouteChunkRetry, recoverRouteChunk } from 'src/services/routeChunkRecovery'
 
 /*
  * If not building with SSR mode, you can
@@ -36,6 +37,35 @@ export default defineRouter(function (/* { store, ssrContext } */) {
     history: createHistory(import.meta.env.QUASAR_VUE_ROUTER_BASE),
   })
   let verifiedAdminToken = null
+  const notifyChunkError = () =>
+    Notify.create({
+      type: 'warning',
+      message: 'Não foi possível carregar a tela. Atualize a página e tente novamente.',
+    })
+  Router.onError((error, to) => {
+    if (typeof window === 'undefined') return
+    try {
+      const recovered = recoverRouteChunk(error, to, {
+        resolve: (target) => Router.resolve(target).href,
+        storage: window.sessionStorage,
+        location: window.location,
+        notify: notifyChunkError,
+      })
+      if (!recovered) console.error(error)
+    } catch {
+      notifyChunkError()
+    }
+  })
+  if (typeof window !== 'undefined')
+    Router.isReady()
+      .then(() => {
+        try {
+          clearRouteChunkRetry(window.sessionStorage)
+        } catch {
+          /* Storage may be unavailable. */
+        }
+      })
+      .catch(() => {})
   Router.beforeEach(async (to, from, next) => {
     document.title = to.name != undefined ? 'Strategy Analytics - ' + to.name : 'Strategy Analytics'
     const isAuthenticated = !!LocalStorage.getItem(TOKEN_KEY)

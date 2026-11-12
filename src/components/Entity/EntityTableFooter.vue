@@ -78,6 +78,7 @@ const emit = defineEmits(['page', 'page-size'])
   flex-wrap: wrap;
   color: rgba(255, 255, 255, 0.72);
   font-size: 14px;
+  line-height: 20px;
   padding-top: 16px;
 }
 .audit-footer__buttons {

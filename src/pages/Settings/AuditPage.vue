@@ -460,27 +460,33 @@ onScopeDispose(() => {
   font-family: Inter, sans-serif;
 }
 .audit-heading {
-  background: #ffffff0a;
-  border-bottom: 1px solid #ffffff1f;
+  background: #ffffff0f;
+  border-bottom: 1px solid #ffffff33;
+  box-shadow:
+    0 1px 3px #0000001a,
+    0 1px 2px #0000001a;
   padding: 16px 24px;
 }
 .audit-heading :deep(.col-12.q-pa-md) {
   padding: 0;
+  max-width: 1552px;
+  margin: auto;
 }
 h1 {
   font:
     700 20px/28px Inter,
     sans-serif;
   margin: 0;
+  letter-spacing: -0.5px;
 }
 h1 span {
-  color: #ffffffa3;
+  color: #ffffff99;
 }
 .audit-heading p {
   color: #ffffffb8;
   font-size: 12px;
   line-height: 16px;
-  margin: 0;
+  margin: 2px 0 0;
 }
 .audit-export {
   border-radius: 8px;

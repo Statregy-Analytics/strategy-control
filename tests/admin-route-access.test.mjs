@@ -26,6 +26,7 @@ async function harness({ token = true, roles = ['Admin'], unavailable = false } 
       beforeEach: (fn) => {
         guard = fn
       },
+      onError() {},
     }),
     createMemoryHistory() {},
     createWebHistory() {},
@@ -36,6 +37,10 @@ async function harness({ token = true, roles = ['Admin'], unavailable = false } 
     Notify: { create: (value) => notifications.push(value) },
   })
   synthetic('src/boot/axios', { TOKEN_KEY: 'test-token-key' })
+  synthetic('src/services/routeChunkRecovery', {
+    clearRouteChunkRetry() {},
+    recoverRouteChunk() {},
+  })
   synthetic('src/services/authService', {
     getCurrentUser: async () => {
       calls++

@@ -46,8 +46,20 @@ A execução intensiva inicial atingiu o limitador real (429). As chamadas foram
 
 ## Qualidade e publicação
 
-- [x] Lint, build e testes automatizados locais passaram; 221 testes locais, dos quais oito pertencem ao estudo futuro preexistente e não foram incluídos na entrega.
-- [x] Novos testes cobrem datas inválidas, precisão/valores nulos, moeda inválida e reutilização segura da verificação de acesso.
+- [x] Lint, build e testes automatizados locais passaram; 224 testes locais, dos quais oito pertencem ao estudo futuro preexistente e não foram incluídos na entrega.
+- [x] Novos testes cobrem datas inválidas, precisão/valores nulos, moeda inválida, reutilização segura da verificação de acesso e recuperação limitada de módulos antigos após publicação.
 - [x] Detector visual executado; fonte Inter, raios, tamanhos e cores estão presos ao Figma e foram mantidos apesar dos avisos do documento visual legado.
 - [x] Alterações não relacionadas do worktree preservadas; whitespace conferido apenas nos arquivos entregues, sem incluir o Swagger preexistente.
 - [ ] Publicação e repetição das duas suítes na URL de homologação — registrar o resultado após a ativação.
+
+## Recuperação de uma página aberta antes do deploy
+
+A primeira matriz publicada passou em 48 verificações e parou no link de Transações durante a substituição dos arquivos da versão. A tela de origem permaneceu aberta; o mecanismo de carregamento podia tentar buscar um módulo antigo. Esse caso foi reproduzido bloqueando uma única carga do módulo no navegador.
+
+- [x] O frontend agora recupera o destino interno protegido com uma navegação completa, preservando os parâmetros do registro e `history=1`.
+- [x] Usa navegação que preserva Voltar para a Auditoria e seus filtros. Não executa operações nem envia formulários.
+- [x] Marca uma tentativa por destino na sessão e limpa a marca quando a página nova termina de abrir. Não entra em recarga infinita se o arquivo continuar indisponível.
+- [x] Erros comuns, rotas públicas, URLs externas e armazenamento bloqueado não disparam redirecionamento automático. Erros não recuperados continuam registrados no console.
+- [x] Reprodução local: arquivo bloqueado uma vez → Transação real abre com histórico → marca limpa → Voltar restaura o filtro. [Evidência local](evidence/qa-2026-11-12-auditoria-132/revisao-completa/local-recuperacao-versao.json).
+
+Os ajustes visuais finais também removem o padding extra que o Quasar aplicava à primeira coluna e a redução adicional de opacidade dos placeholders; cabeçalho e rodapé seguem as medidas do desenho.
