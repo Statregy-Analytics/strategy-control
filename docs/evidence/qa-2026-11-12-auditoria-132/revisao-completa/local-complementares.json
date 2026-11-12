@@ -1,0 +1,15 @@
+{
+  "base": "http://localhost:8080",
+  "passed": [
+    "menu Configurações opens Auditoria and eye history supports Back Forward and sidebar reset",
+    "open-ended period ?from=2026-11-12 is visible and calendar restores its year",
+    "open-ended period ?to=2025-01-01 is visible and calendar restores its year",
+    "keyboard filter panel closes with header and restores trigger focus",
+    "shared customer selection still works in transaction creation without posting",
+    "all selected filter labels fit their controls on desktop and mobile",
+    "loading hides the former empty state and disables export until real data arrives",
+    "no uncaught browser errors"
+  ],
+  "failed": [],
+  "uncaught": []
+}

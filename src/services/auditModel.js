@@ -104,7 +104,11 @@ export function auditValue(field, value, currency) {
     /^(Amount|Balance|AllocatedAmount|Value)$/i.test(field || '') &&
     /^-?\d+(\.\d+)?$/.test(String(safe))
   ) {
-    return new Intl.NumberFormat('pt-BR', { style: 'currency', currency }).format(Number(safe))
+    try {
+      return new Intl.NumberFormat('pt-BR', { style: 'currency', currency }).format(Number(safe))
+    } catch {
+      /* Keep the real value when currency metadata is invalid. */
+    }
   }
   return String(safe)
 }
@@ -113,7 +117,7 @@ export function auditDate(value) {
   return value && Number.isFinite(date.getTime())
     ? new Intl.DateTimeFormat('pt-BR', { dateStyle: 'short', timeStyle: 'short', timeZone: 'UTC' })
         .format(date)
-        .replace(', ', '\n')
+        .replace(',', '')
     : '—'
 }
 const uuid = (value) =>
@@ -152,7 +156,12 @@ export function auditRecord(row, metadata) {
   return `${names[row.resourceType] || row.resourceType || 'Registro'} · ${String(row.resourceId || '—').slice(0, 8)}`
 }
 const clean = (value, max = 200) => (typeof value === 'string' ? value.slice(0, max).trim() : '')
-const day = (v) => (/^\d{4}-\d{2}-\d{2}$/.test(v || '') && !Number.isNaN(Date.parse(v)) ? v : '')
+const day = (v) =>
+  /^\d{4}-\d{2}-\d{2}$/.test(v || '') &&
+  Number.isFinite(Date.parse(v)) &&
+  new Date(v).toISOString().slice(0, 10) === v
+    ? v
+    : ''
 export function auditFilters(query = {}) {
   return {
     search: clean(query.search),
@@ -162,8 +171,8 @@ export function auditFilters(query = {}) {
     module: clean(query.module, 64),
     action: auditActions.some((x) => x.value === query.action) ? query.action : '',
     customer: uuid(query.customer) ? query.customer : '',
-    resourceType: clean(query.resourceType, 100),
-    resourceId: clean(query.resourceId),
+    resourceType: clean(query.resourceId) ? clean(query.resourceType, 100) : '',
+    resourceId: clean(query.resourceType, 100) ? clean(query.resourceId) : '',
   }
 }
 export function auditParams(filters) {

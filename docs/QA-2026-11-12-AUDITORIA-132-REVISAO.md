@@ -85,3 +85,7 @@ Evidências locais: [nome do cliente](evidence/qa-2026-11-12-auditoria-132/audit
 Runtime atual `ece2e5b`, publicado com a [pipeline 43259860185](https://github.com/Statregy-Analytics/strategy-control/actions/runs/43259860185) aprovada: 209 testes, lint, build, upload e ativação. As dez verificações foram repetidas com sucesso na URL de homologação, sem erro JavaScript não tratado; troca/recarga/limpeza do cliente e navegação foram testes reais de leitura, a falha da tabela foi controlada. Nenhuma transação foi enviada.
 
 [Resultado em homologação](evidence/qa-2026-11-12-auditoria-132/hml-fix-results.json), [filtro com o nome retomado](evidence/qa-2026-11-12-auditoria-132/hml-fix-customer.png) e [histórico sem ação redundante](evidence/qa-2026-11-12-auditoria-132/hml-fix-history.png). Checklist corrigido; esses dois defeitos eram do front e não foram registrados como bloqueios do backend.
+
+## Revisão completa posterior
+
+Ver a [matriz completa da Auditoria](QA-2026-11-12-AUDITORIA-132-REVISAO-COMPLETA.md), que inclui todos os filtros, navegações, combinações, estados e correções posteriores desta tela.

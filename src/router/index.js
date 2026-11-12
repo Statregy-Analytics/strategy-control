@@ -35,21 +35,38 @@ export default defineRouter(function (/* { store, ssrContext } */) {
     // quasar.conf.js -> build -> publicPath
     history: createHistory(import.meta.env.QUASAR_VUE_ROUTER_BASE),
   })
+  let verifiedAdminToken = null
   Router.beforeEach(async (to, from, next) => {
     document.title = to.name != undefined ? 'Strategy Analytics - ' + to.name : 'Strategy Analytics'
     const isAuthenticated = !!LocalStorage.getItem(TOKEN_KEY)
 
     if (to.matched.some((record) => record.meta.requiresAuth) && !isAuthenticated) {
+      verifiedAdminToken = null
       next({ name: 'Auth' }) // Redirect to login page if not authenticated
     } else if (to.matched.some((record) => record.meta.requiresAdmin)) {
+      const token = LocalStorage.getItem(TOKEN_KEY)
+      if (
+        token &&
+        token === verifiedAdminToken &&
+        to.path &&
+        to.path === from.path &&
+        from.matched?.some((record) => record.meta.requiresAdmin)
+      ) {
+        next()
+        return
+      }
       try {
         const user = await getCurrentUser()
-        if (Array.isArray(user?.roles) && user.roles.includes('Admin')) next()
-        else {
+        if (Array.isArray(user?.roles) && user.roles.includes('Admin')) {
+          verifiedAdminToken = token
+          next()
+        } else {
+          verifiedAdminToken = null
           Notify.create({ type: 'negative', message: 'Acesso restrito a administradores.' })
           next({ name: 'Auth' })
         }
       } catch {
+        verifiedAdminToken = null
         next({ name: 'Auth' })
       }
     } else {

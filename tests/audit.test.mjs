@@ -7,6 +7,7 @@ import {
   auditValue,
   auditAction,
   auditRouteQuery,
+  auditDate,
 } from '../src/services/auditModel.js'
 import { createAuditService, filterAuditCsv, parseAuditCsv } from '../src/services/auditService.js'
 
@@ -71,6 +72,23 @@ test('audit values protect passwords and nested sensitive data without inventing
   assert.equal(auditAction('Archived').tone, 'deleted')
   assert.equal(auditAction('Deleted').label, 'Exclusão')
   assert.equal(auditAction('Unexpected').label, 'Unexpected')
+})
+test('impossible calendar days and incomplete resource scopes do not reach the API', () => {
+  assert.equal(auditFilters({ from: '2026-02-31', to: '2026-13-01' }).from, '')
+  assert.equal(auditFilters({ from: '2026-02-31', to: '2026-13-01' }).to, '')
+  assert.equal(auditFilters({ from: '2024-02-29' }).from, '2024-02-29')
+  assert.equal(auditFilters({ resourceId: id }).resourceId, '')
+  assert.equal(auditFilters({ resourceType: 'Announcement' }).resourceType, '')
+})
+test('audit date values stay in UTC and malformed currency metadata cannot break a row', () => {
+  assert.equal(auditDate('2026-11-12T12:34:00Z'), '12/11/2026 12:34')
+  assert.equal(
+    auditValue('ArchivedAtUtc', '2026-11-12T12:34:00.123456Z'),
+    '2026-11-12T12:34:00.123456Z',
+  )
+  assert.equal(auditValue('ArchivedAtUtc', null), '—')
+  assert.equal(auditValue('Amount', '50', 'not-a-currency'), '50')
+  assert.equal(auditDate('invalid'), '—')
 })
 test('module discovery reads every page and deletion pagination combines archive and delete', async () => {
   const calls = []

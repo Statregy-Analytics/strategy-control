@@ -5,6 +5,7 @@
       no-caps
       class="audit-period"
       :label="periodLabel"
+      :title="periodLabel"
       aria-label="Período"
       :aria-expanded="periodOpen"
       ><img src="/icons/audit/chevron.svg" alt="" /><q-menu v-model="periodOpen"
@@ -13,6 +14,11 @@
             :model-value="period"
             range
             mask="YYYY-MM-DD"
+            :default-year-month="
+              modelValue.from || modelValue.to
+                ? (modelValue.from || modelValue.to).slice(0, 7).replace('-', '/')
+                : undefined
+            "
             dark
             @update:model-value="changePeriod" /><q-btn
             flat
@@ -33,6 +39,7 @@
       placeholder="Autor"
       :display-value="auditActors.find((x) => x.value === modelValue.actor)?.label || 'Autor'"
       aria-label="Autor"
+      :title="auditActors.find((x) => x.value === modelValue.actor)?.label || 'Autor'"
       dropdown-icon="img:/icons/audit/chevron.svg"
       @update:model-value="emit('change', { actor: $event || '' })"
     />
@@ -48,14 +55,19 @@
       :loading="modulesLoading"
       :display-value="modelValue.module ? auditModule(modelValue.module) : 'Módulo'"
       aria-label="Módulo"
+      :title="modelValue.module ? auditModule(modelValue.module) : 'Módulo'"
       dropdown-icon="img:/icons/audit/chevron.svg"
       @popup-show="emit('modules')"
       @update:model-value="emit('change', { module: $event || '' })"
       ><template #no-option
         ><q-item
           ><q-item-section>{{
-            modulesError || 'Nenhum módulo registrado.'
+            modulesLoading ? 'Carregando módulos...' : modulesError || 'Nenhum módulo registrado.'
           }}</q-item-section></q-item
+        ></template
+      ><template #after-options
+        ><q-item v-if="modules.length && modulesError" role="alert"
+          ><q-item-section>{{ modulesError }}</q-item-section></q-item
         ></template
       ></q-select
     >
@@ -70,12 +82,15 @@
       dark
       :display-value="auditActions.find((x) => x.value === modelValue.action)?.label || 'Ação'"
       aria-label="Ação"
+      :title="auditActions.find((x) => x.value === modelValue.action)?.label || 'Ação'"
       dropdown-icon="img:/icons/audit/chevron.svg"
       @update:model-value="emit('change', { action: $event || '' })"
     />
     <customer-select
       :model-value="modelValue.customer || null"
       :current="customer"
+      :selected-label="customer?.displayName || ''"
+      :resolving="customerLoading"
       dark
       :placeholder="modelValue.customer ? undefined : 'Cliente'"
       hide-selected
@@ -83,6 +98,7 @@
       :title="customer?.displayName"
       dropdown-icon="img:/icons/audit/chevron.svg"
       @update:model-value="emit('change', { customer: $event || '' })"
+      @resolved="emit('customer-resolved', $event)"
     />
   </div>
 </template>
@@ -96,27 +112,28 @@ const props = defineProps({
   modulesLoading: Boolean,
   modulesError: String,
   customer: { type: Object, default: null },
+  customerLoading: Boolean,
   stacked: Boolean,
 })
-const emit = defineEmits(['change', 'modules'])
+const emit = defineEmits(['change', 'modules', 'customer-resolved'])
 const periodOpen = ref(false)
 function clearPeriod() {
   emit('change', { from: '', to: '' })
   periodOpen.value = false
 }
 const period = computed(() =>
-  props.modelValue.from
-    ? { from: props.modelValue.from, to: props.modelValue.to || props.modelValue.from }
-    : null,
+  props.modelValue.from && props.modelValue.to
+    ? { from: props.modelValue.from, to: props.modelValue.to }
+    : props.modelValue.from || props.modelValue.to || null,
 )
-const periodLabel = computed(() =>
-  props.modelValue.from
-    ? [props.modelValue.from, props.modelValue.to]
-        .filter(Boolean)
-        .map((v) => v.split('-').reverse().join('/'))
-        .join(' – ')
-    : 'Período',
-)
+const dateLabel = (value) => value.split('-').reverse().join('/')
+const periodLabel = computed(() => {
+  const { from, to } = props.modelValue
+  if (from && to) return from === to ? dateLabel(from) : `${dateLabel(from)} – ${dateLabel(to)}`
+  if (from) return `A partir de ${dateLabel(from)}`
+  if (to) return `Até ${dateLabel(to)}`
+  return 'Período'
+})
 function changePeriod(value) {
   if (!value) return
   emit(
@@ -157,6 +174,14 @@ function changePeriod(value) {
 }
 .audit-filters :deep(.q-field__native) {
   min-height: 36px;
+  flex-wrap: nowrap;
+}
+.audit-filters :deep(.q-select .q-field__native > span) {
+  min-width: 0;
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 .audit-filters :deep(.q-field__marginal) {
   height: 36px;

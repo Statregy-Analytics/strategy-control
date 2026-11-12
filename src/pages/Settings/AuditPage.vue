@@ -12,7 +12,9 @@
           label="Exportar"
           class="audit-export"
           :loading="exporting"
-          :disable="Boolean(resource.state.error) || resource.state.loading"
+          :disable="
+            Boolean(resource.state.error) || resource.state.loading || Boolean(pendingFilters)
+          "
           @click="exportRows"
           ><img src="/icons/audit/export.svg" alt="" /></q-btn></template
     ></title-page>
@@ -32,9 +34,7 @@
             maxlength="200"
             placeholder="Buscar por ID, cliente ou campo alterado..."
             aria-label="Buscar por ID, cliente ou campo alterado..."
-            @update:model-value="
-              changeFilters({ search: $event || '', resourceType: '', resourceId: '' })
-            "
+            @update:model-value="changeFilters({ search: $event || '' })"
             ><template #prepend><img src="/icons/audit/search.svg" alt="" /></template
           ></q-input>
           <audit-filter-fields
@@ -43,13 +43,16 @@
             :modules-loading="modulesLoading"
             :modules-error="modulesError"
             :customer="selectedCustomer"
+            :customer-loading="customerLoading"
             @change="changeFilters"
             @modules="loadModules"
+            @customer-resolved="onCustomerResolved"
           />
           <q-btn outline no-caps label="Mais Filtros" class="audit-more" @click="filtersOpen = true"
             ><img src="/icons/audit/filter.svg" alt=""
           /></q-btn>
         </div>
+        <p v-if="customerError" role="alert" class="audit-error">{{ customerError }}</p>
         <p v-if="exportError" role="alert" class="audit-error">{{ exportError }}</p>
         <div v-if="resource.state.error" class="audit-error" role="alert">
           {{ resource.state.error }}
@@ -66,7 +69,7 @@
           row-key="id"
           :pagination="{ rowsPerPage: 0 }"
           :rows-per-page-options="[0]"
-          :loading="resource.state.loading"
+          :loading="resource.state.loading || Boolean(pendingFilters)"
           class="audit-table"
         >
           <template #body-cell-occurredAtUtc="p"
@@ -126,21 +129,25 @@
                 round
                 dense
                 size="sm"
+                class="audit-open"
                 :aria-label="
                   'Abrir histórico de ' + auditRecord(p.row, metadata.get(recordKey(p.row)))
                 "
-                :disable="!p.row.resourceId || !p.row.resourceType"
+                :disable="Boolean(pendingFilters) || !p.row.resourceId || !p.row.resourceType"
                 :to="auditTarget(p.row, filters)"
                 ><img src="/icons/audit/open.svg" alt="" /></q-btn></q-td
           ></template>
           <template #no-data
-            ><div v-if="!resource.state.loading" class="full-width text-center q-pa-xl">
+            ><div
+              v-if="!resource.state.loading && !pendingFilters"
+              class="full-width text-center q-pa-xl"
+            >
               Nenhum registro encontrado.
             </div></template
           >
         </q-table>
         <entity-table-footer
-          v-if="resource.state.data && !resource.state.error"
+          v-if="resource.state.data && !resource.state.error && page <= pages"
           variant="audit"
           :page="page"
           :page-size="10"
@@ -148,7 +155,7 @@
           :total-pages="pages"
           :first-item="total ? (page - 1) * 10 + 1 : 0"
           :last-item="Math.min(page * 10, total)"
-          :loading="resource.state.loading"
+          :loading="resource.state.loading || Boolean(pendingFilters)"
           @page="changePage"
         />
       </form-section>
@@ -163,8 +170,10 @@
             :modules-loading="modulesLoading"
             :modules-error="modulesError"
             :customer="selectedCustomer"
+            :customer-loading="customerLoading"
             @change="changeFilters"
-            @modules="loadModules" /></q-card-section></q-card
+            @modules="loadModules"
+            @customer-resolved="onCustomerResolved" /></q-card-section></q-card
     ></q-dialog>
   </q-page>
 </template>
@@ -224,9 +233,13 @@ const resource = useFinanceResource(),
   modules = ref([]),
   modulesLoading = ref(false),
   modulesError = ref(''),
-  selectedCustomer = ref(null)
+  selectedCustomer = ref(null),
+  customerLoading = ref(false),
+  customerError = ref(''),
+  pendingFilters = ref(null)
 let revision = 0,
-  modulesReady = false
+  modulesReady = false,
+  navigationRevision = 0
 const ownerActive = context.capture()
 const assertCurrent = () => {
   if (!ownerActive()) throw new Error('Consulta encerrada.')
@@ -243,7 +256,7 @@ const service = createAuditService({
   },
   assertCurrent,
 })
-const filters = computed(() => auditFilters(route.query))
+const filters = computed(() => pendingFilters.value || auditFilters(route.query))
 const page = computed(() => Math.max(1, Number.parseInt(String(route.query.page || '1'), 10) || 1))
 const total = computed(() => resource.state.data?.pagination?.totalItems || 0)
 const pages = computed(() => resource.state.data?.pagination?.totalPages || 1)
@@ -267,48 +280,48 @@ const columns = [
     label: 'Data/Hora',
     field: 'occurredAtUtc',
     align: 'left',
-    style: 'width:110px',
-    headerStyle: 'width:110px',
+    style: 'width:111px',
+    headerStyle: 'width:111px',
   },
   {
     name: 'actorType',
     label: 'Autor',
     field: 'actorType',
     align: 'left',
-    style: 'width:90px',
-    headerStyle: 'width:90px',
+    style: 'width:103px',
+    headerStyle: 'width:103px',
   },
   {
     name: 'module',
     label: 'Módulo',
     field: 'module',
     align: 'left',
-    style: 'width:100px',
-    headerStyle: 'width:100px',
+    style: 'width:124px',
+    headerStyle: 'width:124px',
   },
   {
     name: 'resource',
     label: 'Registro',
     field: 'resourceId',
     align: 'left',
-    style: 'width:190px',
-    headerStyle: 'width:190px',
+    style: 'width:17%',
+    headerStyle: 'width:17%',
   },
   {
     name: 'customerName',
     label: 'Cliente',
     field: (r) => r.customerName || '—',
     align: 'left',
-    style: 'width:150px',
-    headerStyle: 'width:150px',
+    style: 'width:12.35%',
+    headerStyle: 'width:12.35%',
   },
   {
     name: 'action',
     label: 'Ação',
     field: 'action',
     align: 'left',
-    style: 'width:150px',
-    headerStyle: 'width:150px',
+    style: 'width:154px',
+    headerStyle: 'width:154px',
   },
   { name: 'changes', label: 'O que mudou', field: 'field', align: 'left' },
   {
@@ -320,8 +333,17 @@ const columns = [
     headerStyle: 'width:40px',
   },
 ]
-function changeFilters(patch) {
-  router.replace({ query: auditRouteQuery({ ...filters.value, ...patch }) })
+async function changeFilters(patch) {
+  const next = { ...filters.value, ...patch }
+  pendingFilters.value = next
+  const navigation = ++navigationRevision
+  if ('customer' in patch && patch.customer === route.query.customer)
+    resolveCustomer(patch.customer, revision)
+  try {
+    await router.replace({ query: auditRouteQuery(next) })
+  } finally {
+    if (ownerActive() && navigation === navigationRevision) pendingFilters.value = null
+  }
 }
 function changePage(value) {
   router.replace({ query: auditRouteQuery(filters.value, value) })
@@ -346,12 +368,12 @@ async function loadModules() {
 async function load() {
   const current = ++revision
   exportError.value = ''
-  const snapshot = filters.value
+  const snapshot = auditFilters(route.query)
   if (selectedCustomer.value?.customerId !== snapshot.customer) selectedCustomer.value = null
   resolveCustomer(snapshot.customer, current)
   const result = await resource.load(() => service.list(snapshot, page.value))
   if (!ownerActive() || current !== revision || !result) return
-  if (total.value && page.value > pages.value) {
+  if (page.value > pages.value) {
     changePage(pages.value)
     return
   }
@@ -371,6 +393,8 @@ async function load() {
   }
 }
 async function resolveCustomer(customerId, current) {
+  customerLoading.value = Boolean(customerId)
+  customerError.value = ''
   if (customerId) {
     try {
       const response = await financeGet('admin/customers/' + customerId + '/header')
@@ -385,9 +409,22 @@ async function resolveCustomer(customerId, current) {
             '',
         }
     } catch {
-      /* The lookup can retain its real label; never manufacture a name from the ID. */
+      if (ownerActive() && current === revision && !selectedCustomer.value?.displayName)
+        customerError.value =
+          'Não foi possível consultar o nome do cliente. Pesquise e selecione o cliente novamente.'
+    } finally {
+      if (ownerActive() && current === revision) customerLoading.value = false
     }
   }
+}
+function onCustomerResolved(option) {
+  if (!ownerActive() || option.customerId !== filters.value.customer || !option.displayName) return
+  if (
+    selectedCustomer.value?.customerId !== option.customerId ||
+    selectedCustomer.value?.displayName !== option.displayName
+  )
+    selectedCustomer.value = option
+  customerError.value = ''
 }
 async function exportRows() {
   if (exporting.value) return
@@ -487,7 +524,7 @@ h1 span {
 }
 .audit-toolbar {
   display: grid;
-  grid-template-columns: minmax(220px, 2fr) minmax(580px, 5fr) auto;
+  grid-template-columns: minmax(220px, 1fr) 754px 141.2px;
   gap: 12px;
   padding: 16px;
   margin-bottom: 16px;
@@ -557,45 +594,60 @@ h1 span {
   border-color: #ffffff1a;
 }
 .audit-table :deep(td:first-child) {
-  white-space: pre-line;
+  white-space: nowrap;
+  padding-right: 0;
+}
+.audit-table :deep(td:nth-child(3)),
+.audit-table :deep(td:nth-child(5)) {
+  font-weight: 500;
+}
+.audit-open {
+  width: 32px;
+  height: 32px;
+}
+.audit-table :deep(td:last-child) {
+  padding-left: 0;
+  padding-right: 8px;
 }
 .audit-table small {
   display: block;
   margin-top: 2px;
-  font-size: 12px;
+  font-size: 11px;
 }
 .audit-change {
   white-space: pre-wrap;
 }
 .audit-badge {
   display: inline-block;
-  border: 1px solid;
+  border: 0.8px solid;
   border-radius: 8px;
-  padding: 2px 8px;
+  padding: 3px 9px;
   font-size: 10px;
-  line-height: 16px;
+  line-height: 14.286px;
+  font-weight: 500;
+  letter-spacing: 0.25px;
   text-transform: uppercase;
   white-space: nowrap;
 }
 .audit-badge--created {
-  color: #7ef0b6;
-  background: #1c8b5d21;
-  border-color: #59c895;
+  color: #74ffa0;
+  background: rgba(0, 122, 85, 0.2);
+  border-color: #74ffa0;
 }
 .audit-badge--updated {
-  color: #8bd7ff;
-  background: #00a3ff1a;
-  border-color: #72c7ef;
+  color: #a8e5ff;
+  background: rgba(0, 163, 255, 0.16);
+  border-color: #a8e5ff;
 }
 .audit-badge--status {
-  color: #ffdf80;
-  background: #ffd1661a;
-  border-color: #d6b56a;
+  color: #fee685;
+  background: rgba(187, 77, 0, 0.2);
+  border-color: #fee685;
 }
 .audit-badge--deleted {
-  color: #ffa9b3;
-  background: #ff6b811a;
-  border-color: #ca8795;
+  color: #ffc9c9;
+  background: rgba(193, 0, 7, 0.2);
+  border-color: #ffc9c9;
 }
 .audit-badge--unknown {
   color: #fff;
