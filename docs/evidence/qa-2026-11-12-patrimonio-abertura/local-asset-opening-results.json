@@ -1,0 +1,23 @@
+{
+  "controlled": true,
+  "checks": [
+    "URL atrasada 6,2 s abre com bloqueador ativo, sem opener ou Referer",
+    "Layout existente desktop e mobile sem overflow externo",
+    "Arquivo já aberto permanece ao sair da seção",
+    "Falha da API fecha reserva e exibe erro no local existente",
+    "Nova tentativa limpa erro e abre arquivo",
+    "URL inválida é rejeitada sem deixar aba vazia",
+    "Popup bloqueado avisa e não consulta URL inutilmente",
+    "Saída durante consulta fecha reserva e ignora resposta tardia"
+  ],
+  "errors": [],
+  "fileRequests": [
+    {
+      "referer": null
+    },
+    {
+      "referer": null
+    }
+  ],
+  "urlRequests": 5
+}

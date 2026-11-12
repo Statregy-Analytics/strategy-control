@@ -1,5 +1,9 @@
 # Pendências do backend para homologação
 
+## Revisão de 12/11 — abertura de documentos do patrimônio
+
+[Checklist e evidências](QA-2026-11-12-PATRIMONIO-DOCUMENTOS-ABERTURA.md). Corrigida abertura após URL lenta, popup bloqueado, limpeza de erro na nova tentativa e reserva pendente ao sair/trocar sessão. Versão 82faebd publicada, oito verificações controladas e seis integradas em homologação com Éric/Cláudio, sem erro HTTP/JavaScript. Template/estilos/ações preservados; oito testes específicos e 395 testes totais, lint/build aprovados. Nenhum endpoint novo necessário; bloqueios anteriores de API continuam separados.
+
 ## Revisão de 12/11 — lista de contratos e paginação
 
 [Checklist e evidências](QA-2026-11-12-LISTA-CONTRATOS.md). Corrigidas consulta duplicada ao reiniciar a página, página que deixou de existir e respostas após sair/trocar sessão. Corrigido também o caminho da fonte Roboto existente. Versão cf84cfc publicada; 11 verificações controladas e três contas reais em homologação, sem erro HTTP/JavaScript. Sem campos ou ações novos; nove testes específicos, 387 testes totais, lint/build aprovados. Nenhum novo endpoint necessário; demais bloqueios de API e massa permanecem separados.

@@ -1,0 +1,14 @@
+{
+  "realApi": true,
+  "readOnly": true,
+  "checks": [
+    "Cláudio: patrimônio real expandido e arquivo fictício existente aberto por URL temporária 200",
+    "Arquivo aberto permanece após sair; nenhum vínculo criado ou removido",
+    "Retorno pelo navegador recarrega patrimônio/documentos sem erro residual",
+    "claudio: desktop/mobile sem overflow externo",
+    "Éric: patrimônio real sem documento mostra vazio de sucesso",
+    "eric: desktop/mobile sem overflow externo"
+  ],
+  "errors": [],
+  "httpErrors": []
+}
