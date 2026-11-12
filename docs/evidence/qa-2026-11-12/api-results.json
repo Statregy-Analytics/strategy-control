@@ -1,0 +1,118 @@
+[
+  {
+    "account": "Eric",
+    "scenario": "list",
+    "http": 403,
+    "codes": [
+      "DocumentLevelInsufficient"
+    ]
+  },
+  {
+    "account": "Eric",
+    "scenario": "detail",
+    "http": 403,
+    "codes": [
+      "DocumentLevelInsufficient"
+    ]
+  },
+  {
+    "account": "Eric",
+    "scenario": "read",
+    "http": 403,
+    "codes": [
+      "DocumentLevelInsufficient"
+    ]
+  },
+  {
+    "account": "Eric",
+    "scenario": "recipient",
+    "http": 200,
+    "codes": []
+  },
+  {
+    "account": "Eric",
+    "scenario": "unknownRecipient",
+    "http": 404,
+    "codes": [
+      "transaction.recipient_not_found"
+    ]
+  },
+  {
+    "account": "Claudio",
+    "scenario": "list",
+    "http": 403,
+    "codes": [
+      "DocumentLevelInsufficient"
+    ]
+  },
+  {
+    "account": "Claudio",
+    "scenario": "detail",
+    "http": 403,
+    "codes": [
+      "DocumentLevelInsufficient"
+    ]
+  },
+  {
+    "account": "Claudio",
+    "scenario": "read",
+    "http": 403,
+    "codes": [
+      "DocumentLevelInsufficient"
+    ]
+  },
+  {
+    "account": "Claudio",
+    "scenario": "recipient",
+    "http": 400,
+    "codes": [
+      "transaction.same_client"
+    ]
+  },
+  {
+    "account": "Claudio",
+    "scenario": "unknownRecipient",
+    "http": 404,
+    "codes": [
+      "transaction.recipient_not_found"
+    ]
+  },
+  {
+    "account": "Client",
+    "scenario": "list",
+    "http": 403,
+    "codes": [
+      "DocumentLevelInsufficient"
+    ]
+  },
+  {
+    "account": "Client",
+    "scenario": "detail",
+    "http": 403,
+    "codes": [
+      "DocumentLevelInsufficient"
+    ]
+  },
+  {
+    "account": "Client",
+    "scenario": "read",
+    "http": 403,
+    "codes": [
+      "DocumentLevelInsufficient"
+    ]
+  },
+  {
+    "account": "Client",
+    "scenario": "recipient",
+    "http": 200,
+    "codes": []
+  },
+  {
+    "account": "Client",
+    "scenario": "unknownRecipient",
+    "http": 404,
+    "codes": [
+      "transaction.recipient_not_found"
+    ]
+  }
+]

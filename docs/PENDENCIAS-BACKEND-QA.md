@@ -1,5 +1,9 @@
 # Pendências do backend para homologação
 
+## Atualização de 12/11 — Comunicados e transferência do cliente
+
+[Checklist e evidências](QA-2026-11-12-COMUNICADOS-TRANSFERENCIAS.md). Front publicado e testado no navegador com Éric e Cláudio. **API:** a própria senha de login continua recusada em transferências com 409 transaction.withdrawal_password_not_set; alinhar a confirmação e a auditoria conforme regra informada pelo Jorge. Comunicados ainda não expõe autor/capa/versão/índice/anexos nem define a correspondência dos três grupos do Figma com suas cinco categorias. Filtro por período já foi resolvido no front, sem endpoint novo. **Massa de teste:** disponibilizar uma conta nível 2 para sucesso integrado de listagem/detalhe/leitura; as contas consultadas estão em nível 0. Não foi classificado como bug o bloqueio de nível dessas contas.
+
 A interface segue o Figma e as alterações de ordem/campos expressamente autorizadas pelo designer/QA e pelo usuário. **Na ordem atual, profissional/financeiro é etapa 4 e documentos/endereço é etapa 5.** Precisamos dos estados e operações abaixo sem acrescentar campos ou ações às telas.
 
 ## Reteste vigente — 04/11 — QA 121–130

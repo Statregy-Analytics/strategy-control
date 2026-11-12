@@ -1,0 +1,111 @@
+{
+  "base": "https://hml.strategyanalytics.com.br",
+  "checks": [
+    {
+      "name": "switching targets creates a clean recipient form",
+      "pass": true
+    },
+    {
+      "name": "real recipient resolved",
+      "pass": true
+    },
+    {
+      "name": "confirm enabled with real recipient and balance",
+      "pass": true
+    },
+    {
+      "name": "all Figma currencies shown",
+      "pass": true
+    },
+    {
+      "name": "unavailable USD disabled",
+      "pass": true
+    },
+    {
+      "name": "real transfer returns known 409",
+      "pass": true
+    },
+    {
+      "name": "password cleared after failure",
+      "pass": true
+    },
+    {
+      "name": "own account rejected",
+      "pass": true
+    },
+    {
+      "name": "unknown ID rejected",
+      "pass": true
+    },
+    {
+      "name": "excess amount disabled in browser",
+      "pass": true
+    },
+    {
+      "name": "transfer mobile no horizontal overflow",
+      "pass": true
+    },
+    {
+      "name": "controlled invalid password clears secret",
+      "pass": true
+    },
+    {
+      "name": "controlled success closes dialog and reloads actual wallets",
+      "pass": true
+    },
+    {
+      "name": "real level block replaces empty state",
+      "pass": true
+    },
+    {
+      "name": "server pagination sends page two",
+      "pass": true
+    },
+    {
+      "name": "controlled unread badge",
+      "pass": true
+    },
+    {
+      "name": "controlled card view",
+      "pass": true
+    },
+    {
+      "name": "receipt failure preserves detail",
+      "pass": true
+    },
+    {
+      "name": "body escaped, no HTML execution",
+      "pass": true
+    },
+    {
+      "name": "receipt retried",
+      "pass": true
+    },
+    {
+      "name": "read badge cleared",
+      "pass": true
+    },
+    {
+      "name": "period reads complete collection before browser filtering",
+      "pass": true
+    },
+    {
+      "name": "period does not invent HTTP query fields",
+      "pass": true
+    },
+    {
+      "name": "unread filter sent to API",
+      "pass": true
+    },
+    {
+      "name": "mobile no horizontal overflow",
+      "pass": true
+    },
+    {
+      "name": "no page errors",
+      "pass": true
+    }
+  ],
+  "errors": [],
+  "controlledResponses": true
+}

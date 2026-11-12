@@ -1,5 +1,9 @@
 # Marco 3 — checklist manual
 
+## Integração de 12/11 — Comunicados e ID Strategy
+
+Checklist e evidências em [Comunicados e transferências](QA-2026-11-12-COMUNICADOS-TRANSFERENCIAS.md). Runtime ef1b6e5 publicado; pipeline 43238570009 aprovada com 342 testes. Homologação no Chromium: 26 verificações com Éric, 26 com Cláudio e três estados controlados de carteira, distinguindo API real de respostas controladas. Transferência real segue em 409 withdrawal_password_not_set ao usar a senha de login; Comunicados positivo aguarda conta nível 2. Período funciona no front; dados de autor/capa/versão/anexos e separação dos grupos do Figma ainda precisam de contrato. Esta rodada não homologa as demais entregas do backend.
+
 > Revisão complementar QA 121–130: reenvio por lado, versão vigente, PIX protegido, dimensões dos níveis, selects/estados de patrimônio e retomada de aba corrigidos. [Matriz e evidências](QA-2026-11-04-PERFIL-DOCUMENTACAO-121-130.md). Regras oficiais de nível e campos/tipos não suportados continuam sem aprovação integrada; não devolver como checklist todo verde.
 
 

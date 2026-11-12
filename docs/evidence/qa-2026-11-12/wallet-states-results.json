@@ -1,0 +1,18 @@
+{
+  "base": "https://hml.strategyanalytics.com.br",
+  "controlledResponses": true,
+  "checks": [
+    {
+      "scenario": "empty",
+      "pass": true
+    },
+    {
+      "scenario": "error",
+      "pass": true
+    },
+    {
+      "scenario": "wallet retry restores confirmed currency",
+      "pass": true
+    }
+  ]
+}
