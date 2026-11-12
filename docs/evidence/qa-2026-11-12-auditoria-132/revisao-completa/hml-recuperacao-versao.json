@@ -1,0 +1,11 @@
+{
+  "base": "https://admin.strategyanalytics.com.br",
+  "passed": [
+    "missing route module reloads intended real Transaction with query preserved",
+    "successful destination clears recovery marker",
+    "browser Back restores the source Audit filters",
+    "no uncaught error after route recovery"
+  ],
+  "errors": [],
+  "blocked": 1
+}

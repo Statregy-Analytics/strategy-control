@@ -1,0 +1,18 @@
+{
+  "base": "https://admin.strategyanalytics.com.br",
+  "style": {
+    "headerPadding": "8px",
+    "bodyPadding": "8px",
+    "placeholderOpacity": "1",
+    "headingTracking": "-0.5px",
+    "subtitleMargin": "2px"
+  },
+  "viewports": [
+    1920,
+    1706,
+    1440,
+    390
+  ],
+  "alignment": true,
+  "noDocumentOverflow": true
+}

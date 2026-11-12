@@ -50,7 +50,7 @@ A execução intensiva inicial atingiu o limitador real (429). As chamadas foram
 - [x] Novos testes cobrem datas inválidas, precisão/valores nulos, moeda inválida, reutilização segura da verificação de acesso e recuperação limitada de módulos antigos após publicação.
 - [x] Detector visual executado; fonte Inter, raios, tamanhos e cores estão presos ao Figma e foram mantidos apesar dos avisos do documento visual legado.
 - [x] Alterações não relacionadas do worktree preservadas; whitespace conferido apenas nos arquivos entregues, sem incluir o Swagger preexistente.
-- [ ] Publicação e repetição das duas suítes na URL de homologação — registrar o resultado após a ativação.
+- [x] Runtime final `22c6ee8` publicado; [pipeline 43272332205](https://github.com/Statregy-Analytics/strategy-control/actions/runs/43272332205) aprovada com 216 testes versionados, lint, build, upload e ativação. As 49 verificações principais, 8 complementares e 4 da recuperação de módulos foram concluídas na URL de homologação, sem falhas pendentes.
 
 ## Recuperação de uma página aberta antes do deploy
 
@@ -63,3 +63,13 @@ A primeira matriz publicada passou em 48 verificações e parou no link de Trans
 - [x] Reprodução local: arquivo bloqueado uma vez → Transação real abre com histórico → marca limpa → Voltar restaura o filtro. [Evidência local](evidence/qa-2026-11-12-auditoria-132/revisao-completa/local-recuperacao-versao.json).
 
 Os ajustes visuais finais também removem o padding extra que o Quasar aplicava à primeira coluna e a redução adicional de opacidade dos placeholders; cabeçalho e rodapé seguem as medidas do desenho.
+
+## Evidências finais na URL publicada
+
+- [49 verificações principais](evidence/qa-2026-11-12-auditoria-132/revisao-completa/hml-matriz.json), [8 complementares](evidence/qa-2026-11-12-auditoria-132/revisao-completa/hml-complementares.json) e [4 da recuperação de módulo](evidence/qa-2026-11-12-auditoria-132/revisao-completa/hml-recuperacao-versao.json). Cada suíte inclui sua conferência de erros JavaScript não tratados; não são 61 cenários independentes de negócio.
+- [Medidas finais](evidence/qa-2026-11-12-auditoria-132/revisao-completa/hml-medidas-visuais.json): primeira coluna com 8 px, opacidade do placeholder 1 sobre a cor do desenho, título com tracking -0,5 px, intervalo de 2 px da legenda e alinhamento do conteúdo. Sem overflow do documento em 1920, 1706, 1440 e 390 px.
+- Capturas: [desktop](evidence/qa-2026-11-12-auditoria-132/revisao-completa/hml-desktop-1706.png), [celular](evidence/qa-2026-11-12-auditoria-132/revisao-completa/hml-celular-390.png), [cinco filtros preenchidos](evidence/qa-2026-11-12-auditoria-132/revisao-completa/hml-filtros-preenchidos-desktop.png) e [filtros no celular](evidence/qa-2026-11-12-auditoria-132/revisao-completa/hml-filtros-preenchidos-celular.png).
+
+A reprodução de falha de módulo passou também na compilação publicada: bloqueio controlado de um arquivo → destino real com histórico → marca de tentativa removida → Voltar preservando filtros. O reteste regular de Transações passou e fecha o único cenário interrompido durante a primeira publicação.
+
+Esta tela pode voltar ao QA para refinamento visual/de negócio dentro do item 132. Não há correção de frontend conhecida pendente nesta matriz nem novo bloqueio de API a encaminhar para este fluxo. Isso não declara o restante do Marco 3 homologado.
