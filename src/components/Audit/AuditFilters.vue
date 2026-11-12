@@ -176,6 +176,9 @@ function changePeriod(value) {
   min-height: 36px;
   flex-wrap: nowrap;
 }
+.audit-filters :deep(input::placeholder) {
+  opacity: 1;
+}
 .audit-filters :deep(.q-select .q-field__native > span) {
   min-width: 0;
   flex: 1;

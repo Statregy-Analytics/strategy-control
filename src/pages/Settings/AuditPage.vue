@@ -549,6 +549,9 @@ h1 span {
   color: #ffffffb8;
   font-size: 14px;
 }
+.audit-toolbar :deep(input::placeholder) {
+  opacity: 1;
+}
 .audit-more {
   border-radius: 8px;
   font-size: 14px;
@@ -595,7 +598,11 @@ h1 span {
 }
 .audit-table :deep(td:first-child) {
   white-space: nowrap;
+  padding-left: 8px;
   padding-right: 0;
+}
+.audit-table :deep(th:first-child) {
+  padding-left: 8px;
 }
 .audit-table :deep(td:nth-child(3)),
 .audit-table :deep(td:nth-child(5)) {
