@@ -19,6 +19,7 @@ export const auditAction = (action) =>
 const modules = {
   Customers: 'Clientes',
   Assets: 'Patrimônio',
+  Documents: 'Documentos',
   Contracts: 'Contratos',
   Debts: 'Dívidas',
   ContractDebts: 'Dívidas',
@@ -155,6 +156,7 @@ export function auditRecord(row, metadata) {
     CustomerBankAccount: 'Conta bancária',
     CustomerAsset: 'Patrimônio',
     CustomerAssetDocumentLink: 'Anexo do patrimônio',
+    ContractDocumentLink: 'Anexo do contrato',
     Announcement: 'Comunicado',
     AnnouncementTarget: 'Público do comunicado',
     Contract: 'Contrato',
