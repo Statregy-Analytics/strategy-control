@@ -103,6 +103,7 @@
       maximized
       class="control-width"
       :persistent="busy"
+      @show="showAuditHistory"
       ><q-card
         ><title-card title="Solicitação de transação" :disable-close="busy" /><q-separator />
         <resource-state :state="detail.state" @retry="loadDetail">
@@ -227,7 +228,7 @@
                   row-key="id"
                   no-data-label="Nenhum lançamento executado"
               /></form-section>
-              <form-section title="Histórico"
+              <form-section id="transaction-history" title="Histórico"
                 ><q-table
                   flat
                   dense
@@ -259,8 +260,9 @@ const walletType = ref('total'),
 import WalletDirectory from 'src/components/Finance/WalletDirectory.vue'
 import WalletOverview from 'src/components/Finance/WalletOverview.vue'
 
-import { computed, ref } from 'vue'
+import { computed, ref, watch, nextTick } from 'vue'
 import { useQuasar } from 'quasar'
+import { useRoute } from 'vue-router'
 import TitlePage from 'src/components/TitlePage.vue'
 import TitleCard from 'src/components/Card/TitleCard.vue'
 import EntityHeader from 'src/components/Entity/EntityHeader.vue'
@@ -393,6 +395,24 @@ function confirmAction(action) {
       busy.value = false
     }
   })
+}
+const route = useRoute()
+watch(
+  () => route.query.transactionId,
+  (value) => {
+    if (typeof value === 'string' && /^[0-9a-f]{8}(-[0-9a-f]{4}){3}-[0-9a-f]{12}$/i.test(value))
+      open(value)
+  },
+  { immediate: true },
+)
+watch(() => [detail.state.loading, dialog.value, route.query.history], showAuditHistory, {
+  flush: 'post',
+})
+async function showAuditHistory() {
+  if (detail.state.loading || !dialog.value || route.query.history !== '1') return
+  await nextTick()
+  if (dialog.value)
+    document.getElementById('transaction-history')?.scrollIntoView({ block: 'start' })
 }
 </script>
 <style scoped>

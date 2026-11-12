@@ -1,5 +1,9 @@
 # Pendências do backend para homologação
 
+## Conferência de 12/11 — item 132 Auditoria
+
+[Conferência com Figma e API](QA-2026-11-12-AUDITORIA-132-REVISAO.md): consulta geral, filtros e CSV respondem 200; edição fictícia de dois campos comprovou antes/depois no módulo Comunicados. Tela Auditoria e acesso em Configurações implementados e testados com os endpoints existentes; histórico local filtrado nos módulos sem tela integrada. Nenhum novo bloqueio de API identificado no item 132. Não encaminhar esses endpoints ou o antes/depois desse cenário como ausências do backend. Cobertura dos demais módulos, eventos automáticos e motivos em reprovações não foi certificada por esta amostra. Landing Page Admin permanece identificada como Marco 5 no anexo do QA.
+
 ## Atualização de 12/11 — Comunicados e transferência do cliente
 
 [Checklist e evidências](QA-2026-11-12-COMUNICADOS-TRANSFERENCIAS.md). Front publicado e testado no navegador com Éric e Cláudio. **API:** a própria senha de login continua recusada em transferências com 409 transaction.withdrawal_password_not_set; alinhar a confirmação e a auditoria conforme regra informada pelo Jorge. Comunicados ainda não expõe autor/capa/versão/índice/anexos nem define a correspondência dos três grupos do Figma com suas cinco categorias. Filtro por período já foi resolvido no front, sem endpoint novo. **Massa de teste:** disponibilizar uma conta nível 2 para sucesso integrado de listagem/detalhe/leitura; as contas consultadas estão em nível 0. Não foi classificado como bug o bloqueio de nível dessas contas.

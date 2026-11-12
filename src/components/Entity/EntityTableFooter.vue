@@ -1,6 +1,29 @@
 <template>
+  <div v-if="variant === 'audit'" class="audit-footer">
+    <span
+      >Exibindo {{ totalItems ? lastItem - firstItem + 1 : 0 }} de {{ totalItems }} registros</span
+    >
+    <div class="audit-footer__buttons">
+      <q-btn
+        outline
+        dense
+        no-caps
+        label="Anterior"
+        :disable="loading || page <= 1"
+        @click="emit('page', page - 1)"
+      /><span>Página {{ page }} de {{ Math.max(1, totalPages) }}</span
+      ><q-btn
+        outline
+        dense
+        no-caps
+        label="Próximo"
+        :disable="loading || page >= totalPages"
+        @click="emit('page', page + 1)"
+      />
+    </div>
+  </div>
   <entity-pagination
-    v-if="variant === 'customer-selection'"
+    v-else-if="variant === 'customer-selection'"
     :model-value="page"
     :max="totalPages"
     @update:model-value="emit('page', $event)"
@@ -34,6 +57,7 @@
 import EntityPagination from './EntityPagination.vue'
 defineProps({
   variant: { type: String, default: 'default' },
+  loading: Boolean,
   dark: { type: Boolean, default: null },
   page: { type: Number, required: true },
   pageSize: { type: Number, required: true },
@@ -46,6 +70,31 @@ defineProps({
 const emit = defineEmits(['page', 'page-size'])
 </script>
 <style scoped>
+.audit-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+  color: rgba(255, 255, 255, 0.72);
+  font-size: 14px;
+  padding-top: 16px;
+}
+.audit-footer__buttons {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.audit-footer__buttons .q-btn {
+  background: rgba(255, 255, 255, 0.06);
+  border-radius: 8px;
+  height: 32px;
+  min-height: 32px;
+  padding: 0 12px;
+}
+.audit-footer__buttons .q-btn:before {
+  border-color: rgba(255, 255, 255, 0.2);
+}
 .entity-table-footer {
   color: rgba(255, 255, 255, 0.6);
   font-size: 12px;

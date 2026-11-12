@@ -1,0 +1,23 @@
+{
+  "base": "http://localhost:8080",
+  "passed": [
+    "real list and pagination",
+    "next page",
+    "previous page",
+    "search field, reset page",
+    "real filtered CSV download",
+    "filtered record history and back restores filters",
+    "real empty System filter",
+    "archive shown as deletion",
+    "module filter from actual catalog",
+    "period opens and clears",
+    "more filters reuses same five controls",
+    "customer history navigation",
+    "mobile document fits and table scrolls internally",
+    "controlled API error",
+    "retry returns real data",
+    "export failure preserves table",
+    "no uncaught browser error"
+  ],
+  "errors": []
+}

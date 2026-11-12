@@ -49,6 +49,7 @@
       maximized
       class="control-width"
       :persistent="saving"
+      @show="showAuditHistory"
     >
       <q-card
         ><title-card title="Contrato" :disable-close="saving" /><q-separator />
@@ -246,6 +247,7 @@
               :detail="detail.state.data"
               :statuses="catalog.state.data?.statuses || []"
               @changed="onSectionChanged"
+              @settled="showAuditHistory"
             />
           </q-card-section>
         </resource-state>
@@ -255,7 +257,7 @@
 </template>
 <script setup>
 import MoneyInput from 'src/components/Form/MoneyInput.vue'
-import { computed, ref, watch } from 'vue'
+import { computed, ref, watch, nextTick } from 'vue'
 import { useRoute } from 'vue-router'
 import { useQuasar } from 'quasar'
 import TitlePage from 'src/components/TitlePage.vue'
@@ -448,4 +450,12 @@ watch(
   },
   { immediate: true },
 )
+watch(() => [detail.state.loading, dialog.value, route.query.history], showAuditHistory, {
+  flush: 'post',
+})
+async function showAuditHistory() {
+  if (detail.state.loading || !dialog.value || route.query.history !== '1') return
+  await nextTick()
+  if (dialog.value) document.getElementById('contract-history')?.scrollIntoView({ block: 'start' })
+}
 </script>

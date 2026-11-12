@@ -1,5 +1,9 @@
 # Marco 3 — checklist manual
 
+## Implementação de 12/11 — item 132 Auditoria
+
+[Checklist e evidências da Auditoria](QA-2026-11-12-AUDITORIA-132-REVISAO.md): menu, tela Figma, cinco filtros, busca, paginação, CSV e navegação de históricos implementados. Testes reais e estados controlados discriminados no relatório; nenhum novo bloqueio de API identificado neste item. Publicação registrada no relatório após conferência do deploy.
+
 ## Integração de 12/11 — Comunicados e ID Strategy
 
 Checklist e evidências em [Comunicados e transferências](QA-2026-11-12-COMUNICADOS-TRANSFERENCIAS.md). Runtime ef1b6e5 publicado; pipeline 43238570009 aprovada com 342 testes. Homologação no Chromium: 26 verificações com Éric, 26 com Cláudio e três estados controlados de carteira, distinguindo API real de respostas controladas. Transferência real segue em 409 withdrawal_password_not_set ao usar a senha de login; Comunicados positivo aguarda conta nível 2. Período funciona no front; dados de autor/capa/versão/anexos e separação dos grupos do Figma ainda precisam de contrato. Esta rodada não homologa as demais entregas do backend.

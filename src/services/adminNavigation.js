@@ -23,6 +23,7 @@ export const adminNavigation = [
   { label: 'Comunicados', icon: asset('communications'), to: null },
 ]
 export const adminSettings = [
+  { label: 'Auditoria', to: '/settings/audit' },
   { label: 'Formulários', to: '/dataManagement/forms' },
   { label: 'Bancos', to: '/dataManagement/banks' },
   { label: 'Configuração documental', to: '/dataManagement/document-settings' },

@@ -9,6 +9,12 @@ const routes = [
     },
     children: [
       {
+        path: '/settings/audit',
+        name: 'Auditoria',
+        meta: { requiresAdmin: true },
+        component: () => import('pages/Settings/AuditPage.vue'),
+      },
+      {
         path: '',
         redirect: { name: 'Clientes' },
       },

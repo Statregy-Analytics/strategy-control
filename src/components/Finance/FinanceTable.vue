@@ -32,6 +32,7 @@ import { financeGet } from 'src/services/financeService'
 import { useFinanceResource } from 'src/composables/useFinanceResource'
 import ResourceState from './ResourceState.vue'
 import EntityTableFooter from 'src/components/Entity/EntityTableFooter.vue'
+const emit = defineEmits(['settled'])
 const props = defineProps({
   path: { type: String, required: true },
   params: { type: Object, default: () => ({}) },
@@ -67,6 +68,13 @@ watch(
   { deep: true },
 )
 watch([page, pageSize], reload)
+watch(
+  () => resource.state.loading,
+  (loading) => {
+    if (!loading) emit('settled')
+  },
+  { flush: 'post' },
+)
 reload()
 defineExpose({ reload })
 </script>

@@ -1,0 +1,12 @@
+{
+  "base": "http://localhost:8080",
+  "passed": [
+    "actual searchable customer filter",
+    "actual calendar date range",
+    "controlled Audit Contract link opens existing real record history",
+    "controlled Audit Transaction link opens existing real record history",
+    "delayed old search cannot overwrite newer empty result",
+    "no uncaught errors in supplementary flows"
+  ],
+  "errors": []
+}

@@ -1,0 +1,181 @@
+[
+  {
+    "params": {
+      "Page": 1,
+      "PageSize": 100
+    },
+    "http": 200,
+    "total": 6,
+    "count": 6,
+    "modules": [
+      "Communications",
+      "Customers"
+    ],
+    "actions": [
+      "Created",
+      "StatusChanged",
+      "Updated"
+    ],
+    "actors": [
+      "Admin",
+      "Client"
+    ],
+    "fields": [
+      "",
+      "PublishedAtUtc",
+      "PublishedBy",
+      "Status"
+    ],
+    "beforeAfterRows": 1
+  },
+  {
+    "params": {
+      "Page": 1,
+      "PageSize": 5,
+      "ActorType": "Admin"
+    },
+    "http": 200,
+    "total": 5,
+    "count": 5,
+    "modules": [
+      "Communications"
+    ],
+    "actions": [
+      "Created",
+      "StatusChanged",
+      "Updated"
+    ],
+    "actors": [
+      "Admin"
+    ],
+    "fields": [
+      "",
+      "PublishedAtUtc",
+      "PublishedBy",
+      "Status"
+    ],
+    "beforeAfterRows": 1
+  },
+  {
+    "params": {
+      "Page": 1,
+      "PageSize": 5,
+      "ActorType": "Client"
+    },
+    "http": 200,
+    "total": 1,
+    "count": 1,
+    "modules": [
+      "Customers"
+    ],
+    "actions": [
+      "Created"
+    ],
+    "actors": [
+      "Client"
+    ],
+    "fields": [
+      ""
+    ],
+    "beforeAfterRows": 0
+  },
+  {
+    "params": {
+      "Page": 1,
+      "PageSize": 5,
+      "ActorType": "System"
+    },
+    "http": 200,
+    "total": 0,
+    "count": 0,
+    "modules": [],
+    "actions": [],
+    "actors": [],
+    "fields": [],
+    "beforeAfterRows": 0
+  },
+  {
+    "params": {
+      "Page": 1,
+      "PageSize": 5,
+      "Action": "Updated"
+    },
+    "http": 200,
+    "total": 2,
+    "count": 2,
+    "modules": [
+      "Communications"
+    ],
+    "actions": [
+      "Updated"
+    ],
+    "actors": [
+      "Admin"
+    ],
+    "fields": [
+      "PublishedAtUtc",
+      "PublishedBy"
+    ],
+    "beforeAfterRows": 0
+  },
+  {
+    "params": {
+      "Page": 1,
+      "PageSize": 5,
+      "Search": "QA"
+    },
+    "http": 200,
+    "total": 0,
+    "count": 0,
+    "modules": [],
+    "actions": [],
+    "actors": [],
+    "fields": [],
+    "beforeAfterRows": 0
+  },
+  {
+    "params": {
+      "Page": 1,
+      "PageSize": 5,
+      "From": "2026-11-12"
+    },
+    "http": 200,
+    "total": 6,
+    "count": 5,
+    "modules": [
+      "Communications",
+      "Customers"
+    ],
+    "actions": [
+      "Created",
+      "StatusChanged",
+      "Updated"
+    ],
+    "actors": [
+      "Admin",
+      "Client"
+    ],
+    "fields": [
+      "",
+      "PublishedAtUtc",
+      "PublishedBy",
+      "Status"
+    ],
+    "beforeAfterRows": 1
+  },
+  {
+    "params": {
+      "Page": 1,
+      "PageSize": 5,
+      "CustomerId": "cf2f5863-d234-42d9-9cc1-95881c05dbd1"
+    },
+    "http": 200,
+    "total": 0,
+    "count": 0,
+    "modules": [],
+    "actions": [],
+    "actors": [],
+    "fields": [],
+    "beforeAfterRows": 0
+  }
+]

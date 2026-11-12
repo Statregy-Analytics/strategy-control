@@ -132,6 +132,7 @@
     caption="Selecione os ativos de bolsa e cripto permitidos para este contrato."
   >
     <finance-table
+      @settled="emit('settled')"
       ref="assetsTable"
       :path="`admin/contracts/${contractId}/assets`"
       :columns="assetColumns"
@@ -190,8 +191,9 @@
     />
     <q-btn flat dense no-caps label="Exportar ativos" :loading="exporting" @click="exportAssets" />
   </form-section>
-  <form-section title="Histórico"
+  <form-section id="contract-history" title="Histórico"
     ><finance-table
+      @settled="emit('settled')"
       ref="history"
       :path="`admin/contracts/${contractId}/history`"
       :columns="historyColumns"
@@ -221,7 +223,7 @@ const props = defineProps({
   detail: { type: Object, default: null },
   statuses: { type: Array, default: () => [] },
 })
-const emit = defineEmits(['changed']),
+const emit = defineEmits(['changed', 'settled']),
   $q = useQuasar()
 const documents = useFinanceResource(),
   assetOptions = useFinanceResource()

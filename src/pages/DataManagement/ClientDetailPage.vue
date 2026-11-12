@@ -393,7 +393,7 @@
               </p>
             </div></resource-state
           >
-          <div class="profile-divider">
+          <div id="client-history" class="profile-divider">
             <h3>Histórico recente</h3>
             <resource-state :state="timeline.state" @retry="loadTimeline"
               ><ol v-if="recentEvents.length" class="profile-timeline">
@@ -449,7 +449,7 @@
 </template>
 <script setup>
 import ClientAssetDocumentOverview from 'src/components/Clients/ClientAssetDocumentOverview.vue'
-import { computed, ref, watch, onMounted, onScopeDispose } from 'vue'
+import { computed, ref, watch, nextTick, onMounted, onScopeDispose } from 'vue'
 import { createRequestContext, readCurrentPages } from 'src/services/requestContext'
 import ClientSessionsPanel from 'src/components/Clients/ClientSessionsPanel.vue'
 import CustomerIndicators from 'src/components/Clients/CustomerIndicators.vue'
@@ -1093,6 +1093,41 @@ watch(
     loadTimeline()
   },
   { immediate: true, flush: 'sync' },
+)
+let auditHistoryPending = false
+const profileLoads = () =>
+  [
+    customerResource,
+    identificationResource,
+    professional,
+    financial,
+    security,
+    documentOverview,
+    compliance,
+    timeline,
+  ].map((resource) => resource.state.loading)
+async function showAuditHistory() {
+  if (!auditHistoryPending || route.query.history !== '1' || profileLoads().some(Boolean)) return
+  const active = profileContext.capture()
+  await nextTick()
+  if (!active() || route.query.history !== '1') return
+  auditHistoryPending = false
+  document.getElementById('client-history')?.scrollIntoView({ block: 'start' })
+}
+watch(profileLoads, showAuditHistory, { flush: 'post' })
+watch(
+  () => [customerId.value, route.query.history],
+  async () => {
+    auditHistoryPending = route.query.history === '1'
+    if (route.query.history !== '1') return
+    const id = customerId.value
+    const active = profileContext.capture()
+    showHistory.value = true
+    await loadTimeline()
+    await nextTick()
+    if (active() && customerId.value === id) showAuditHistory()
+  },
+  { immediate: true },
 )
 </script>
 

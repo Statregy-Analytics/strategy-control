@@ -1,0 +1,61 @@
+{
+  "fixtureId": "75a77064-5f1b-4f29-a374-2f4371ce120e",
+  "module": "Communications",
+  "resourceType": "Announcement",
+  "neverPublished": true,
+  "checks": [
+    {
+      "field": "Title",
+      "oldAndNewCorrect": true
+    },
+    {
+      "field": "Summary",
+      "oldAndNewCorrect": true
+    }
+  ],
+  "archived": true,
+  "events": [
+    {
+      "action": "Archived",
+      "field": "ArchivedAtUtc",
+      "oldPresent": false,
+      "newPresent": true,
+      "reasonPresent": false
+    },
+    {
+      "action": "StatusChanged",
+      "field": "Status",
+      "oldPresent": true,
+      "newPresent": true,
+      "reasonPresent": false
+    },
+    {
+      "action": "Updated",
+      "field": "ArchivedBy",
+      "oldPresent": false,
+      "newPresent": true,
+      "reasonPresent": false
+    },
+    {
+      "action": "Updated",
+      "field": "Title",
+      "oldPresent": true,
+      "newPresent": true,
+      "reasonPresent": false
+    },
+    {
+      "action": "Updated",
+      "field": "Summary",
+      "oldPresent": true,
+      "newPresent": true,
+      "reasonPresent": false
+    },
+    {
+      "action": "Created",
+      "field": null,
+      "oldPresent": false,
+      "newPresent": false,
+      "reasonPresent": false
+    }
+  ]
+}
