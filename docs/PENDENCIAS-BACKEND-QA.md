@@ -1,5 +1,9 @@
 # Pendências do backend para homologação
 
+## Revisão de 12/11 — lista de contratos e paginação
+
+[Checklist e evidências](QA-2026-11-12-LISTA-CONTRATOS.md). Corrigidas consulta duplicada ao reiniciar a página, página que deixou de existir e respostas após sair/trocar sessão. Corrigido também o caminho da fonte Roboto existente. Versão cf84cfc publicada; 11 verificações controladas e três contas reais em homologação, sem erro HTTP/JavaScript. Sem campos ou ações novos; nove testes específicos, 387 testes totais, lint/build aprovados. Nenhum novo endpoint necessário; demais bloqueios de API e massa permanecem separados.
+
 ## Revisão de 12/11 — Contratos e Termos e abas do perfil
 
 [Checklist e evidências](QA-2026-11-12-PERFIL-TERMOS-E-ABAS.md). Corrigidas abertura de anexo após consulta lenta, reserva de aba ao sair, aviso de popup bloqueado e volta indevida da aba anterior na navegação rápida. Layout/campos/ações preservados; 19 testes de documentos e oito de abas com roteador real, 378 testes totais, lint/build aprovados. Sem novo endpoint necessário; bloqueios de API e massa permanecem separados.

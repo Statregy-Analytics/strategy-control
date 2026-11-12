@@ -1,0 +1,67 @@
+{
+  "controlled": true,
+  "checks": [
+    "Carregamento mantém ausência de dados distinta de vazio real",
+    "Primeira página tem dez contratos e total 25",
+    "Página removida corrige para uma sem vazio ou contador transitório",
+    "Resultado esvaziado corrige para página 1; zero exibido somente após sucesso",
+    "Erro de API não vira zero registros nem vazio",
+    "Retry envia uma consulta e recupera lista",
+    "Paginação normal exibe a segunda página correta",
+    "Sair durante consulta ignora resposta da lista anterior",
+    "Retorno à lista faz uma consulta na página 1",
+    "Mobile sem overflow da página; tabela mantém rolagem interna",
+    "Resposta de sessão anterior não vira dados, erro ou vazio de sucesso"
+  ],
+  "errors": [],
+  "requests": [
+    {
+      "mode": "initial",
+      "page": 1
+    },
+    {
+      "mode": "shrink",
+      "page": 3
+    },
+    {
+      "mode": "shrink",
+      "page": 1
+    },
+    {
+      "mode": "many",
+      "page": 1
+    },
+    {
+      "mode": "empty",
+      "page": 3
+    },
+    {
+      "mode": "empty",
+      "page": 1
+    },
+    {
+      "mode": "error",
+      "page": 1
+    },
+    {
+      "mode": "many",
+      "page": 1
+    },
+    {
+      "mode": "many",
+      "page": 2
+    },
+    {
+      "mode": "pending",
+      "page": 3
+    },
+    {
+      "mode": "many",
+      "page": 1
+    },
+    {
+      "mode": "pending",
+      "page": 2
+    }
+  ]
+}

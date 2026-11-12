@@ -1,0 +1,31 @@
+{
+  "realApi": true,
+  "readOnly": true,
+  "checks": [
+    "eric: login, lista real, detalhe, Voltar e uma consulta por entrada",
+    "eric: desktop e mobile sem overflow externo",
+    "claudio: login, lista real, detalhe, Voltar e uma consulta por entrada",
+    "claudio: desktop e mobile sem overflow externo",
+    "client: lista real vazia após sucesso, contador zero e sem paginação inválida",
+    "client: desktop e mobile sem overflow externo"
+  ],
+  "errors": [],
+  "httpErrors": [],
+  "fontLoads": [
+    {
+      "role": "eric",
+      "loaded": true,
+      "ready": true
+    },
+    {
+      "role": "claudio",
+      "loaded": true,
+      "ready": true
+    },
+    {
+      "role": "client",
+      "loaded": true,
+      "ready": true
+    }
+  ]
+}
