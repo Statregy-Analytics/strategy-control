@@ -18,6 +18,7 @@ export const auditAction = (action) =>
   }
 const modules = {
   Customers: 'Clientes',
+  Assets: 'Patrimônio',
   Contracts: 'Contratos',
   Debts: 'Dívidas',
   ContractDebts: 'Dívidas',
@@ -46,6 +47,10 @@ const fields = {
   PublishedBy: 'Publicado por',
   ArchivedAtUtc: 'Arquivado em',
   ArchivedBy: 'Arquivado por',
+  LinkedAtUtc: 'Vinculado em',
+  LinkedBy: 'Vinculado por',
+  UnlinkedAtUtc: 'Desvinculado em',
+  UnlinkedBy: 'Desvinculado por',
   IndividualMonthlyIncome: 'Renda mensal individual',
   FamilyMonthlyIncome: 'Renda familiar',
   DeclaredAssets: 'Patrimônio declarado',
@@ -148,6 +153,8 @@ export function auditRecord(row, metadata) {
     Customer: 'Cliente',
     CustomerPersonalDetails: 'Dados pessoais',
     CustomerBankAccount: 'Conta bancária',
+    CustomerAsset: 'Patrimônio',
+    CustomerAssetDocumentLink: 'Anexo do patrimônio',
     Announcement: 'Comunicado',
     AnnouncementTarget: 'Público do comunicado',
     Contract: 'Contrato',
