@@ -1,0 +1,22 @@
+{
+  "create": {
+    "status": 201,
+    "id": "c7a110ba-5703-4732-a890-7d268549eb87",
+    "errors": []
+  },
+  "updateWithoutSensitiveNumber": {
+    "status": 400,
+    "errors": [
+      {
+        "code": "documents.metadata_required",
+        "message": "Field 'documentNumber' is required."
+      }
+    ],
+    "returnedKeys": []
+  },
+  "archive": {
+    "status": 200,
+    "archivedAtUtc": "2026-11-12T19:13:54.0887603+00:00",
+    "documentStatus": "Archived"
+  }
+}

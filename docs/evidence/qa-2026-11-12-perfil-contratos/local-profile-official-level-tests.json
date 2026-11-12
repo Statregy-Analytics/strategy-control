@@ -1,0 +1,31 @@
+{
+  "checks": [
+    {
+      "level": 0,
+      "summaryFailure": false,
+      "passed": true
+    },
+    {
+      "level": 1,
+      "summaryFailure": false,
+      "passed": true
+    },
+    {
+      "level": 2,
+      "summaryFailure": false,
+      "passed": true
+    },
+    {
+      "level": 3,
+      "summaryFailure": false,
+      "passed": true
+    },
+    {
+      "level": null,
+      "summaryFailure": true,
+      "passed": true
+    }
+  ],
+  "errors": [],
+  "mobileOverflow": false
+}

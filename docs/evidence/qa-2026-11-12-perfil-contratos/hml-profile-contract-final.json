@@ -1,0 +1,14 @@
+{
+  "checks": [
+    "eric: login real pelo navegador",
+    "eric: nível oficial zero, 1/2 confirmações, sem nível 1 indevido",
+    "eric: lista → detalhe, histórico em português e lista documental vazia após remoção do vínculo",
+    "claudio: login real pelo navegador",
+    "claudio: nível oficial zero, 1/2 confirmações, sem nível 1 indevido",
+    "claudio: lista → detalhe, histórico em português e lista documental vazia após remoção do vínculo",
+    "client: login real pelo navegador",
+    "client: nível oficial zero, 1/2 confirmações, sem nível 1 indevido",
+    "mobile 390: sem overflow da página"
+  ],
+  "errors": []
+}

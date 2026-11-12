@@ -1,0 +1,391 @@
+{
+  "date": "2026-11-12",
+  "source": "API real de homologação; sem tokens ou dados integrais de documentos/contas",
+  "clients": {
+    "eric": {
+      "endpointStatuses": {
+        "client/profile/summary": 200,
+        "client/onboarding/status": 200,
+        "client/profile/documents/progress": 200,
+        "client/profile/documents/overview": 200,
+        "client/profile/document-types": 200,
+        "client/profile/financial-profile": 200,
+        "client/profile/professional-profile": 200,
+        "client/profile/trusted-contacts/declaration": 200,
+        "client/profile/preferences": 200,
+        "client/contracts": 200,
+        "client/wallets": 200,
+        "client/home": 200
+      },
+      "levelProgress": {
+        "level": 0,
+        "emailConfirmed": true,
+        "phoneVerified": false,
+        "countedDocuments": 0,
+        "requiredDocuments": 5,
+        "registeredAssets": 2,
+        "requiredAssets": 3
+      },
+      "submission": {
+        "status": "NotSubmitted",
+        "submittedAtUtc": null,
+        "truthfulnessConfirmedAtUtc": null,
+        "profileEditingLocked": false
+      },
+      "contracts": [
+        {
+          "id": "01b837f5-4b9c-4171-a5d0-fee468ac6df1",
+          "publicCode": "CTR-E976C745",
+          "name": "Legacy Prime",
+          "currencyCode": "USD",
+          "businessStatus": {
+            "code": "ACTIVE",
+            "name": "Ativo"
+          },
+          "myParticipation": {
+            "allocatedAmount": 200000,
+            "allocationPercentage": 40,
+            "contributedAmount": 0,
+            "baseAmount": 200000,
+            "linkedAtUtc": "2026-10-10T20:46:21.046962+00:00"
+          }
+        },
+        {
+          "id": "5df8fc11-d8aa-41a3-af08-0c76454e9b81",
+          "publicCode": "CTR-F65C316E",
+          "name": "Alpha Hedge Fund",
+          "currencyCode": "USD",
+          "businessStatus": {
+            "code": "ACTIVE",
+            "name": "Ativo"
+          },
+          "myParticipation": {
+            "allocatedAmount": 50000,
+            "allocationPercentage": 40,
+            "contributedAmount": 0,
+            "baseAmount": 50000,
+            "linkedAtUtc": "2026-10-10T20:46:12.249722+00:00"
+          }
+        }
+      ],
+      "portfolio": {
+        "customerId": "cf2f5863-d234-42d9-9cc1-95881c05dbd1",
+        "calculatedAtUtc": "2026-11-12T18:38:40.8349234+00:00",
+        "isAutomaticallyCalculated": true,
+        "lastUpdatedAtUtc": "2026-10-12T15:33:07.444973+00:00",
+        "currencies": [
+          {
+            "currencyId": "f39ba6d7-e6ca-4367-9f7e-81850804447d",
+            "currencyIsoCode": "BRL",
+            "baseEquity": 370000,
+            "invested": 0,
+            "investable": 47500,
+            "total": 417500,
+            "baseEquityBreakdown": {
+              "assetCount": 2,
+              "grossDeclaredValue": 370000,
+              "financedBalance": 0
+            },
+            "investedBreakdown": {
+              "contractCount": 0,
+              "contractAllocation": 0,
+              "contractContributions": 0
+            },
+            "wallets": [
+              {
+                "id": "44fd4a72-9880-445f-957d-ec99b48d273f",
+                "type": "Free",
+                "currencyId": "f39ba6d7-e6ca-4367-9f7e-81850804447d",
+                "currencyIsoCode": "BRL",
+                "balance": 50000,
+                "reserved": 2500,
+                "available": 47500
+              }
+            ]
+          },
+          {
+            "currencyId": "9bd50b81-47f2-42c3-b854-937624b40d4d",
+            "currencyIsoCode": "USD",
+            "baseEquity": 0,
+            "invested": 250000,
+            "investable": 0,
+            "total": 250000,
+            "baseEquityBreakdown": {
+              "assetCount": 0,
+              "grossDeclaredValue": 0,
+              "financedBalance": 0
+            },
+            "investedBreakdown": {
+              "contractCount": 2,
+              "contractAllocation": 250000,
+              "contractContributions": 0
+            },
+            "wallets": []
+          }
+        ]
+      },
+      "contractDetails": [
+        {
+          "id": "01b837f5-4b9c-4171-a5d0-fee468ac6df1",
+          "publicCode": "CTR-E976C745",
+          "businessStatus": {
+            "code": "ACTIVE",
+            "name": "Ativo"
+          },
+          "currency": {
+            "isoCode": "USD",
+            "name": "Dólar americano"
+          },
+          "myParticipation": {
+            "allocatedAmount": 200000,
+            "allocationPercentage": 40,
+            "contributedAmount": 0,
+            "baseAmount": 200000,
+            "linkedAtUtc": "2026-10-10T20:46:21.046962+00:00"
+          },
+          "currentPosition": {
+            "value": null,
+            "asOfUtc": null,
+            "source": "IndexedVariationEngine",
+            "calculationStatus": "NotAvailable"
+          },
+          "entryValue": {
+            "value": null,
+            "asOfUtc": null,
+            "source": "IndexedVariationEngine",
+            "calculationStatus": "NotAvailable"
+          },
+          "result": {
+            "value": null,
+            "asOfUtc": null,
+            "source": "IndexedVariationEngine",
+            "calculationStatus": "NotAvailable"
+          }
+        },
+        {
+          "id": "5df8fc11-d8aa-41a3-af08-0c76454e9b81",
+          "publicCode": "CTR-F65C316E",
+          "businessStatus": {
+            "code": "ACTIVE",
+            "name": "Ativo"
+          },
+          "currency": {
+            "isoCode": "USD",
+            "name": "Dólar americano"
+          },
+          "myParticipation": {
+            "allocatedAmount": 50000,
+            "allocationPercentage": 40,
+            "contributedAmount": 0,
+            "baseAmount": 50000,
+            "linkedAtUtc": "2026-10-10T20:46:12.249722+00:00"
+          },
+          "currentPosition": {
+            "value": null,
+            "asOfUtc": null,
+            "source": "IndexedVariationEngine",
+            "calculationStatus": "NotAvailable"
+          },
+          "entryValue": {
+            "value": null,
+            "asOfUtc": null,
+            "source": "IndexedVariationEngine",
+            "calculationStatus": "NotAvailable"
+          },
+          "result": {
+            "value": null,
+            "asOfUtc": null,
+            "source": "IndexedVariationEngine",
+            "calculationStatus": "NotAvailable"
+          }
+        }
+      ]
+    },
+    "claudio": {
+      "endpointStatuses": {
+        "client/profile/summary": 200,
+        "client/onboarding/status": 200,
+        "client/profile/documents/progress": 200,
+        "client/profile/documents/overview": 200,
+        "client/profile/document-types": 200,
+        "client/profile/financial-profile": 200,
+        "client/profile/professional-profile": 200,
+        "client/profile/trusted-contacts/declaration": 200,
+        "client/profile/preferences": 200,
+        "client/contracts": 200,
+        "client/wallets": 200,
+        "client/home": 200
+      },
+      "levelProgress": {
+        "level": 0,
+        "emailConfirmed": true,
+        "phoneVerified": false,
+        "countedDocuments": 0,
+        "requiredDocuments": 5,
+        "registeredAssets": 4,
+        "requiredAssets": 3
+      },
+      "submission": {
+        "status": "NotSubmitted",
+        "submittedAtUtc": null,
+        "truthfulnessConfirmedAtUtc": null,
+        "profileEditingLocked": false
+      },
+      "contracts": [
+        {
+          "id": "72981540-b565-429c-b1ff-59f61645ba6f",
+          "publicCode": "CTR-403B56CC",
+          "name": "Beta Growth Spec",
+          "currencyCode": "BRL",
+          "businessStatus": {
+            "code": "CLOSED",
+            "name": "Encerrado"
+          },
+          "myParticipation": {
+            "allocatedAmount": 261500,
+            "allocationPercentage": 100,
+            "contributedAmount": 0,
+            "baseAmount": 261500,
+            "linkedAtUtc": "2026-10-10T20:46:15.135504+00:00"
+          }
+        }
+      ],
+      "portfolio": {
+        "customerId": "026a7899-756d-40a7-b5e9-8a3abb60cc54",
+        "calculatedAtUtc": "2026-11-12T18:38:57.4979823+00:00",
+        "isAutomaticallyCalculated": true,
+        "lastUpdatedAtUtc": "2026-11-04T23:59:04.77789+00:00",
+        "currencies": [
+          {
+            "currencyId": "f39ba6d7-e6ca-4367-9f7e-81850804447d",
+            "currencyIsoCode": "BRL",
+            "baseEquity": 310,
+            "invested": 261500,
+            "investable": 25000,
+            "total": 286810,
+            "baseEquityBreakdown": {
+              "assetCount": 4,
+              "grossDeclaredValue": 400,
+              "financedBalance": 90
+            },
+            "investedBreakdown": {
+              "contractCount": 1,
+              "contractAllocation": 261500,
+              "contractContributions": 0
+            },
+            "wallets": [
+              {
+                "id": "a4a754a8-ce55-4d03-9822-012df4c3d737",
+                "type": "Free",
+                "currencyId": "f39ba6d7-e6ca-4367-9f7e-81850804447d",
+                "currencyIsoCode": "BRL",
+                "balance": 25000,
+                "reserved": 0,
+                "available": 25000
+              }
+            ]
+          }
+        ]
+      },
+      "contractDetails": [
+        {
+          "id": "72981540-b565-429c-b1ff-59f61645ba6f",
+          "publicCode": "CTR-403B56CC",
+          "businessStatus": {
+            "code": "CLOSED",
+            "name": "Encerrado"
+          },
+          "currency": {
+            "isoCode": "BRL",
+            "name": "Real brasileiro"
+          },
+          "myParticipation": {
+            "allocatedAmount": 261500,
+            "allocationPercentage": 100,
+            "contributedAmount": 0,
+            "baseAmount": 261500,
+            "linkedAtUtc": "2026-10-10T20:46:15.135504+00:00"
+          },
+          "currentPosition": {
+            "value": null,
+            "asOfUtc": null,
+            "source": "IndexedVariationEngine",
+            "calculationStatus": "NotAvailable"
+          },
+          "entryValue": {
+            "value": null,
+            "asOfUtc": null,
+            "source": "IndexedVariationEngine",
+            "calculationStatus": "NotAvailable"
+          },
+          "result": {
+            "value": null,
+            "asOfUtc": null,
+            "source": "IndexedVariationEngine",
+            "calculationStatus": "NotAvailable"
+          }
+        }
+      ]
+    },
+    "client": {
+      "endpointStatuses": {
+        "client/profile/summary": 200,
+        "client/onboarding/status": 200,
+        "client/profile/documents/progress": 200,
+        "client/profile/documents/overview": 200,
+        "client/profile/document-types": 200,
+        "client/profile/financial-profile": 200,
+        "client/profile/professional-profile": 200,
+        "client/profile/trusted-contacts/declaration": 200,
+        "client/profile/preferences": 200,
+        "client/contracts": 200,
+        "client/wallets": 200,
+        "client/home": 200
+      },
+      "levelProgress": {
+        "level": 0,
+        "emailConfirmed": true,
+        "phoneVerified": false,
+        "countedDocuments": 1,
+        "requiredDocuments": 5,
+        "registeredAssets": 1,
+        "requiredAssets": 3
+      },
+      "submission": {
+        "status": "Approved",
+        "submittedAtUtc": "2026-10-23T02:44:50.760032+00:00",
+        "truthfulnessConfirmedAtUtc": "2026-10-23T02:44:50.760032+00:00",
+        "profileEditingLocked": false
+      },
+      "contracts": [],
+      "portfolio": {
+        "customerId": "b96019ad-0ab1-4093-8047-d80e8b6d1f29",
+        "calculatedAtUtc": "2026-11-12T18:39:08.4930902+00:00",
+        "isAutomaticallyCalculated": true,
+        "lastUpdatedAtUtc": "2026-11-01T12:38:21.118446+00:00",
+        "currencies": [
+          {
+            "currencyId": "f39ba6d7-e6ca-4367-9f7e-81850804447d",
+            "currencyIsoCode": "BRL",
+            "baseEquity": 850000,
+            "invested": 0,
+            "investable": 0,
+            "total": 850000,
+            "baseEquityBreakdown": {
+              "assetCount": 1,
+              "grossDeclaredValue": 850000,
+              "financedBalance": 0
+            },
+            "investedBreakdown": {
+              "contractCount": 0,
+              "contractAllocation": 0,
+              "contractContributions": 0
+            },
+            "wallets": []
+          }
+        ]
+      },
+      "contractDetails": []
+    }
+  }
+}

@@ -1,5 +1,9 @@
 # Marco 3 — checklist manual
 
+## Reteste de 12/11 — perfil e contratos
+
+[Checklist vigente e bloqueios reproduzidos](QA-2026-11-12-RETESTE-PERFIL-CONTRATOS.md). A renda atual persistiu no salvamento/recarga e foi restaurada; nível oficial já existe e concorda entre summary/onboarding/cards. Cabeçalho documental corrigido no front para consumir levelProgress. Não reencaminhar “nível unificado ausente”, renda antiga ou baseAmount ausente. Permanecem contrato encerrado do Cláudio no investido, métricas individuais indisponíveis, versão documental vigente, contagem elegível a esclarecer e campos/tipos/escritas sem contrato discriminados na matriz. Celular não confirmado e documento fiscal ausente são pré-condições da massa.
+
 ## Implementação de 12/11 — item 132 Auditoria
 
 > Revisão completa da Auditoria: [matriz e evidências finais](QA-2026-11-12-AUDITORIA-132-REVISAO-COMPLETA.md). Runtime 22c6ee8 publicado; pipeline 43272332205 aprovada com 216 testes. Em homologação: 49 verificações principais, 8 complementares e 4 de recuperação após deploy concluídas, sem falhas pendentes; inclui filtros, CSV, navegações, erros, rótulos longos e revisão visual desktop/celular. Sem novo bloqueio de API neste item.
@@ -15,7 +19,7 @@ Checklist e evidências em [Comunicados e transferências](QA-2026-11-12-COMUNIC
 
 Atualizado em 04/11/2026. Rodadas iniciais: Admin em 12/10 e portal em 13/10. Admin localhost:8080; Portal localhost:9010 (origens CORS autorizadas).
 
-## Reteste vigente — 04/11 — itens 121–130
+## Reteste histórico — 04/11 — itens 121–130
 
 Matriz de telas, ações, estados e integração em [Perfil e Documentação 121–130](QA-2026-11-04-PERFIL-DOCUMENTACAO-121-130.md). Inclui tema Aurora, grupos documentais, edição branca na linha e anexos patrimoniais. Níveis, catálogo novo, suítes e compatibilidade do POST com os formulários reduzidos continuam discriminados como contratos pendentes. Runtime portal 988d7fc / pipeline 41930363128 e Admin 82bd3ec / pipeline 41930348144 publicados com sucesso; 318 e 200 testes versionados, respectivamente. Documentação, tema e estados vazios/arquivo retomado conferidos em homologação. Não representa homologação integral do Marco 3.
 

@@ -1,5 +1,7 @@
 # QA 121–130 — Perfil, Documentação e tema 3 — 04/11/2026
 
+> Atualização de 12/11: [reteste vigente de perfil e contratos](QA-2026-11-12-RETESTE-PERFIL-CONTRATOS.md) prevalece sobre os relatos abaixo de nível oficial ausente e renda divergente. A regra e contadores já existem; baixo nível com celular não confirmado é pré-condição de massa. Cabeçalho do portal passa a usar levelProgress. Permanecem as lacunas de catálogo/campos e versão/contagem documental detalhadas na matriz atual.
+
 Devolutiva recebida em 04/11. Ambiente local Admin :8080 e portal :9010, ambos integrados ao backend de homologação. Este checklist distingue implementação, teste integrado e dependência de contrato; uma tela renderizada não significa uma regra de negócio homologada.
 
 ## Revisão complementar dos fluxos — 04/11

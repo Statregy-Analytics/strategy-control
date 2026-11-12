@@ -1,0 +1,10 @@
+{
+  "checks": [
+    "Lista → detalhe do contrato e anexo liberado",
+    "Abrir anexo gerou URL temporária e abriu nova aba HTTPS",
+    "Ocultação no Admin removeu o anexo do cliente após recarga",
+    "Vínculo fictício removido; nenhum valor ou participante alterado",
+    "Cláudio lista → contrato encerrado, participação R$261.500 e métricas indisponíveis"
+  ],
+  "errors": []
+}

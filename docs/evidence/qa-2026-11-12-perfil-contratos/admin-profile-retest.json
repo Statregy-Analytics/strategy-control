@@ -1,0 +1,15 @@
+{
+  "checks": [
+    {
+      "role": "claudio",
+      "loaded": true
+    },
+    {
+      "role": "client",
+      "loaded": true,
+      "restoredIncomeMatches": true
+    }
+  ],
+  "errors": [],
+  "responses": []
+}

@@ -1,0 +1,83 @@
+{
+  "passed": true,
+  "original": "3.333,33",
+  "testValue": "3.350,58",
+  "restored": true,
+  "events": [
+    {
+      "path": "/api/v1/client/profile/professional-profile",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "path": "/api/v1/client/profile/financial-profile",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "path": "/api/v1/client/profile/financial-profile",
+      "method": "PUT",
+      "status": 200,
+      "sent": {
+        "individualMonthlyIncome": "3350.58",
+        "householdMonthlyIncome": "12000",
+        "declaredNetWorth": "250000",
+        "currencyCode": "BRL",
+        "effectiveFrom": "2026-01-01"
+      }
+    },
+    {
+      "path": "/api/v1/client/profile/professional-profile",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "path": "/api/v1/client/profile/financial-profile",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "path": "/api/v1/client/profile/professional-profile",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "path": "/api/v1/client/profile/financial-profile",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "path": "/api/v1/client/profile/financial-profile",
+      "method": "PUT",
+      "status": 200,
+      "sent": {
+        "individualMonthlyIncome": "3333.33",
+        "householdMonthlyIncome": "12000",
+        "declaredNetWorth": "250000",
+        "currencyCode": "BRL",
+        "effectiveFrom": "2026-01-01"
+      }
+    },
+    {
+      "path": "/api/v1/client/profile/professional-profile",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "path": "/api/v1/client/profile/financial-profile",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "path": "/api/v1/client/profile/professional-profile",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "path": "/api/v1/client/profile/financial-profile",
+      "method": "GET",
+      "status": 200
+    }
+  ],
+  "errors": []
+}

@@ -1,5 +1,9 @@
 # Pendências do backend para homologação
 
+## Reteste de 12/11 — perfil e contratos
+
+[Checklist vigente e bloqueios reproduzidos](QA-2026-11-12-RETESTE-PERFIL-CONTRATOS.md). A renda atual persistiu no salvamento/recarga e foi restaurada; nível oficial já existe e concorda entre summary/onboarding/cards. Cabeçalho documental corrigido no front para consumir levelProgress. Não reencaminhar “nível unificado ausente”, renda antiga ou baseAmount ausente. Permanecem contrato encerrado do Cláudio no investido, métricas individuais indisponíveis, versão documental vigente, contagem elegível a esclarecer e campos/tipos/escritas sem contrato discriminados na matriz. POST/PUT de documentos tipados existem; o limite reproduzido é editar metadados do RG sem reenviar documentNumber (400 documents.metadata_required), não falta dessas rotas. Celular não confirmado e documento fiscal ausente são pré-condições da massa.
+
 ## Conferência de 12/11 — item 132 Auditoria
 
 [Revisão completa com Figma e API](QA-2026-11-12-AUDITORIA-132-REVISAO-COMPLETA.md): consulta geral, filtros e CSV respondem 200; edição fictícia de dois campos comprovou antes/depois no módulo Comunicados. Tela Auditoria e acesso em Configurações implementados e testados com os endpoints existentes; histórico local filtrado nos módulos sem tela integrada. Nenhum novo bloqueio de API identificado no item 132; filtros, CSV, navegações, falhas e recuperação após deploy retestados na URL publicada. Não encaminhar esses endpoints ou o antes/depois desse cenário como ausências do backend. Cobertura dos demais módulos, eventos automáticos e motivos em reprovações não foi certificada por esta amostra. Landing Page Admin permanece identificada como Marco 5 no anexo do QA.
@@ -10,9 +14,9 @@
 
 A interface segue o Figma e as alterações de ordem/campos expressamente autorizadas pelo designer/QA e pelo usuário. **Na ordem atual, profissional/financeiro é etapa 4 e documentos/endereço é etapa 5.** Precisamos dos estados e operações abaixo sem acrescentar campos ou ações às telas.
 
-## Reteste vigente — 04/11 — QA 121–130
+## Reteste histórico — 04/11 — QA 121–130
 
-Ver a [matriz de Perfil e Documentação](QA-2026-11-04-PERFIL-DOCUMENTACAO-121-130.md): faltam a regra unificada de níveis (5 documentos não recusados + 3 patrimônios), cinco novos tipos de renda, alternativas de estado civil, suítes e início do consórcio. O POST ainda exige dados além dos formulários reduzidos do QA; confirmar compatibilidade sem inventar dados. Leitura e upload de arquivos, vínculo/desvínculo de patrimônio e análise dos anexos já têm endpoints; não reabrir como rotas ausentes. Características de imóvel já foram liberadas e integradas em 9551a03 / c37df91, substituindo a pendência histórica abaixo.
+Ver a [matriz de Perfil e Documentação](QA-2026-11-04-PERFIL-DOCUMENTACAO-121-130.md): naquela rodada faltavam a regra unificada de níveis, cinco novos tipos de renda, alternativas de estado civil, suítes e início do consórcio. **Em 12/11 a regra oficial e seus contadores já existem**; as lacunas restantes e a contagem elegível a esclarecer estão no reteste atual acima. O POST ainda exige dados além dos formulários reduzidos do QA; confirmar compatibilidade sem inventar dados. Leitura e upload de arquivos, vínculo/desvínculo de patrimônio e análise dos anexos já têm endpoints; não reabrir como rotas ausentes. Características de imóvel já foram liberadas e integradas em 9551a03 / c37df91, substituindo a pendência histórica abaixo.
 
 Reteste complementar: recusa → motivo no portal → reenvio → aprovação passou com IRPF fictício do Cláudio. O overview administrativo continua retornando a versão antiga rejeitada e a nova aprovada como itens separados, incluindo ambas nos contadores; corrigir a identificação da versão vigente/obsolescência no servidor. O front impede reenvio da antiga quando uma linha de documento único tem upload mais recente comprovado por createdAtUtc; não altera nível/permissões.
 

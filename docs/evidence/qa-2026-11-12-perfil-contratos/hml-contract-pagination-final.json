@@ -1,0 +1,13 @@
+{
+  "checks": [
+    "eric: login real pelo navegador",
+    "eric: nível oficial zero, 1/2 confirmações, sem nível 1 indevido",
+    "eric: contador de paginação em português",
+    "eric: lista → detalhe, histórico em português e lista documental vazia após remoção do vínculo",
+    "claudio: login real pelo navegador",
+    "claudio: nível oficial zero, 1/2 confirmações, sem nível 1 indevido",
+    "claudio: contador de paginação em português",
+    "claudio: lista → detalhe, histórico em português e lista documental vazia após remoção do vínculo"
+  ],
+  "errors": []
+}

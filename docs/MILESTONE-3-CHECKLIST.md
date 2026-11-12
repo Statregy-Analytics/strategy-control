@@ -1,5 +1,9 @@
 # Marco 3 — implementação frontend
 
+## Reteste de 12/11 — perfil e contratos
+
+[Checklist vigente e bloqueios reproduzidos](QA-2026-11-12-RETESTE-PERFIL-CONTRATOS.md). A renda atual persistiu no salvamento/recarga e foi restaurada; nível oficial já existe e concorda entre summary/onboarding/cards. Cabeçalho documental corrigido no front para consumir levelProgress. Não reencaminhar “nível unificado ausente”, renda antiga ou baseAmount ausente. Permanecem contrato encerrado do Cláudio no investido, métricas individuais indisponíveis, versão documental vigente, contagem elegível a esclarecer e campos/tipos/escritas sem contrato discriminados na matriz. Celular não confirmado e documento fiscal ausente são pré-condições da massa.
+
 Atualizado em 12/10/2026. Admin: http://localhost:8080. Portal: http://localhost:9010.
 As duas portas são as origens autorizadas pelo CORS do backend.
 
