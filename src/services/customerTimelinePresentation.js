@@ -22,6 +22,7 @@ const titles = {
   'Document archived': 'Documento arquivado',
   'Provided document updated': 'Dados do documento atualizados',
   'Provided document created': 'Dados do documento cadastrados',
+  'Provided document archived': 'Dados do documento arquivados',
 }
 const types = {
   Created: 'Cliente cadastrado',

@@ -221,6 +221,7 @@
 </template>
 <script setup>
 import { computed, ref, reactive, watch, onScopeDispose } from 'vue'
+import { createDocumentWindow } from 'src/services/documentWindow'
 import TitleCard from 'src/components/Card/TitleCard.vue'
 import LabelForm from 'src/components/Form/LabelForm.vue'
 import useNotification from 'src/composables/global/useNotification'
@@ -252,7 +253,9 @@ const downloading = ref(false),
   rejectOpen = ref(false)
 const rejection = reactive({ reason: null, message: '' })
 const reviewState = reactive({})
-let revision = 0
+let revision = 0,
+  active = true,
+  documentWindow = createDocumentWindow()
 const reviewer = createDocumentReviewer(reviewState, {
   item: () => props.item,
   write: reviewDocument,
@@ -286,6 +289,8 @@ const openRejection = () => {
 }
 function resetDocumentContext() {
   revision++
+  documentWindow.dispose()
+  documentWindow = createDocumentWindow()
   reviewer.reset()
   busy.value = false
   downloading.value = false
@@ -298,7 +303,11 @@ watch(
   resetDocumentContext,
   { flush: 'sync' },
 )
-onScopeDispose(resetDocumentContext)
+onScopeDispose(() => {
+  active = false
+  resetDocumentContext()
+  documentWindow.dispose()
+})
 const name = computed(() => props.item.documentTypeName || 'documento')
 const documentId = computed(() => props.item.documentId || props.item.document?.id)
 const canUpload = computed(() =>
@@ -342,23 +351,27 @@ const fileRules = [
 ]
 const rejectFile = () => errorNotify('Use PDF, JPEG ou PNG com até 25 MB.')
 async function view() {
-  const operation = revision
+  if (!active || busy.value || !documentId.value) return
+  const operation = revision,
+    id = documentId.value
   busy.value = true
   try {
-    const result = await getDocumentTemporaryUrl(documentId.value)
-    if (operation !== revision) return
-    const url = result.url || result.temporaryUrl
-    if (!url || !/^https?:\/\//i.test(url)) throw new Error('URL indisponível')
-    window.open(url, '_blank', 'noopener,noreferrer')
+    await documentWindow.open(
+      async () => {
+        const result = await getDocumentTemporaryUrl(id)
+        return result?.url || result?.temporaryUrl
+      },
+      { current: () => active && operation === revision },
+    )
   } catch (error) {
-    if (operation !== revision) return
+    if (!active || operation !== revision) return
     errorNotify(getApiErrorMessage(error, 'Não foi possível abrir o documento.'))
   } finally {
-    if (operation === revision) busy.value = false
+    if (active && operation === revision) busy.value = false
   }
 }
 async function download() {
-  if (downloading.value) return
+  if (!active || downloading.value) return
   const operation = revision
   downloading.value = true
   try {

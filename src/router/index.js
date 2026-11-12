@@ -9,6 +9,7 @@ import { LocalStorage, Notify } from 'quasar'
 import routes from './routes'
 import { TOKEN_KEY } from 'src/boot/axios'
 import { getCurrentUser } from 'src/services/authService'
+import { isAuthenticationFailure } from 'src/services/authFailure'
 import { clearRouteChunkRetry, recoverRouteChunk } from 'src/services/routeChunkRecovery'
 
 /*
@@ -95,9 +96,16 @@ export default defineRouter(function (/* { store, ssrContext } */) {
           Notify.create({ type: 'negative', message: 'Acesso restrito a administradores.' })
           next({ name: 'Auth' })
         }
-      } catch {
+      } catch (error) {
         verifiedAdminToken = null
-        next({ name: 'Auth' })
+        if (isAuthenticationFailure(error)) next({ name: 'Auth' })
+        else {
+          Notify.create({
+            type: 'warning',
+            message: 'Não foi possível verificar o acesso. Tente novamente.',
+          })
+          next(false)
+        }
       }
     } else {
       next() // Proceed to the route

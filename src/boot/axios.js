@@ -1,6 +1,7 @@
 import { defineBoot } from '#q-app'
 import axios from 'axios'
 import { LocalStorage } from 'quasar'
+import { isAuthenticationFailure } from 'src/services/authFailure'
 
 export const TOKEN_KEY = 'sa_access_token'
 export const REFRESH_TOKEN_KEY = 'sa_refresh_token'
@@ -58,14 +59,18 @@ api.interceptors.response.use(
         return payload.accessToken
       })
       .catch((refreshError) => {
-        LocalStorage.remove(TOKEN_KEY)
-        LocalStorage.remove(REFRESH_TOKEN_KEY)
-        LocalStorage.remove(WORKSPACE_KEY)
-        LocalStorage.remove(LEGACY_WORKSPACE_KEY)
-        window.dispatchEvent(new CustomEvent('auth:expired'))
+        if (isAuthenticationFailure(refreshError)) {
+          LocalStorage.remove(TOKEN_KEY)
+          LocalStorage.remove(REFRESH_TOKEN_KEY)
+          LocalStorage.remove(WORKSPACE_KEY)
+          LocalStorage.remove(LEGACY_WORKSPACE_KEY)
+          window.dispatchEvent(new CustomEvent('auth:expired'))
+        }
         throw refreshError
       })
-      .finally(() => { refreshPromise = null })
+      .finally(() => {
+        refreshPromise = null
+      })
     const accessToken = await refreshPromise
     originalRequest.headers.Authorization = `Bearer ${accessToken}`
     return api(originalRequest)

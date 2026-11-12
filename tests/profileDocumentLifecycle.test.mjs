@@ -32,7 +32,8 @@ async function harness(service = {}) {
     updates = [],
     opened = [],
     downloads = [],
-    stops = []
+    stops = [],
+    tabs = []
   let unmount
   const methods = {
     getDocumentTemporaryUrl: async () => ({ url: 'https://example.test/qa.png' }),
@@ -67,12 +68,50 @@ async function harness(service = {}) {
       }),
     },
   }
+  class TestURL extends URL {
+    static createObjectURL() {
+      return 'blob:qa'
+    }
+    static revokeObjectURL() {}
+  }
   const context = vm.createContext({
     defineProps: () => props,
     defineEmits: () => () => updates.push(true),
     FormData,
-    window: { open: (...args) => opened.push(args) },
-    URL: { createObjectURL: () => 'blob:qa', revokeObjectURL() {} },
+    window: {
+      location: { origin: 'https://admin.example.test' },
+      open: () => {
+        const tab = {
+          closed: false,
+          opener: {},
+          close() {
+            this.closed = true
+          },
+        }
+        tab.document = {
+          head: {
+            appendChild(n) {
+              this.meta = n
+            },
+          },
+          body: {
+            appendChild(n) {
+              this.link = n
+            },
+          },
+          createElement() {
+            return {
+              click() {
+                opened.push(this.href)
+              },
+            }
+          },
+        }
+        tabs.push(tab)
+        return tab
+      },
+    },
+    URL: TestURL,
     document: { createElement: () => ({ click: () => downloads.push(true) }) },
     setTimeout: (fn) => fn(),
   })
@@ -80,7 +119,13 @@ async function harness(service = {}) {
     source + '\nexport {busy,downloading,file,uploadOpen,upload,view,download};',
     { context },
   )
+  const helper = new vm.SourceTextModule(
+    readFileSync(new URL('../src/services/documentWindow.js', import.meta.url), 'utf8'),
+    { context },
+  )
+  await helper.link(() => {})
   await mod.link((name) => {
+    if (name === 'src/services/documentWindow') return helper
     const exports = name.endsWith('.vue') ? { default: {} } : modules[name]
     assert.ok(exports, name)
     return new vm.SyntheticModule(
@@ -98,6 +143,7 @@ async function harness(service = {}) {
     notifications,
     updates,
     opened,
+    tabs,
     downloads,
     dispose: () => {
       unmount()
@@ -248,6 +294,81 @@ test('CPF and NIF upload preserve the API type, requirement and country without 
     assert.equal(payload.get('requirementId'), 'req')
     assert.equal(payload.has('metadata'), false)
     assert.equal(h.updates.length, 1)
+    h.dispose()
+  }
+})
+
+test('document reserves a tab during click, isolates opener/referrer and preserves an opened file', async () => {
+  const p = deferred(),
+    h = await harness({ getDocumentTemporaryUrl: () => p.promise })
+  const opening = h.m.view()
+  assert.equal(h.tabs.length, 1)
+  assert.equal(h.tabs[0].opener, null)
+  assert.equal(h.tabs[0].document.head.meta.content, 'no-referrer')
+  p.resolve({ url: 'https://files.example.test/ficticio.png' })
+  await opening
+  assert.equal(h.tabs[0].document.body.link.referrerPolicy, 'no-referrer')
+  h.dispose()
+  assert.equal(h.tabs[0].closed, false)
+})
+test('switching customer closes only the pending reservation and a late URL is discarded', async () => {
+  const p = deferred(),
+    h = await harness({ getDocumentTemporaryUrl: () => p.promise })
+  const opening = h.m.view()
+  h.props.customerId = 'other'
+  assert.equal(h.tabs[0].closed, true)
+  p.resolve({ url: 'https://files.example.test/ficticio.png' })
+  await opening
+  assert.equal(h.opened.length, 0)
+  h.dispose()
+})
+test('leaving closes pending document and prohibits later actions', async () => {
+  const p = deferred()
+  let calls = 0
+  const h = await harness({
+    getDocumentTemporaryUrl: () => {
+      calls++
+      return p.promise
+    },
+  })
+  const opening = h.m.view()
+  h.dispose()
+  assert.equal(h.tabs[0].closed, true)
+  p.resolve({ url: 'https://files.example.test/ficticio.png' })
+  await opening
+  await h.m.view()
+  assert.equal(calls, 1)
+  assert.equal(h.opened.length, 0)
+})
+test('duplicate opening sends one request; failure closes reserve and retry is available', async () => {
+  const p = deferred()
+  let calls = 0
+  const h = await harness({
+    getDocumentTemporaryUrl: () => {
+      calls++
+      return calls === 1
+        ? p.promise
+        : Promise.resolve({ url: 'https://files.example.test/ficticio.png' })
+    },
+  })
+  const opening = h.m.view()
+  await h.m.view()
+  assert.equal(calls, 1)
+  p.reject(Error('Falha controlada'))
+  await opening
+  assert.equal(h.tabs[0].closed, true)
+  await h.m.view()
+  assert.equal(h.opened.length, 1)
+  assert.equal(h.m.busy.value, false)
+  h.dispose()
+})
+test('invalid document URL leaves no empty tab and notifies the current customer', async () => {
+  for (const url of ['javascript:alert(1)', 'http://external.example.test/file', 'invalid']) {
+    const h = await harness({ getDocumentTemporaryUrl: async () => ({ url }) })
+    await h.m.view()
+    assert.equal(h.tabs[0].closed, true)
+    assert.equal(h.opened.length, 0)
+    assert.equal(h.notifications.length, 1)
     h.dispose()
   }
 })

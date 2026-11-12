@@ -1,3 +1,4 @@
+import { isAuthenticationFailure } from '../src/services/authFailure.js'
 import { test } from 'node:test'
 import assert from 'node:assert/strict'
 import { readFile } from 'node:fs/promises'
@@ -20,6 +21,7 @@ async function harness({ token = true, roles = ['Admin'], unavailable = false } 
         { context },
       ),
     )
+  synthetic('src/services/authFailure', { isAuthenticationFailure })
   synthetic('#q-app', { defineRouter: (fn) => fn })
   synthetic('vue-router', {
     createRouter: () => ({
@@ -135,7 +137,9 @@ test('administrator role comes from auth/me and allows editing', async () => {
 test('unverifiable or missing roles do not grant access', async () => {
   for (const config of [{ roles: [] }, { unavailable: true }]) {
     const h = await harness(config)
-    assert.equal((await h.enter(true)).name, 'Auth')
+    const result = await h.enter(true)
+    if (config.unavailable) assert.equal(result, false)
+    else assert.equal(result.name, 'Auth')
   }
 })
 test('audit filter changes reuse only a verified admin session on the same page', async () => {
