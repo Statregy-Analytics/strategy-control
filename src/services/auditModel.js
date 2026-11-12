@@ -118,7 +118,7 @@ export function auditDate(value) {
 }
 const uuid = (value) =>
   typeof value === 'string' && /^[a-f\d]{8}(-[a-f\d]{4}){3}-[a-f\d]{12}$/i.test(value)
-export function auditTarget(row) {
+export function auditTarget(row, scope = {}) {
   const query = { history: '1' }
   if (
     row.module === 'Customers' &&
@@ -129,6 +129,7 @@ export function auditTarget(row) {
     return { name: 'contracts', query: { ...query, contractId: row.resourceId } }
   if (row.resourceType === 'Transaction' && uuid(row.resourceId))
     return { name: 'Transações', query: { ...query, transactionId: row.resourceId } }
+  if (scope.resourceType === row.resourceType && scope.resourceId === row.resourceId) return null
   return {
     name: 'Auditoria',
     query: {

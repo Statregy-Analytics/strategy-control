@@ -26,7 +26,7 @@
   </q-select>
 </template>
 <script setup>
-import { ref, watch } from 'vue'
+import { ref, watch, onScopeDispose } from 'vue'
 import { lookupCustomers } from 'src/services/customerService'
 const props = defineProps({
   modelValue: { type: String, default: null },
@@ -44,6 +44,9 @@ watch(
   { immediate: true },
 )
 let sequence = 0
+onScopeDispose(() => {
+  sequence++
+})
 async function search(value, update) {
   const current = ++sequence
   loading.value = true

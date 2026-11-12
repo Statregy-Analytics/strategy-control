@@ -121,6 +121,7 @@
           <template #body-cell-open="p"
             ><q-td :props="p"
               ><q-btn
+                v-if="auditTarget(p.row, filters)"
                 flat
                 round
                 dense
@@ -129,7 +130,7 @@
                   'Abrir histórico de ' + auditRecord(p.row, metadata.get(recordKey(p.row)))
                 "
                 :disable="!p.row.resourceId || !p.row.resourceType"
-                :to="auditTarget(p.row)"
+                :to="auditTarget(p.row, filters)"
                 ><img src="/icons/audit/open.svg" alt="" /></q-btn></q-td
           ></template>
           <template #no-data
@@ -346,6 +347,8 @@ async function load() {
   const current = ++revision
   exportError.value = ''
   const snapshot = filters.value
+  if (selectedCustomer.value?.customerId !== snapshot.customer) selectedCustomer.value = null
+  resolveCustomer(snapshot.customer, current)
   const result = await resource.load(() => service.list(snapshot, page.value))
   if (!ownerActive() || current !== revision || !result) return
   if (total.value && page.value > pages.value) {
@@ -366,21 +369,23 @@ async function load() {
       })
       .catch(() => {})
   }
-  selectedCustomer.value = null
-  if (snapshot.customer) {
+}
+async function resolveCustomer(customerId, current) {
+  if (customerId) {
     try {
-      const response = await financeGet('admin/customers/' + snapshot.customer + '/header')
+      const response = await financeGet('admin/customers/' + customerId + '/header')
       if (ownerActive() && current === revision)
         selectedCustomer.value = {
-          customerId: snapshot.customer,
+          customerId,
           displayName:
+            response.data.primaryName ||
             response.data.displayName ||
             response.data.name ||
             response.data.legalName ||
-            snapshot.customer,
+            '',
         }
     } catch {
-      /* Keep the selected identifier without inventing a customer name. */
+      /* The lookup can retain its real label; never manufacture a name from the ID. */
     }
   }
 }

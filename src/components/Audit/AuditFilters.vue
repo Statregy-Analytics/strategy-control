@@ -77,7 +77,10 @@
       :model-value="modelValue.customer || null"
       :current="customer"
       dark
-      placeholder="Cliente"
+      :placeholder="modelValue.customer ? undefined : 'Cliente'"
+      hide-selected
+      fill-input
+      :title="customer?.displayName"
       dropdown-icon="img:/icons/audit/chevron.svg"
       @update:model-value="emit('change', { customer: $event || '' })"
     />

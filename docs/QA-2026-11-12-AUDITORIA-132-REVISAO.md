@@ -67,3 +67,15 @@ Evidências publicadas:
 
 - [17 verificações principais](evidence/qa-2026-11-12-auditoria-132/hml-ui-results.json) e [seis complementares](evidence/qa-2026-11-12-auditoria-132/hml-extra-results.json).
 - [Desktop 1706 px](evidence/qa-2026-11-12-auditoria-132/hml-desktop-1706.png), [desktop 1440 px](evidence/qa-2026-11-12-auditoria-132/hml-desktop-1440.png), [celular 390 px](evidence/qa-2026-11-12-auditoria-132/hml-mobile-390.png) e [painel com os mesmos cinco filtros](evidence/qa-2026-11-12-auditoria-132/hml-filter-panel.png).
+
+## Correção após as imagens do usuário — 12/11
+
+A verificação anterior confirmou a existência de um valor no seletor, mas não conferiu o nome exato retomado por URL. Também aceitou o olho redundante no histórico filtrado. Esses dois estados estavam incorretos no frontend.
+
+- [x] Cabeçalho real de Jorge retorna `primaryName: Jorge Nunes`. O filtro agora lê esse campo; não usa mais o UUID como nome de fallback.
+- [x] Cliente selecionado usa o input de busca preenchido, sem repetir o placeholder Cliente em outra linha. Rótulo é preservado ao trocar outros filtros e consultado independentemente da tabela de auditoria.
+- [x] A lista geral mantém o olho conforme o Figma. O histórico filtrado, que é a alternativa expressamente aprovada para módulos sem tela integrada, não mostra olho que leva ao próprio histórico. Não foi criado um detalhe fictício de Comunicado.
+- [x] Dez verificações locais no Chromium: nome exato pela URL, recarga, painel compacto, troca de cliente com ID na consulta/nome no campo, limpeza, falha independente da tabela, histórico sem olho redundante, Voltar com filtro/olho originais, seletor compartilhado em Nova transação sem enviar e ausência de erro JavaScript não tratado.
+- [x] Teste de navegação impede o retorno de destino para o próprio histórico e mantém o destino de Contratos.
+
+Evidências locais: [nome do cliente](evidence/qa-2026-11-12-auditoria-132/audit132-fix-customer.png), [histórico sem olho repetido](evidence/qa-2026-11-12-auditoria-132/audit132-fix-history.png) e [verificações](evidence/qa-2026-11-12-auditoria-132/audit132-fix-results.json). Nenhum endpoint novo solicitado ao backend para essas correções.

@@ -47,7 +47,15 @@ test('record navigation opens supported histories and keeps other records in Aud
   for (const type of ['Announcement', 'Loan', 'Engine', 'Contract']) {
     const row = { resourceType: type, resourceId: type === 'Contract' ? 'https://bad.test' : id }
     assert.deepEqual(auditTarget(row), { name: 'Auditoria', query: row })
+    assert.equal(auditTarget(row, row), null, 'an already open Audit history has no self-link')
   }
+  assert.equal(
+    auditTarget(
+      { resourceType: 'Contract', resourceId: id },
+      { resourceType: 'Contract', resourceId: id },
+    ).name,
+    'contracts',
+  )
 })
 test('audit values protect passwords and nested sensitive data without inventing currency or zero values', () => {
   assert.equal(auditValue('Password', 'test-secret'), '••••')
