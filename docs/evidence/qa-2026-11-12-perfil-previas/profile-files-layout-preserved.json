@@ -1,0 +1,17 @@
+[
+  {
+    "file": "src/system/layouts/config/DocumentationSettingLayout.vue",
+    "templateUnchanged": true,
+    "stylesUnchanged": true
+  },
+  {
+    "file": "src/system/components/profile/AssetDocumentGallery.vue",
+    "templateUnchanged": true,
+    "stylesUnchanged": true
+  },
+  {
+    "file": "src/system/components/profile/AssetAttachmentEditor.vue",
+    "templateUnchanged": true,
+    "stylesUnchanged": true
+  }
+]

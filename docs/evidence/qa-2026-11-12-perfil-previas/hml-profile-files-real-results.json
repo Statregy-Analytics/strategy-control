@@ -1,0 +1,53 @@
+{
+  "realApi": true,
+  "checks": [
+    "Login normal de Cláudio",
+    "Vínculo temporário do arquivo fictício existente ao veículo criado",
+    "Documentação: URL temporária 200 e arquivo aberto sem opener",
+    "Documentação: arquivo aberto permanece ao sair",
+    "Edição de imóvel: URL temporária 200 e arquivo aberto sem opener",
+    "Edição de imóvel: desktop/mobile e anexos existentes preservados; sem salvar",
+    "Galeria de veículo: URL temporária 200 e arquivo aberto sem opener",
+    "Galeria: prévia real do arquivo fictício e mobile sem overflow externo"
+  ],
+  "errors": [],
+  "httpErrors": [],
+  "expectedBlocks": [
+    {
+      "status": 403,
+      "path": "/api/v1/client/announcements",
+      "reason": "Conta de teste em nível 0; Comunicados exige nível 2, fora do escopo"
+    },
+    {
+      "status": 403,
+      "path": "/api/v1/client/announcements",
+      "reason": "Conta de teste em nível 0; Comunicados exige nível 2, fora do escopo"
+    }
+  ],
+  "fileResponses": [
+    {
+      "label": "Documentação",
+      "status": 200
+    },
+    {
+      "label": "Documentação",
+      "status": 200
+    },
+    {
+      "label": "Documentação",
+      "status": 200
+    },
+    {
+      "label": "Edição de imóvel",
+      "status": 200
+    },
+    {
+      "label": "Galeria de veículo",
+      "status": 200
+    }
+  ],
+  "cleanup": {
+    "status": 204,
+    "removed": true
+  }
+}

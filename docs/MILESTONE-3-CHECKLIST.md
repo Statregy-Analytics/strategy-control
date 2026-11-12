@@ -1,5 +1,9 @@
 # Marco 3 — implementação frontend
 
+## Revisão de 12/11 — Documentação e prévias dos editores
+
+[Checklist e evidências](QA-2026-11-12-PERFIL-PREVIAS-DOCUMENTOS.md). Corrigida abertura tardia em Documentação, galeria de anexos e edição de imóvel, incluindo falha/retry, clique duplicado, sessão antiga e reserva pendente ao sair. Os três pontos reutilizam a mesma proteção; templates/estilos/ações preservados. Versão 118fd8b publicada; 18 verificações controladas e oito integradas em homologação, destinos 200 e vínculo temporário removido. 25 novos testes e 420 testes totais, lint/build aprovados. Nenhum endpoint novo necessário; bloqueios anteriores de API continuam separados.
+
 ## Revisão de 12/11 — abertura de documentos do patrimônio
 
 [Checklist e evidências](QA-2026-11-12-PATRIMONIO-DOCUMENTOS-ABERTURA.md). Corrigida abertura após URL lenta, popup bloqueado, limpeza de erro na nova tentativa e reserva pendente ao sair/trocar sessão. Versão 82faebd publicada, oito verificações controladas e seis integradas em homologação com Éric/Cláudio, sem erro HTTP/JavaScript. Template/estilos/ações preservados; oito testes específicos e 395 testes totais, lint/build aprovados. Nenhum endpoint novo necessário; bloqueios anteriores de API continuam separados.

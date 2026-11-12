@@ -1,0 +1,50 @@
+{
+  "controlled": true,
+  "checks": [
+    "documentation: resposta em 6,2 s abre com bloqueador ativo, sem opener ou Referer",
+    "documentation: desktop/mobile sem overflow externo",
+    "documentation: arquivo aberto permanece ao sair",
+    "documentation: falha fecha reserva e nova tentativa recupera arquivo",
+    "documentation: popup bloqueado orienta sem consultar API",
+    "documentation: saída fecha reserva e ignora resposta tardia",
+    "gallery: resposta em 6,2 s abre com bloqueador ativo, sem opener ou Referer",
+    "gallery: desktop/mobile sem overflow externo",
+    "gallery: arquivo aberto permanece ao sair",
+    "gallery: falha fecha reserva e nova tentativa recupera arquivo",
+    "gallery: popup bloqueado orienta sem consultar API",
+    "gallery: saída fecha reserva e ignora resposta tardia",
+    "editor: resposta em 6,2 s abre com bloqueador ativo, sem opener ou Referer",
+    "editor: desktop/mobile sem overflow externo",
+    "editor: arquivo aberto permanece ao sair",
+    "editor: falha fecha reserva e nova tentativa recupera arquivo",
+    "editor: popup bloqueado orienta sem consultar API",
+    "editor: saída fecha reserva e ignora resposta tardia"
+  ],
+  "errors": [],
+  "destinations": [
+    {
+      "kind": "documentation",
+      "referer": null
+    },
+    {
+      "kind": "documentation",
+      "referer": null
+    },
+    {
+      "kind": "gallery",
+      "referer": null
+    },
+    {
+      "kind": "gallery",
+      "referer": null
+    },
+    {
+      "kind": "editor",
+      "referer": null
+    },
+    {
+      "kind": "editor",
+      "referer": null
+    }
+  ]
+}
