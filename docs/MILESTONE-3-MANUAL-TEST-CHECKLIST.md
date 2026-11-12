@@ -1,5 +1,9 @@
 # Marco 3 — checklist manual
 
+## Entrega consolidada de 12/11
+
+A [matriz única de frontend](QA-2026-11-12-REVISAO-CONSOLIDADA-FRONT.md) reúne correções, testes, evidências anteriores e limites atuais. As seções datadas abaixo são histórico; não reenviar endpoints já entregues como novas pendências. Esta rodada corrige sessão temporariamente indisponível e abertura de documentos no Admin, preservando templates/estilos/campos/ações. Bloqueios de API, massa e decisões de produto estão separados na matriz.
+
 ## Revisão de 12/11 — Documentação e prévias dos editores
 
 [Checklist e evidências](QA-2026-11-12-PERFIL-PREVIAS-DOCUMENTOS.md). Corrigida abertura tardia em Documentação, galeria de anexos e edição de imóvel, incluindo falha/retry, clique duplicado, sessão antiga e reserva pendente ao sair. Os três pontos reutilizam a mesma proteção; templates/estilos/ações preservados. Versão 118fd8b publicada; 18 verificações controladas e oito integradas em homologação, destinos 200 e vínculo temporário removido. 25 novos testes e 420 testes totais, lint/build aprovados. Nenhum endpoint novo necessário; bloqueios anteriores de API continuam separados.

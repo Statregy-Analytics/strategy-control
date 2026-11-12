@@ -1,0 +1,87 @@
+{
+  "date": "2026-11-12",
+  "adminCommit": "78074f7452a0b3bf66e7aa7a21be7bb2556fcba2",
+  "admin": {
+    "lint": "passed",
+    "localTests": 247,
+    "versionedTests": 239,
+    "deferredUncommittedTests": 8,
+    "build": "passed",
+    "documentComponentLayoutPreserved": {
+      "template": true,
+      "style": true
+    },
+    "automatedFaults": "VM executing actual App/router/interceptor/component scripts; not integrated API failures"
+  },
+  "portal": {
+    "lint": "passed",
+    "tests": 420,
+    "build": "passed",
+    "changes": "Existing session footer labels and registration document status; no fields or actions added",
+    "commit": "6e013a3e2b09f10bc40952362d976e0d9efa74ad"
+  },
+  "browserChecks": [
+    {
+      "scope": "local Admin / Eric",
+      "result": "passed",
+      "checks": [
+        "search returns Eric",
+        "real fictitious IRPF opened in separate tab",
+        "Save disabled without edit, enabled after change",
+        "discard restores occupation",
+        "empty bank rejected without writing",
+        "contracts, audit, banks, document settings and forms loaded"
+      ]
+    },
+    {
+      "scope": "published Admin",
+      "result": "passed",
+      "checks": [
+        "login",
+        "IRPF fictitious file opened",
+        "file tab remains after leaving client",
+        "contracts and transactions loaded",
+        "Jane wallet four confirmed zero values and empty statement",
+        "Claudio statement deposit 25000, Strategy 261500 and closed Beta Growth still included",
+        "preferences edit and selected check without saving",
+        "audit translated labels and filtered history without self-links"
+      ]
+    },
+    {
+      "scope": "published portal / Client fictitious account",
+      "result": "passed within stated access limits",
+      "checks": [
+        "Home no contracts",
+        "profile summary and personal data",
+        "Documentation uses official level zero, phone missing",
+        "bank account masked and primary",
+        "Contracts and Terms with real terms and no contract documents",
+        "empty contracts list",
+        "Communication blocked at level zero",
+        "Leverage blocked below level three",
+        "step 6 blank validation",
+        "step 4 occupation and income resumed without currency fields",
+        "step 5 number 10, issuer/mask and existing file indication resumed",
+        "step 7 review without submit",
+        "session footer 1–5 de 16 then 6–10 de 16 and back"
+      ]
+    }
+  ],
+  "browserLimitations": [
+    "Browser smoke is read/navigation/validation, not a new full CRUD/financial approval or identity approval campaign",
+    "Full prior integrated workflows are linked by area in the consolidated report",
+    "No current mobile certification of every screen; previous per-flow mobile evidence remains linked",
+    "Viewport override did not apply to the portal tab in this round; no new portal mobile pass is claimed. Admin published profile measured 375px with no root overflow."
+  ],
+  "noWrites": "No registration submit, new consent, identity review, financial operation or saved profile change in this final browser round",
+  "deploy": {
+    "admin": {
+      "run": 43330858099,
+      "status": "success"
+    },
+    "portal": {
+      "run": 43331638337,
+      "status": "success"
+    }
+  }
+}

@@ -8,7 +8,7 @@ Atualizado em 22/10/2026 após a mudança de ordem e campos autorizada pelo desi
 - [x] Checkbox de ausência integrado ao GET/PUT da declaração, com recuperação após sessão e preservação de contatos existentes.
 - [x] Botão/checkbox existentes da etapa 7 ligados ao POST onboarding/submit; confirmação obrigatória, idempotência, erro sem perder rascunho e limpeza da retomada após sucesso.
 - [x] Estado oficial profileEditingLocked controla edição; wizard envia Front/Back com evidenceDocumentIds e países seguem idioma pelo isoCode.
-- [ ] Homologação integrada de envio final com consentimentos, nova sessão, recusa e aprovação de identidade; frente/verso agrupados nas projeções do Admin e portal. Endpoints disponíveis; não classificar como ausência de backend.
+- [x] Envio final, consentimentos, nova sessão e bloqueio/desbloqueio homologados em [22/10](QA-2026-10-22-ENVIO-CONSENTIMENTOS.md). Reenvio pelo perfil e aprovação frente/verso conferidos em [23/10](QA-2026-10-23-REENVIO-PERFIL.md); versão histórica/contadores permanecem separados no reteste de 12/11.
 
 Referência: [Retorno de 22/10](QA-2026-10-22-RETORNO-BACKEND.md). As tabelas/rodadas de 20/10 abaixo são histórico e não representam contratos ausentes hoje.
 
@@ -16,19 +16,21 @@ Referência: [Retorno de 22/10](QA-2026-10-22-RETORNO-BACKEND.md). As tabelas/ro
 
 [Integração e retestes](QA-2026-10-20-RETORNO-BACKEND.md): renda corrigida; profissional antes dos documentos já integrado; catálogos, país de nascimento, até três nacionalidades, bairro e contato sem relacionamento agora suportados. Relatos históricos de ausência desses contratos estão superados.
 
-## Situação atual por etapa
+## Situação consolidada por etapa — 12/11
 
-| Etapa | Implementado no front | Pendência real da API ou homologação |
+A matriz abaixo substitui a tabela inicial de 20/10. [Entrega consolidada](QA-2026-11-12-REVISAO-CONSOLIDADA-FRONT.md); registros subsequentes de outubro são históricos.
+
+| Etapa | Situação vigente | Evidência / limite |
 | --- | --- | --- |
-| 1 · Criar conta | POST /auth/register; nome, e-mail, senha e indicação; chave estável no retry; /register abre o fluxo Figma | Texto/versão e registro do aceite antes da autenticação; residência regional não identifica um país |
-| 2 · Confirmar e-mail | Confirmação e reenvio reais; após confirmação usa login existente para continuar na etapa 3; sem senha em storage/URL | Criação/código confirmados pelo usuário e sessão na etapa 3 observada; aceite versionado continua pendente |
-| 3 · Dados pessoais | GET/PATCH do perfil; nascimento, gênero/estado civil do catálogo, país de nascimento, até três nacionalidades e cidade; preserva dados externos à etapa | Novos campos e catálogos integrados e cobertos por testes; reteste manual completo pelo QA ainda aberto |
-| 4 · Atividade trabalhista e moedas | Ocupação obrigatória em texto livre; Empregador opcional; rendas/bens; duas moedas do catálogo. PUT profissional e financeiro + PATCH preferências antes de avançar | Criação profissional, moedas e financeiro validados na conta nova; ocupação não exige catálogo. Defaults de idioma/fuso/tema ausentes ainda exigiriam alinhamento |
-| 5 · Documento e endereço | Endereço/filiação, CEP, tipos/definições e serviços documentais existentes. Entrada exige profissional/financeiro e moedas; links antigos e retomada migrados | Upload, aprovação, reprovação/motivo e reenvio RG validados; vínculo de substituição/metadados continuam parciais. Retomada de número mascarado/emissor/datas e indicação de evidências corrigidas e validadas em homologação; bairro separado integrado; UF e outros países continuam parciais |
-| 6 · Contatos de confiança | GET real e PUT de existentes preservando relationship/e-mail; valida todos antes de escrever | Inclusão sem relationship integrada; declaração de ausência sem operação de persistência |
-| 7 · Revisão e envio | Revisa dados carregados da API e alterações locais; Editar por etapa; confirmação; consulta real de onboarding | Operação final/recibo de envio e revisão cadastral não identificados; Data Intake atual contém apenas formulários patrimoniais |
+| 1 · Criar conta | Register existente integrado; criação/código confirmados pelo usuário. | Aceite versionado ocorre na etapa 7, por decisão autorizada. Consulta pré-login não é novo bloqueio dessa solução. |
+| 2 · Confirmar e-mail | Confirmação, reenvio e login existentes reutilizados. | Conta criada e código recebidos; não repetir envio de códigos sem necessidade. |
+| 3 · Dados pessoais | GET/PATCH, nascimento, catálogo, até três nacionalidades e retomada integrados. | Campos/catálogos já existem; ausência de dados reais não deve ser preenchida com exemplos. |
+| 4 · Atividade trabalhista | PUT profissional e financeiro antes dos documentos. | Moedas já removidas; defaults do país vêm do backend. Não enviar effectiveTo na renda atual. |
+| 5 · Documento e endereço | CEP, endereço, filiação, número retomado, documentos e Front/Back integrados. | RG/CNH/passaporte são alternativas. Versões anteriores/contagem elegível permanecem no reteste de 12/11. |
+| 6 · Contatos de confiança | Leitura/escrita, múltiplos contatos e declaração de ausência persistida. | Inclusão sem relationship e declaração já entregues; não cobrar endpoints novamente. |
+| 7 · Revisão e envio | Consentimentos versionados reutilizados, confirmação e POST submit reais. | Envio, nova sessão e bloqueio/desbloqueio testados em 22/10; reenvio no perfil em 23/10. |
 
-## Concluído neste lote
+## Histórico da integração inicial — 20/10
 
 - [x] Preservar campos, composição, assets e ações existentes do Figma; retirar avisos globais de prévia das etapas integradas.
 - [x] Usar clientApi, autenticação existente e idempotência; rotas 3–7 protegidas, com retorno à etapa após login.
@@ -40,7 +42,7 @@ Referência: [Retorno de 22/10](QA-2026-10-22-RETORNO-BACKEND.md). As tabelas/ro
 - [x] Máscaras na revisão, sem senhas/códigos/nomes de arquivos no resumo; senha temporária descartada ao confirmar/sair do fluxo.
 - [x] Criação e recebimento do código confirmados pelo usuário; sessão autenticada e acesso à etapa 3 observados em homologação. Leitura e registro versionado do aceite continuam pendentes.
 - [x] Retestar upload RG Brasil/dados tipados com dois arquivos fictícios na conta nova após os requisitos cadastrais; vínculo confirmado pela leitura administrativa. Outros tipos/países e aprovação não homologados.
-- [ ] Homologar inclusão de contatos, ausência persistida e envio final após correção/confirmação dos contratos.
+- [x] Inclusão/declaração e envio final têm integração e relatórios posteriores; esta antiga pendência de ausência de contrato está superada. Ver matriz atual acima.
 - [ ] Aprovação completa pelo QA: continua aberta; integração parcial não equivale a cadastro concluído de ponta a ponta.
 
 ## Pendências exclusivas do backend
