@@ -2,7 +2,7 @@
 
 ## Implementação de 12/11 — item 132 Auditoria
 
-[Checklist e evidências da Auditoria](QA-2026-11-12-AUDITORIA-132-REVISAO.md): menu, tela Figma, cinco filtros, busca, paginação, CSV e navegação de históricos implementados. Testes reais e estados controlados discriminados no relatório; nenhum novo bloqueio de API identificado neste item. Publicação registrada no relatório após conferência do deploy.
+[Checklist e evidências da Auditoria](QA-2026-11-12-AUDITORIA-132-REVISAO.md): menu, tela Figma, cinco filtros, busca, paginação, CSV e navegação de históricos implementados. Testes reais e estados controlados discriminados no relatório; nenhum novo bloqueio de API identificado neste item. Runtime 2364620 publicado; pipeline 43249869086 aprovada com 209 testes versionados, lint, build, upload e ativação. Na URL publicada, passaram 17 verificações principais e seis complementares no Chromium, com revisão desktop/mobile.
 
 ## Integração de 12/11 — Comunicados e ID Strategy
 

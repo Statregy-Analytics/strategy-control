@@ -4,7 +4,7 @@
 
 O texto do QA corresponde ao [Figma 2255:283](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI/?node-id=2255-283). A tela e o acesso em Configurações foram implementados no frontend. Consulta, filtros e exportação já existem e respondem em homologação; não devem ser cobrados como endpoints ausentes.
 
-A conferência inicial foi seguida pela implementação e pelos testes abaixo. A publicação é registrada ao final após a validação do deploy.
+A conferência inicial foi seguida pela implementação, publicação e pelos testes abaixo.
 
 ## Conferência visual e responsabilidade do front
 
@@ -51,3 +51,19 @@ A matriz de ações do anexo inclui módulos ainda não implementados e identifi
 - [Consultas de auditoria](evidence/qa-2026-11-12-auditoria-132/read-results.json).
 - [Edição fictícia e registros antes/depois](evidence/qa-2026-11-12-auditoria-132/write-results.json).
 - [Menu de Configurações publicado](evidence/qa-2026-11-12-auditoria-132/admin-settings.png).
+
+## Publicação e aceite técnico desta rodada
+
+- [x] Runtime `2364620` publicado no [Admin de homologação](https://admin.strategyanalytics.com.br/settings/audit).
+- [x] [Pipeline 43249869086](https://github.com/Statregy-Analytics/strategy-control/actions/runs/43249869086) aprovada: 209 testes versionados, lint, build, upload e ativação. Localmente, 217 testes passaram; os oito testes adicionais pertencem ao estudo futuro já existente no worktree e não foram incluídos nesta entrega.
+- [x] `git diff --cached --check` passou para toda a entrega. O `git diff --check` integral ainda aponta CRLF/whitespace do Swagger previamente alterado no worktree, que foi preservado e não incluído no commit.
+- [x] Na URL publicada, repetidas as 17 verificações principais e as seis complementares, com sucesso; nenhum erro JavaScript não tratado. Navegação de Contrato/Transação usou eventos de auditoria controlados apontando a registros reais, somente leitura; não foi alegada criação real de auditoria nesses módulos.
+- [x] CSV filtrado baixado da API real; período, cliente e histórico de Cliente também consultados de forma integrada. As falhas 503 e a corrida entre buscas foram respostas controladas para testar o front.
+- [x] Histórico de módulos sem tela permanece filtrado na própria Auditoria, conforme autorização. Não foi criado editor de Comunicados, Motor ou Empréstimos neste item.
+
+Nenhum novo bloqueio de backend identificado para a tela 132. Esta validação não certifica a geração de eventos de todas as operações da cláusula 20; os limites da amostra continuam descritos acima.
+
+Evidências publicadas:
+
+- [17 verificações principais](evidence/qa-2026-11-12-auditoria-132/hml-ui-results.json) e [seis complementares](evidence/qa-2026-11-12-auditoria-132/hml-extra-results.json).
+- [Desktop 1706 px](evidence/qa-2026-11-12-auditoria-132/hml-desktop-1706.png), [desktop 1440 px](evidence/qa-2026-11-12-auditoria-132/hml-desktop-1440.png), [celular 390 px](evidence/qa-2026-11-12-auditoria-132/hml-mobile-390.png) e [painel com os mesmos cinco filtros](evidence/qa-2026-11-12-auditoria-132/hml-filter-panel.png).
