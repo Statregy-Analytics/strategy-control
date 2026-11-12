@@ -1,0 +1,46 @@
+{
+  "realApi": true,
+  "checks": [
+    "Dois contatos fictícios com telefones reservados NANP criados no mesmo salvamento",
+    "Recarga preserva os dois contatos",
+    "Edição somente do segundo contato enviou um PUT, sem duplicar ou alterar o primeiro"
+  ],
+  "errors": [],
+  "writes": [
+    {
+      "method": "POST",
+      "status": 201,
+      "keys": [
+        "name",
+        "phoneNumber",
+        "relationship",
+        "email"
+      ]
+    },
+    {
+      "method": "POST",
+      "status": 201,
+      "keys": [
+        "name",
+        "phoneNumber",
+        "relationship",
+        "email"
+      ]
+    },
+    {
+      "method": "PUT",
+      "status": 200,
+      "keys": [
+        "name",
+        "phoneNumber",
+        "relationship",
+        "email"
+      ]
+    }
+  ],
+  "cleanup": [
+    "Contato fictício removido: 7b04b586-d17b-4058-8aaa-90aed30be839",
+    "Contato fictício removido: 231c8c9b-6f2a-409e-acbd-2c161e16405a",
+    "Lista vazia original confirmada"
+  ]
+}

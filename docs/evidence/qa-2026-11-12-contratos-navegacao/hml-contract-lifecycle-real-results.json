@@ -1,0 +1,19 @@
+{
+  "realApi": true,
+  "checks": [
+    "Vínculo temporário do arquivo fictício criado pela API administrativa",
+    "eric: login real",
+    "eric: lista → detalhe e histórico",
+    "Éric: arquivo fictício aberto por URL temporária 200",
+    "Éric: arquivo já aberto permanece após voltar para lista",
+    "Éric: retorno ao detalhe sem erro residual",
+    "claudio: login real",
+    "claudio: lista → detalhe e histórico",
+    "Cláudio: encerrado, valores reais, documentos vazios e mobile sem overflow"
+  ],
+  "errors": [],
+  "cleanup": {
+    "removedTemporaryLink": true,
+    "status": 204
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "controlled": true,
+  "checks": [
+    "Detalhe/documento/histórico renderizados com fixture controlada",
+    "Abertura pendente bloqueia clique repetido",
+    "Troca de contrato fecha aba pendente e ignora URL antiga",
+    "Sair para listagem fecha aba pendente sem reabertura tardia",
+    "Popup bloqueado usa aviso existente sem consultar URL",
+    "Sucesso abre arquivo e mantém aba ao trocar contrato",
+    "Falha documental mantém detalhe/histórico e não vira vazio",
+    "Retry recupera documentos isoladamente",
+    "Vazio aparece somente após leitura bem-sucedida",
+    "Mobile com nome longo: {\"viewport\":390,\"scroll\":390}"
+  ],
+  "errors": [],
+  "geometry": {
+    "viewport": 390,
+    "scroll": 390
+  },
+  "invalidRequests": []
+}

@@ -1,5 +1,9 @@
 # Marco 3 — implementação frontend
 
+## Revisão de 12/11 — navegação dos contratos
+
+[Checklist e evidências](QA-2026-11-12-CONTRATOS-NAVEGACAO.md). Corrigidos abertura duplicada, respostas de anexo após trocar contrato/sair, erro residual e consulta com ID de outra rota. Campos, ações e layout preservados; 14 testes específicos e 359 testes totais passaram, com lint/build. Falhas são de front, sem nova demanda de API; bloqueios de valores/documentos do reteste anterior permanecem separados.
+
 ## Reteste de 12/11 — perfil e contratos
 
 [Checklist vigente e bloqueios reproduzidos](QA-2026-11-12-RETESTE-PERFIL-CONTRATOS.md). A renda atual persistiu no salvamento/recarga e foi restaurada; nível oficial já existe e concorda entre summary/onboarding/cards. Cabeçalho documental corrigido no front para consumir levelProgress. Não reencaminhar “nível unificado ausente”, renda antiga ou baseAmount ausente. Permanecem contrato encerrado do Cláudio no investido, métricas individuais indisponíveis, versão documental vigente, contagem elegível a esclarecer e campos/tipos/escritas sem contrato discriminados na matriz. Celular não confirmado e documento fiscal ausente são pré-condições da massa.
@@ -16,7 +20,9 @@ As duas portas são as origens autorizadas pelo CORS do backend.
 - Portal: formulário de saque com validação e confirmação, bloqueado quando não existe o identificador de moeda exigido pela API.
 - Recursos independentes, recuperação de erro, proteção contra respostas antigas e idempotência preservada nas tentativas de escrita.
 
-## Pendências de contrato HTTP
+## Histórico de lacunas de contrato HTTP — 12/10/2026
+
+**Esta tabela registra a rodada de 12/10; não encaminhar como pendência atual. As revisões datadas no início deste documento prevalecem.**
 
 Não foram inventados valores para campos sem vocabulário publicado no OpenAPI. O usuário informou não possuir documentação complementar.
 
@@ -31,7 +37,7 @@ Não foram inventados valores para campos sem vocabulário publicado no OpenAPI.
 Posição, resultado e evolução NotAvailable são apresentados como indisponíveis, nunca convertidos em saldo zero.
 Fonte de referência: docs/Api/milestone-3-swagger.json, snapshot do endpoint /openapi/v1.json.
 
-## Verificações
+## Verificações históricas — outubro de 2026
 
 - Builds Admin e Portal: aprovados.
 - Lint Admin: aprovado.

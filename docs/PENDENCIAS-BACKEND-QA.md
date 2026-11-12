@@ -1,5 +1,9 @@
 # Pendências do backend para homologação
 
+## Revisão de 12/11 — navegação dos contratos
+
+[Checklist e evidências](QA-2026-11-12-CONTRATOS-NAVEGACAO.md). Corrigidos abertura duplicada, respostas de anexo após trocar contrato/sair, erro residual e consulta com ID de outra rota. Campos, ações e layout preservados; 14 testes específicos e 359 testes totais passaram, com lint/build. Falhas são de front, sem nova demanda de API; bloqueios de valores/documentos do reteste anterior permanecem separados.
+
 ## Reteste de 12/11 — perfil e contratos
 
 [Checklist vigente e bloqueios reproduzidos](QA-2026-11-12-RETESTE-PERFIL-CONTRATOS.md). A renda atual persistiu no salvamento/recarga e foi restaurada; nível oficial já existe e concorda entre summary/onboarding/cards. Cabeçalho documental corrigido no front para consumir levelProgress. Não reencaminhar “nível unificado ausente”, renda antiga ou baseAmount ausente. Permanecem contrato encerrado do Cláudio no investido, métricas individuais indisponíveis, versão documental vigente, contagem elegível a esclarecer e campos/tipos/escritas sem contrato discriminados na matriz. POST/PUT de documentos tipados existem; o limite reproduzido é editar metadados do RG sem reenviar documentNumber (400 documents.metadata_required), não falta dessas rotas. Celular não confirmado e documento fiscal ausente são pré-condições da massa.

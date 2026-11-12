@@ -1,5 +1,9 @@
 # Marco 3 — checklist manual
 
+## Revisão de 12/11 — navegação dos contratos
+
+[Checklist e evidências](QA-2026-11-12-CONTRATOS-NAVEGACAO.md). Corrigidos abertura duplicada, respostas de anexo após trocar contrato/sair, erro residual e consulta com ID de outra rota. Campos, ações e layout preservados; 14 testes específicos e 359 testes totais passaram, com lint/build. Falhas são de front, sem nova demanda de API; bloqueios de valores/documentos do reteste anterior permanecem separados.
+
 ## Reteste de 12/11 — perfil e contratos
 
 [Checklist vigente e bloqueios reproduzidos](QA-2026-11-12-RETESTE-PERFIL-CONTRATOS.md). A renda atual persistiu no salvamento/recarga e foi restaurada; nível oficial já existe e concorda entre summary/onboarding/cards. Cabeçalho documental corrigido no front para consumir levelProgress. Não reencaminhar “nível unificado ausente”, renda antiga ou baseAmount ausente. Permanecem contrato encerrado do Cláudio no investido, métricas individuais indisponíveis, versão documental vigente, contagem elegível a esclarecer e campos/tipos/escritas sem contrato discriminados na matriz. Celular não confirmado e documento fiscal ausente são pré-condições da massa.
@@ -493,7 +497,7 @@ Defeito do frontend encerrado, sem novo endpoint ou ajuste do servidor. Ausênci
 - [x] Correção do frontend e2997fd: mantém base de edição separada de consultas; não repete uma escrita já confirmada ao tentar novamente após falha parcial.
 - [x] Testes automatizados: falha na segunda escrita preserva rascunho/primeira confirmação; falha na primeira não envia a segunda; troca de sessão interrompe a sequência. Total 173 testes aprovados.
 - [x] Correção a41ae98: usa a mensagem de erro existente para avisar quando a consulta após salvar retorna valores diferentes dos enviados. Mesmo layout, campos e ações.
-- [ ] Homologação integrada do financeiro: backend grava novos valores no histórico, mas consulta atual retorna registro anterior. Pendência real detalhada em PENDENCIAS-BACKEND-QA.md; não considerar este cenário aprovado só pelo PUT aceito.
+- [x] Renda vigente: divergência histórica superada no reteste de 12/11; salvamento, recarga e restauração passaram. Ver [perfil e contratos](QA-2026-11-12-RETESTE-PERFIL-CONTRATOS.md). Não reencaminhar a antiga consulta de renda como bug aberto.
 
 A aprovação anterior de leitura financeira integral foi revista por este reteste. Os cenários independentes de contatos, documentos e edição de localização não foram reabertos.
 
@@ -634,7 +638,7 @@ Complemento visual desta rodada: no primeiro deploy 3ea3c43, busca por 325 e con
 - [x] Portal: 207 testes, lint e build aprovados. Teste integrado do mesmo adaptador com Cláudio criou/editou contato fictício, confirmou leitura e removeu o registro descartável; lista original preservada.
 - [x] Publicação 2591a8b / pipeline 39526079478 aprovada no portal. Na conta do usuário, lista vazia abriu a edição; nome/telefone inválidos recusados, descarte/reabertura limpos, sem criar contato.
 - [x] Desktop 1366 px e mobile 390 px conferidos; largura útil/rolagem 378/378 px no mobile. Viewport restaurado; evidências cliente-contatos-primeiro-editor-hml.png e cliente-contatos-primeiro-editor-mobile-hml.png.
-- [ ] Reteste manual de lista múltipla em conta aprovada pelo QA; cobertura automática de múltiplos contatos e falha parcial concluída.
+- [x] Reteste técnico manual de lista múltipla em 12/11: criação de dois contatos, recarga e edição isolada de um passaram; contatos fictícios removidos e estado original confirmado. Ver [regressão e evidências](QA-2026-11-12-CONTRATOS-NAVEGACAO.md). Aceite independente do QA permanece separado.
 
 Esta é uma correção do frontend e não entra na tabela de bugs do backend. A declaração persistida de ausência de contato e as demais pendências cadastrais continuam separadas.
 
