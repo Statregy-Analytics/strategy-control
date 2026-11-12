@@ -1,0 +1,16 @@
+{
+  "base": "https://admin.strategyanalytics.com.br",
+  "passed": [
+    "direct filtered URL resolves primaryName and never shows UUID",
+    "name restored after reload",
+    "same customer label in compact panel",
+    "search another customer emits its ID while displaying its name",
+    "clear customer filter",
+    "customer label resolves independently from failed Audit request",
+    "filtered resource history contains no repetitive eye links",
+    "back restores original list, filter and eye links",
+    "shared customer picker still selects correctly in transaction form without submitting",
+    "no uncaught JavaScript errors"
+  ],
+  "errors": []
+}

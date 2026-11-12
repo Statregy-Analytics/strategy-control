@@ -52,7 +52,7 @@ A matriz de ações do anexo inclui módulos ainda não implementados e identifi
 - [Edição fictícia e registros antes/depois](evidence/qa-2026-11-12-auditoria-132/write-results.json).
 - [Menu de Configurações publicado](evidence/qa-2026-11-12-auditoria-132/admin-settings.png).
 
-## Publicação e aceite técnico desta rodada
+## Publicação inicial e aceite técnico desta rodada
 
 - [x] Runtime `2364620` publicado no [Admin de homologação](https://admin.strategyanalytics.com.br/settings/audit).
 - [x] [Pipeline 43249869086](https://github.com/Statregy-Analytics/strategy-control/actions/runs/43249869086) aprovada: 209 testes versionados, lint, build, upload e ativação. Localmente, 217 testes passaram; os oito testes adicionais pertencem ao estudo futuro já existente no worktree e não foram incluídos nesta entrega.
@@ -79,3 +79,9 @@ A verificação anterior confirmou a existência de um valor no seletor, mas nã
 - [x] Teste de navegação impede o retorno de destino para o próprio histórico e mantém o destino de Contratos.
 
 Evidências locais: [nome do cliente](evidence/qa-2026-11-12-auditoria-132/audit132-fix-customer.png), [histórico sem olho repetido](evidence/qa-2026-11-12-auditoria-132/audit132-fix-history.png) e [verificações](evidence/qa-2026-11-12-auditoria-132/audit132-fix-results.json). Nenhum endpoint novo solicitado ao backend para essas correções.
+
+### Publicação da correção e reteste
+
+Runtime atual `ece2e5b`, publicado com a [pipeline 43259860185](https://github.com/Statregy-Analytics/strategy-control/actions/runs/43259860185) aprovada: 209 testes, lint, build, upload e ativação. As dez verificações foram repetidas com sucesso na URL de homologação, sem erro JavaScript não tratado; troca/recarga/limpeza do cliente e navegação foram testes reais de leitura, a falha da tabela foi controlada. Nenhuma transação foi enviada.
+
+[Resultado em homologação](evidence/qa-2026-11-12-auditoria-132/hml-fix-results.json), [filtro com o nome retomado](evidence/qa-2026-11-12-auditoria-132/hml-fix-customer.png) e [histórico sem ação redundante](evidence/qa-2026-11-12-auditoria-132/hml-fix-history.png). Checklist corrigido; esses dois defeitos eram do front e não foram registrados como bloqueios do backend.

@@ -2,7 +2,7 @@
 
 ## Implementação de 12/11 — item 132 Auditoria
 
-[Checklist e evidências da Auditoria](QA-2026-11-12-AUDITORIA-132-REVISAO.md): menu, tela Figma, cinco filtros, busca, paginação, CSV e navegação de históricos implementados. Testes reais e estados controlados discriminados no relatório; nenhum novo bloqueio de API identificado neste item. Runtime 2364620 publicado; pipeline 43249869086 aprovada com 209 testes versionados, lint, build, upload e ativação. Na URL publicada, passaram 17 verificações principais e seis complementares no Chromium, com revisão desktop/mobile.
+[Checklist e evidências da Auditoria](QA-2026-11-12-AUDITORIA-132-REVISAO.md): menu, tela Figma, cinco filtros, busca, paginação, CSV e navegação de históricos implementados. Testes reais e estados controlados discriminados no relatório; nenhum novo bloqueio de API identificado neste item. Runtime 2364620 publicado; pipeline 43249869086 aprovada com 209 testes versionados, lint, build, upload e ativação. Na URL publicada, passaram 17 verificações principais e seis complementares no Chromium, com revisão desktop/mobile. Correção posterior publicada em ece2e5b, pipeline 43259860185 aprovada: nome primaryName retomado no filtro, placeholder sem sobreposição e olho sem apontar ao próprio histórico. Dez verificações específicas passaram também em homologação; não são pendências do backend.
 
 ## Integração de 12/11 — Comunicados e ID Strategy
 
