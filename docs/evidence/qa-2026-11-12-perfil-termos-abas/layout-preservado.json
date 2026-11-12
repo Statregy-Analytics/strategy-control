@@ -1,0 +1,10 @@
+{
+  "src/system/layouts/config/TermsContractLayouts.vue": {
+    "templateUnchanged": true,
+    "stylesUnchanged": true
+  },
+  "src/system/pages/Config/ProfilePage.vue": {
+    "templateUnchanged": true,
+    "stylesUnchanged": true
+  }
+}

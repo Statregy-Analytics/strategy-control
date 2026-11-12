@@ -1,0 +1,24 @@
+{
+  "controlled": true,
+  "checks": [
+    "Contratos e Termos carregam independentemente",
+    "Termo em texto baixado como TXT",
+    "Arquivo da plataforma baixado por blob",
+    "Troca rápida de abas com autenticação atrasada preserva a última escolha",
+    "URL após 6,2s abre sem depender de ativação tardia, sem opener/referer",
+    "Arquivo já aberto é preservado ao trocar de aba",
+    "Troca de aba fecha reserva e ignora URL tardia",
+    "Popup bloqueado informa recuperação e não consulta URL",
+    "Falha de URL fecha reserva e libera novo clique",
+    "Retry após falha abre o arquivo",
+    "Falha parcial de termos não vira vazio nem bloqueia contratos",
+    "Retry recupera fonte de termos",
+    "Vazios reais dos dois grupos após resposta 200",
+    "Mobile e nome extenso sem overflow"
+  ],
+  "errors": [],
+  "referrers": [
+    null,
+    null
+  ]
+}

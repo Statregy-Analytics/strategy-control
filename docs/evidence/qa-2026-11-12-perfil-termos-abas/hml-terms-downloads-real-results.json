@@ -1,0 +1,19 @@
+{
+  "realApi": true,
+  "checks": [
+    "Vínculo temporário do arquivo fictício criado pela API administrativa",
+    "eric: login real",
+    "eric: termo real lido pela API e baixado como texto não vazio",
+    "Éric: anexo fictício da aba Contratos e Termos aberto por URL temporária 200",
+    "Éric: mudar de aba preserva o arquivo já aberto",
+    "Éric: reentrada preserva consulta e ação disponível",
+    "claudio: login real",
+    "claudio: termo real lido pela API e baixado como texto não vazio",
+    "Cláudio: contratos sem anexo e termos independentes, mobile sem overflow"
+  ],
+  "errors": [],
+  "cleanup": {
+    "removedTemporaryLink": true,
+    "status": 204
+  }
+}

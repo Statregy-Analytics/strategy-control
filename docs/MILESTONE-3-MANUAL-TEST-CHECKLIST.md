@@ -1,5 +1,9 @@
 # Marco 3 — checklist manual
 
+## Revisão de 12/11 — Contratos e Termos e abas do perfil
+
+[Checklist e evidências](QA-2026-11-12-PERFIL-TERMOS-E-ABAS.md). Corrigidas abertura de anexo após consulta lenta, reserva de aba ao sair, aviso de popup bloqueado e volta indevida da aba anterior na navegação rápida. Layout/campos/ações preservados; 19 testes de documentos e oito de abas com roteador real, 378 testes totais, lint/build aprovados. Sem novo endpoint necessário; bloqueios de API e massa permanecem separados.
+
 ## Revisão de 12/11 — navegação dos contratos
 
 [Checklist e evidências](QA-2026-11-12-CONTRATOS-NAVEGACAO.md). Corrigidos abertura duplicada, respostas de anexo após trocar contrato/sair, erro residual e consulta com ID de outra rota. Campos, ações e layout preservados; 14 testes específicos e 359 testes totais passaram, com lint/build. Falhas são de front, sem nova demanda de API; bloqueios de valores/documentos do reteste anterior permanecem separados.
