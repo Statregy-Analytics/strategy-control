@@ -1,0 +1,13 @@
+<svg preserveAspectRatio="none" overflow="visible" style="display: block;" width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="Coins" clip-path="url(#clip0_0_22)">
+<path id="Vector" d="M7 4C7 5.65685 5.65685 7 4 7C2.34315 7 1 5.65685 1 4C1 2.34315 2.34315 1 4 1C5.65685 1 7 2.34315 7 4Z" stroke-linecap="round" stroke-linejoin="round" stroke="white"/>
+<path id="Vector_2" d="M9.045 5.185C9.51765 5.36121 9.93824 5.65377 10.2679 6.0356C10.5975 6.41743 10.8255 6.87622 10.9309 7.36953C11.0362 7.86285 11.0155 8.37476 10.8705 8.85792C10.7256 9.34109 10.4612 9.77991 10.1017 10.1338C9.74225 10.4877 9.29936 10.7452 8.81399 10.8826C8.32862 11.02 7.81645 11.0327 7.32484 10.9197C6.83323 10.8067 6.37806 10.5715 6.00141 10.236C5.62477 9.90045 5.33882 9.47535 5.17 9" stroke-linecap="round" stroke-linejoin="round" stroke="white"/>
+<path id="Vector_3" d="M3.5 3H4V5" stroke-linecap="round" stroke-linejoin="round" stroke="white"/>
+<path id="Vector_4" d="M8.355 6.94L8.705 7.295L7.295 8.705" stroke-linecap="round" stroke-linejoin="round" stroke="white"/>
+</g>
+<defs>
+<clipPath id="clip0_0_22">
+<rect width="12" height="12" fill="white"/>
+</clipPath>
+</defs>
+</svg>

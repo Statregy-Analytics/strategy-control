@@ -3,6 +3,14 @@
     ref="select"
     class="glass-select"
     :model-value="modelValue"
+    :display-value="
+      (modelValue == null ||
+        modelValue === '' ||
+        (Array.isArray(modelValue) && !modelValue.length)) &&
+      placeholder
+        ? placeholder
+        : undefined
+    "
     :options="options"
     outlined
     dense
@@ -46,6 +54,7 @@ defineExpose({ hidePopup: () => select.value?.hidePopup() })
 defineProps({
   modelValue: { type: [String, Number, Boolean, Array], default: null },
   options: { type: Array, default: () => [] },
+  placeholder: { type: String, default: '' },
 })
 defineEmits(['update:modelValue'])
 </script>

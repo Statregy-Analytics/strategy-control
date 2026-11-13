@@ -24,9 +24,9 @@ test('enabled menu items resolve to existing routes; unintegrated modules have n
     assert.ok(paths.includes(item.to), item.to)
   assert.deepEqual(
     adminNavigation.filter((item) => !item.to).map((item) => item.label),
-    ['Lógicas', 'Crédito', 'Comunicados'],
+    [],
   )
-  assert.ok(!adminNavigation.some((item) => /dashboard|assessor|lead|logic/.test(item.to || '')))
+  assert.ok(!adminNavigation.some((item) => /dashboard|assessor|lead/.test(item.to || '')))
 })
 test('customer detail belongs to Clientes; auxiliary pages do not', () => {
   const clients = adminNavigation[0]

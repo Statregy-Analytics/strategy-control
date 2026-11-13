@@ -38,7 +38,8 @@
 import TitlePage from 'src/components/TitlePage.vue'
 import ClientsTable from 'src/components/Table/Clients/ClientsTable.vue'
 import CreateClientLayout from 'src/layouts/Clients/CreateClientLayout.vue'
-import { defineComponent } from 'vue'
+import { defineComponent, watch } from 'vue'
+import { useRoute, useRouter } from 'vue-router'
 import { useLayoutStore } from 'src/stores/layout'
 import { storeToRefs } from 'pinia'
 defineComponent({
@@ -46,6 +47,20 @@ defineComponent({
 })
 const layoutStore = useLayoutStore()
 const { createClientDialog } = storeToRefs(layoutStore)
+const route = useRoute(),
+  router = useRouter()
+watch(
+  () => route.query.new,
+  (value) => {
+    if (value === '1') {
+      layoutStore.setCreateClientDialog(true)
+      const query = { ...route.query }
+      delete query.new
+      router.replace({ query })
+    }
+  },
+  { immediate: true },
+)
 const openCreateClient = () => {
   layoutStore.setCreateClientDialog(true)
 }

@@ -1,0 +1,438 @@
+[
+  {
+    "id": "1:28279",
+    "name": "[UI] FLUXO CARTEIRA - SAQUE - Passo 1"
+  },
+  {
+    "id": "251:28194",
+    "name": "[UI] FLUXO CARTEIRA - SAQUE - Passo 1 · Conta bancária aberta"
+  },
+  {
+    "id": "1:28349",
+    "name": "[UI] FLUXO CARTEIRA - SAQUE - Passo 3"
+  },
+  {
+    "id": "1:28421",
+    "name": "[UI] FLUXO CARTEIRA - SAQUE - Sucesso"
+  },
+  {
+    "id": "1:28491",
+    "name": "[UI] FLUXO CARTEIRA - SAQUE - Passo 2"
+  },
+  {
+    "id": "1:29678",
+    "name": "[UI] HOME - VERSÃO PADRÃO"
+  },
+  {
+    "id": "1:31985",
+    "name": "[UI] HOME - CONTA NOVA - Sem depósito"
+  },
+  {
+    "id": "1:32335",
+    "name": "[EC] HOME · Conta nova · Estados do gráfico e do período"
+  },
+  {
+    "id": "1:32479",
+    "name": "[UI] CONTRATOS - GERAL"
+  },
+  {
+    "id": "1:34294",
+    "name": "[UI] CONTRATOS - OFERTA_CONTRATO - 1"
+  },
+  {
+    "id": "1:36148",
+    "name": "[UI] CONTRATOS - OFERTA_CONTRATO - 2"
+  },
+  {
+    "id": "1:37994",
+    "name": "[UI] CONTRATOS - OFERTA_CONTRATO - 3"
+  },
+  {
+    "id": "1:39818",
+    "name": "[UI] CONTRATOS - OFERTA_CONTRATO - 4"
+  },
+  {
+    "id": "1:41796",
+    "name": "[UI] CONTRATOS - OFERTA_CONTRATO - 5A"
+  },
+  {
+    "id": "1:43678",
+    "name": "[UI] CONTRATOS - OFERTA_CONTRATO - 5A"
+  },
+  {
+    "id": "1:45691",
+    "name": "[UI] CONTRATOS - PAG ESPECIFICA"
+  },
+  {
+    "id": "1:46764",
+    "name": "[UI] CONTRATOS - PAG ESPECIFICA"
+  },
+  {
+    "id": "1:48631",
+    "name": "[UI] CONTRATOS - PAG ESPECIFICA"
+  },
+  {
+    "id": "1:50141",
+    "name": "[UI] CONTRATOS - PAG ESPECIFICA"
+  },
+  {
+    "id": "211:28821",
+    "name": "[EC] CONTRATOS - PAG ESPECIFICA · Operações · sem registro"
+  },
+  {
+    "id": "1:50557",
+    "name": "[UI] ALAVANCAGEM"
+  },
+  {
+    "id": "1:50683",
+    "name": "[UI] ALAVANCAGEM - BLOQUEADO"
+  },
+  {
+    "id": "1:50860",
+    "name": "[UI] FLUXO - SOLICITAR EMPRÉSTIMO - "
+  },
+  {
+    "id": "1:50960",
+    "name": "[UI] ALAVANCAGEM - PÁG ALAVANCAGEM - GARANTIA IMÓVEL"
+  },
+  {
+    "id": "1:51347",
+    "name": "[UI] ALAVANCAGEM - PÁG ALAVANCAGEM - GARANTIA AUTOMÓVEL"
+  },
+  {
+    "id": "1:51728",
+    "name": "[UI] ALAVANCAGEM - PÁG ALAVANCAGEM - CONSÓRCIO AUTOMÓVEL"
+  },
+  {
+    "id": "1:52034",
+    "name": "[UI] ALAVANCAGEM - PÁG ALAVANCAGEM - COLATERAL"
+  },
+  {
+    "id": "1:52217",
+    "name": "[UI] FLUXO - SOLICITAR EMPRÉSTIMO - "
+  },
+  {
+    "id": "1:52330",
+    "name": "[UI] FLUXO - SOLICITAR EMPRÉSTIMO - "
+  },
+  {
+    "id": "1:52424",
+    "name": "[UI] FLUXO - SOLICITAR EMPRÉSTIMO - "
+  },
+  {
+    "id": "1:52520",
+    "name": "[UI] FLUXO - SOLICITAR EMPRÉSTIMO - "
+  },
+  {
+    "id": "1:52616",
+    "name": "[UI] FLUXO - SOLICITAR EMPRÉSTIMO - "
+  },
+  {
+    "id": "1:52719",
+    "name": "OFERTAS CRÉDITO PRÉ APROVADO"
+  },
+  {
+    "id": "1:52928",
+    "name": "OFERTAS CRÉDITO PRÉ APROVADO"
+  },
+  {
+    "id": "1:53140",
+    "name": "OFERTAS FINAIS CRÉDITO "
+  },
+  {
+    "id": "1:53312",
+    "name": "OFERTAS FINAIS CRÉDITO "
+  },
+  {
+    "id": "1:53568",
+    "name": "OFERTAS FINAIS CRÉDITO "
+  },
+  {
+    "id": "1:53739",
+    "name": "[UI] FLUXO - SOLICITAR EMPRÉSTIMO - "
+  },
+  {
+    "id": "1:53839",
+    "name": "[UI] FLUXO - SOLICITAR EMPRÉSTIMO - "
+  },
+  {
+    "id": "1:53960",
+    "name": "[UI] FLUXO - SOLICITAR EMPRÉSTIMO - "
+  },
+  {
+    "id": "1:54054",
+    "name": "[UI] FLUXO - SOLICITAR EMPRÉSTIMO - "
+  },
+  {
+    "id": "1:54146",
+    "name": "[UI] FLUXO - SOLICITAR EMPRÉSTIMO - "
+  },
+  {
+    "id": "1:54266",
+    "name": "[UI] FLUXO - SOLICITAR EMPRÉSTIMO - "
+  },
+  {
+    "id": "1:54430",
+    "name": "[UI] FLUXO - SOLICITAR EMPRÉSTIMO - "
+  },
+  {
+    "id": "1:54617",
+    "name": "[UI] FLUXO - SOLICITAR EMPRÉSTIMO - "
+  },
+  {
+    "id": "1:54810",
+    "name": "OFERTAS CONSÓRCIO - LISTA"
+  },
+  {
+    "id": "1:55081",
+    "name": "OFERTAS CONSÓRCIO - CARDS"
+  },
+  {
+    "id": "1:55357",
+    "name": "[UI] FLUXO - SOLICITAR CONSÓRCIO "
+  },
+  {
+    "id": "1:55448",
+    "name": "[UI] FLUXO - SOLICITAR EMPRÉSTIMO - "
+  },
+  {
+    "id": "1:55539",
+    "name": "[UI] FLUXO - SOLICITAR EMPRÉSTIMO - "
+  },
+  {
+    "id": "1:55637",
+    "name": "[UI] FLUXO - SOLICITAR EMPRÉSTIMO - "
+  },
+  {
+    "id": "1:55709",
+    "name": "[UI] FLUXO - SOLICITAR EMPRÉSTIMO - "
+  },
+  {
+    "id": "1:55832",
+    "name": "[UI] FLUXO - SOLICITAR EMPRÉSTIMO - "
+  },
+  {
+    "id": "1:55919",
+    "name": "[UI] FLUXO - SOLICITAR EMPRÉSTIMO - "
+  },
+  {
+    "id": "1:56020",
+    "name": "[UI] FLUXO - SOLICITAR EMPRÉSTIMO - "
+  },
+  {
+    "id": "1:56115",
+    "name": "[UI] FLUXO - SOLICITAR EMPRÉSTIMO - "
+  },
+  {
+    "id": "1:56231",
+    "name": "[UI] ALAVANCAGEM - MINHAS ALAVANCAGENS - STATUS ATIVAS"
+  },
+  {
+    "id": "1:57431",
+    "name": "[UI] ALAVANCAGEM - MINHAS ALAVANCAGENS - STATUS ATIVAS"
+  },
+  {
+    "id": "1:58679",
+    "name": "[UI] ALAVANCAGEM - MINHAS ALAVANCAGENS - STATUS ATIVAS"
+  },
+  {
+    "id": "1:59912",
+    "name": "[UI] ALAVANCAGEM - MINHAS ALAVANCAGENS - STATUS ATIVAS"
+  },
+  {
+    "id": "1:61125",
+    "name": "[UI] ALAVANCAGEM - MINHAS ALAVANCAGENS - STATUS EM ANÁLISE"
+  },
+  {
+    "id": "1:62011",
+    "name": "[UI] ALAVANCAGEM - MINHAS ALAVANCAGENS - STATUS QUITADOS"
+  },
+  {
+    "id": "1:64153",
+    "name": "[UI] COMUNICAÇÃO (List View)"
+  },
+  {
+    "id": "1:64344",
+    "name": "[UI] COMUNICAÇÃO (Card View)"
+  },
+  {
+    "id": "1:64591",
+    "name": "[UI] COMUNICAÇÃO - COMUNICADO S.A - PÁG ESPECIFICA"
+  },
+  {
+    "id": "1:64751",
+    "name": "[UI] COMUNICAÇÃO - INSIGHTS - PÁG ESPECIFICA"
+  },
+  {
+    "id": "1:65313",
+    "name": "[UI] COMUNICAÇÃO - RELATÓRIOS - PAG ESPECIFICA"
+  },
+  {
+    "id": "1:65403",
+    "name": "[UI] COMUNICAÇÃO - RELATÓRIOS - PAG ESPECIFICA"
+  },
+  {
+    "id": "1:65504",
+    "name": "[UI] COMUNICAÇÃO - RELATÓRIOS - PAG ESPECIFICA - relatório 2 pags folheado"
+  },
+  {
+    "id": "10:26031",
+    "name": "[UI] COMUNICAÇÃO - Sem conteúdo"
+  },
+  {
+    "id": "208:27698",
+    "name": "[UI] COMUNICAÇÃO - BLOQUEADO (Nível 2)"
+  },
+  {
+    "id": "1:65981",
+    "name": "[UI] PERFIL - Dados Pessoais - Red Blue"
+  },
+  {
+    "id": "1:66213",
+    "name": "[UI] PERFIL - Dados Pessoais - Red Blue"
+  },
+  {
+    "id": "1:66443",
+    "name": "[UI] PERFIL - Contas Bancárias - Red Blue"
+  },
+  {
+    "id": "1:66549",
+    "name": "[UI] PERFIL - Patrimônios - Red Blue"
+  },
+  {
+    "id": "1:66813",
+    "name": "[UI] PERFIL - Patrimônios - Red Blue"
+  },
+  {
+    "id": "1:67143",
+    "name": "[UI] PERFIL - Contas Bancárias - Red Blue"
+  },
+  {
+    "id": "1:67249",
+    "name": "[UI] PERFIL - Documentação - Red Blue"
+  },
+  {
+    "id": "1:67951",
+    "name": "[UI] PERFIL - Contratos e Termos - Red Blue"
+  },
+  {
+    "id": "1:68090",
+    "name": "[UI] PERFIL - Pág Resumo - Dados Pessoais"
+  },
+  {
+    "id": "1:68461",
+    "name": "[UI] HOME - VERSÃO PADRÃO"
+  },
+  {
+    "id": "1:68794",
+    "name": "[UI] HOME - VERSÃO PADRÃO"
+  },
+  {
+    "id": "1:69127",
+    "name": "[UI] CONTRATOS - GERAL"
+  },
+  {
+    "id": "1:70897",
+    "name": "[UI] CONTRATOS - GERAL"
+  },
+  {
+    "id": "1:72668",
+    "name": "[UI] ALAVANCAGEM"
+  },
+  {
+    "id": "1:72787",
+    "name": "[UI] ALAVANCAGEM"
+  },
+  {
+    "id": "1:72906",
+    "name": "[UI] COMUNICAÇÃO (List View)"
+  },
+  {
+    "id": "1:73097",
+    "name": "[UI] COMUNICAÇÃO (List View)"
+  },
+  {
+    "id": "1:73288",
+    "name": "[UI] PERFIL - Pág Resumo - Dados Pessoais"
+  },
+  {
+    "id": "1:73602",
+    "name": "[UI] PERFIL - Pág Resumo - Dados Pessoais"
+  },
+  {
+    "id": "163:27273",
+    "name": "[UI] PERFIL - Pág Resumo - Dados Pessoais · Moeda Primária aberta (dropdown)"
+  },
+  {
+    "id": "4:25438",
+    "name": "[UI] LOGIN"
+  },
+  {
+    "id": "4:25513",
+    "name": "[UI] CADASTRO - 1 Criar conta"
+  },
+  {
+    "id": "4:25620",
+    "name": "[UI] CADASTRO - 2 Confirmar e-mail e celular"
+  },
+  {
+    "id": "6:25562",
+    "name": "[UI] CADASTRO - 3 Dados pessoais"
+  },
+  {
+    "id": "9:25789",
+    "name": "[UI] CADASTRO - 4 Atividade trabalhista"
+  },
+  {
+    "id": "9:25883",
+    "name": "[UI] CADASTRO - 6 Contatos de confiança"
+  },
+  {
+    "id": "9:25964",
+    "name": "[UI] CADASTRO - 7 Revisão e envio"
+  },
+  {
+    "id": "9:26067",
+    "name": "[UI] CADASTRO - Enviado para análise"
+  },
+  {
+    "id": "9:26096",
+    "name": "[UI] PERFIL - Dados Pessoais - Pendente"
+  },
+  {
+    "id": "6:25690",
+    "name": "[UI] CADASTRO - 5 Documento e endereço - Brasil"
+  },
+  {
+    "id": "37:27142",
+    "name": "[UI] CADASTRO - 5 Documento e endereço - Estados Unidos e Canadá"
+  },
+  {
+    "id": "37:27262",
+    "name": "[UI] CADASTRO - 5 Documento e endereço - América do Sul (Argentina)"
+  },
+  {
+    "id": "37:27382",
+    "name": "[UI] CADASTRO - 5 Documento e endereço - Japão"
+  },
+  {
+    "id": "37:27502",
+    "name": "[UI] CADASTRO - 5 Documento e endereço - China"
+  },
+  {
+    "id": "37:27622",
+    "name": "[UI] CADASTRO - 5 Documento e endereço - Europa (Portugal)"
+  },
+  {
+    "id": "37:27742",
+    "name": "[UI] CADASTRO - 5 Documento e endereço - África (África do Sul)"
+  },
+  {
+    "id": "37:27862",
+    "name": "[UI] CADASTRO - 5 Documento e endereço - Austrália"
+  },
+  {
+    "id": "121:27090",
+    "name": "[EC] CADASTRO - 1 Criar conta · E-mail já confirmado (aviso abaixo do campo)"
+  }
+]

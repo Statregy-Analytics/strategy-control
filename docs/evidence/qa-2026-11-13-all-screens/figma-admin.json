@@ -1,0 +1,802 @@
+[
+  {
+    "id": "1484:66878",
+    "name": "A01 · Login — Padrão · Glass"
+  },
+  {
+    "id": "1484:66973",
+    "name": "A02 · Seleção de Sistema · Glass"
+  },
+  {
+    "id": "1484:67206",
+    "name": "F01 · Seleção de clientes · Cards / Lista + filtros"
+  },
+  {
+    "id": "1484:67207",
+    "name": "C01 · Seleção de Cliente — Cards · Glass"
+  },
+  {
+    "id": "1484:67626",
+    "name": "C03 · Seleção de Cliente — Lista · Glass"
+  },
+  {
+    "id": "1484:67993",
+    "name": "C04 · EC · Painel de Estados · Filtro Status"
+  },
+  {
+    "id": "1484:67997",
+    "name": "EC01 · Status fechado"
+  },
+  {
+    "id": "1484:68005",
+    "name": "EC02 · Status aberto"
+  },
+  {
+    "id": "1484:68034",
+    "name": "F02 · Perfil do cliente · Ficha no centro · estados, cliente novo e patrimônio em volta"
+  },
+  {
+    "id": "1484:68035",
+    "name": "C02 · Perfil Consolidado — Saldos não selecionados · Glass"
+  },
+  {
+    "id": "1484:68911",
+    "name": "C08 · EC · Visão Consolidada — Carteira Strategy selecionada · Glass"
+  },
+  {
+    "id": "1484:69032",
+    "name": "C09 · MD · Dados Bancários — Adicionar Conta · Glass"
+  },
+  {
+    "id": "1484:69073",
+    "name": "C15 · EC · Preferências — Moeda Primária Aberta · Glass"
+  },
+  {
+    "id": "1484:69087",
+    "name": "C16 · EC · Preferências — Moeda Secundária Aberta · Glass"
+  },
+  {
+    "id": "1484:69103",
+    "name": "C17 · EC · Preferências — Idioma Aberto · Glass"
+  },
+  {
+    "id": "1484:69117",
+    "name": "C18 · EC · Preferências — Fuso Horário Aberto · Glass"
+  },
+  {
+    "id": "1484:69131",
+    "name": "C19 · EC · Segurança da Conta — Gerenciamento de Login Expandido · Glass"
+  },
+  {
+    "id": "1484:69170",
+    "name": "C20 · EC · Documentação Pessoal — Recolhida · Glass"
+  },
+  {
+    "id": "1484:69175",
+    "name": "C21 · EC · Contábil Fiscal — Recolhida · Glass"
+  },
+  {
+    "id": "1484:69180",
+    "name": "C22 · EC · Plataforma — Expandida · Glass"
+  },
+  {
+    "id": "1484:69233",
+    "name": "C23 · EC · Contratos — Expandido · Glass"
+  },
+  {
+    "id": "1930:281",
+    "name": "C24 · EC · Edição por seção — todos os estados · Glass"
+  },
+  {
+    "id": "1968:310",
+    "name": "C30 · EC · Dados Bancários — Banco com busca · Glass"
+  },
+  {
+    "id": "1994:284",
+    "name": "C32 · EC · Identificação e Contato — Em edição · Glass"
+  },
+  {
+    "id": "1995:281",
+    "name": "C33 · EC · Segurança da Conta — Em edição · Glass"
+  },
+  {
+    "id": "1995:348",
+    "name": "C35 · EC · Dados Bancários — Logos dos bancos · Glass"
+  },
+  {
+    "id": "1932:282",
+    "name": "C25 · EC · Cabeçalho — cliente novo · Glass"
+  },
+  {
+    "id": "1932:311",
+    "name": "C26 · EC · Identificação e Contato — dados do cadastro pendentes · Glass"
+  },
+  {
+    "id": "1973:281",
+    "name": "C31 · EC · Registro de Patrimônio — Sem bens registrados · Glass"
+  },
+  {
+    "id": "1932:387",
+    "name": "C27 · EC · Documentação Pessoal — documento do cadastro aguardando aprovação · Glass"
+  },
+  {
+    "id": "1933:281",
+    "name": "C28 · MD · Reprovar documento · Glass"
+  },
+  {
+    "id": "2011:317",
+    "name": "C08.1 · EC · Visão Consolidada — Carteira de Depósito selecionada · Glass"
+  },
+  {
+    "id": "2011:546",
+    "name": "C08.2 · EC · Visão Consolidada — Patrimônio selecionado · Glass"
+  },
+  {
+    "id": "1933:300",
+    "name": "C29 · EC · Visão Consolidada — carteiras zeradas, sem composição e sem lançamentos · Glass"
+  },
+  {
+    "id": "1484:69299",
+    "name": "C10 · EC · Registro de Patrimônio — Imóvel Expandido · Glass"
+  },
+  {
+    "id": "1484:69408",
+    "name": "C11 · Registro de Patrimônio — Editar Imóvel"
+  },
+  {
+    "id": "1484:69564",
+    "name": "C12 · Registro de Patrimônio — Editar Veículo"
+  },
+  {
+    "id": "1484:69651",
+    "name": "C13 · Registro de Patrimônio — Editar Consórcio"
+  },
+  {
+    "id": "1484:69736",
+    "name": "C14 · Registro de Patrimônio — Editar Investimento"
+  },
+  {
+    "id": "1557:2",
+    "name": "C10.1 · Imóvel financiado expandido"
+  },
+  {
+    "id": "1559:71",
+    "name": "C10.2 · Veículo expandido"
+  },
+  {
+    "id": "1559:297",
+    "name": "C10.3 · Consórcio contemplado expandido"
+  },
+  {
+    "id": "1560:216",
+    "name": "C10.4 · Consórcio não contemplado expandido"
+  },
+  {
+    "id": "1560:383",
+    "name": "C10.5 · Investimento expandido"
+  },
+  {
+    "id": "2053:284",
+    "name": "C11.1 · Valor e situação financeira · não quitado (campo Restante visível)"
+  },
+  {
+    "id": "2072:281",
+    "name": "C08.3 · EC · Visão Consolidada — Carteira Total selecionada · Glass"
+  },
+  {
+    "id": "2072:414",
+    "name": "C08.4 · EC · Visão Consolidada — Nenhuma carteira selecionada · Glass"
+  },
+  {
+    "id": "2077:281",
+    "name": "C11.2 · Identificação e valor · erros ao salvar (caixas no lugar)"
+  },
+  {
+    "id": "2095:281",
+    "name": "C09.1 · MD · Dados Bancários — Adicionar Conta · preenchido, conta principal ativa"
+  },
+  {
+    "id": "1484:69984",
+    "name": "F01 · Seleção de contratos · Cards / Lista + painéis temporários"
+  },
+  {
+    "id": "1484:69985",
+    "name": "CT01 · PB · Seleção de contratos · Cards · DESIGN GLASS"
+  },
+  {
+    "id": "1484:70685",
+    "name": "CT02 · SP · Seleção de contratos · Lista · DESIGN GLASS"
+  },
+  {
+    "id": "1484:71333",
+    "name": "F02 · Criação de contrato · Tela única + painéis acionados"
+  },
+  {
+    "id": "1484:71334",
+    "name": "CT04 · SP · Criar novo contrato · Tela única completa · DESIGN GLASS"
+  },
+  {
+    "id": "1484:72006",
+    "name": "CT05 · MD · Selecionar clientes para vincular · DESIGN GLASS"
+  },
+  {
+    "id": "1484:72120",
+    "name": "CT06 · MD · Adicionar ativo elegível · DESIGN GLASS"
+  },
+  {
+    "id": "1484:72187",
+    "name": "F03 · Contrato aberto · Componentes, estados e ações"
+  },
+  {
+    "id": "1484:72188",
+    "name": "CT07 · PB · Contrato aberto · Página base · DESIGN GLASS"
+  },
+  {
+    "id": "1484:73154",
+    "name": "CT08 · CP · Clientes vinculados · Lista · DESIGN GLASS"
+  },
+  {
+    "id": "1484:73324",
+    "name": "CT09 · MD · Adicionar cliente vinculado · DESIGN GLASS"
+  },
+  {
+    "id": "1484:73364",
+    "name": "CT10 · MD · Ver detalhes do cliente · DESIGN GLASS"
+  },
+  {
+    "id": "1484:73521",
+    "name": "CT11 · CP · Motores e operações · Maximizado · DESIGN GLASS"
+  },
+  {
+    "id": "1484:73658",
+    "name": "CT12 · MD · Adicionar operação intradiária · DESIGN GLASS"
+  },
+  {
+    "id": "1484:73745",
+    "name": "CT13 · CP · Ativos do contrato · Maximizado · DESIGN GLASS"
+  },
+  {
+    "id": "1484:73893",
+    "name": "CT14 · PE · Ativos do contrato · Editar ativo / Excluir · DESIGN GLASS"
+  },
+  {
+    "id": "1484:74090",
+    "name": "CT15 · CP · Dívidas vinculadas · Maximizado · DESIGN GLASS"
+  },
+  {
+    "id": "1484:74204",
+    "name": "CT16 · PE · Dívidas vinculadas · Modo edição · DESIGN GLASS"
+  },
+  {
+    "id": "1484:74335",
+    "name": "CT17 · MD · Adicionar dívida · DESIGN GLASS"
+  },
+  {
+    "id": "1484:74524",
+    "name": "CT18 · MD · Ver detalhes da dívida · DESIGN GLASS"
+  },
+  {
+    "id": "1484:74680",
+    "name": "CT19 · MD · Editar dívida · DESIGN GLASS"
+  },
+  {
+    "id": "1484:74946",
+    "name": "CT20 · PE · Documentos do contrato · Modo edição · DESIGN GLASS"
+  },
+  {
+    "id": "1484:75082",
+    "name": "CT21 · CP · Performance histórica · Tabela · DESIGN GLASS"
+  },
+  {
+    "id": "1484:75314",
+    "name": "CT22 · PE · Performance histórica · Gráfico · DESIGN GLASS"
+  },
+  {
+    "id": "1484:75524",
+    "name": "CT23 · MD · Performance histórica · Histórico completo · DESIGN GLASS"
+  },
+  {
+    "id": "2149:300",
+    "name": "CT11.1 · EC · Resultado no fechamento — Motor Principal + Operações"
+  },
+  {
+    "id": "2157:281",
+    "name": "CT11.2 · EC · Motor de Dividendos — Conectado (Aleatório)"
+  },
+  {
+    "id": "2157:348",
+    "name": "CT11.3 · EC · Motor de Dividendos — valor Fixo"
+  },
+  {
+    "id": "1484:76064",
+    "name": "F01 · Seleção de lógicas · Cards / Lista + painel temporário"
+  },
+  {
+    "id": "1484:76065",
+    "name": "LG01 · PB · Seleção de lógicas · Cards · TELA BASE · DESIGN GLASS"
+  },
+  {
+    "id": "1484:76704",
+    "name": "LG02 · SP · Seleção de lógicas · Lista · SUBPÁGINA · DESIGN GLASS"
+  },
+  {
+    "id": "1484:77198",
+    "name": "LG03 · MT · Resumo executivo da lógica · Hover temporário · PAINEL ISOLADO · DESIGN GLASS"
+  },
+  {
+    "id": "1484:77225",
+    "name": "LG01 · EC · Delta-Income em hover · Abrir · Editar · Vínculos · DESIGN GLASS"
+  },
+  {
+    "id": "1484:77226",
+    "name": "EC01 · Card em hover · Abrir · Editar · Vínculos"
+  },
+  {
+    "id": "1484:77323",
+    "name": "LG04 · EC · Filtros abertos + Lista em hover · PAINEL DE ESTADOS SOLTO · DESIGN GLASS"
+  },
+  {
+    "id": "1484:77335",
+    "name": "DD01 · Status · Aberto"
+  },
+  {
+    "id": "1484:77346",
+    "name": "DD02 · Vínculos · Aberto"
+  },
+  {
+    "id": "1484:77353",
+    "name": "DD03 · Ordenação · Aberto"
+  },
+  {
+    "id": "1484:77384",
+    "name": "EC03.1 · Motor ativo em hover · Pausar · Editar · Entrar"
+  },
+  {
+    "id": "1484:77407",
+    "name": "F02 · Criar e abrir lógica · Fluxos principais"
+  },
+  {
+    "id": "1484:77408",
+    "name": "LG04 · SP · Criar nova lógica · SUBPÁGINA · DESIGN GLASS"
+  },
+  {
+    "id": "1484:78227",
+    "name": "LG05 · PB · Lógica aberta · TELA BASE · DESIGN GLASS"
+  },
+  {
+    "id": "1484:79229",
+    "name": "EC01 · Identidade configurada · ícone Distribuição + azul"
+  },
+  {
+    "id": "1484:79361",
+    "name": "EC02.1 · Preview · Alpha-2 Institucional"
+  },
+  {
+    "id": "1484:79457",
+    "name": "EC02.2 · Preview · Delta-Green"
+  },
+  {
+    "id": "1484:79553",
+    "name": "EC02.3 · Preview · Atlas-Orange"
+  },
+  {
+    "id": "1484:79652",
+    "name": "EC03 · Frequência · data e hora preenchidas"
+  },
+  {
+    "id": "1484:79712",
+    "name": "EC04.1 · Probabilidade · 50/50 · soma válida"
+  },
+  {
+    "id": "1484:79755",
+    "name": "EC04.2 · Probabilidade · 60/50 · soma 110% inválida"
+  },
+  {
+    "id": "1484:79802",
+    "name": "EC05.1 · Zona de amortecimento · desativada"
+  },
+  {
+    "id": "1484:79819",
+    "name": "EC05.2 · Zona de amortecimento · ativada + tabela"
+  },
+  {
+    "id": "1484:79883",
+    "name": "EC06 · Limites operacionais · regra contornada"
+  },
+  {
+    "id": "1484:79941",
+    "name": "EC07 · Fechamento soberano · separador"
+  },
+  {
+    "id": "1484:79981",
+    "name": "F03 · Edição da lógica · Simulações + validação"
+  },
+  {
+    "id": "1484:79982",
+    "name": "LG06 · PE · Modo de edição · Simulação abaixo · TELA BASE DE EDIÇÃO · DESIGN GLASS"
+  },
+  {
+    "id": "1484:82147",
+    "name": "LG07 · EC · Simulação ao lado · PAINEL DE ESTADOS DO COMPONENTE · DESIGN GLASS"
+  },
+  {
+    "id": "1484:83473",
+    "name": "LG08 · MD · Validação da lógica · MODAL ISOLADO · DESIGN GLASS"
+  },
+  {
+    "id": "1484:83539",
+    "name": "F04 · Estados complementares do motor · Histórico completo + configuração minimizada"
+  },
+  {
+    "id": "1484:83540",
+    "name": "LG09 · SP · Histórico completo do motor · SUBPÁGINA · DESIGN GLASS"
+  },
+  {
+    "id": "1484:85344",
+    "name": "LG11 · EC · Configuração do motor minimizada · PAINEL DE ESTADOS DO COMPONENTE · DESIGN GLASS"
+  },
+  {
+    "id": "1484:85374",
+    "name": "F01 · Extrato + Solicitações + Nova transação"
+  },
+  {
+    "id": "1484:85378",
+    "name": "P01 · V01 · Transações · Extrato global + Solicitações"
+  },
+  {
+    "id": "1484:86271",
+    "name": "MD01 · Nova transação · Seleção de tipo"
+  },
+  {
+    "id": "1484:86319",
+    "name": "MD02 · Nova transação · Depósito"
+  },
+  {
+    "id": "1484:86383",
+    "name": "MD03 · Nova transação · Saque"
+  },
+  {
+    "id": "1484:86476",
+    "name": "MD04 · Nova transação · Transferência"
+  },
+  {
+    "id": "1484:86593",
+    "name": "MD06 · Solicitação pendente · Detalhes + ações disponíveis"
+  },
+  {
+    "id": "1484:86740",
+    "name": "EC01 · Painel de estados do componente · Solicitação pendente"
+  },
+  {
+    "id": "1484:86742",
+    "name": "E03 · Painel de estados do componente · Validar"
+  },
+  {
+    "id": "1484:86762",
+    "name": "E04 · Painel de estados do componente · Aprovar"
+  },
+  {
+    "id": "1484:86782",
+    "name": "E05 · Painel de estados do componente · Rejeitar"
+  },
+  {
+    "id": "1484:86802",
+    "name": "E06 · Painel de estados do componente · Executar operação"
+  },
+  {
+    "id": "1484:86822",
+    "name": "E07 · Painel de estados do componente · Solicitar correção"
+  },
+  {
+    "id": "1484:86842",
+    "name": "E08 · Painel de estados do componente · Anexar documento"
+  },
+  {
+    "id": "1484:86864",
+    "name": "E09 · Painel de estados do componente · Ver comprovante"
+  },
+  {
+    "id": "1484:86887",
+    "name": "E10 · Painel de estados do componente · Adicionar observação"
+  },
+  {
+    "id": "1484:86903",
+    "name": "A01 · clique"
+  },
+  {
+    "id": "1484:86906",
+    "name": "A01 · escolher tipo"
+  },
+  {
+    "id": "2224:281",
+    "name": "A02 · abrir detalhe · saída do P01"
+  },
+  {
+    "id": "1484:86909",
+    "name": "A02 · abrir detalhe"
+  },
+  {
+    "id": "1484:86912",
+    "name": "A02 · ação interna → EC01"
+  },
+  {
+    "id": "2027:301",
+    "name": "MD04.1 · Nova transação · Transferência · Moeda aberta (todas as moedas)"
+  },
+  {
+    "id": "2152:329",
+    "name": "MD04.2 · Nova transação · Transferência · Para outro cliente"
+  },
+  {
+    "id": "2153:281",
+    "name": "MD07 · Confirmar com senha · Executar, aprovar, reprovar ou cancelar transação"
+  },
+  {
+    "id": "2160:281",
+    "name": "MD06.1 · Depósito processado · Detalhes + Corrigir"
+  },
+  {
+    "id": "2161:281",
+    "name": "P01.1 · EC · Extrato · Depósito corrigido"
+  },
+  {
+    "id": "2179:281",
+    "name": "MD08 · Corrigir depósito · Dados certos e motivo (depois MD07 · senha)"
+  },
+  {
+    "id": "2179:355",
+    "name": "MD06.2 · Solicitação pendente · Editar dados"
+  },
+  {
+    "id": "2187:404",
+    "name": "MD06.3 · Transação corrigida · Detalhes com a transação original"
+  },
+  {
+    "id": "2282:289",
+    "name": "E11 · Painel de estados do componente · Cancelar"
+  },
+  {
+    "id": "1484:86915",
+    "name": "F02 · Carteiras · Cards ↔ Lista"
+  },
+  {
+    "id": "1484:86920",
+    "name": "V02 · Carteira Total · Cards"
+  },
+  {
+    "id": "1484:87711",
+    "name": "V05 · Carteira de Depósito · Lista"
+  },
+  {
+    "id": "1484:88127",
+    "name": "V06 · Carteira de Patrimônio · Cards"
+  },
+  {
+    "id": "1484:88727",
+    "name": "V07 · Carteira de Patrimônio · Lista"
+  },
+  {
+    "id": "1484:89118",
+    "name": "A03 · Cards ↔ Lista · Carteira Total"
+  },
+  {
+    "id": "1484:89121",
+    "name": "A04 · Cards ↔ Lista · Carteira de Depósito"
+  },
+  {
+    "id": "1484:89124",
+    "name": "A05 · Cards ↔ Lista · Carteira de Patrimônio"
+  },
+  {
+    "id": "1484:89127",
+    "name": "V03 · Carteira Total · Lista"
+  },
+  {
+    "id": "1484:89697",
+    "name": "V04 · Carteira de Depósito · Cards"
+  },
+  {
+    "id": "1484:89694",
+    "name": "F03 · Carteiras Strategy (contratos vinculados) · Cards + Lista + expansão"
+  },
+  {
+    "id": "1484:90218",
+    "name": "V09 · Carteira Strategy · Lista · Recolhido"
+  },
+  {
+    "id": "1484:90787",
+    "name": "V08 · Carteira Strategy · Cards · Recolhido"
+  },
+  {
+    "id": "1484:91469",
+    "name": "E01 · Carteira Strategy · Cards · Expandido"
+  },
+  {
+    "id": "1484:92301",
+    "name": "A06 · Cards · Recolher ↔ Expandir"
+  },
+  {
+    "id": "1484:92532",
+    "name": "F01 · Operações de crédito · Lista / Cards / Kanban"
+  },
+  {
+    "id": "1484:92533",
+    "name": "CR01 · PB · Operações de crédito · Lista · TELA BASE · DESIGN GLASS"
+  },
+  {
+    "id": "1484:92907",
+    "name": "CR02 · SP · Operações de crédito · Cards · SUBPÁGINA · DESIGN GLASS"
+  },
+  {
+    "id": "1484:93351",
+    "name": "CR03 · SP · Operações de crédito · Kanban · SUBPÁGINA · DESIGN GLASS"
+  },
+  {
+    "id": "1484:93771",
+    "name": "EC01 · Painel de estados do componente · Visualização Lista / Cards / Kanban"
+  },
+  {
+    "id": "1484:93774",
+    "name": "EC01.1 · Lista selecionada"
+  },
+  {
+    "id": "1484:93795",
+    "name": "EC01.2 · Cards selecionado"
+  },
+  {
+    "id": "1484:93816",
+    "name": "EC01.3 · Kanban selecionado"
+  },
+  {
+    "id": "1484:93837",
+    "name": "F02 · Nova operação · Etapas + detalhes"
+  },
+  {
+    "id": "1484:93838",
+    "name": "CR04 · MD · Nova operação · Seleção do tipo · ESTADO · DESIGN GLASS"
+  },
+  {
+    "id": "1484:93952",
+    "name": "CR05 · MD · Nova operação · Seleção do cliente · ESTADO · DESIGN GLASS"
+  },
+  {
+    "id": "1484:94059",
+    "name": "CR06 · MD · Detalhes da operação · MODAL FIXO · DESIGN GLASS"
+  },
+  {
+    "id": "1484:94631",
+    "name": "EC02 · Painel de estados do componente · Nova operação"
+  },
+  {
+    "id": "1484:94636",
+    "name": "EC02.S01 · Etapa padrão"
+  },
+  {
+    "id": "1484:94638",
+    "name": "EC02.S02 · Etapa atual"
+  },
+  {
+    "id": "1484:94643",
+    "name": "EC02.S03 · Tipo de operação"
+  },
+  {
+    "id": "1484:94653",
+    "name": "EC02.S04 · Cliente selecionável"
+  },
+  {
+    "id": "1484:94673",
+    "name": "EC02 · CONEXÃO · Fluxo → estados"
+  },
+  {
+    "id": "1484:94676",
+    "name": "F03 · Parceiros de crédito · Lista, criação e detalhes"
+  },
+  {
+    "id": "1484:94677",
+    "name": "CR07 · PB · Parceiros de crédito · Lista · TELA BASE · DESIGN GLASS"
+  },
+  {
+    "id": "1484:95173",
+    "name": "CR08 · MD · Novo parceiro · Etapa 1 · ESTADO · DESIGN GLASS"
+  },
+  {
+    "id": "1484:95475",
+    "name": "CR09 · MD · Novo parceiro · Etapa 2 · ESTADO · DESIGN GLASS"
+  },
+  {
+    "id": "1484:95847",
+    "name": "CR10 · MD · Detalhes do parceiro · MODAL FIXO · DESIGN GLASS"
+  },
+  {
+    "id": "1484:95957",
+    "name": "EC03 · Painel de estados do componente · Parceiros"
+  },
+  {
+    "id": "1484:95962",
+    "name": "EC03.S01 · Aba selecionada"
+  },
+  {
+    "id": "1484:95964",
+    "name": "EC03.S02 · Aba padrão"
+  },
+  {
+    "id": "1484:95970",
+    "name": "EC03.S03 · Status aceito"
+  },
+  {
+    "id": "1484:95972",
+    "name": "EC03.S04 · Status em análise"
+  },
+  {
+    "id": "1484:95974",
+    "name": "EC03.S05 · Status não aceito"
+  },
+  {
+    "id": "1484:95984",
+    "name": "EC03.S08 · Linha de opção"
+  },
+  {
+    "id": "1484:95999",
+    "name": "EC03 · CONEXÃO · Fluxo → estados"
+  },
+  {
+    "id": "1484:96066",
+    "name": "F01 · Comunicação · Conteúdos / Redatores"
+  },
+  {
+    "id": "1484:96067",
+    "name": "CO01 · PB · Comunicação · Conteúdos · TELA BASE · DESIGN GLASS"
+  },
+  {
+    "id": "1484:96418",
+    "name": "CO02 · SP · Comunicação · Redatores · ESTADO BASE · DESIGN GLASS"
+  },
+  {
+    "id": "1484:96662",
+    "name": "EC01 · Painel de estados do componente · Comunicação"
+  },
+  {
+    "id": "1484:96691",
+    "name": "F02 · Modais acionados · Tipo / Redator / Prévia"
+  },
+  {
+    "id": "1484:96692",
+    "name": "CO03 · MD · Criar conteúdo · Escolher tipo · MODAL FIXO · DESIGN GLASS"
+  },
+  {
+    "id": "1484:96758",
+    "name": "CO07 · MD · Criar novo redator · MODAL FIXO · ALTURA NATURAL · DESIGN GLASS"
+  },
+  {
+    "id": "1484:96838",
+    "name": "CO08 · MD · Prévia · Visualização do cliente · MODAL FIXO · DESIGN GLASS"
+  },
+  {
+    "id": "1484:96881",
+    "name": "F03 · Editores de conteúdo · Insight / Comunicado / Relatório"
+  },
+  {
+    "id": "1484:96882",
+    "name": "CO04 · SP · Criar Insight · EDITOR BASE · DESIGN GLASS"
+  },
+  {
+    "id": "1484:97193",
+    "name": "CO05 · SP · Criar Comunicado Oficial · VARIAÇÃO EDITORIAL · DESIGN GLASS"
+  },
+  {
+    "id": "1484:97530",
+    "name": "CO06 · SP · Criar Relatório · EDITOR ESPECÍFICO · DESIGN GLASS"
+  },
+  {
+    "id": "1484:97906",
+    "name": "EC02 · Painel de estados do componente · Editor"
+  },
+  {
+    "id": "2255:282",
+    "name": "F01 · Configurações › Auditoria · Consulta geral"
+  },
+  {
+    "id": "2255:283",
+    "name": "AU01 · SP · Configurações › Auditoria · Consulta geral"
+  }
+]

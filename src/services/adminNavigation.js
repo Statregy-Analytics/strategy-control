@@ -12,15 +12,15 @@ export const adminNavigation = [
     activeIcon: asset('contracts-active'),
     to: '/contracts',
   },
-  { label: 'Lógicas', icon: asset('logics'), to: null },
+  { label: 'Lógicas', icon: asset('logics'), to: '/logics' },
   {
     label: 'Transações',
     icon: asset('transactions'),
     activeIcon: asset('transactions-active'),
     to: '/transaction',
   },
-  { label: 'Crédito', icon: asset('credit'), to: null },
-  { label: 'Comunicados', icon: asset('communications'), to: null },
+  { label: 'Crédito', icon: asset('credit'), to: '/credit' },
+  { label: 'Comunicados', icon: asset('communications'), to: '/communications' },
 ]
 export const adminSettings = [
   { label: 'Auditoria', to: '/settings/audit' },

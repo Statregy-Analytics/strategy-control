@@ -9,6 +9,27 @@ const routes = [
     },
     children: [
       {
+        path: '/logics',
+        name: 'Lógicas',
+        meta: { requiresAdmin: true },
+        component: () => import('pages/Workspaces/AdminWorkspacePage.vue'),
+        props: { module: 'logic' },
+      },
+      {
+        path: '/credit',
+        name: 'Crédito',
+        meta: { requiresAdmin: true },
+        component: () => import('pages/Workspaces/AdminWorkspacePage.vue'),
+        props: { module: 'credit' },
+      },
+      {
+        path: '/communications',
+        name: 'Comunicados',
+        meta: { requiresAdmin: true },
+        component: () => import('pages/Workspaces/AdminWorkspacePage.vue'),
+        props: { module: 'communication' },
+      },
+      {
         path: '/settings/audit',
         name: 'Auditoria',
         meta: { requiresAdmin: true },

@@ -4,16 +4,15 @@
       {{ label }}
     </span>
 
-    <q-btn flat v-if="!localDateRange.to">
+    <q-btn flat v-if="!localDateRange.to" :aria-label="label">
       <IconCalendarEventFilled size="16" />
       <q-popup-proxy
         @before-show="updateProxy"
         cover
         transition-show="scale"
         transition-hide="scale"
-        @before-hide="saveDateRange"
       >
-        <q-date v-model="localDateRange" range mask="DD/MM/YYYY">
+        <q-date v-model="proxyDateRange" range mask="DD/MM/YYYY">
           <div class="row items-center justify-end q-gutter-sm">
             <q-btn label="Cancelar" color="primary" flat v-close-popup />
             <q-btn label="OK" color="primary" flat @click="saveDateRange" v-close-popup />
@@ -50,6 +49,7 @@ export default defineComponent({
   emits: ['update:modelValue'],
   setup(props, { emit }) {
     const localDateRange = ref({ ...props.modelValue })
+    const proxyDateRange = ref(props.modelValue?.from ? { ...props.modelValue } : null)
 
     // Atualiza o valor local quando o prop muda
     watch(
@@ -61,10 +61,12 @@ export default defineComponent({
     )
 
     const updateProxy = () => {
-      // Pode ser usado para sincronizar dados antes de abrir o popup
+      proxyDateRange.value = props.modelValue?.from ? { ...props.modelValue } : null
     }
 
     const saveDateRange = () => {
+      const range = proxyDateRange.value
+      localDateRange.value = typeof range === 'string' ? { from: range, to: range } : { ...range }
       emit('update:modelValue', { ...localDateRange.value })
     }
 
@@ -75,6 +77,7 @@ export default defineComponent({
 
     return {
       localDateRange,
+      proxyDateRange,
       updateProxy,
       saveDateRange,
       resetDateRange,
