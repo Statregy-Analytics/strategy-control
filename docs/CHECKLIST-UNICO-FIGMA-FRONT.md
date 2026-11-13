@@ -88,7 +88,7 @@ Atualização: 13/11/2026. Este é o índice desta revisão ampla. Evidências a
 - [x] Testados localmente: abrir Quant Core, Área, Comparar, Tabela, iniciar edição e alternar para Ao Lado. Ambas as tabelas mantêm os mesmos 22 indicadores.
 - [x] Responsividade local confirmada em 390 px: ambas as tabelas com 22 indicadores, empilhadas sem excesso horizontal; ícones medidos nas dimensões nativas (16 px e 16,7 px).
 - [x] Lógicas publicadas em 1b3ccf6; deploy 43473340021 aprovado. Tabela de 22 indicadores, início da edição, Ao Lado (empilhado em 390 px) e Cancelar retestados no Admin publicado.
-- [x] Comparar em modo Tabela mantém estado indisponível próprio; não reaproveita indevidamente os indicadores do motor. Verificado localmente antes da publicação complementar.
+- [x] Comparar em modo Tabela mantém estado indisponível próprio; não reaproveita indevidamente os indicadores do motor. Verificado localmente e no Admin publicado após o deploy complementar 5f47719 (execução 43474098962, concluída com sucesso).
 - LG09 ainda não está concluído; a composição completa do histórico e sua revisão não foram marcadas como entregues.
 
 ## Impedimento da revisão visual restante
@@ -466,3 +466,13 @@ Legenda: **Preparado / revisão pendente** = há código novo, mas a validação
 - [Revisão consolidada anterior](QA-2026-11-12-REVISAO-CONSOLIDADA-FRONT.md).
 - [CT04/CT07](QA-2026-11-13-CONTRATOS-CT04-CT07.md).
 - [Pendências de backend anteriores](PENDENCIAS-BACKEND-QA.md): retestar antes de considerar resolvidas.
+
+## Fechamento das publicações desta rodada
+
+- Código publicado: c32f5a5 (Contratos), 1b3ccf6 e 5f47719 (estados de Lógicas). Deploys concluídos com sucesso.
+- Checks finais: lint, build e 285 testes locais passaram. Oito desses testes pertencem ao estudo de preferências preexistente, que não foi incluído nos commits; os 277 testes versionados também passaram.
+- Contraste publicado: cabeçalhos e células das tabelas de aportes/alterações confirmados brancos; screenshot desktop admin-contratos-contraste-publicado.jpg e screenshot mobile admin-historico-contraste-publicado.jpg.
+- Lógicas publicado: 22 indicadores no Motor; comparação em Tabela retorna estado próprio indisponível, sem colunas do Motor; tabelas Atual/Simulada mantêm 22 indicadores; Cancelar encerra a edição sem escrita. Screenshot admin-logicas-simulacao-publicada.jpg.
+- Capturas em C:/Users/jlbnu/.codex/visualizations/2026/11/13/01a1d51a-ae33-79d1-87aa-854dbd4884dc/.
+- Sessão exclusiva usada pelos scripts de teste encerrada pela API (204); arquivo temporário de credenciais removido. Sessões do usuário no navegador preservadas.
+- A entrega ampla de todos os frames NÃO está concluída. Os itens abertos na seção Ainda é trabalho de frontend continuam abertos; o limite de consultas do Figma impediu concluir a obtenção dos desenhos restantes. Não encaminhar essas lacunas como falhas do backend.
