@@ -74,3 +74,91 @@ test('selection does not enable access while identity is pending or failed; retr
   assert.equal(attempt, 2)
   assert.equal(h.destination(systemDefinitions[0]), '/dataManagement')
 })
+
+import { canAccessAdministrativeSystem } from '../src/services/adminNavigation.js'
+async function signIn(profile, failed = false) {
+  const source = readFileSync(
+    new URL('../src/layouts/Auth/SignInLayout.vue', import.meta.url),
+    'utf8',
+  ).match(/<script setup>([\s\S]*?)<\/script>/)[1]
+  const routes = [],
+    failures = []
+  let logins = 0,
+    reads = 0,
+    hidden = 0
+  const store = {
+    loginAction: async () => {
+      logins++
+    },
+    fetchCurrentUser: async () => {
+      reads++
+      if (failed) throw Error('unavailable')
+      return profile
+    },
+  }
+  const modules = {
+    vue: { ref: (value) => ({ value }), defineComponent() {} },
+    'vue-router': { useRouter: () => ({ push: (route) => routes.push(route) }) },
+    pinia: {
+      storeToRefs: () => ({
+        auth: { value: { email: 'fixture', password: 'fixture' } },
+        passwordReset: { value: false },
+      }),
+    },
+    'src/stores/auth': { useAuthStore: () => store },
+    'src/components/Form/LabelForm.vue': { default: {} },
+    'src/composables/global/useNotification': {
+      default: () => ({
+        showLoading() {},
+        hideLoading() {
+          hidden++
+        },
+        successNotify() {},
+        errorNotify: (error) => failures.push(error),
+      }),
+    },
+    'src/services/apiError': { getApiErrorMessage: (error) => error.message },
+    'src/services/adminNavigation': { canAccessAdministrativeSystem },
+  }
+  const context = vm.createContext({})
+  const mod = new vm.SourceTextModule(source + '\nexport {onSubmit,emailRef,passwordRef}', {
+    context,
+  })
+  await mod.link(
+    (name) =>
+      new vm.SyntheticModule(
+        Object.keys(modules[name]),
+        function () {
+          for (const [key, value] of Object.entries(modules[name])) this.setExport(key, value)
+        },
+        { context },
+      ),
+  )
+  await mod.evaluate()
+  for (const name of ['emailRef', 'passwordRef'])
+    mod.namespace[name].value = { validate() {}, hasError: false }
+  await mod.namespace.onSubmit()
+  return { routes, failures, logins, reads, hidden }
+}
+for (const [role, route] of [
+  ['Cliente', 'Selected'],
+  ['Admin', 'Clientes'],
+]) {
+  test(
+    'fresh ' + role + ' login uses verified identity before selecting a destination',
+    async () => {
+      const h = await signIn({ roles: [role] })
+      assert.equal(h.routes[0].name, route)
+      assert.equal(h.logins, 1)
+      assert.equal(h.reads, 1)
+      assert.equal(h.hidden, 1)
+      assert.equal(h.failures.length, 0)
+    },
+  )
+}
+test('identity failure during login does not navigate using a previous administrative profile', async () => {
+  const h = await signIn({ roles: ['Admin'] }, true)
+  assert.equal(h.routes.length, 0)
+  assert.equal(h.failures.length, 1)
+  assert.equal(h.hidden, 1)
+})

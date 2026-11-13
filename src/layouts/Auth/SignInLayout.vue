@@ -68,6 +68,7 @@ import { storeToRefs } from 'pinia'
 import LabelForm from 'src/components/Form/LabelForm.vue'
 import useNotification from 'src/composables/global/useNotification'
 import { getApiErrorMessage } from 'src/services/apiError'
+import { canAccessAdministrativeSystem } from 'src/services/adminNavigation'
 
 const storeAuth = useAuthStore()
 const { auth, passwordReset } = storeToRefs(storeAuth)
@@ -87,8 +88,9 @@ const onSubmit = async () => {
   try {
     showLoading('Autenticando...')
     await storeAuth.loginAction({ email: auth.value.email, password: auth.value.password })
+    const user = await storeAuth.fetchCurrentUser()
     successNotify('Bem-vindo!')
-    router.push({ name: 'Clientes' })
+    router.push({ name: canAccessAdministrativeSystem(user) ? 'Clientes' : 'Selected' })
   } catch (error) {
     errorNotify(getApiErrorMessage(error, 'Não foi possível entrar. Verifique suas credenciais.'))
   } finally {
