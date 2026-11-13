@@ -1,5 +1,23 @@
 # QA — revisão consolidada do frontend — 12/11/2026
 
+## Seleção de sistema e destino do login — 12/11
+
+- [x] Seleção cruza os sistemas disponíveis com o perfil atual de GET auth/me. A permissão de data-intake do cliente não equivale ao acesso ao painel administrativo.
+- [x] Cliente mantém o card existente no estado indisponível, sem link ou foco de navegação. Nenhum campo, botão, mensagem ou composição novo.
+- [x] Login Cliente chega à seleção; login Admin conserva o acesso à lista de clientes. Falha ao consultar a identidade impede navegar com o perfil de outra sessão.
+- [x] Administração continua condicionada à disponibilidade da API; Admin, Operador e System seguem como perfis administrativos existentes. Auditoria e outras rotas Admin-only conservam suas próprias restrições. Nenhum papel foi alterado na API.
+- [x] Sete novos testes; 256 locais, dos quais 248 versionados. Lint, build e diff das alterações aprovados. Estudo local adiado preservado fora do commit.
+- [x] **39d57f0 publicado**, [pipeline 43349346835](https://github.com/Statregy-Analytics/strategy-control/actions/runs/43349346835) aprovada. Éric/Cliente: login → seleção, card DIV sem href e aria-disabled=true; recarga mantém bloqueio, sem aviso de sessão. Admin: login → clientes e link da seleção habilitado. [Resumo dos testes](evidence/qa-2026-11-12-consolidada/system-selection.json).
+
+### Pendência visual confirmada: cadastro/edição de contrato no Admin
+
+O relato novo do QA é procedente. A criação publicada ainda usa o painel lateral de ContractsPage.vue; o desenho atual [CT04 · Novo Contrato](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI/?node-id=1484-71334) usa tela completa com cabeçalho, blocos e coluna de clientes/resumo. A edição usa o mesmo editor legado; [CT07 · Contrato aberto](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI/?node-id=1484-72188) também deve compor a revisão visual.
+
+- [ ] Aplicar os frames atuais de cadastro/edição e validar os estados e integrações correspondentes. Esta diferença é de frontend e não deve ser encaminhada como erro ou ausência de API.
+
+A inspeção abriu apenas Novo contrato, sem salvar rascunho, alterar contrato ou executar operação. Os testes funcionais anteriores de contratos não representam aceite visual desses frames. A correção de seleção acima está publicada; o modelo de contrato **não foi corrigido neste lote**.
+
+
 ## Correção do incidente de sessão — 12/11, 22h
 
 O relato de falha em Selecionar Sistema levou à reprodução de uma lacuna do front: a instância usada para renovar sessão não incluía Idempotency-Key. A API respondeu 400 idempotency.key_required; essa falha chegava às consultas de usuário e sistemas, explicando a combinação de aviso de verificação de sessão e erro genérico. O 403 administrativo da conta Cliente do Éric é outro cenário e não explica sozinho o incidente. A verificação anterior com sessão válida não cobria essa renovação.
@@ -62,7 +80,7 @@ Esta relação consolida o último reteste documentado; não declara que todos e
 
 ## Verificação e publicação
 
-- [x] Admin: lint, 249 testes locais e build aprovados; 8 testes pertencem ao estudo local adiado e não entram no commit. Suíte versionada: 241 testes, incluindo os dois casos da correção de refresh descrita no início.
+- [x] Admin: lint, 256 testes locais e build aprovados; 8 testes pertencem ao estudo local adiado e não entram no commit. Suíte versionada atual: 248 testes, incluindo refresh e seleção/login por perfil descritos no início.
 - [x] Portal: lint, 420 testes e build aprovados. Complementos de tradução do rodapé de sessões e do status na revisão do cadastro, sem alterar estrutura/campos/ações.
 - [x] Diff das alterações sem erros de whitespace; arquivos locais não relacionados preservados.
 - [x] Testes novos executam scripts reais de App/router/interceptor e do componente documental: rede, 429, 500/503, 401/403, navegação bloqueada, retry e mudança de contexto. Falhas controladas não são chamadas defeituosas provocadas no backend.

@@ -1,5 +1,9 @@
 # Pendências do backend para homologação
 
+## Seleção por perfil — 12/11
+
+[Entrega e checklist vigentes](QA-2026-11-12-REVISAO-CONSOLIDADA-FRONT.md#seleção-de-sistema-e-destino-do-login--1211): Cliente chega à seleção com card administrativo indisponível, sem link; Admin mantém entrada em Clientes. Versão 39d57f0 publicada, 248 testes versionados/lint/build/deploy aprovados e ambos os perfis conferidos no navegador. A nova divergência visual de cadastro/edição de contratos com CT04/CT07 foi confirmada e registrada como pendência de front; não está corrigida nem é nova demanda de API.
+
 ## Correção de sessão — 12/11, 22h
 
 [Incidente e testes](QA-2026-11-12-REVISAO-CONSOLIDADA-FRONT.md#correção-do-incidente-de-sessão--1211-22h): o refresh do Admin omitia Idempotency-Key e a API retornava 400 idempotency.key_required. Cabeçalho corrigido e renovação 401 → refresh 200 → consultas 200 validada com Axios real/API para Éric e Admin. Versão 9c47bb4 publicada, 241 testes versionados e deploy aprovados; login/seleção/recarga conferidos no navegador. Falha de front corrigida, sem nova pendência de API. O 403 de Éric/Cliente na consulta administrativa permanece uma questão distinta de autorização.

@@ -1,0 +1,44 @@
+{
+  "date": "2026-11-12",
+  "scope": "System selection and login destination; templates, CSS, fields and actions preserved",
+  "rule": "Use current authenticated roles and server availability together; discovery data-intake.submit alone never enables the administrative destination for Cliente. Known staff roles remain eligible; Admin-only routes keep existing restrictions.",
+  "code": [
+    "8640bb8",
+    "39d57f0"
+  ],
+  "pipeline": 43349346835,
+  "deploy": "success",
+  "localTests": 256,
+  "publishedTests": 248,
+  "deferredUncommittedTests": 8,
+  "lint": "passed",
+  "build": "passed",
+  "automated": [
+    "Cliente, missing, unknown and malformed roles cannot enable card",
+    "staff still requires server availability",
+    "identity loading/failure cannot enable card; retry rereads identity",
+    "scope disposal removes destination",
+    "fresh Cliente login returns to selection; fresh Admin goes to customers",
+    "login identity failure never reuses previous staff profile"
+  ],
+  "browser": {
+    "local": [
+      "Admin selection enabled",
+      "Eric login -> root, card DIV with no href and aria-disabled=true",
+      "Admin login -> customer list"
+    ],
+    "published": [
+      "Eric login -> root directly, no administrative customer-list request as login destination",
+      "two disabled DIV cards without href, no session toast",
+      "reload preserves disabled state",
+      "Admin fresh login -> customers",
+      "Admin system link -> customer list"
+    ]
+  },
+  "contractQaObservation": {
+    "status": "confirmed frontend visual gap, not fixed in this change",
+    "figmaCreate": "1484:71334 / CT04",
+    "figmaOpen": "1484:72188 / CT07",
+    "published": "Create opens the older right dialog in ContractsPage; current design calls for a full page. Same editor is reused for existing IDs. No record saved during inspection."
+  }
+}
