@@ -36,6 +36,7 @@ const fields = {
   Summary: 'Resumo',
   Body: 'Conteúdo',
   Name: 'Nome',
+  FinancialNotes: 'Observação financeira',
   Status: 'Status',
   Amount: 'Valor',
   Balance: 'Saldo',

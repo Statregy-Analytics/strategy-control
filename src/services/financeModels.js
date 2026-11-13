@@ -51,7 +51,9 @@ export function buildContractTerm(term) {
   if (!option) throw new Error('Selecione dias, meses ou anos para o prazo.')
   const value = Number(term.value)
   if (!Number.isInteger(value) || value < 1 || value > option.max)
-    throw new Error(`Informe um prazo inteiro entre 1 e ${option.max} ${option.label.toLowerCase()}.`)
+    throw new Error(
+      `Informe um prazo inteiro entre 1 e ${option.max} ${option.label.toLowerCase()}.`,
+    )
   return { value, unit: option.value }
 }
 export function buildDraftPayload(form, term) {
@@ -81,4 +83,30 @@ export function buildDraftPayload(form, term) {
       allocatedAmount: nullableAmount(p.allocatedAmount),
     })),
   }
+}
+
+// Match calendar-based terms, including month ends and leap years.
+export function contractEndDate(startDate, term) {
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(startDate || '') || !term) return null
+  const value = Number(term.value)
+  if (
+    !Number.isInteger(value) ||
+    value < 1 ||
+    !contractTermOptions.some((o) => o.value === term.unit)
+  )
+    return null
+  const date = new Date(startDate + 'T12:00:00Z')
+  if (!Number.isFinite(date.getTime()) || date.toISOString().slice(0, 10) !== startDate) return null
+  if (term.unit === 'Day') date.setUTCDate(date.getUTCDate() + value)
+  else {
+    const day = date.getUTCDate()
+    date.setUTCDate(1)
+    if (term.unit === 'Month') date.setUTCMonth(date.getUTCMonth() + value)
+    else date.setUTCFullYear(date.getUTCFullYear() + value)
+    const lastDay = new Date(
+      Date.UTC(date.getUTCFullYear(), date.getUTCMonth() + 1, 0),
+    ).getUTCDate()
+    date.setUTCDate(Math.min(day, lastDay))
+  }
+  return Number.isFinite(date.getTime()) ? date.toISOString().slice(0, 10) : null
 }
