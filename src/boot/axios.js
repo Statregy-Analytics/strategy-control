@@ -50,7 +50,11 @@ api.interceptors.response.use(
     }
     originalRequest._retry = true
     refreshPromise ??= refreshClient
-      .post('/api/v1/auth/refresh', { refreshToken })
+      .post(
+        '/api/v1/auth/refresh',
+        { refreshToken },
+        { headers: { 'Idempotency-Key': generateIdempotencyKey() } },
+      )
       .then(({ data }) => {
         const payload = data?.data ?? data
         if (!payload?.accessToken) throw new Error('A API não retornou um novo access token.')
