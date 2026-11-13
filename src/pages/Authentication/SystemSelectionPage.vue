@@ -37,16 +37,17 @@
 import { onMounted, onScopeDispose } from 'vue'
 import ResourceState from 'src/components/Finance/ResourceState.vue'
 import { useFinanceResource } from 'src/composables/useFinanceResource'
-import { getMySystems } from 'src/services/authService'
+import { getMySystems, getCurrentUser } from 'src/services/authService'
 import { availableSystemRoute, systemDefinitions } from 'src/services/adminNavigation'
 const resource = useFinanceResource()
 const load = () =>
   resource.load(async () => {
-    const result = await getMySystems()
+    const [result, user] = await Promise.all([getMySystems(), getCurrentUser()])
     if (!Array.isArray(result?.systems)) throw Error('Resposta de sistemas indisponível.')
-    return result
+    return { ...result, user }
   })
-const destination = (system) => availableSystemRoute(system, resource.state.data)
+const destination = (system) =>
+  availableSystemRoute(system, resource.state.data, resource.state.data?.user)
 onMounted(load)
 onScopeDispose(resource.reset)
 </script>

@@ -55,11 +55,15 @@ test('server availability does not enable prototype LP or arbitrary destinations
       { id: lp.id, status: 'available', route: '/edit-lp' },
     ],
   }
-  assert.equal(availableSystemRoute(data, response), '/dataManagement')
-  assert.equal(availableSystemRoute(lp, response), null)
-  assert.equal(availableSystemRoute(data, { systems: [] }), null)
+  assert.equal(availableSystemRoute(data, response, { roles: ['Admin'] }), '/dataManagement')
+  assert.equal(availableSystemRoute(lp, response, { roles: ['Admin'] }), null)
+  assert.equal(availableSystemRoute(data, { systems: [] }, { roles: ['Admin'] }), null)
   assert.equal(
-    availableSystemRoute(data, { systems: [{ id: data.id, status: 'unavailable' }] }),
+    availableSystemRoute(
+      data,
+      { systems: [{ id: data.id, status: 'unavailable' }] },
+      { roles: ['Admin'] },
+    ),
     null,
   )
 })
@@ -98,4 +102,26 @@ test('legacy LP entry renders the existing selection without weakening editor ac
   assert.equal(editor.meta.requiresAdmin, true)
   assert.equal(editor.children[0].path, '')
   assert.equal(editor.children[0].name, 'Edição de LP')
+})
+
+test('client discovery permissions never enable the administrative card; known staff roles still require server availability', () => {
+  const data = systemDefinitions[0]
+  const response = {
+    systems: [{ id: data.id, status: 'available', requiredPermissions: ['data-intake.submit'] }],
+  }
+  for (const user of [
+    undefined,
+    {},
+    { roles: [] },
+    { roles: ['Cliente'] },
+    { roles: ['Other'] },
+    { roles: 'Admin' },
+    { roles: {} },
+  ]) {
+    assert.equal(availableSystemRoute(data, response, user), null)
+  }
+  for (const roles of [['Admin'], ['Operador'], ['System'], ['Cliente', 'Admin']]) {
+    assert.equal(availableSystemRoute(data, response, { roles }), '/dataManagement')
+    assert.equal(availableSystemRoute(data, { systems: [] }, { roles }), null)
+  }
 })

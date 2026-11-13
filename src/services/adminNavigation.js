@@ -56,7 +56,14 @@ export const systemDefinitions = [
     to: null,
   },
 ]
-export function availableSystemRoute(definition, response) {
+export function availableSystemRoute(definition, response, user) {
+  // System discovery also contains client data-intake permissions. It does not
+  // grant access to this administrative frontend. Unknown roles fail closed.
+  if (
+    !Array.isArray(user?.roles) ||
+    !user.roles.some((role) => ['Admin', 'Operador', 'System'].includes(role))
+  )
+    return null
   const system = response?.systems?.find((item) => item.id === definition.id)
   return system?.status === 'available' ? definition.to : null
 }
