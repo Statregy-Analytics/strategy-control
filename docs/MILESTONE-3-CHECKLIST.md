@@ -1,5 +1,9 @@
 # Marco 3 — implementação frontend
 
+## Correção de sessão — 12/11, 22h
+
+[Incidente e testes](QA-2026-11-12-REVISAO-CONSOLIDADA-FRONT.md#correção-do-incidente-de-sessão--1211-22h): o refresh do Admin omitia Idempotency-Key e a API retornava 400 idempotency.key_required. Cabeçalho corrigido e renovação 401 → refresh 200 → consultas 200 validada com Axios real/API para Éric e Admin. Versão 9c47bb4 publicada, 241 testes versionados e deploy aprovados; login/seleção/recarga conferidos no navegador. Falha de front corrigida, sem nova pendência de API. O 403 de Éric/Cliente na consulta administrativa permanece uma questão distinta de autorização.
+
 ## Entrega consolidada de 12/11
 
 A [matriz única de frontend](QA-2026-11-12-REVISAO-CONSOLIDADA-FRONT.md) reúne correções, testes, evidências anteriores e limites atuais. As seções datadas abaixo são histórico; não reenviar endpoints já entregues como novas pendências. Esta rodada corrige sessão temporariamente indisponível e abertura de documentos no Admin, preservando templates/estilos/campos/ações. Bloqueios de API, massa e decisões de produto estão separados na matriz.

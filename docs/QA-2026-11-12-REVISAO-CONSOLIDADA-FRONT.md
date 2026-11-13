@@ -1,5 +1,20 @@
 # QA — revisão consolidada do frontend — 12/11/2026
 
+## Correção do incidente de sessão — 12/11, 22h
+
+O relato de falha em Selecionar Sistema levou à reprodução de uma lacuna do front: a instância usada para renovar sessão não incluía Idempotency-Key. A API respondeu 400 idempotency.key_required; essa falha chegava às consultas de usuário e sistemas, explicando a combinação de aviso de verificação de sessão e erro genérico. O 403 administrativo da conta Cliente do Éric é outro cenário e não explica sozinho o incidente. A verificação anterior com sessão válida não cobria essa renovação.
+
+- [x] Incluir chave UUID no POST de refresh, mantendo a renovação única para requisições simultâneas e as chaves das operações originais.
+- [x] Reproduzir 400 sem o cabeçalho e 200 com ele na API publicada, usando sessão fictícia do Éric.
+- [x] Executar o interceptor real com Axios contra a API: token de acesso propositalmente inválido + refresh válido → duas consultas 401 → refresh 200 → usuário/sistemas 200. Executado para Éric e Admin; sessões criadas pelo teste encerradas com 204.
+- [x] Confirmar autorização preservada: cards administrativos retornam 403 para Éric/Cliente e 200 para Admin. Não alterar papéis de usuário para contornar a falha de renovação.
+- [x] Regressão: dois testes novos falham contra o código anterior e passam com a correção. Lint, 249 testes locais (241 versionados) e build aprovados.
+- [x] **9c47bb4 publicada**, [pipeline 43346452576](https://github.com/Statregy-Analytics/strategy-control/actions/runs/43346452576) aprovada com 241 testes, lint, build, upload e ativação. Bundle index-CBVV5KWG.js conferido na URL pública.
+- [x] Navegador publicado: recarga da sessão existente; novo login do Éric, seleção de sistema sem erro/aviso e mensagem específica de permissão nos clientes; saída da sessão de teste; novo login Admin com 14 clientes e retorno à seleção sem aviso de sessão. Não houve concessão de papel Admin à conta Cliente.
+
+[Evidências reduzidas sem credenciais](evidence/qa-2026-11-12-consolidada/session-refresh.json). O teste de renovação foi de transporte com a API real e storage isolado; não se declara expiração natural no navegador. Nenhum campo, ação, estilo ou permissão de negócio foi alterado. Os registros anteriores abaixo mantêm as versões e resultados de suas rodadas.
+
+
 Este é o ponto único de entrega para a rodada atual. Reúne os resultados anteriores com as correções desta revisão; não transforma caixas históricas em novos pedidos de API. As evidências específicas permanecem vinculadas abaixo. Uma aprovação automatizada não equivale a uma homologação integrada, e uma tela publicada não equivale à aprovação de todos os estados do negócio.
 
 ## Correções finais desta rodada
@@ -47,7 +62,7 @@ Esta relação consolida o último reteste documentado; não declara que todos e
 
 ## Verificação e publicação
 
-- [x] Admin: lint, 247 testes locais e build aprovados; 8 testes pertencem ao estudo local adiado e não entram no commit. Suíte versionada esperada: 239 testes (216 anteriores + 23 novos de sessão/ciclo de documento).
+- [x] Admin: lint, 249 testes locais e build aprovados; 8 testes pertencem ao estudo local adiado e não entram no commit. Suíte versionada: 241 testes, incluindo os dois casos da correção de refresh descrita no início.
 - [x] Portal: lint, 420 testes e build aprovados. Complementos de tradução do rodapé de sessões e do status na revisão do cadastro, sem alterar estrutura/campos/ações.
 - [x] Diff das alterações sem erros de whitespace; arquivos locais não relacionados preservados.
 - [x] Testes novos executam scripts reais de App/router/interceptor e do componente documental: rede, 429, 500/503, 401/403, navegação bloqueada, retry e mudança de contexto. Falhas controladas não são chamadas defeituosas provocadas no backend.

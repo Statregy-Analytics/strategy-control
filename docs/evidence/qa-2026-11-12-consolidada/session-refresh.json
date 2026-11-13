@@ -1,0 +1,72 @@
+{
+  "date": "2026-11-12",
+  "cause": "Refresh client omitted the Idempotency-Key required by API; 400 propagated into auth/me and systems error states.",
+  "before": {
+    "refreshWithoutKey": {
+      "status": 400,
+      "code": "idempotency.key_required",
+      "requestId": "01a1d28b82b175e983a95b29c358e42f"
+    },
+    "sameValidRefreshWithKey": {
+      "status": 200,
+      "requestId": "01a1d28b836c7978bef741c17713b452"
+    }
+  },
+  "afterActualTransportTests": [
+    {
+      "account": "Eric fictitious client",
+      "initialMeAndSystems": [
+        401,
+        401
+      ],
+      "refresh": 200,
+      "refreshRequestId": "01a1d28dafea703d8548de4d85c57365",
+      "retriedMeAndSystems": [
+        200,
+        200
+      ],
+      "adminCards": 403,
+      "expiredEvents": 0,
+      "ownSessionLogout": 204
+    },
+    {
+      "account": "Admin",
+      "initialMeAndSystems": [
+        401,
+        401
+      ],
+      "refresh": 200,
+      "refreshRequestId": "01a1d28dc0307a85a571dc01292f9168",
+      "retriedMeAndSystems": [
+        200,
+        200
+      ],
+      "adminCards": 200,
+      "expiredEvents": 0,
+      "ownSessionLogout": 204
+    }
+  ],
+  "method": "Real axios running the actual boot module in Node VM with isolated in-memory storage, deliberately invalid access token and valid refresh token from a new login. Uses published API; not a browser expiration test.",
+  "regression": "Two new tests fail against the previous boot source and pass after correction. Concurrent queries share one keyed refresh; original operation keys survive; 401 loops are bounded; 503 preserves credentials for another attempt.",
+  "checks": {
+    "localTests": 249,
+    "versionedTests": 241,
+    "deferredUncommittedTests": 8,
+    "lint": "passed",
+    "build": "passed",
+    "diff": "passed"
+  },
+  "codeCommit": "9c47bb4",
+  "deployRun": 43346452576,
+  "deployStatus": "success",
+  "browser": {
+    "publishedBundle": "index-CBVV5KWG.js",
+    "existingSessionReload": "passed",
+    "EricFreshLoginAndSystemSelection": "passed without session warning",
+    "EricAdminCustomers": "specific permission denial, as expected for Cliente",
+    "EricOwnTestSessionLogout": "passed",
+    "AdminFreshLogin": "14 customers loaded",
+    "AdminSystemSelectionAfterReload": "passed without notification",
+    "limitation": "Refresh branch was exercised against actual API with the real transport module; browser natural token expiry was not certified."
+  }
+}
