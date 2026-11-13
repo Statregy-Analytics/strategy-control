@@ -107,7 +107,13 @@ Atualização: 13/11/2026. Este é o índice desta revisão ampla. Evidências a
 - [x] LG06: Editar no menu da linha agora abre edição; Cancelar descarta índice local e volta ao registro real somente leitura.
 - [x] CT11.1–CT11.3: modos combinado/principal e aleatório/fixo preparados como apresentação e testados isoladamente. API sem configuração não seleciona um modo por suposição. Não foi criado campo de percentual que não aparece no desenho.
 - [x] Testes locais de arquivo inválido/válido, áudio WAV, anexos múltiplos, prévia/fechamento, validação obrigatória e proteção de arquivado. Nenhum comunicado publicado nem notificação enviada.
-- [ ] Confirmar deploy deste complemento e repetir os fluxos disponíveis no Admin publicado.
+- [x] Complemento publicado em 1c5cb04 e correção de MIME do worker em 4002e2a; [deploy final aprovado](https://github.com/Statregy-Analytics/strategy-control/actions/runs/43491875929).
+- [x] Homologação: prévia CO08, arquivado readonly, edição pelo menu LG06 e Cancelar; PDF real de uma/três páginas, arquivo inválido preservando anterior, nova seleção, WAV (0,5 s / readyState 4), anexos múltiplos, fechar/reabrir prévia, 390 px sem overflow e validação de título.
+- [x] Homologação: tentativa de Salvar relatório com dados preenchidos informa serviço indisponível, sem sucesso fictício. Descartar retorna aos mesmos dois registros. Não houve publicação nem notificação.
+- [x] Publicação detectou worker .mjs servido como application/octet-stream; corrigido para .js versionado, confirmado application/javascript e PDF renderizado no IAB publicado.
+- [x] Checks finais: lint, build, diff dos arquivos da entrega e 290 testes locais aprovados; CI testa somente os 282 versionados, pois os 8 do estudo futuro foram preservados fora da entrega.
+- Evidências publicadas: admin-co08-publicado.jpg, admin-pdf-publicado.jpg e admin-pdf-mobile-publicado.jpg em C:/Users/jlbnu/.codex/visualizations/2026/11/13/01a1d51a-ae33-79d1-87aa-854dbd4884dc/.
+- CR10/CT11 configurado: testes de apresentação isolados. Sem DTOs operacionais, não foram considerados homologação integrada.
 
 **Backend:** persistência de parceiros e seus detalhes; grupos editoriais, redatores, PDF/áudio/anexos/versão e metadados; configuração operacional dos motores. Uploads/prévias são locais e não simulam persistência.
 **Designer/contexto:** mídia/H2/H3 abertos, LG09 completo, distribuição CT05, importação e gatilho CT12 continuam sem desenho completo disponível. Não classificar como bug da API. Nenhuma nova consulta ao Figma foi necessária neste complemento.
