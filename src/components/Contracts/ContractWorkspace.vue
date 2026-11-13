@@ -394,8 +394,16 @@
                 v-model="participantLayout"
                 no-caps
                 :options="[
-                  { label: 'Cards', value: 'cards' },
-                  { label: 'Lista', value: 'list' },
+                  {
+                    label: 'Cards',
+                    value: 'cards',
+                    icon: 'img:/icons/contracts/ct08-chart-pie.svg',
+                  },
+                  {
+                    label: 'Lista',
+                    value: 'list',
+                    icon: 'img:/icons/contracts/ct08-chart-column.svg',
+                  },
                 ]" /><q-btn
                 outline
                 no-caps
@@ -406,7 +414,74 @@
             <div v-if="!detail.state.data?.participants?.length" class="contract-empty">
               Nenhum cliente vinculado.
             </div>
+            <q-table
+              v-if="participantLayout === 'list' && detail.state.data?.participants?.length"
+              class="contract-participant-table"
+              dark
+              flat
+              dense
+              :rows="detail.state.data.participants"
+              :columns="participantColumns"
+              row-key="clientId"
+              hide-pagination
+              :pagination="{ rowsPerPage: 0 }"
+            >
+              <template #body-cell-client="scope"
+                ><q-td :props="scope"
+                  ><div class="contract-participant-identity">
+                    <img
+                      :src="
+                        ['PJ', 'Organization'].includes(scope.row.personType)
+                          ? '/icons/contracts/ct08-building2.svg'
+                          : '/icons/contracts/ct08-user.svg'
+                      "
+                      alt=""
+                    />
+                    <div>
+                      <strong>{{ scope.row.displayName }}</strong
+                      ><small>{{
+                        ['PJ', 'Organization'].includes(scope.row.personType)
+                          ? 'PJ'
+                          : ['PF', 'Person'].includes(scope.row.personType)
+                            ? 'PF'
+                            : '—'
+                      }}</small>
+                    </div>
+                  </div></q-td
+                ></template
+              >
+              <template #body-cell-actions="scope"
+                ><q-td :props="scope"
+                  ><div class="contract-participant-actions">
+                    <q-btn
+                      outline
+                      dense
+                      no-caps
+                      label="Detalhes"
+                      @click="participantDetail = scope.row"
+                    /><q-btn
+                      outline
+                      dense
+                      icon="more_vert"
+                      :aria-label="'Ações de ' + scope.row.displayName"
+                      ><q-menu dark class="profile-glass-menu"
+                        ><q-list
+                          ><q-item
+                            clickable
+                            v-close-popup
+                            :disable="busy"
+                            @click="unlinkParticipant(scope.row)"
+                            ><q-item-section>Desvincular cliente</q-item-section></q-item
+                          ></q-list
+                        ></q-menu
+                      ></q-btn
+                    >
+                  </div></q-td
+                ></template
+              >
+            </q-table>
             <div
+              v-else
               class="contract-participants"
               :class="{ 'contract-participants--list': participantLayout === 'list' }"
             >
@@ -752,23 +827,12 @@
             @click="linkDocument"
           /></div></q-card
     ></q-dialog>
-    <q-dialog
-      :model-value="Boolean(participantDetail)"
-      @update:model-value="participantDetail = null"
-      ><q-card class="contract-modal"
-        ><h2>{{ participantDetail?.displayName }}</h2>
-        <dl class="contract-summary">
-          <div>
-            <dt>Capital base</dt>
-            <dd>{{ money(participantDetail?.baseAmount, currencyCode) }}</dd>
-          </div>
-          <div>
-            <dt>Valor alocado</dt>
-            <dd>{{ money(participantDetail?.allocatedAmount, currencyCode) }}</dd>
-          </div>
-        </dl>
-        <q-btn outline no-caps label="Fechar" @click="participantDetail = null" /></q-card
-    ></q-dialog>
+    <participant-detail-panel
+      v-if="participantDetail"
+      :participant="participantDetail"
+      :currency="currencyCode"
+      @close="participantDetail = null"
+    />
   </div>
 </template>
 
@@ -777,6 +841,7 @@ import { ref, computed, watch, nextTick, onScopeDispose } from 'vue'
 import { useQuasar } from 'quasar'
 import { onBeforeRouteLeave, onBeforeRouteUpdate } from 'vue-router'
 import ContractPanel from './ContractPanel.vue'
+import ParticipantDetailPanel from './ParticipantDetail.vue'
 import LabelForm from 'src/components/Form/LabelForm.vue'
 import GlassSelect from 'src/components/Entity/GlassSelect.vue'
 import MoneyInput from 'src/components/Form/MoneyInput.vue'
@@ -906,6 +971,29 @@ watch(
 const dirty = computed(
   () =>
     JSON.stringify([form.value, termValue.value, termUnit.value, endDate.value]) !== baseline.value,
+)
+const participantColumns = computed(() =>
+  columns([
+    ['client', 'Cliente'],
+    ['status', 'Status', () => 'Indisponível'],
+    ['linkedAtUtc', 'Vínculo', (row) => dateLabel(row.linkedAtUtc)],
+    [
+      'allocationPercentage',
+      'Participação',
+      (row) =>
+        row.allocationPercentage == null
+          ? 'Indisponível'
+          : new Intl.NumberFormat('pt-BR', { maximumFractionDigits: 2 }).format(
+              row.allocationPercentage,
+            ) + '%',
+    ],
+    ['contributedAmount', 'Aportes', (row) => money(row.contributedAmount, currencyCode.value)],
+    ['withdrawals', 'Retiradas', () => 'Indisponível'],
+    ['position', 'Posição Atual', () => 'Indisponível'],
+    ['lastDeposit', 'Último Depósito', () => 'Indisponível'],
+    ['lastWithdrawal', 'Última Retirada', () => 'Indisponível'],
+    ['actions', 'Ações'],
+  ]),
 )
 const participantName = (clientId) =>
   detail.state.data?.participants?.find((p) => p.clientId === clientId)?.displayName || 'Cliente'
@@ -1785,5 +1873,38 @@ watch(
 .contract-participant-details img {
   order: -1;
   margin-right: 6px;
+}
+.contract-participant-table {
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 10px;
+  background: rgba(0, 0, 0, 0.04);
+}
+.contract-participant-table :deep(th) {
+  text-transform: uppercase;
+  font-size: 10px;
+  letter-spacing: 0.04em;
+}
+.contract-participant-table :deep(td) {
+  font-size: 11px;
+}
+.contract-participant-table :deep(.contract-participant-actions) {
+  margin: 0;
+  justify-content: flex-end;
+  flex-wrap: nowrap;
+}
+.contract-participant-identity {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.contract-participant-identity img {
+  padding: 5px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 50%;
+  box-sizing: content-box;
+}
+.contract-participant-identity strong,
+.contract-participant-identity small {
+  display: block;
 }
 </style>

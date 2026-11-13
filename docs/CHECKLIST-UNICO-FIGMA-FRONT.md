@@ -23,6 +23,16 @@ Atualização: 13/11/2026. Este é o índice desta revisão ampla. Evidências a
 - [x] Vigência: Cancelar descarta o período escolhido.
 - [x] Modelos: paginação completa, falha parcial, resposta obsoleta, busca com acentos, datas localizadas, preservação de audiência/categoria e validações numéricas/data.
 
+## CT08 e CT10 — revisão adicional
+
+- [x] CT08: Lista agora é tabela com as dez colunas do desenho; Cards mantém a composição existente.
+- [x] Legacy Prime: Éric aparece como PF e participação 40%, Homologação Pessoa Física como PF e 60%, sem alterar vínculos.
+- [x] Detalhes de Éric abrem o CT10; nome/data/participação/aportes vêm do contrato e e-mail mascarado vem da consulta cadastral real.
+- [x] Fechar o modal mantém a lista; voltar para Cards mantém ambos os participantes.
+- [ ] Verificação publicada e checagens finais da revisão adicional.
+- Lacunas do DTO de participante: status do vínculo, índice na entrada, participação inicial, posição, total retirado e últimos movimentos não são retornados. Não converter o status do cliente em status do vínculo.
+- Históricos por vínculo e destino dos dividendos no CT10 permanecem sem integração. A revisão dos endpoints de movimentos/distribuições continua sendo tarefa do front antes de atribuir essa lacuna ao backend.
+
 ## Ainda é trabalho de frontend
 
 - [ ] Revisar todos os estados LG05/LG06/LG07/LG09 (simulação, comparação e histórico), além das composições já preparadas.
@@ -52,9 +62,10 @@ Referência: OpenAPI de homologação consultado nesta rodada, sem substituir o 
 
 ## Publicação
 
-- [ ] Commit e push desta revisão ampla.
-- [ ] Pipeline e versão publicada confirmados.
-- [ ] Testes em admin.strategyanalytics.com.br repetidos.
+- [x] Commit e push da primeira composição: `515c8b6`.
+- [x] Deploy `515c8b6` concluído: [execução 43449296804](https://github.com/Statregy-Analytics/strategy-control/actions/runs/43449296804).
+- [x] Admin publicado: CT01/CT02 carregam; busca Legacy + tabela com participante e valor inicial reais; capital atual indisponível preservado.
+- [ ] Repetir a validação publicada dos demais estados após seus ajustes.
 - Área do Cliente não foi alterada nesta rodada; não há novo deploy dela a anunciar.
 
 ## Inventário por frame
