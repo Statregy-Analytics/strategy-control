@@ -158,6 +158,7 @@ export function validateLogic(form) {
     return 'O fechamento deve ser posterior ao início do ciclo.'
   if (
     !(Number(form.initialIndex) > 0) ||
+    !Number.isFinite(Number(form.initialIndex)) ||
     form.target == null ||
     form.target === '' ||
     !Number.isFinite(Number(form.target))
@@ -235,7 +236,8 @@ export function initialLogic() {
   }
 }
 export function projectedFinalIndex(form) {
-  return Number(form.initialIndex) > 0 &&
+  return Number.isFinite(Number(form.initialIndex)) &&
+    Number(form.initialIndex) > 0 &&
     form.target !== null &&
     form.target !== '' &&
     Number.isFinite(Number(form.target))

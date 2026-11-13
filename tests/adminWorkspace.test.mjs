@@ -157,6 +157,8 @@ test('logic rejects incomplete, invalid probability and empty target', () => {
   assert.equal(validateLogic(form), '')
   assert.match(validateLogic({ ...form, positive: 60 }), /somar 100/)
   assert.notEqual(validateLogic({ ...form, target: '' }), '')
+  assert.notEqual(validateLogic({ ...form, initialIndex: Infinity }), '')
+  assert.equal(projectedFinalIndex({ initialIndex: Infinity, target: 1 }), null)
   assert.notEqual(validateLogic({ ...form, startDate: '2026-02-31' }), '')
   assert.equal(projectedFinalIndex({ initialIndex: 100, target: null }), null)
 })

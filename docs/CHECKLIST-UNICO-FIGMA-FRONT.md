@@ -29,7 +29,9 @@ Atualização: 13/11/2026. Este é o índice desta revisão ampla. Evidências a
 - [x] Legacy Prime: Éric aparece como PF e participação 40%, Homologação Pessoa Física como PF e 60%, sem alterar vínculos.
 - [x] Detalhes de Éric abrem o CT10; nome/data/participação/aportes vêm do contrato e e-mail mascarado vem da consulta cadastral real.
 - [x] Fechar o modal mantém a lista; voltar para Cards mantém ambos os participantes.
-- [ ] Verificação publicada e checagens finais da revisão adicional.
+- [x] CT08/CT10 publicados em `b6c7b84`; [deploy 43450966788 aprovado](https://github.com/Statregy-Analytics/strategy-control/actions/runs/43450966788). Lista de Éric, abertura do CT10, e-mail mascarado e fechamento mantendo a lista retestados no Admin publicado.
+- [x] Lint, build e 274 testes locais passaram novamente após CT08/CT10.
+- [x] Crédito publicado carrega a consulta vazia real; Lógicas publicado carrega Quant Core, abre Novo Motor e retorna pelo Cancelar.
 - Lacunas do DTO de participante: status do vínculo, índice na entrada, participação inicial, posição, total retirado e últimos movimentos não são retornados. Não converter o status do cliente em status do vínculo.
 - Históricos por vínculo e destino dos dividendos no CT10 permanecem sem integração. A revisão dos endpoints de movimentos/distribuições continua sendo tarefa do front antes de atribuir essa lacuna ao backend.
 
@@ -126,17 +128,17 @@ Legenda: **Preparado / revisão pendente** = há código novo, mas a validação
 | [2077:281](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=2077-281)     | C11.2 · Identificação e valor · erros ao salvar (caixas no lugar)                             | Revalidar                                                                |
 | [2095:281](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=2095-281)     | C09.1 · MD · Dados Bancários — Adicionar Conta · preenchido, conta principal ativa            | Revalidar                                                                |
 | [1484:69984](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-69984) | F01 · Seleção de contratos · Cards / Lista + painéis temporários                              | Revalidar                                                                |
-| [1484:69985](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-69985) | CT01 · PB · Seleção de contratos · Cards · DESIGN GLASS                                       | Busca, cards/lista e retorno testados localmente; revisão final pendente |
-| [1484:70685](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-70685) | CT02 · SP · Seleção de contratos · Lista · DESIGN GLASS                                       | Busca, cards/lista e retorno testados localmente; revisão final pendente |
+| [1484:69985](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-69985) | CT01 · PB · Seleção de contratos · Cards · DESIGN GLASS                                       | Busca, cards/lista e retorno testados localmente e no Admin publicado; revisão final pendente |
+| [1484:70685](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-70685) | CT02 · SP · Seleção de contratos · Lista · DESIGN GLASS                                       | Busca, cards/lista e retorno testados localmente e no Admin publicado; revisão final pendente |
 | [1484:71333](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-71333) | F02 · Criação de contrato · Tela única + painéis acionados                                    | Revalidar                                                                |
 | [1484:71334](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-71334) | CT04 · SP · Criar novo contrato · Tela única completa · DESIGN GLASS                          | Revalidar                                                                |
 | [1484:72006](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-72006) | CT05 · MD · Selecionar clientes para vincular · DESIGN GLASS                                  | Revalidar                                                                |
 | [1484:72120](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-72120) | CT06 · MD · Adicionar ativo elegível · DESIGN GLASS                                           | Revalidar                                                                |
 | [1484:72187](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-72187) | F03 · Contrato aberto · Componentes, estados e ações                                          | Revalidar                                                                |
 | [1484:72188](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-72188) | CT07 · PB · Contrato aberto · Página base · DESIGN GLASS                                      | Revalidar                                                                |
-| [1484:73154](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-73154) | CT08 · CP · Clientes vinculados · Lista · DESIGN GLASS                                        | Revalidar                                                                |
+| [1484:73154](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-73154) | CT08 · CP · Clientes vinculados · Lista · DESIGN GLASS                                        | Tabela e alternância testadas em homologação; dados ausentes identificados |
 | [1484:73324](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-73324) | CT09 · MD · Adicionar cliente vinculado · DESIGN GLASS                                        | Revalidar                                                                |
-| [1484:73364](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-73364) | CT10 · MD · Ver detalhes do cliente · DESIGN GLASS                                            | Revalidar                                                                |
+| [1484:73364](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-73364) | CT10 · MD · Ver detalhes do cliente · DESIGN GLASS                                            | Modal e consulta cadastral testados em homologação; históricos/destino ainda sem integração |
 | [1484:73521](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-73521) | CT11 · CP · Motores e operações · Maximizado · DESIGN GLASS                                   | Revalidar                                                                |
 | [1484:73658](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-73658) | CT12 · MD · Adicionar operação intradiária · DESIGN GLASS                                     | Revalidar                                                                |
 | [1484:73745](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-73745) | CT13 · CP · Ativos do contrato · Maximizado · DESIGN GLASS                                    | Revalidar                                                                |
@@ -390,6 +392,12 @@ Legenda: **Preparado / revisão pendente** = há código novo, mas a validação
 | [37:27742](https://www.figma.com/design/BaDXlWpxbIoY4azOaQnXgv?node-id=37-27742)   | [UI] CADASTRO - 5 Documento e endereço - África (África do Sul)              | Revalidar              |
 | [37:27862](https://www.figma.com/design/BaDXlWpxbIoY4azOaQnXgv?node-id=37-27862)   | [UI] CADASTRO - 5 Documento e endereço - Austrália                           | Revalidar              |
 | [121:27090](https://www.figma.com/design/BaDXlWpxbIoY4azOaQnXgv?node-id=121-27090) | [EC] CADASTRO - 1 Criar conta · E-mail já confirmado (aviso abaixo do campo) | Revalidar              |
+
+## Evidência desta rodada
+
+- Captura do CT10 no Admin publicado: `C:/Users/jlbnu/.codex/visualizations/2026/11/13/01a1d51a-ae33-79d1-87aa-854dbd4884dc/admin-ct10-publicado.jpg`.
+- Validações do motor também rejeitam índice inicial infinito e datas inexistentes; nenhum cálculo de prévia assume dados operacionais do servidor.
+- `git diff --check` dos arquivos desta revisão aprovado. O snapshot Swagger preexistente contém whitespace e não foi incluído nos commits.
 
 ## Evidências anteriores
 
