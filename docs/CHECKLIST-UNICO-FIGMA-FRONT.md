@@ -6,7 +6,7 @@ Atualização: 13/11/2026. Este é o índice desta revisão ampla. Evidências a
 
 - [ ] Todos os frames/estados abaixo comparados visualmente, inclusive erro, vazio e retorno.
 - [ ] Fluxos de escrita e leitura integrados testados com dados fictícios.
-- [x] Admin: lint e build aprovados; 274 testes locais passaram (incluem 8 testes de estudo já existentes no worktree).
+- [x] Admin: lint e build aprovados; 285 testes locais passaram (incluem 8 testes de estudo já existentes no worktree).
 - [ ] Reexecutar os checks após concluir as demais telas; Área do Cliente ainda não alterada nesta rodada.
 - [ ] Deploy confirmado e testes repetidos nas URLs publicadas.
 - [ ] Pendências de frontend separadas das pendências reais da API e do designer.
@@ -34,6 +34,50 @@ Atualização: 13/11/2026. Este é o índice desta revisão ampla. Evidências a
 - [x] Crédito publicado carrega a consulta vazia real; Lógicas publicado carrega Quant Core, abre Novo Motor e retorna pelo Cancelar.
 - Lacunas do DTO de participante: status do vínculo, índice na entrada, participação inicial, posição, total retirado e últimos movimentos não são retornados. Não converter o status do cliente em status do vínculo.
 - Históricos por vínculo e destino dos dividendos no CT10 permanecem sem integração. A revisão dos endpoints de movimentos/distribuições continua sendo tarefa do front antes de atribuir essa lacuna ao backend.
+
+## Contratos — contraste e estados expandidos (rodada atual)
+
+- [x] Contraste: tabelas de aportes e alterações agora usam tema escuro; cabeçalhos e células medidos no navegador com `rgb(255, 255, 255)`. Textos longos do histórico quebram linha.
+- [x] Campos dos novos modais: corrigida a herança que deixava os valores azuis; leitura branca confirmada no formulário de dívida.
+- [x] CT06: formulário do Figma com tipo, bolsa, nome, ticker e moeda. B3 preenche BRL automaticamente; moeda inexistente é barrada localmente.
+- [x] CT06: reutilização de PETR4 sem duplicar catálogo e criação real do ativo fictício QACT3, sem finalizar contrato.
+- [x] CT13/CT14: tabela no lugar da lista textual; edição de contrato existente permite adicionar/remover vínculo de ativo. PETR4 foi adicionado e removido pela interface; universo restaurado a zero.
+- [x] CT15/CT16/CT17/CT18/CT19: tabela e formulários conforme os campos desenhados; dados disponíveis preenchidos pela API. Criação visual, campos obrigatórios, abertura de detalhes, histórico real, edição preenchida e descarte passaram.
+- [x] CT19: Salvar desabilitado sem mudança; alteração local do credor habilita; fechar/reabrir restaura o credor do servidor.
+- [x] CT20: tabela com nome, tipo real, envio, formato e ações do desenho. Vínculo, download de PNG fictício (68 bytes), visualização em nova aba e remoção do vínculo passaram. Arquivo original preservado.
+- [x] CT11: motor principal real Quant Core, conexão pendente e índices indisponíveis preservados; Ver motor completo abre Lógicas e Voltar retorna ao contrato.
+- [x] CT21/CT22/CT23: troca tabela/gráfico, períodos, histórico expandido, intervalo 01–13/11, troca para 90 dias e fechamento testados localmente. Intervalo personalizado e período predefinido se desmarcam mutuamente. Sem série temporal real, indicadores não recebem valores de exemplo e exportação permanece desabilitada.
+- [x] Leitura de movimentos por vínculo testada no CT10 do Éric, com retorno vazio real e total retirado zero confirmado, usando os filtros reais cliente/contrato; aportes não incluem resgates. Somatórios recusam mistura de moedas e preservam zero confirmado.
+- [x] Paginação: leituras completas interrompem ao sair/trocar de registro e rejeitam envelopes de erro/paginação inválida.
+- [x] Rotas legadas de lógica e dividendos direcionam a Lógicas; não abrem as telas antigas com dados fictícios.
+- [x] Revisão local desktop e 390 px: tabelas contidas com rolagem própria, modal completo sem excesso horizontal, cabeçalhos/células e intervalo de datas legíveis.
+- [ ] Repetir os estados afetados no deploy desta rodada.
+
+### API — lacunas verificadas nesta rodada
+
+- Exportação de ativos: `format=xlsx` e `format=pdf` retornaram HTTP 400, `contract_asset.export_format_invalid`, informando suporte apenas a CSV. Figma pede Excel e PDF.
+- Alterar os dados de um vínculo de ativo: não há PATCH do vínculo; PATCH do catálogo é global e não será usado como substituto. Inclusão e remoção do vínculo já funcionam.
+- Composição estratégica Intradiário/Núcleo/Tática: não há campos/rotas para persistir os três percentuais. Não preencher com exemplos nem descartar valores silenciosamente no salvamento.
+- Dívida: faltam alteração do cliente responsável, início das parcelas, parcela atual/total, valor da parcela, dia fixo, periodicidade, amortização, índice de correção, taxas mensal/anual distintas, modo automático/manual e dados estruturados do boleto. A edição completa do desenho não pode ser salva com o DTO atual.
+- `interestRatePercent` não informa a periodicidade no Swagger. Não foi apresentado como taxa mensal por suposição.
+- Remoção de dívida: não há DELETE/desvinculação; não usar mudança para Canceled como substituto da remoção do desenho.
+- Documento do contrato: tipos específicos do desenho ainda precisam constar no catálogo. A consulta atual retornou 31 tipos e, entre contratos, apenas CONTRATO_ADESAO_CONSORCIO. O teste mostrou o tipo real Declaração IRPF; não foi renomeado para Contrato digitalizado.
+- CT10: consulta real de transações existe e foi integrada ao histórico de aportes. Ainda falta identificar distribuições/dividendos e seus destinos; o resgate não será apresentado como dividendo.
+- Performance e operações intradiárias: Swagger atualizado consultado; não há consulta da série temporal/OHLC nem operações operacionais/distribuições dos motores.
+
+### Designer / definição de negócio
+
+- CT06: o frame fornecido mostra Ativo de bolsa. Falta o estado de Criptoativo e a definição de como os dados de rede/token entram nos campos existentes; não foi acrescentado campo Rede por conta própria.
+- CT12: o modal está desenhado, mas não foi localizado o gatilho de abertura no CT07/CT11. Definir onde a ação aparece, sem inventar botão.
+- CT20: confirmar o modal de inclusão; o desenho enviado contém a tabela e Adicionar Documento. O fluxo legado de vincular documento do cliente foi reutilizado, sem acrescentar campos novos.
+- Dívidas: o servidor usa Active/Overdue/Renegotiated/Settled/Canceled; definir a correspondência com Em dia e o modo automático do desenho. Não converter status por aproximação.
+
+### Dados de teste desta rodada (não são bloqueios da API)
+
+- Dívida `DBT-26F371A5`, ID `382914ef-79ef-44ff-b2d9-dcc3b6ee3b70`: registro explicitamente fictício, saldo zero, encerrado com status Canceled após os testes. Não houve operação de carteira.
+- Ativo `QACT3`, ID `7e901686-a9d5-4910-bc08-b0bae4b2d293`: nome QA CT06 FICTÍCIO — não negociar. Permanece como dado de teste no catálogo; nenhum vínculo ficou no rascunho.
+- Legacy Prime e rascunho QA CT04/CT07: confirmados pela API com zero ativos e zero documentos após a restauração dos testes.
+- Arquivo `qa1112-ficticio-sem-dados-pessoais.png`: original Available preservado; somente o vínculo temporário foi removido.
 
 ## Ainda é trabalho de frontend
 
@@ -133,25 +177,25 @@ Legenda: **Preparado / revisão pendente** = há código novo, mas a validação
 | [1484:71333](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-71333) | F02 · Criação de contrato · Tela única + painéis acionados                                    | Revalidar                                                                |
 | [1484:71334](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-71334) | CT04 · SP · Criar novo contrato · Tela única completa · DESIGN GLASS                          | Revalidar                                                                |
 | [1484:72006](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-72006) | CT05 · MD · Selecionar clientes para vincular · DESIGN GLASS                                  | Revalidar                                                                |
-| [1484:72120](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-72120) | CT06 · MD · Adicionar ativo elegível · DESIGN GLASS                                           | Revalidar                                                                |
+| [1484:72120](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-72120) | CT06 · MD · Adicionar ativo elegível · DESIGN GLASS                                           | Implementado/revisado nesta rodada; testes e bloqueios detalhados acima |
 | [1484:72187](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-72187) | F03 · Contrato aberto · Componentes, estados e ações                                          | Revalidar                                                                |
 | [1484:72188](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-72188) | CT07 · PB · Contrato aberto · Página base · DESIGN GLASS                                      | Revalidar                                                                |
 | [1484:73154](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-73154) | CT08 · CP · Clientes vinculados · Lista · DESIGN GLASS                                        | Tabela e alternância testadas em homologação; dados ausentes identificados |
 | [1484:73324](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-73324) | CT09 · MD · Adicionar cliente vinculado · DESIGN GLASS                                        | Revalidar                                                                |
 | [1484:73364](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-73364) | CT10 · MD · Ver detalhes do cliente · DESIGN GLASS                                            | Modal e consulta cadastral testados em homologação; históricos/destino ainda sem integração |
-| [1484:73521](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-73521) | CT11 · CP · Motores e operações · Maximizado · DESIGN GLASS                                   | Revalidar                                                                |
+| [1484:73521](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-73521) | CT11 · CP · Motores e operações · Maximizado · DESIGN GLASS                                   | Implementado/revisado nesta rodada; testes e bloqueios detalhados acima |
 | [1484:73658](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-73658) | CT12 · MD · Adicionar operação intradiária · DESIGN GLASS                                     | Revalidar                                                                |
-| [1484:73745](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-73745) | CT13 · CP · Ativos do contrato · Maximizado · DESIGN GLASS                                    | Revalidar                                                                |
-| [1484:73893](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-73893) | CT14 · PE · Ativos do contrato · Editar ativo / Excluir · DESIGN GLASS                        | Revalidar                                                                |
-| [1484:74090](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-74090) | CT15 · CP · Dívidas vinculadas · Maximizado · DESIGN GLASS                                    | Revalidar                                                                |
-| [1484:74204](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-74204) | CT16 · PE · Dívidas vinculadas · Modo edição · DESIGN GLASS                                   | Revalidar                                                                |
-| [1484:74335](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-74335) | CT17 · MD · Adicionar dívida · DESIGN GLASS                                                   | Revalidar                                                                |
-| [1484:74524](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-74524) | CT18 · MD · Ver detalhes da dívida · DESIGN GLASS                                             | Revalidar                                                                |
-| [1484:74680](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-74680) | CT19 · MD · Editar dívida · DESIGN GLASS                                                      | Revalidar                                                                |
-| [1484:74946](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-74946) | CT20 · PE · Documentos do contrato · Modo edição · DESIGN GLASS                               | Revalidar                                                                |
-| [1484:75082](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-75082) | CT21 · CP · Performance histórica · Tabela · DESIGN GLASS                                     | Revalidar                                                                |
-| [1484:75314](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-75314) | CT22 · PE · Performance histórica · Gráfico · DESIGN GLASS                                    | Revalidar                                                                |
-| [1484:75524](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-75524) | CT23 · MD · Performance histórica · Histórico completo · DESIGN GLASS                         | Revalidar                                                                |
+| [1484:73745](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-73745) | CT13 · CP · Ativos do contrato · Maximizado · DESIGN GLASS                                    | Implementado/revisado nesta rodada; testes e bloqueios detalhados acima |
+| [1484:73893](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-73893) | CT14 · PE · Ativos do contrato · Editar ativo / Excluir · DESIGN GLASS                        | Implementado/revisado nesta rodada; testes e bloqueios detalhados acima |
+| [1484:74090](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-74090) | CT15 · CP · Dívidas vinculadas · Maximizado · DESIGN GLASS                                    | Implementado/revisado nesta rodada; testes e bloqueios detalhados acima |
+| [1484:74204](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-74204) | CT16 · PE · Dívidas vinculadas · Modo edição · DESIGN GLASS                                   | Implementado/revisado nesta rodada; testes e bloqueios detalhados acima |
+| [1484:74335](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-74335) | CT17 · MD · Adicionar dívida · DESIGN GLASS                                                   | Implementado/revisado nesta rodada; testes e bloqueios detalhados acima |
+| [1484:74524](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-74524) | CT18 · MD · Ver detalhes da dívida · DESIGN GLASS                                             | Implementado/revisado nesta rodada; testes e bloqueios detalhados acima |
+| [1484:74680](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-74680) | CT19 · MD · Editar dívida · DESIGN GLASS                                                      | Implementado/revisado nesta rodada; testes e bloqueios detalhados acima |
+| [1484:74946](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-74946) | CT20 · PE · Documentos do contrato · Modo edição · DESIGN GLASS                               | Implementado/revisado nesta rodada; testes e bloqueios detalhados acima |
+| [1484:75082](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-75082) | CT21 · CP · Performance histórica · Tabela · DESIGN GLASS                                     | Implementado/revisado nesta rodada; testes e bloqueios detalhados acima |
+| [1484:75314](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-75314) | CT22 · PE · Performance histórica · Gráfico · DESIGN GLASS                                    | Implementado/revisado nesta rodada; testes e bloqueios detalhados acima |
+| [1484:75524](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-75524) | CT23 · MD · Performance histórica · Histórico completo · DESIGN GLASS                         | Implementado/revisado nesta rodada; testes e bloqueios detalhados acima |
 | [2149:300](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=2149-300)     | CT11.1 · EC · Resultado no fechamento — Motor Principal + Operações                           | Revalidar                                                                |
 | [2157:281](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=2157-281)     | CT11.2 · EC · Motor de Dividendos — Conectado (Aleatório)                                     | Revalidar                                                                |
 | [2157:348](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=2157-348)     | CT11.3 · EC · Motor de Dividendos — valor Fixo                                                | Revalidar                                                                |

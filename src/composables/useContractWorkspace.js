@@ -2,6 +2,7 @@ import { ref, computed, watch, onScopeDispose } from 'vue'
 import { useFinanceResource } from './useFinanceResource'
 import { financeGet, financeWrite } from 'src/services/financeService'
 import { buildDraftPayload, buildContractTerm } from 'src/services/financeModels'
+import { readCurrentPages } from 'src/services/requestContext'
 import { getApiErrorMessage } from 'src/services/apiError'
 
 export function useContractWorkspace(props, emit, notify) {
@@ -134,9 +135,12 @@ export function useContractWorkspace(props, emit, notify) {
   const loadDebts = () => {
     const contractId = id.value
     if (!contractId) return Promise.resolve()
-    return debts.load(
-      async () =>
-        (await financeGet('admin/debts', { contractId, page: 1, pageSize: 100 })).data || [],
+    const r = revision
+    return debts.load(() =>
+      readCurrentPages(
+        (page) => financeGet('admin/debts', { contractId, page, pageSize: 100 }),
+        () => current(r) && id.value === contractId,
+      ),
     )
   }
   async function loadDetail(sync = true) {

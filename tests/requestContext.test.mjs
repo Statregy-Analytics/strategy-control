@@ -48,3 +48,19 @@ test('pagination returns all rows and preserves failure rather than partial succ
     /network/,
   )
 })
+
+test('invalid pagination and unsuccessful envelopes fail instead of looping or hiding errors', async () => {
+  for (const result of [
+    { data: [], success: false },
+    { data: [], pagination: { totalPages: Infinity } },
+    { data: [], pagination: { totalPages: 1.5 } },
+    { data: { unexpected: true } },
+  ]) {
+    await assert.rejects(
+      readCurrentPages(
+        async () => result,
+        () => true,
+      ),
+    )
+  }
+})

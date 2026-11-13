@@ -245,6 +245,7 @@
                   aria-label="Status Inicial do Contrato" /></label-form
             ></contract-panel>
             <contract-panel
+              v-if="draft"
               title="Universo de Ativos do Contrato"
               icon="assets"
               caption="Ativos, bolsas e moedas elegíveis dentro da política do contrato."
@@ -320,6 +321,15 @@
                   ><q-input outlined dense disable placeholder="Indisponível" :aria-label="label"
                 /></label-form></div
             ></contract-panel>
+            <contract-panel v-else title="Ativos do Contrato" icon="assets"
+              ><contract-assets
+                :state="assets.state"
+                editing
+                :busy="busy"
+                @retry="loadAssets"
+                @add="assetOpen = true"
+                @remove="unlinkAsset"
+            /></contract-panel>
             <contract-panel
               title="Documentos do Contrato"
               caption="Repositório de arquivos digitais do contrato"
@@ -333,6 +343,14 @@
                 >
               </div></contract-panel
             >
+            <contract-panel v-if="!draft" title="Dívidas Vinculadas ao Contrato" icon="debt"
+              ><debt-registry
+                :state="debts.state"
+                :participants="detail.state.data?.participants || []"
+                :currency="currencyCode"
+                editing
+                @retry="loadDebts"
+            /></contract-panel>
             <p class="contract-audit-note">
               <img src="/icons/contracts/info.svg" alt="" />A criação do contrato registra os
               vínculos e alterações no histórico de auditoria.
@@ -554,21 +572,7 @@
               <span>{{
                 financeLabel(detail.state.data?.primaryEngine?.connectionStatus)
               }}</span></template
-            ><resource-state :state="engines.state" @retry="loadEngines"
-              ><div
-                v-for="engine in engines.state.data || []"
-                :key="engine.contractEngineId"
-                class="contract-engine"
-              >
-                <h3>{{ engine.name }}</h3>
-                <div class="contract-row">
-                  <span>Índice na conexão: {{ engine.indexAtConnection ?? 'Indisponível' }}</span
-                  ><span>Índice atual: {{ engine.currentIndex ?? 'Indisponível' }}</span
-                  ><span>Conectado em: {{ dateLabel(engine.connectedAtUtc) }}</span>
-                </div>
-              </div>
-              <p v-if="!engines.state.data?.length">Nenhum motor vinculado.</p></resource-state
-            ></q-expansion-item
+            ><contract-engines :state="engines.state" @retry="loadEngines" /> ></q-expansion-item
           >
           <q-expansion-item
             v-model="expandedSections.assets"
@@ -587,37 +591,8 @@
                   ativos vinculados</small
                 >
               </div></template
-            ><resource-state :state="assets.state" @retry="loadAssets"
-              ><q-btn
-                outline
-                no-caps
-                label="Adicionar Ativo"
-                :disable="busy"
-                @click="assetOpen = true"
-              /><q-btn flat no-caps label="Exportar ativos" :disable="busy" @click="exportAssets" />
-              <div
-                v-for="a in assets.state.data?.items || []"
-                :key="a.contractAssetId"
-                class="contract-asset-line"
-              >
-                <span
-                  >{{ a.ticker }} · {{ a.name }} ·
-                  {{ a.market?.name || a.network?.name || '—' }}</span
-                ><q-btn
-                  flat
-                  dense
-                  round
-                  icon="close"
-                  aria-label="Remover ativo"
-                  :disable="busy"
-                  @click="unlinkAsset(a)"
-                />
-              </div>
-              <p v-if="!assets.state.data?.items?.length">
-                Nenhum ativo vinculado.
-              </p></resource-state
-            ></q-expansion-item
-          >
+            ><contract-assets :state="assets.state" :busy="busy" @retry="loadAssets" />
+          </q-expansion-item>
           <q-expansion-item
             v-model="expandedSections.debts"
             class="contract-expansion"
@@ -625,22 +600,15 @@
             ><template #header
               ><img class="contract-section-icon" src="/icons/contracts/debt.svg" alt="" />
               <div class="contract-expansion-title">
-                <strong>Dívidas Vinculadas ao Contrato</strong
-                ><small>{{ debtRows.length }} dívidas</small>
+                <strong>Dívidas Vinculadas ao Contrato</strong><small>{{ debtSummary }}</small>
               </div></template
-            ><resource-state :state="debts.state" @retry="loadDebts"
-              ><div v-for="debt in debtRows" :key="debt.id" class="contract-debt">
-                <h3>{{ debt.creditor || debt.publicCode }}</h3>
-                <p>{{ debt.description }}</p>
-                <div class="contract-row">
-                  <span>Saldo: {{ money(debt.outstandingAmount, debt.currencyIsoCode) }}</span
-                  ><span>Vencimento: {{ dateLabel(debt.dueDate) }}</span
-                  ><span>{{ financeLabel(debt.status) }}</span>
-                </div>
-              </div>
-              <p v-if="!debtRows.length">Nenhuma dívida vinculada.</p></resource-state
-            ></q-expansion-item
-          >
+            ><debt-registry
+              :state="debts.state"
+              :participants="detail.state.data?.participants || []"
+              :currency="currencyCode"
+              @retry="loadDebts"
+            />
+          </q-expansion-item>
           <q-expansion-item
             v-model="expandedSections.documents"
             class="contract-expansion"
@@ -651,53 +619,18 @@
                 <strong>Documentos do Contrato</strong
                 ><small>{{ documents.state.data?.length ?? '—' }} documentos</small>
               </div></template
-            ><resource-state :state="documents.state" @retry="loadDocuments"
-              ><div
-                v-for="d in documents.state.data || []"
-                :key="d.documentId"
-                class="contract-document"
-              >
-                <strong>{{ d.fileName }}</strong
-                ><small>{{ d.visibleToClient ? 'Liberado ao cliente' : 'Uso interno' }}</small>
-                <div>
-                  <q-btn
-                    flat
-                    dense
-                    no-caps
-                    label="Visualizar"
-                    :loading="opening === d.documentId"
-                    @click="openDocument(d)"
-                  /><q-btn
-                    flat
-                    dense
-                    no-caps
-                    :label="d.visibleToClient ? 'Ocultar do cliente' : 'Liberar ao cliente'"
-                    :disable="busy"
-                    @click="
-                      writeSection(
-                        'patch',
-                        'documents/' + d.documentId,
-                        { visibleToClient: !d.visibleToClient },
-                        loadDocuments,
-                      )
-                    "
-                  /><q-btn
-                    flat
-                    dense
-                    no-caps
-                    label="Desvincular"
-                    :disable="busy"
-                    @click="unlinkDocument(d)"
-                  />
-                </div>
-              </div>
-              <p v-if="!documents.state.data?.length">Nenhum documento vinculado.</p>
-              <q-btn
-                outline
-                no-caps
-                label="Adicionar documento"
-                @click="documentOpen = true" /></resource-state
-          ></q-expansion-item>
+            ><contract-documents
+              :state="documents.state"
+              :busy="busy"
+              :opening="opening"
+              :downloading="downloading"
+              @retry="loadDocuments"
+              @add="documentOpen = true"
+              @open="openDocument"
+              @download="downloadContractDocument"
+              @remove="unlinkDocument"
+            />
+          </q-expansion-item>
           <contract-panel title="Histórico de Aportes do Capital Base" icon="wallet"
             ><template #actions
               ><span
@@ -709,6 +642,7 @@
             >
             <resource-state :state="contributions.state" @retry="loadContributions">
               <q-table
+                dark
                 flat
                 dense
                 hide-pagination
@@ -723,25 +657,15 @@
               </p>
             </resource-state></contract-panel
           >
-          <contract-panel title="Performance Histórica" icon="performance"
-            ><template #actions
-              ><q-btn-toggle
-                v-model="performanceView"
-                disable
-                no-caps
-                :options="[
-                  { label: 'Tabela', value: 'table' },
-                  { label: 'Gráfico', value: 'chart' },
-                ]" /><q-btn outline no-caps label="Ver Histórico Completo" disable
-            /></template>
-            <p class="contract-muted">Performance histórica indisponível.</p></contract-panel
-          >
+          <contract-performance />
           <contract-panel id="contract-history" title="Histórico de Alterações" icon="history"
             ><resource-state :state="history.state" @retry="loadHistory"
               ><q-table
+                dark
                 flat
                 dense
                 hide-pagination
+                wrap-cells
                 :rows="historyRows"
                 :columns="historyColumns"
                 row-key="id"
@@ -763,40 +687,12 @@
             @click="addClient"
           /></div></q-card
     ></q-dialog>
-    <q-dialog v-model="assetOpen" :persistent="busy"
-      ><q-card class="contract-modal"
-        ><h2>Adicionar ativo elegível</h2>
-        <q-input
-          v-model="assetSearch"
-          outlined
-          dense
-          debounce="350"
-          placeholder="Buscar ativo"
-          aria-label="Buscar ativo"
-          @update:model-value="loadAssetOptions" /><resource-state
-          :state="assetOptions.state"
-          @retry="loadAssetOptions"
-          ><glass-select
-            v-model="selectedAsset"
-            :options="
-              (assetOptions.state.data || []).map((a) => ({
-                ...a,
-                label: a.ticker + ' · ' + a.name,
-              }))
-            "
-            option-value="id"
-            :option-label="(a) => a.ticker + ' · ' + a.name"
-            aria-label="Ativo elegível"
-        /></resource-state>
-        <div class="contract-modal-actions">
-          <q-btn flat no-caps label="Cancelar" :disable="busy" @click="assetOpen = false" /><q-btn
-            outline
-            no-caps
-            label="Adicionar"
-            :disable="!selectedAsset || busy"
-            @click="addAsset"
-          /></div></q-card
-    ></q-dialog>
+    <contract-asset-dialog
+      v-if="assetOpen"
+      :busy="busy"
+      :submit="addAsset"
+      @close="assetOpen = false"
+    />
     <q-dialog v-model="documentOpen" :persistent="busy"
       ><q-card class="contract-modal"
         ><h2>Documentos do Contrato</h2>
@@ -830,6 +726,7 @@
     <participant-detail-panel
       v-if="participantDetail"
       :participant="participantDetail"
+      :contract-id="id"
       :currency="currencyCode"
       @close="participantDetail = null"
     />
@@ -841,6 +738,12 @@ import { ref, computed, watch, nextTick, onScopeDispose } from 'vue'
 import { useQuasar } from 'quasar'
 import { onBeforeRouteLeave, onBeforeRouteUpdate } from 'vue-router'
 import ContractPanel from './ContractPanel.vue'
+import ContractPerformance from './ContractPerformance.vue'
+import ContractAssets from './ContractAssets.vue'
+import ContractAssetDialog from './ContractAssetDialog.vue'
+import ContractEngines from './ContractEngines.vue'
+import ContractDocuments from './ContractDocuments.vue'
+import DebtRegistry from './DebtRegistry.vue'
 import ParticipantDetailPanel from './ParticipantDetail.vue'
 import LabelForm from 'src/components/Form/LabelForm.vue'
 import GlassSelect from 'src/components/Entity/GlassSelect.vue'
@@ -850,20 +753,19 @@ import CustomerSelect from 'src/components/Finance/CustomerSelect.vue'
 import CustomerDocumentSelect from 'src/components/Finance/CustomerDocumentSelect.vue'
 import ResourceState from 'src/components/Finance/ResourceState.vue'
 import { useContractWorkspace } from 'src/composables/useContractWorkspace'
-import { useFinanceResource } from 'src/composables/useFinanceResource'
 import {
   financeGet,
-  financeExport,
   money,
   dateLabel,
   financeLabel,
   endpointLabel,
   columns,
 } from 'src/services/financeService'
+import { contractMovements } from 'src/services/contractMovements'
 import { contractTermOptions, contractEndDate } from 'src/services/financeModels'
 import { auditAction, auditField, auditValue } from 'src/services/auditModel'
 import { createDocumentWindow } from 'src/services/documentWindow'
-import { getDocumentTemporaryUrl } from 'src/services/documentAdminService'
+import { downloadDocument, getDocumentTemporaryUrl } from 'src/services/documentAdminService'
 const props = defineProps({
   contractId: { type: String, default: null },
   historyRequested: Boolean,
@@ -916,23 +818,19 @@ const termOptions = contractTermOptions,
   documentOpen = ref(false),
   selectedClient = ref(null),
   selectedClientData = ref(null),
-  selectedAsset = ref(null),
-  assetSearch = ref(''),
   documentClient = ref(null),
   documentId = ref(null),
   documentVisible = ref(false),
   participantDetail = ref(null),
   expandedSections = ref({ engines: false, assets: false, debts: false, documents: false }),
   participantLayout = ref('cards'),
-  performanceView = ref('table'),
   presetBusy = ref(null),
-  opening = ref(null)
-const assetOptions = useFinanceResource(),
-  documentWindow = createDocumentWindow()
+  opening = ref(null),
+  downloading = ref(null)
+const documentWindow = createDocumentWindow()
 let active = true
 onScopeDispose(() => {
   active = false
-  assetOptions.reset()
   documentWindow.dispose()
 })
 watch(
@@ -995,6 +893,28 @@ const participantColumns = computed(() =>
     ['actions', 'Ações'],
   ]),
 )
+const debtSummary = computed(() => {
+  if (!Array.isArray(debts.state.data)) return 'Consulta indisponível'
+  const rows = debts.state.data
+  const known = rows.every(
+    (row) =>
+      row.currencyIsoCode === currencyCode.value &&
+      typeof row.outstandingAmount === 'number' &&
+      Number.isFinite(row.outstandingAmount),
+  )
+  const total = known
+    ? money(
+        rows.reduce((sum, row) => sum + row.outstandingAmount, 0),
+        currencyCode.value,
+      )
+    : 'Indisponível'
+  const dates = rows
+    .filter((row) => !['Settled', 'Canceled'].includes(row.status))
+    .map((row) => row.dueDate)
+    .filter(Boolean)
+    .sort()
+  return `${rows.length} ${rows.length === 1 ? 'dívida' : 'dívidas'} • Saldo total: ${total} • Próx. vencimento: ${dates.length ? dateLabel(dates[0]) : '—'}`
+})
 const participantName = (clientId) =>
   detail.state.data?.participants?.find((p) => p.clientId === clientId)?.displayName || 'Cliente'
 const documentSlots = [
@@ -1065,10 +985,9 @@ const headerMetrics = computed(() => {
       ]
     : []
 })
-const debtRows = computed(() =>
-  Array.isArray(debts.state.data) ? debts.state.data : debts.state.data?.items || [],
+const contributionRows = computed(
+  () => contractMovements(contributions.state.data?.items || [], id.value).deposits,
 )
-const contributionRows = computed(() => contributions.state.data?.items || [])
 const contributionColumns = columns([
   ['requestedAtUtc', 'Data', (r) => dateLabel(r.requestedAtUtc)],
   [
@@ -1145,26 +1064,9 @@ async function addClient() {
 function removeClient(key) {
   form.value.clientAllocations = form.value.clientAllocations.filter((p) => p.clientId !== key)
 }
-async function loadAssetOptions() {
-  await assetOptions.load(async () => {
-    const d = (
-      await financeGet('admin/contracts/catalog/assets', {
-        search: assetSearch.value || undefined,
-        page: 1,
-        pageSize: 100,
-      })
-    ).data
-    return Array.isArray(d) ? d : d?.items || []
-  })
-}
-watch(assetOpen, (v) => {
-  if (v) loadAssetOptions()
-})
-async function addAsset() {
-  const a = assetOptions.state.data?.find((a) => a.id === selectedAsset.value)
-  if (!a) return
-  if (editing.value) {
-    if (!draft.value) return
+async function addAsset(a) {
+  if (!a?.id || busy.value) return false
+  if (editing.value && draft.value) {
     if (!stagedAssets.value.some((x) => (x.assetId || x.id) === a.id)) {
       stagedAssets.value.push(a)
       assetsChanged.value = true
@@ -1179,7 +1081,7 @@ async function addAsset() {
   )
     return
   assetOpen.value = false
-  selectedAsset.value = null
+  return true
 }
 function removeStagedAsset(a) {
   stagedAssets.value = stagedAssets.value.filter((x) => (x.assetId || x.id) !== (a.assetId || a.id))
@@ -1249,18 +1151,25 @@ async function openDocument(d) {
     if (active) opening.value = null
   }
 }
-async function exportAssets() {
+async function downloadContractDocument(d) {
+  if (downloading.value) return
+  downloading.value = d.documentId
   try {
-    await financeExport(
-      `admin/contracts/${id.value}/assets/export`,
-      { format: 'csv' },
-      'ativos-contrato.csv',
-      () => active,
-    )
+    const response = await downloadDocument(d.documentId)
+    if (!active) return
+    const url = URL.createObjectURL(response.data)
+    const link = document.createElement('a')
+    link.href = url
+    link.download = d.fileName || 'documento'
+    link.click()
+    setTimeout(() => URL.revokeObjectURL(url), 1000)
   } catch {
-    if (active) error.value = 'Não foi possível exportar os ativos.'
+    if (active) error.value = 'Não foi possível baixar o documento. Tente novamente.'
+  } finally {
+    if (active) downloading.value = null
   }
 }
+
 watch(
   () => [props.historyRequested, history.state.loading, editing.value],
   async () => {

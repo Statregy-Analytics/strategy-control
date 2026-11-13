@@ -3,6 +3,7 @@ import assert from 'node:assert/strict'
 import vm from 'node:vm'
 import { readFileSync } from 'node:fs'
 import * as vue from 'vue'
+import { readCurrentPages } from '../src/services/requestContext.js'
 import { useFinanceResource } from '../src/composables/useFinanceResource.js'
 import {
   buildDraftPayload,
@@ -72,6 +73,7 @@ async function setup({
   }
   const modules = {
     vue,
+    'src/services/requestContext': { readCurrentPages },
     './useFinanceResource': { useFinanceResource },
     'src/services/financeService': { financeGet: get, financeWrite: write },
     'src/services/financeModels': { buildDraftPayload, buildContractTerm, contractEndDate },

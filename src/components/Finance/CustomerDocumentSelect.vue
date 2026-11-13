@@ -1,10 +1,10 @@
 <template>
   <resource-state :state="resource.state" @retry="load">
-    <q-select
+    <glass-select
       :model-value="modelValue"
-      :options="resource.state.data || []"
+      :options="options"
       option-value="id"
-      :option-label="(d) => d.file?.fileName || d.documentTypeName || 'Documento'"
+      option-label="label"
       emit-value
       map-options
       clearable
@@ -19,7 +19,9 @@
   </resource-state>
 </template>
 <script setup>
-import { watch } from 'vue'
+import { computed, watch, onScopeDispose } from 'vue'
+import GlassSelect from 'src/components/Entity/GlassSelect.vue'
+import { createRequestContext, readCurrentPages } from 'src/services/requestContext'
 import ResourceState from './ResourceState.vue'
 import { useFinanceResource } from 'src/composables/useFinanceResource'
 import { financeGet } from 'src/services/financeService'
@@ -29,27 +31,37 @@ const props = defineProps({
 })
 const emit = defineEmits(['update:modelValue']),
   resource = useFinanceResource()
-const load = () =>
-  resource.load(async () => {
-    if (!props.customerId) return []
-    const path = `admin/customers/${props.customerId}/documents`,
-      result = []
-    let page = 1,
-      totalPages = 1
-    do {
-      const response = await financeGet(path, { page, pageSize: 100 })
-      result.push(...(response.data || []))
-      totalPages = Number(response.pagination?.totalPages || 1)
-      page++
-    } while (page <= totalPages)
-    return result
-  })
+const context = createRequestContext(() => props.customerId)
+const options = computed(() =>
+  (resource.state.data || []).map((d) => ({
+    ...d,
+    label: d.file?.fileName || d.documentTypeName || 'Documento',
+  })),
+)
+const load = () => {
+  const customerId = props.customerId
+  const active = context.capture()
+  return resource.load(() =>
+    customerId
+      ? readCurrentPages(
+          (page) => financeGet(`admin/customers/${customerId}/documents`, { page, pageSize: 100 }),
+          active,
+        )
+      : Promise.resolve([]),
+  )
+}
+
 watch(
   () => props.customerId,
   () => {
+    context.invalidate()
     emit('update:modelValue', null)
     load()
   },
   { immediate: true },
 )
+onScopeDispose(() => {
+  context.dispose()
+  resource.reset()
+})
 </script>

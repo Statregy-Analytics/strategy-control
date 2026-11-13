@@ -62,7 +62,7 @@
             </div>
             <div>
               <dt>Total Retirado</dt>
-              <dd>Indisponível</dd>
+              <dd>{{ money(withdrawalTotal, currency) }}</dd>
             </div>
           </dl>
         </section>
@@ -71,16 +71,17 @@
             <img src="/icons/contracts/ct10-arrow-up-right.svg" alt="" />Histórico de
             Depósitos/Aportes
           </h3>
-          <q-table
-            flat
-            dark
-            dense
-            hide-pagination
-            :rows="[]"
-            :columns="depositColumns"
-            :pagination="{ rowsPerPage: 0 }"
-            no-data-label="Consulta indisponível."
-          />
+          <resource-state :state="movements.state" @retry="loadMovements"
+            ><q-table
+              flat
+              dark
+              dense
+              hide-pagination
+              :rows="deposits"
+              :columns="depositColumns"
+              :pagination="{ rowsPerPage: 0 }"
+              no-data-label="Nenhum movimento retornado para este vínculo."
+          /></resource-state>
         </section>
         <section>
           <h3><img src="/icons/contracts/ct10-coins.svg" alt="" />Distribuições Recebidas</h3>
@@ -131,14 +132,26 @@
 import { computed, watch, onScopeDispose } from 'vue'
 import ResourceState from 'src/components/Finance/ResourceState.vue'
 import { useFinanceResource } from 'src/composables/useFinanceResource'
+import { readCurrentPages, createRequestContext } from 'src/services/requestContext'
+import { contractMovements, movementTotal } from 'src/services/contractMovements'
 import { getCustomerIdentificationContact } from 'src/services/customerService'
-import { columns, dateLabel, money } from 'src/services/financeService'
+import {
+  columns,
+  dateLabel,
+  money,
+  financeGet,
+  financeLabel,
+  endpointLabel,
+} from 'src/services/financeService'
 const props = defineProps({
   participant: { type: Object, required: true },
   currency: { type: String, required: true },
+  contractId: { type: String, required: true },
 })
 defineEmits(['close'])
-const identity = useFinanceResource()
+const identity = useFinanceResource(),
+  movements = useFinanceResource()
+const context = createRequestContext(() => props.contractId + ':' + props.participant.clientId)
 const document = computed(() => {
   const docs = identity.state.data?.personalDocuments || []
   const doc = docs.find((d) => ['CPF', 'NIF', 'CNPJ'].includes(d.documentCode)) || docs[0]
@@ -165,15 +178,60 @@ watch(
   { immediate: true },
 )
 onScopeDispose(() => identity.reset())
+const deposits = computed(
+  () =>
+    contractMovements(movements.state.data || [], props.contractId, props.participant.clientId)
+      .deposits,
+)
+const withdrawalTotal = computed(() =>
+  Array.isArray(movements.state.data)
+    ? movementTotal(
+        contractMovements(movements.state.data, props.contractId, props.participant.clientId)
+          .withdrawals,
+        props.currency,
+      )
+    : null,
+)
+const loadMovements = () => {
+  const contractId = props.contractId,
+    clientId = props.participant.clientId,
+    active = context.capture()
+  return movements.load(() =>
+    readCurrentPages(
+      (page) =>
+        financeGet('admin/transactions', {
+          contractId,
+          clientId,
+          status: 'Completed',
+          page,
+          pageSize: 100,
+        }),
+      active,
+    ),
+  )
+}
+watch(
+  () => [props.contractId, props.participant.clientId],
+  () => {
+    context.invalidate()
+    movements.reset()
+    loadMovements()
+  },
+  { immediate: true },
+)
+onScopeDispose(() => {
+  context.dispose()
+  movements.reset()
+})
 const percentage = (value) =>
   value == null
     ? 'Indisponível'
     : new Intl.NumberFormat('pt-BR', { maximumFractionDigits: 2 }).format(value) + '%'
 const depositColumns = columns([
-  ['date', 'Data'],
-  ['type', 'Tipo'],
-  ['amount', 'Valor'],
-  ['origin', 'Origem (Moeda e Cotação)'],
+  ['requestedAtUtc', 'Data', (row) => dateLabel(row.requestedAtUtc)],
+  ['type', 'Tipo', (row) => financeLabel(row.type)],
+  ['amount', 'Valor', (row) => money(row.amount, row.currencyIsoCode)],
+  ['origin', 'Origem (Moeda e Cotação)', (row) => endpointLabel(row.source)],
 ])
 const distributionColumns = columns([
   ['date', 'Data'],

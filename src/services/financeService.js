@@ -66,6 +66,7 @@ const labels = {
   RealEstate: 'Imóvel',
   Vehicle: 'Veículo',
   Consortium: 'Consórcio',
+  Loan: 'Empréstimo',
   Transaction: 'Movimentações',
   Contracts: 'Contratos',
   Ledger: 'Livro-razão',

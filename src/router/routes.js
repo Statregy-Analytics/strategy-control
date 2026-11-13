@@ -56,12 +56,12 @@ const routes = [
           {
             path: 'logic',
             name: 'contracts.logic',
-            component: () => import('pages/Contracts/ContractLogicPage.vue'),
+            redirect: '/logics',
           },
           {
             path: 'dividends',
             name: 'contracts.dividends',
-            component: () => import('pages/Contracts/DividendLogicPage.vue'),
+            redirect: '/logics',
           },
         ],
       },

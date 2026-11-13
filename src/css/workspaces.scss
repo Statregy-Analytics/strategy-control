@@ -193,8 +193,10 @@
   border-color: rgba(255, 255, 255, 0.2);
 }
 .workspace .q-field__native,
-.workspace-modal .q-field__native {
-  color: inherit;
+.workspace .q-field__input,
+.workspace-modal .q-field__native,
+.workspace-modal .q-field__input {
+  color: var(--sa-text, #ffffff);
   font-size: 14px;
 }
 .workspace .profile-section {
