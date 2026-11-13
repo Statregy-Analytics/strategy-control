@@ -441,21 +441,28 @@
                     <dd>Indisponível</dd>
                   </div>
                 </dl>
-                <q-btn
-                  outline
-                  no-caps
-                  label="Ver Detalhes"
-                  class="full-width"
-                  @click="participantDetail = p"
-                /><q-btn flat round dense icon="more_vert" :aria-label="'Ações de ' + p.displayName"
-                  ><q-menu
-                    ><q-list
-                      ><q-item clickable v-close-popup :disable="busy" @click="unlinkParticipant(p)"
-                        ><q-item-section>Desvincular cliente</q-item-section></q-item
-                      ></q-list
-                    ></q-menu
-                  ></q-btn
-                >
+                <div class="contract-participant-actions">
+                  <q-btn
+                    outline
+                    no-caps
+                    label="Ver Detalhes"
+                    class="contract-participant-details"
+                    @click="participantDetail = p"
+                    ><img src="/icons/contracts/ct04-basic.svg" alt="" /></q-btn
+                  ><q-btn outline dense icon="more_vert" :aria-label="'Ações de ' + p.displayName"
+                    ><q-menu dark class="profile-glass-menu"
+                      ><q-list
+                        ><q-item
+                          clickable
+                          v-close-popup
+                          :disable="busy"
+                          @click="unlinkParticipant(p)"
+                          ><q-item-section>Desvincular cliente</q-item-section></q-item
+                        ></q-list
+                      ></q-menu
+                    ></q-btn
+                  >
+                </div>
               </article>
             </div></contract-panel
           >
@@ -1763,5 +1770,20 @@ watch(
   .contract-title-line {
     flex: 1;
   }
+}
+.contract-participant-actions {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding-top: 12px;
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
+}
+.contract-participant-details {
+  flex: 1;
+  min-width: 0;
+}
+.contract-participant-details img {
+  order: -1;
+  margin-right: 6px;
 }
 </style>
