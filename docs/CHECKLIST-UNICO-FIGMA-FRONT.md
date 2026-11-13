@@ -9,7 +9,7 @@ Atualização: 13/11/2026. Este é o índice desta revisão ampla. Evidências a
 - [x] Admin: lint e build aprovados; 285 testes locais passaram (incluem 8 testes de estudo já existentes no worktree).
 - [ ] Reexecutar os checks após concluir as demais telas; Área do Cliente ainda não alterada nesta rodada.
 - [ ] Deploy confirmado e testes repetidos nas URLs publicadas.
-- [ ] Pendências de frontend separadas das pendências reais da API e do designer.
+- [x] Pendências de frontend separadas das pendências reais da API, do designer e da limitação de consulta ao Figma.
 
 ## Verificado localmente nesta rodada
 
@@ -51,7 +51,7 @@ Atualização: 13/11/2026. Este é o índice desta revisão ampla. Evidências a
 - [x] Paginação: leituras completas interrompem ao sair/trocar de registro e rejeitam envelopes de erro/paginação inválida.
 - [x] Rotas legadas de lógica e dividendos direcionam a Lógicas; não abrem as telas antigas com dados fictícios.
 - [x] Revisão local desktop e 390 px: tabelas contidas com rolagem própria, modal completo sem excesso horizontal, cabeçalhos/células e intervalo de datas legíveis.
-- [x] Contratos publicados em c32f5a5; deploy 43470716702 aprovado. Consulta de Legacy Prime, texto branco nas tabelas e troca para gráfico retestados no Admin publicado.
+- [x] Contratos publicados em c32f5a5; deploy 43470716702 aprovado. Consulta de Legacy Prime, texto branco nas tabelas, troca para gráfico, ativos/documentos vazios, abertura e cancelamento de Adicionar Documento e CT06 no modo Editar retestados no Admin publicado, sem gravar alterações.
 - Evidência: captura admin-contratos-contraste-publicado.jpg na pasta de visualizações desta rodada.
 
 ### API — lacunas verificadas nesta rodada
@@ -87,7 +87,8 @@ Atualização: 13/11/2026. Este é o índice desta revisão ampla. Evidências a
 - [x] Índices, probabilidades, séries e resultados não recebidos continuam indisponíveis; a tela não produz uma simulação fictícia nem apresenta o motor como ativo pelo isSelectable.
 - [x] Testados localmente: abrir Quant Core, Área, Comparar, Tabela, iniciar edição e alternar para Ao Lado. Ambas as tabelas mantêm os mesmos 22 indicadores.
 - [x] Responsividade local confirmada em 390 px: ambas as tabelas com 22 indicadores, empilhadas sem excesso horizontal; ícones medidos nas dimensões nativas (16 px e 16,7 px).
-- [ ] Confirmar publicação destes estados.
+- [x] Lógicas publicadas em 1b3ccf6; deploy 43473340021 aprovado. Tabela de 22 indicadores, início da edição, Ao Lado (empilhado em 390 px) e Cancelar retestados no Admin publicado.
+- [x] Comparar em modo Tabela mantém estado indisponível próprio; não reaproveita indevidamente os indicadores do motor. Verificado localmente antes da publicação complementar.
 - LG09 ainda não está concluído; a composição completa do histórico e sua revisão não foram marcadas como entregues.
 
 ## Impedimento da revisão visual restante

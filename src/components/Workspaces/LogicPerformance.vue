@@ -69,10 +69,17 @@
         />
       </div>
       <temporal-indicator-table
-        v-else
+        v-else-if="subject === 'Motor'"
         :indicators="logicTemporalIndicators"
         :label="'Indicadores — ' + subject"
       />
+      <div v-else class="workspace-empty" role="status">
+        {{
+          subject === 'Comparar'
+            ? 'Comparação indisponível.'
+            : 'Performance dos papéis indisponível.'
+        }}
+      </div>
     </div>
   </profile-section>
   <profile-section
