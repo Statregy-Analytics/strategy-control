@@ -29,7 +29,6 @@
 </template>
 <script setup>
 import { nextTick, onMounted, onScopeDispose, ref, watch } from 'vue'
-import workerUrl from 'pdfjs-dist/build/pdf.worker.min.mjs?url'
 const props = defineProps({ src: { type: String, required: true } })
 const container = ref(null),
   loading = ref(false),
@@ -112,8 +111,11 @@ async function load(src) {
   try {
     const pdf = await import('pdfjs-dist')
     if (!active || owner !== generation) return
-    pdf.GlobalWorkerOptions.workerSrc = workerUrl
-    const assets = new URL('vendor/pdfjs/', window.location.origin + import.meta.env.BASE_URL).href
+    const assets = new URL(
+      'vendor/pdfjs/' + pdf.version + '/',
+      window.location.origin + import.meta.env.BASE_URL,
+    ).href
+    pdf.GlobalWorkerOptions.workerSrc = assets + 'pdf.worker.min.js'
     loadingTask = pdf.getDocument({
       url: src,
       isEvalSupported: false,
