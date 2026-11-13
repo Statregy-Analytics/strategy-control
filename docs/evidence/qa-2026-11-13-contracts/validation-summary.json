@@ -1,0 +1,62 @@
+{
+  "releaseCommit": "f6092ebc4f16b9023b01b87d853439712908372d",
+  "workflowRun": 43360865829,
+  "newDraft": {
+    "id": "f3226097-effc-4c0f-ba3f-3eb4d4f01b53",
+    "draft": true,
+    "clientsAfterCleanup": 0,
+    "assetsAfterCleanup": 0,
+    "endDate": "2027-01-01"
+  },
+  "existingContract": {
+    "id": "01b837f5-4b9c-4171-a5d0-fee468ac6df1",
+    "notesRestored": true,
+    "participants": 2,
+    "capitalPreserved": true,
+    "temporaryDocumentLinksAfterCleanup": 0
+  },
+  "localTests": 265,
+  "preexistingStudyTestsExcluded": 8,
+  "versionedTests": 257,
+  "newTests": 9,
+  "lint": "passed",
+  "build": "passed",
+  "responsive": [
+    {
+      "width": 917,
+      "scrollWidth": 917
+    },
+    {
+      "width": 1425,
+      "scrollWidth": 1425
+    },
+    {
+      "width": 375,
+      "scrollWidth": 375
+    }
+  ],
+  "finalization": "controlled test only; integrated distribution frame pending design",
+  "pipeline": "success",
+  "pipelineTests": 257,
+  "publishedDraftSaveAndReload": "passed",
+  "published": {
+    "draftRestored": true,
+    "newAndListNavigation": "passed",
+    "editWithoutChangesDisabled": "passed",
+    "discard": "passed",
+    "directHistory": "passed",
+    "consoleErrors": 0,
+    "mobileWidth": 375,
+    "mobileScrollWidth": 375,
+    "participantActionsSameRowDesktopAndMobile": true,
+    "participantMenuGlass": true,
+    "finalRuntime": "f6092eb"
+  },
+  "baseReleaseCommit": "de0213c6bf04fe615fe0e9097e272920f98be689",
+  "baseWorkflowRun": 43359734553,
+  "participantActions": {
+    "desktopSameTop": true,
+    "mobileSameTop": true,
+    "menu": "existing glass style"
+  }
+}

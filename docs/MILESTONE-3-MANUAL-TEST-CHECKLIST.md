@@ -1,5 +1,17 @@
 # Marco 3 — checklist manual
 
+## Contratos CT04/CT07 — 13/11/2026
+
+- [x] Página completa de cadastro/edição e contrato aberto segundo os frames; integrações reais preservadas.
+- [x] Criar/salvar/retomar rascunho fictício; adicionar/remover cliente e conjunto de ativos; criar incompleto impede escrita.
+- [x] Editar contrato existente, descartar, salvar observação, verificar anterior/novo e restaurar; sem alterar capital/moeda/participações.
+- [x] Vincular, abrir, liberar, ocultar e desvincular anexo fictício; preservar o arquivo original do cliente.
+- [x] Cards/lista, detalhes, seções expansíveis, histórico, estados vazios e leitura de valores reais; desktop/intermediário/mobile sem overflow externo.
+- [x] Lint, build, 257 testes versionados (265 locais com 8 preexistentes fora da entrega), diff dos arquivos alterados e publicação f6092eb/pipeline 43360865829 aprovados.
+- [ ] Homologação integral da finalização/distribuição depende do desenho após CT05, questionamento ao designer solicitado pelo usuário. Importação/modelo ainda precisam de especificação. Limites reais de API separados no [relatório](QA-2026-11-13-CONTRATOS-CT04-CT07.md).
+
+Esta seção complementa o checklist. Pendências de desenho não são bugs de backend, e os relatos antigos abaixo permanecem como histórico.
+
 ## Seleção por perfil — 12/11
 
 [Entrega e checklist vigentes](QA-2026-11-12-REVISAO-CONSOLIDADA-FRONT.md#seleção-de-sistema-e-destino-do-login--1211): Cliente chega à seleção com card administrativo indisponível, sem link; Admin mantém entrada em Clientes. Versão 39d57f0 publicada, 248 testes versionados/lint/build/deploy aprovados e ambos os perfis conferidos no navegador. A nova divergência visual de cadastro/edição de contratos com CT04/CT07 foi confirmada e registrada como pendência de front; não está corrigida nem é nova demanda de API.

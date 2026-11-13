@@ -9,14 +9,13 @@
 - [x] Sete novos testes; 256 locais, dos quais 248 versionados. Lint, build e diff das alterações aprovados. Estudo local adiado preservado fora do commit.
 - [x] **39d57f0 publicado**, [pipeline 43349346835](https://github.com/Statregy-Analytics/strategy-control/actions/runs/43349346835) aprovada. Éric/Cliente: login → seleção, card DIV sem href e aria-disabled=true; recarga mantém bloqueio, sem aviso de sessão. Admin: login → clientes e link da seleção habilitado. [Resumo dos testes](evidence/qa-2026-11-12-consolidada/system-selection.json).
 
-### Pendência visual confirmada: cadastro/edição de contrato no Admin
+### Contratos CT04/CT07 — revisão de 13/11
 
-O relato novo do QA é procedente. A criação publicada ainda usa o painel lateral de ContractsPage.vue; o desenho atual [CT04 · Novo Contrato](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI/?node-id=1484-71334) usa tela completa com cabeçalho, blocos e coluna de clientes/resumo. A edição usa o mesmo editor legado; [CT07 · Contrato aberto](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI/?node-id=1484-72188) também deve compor a revisão visual.
+- [x] Editor lateral substituído pela composição dos frames CT04/CT07, reutilizando as integrações existentes. Versão f6092eb publicada; pipeline 43360865829 aprovada.
+- [x] Rascunho e retomada, edição/descarte/restauração, vínculos de clientes/ativos, anexo fictício e visibilidade, histórico anterior/novo e responsividade verificados. 257 testes versionados; lint/build aprovados.
+- [ ] Distribuição após CT05: questionamento ao designer solicitado pelo usuário. Não inventar rateio ou nova etapa. Importação/modelo precisam de definição. Tipos de upload, estratégia e métricas não disponíveis no contrato HTTP permanecem separados no [checklist detalhado](QA-2026-11-13-CONTRATOS-CT04-CT07.md).
 
-- [ ] Aplicar os frames atuais de cadastro/edição e validar os estados e integrações correspondentes. Esta diferença é de frontend e não deve ser encaminhada como erro ou ausência de API.
-
-A inspeção abriu apenas Novo contrato, sem salvar rascunho, alterar contrato ou executar operação. Os testes funcionais anteriores de contratos não representam aceite visual desses frames. A correção de seleção acima está publicada; o modelo de contrato **não foi corrigido neste lote**.
-
+A finalização positiva foi exercitada em teste controlado; o cadastro completo integrado não é declarado homologado sem a definição da distribuição.
 
 ## Correção do incidente de sessão — 12/11, 22h
 

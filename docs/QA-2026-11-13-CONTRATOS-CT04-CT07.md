@@ -2,10 +2,12 @@
 
 Referências: [CT04 — Novo Contrato](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI/?node-id=1484-71334) e [CT07 — Contrato aberto](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI/?node-id=1484-72188). Estes frames, solicitados expressamente, prevalecem sobre a orientação legada de editor lateral. Não houve mudança no menu nem na identidade global.
 
+As validações integradas iniciais usaram a interface em localhost:8080 contra a API de homologação. Após o deploy, foram repetidos no Admin publicado: salvar/recarregar/restaurar rascunho, entrada por Novo contrato/listagem, edição sem alterações, descarte, abertura direta do histórico e conferência responsiva. Os testes controlados ficam identificados separadamente.
+
 ## Implementação e validações
 
 - [x] Substituir o editor lateral por página completa: cabeçalho e ações, informações básicas, vigência, financeiro/moeda, motor, status, universo de ativos, documentos e coluna de clientes/resumo do CT04. Reutilizados ProfileSection, LabelForm, GlassSelect, MoneyInput e seletores financeiros existentes.
-- [x] CT07: cabeçalho com seis indicadores, clientes em cards/lista, seções expansíveis de motor, ativos, dívidas e documentos, aportes, performance e histórico de alterações. Sem números demonstrativos nem conversão de ausência em zero.
+- [x] CT07: ações do participante alinhadas na mesma linha, com ícone de documento e menu glass existente, inclusive em mobile; cabeçalho com seis indicadores, clientes em cards/lista, seções expansíveis de motor, ativos, dívidas e documentos, aportes, performance e histórico de alterações. Sem números demonstrativos nem conversão de ausência em zero.
 - [x] Manter as consultas e escritas reais com autenticação e idempotência existentes. Rascunhos usam POST drafts e PUT draft; contratos criados usam PATCH e a rota separada de status. Prazo e endDate não são enviados juntos no PATCH.
 - [x] Salvar desabilitado sem alterações no contrato criado; editar/descartar; campos imutáveis preservados. Respostas atrasadas de ativos não sobrescrevem digitação; seção indisponível não apaga as demais. As expansões são preservadas durante atualização.
 - [x] Previsão de término com dias, meses e anos; testes de fevereiro, ano bissexto e virada do ano. A API confirmou 01/01/2026 + 1 ano = 01/01/2027, sem subtrair um dia.
@@ -25,6 +27,8 @@ Referências: [CT04 — Novo Contrato](https://www.figma.com/design/i2jizg7UtPyg
 - [ ] CT05 diz “Continuar para Distribuição”, mas não foi localizado o frame seguinte para distribuir capital por cliente. O usuário pediu registrar questionamento ao Figma/design. Solicitar o desenho e a regra de distribuição/validação. Não inventar rateio igual, novo campo ou etapa. O seletor integrado existente foi preservado; a finalização positiva foi exercitada em teste controlado, não com nova movimentação real.
 - [ ] Importar Excel/PDF e baixar modelo aparecem no CT04, mas não há importador/modelo integrado nem especificação de colunas/extrator no projeto. Definir arquivo de referência e mapeamento. Isto não é prova de endpoint ausente: a importação pode ser feita pelo front usando a seleção de ativos existente. Ações ficam desabilitadas até definição/implementação desse fluxo.
 
+Questionamento para o designer: **“O CT05 termina em ‘Continuar para Distribuição’. Qual é o frame seguinte e como devem ser apresentados os valores alocados por cliente e a validação do total? Precisamos desse desenho para concluir o fluxo sem criar campos ou rateio por conta própria.”**
+
 ### Contrato da API
 
 - [ ] Quatro slots do CT04 (Contrato Digitalizado, Documento Complementar, Termo de Adesão, Outros Documentos): o catálogo consultado não oferece os tipos específicos/definições de upload para esse contexto. Não usar o tipo de contrato de adesão de consórcio, que pertence a Patrimônio. O vínculo, visibilidade e abertura de documentos já existentes funcionam; falta definir o upload tipado e a titularidade no contrato com vários clientes.
@@ -39,4 +43,10 @@ Rascunho `f3226097-effc-4c0f-ba3f-3eb4d4f01b53`, nome **QA CT04 CT07 — FICTÍC
 ## Publicação
 
 - [x] Lint e build aprovados; 265 testes locais, sendo 8 do estudo preexistente adiado. Suíte a publicar: 257 testes, com 9 novos nesta entrega. Diff dos arquivos desta alteração sem whitespace.
-- [ ] Commit, pipeline de publicação e conferência da versão servida.
+- [x] Commit **de0213c** publicado; [pipeline 43359734553](https://github.com/Statregy-Analytics/strategy-control/actions/runs/43359734553) aprovada com 257 testes, lint, build, upload e ativação.
+- [x] Complemento visual **f6092eb** publicado; [pipeline 43360865829](https://github.com/Statregy-Analytics/strategy-control/actions/runs/43360865829) aprovada. Rodapé dos cards na mesma linha e menu glass, sem nova ação/campo.
+- [x] Admin publicado: rascunho salvo com observação de teste, recarregado com persistência confirmada e restaurado; CT04/CT07 e navegação conferidos na versão servida.
+
+[Resumo verificável dos testes e limpeza](evidence/qa-2026-11-13-contracts/validation-summary.json).
+
+Capturas da versão publicada: [CT04](evidence/qa-2026-11-13-contracts/ct04-published.jpg) e [CT07](evidence/qa-2026-11-13-contracts/ct07-published.jpg). A sessão exclusiva criada para consultas por script foi encerrada com 204; as sessões abertas do usuário foram preservadas.

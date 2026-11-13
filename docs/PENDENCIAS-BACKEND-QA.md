@@ -1,8 +1,12 @@
 # Pendências do backend para homologação
 
+## Contratos CT04/CT07 — 13/11
+
+[Checklist CT04/CT07](QA-2026-11-13-CONTRATOS-CT04-CT07.md): página completa de cadastro/edição e contrato aberto implementados com integrações existentes; f6092eb publicado, pipeline 43360865829 aprovada. Rascunho, edição/restauração, ativos, clientes, anexos e histórico testados com dados fictícios. Distribuição após CT05 é questionamento ao designer, conforme orientação do usuário; importação/modelo ainda precisam de especificação. Tipos de upload, composição estratégica e métricas ausentes estão discriminados no relatório. Não classificar correções do PATCH ou opções vazias como falhas de backend.
+
 ## Seleção por perfil — 12/11
 
-[Entrega e checklist vigentes](QA-2026-11-12-REVISAO-CONSOLIDADA-FRONT.md#seleção-de-sistema-e-destino-do-login--1211): Cliente chega à seleção com card administrativo indisponível, sem link; Admin mantém entrada em Clientes. Versão 39d57f0 publicada, 248 testes versionados/lint/build/deploy aprovados e ambos os perfis conferidos no navegador. A nova divergência visual de cadastro/edição de contratos com CT04/CT07 foi confirmada e registrada como pendência de front; não está corrigida nem é nova demanda de API.
+[Entrega e checklist vigentes](QA-2026-11-12-REVISAO-CONSOLIDADA-FRONT.md#seleção-de-sistema-e-destino-do-login--1211): Cliente chega à seleção com card administrativo indisponível, sem link; Admin mantém entrada em Clientes. Versão 39d57f0 publicada, 248 testes versionados/lint/build/deploy aprovados e ambos os perfis conferidos no navegador. A divergência de CT04/CT07 foi tratada na revisão de 13/11 acima; os limites remanescentes estão separados por desenho/definição e API.
 
 ## Correção de sessão — 12/11, 22h
 
