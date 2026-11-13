@@ -111,6 +111,7 @@
               </div>
               <template v-if="section.key === 'probability'"
                 ><div
+                  v-if="form.positive != null && form.negative != null"
                   class="logic-probability"
                   :aria-label="
                     'Chance positiva ' + form.positive + '%; chance negativa ' + form.negative + '%'
@@ -220,47 +221,14 @@
               :columns="linkedColumns"
               hide-pagination
               no-data-label="Vínculos indisponíveis nesta consulta." /></profile-section
-          ><profile-section
-            :title="
-              historyOpen
-                ? 'Histórico Completo do Motor'
-                : 'Performance Histórica do Índice do Motor'
-            "
-            ><template #actions
-              ><q-btn
-                outline
-                no-caps
-                :label="historyOpen ? 'Voltar para lógica' : 'Ver histórico completo'"
-                @click="historyOpen = !historyOpen"
+          ><logic-performance :editing="editing" @history="historyOpen = !historyOpen" />
+          <profile-section v-if="historyOpen" title="Histórico Completo do Motor">
+            <template #actions
+              ><q-btn outline no-caps label="Voltar para lógica" @click="historyOpen = false"
             /></template>
-            <div class="workspace-toolbar">
-              <q-btn-toggle
-                v-model="performanceView"
-                no-caps
-                :options="[
-                  { label: 'Gráfico', value: 'chart' },
-                  { label: 'Tabela', value: 'table' },
-                ]"
-              /><q-btn-toggle
-                v-model="period"
-                no-caps
-                :options="
-                  ['Hoje', '7D', '30D', 'Mês', 'Ciclo', 'Tudo'].map((label) => ({
-                    label,
-                    value: label,
-                  }))
-                "
-              /><glass-select
-                v-model="granularity"
-                :options="['Atualização', 'Horário', 'Diário', 'Semanal', 'Mensal']"
-                aria-label="Granularidade"
-              />
-            </div>
-            <div class="workspace-empty">Performance histórica indisponível.</div></profile-section
-          ><profile-section v-if="editing" title="Tabela Simulada (Parâmetros em Edição)"
-            ><div class="workspace-empty">Simulação indisponível.</div></profile-section
-          ></template
-        >
+            <div class="workspace-empty">Histórico operacional indisponível.</div>
+          </profile-section>
+        </template>
       </resource-state>
     </main>
     <q-dialog v-model="validationOpen"
@@ -280,10 +248,10 @@
 <script setup>
 import { computed, onScopeDispose, ref } from 'vue'
 import ProfileSection from 'src/components/Entity/ProfileSection.vue'
-import GlassSelect from 'src/components/Entity/GlassSelect.vue'
 import ResourceState from 'src/components/Finance/ResourceState.vue'
 import WorkspaceIcon from './WorkspaceIcon.vue'
 import WorkspaceField from './WorkspaceField.vue'
+import LogicPerformance from './LogicPerformance.vue'
 import { useFinanceResource } from 'src/composables/useFinanceResource'
 import { financeGet, columns } from 'src/services/financeService'
 import { getPreferenceCatalog } from 'src/services/customerService'
@@ -306,9 +274,6 @@ const form = ref(initialLogic()),
   currencyOptions = ref([]),
   catalogError = ref(false),
   historyOpen = ref(false),
-  performanceView = ref('chart'),
-  period = ref('Ciclo'),
-  granularity = ref('Atualização'),
   validationOpen = ref(false)
 let active = true
 const baseline = ref('')

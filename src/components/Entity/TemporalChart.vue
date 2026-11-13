@@ -6,8 +6,13 @@
         <line x1="60" x2="960" :y1="tick.y" :y2="tick.y" />
         <text x="52" :y="tick.y + 3" text-anchor="end">{{ valueLabel(tick.value) }}</text>
       </g>
+      <polygon
+        v-if="mode === 'area'"
+        :points="`${geometry.points[0].x},280 ${geometry.points.map((p) => `${p.x},${p.y}`).join(' ')} ${geometry.points.at(-1).x},280`"
+        fill="rgba(79,70,255,.12)"
+      />
       <polyline
-        v-if="mode === 'line'"
+        v-if="mode !== 'candles'"
         :points="geometry.points.map((p) => `${p.x},${p.y}`).join(' ')"
         fill="none"
         class="temporal-chart-line"

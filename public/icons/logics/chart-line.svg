@@ -1,0 +1,14 @@
+<svg preserveAspectRatio="none" overflow="visible" style="display: block;" width="16.7" height="16.7" viewBox="0 0 16.7 16.7" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="ChartLine" filter="url(#filter0_f_0_12)">
+<rect width="16" height="16" transform="translate(0.35 0.35)" fill="white" fill-opacity="0.05"/>
+<path id="Vector" d="M2.35 2.35V13.0167C2.35 13.3703 2.49048 13.7094 2.74052 13.9595C2.99057 14.2095 3.32971 14.35 3.68333 14.35H14.35" stroke-width="1.33333" stroke-linecap="round" stroke-linejoin="round" stroke="white" stroke-opacity="0.6"/>
+<path id="Vector_2" d="M13.0167 6.35L9.68333 9.68333L7.01667 7.01667L5.01667 9.01667" stroke-width="1.33333" stroke-linecap="round" stroke-linejoin="round" stroke="white" stroke-opacity="0.6"/>
+</g>
+<defs>
+<filter id="filter0_f_0_12" x="0" y="0" width="16.7" height="16.7" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+<feFlood flood-opacity="0" result="BackgroundImageFix"/>
+<feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape"/>
+<feGaussianBlur stdDeviation="0.175" result="effect1_foregroundBlur_0_12"/>
+</filter>
+</defs>
+</svg>

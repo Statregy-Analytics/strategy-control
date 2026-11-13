@@ -51,7 +51,8 @@ Atualização: 13/11/2026. Este é o índice desta revisão ampla. Evidências a
 - [x] Paginação: leituras completas interrompem ao sair/trocar de registro e rejeitam envelopes de erro/paginação inválida.
 - [x] Rotas legadas de lógica e dividendos direcionam a Lógicas; não abrem as telas antigas com dados fictícios.
 - [x] Revisão local desktop e 390 px: tabelas contidas com rolagem própria, modal completo sem excesso horizontal, cabeçalhos/células e intervalo de datas legíveis.
-- [ ] Repetir os estados afetados no deploy desta rodada.
+- [x] Contratos publicados em c32f5a5; deploy 43470716702 aprovado. Consulta de Legacy Prime, texto branco nas tabelas e troca para gráfico retestados no Admin publicado.
+- Evidência: captura admin-contratos-contraste-publicado.jpg na pasta de visualizações desta rodada.
 
 ### API — lacunas verificadas nesta rodada
 
@@ -79,9 +80,25 @@ Atualização: 13/11/2026. Este é o índice desta revisão ampla. Evidências a
 - Legacy Prime e rascunho QA CT04/CT07: confirmados pela API com zero ativos e zero documentos após a restauração dos testes.
 - Arquivo `qa1112-ficticio-sem-dados-pessoais.png`: original Available preservado; somente o vínculo temporário foi removido.
 
+## Lógicas — estados de performance e simulação
+
+- [x] Composição do LG05 com oito indicadores, visualizações Gráfico/Tabela, períodos, granularidade e abas Motor/Papéis Vinculados/Comparar, usando o contexto completo do Figma obtido nesta rodada.
+- [x] Composição da simulação de edição com Tabela Atual e Tabela Simulada e os 22 indicadores do desenho; alternância Abaixo/Ao Lado reutiliza a mesma tabela neutra.
+- [x] Índices, probabilidades, séries e resultados não recebidos continuam indisponíveis; a tela não produz uma simulação fictícia nem apresenta o motor como ativo pelo isSelectable.
+- [x] Testados localmente: abrir Quant Core, Área, Comparar, Tabela, iniciar edição e alternar para Ao Lado. Ambas as tabelas mantêm os mesmos 22 indicadores.
+- [x] Responsividade local confirmada em 390 px: ambas as tabelas com 22 indicadores, empilhadas sem excesso horizontal; ícones medidos nas dimensões nativas (16 px e 16,7 px).
+- [ ] Confirmar publicação destes estados.
+- LG09 ainda não está concluído; a composição completa do histórico e sua revisão não foram marcadas como entregues.
+
+## Impedimento da revisão visual restante
+
+- O conector do Figma retornou limite de chamadas da conta/plano durante a obtenção dos estados restantes. Contextos completos já obtidos foram aproveitados; respostas esparsas não foram usadas como especificação de implementação.
+- Esse limite não é pendência do backend e não significa aprovação das telas que continuam listadas como trabalho de frontend.
+- Continuam necessários os contextos completos dos estados restantes de Lógicas, Crédito/Comunicados e Área do Cliente para concluir a comparação visual de todo o inventário.
+
 ## Ainda é trabalho de frontend
 
-- [ ] Revisar todos os estados LG05/LG06/LG07/LG09 (simulação, comparação e histórico), além das composições já preparadas.
+- [ ] Concluir a revisão integral LG05/LG06/LG07/LG09; estados básicos de gráfico, tabela e disposição da simulação já preparados e testados, histórico completo ainda pendente.
 - [ ] Concluir e revisar as abas e estados expandidos dos contratos CT08–CT23, preservando os serviços existentes.
 - [ ] Comparar os estados de Transações e Carteiras com seus frames, inclusive os modais.
 - [ ] Concluir a composição dos detalhes de parceiro e o editor de blocos de conteúdo; a área de texto atual não implementa inserção de mídia/H2/H3.
