@@ -51,11 +51,36 @@
     </section>
     <section class="contract-engine-card">
       <header>
-        <h3><img src="/icons/contracts/ct11-coins.svg" alt="" />Motor de Dividendos</h3>
+        <h3>
+          <span class="engine-icon-box"
+            ><img
+              :src="
+                dividendMode === 'fixed'
+                  ? '/icons/contracts/ct11-dividend-fixed.svg'
+                  : dividendMode === 'random'
+                    ? '/icons/contracts/ct11-dividend-random.svg'
+                    : '/icons/contracts/ct11-coins.svg'
+              "
+              alt="" /></span
+          >Motor de Dividendos
+        </h3>
+        <div class="engine-mode" v-if="dividend">
+          <span>Valor do dividendo</span
+          ><q-btn-toggle
+            :model-value="dividendMode"
+            disable
+            no-caps
+            :options="[
+              { label: 'Aleatório (0,30% a 1,00%)', value: 'random' },
+              { label: 'Fixo', value: 'fixed' },
+            ]"
+          />
+        </div>
         <q-badge outline>{{
           dividend ? financeLabel(dividend.connectionStatus) : 'Não Conectado'
         }}</q-badge>
       </header>
+      <p v-if="dividend && dividendMode" class="engine-explanation">{{ dividendExplanation }}</p>
       <template v-if="dividend"
         ><div class="engine-identity">
           <small>Motor de Dividendos</small><strong>{{ dividend.name }}</strong
@@ -65,7 +90,15 @@
         <dl class="engine-data">
           <div>
             <dt>Valor do Dividendo</dt>
-            <dd>Indisponível</dd>
+            <dd>
+              {{
+                dividendMode === 'random'
+                  ? 'Aleatório: 0,30% a 1,00% do valor do contrato, sorteado a cada mês, até o lucro do mês'
+                  : dividendMode === 'fixed'
+                    ? 'Fixo: percentual indisponível'
+                    : 'Indisponível'
+              }}
+            </dd>
           </div>
           <div>
             <dt>Próximo Pagamento</dt>
@@ -81,7 +114,8 @@
           </div>
         </dl>
         <q-btn class="engine-footer" outline no-caps label="Ver dividendos pagos" disable
-      /></template>
+          ><img src="/icons/contracts/ct11-dividend-arrow.svg" alt="" /></q-btn
+      ></template>
       <template v-else
         ><div class="engine-empty">
           <p>Nenhum motor de dividendos conectado.</p>
@@ -100,7 +134,7 @@
         <div class="engine-mode">
           <span>Resultado no fechamento</span
           ><q-btn-toggle
-            :model-value="null"
+            :model-value="closingMode"
             disable
             no-caps
             :options="[
@@ -110,11 +144,7 @@
           />
         </div>
       </header>
-      <p class="engine-explanation">
-        Só Motor Principal: no fechamento, vale o resultado definido pelo Motor Principal. As
-        operações mudam o valor do contrato durante o prazo e ficam no histórico, mas não entram no
-        resultado final.
-      </p>
+      <p class="engine-explanation">{{ closingExplanation }}</p>
       <dl class="engine-operation-metrics">
         <div
           v-for="label in ['Total de Operações', 'Positivas / Negativas', 'Resultado Acumulado']"
@@ -132,7 +162,34 @@
 import { computed } from 'vue'
 import ResourceState from 'src/components/Finance/ResourceState.vue'
 import { dateLabel, financeLabel } from 'src/services/financeService'
-const props = defineProps({ state: { type: Object, required: true } })
+// Display-state props are separate from the HTTP engine catalog. Keep them null
+// until the API supplies the operational configuration; do not derive them from isSelectable.
+const props = defineProps({
+  state: { type: Object, required: true },
+  dividendMode: {
+    type: String,
+    default: null,
+    validator: (value) => value == null || ['random', 'fixed'].includes(value),
+  },
+  closingMode: {
+    type: String,
+    default: null,
+    validator: (value) => value == null || ['primary', 'combined'].includes(value),
+  },
+})
+const closingExplanation = computed(() =>
+  props.closingMode === 'combined'
+    ? 'Motor Principal + Operações: no fechamento, o resultado das operações soma ao do Motor Principal. Ex.: o motor deixou o contrato em R$ 100.000,00 e as operações somaram +R$ 10,00 → o contrato fecha com R$ 100.010,00.'
+    : props.closingMode === 'primary'
+      ? 'Só Motor Principal: no fechamento, vale o resultado definido pelo Motor Principal. As operações mudam o valor do contrato durante o prazo e ficam no histórico, mas não entram no resultado final.'
+      : 'Configuração do resultado no fechamento indisponível.',
+)
+const dividendExplanation = computed(() =>
+  props.dividendMode === 'fixed'
+    ? 'Fixo: o admin digita o percentual (ex.: 0,50% do valor do contrato) e ele vale todo mês até ser alterado. Aleatório: a cada mês o sistema sorteia um percentual entre 0,30% e 1,00%; se passar do lucro do mês, sorteia de novo. O dividendo nunca passa do lucro do mês: se o lucro for menor que 0,30% (Aleatório) ou que o percentual fixo (Fixo), o dividendo do mês é zero.'
+    : 'O dividendo sai do valor do contrato no dia do pagamento, como um resgate: o que fica continua acompanhando o Motor Principal. Não reduz o valor aplicado e não muda o % do contrato. Com "Só Motor Principal", o percentual é calculado sobre o valor do contrato pelo motor, sem as operações. O dividendo nunca passa do lucro do mês. No Aleatório, se o sorteio passar do lucro, o sistema sorteia de novo; se o lucro do mês for menor que 0,30% (ou zero, ou negativo), não há sorteio e o dividendo do mês é zero. No Fixo, se o percentual passar do lucro do mês, o dividendo do mês é zero.',
+)
+
 defineEmits(['retry'])
 const primary = computed(() => props.state.data?.find((e) => e.role === 'Primary'))
 const dividend = computed(() =>
@@ -149,6 +206,18 @@ const index = (value) =>
     : 'Indisponível'
 </script>
 <style scoped>
+.engine-icon-box {
+  display: inline-flex;
+  padding: 6px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 8px;
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0.08),
+    rgba(255, 255, 255, 0.03),
+    rgba(255, 255, 255, 0.07)
+  );
+}
 .contract-engine-card {
   border: 1px solid rgba(255, 255, 255, 0.12);
   border-radius: 12px;

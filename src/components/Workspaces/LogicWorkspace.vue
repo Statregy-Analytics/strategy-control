@@ -26,9 +26,16 @@
             outline
             no-caps
             :label="recordId ? 'Salvar Alterações' : 'Confirmar e Criar'"
-            :disable="recordId && !dirty"
+            :disable="recordId && (!dirty || resource.state.loading || !source)"
             @click="confirm" /></template
-        ><q-btn v-else outline no-caps label="Editar Lógica" @click="editing = true" />
+        ><q-btn
+          v-else
+          outline
+          no-caps
+          label="Editar Lógica"
+          :disable="resource.state.loading || (recordId && !source)"
+          @click="editing = true"
+        />
       </div>
     </header>
     <main class="workspace-main">
@@ -262,11 +269,11 @@ import {
   validateLogic,
   foldSearch,
 } from 'src/services/adminWorkspaceModel'
-const props = defineProps({ recordId: { type: String, default: null } }),
-  emit = defineEmits(['close'])
+const props = defineProps({ recordId: { type: String, default: null }, startEditing: Boolean }),
+  emit = defineEmits(['close', 'readonly'])
 const form = ref(initialLogic()),
   source = ref(null),
-  editing = ref(!props.recordId),
+  editing = ref(!props.recordId || props.startEditing),
   error = ref(''),
   resource = useFinanceResource(),
   contracts = useFinanceResource(),
@@ -478,6 +485,7 @@ function cancel() {
     form.value = JSON.parse(baseline.value)
     editing.value = false
     error.value = ''
+    emit('readonly')
   } else emit('close')
 }
 load()

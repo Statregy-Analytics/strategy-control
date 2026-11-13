@@ -6,7 +6,9 @@
           ><workspace-icon name="arrow-left"
         /></q-btn>
         <h1>{{ recordId ? 'Editar Conteúdo' : 'Novo ' + (kind || 'Conteúdo') }}</h1>
-        <q-badge outline>{{ workspaceStatus(source?.status || 'Draft') }}</q-badge>
+        <q-badge outline>{{
+          workspaceStatus(source?.status || (recordId ? null : 'Draft'))
+        }}</q-badge>
       </div>
       <div class="workspace-actions">
         <q-btn flat no-caps label="Descartar" :disable="busy" @click="$emit('close')" /><q-btn
@@ -39,22 +41,24 @@
                   <workspace-field
                     v-model="form.title"
                     :field="{
+                      readonly: locked,
                       label: 'Título do Relatório *',
                       wide: true,
                       placeholder: 'Ex: Relatório Econômico - Q1 2026',
                     }"
                   /><workspace-field
                     v-model="form.code"
-                    :field="{ label: 'Código' }"
+                    :field="{ readonly: locked, label: 'Código' }"
                   /><workspace-field
                     v-model="form.version"
-                    :field="{ label: 'Versão' }"
+                    :field="{ readonly: locked, label: 'Versão' }"
                   /><workspace-field
                     v-model="form.period"
-                    :field="{ label: 'Período' }"
+                    :field="{ readonly: locked, label: 'Período' }"
                   /><workspace-field
                     v-model="form.summary"
                     :field="{
+                      readonly: locked,
                       label: 'Resumo Curto (opcional)',
                       kind: 'textarea',
                       wide: true,
@@ -64,53 +68,28 @@
               ><profile-section
                 title="PDF Principal do Relatório"
                 caption="Este é o elemento principal do relatório"
-                ><iframe
-                  v-if="pdfUrl"
-                  :src="pdfUrl"
-                  title="Prévia do PDF principal"
-                  class="publication-pdf"
-                />
-                <div v-else class="workspace-empty">
-                  Nenhum PDF enviado
-                  <p>Envie o documento principal do relatório para visualizar a prévia</p>
-                </div>
-                <q-file
+                icon-src="/icons/publication/pdf-heading.svg"
+                ><publication-upload
                   v-model="form.pdf"
-                  outlined
-                  dark
-                  dense
-                  accept="application/pdf"
-                  max-file-size="52428800"
-                  label="Enviar PDF"
-                  aria-label="Enviar PDF"
-                  @rejected="fileRejected('PDF até 50MB')"
-                /><small>Tamanho máximo: 50MB</small></profile-section
-              ><profile-section title="Áudio do Relatório (Opcional)"
-                ><audio v-if="audioUrl" :src="audioUrl" controls />
-                <p v-else>Nenhum áudio enviado</p>
-                <q-file
+                  kind="pdf"
+                  :preview-url="pdfUrl"
+                  :disabled="locked" /></profile-section
+              ><profile-section
+                title="Áudio do Relatório (Opcional)"
+                icon-src="/icons/publication/audio-heading.svg"
+                ><publication-upload
                   v-model="form.audio"
-                  outlined
-                  dark
-                  dense
-                  accept="audio/mpeg,audio/wav,audio/x-m4a,audio/mp4"
-                  max-file-size="104857600"
-                  label="Enviar Áudio"
-                  aria-label="Enviar Áudio"
-                  @rejected="fileRejected('áudio até 100MB')"
-                /><small>MP3, WAV ou M4A · Máx: 100MB</small></profile-section
+                  kind="audio"
+                  :preview-url="audioUrl"
+                  :disabled="locked" /></profile-section
               ><profile-section
                 title="Anexos Complementares"
                 caption="Planilhas, documentos de apoio, imagens adicionais"
-                ><p v-if="!form.attachments?.length">Nenhum anexo complementar</p>
-                <q-file
+                icon-src="/icons/publication/attachments-heading.svg"
+                ><publication-upload
                   v-model="form.attachments"
-                  multiple
-                  outlined
-                  dark
-                  dense
-                  label="Adicionar Anexo"
-                  aria-label="Adicionar Anexo" /></profile-section></template
+                  kind="attachments"
+                  :disabled="locked" /></profile-section></template
             ><profile-section v-else class="publication-content" title=""
               ><q-input
                 v-model="form.title"
@@ -152,6 +131,7 @@
               ><workspace-field
                 :model-value="kind || 'Indisponível'"
                 :field="{
+                  readonly: locked,
                   label: 'Categoria do Conteúdo',
                   disabled: true,
                   hint: 'Categoria definida na criação',
@@ -159,12 +139,13 @@
               />
               <p>Status Atual</p>
               <q-badge outline
-                >{{ workspaceStatus(source?.status || 'Draft')
+                >{{ workspaceStatus(source?.status || (recordId ? null : 'Draft'))
                 }}{{ !source || source.status === 'Draft' ? ' (Não visível)' : '' }}</q-badge
               >
               <p>Agendamento</p>
               <q-btn-toggle
                 v-model="form.schedule"
+                :disable="locked"
                 no-caps
                 :options="[
                   { label: 'Publicar Agora', value: 'now' },
@@ -173,6 +154,7 @@
               /><workspace-field
                 v-model="form.author"
                 :field="{
+                  readonly: locked,
                   label: 'Redator / Autor',
                   kind: 'select',
                   options: [],
@@ -183,6 +165,7 @@
                 outline
                 no-caps
                 label="Criar novo redator"
+                :disable="locked"
                 class="full-width q-mt-sm"
                 @click="authorOpen = true"
               />
@@ -190,20 +173,26 @@
               <div class="row no-wrap items-center">
                 <q-input
                   v-model="themeInput"
+                  :readonly="locked"
                   outlined
                   dense
                   dark
                   placeholder="Ex: Economia, Política..."
                   aria-label="Tema do conteúdo"
                   @keyup.enter="addTheme"
-                /><q-btn outline dense aria-label="Adicionar tema" @click="addTheme"
+                /><q-btn
+                  outline
+                  dense
+                  aria-label="Adicionar tema"
+                  :disable="locked"
+                  @click="addTheme"
                   ><workspace-icon name="plus"
                 /></q-btn>
               </div>
               <q-chip
                 v-for="theme in form.themes"
                 :key="theme"
-                removable
+                :removable="!locked"
                 @remove="form.themes = form.themes.filter((t) => t !== theme)"
                 >{{ theme }}</q-chip
               ><small
@@ -216,6 +205,7 @@
                 alt="Capa selecionada"
                 class="publication-cover" /><q-file
                 v-model="form.cover"
+                :disable="locked"
                 outlined
                 dark
                 dense
@@ -228,7 +218,13 @@
               caption="Define o que aparecerá na coluna direita"
               ><workspace-field
                 v-model="form.relatedMode"
-                :field="{ label: 'Modo de Seleção', kind: 'select', options: ['Baseado em Tema'] }"
+                :field="{
+                  readonly: locked,
+                  label: 'Modo de Seleção',
+                  disabled: locked,
+                  kind: 'select',
+                  options: ['Baseado em Tema'],
+                }"
               />
               <p>Sugere conteúdos baseados nos temas cadastrados acima.</p></profile-section
             ><profile-section
@@ -240,19 +236,19 @@
               ><div class="workspace-form-grid">
                 <workspace-field
                   v-model="form.code"
-                  :field="{ label: 'Código *', placeholder: 'Ex: COM-2024-001' }"
+                  :field="{ readonly: locked, label: 'Código *', placeholder: 'Ex: COM-2024-001' }"
                 /><workspace-field
                   v-model="form.version"
-                  :field="{ label: 'Versão' }"
+                  :field="{ readonly: locked, label: 'Versão' }"
                 /><workspace-field
                   v-model="form.notes"
-                  :field="{ label: 'Notas', kind: 'textarea', wide: true }"
+                  :field="{ readonly: locked, label: 'Notas', kind: 'textarea', wide: true }"
                 /><workspace-field
                   v-model="form.references"
-                  :field="{ label: 'Referências', kind: 'textarea', wide: true }"
+                  :field="{ readonly: locked, label: 'Referências', kind: 'textarea', wide: true }"
                 /><workspace-field
                   v-model="form.bibliography"
-                  :field="{ label: 'Bibliografia', kind: 'textarea', wide: true }"
+                  :field="{ readonly: locked, label: 'Bibliografia', kind: 'textarea', wide: true }"
                 /></div></profile-section
             ><profile-section title="Disparo de Notificações"
               ><q-checkbox
@@ -285,18 +281,15 @@
               no-data-label="Nenhuma alteração registrada." /></resource-state></profile-section
       ></resource-state>
     </main>
-    <author-dialog v-if="authorOpen" @close="authorOpen = false" /><q-dialog v-model="previewOpen"
-      ><q-card class="workspace-modal workspace-modal--wide"
-        ><div class="workspace-modal-heading">
-          <h2>Prévia - Visualização do Cliente</h2>
-          <q-btn flat dense icon="close" aria-label="Fechar prévia" v-close-popup />
-        </div>
-        <h3>{{ form.title || 'Título' }}</h3>
-        <p>{{ form.summary }}</p>
-        <iframe v-if="pdfUrl" :src="pdfUrl" title="Prévia do relatório" class="publication-pdf" />
-        <div v-else class="workspace-preview">{{ form.body }}</div></q-card
-      ></q-dialog
-    >
+    <author-dialog v-if="authorOpen" @close="authorOpen = false" />
+    <publication-preview
+      :open="previewOpen"
+      :kind="kind"
+      :form="form"
+      :source="source"
+      :pdf-url="pdfUrl"
+      @close="previewOpen = false"
+    />
   </div>
 </template>
 <script setup>
@@ -308,11 +301,14 @@ import ResourceState from 'src/components/Finance/ResourceState.vue'
 import WorkspaceField from './WorkspaceField.vue'
 import WorkspaceIcon from './WorkspaceIcon.vue'
 import AuthorDialog from './AuthorDialog.vue'
+import PublicationUpload from './PublicationUpload.vue'
+import PublicationPreview from './PublicationPreview.vue'
 import { financeGet, financeWrite, columns, dateLabel } from 'src/services/financeService'
 import { useFinanceResource } from 'src/composables/useFinanceResource'
 import {
   announcementTextPayload,
   validatePublication,
+  publicationEditLocked,
   workspaceStatus,
 } from 'src/services/adminWorkspaceModel'
 import { auditAction, auditField, auditValue } from 'src/services/auditModel'
@@ -362,7 +358,15 @@ const extras = () =>
     Object.entries(form.value).filter(([k]) => !['title', 'summary', 'body'].includes(k)),
   )
 const dirty = computed(() => JSON.stringify(form.value) !== baseline.value),
-  locked = computed(() => source.value?.status === 'Archived' || busy.value)
+  locked = computed(() =>
+    publicationEditLocked({
+      source: source.value,
+      recordId: props.recordId,
+      loading: detail.state.loading,
+      busy: busy.value,
+    }),
+  )
+
 const historyColumns = columns([
   ['occurredAtUtc', 'Data/Hora', (r) => dateLabel(r.occurredAtUtc)],
   ['actorName', 'Autor'],
@@ -381,14 +385,12 @@ const historyColumns = columns([
   ],
 ])
 function addTheme() {
+  if (locked.value) return
   const value = themeInput.value.trim()
   if (value && !form.value.themes.includes(value)) {
     form.value.themes.push(value)
     themeInput.value = ''
   }
-}
-function fileRejected(label) {
-  error.value = 'Selecione um arquivo válido: ' + label + '.'
 }
 for (const [key, url, valid] of [
   ['cover', coverUrl, (f) => f.type.startsWith('image/')],
@@ -518,11 +520,6 @@ onScopeDispose(() => {
   max-height: 260px;
   object-fit: contain;
   margin-bottom: 16px;
-}
-.publication-pdf {
-  border: 0;
-  width: 100%;
-  height: 500px;
 }
 .publication-editor aside .LabelForm {
   margin: 16px 0;

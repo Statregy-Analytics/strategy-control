@@ -2,13 +2,15 @@
   <q-page class="workspace">
     <logic-workspace
       v-if="editor && module === 'logic'"
-      :key="editor"
+      :key="editor + '-' + (recordId || 'new') + '-' + (contentKind || '')"
       :record-id="recordId"
+      :start-editing="editor === 'edit'"
+      @readonly="editor === 'edit' && router.replace({ query: { ...route.query, editor: 'open' } })"
       @close="closeEditor"
     />
     <publication-workspace
       v-else-if="editor && module === 'communication'"
-      :key="editor"
+      :key="editor + '-' + (recordId || 'new') + '-' + (contentKind || '')"
       :record-id="recordId"
       :kind="contentKind"
       @close="closeEditor"
@@ -240,6 +242,7 @@
     ></q-dialog>
     <credit-workspace
       v-if="creditOpen"
+      :key="creditRecord || tab + '-' + selectedType"
       :record-id="creditRecord"
       :operation-type="selectedType"
       :partner="tab === 'partners'"

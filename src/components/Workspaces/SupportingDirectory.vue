@@ -69,51 +69,13 @@
               @select="
                 $event === 'open' ? (selected = p.row) : $emit('edit', p.row)
               " /></q-td></template></q-table></template
-    ><q-dialog :model-value="Boolean(selected)" @update:model-value="!$event && (selected = null)"
-      ><q-card class="workspace-modal workspace-modal--wide"
-        ><div class="workspace-modal-heading">
-          <h2>Detalhes do Parceiro</h2>
-          <q-btn
-            flat
-            dense
-            icon="close"
-            aria-label="Fechar detalhes do parceiro"
-            @click="selected = null"
-          />
-        </div>
-        <p>Visualize e gerencie informações completas do parceiro</p>
-        <h3>{{ selected?.name }}</h3>
-        <p>{{ selected?.type }}</p>
-        <q-btn-toggle
-          v-model="partnerTab"
-          no-caps
-          :options="partnerTabs.map((label) => ({ label, value: label }))" /><template
-          v-if="partnerTab === 'Dados Gerais'"
-          ><dl class="partner-details">
-            <template v-for="field in partnerFields" :key="field.key"
-              ><dt>{{ field.label }}</dt>
-              <dd>{{ selected?.[field.key] ?? 'Indisponível' }}</dd></template
-            >
-          </dl></template
-        ><q-list v-else-if="partnerTab === 'Serviços'"
-          ><q-item v-for="product in selected?.products || []" :key="product"
-            ><q-item-section>{{ product }}</q-item-section></q-item
-          ></q-list
-        >
-        <p v-else>Consulta indisponível.</p>
-        <div class="workspace-actions">
-          <q-btn outline no-caps label="Fechar" @click="selected = null" /><q-btn
-            outline
-            no-caps
-            label="Editar Parceiro"
-            @click="editSelected"
-          /></div></q-card
-    ></q-dialog>
+    ><partner-details :partner="selected" @close="selected = null" @edit="editSelected" />
   </section>
 </template>
 <script setup>
 import { ref } from 'vue'
 import RowActions from 'src/components/Entity/RowActions.vue'
+import PartnerDetails from './PartnerDetails.vue'
 import { columns, dateLabel } from 'src/services/financeService'
 defineProps({
   kind: { type: String, required: true },
@@ -126,8 +88,7 @@ function editSelected() {
   selected.value = null
   emit('edit', row)
 }
-const selected = ref(null),
-  partnerTab = ref('Dados Gerais')
+const selected = ref(null)
 const authorFields = [
   { key: 'economicView', label: 'Visão econômica' },
   { key: 'politicalView', label: 'Visão política' },
@@ -154,38 +115,8 @@ const partnerColumns = columns([
   ['updatedAtUtc', 'Última Atualização', (r) => dateLabel(r.updatedAtUtc)],
   ['actions', ''],
 ])
-const partnerTabs = [
-  'Dados Gerais',
-  'Serviços',
-  'Regras',
-  'Comissão',
-  'Documentos',
-  'Procedimentos',
-  'Materiais',
-  'Histórico',
-]
-const partnerFields = [
-  { key: 'type', label: 'Tipo de Parceiro' },
-  { key: 'publicCode', label: 'ID do Parceiro' },
-  { key: 'status', label: 'Status' },
-  { key: 'updatedAtUtc', label: 'Última Atualização' },
-  { key: 'email', label: 'Contato' },
-  { key: 'phone', label: 'Telefone' },
-]
 </script>
 <style scoped>
-.partner-details {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 12px;
-  margin: 24px 0;
-}
-.partner-details dd {
-  margin: 0;
-}
-.workspace-modal :deep(.q-btn-toggle) {
-  flex-wrap: wrap;
-}
 .workspace-record-head > div {
   min-width: 0;
   flex: 1;

@@ -6,7 +6,7 @@ Atualização: 13/11/2026. Este é o índice desta revisão ampla. Evidências a
 
 - [ ] Todos os frames/estados abaixo comparados visualmente, inclusive erro, vazio e retorno.
 - [ ] Fluxos de escrita e leitura integrados testados com dados fictícios.
-- [x] Admin: lint e build aprovados; 285 testes locais passaram (incluem 8 testes de estudo já existentes no worktree).
+- [x] Admin: lint e build aprovados; 290 testes locais passaram (incluem 8 testes de estudo já existentes no worktree; 282 versionados nesta entrega).
 - [ ] Reexecutar os checks após concluir as demais telas; Área do Cliente ainda não alterada nesta rodada.
 - [ ] Deploy confirmado e testes repetidos nas URLs publicadas.
 - [x] Pendências de frontend separadas das pendências reais da API, do designer e da limitação de consulta ao Figma.
@@ -97,12 +97,28 @@ Atualização: 13/11/2026. Este é o índice desta revisão ampla. Evidências a
 - Esse limite não é pendência do backend e não significa aprovação das telas que continuam listadas como trabalho de frontend.
 - Continuam necessários os contextos completos dos estados restantes de Lógicas, Crédito/Comunicados e Área do Cliente para concluir a comparação visual de todo o inventário.
 
+## Contextos já obtidos — complemento de 13/11
+
+- [x] CR10: detalhes de parceiro no modal do desenho, dados/contatos, produtos e comissão real (inclusive zero), oito abas, Fechar/Editar e retorno à primeira aba ao reabrir. Teste isolado com props fictícias, desktop e 390 px; não há parceiros fictícios na aplicação publicada.
+- [x] CO06: áreas de PDF, áudio e anexos com ícones originais, nomes reais dos arquivos, limites desenhados (50/100 MB), seleção múltipla de anexos e erros independentes. PDF inválido não apaga a seleção válida anterior.
+- [x] Prévia de PDF renderizada no próprio front: o visualizador nativo ficava vazio no IAB e no Edge. PDF.js local, worker/fontes/CMaps/WASM servidos pelo projeto, sem CDN; três páginas com orientação mista e troca de arquivo testadas. Sem novos botões/campos.
+- [x] CO08: prévia formal com autor, versão/código, data real e fechamento do desenho. Sem autor/data publicados, informa ausência; conteúdo HTML digitado permanece texto escapado.
+- [x] Arquivado, carregamento, falha e troca de registro: edição bloqueada até carregar o registro correto; arquivado permanece somente leitura. Troca entre editores não reaproveita dados do registro anterior.
+- [x] LG06: Editar no menu da linha agora abre edição; Cancelar descarta índice local e volta ao registro real somente leitura.
+- [x] CT11.1–CT11.3: modos combinado/principal e aleatório/fixo preparados como apresentação e testados isoladamente. API sem configuração não seleciona um modo por suposição. Não foi criado campo de percentual que não aparece no desenho.
+- [x] Testes locais de arquivo inválido/válido, áudio WAV, anexos múltiplos, prévia/fechamento, validação obrigatória e proteção de arquivado. Nenhum comunicado publicado nem notificação enviada.
+- [ ] Confirmar deploy deste complemento e repetir os fluxos disponíveis no Admin publicado.
+
+**Backend:** persistência de parceiros e seus detalhes; grupos editoriais, redatores, PDF/áudio/anexos/versão e metadados; configuração operacional dos motores. Uploads/prévias são locais e não simulam persistência.
+**Designer/contexto:** mídia/H2/H3 abertos, LG09 completo, distribuição CT05, importação e gatilho CT12 continuam sem desenho completo disponível. Não classificar como bug da API. Nenhuma nova consulta ao Figma foi necessária neste complemento.
+**Limite da entrega:** demais frames assinalados como Revalidar continuam pendentes; não declarar o inventário inteiro homologado.
+
 ## Ainda é trabalho de frontend
 
 - [ ] Concluir a revisão integral LG05/LG06/LG07/LG09; estados básicos de gráfico, tabela e disposição da simulação já preparados e testados, histórico completo ainda pendente.
 - [ ] Concluir e revisar as abas e estados expandidos dos contratos CT08–CT23, preservando os serviços existentes.
 - [ ] Comparar os estados de Transações e Carteiras com seus frames, inclusive os modais.
-- [ ] Concluir a composição dos detalhes de parceiro e o editor de blocos de conteúdo; a área de texto atual não implementa inserção de mídia/H2/H3.
+- [ ] Concluir o editor de blocos de conteúdo quando houver contexto completo do estado aberto; a área de texto atual não implementa inserção de mídia/H2/H3. CR10 já composto e validado isoladamente; integração de parceiros depende da API.
 - [ ] Conferir todos os estados responsivos e as imagens/ícones dos novos módulos.
 - [ ] Área do Cliente: revisar solicitações de empréstimo/alavancagem e substituir os dados fictícios legados antes de considerar os fluxos integrados.
 - [ ] Executar regressão visual do conjunto de telas anteriores; consultar o inventário abaixo para não esquecer estados.

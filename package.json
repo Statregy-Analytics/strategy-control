@@ -12,7 +12,9 @@
     "test": "node --experimental-vm-modules --test tests/*.test.mjs",
     "dev": "quasar dev",
     "build": "quasar build",
-    "postinstall": "quasar prepare"
+    "postinstall": "quasar prepare",
+    "predev": "node scripts/prepare-pdf-assets.mjs",
+    "prebuild": "node scripts/prepare-pdf-assets.mjs"
   },
   "dependencies": {
     "@quasar/extras": "^1.16.4",
@@ -20,6 +22,7 @@
     "ajv": "^8.20.0",
     "ajv-formats": "^3.0.1",
     "axios": "^1.2.1",
+    "pdfjs-dist": "6.5.438",
     "pinia": "^3.0.2",
     "quasar": "^2.35.2",
     "vue": "^3.4.18",

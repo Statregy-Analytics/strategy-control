@@ -103,6 +103,7 @@ const labels = {
   Debit: 'Débito',
   NotAvailable: 'Indisponível',
   PendingConnection: 'Conexão pendente',
+  Connected: 'Conectado',
   Active: 'Ativo',
   Inactive: 'Inativo',
 }

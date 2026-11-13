@@ -244,6 +244,11 @@ export function projectedFinalIndex(form) {
     ? Number(form.initialIndex) * (1 + Number(form.target) / 100)
     : null
 }
+export function publicationEditLocked({ source, recordId, loading, busy }) {
+  return Boolean(
+    busy || loading || source?.status === 'Archived' || (recordId && source?.id !== recordId),
+  )
+}
 export function validatePublication(form, kind) {
   if (!requiredText(form.title)) return 'Informe o título do conteúdo.'
   if (!form.themes?.length) return 'Informe pelo menos um tema.'

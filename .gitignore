@@ -36,3 +36,6 @@ yarn-error.log*
 /tmp
 /output
 /.impeccable
+
+# Generated PDF renderer assets from the pinned dependency
+/public/vendor/pdfjs/
