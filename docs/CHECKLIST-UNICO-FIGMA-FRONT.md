@@ -6,12 +6,27 @@ Atualização: 14/11/2026. Este é o índice desta revisão ampla. Evidências a
 
 - [ ] Todos os frames/estados abaixo comparados visualmente, inclusive erro, vazio e retorno.
 - [ ] Fluxos de escrita e leitura integrados testados com dados fictícios.
-- [x] Admin: lint e build aprovados; 297 testes locais passaram (incluem 8 testes de estudo já existentes no worktree; 289 versionados na publicação atual).
+- [x] Admin: lint e build aprovados; 300 testes locais passaram (incluem 8 testes de estudo já existentes no worktree; 292 versionados neste complemento).
 - [ ] Reexecutar os checks após concluir as demais telas; Área do Cliente ainda não alterada nesta rodada.
 - [ ] Deploy confirmado e testes repetidos nas URLs publicadas.
 - [x] Pendências de frontend separadas das pendências reais da API, do designer e da limitação de consulta ao Figma.
 
-## LG09 — recuperação da referência e navegação (14/11)
+## LG09 — tabela completa recuperada (14/11, complemento)
+
+- [x] Nova tentativa liberada: recuperados os 19 contextos restantes, todos completos. Os 69 blocos consultados estão preservados em `figma-recovered-context.json`, sem respostas de erro pendentes. A limitação de acesso da primeira rodada foi superada.
+- [x] Tabela completa do estado desenhado: oito grupos e 58 indicadores na ordem do LG09; indicadores com rótulos repetidos têm identidades distintas. Cabeçalho por período, ação de detalhamento, bordas, glass, cores, badges e ênfases conforme os contextos recuperados.
+- [x] Extraída a primitiva `GroupedTemporalTable`; recebe células de apresentação, sem pressupor um contrato HTTP inexistente, fazer cálculos financeiros ou inferir resultados pela cor.
+- [x] Teste isolado com os 12 períodos exemplificados no Figma: 13 colunas, oito grupos, 58 indicadores, zero preservado, badges e valores positivos/negativos. A ação de detalhe emitiu o identificador correto do período. **Este teste valida a emissão do evento, não uma consulta integrada de detalhes.**
+- [x] Sem períodos: uma coluna sem data inventada e 58 valores indisponíveis. Texto fictício de 515 caracteres quebrou dentro da célula de 160 px; rolagem horizontal por teclado manteve a primeira coluna visível. Revisões em 2304/1280 px e 390 px sem excesso horizontal da página. Capturas isoladas identificadas em `table-isolated-desktop.png` e `table-isolated-mobile.png`.
+- [x] Fluxo local real: Quant Core → histórico com os oito grupos/58 valores indisponíveis → Gráfico sem série → retorno à lógica com foco restaurado. Nenhum dado dos exemplos foi incorporado à aplicação nem gravado na API; arquivos temporários do teste removidos.
+- [x] Lint, build, 300 testes locais (292 versionados, oito de estudo preexistentes não incluídos) e revisão de diff aprovados.
+- [ ] Publicar este complemento e repetir a validação no Admin publicado.
+
+**API:** continuam faltando histórico operacional/agregações, dados por atualização e exportações. Os controles correspondentes permanecem desabilitados; auditoria CRUD não substitui a série do motor. A especificação revisada está em `api-review.json`.
+
+**Desenho:** o frame LG09 recuperado apresenta a tabela e os botões Gráfico/Ver atualizações detalhadas, sem desenhar os respectivos estados abertos. A tabela foi concluída; gráfico com dados e composição aberta dos detalhes não são declarados visualmente homologados por este teste. Não foram criadas telas adicionais para esses destinos.
+
+## LG09 — primeira publicação, antes da recuperação integral (14/11)
 
 - [x] Recuperados o screenshot integral do frame `1484:83540`, o contexto completo do cabeçalho e 49 outros blocos da tabela. Referência durável em [evidence/qa-2026-11-14-lg09](evidence/qa-2026-11-14-lg09).
 - [x] Histórico abre como subpágina, substituindo a ficha visível, com título, legenda, retorno, períodos, granularidades, visualizações e exportações do cabeçalho obtido. Nenhum campo ou ação adicional.
@@ -355,7 +370,7 @@ Legenda: **Preparado / revisão pendente** = há código novo, mas a validação
 | [1484:82147](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-82147) | LG07 · EC · Simulação ao lado · PAINEL DE ESTADOS DO COMPONENTE · DESIGN GLASS                | Preparado / revisão pendente                                             |
 | [1484:83473](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-83473) | LG08 · MD · Validação da lógica · MODAL ISOLADO · DESIGN GLASS                                | Composto; estados testados — ver complemento 14/11 |
 | [1484:83539](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-83539) | F04 · Estados complementares do motor · Histórico completo + configuração minimizada          | Revalidar                                                                |
-| [1484:83540](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-83540) | LG09 · SP · Histórico completo do motor · SUBPÁGINA · DESIGN GLASS                            | Cabeçalho/retorno publicados; tabela e API pendentes |
+| [1484:83540](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-83540) | LG09 · SP · Histórico completo do motor · SUBPÁGINA · DESIGN GLASS                            | Tabela completa preparada/testada; publicação e API pendentes |
 | [1484:85344](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-85344) | LG11 · EC · Configuração do motor minimizada · PAINEL DE ESTADOS DO COMPONENTE · DESIGN GLASS | Preparado / revisão pendente                                             |
 | [1484:85374](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-85374) | F01 · Extrato + Solicitações + Nova transação                                                 | Revalidar                                                                |
 | [1484:85378](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-85378) | P01 · V01 · Transações · Extrato global + Solicitações                                        | Revalidar                                                                |

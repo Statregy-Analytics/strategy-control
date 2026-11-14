@@ -59,9 +59,10 @@
       </div>
     </header>
     <main class="logic-history__body">
-      <div v-if="view === 'table'" class="logic-history__unavailable" role="status">
-        Histórico operacional indisponível.
-      </div>
+      <template v-if="view === 'table'">
+        <p class="logic-history__availability" role="status">Histórico operacional indisponível.</p>
+        <grouped-temporal-table :groups="logicHistoryGroups" />
+      </template>
       <temporal-chart
         v-else
         :points="[]"
@@ -74,6 +75,8 @@
 <script setup>
 import { onMounted, ref } from 'vue'
 import TemporalChart from 'src/components/Entity/TemporalChart.vue'
+import GroupedTemporalTable from 'src/components/Entity/GroupedTemporalTable.vue'
+import { logicHistoryGroups } from 'src/services/logicHistoryModel'
 defineEmits(['close'])
 const heading = ref(null)
 const view = ref('table')
@@ -186,13 +189,8 @@ p {
 .logic-history__body {
   padding: 24px;
 }
-.logic-history__unavailable {
-  padding: 32px 16px;
-  text-align: center;
-  color: var(--sa-muted, rgba(255, 255, 255, 0.65));
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  border-radius: 8px;
-  font-size: 12px;
+.logic-history__availability {
+  margin-bottom: 12px;
 }
 @media (max-width: 600px) {
   .logic-history__header,
