@@ -15,7 +15,12 @@
             ><img :src="option.image" alt=""
           /></q-btn>
         </div>
-        <q-btn outline no-caps label="Ver histórico completo" @click="$emit('history')"
+        <q-btn
+          ref="historyButton"
+          outline
+          no-caps
+          label="Ver histórico completo"
+          @click="$emit('history')"
           ><img src="/icons/logics/chevron-right.svg" alt=""
         /></q-btn>
       </div>
@@ -129,6 +134,8 @@ import TemporalIndicatorTable from 'src/components/Entity/TemporalIndicatorTable
 import { logicTemporalIndicators } from 'src/services/logicPerformanceModel'
 defineProps({ editing: Boolean })
 defineEmits(['history'])
+const historyButton = ref(null)
+defineExpose({ focusHistory: () => historyButton.value?.$el?.focus() })
 const days = ref('days'),
   view = ref('chart'),
   period = ref('Ciclo'),

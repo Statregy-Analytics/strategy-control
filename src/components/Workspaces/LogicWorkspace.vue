@@ -1,6 +1,7 @@
 <template>
   <div class="workspace">
-    <header class="workspace-header">
+    <logic-history v-if="historyOpen" @close="closeHistory" />
+    <header v-show="!historyOpen" class="workspace-header">
       <div>
         <q-btn flat no-caps label="Voltar para lógicas" @click="$emit('close')" />
         <h1>
@@ -38,7 +39,7 @@
         />
       </div>
     </header>
-    <main class="workspace-main">
+    <main v-show="!historyOpen" class="workspace-main">
       <q-banner v-if="catalogError" class="workspace-error" role="alert"
         >Não foi possível carregar as moedas.
         <q-btn flat no-caps label="Tentar novamente" @click="loadCatalog"
@@ -228,13 +229,7 @@
               :columns="linkedColumns"
               hide-pagination
               no-data-label="Vínculos indisponíveis nesta consulta." /></profile-section
-          ><logic-performance :editing="editing" @history="historyOpen = !historyOpen" />
-          <profile-section v-if="historyOpen" title="Histórico Completo do Motor">
-            <template #actions
-              ><q-btn outline no-caps label="Voltar para lógica" @click="historyOpen = false"
-            /></template>
-            <div class="workspace-empty">Histórico operacional indisponível.</div>
-          </profile-section>
+          ><logic-performance ref="performance" :editing="editing" @history="historyOpen = true" />
         </template>
       </resource-state>
     </main>
@@ -247,13 +242,14 @@
   </div>
 </template>
 <script setup>
-import { computed, onScopeDispose, ref } from 'vue'
+import { computed, nextTick, onScopeDispose, ref } from 'vue'
 import ProfileSection from 'src/components/Entity/ProfileSection.vue'
 import ResourceState from 'src/components/Finance/ResourceState.vue'
 import WorkspaceIcon from './WorkspaceIcon.vue'
 import WorkspaceField from './WorkspaceField.vue'
 import LogicPerformance from './LogicPerformance.vue'
 import LogicValidation from './LogicValidation.vue'
+import LogicHistory from './LogicHistory.vue'
 import { useFinanceResource } from 'src/composables/useFinanceResource'
 import { financeGet, columns } from 'src/services/financeService'
 import { getPreferenceCatalog } from 'src/services/customerService'
@@ -267,6 +263,12 @@ import {
 } from 'src/services/adminWorkspaceModel'
 const props = defineProps({ recordId: { type: String, default: null }, startEditing: Boolean }),
   emit = defineEmits(['close', 'readonly'])
+const performance = ref(null)
+async function closeHistory() {
+  historyOpen.value = false
+  await nextTick()
+  performance.value?.focusHistory()
+}
 const form = ref(initialLogic()),
   source = ref(null),
   editing = ref(!props.recordId || props.startEditing),

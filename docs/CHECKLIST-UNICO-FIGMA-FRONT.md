@@ -1,6 +1,6 @@
 # Checklist único — telas do Figma e integração
 
-Atualização: 13/11/2026. Este é o índice desta revisão ampla. Evidências anteriores continuam nos documentos vinculados; uma tela existente não é automaticamente considerada revalidada nesta rodada.
+Atualização: 14/11/2026. Este é o índice desta revisão ampla. Evidências anteriores continuam nos documentos vinculados; uma tela existente não é automaticamente considerada revalidada nesta rodada.
 
 ## Critério de conclusão
 
@@ -10,6 +10,20 @@ Atualização: 13/11/2026. Este é o índice desta revisão ampla. Evidências a
 - [ ] Reexecutar os checks após concluir as demais telas; Área do Cliente ainda não alterada nesta rodada.
 - [ ] Deploy confirmado e testes repetidos nas URLs publicadas.
 - [x] Pendências de frontend separadas das pendências reais da API, do designer e da limitação de consulta ao Figma.
+
+## LG09 — recuperação da referência e navegação (14/11)
+
+- [x] Recuperados o screenshot integral do frame `1484:83540`, o contexto completo do cabeçalho e 49 outros blocos da tabela. Referência durável em [evidence/qa-2026-11-14-lg09](evidence/qa-2026-11-14-lg09).
+- [x] Histórico abre como subpágina, substituindo a ficha visível, com título, legenda, retorno, períodos, granularidades, visualizações e exportações do cabeçalho obtido. Nenhum campo ou ação adicional.
+- [x] Retorno preserva o motor, o modo de edição e o componente de performance montado. Teste local alterando para Tabela/7D, abrindo o histórico e voltando preservou ambas as opções; foco retorna ao botão que abriu o histórico.
+- [x] Estados reais sem fonte operacional: Tabela e Gráfico mostram indisponibilidade; períodos, granularidades e CSV/PDF ficam desabilitados. Não foi considerado histórico vazio confirmado, nem foram geradas séries de exemplo ou usados eventos de auditoria CRUD como atualizações do índice.
+- [x] Revisão visual local em 1280 px e 390 px, sem excesso horizontal; quatro SVGs do cabeçalho carregados em seus slots, todos em 16 × 16 px. Corrigida a herança global que alterava a fonte do título; conferir também na publicação.
+- [ ] Confirmar deploy e repetir abertura/retorno/visualizações no Admin publicado.
+- [ ] Concluir tabela completa, detalhes por atualização e validação com série real. **LG09 não está entregue integralmente.**
+
+**API — bloqueio confirmado na especificação publicada em 14/11:** existem apenas `/admin/contracts/catalog/engines`, `/admin/contracts/catalog/engines/{engineId}` e `/admin/contracts/{contractId}/engines`. `EngineResponse` traz identificação/descrição/selecionabilidade; não fornece histórico operacional, agregação por período/granularidade, parâmetros/travas/impacto por atualização ou exportações CSV/PDF. Evidência: [api-review.json](evidence/qa-2026-11-14-lg09/api-review.json). Não foi inventado endpoint para testar 404.
+
+**Referência — bloqueio de consulta, separado da API/designer:** o Figma retornou o frame completo como metadados esparsos. A leitura dos filhos recuperou 50 contextos completos, mas 19 consultas foram recusadas pelo limite do plano, incluindo o cabeçalho das datas e blocos finais. A tabela populada não foi implementada a partir dos metadados incompletos. IDs e respostas preservados em `figma-recovered-context.json`; não é falta de desenho do designer. O gráfico populado e os detalhes também precisam de referência suficiente antes de implementação.
 
 ## Verificado localmente nesta rodada
 
