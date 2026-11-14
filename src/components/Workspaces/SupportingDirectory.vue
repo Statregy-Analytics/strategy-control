@@ -3,37 +3,13 @@
     <q-banner v-if="!available" class="workspace-error" role="status"
       >Consulta indisponível.</q-banner
     ><template v-if="kind === 'authors'"
-      ><div class="workspace-cards">
-        <article v-for="row in rows" :key="row.id" class="workspace-record">
-          <div class="workspace-record-head">
-            <q-avatar size="48px">{{ row.name?.slice(0, 1) || '—' }}</q-avatar>
-            <div>
-              <h2>{{ row.name }}</h2>
-              <p>{{ row.role || '—' }}</p>
-              <small>{{ row.attribution || '—' }}</small>
-            </div>
-            <row-actions
-              dark
-              :actions="[{ name: 'edit', label: 'Editar', icon: 'edit' }]"
-              @select="$emit('edit', row)"
-            />
-          </div>
-          <dl>
-            <div>
-              <dt>Publicações</dt>
-              <dd>{{ row.publicationsCount ?? 'Indisponível' }}</dd>
-            </div>
-            <div>
-              <dt>Status</dt>
-              <dd>{{ row.status || '—' }}</dd>
-            </div>
-          </dl>
-          <q-expansion-item v-for="field in authorFields" :key="field.key" :label="field.label"
-            ><p class="workspace-preview">
-              {{ row[field.key] || 'Não informado' }}
-            </p></q-expansion-item
-          >
-        </article>
+      ><div v-if="available && rows.length" class="author-grid">
+        <author-card
+          v-for="row in rows"
+          :key="row.id"
+          :author="row"
+          @edit="$emit('edit', $event)"
+        />
       </div>
       <p v-if="available && !rows.length" class="workspace-empty">
         Nenhum redator encontrado.
@@ -76,6 +52,7 @@
 import { ref } from 'vue'
 import RowActions from 'src/components/Entity/RowActions.vue'
 import PartnerDetails from './PartnerDetails.vue'
+import AuthorCard from './AuthorCard.vue'
 import { columns, dateLabel } from 'src/services/financeService'
 defineProps({
   kind: { type: String, required: true },
@@ -89,11 +66,6 @@ function editSelected() {
   emit('edit', row)
 }
 const selected = ref(null)
-const authorFields = [
-  { key: 'economicView', label: 'Visão econômica' },
-  { key: 'politicalView', label: 'Visão política' },
-  { key: 'philosophy', label: 'Filosofia de vida' },
-]
 const partnerMetrics = [
   'Parceiros Ativos',
   'Produtos Cadastrados',
@@ -117,11 +89,19 @@ const partnerColumns = columns([
 ])
 </script>
 <style scoped>
-.workspace-record-head > div {
-  min-width: 0;
-  flex: 1;
+.author-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 24px;
 }
-.workspace-record-head .q-avatar {
-  flex: none;
+@media (max-width: 1400px) {
+  .author-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+@media (max-width: 900px) {
+  .author-grid {
+    grid-template-columns: 1fr;
+  }
 }
 </style>

@@ -35,7 +35,10 @@
             alt="" /><workspace-icon v-else name="plus"
         /></q-btn>
       </header>
-      <main class="workspace-main">
+      <main
+        class="workspace-main"
+        :class="{ 'workspace-main--authors': module === 'communication' && tab === 'authors' }"
+      >
         <q-tabs
           v-if="module === 'communication'"
           v-model="tab"
@@ -62,7 +65,7 @@
             ]"
           />
         </div>
-        <div class="workspace-toolbar">
+        <div v-if="!(module === 'communication' && tab === 'authors')" class="workspace-toolbar">
           <q-btn-toggle
             v-if="module === 'logic'"
             v-model="view"
@@ -474,7 +477,8 @@ function create() {
   else typeOpen.value = true
 }
 function editDirectory() {
-  if (tab.value === 'authors') authorOpen.value = true
+  if (tab.value === 'authors')
+    error.value = 'Não foi possível editar o redator. Serviço indisponível no momento.'
   else creditOpen.value = true
 }
 function backToCreditType() {
@@ -511,6 +515,9 @@ watch(
   },
   { immediate: true },
 )
+watch(tab, () => {
+  error.value = ''
+})
 watch(
   () => props.module,
   () => {
@@ -530,6 +537,10 @@ onScopeDispose(() => {
 </script>
 <style src="src/css/workspaces.scss" lang="scss"></style>
 <style scoped>
+.workspace-main--authors {
+  padding: 24px;
+  max-width: 1800px;
+}
 .publication-tabs {
   margin-bottom: 24px;
   color: white;

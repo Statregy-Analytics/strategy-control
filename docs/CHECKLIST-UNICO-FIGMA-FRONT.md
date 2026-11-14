@@ -170,7 +170,23 @@ Atualização: 13/11/2026. Este é o índice desta revisão ampla. Evidências a
 - Evidência: C:/Users/jlbnu/.codex/visualizations/2026/11/13/01a1d51a-ae33-79d1-87aa-854dbd4884dc/admin-publication-history-complete.jpg.
 
 **Backend/designer:** nenhum novo bloqueio identificado neste cenário. Paginação, corte da tabela e isolamento eram correções do frontend. Persistem as dependências editoriais relacionadas acima.
-**Referências:** CO02/cards de redatores permanece pendente de recuperação do contexto detalhado; o cache de ferramentas anterior não sobreviveu à retomada. Não foi recriado um desenho por aproximação, nem aberta nova consulta ao Figma nesta rodada. Essa lacuna não é bug do backend.
+**Referências:** CO02/cards estava pendente de recuperação do contexto. A referência foi recuperada no complemento CO02 abaixo; essa limitação anterior foi resolvida.
+
+## CO02 — cards de redatores, referência recuperada (14/11)
+
+- [x] Contexto completo e screenshot recuperados do Figma, nó 1484:96418. Arquivados em [referência CO02](evidence/qa-2026-11-14-co02/source.json), [desenho](evidence/qa-2026-11-14-co02/figma-reference.png) e [contexto](evidence/qa-2026-11-14-co02/figma-context.txt), para não depender do cache da conversa.
+- [x] Card com avatar 64 px/initial 20 px, nome 18 px, função/atribuição, menu original, divisor, Publicações/Status e três textos de perfil. Base medida em 565,3 × 274,4 px, como no frame. SVG original do menu medido em 16 px, gatilho 32 px.
+- [x] Retirados acordeões extras dos textos e busca/filtros de conteúdo da aba Redatores, ausentes no CO02. Nenhum novo campo ou ação. Foto fornecida por dados continua dinâmica; ausência/falha usa inicial.
+- [x] Estados isolados: zero preservado, nulo/ausente indisponível, status desconhecido sem converter para Ativo, foto válida e com falha, textos longos/com palavra sem espaços, HTML escapado, vazio e consulta indisponível sem cards antigos.
+- [x] Menu mantém somente Editar existente; emite o redator correto e fecha por Escape. Corrigido o controlador que abria Criar Novo Redator vazio ao pedir edição: agora informa indisponibilidade, sem simular edição.
+- [x] Responsividade: 2048 px com três colunas, 1280 px com duas e 390 px com uma; sem overflow externo. Menu compartilhado de Comunicados continua abrindo Abrir/Editar.
+- [x] Local integrado: aba Redatores sem busca/filtros de conteúdo e sem dados fictícios; Novo Redator abre o CO07 e fecha normalmente.
+- [x] Lint/build/diff da entrega e 297 testes locais aprovados (289 versionados e 8 do estudo preexistente fora desta entrega). Detector do card: zero antipadrões; avisos consultivos do DESIGN.md antigo preservam as definições explícitas do Figma.
+- [ ] Confirmar deploy e retestar a aba publicada.
+
+**Backend:** Swagger público consultado novamente em 14/11 (/openapi/v1.json): sem rotas de autores/redatores. Faltam consulta/identificação, foto, função/atribuição, contagem, status, textos de perfil e gravação/edição. O componente usa props e não assume um DTO HTTP novo. A aba publicada permanece com Consulta indisponível até haver integração; não há pessoas de exemplo no bundle.
+**Designer:** o CO02 não detalha o menu aberto. Preservado apenas Editar já existente; nenhum Arquivar/Excluir/Ativar foi criado. A edição integrada continua dependente da API e do fluxo de edição aprovado, sem reutilizar o cadastro vazio.
+**Evidência isolada:** admin-co02-cards-isolado.jpg e admin-co02-cards-mobile-isolado.jpg na pasta de visualizações desta rodada. Esses testes não representam leitura integrada de redatores nem dados publicados.
 
 ## Ainda é trabalho de frontend
 
@@ -402,7 +418,7 @@ Legenda: **Preparado / revisão pendente** = há código novo, mas a validação
 | [1484:95999](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-95999) | EC03 · CONEXÃO · Fluxo → estados                                                              | Preparado / revisão pendente                                             |
 | [1484:96066](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-96066) | F01 · Comunicação · Conteúdos / Redatores                                                     | Revalidar                                                                |
 | [1484:96067](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-96067) | CO01 · PB · Comunicação · Conteúdos · TELA BASE · DESIGN GLASS                                | Preparado / revisão pendente                                             |
-| [1484:96418](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-96418) | CO02 · SP · Comunicação · Redatores · ESTADO BASE · DESIGN GLASS                              | Preparado / revisão pendente                                             |
+| [1484:96418](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-96418) | CO02 · SP · Comunicação · Redatores · ESTADO BASE · DESIGN GLASS                              | Cards preparados/testados isoladamente; API de redatores pendente |
 | [1484:96662](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-96662) | EC01 · Painel de estados do componente · Comunicação                                          | Estados disponíveis publicados/testados — ver complemento Comunicação 14/11 |
 | [1484:96691](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-96691) | F02 · Modais acionados · Tipo / Redator / Prévia                                              | Revalidar                                                                |
 | [1484:96692](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-96692) | CO03 · MD · Criar conteúdo · Escolher tipo · MODAL FIXO · DESIGN GLASS                        | Preparado / revisão pendente                                             |
