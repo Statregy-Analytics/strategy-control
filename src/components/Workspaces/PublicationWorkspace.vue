@@ -270,6 +270,7 @@
       <profile-section v-if="recordId" title="Histórico de Alterações"
         ><resource-state :state="history.state" @retry="loadHistory"
           ><q-table
+            class="publication-history"
             dark
             flat
             dense
@@ -501,6 +502,29 @@ onScopeDispose(() => {
 })
 </script>
 <style scoped>
+.publication-history :deep(table) {
+  table-layout: fixed;
+  width: 100%;
+  min-width: 620px;
+}
+.publication-history :deep(th:nth-child(1)),
+.publication-history :deep(td:nth-child(1)) {
+  width: 145px;
+}
+.publication-history :deep(th:nth-child(2)),
+.publication-history :deep(td:nth-child(2)) {
+  width: 120px;
+}
+.publication-history :deep(th:nth-child(3)),
+.publication-history :deep(td:nth-child(3)) {
+  width: 160px;
+}
+.publication-history :deep(td) {
+  white-space: normal;
+  overflow-wrap: anywhere;
+  vertical-align: top;
+}
+
 .publication-editor {
   margin-bottom: 32px;
 }
