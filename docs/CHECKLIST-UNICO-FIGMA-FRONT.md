@@ -119,6 +119,20 @@ Atualização: 13/11/2026. Este é o índice desta revisão ampla. Evidências a
 **Designer/contexto:** mídia/H2/H3 abertos, LG09 completo, distribuição CT05, importação e gatilho CT12 continuam sem desenho completo disponível. Não classificar como bug da API. Nenhuma nova consulta ao Figma foi necessária neste complemento.
 **Limite da entrega:** demais frames assinalados como Revalidar continuam pendentes; não declarar o inventário inteiro homologado.
 
+## CR06 e LG08 — complemento de 14/11
+
+- [x] CR06: cabeçalho com código, status real, tipo, cliente, valor, garantia e datas; sete etapas sem selecionar uma etapa CRM a partir do status informativo. Corrigida leitura do cliente para client.name (o DTO não possui displayName).
+- [x] CR06: seções do desenho, documentos enviados, expansão de Documentos Futuros Previstos, comparativo com colunas aprovadas e histórico em linha do tempo (data/hora, autor, motivo e campos alterados). Sem linhas de propostas fictícias.
+- [x] CR06: detalhe, documentos e histórico preservam erro/carregamento independentes. Testes isolados: valor/prazo zero, vazio, loading, falha documental com retry emitido, expansão, fechar e 390 px sem overflow externo. Ícones originais medidos em 16 px e seta em 12 px.
+- [x] LG08: cabeçalho/fechamento, confirmação, cinco regras e hierarquia no desenho salvo. Configuração incompleta não recebe ícone de sucesso; só regras satisfeitas recebem check. Testes isolados de configuração válida/incompleta e mobile; ícones originais de 16/20/24 px.
+- [x] Validações numéricas: campos ausentes, sinal incorreto, igualdade entre limites e probabilidades fora de 100% não recebem aprovação. Testes unitários específicos.
+- [ ] Confirmar publicação e repetir a abertura do LG08 e o fluxo real disponível de Crédito em homologação.
+
+**API (CR06):** faltam etapa CRM, renda mensal da operação, requisitos preenchidos/faltantes e documentais por etapa, responsável/origem, parceiros, pré-propostas/propostas e sua comparação/escolha. Os endpoints de empréstimos atuais são informativos; não usar Active como Contratada. As ações desse funil permanecem desabilitadas. A abertura/download de arquivo exige concluir a revisão da rota documental geral antes de atribuir ausência à API.
+**API (LG08):** a aprovação local das regras não persiste nem executa motor. Configuração operacional ainda não tem contrato HTTP; o bloqueio de salvamento permanece explícito.
+**Designer:** nenhum novo questionamento nestes dois frames; utilizados somente os contextos completos já obtidos. LG09 completo, editor de mídia, CT05/importação/gatilho CT12 permanecem nas dependências anteriores.
+**Limite de teste:** CR06 com conteúdo foi validado isoladamente com props fictícias, sem criar empréstimo. Não afirmar fluxo integrado de propostas aprovado.
+
 ## Ainda é trabalho de frontend
 
 - [ ] Concluir a revisão integral LG05/LG06/LG07/LG09; estados básicos de gráfico, tabela e disposição da simulação já preparados e testados, histórico completo ainda pendente.

@@ -1,5 +1,15 @@
 <template>
-  <q-dialog :model-value="true" @update:model-value="!$event && $emit('close')"
+  <credit-operation-details
+    v-if="recordId"
+    :detail="detail.state"
+    :documents="documents.state"
+    :history="history.state"
+    @close="$emit('close')"
+    @retry-detail="load"
+    @retry-documents="loadDocuments"
+    @retry-history="loadHistory"
+  />
+  <q-dialog v-else :model-value="true" @update:model-value="!$event && $emit('close')"
     ><q-card
       class="workspace-modal"
       :class="{ 'workspace-modal--wide': recordId || (partner && step === 2) }"
@@ -27,74 +37,7 @@
         }}
       </p>
       <q-banner v-if="error" class="workspace-error" role="alert">{{ error }}</q-banner>
-      <template v-if="recordId"
-        ><resource-state :state="detail.state" @retry="load"
-          ><h3>{{ detail.state.data?.publicCode }}</h3>
-          <dl class="credit-summary">
-            <template v-for="item in summary" :key="item.label"
-              ><dt>{{ item.label }}</dt>
-              <dd>{{ item.value }}</dd></template
-            >
-          </dl>
-          <div class="workspace-tabs">
-            <q-badge v-for="stage in stages" :key="stage" outline>{{ stage }}</q-badge>
-          </div>
-          <div class="workspace-actions">
-            <q-btn
-              v-for="action in [
-                'Editar Operação',
-                'Solicitar Documento',
-                'Inserir Proposta Final',
-                'Alterar Status',
-              ]"
-              :key="action"
-              outline
-              no-caps
-              :label="action"
-              disable
-            />
-          </div>
-          <h3>Informações da Operação</h3>
-          <div class="workspace-form-grid">
-            <workspace-field
-              v-for="field in detailFields"
-              :key="field.key"
-              :model-value="detail.state.data?.[field.key]"
-              :field="{ ...field, disabled: true }"
-            />
-          </div>
-          <h3>Documentos da Etapa</h3>
-          <resource-state :state="documents.state" @retry="loadDocuments"
-            ><p v-if="!documents.state.data?.length">Nenhum documento enviado.</p>
-            <div v-for="doc in documents.state.data || []" :key="doc.documentId">
-              {{ doc.fileName || doc.documentTypeName || 'Documento' }}
-            </div></resource-state
-          >
-          <h3>Pré-propostas por Parceiro</h3>
-          <p>Consulta indisponível.</p>
-          <h3>Propostas Finais por Parceiro</h3>
-          <p>Consulta indisponível.</p>
-          <h3>Comparativo de Propostas</h3>
-          <q-table
-            dark
-            flat
-            dense
-            :rows="[]"
-            :columns="proposalColumns"
-            hide-pagination
-            no-data-label="Nenhuma proposta disponível." />
-          <h3>Histórico da Operação</h3>
-          <resource-state :state="history.state" @retry="loadHistory"
-            ><q-table
-              dark
-              flat
-              dense
-              :rows="history.state.data || []"
-              :columns="historyColumns"
-              hide-pagination
-              no-data-label="Nenhuma alteração registrada." /></resource-state></resource-state
-      ></template>
-      <template v-else-if="!partner"
+      <template v-if="!partner"
         ><div class="credit-steps">
           <span>1 · Tipo</span><q-separator /><strong>2 · Cliente</strong>
         </div>
@@ -290,15 +233,16 @@
   ></q-dialog>
 </template>
 <script setup>
-import { computed, onScopeDispose, ref } from 'vue'
+import { onScopeDispose, ref } from 'vue'
 import { useRouter } from 'vue-router'
 import LabelForm from 'src/components/Form/LabelForm.vue'
 import GlassSelect from 'src/components/Entity/GlassSelect.vue'
 import ResourceState from 'src/components/Finance/ResourceState.vue'
 import WorkspaceField from './WorkspaceField.vue'
-import { partnerTypes, partnerProducts, workspaceStatus } from 'src/services/adminWorkspaceModel'
+import CreditOperationDetails from './CreditOperationDetails.vue'
+import { partnerTypes, partnerProducts } from 'src/services/adminWorkspaceModel'
 import { lookupCustomers } from 'src/services/customerService'
-import { financeGet, columns, dateLabel, money } from 'src/services/financeService'
+import { financeGet, columns } from 'src/services/financeService'
 import { useFinanceResource } from 'src/composables/useFinanceResource'
 const props = defineProps({
     recordId: { type: String, default: null },
@@ -320,50 +264,6 @@ const error = ref(''),
   rules = ref({})
 let active = true,
   sequence = 0
-const stages = [
-  'Iniciada',
-  'Pendente',
-  'Pré-proposta',
-  'Documentação',
-  'Proposta Final',
-  'Assinatura',
-  'Contratada',
-]
-const summary = computed(() => {
-  const d = detail.state.data
-  return d
-    ? [
-        { label: 'Cliente', value: d.client?.displayName || '—' },
-        { label: 'Tipo', value: workspaceStatus(d.kind) },
-        { label: 'Valor solicitado', value: money(d.principalAmount, d.currencyIsoCode) },
-        { label: 'Garantia', value: d.collateral || '—' },
-        { label: 'Status', value: workspaceStatus(d.status) },
-        { label: 'Criado em', value: dateLabel(d.createdAtUtc) },
-        { label: 'Atualizado', value: dateLabel(d.updatedAtUtc) },
-      ]
-    : []
-})
-const detailFields = [
-  { key: 'termMonths', label: 'Prazo desejado', kind: 'number' },
-  { key: 'purpose', label: 'Finalidade' },
-]
-const proposalColumns = columns(
-    [
-      'Parceiro',
-      'Valor Aprovado',
-      'Valor Líquido',
-      'Parcela',
-      'Prazo',
-      'Taxa a.m.',
-      'CET a.m.',
-      'Validade',
-      'Status',
-    ].map((x) => [x, x]),
-  ),
-  historyColumns = columns([
-    ['occurredAtUtc', 'Data/Hora', (r) => dateLabel(r.occurredAtUtc)],
-    ['action', 'Alteração', (r) => workspaceStatus(r.action)],
-  ])
 const collateralColumns = columns(
   [
     'Tipo de Garantia',

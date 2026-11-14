@@ -238,18 +238,12 @@
         </template>
       </resource-state>
     </main>
-    <q-dialog v-model="validationOpen"
-      ><q-card class="workspace-modal"
-        ><h2>Validação da Configuração</h2>
-        <p>{{ validationError || 'Configuração Válida' }}</p>
-        <q-list
-          ><q-item v-for="rule in validationRules" :key="rule"
-            ><q-item-section>{{ rule }}</q-item-section></q-item
-          ></q-list
-        >
-        <div class="workspace-actions">
-          <q-btn flat no-caps label="Fechar" v-close-popup /></div></q-card
-    ></q-dialog>
+    <logic-validation
+      v-if="validationOpen"
+      :error="validationError"
+      :rules="validationRules"
+      @close="validationOpen = false"
+    />
   </div>
 </template>
 <script setup>
@@ -259,6 +253,7 @@ import ResourceState from 'src/components/Finance/ResourceState.vue'
 import WorkspaceIcon from './WorkspaceIcon.vue'
 import WorkspaceField from './WorkspaceField.vue'
 import LogicPerformance from './LogicPerformance.vue'
+import LogicValidation from './LogicValidation.vue'
 import { useFinanceResource } from 'src/composables/useFinanceResource'
 import { financeGet, columns } from 'src/services/financeService'
 import { getPreferenceCatalog } from 'src/services/customerService'
@@ -267,6 +262,7 @@ import {
   logicStatuses,
   projectedFinalIndex,
   validateLogic,
+  logicRuleResults,
   foldSearch,
 } from 'src/services/adminWorkspaceModel'
 const props = defineProps({ recordId: { type: String, default: null }, startEditing: Boolean }),
@@ -414,13 +410,7 @@ const bufferColumns = columns([
       'Status do vínculo',
     ].map((x) => [x, x]),
   )
-const validationRules = [
-  'Intensidade positiva menor que teto diário',
-  'Intensidade negativa menor que piso diário em módulo',
-  'Teto diário menor que teto mensal',
-  'Piso diário em módulo menor que piso mensal em módulo',
-  'Chance positiva + chance negativa = 100%',
-]
+const validationRules = computed(() => logicRuleResults(form.value))
 const matchedContracts = computed(() =>
   (contracts.state.data || []).filter((c) =>
     foldSearch(c.name + ' ' + c.publicCode).includes(foldSearch(contractSearch.value)),

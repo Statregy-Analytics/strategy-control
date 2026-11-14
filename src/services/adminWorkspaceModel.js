@@ -279,3 +279,47 @@ export function announcementTextPayload(source, form) {
 export function historyAction(row) {
   return auditAction(row.action).label
 }
+
+export function logicRuleResults(form) {
+  const finite = (v) => v !== null && v !== undefined && v !== '' && Number.isFinite(Number(v))
+  const less = (a, b) => finite(a) && finite(b) && Number(a) >= 0 && Number(a) < Math.abs(Number(b))
+  return [
+    {
+      label: 'Intensidade positiva menor que teto diário',
+      valid:
+        finite(form.dailyCeiling) &&
+        Number(form.dailyCeiling) >= 0 &&
+        less(form.intensity, form.dailyCeiling),
+    },
+    {
+      label: 'Intensidade negativa menor que piso diário em módulo',
+      valid:
+        finite(form.dailyFloor) &&
+        Number(form.dailyFloor) <= 0 &&
+        less(form.intensity, form.dailyFloor),
+    },
+    {
+      label: 'Teto diário menor que teto mensal',
+      valid:
+        finite(form.monthlyCeiling) &&
+        Number(form.monthlyCeiling) >= 0 &&
+        less(form.dailyCeiling, form.monthlyCeiling),
+    },
+    {
+      label: 'Piso diário em módulo menor que piso mensal em módulo',
+      valid:
+        finite(form.dailyFloor) &&
+        finite(form.monthlyFloor) &&
+        Number(form.dailyFloor) <= 0 &&
+        Number(form.monthlyFloor) <= 0 &&
+        Math.abs(Number(form.dailyFloor)) < Math.abs(Number(form.monthlyFloor)),
+    },
+    {
+      label: 'Chance positiva + chance negativa = 100%',
+      valid:
+        [form.positive, form.negative].every(
+          (v) => finite(v) && Number(v) >= 0 && Number(v) <= 100,
+        ) && Math.abs(Number(form.positive) + Number(form.negative) - 100) < 0.000001,
+    },
+  ]
+}
