@@ -6,9 +6,7 @@
           ><workspace-icon name="arrow-left"
         /></q-btn>
         <h1>{{ recordId ? 'Editar Conteúdo' : 'Novo ' + (kind || 'Conteúdo') }}</h1>
-        <q-badge outline>{{
-          workspaceStatus(source?.status || (recordId ? null : 'Draft'))
-        }}</q-badge>
+        <publication-status :status="source?.status || (recordId ? null : 'Draft')" />
       </div>
       <div class="workspace-actions">
         <q-btn flat no-caps label="Descartar" :disable="busy" @click="$emit('close')" /><q-btn
@@ -303,7 +301,8 @@ import WorkspaceIcon from './WorkspaceIcon.vue'
 import AuthorDialog from './AuthorDialog.vue'
 import PublicationUpload from './PublicationUpload.vue'
 import PublicationPreview from './PublicationPreview.vue'
-import { financeGet, financeWrite, columns, dateLabel } from 'src/services/financeService'
+import PublicationStatus from './PublicationStatus.vue'
+import { financeGet, financeWrite, columns } from 'src/services/financeService'
 import { useFinanceResource } from 'src/composables/useFinanceResource'
 import {
   announcementTextPayload,
@@ -311,7 +310,7 @@ import {
   publicationEditLocked,
   workspaceStatus,
 } from 'src/services/adminWorkspaceModel'
-import { auditAction, auditField, auditValue } from 'src/services/auditModel'
+import { auditAction, auditField, auditValue, auditDate } from 'src/services/auditModel'
 const props = defineProps({
     recordId: { type: String, default: null },
     kind: { type: String, default: null },
@@ -368,7 +367,7 @@ const dirty = computed(() => JSON.stringify(form.value) !== baseline.value),
   )
 
 const historyColumns = columns([
-  ['occurredAtUtc', 'Data/Hora', (r) => dateLabel(r.occurredAtUtc)],
+  ['occurredAtUtc', 'Data/Hora', (r) => auditDate(r.occurredAtUtc)],
   ['actorName', 'Autor'],
   ['action', 'Alteração', (r) => auditAction(r.action).label],
   [

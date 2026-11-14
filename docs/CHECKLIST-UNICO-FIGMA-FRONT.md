@@ -137,6 +137,20 @@ Atualização: 13/11/2026. Este é o índice desta revisão ampla. Evidências a
 **Designer:** nenhum novo questionamento nestes dois frames; utilizados somente os contextos completos já obtidos. LG09 completo, editor de mídia, CT05/importação/gatilho CT12 permanecem nas dependências anteriores.
 **Limite de teste:** CR06 com conteúdo foi validado isoladamente com props fictícias, sem criar empréstimo. Não afirmar fluxo integrado de propostas aprovado.
 
+## Comunicação CO07 / EC01 / EC02 — complemento de 14/11
+
+- [x] CO07: modal de 512 px, cabeçalho, foto 80 px e inicial 24 px, botão Enviar Foto com SVG original, campos/nota/rodapé do desenho salvo. Criar Redator só habilita com nome, função e atribuição preenchidos; nenhuma ação adicional.
+- [x] Foto válida decodificada antes de mostrar; imagem inválida preserva a anterior e mostra erro. Cancelar/Fechar descarta dados/foto, reabrir inicia vazio, e término assíncrono após fechamento não atualiza o componente.
+- [x] EC01: Conteúdos/Redatores com aba selecionada azul e sublinhado; navegação por clique e teclado. Badges Publicado/Rascunho/Em Revisão/Arquivado conforme cores, bordas e tipografia do contexto obtido. Valor desconhecido não vira outro status por aproximação.
+- [x] EC01: ação principal com ícone original de 16 px, espaço e fundo glass do desenho. Status aplicado na lista e no cabeçalho do editor, preservando o valor real.
+- [x] EC02: coluna Data/Hora do histórico agora inclui hora/minuto; consulta de arquivado mantém os registros reais e a edição bloqueada. Agendamento continua sem seletor inventado.
+- [x] Testes locais: obrigatórios, validação e preservação da foto, tentativa de gravação informando serviço indisponível, descarte/reabertura, duas abas, quatro badges + desconhecido/nulo, histórico real e mobile 390 px sem overflow externo. Ícones 16 px conferidos. Lint/build e 292 testes locais passaram (284 versionados, 8 de estudo preexistente fora desta entrega).
+- [ ] Confirmar deploy e repetir CO07/abas/status/histórico no Admin publicado.
+
+**Backend:** continuam faltando API de redatores (consulta/gravação/foto/perfis editoriais/contagem), grupos editoriais e demais metadados já relacionados. O modal não simula sucesso de gravação nem cadastra redator fake.
+**Designer:** escolha de data/hora de Programar e estado aberto do editor de mídia/H2/H3 continuam sem contexto completo. Não foram adicionados campos.
+**Limite:** Rascunho/Em Revisão e status desconhecido foram validados por props isoladas, sem publicar comunicados ou gerar notificações.
+
 ## Ainda é trabalho de frontend
 
 - [ ] Concluir a revisão integral LG05/LG06/LG07/LG09; estados básicos de gráfico, tabela e disposição da simulação já preparados e testados, histórico completo ainda pendente.

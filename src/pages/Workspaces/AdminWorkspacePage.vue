@@ -27,28 +27,24 @@
           outline
           no-caps
           :label="tab === 'authors' ? 'Novo Redator' : definition.create"
+          :class="{ 'publication-create': module === 'communication' }"
           @click="create"
-          ><workspace-icon name="plus"
+          ><img
+            v-if="module === 'communication'"
+            src="/icons/publication/content-plus.svg"
+            alt="" /><workspace-icon v-else name="plus"
         /></q-btn>
       </header>
       <main class="workspace-main">
-        <div v-if="module === 'communication'" class="workspace-tabs">
-          <q-btn-toggle
-            v-model="tab"
-            no-caps
-            :options="
-              module === 'credit'
-                ? [
-                    { label: 'Operações', value: 'main' },
-                    { label: 'Parceiros', value: 'partners' },
-                  ]
-                : [
-                    { label: 'Conteúdos', value: 'main' },
-                    { label: 'Redatores', value: 'authors' },
-                  ]
-            "
-          />
-        </div>
+        <q-tabs
+          v-if="module === 'communication'"
+          v-model="tab"
+          class="publication-tabs"
+          align="left"
+          no-caps
+        >
+          <q-tab name="main" label="Conteúdos" /><q-tab name="authors" label="Redatores" />
+        </q-tabs>
         <div v-if="tab === 'main' || module === 'credit'" class="workspace-metrics">
           <div v-for="(metric, i) in metrics" :key="metric.label" class="workspace-metric">
             <small>{{ metric.label }}</small
@@ -202,6 +198,13 @@
             hide-pagination
             :pagination="{ rowsPerPage: 0 }"
             no-data-label="Nenhum registro encontrado."
+            ><template #body-cell-status="p"
+              ><q-td :props="p"
+                ><publication-status
+                  v-if="module === 'communication'"
+                  :status="p.row.status"
+                /><template v-else>{{ p.value }}</template></q-td
+              ></template
             ><template #body-cell-actions="p"
               ><q-td :props="p"
                 ><row-actions
@@ -253,6 +256,7 @@
   </q-page>
 </template>
 <script setup>
+import PublicationStatus from 'src/components/Workspaces/PublicationStatus.vue'
 import { computed, ref, watch, onScopeDispose } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import ResourceState from 'src/components/Finance/ResourceState.vue'
@@ -526,6 +530,34 @@ onScopeDispose(() => {
 </script>
 <style src="src/css/workspaces.scss" lang="scss"></style>
 <style scoped>
+.publication-tabs {
+  margin-bottom: 24px;
+  color: white;
+}
+.publication-tabs :deep(.q-tab) {
+  min-height: 40px;
+  padding: 8px 16px;
+  font-size: 14px;
+  font-weight: 600;
+}
+.publication-tabs :deep(.q-tab--active) {
+  color: #2b7fff;
+}
+.publication-tabs :deep(.q-tab__indicator) {
+  background: #2b7fff;
+  height: 2px;
+}
+.publication-create {
+  height: 36px;
+  background: rgba(255, 255, 255, 0.06);
+  color: white;
+  font-size: 14px !important;
+}
+.publication-create :deep(.q-btn__content) {
+  gap: 16px;
+  flex-direction: row-reverse;
+}
+
 .workspace-kanban {
   display: grid;
   grid-template-columns: repeat(5, minmax(230px, 1fr));

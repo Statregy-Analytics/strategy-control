@@ -33,7 +33,7 @@
                 ? 'textarea'
                 : 'text'
       "
-      :rows="field.kind === 'textarea' ? 3 : undefined"
+      :rows="field.kind === 'textarea' ? field.rows || 3 : undefined"
       :readonly="field.readonly"
       :disable="field.disabled"
       :min="field.min"
