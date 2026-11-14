@@ -164,7 +164,10 @@ Atualização: 13/11/2026. Este é o índice desta revisão ampla. Evidências a
 - [x] Testes isolados de navegador: 107 linhas em duas páginas, última alteração acessível, falha de conteúdo com 107 linhas preservadas, falha da página 2 com zero linhas parciais, retry 1/2/1/2 e vazio real.
 - [x] Local integrado: arquivado COM-BB0889A7 retorna seis alterações e agora as seis aparecem, inclusive a criação que ficava cortada.
 - [x] Lint, build, diff da entrega e 297 testes locais passaram (289 versionados; 8 do estudo futuro preservados fora da entrega).
-- [ ] Confirmar deploy e retestar histórico real no Admin publicado.
+- [x] Publicado em c7b3542 e bcd78ba; [deploy final 43602825718 aprovado](https://github.com/Statregy-Analytics/strategy-control/actions/runs/43602825718).
+- [x] Homologação: seis alterações do arquivado COM-BB0889A7 exibidas, incluindo Criação; Salvar permanece desabilitado. Textos longos quebram na quarta coluna: largura e scroll da tabela ambos 894 px no desktop, sem excesso horizontal da página.
+- [x] Janela estreita local: rolagem contida na tabela (620 px dentro da seção), sem alterar as quatro colunas. Testes de 107 registros/falhas/retentativa foram isolados, sem dados fictícios no bundle e sem escrita na API.
+- Evidência: C:/Users/jlbnu/.codex/visualizations/2026/11/13/01a1d51a-ae33-79d1-87aa-854dbd4884dc/admin-publication-history-complete.jpg.
 
 **Backend/designer:** nenhum novo bloqueio identificado neste cenário. Paginação, corte da tabela e isolamento eram correções do frontend. Persistem as dependências editoriais relacionadas acima.
 **Referências:** CO02/cards de redatores permanece pendente de recuperação do contexto detalhado; o cache de ferramentas anterior não sobreviveu à retomada. Não foi recriado um desenho por aproximação, nem aberta nova consulta ao Figma nesta rodada. Essa lacuna não é bug do backend.
