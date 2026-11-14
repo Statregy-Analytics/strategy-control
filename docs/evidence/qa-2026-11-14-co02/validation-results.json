@@ -1,0 +1,50 @@
+{
+  "date": "2026-11-14",
+  "commit": "6143e32",
+  "deployment": "https://github.com/Statregy-Analytics/strategy-control/actions/runs/43604671622",
+  "checks": {
+    "lint": "passed",
+    "build": "passed",
+    "localTests": 297,
+    "versionedTests": 289,
+    "diffCheck": "passed"
+  },
+  "isolated": {
+    "fictitiousPropsOnly": true,
+    "desktopWidth": 2048,
+    "columns": 3,
+    "cardWidth": 565.3,
+    "cardHeight": 274.4,
+    "avatarSize": 64,
+    "initialFontSize": 20,
+    "menuIconSize": 16,
+    "tabletWidth": 1280,
+    "tabletColumns": 2,
+    "mobileWidth": 390,
+    "mobileColumns": 1,
+    "externalOverflow": false,
+    "zeroCountPreserved": true,
+    "nullCountUnavailable": true,
+    "unknownStatusNotConvertedToActive": true,
+    "brokenPhotoFallsBack": true,
+    "validPhotoDecoded": true,
+    "htmlEscaped": true,
+    "noAccordions": true,
+    "menuEditEmitsCorrectRecord": true,
+    "escapeClosesMenu": true,
+    "emptyAndUnavailableHideStaleCards": true
+  },
+  "published": {
+    "tabToolbarAbsent": true,
+    "fictitiousCards": 0,
+    "unavailableState": true,
+    "newAuthorDialogOpensAndCloses": true,
+    "contentMenuOpens": true,
+    "archivedContentHistoryRows": 6,
+    "apiWritesPerformed": false
+  },
+  "api": {
+    "openApiUrl": "https://strategyanalytics.codebiz.com.br/openapi/v1.json",
+    "authorRoutesFound": []
+  }
+}

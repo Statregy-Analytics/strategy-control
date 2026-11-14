@@ -182,7 +182,9 @@ Atualização: 13/11/2026. Este é o índice desta revisão ampla. Evidências a
 - [x] Responsividade: 2048 px com três colunas, 1280 px com duas e 390 px com uma; sem overflow externo. Menu compartilhado de Comunicados continua abrindo Abrir/Editar.
 - [x] Local integrado: aba Redatores sem busca/filtros de conteúdo e sem dados fictícios; Novo Redator abre o CO07 e fecha normalmente.
 - [x] Lint/build/diff da entrega e 297 testes locais aprovados (289 versionados e 8 do estudo preexistente fora desta entrega). Detector do card: zero antipadrões; avisos consultivos do DESIGN.md antigo preservam as definições explícitas do Figma.
-- [ ] Confirmar deploy e retestar a aba publicada.
+- [x] Publicado em 6143e32; [deploy 43604671622 aprovado](https://github.com/Statregy-Analytics/strategy-control/actions/runs/43604671622).
+- [x] Homologação: Redatores sem toolbar de conteúdo, zero cards fictícios e Consulta indisponível preservada; Novo Redator abre/fecha CO07. Conteúdos mantém busca/filtros próprios; menu compartilhado abre Abrir/Editar e o arquivado mantém seis alterações reais.
+- [x] Referência e resultados arquivados em docs/evidence/qa-2026-11-14-co02. A referência deixou de ser dependência; leitura/gravação integrada de redatores continua bloqueada pela API.
 
 **Backend:** Swagger público consultado novamente em 14/11 (/openapi/v1.json): sem rotas de autores/redatores. Faltam consulta/identificação, foto, função/atribuição, contagem, status, textos de perfil e gravação/edição. O componente usa props e não assume um DTO HTTP novo. A aba publicada permanece com Consulta indisponível até haver integração; não há pessoas de exemplo no bundle.
 **Designer:** o CO02 não detalha o menu aberto. Preservado apenas Editar já existente; nenhum Arquivar/Excluir/Ativar foi criado. A edição integrada continua dependente da API e do fluxo de edição aprovado, sem reutilizar o cadastro vazio.
