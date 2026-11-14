@@ -221,6 +221,9 @@ main {
 .author-fields .workspace-wide {
   grid-column: 1/-1;
 }
+.author-dialog :deep(.LabelForm > span) {
+  font-weight: 600 !important;
+}
 .author-dialog :deep(.LabelForm) {
   min-width: 0;
 }

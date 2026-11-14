@@ -540,6 +540,9 @@ onScopeDispose(() => {
   font-size: 14px;
   font-weight: 600;
 }
+.publication-tabs :deep(.q-tab__label) {
+  font-weight: 600;
+}
 .publication-tabs :deep(.q-tab--active) {
   color: #2b7fff;
 }
