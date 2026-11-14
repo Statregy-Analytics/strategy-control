@@ -1,0 +1,67 @@
+{
+  "date": "2026-11-14",
+  "frame": "1484:83540",
+  "deployedCommit": "bdd76b1d9052cda48e2b19203baec3bb303e4848",
+  "deploy": "https://github.com/Statregy-Analytics/strategy-control/actions/runs/43608770289",
+  "deployConclusion": "success",
+  "reference": {
+    "recoveredMissingContexts": 19,
+    "totalCompleteChildContexts": 69,
+    "remainingFailedChildContexts": 0,
+    "groups": 8,
+    "indicatorRows": 58,
+    "prototypeTargetsForChartAndDetails": []
+  },
+  "checks": {
+    "lint": "passed",
+    "build": "passed",
+    "scopedDiffCheck": "passed",
+    "localTests": { "passed": 300, "versioned": 292, "preexistingUntrackedStudyTests": 8 },
+    "isolatedPopulatedTable": {
+      "periods": 12,
+      "columns": 13,
+      "groups": 8,
+      "indicatorRows": 58,
+      "valuesSource": "Figma examples in temporary fixture, not production"
+    },
+    "isolatedDetailEvent": {
+      "clickedPeriod": "01/05/2026",
+      "emittedId": "0",
+      "integratedDetailRequest": false
+    },
+    "isolatedNoPeriods": { "headerColumns": 2, "unavailableCells": 58, "detailButtons": 0 },
+    "isolatedLongText": {
+      "characters": 515,
+      "cellWidth": 160,
+      "cellHeight": 336.8,
+      "wrapped": true
+    },
+    "isolatedKeyboardHorizontalScroll": { "scrollLeft": 40, "firstColumnRemainedVisible": true },
+    "publishedRealRecord": "Quant Core",
+    "publishedGroups": 8,
+    "publishedIndicatorRows": 58,
+    "publishedUnavailableCells": 58,
+    "publishedDataHeaders": ["Indicador / Parâmetro", "—"],
+    "publishedDisabledDataDependentControls": 13,
+    "publishedTableChartSwitch": "passed; source remains unavailable",
+    "publishedReturnPreservesTableAnd7D": true,
+    "publishedReturnFocus": "Ver histórico completo",
+    "publishedDesktop": { "viewport": 1280, "documentWidth": 1265 },
+    "publishedMobile": {
+      "viewport": 390,
+      "documentWidth": 375,
+      "tableViewport": 342,
+      "tableContentWidth": 360
+    },
+    "publishedStaticAssets": { "count": 4, "allLoaded": true, "width": 16, "height": 16 },
+    "publishedConsoleErrorsAndWarnings": 0,
+    "backendWrites": 0,
+    "temporaryFixtureFilesRemoved": true
+  },
+  "frameTableImplemented": true,
+  "fullOperationalFlowHomologated": false,
+  "remaining": {
+    "backend": "Operational series, aggregation, per-update details, CSV/PDF export contracts absent from published OpenAPI reviewed on this date.",
+    "design": "Opened populated chart and detailed-updates compositions not obtained; the LG09 buttons and root frame have no prototype targets. No extra screens were invented."
+  }
+}
