@@ -1,0 +1,34 @@
+{
+  "date": "2026-11-14",
+  "frame": "1484:83540",
+  "deployedCommit": "40fb41dfb5fac0531f5d06474ee46c504ebd943c",
+  "deploy": "https://github.com/Statregy-Analytics/strategy-control/actions/runs/43606382875",
+  "deployConclusion": "success",
+  "url": "https://admin.strategyanalytics.com.br/logics",
+  "record": "Quant Core",
+  "checks": {
+    "lint": "passed",
+    "build": "passed",
+    "localTests": { "passed": 297, "versioned": 289, "preexistingUntrackedStudyTests": 8 },
+    "scopedDiffCheck": "passed",
+    "openHistoryFromRealCatalog": "passed locally and in published Admin",
+    "tableAndChartUnavailableStates": "passed locally and in published Admin",
+    "filtersAndExportsDisabledWithoutOperationalSource": 13,
+    "returnPreservesTableAnd7D": "passed locally and in published Admin",
+    "returnFocus": "Ver histórico completo",
+    "returnPreservesEditMode": "passed locally and in published Admin; unchanged Save remains disabled",
+    "writesPerformed": 0,
+    "publishedDesktop": { "width": 1280, "documentWidth": 1280 },
+    "publishedMobile": { "width": 390, "documentWidth": 390 },
+    "publishedHeading": { "fontSize": "18px", "color": "rgb(255, 255, 255)" },
+    "staticAssets": { "count": 4, "allLoaded": true, "renderedWidth": 16, "renderedHeight": 16 },
+    "publishedConsoleErrorsAndWarnings": 0
+  },
+  "notValidatedOrDelivered": [
+    "Full populated table: 19 requested child design contexts refused by Figma plan limit, including date header and final blocks.",
+    "Operational source, server aggregation, per-update details and CSV/PDF export: no documented endpoint in published OpenAPI.",
+    "Populated graph and drill-down: sufficient design context and API still required.",
+    "An empty operational history was not confirmed; current UI states source unavailable. No loading/error/retry was simulated for a nonexistent history request. Existing catalog resource states remain unchanged."
+  ],
+  "completeLG09": false
+}

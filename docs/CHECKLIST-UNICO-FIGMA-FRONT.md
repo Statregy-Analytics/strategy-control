@@ -6,7 +6,7 @@ Atualização: 14/11/2026. Este é o índice desta revisão ampla. Evidências a
 
 - [ ] Todos os frames/estados abaixo comparados visualmente, inclusive erro, vazio e retorno.
 - [ ] Fluxos de escrita e leitura integrados testados com dados fictícios.
-- [x] Admin: lint e build aprovados; 290 testes locais passaram (incluem 8 testes de estudo já existentes no worktree; 282 versionados nesta entrega).
+- [x] Admin: lint e build aprovados; 297 testes locais passaram (incluem 8 testes de estudo já existentes no worktree; 289 versionados na publicação atual).
 - [ ] Reexecutar os checks após concluir as demais telas; Área do Cliente ainda não alterada nesta rodada.
 - [ ] Deploy confirmado e testes repetidos nas URLs publicadas.
 - [x] Pendências de frontend separadas das pendências reais da API, do designer e da limitação de consulta ao Figma.
@@ -18,7 +18,8 @@ Atualização: 14/11/2026. Este é o índice desta revisão ampla. Evidências a
 - [x] Retorno preserva o motor, o modo de edição e o componente de performance montado. Teste local alterando para Tabela/7D, abrindo o histórico e voltando preservou ambas as opções; foco retorna ao botão que abriu o histórico.
 - [x] Estados reais sem fonte operacional: Tabela e Gráfico mostram indisponibilidade; períodos, granularidades e CSV/PDF ficam desabilitados. Não foi considerado histórico vazio confirmado, nem foram geradas séries de exemplo ou usados eventos de auditoria CRUD como atualizações do índice.
 - [x] Revisão visual local em 1280 px e 390 px, sem excesso horizontal; quatro SVGs do cabeçalho carregados em seus slots, todos em 16 × 16 px. Corrigida a herança global que alterava a fonte do título; conferir também na publicação.
-- [ ] Confirmar deploy e repetir abertura/retorno/visualizações no Admin publicado.
+- [x] Publicado em `40fb41d`; [deploy 43606382875 aprovado](https://github.com/Statregy-Analytics/strategy-control/actions/runs/43606382875). Quant Core abriu pela listagem real; Tabela/Gráfico, retorno com Tabela/7D preservados, foco no botão de origem e retorno ao modo Editar passaram no Admin publicado. Nenhuma alteração de motor foi gravada.
+- [x] Revisão publicada em 1280 px e 390 px, sem excesso horizontal. Título branco em 18 px; quatro SVGs carregados em 16 × 16 px; 13 controles dependentes de dados desabilitados; console sem erros/avisos no reteste. Evidências: `published-desktop.png`, `published-mobile.png` e `validation-results.json` na pasta desta rodada.
 - [ ] Concluir tabela completa, detalhes por atualização e validação com série real. **LG09 não está entregue integralmente.**
 
 **API — bloqueio confirmado na especificação publicada em 14/11:** existem apenas `/admin/contracts/catalog/engines`, `/admin/contracts/catalog/engines/{engineId}` e `/admin/contracts/{contractId}/engines`. `EngineResponse` traz identificação/descrição/selecionabilidade; não fornece histórico operacional, agregação por período/granularidade, parâmetros/travas/impacto por atualização ou exportações CSV/PDF. Evidência: [api-review.json](evidence/qa-2026-11-14-lg09/api-review.json). Não foi inventado endpoint para testar 404.
@@ -354,7 +355,7 @@ Legenda: **Preparado / revisão pendente** = há código novo, mas a validação
 | [1484:82147](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-82147) | LG07 · EC · Simulação ao lado · PAINEL DE ESTADOS DO COMPONENTE · DESIGN GLASS                | Preparado / revisão pendente                                             |
 | [1484:83473](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-83473) | LG08 · MD · Validação da lógica · MODAL ISOLADO · DESIGN GLASS                                | Composto; estados testados — ver complemento 14/11 |
 | [1484:83539](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-83539) | F04 · Estados complementares do motor · Histórico completo + configuração minimizada          | Revalidar                                                                |
-| [1484:83540](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-83540) | LG09 · SP · Histórico completo do motor · SUBPÁGINA · DESIGN GLASS                            | Preparado / revisão pendente                                             |
+| [1484:83540](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-83540) | LG09 · SP · Histórico completo do motor · SUBPÁGINA · DESIGN GLASS                            | Cabeçalho/retorno publicados; tabela e API pendentes |
 | [1484:85344](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-85344) | LG11 · EC · Configuração do motor minimizada · PAINEL DE ESTADOS DO COMPONENTE · DESIGN GLASS | Preparado / revisão pendente                                             |
 | [1484:85374](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-85374) | F01 · Extrato + Solicitações + Nova transação                                                 | Revalidar                                                                |
 | [1484:85378](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-85378) | P01 · V01 · Transações · Extrato global + Solicitações                                        | Revalidar                                                                |
