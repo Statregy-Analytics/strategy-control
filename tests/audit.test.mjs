@@ -145,3 +145,76 @@ test('CSV export preserves quoted multiline text, masks values and uses the same
     "'=SUM(1)",
   )
 })
+
+test('record history reads every page with a fixed record scope and retains more than five rows', async () => {
+  const calls = []
+  const service = createAuditService({
+    read: async (path, params) => {
+      calls.push({ path, params })
+      return {
+        success: true,
+        data: Array.from({ length: params.Page === 1 ? 100 : 7 }, (_, i) => ({
+          id: String((params.Page - 1) * 100 + i),
+        })),
+        pagination: { totalItems: 107, totalPages: 2 },
+      }
+    },
+  })
+  const result = await service.history('Announcement', id)
+  assert.equal(result.length, 107)
+  assert.deepEqual(
+    calls.map((x) => x.params.Page),
+    [1, 2],
+  )
+  assert.ok(
+    calls.every(
+      (x) =>
+        x.path === 'admin/audit/changes' &&
+        x.params.ResourceType === 'Announcement' &&
+        x.params.ResourceId === id &&
+        x.params.PageSize === 100,
+    ),
+  )
+})
+test('record history rejects a partial result and a retry starts at page one', async () => {
+  let fail = true
+  const calls = []
+  const service = createAuditService({
+    read: async (_, params) => {
+      calls.push(params.Page)
+      if (fail && params.Page === 2) throw new Error('offline')
+      return { data: [{ id: String(params.Page) }], pagination: { totalItems: 2, totalPages: 2 } }
+    },
+  })
+  await assert.rejects(service.history('Announcement', id), /offline/)
+  fail = false
+  assert.equal((await service.history('Announcement', id)).length, 2)
+  assert.deepEqual(calls, [1, 2, 1, 2])
+})
+test('expired record history stops before requesting the next page', async () => {
+  let active = true,
+    calls = 0
+  const service = createAuditService({
+    assertCurrent: () => {
+      if (!active) throw Error('expired')
+    },
+    read: async () => {
+      calls++
+      active = false
+      return { data: [{ id: 'a' }], pagination: { totalItems: 2, totalPages: 2 } }
+    },
+  })
+  await assert.rejects(service.history('Announcement', id), /expired/)
+  assert.equal(calls, 1)
+})
+test('record history never falls back to a global audit query for an invalid scope', async () => {
+  let called = false
+  const service = createAuditService({
+    read: async () => {
+      called = true
+    },
+  })
+  await assert.rejects(service.history('Announcement', ''), /inválido/)
+  await assert.rejects(service.history('', id), /inválido/)
+  assert.equal(called, false)
+})

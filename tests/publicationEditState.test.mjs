@@ -28,3 +28,14 @@ test('archive and in-flight writes prevent edits while a new local draft remains
     false,
   )
 })
+
+test('a failed refresh keeps a previously loaded publication locked', () => {
+  assert.equal(
+    publicationEditLocked({
+      recordId: 'A',
+      source: { id: 'A', status: 'Draft' },
+      error: 'offline',
+    }),
+    true,
+  )
+})

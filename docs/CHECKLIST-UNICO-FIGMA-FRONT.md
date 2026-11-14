@@ -155,6 +155,20 @@ Atualização: 13/11/2026. Este é o índice desta revisão ampla. Evidências a
 **Designer:** escolha de data/hora de Programar e estado aberto do editor de mídia/H2/H3 continuam sem contexto completo. Não foram adicionados campos.
 **Limite:** Rascunho/Em Revisão e status desconhecido foram validados por props isoladas, sem publicar comunicados ou gerar notificações.
 
+## Comunicação — histórico completo e falhas independentes (14/11)
+
+- [x] Corrigido corte de frontend: Histórico de Alterações exibia só cinco linhas com paginação oculta. Agora apresenta todas as alterações carregadas, nas mesmas quatro colunas do EC02.
+- [x] Consulta percorre todas as páginas da auditoria com ResourceType/ResourceId fixos. Não faz consulta global se o ID do registro for inválido.
+- [x] Erro na segunda página não expõe histórico parcial; Tentar novamente reinicia na primeira página. Resposta de consulta substituída/registro fechado é descartada.
+- [x] Falha no conteúdo não esconde histórico que carregou; falha no histórico não esconde o conteúdo. Reconsulta com falha mantém Salvar/Publicar bloqueados, sem reutilizar uma fonte antiga.
+- [x] Testes isolados de navegador: 107 linhas em duas páginas, última alteração acessível, falha de conteúdo com 107 linhas preservadas, falha da página 2 com zero linhas parciais, retry 1/2/1/2 e vazio real.
+- [x] Local integrado: arquivado COM-BB0889A7 retorna seis alterações e agora as seis aparecem, inclusive a criação que ficava cortada.
+- [x] Lint, build, diff da entrega e 297 testes locais passaram (289 versionados; 8 do estudo futuro preservados fora da entrega).
+- [ ] Confirmar deploy e retestar histórico real no Admin publicado.
+
+**Backend/designer:** nenhum novo bloqueio identificado neste cenário. Paginação, corte da tabela e isolamento eram correções do frontend. Persistem as dependências editoriais relacionadas acima.
+**Referências:** CO02/cards de redatores permanece pendente de recuperação do contexto detalhado; o cache de ferramentas anterior não sobreviveu à retomada. Não foi recriado um desenho por aproximação, nem aberta nova consulta ao Figma nesta rodada. Essa lacuna não é bug do backend.
+
 ## Ainda é trabalho de frontend
 
 - [ ] Concluir a revisão integral LG05/LG06/LG07/LG09; estados básicos de gráfico, tabela e disposição da simulação já preparados e testados, histórico completo ainda pendente.

@@ -244,9 +244,13 @@ export function projectedFinalIndex(form) {
     ? Number(form.initialIndex) * (1 + Number(form.target) / 100)
     : null
 }
-export function publicationEditLocked({ source, recordId, loading, busy }) {
+export function publicationEditLocked({ source, recordId, loading, busy, error }) {
   return Boolean(
-    busy || loading || source?.status === 'Archived' || (recordId && source?.id !== recordId),
+    busy ||
+    loading ||
+    error ||
+    source?.status === 'Archived' ||
+    (recordId && source?.id !== recordId),
   )
 }
 export function validatePublication(form, kind) {

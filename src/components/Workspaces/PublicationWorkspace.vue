@@ -266,18 +266,20 @@
             />
           </aside>
         </div>
-        <profile-section v-if="recordId" title="Histórico de Alterações"
-          ><resource-state :state="history.state" @retry="loadHistory"
-            ><q-table
-              dark
-              flat
-              dense
-              :rows="history.state.data || []"
-              :columns="historyColumns"
-              row-key="id"
-              hide-pagination
-              no-data-label="Nenhuma alteração registrada." /></resource-state></profile-section
-      ></resource-state>
+      </resource-state>
+      <profile-section v-if="recordId" title="Histórico de Alterações"
+        ><resource-state :state="history.state" @retry="loadHistory"
+          ><q-table
+            dark
+            flat
+            dense
+            :rows="history.state.data || []"
+            :columns="historyColumns"
+            row-key="id"
+            hide-pagination
+            :pagination="{ rowsPerPage: 0 }"
+            no-data-label="Nenhuma alteração registrada." /></resource-state
+      ></profile-section>
     </main>
     <author-dialog v-if="authorOpen" @close="authorOpen = false" />
     <publication-preview
@@ -304,6 +306,7 @@ import PublicationPreview from './PublicationPreview.vue'
 import PublicationStatus from './PublicationStatus.vue'
 import { financeGet, financeWrite, columns } from 'src/services/financeService'
 import { useFinanceResource } from 'src/composables/useFinanceResource'
+import { createAuditService } from 'src/services/auditService'
 import {
   announcementTextPayload,
   validatePublication,
@@ -351,7 +354,9 @@ const detail = useFinanceResource(),
   coverUrl = ref(''),
   pdfUrl = ref(''),
   audioUrl = ref('')
-let active = true
+let active = true,
+  detailRevision = 0,
+  historyRevision = 0
 const extras = () =>
   Object.fromEntries(
     Object.entries(form.value).filter(([k]) => !['title', 'summary', 'body'].includes(k)),
@@ -362,6 +367,7 @@ const dirty = computed(() => JSON.stringify(form.value) !== baseline.value),
       source: source.value,
       recordId: props.recordId,
       loading: detail.state.loading,
+      error: detail.state.error,
       busy: busy.value,
     }),
   )
@@ -414,8 +420,14 @@ async function load() {
     baselineExtras.value = JSON.stringify(extras())
     return
   }
+  const revision = ++detailRevision
+  source.value = null
   await detail.load(async () => {
-    const d = (await financeGet('admin/announcements/' + props.recordId)).data
+    const response = await financeGet('admin/announcements/' + props.recordId)
+    if (!active || revision !== detailRevision) throw new Error('Consulta substituída.')
+    const d = response?.data
+    if (!d || d.id !== props.recordId || typeof d.title !== 'string' || typeof d.body !== 'string')
+      throw new Error('Publicação indisponível.')
     if (active) {
       source.value = d
       form.value.title = d.title
@@ -428,16 +440,14 @@ async function load() {
   })
 }
 async function loadHistory() {
-  await history.load(
-    async () =>
-      (
-        await financeGet('admin/audit/changes', {
-          ResourceType: 'Announcement',
-          ResourceId: props.recordId,
-          PageSize: 100,
-        })
-      ).data || [],
-  )
+  const revision = ++historyRevision
+  const reader = createAuditService({
+    read: financeGet,
+    assertCurrent: () => {
+      if (!active || revision !== historyRevision) throw new Error('Consulta substituída.')
+    },
+  })
+  await history.load(() => reader.history('Announcement', props.recordId))
 }
 async function save(publish) {
   if (busy.value || locked.value) return
@@ -483,6 +493,8 @@ load()
 if (props.recordId) loadHistory()
 onScopeDispose(() => {
   active = false
+  detailRevision++
+  historyRevision++
   detail.reset()
   history.reset()
   for (const u of [coverUrl, pdfUrl, audioUrl]) if (u.value) URL.revokeObjectURL(u.value)

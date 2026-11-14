@@ -78,6 +78,14 @@ export function createAuditService({ read, readCsv, assertCurrent = () => {} }) 
     return [...rows.values()]
   }
   return {
+    async history(resourceType, resourceId) {
+      if (
+        !resourceType ||
+        !/^[a-f\d]{8}-[a-f\d]{4}-[a-f\d]{4}-[a-f\d]{4}-[a-f\d]{12}$/i.test(resourceId || '')
+      )
+        throw new Error('Registro de auditoria inválido.')
+      return all({ ResourceType: resourceType, ResourceId: resourceId })
+    },
     async list(filters, page = 1, pageSize = 10) {
       const params = auditParams(filters)
       if (filters.action === 'deletion') {
