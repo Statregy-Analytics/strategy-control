@@ -1,4 +1,5 @@
 import { auditAction } from './auditModel.js'
+import { probabilityState } from './logicProbabilityModel.js'
 
 export const workspaceTypes = {
   logic: {
@@ -165,13 +166,7 @@ export function validateLogic(form) {
   )
     return 'Revise o índice inicial e o alvo do ciclo.'
   if (!form.interval) return 'Selecione o intervalo operacional.'
-  if (
-    [form.positive, form.negative].some(
-      (v) =>
-        v == null || v === '' || !Number.isFinite(Number(v)) || Number(v) < 0 || Number(v) > 100,
-    ) ||
-    Math.abs(Number(form.positive) + Number(form.negative) - 100) > 0.000001
-  )
+  if (probabilityState(form.positive, form.negative).valid !== true)
     return 'As chances positiva e negativa devem somar 100%.'
   for (const [lower, upper] of [
     [form.dailyFloor, form.dailyCeiling],
@@ -337,10 +332,7 @@ export function logicRuleResults(form) {
     },
     {
       label: 'Chance positiva + chance negativa = 100%',
-      valid:
-        [form.positive, form.negative].every(
-          (v) => finite(v) && Number(v) >= 0 && Number(v) <= 100,
-        ) && Math.abs(Number(form.positive) + Number(form.negative) - 100) < 0.000001,
+      valid: probabilityState(form.positive, form.negative).valid === true,
     },
   ]
 }

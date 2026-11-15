@@ -6,10 +6,26 @@ Atualização: 15/11/2026. Este é o índice desta revisão ampla. Evidências a
 
 - [ ] Todos os frames/estados abaixo comparados visualmente, inclusive erro, vazio e retorno.
 - [ ] Fluxos de escrita e leitura integrados testados com dados fictícios.
-- [x] Admin: lint e build aprovados; 309 testes locais passaram (incluem 8 testes de estudo já existentes no worktree; 301 versionados neste complemento).
+- [x] Admin: lint e build aprovados; 312 testes locais passaram (incluem 8 testes de estudo já existentes no worktree; 304 versionados neste complemento).
 - [ ] Reexecutar os checks após concluir as demais telas; Área do Cliente ainda não alterada nesta rodada.
 - [ ] Deploy confirmado e testes repetidos nas URLs publicadas.
 - [x] Pendências de frontend separadas das pendências reais da API, do designer e da limitação de consulta ao Figma.
+
+## EC04.1 / EC04.2 — probabilidade direcional válida e inválida (15/11)
+
+- [x] Referências já recuperadas 1484:79712 (50/50 válido) e 1484:79755 (60/50 inválido) reconfirmadas e arquivadas com contextos completos, screenshots e dois SVGs originais em [evidence/qa-2026-11-15-probability](evidence/qa-2026-11-15-probability).
+- [x] Composição do desenho: Gauge, dois campos existentes com sufixo %, Barra Visual 100%, segmentos Alta/Baixa, soma e caixa de regra. Chance Negativa permanece bloqueada como nos frames e não é recalculada ao digitar a positiva. Sem novo campo ou ação.
+- [x] Reutilizados ProfileSection, LabelForm e QInput. Inputs de 36 px, barra de 32 px e Gauge de 16 px; painel isolado 798,39 × 408 px. Estado 50/50 mostra 100% em verde; 60/50 preserva os dois valores, mostra 110% e regra violada em vermelho. Só as larguras gráficas são normalizadas: 60/110 e 50/110; os valores de negócio não mudam.
+- [x] Valores ausentes/incompletos não viram zero, barra simulada ou soma vermelha. Ambos indisponíveis no Quant Core mostram soma neutra; preencher só a positiva não inventa a negativa. Limpeza retorna a indisponível, correção para 50/50 remove erro e valores fora de 0–100 recebem erro específico dentro da mesma caixa de regra.
+- [x] Renderização, validação de salvar e modal compartilham a mesma decisão, com a tolerância numérica já existente. Valores emitidos são número/null; editar e restaurar o valor original volta a desabilitar Salvar Alterações, sem falso estado alterado.
+- [x] Local integrado: leitura do Quant Core sem dados; edição incompleta e Cancelar; novo motor 50/50 → 60/50 → 101/50 → campo vazio → 50/50; negativo bloqueado, ArrowUp/ArrowDown 50 → 51 → 50 e digitação decimal 0.5 preservada. Rascunhos cancelados; nenhuma gravação.
+- [x] Isolado: 0/100 e 100/0 preservam zero e ocupam corretamente a barra; 33,3/66,7 soma 100%; leitura bloqueia os campos e ausência de dados não exibe alerta. Cenários do desenho arquivados; arquivos temporários removidos.
+- [x] Revisão móvel em 390 px: campos em uma coluna, barra de 32 px, painel real de 343 px/530 px de altura e página de 375 px sem excesso horizontal. Isolado: página de 390 px e painel de 342 × 530 px. Exemplos isolados não representam dados retornados pela API.
+- [ ] Checks finais, publicação e reteste em homologação.
+
+**API:** reconsulta da OpenAPI em 15/11 confirmou que EngineResponse não contém probabilidades/configuração operacional e que POST/PATCH do catálogo só aceitam metadados. Falta projeção/consulta e gravação operacional para integrar as probabilidades; o frontend não manda esses campos ao catálogo nem completa a Chance Negativa com um valor inventado. api-review.json preserva schemas/operações. Estados 50/50 e 60/50 foram testados em rascunhos e isolamento; não declarar gravação operacional integrada.
+
+**Designer:** nenhum novo bloqueio dos dois estados consultados. Chance Negativa bloqueada e 60/50 inválido seguem os frames; não foi presumida regra de complemento automático. As demais seções do motor continuam com revisão própria no inventário.
 
 ## EC05.1 / EC05.2 — zona de amortecimento (15/11)
 
@@ -457,8 +473,8 @@ Legenda: **Preparado / revisão pendente** = há código novo, mas a validação
 | [1484:79457](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-79457) | EC02.2 · Preview · Delta-Green                                                                | Preparado / revisão pendente                                             |
 | [1484:79553](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-79553) | EC02.3 · Preview · Atlas-Orange                                                               | Preparado / revisão pendente                                             |
 | [1484:79652](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-79652) | EC03 · Frequência · data e hora preenchidas                                                   | Preparado / revisão pendente                                             |
-| [1484:79712](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-79712) | EC04.1 · Probabilidade · 50/50 · soma válida                                                  | Preparado / revisão pendente                                             |
-| [1484:79755](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-79755) | EC04.2 · Probabilidade · 60/50 · soma 110% inválida                                           | Preparado / revisão pendente                                             |
+| [1484:79712](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-79712) | EC04.1 · Probabilidade · 50/50 · soma válida                                                  | Estados compostos/testados; consulta e gravação dependem da API                                             |
+| [1484:79755](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-79755) | EC04.2 · Probabilidade · 60/50 · soma 110% inválida                                           | Estados compostos/testados; consulta e gravação dependem da API                                             |
 | [1484:79802](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-79802) | EC05.1 · Zona de amortecimento · desativada                                                   | Composição/estados testados; projeção e gravação dependem da API                                             |
 | [1484:79819](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-79819) | EC05.2 · Zona de amortecimento · ativada + tabela                                             | Composição/estados testados; projeção e gravação dependem da API                                             |
 | [1484:79883](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-79883) | EC06 · Limites operacionais · regra contornada                                                | Preparado / revisão pendente                                             |

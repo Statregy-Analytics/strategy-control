@@ -1,0 +1,96 @@
+{
+  "date": "2026-11-15",
+  "frames": [
+    "1484:79712",
+    "1484:79755"
+  ],
+  "local": {
+    "readonlyRecord": "Quant Core",
+    "readonly": {
+      "fieldsEmptyAndDisabled": true,
+      "alerts": 0,
+      "drawnBars": 0,
+      "total": "Indisponível",
+      "totalColor": "rgba(255, 255, 255, 0.72)"
+    },
+    "draft": {
+      "negativeDisabled": true,
+      "validValues": [
+        50,
+        50
+      ],
+      "validTotal": 100,
+      "invalidValues": [
+        60,
+        50
+      ],
+      "invalidTotal": 110,
+      "positiveGraphicRatio": 0.5454494602002573,
+      "rangeErrorTested": true,
+      "clearRemovesFalseError": true,
+      "correctionRemovesError": true,
+      "arrowKeys": [
+        50,
+        51,
+        50
+      ],
+      "decimalTyping": "0.5",
+      "cancelled": true
+    },
+    "dirtySaveEnabled": [
+      false,
+      true,
+      false
+    ],
+    "desktop": {
+      "viewport": 1280,
+      "sectionWidth": 608.65625,
+      "sectionHeight": 408,
+      "inputHeights": [
+        36,
+        36
+      ],
+      "barHeight": 32
+    },
+    "mobile": {
+      "viewport": 390,
+      "documentWidth": 375,
+      "sectionWidth": 343,
+      "sectionHeight": 530,
+      "negativeDisabled": true
+    }
+  },
+  "fixture": {
+    "width": 798.390625,
+    "height": 408,
+    "inputHeights": [
+      36,
+      36
+    ],
+    "barHeight": 32,
+    "zeroHighWidth": 0,
+    "zeroLowWidth": 0,
+    "decimalValues": [
+      33.3,
+      66.7
+    ],
+    "decimalTotal": 100,
+    "readonlyFieldsDisabled": true,
+    "unknownAlerts": 0,
+    "unknownBars": 0,
+    "mobile": {
+      "viewport": 390,
+      "documentWidth": 390,
+      "sectionWidth": 342,
+      "sectionHeight": 530,
+      "oneColumn": true
+    },
+    "removed": true
+  },
+  "gaugeDimensions": [
+    16,
+    16
+  ],
+  "operationalWrites": 0,
+  "published": "pending"
+}

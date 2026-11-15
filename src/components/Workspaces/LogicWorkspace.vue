@@ -114,6 +114,12 @@
                 v-model="form.buffer"
                 :disabled="!editing"
               />
+              <logic-probability
+                v-else-if="section.key === 'probability'"
+                v-model:positive="form.positive"
+                :negative="form.negative"
+                :disabled="!editing"
+              />
               <profile-section v-else :title="section.title" :caption="section.caption"
                 ><div class="workspace-form-grid">
                   <template v-for="field in section.fields" :key="field.key"
@@ -124,37 +130,6 @@
                       @update:model-value="form[field.key] = $event"
                   /></template>
                 </div>
-                <template v-if="section.key === 'probability'"
-                  ><div
-                    v-if="form.positive != null && form.negative != null"
-                    class="logic-probability"
-                    :aria-label="
-                      'Chance positiva ' +
-                      form.positive +
-                      '%; chance negativa ' +
-                      form.negative +
-                      '%'
-                    "
-                  >
-                    <span
-                      :style="{
-                        width: Math.max(0, Math.min(100, Number(form.positive) || 0)) + '%',
-                      }"
-                    />
-                  </div>
-                  <p
-                    :class="{
-                      'text-negative': Number(form.positive) + Number(form.negative) !== 100,
-                    }"
-                  >
-                    Soma atual:
-                    {{
-                      form.positive == null || form.negative == null
-                        ? 'Indisponível'
-                        : Number(form.positive) + Number(form.negative) + '%'
-                    }}
-                  </p></template
-                >
                 <p v-if="section.key === 'sovereign'" class="workspace-muted">
                   As bandas e probabilidades controlam o percurso. O fechamento soberano controla o
                   índice final do ciclo trimestral.
@@ -264,6 +239,7 @@ import LogicValidation from './LogicValidation.vue'
 import LogicHistory from './LogicHistory.vue'
 import LogicConfiguration from './LogicConfiguration.vue'
 import LogicDampingZone from './LogicDampingZone.vue'
+import LogicProbability from './LogicProbability.vue'
 import { useFinanceResource } from 'src/composables/useFinanceResource'
 import { financeGet, columns } from 'src/services/financeService'
 import { getPreferenceCatalog } from 'src/services/customerService'
@@ -365,11 +341,7 @@ const sections = computed(() => [
   {
     key: 'probability',
     title: 'Probabilidade Direcional Base',
-    caption: 'Configure a probabilidade de variação positiva ou negativa.',
-    fields: fields([
-      ['positive', 'Chance Positiva (%)', 'number', { min: 0, max: 100 }],
-      ['negative', 'Chance Negativa (%)', 'number', { min: 0, max: 100 }],
-    ]),
+    fields: [],
   },
   {
     key: 'intensity',
@@ -581,17 +553,5 @@ onScopeDispose(() => {
 .logic-existing {
   max-width: 1552px;
   margin: auto;
-}
-.logic-probability {
-  height: 10px;
-  border-radius: 6px;
-  background: rgba(241, 55, 70, 0.65);
-  overflow: hidden;
-  margin-top: 24px;
-}
-.logic-probability span {
-  display: block;
-  height: 100%;
-  background: #4dd495;
 }
 </style>
