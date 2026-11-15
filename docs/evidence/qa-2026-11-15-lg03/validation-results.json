@@ -1,0 +1,85 @@
+{
+  "date": "2026-11-15",
+  "frame": "1484:77198",
+  "codeCommit": "1bfe8e0",
+  "checks": {
+    "lint": "passed",
+    "build": "passed",
+    "tests": {
+      "local": 303,
+      "versioned": 295,
+      "failed": 0
+    },
+    "diff": "delivery paths passed; preexisting swagger trailing whitespace excluded"
+  },
+  "local": {
+    "record": "Quant Core",
+    "description": "Motor quantitativo principal",
+    "keyboard": [
+      "Enter opens",
+      "Space opens",
+      "Escape closes",
+      "Tab closes after grace period"
+    ],
+    "navigation": [
+      "Cards to Lista removes panel",
+      "empty search removes panel",
+      "open logic and return"
+    ],
+    "desktop": {
+      "viewport": 1280,
+      "panelWidth": 430,
+      "panelHeight": 560
+    },
+    "mobile": {
+      "viewport": 390,
+      "documentWidth": 375,
+      "internalScroll": true
+    },
+    "fixture": {
+      "missingDescription": "explicit unavailable",
+      "longDescriptionCharacters": 672,
+      "desktopPanelClientWidth": 418,
+      "desktopPanelContentWidth": 418,
+      "mobileDocumentWidth": 390,
+      "mobileViewportWidth": 390,
+      "removed": true
+    },
+    "console": "preexisting Vue Router next() deprecation warning; no new component error"
+  },
+  "apiWrites": 0,
+  "apiBlocker": "Only engine catalog and contract links published; executive operational data absent.",
+  "published": {
+    "url": "https://admin.strategyanalytics.com.br/logics",
+    "deploy": "https://github.com/Statregy-Analytics/strategy-control/actions/runs/43735702373",
+    "conclusion": "success",
+    "keyboard": [
+      "Enter opens",
+      "Space opens",
+      "Escape closes",
+      "Tab closes",
+      "focused trigger keeps popup open across pointer leave/resize"
+    ],
+    "navigation": [
+      "Cards to Lista removes popup",
+      "empty search removes record and popup",
+      "open Quant Core and return"
+    ],
+    "desktop": {
+      "viewport": 1280,
+      "documentWidth": 1280,
+      "panelWidth": 430,
+      "panelHeight": 560
+    },
+    "mobile": {
+      "viewport": 390,
+      "documentWidth": 375,
+      "panelWidth": 366,
+      "panelHeight": 459,
+      "panelScrollHeight": 558
+    },
+    "console": [],
+    "apiWrites": 0,
+    "viewportReset": true
+  }
+}

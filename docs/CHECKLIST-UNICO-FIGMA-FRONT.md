@@ -19,7 +19,8 @@ Atualização: 15/11/2026. Este é o índice desta revisão ampla. Evidências a
 - [x] Painel de 430 × 560 px no desktop; posição adaptada e rolagem interna na tela pequena. Base escura do glass preserva leitura sobre os dados da tela; título, bordas, espaçamentos e blocos seguem a referência.
 - [x] Local integrado: Quant Core, abertura por Enter/Espaço/clique, Escape, Tab, Cards/Lista, busca sem resultado, abrir o motor e voltar. Nenhuma gravação na API.
 - [x] Isolado: descrição ausente e descrição fictícia de 672 caracteres. Quebra de texto e rolagem interna sem excesso horizontal em 1280/390 px; arquivos temporários removidos. Capturas isoladas não representam dados retornados pelo backend.
-- [ ] Publicação e reteste na URL de homologação.
+- [x] Publicado em 6b2e1b2, com correção de persistência do foco em 1bfe8e0; [deploy 43735702373 aprovado](https://github.com/Statregy-Analytics/strategy-control/actions/runs/43735702373). Homologação: Enter/Espaço/clique, Escape/Tab, troca Cards/Lista, busca vazia, abrir o motor e voltar passaram. Painel permanece aberto enquanto o título tem foco, mesmo após movimentação do ponteiro/redimensionamento.
+- [x] Revisão publicada em 1280/390 px: painel desktop 430 × 560 px, largura móvel 366 px com rolagem interna e página de 375 px sem excesso horizontal. Descrição real preservada; nenhum dado operacional de exemplo. Console publicado sem erros/avisos; zero gravações na API. Evidências: published-desktop.jpg, published-mobile.jpg e validation-results.json.
 
 **API:** OpenAPI reconsultada em 15/11: somente catálogo de motores e vínculos de contrato, sem resumo operacional, performance/série, ciclo, próxima atualização ou fechamento. EngineResponse fornece descrição, mas não os demais campos do LG03. api-review.json preserva paths e schemas publicados. O estado integrado disponível foi testado; o resumo operacional completo continua bloqueado pela API.
 
