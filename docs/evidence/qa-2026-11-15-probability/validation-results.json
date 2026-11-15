@@ -92,5 +92,91 @@
     16
   ],
   "operationalWrites": 0,
-  "published": "pending"
+  "published": {
+    "url": "https://admin.strategyanalytics.com.br/logics?editor=open&id=e99dec56-2b66-4cab-9bb3-12e084834817",
+    "deploy": "https://github.com/Statregy-Analytics/strategy-control/actions/runs/43762160678",
+    "conclusion": "success",
+    "record": "Quant Core",
+    "readonly": {
+      "fieldsEmptyAndDisabled": true,
+      "alerts": 0,
+      "drawnBars": 0,
+      "total": "Indisponível",
+      "color": "rgba(255, 255, 255, 0.72)"
+    },
+    "editing": {
+      "partialPositive": 50,
+      "negativeRemainsEmptyAndDisabled": true,
+      "barNotInvented": true,
+      "LG09ReturnPreservesPositive": true,
+      "dirtySaveEnabled": [
+        false,
+        true,
+        false
+      ],
+      "cancelRestoresUnknown": true
+    },
+    "draft": {
+      "validValues": [
+        50,
+        50
+      ],
+      "validTotal": 100,
+      "invalidValues": [
+        60,
+        50
+      ],
+      "invalidTotal": 110,
+      "negativeRemainsDisabledAndUnchanged": true,
+      "positiveGraphicRatio": 0.5454494602002573,
+      "rangeErrorTested": true,
+      "clearRemovesFalseError": true,
+      "correctionRemovesError": true,
+      "arrowKeys": [
+        50,
+        51,
+        50
+      ],
+      "decimalTyping": "0.5",
+      "cancelled": true,
+      "catalogCountAfterCancel": 1
+    },
+    "desktop": {
+      "viewport": 1280,
+      "inputHeights": [
+        36,
+        36
+      ],
+      "barHeight": 32
+    },
+    "mobile": {
+      "viewport": 390,
+      "documentWidth": 375,
+      "sectionWidth": 343,
+      "sectionHeight": 530,
+      "oneColumn": true,
+      "total": 110
+    },
+    "invalidGauge": {
+      "loaded": true,
+      "width": 16,
+      "height": 16
+    },
+    "console": [],
+    "operationalWrites": 0,
+    "invalidScreenshotIsCancelledDraft": true,
+    "viewportReset": true
+  },
+  "codeCommit": "dac8e2d",
+  "checks": {
+    "lint": "passed",
+    "build": "passed",
+    "tests": {
+      "local": 312,
+      "versioned": 304,
+      "failed": 0
+    },
+    "diff": "delivery paths passed",
+    "detectorAntiPatterns": 0
+  }
 }
