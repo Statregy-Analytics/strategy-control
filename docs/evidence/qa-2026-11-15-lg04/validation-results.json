@@ -71,5 +71,83 @@
     }
   },
   "apiWrites": 0,
-  "published": "pending"
+  "published": {
+    "url": "https://admin.strategyanalytics.com.br/logics",
+    "deploy": "https://github.com/Statregy-Analytics/strategy-control/actions/runs/43752936637",
+    "conclusion": "success",
+    "flows": [
+      "three menus open by click/keyboard",
+      "Escape restores field focus",
+      "status stays Todos after ArrowDown/Enter",
+      "Mais Recentes selected by click",
+      "Mais Antigas selected by keyboard",
+      "Cards/Lista preserve record and selection",
+      "empty search preserves selection",
+      "open logic and return preserves selection"
+    ],
+    "catalogRecords": 1,
+    "relativeMultiRecordOrder": "automated tests; not demonstrable with the single integrated record",
+    "desktop": {
+      "viewport": 1280,
+      "documentWidth": 1280,
+      "statusMenu": {
+        "width": 268,
+        "height": 178,
+        "disabled": 4
+      },
+      "linksMenu": {
+        "width": 258,
+        "height": 114,
+        "disabled": 2
+      },
+      "orderMenu": {
+        "width": 300,
+        "height": 346,
+        "groups": 3,
+        "options": 8,
+        "disabled": 6,
+        "selected": "Mais Antigas"
+      }
+    },
+    "mobile": {
+      "viewport": 390,
+      "documentWidth": 375,
+      "orderMenu": {
+        "x": 46,
+        "right": 346,
+        "width": 300
+      },
+      "statusMenu": {
+        "x": 29,
+        "right": 297,
+        "width": 268
+      },
+      "linksMenu": {
+        "x": 137.328125,
+        "right": 375,
+        "width": 237.671875
+      }
+    },
+    "chevrons": {
+      "count": 3,
+      "loaded": true,
+      "width": 10,
+      "height": 10
+    },
+    "console": [],
+    "apiWrites": 0,
+    "viewportReset": true
+  },
+  "codeCommit": "ed4af51",
+  "checks": {
+    "lint": "passed",
+    "build": "passed",
+    "tests": {
+      "local": 306,
+      "versioned": 298,
+      "failed": 0
+    },
+    "diff": "delivery paths passed",
+    "detectorAntiPatterns": 0
+  }
 }
