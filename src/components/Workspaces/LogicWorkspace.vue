@@ -223,18 +223,26 @@
           </aside>
         </div>
         <template v-if="recordId"
-          ><profile-section
-            title="Papéis Vinculados ao Motor"
-            caption="Papéis possuem valor real. O motor apenas indexa a performance proporcionalmente ao índice de conexão de cada papel."
-            ><q-table
-              dark
-              flat
-              dense
-              :rows="[]"
-              :columns="linkedColumns"
-              hide-pagination
-              no-data-label="Vínculos indisponíveis nesta consulta." /></profile-section
-          ><logic-performance ref="performance" :editing="editing" @history="historyOpen = true" />
+          ><section
+            ref="linksPanel"
+            class="logic-links"
+            tabindex="-1"
+            aria-label="Papéis Vinculados ao Motor"
+          >
+            <profile-section
+              title="Papéis Vinculados ao Motor"
+              caption="Papéis possuem valor real. O motor apenas indexa a performance proporcionalmente ao índice de conexão de cada papel."
+              ><q-table
+                dark
+                flat
+                dense
+                :rows="[]"
+                :columns="linkedColumns"
+                hide-pagination
+                no-data-label="Vínculos indisponíveis nesta consulta."
+            /></profile-section>
+          </section>
+          <logic-performance ref="performance" :editing="editing" @history="historyOpen = true" />
         </template>
       </resource-state>
     </main>
@@ -247,7 +255,7 @@
   </div>
 </template>
 <script setup>
-import { computed, nextTick, onScopeDispose, ref } from 'vue'
+import { computed, nextTick, onScopeDispose, ref, watch } from 'vue'
 import ProfileSection from 'src/components/Entity/ProfileSection.vue'
 import ResourceState from 'src/components/Finance/ResourceState.vue'
 import WorkspaceIcon from './WorkspaceIcon.vue'
@@ -268,9 +276,14 @@ import {
   foldSearch,
   logicIntensityConstraint,
 } from 'src/services/adminWorkspaceModel'
-const props = defineProps({ recordId: { type: String, default: null }, startEditing: Boolean }),
+const props = defineProps({
+    recordId: { type: String, default: null },
+    startEditing: Boolean,
+    focusLinks: Boolean,
+  }),
   emit = defineEmits(['close', 'readonly'])
 const performance = ref(null)
+const linksPanel = ref(null)
 const configurationExpanded = ref(true)
 const intensityConstraint = computed(() => logicIntensityConstraint(form.value))
 async function closeHistory() {
@@ -290,6 +303,17 @@ const form = ref(initialLogic()),
   historyOpen = ref(false),
   validationOpen = ref(false)
 let active = true
+watch(
+  () => props.focusLinks && !resource.state.loading && !!resource.state.data,
+  async (ready) => {
+    if (!ready) return
+    await nextTick()
+    if (!active) return
+    linksPanel.value?.scrollIntoView({ block: 'start' })
+    linksPanel.value?.focus({ preventScroll: true })
+  },
+)
+
 const baseline = ref('')
 const dirty = computed(() => JSON.stringify(form.value) !== baseline.value),
   finalIndex = computed(() => projectedFinalIndex(form.value)),
@@ -513,6 +537,14 @@ onScopeDispose(() => {
 })
 </script>
 <style scoped>
+.logic-links {
+  scroll-margin-top: 20px;
+}
+.logic-links:focus-visible {
+  outline: 2px solid #00a3ff;
+  outline-offset: 4px;
+  border-radius: 14px;
+}
 .logic-icons {
   display: flex;
   gap: 10px;

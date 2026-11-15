@@ -11,6 +11,20 @@ Atualização: 15/11/2026. Este é o índice desta revisão ampla. Evidências a
 - [ ] Deploy confirmado e testes repetidos nas URLs publicadas.
 - [x] Pendências de frontend separadas das pendências reais da API, do designer e da limitação de consulta ao Figma.
 
+## LG01 — card em hover e navegação Vínculos (15/11)
+
+- [x] Referência já recuperada 1484:77226 (EC01 do LG01) arquivada integralmente com screenshot e cinco SVGs originais em [evidence/qa-2026-11-15-lg01-hover](evidence/qa-2026-11-15-lg01-hover).
+- [x] Card de catálogo substituído pela composição da referência: identidade, código/status, quatro indicadores, ciclo, performance, próxima atualização/encerramento e fechamento. Dimensões 364 × 392 px no desktop; 343 × 392 px na tela de 390 px, sem rolagem horizontal.
+- [x] Faixa Abrir · Editar · Vínculos aparece em hover/foco; em aparelho sem hover permanece acessível. O badge de fechamento fica encoberto pela faixa como no estado desenhado, sem trecho cortado. Botões são alcançáveis por Tab e têm foco visível; menu reutiliza RowActions e o SVG horizontal do desenho.
+- [x] Vínculos, pela faixa e pelos menus de Cards/Lista, abre o motor na seção existente Papéis Vinculados ao Motor, com rolagem e foco após o carregamento. Nenhuma nova tela ou endpoint foi inventado.
+- [x] Local integrado: Abrir, Editar/Cancelar, retornar, Vínculos nas duas visualizações, busca vazia e resumo LG03 por Enter/Escape. Sem gravação de motor/contrato ou dados operacionais inventados.
+- [x] Isolado: estado Encerrado somente com status explicitamente fornecido; ícones chart-pie 20 px, ellipsis 16 px, link/circle-check/clock 12 px carregados nas dimensões nativas. Emissões open/edit/links conferidas. Nome de 375 caracteres e código de 120 quebram dentro do card sem excesso horizontal. Arquivos fictícios removidos.
+- [ ] Checks finais, publicação e reteste integrado na URL de homologação.
+
+**API:** continua faltando a projeção operacional do motor (status, indicadores, sinais de performance/aderência, ciclo, atualização/encerramento, fechamento e vínculos operacionais). O catálogo atual só fornece identidade/descrição/isSelectable; esta flag não é convertida em status. Nenhuma letra, badge positivo, percentual, data ou quantidade dos exemplos do Figma foi copiada para dados reais. A navegação está integrada; a consulta operacional da seção de Vínculos continua explicitamente indisponível. Evidência HTTP já registrada no complemento LG03, reusada aqui sem acrescentar uma nova falha de API.
+
+**Designer:** nenhum novo bloqueio do EC01 consultado. LG01 completo, LG02, filtros LG04 e card ativo EC03.1 continuam com sua revisão separada; não declarar esses frames concluídos por esta entrega.
+
 ## LG03 — resumo executivo temporário do motor (15/11)
 
 - [x] Referência completa recuperada e arquivada (1484:77198), com screenshot em [evidence/qa-2026-11-15-lg03](evidence/qa-2026-11-15-lg03). O card em hover 1484:77226 também foi consultado; esta entrega não aprova sua reformulação completa.
@@ -392,8 +406,8 @@ Legenda: **Preparado / revisão pendente** = há código novo, mas a validação
 | [1484:76065](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-76065) | LG01 · PB · Seleção de lógicas · Cards · TELA BASE · DESIGN GLASS                             | Preparado / revisão pendente                                             |
 | [1484:76704](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-76704) | LG02 · SP · Seleção de lógicas · Lista · SUBPÁGINA · DESIGN GLASS                             | Preparado / revisão pendente                                             |
 | [1484:77198](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-77198) | LG03 · MT · Resumo executivo da lógica · Hover temporário · PAINEL ISOLADO · DESIGN GLASS     | Estado de catálogo implementado; resumo operacional depende da API                                             |
-| [1484:77225](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-77225) | LG01 · EC · Delta-Income em hover · Abrir · Editar · Vínculos · DESIGN GLASS                  | Preparado / revisão pendente                                             |
-| [1484:77226](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-77226) | EC01 · Card em hover · Abrir · Editar · Vínculos                                              | Preparado / revisão pendente                                             |
+| [1484:77225](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-77225) | LG01 · EC · Delta-Income em hover · Abrir · Editar · Vínculos · DESIGN GLASS                  | Card EC01 ajustado; testes e limites no complemento LG01                                             |
+| [1484:77226](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-77226) | EC01 · Card em hover · Abrir · Editar · Vínculos                                              | Card EC01 ajustado; testes e limites no complemento LG01                                             |
 | [1484:77323](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-77323) | LG04 · EC · Filtros abertos + Lista em hover · PAINEL DE ESTADOS SOLTO · DESIGN GLASS         | Preparado / revisão pendente                                             |
 | [1484:77335](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-77335) | DD01 · Status · Aberto                                                                        | Revalidar                                                                |
 | [1484:77346](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-77346) | DD02 · Vínculos · Aberto                                                                      | Revalidar                                                                |

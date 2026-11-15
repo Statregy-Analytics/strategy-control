@@ -5,6 +5,7 @@
       :key="editor + '-' + (recordId || 'new') + '-' + (contentKind || '')"
       :record-id="recordId"
       :start-editing="editor === 'edit'"
+      :focus-links="route.query.section === 'links'"
       @readonly="editor === 'edit' && router.replace({ query: { ...route.query, editor: 'open' } })"
       @close="closeEditor"
     />
@@ -150,53 +151,45 @@
               <p class="workspace-muted">Indisponível</p>
             </section>
           </div>
-          <div v-else-if="view === 'cards'" class="workspace-cards">
-            <article v-for="row in pageRows" :key="row.id" class="workspace-record">
-              <div class="workspace-record-head">
-                <logic-executive-summary
-                  v-if="module === 'logic'"
-                  :name="row.name || row.code"
-                  :description="row.description"
-                >
-                  <h2><workspace-icon name="chart-pie" />{{ row.name || row.code }}</h2>
-                  <small>{{ row.code }}</small>
-                  <q-badge outline>{{ workspaceStatus(row.status) }}</q-badge>
-                </logic-executive-summary>
-                <div v-else>
-                  <h2>
-                    <workspace-icon name="file-text" />
-                    {{ row.name || row.title || row.client?.displayName || row.publicCode }}
-                  </h2>
-                  <small>{{ row.code || row.publicCode }}</small>
-                  <q-badge outline>{{ workspaceStatus(row.status) }}</q-badge>
+          <div
+            v-else-if="view === 'cards'"
+            class="workspace-cards"
+            :class="{ 'workspace-cards--logic': module === 'logic' }"
+          >
+            <template v-for="row in pageRows" :key="row.id">
+              <logic-card v-if="module === 'logic'" :record="row" @select="openRow(row, $event)" />
+              <article v-else class="workspace-record">
+                <div class="workspace-record-head">
+                  <div>
+                    <h2>
+                      <workspace-icon name="file-text" />
+                      {{ row.name || row.title || row.client?.displayName || row.publicCode }}
+                    </h2>
+                    <small>{{ row.code || row.publicCode }}</small>
+                    <q-badge outline>{{ workspaceStatus(row.status) }}</q-badge>
+                  </div>
+                  <row-actions dark :actions="recordActions" @select="openRow(row, $event)" />
                 </div>
-                <row-actions dark :actions="recordActions" @select="openRow(row, $event)" />
-              </div>
-              <dl v-if="module === 'logic'">
-                <div v-for="label in logicCardLabels" :key="label">
-                  <dt>{{ label }}</dt>
-                  <dd>Indisponível</dd>
-                </div>
-              </dl>
-              <dl v-else>
-                <div>
-                  <dt>Tipo</dt>
-                  <dd>{{ workspaceStatus(row.kind) }}</dd>
-                </div>
-                <div>
-                  <dt>Valor</dt>
-                  <dd>{{ money(row.principalAmount, row.currencyIsoCode) }}</dd>
-                </div>
-                <div>
-                  <dt>Garantia</dt>
-                  <dd>{{ row.collateral || '—' }}</dd>
-                </div>
-                <div>
-                  <dt>Atualização</dt>
-                  <dd>{{ dateLabel(row.updatedAtUtc) }}</dd>
-                </div>
-              </dl>
-            </article>
+                <dl>
+                  <div>
+                    <dt>Tipo</dt>
+                    <dd>{{ workspaceStatus(row.kind) }}</dd>
+                  </div>
+                  <div>
+                    <dt>Valor</dt>
+                    <dd>{{ money(row.principalAmount, row.currencyIsoCode) }}</dd>
+                  </div>
+                  <div>
+                    <dt>Garantia</dt>
+                    <dd>{{ row.collateral || '—' }}</dd>
+                  </div>
+                  <div>
+                    <dt>Atualização</dt>
+                    <dd>{{ dateLabel(row.updatedAtUtc) }}</dd>
+                  </div>
+                </dl>
+              </article>
+            </template>
             <div v-if="!pageRows.length" class="workspace-empty">Nenhum registro encontrado.</div>
           </div>
           <q-table
@@ -268,7 +261,7 @@
   </q-page>
 </template>
 <script setup>
-import LogicExecutiveSummary from 'src/components/Workspaces/LogicExecutiveSummary.vue'
+import LogicCard from 'src/components/Workspaces/LogicCard.vue'
 import PublicationStatus from 'src/components/Workspaces/PublicationStatus.vue'
 import { computed, ref, watch, onScopeDispose } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
@@ -423,10 +416,11 @@ const logicCardLabels = [
   'Próxima Atualização',
 ]
 const creditStages = ['Iniciada', 'Pendente', 'Pré-proposta', 'Documentação', 'Proposta Final']
-const recordActions = [
+const recordActions = computed(() => [
   { name: 'open', label: 'Abrir', icon: 'visibility' },
   { name: 'edit', label: 'Editar', icon: 'edit' },
-]
+  ...(props.module === 'logic' ? [{ name: 'links', label: 'Vínculos', icon: 'link' }] : []),
+])
 const tableColumns = computed(() =>
   props.module === 'communication'
     ? columns([
@@ -506,7 +500,14 @@ function openRow(row, action) {
   if (props.module === 'credit') {
     creditRecord.value = row.id
     creditOpen.value = true
-  } else router.push({ query: { editor: action === 'edit' ? 'edit' : 'open', id: row.id } })
+  } else
+    router.push({
+      query: {
+        editor: action === 'edit' ? 'edit' : 'open',
+        id: row.id,
+        ...(props.module === 'logic' && action === 'links' ? { section: 'links' } : {}),
+      },
+    })
 }
 function closeEditor() {
   router.push({ query: {} })

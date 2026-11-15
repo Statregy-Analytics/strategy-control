@@ -1,0 +1,71 @@
+{
+  "date": "2026-11-15",
+  "frame": "1484:77226",
+  "local": {
+    "record": "Quant Core",
+    "desktop": {
+      "viewport": 1280,
+      "cardWidth": 364,
+      "cardHeight": 392
+    },
+    "mobile": {
+      "viewport": 390,
+      "documentWidth": 375,
+      "cardWidth": 343,
+      "cardHeight": 392
+    },
+    "flows": [
+      "open",
+      "edit/cancel",
+      "return",
+      "links via action bar",
+      "links via card menu",
+      "links via list menu",
+      "empty search",
+      "LG03 Enter/Escape"
+    ],
+    "links": {
+      "focusedSection": "Papéis Vinculados ao Motor",
+      "sectionTop": 20
+    },
+    "fixture": {
+      "closedStatusExplicit": true,
+      "emittedActions": [
+        "open",
+        "edit",
+        "links"
+      ],
+      "nameLength": 375,
+      "codeLength": 120,
+      "viewport": 390,
+      "documentWidth": 375,
+      "cardWidth": 327,
+      "cardScrollWidth": 325,
+      "removed": true
+    },
+    "assetDimensions": {
+      "chart-pie": [
+        20,
+        20
+      ],
+      "ellipsis": [
+        16,
+        16
+      ],
+      "link": [
+        12,
+        12
+      ],
+      "circle-check": [
+        12,
+        12
+      ],
+      "clock": [
+        12,
+        12
+      ]
+    }
+  },
+  "apiWrites": 0,
+  "published": "pending"
+}
