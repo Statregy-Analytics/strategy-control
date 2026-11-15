@@ -1,0 +1,59 @@
+{
+  "date": "2026-11-15",
+  "frame": "1484:73324",
+  "sessionId": "dbd31352-f90f-422c-9e67-e46477e0e62e",
+  "deployedCommit": "f7b9f573b37eaff349054401d3555d5c1bf8e344",
+  "deploy": "https://github.com/Statregy-Analytics/strategy-control/actions/runs/43728980534",
+  "deployConclusion": "success",
+  "checks": {
+    "lint": "passed",
+    "build": "passed",
+    "scopedDiffCheck": "passed",
+    "localTests": { "passed": 300, "versioned": 292, "preexistingUntrackedStudyTests": 8 },
+    "desktopModal": { "width": 512, "height": 266, "bodyHeight": 143 },
+    "isolated": {
+      "emptySelectionDisablesSubmit": true,
+      "successfulCallbackReceivesSelectedIdAndCloses": true,
+      "failedCallbackKeepsSelectionAndAllowsRetry": true,
+      "emptySearch": true,
+      "failedSearch": true,
+      "pendingSaveDisablesCancelCloseAndSelect": true,
+      "pendingSaveEventuallyClosesOnSuccess": true,
+      "longName": "Single filled search input; placeholder absent after selection; input remains inside 36px field",
+      "mobile": { "viewport": 390, "documentWidth": 390, "modalWidth": 342 },
+      "temporaryFixtureRemoved": true
+    },
+    "published": {
+      "record": "Legacy Prime",
+      "lookupRealCustomers": true,
+      "lookupWithoutResults": "No customers found; submit disabled",
+      "duplicate": "Éric Vicente blocked before mutation",
+      "reopen": "No stale selection or error; submit disabled",
+      "desktop": { "viewport": 1280, "documentWidth": 1265, "modalWidth": 512, "modalHeight": 266 },
+      "mobile": {
+        "viewport": 390,
+        "documentWidth": 375,
+        "modalWidth": 327,
+        "titleInsideViewport": true
+      },
+      "inputCount": 1,
+      "assets": {
+        "count": 6,
+        "loaded": true,
+        "standardIcons": "16x16",
+        "closeStrokes": "9.33x9.33"
+      },
+      "participantsPreserved": ["Homologação Pessoa Física", "Éric Vicente"],
+      "listRowsAfterCancel": 2,
+      "cardsAfterCancel": 2,
+      "consoleErrorsAndWarnings": 0,
+      "backendWrites": 0
+    }
+  },
+  "limitations": [
+    "Success/error writing were tested with isolated callbacks. This revision does not claim a new participant was persisted in the shared homologation contracts.",
+    "CT05 distribution remains dependent on the approved next-step design; CT09 does not add an allocation field.",
+    "Remaining modules in the unified checklist are not marked complete by this revision."
+  ],
+  "newBackendBlocker": null
+}
