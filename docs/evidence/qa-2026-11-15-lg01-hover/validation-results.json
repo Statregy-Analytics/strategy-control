@@ -26,7 +26,13 @@
     ],
     "links": {
       "focusedSection": "Papéis Vinculados ao Motor",
-      "sectionTop": 20
+      "sectionTop": 20,
+      "mobile": {
+        "viewport": 390,
+        "headerBottom": 50,
+        "regionTop": 72,
+        "headingTop": 89
+      }
     },
     "fixture": {
       "closedStatusExplicit": true,
@@ -67,5 +73,66 @@
     }
   },
   "apiWrites": 0,
-  "published": "pending"
+  "published": {
+    "url": "https://admin.strategyanalytics.com.br/logics",
+    "deploy": "https://github.com/Statregy-Analytics/strategy-control/actions/runs/43746595786",
+    "conclusion": "success",
+    "desktop": {
+      "viewport": 1280,
+      "documentWidth": 1280,
+      "cardWidth": 364,
+      "cardHeight": 392,
+      "linkSectionTop": 20
+    },
+    "mobile": {
+      "viewport": 390,
+      "documentWidth": 375,
+      "cardWidth": 343,
+      "cardHeight": 392,
+      "linkSectionTop": 72,
+      "headingTop": 89,
+      "headerBottom": 50
+    },
+    "flows": [
+      "Tab reveals actions and focuses Abrir",
+      "Enter opens logic",
+      "edit/cancel",
+      "links via action bar",
+      "links via card menu",
+      "links via list menu",
+      "reload preserves focused link section",
+      "return",
+      "empty search",
+      "LG03 Enter/Escape"
+    ],
+    "visibleAssets": {
+      "chart-pie": [
+        20,
+        20
+      ],
+      "ellipsis": [
+        16,
+        16
+      ],
+      "link": [
+        12,
+        12
+      ]
+    },
+    "console": [],
+    "apiWrites": 0,
+    "viewportReset": true
+  },
+  "codeCommit": "7fe945c",
+  "checks": {
+    "lint": "passed",
+    "build": "passed",
+    "tests": {
+      "local": 303,
+      "versioned": 295,
+      "failed": 0
+    },
+    "diff": "delivery paths passed",
+    "detectorAntiPatterns": 0
+  }
 }
