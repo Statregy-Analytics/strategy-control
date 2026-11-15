@@ -284,6 +284,23 @@ export function historyAction(row) {
   return auditAction(row.action).label
 }
 
+export function logicIntensityConstraint(form) {
+  const values = [form.intensity, form.dailyCeiling, form.dailyFloor]
+  if (
+    values.some(
+      (v) =>
+        !['number', 'string'].includes(typeof v) ||
+        String(v).trim() === '' ||
+        !Number.isFinite(Number(v)),
+    )
+  )
+    return null
+  if (Number(form.intensity) < 0 || Number(form.dailyCeiling) < 0 || Number(form.dailyFloor) > 0)
+    return null
+  return logicRuleResults(form)
+    .slice(0, 2)
+    .every((rule) => rule.valid)
+}
 export function logicRuleResults(form) {
   const finite = (v) => v !== null && v !== undefined && v !== '' && Number.isFinite(Number(v))
   const less = (a, b) => finite(a) && finite(b) && Number(a) >= 0 && Number(a) < Math.abs(Number(b))

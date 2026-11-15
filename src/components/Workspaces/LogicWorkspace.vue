@@ -47,7 +47,12 @@
       <q-banner v-if="error" class="workspace-error" role="alert">{{ error }}</q-banner
       ><resource-state :state="resource.state" @retry="load">
         <div :class="recordId ? 'logic-existing' : 'workspace-editor'">
-          <div>
+          <logic-configuration
+            v-model="configurationExpanded"
+            :enabled="Boolean(recordId)"
+            body-id="logic-configuration-fields"
+            :intensity-invalid="intensityConstraint === false"
+          >
             <profile-section
               v-if="!recordId"
               title="Identidade do Motor"
@@ -188,7 +193,7 @@
                 valorização passa a ser calculada a partir do índice na conexão.</small
               ></profile-section
             >
-          </div>
+          </logic-configuration>
           <aside
             v-if="!recordId"
             class="workspace-record logic-preview"
@@ -250,6 +255,7 @@ import WorkspaceField from './WorkspaceField.vue'
 import LogicPerformance from './LogicPerformance.vue'
 import LogicValidation from './LogicValidation.vue'
 import LogicHistory from './LogicHistory.vue'
+import LogicConfiguration from './LogicConfiguration.vue'
 import { useFinanceResource } from 'src/composables/useFinanceResource'
 import { financeGet, columns } from 'src/services/financeService'
 import { getPreferenceCatalog } from 'src/services/customerService'
@@ -260,10 +266,13 @@ import {
   validateLogic,
   logicRuleResults,
   foldSearch,
+  logicIntensityConstraint,
 } from 'src/services/adminWorkspaceModel'
 const props = defineProps({ recordId: { type: String, default: null }, startEditing: Boolean }),
   emit = defineEmits(['close', 'readonly'])
 const performance = ref(null)
+const configurationExpanded = ref(true)
+const intensityConstraint = computed(() => logicIntensityConstraint(form.value))
 async function closeHistory() {
   historyOpen.value = false
   await nextTick()

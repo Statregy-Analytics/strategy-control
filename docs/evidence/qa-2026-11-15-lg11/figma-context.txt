@@ -1,0 +1,68 @@
+const imgSettings = "https://www.figma.com/api/mcp/asset/873c52f8-f496-483c-9950-c05a206986cd.svg";
+const imgChevronDown = "https://www.figma.com/api/mcp/asset/66277e41-af24-40af-b885-4006e911a815.svg";
+const imgCircleAlert = "https://www.figma.com/api/mcp/asset/9549d83a-95fc-4b14-a30a-686c5ed29629.svg";
+const imgInfo = "https://www.figma.com/api/mcp/asset/f2b588e4-aed0-4aff-8065-aa62e2531fd0.svg";
+
+export default function Lg11EcConfiguracaoDoMotorMinimizadaPainelDeEstadosDoComponenteDesignGlass() {
+  return (
+    <div className="backdrop-blur-[20px] border border-[rgba(255,255,255,0.12)] border-solid content-stretch drop-shadow-[4px_4px_6px_rgba(0,0,0,0.24)] flex flex-col items-start p-[var(--sa-spacing-24,25px)] relative size-full" data-node-id="1484:85344" style={{ backgroundImage: "linear-gradient(182.63755632150804deg, rgba(0, 0, 0, 0.24) 0.52072%, rgba(0, 0, 0, 0.08) 51.124%, rgba(0, 0, 0, 0.04) 99.479%), linear-gradient(182.63755632150804deg, rgba(0, 0, 0, 0.16) 0.52072%, rgba(0, 0, 0, 0.08) 51.124%, rgba(0, 0, 0, 0.02) 99.479%), linear-gradient(-6.147105086992994deg, rgb(26, 30, 45) 0%, rgb(26, 30, 45) 7%, rgb(19, 71, 109) 23%, rgb(16, 81, 126) 28%, rgb(16, 81, 126) 30%, rgb(18, 78, 120) 33%, rgb(26, 30, 45) 53%, rgb(26, 30, 45) 84%, rgb(78, 23, 35) 100%)" }} data-name="LG11 · EC · Configuração do motor minimizada · PAINEL DE ESTADOS DO COMPONENTE · DESIGN GLASS">
+      <div className="relative shrink-0 w-full" data-node-id="1484:85345" data-name="Container">
+        <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex items-center justify-between relative size-full">
+          <div className="relative shrink-0" data-node-id="1484:85346" data-name="Heading 3">
+            <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex gap-[var(--sa-spacing-8,8px)] items-center relative size-full">
+              <div className="relative shrink-0 size-[20px]" data-node-id="1484:85347" data-name="Settings">
+                <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgSettings} />
+              </div>
+              <p className="[word-break:break-word] font-['Inter:Bold'] font-bold leading-[24px] not-italic relative shrink-0 text-[16px] text-[color:var(--sa-color-text-primary,white)] whitespace-nowrap" data-node-id="1484:85350">
+                Configuração do Motor
+              </p>
+            </div>
+          </div>
+          <div className="bg-[rgba(255,255,255,0.05)] border-[length:var(----sa-stroke-1,1px)] border-[var(--sa-color-border-glass,rgba(255,255,255,0.2))] border-solid drop-shadow-[0px_1px_1.5px_rgba(0,0,0,0.1),0px_1px_1px_rgba(0,0,0,0.1)] h-[32px] relative rounded-[var(--sa-radius-8,8px)] shrink-0" data-node-id="1484:85351" data-name="Button">
+            <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex gap-[var(--sa-spacing-6,6px)] items-center justify-center px-[var(--sa-spacing-10,11px)] py-px relative size-full">
+              <div className="relative shrink-0 size-[16px]" data-node-id="1484:85352" data-name="ChevronDown">
+                <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgChevronDown} />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div className="h-[107.2px] relative shrink-0 w-[1694.4px]" data-node-id="1484:85354" data-name="Container">
+        <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex flex-col items-start pt-[var(--sa-spacing-16,16px)] relative size-full">
+          <div className="bg-gradient-to-r border border-[rgba(255,255,255,0.25)] border-solid from-[rgba(0,0,0,0.25)] relative rounded-[var(--sa-radius-4,4px)] shrink-0 to-[rgba(0,0,0,0.08)] via-[52%] via-[rgba(0,0,0,0.16)] w-full" data-node-id="1484:85355" data-name="Container">
+            <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex gap-[var(--sa-spacing-8,8px)] items-center p-[var(--sa-spacing-12,13px)] relative size-full">
+              <div className="relative shrink-0 size-[16px]" data-node-id="1484:85356" data-name="CircleAlert">
+                <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgCircleAlert} />
+              </div>
+              <p className="[word-break:break-word] font-['Inter:Regular'] font-normal leading-[16px] not-italic relative shrink-0 text-[12px] text-[color:var(--sa-color-text-muted,rgba(255,255,255,0.6))] whitespace-nowrap" data-node-id="1484:85360">
+                Intensidade por atualização deve ser menor que limite diário
+              </p>
+            </div>
+          </div>
+          <div className="relative shrink-0 w-full" data-node-id="1484:85361" data-name="Container:margin">
+            <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex flex-col items-center pt-[var(--sa-spacing-8,8px)] relative size-full">
+              <div className="bg-gradient-to-r border border-[rgba(255,255,255,0.25)] border-solid content-stretch flex from-[rgba(0,0,0,0.25)] gap-[var(--sa-spacing-8,8px)] items-center p-[var(--sa-spacing-12,13px)] relative rounded-[var(--sa-radius-4,4px)] shrink-0 to-[rgba(0,0,0,0.08)] via-[52%] via-[rgba(0,0,0,0.16)] w-full" data-node-id="1484:85362" data-name="Container">
+                <div className="relative shrink-0 size-[16px]" data-node-id="1484:85363" data-name="Info">
+                  <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgInfo} />
+                </div>
+                <p className="[word-break:break-word] font-['Inter:Regular'] font-normal leading-[16px] not-italic relative shrink-0 text-[12px] text-[color:var(--sa-color-text-muted,rgba(255,255,255,0.6))] whitespace-nowrap" data-node-id="1484:85367">
+                  Intensidade alta pode causar muitas travas
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+SUPER CRITICAL: The generated React+Tailwind code MUST be converted to match the target project's technology stack and styling system.
+1. Analyze the target codebase to identify: technology stack, styling approach, component patterns, and design tokens
+2. Convert React syntax to the target framework/library
+3. Transform all Tailwind classes to the target styling system while preserving exact visual design
+4. Follow the project's existing patterns and conventions
+DO NOT install any Tailwind as a dependency unless the user instructs you to do so.
+
+Node ids have been added to the code as data attributes, e.g. `data-node-id="1:2"`.
+These styles are contained in the design: SA/Glass/Floating Control: Effect(type: DROP_SHADOW, color: #0000001A, offset: (0, 1), radius: 2, spread: -1); Effect(type: DROP_SHADOW, color: #0000001A, offset: (0, 1), radius: 3, spread: 0), SA/Glass/Surface: Effect(type: BACKGROUND_BLUR, radius: 40); Effect(type: DROP_SHADOW, color: #0000003D, offset: (4, 4), radius: 12, spread: 0).
+The generated code contains image and SVG URL constants, e.g. const image = 'https://www.figma.com/api/mcp/asset/550e8400-e29b-41d4-a716-446655440000.png'. These URLs are temporary download sources and expire after 7 days. Download each asset into the project with curl -L, then replace its URL in the generated code with a reference to the downloaded asset. Never use the temporary URLs as runtime image sources.

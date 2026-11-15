@@ -6,10 +6,24 @@ Atualização: 15/11/2026. Este é o índice desta revisão ampla. Evidências a
 
 - [ ] Todos os frames/estados abaixo comparados visualmente, inclusive erro, vazio e retorno.
 - [ ] Fluxos de escrita e leitura integrados testados com dados fictícios.
-- [x] Admin: lint e build aprovados; 300 testes locais passaram (incluem 8 testes de estudo já existentes no worktree; 292 versionados neste complemento).
+- [x] Admin: lint e build aprovados; 303 testes locais passaram (incluem 8 testes de estudo já existentes no worktree; 295 versionados neste complemento).
 - [ ] Reexecutar os checks após concluir as demais telas; Área do Cliente ainda não alterada nesta rodada.
 - [ ] Deploy confirmado e testes repetidos nas URLs publicadas.
 - [x] Pendências de frontend separadas das pendências reais da API, do designer e da limitação de consulta ao Figma.
+
+## LG11 — configuração do motor minimizada (15/11)
+
+- [x] Reconfirmado e arquivado o contexto completo do LG11 (`1484:85344`), com screenshot e quatro SVGs originais em [evidence/qa-2026-11-15-lg11](evidence/qa-2026-11-15-lg11).
+- [x] Configuração do Motor tem o controle do desenho para recolher/reabrir os campos existentes. `aria-expanded`/`aria-controls`, Enter e Espaço operam o mesmo botão, sem acrescentar campos ou ações.
+- [x] Recolhimento preserva os campos montados e os valores locais. Navegar ao LG09 e voltar mantém a configuração recolhida; Cancelar descarta os valores de edição. Novo Motor mantém seu fluxo e não recebe esse controle.
+- [x] Aviso de intensidade usa as duas regras diárias já existentes, somente com intensidade/teto/piso numéricos e sinais válidos. Parâmetro ausente/malformado não se transforma em zero nem em violação. Informação geral sobre intensidade alta não presume risco medido nem cria um limiar de negócio.
+- [x] Testes locais, sem gravação: Quant Core com parâmetros ausentes não exibe alerta; edição temporária com intensidade 1/teto 0,8/piso −0,8 exibe o aviso; recolher/reabrir preserva valores; 0,1 remove o aviso e campo vazio também; Cancelar restaura leitura sem alerta. Novo Motor com nome fictício foi cancelado, sem criar motor.
+- [x] Revisão em 1280/390 px sem excesso horizontal; título 16 px, engrenagem 20 px, seta/alerta/informação 16 px. Os dois avisos do frame foram conferidos com valores locais temporários, não com parâmetros retornados pela API. Capturas `local-invalid-desktop.jpg`/`local-invalid-mobile.jpg` identificam esse cenário.
+- [ ] Confirmar checks finais, publicar e repetir os estados no Admin de homologação.
+
+**API:** OpenAPI publicada reconsultada em 15/11 continua oferecendo somente catálogo/vínculo de motores. `EngineResponse` não contém intensidade nem limites; não há configuração operacional para consultar/salvar. LG11 foi implementado como estado de frontend, sem simular gravação ou erro de parâmetros ausentes. Evidência: `api-review.json`.
+
+**Designer:** nenhum novo bloqueio do LG11. Os destinos abertos de gráfico/detalhes do LG09 e as demais dependências anteriores continuam separados; esta entrega não os aprova.
 
 ## CT09 — inclusão de participante no contrato existente (15/11)
 
@@ -388,7 +402,7 @@ Legenda: **Preparado / revisão pendente** = há código novo, mas a validação
 | [1484:83473](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-83473) | LG08 · MD · Validação da lógica · MODAL ISOLADO · DESIGN GLASS                                | Composto; estados testados — ver complemento 14/11 |
 | [1484:83539](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-83539) | F04 · Estados complementares do motor · Histórico completo + configuração minimizada          | Revalidar                                                                |
 | [1484:83540](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-83540) | LG09 · SP · Histórico completo do motor · SUBPÁGINA · DESIGN GLASS                            | Tabela LG09 concluída/publicada; integração operacional pendente |
-| [1484:85344](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-85344) | LG11 · EC · Configuração do motor minimizada · PAINEL DE ESTADOS DO COMPONENTE · DESIGN GLASS | Preparado / revisão pendente                                             |
+| [1484:85344](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-85344) | LG11 · EC · Configuração do motor minimizada · PAINEL DE ESTADOS DO COMPONENTE · DESIGN GLASS | Composto/testado localmente; publicação pendente |
 | [1484:85374](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-85374) | F01 · Extrato + Solicitações + Nova transação                                                 | Revalidar                                                                |
 | [1484:85378](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-85378) | P01 · V01 · Transações · Extrato global + Solicitações                                        | Revalidar                                                                |
 | [1484:86271](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-86271) | MD01 · Nova transação · Seleção de tipo                                                       | Revalidar                                                                |
