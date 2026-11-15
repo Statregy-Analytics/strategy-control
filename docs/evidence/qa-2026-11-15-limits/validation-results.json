@@ -88,5 +88,51 @@
     ]
   },
   "operationalWrites": 0,
-  "published": "pending"
+  "published": {
+    "commit": "05f8be77a0fd0538de587a776183f72ce0017bc9",
+    "deployId": 43768969147,
+    "deployConclusion": "success",
+    "record": "Quant Core",
+    "readonlyFieldsEmptyAndDisabled": 4,
+    "draftValues": [
+      "0,80",
+      "-0,80",
+      "12,00",
+      "-12,00"
+    ],
+    "inputHeight": 36,
+    "negativeColor": "rgb(255, 138, 138)",
+    "wrongFloorAriaInvalid": true,
+    "LG09ReturnPreservesValues": true,
+    "configurationCollapsePreservesValues": true,
+    "saveEnabledAfterClearingOriginals": false,
+    "mobile": {
+      "viewport": 390,
+      "documentWidth": 375,
+      "sectionWidth": 309,
+      "sequentialNegativeInput": "-0,80"
+    },
+    "desktop": {
+      "viewport": 1280,
+      "sectionWidth": 895,
+      "sectionHeight": 448,
+      "horizontalOverflow": false
+    },
+    "probabilityRegression": {
+      "invalid": "60/50 shows 110% and rule violation",
+      "corrected": "50/50 shows 100% and no violation",
+      "negativeDisabled": true
+    },
+    "consoleWarningsOrErrors": [],
+    "draftsCancelled": true,
+    "finalState": "readonly; four blank disabled fields",
+    "operationalWrites": 0
+  },
+  "checks": {
+    "lint": "pass",
+    "build": "pass",
+    "localTests": 315,
+    "versionedTests": 307,
+    "diffOfDelivery": "pass"
+  }
 }
