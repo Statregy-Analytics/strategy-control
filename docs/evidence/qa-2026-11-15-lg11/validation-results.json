@@ -1,0 +1,44 @@
+{
+  "date": "2026-11-15",
+  "frame": "1484:85344",
+  "sessionId": "29ef6dbf-4959-42f5-89f3-3443b5d1f3ba",
+  "deployedCommit": "04b7b54f68cb25af875a1a279ae4d40e0fa5bbd4",
+  "deploy": "https://github.com/Statregy-Analytics/strategy-control/actions/runs/43730693255",
+  "deployConclusion": "success",
+  "checks": {
+    "lint": "passed",
+    "build": "passed",
+    "scopedDiffCheck": "passed",
+    "localTests": { "passed": 303, "versioned": 295, "preexistingUntrackedStudyTests": 8 },
+    "localAndPublished": {
+      "record": "Quant Core",
+      "unknownApiParameters": "No constraint alert; only the general informational note from the design",
+      "collapseHidesFieldsWithoutUnmounting": true,
+      "ariaExpandedAndControls": true,
+      "keyboard": ["Enter", "Space"],
+      "historyReturnPreservesCollapsedState": true,
+      "temporaryInvalidValues": { "intensity": 1, "dailyCeiling": 0.8, "dailyFloor": -0.8 },
+      "invalidWarning": "Intensidade por atualização deve ser menor que limite diário",
+      "valuesPreservedAfterReopen": ["1", "0.8", "-0.8"],
+      "validIntensity": { "value": "0.1", "alerts": 0 },
+      "missingIntensity": { "value": "", "alerts": 0 },
+      "cancelDiscardsTemporaryValues": true,
+      "readonlyInputsDisabledAfterCancel": true,
+      "backendWrites": 0
+    },
+    "localCreateRegression": "New Motor retains its fields without a collapse action; fictitious name cancelled; no motor created",
+    "publishedDesktop": { "viewport": 1280, "documentWidth": 1265 },
+    "publishedMobile": {
+      "viewport": 390,
+      "documentWidth": 375,
+      "panelWidth": 343,
+      "noticesInsideViewport": true
+    },
+    "publishedTitleFont": "16px",
+    "staticAssets": { "allLoaded": true, "settings": "20x20", "chevronAlertInfo": "16x16" },
+    "publishedConsoleErrorsAndWarnings": 0
+  },
+  "remainingBackendDependency": "Published engine catalog lacks operational intensity/limit configuration and a read/save contract. No successful configuration persistence is claimed.",
+  "remainingDesignDependencyForLG11": null,
+  "scope": "LG11 collapsed configuration and transitions only; other checklist frames remain independently pending."
+}
