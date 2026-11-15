@@ -19,7 +19,7 @@
     emit-value
     map-options
     dropdown-icon="img:/icons/client-profile/form-chevron.svg"
-    popup-content-class="profile-glass-menu"
+    :popup-content-class="['profile-glass-menu', popupClass].filter(Boolean).join(' ')"
     behavior="menu"
     :options-dense="true"
     @update:model-value="$emit('update:modelValue', $event)"
@@ -55,6 +55,7 @@ defineProps({
   modelValue: { type: [String, Number, Boolean, Array], default: null },
   options: { type: Array, default: () => [] },
   placeholder: { type: String, default: '' },
+  popupClass: { type: String, default: '' },
 })
 defineEmits(['update:modelValue'])
 </script>

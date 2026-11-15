@@ -1,0 +1,30 @@
+export default function Dd02VinculosAberto() {
+  return (
+    <div className="backdrop-blur-[20px] bg-[rgba(255,255,255,0.06)] border border-[var(--sa-color-border-glass,rgba(255,255,255,0.2))] border-solid drop-shadow-[4px_4px_6px_rgba(0,0,0,0.13)] relative rounded-[10px] size-full" data-node-id="1484:77346" data-name="DD02 · Vínculos · Aberto">
+      <div className="absolute bg-[rgba(0,163,255,0.12)] h-[28px] left-[7px] rounded-[6px] top-[7px] w-[244px]" data-node-id="1484:77347" data-name="Opção · Vínculos: Todos">
+        <div className="-translate-y-1/2 [word-break:break-word] absolute flex flex-col font-['Inter:Semi_Bold'] font-semibold h-[28px] justify-center leading-[0] left-[8px] not-italic text-[#00a3ff] text-[12px] top-[14px] w-[228px]" data-node-id="1484:77348">
+          <p className="leading-[normal] whitespace-pre-wrap">{`✓  Vínculos: Todos`}</p>
+        </div>
+      </div>
+      <div className="absolute h-[28px] left-[7px] rounded-[6px] top-[39px] w-[244px]" data-node-id="1484:77349" data-name="Opção · Com vínculos">
+        <div className="-translate-y-1/2 [word-break:break-word] absolute flex flex-col font-['Inter:Regular'] font-normal h-[28px] justify-center leading-[0] left-[8px] not-italic text-[12px] text-[color:var(--sa-color-text-primary,white)] top-[14px] w-[228px]" data-node-id="1484:77350">
+          <p className="leading-[normal]">Com vínculos</p>
+        </div>
+      </div>
+      <div className="absolute h-[28px] left-[7px] rounded-[6px] top-[71px] w-[244px]" data-node-id="1484:77351" data-name="Opção · Sem vínculos">
+        <div className="-translate-y-1/2 [word-break:break-word] absolute flex flex-col font-['Inter:Regular'] font-normal h-[28px] justify-center leading-[0] left-[8px] not-italic text-[12px] text-[color:var(--sa-color-text-primary,white)] top-[14px] w-[228px]" data-node-id="1484:77352">
+          <p className="leading-[normal]">Sem vínculos</p>
+        </div>
+      </div>
+    </div>
+  );
+}
+SUPER CRITICAL: The generated React+Tailwind code MUST be converted to match the target project's technology stack and styling system.
+1. Analyze the target codebase to identify: technology stack, styling approach, component patterns, and design tokens
+2. Convert React syntax to the target framework/library
+3. Transform all Tailwind classes to the target styling system while preserving exact visual design
+4. Follow the project's existing patterns and conventions
+DO NOT install any Tailwind as a dependency unless the user instructs you to do so.
+
+Node ids have been added to the code as data attributes, e.g. `data-node-id="1:2"`.
+The generated code contains image and SVG URL constants, e.g. const image = 'https://www.figma.com/api/mcp/asset/550e8400-e29b-41d4-a716-446655440000.png'. These URLs are temporary download sources and expire after 7 days. Download each asset into the project with curl -L, then replace its URL in the generated code with a reference to the downloaded asset. Never use the temporary URLs as runtime image sources.

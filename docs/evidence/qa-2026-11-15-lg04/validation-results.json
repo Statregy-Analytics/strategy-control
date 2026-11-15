@@ -1,0 +1,75 @@
+{
+  "date": "2026-11-15",
+  "frames": [
+    "1484:77335",
+    "1484:77346",
+    "1484:77353"
+  ],
+  "local": {
+    "record": "Quant Core",
+    "menuWidths": {
+      "status": 268,
+      "links": 258,
+      "order": 300
+    },
+    "orderHeight": 346,
+    "optionHeight": 28,
+    "groups": [
+      "PERFORMANCE",
+      "OPERACIONAL",
+      "GERAL"
+    ],
+    "disabledOptions": {
+      "status": 4,
+      "links": 2,
+      "order": 6
+    },
+    "flow": [
+      "keyboard opens",
+      "Escape closes",
+      "operational options disabled with description",
+      "status stays Todos after ArrowDown/Enter",
+      "Mais Recentes selected by click",
+      "Mais Antigas selected by keyboard",
+      "Cards/Lista preserve record and selection",
+      "empty search preserves selection",
+      "open logic and return preserves selection"
+    ],
+    "mobile": {
+      "viewport": 390,
+      "documentWidth": 375,
+      "menuX": 46,
+      "menuRight": 346,
+      "menuWidth": 300
+    },
+    "fixture": {
+      "eightSelectionEmissionsPassed": true,
+      "keyboardCrossGroupSelection": "Maior Nº Papéis",
+      "standardSelectorClass": "profile-glass-menu",
+      "standardSelectorChange": "BRL to USD",
+      "emptyText": "Nenhuma opção disponível.",
+      "mobile": {
+        "viewport": 390,
+        "documentWidth": 390,
+        "menuX": 24,
+        "menuRight": 324,
+        "menuWidth": 300
+      },
+      "removed": true
+    },
+    "dateOrdering": {
+      "integratedCatalogCount": 1,
+      "multiRecordOrder": "automated tests",
+      "createdAtSource": "createdAtUtc",
+      "doesNotUseCatalogEditsForOperationalUpdate": true
+    },
+    "chevrons": {
+      "count": 3,
+      "loaded": true,
+      "width": 10,
+      "height": 10
+    }
+  },
+  "apiWrites": 0,
+  "published": "pending"
+}

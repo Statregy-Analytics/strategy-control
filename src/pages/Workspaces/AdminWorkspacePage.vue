@@ -83,12 +83,20 @@
             :aria-label="searchPlaceholder"
             ><template #prepend><workspace-icon name="search" /></template></q-input
           ><glass-select
+            v-if="module !== 'logic'"
             v-model="status"
             :options="statusOptions"
             placeholder="Status"
             aria-label="Status"
-            :disable="module === 'logic' || tab !== 'main'"
+            :disable="tab !== 'main'"
             clearable
+          /><compact-glass-select
+            v-else
+            v-model="logicStatus"
+            :options="logicStatusOptions"
+            placeholder="Status: Todos"
+            aria-label="Status"
+            :menu-width="268"
           /><glass-select
             v-if="module === 'communication'"
             v-model="kindFilter"
@@ -103,20 +111,18 @@
             placeholder="Redator"
             aria-label="Redator"
             disable
-          /><glass-select
+          /><compact-glass-select
             v-if="module === 'logic'"
             v-model="linksFilter"
-            :options="[]"
+            :options="logicLinksOptions"
             placeholder="Vínculos: Todos"
             aria-label="Vínculos"
-            disable
-          /><glass-select
+            :menu-width="258"
+          /><compact-glass-select
             v-if="module === 'logic'"
-            v-model="sort"
-            :options="[
-              { label: 'A–Z', value: 'az' },
-              { label: 'Mais recente', value: 'recent' },
-            ]"
+            v-model="logicSort"
+            :options="logicSortOptions"
+            placeholder="Ordenar por"
             aria-label="Ordenar por"
           /><template v-if="module === 'credit'"
             ><q-btn-toggle
@@ -268,6 +274,8 @@ import { useRoute, useRouter } from 'vue-router'
 import ResourceState from 'src/components/Finance/ResourceState.vue'
 import RowActions from 'src/components/Entity/RowActions.vue'
 import GlassSelect from 'src/components/Entity/GlassSelect.vue'
+import CompactGlassSelect from 'src/components/Entity/CompactGlassSelect.vue'
+import { canOrderLogicCatalog, orderLogicCatalog } from 'src/services/logicCatalogOrder'
 import WorkspaceIcon from 'src/components/Workspaces/WorkspaceIcon.vue'
 import SupportingDirectory from 'src/components/Workspaces/SupportingDirectory.vue'
 import LogicWorkspace from 'src/components/Workspaces/LogicWorkspace.vue'
@@ -279,7 +287,6 @@ import {
   publicationStatuses,
   contentTypes,
   creditTypes,
-  logicStatuses,
   workspaceStatus,
   readWorkspaceCollection,
   filterWorkspace,
@@ -297,7 +304,9 @@ const tab = ref('main'),
   view = ref(props.module === 'logic' ? 'cards' : 'list'),
   kindFilter = ref(null),
   authorFilter = ref(null),
-  linksFilter = ref(null),
+  linksFilter = ref('all'),
+  logicStatus = ref('all'),
+  logicSort = ref(null),
   creditGroup = ref('open'),
   typeOpen = ref(false),
   selectedType = ref(null),
@@ -325,20 +334,35 @@ const contentKind = computed(() =>
   contentTypes.includes(route.query.kind) ? route.query.kind : null,
 )
 const filtered = computed(() =>
-  filterWorkspace(resource.state.data || [], {
-    search: search.value,
-    status: status.value,
-    sort: sort.value,
-  }).filter((r) => {
-    if (props.module !== 'credit') return true
-    const closed = ['Settled', 'Closed'],
-      cancelled = ['Cancelled', 'Canceled', 'Rejected']
-    return creditGroup.value === 'closed'
-      ? closed.includes(r.status)
-      : creditGroup.value === 'cancelled'
-        ? cancelled.includes(r.status)
-        : ![...closed, ...cancelled].includes(r.status)
-  }),
+  orderLogicCatalog(
+    filterWorkspace(resource.state.data || [], {
+      search: search.value,
+      status: status.value,
+      sort: sort.value,
+    }).filter((r) => {
+      if (props.module !== 'credit') return true
+      const closed = ['Settled', 'Closed'],
+        cancelled = ['Cancelled', 'Canceled', 'Rejected']
+      return creditGroup.value === 'closed'
+        ? closed.includes(r.status)
+        : creditGroup.value === 'cancelled'
+          ? cancelled.includes(r.status)
+          : ![...closed, ...cancelled].includes(r.status)
+    }),
+    props.module === 'logic' ? logicSort.value : null,
+  ),
+)
+watch(
+  () => resource.state.data,
+  (rows) => {
+    if (
+      props.module === 'logic' &&
+      Array.isArray(rows) &&
+      logicSort.value &&
+      !canOrderLogicCatalog(rows, logicSort.value)
+    )
+      logicSort.value = null
+  },
 )
 
 const pageRows = filtered
@@ -352,11 +376,9 @@ const searchPlaceholder = computed(() =>
 const statusOptions = computed(() =>
   props.module === 'communication'
     ? publicationStatuses
-    : props.module === 'logic'
-      ? logicStatuses.map((label) => ({ label, value: label }))
-      : [...new Set((resource.state.data || []).map((r) => r.status).filter(Boolean))].map(
-          (value) => ({ label: workspaceStatus(value), value }),
-        ),
+    : [...new Set((resource.state.data || []).map((r) => r.status).filter(Boolean))].map(
+        (value) => ({ label: workspaceStatus(value), value }),
+      ),
 )
 const viewOptions = computed(() => [
   { label: 'Lista', value: 'list' },
@@ -406,6 +428,46 @@ const metrics = computed(() => {
             : 'Indisponível',
   }))
 })
+// The catalog provides creation dates, but not the operational projection.
+// Enable only options backed by complete, validated data from that response.
+const logicStatusOptions = [
+  { label: 'Status: Todos', value: 'all' },
+  ...['Ativa', 'Pausada', 'Em Análise', 'Inativa'].map((label) => ({
+    label,
+    value: label,
+    disable: true,
+  })),
+]
+const logicLinksOptions = [
+  { label: 'Vínculos: Todos', value: 'all' },
+  ...['Com vínculos', 'Sem vínculos'].map((label) => ({ label, value: label, disable: true })),
+]
+const logicSortOptions = computed(() =>
+  [
+    { label: 'Maior Performance do Ciclo', groupLabel: 'PERFORMANCE' },
+    { label: 'Melhor Perf. Desde Início' },
+    { label: 'Maior Nº Papéis', groupLabel: 'OPERACIONAL' },
+    { label: 'Maior Alvo do Ciclo' },
+    { label: 'Menor Intervalo' },
+    // Catalog edits are not assumed to be operational motor updates.
+    { label: 'Última Atualização' },
+    {
+      label: 'Mais Recentes',
+      value: 'recent',
+      groupLabel: 'GERAL',
+      disable: !canOrderLogicCatalog(resource.state.data, 'recent'),
+    },
+    {
+      label: 'Mais Antigas',
+      value: 'oldest',
+      disable: !canOrderLogicCatalog(resource.state.data, 'oldest'),
+    },
+  ].map((option) => ({
+    ...option,
+    value: option.value || option.label,
+    disable: option.disable ?? true,
+  })),
+)
 const logicCardLabels = [
   'Índice Atual',
   'Alvo do Ciclo',
