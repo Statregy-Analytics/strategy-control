@@ -82,5 +82,70 @@
     ]
   },
   "apiWrites": 0,
-  "published": "pending"
+  "published": {
+    "url": "https://admin.strategyanalytics.com.br/logics?editor=open&id=e99dec56-2b66-4cab-9bb3-12e084834817",
+    "deploy": "https://github.com/Statregy-Analytics/strategy-control/actions/runs/43757389939",
+    "conclusion": "success",
+    "record": "Quant Core",
+    "readonly": "unknown; unavailable; no false off state",
+    "draftUnknownAriaPressed": "mixed",
+    "editing": [
+      "unknown to on by Space",
+      "collapse Enter",
+      "expand Space",
+      "on to off",
+      "off to on",
+      "LG09 return keeps collapsed",
+      "cancel restores unknown"
+    ],
+    "creation": [
+      "off by default",
+      "fictitious name preserved across collapse/expand",
+      "cancelled",
+      "catalog count unchanged at one"
+    ],
+    "desktop": {
+      "viewport": 1280,
+      "columns": 5,
+      "rows": 5,
+      "rowHeight": 36.796875,
+      "unknownCells": 20,
+      "headersTextTransform": "none"
+    },
+    "mobile": {
+      "viewport": 390,
+      "documentWidth": 375,
+      "zoneWidth": 309,
+      "tableRegionWidth": 267,
+      "tableScrollWidth": 721,
+      "unknownCells": 20,
+      "keyboardScrollLeft": 120
+    },
+    "onAssets": {
+      "sliders": [
+        16,
+        16
+      ],
+      "chevron-up": [
+        16,
+        16
+      ]
+    },
+    "console": [],
+    "operationalWrites": 0,
+    "activeScreenshotIsCancelledDraft": true,
+    "viewportReset": true
+  },
+  "codeCommit": "bb4a79f",
+  "checks": {
+    "lint": "passed",
+    "build": "passed",
+    "tests": {
+      "local": 309,
+      "versioned": 301,
+      "failed": 0
+    },
+    "diff": "delivery paths passed",
+    "detectorAntiPatterns": 0
+  }
 }

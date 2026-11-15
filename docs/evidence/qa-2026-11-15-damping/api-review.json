@@ -55,5 +55,40 @@
         "example": "2026-11-15T00:00:00Z"
       }
     }
-  }
+  },
+  "operations": [
+    {
+      "path": "/api/v1/admin/contracts/catalog/engines",
+      "method": "get",
+      "requestSchema": null,
+      "requestFields": []
+    },
+    {
+      "path": "/api/v1/admin/contracts/catalog/engines",
+      "method": "post",
+      "requestSchema": "CreateEngineRequest",
+      "requestFields": [
+        "code",
+        "name",
+        "description",
+        "isSelectable"
+      ]
+    },
+    {
+      "path": "/api/v1/admin/contracts/catalog/engines/{engineId}",
+      "method": "patch",
+      "requestSchema": "UpdateEngineRequest",
+      "requestFields": [
+        "name",
+        "description",
+        "isSelectable"
+      ]
+    },
+    {
+      "path": "/api/v1/admin/contracts/{contractId}/engines",
+      "method": "get",
+      "requestSchema": null,
+      "requestFields": []
+    }
+  ]
 }
