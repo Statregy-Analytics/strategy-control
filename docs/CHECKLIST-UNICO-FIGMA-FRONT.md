@@ -6,10 +6,25 @@ Atualização: 15/11/2026. Este é o índice desta revisão ampla. Evidências a
 
 - [ ] Todos os frames/estados abaixo comparados visualmente, inclusive erro, vazio e retorno.
 - [ ] Fluxos de escrita e leitura integrados testados com dados fictícios.
-- [x] Admin: lint e build aprovados; 312 testes locais passaram (incluem 8 testes de estudo já existentes no worktree; 304 versionados neste complemento).
+- [x] Admin: lint e build aprovados; 315 testes locais passaram (incluem 8 testes de estudo já existentes no worktree; 307 versionados neste complemento).
 - [ ] Reexecutar os checks após concluir as demais telas; Área do Cliente ainda não alterada nesta rodada.
 - [ ] Deploy confirmado e testes repetidos nas URLs publicadas.
 - [x] Pendências de frontend separadas das pendências reais da API, do designer e da limitação de consulta ao Figma.
+
+## EC06 — limites diários e mensais (15/11)
+
+- [x] Referência já recuperada 1484:79883 reconfirmada e arquivada com contexto completo, screenshot e três SVGs originais em [evidence/qa-2026-11-15-limits](evidence/qa-2026-11-15-limits).
+- [x] Quatro campos existentes organizados em Diário/Mensal, com Shield/Timer/Calendar, sufixos % e nota contornada do desenho. Nenhum campo de limite efetivo, botão ou ação foi acrescentado; não há cálculo/valor novo na nota.
+- [x] Extraído PercentInput neutro usando LabelForm/QInput e reutilizado em Probabilidade. LabelForm conserva o padrão de 14 px; tamanho de 12 px é opcional no EC06. Probabilidade mantém 14 px/linha de 14 px, inputs de 36 px, campo negativo bloqueado e estados 50/50/60/50.
+- [x] Limites aceitam edição decimal assinada com ponto ou vírgula, exibem vírgula e pelo menos duas casas ao sair do campo, mantêm o modelo numérico e não arredondam a precisão digitada. Campos vazios continuam vazios; zero real aparece como 0,00. Pisos negativos usam #ff8a8a, com correção local da regra global que forçava branco.
+- [x] Local integrado: Quant Core com quatro campos vazios/bloqueados; edição temporária de 0,80/-0,80 e 12,00/-12,00, sinal incorreto sinalizado por aria-invalid, retorno do LG09 e configuração recolhida/reaberta preservando valores. Limpar/restaurar os quatro campos volta a desabilitar Salvar Alterações; Cancelar restaura leitura vazia. Nenhuma gravação.
+- [x] Isolado: painel 798,39 × 448 px, dois grupos de aproximadamente 362,2 × 206 px, quatro inputs de 36 px e três SVGs de 16 px. Digitar -0.805 retorna modelo -0.805 e exibição -0,805; zero não vira dado ausente; leitura bloqueia os campos. Rótulo padrão permaneceu em 14 px/gap 4 px. Exemplos isolados removidos antes da entrega.
+- [x] Revisão em 1280/390 px: painel real desktop de 895 × 448 px e pisos vermelhos; móvel de 309 × 734 px, grupos em uma coluna, página de 375 px sem excesso horizontal e digitação sequencial -0,8 preservada. Isolado móvel: 327 × 718 px, também sem excesso horizontal.
+- [ ] Checks finais, publicação e reteste em homologação.
+
+**API:** OpenAPI reconsultada em 15/11 não contém os quatro limites/configuração operacional em EngineResponse. POST/PATCH do catálogo continuam limitados a metadados; faltam projeção/consulta e gravação operacional. O front não injeta os exemplos 0,80/-0,80/12,00/-12,00 em motor real, não chama metadados para salvar configuração e mantém as validações de sinal/hierarquia existentes. Evidência: api-review.json. Não declarar consulta/gravação dos limites integradas.
+
+**Designer:** nenhum novo bloqueio do EC06 consultado. Dois grupos internos seguem o frame, preservando a estrutura vertical das seções do editor; os demais frames continuam separados no inventário.
 
 ## EC04.1 / EC04.2 — probabilidade direcional válida e inválida (15/11)
 
@@ -479,7 +494,7 @@ Legenda: **Preparado / revisão pendente** = há código novo, mas a validação
 | [1484:79755](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-79755) | EC04.2 · Probabilidade · 60/50 · soma 110% inválida                                           | Estados compostos/testados; consulta e gravação dependem da API                                             |
 | [1484:79802](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-79802) | EC05.1 · Zona de amortecimento · desativada                                                   | Composição/estados testados; projeção e gravação dependem da API                                             |
 | [1484:79819](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-79819) | EC05.2 · Zona de amortecimento · ativada + tabela                                             | Composição/estados testados; projeção e gravação dependem da API                                             |
-| [1484:79883](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-79883) | EC06 · Limites operacionais · regra contornada                                                | Preparado / revisão pendente                                             |
+| [1484:79883](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-79883) | EC06 · Limites operacionais · regra contornada                                                | Composição/edição testadas; projeção e gravação dependem da API                                             |
 | [1484:79941](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-79941) | EC07 · Fechamento soberano · separador                                                        | Preparado / revisão pendente                                             |
 | [1484:79981](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-79981) | F03 · Edição da lógica · Simulações + validação                                               | Revalidar                                                                |
 | [1484:79982](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-79982) | LG06 · PE · Modo de edição · Simulação abaixo · TELA BASE DE EDIÇÃO · DESIGN GLASS            | Preparado / revisão pendente                                             |

@@ -1,9 +1,5 @@
-export function probabilityNumber(value) {
-  if (typeof value !== 'number' && typeof value !== 'string') return null
-  if (typeof value === 'string' && !value.trim()) return null
-  const number = Number(value)
-  return Number.isFinite(number) ? number : null
-}
+import { numberInputValue as probabilityNumber } from './numberInputValue.js'
+export { probabilityNumber }
 
 export function probabilityState(positiveValue, negativeValue) {
   const positive = probabilityNumber(positiveValue)

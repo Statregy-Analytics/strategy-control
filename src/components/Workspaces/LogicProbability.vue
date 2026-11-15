@@ -11,41 +11,15 @@
     "
   >
     <div class="logic-probability-fields">
-      <label-form text-label="Chance Positiva (%)" style="gap: 8px">
-        <div class="logic-probability-input">
-          <q-input
-            :model-value="positive"
-            type="number"
-            min="0"
-            max="100"
-            step="any"
-            outlined
-            dense
-            dark
-            hide-bottom-space
-            :disable="disabled"
-            aria-label="Chance Positiva (%)"
-            :aria-invalid="state.positive !== null && (state.positive < 0 || state.positive > 100)"
-            @update:model-value="$emit('update:positive', probabilityNumber($event))"
-          />
-          <span class="logic-probability-suffix" aria-hidden="true">%</span>
-        </div>
-      </label-form>
-      <label-form text-label="Chance Negativa (%)" style="gap: 8px">
-        <div class="logic-probability-input">
-          <q-input
-            :model-value="negative"
-            type="number"
-            outlined
-            dense
-            dark
-            hide-bottom-space
-            disable
-            aria-label="Chance Negativa (%)"
-          />
-          <span class="logic-probability-suffix" aria-hidden="true">%</span>
-        </div>
-      </label-form>
+      <percent-input
+        :model-value="positive"
+        label="Chance Positiva (%)"
+        :min="0"
+        :max="100"
+        :disabled="disabled"
+        @update:model-value="$emit('update:positive', $event)"
+      />
+      <percent-input :model-value="negative" label="Chance Negativa (%)" disabled />
     </div>
     <div class="logic-probability-visual">
       <p>Barra Visual 100%</p>
@@ -98,12 +72,8 @@
 <script setup>
 import { computed } from 'vue'
 import ProfileSection from 'src/components/Entity/ProfileSection.vue'
-import LabelForm from 'src/components/Form/LabelForm.vue'
-import {
-  probabilityState,
-  probabilityLabel,
-  probabilityNumber,
-} from 'src/services/logicProbabilityModel'
+import PercentInput from 'src/components/Form/PercentInput.vue'
+import { probabilityState, probabilityLabel } from 'src/services/logicProbabilityModel'
 const props = defineProps({
   positive: { type: [Number, String], default: null },
   negative: { type: [Number, String], default: null },
@@ -158,46 +128,6 @@ const state = computed(() => probabilityState(props.positive, props.negative))
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 24px;
-}
-.logic-probability-fields :deep(.LabelForm) {
-  min-width: 0;
-}
-.logic-probability-fields :deep(.LabelForm > span) {
-  line-height: 14px;
-}
-.logic-probability-input {
-  position: relative;
-  min-width: 0;
-}
-.logic-probability-input :deep(.q-field__control) {
-  height: 36px;
-  min-height: 36px;
-  border-radius: 8px;
-  background: rgba(255, 255, 255, 0.05);
-}
-.logic-probability-input :deep(.q-field__native) {
-  min-height: 36px;
-  padding-right: 22px;
-  font-size: 14px;
-  line-height: 20px;
-  color: rgba(255, 255, 255, 0.72);
-}
-.logic-probability-input :deep(input[type='number']) {
-  appearance: textfield;
-}
-.logic-probability-input :deep(input::-webkit-inner-spin-button),
-.logic-probability-input :deep(input::-webkit-outer-spin-button) {
-  appearance: none;
-  margin: 0;
-}
-.logic-probability-suffix {
-  position: absolute;
-  right: 12px;
-  top: 8px;
-  font-size: 14px;
-  font-weight: 700;
-  line-height: 20px;
-  pointer-events: none;
 }
 .logic-probability-visual {
   padding-top: 24px;

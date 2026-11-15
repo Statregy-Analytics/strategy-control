@@ -120,6 +120,11 @@
                 :negative="form.negative"
                 :disabled="!editing"
               />
+              <logic-limits
+                v-else-if="section.key === 'limits'"
+                v-model="form"
+                :disabled="!editing"
+              />
               <profile-section v-else :title="section.title" :caption="section.caption"
                 ><div class="workspace-form-grid">
                   <template v-for="field in section.fields" :key="field.key"
@@ -240,6 +245,7 @@ import LogicHistory from './LogicHistory.vue'
 import LogicConfiguration from './LogicConfiguration.vue'
 import LogicDampingZone from './LogicDampingZone.vue'
 import LogicProbability from './LogicProbability.vue'
+import LogicLimits from './LogicLimits.vue'
 import { useFinanceResource } from 'src/composables/useFinanceResource'
 import { financeGet, columns } from 'src/services/financeService'
 import { getPreferenceCatalog } from 'src/services/customerService'
@@ -360,13 +366,7 @@ const sections = computed(() => [
   {
     key: 'limits',
     title: 'Limites Operacionais',
-    caption: 'Defina as bandas de variação diária e mensal.',
-    fields: fields([
-      ['dailyCeiling', 'Teto Diário (%)'],
-      ['dailyFloor', 'Piso Diário (%)'],
-      ['monthlyCeiling', 'Teto Mensal (%)'],
-      ['monthlyFloor', 'Piso Mensal (%)'],
-    ]),
+    fields: [],
   },
   {
     key: 'buffer',
