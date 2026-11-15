@@ -11,6 +11,20 @@ Atualização: 15/11/2026. Este é o índice desta revisão ampla. Evidências a
 - [ ] Deploy confirmado e testes repetidos nas URLs publicadas.
 - [x] Pendências de frontend separadas das pendências reais da API, do designer e da limitação de consulta ao Figma.
 
+## LG03 — resumo executivo temporário do motor (15/11)
+
+- [x] Referência completa recuperada e arquivada (1484:77198), com screenshot em [evidence/qa-2026-11-15-lg03](evidence/qa-2026-11-15-lg03). O card em hover 1484:77226 também foi consultado; esta entrega não aprova sua reformulação completa.
+- [x] Resumo ligado ao título do card, sem novo campo ou botão visual. Abre por ponteiro/clique, foco, Enter e Espaço; Escape, saída de foco/ponteiro e troca de contexto fecham o painel.
+- [x] Composição do LG03: título, descrição real do catálogo, performance, área do gráfico, Papéis / Contratos, ciclo, próxima atualização e fechamento. Sem dados operacionais: valores indisponíveis, sem curva ilustrativa, contratos de exemplo, contagem zero ou fechamento aplicado inventados.
+- [x] Painel de 430 × 560 px no desktop; posição adaptada e rolagem interna na tela pequena. Base escura do glass preserva leitura sobre os dados da tela; título, bordas, espaçamentos e blocos seguem a referência.
+- [x] Local integrado: Quant Core, abertura por Enter/Espaço/clique, Escape, Tab, Cards/Lista, busca sem resultado, abrir o motor e voltar. Nenhuma gravação na API.
+- [x] Isolado: descrição ausente e descrição fictícia de 672 caracteres. Quebra de texto e rolagem interna sem excesso horizontal em 1280/390 px; arquivos temporários removidos. Capturas isoladas não representam dados retornados pelo backend.
+- [ ] Publicação e reteste na URL de homologação.
+
+**API:** OpenAPI reconsultada em 15/11: somente catálogo de motores e vínculos de contrato, sem resumo operacional, performance/série, ciclo, próxima atualização ou fechamento. EngineResponse fornece descrição, mas não os demais campos do LG03. api-review.json preserva paths e schemas publicados. O estado integrado disponível foi testado; o resumo operacional completo continua bloqueado pela API.
+
+**Designer:** nenhum novo bloqueio para o painel isolado LG03. A revisão completa do card e de suas ações continua separada no inventário.
+
 ## LG11 — configuração do motor minimizada (15/11)
 
 - [x] Reconfirmado e arquivado o contexto completo do LG11 (`1484:85344`), com screenshot e quatro SVGs originais em [evidence/qa-2026-11-15-lg11](evidence/qa-2026-11-15-lg11).
@@ -376,7 +390,7 @@ Legenda: **Preparado / revisão pendente** = há código novo, mas a validação
 | [1484:76064](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-76064) | F01 · Seleção de lógicas · Cards / Lista + painel temporário                                  | Revalidar                                                                |
 | [1484:76065](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-76065) | LG01 · PB · Seleção de lógicas · Cards · TELA BASE · DESIGN GLASS                             | Preparado / revisão pendente                                             |
 | [1484:76704](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-76704) | LG02 · SP · Seleção de lógicas · Lista · SUBPÁGINA · DESIGN GLASS                             | Preparado / revisão pendente                                             |
-| [1484:77198](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-77198) | LG03 · MT · Resumo executivo da lógica · Hover temporário · PAINEL ISOLADO · DESIGN GLASS     | Preparado / revisão pendente                                             |
+| [1484:77198](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-77198) | LG03 · MT · Resumo executivo da lógica · Hover temporário · PAINEL ISOLADO · DESIGN GLASS     | Estado de catálogo implementado; resumo operacional depende da API                                             |
 | [1484:77225](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-77225) | LG01 · EC · Delta-Income em hover · Abrir · Editar · Vínculos · DESIGN GLASS                  | Preparado / revisão pendente                                             |
 | [1484:77226](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-77226) | EC01 · Card em hover · Abrir · Editar · Vínculos                                              | Preparado / revisão pendente                                             |
 | [1484:77323](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-77323) | LG04 · EC · Filtros abertos + Lista em hover · PAINEL DE ESTADOS SOLTO · DESIGN GLASS         | Preparado / revisão pendente                                             |

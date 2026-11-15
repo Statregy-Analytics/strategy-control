@@ -153,9 +153,18 @@
           <div v-else-if="view === 'cards'" class="workspace-cards">
             <article v-for="row in pageRows" :key="row.id" class="workspace-record">
               <div class="workspace-record-head">
-                <div>
+                <logic-executive-summary
+                  v-if="module === 'logic'"
+                  :name="row.name || row.code"
+                  :description="row.description"
+                >
+                  <h2><workspace-icon name="chart-pie" />{{ row.name || row.code }}</h2>
+                  <small>{{ row.code }}</small>
+                  <q-badge outline>{{ workspaceStatus(row.status) }}</q-badge>
+                </logic-executive-summary>
+                <div v-else>
                   <h2>
-                    <workspace-icon :name="module === 'logic' ? 'chart-pie' : 'file-text'" />
+                    <workspace-icon name="file-text" />
                     {{ row.name || row.title || row.client?.displayName || row.publicCode }}
                   </h2>
                   <small>{{ row.code || row.publicCode }}</small>
@@ -259,6 +268,7 @@
   </q-page>
 </template>
 <script setup>
+import LogicExecutiveSummary from 'src/components/Workspaces/LogicExecutiveSummary.vue'
 import PublicationStatus from 'src/components/Workspaces/PublicationStatus.vue'
 import { computed, ref, watch, onScopeDispose } from 'vue'
 import { useRoute, useRouter } from 'vue-router'

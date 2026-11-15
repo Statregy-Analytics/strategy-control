@@ -1,0 +1,81 @@
+const imgFrame = "https://www.figma.com/api/mcp/asset/f3d0aa1f-e41e-41e0-89da-3c6f52c3ebf3.svg";
+
+export default function Lg03MtResumoExecutivoDaLogicaHoverTemporarioPainelIsoladoDesignGlass() {
+  return (
+    <div className="backdrop-blur-[20px] bg-[rgba(255,255,255,0.06)] border border-[var(--sa-color-border-glass,rgba(255,255,255,0.2))] border-solid content-stretch flex flex-col gap-[12px] items-start overflow-clip p-[20px] relative rounded-[12px] shadow-[4px_4px_12px_0px_rgba(0,0,0,0.13)] size-full" data-node-id="1484:77198" data-name="LG03 · MT · Resumo executivo da lógica · Hover temporário · PAINEL ISOLADO · DESIGN GLASS">
+      <p className="[word-break:break-word] font-['Inter:Semi_Bold'] font-semibold leading-[normal] min-w-full not-italic relative shrink-0 text-[20px] text-[color:var(--sa-color-text-primary,white)] w-[min-content]" data-node-id="1484:77199">
+        Resumo Executivo
+      </p>
+      <p className="[word-break:break-word] font-['Inter:Regular'] font-normal h-[48px] leading-[normal] min-w-full not-italic relative shrink-0 text-[14px] text-[color:var(--sa-color-text-muted,rgba(255,255,255,0.6))] w-[min-content]" data-node-id="1484:77200">
+        O motor Alpha-2 opera com intervalo de 1h visando alvo trimestral de 4,8%. Possui 4 papéis/contratos vinculados em BRL.
+      </p>
+      <div className="[word-break:break-word] content-stretch flex font-['Inter:Semi_Bold'] font-semibold h-[22px] items-center justify-between leading-[normal] not-italic overflow-clip relative shrink-0 w-full whitespace-nowrap" data-node-id="1484:77201" data-name="Frame">
+        <p className="relative shrink-0 text-[12px] text-[color:var(--sa-color-text-muted,rgba(255,255,255,0.6))]" data-node-id="1484:77202">
+          PERFORMANCE DO CICLO ATUAL
+        </p>
+        <p className="relative shrink-0 text-[14px] text-[color:var(--color\/v2\/text\/value-positive,#66e59e)]" data-node-id="1484:77203">
+          +4,80%
+        </p>
+      </div>
+      <div className="bg-[rgba(255,255,255,0.05)] border border-[var(--sa-color-text-nav-active,#00a3ff)] border-solid h-[70px] overflow-clip relative rounded-[8px] shrink-0 w-full" data-node-id="1484:77204" data-name="Frame">
+        <div className="absolute h-[52px] left-[19px] top-[8px] w-[350px]" data-node-id="1484:77205" data-name="Frame">
+          <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgFrame} />
+        </div>
+      </div>
+      <p className="[word-break:break-word] font-['Inter:Semi_Bold'] font-semibold leading-[normal] min-w-full not-italic relative shrink-0 text-[12px] text-[color:var(--sa-color-text-muted,rgba(255,255,255,0.6))] w-[min-content]" data-node-id="1484:77208">
+        PAPÉIS / CONTRATOS (4)
+      </p>
+      <div className="[word-break:break-word] backdrop-blur-[20px] bg-[rgba(255,255,255,0.06)] border border-[rgba(255,255,255,0.2)] border-solid content-stretch flex flex-col gap-[7px] h-[130px] items-start leading-[normal] not-italic overflow-clip p-[8px] relative rounded-[8px] shadow-[4px_4px_12px_0px_rgba(0,0,0,0.13)] shrink-0 text-[color:var(--sa-color-text-muted,rgba(255,255,255,0.6))] w-full whitespace-nowrap" data-node-id="1484:77209" data-name="Frame">
+        <div className="bg-[rgba(255,255,255,0.05)] border border-[var(--sa-color-border-glass,rgba(255,255,255,0.2))] border-solid content-stretch flex h-[31px] items-center justify-between overflow-clip px-[10px] relative rounded-[6px] shadow-[0px_2px_4px_0px_rgba(0,0,0,0.14)] shrink-0 w-full" data-node-id="1484:77210" data-name="Frame">
+          <p className="font-['Inter:Medium'] font-medium relative shrink-0 text-[12px]" data-node-id="1484:77211">
+            Prev. Privada A
+          </p>
+          <p className="font-['Inter:Regular'] font-normal relative shrink-0 text-[10px]" data-node-id="1484:77212">
+            CTR-88123
+          </p>
+        </div>
+        <div className="bg-[rgba(255,255,255,0.05)] border border-[var(--sa-color-border-glass,rgba(255,255,255,0.2))] border-solid content-stretch flex h-[31px] items-center justify-between overflow-clip px-[10px] relative rounded-[6px] shadow-[0px_2px_4px_0px_rgba(0,0,0,0.14)] shrink-0 w-full" data-node-id="1484:77213" data-name="Frame">
+          <p className="font-['Inter:Medium'] font-medium relative shrink-0 text-[12px]" data-node-id="1484:77214">
+            Prev. Privada B
+          </p>
+          <p className="font-['Inter:Regular'] font-normal relative shrink-0 text-[10px]" data-node-id="1484:77215">
+            CTR-88124
+          </p>
+        </div>
+        <div className="bg-[rgba(255,255,255,0.05)] border border-[var(--sa-color-border-glass,rgba(255,255,255,0.2))] border-solid content-stretch flex h-[31px] items-center justify-between overflow-clip px-[10px] relative rounded-[7px] shrink-0 w-full" data-node-id="1484:77216" data-name="Frame">
+          <p className="font-['Inter:Medium'] font-medium relative shrink-0 text-[12px]" data-node-id="1484:77217">
+            Prev. Privada C
+          </p>
+          <p className="font-['Inter:Regular'] font-normal relative shrink-0 text-[10px]" data-node-id="1484:77218">
+            CTR-88125
+          </p>
+        </div>
+      </div>
+      <div className="bg-[rgba(255,255,255,0.05)] border border-[var(--sa-color-border-glass,rgba(255,255,255,0.2))] border-solid content-stretch flex h-[36px] items-center overflow-clip px-[12px] relative rounded-[7px] shrink-0 w-full" data-node-id="1484:77219" data-name="Frame">
+        <p className="[word-break:break-word] font-['Inter:Regular'] font-normal leading-[normal] not-italic relative shrink-0 text-[12px] text-[color:var(--sa-color-text-muted,rgba(255,255,255,0.6))] whitespace-nowrap" data-node-id="1484:77220">
+          Ciclo: 01/10/2025 — 31/12/2025
+        </p>
+      </div>
+      <div className="bg-[rgba(255,255,255,0.05)] border border-[var(--sa-color-border-glass,rgba(255,255,255,0.2))] border-solid content-stretch flex h-[36px] items-center overflow-clip px-[12px] relative rounded-[7px] shrink-0 w-full" data-node-id="1484:77221" data-name="Frame">
+        <p className="[word-break:break-word] font-['Inter:Regular'] font-normal leading-[normal] not-italic relative shrink-0 text-[12px] text-[color:var(--sa-color-text-muted,rgba(255,255,255,0.6))] whitespace-nowrap" data-node-id="1484:77222">
+          Próxima atualização: —
+        </p>
+      </div>
+      <div className="bg-[rgba(0,0,0,0.2)] border-[0.5px] border-solid border-white content-stretch flex items-center justify-center overflow-clip pl-[9px] pr-[11px] py-[3px] relative rounded-[8px] shrink-0" data-node-id="1484:77223" data-name="Frame">
+        <p className="[word-break:break-word] font-['Inter:Medium'] font-medium leading-[normal] not-italic relative shrink-0 text-[12px] text-white whitespace-nowrap" data-node-id="1484:77224">
+          Fechamento aplicado
+        </p>
+      </div>
+    </div>
+  );
+}
+SUPER CRITICAL: The generated React+Tailwind code MUST be converted to match the target project's technology stack and styling system.
+1. Analyze the target codebase to identify: technology stack, styling approach, component patterns, and design tokens
+2. Convert React syntax to the target framework/library
+3. Transform all Tailwind classes to the target styling system while preserving exact visual design
+4. Follow the project's existing patterns and conventions
+DO NOT install any Tailwind as a dependency unless the user instructs you to do so.
+
+Node ids have been added to the code as data attributes, e.g. `data-node-id="1:2"`.
+These styles are contained in the design: SA/Glass/Surface Subtle: Effect(type: BACKGROUND_BLUR, radius: 40); Effect(type: DROP_SHADOW, color: #00000021, offset: (4, 4), radius: 12, spread: 0).
+The generated code contains image and SVG URL constants, e.g. const image = 'https://www.figma.com/api/mcp/asset/550e8400-e29b-41d4-a716-446655440000.png'. These URLs are temporary download sources and expire after 7 days. Download each asset into the project with curl -L, then replace its URL in the generated code with a reference to the downloaded asset. Never use the temporary URLs as runtime image sources.

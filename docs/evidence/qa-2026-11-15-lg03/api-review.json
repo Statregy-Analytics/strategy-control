@@ -1,0 +1,188 @@
+{
+  "date": "2026-11-15",
+  "source": "https://strategyanalytics.codebiz.com.br/openapi/v1.json",
+  "enginePaths": [
+    "/api/v1/admin/contracts/catalog/engines",
+    "/api/v1/admin/contracts/catalog/engines/{engineId}",
+    "/api/v1/admin/contracts/{contractId}/engines"
+  ],
+  "engineSchemas": {
+    "ApiResponseOfEngineResponse": {
+      "type": "object",
+      "properties": {
+        "data": {
+          "oneOf": [
+            {
+              "type": "null"
+            },
+            {
+              "$ref": "#/components/schemas/EngineResponse"
+            }
+          ]
+        },
+        "success": {
+          "type": "boolean",
+          "example": true
+        },
+        "requestId": {
+          "type": "string"
+        },
+        "correlationId": {
+          "type": [
+            "null",
+            "string"
+          ]
+        },
+        "errors": {
+          "type": "array",
+          "items": {
+            "$ref": "#/components/schemas/ApiErrorItem"
+          }
+        }
+      }
+    },
+    "ApiResponseOfIReadOnlyCollectionOfEngineResponse": {
+      "type": "object",
+      "properties": {
+        "data": {
+          "type": [
+            "null",
+            "array"
+          ],
+          "items": {
+            "$ref": "#/components/schemas/EngineResponse"
+          }
+        },
+        "success": {
+          "type": "boolean",
+          "example": true
+        },
+        "requestId": {
+          "type": "string"
+        },
+        "correlationId": {
+          "type": [
+            "null",
+            "string"
+          ]
+        },
+        "errors": {
+          "type": "array",
+          "items": {
+            "$ref": "#/components/schemas/ApiErrorItem"
+          }
+        }
+      }
+    },
+    "ClientContractEngineResponse": {
+      "required": [
+        "name",
+        "connectionStatus"
+      ],
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "example": "Jane Doe"
+        },
+        "connectionStatus": {
+          "type": "string"
+        }
+      }
+    },
+    "ContractListEngineResponse": {
+      "required": [
+        "engineId",
+        "name"
+      ],
+      "type": "object",
+      "properties": {
+        "engineId": {
+          "type": "string",
+          "format": "uuid",
+          "example": "3fa85f64-5717-4562-b3fc-2c963f66afa6"
+        },
+        "name": {
+          "type": "string",
+          "example": "Jane Doe"
+        }
+      }
+    },
+    "ContractPrimaryEngineResponse": {
+      "required": [
+        "engineId",
+        "code",
+        "name",
+        "connectionStatus"
+      ],
+      "type": "object",
+      "properties": {
+        "engineId": {
+          "type": "string",
+          "format": "uuid",
+          "example": "3fa85f64-5717-4562-b3fc-2c963f66afa6"
+        },
+        "code": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string",
+          "example": "Jane Doe"
+        },
+        "connectionStatus": {
+          "type": "string"
+        }
+      }
+    },
+    "EngineResponse": {
+      "required": [
+        "id",
+        "code",
+        "name",
+        "description",
+        "isSelectable",
+        "createdAtUtc",
+        "updatedAtUtc"
+      ],
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "format": "uuid",
+          "example": "3fa85f64-5717-4562-b3fc-2c963f66afa6"
+        },
+        "code": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string",
+          "example": "Jane Doe"
+        },
+        "description": {
+          "type": [
+            "null",
+            "string"
+          ],
+          "example": "Example description."
+        },
+        "isSelectable": {
+          "type": "boolean",
+          "example": true
+        },
+        "createdAtUtc": {
+          "type": "string",
+          "format": "date-time",
+          "example": "2026-11-15T00:00:00Z"
+        },
+        "updatedAtUtc": {
+          "type": [
+            "null",
+            "string"
+          ],
+          "format": "date-time",
+          "example": "2026-11-15T00:00:00Z"
+        }
+      }
+    }
+  }
+}
