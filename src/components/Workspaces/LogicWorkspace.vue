@@ -540,6 +540,11 @@ onScopeDispose(() => {
 .logic-links {
   scroll-margin-top: 20px;
 }
+@media (max-width: 1023px) {
+  .logic-links {
+    scroll-margin-top: 72px;
+  }
+}
 .logic-links:focus-visible {
   outline: 2px solid #00a3ff;
   outline-offset: 4px;
