@@ -674,7 +674,14 @@
           ></contract-panel></div
       ></resource-state>
     </main>
-    <q-dialog v-model="clientOpen" :persistent="busy"
+    <contract-participant-dialog
+      v-if="clientOpen && !draft"
+      :busy="busy"
+      :existing-ids="(detail.state.data?.participants || []).map((p) => p.clientId)"
+      :submit="includeParticipant"
+      @close="clientOpen = false"
+    />
+    <q-dialog v-if="draft" v-model="clientOpen" :persistent="busy"
       ><q-card class="contract-modal"
         ><h2>{{ draft ? 'Selecionar clientes para vincular' : 'Adicionar cliente vinculado' }}</h2>
         <customer-select v-model="selectedClient" @resolved="selectedClientData = $event" />
@@ -745,6 +752,7 @@ import ContractEngines from './ContractEngines.vue'
 import ContractDocuments from './ContractDocuments.vue'
 import DebtRegistry from './DebtRegistry.vue'
 import ParticipantDetailPanel from './ParticipantDetail.vue'
+import ContractParticipantDialog from './ContractParticipantDialog.vue'
 import LabelForm from 'src/components/Form/LabelForm.vue'
 import GlassSelect from 'src/components/Entity/GlassSelect.vue'
 import MoneyInput from 'src/components/Form/MoneyInput.vue'
@@ -1060,6 +1068,13 @@ async function addClient() {
   clientOpen.value = false
   selectedClient.value = null
   selectedClientData.value = null
+}
+async function includeParticipant(clientId) {
+  if (busy.value) return { success: false }
+  if ((detail.state.data?.participants || []).some((p) => p.clientId === clientId))
+    return { success: false, message: 'Este cliente já está vinculado.' }
+  const success = await writeSection('post', 'participants', { clientId, allocatedAmount: null })
+  return { success, message: success ? '' : error.value }
 }
 function removeClient(key) {
   form.value.clientAllocations = form.value.clientAllocations.filter((p) => p.clientId !== key)

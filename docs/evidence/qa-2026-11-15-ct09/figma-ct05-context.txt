@@ -1,0 +1,291 @@
+const imgInfo = "https://www.figma.com/api/mcp/asset/8622b3d6-33e5-4d78-9b28-6138425d0b17.svg";
+const imgSearch = "https://www.figma.com/api/mcp/asset/7714cd7f-e751-4355-9a53-807ae082c9f4.svg";
+const imgUser = "https://www.figma.com/api/mcp/asset/071257da-0616-4d49-b724-6bfe9b551b19.svg";
+const imgBuilding2 = "https://www.figma.com/api/mcp/asset/7c0f98ac-86a4-49c5-b9bd-fe1aa817c02b.svg";
+const imgIcon = "https://www.figma.com/api/mcp/asset/b6b20a87-0447-48b0-a8ba-7716acd673da.svg";
+
+export default function Ct05MdSelecionarClientesParaVincularDesignGlass() {
+  return (
+    <div className="backdrop-blur-[20px] border border-[rgba(255,255,255,0.12)] border-solid drop-shadow-[4px_4px_6px_rgba(0,0,0,0.13)] relative rounded-[12px] size-full" data-node-id="1484:72006" style={{ backgroundImage: "linear-gradient(212.06379052897796deg, rgba(0, 0, 0, 0.118) 0.52072%, rgba(0, 0, 0, 0.039) 51.124%, rgba(0, 0, 0, 0.02) 99.479%), linear-gradient(212.06379052897796deg, rgba(0, 0, 0, 0.078) 0.52072%, rgba(0, 0, 0, 0.039) 51.124%, rgba(0, 0, 0, 0.01) 99.479%)" }} data-name="CT05 · MD · Selecionar clientes para vincular · DESIGN GLASS">
+      <div className="absolute border-[rgba(255,255,255,0.12)] border-b-[0.8px] border-solid content-stretch flex flex-col gap-[var(--sa-spacing-8,8px)] items-start left-[-0.2px] pb-[var(--sa-spacing-16,16.8px)] pt-[var(--sa-spacing-16,16px)] px-[var(--sa-spacing-24,24px)] top-[-0.2px] w-[510.4px]" data-node-id="1484:72007" data-name="Container">
+        <div className="relative shrink-0 w-full" data-node-id="1484:72008" data-name="DialogTitle">
+          <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex flex-col items-start relative size-full">
+            <p className="[word-break:break-word] font-['Inter:Bold'] font-bold leading-[20px] not-italic relative shrink-0 text-[14px] text-[color:var(--sa-color-text-primary,white)] tracking-[0.7px] uppercase whitespace-nowrap" data-node-id="1484:72009">
+              Selecionar Clientes para Vincular
+            </p>
+          </div>
+        </div>
+      </div>
+      <div className="absolute content-stretch flex flex-col h-[602px] items-start left-[-0.2px] top-[68.6px] w-[510.4px]" data-node-id="1484:72010" data-name="Container">
+        <div className="relative shrink-0 w-full" data-node-id="1484:72011" data-name="Container">
+          <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex flex-col items-start p-[var(--sa-spacing-24,24px)] relative size-full">
+            <div className="backdrop-blur-[20px] bg-[rgba(255,255,255,0.06)] border border-[rgba(255,255,255,0.2)] border-solid relative rounded-[var(--sa-radius-10,10px)] shrink-0 w-full" data-node-id="1484:72012" data-name="Container">
+              <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex flex-col items-start p-[var(--sa-spacing-16,17px)] relative size-full">
+                <div className="relative shrink-0 w-[429px]" data-node-id="1484:72013" data-name="Container">
+                  <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex gap-[var(--sa-spacing-12,12px)] items-start relative size-full">
+                    <div className="relative shrink-0" data-node-id="1484:72014" data-name="Info:margin">
+                      <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex items-start pt-[2px] relative size-full">
+                        <div className="relative shrink-0 size-[20px]" data-node-id="1484:72015" data-name="Info">
+                          <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgInfo} />
+                        </div>
+                      </div>
+                    </div>
+                    <div className="flex-[397_0_0] min-w-px relative" data-node-id="1484:72019" data-name="Container">
+                      <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex flex-col items-start relative size-full">
+                        <p className="[word-break:break-word] font-['Inter:Regular'] font-normal leading-[19.5px] not-italic relative shrink-0 text-[12px] text-[color:var(--sa-color-text-primary,white)] w-[397px]" data-node-id="1484:72020">
+                          Selecione um ou mais clientes que receberão participação no contrato. Na próxima etapa você distribuirá o capital inicial contratual entre eles.
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div className="relative shrink-0 w-[462.4px]" data-node-id="1484:72021" data-name="Container">
+              <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex flex-col items-start pt-[var(--sa-spacing-16,16px)] relative size-full">
+                <div className="border-[0.8px] border-[rgba(255,255,255,0.12)] border-solid h-[36px] relative rounded-[var(--sa-radius-8,8px)] shrink-0 w-[462px]" data-node-id="1484:72022" style={{ backgroundImage: "linear-gradient(181.893379964877deg, rgba(0, 0, 0, 0.118) 0.52072%, rgba(0, 0, 0, 0.039) 51.124%, rgba(0, 0, 0, 0.02) 99.479%), linear-gradient(181.893379964877deg, rgba(0, 0, 0, 0.078) 0.52072%, rgba(0, 0, 0, 0.039) 51.124%, rgba(0, 0, 0, 0.01) 99.479%)" }} data-name="Text Input">
+                  <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex flex-col items-start justify-center overflow-clip pl-[36.8px] pr-[var(--sa-spacing-12,12.8px)] py-[var(--sa-spacing-4,4.8px)] relative rounded-[inherit] size-full">
+                    <p className="[word-break:break-word] font-['Inter:Regular'] font-normal leading-[normal] not-italic relative shrink-0 text-[14px] text-[color:var(--sa-color-text-primary,white)] w-full" data-node-id="1484:72023">
+                      Nome, ID, CPF/CNPJ...
+                    </p>
+                  </div>
+                </div>
+                <div className="absolute left-[11.8px] size-[16px] top-[26px]" data-node-id="1484:72024" data-name="Search">
+                  <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgSearch} />
+                </div>
+              </div>
+            </div>
+            <div className="h-[409.2px] relative shrink-0 w-[462.4px]" data-node-id="1484:72027" data-name="Container">
+              <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex flex-col items-start pt-[var(--sa-spacing-16,16px)] relative size-full">
+                <div className="border-[1.6px] border-[rgba(255,255,255,0.12)] border-solid relative rounded-[var(--sa-radius-10,10px)] shrink-0 w-[462px]" data-node-id="1484:72028" data-name="Button">
+                  <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex gap-[var(--sa-spacing-12,12px)] items-center p-[var(--sa-spacing-12,13.6px)] relative size-full">
+                    <div className="bg-[rgba(255,255,255,0.05)] border-[1.6px] border-[rgba(255,255,255,0.12)] border-solid relative rounded-[var(--sa-radius-4,4px)] shrink-0 size-[20px]" data-node-id="1484:72029" data-name="Container" />
+                    <div className="bg-[var(--color\/v2\/bg\/status-closed,rgba(0,0,0,0.1))] border-[0.8px] border-[var(--color\/v2\/border\/status-closed,white)] border-solid relative rounded-[26843500px] shrink-0 size-[32px]" data-node-id="1484:72030" data-name="Container">
+                      <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex items-center justify-center p-[0.8px] relative size-full">
+                        <div className="relative shrink-0 size-[14px]" data-node-id="1484:72031" data-name="User">
+                          <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgUser} />
+                        </div>
+                      </div>
+                    </div>
+                    <div className="flex-[359_0_0] min-w-px relative" data-node-id="1484:72034" data-name="Container">
+                      <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex flex-col items-start relative size-full">
+                        <div className="relative shrink-0 w-full" data-node-id="1484:72035" data-name="Container">
+                          <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex flex-col items-start relative size-full">
+                            <p className="[word-break:break-word] font-['Inter:Medium'] font-medium leading-[20px] not-italic relative shrink-0 text-[14px] text-[color:var(--sa-color-text-primary,white)] whitespace-nowrap" data-node-id="1484:72036">
+                              Roberto Carlos da Silva
+                            </p>
+                          </div>
+                        </div>
+                        <div className="relative shrink-0 w-full" data-node-id="1484:72037" data-name="Container">
+                          <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex flex-col items-start relative size-full">
+                            <p className="[word-break:break-word] font-['Consolas:Regular'] leading-[15px] not-italic relative shrink-0 text-[10px] text-white whitespace-nowrap" data-node-id="1484:72038">
+                              123.456.789-00
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div className="relative shrink-0 w-full" data-node-id="1484:72039" data-name="Button:margin">
+                  <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex flex-col items-center pt-[var(--sa-spacing-4,4px)] relative size-full">
+                    <div className="border-[1.6px] border-[rgba(255,255,255,0.12)] border-solid content-stretch flex gap-[var(--sa-spacing-12,12px)] items-center p-[var(--sa-spacing-12,13.6px)] relative rounded-[var(--sa-radius-10,10px)] shrink-0 w-[462px]" data-node-id="1484:72040" data-name="Button">
+                      <div className="bg-[rgba(255,255,255,0.05)] border-[1.6px] border-[rgba(255,255,255,0.12)] border-solid relative rounded-[var(--sa-radius-4,4px)] shrink-0 size-[20px]" data-node-id="1484:72041" data-name="Container" />
+                      <div className="bg-[var(--color\/v2\/bg\/status-closed,rgba(0,0,0,0.1))] border-[0.8px] border-[var(--color\/v2\/border\/status-closed,white)] border-solid relative rounded-[26843500px] shrink-0 size-[32px]" data-node-id="1484:72042" data-name="Container">
+                        <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex items-center justify-center p-[0.8px] relative size-full">
+                          <div className="relative shrink-0 size-[14px]" data-node-id="1484:72043" data-name="User">
+                            <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgUser} />
+                          </div>
+                        </div>
+                      </div>
+                      <div className="flex-[359_0_0] min-w-px relative" data-node-id="1484:72046" data-name="Container">
+                        <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex flex-col items-start relative size-full">
+                          <div className="relative shrink-0 w-full" data-node-id="1484:72047" data-name="Container">
+                            <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex flex-col items-start relative size-full">
+                              <p className="[word-break:break-word] font-['Inter:Medium'] font-medium leading-[20px] not-italic relative shrink-0 text-[14px] text-[color:var(--sa-color-text-primary,white)] whitespace-nowrap" data-node-id="1484:72048">
+                                Mariana Alencar
+                              </p>
+                            </div>
+                          </div>
+                          <div className="relative shrink-0 w-full" data-node-id="1484:72049" data-name="Container">
+                            <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex flex-col items-start relative size-full">
+                              <p className="[word-break:break-word] font-['Consolas:Regular'] leading-[15px] not-italic relative shrink-0 text-[10px] text-white whitespace-nowrap" data-node-id="1484:72050">
+                                987.654.321-11
+                              </p>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div className="relative shrink-0 w-full" data-node-id="1484:72051" data-name="Button:margin">
+                  <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex flex-col items-center pt-[var(--sa-spacing-4,4px)] relative size-full">
+                    <div className="border-[1.6px] border-[rgba(255,255,255,0.12)] border-solid content-stretch flex gap-[var(--sa-spacing-12,12px)] items-center p-[var(--sa-spacing-12,13.6px)] relative rounded-[var(--sa-radius-10,10px)] shrink-0 w-[462px]" data-node-id="1484:72052" data-name="Button">
+                      <div className="bg-[rgba(255,255,255,0.05)] border-[1.6px] border-[rgba(255,255,255,0.12)] border-solid relative rounded-[var(--sa-radius-4,4px)] shrink-0 size-[20px]" data-node-id="1484:72053" data-name="Container" />
+                      <div className="bg-[var(--color\/v2\/bg\/status-closed,rgba(0,0,0,0.1))] border-[0.8px] border-[var(--color\/v2\/border\/status-closed,white)] border-solid relative rounded-[26843500px] shrink-0 size-[32px]" data-node-id="1484:72054" data-name="Container">
+                        <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex items-center justify-center p-[0.8px] relative size-full">
+                          <div className="relative shrink-0 size-[14px]" data-node-id="1484:72055" data-name="Building2">
+                            <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgBuilding2} />
+                          </div>
+                        </div>
+                      </div>
+                      <div className="flex-[359_0_0] min-w-px relative" data-node-id="1484:72063" data-name="Container">
+                        <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex flex-col items-start relative size-full">
+                          <div className="relative shrink-0 w-full" data-node-id="1484:72064" data-name="Container">
+                            <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex flex-col items-start relative size-full">
+                              <p className="[word-break:break-word] font-['Inter:Medium'] font-medium leading-[20px] not-italic relative shrink-0 text-[14px] text-[color:var(--sa-color-text-primary,white)] whitespace-nowrap" data-node-id="1484:72065">
+                                Holding Investimentos SA
+                              </p>
+                            </div>
+                          </div>
+                          <div className="relative shrink-0 w-full" data-node-id="1484:72066" data-name="Container">
+                            <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex flex-col items-start relative size-full">
+                              <p className="[word-break:break-word] font-['Consolas:Regular'] leading-[15px] not-italic relative shrink-0 text-[10px] text-white whitespace-nowrap" data-node-id="1484:72067">
+                                12.345.678/0001-90
+                              </p>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div className="relative shrink-0 w-full" data-node-id="1484:72068" data-name="Button:margin">
+                  <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex flex-col items-center pt-[var(--sa-spacing-4,4px)] relative size-full">
+                    <div className="border-[1.6px] border-[rgba(255,255,255,0.12)] border-solid content-stretch flex gap-[var(--sa-spacing-12,12px)] items-center p-[var(--sa-spacing-12,13.6px)] relative rounded-[var(--sa-radius-10,10px)] shrink-0 w-[462px]" data-node-id="1484:72069" data-name="Button">
+                      <div className="bg-[rgba(255,255,255,0.05)] border-[1.6px] border-[rgba(255,255,255,0.12)] border-solid relative rounded-[var(--sa-radius-4,4px)] shrink-0 size-[20px]" data-node-id="1484:72070" data-name="Container" />
+                      <div className="bg-[var(--color\/v2\/bg\/status-closed,rgba(0,0,0,0.1))] border-[0.8px] border-[var(--color\/v2\/border\/status-closed,white)] border-solid relative rounded-[26843500px] shrink-0 size-[32px]" data-node-id="1484:72071" data-name="Container">
+                        <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex items-center justify-center p-[0.8px] relative size-full">
+                          <div className="relative shrink-0 size-[14px]" data-node-id="1484:72072" data-name="User">
+                            <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgUser} />
+                          </div>
+                        </div>
+                      </div>
+                      <div className="flex-[359_0_0] min-w-px relative" data-node-id="1484:72075" data-name="Container">
+                        <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex flex-col items-start relative size-full">
+                          <div className="relative shrink-0 w-full" data-node-id="1484:72076" data-name="Container">
+                            <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex flex-col items-start relative size-full">
+                              <p className="[word-break:break-word] font-['Inter:Medium'] font-medium leading-[20px] not-italic relative shrink-0 text-[14px] text-[color:var(--sa-color-text-primary,white)] whitespace-nowrap" data-node-id="1484:72077">
+                                Carlos Eduardo Souza
+                              </p>
+                            </div>
+                          </div>
+                          <div className="relative shrink-0 w-full" data-node-id="1484:72078" data-name="Container">
+                            <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex flex-col items-start relative size-full">
+                              <p className="[word-break:break-word] font-['Consolas:Regular'] leading-[15px] not-italic relative shrink-0 text-[10px] text-white whitespace-nowrap" data-node-id="1484:72079">
+                                111.222.333-44
+                              </p>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div className="relative shrink-0 w-full" data-node-id="1484:72080" data-name="Button:margin">
+                  <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex flex-col items-center pt-[var(--sa-spacing-4,4px)] relative size-full">
+                    <div className="border-[1.6px] border-[rgba(255,255,255,0.12)] border-solid content-stretch flex gap-[var(--sa-spacing-12,12px)] items-center p-[var(--sa-spacing-12,13.6px)] relative rounded-[var(--sa-radius-10,10px)] shrink-0 w-[462px]" data-node-id="1484:72081" data-name="Button">
+                      <div className="bg-[rgba(255,255,255,0.05)] border-[1.6px] border-[rgba(255,255,255,0.12)] border-solid relative rounded-[var(--sa-radius-4,4px)] shrink-0 size-[20px]" data-node-id="1484:72082" data-name="Container" />
+                      <div className="bg-[var(--color\/v2\/bg\/status-closed,rgba(0,0,0,0.1))] border-[0.8px] border-[var(--color\/v2\/border\/status-closed,white)] border-solid relative rounded-[26843500px] shrink-0 size-[32px]" data-node-id="1484:72083" data-name="Container">
+                        <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex items-center justify-center p-[0.8px] relative size-full">
+                          <div className="relative shrink-0 size-[14px]" data-node-id="1484:72084" data-name="User">
+                            <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgUser} />
+                          </div>
+                        </div>
+                      </div>
+                      <div className="flex-[359_0_0] min-w-px relative" data-node-id="1484:72087" data-name="Container">
+                        <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex flex-col items-start relative size-full">
+                          <div className="relative shrink-0 w-full" data-node-id="1484:72088" data-name="Container">
+                            <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex flex-col items-start relative size-full">
+                              <p className="[word-break:break-word] font-['Inter:Medium'] font-medium leading-[20px] not-italic relative shrink-0 text-[14px] text-[color:var(--sa-color-text-primary,white)] whitespace-nowrap" data-node-id="1484:72089">
+                                Ana Paula Ferreira
+                              </p>
+                            </div>
+                          </div>
+                          <div className="relative shrink-0 w-full" data-node-id="1484:72090" data-name="Container">
+                            <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex flex-col items-start relative size-full">
+                              <p className="[word-break:break-word] font-['Consolas:Regular'] leading-[15px] not-italic relative shrink-0 text-[10px] text-white whitespace-nowrap" data-node-id="1484:72091">
+                                555.666.777-88
+                              </p>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div className="relative shrink-0 w-full" data-node-id="1484:72092" data-name="Button:margin">
+                  <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex flex-col items-center pt-[var(--sa-spacing-4,4px)] relative size-full">
+                    <div className="border-[1.6px] border-[rgba(255,255,255,0.12)] border-solid content-stretch flex gap-[var(--sa-spacing-12,12px)] items-center p-[var(--sa-spacing-12,13.6px)] relative rounded-[var(--sa-radius-10,10px)] shrink-0 w-[462px]" data-node-id="1484:72093" data-name="Button">
+                      <div className="bg-[rgba(255,255,255,0.05)] border-[1.6px] border-[rgba(255,255,255,0.12)] border-solid relative rounded-[var(--sa-radius-4,4px)] shrink-0 size-[20px]" data-node-id="1484:72094" data-name="Container" />
+                      <div className="bg-[var(--color\/v2\/bg\/status-closed,rgba(0,0,0,0.1))] border-[0.8px] border-[var(--color\/v2\/border\/status-closed,white)] border-solid relative rounded-[26843500px] shrink-0 size-[32px]" data-node-id="1484:72095" data-name="Container">
+                        <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex items-center justify-center p-[0.8px] relative size-full">
+                          <div className="relative shrink-0 size-[14px]" data-node-id="1484:72096" data-name="Building2">
+                            <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgBuilding2} />
+                          </div>
+                        </div>
+                      </div>
+                      <div className="flex-[359_0_0] min-w-px relative" data-node-id="1484:72104" data-name="Container">
+                        <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex flex-col items-start relative size-full">
+                          <div className="relative shrink-0 w-full" data-node-id="1484:72105" data-name="Container">
+                            <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex flex-col items-start relative size-full">
+                              <p className="[word-break:break-word] font-['Inter:Medium'] font-medium leading-[20px] not-italic relative shrink-0 text-[14px] text-[color:var(--sa-color-text-primary,white)] whitespace-nowrap" data-node-id="1484:72106">
+                                Grupo Alpha Ltda
+                              </p>
+                            </div>
+                          </div>
+                          <div className="relative shrink-0 w-full" data-node-id="1484:72107" data-name="Container">
+                            <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex flex-col items-start relative size-full">
+                              <p className="[word-break:break-word] font-['Consolas:Regular'] leading-[15px] not-italic relative shrink-0 text-[10px] text-white whitespace-nowrap" data-node-id="1484:72108">
+                                99.888.777/0001-66
+                              </p>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div className="absolute border-[rgba(255,255,255,0.12)] border-solid border-t-[0.8px] content-stretch flex flex-col items-start left-[-0.2px] pb-[var(--sa-spacing-16,16px)] pt-[var(--sa-spacing-16,16.8px)] px-[var(--sa-spacing-24,24px)] rounded-[8px] top-[686px] w-[510.4px]" data-node-id="1484:72109" style={{ backgroundImage: "linear-gradient(183.27295796393673deg, rgba(0, 0, 0, 0.118) 0.52072%, rgba(0, 0, 0, 0.039) 51.124%, rgba(0, 0, 0, 0.02) 99.479%), linear-gradient(183.27295796393673deg, rgba(0, 0, 0, 0.078) 0.52072%, rgba(0, 0, 0, 0.039) 51.124%, rgba(0, 0, 0, 0.01) 99.479%)" }} data-name="Container">
+        <div className="relative shrink-0 w-[462px]" data-node-id="1484:72110" data-name="Container">
+          <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex gap-[var(--sa-spacing-12,12px)] items-start relative size-full">
+            <div className="bg-[var(--sa-color-bg-surface,rgba(255,255,255,0.06))] border-[0.8px] border-[var(--sa-color-border-default,rgba(255,255,255,0.2))] border-solid flex-[226_0_0] h-[36px] min-w-px relative rounded-[var(--sa-radius-8,8px)]" data-node-id="1484:72111" data-name="Botão ação nível 1">
+              <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex items-center justify-center px-[14.8px] py-[var(--sa-spacing-8,8.8px)] relative size-full">
+                <p className="[word-break:break-word] font-['Inter:Medium'] font-medium leading-[20px] not-italic relative shrink-0 text-[14px] text-[color:var(--sa-color-text-secondary,rgba(255,255,255,0.72))] text-center whitespace-nowrap" data-node-id="1484:72112">
+                  Cancelar
+                </p>
+              </div>
+            </div>
+            <div className="bg-[var(--sa-color-bg-glass,rgba(255,255,255,0.06))] border-[length:var(----sa-stroke-1,1px)] border-[var(--sa-color-border-strong,rgba(255,255,255,0.28))] border-solid flex-[224_0_0] h-[36px] min-w-px opacity-50 relative rounded-[var(--sa-radius-8,8px)]" data-node-id="1484:72113" data-name="Botão ação nível 1">
+              <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex items-center justify-center px-[15px] py-[var(--sa-spacing-8,9px)] relative size-full">
+                <p className="[word-break:break-word] font-['Inter:Medium'] font-medium leading-[20px] not-italic relative shrink-0 text-[14px] text-[color:var(--sa-color-text-primary,white)] text-center whitespace-nowrap" data-node-id="1484:72114">
+                  Continuar para Distribuição
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div className="absolute content-stretch flex flex-col items-start justify-center left-[478.2px] opacity-70 rounded-[2px] top-[15.8px]" data-node-id="1484:72115" data-name="DialogClose">
+        <div className="relative shrink-0 size-[16px]" data-node-id="1484:72116" data-name="Icon">
+          <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgIcon} />
+        </div>
+      </div>
+    </div>
+  );
+}
+SUPER CRITICAL: The generated React+Tailwind code MUST be converted to match the target project's technology stack and styling system.
+1. Analyze the target codebase to identify: technology stack, styling approach, component patterns, and design tokens
+2. Convert React syntax to the target framework/library
+3. Transform all Tailwind classes to the target styling system while preserving exact visual design
+4. Follow the project's existing patterns and conventions
+DO NOT install any Tailwind as a dependency unless the user instructs you to do so.
+
+Node ids have been added to the code as data attributes, e.g. `data-node-id="1:2"`.
+The generated code contains image and SVG URL constants, e.g. const image = 'https://www.figma.com/api/mcp/asset/550e8400-e29b-41d4-a716-446655440000.png'. These URLs are temporary download sources and expire after 7 days. Download each asset into the project with curl -L, then replace its URL in the generated code with a reference to the downloaded asset. Never use the temporary URLs as runtime image sources.

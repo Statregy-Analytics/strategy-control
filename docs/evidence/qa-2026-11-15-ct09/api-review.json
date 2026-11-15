@@ -1,0 +1,32 @@
+{
+  "retrievedAt": "2026-11-15",
+  "source": "https://strategyanalytics.codebiz.com.br/openapi/v1.json",
+  "path": "/api/v1/admin/contracts/{contractId}/participants",
+  "operationId": "AddContractParticipant",
+  "request": {
+    "required": [
+      "clientId",
+      "allocatedAmount"
+    ],
+    "type": "object",
+    "properties": {
+      "clientId": {
+        "type": "string",
+        "format": "uuid",
+        "example": "3fa85f64-5717-4562-b3fc-2c963f66afa6"
+      },
+      "allocatedAmount": {
+        "pattern": "^-?(?:0|[1-9]\\d*)(?:\\.\\d+)?$",
+        "type": [
+          "null",
+          "number",
+          "string"
+        ],
+        "format": "double",
+        "example": 1000.0
+      }
+    },
+    "additionalProperties": false
+  },
+  "finding": "Existing contract allows allocatedAmount:null; no value input added to CT09. New tests of writing were isolated; real lookup/duplicate/cancel only."
+}

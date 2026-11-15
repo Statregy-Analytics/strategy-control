@@ -1,6 +1,6 @@
 # Checklist único — telas do Figma e integração
 
-Atualização: 14/11/2026. Este é o índice desta revisão ampla. Evidências anteriores continuam nos documentos vinculados; uma tela existente não é automaticamente considerada revalidada nesta rodada.
+Atualização: 15/11/2026. Este é o índice desta revisão ampla. Evidências anteriores continuam nos documentos vinculados; uma tela existente não é automaticamente considerada revalidada nesta rodada.
 
 ## Critério de conclusão
 
@@ -10,6 +10,20 @@ Atualização: 14/11/2026. Este é o índice desta revisão ampla. Evidências a
 - [ ] Reexecutar os checks após concluir as demais telas; Área do Cliente ainda não alterada nesta rodada.
 - [ ] Deploy confirmado e testes repetidos nas URLs publicadas.
 - [x] Pendências de frontend separadas das pendências reais da API, do designer e da limitação de consulta ao Figma.
+
+## CT09 — inclusão de participante no contrato existente (15/11)
+
+- [x] Reconfirmado o contexto completo do CT09 (`1484:73324`) e preservado em [evidence/qa-2026-11-15-ct09](evidence/qa-2026-11-15-ct09), com screenshot e SVGs originais. CT05 também arquivado para preservar a distinção entre os dois fluxos; sua etapa posterior de distribuição não foi inventada.
+- [x] Modal genérico substituído pelo CT09: título Adicionar Participante ao Contrato, fechamento, seção 1. Participante, único campo Cliente, Cancelar e Confirmar inclusão. Medido em 512 × 266 px no desktop, com corpo de 143 px, como na referência.
+- [x] Reutilizado `CustomerSelect` e a busca autenticada existente; opções adicionais são configuráveis sem alterar o padrão dos demais consumidores. Corrigida orientação que permanecia junto do nome selecionado; preenchimento e pesquisa usam o mesmo campo, inclusive com nome longo.
+- [x] Seis SVGs originais carregados nos slots: quatro em 16 × 16 px e os dois traços do fechamento em 9,33 × 9,33 px. Revisão em 1280 e 390 px, sem excesso horizontal; nome longo e cursor dentro do campo de 36 px.
+- [x] Testes isolados sem API: confirmação somente com seleção, sucesso fecha com ID correto, falha mostra erro e preserva seleção, nova tentativa habilitada, busca vazia, falha da busca e bloqueio de campo/fechamento/cancelamento durante salvamento pendente. Arquivos temporários do teste removidos.
+- [x] Local integrado: Legacy Prime, busca real, seleção de Éric já vinculado barrada antes de gravação, cancelamento e reabertura sem seleção/erro antigos. Reteste do seletor final confirmou preenchimento sem orientação duplicada e bloqueio da duplicidade.
+- [ ] Concluir publicação e repetir busca/duplicidade/cancelamento/retorno no Admin publicado.
+
+**API:** especificação publicada consultada em 15/11 aceita `allocatedAmount: null` em `POST /admin/contracts/{contractId}/participants`; preservado esse payload existente, sem acrescentar valor ou distribuição ao CT09. Não identificado novo bloqueio de API neste cenário. A nova gravação com sucesso/falha foi exercitada com callback isolado, não com alteração de vínculos dos contratos compartilhados; não declarar escrita integrada aprovada nem classificar teste não executado como bug do backend.
+
+**Designer:** distribuição após CT05 continua sendo a dependência já registrada. Este ajuste se aplica somente ao CT09 do contrato existente; não aprova nem substitui a seleção/distribuição da criação.
 
 ## LG09 — tabela completa recuperada (14/11, complemento)
 
@@ -323,7 +337,7 @@ Legenda: **Preparado / revisão pendente** = há código novo, mas a validação
 | [1484:72187](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-72187) | F03 · Contrato aberto · Componentes, estados e ações                                          | Revalidar                                                                |
 | [1484:72188](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-72188) | CT07 · PB · Contrato aberto · Página base · DESIGN GLASS                                      | Revalidar                                                                |
 | [1484:73154](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-73154) | CT08 · CP · Clientes vinculados · Lista · DESIGN GLASS                                        | Tabela e alternância testadas em homologação; dados ausentes identificados |
-| [1484:73324](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-73324) | CT09 · MD · Adicionar cliente vinculado · DESIGN GLASS                                        | Revalidar                                                                |
+| [1484:73324](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-73324) | CT09 · MD · Adicionar cliente vinculado · DESIGN GLASS                                        | Visual/estados e busca/duplicidade locais aprovados; publicação pendente |
 | [1484:73364](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-73364) | CT10 · MD · Ver detalhes do cliente · DESIGN GLASS                                            | Modal e consulta cadastral testados em homologação; históricos/destino ainda sem integração |
 | [1484:73521](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-73521) | CT11 · CP · Motores e operações · Maximizado · DESIGN GLASS                                   | Implementado/revisado nesta rodada; testes e bloqueios detalhados acima |
 | [1484:73658](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-73658) | CT12 · MD · Adicionar operação intradiária · DESIGN GLASS                                     | Revalidar                                                                |

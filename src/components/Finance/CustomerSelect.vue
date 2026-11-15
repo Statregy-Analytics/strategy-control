@@ -4,7 +4,9 @@
     outlined
     dense
     use-input
-    clearable
+    :clearable="clearable"
+    :placeholder="modelValue ? undefined : placeholder"
+    :dropdown-icon="dropdownIcon"
     input-debounce="350"
     :options="options"
     :loading="loading || resolving"
@@ -33,6 +35,10 @@ const props = defineProps({
   current: { type: Object, default: null },
   selectedLabel: { type: String, default: null },
   resolving: Boolean,
+  clearable: { type: Boolean, default: true },
+  placeholder: { type: String, default: undefined },
+  dropdownIcon: { type: String, default: undefined },
+  lookup: { type: Function, default: lookupCustomers },
 })
 const emit = defineEmits(['update:modelValue', 'resolved'])
 const options = ref([]),
@@ -73,7 +79,7 @@ async function search(value, update) {
   loading.value = true
   error.value = ''
   try {
-    const result = await lookupCustomers({ search: value, limit: 20 })
+    const result = await props.lookup({ search: value, limit: 20 })
     if (current === sequence)
       update(() => {
         options.value = [
