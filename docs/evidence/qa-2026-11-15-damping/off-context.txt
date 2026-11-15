@@ -1,0 +1,65 @@
+const imgSettings = "https://www.figma.com/api/mcp/asset/bd53ea33-1fab-45f7-a24a-37319561e413.svg";
+
+export default function Ec051ZonaDeAmortecimentoDesativada() {
+  return (
+    <div className="backdrop-blur-[20px] border border-[rgba(255,255,255,0.12)] border-solid content-stretch drop-shadow-[4px_4px_6px_rgba(0,0,0,0.13)] flex flex-col gap-[var(--sa-spacing-24,24px)] items-start p-px relative rounded-[var(--sa-radius-14,14px)] size-full" data-node-id="1484:79802" style={{ backgroundImage: "linear-gradient(186.35446394408967deg, rgba(0, 0, 0, 0.118) 0.52072%, rgba(0, 0, 0, 0.039) 51.124%, rgba(0, 0, 0, 0.02) 99.479%), linear-gradient(186.35446394408967deg, rgba(0, 0, 0, 0.078) 0.52072%, rgba(0, 0, 0, 0.039) 51.124%, rgba(0, 0, 0, 0.01) 99.479%), linear-gradient(-14.593553290229067deg, rgb(26, 30, 45) 0%, rgb(26, 30, 45) 7%, rgb(19, 71, 109) 23%, rgb(16, 81, 126) 28%, rgb(16, 81, 126) 30%, rgb(18, 78, 120) 33%, rgb(26, 30, 45) 53%, rgb(26, 30, 45) 84%, rgb(78, 23, 35) 100%)" }} data-name="EC05.1 · Zona de amortecimento · desativada">
+      <div className="relative shrink-0 w-full" data-node-id="1484:79803" data-name="Container">
+        <div className="bg-clip-padding border-0 border-[transparent] border-solid gap-x-[6px] gap-y-[6px] grid grid-cols-[_750.40px] grid-rows-[__24px_24px] p-[24px] relative size-full">
+          <div className="col-1 h-[24px] justify-self-stretch relative row-1 self-start shrink-0" data-node-id="1484:79804" data-name="Heading 4">
+            <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex gap-[var(--sa-spacing-8,8px)] items-center relative size-full">
+              <div className="relative shrink-0 size-[16px]" data-node-id="1484:79805" data-name="Settings">
+                <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgSettings} />
+              </div>
+              <p className="[word-break:break-word] font-['Inter:Bold'] font-bold leading-[24px] not-italic relative shrink-0 text-[16px] text-[color:var(--sa-color-text-secondary,rgba(255,255,255,0.72))] whitespace-nowrap" data-node-id="1484:79808">
+                Zona de Amortecimento das Bordas
+              </p>
+            </div>
+          </div>
+          <div className="col-1 h-[24px] justify-self-stretch relative row-2 self-start shrink-0" data-node-id="1484:79809" data-name="Paragraph">
+            <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex flex-col items-start relative size-full">
+              <p className="[word-break:break-word] font-['Inter:Regular'] font-normal leading-[24px] not-italic relative shrink-0 text-[16px] text-[color:var(--sa-color-text-secondary,rgba(255,255,255,0.72))] whitespace-nowrap" data-node-id="1484:79810">
+                Ajuste dinâmico de probabilidade nas proximidades dos limites.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div className="h-[82px] relative shrink-0 w-[798.4px]" data-node-id="1484:79811" data-name="Container">
+        <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex items-center justify-between p-[var(--sa-spacing-24,24px)] relative size-full">
+          <div className="relative shrink-0 w-[585.1px]" data-node-id="1484:79812" data-name="Container">
+            <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex flex-col items-start relative size-full">
+              <div className="relative shrink-0 w-full" data-node-id="1484:79813" data-name="Label">
+                <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex gap-[var(--sa-spacing-8,8px)] items-center relative size-full">
+                  <p className="[word-break:break-word] font-['Inter:Medium'] font-medium leading-[14px] not-italic relative shrink-0 text-[14px] text-[color:var(--sa-color-text-secondary,rgba(255,255,255,0.72))] whitespace-nowrap" data-node-id="1484:79814">
+                    Ativar Zona de Amortecimento
+                  </p>
+                </div>
+              </div>
+              <div className="h-[20px] relative shrink-0 w-[585.1px]" data-node-id="1484:79815" data-name="Paragraph">
+                <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex flex-col items-start pt-[var(--sa-spacing-4,4px)] relative size-full">
+                  <p className="[word-break:break-word] font-['Inter:Regular'] font-normal leading-[16px] not-italic relative shrink-0 text-[12px] text-[color:var(--sa-color-text-muted,rgba(255,255,255,0.6))] whitespace-nowrap" data-node-id="1484:79816">
+                    Quando ativada, ajusta a chance positiva ou negativa conforme o índice se aproxima do teto ou do piso diário.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="bg-[rgba(255,255,255,0.05)] border border-[var(--sa-color-border-glass,rgba(255,255,255,0.2))] border-solid h-[18.4px] relative rounded-[26843500px] shrink-0 w-[32px]" data-node-id="1484:79817" data-name="Switch">
+            <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex items-center p-px relative size-full">
+              <div className="bg-[rgba(9,19,34,0.58)] border-[length:var(----sa-stroke-1,1px)] border-[rgba(255,255,255,0.25)] border-solid relative rounded-[26843500px] shrink-0 size-[16px]" data-node-id="1484:79818" data-name="SwitchThumb" />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+SUPER CRITICAL: The generated React+Tailwind code MUST be converted to match the target project's technology stack and styling system.
+1. Analyze the target codebase to identify: technology stack, styling approach, component patterns, and design tokens
+2. Convert React syntax to the target framework/library
+3. Transform all Tailwind classes to the target styling system while preserving exact visual design
+4. Follow the project's existing patterns and conventions
+DO NOT install any Tailwind as a dependency unless the user instructs you to do so.
+
+Node ids have been added to the code as data attributes, e.g. `data-node-id="1:2"`.
+The generated code contains image and SVG URL constants, e.g. const image = 'https://www.figma.com/api/mcp/asset/550e8400-e29b-41d4-a716-446655440000.png'. These URLs are temporary download sources and expire after 7 days. Download each asset into the project with curl -L, then replace its URL in the generated code with a reference to the downloaded asset. Never use the temporary URLs as runtime image sources.

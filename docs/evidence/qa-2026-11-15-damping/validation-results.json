@@ -1,0 +1,86 @@
+{
+  "date": "2026-11-15",
+  "frames": [
+    "1484:79802",
+    "1484:79819"
+  ],
+  "local": {
+    "record": "Quant Core",
+    "readonly": "unknown, no false disabled configuration",
+    "editing": [
+      "unknown to on",
+      "on to off",
+      "off to on",
+      "collapse Enter",
+      "expand Space",
+      "return from LG09 keeps collapsed",
+      "cancel restores unknown"
+    ],
+    "creation": [
+      "off by default",
+      "fictitious name preserved across collapse",
+      "cancelled without writes"
+    ],
+    "desktop": {
+      "viewport": 1280,
+      "documentWidth": 1265,
+      "zoneWidth": 895,
+      "unknownCells": 20
+    },
+    "mobile": {
+      "viewport": 390,
+      "documentWidth": 375,
+      "zoneWidth": 309,
+      "readonlyZoneHeight": 327,
+      "tableRegionWidth": 267,
+      "tableScrollWidth": 721,
+      "unknownCells": 20
+    }
+  },
+  "fixture": {
+    "off": {
+      "width": 798.390625,
+      "height": 210,
+      "switchWidth": 32,
+      "switchHeight": 18.390625
+    },
+    "on": {
+      "width": 1502,
+      "height": 394.984375,
+      "columns": 5,
+      "rows": 5,
+      "rowHeight": 36.796875,
+      "positiveColor": "rgb(102, 229, 158)",
+      "negativeColor": "rgb(255, 138, 138)",
+      "headersTextTransform": "none"
+    },
+    "readonlySwitchDisabled": true,
+    "collapsePreservesData": true,
+    "unknownCells": 20,
+    "mobile": {
+      "viewport": 390,
+      "documentWidth": 390,
+      "tableRegionWidth": 300,
+      "tableScrollWidth": 720,
+      "keyboardScrollLeft": 120
+    },
+    "examplesOnlyInIsolatedTest": true,
+    "removed": true
+  },
+  "assets": {
+    "settings": [
+      16,
+      16
+    ],
+    "sliders": [
+      16,
+      16
+    ],
+    "chevron-up": [
+      16,
+      16
+    ]
+  },
+  "apiWrites": 0,
+  "published": "pending"
+}

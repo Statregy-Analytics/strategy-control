@@ -108,60 +108,59 @@
                   <workspace-icon v-if="form.color === color" name="check" />
                 </button></div
             ></profile-section>
-            <profile-section
-              v-for="section in sections"
-              :key="section.title"
-              :title="section.title"
-              :caption="section.caption"
-              ><div class="workspace-form-grid">
-                <template v-for="field in section.fields" :key="field.key"
-                  ><workspace-field
-                    v-if="!field.when || field.when(form)"
-                    :model-value="field.computed ? field.computed(form) : form[field.key]"
-                    :field="{ ...field, disabled: field.disabled || !editing }"
-                    @update:model-value="form[field.key] = $event"
-                /></template>
-              </div>
-              <template v-if="section.key === 'probability'"
-                ><div
-                  v-if="form.positive != null && form.negative != null"
-                  class="logic-probability"
-                  :aria-label="
-                    'Chance positiva ' + form.positive + '%; chance negativa ' + form.negative + '%'
-                  "
-                >
-                  <span
-                    :style="{ width: Math.max(0, Math.min(100, Number(form.positive) || 0)) + '%' }"
-                  />
+            <template v-for="section in sections" :key="section.title">
+              <logic-damping-zone
+                v-if="section.key === 'buffer'"
+                v-model="form.buffer"
+                :disabled="!editing"
+              />
+              <profile-section v-else :title="section.title" :caption="section.caption"
+                ><div class="workspace-form-grid">
+                  <template v-for="field in section.fields" :key="field.key"
+                    ><workspace-field
+                      v-if="!field.when || field.when(form)"
+                      :model-value="field.computed ? field.computed(form) : form[field.key]"
+                      :field="{ ...field, disabled: field.disabled || !editing }"
+                      @update:model-value="form[field.key] = $event"
+                  /></template>
                 </div>
-                <p
-                  :class="{
-                    'text-negative': Number(form.positive) + Number(form.negative) !== 100,
-                  }"
+                <template v-if="section.key === 'probability'"
+                  ><div
+                    v-if="form.positive != null && form.negative != null"
+                    class="logic-probability"
+                    :aria-label="
+                      'Chance positiva ' +
+                      form.positive +
+                      '%; chance negativa ' +
+                      form.negative +
+                      '%'
+                    "
+                  >
+                    <span
+                      :style="{
+                        width: Math.max(0, Math.min(100, Number(form.positive) || 0)) + '%',
+                      }"
+                    />
+                  </div>
+                  <p
+                    :class="{
+                      'text-negative': Number(form.positive) + Number(form.negative) !== 100,
+                    }"
+                  >
+                    Soma atual:
+                    {{
+                      form.positive == null || form.negative == null
+                        ? 'Indisponível'
+                        : Number(form.positive) + Number(form.negative) + '%'
+                    }}
+                  </p></template
                 >
-                  Soma atual:
-                  {{
-                    form.positive == null || form.negative == null
-                      ? 'Indisponível'
-                      : Number(form.positive) + Number(form.negative) + '%'
-                  }}
-                </p></template
-              >
-              <p v-if="section.key === 'sovereign'" class="workspace-muted">
-                As bandas e probabilidades controlam o percurso. O fechamento soberano controla o
-                índice final do ciclo trimestral.
-              </p>
-              <div v-if="section.key === 'buffer' && form.buffer">
-                <q-table
-                  dark
-                  flat
-                  dense
-                  :rows="[]"
-                  :columns="bufferColumns"
-                  hide-pagination
-                  no-data-label="Configuração indisponível."
-                /></div
-            ></profile-section>
+                <p v-if="section.key === 'sovereign'" class="workspace-muted">
+                  As bandas e probabilidades controlam o percurso. O fechamento soberano controla o
+                  índice final do ciclo trimestral.
+                </p>
+              </profile-section>
+            </template>
             <profile-section
               v-if="!recordId"
               title="Vincular Papéis/Contratos (Opcional)"
@@ -264,6 +263,7 @@ import LogicPerformance from './LogicPerformance.vue'
 import LogicValidation from './LogicValidation.vue'
 import LogicHistory from './LogicHistory.vue'
 import LogicConfiguration from './LogicConfiguration.vue'
+import LogicDampingZone from './LogicDampingZone.vue'
 import { useFinanceResource } from 'src/composables/useFinanceResource'
 import { financeGet, columns } from 'src/services/financeService'
 import { getPreferenceCatalog } from 'src/services/customerService'
@@ -399,19 +399,7 @@ const sections = computed(() => [
   {
     key: 'buffer',
     title: 'Zona de Amortecimento das Bordas',
-    caption: 'Ajuste dinâmico de probabilidade nas proximidades dos limites.',
-    fields: fields([
-      [
-        'buffer',
-        'Ativar Zona de Amortecimento',
-        'check',
-        {
-          wide: true,
-          caption:
-            'Quando ativada, ajusta a chance positiva ou negativa conforme o índice se aproxima do teto ou do piso diário.',
-        },
-      ],
-    ]),
+    fields: [],
   },
   {
     key: 'sovereign',
@@ -429,22 +417,17 @@ const sections = computed(() => [
     ]),
   },
 ])
-const bufferColumns = columns([
-    ['range', 'Faixa'],
-    ['positive', 'Chance Positiva'],
-    ['negative', 'Chance Negativa'],
-  ]),
-  linkedColumns = columns(
-    [
-      'Papel',
-      'Valor de entrada',
-      'Índice na conexão',
-      'Índice atual do motor',
-      'Valor atual',
-      'Variação desde conexão',
-      'Status do vínculo',
-    ].map((x) => [x, x]),
-  )
+const linkedColumns = columns(
+  [
+    'Papel',
+    'Valor de entrada',
+    'Índice na conexão',
+    'Índice atual do motor',
+    'Valor atual',
+    'Variação desde conexão',
+    'Status do vínculo',
+  ].map((x) => [x, x]),
+)
 const validationRules = computed(() => logicRuleResults(form.value))
 const matchedContracts = computed(() =>
   (contracts.state.data || []).filter((c) =>
@@ -484,6 +467,7 @@ async function load() {
         name: row.name,
         description: row.description || '',
         initialIndex: null,
+        buffer: null,
         positive: null,
         negative: null,
         status: null,

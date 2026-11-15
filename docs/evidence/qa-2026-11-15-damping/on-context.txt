@@ -1,0 +1,178 @@
+const imgSlidersVertical = "https://www.figma.com/api/mcp/asset/30d16706-5226-48d2-8727-c6916476928f.svg";
+const imgChevronUp = "https://www.figma.com/api/mcp/asset/1026c233-3f0e-42c0-85d7-6a09347f4a80.svg";
+
+export default function Ec052ZonaDeAmortecimentoAtivadaTabela() {
+  return (
+    <div className="content-stretch flex flex-col items-start relative size-full" data-node-id="1484:79819" style={{ backgroundImage: "linear-gradient(-14.608004911595572deg, rgb(26, 30, 45) 0%, rgb(26, 30, 45) 7%, rgb(19, 71, 109) 23%, rgb(16, 81, 126) 28%, rgb(16, 81, 126) 30%, rgb(18, 78, 120) 33%, rgb(26, 30, 45) 53%, rgb(26, 30, 45) 84%, rgb(78, 23, 35) 100%)" }} data-name="EC05.2 · Zona de amortecimento · ativada + tabela">
+      <div className="h-[28px] relative shrink-0 w-[1502.4px]" data-node-id="1484:79820" data-name="Container">
+        <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex gap-[var(--sa-spacing-8,8px)] items-center pb-[var(--sa-spacing-12,12px)] relative size-full">
+          <div className="relative shrink-0 size-[16px]" data-node-id="1484:79821" data-name="SlidersVertical">
+            <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgSlidersVertical} />
+          </div>
+          <div className="relative shrink-0" data-node-id="1484:79831" data-name="Heading 4">
+            <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex flex-col items-start relative size-full">
+              <p className="[word-break:break-word] font-['Inter:Bold'] font-bold leading-[16px] not-italic relative shrink-0 text-[12px] text-[color:var(--sa-color-text-muted,rgba(255,255,255,0.6))] tracking-[0.6px] uppercase whitespace-nowrap" data-node-id="1484:79832">
+                Zona de Amortecimento das Bordas Diárias
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div className="backdrop-blur-[20px] border border-[rgba(255,255,255,0.12)] border-solid drop-shadow-[4px_4px_6px_rgba(0,0,0,0.13)] relative rounded-[var(--sa-radius-10,10px)] shrink-0 w-full" data-node-id="1484:79833" style={{ backgroundImage: "linear-gradient(185.8941366241136deg, rgba(0, 0, 0, 0.118) 0.52072%, rgba(0, 0, 0, 0.039) 51.124%, rgba(0, 0, 0, 0.02) 99.479%), linear-gradient(185.8941366241136deg, rgba(0, 0, 0, 0.078) 0.52072%, rgba(0, 0, 0, 0.039) 51.124%, rgba(0, 0, 0, 0.01) 99.479%)" }} data-name="Container">
+        <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex flex-col items-start p-[var(--sa-spacing-20,21px)] relative size-full">
+          <div className="relative shrink-0 w-full" data-node-id="1484:79834" data-name="Container">
+            <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex items-center justify-between relative size-full">
+              <div className="relative shrink-0" data-node-id="1484:79835" data-name="Container">
+                <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex gap-[var(--sa-spacing-12,12px)] items-center relative size-full">
+                  <p className="[word-break:break-word] font-['Inter:Bold'] font-bold leading-[16px] not-italic relative shrink-0 text-[12px] text-[color:var(--sa-color-text-muted,rgba(255,255,255,0.6))] whitespace-nowrap" data-node-id="1484:79836">
+                    Ativada
+                  </p>
+                  <div className="bg-[var(--sa-green-600,#008236)] border border-[var(--sa-color-border-success,#008236)] border-solid h-[18.4px] relative rounded-[26843500px] shrink-0 w-[32px]" data-node-id="1484:79837" data-name="Switch">
+                    <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex items-center p-px relative size-full">
+                      <div className="bg-[rgba(9,19,34,0.58)] border-[length:var(----sa-stroke-1,1px)] border-[rgba(255,255,255,0.25)] border-solid relative rounded-[26843500px] shrink-0 size-[16px]" data-node-id="1484:79838" data-name="SwitchThumb" />
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div className="bg-[rgba(255,255,255,0.05)] border-[length:var(----sa-stroke-1,1px)] border-[var(--sa-color-border-glass,rgba(255,255,255,0.2))] border-solid h-[28px] relative rounded-[var(--sa-radius-8,8px)] shrink-0" data-node-id="1484:79839" data-name="Button">
+                <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex gap-[var(--sa-spacing-6,6px)] items-center justify-center px-[var(--sa-spacing-10,11px)] py-px relative size-full">
+                  <div className="relative shrink-0 size-[16px]" data-node-id="1484:79840" data-name="ChevronUp">
+                    <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgChevronUp} />
+                  </div>
+                  <p className="[word-break:break-word] font-['Inter:Medium'] font-medium leading-[16px] not-italic relative shrink-0 text-[12px] text-[color:var(--sa-color-text-muted,rgba(255,255,255,0.6))] text-center whitespace-nowrap" data-node-id="1484:79842">
+                    Recolher
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="relative shrink-0 w-full" data-node-id="1484:79843" data-name="Container:margin">
+            <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex flex-col items-start pt-[var(--sa-spacing-16,16px)] relative size-full">
+              <div className="content-stretch flex flex-col items-start p-[var(--sa-spacing-12,12px)] relative rounded-[var(--sa-radius-4,4px)] shrink-0 w-full" data-node-id="1484:79844" data-name="Container">
+                <p className="[word-break:break-word] font-['Inter:Medium'] font-medium leading-[16px] not-italic relative shrink-0 text-[12px] text-[color:var(--sa-color-text-muted,rgba(255,255,255,0.6))] whitespace-nowrap" data-node-id="1484:79845">
+                  Quando ativada, ajusta a chance positiva ou negativa conforme o índice se aproxima do teto ou do piso diário.
+                </p>
+              </div>
+            </div>
+          </div>
+          <div className="h-[239.6px] relative shrink-0 w-[1460.8px]" data-node-id="1484:79846" data-name="Container">
+            <div className="[word-break:break-word] bg-clip-padding border-0 border-[transparent] border-solid leading-[20px] not-italic overflow-clip relative rounded-[inherit] size-full text-[14px] whitespace-nowrap">
+              <div className="absolute border border-[rgba(255,255,255,0.25)] border-solid font-['Inter:Medium'] font-medium h-[40px] left-0 text-[color:var(--sa-color-text-secondary,rgba(255,255,255,0.72))] top-[16px] w-[1460.8px]" data-node-id="1484:79847" data-name="Table Row">
+                <p className="absolute left-[7px] top-[8.6px]" data-node-id="1484:79848">
+                  Faixa
+                </p>
+                <p className="absolute left-[393.34px] top-[8.6px]" data-node-id="1484:79849">
+                  De
+                </p>
+                <p className="absolute left-[578.74px] top-[8.6px]" data-node-id="1484:79850">
+                  Até
+                </p>
+                <p className="-translate-x-full absolute left-[1093.13px] text-right top-[8.6px]" data-node-id="1484:79851">
+                  Chance positiva
+                </p>
+                <p className="-translate-x-full absolute left-[1452.36px] text-right top-[8.6px]" data-node-id="1484:79852">
+                  Chance negativa
+                </p>
+              </div>
+              <div className="absolute border border-[rgba(255,255,255,0.25)] border-solid h-[36.8px] left-0 top-[56px] w-[1460.8px]" data-node-id="1484:79853" data-name="Table Row">
+                <p className="absolute font-['Inter:Bold'] font-bold left-[7px] text-[color:var(--sa-color-text-secondary,rgba(255,255,255,0.72))] top-[7.2px]" data-node-id="1484:79854">
+                  Centro
+                </p>
+                <p className="absolute font-['Inter:Regular'] font-normal left-[393.34px] text-[color:var(--color\/v2\/text\/value-negative,#ff8a8a)] top-[7px]" data-node-id="1484:79855">
+                  -0,40%
+                </p>
+                <p className="absolute font-['Inter:Regular'] font-normal left-[578.74px] text-[color:var(--color\/v2\/text\/value-positive,#66e59e)] top-[7px]" data-node-id="1484:79856">
+                  +0,40%
+                </p>
+                <p className="-translate-x-full absolute font-['Inter:Regular'] font-normal left-[1093.6px] text-[color:var(--sa-color-text-secondary,rgba(255,255,255,0.72))] text-right top-[7px]" data-node-id="1484:79857">
+                  50%
+                </p>
+                <p className="-translate-x-full absolute font-['Inter:Regular'] font-normal left-[1452.7px] text-[color:var(--sa-color-text-secondary,rgba(255,255,255,0.72))] text-right top-[7px]" data-node-id="1484:79858">
+                  50%
+                </p>
+              </div>
+              <div className="absolute border border-[rgba(255,255,255,0.25)] border-solid h-[36.8px] left-0 top-[92.8px] w-[1460.8px]" data-node-id="1484:79859" data-name="Table Row">
+                <p className="absolute font-['Inter:Bold'] font-bold left-[7px] text-[color:var(--sa-color-text-secondary,rgba(255,255,255,0.72))] top-[7.2px]" data-node-id="1484:79860">
+                  Próximo do teto
+                </p>
+                <p className="absolute font-['Inter:Regular'] font-normal left-[393.34px] text-[color:var(--color\/v2\/text\/value-positive,#66e59e)] top-[7px]" data-node-id="1484:79861">
+                  +0,40%
+                </p>
+                <p className="absolute font-['Inter:Regular'] font-normal left-[578.74px] text-[color:var(--color\/v2\/text\/value-positive,#66e59e)] top-[7px]" data-node-id="1484:79862">
+                  +0,70%
+                </p>
+                <p className="-translate-x-full absolute font-['Inter:Regular'] font-normal left-[1093.6px] text-[color:var(--sa-color-text-secondary,rgba(255,255,255,0.72))] text-right top-[7px]" data-node-id="1484:79863">
+                  25%
+                </p>
+                <p className="-translate-x-full absolute font-['Inter:Regular'] font-normal left-[1452.7px] text-[color:var(--sa-color-text-secondary,rgba(255,255,255,0.72))] text-right top-[7px]" data-node-id="1484:79864">
+                  75%
+                </p>
+              </div>
+              <div className="absolute border border-[rgba(255,255,255,0.25)] border-solid h-[36.8px] left-0 top-[129.6px] w-[1460.8px]" data-node-id="1484:79865" data-name="Table Row">
+                <p className="absolute font-['Inter:Bold'] font-bold left-[7px] text-[color:var(--sa-color-text-secondary,rgba(255,255,255,0.72))] top-[7.2px]" data-node-id="1484:79866">
+                  Extremo superior
+                </p>
+                <p className="absolute font-['Inter:Regular'] font-normal left-[393.34px] text-[color:var(--color\/v2\/text\/value-positive,#66e59e)] top-[7px]" data-node-id="1484:79867">
+                  +0,70%
+                </p>
+                <p className="absolute font-['Inter:Regular'] font-normal left-[578.74px] text-[color:var(--color\/v2\/text\/value-positive,#66e59e)] top-[7px]" data-node-id="1484:79868">
+                  +0,80%
+                </p>
+                <p className="-translate-x-full absolute font-['Inter:Regular'] font-normal left-[1093.6px] text-[color:var(--sa-color-text-secondary,rgba(255,255,255,0.72))] text-right top-[7px]" data-node-id="1484:79869">
+                  10%
+                </p>
+                <p className="-translate-x-full absolute font-['Inter:Regular'] font-normal left-[1452.7px] text-[color:var(--sa-color-text-secondary,rgba(255,255,255,0.72))] text-right top-[7px]" data-node-id="1484:79870">
+                  90%
+                </p>
+              </div>
+              <div className="absolute border border-[rgba(255,255,255,0.25)] border-solid h-[36.8px] left-0 top-[166.4px] w-[1460.8px]" data-node-id="1484:79871" data-name="Table Row">
+                <p className="absolute font-['Inter:Bold'] font-bold left-[7px] text-[color:var(--sa-color-text-secondary,rgba(255,255,255,0.72))] top-[7.2px]" data-node-id="1484:79872">
+                  Próximo do piso
+                </p>
+                <p className="absolute font-['Inter:Regular'] font-normal left-[393.34px] text-[color:var(--color\/v2\/text\/value-negative,#ff8a8a)] top-[7px]" data-node-id="1484:79873">
+                  -0,70%
+                </p>
+                <p className="absolute font-['Inter:Regular'] font-normal left-[578.74px] text-[color:var(--color\/v2\/text\/value-negative,#ff8a8a)] top-[7px]" data-node-id="1484:79874">
+                  -0,40%
+                </p>
+                <p className="-translate-x-full absolute font-['Inter:Regular'] font-normal left-[1093.6px] text-[color:var(--sa-color-text-secondary,rgba(255,255,255,0.72))] text-right top-[7px]" data-node-id="1484:79875">
+                  75%
+                </p>
+                <p className="-translate-x-full absolute font-['Inter:Regular'] font-normal left-[1452.7px] text-[color:var(--sa-color-text-secondary,rgba(255,255,255,0.72))] text-right top-[7px]" data-node-id="1484:79876">
+                  25%
+                </p>
+              </div>
+              <div className="absolute border-[length:var(----sa-stroke-1,1px)] border-[rgba(255,255,255,0.25)] border-solid h-[36.4px] left-0 top-[203.2px] w-[1460.8px]" data-node-id="1484:79877" data-name="Table Row">
+                <p className="absolute font-['Inter:Bold'] font-bold left-[7px] text-[color:var(--sa-color-text-secondary,rgba(255,255,255,0.72))] top-[7.2px]" data-node-id="1484:79878">
+                  Extremo inferior
+                </p>
+                <p className="absolute font-['Inter:Regular'] font-normal left-[393.34px] text-[color:var(--color\/v2\/text\/value-negative,#ff8a8a)] top-[7px]" data-node-id="1484:79879">
+                  -0,80%
+                </p>
+                <p className="absolute font-['Inter:Regular'] font-normal left-[578.74px] text-[color:var(--color\/v2\/text\/value-negative,#ff8a8a)] top-[7px]" data-node-id="1484:79880">
+                  -0,70%
+                </p>
+                <p className="-translate-x-full absolute font-['Inter:Regular'] font-normal left-[1093.6px] text-[color:var(--sa-color-text-secondary,rgba(255,255,255,0.72))] text-right top-[7px]" data-node-id="1484:79881">
+                  90%
+                </p>
+                <p className="-translate-x-full absolute font-['Inter:Regular'] font-normal left-[1452.7px] text-[color:var(--sa-color-text-secondary,rgba(255,255,255,0.72))] text-right top-[7px]" data-node-id="1484:79882">
+                  10%
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+SUPER CRITICAL: The generated React+Tailwind code MUST be converted to match the target project's technology stack and styling system.
+1. Analyze the target codebase to identify: technology stack, styling approach, component patterns, and design tokens
+2. Convert React syntax to the target framework/library
+3. Transform all Tailwind classes to the target styling system while preserving exact visual design
+4. Follow the project's existing patterns and conventions
+DO NOT install any Tailwind as a dependency unless the user instructs you to do so.
+
+Node ids have been added to the code as data attributes, e.g. `data-node-id="1:2"`.
+These styles are contained in the design: SA/Gradient/Glass Surface Subtle: ,.
+The generated code contains image and SVG URL constants, e.g. const image = 'https://www.figma.com/api/mcp/asset/550e8400-e29b-41d4-a716-446655440000.png'. These URLs are temporary download sources and expire after 7 days. Download each asset into the project with curl -L, then replace its URL in the generated code with a reference to the downloaded asset. Never use the temporary URLs as runtime image sources.

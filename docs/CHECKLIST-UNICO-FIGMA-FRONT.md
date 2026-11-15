@@ -6,10 +6,25 @@ Atualização: 15/11/2026. Este é o índice desta revisão ampla. Evidências a
 
 - [ ] Todos os frames/estados abaixo comparados visualmente, inclusive erro, vazio e retorno.
 - [ ] Fluxos de escrita e leitura integrados testados com dados fictícios.
-- [x] Admin: lint e build aprovados; 306 testes locais passaram (incluem 8 testes de estudo já existentes no worktree; 298 versionados neste complemento).
+- [x] Admin: lint e build aprovados; 309 testes locais passaram (incluem 8 testes de estudo já existentes no worktree; 301 versionados neste complemento).
 - [ ] Reexecutar os checks após concluir as demais telas; Área do Cliente ainda não alterada nesta rodada.
 - [ ] Deploy confirmado e testes repetidos nas URLs publicadas.
 - [x] Pendências de frontend separadas das pendências reais da API, do designer e da limitação de consulta ao Figma.
+
+## EC05.1 / EC05.2 — zona de amortecimento (15/11)
+
+- [x] Referências já recuperadas 1484:79802 (desativada) e 1484:79819 (ativada + tabela) reconfirmadas e arquivadas com contextos completos, screenshots e três SVGs originais em [evidence/qa-2026-11-15-damping](evidence/qa-2026-11-15-damping).
+- [x] Checkbox genérico substituído pelo switch e composições do desenho. Ativação no rascunho mostra tabela com Faixa, De, Até, Chance positiva e Chance negativa; cinco faixas na ordem aprovada. Recolher/Expandir usa o mesmo controle, mantém os valores e é operável por Enter/Espaço.
+- [x] Reutilizados ProfileSection e QTable; não há novos inputs de configuração. Modelo das células é só de apresentação, sem presumir payload ou calcular percentuais/faixas. Valores ausentes não viram zero; zero real é preservado; cores de sinal só são aplicadas a números conhecidos.
+- [x] Motor existente sem projeção operacional retorna estado local nulo e mostra Indisponível em leitura, sem afirmar Desativada. Editar permite escolher um estado para o rascunho; Cancelar restaura indisponibilidade. Ativar não chama API nem afirma execução do motor.
+- [x] Local integrado: Quant Core em leitura indisponível; editar/ativar/desativar, recolher/reabrir, voltar do LG09 mantendo estado recolhido e Cancelar. Criação conserva o padrão desativado; nome fictício preservado ao recolher/reabrir e rascunho cancelado. Nenhuma gravação.
+- [x] Isolado: off medido em 798,39 × 210 px, switch 32 × 18,39 px; on em 1502 × 394,98 px, cinco colunas/cinco linhas de 36,8 px, percentuais do desenho e cores #66e59e/#ff8a8a. Três SVGs em 16 × 16 px. Leitura bloqueia switch mas permite recolher; dados presentes preservados e dados ausentes mostram 20 células indisponíveis. Exemplos ficaram só no cenário isolado, removido antes da entrega.
+- [x] Revisão em 1280/390 px: páginas reais com 1265/375 px sem excesso horizontal; no celular a tabela de 721 px rola dentro da área de 267 px. Isolado móvel: região de 300 px e tabela de 720 px; teclado moveu scrollLeft de 0 para 120.
+- [ ] Checks finais, publicação e reteste em homologação.
+
+**API:** OpenAPI reconsultada em 15/11 continua oferecendo somente catálogo e vínculos de motores. EngineResponse tem identidade, descrição, isSelectable e datas, mas não ativação/configuração da zona nem faixas/probabilidades; também não há rota de gravação operacional. api-review.json preserva a evidência. Não copiar valores ilustrativos do Figma, derivar configuração dos limites diários ou declarar consulta/gravação da zona integradas. As células atuais são explicitamente indisponíveis.
+
+**Designer:** nenhum novo bloqueio para os dois estados consultados e o recolhimento do mesmo controle. Os demais estados do LG04/LG05/LG06 continuam com sua revisão própria no inventário.
 
 ## LG04 — menus de status, vínculos e ordenação (15/11)
 
@@ -442,8 +457,8 @@ Legenda: **Preparado / revisão pendente** = há código novo, mas a validação
 | [1484:79652](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-79652) | EC03 · Frequência · data e hora preenchidas                                                   | Preparado / revisão pendente                                             |
 | [1484:79712](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-79712) | EC04.1 · Probabilidade · 50/50 · soma válida                                                  | Preparado / revisão pendente                                             |
 | [1484:79755](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-79755) | EC04.2 · Probabilidade · 60/50 · soma 110% inválida                                           | Preparado / revisão pendente                                             |
-| [1484:79802](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-79802) | EC05.1 · Zona de amortecimento · desativada                                                   | Preparado / revisão pendente                                             |
-| [1484:79819](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-79819) | EC05.2 · Zona de amortecimento · ativada + tabela                                             | Preparado / revisão pendente                                             |
+| [1484:79802](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-79802) | EC05.1 · Zona de amortecimento · desativada                                                   | Composição/estados testados; projeção e gravação dependem da API                                             |
+| [1484:79819](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-79819) | EC05.2 · Zona de amortecimento · ativada + tabela                                             | Composição/estados testados; projeção e gravação dependem da API                                             |
 | [1484:79883](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-79883) | EC06 · Limites operacionais · regra contornada                                                | Preparado / revisão pendente                                             |
 | [1484:79941](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-79941) | EC07 · Fechamento soberano · separador                                                        | Preparado / revisão pendente                                             |
 | [1484:79981](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-79981) | F03 · Edição da lógica · Simulações + validação                                               | Revalidar                                                                |
