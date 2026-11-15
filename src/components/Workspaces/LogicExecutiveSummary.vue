@@ -1,5 +1,6 @@
 <template>
   <div
+    ref="trigger"
     class="logic-summary-trigger"
     tabindex="0"
     :aria-label="`Resumo executivo de ${name}`"
@@ -53,6 +54,7 @@
 import { onScopeDispose, ref, useId } from 'vue'
 defineProps({ name: { type: String, required: true }, description: { type: String, default: '' } })
 const open = ref(false)
+const trigger = ref(null)
 const panelId = `logic-summary-${useId()}`
 let closeTimer
 function cancelClose() {
@@ -64,6 +66,7 @@ function show() {
 }
 function scheduleClose() {
   cancelClose()
+  if (trigger.value?.matches(':focus')) return
   closeTimer = setTimeout(() => {
     open.value = false
   }, 180)
