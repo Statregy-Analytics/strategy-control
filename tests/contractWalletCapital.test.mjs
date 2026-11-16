@@ -6,6 +6,8 @@ import { parse, compileScript, compileTemplate } from '@vue/compiler-sfc'
 import * as Vue from 'vue'
 import { renderToString } from '@vue/server-renderer'
 import * as model from '../src/services/contractWalletCapital.js'
+import * as entry from '../src/services/contractParticipantEntry.js'
+import * as presentation from '../src/services/customerPresentation.js'
 import * as distribution from '../src/services/contractDistribution.js'
 import { useFinanceResource } from '../src/composables/useFinanceResource.js'
 import { buildDraftPayload } from '../src/services/financeModels.js'
@@ -133,6 +135,14 @@ test('137: unknown, wrong-direction or undocumented FX cannot become a valid con
 
 const context = vm.createContext({})
 const dependencies = {
+  'src/services/contractParticipantEntry': entry,
+  'src/services/customerPresentation': presentation,
+  'src/services/contractDistributionCustomers': {
+    distributionCustomers: async () => ({ customers: [] }),
+  },
+  'src/components/Finance/CustomerSelect.vue': {
+    default: { render: () => Vue.h('select', { 'aria-label': 'Cliente' }) },
+  },
   vue: Vue,
   './useFinanceResource': { useFinanceResource },
   'src/services/financeService': {
@@ -140,9 +150,7 @@ const dependencies = {
       throw Error('Unexpected request')
     },
   },
-  'src/services/contractDistributionCustomers': {
-    distributionCustomers: async () => ({ customers: [] }),
-  },
+
   'src/services/contractDistribution': distribution,
   'src/services/contractWalletCapital': model,
 }
@@ -317,7 +325,12 @@ async function component(path, inlineTemplate = false) {
         ? { useContractWalletCapital: useCapital }
         : name === 'src/composables/useFinanceResource'
           ? { useFinanceResource }
-          : dependencies[name] || { default: await component(name, true) }
+          : dependencies[name] || {
+              default: await component(
+                name.startsWith('./') ? 'src/components/Contracts/' + name.slice(2) : name,
+                true,
+              ),
+            }
     return new vm.SyntheticModule(
       Object.keys(exports),
       function () {
@@ -359,7 +372,7 @@ async function render(state) {
       ...dialog,
       setup(props, ctx) {
         const h = dialog.setup(props, ctx)
-        state(h)
+        state(h.flow)
         return h
       },
     },
@@ -439,4 +452,240 @@ test('137: picker renders two tabs and exactly seven currencies with zero/used p
     (html.match(/role="option"[^>]*disabled|disabled[^>]*role="option"/g) || []).length,
     7,
   )
+})
+
+const entryContract = {
+  currentBalance: '557200.00',
+  primaryEngine: { engineId: 'motor' },
+  participants: [
+    { clientId: 'old1', displayName: 'Roberto', allocationPercentage: '53.846153846153' },
+    { clientId: 'old2', displayName: 'Mariana', allocationPercentage: '35.897435897436' },
+    { clientId: 'old3', displayName: 'Grupo', allocationPercentage: '8.974358974359' },
+    { clientId: 'old4', displayName: 'Marcos', allocationPercentage: '1.282051282052' },
+  ],
+}
+test('138: entry keeps prior value, dilutes shares and closes both columns to100 by largest remainder', () => {
+  const h = entry.participantEntryImpact(entryContract, '50000', customer('new'))
+  assert.equal(h.valid, true)
+  assert.equal(h.total, 60720000n)
+  assert.equal(h.newShare, '8.23')
+  assert.equal(h.previousShare, '91.77')
+  assert.equal(h.rows.reduce((sum, row) => sum + Number(row.after), 0).toFixed(2), '100.00')
+  assert.equal(
+    h.rows
+      .filter((row) => !row.isNew)
+      .reduce((sum, row) => sum + Number(row.before), 0)
+      .toFixed(2),
+    '100.00',
+  )
+  assert.equal(h.rows.at(-1).before, null)
+  assert.equal(entryContract.currentBalance, '557200.00')
+  const equal = entry.participantEntryImpact(
+    {
+      currentBalance: '0.02',
+      participants: [
+        { clientId: 'a', allocationPercentage: 50 },
+        { clientId: 'b', allocationPercentage: 50 },
+      ],
+    },
+    '0.01',
+    customer('new'),
+  )
+  assert.deepEqual(
+    equal.rows.map((row) => row.after),
+    ['33.34', '33.33', '33.33'],
+  )
+})
+test('138: missing position is never replaced with initial capital, nor missing share inferred from old allocations', () => {
+  for (const contract of [
+    { ...entryContract, currentBalance: null, initialConsolidatedCapital: 557200 },
+    {
+      ...entryContract,
+      participants: [{ clientId: 'a', allocatedAmount: 557200, allocationPercentage: null }],
+    },
+    { ...entryContract, participants: [{ clientId: 'a', allocationPercentage: 90 }] },
+  ]) {
+    const h = entry.participantEntryImpact(contract, '50000', customer('new'))
+    assert.equal(!!h.valid, false)
+    assert.equal(h.rows.length, 0)
+  }
+  assert.equal(entry.participantEntryImpact(entryContract, '0', customer('new')).valid, false)
+  assert.equal(entry.participantEntryImpact(entryContract, '100', customer('old1')).valid, false)
+})
+test('138: index only comes from connected primary motor, never indexAtConnection or another motor', () => {
+  assert.equal(
+    entry.participantEntryIndex(
+      [
+        {
+          engineId: 'motor',
+          role: 'Primary',
+          connectionStatus: 'PendingConnection',
+          indexAtConnection: 100,
+          currentIndex: 101,
+        },
+      ],
+      'motor',
+    ),
+    'Indisponível',
+  )
+  assert.equal(
+    entry.participantEntryIndex(
+      [{ engineId: 'other', role: 'Primary', connectionStatus: 'Connected', currentIndex: 101 }],
+      'motor',
+    ),
+    'Indisponível',
+  )
+  assert.equal(
+    entry.participantEntryIndex(
+      [{ engineId: 'motor', role: 'Primary', connectionStatus: 'Connected', currentIndex: 101.35 }],
+      'motor',
+    ),
+    '101,3500',
+  )
+  for (const date of ['2026-02-30', '2026-99-01', 'bad'])
+    assert.equal(entry.validEntryDate(date), false)
+  assert.equal(entry.validEntryDate('2026-11-16'), true)
+})
+const entryDialog = await component('src/components/Contracts/ContractParticipantDialog.vue')
+async function renderEntry({
+  currency = 'BRL',
+  contract = entryContract,
+  engines,
+  lines = [source()],
+  prepare = () => {},
+  submit = async () => ({ success: false, message: entry.participantEntryBlocked }),
+} = {}) {
+  let control
+  const props = {
+    currency,
+    contract,
+    engines: engines || {
+      data: [
+        {
+          engineId: 'motor',
+          role: 'Primary',
+          connectionStatus: 'Connected',
+          currentIndex: '101.35',
+        },
+      ],
+      loading: false,
+      error: '',
+    },
+    retryEngines: () => {},
+    existingIds: [],
+    read: async () => ({ data: [] }),
+    lookup: async () => ({ customers: [] }),
+    submit,
+  }
+  const app = Vue.createSSRApp(
+    {
+      ...entryDialog,
+      setup(props, ctx) {
+        const h = entryDialog.setup(props, ctx)
+        h.selected.value = 'a'
+        populate(h.flow, lines)
+        prepare(h)
+        control = h
+        return h
+      },
+    },
+    props,
+  )
+  for (const name of ['QDialog', 'QCard', 'QBanner', 'QLinearProgress'])
+    app.component(name, { setup: (_, ctx) => () => Vue.h('div', ctx.slots.default?.()) })
+  app.component('QBtn', {
+    props: ['label', 'disable'],
+    setup: (p, ctx) => () =>
+      Vue.h('button', { disabled: p.disable }, p.label || ctx.slots.default?.()),
+  })
+  app.component('QInput', {
+    props: ['modelValue'],
+    setup: (p, ctx) => () =>
+      Vue.h('input', { value: p.modelValue, 'aria-label': ctx.attrs['aria-label'] }),
+  })
+  const html = await renderToString(app)
+  return { html, control }
+}
+test('138: same-currency template grows with impact, audit and original fields, no simulation action', async () => {
+  const { html } = await renderEntry({ lines: [source('Free', 'BRL', '50000')] })
+  for (const text of [
+    '2. Origem do aporte',
+    '3. Impacto no contrato',
+    '4. Auditoria',
+    '607.200,00',
+    '8,23%',
+    'Participação de cada cliente',
+    'Data de entrada',
+    '101,3500',
+    'Performance não herdada',
+    'Moeda firmada do contrato',
+  ])
+    assert.ok(html.includes(text), text)
+  assert.doesNotMatch(html, /3. Conversão|Simular|Confirmar Vínculo/)
+})
+test('138: three source lines show conversion and renumber impact/audit without changing origin amounts', async () => {
+  const { html } = await renderEntry({
+    lines: [
+      source('Free', 'BRL', '19500'),
+      source('Applied', 'USD', '5000', '10000', quote('USD', 'BRL', '5')),
+      source('Applied', 'EUR', '1000', '15000', quote()),
+    ],
+    prepare: (h) => {
+      h.flow.wallets.state.data = [
+        wallet(),
+        wallet('Applied', 'USD', '10000'),
+        wallet('Applied', 'EUR', '15000'),
+      ]
+      h.flow.quotes.value.USD = { data: quote('USD', 'BRL', '5'), loading: false, error: '' }
+    },
+  })
+  for (const text of [
+    '3. Conversão para a moeda firmada',
+    '4. Impacto no contrato',
+    '5. Auditoria',
+    '50.000,00',
+    'USD · Strategy',
+    'EUR · Strategy',
+  ])
+    assert.ok(html.includes(text), text)
+})
+test('138: insufficient source hides conversion, impact and audit and prevents submission', async () => {
+  let writes = 0
+  const { html, control } = await renderEntry({
+    lines: [source('Free', 'BRL', '160000.01')],
+    submit: async () => {
+      writes++
+    },
+  })
+  assert.match(html, /Saldo insuficiente/)
+  assert.doesNotMatch(
+    html,
+    /class="participant-dialog__impact"|O que será registrado no sistema|<table/,
+  )
+  await control.confirm()
+  assert.equal(writes, 0)
+})
+test('138: unavailable current capital/index blocks even keyboard submission; failed confirmation preserves lines', async () => {
+  let writes = 0
+  const missing = await renderEntry({
+    contract: { ...entryContract, currentBalance: null },
+    submit: async () => {
+      writes++
+    },
+  })
+  await missing.control.confirm()
+  assert.equal(writes, 0)
+  assert.match(missing.html, /Capital atual ou participações indisponíveis/)
+  const noIndex = await renderEntry({
+    engines: { data: [], loading: false, error: '' },
+    submit: async () => {
+      writes++
+    },
+  })
+  await noIndex.control.confirm()
+  assert.equal(writes, 0)
+  const failed = await renderEntry()
+  await failed.control.confirm()
+  assert.equal(failed.control.error.value, entry.participantEntryBlocked)
+  assert.equal(failed.control.flow.lines.value[0].amount, '145000.00')
 })

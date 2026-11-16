@@ -721,6 +721,10 @@
       :busy="busy"
       :existing-ids="(detail.state.data?.participants || []).map((p) => p.clientId)"
       :submit="includeParticipant"
+      :currency="currencyCode"
+      :contract="detail.state.data"
+      :engines="engines.state"
+      :retry-engines="loadEngines"
       @close="clientOpen = false"
     />
     <contract-capital-distribution
@@ -833,6 +837,7 @@ import {
   columns,
 } from 'src/services/financeService'
 import { centsDecimal } from 'src/services/contractDistribution'
+import { participantEntryBlocked } from 'src/services/contractParticipantEntry'
 import { walletCapitalTotal } from 'src/services/contractWalletCapital'
 import { contractPercentageLabel } from 'src/services/contractDistribution'
 import { contractMovements } from 'src/services/contractMovements'
@@ -1141,13 +1146,11 @@ async function addClient() {
   selectedClient.value = null
   selectedClientData.value = null
 }
-async function includeParticipant(clientId) {
-  if (busy.value) return { success: false }
-  if ((detail.state.data?.participants || []).some((p) => p.clientId === clientId))
-    return { success: false, message: 'Este cliente já está vinculado.' }
-  const success = await writeSection('post', 'participants', { clientId, allocatedAmount: null })
-  return { success, message: success ? '' : error.value }
+async function includeParticipant() {
+  // The current request has no source wallets, quotes or entry snapshot. Never send a flattened total.
+  return { success: false, message: participantEntryBlocked }
 }
+
 function removeClient(key) {
   form.value.clientAllocations = form.value.clientAllocations.filter((p) => p.clientId !== key)
 }

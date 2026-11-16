@@ -1,0 +1,795 @@
+{
+  "contracts": {
+    "pagination": {
+      "page": 1,
+      "pageSize": 10,
+      "totalItems": 6,
+      "totalPages": 1,
+      "hasNextPage": false,
+      "hasPreviousPage": false
+    },
+    "data": [
+      {
+        "id": "9a5aca18-182f-4493-b47e-5cf25454ad2e",
+        "publicCode": "CTR-26AB2AB6",
+        "name": "QA 136 - distribuicao atribuida - teste ficticio 16-11",
+        "registrationStatus": "Created",
+        "businessStatus": {
+          "id": "81e8ecba-5d28-4f42-bdc7-729a07f4c3a0",
+          "code": "ACTIVE",
+          "name": "Ativo"
+        },
+        "createdAtUtc": "2026-11-16T17:53:08.039137+00:00",
+        "clients": [
+          {
+            "clientId": "cf2f5863-d234-42d9-9cc1-95881c05dbd1",
+            "displayName": "Éric Vicente",
+            "personType": "PF"
+          },
+          {
+            "clientId": "026a7899-756d-40a7-b5e9-8a3abb60cc54",
+            "displayName": "Claudio Manhães",
+            "personType": "PJ"
+          }
+        ],
+        "clientCount": 2,
+        "initialContractualCapital": 0.3,
+        "currentCapital": null,
+        "currencyCode": "BRL",
+        "startDate": "2026-11-16",
+        "endDate": "2026-12-16",
+        "primaryEngine": {
+          "engineId": "e99dec56-2b66-4cab-9bb3-12e084834817",
+          "name": "Quant Core"
+        },
+        "assetUniverseSummary": {
+          "assetCount": 0,
+          "marketCount": 0,
+          "currencyCount": 0,
+          "networkCount": 0
+        }
+      },
+      {
+        "id": "62d50817-d1c2-41b5-9e15-ec20f2f675fb",
+        "publicCode": "CTR-E9E28B59",
+        "name": "Vintage Strategy",
+        "registrationStatus": "Created",
+        "businessStatus": {
+          "id": "c3f81393-082b-4369-9503-f7f0bc619924",
+          "code": "CLOSED",
+          "name": "Encerrado"
+        },
+        "createdAtUtc": "2026-10-10T20:46:23.67775+00:00",
+        "clients": [
+          {
+            "clientId": "23b8042b-a4e2-40fd-9b90-a670fa276c0b",
+            "displayName": "Homologação Pessoa Física",
+            "personType": "PF"
+          }
+        ],
+        "clientCount": 1,
+        "initialContractualCapital": 100000.0,
+        "currentCapital": null,
+        "currencyCode": "USD",
+        "startDate": "2021-05-15",
+        "endDate": "2026-05-15",
+        "primaryEngine": {
+          "engineId": "e99dec56-2b66-4cab-9bb3-12e084834817",
+          "name": "Quant Core"
+        },
+        "assetUniverseSummary": {
+          "assetCount": 0,
+          "marketCount": 0,
+          "currencyCount": 0,
+          "networkCount": 0
+        }
+      },
+      {
+        "id": "01b837f5-4b9c-4171-a5d0-fee468ac6df1",
+        "publicCode": "CTR-E976C745",
+        "name": "Legacy Prime",
+        "registrationStatus": "Created",
+        "businessStatus": {
+          "id": "81e8ecba-5d28-4f42-bdc7-729a07f4c3a0",
+          "code": "ACTIVE",
+          "name": "Ativo"
+        },
+        "createdAtUtc": "2026-10-10T20:46:21.046771+00:00",
+        "clients": [
+          {
+            "clientId": "23b8042b-a4e2-40fd-9b90-a670fa276c0b",
+            "displayName": "Homologação Pessoa Física",
+            "personType": "PF"
+          },
+          {
+            "clientId": "cf2f5863-d234-42d9-9cc1-95881c05dbd1",
+            "displayName": "Éric Vicente",
+            "personType": "PF"
+          }
+        ],
+        "clientCount": 2,
+        "initialContractualCapital": 500000.0,
+        "currentCapital": null,
+        "currencyCode": "USD",
+        "startDate": "2023-11-20",
+        "endDate": "2028-11-20",
+        "primaryEngine": {
+          "engineId": "e99dec56-2b66-4cab-9bb3-12e084834817",
+          "name": "Quant Core"
+        },
+        "assetUniverseSummary": {
+          "assetCount": 0,
+          "marketCount": 0,
+          "currencyCount": 0,
+          "networkCount": 0
+        }
+      },
+      {
+        "id": "ec523ec0-972f-46a9-a834-a937e22e3d67",
+        "publicCode": "CTR-7110739C",
+        "name": "Gamma Yield Secure",
+        "registrationStatus": "Created",
+        "businessStatus": {
+          "id": "2d8223dc-d49a-44d7-8b33-5826726999e3",
+          "code": "SUSPENDED",
+          "name": "Suspenso"
+        },
+        "createdAtUtc": "2026-10-10T20:46:17.132748+00:00",
+        "clients": [
+          {
+            "clientId": "101044c1-60c2-4039-b4bb-3235a913217a",
+            "displayName": "HPJ Homologação",
+            "personType": "PJ"
+          }
+        ],
+        "clientCount": 1,
+        "initialContractualCapital": 230000.0,
+        "currentCapital": null,
+        "currencyCode": "EUR",
+        "startDate": "2026-01-10",
+        "endDate": "2031-01-10",
+        "primaryEngine": {
+          "engineId": "e99dec56-2b66-4cab-9bb3-12e084834817",
+          "name": "Quant Core"
+        },
+        "assetUniverseSummary": {
+          "assetCount": 0,
+          "marketCount": 0,
+          "currencyCount": 0,
+          "networkCount": 0
+        }
+      },
+      {
+        "id": "72981540-b565-429c-b1ff-59f61645ba6f",
+        "publicCode": "CTR-403B56CC",
+        "name": "Beta Growth Spec",
+        "registrationStatus": "Created",
+        "businessStatus": {
+          "id": "c3f81393-082b-4369-9503-f7f0bc619924",
+          "code": "CLOSED",
+          "name": "Encerrado"
+        },
+        "createdAtUtc": "2026-10-10T20:46:15.135395+00:00",
+        "clients": [
+          {
+            "clientId": "026a7899-756d-40a7-b5e9-8a3abb60cc54",
+            "displayName": "Claudio Manhães",
+            "personType": "PJ"
+          }
+        ],
+        "clientCount": 1,
+        "initialContractualCapital": 261500.0,
+        "currentCapital": null,
+        "currencyCode": "BRL",
+        "startDate": "2024-06-01",
+        "endDate": "2026-06-01",
+        "primaryEngine": {
+          "engineId": "e99dec56-2b66-4cab-9bb3-12e084834817",
+          "name": "Quant Core"
+        },
+        "assetUniverseSummary": {
+          "assetCount": 0,
+          "marketCount": 0,
+          "currencyCount": 0,
+          "networkCount": 0
+        }
+      },
+      {
+        "id": "5df8fc11-d8aa-41a3-af08-0c76454e9b81",
+        "publicCode": "CTR-F65C316E",
+        "name": "Alpha Hedge Fund",
+        "registrationStatus": "Created",
+        "businessStatus": {
+          "id": "81e8ecba-5d28-4f42-bdc7-729a07f4c3a0",
+          "code": "ACTIVE",
+          "name": "Ativo"
+        },
+        "createdAtUtc": "2026-10-10T20:46:11.666679+00:00",
+        "clients": [
+          {
+            "clientId": "101044c1-60c2-4039-b4bb-3235a913217a",
+            "displayName": "HPJ Homologação",
+            "personType": "PJ"
+          },
+          {
+            "clientId": "cf2f5863-d234-42d9-9cc1-95881c05dbd1",
+            "displayName": "Éric Vicente",
+            "personType": "PF"
+          }
+        ],
+        "clientCount": 2,
+        "initialContractualCapital": 125000.0,
+        "currentCapital": null,
+        "currencyCode": "USD",
+        "startDate": "2025-03-15",
+        "endDate": "2028-03-15",
+        "primaryEngine": {
+          "engineId": "e99dec56-2b66-4cab-9bb3-12e084834817",
+          "name": "Quant Core"
+        },
+        "assetUniverseSummary": {
+          "assetCount": 0,
+          "marketCount": 0,
+          "currencyCount": 0,
+          "networkCount": 0
+        }
+      }
+    ],
+    "success": true,
+    "requestId": "01a1e5bd1f67765a8b8c189821a69771",
+    "correlationId": "01a1e5bd1f677d6e9759f716515f2e21",
+    "errors": []
+  },
+  "engine": {
+    "data": [
+      {
+        "contractEngineId": "c8b3ce01-761a-41db-b576-5d905bf9bf5c",
+        "engineId": "e99dec56-2b66-4cab-9bb3-12e084834817",
+        "code": "QUANT_CORE",
+        "name": "Quant Core",
+        "functionDescription": "Motor quantitativo principal",
+        "role": "Primary",
+        "connectionStatus": "PendingConnection",
+        "connectedAtUtc": null,
+        "disconnectedAtUtc": null,
+        "indexAtConnection": null,
+        "entryValue": null,
+        "engineConfigurationVersionId": null,
+        "engineSnapshotId": null,
+        "currentIndex": null,
+        "variationSinceConnectionPercentage": null
+      }
+    ],
+    "success": true,
+    "requestId": "01a1e5bd209971c988aa18deeb69a3f0",
+    "correlationId": "01a1e5bd209975c2802c72f09c6b194b",
+    "errors": []
+  },
+  "contract": {
+    "data": {
+      "id": "9a5aca18-182f-4493-b47e-5cf25454ad2e",
+      "publicCode": "CTR-26AB2AB6",
+      "name": "QA 136 - distribuicao atribuida - teste ficticio 16-11",
+      "registrationStatus": "Created",
+      "term": {
+        "value": 1,
+        "unit": "Month"
+      },
+      "startDate": "2026-11-16",
+      "expectedEndDate": "2026-12-16",
+      "currency": {
+        "id": "f39ba6d7-e6ca-4367-9f7e-81850804447d",
+        "isoCode": "BRL",
+        "name": "Real brasileiro"
+      },
+      "initialContractualCapital": 0.3,
+      "initialConsolidatedCapital": 0.3,
+      "currentBalance": null,
+      "initialCapitalOrigin": {
+        "id": "c0a1b2c3-0001-4c0a-9a00-000000000001",
+        "code": "CONTRACT_VALUE",
+        "name": "Valor do contrato"
+      },
+      "financialNotes": "QA 136: contrato fictício para testar distribuição e finalização com capital atribuído; não deve debitar carteiras.",
+      "businessStatus": {
+        "id": "81e8ecba-5d28-4f42-bdc7-729a07f4c3a0",
+        "code": "ACTIVE",
+        "name": "Ativo"
+      },
+      "primaryEngine": {
+        "engineId": "e99dec56-2b66-4cab-9bb3-12e084834817",
+        "code": "QUANT_CORE",
+        "name": "Quant Core",
+        "connectionStatus": "PendingConnection"
+      },
+      "participants": [
+        {
+          "participantId": "832e0795-4d7d-4ca5-875e-a3f7c8d8c471",
+          "clientId": "cf2f5863-d234-42d9-9cc1-95881c05dbd1",
+          "displayName": "Éric Vicente",
+          "personType": "PF",
+          "allocatedAmount": 0.1,
+          "allocationPercentage": 33.3333,
+          "contributedAmount": 0,
+          "baseAmount": 0.1,
+          "linkedAtUtc": "2026-11-16T17:53:08.039377+00:00"
+        },
+        {
+          "participantId": "92ff571e-3241-472a-8057-b28fc226fda8",
+          "clientId": "026a7899-756d-40a7-b5e9-8a3abb60cc54",
+          "displayName": "Claudio Manhães",
+          "personType": "PJ",
+          "allocatedAmount": 0.2,
+          "allocationPercentage": 66.6667,
+          "contributedAmount": 0,
+          "baseAmount": 0.2,
+          "linkedAtUtc": "2026-11-16T17:53:08.039404+00:00"
+        }
+      ],
+      "createdAtUtc": "2026-11-16T17:53:08.039137+00:00",
+      "updatedAtUtc": "2026-11-16T18:11:06.898905+00:00",
+      "finalizedAtUtc": "2026-11-16T18:11:06.89886+00:00",
+      "version": 4,
+      "assetUniverseSummary": {
+        "assetCount": 0,
+        "marketCount": 0,
+        "currencyCount": 0,
+        "networkCount": 0
+      }
+    },
+    "success": true,
+    "requestId": "01a1e5bd21f474d18b957d7ba27de230",
+    "correlationId": "01a1e5bd21f47b34a1be3fb23ee08f2c",
+    "errors": []
+  },
+  "customers": {
+    "pagination": {
+      "page": 1,
+      "pageSize": 30,
+      "totalItems": 14,
+      "totalPages": 1,
+      "hasNextPage": false,
+      "hasPreviousPage": false
+    },
+    "data": [
+      {
+        "customerId": "bbbcea42-7751-4701-8557-81a9ebc7ce22",
+        "displayName": "Jane Austin Doe",
+        "customerKind": "Person",
+        "status": "Archived",
+        "maskedDocument": "******8909",
+        "avatarUrl": null,
+        "advisorId": null,
+        "advisorName": null,
+        "lastAccessAtUtc": "2026-07-28T11:12:18.095883+00:00",
+        "customerSince": "2026-07-28",
+        "documentClassification": "I",
+        "documentLevel": 0,
+        "documentComplianceStatus": "OK",
+        "complianceStatus": "Ok",
+        "documentSummary": {
+          "customerId": "bbbcea42-7751-4701-8557-81a9ebc7ce22",
+          "requirementCount": 0,
+          "documentCount": 0,
+          "approved": 0,
+          "pending": 0,
+          "rejected": 0,
+          "inReview": 0,
+          "missing": 0,
+          "waived": 0
+        },
+        "primaryContact": "maria.santos@example.com",
+        "createdAtUtc": "2026-07-28T11:01:46.726707+00:00",
+        "updatedAtUtc": "2026-10-19T20:49:52.809425+00:00",
+        "strategyId": "SA-52056963"
+      },
+      {
+        "customerId": "026a7899-756d-40a7-b5e9-8a3abb60cc54",
+        "displayName": "Claudio Manhães",
+        "customerKind": "Organization",
+        "status": "Active",
+        "maskedDocument": null,
+        "avatarUrl": null,
+        "advisorId": null,
+        "advisorName": null,
+        "lastAccessAtUtc": "2026-11-12T22:46:18.813649+00:00",
+        "customerSince": "2026-08-04",
+        "documentClassification": "I",
+        "documentLevel": 0,
+        "documentComplianceStatus": "OK",
+        "complianceStatus": "Ok",
+        "documentSummary": {
+          "customerId": "026a7899-756d-40a7-b5e9-8a3abb60cc54",
+          "requirementCount": 0,
+          "documentCount": 6,
+          "approved": 0,
+          "pending": 0,
+          "rejected": 0,
+          "inReview": 0,
+          "missing": 0,
+          "waived": 0
+        },
+        "primaryContact": "joorge.will@gmail.com",
+        "createdAtUtc": "2026-08-04T17:25:07.737212+00:00",
+        "updatedAtUtc": "2026-10-21T00:47:57.911265+00:00",
+        "strategyId": "SA-B47E6862"
+      },
+      {
+        "customerId": "4ff8ec17-e9ea-416a-828c-b393d9b0119a",
+        "displayName": "Carlos Miguel",
+        "customerKind": "Person",
+        "status": "Suspended",
+        "maskedDocument": null,
+        "avatarUrl": null,
+        "advisorId": null,
+        "advisorName": null,
+        "lastAccessAtUtc": null,
+        "customerSince": "2026-08-04",
+        "documentClassification": "I",
+        "documentLevel": 0,
+        "documentComplianceStatus": "Pending",
+        "complianceStatus": "Pending",
+        "documentSummary": {
+          "customerId": "4ff8ec17-e9ea-416a-828c-b393d9b0119a",
+          "requirementCount": 1,
+          "documentCount": 0,
+          "approved": 0,
+          "pending": 0,
+          "rejected": 0,
+          "inReview": 0,
+          "missing": 1,
+          "waived": 0
+        },
+        "primaryContact": "jlbnunes@live.com",
+        "createdAtUtc": "2026-08-04T17:35:27.611506+00:00",
+        "updatedAtUtc": "2026-10-01T19:52:59.495577+00:00",
+        "strategyId": "SA-05DCD53A"
+      },
+      {
+        "customerId": "23b8042b-a4e2-40fd-9b90-a670fa276c0b",
+        "displayName": "Homologação Pessoa Física",
+        "customerKind": "Person",
+        "status": "Active",
+        "maskedDocument": null,
+        "avatarUrl": null,
+        "advisorId": null,
+        "advisorName": null,
+        "lastAccessAtUtc": null,
+        "customerSince": "2026-08-04",
+        "documentClassification": "I",
+        "documentLevel": 0,
+        "documentComplianceStatus": "OK",
+        "complianceStatus": "Ok",
+        "documentSummary": {
+          "customerId": "23b8042b-a4e2-40fd-9b90-a670fa276c0b",
+          "requirementCount": 0,
+          "documentCount": 0,
+          "approved": 0,
+          "pending": 0,
+          "rejected": 0,
+          "inReview": 0,
+          "missing": 0,
+          "waived": 0
+        },
+        "primaryContact": "homologacao.pf.20260804.1405@example.com",
+        "createdAtUtc": "2026-08-04T18:31:36.937905+00:00",
+        "updatedAtUtc": "2026-08-05T12:58:50.718035+00:00",
+        "strategyId": "SA-D85E86AC"
+      },
+      {
+        "customerId": "101044c1-60c2-4039-b4bb-3235a913217a",
+        "displayName": "HPJ Homologação",
+        "customerKind": "Organization",
+        "status": "Active",
+        "maskedDocument": null,
+        "avatarUrl": null,
+        "advisorId": null,
+        "advisorName": null,
+        "lastAccessAtUtc": null,
+        "customerSince": "2026-08-04",
+        "documentClassification": "I",
+        "documentLevel": 0,
+        "documentComplianceStatus": "OK",
+        "complianceStatus": "Ok",
+        "documentSummary": {
+          "customerId": "101044c1-60c2-4039-b4bb-3235a913217a",
+          "requirementCount": 0,
+          "documentCount": 0,
+          "approved": 0,
+          "pending": 0,
+          "rejected": 0,
+          "inReview": 0,
+          "missing": 0,
+          "waived": 0
+        },
+        "primaryContact": "principal.pj.20260804.1410@example.com",
+        "createdAtUtc": "2026-08-04T18:33:26.154787+00:00",
+        "updatedAtUtc": "2026-08-04T19:10:25.148618+00:00",
+        "strategyId": "SA-56781CF7"
+      },
+      {
+        "customerId": "b96019ad-0ab1-4093-8047-d80e8b6d1f29",
+        "displayName": "Client Preferred Name",
+        "customerKind": "Person",
+        "status": "Prospect",
+        "maskedDocument": null,
+        "avatarUrl": null,
+        "advisorId": null,
+        "advisorName": null,
+        "lastAccessAtUtc": "2026-11-12T23:59:29.706554+00:00",
+        "customerSince": "2026-08-05",
+        "documentClassification": "I",
+        "documentLevel": 0,
+        "documentComplianceStatus": "OK",
+        "complianceStatus": "Ok",
+        "documentSummary": {
+          "customerId": "b96019ad-0ab1-4093-8047-d80e8b6d1f29",
+          "requirementCount": 0,
+          "documentCount": 17,
+          "approved": 0,
+          "pending": 0,
+          "rejected": 0,
+          "inReview": 0,
+          "missing": 0,
+          "waived": 0
+        },
+        "primaryContact": "client@example.com",
+        "createdAtUtc": "2026-08-05T16:09:17.733214+00:00",
+        "updatedAtUtc": "2026-11-12T18:49:39.31028+00:00",
+        "strategyId": "SA-68C6EED2"
+      },
+      {
+        "customerId": "cf2f5863-d234-42d9-9cc1-95881c05dbd1",
+        "displayName": "Éric Vicente",
+        "customerKind": "Person",
+        "status": "Active",
+        "maskedDocument": null,
+        "avatarUrl": null,
+        "advisorId": null,
+        "advisorName": null,
+        "lastAccessAtUtc": "2026-11-13T02:05:02.207477+00:00",
+        "customerSince": "2026-10-01",
+        "documentClassification": "I",
+        "documentLevel": 0,
+        "documentComplianceStatus": "OK",
+        "complianceStatus": "Ok",
+        "documentSummary": {
+          "customerId": "cf2f5863-d234-42d9-9cc1-95881c05dbd1",
+          "requirementCount": 0,
+          "documentCount": 2,
+          "approved": 0,
+          "pending": 0,
+          "rejected": 0,
+          "inReview": 0,
+          "missing": 0,
+          "waived": 0
+        },
+        "primaryContact": "fantoma2010.siqueira@gmail.com",
+        "createdAtUtc": "2026-10-01T06:21:56.656787+00:00",
+        "updatedAtUtc": "2026-11-05T13:02:57.552006+00:00",
+        "strategyId": "SA-B3A2E852"
+      },
+      {
+        "customerId": "46641101-e541-4a58-a6e0-14ea6bc75461",
+        "displayName": "TEste",
+        "customerKind": "Person",
+        "status": "Active",
+        "maskedDocument": null,
+        "avatarUrl": null,
+        "advisorId": null,
+        "advisorName": null,
+        "lastAccessAtUtc": null,
+        "customerSince": "2026-10-02",
+        "documentClassification": "I",
+        "documentLevel": 0,
+        "documentComplianceStatus": "OK",
+        "complianceStatus": "Ok",
+        "documentSummary": {
+          "customerId": "46641101-e541-4a58-a6e0-14ea6bc75461",
+          "requirementCount": 0,
+          "documentCount": 0,
+          "approved": 0,
+          "pending": 0,
+          "rejected": 0,
+          "inReview": 0,
+          "missing": 0,
+          "waived": 0
+        },
+        "primaryContact": "jlbnunes@live.com",
+        "createdAtUtc": "2026-10-02T13:31:29.647555+00:00",
+        "updatedAtUtc": null,
+        "strategyId": "SA-4E93BB85"
+      },
+      {
+        "customerId": "a7039210-a6b1-4b20-8d5e-04dac0c5e5b9",
+        "displayName": "Hercilio Luz",
+        "customerKind": "Person",
+        "status": "Prospect",
+        "maskedDocument": null,
+        "avatarUrl": null,
+        "advisorId": null,
+        "advisorName": null,
+        "lastAccessAtUtc": "2026-10-06T16:23:09.495976+00:00",
+        "customerSince": "2026-10-05",
+        "documentClassification": "I",
+        "documentLevel": 0,
+        "documentComplianceStatus": "Pending",
+        "complianceStatus": "Pending",
+        "documentSummary": {
+          "customerId": "a7039210-a6b1-4b20-8d5e-04dac0c5e5b9",
+          "requirementCount": 2,
+          "documentCount": 0,
+          "approved": 0,
+          "pending": 0,
+          "rejected": 0,
+          "inReview": 0,
+          "missing": 2,
+          "waived": 0
+        },
+        "primaryContact": "yipih28965@aminavin.com",
+        "createdAtUtc": "2026-10-05T17:13:50.294908+00:00",
+        "updatedAtUtc": "2026-10-05T18:06:58.965683+00:00",
+        "strategyId": "SA-57500050"
+      },
+      {
+        "customerId": "a7c3aedc-1931-4ea4-82a4-fa4e41a42691",
+        "displayName": "Joao Caetano",
+        "customerKind": "Person",
+        "status": "Active",
+        "maskedDocument": null,
+        "avatarUrl": null,
+        "advisorId": null,
+        "advisorName": null,
+        "lastAccessAtUtc": null,
+        "customerSince": "2026-10-14",
+        "documentClassification": "I",
+        "documentLevel": 0,
+        "documentComplianceStatus": "OK",
+        "complianceStatus": "Ok",
+        "documentSummary": {
+          "customerId": "a7c3aedc-1931-4ea4-82a4-fa4e41a42691",
+          "requirementCount": 0,
+          "documentCount": 0,
+          "approved": 0,
+          "pending": 0,
+          "rejected": 0,
+          "inReview": 0,
+          "missing": 0,
+          "waived": 0
+        },
+        "primaryContact": "joaoca@gmail.com",
+        "createdAtUtc": "2026-10-14T11:18:34.19645+00:00",
+        "updatedAtUtc": null,
+        "strategyId": "SA-1328DD68"
+      },
+      {
+        "customerId": "8558fa32-31b1-413c-9740-6a3125bb1efe",
+        "displayName": "teste.teste",
+        "customerKind": "Person",
+        "status": "Prospect",
+        "maskedDocument": null,
+        "avatarUrl": null,
+        "advisorId": null,
+        "advisorName": null,
+        "lastAccessAtUtc": "2026-10-26T15:14:04.959133+00:00",
+        "customerSince": "2026-10-17",
+        "documentClassification": "I",
+        "documentLevel": 0,
+        "documentComplianceStatus": "OK",
+        "complianceStatus": "Pending",
+        "documentSummary": {
+          "customerId": "8558fa32-31b1-413c-9740-6a3125bb1efe",
+          "requirementCount": 0,
+          "documentCount": 0,
+          "approved": 0,
+          "pending": 0,
+          "rejected": 0,
+          "inReview": 0,
+          "missing": 0,
+          "waived": 0
+        },
+        "primaryContact": "asura.siqueira@gmail.com",
+        "createdAtUtc": "2026-10-17T20:29:28.464612+00:00",
+        "updatedAtUtc": null,
+        "strategyId": "SA-BB95B8DC"
+      },
+      {
+        "customerId": "4f3ee648-6aae-4c78-90d7-46e1cc10e039",
+        "displayName": "Jorge Nunes",
+        "customerKind": "Person",
+        "status": "Prospect",
+        "maskedDocument": "******4725",
+        "avatarUrl": null,
+        "advisorId": null,
+        "advisorName": null,
+        "lastAccessAtUtc": "2026-10-20T18:55:40.528221+00:00",
+        "customerSince": "2026-10-20",
+        "documentClassification": "I",
+        "documentLevel": 0,
+        "documentComplianceStatus": "OK",
+        "complianceStatus": "Pending",
+        "documentSummary": {
+          "customerId": "4f3ee648-6aae-4c78-90d7-46e1cc10e039",
+          "requirementCount": 0,
+          "documentCount": 22,
+          "approved": 0,
+          "pending": 0,
+          "rejected": 0,
+          "inReview": 0,
+          "missing": 0,
+          "waived": 0
+        },
+        "primaryContact": "jorgelbwnunes@gmail.com",
+        "createdAtUtc": "2026-10-20T15:13:48.309641+00:00",
+        "updatedAtUtc": "2026-10-24T21:31:57.548412+00:00",
+        "strategyId": "SA-91EEC4D7"
+      },
+      {
+        "customerId": "456950a6-5b6e-4104-827e-8a3c3b663d45",
+        "displayName": "Éric Vicente teste novo",
+        "customerKind": "Person",
+        "status": "Prospect",
+        "maskedDocument": "******7883",
+        "avatarUrl": null,
+        "advisorId": null,
+        "advisorName": null,
+        "lastAccessAtUtc": "2026-10-22T16:27:33.149778+00:00",
+        "customerSince": "2026-10-21",
+        "documentClassification": "I",
+        "documentLevel": 0,
+        "documentComplianceStatus": "OK",
+        "complianceStatus": "Pending",
+        "documentSummary": {
+          "customerId": "456950a6-5b6e-4104-827e-8a3c3b663d45",
+          "requirementCount": 0,
+          "documentCount": 2,
+          "approved": 0,
+          "pending": 0,
+          "rejected": 0,
+          "inReview": 0,
+          "missing": 0,
+          "waived": 0
+        },
+        "primaryContact": "fantoma2010.siqueira+teste@gmail.com",
+        "createdAtUtc": "2026-10-21T04:17:47.369408+00:00",
+        "updatedAtUtc": "2026-10-21T16:13:42.428587+00:00",
+        "strategyId": "SA-FBD9E7BA"
+      },
+      {
+        "customerId": "c683a86e-0c92-43b5-8bcc-b8248d331edd",
+        "displayName": "Marcos Marciano Katan",
+        "customerKind": "Person",
+        "status": "Prospect",
+        "maskedDocument": "******7883",
+        "avatarUrl": null,
+        "advisorId": null,
+        "advisorName": null,
+        "lastAccessAtUtc": "2026-10-26T06:58:09.348907+00:00",
+        "customerSince": "2026-10-26",
+        "documentClassification": "I",
+        "documentLevel": 0,
+        "documentComplianceStatus": "OK",
+        "complianceStatus": "Pending",
+        "documentSummary": {
+          "customerId": "c683a86e-0c92-43b5-8bcc-b8248d331edd",
+          "requirementCount": 0,
+          "documentCount": 2,
+          "approved": 0,
+          "pending": 0,
+          "rejected": 0,
+          "inReview": 0,
+          "missing": 0,
+          "waived": 0
+        },
+        "primaryContact": "fantoma2010@gmail.com",
+        "createdAtUtc": "2026-10-26T06:58:06.88261+00:00",
+        "updatedAtUtc": "2026-10-30T00:13:16.923255+00:00",
+        "strategyId": "SA-0C314AAF"
+      }
+    ],
+    "success": true,
+    "requestId": "01a1e5bd231777359a8e60cfaa4572a1",
+    "correlationId": "01a1e5bd231777069814a622ee72ea8e",
+    "errors": []
+  }
+}

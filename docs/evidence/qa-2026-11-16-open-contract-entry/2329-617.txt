@@ -1,0 +1,79 @@
+const imgCircleAlert = "https://www.figma.com/api/mcp/asset/b9a6a9c4-c309-4889-ab4e-729af94fff20.svg";
+const imgPlus = "https://www.figma.com/api/mcp/asset/3eb38e37-db92-4a1f-b25f-5864c3fe7694.svg";
+
+export default function Ct094EMoedaAcimaDoSaldoDaCarteiraDesignGlass() {
+  return (
+    <div className="backdrop-blur-[20px] border border-[rgba(255,255,255,0.12)] border-solid content-stretch drop-shadow-[4px_4px_6px_rgba(0,0,0,0.13)] flex flex-col gap-[16px] items-start p-[24px] relative rounded-[12px] size-full" data-node-id="2329:617" style={{ backgroundImage: "linear-gradient(197.02715773633662deg, rgba(0, 0, 0, 0.118) 0.52072%, rgba(0, 0, 0, 0.039) 51.124%, rgba(0, 0, 0, 0.02) 99.479%), linear-gradient(197.02715773633662deg, rgba(0, 0, 0, 0.078) 0.52072%, rgba(0, 0, 0, 0.039) 51.124%, rgba(0, 0, 0, 0.01) 99.479%)" }} data-name="CT09.4 · E · Moeda acima do saldo da carteira · DESIGN GLASS">
+      <p className="[word-break:break-word] font-['Inter:Medium'] font-medium leading-[normal] not-italic relative shrink-0 text-[14px] text-[color:var(--sa-color-text-primary,white)] whitespace-nowrap" data-node-id="2335:758">
+        Moedas do aporte
+      </p>
+      <div className="bg-[var(--sa-color-bg-surface,rgba(255,255,255,0.06))] border-[0.8px] border-[var(--sa-color-border-default,rgba(255,255,255,0.2))] border-solid content-stretch flex flex-col gap-[8px] items-start px-[14px] py-[12px] relative rounded-[10px] shrink-0 w-full" data-node-id="2335:759" data-name="Moeda · BRL">
+        <div className="[word-break:break-word] content-stretch flex gap-[8px] items-center leading-[normal] not-italic relative shrink-0 w-full" data-node-id="2335:760" data-name="topo">
+          <p className="flex-[1_0_0] font-['Inter:Semi_Bold'] font-semibold min-w-px relative text-[13px] text-[color:var(--sa-color-text-primary,white)]" data-node-id="2335:761">
+            BRL · Carteira de Depósito
+          </p>
+          <p className="font-['Inter:Regular'] font-normal relative shrink-0 text-[12px] text-[color:var(--sa-color-text-secondary,rgba(255,255,255,0.72))] whitespace-nowrap" data-node-id="2335:762">
+            Saldo: R$ 60.000,00
+          </p>
+        </div>
+        <div className="[word-break:break-word] border-[1.2px] border-[var(--color\/v2\/border\/status-negative,#ffc9c9)] border-solid content-stretch flex font-['Inter:Bold'] font-bold gap-[8px] h-[36px] items-center leading-[normal] not-italic px-[12px] relative rounded-[8px] shrink-0 w-full" data-node-id="2335:763" style={{ backgroundImage: "linear-gradient(182.02288733630337deg, rgba(0, 0, 0, 0.118) 0.52072%, rgba(0, 0, 0, 0.039) 51.124%, rgba(0, 0, 0, 0.02) 99.479%), linear-gradient(182.02288733630337deg, rgba(0, 0, 0, 0.078) 0.52072%, rgba(0, 0, 0, 0.039) 51.124%, rgba(0, 0, 0, 0.01) 99.479%)" }} data-name="Input">
+          <p className="relative shrink-0 text-[12px] text-[color:var(--sa-color-text-muted,rgba(255,255,255,0.6))] whitespace-nowrap" data-node-id="2335:764">
+            R$
+          </p>
+          <p className="flex-[1_0_0] min-w-px relative text-[14px] text-[color:var(--sa-color-text-primary,white)]" data-node-id="2335:765">
+            80.000,00
+          </p>
+        </div>
+        <div className="content-stretch flex gap-[6px] items-center relative shrink-0 w-full" data-node-id="2335:766" data-name="erro">
+          <div className="relative shrink-0 size-[14px]" data-node-id="2335:767" data-name="CircleAlert">
+            <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgCircleAlert} />
+          </div>
+          <p className="[word-break:break-word] flex-[1_0_0] font-['Inter:Medium'] font-medium leading-[16px] min-w-px not-italic relative text-[12px] text-[color:var(--color\/v2\/text\/status-negative,#ffc9c9)]" data-node-id="2335:771">
+            Saldo insuficiente em BRL na Carteira de Depósito: disponível R$ 60.000,00.
+          </p>
+        </div>
+        <div className="[word-break:break-word] content-stretch flex items-center justify-between leading-[normal] not-italic relative shrink-0 text-[12px] text-[color:var(--sa-color-text-muted,rgba(255,255,255,0.6))] w-full whitespace-nowrap" data-node-id="2335:772" data-name="rodapé">
+          <p className="font-['Inter:Regular'] font-normal relative shrink-0" data-node-id="2335:773">{` `}</p>
+          <p className="font-['Inter:Medium'] font-medium relative shrink-0" data-node-id="2335:774">
+            Remover
+          </p>
+        </div>
+      </div>
+      <p className="[word-break:break-word] font-['Inter:Regular'] font-normal leading-[18px] min-w-full not-italic relative shrink-0 text-[12px] text-[color:var(--sa-color-text-muted,rgba(255,255,255,0.6))] w-[min-content]" data-node-id="2335:775">
+        Enquanto o valor de alguma linha passar do saldo da carteira de onde sai, Impacto no contrato e Auditoria não aparecem e Confirmar inclusão fica desabilitado.
+      </p>
+      <div className="content-stretch flex items-center justify-between pt-[var(--sa-spacing-16,16px)] relative rounded-[8px] shrink-0 w-full" data-node-id="2335:776" data-name="Container">
+        <div className="bg-[var(--sa-color-bg-surface,rgba(255,255,255,0.06))] border-[0.8px] border-[var(--sa-color-border-default,rgba(255,255,255,0.2))] border-solid h-[36px] relative rounded-[var(--sa-radius-8,8px)] shrink-0" data-node-id="2335:777" data-name="Botão ação nível 1">
+          <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex items-center justify-center px-[14.8px] py-[var(--sa-spacing-8,8.8px)] relative size-full">
+            <p className="[word-break:break-word] font-['Inter:Medium'] font-medium leading-[20px] not-italic relative shrink-0 text-[14px] text-[color:var(--sa-color-text-secondary,rgba(255,255,255,0.72))] text-center whitespace-nowrap" data-node-id="2335:778">
+              Cancelar
+            </p>
+          </div>
+        </div>
+        <div className="bg-[var(--sa-color-bg-glass,rgba(255,255,255,0.06))] border-[length:var(----sa-stroke-1,1px)] border-[var(--sa-color-border-strong,rgba(255,255,255,0.28))] border-solid h-[36px] opacity-40 relative rounded-[var(--sa-radius-8,8px)] shrink-0" data-node-id="2335:779" data-name="Botão ação nível 1">
+          <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex gap-[16px] items-center justify-center px-[15px] py-[var(--sa-spacing-8,9px)] relative size-full">
+            <div className="relative shrink-0" data-node-id="2335:780" data-name="Plus:margin">
+              <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex items-start pr-[var(--sa-spacing-8,8px)] relative size-full">
+                <div className="relative shrink-0 size-[16px]" data-node-id="2335:781" data-name="Plus">
+                  <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgPlus} />
+                </div>
+              </div>
+            </div>
+            <p className="[word-break:break-word] font-['Inter:Medium'] font-medium leading-[20px] not-italic relative shrink-0 text-[14px] text-[color:var(--sa-color-text-primary,white)] text-center whitespace-nowrap" data-node-id="2335:784">
+              Confirmar inclusão
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+SUPER CRITICAL: The generated React+Tailwind code MUST be converted to match the target project's technology stack and styling system.
+1. Analyze the target codebase to identify: technology stack, styling approach, component patterns, and design tokens
+2. Convert React syntax to the target framework/library
+3. Transform all Tailwind classes to the target styling system while preserving exact visual design
+4. Follow the project's existing patterns and conventions
+DO NOT install any Tailwind as a dependency unless the user instructs you to do so.
+
+Node ids have been added to the code as data attributes, e.g. `data-node-id="1:2"`.
+The generated code contains image and SVG URL constants, e.g. const image = 'https://www.figma.com/api/mcp/asset/550e8400-e29b-41d4-a716-446655440000.png'. These URLs are temporary download sources and expire after 7 days. Download each asset into the project with curl -L, then replace its URL in the generated code with a reference to the downloaded asset. Never use the temporary URLs as runtime image sources.

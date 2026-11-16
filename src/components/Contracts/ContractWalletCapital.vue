@@ -66,175 +66,7 @@
             ><small>{{ client.maskedDocument }}</small>
           </div>
         </div>
-        <div>
-          <h3>Moedas do aporte</h3>
-          <p class="wallet-capital__hint">
-            Uma ou mais moedas, da Carteira Strategy (saldo parado) ou da Carteira de Depósito do
-            cliente; a mesma moeda pode vir das duas carteiras, uma linha para cada. Moeda diferente
-            da firmada ({{ currency }}) é convertida pela última PTAX de venda.
-          </p>
-        </div>
-        <resource-state :state="wallets.state" @retry="loadWallets">
-          <div class="wallet-capital__lines">
-            <div
-              v-for="line in state.rows"
-              :key="walletLineKey(line)"
-              class="wallet-capital__line"
-              :class="{ insufficient: line.exceeds }"
-            >
-              <div class="wallet-capital__line-heading">
-                <strong
-                  >{{ line.currencyIsoCode }} · {{ walletCapitalType(line.type).label }}</strong
-                ><span
-                  >{{ walletCapitalType(line.type).balance }}:
-                  {{ walletMoney(line.availableCents, line.currencyIsoCode) }}</span
-                >
-              </div>
-              <q-input
-                :model-value="amountTexts[walletLineKey(line)] ?? amountLabel(line.amount)"
-                outlined
-                dense
-                inputmode="decimal"
-                placeholder="0,00"
-                :aria-label="`Valor a utilizar em ${line.currencyIsoCode} na ${walletCapitalType(line.type).label}`"
-                :aria-invalid="line.exceeds"
-                @update:model-value="updateAmount(line, $event)"
-                @blur="delete amountTexts[walletLineKey(line)]"
-                ><template #prepend
-                  ><span class="wallet-capital__unit">{{
-                    symbol(line.currencyIsoCode)
-                  }}</span></template
-                ></q-input
-              >
-              <p v-if="line.exceeds" class="wallet-capital__error" role="alert">
-                <img :src="asset('2326-335', 'CircleAlert')" alt="" />{{
-                  line.type === 'Applied' ? 'Saldo parado insuficiente' : 'Saldo insuficiente'
-                }}
-                em {{ line.currencyIsoCode }} na {{ walletCapitalType(line.type).label }}:
-                disponível {{ walletMoney(line.availableCents, line.currencyIsoCode) }}.
-              </p>
-              <template v-else-if="!state.exceeds">
-                <p v-if="line.currencyIsoCode === currency" class="wallet-capital__hint">
-                  Mesma moeda do contrato: sem conversão.
-                </p>
-                <resource-state
-                  v-else-if="quotes[line.currencyIsoCode]"
-                  :state="quotes[line.currencyIsoCode]"
-                  @retry="loadQuote(line.currencyIsoCode)"
-                  ><p class="wallet-capital__hint">
-                    × {{ walletRateLabel(line.quote?.rate) }} (PTAX de venda de
-                    {{ walletQuoteDate(line.quote?.referenceDate) }}) =
-                    {{ walletMoney(line.converted, currency) }}
-                  </p></resource-state
-                >
-              </template>
-              <div class="wallet-capital__line-footer">
-                <span v-if="!line.exceeds"
-                  >{{ walletCapitalType(line.type).after }}:
-                  {{ walletMoney(line.after, line.currencyIsoCode) }}</span
-                ><span v-else /><button
-                  type="button"
-                  :aria-label="`Remover ${line.currencyIsoCode} da ${walletCapitalType(line.type).label}`"
-                  @click="removeLine(line)"
-                >
-                  Remover
-                </button>
-              </div>
-            </div>
-          </div>
-          <q-btn
-            outline
-            no-caps
-            class="wallet-capital__add"
-            :class="{ open: picking }"
-            :aria-expanded="picking"
-            @click="picking = !picking"
-            ><img :src="asset(picking ? '2326-281' : configNode, 'Plus')" alt="" />Adicionar
-            moeda</q-btn
-          >
-          <div v-if="picking" class="wallet-capital__picker">
-            <div role="tablist" aria-label="Carteira de origem">
-              <button
-                v-for="type in walletCapitalTypes"
-                :key="type.key"
-                type="button"
-                role="tab"
-                :aria-selected="tab === type.key"
-                @click="tab = type.key"
-              >
-                {{ type.label }}
-              </button>
-            </div>
-            <div role="listbox" :aria-label="`Moedas da ${walletCapitalType(tab).label}`">
-              <button
-                v-for="option in options"
-                :key="option.code"
-                type="button"
-                role="option"
-                :aria-selected="
-                  lines.some((line) => walletLineKey(line) === `${option.type}:${option.code}`)
-                "
-                :disabled="!canAdd(option)"
-                @click="add(option)"
-              >
-                <span>{{ option.code }} · {{ option.name }}</span
-                ><strong>{{ walletMoney(option.available, option.code) }}</strong>
-              </button>
-            </div>
-            <p class="wallet-capital__hint">
-              As abas do topo trocam a carteira: Carteira Strategy mostra o saldo parado (rendendo)
-              de cada moeda; Carteira de Depósito, o saldo. As sete moedas aparecem sempre, e a que
-              não tem saldo aparece zerada. Só dá para escolher moeda com saldo e que ainda não está
-              no aporte por aquela carteira; a mesma moeda pode entrar pelas duas.
-            </p>
-          </div>
-        </resource-state>
-        <p v-if="state.exceeds" class="wallet-capital__hint">
-          Enquanto o valor de alguma linha passar do saldo da carteira de onde sai, a conversão não
-          aparece e Confirmar Vínculo fica desabilitado.
-        </p>
-        <div v-else-if="lines.length" class="wallet-capital__conversion">
-          <template v-if="state.rows.some((line) => line.currencyIsoCode !== currency)">
-            <h4>
-              <img :src="asset(configNode, 'ArrowRightLeft')" alt="" />Conversão para a moeda
-              firmada ({{ currency }})
-            </h4>
-            <table>
-              <thead>
-                <tr>
-                  <th>Origem</th>
-                  <th>Valor de origem</th>
-                  <th>PTAX (venda)</th>
-                  <th>Em {{ currency }}</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr v-for="line in state.rows" :key="walletLineKey(line)">
-                  <td>{{ line.currencyIsoCode }} · {{ walletCapitalType(line.type).short }}</td>
-                  <td>{{ walletMoney(line.amountCents, line.currencyIsoCode) }}</td>
-                  <td>
-                    {{
-                      line.currencyIsoCode === currency
-                        ? '—'
-                        : line.quote
-                          ? walletRateLabel(line.quote.rate)
-                          : 'Indisponível'
-                    }}
-                  </td>
-                  <td>{{ walletMoney(line.converted, currency) }}</td>
-                </tr>
-              </tbody>
-            </table>
-          </template>
-          <div class="wallet-capital__total">
-            <strong>Total do aporte</strong
-            ><strong>{{ walletMoney(state.total, currency) }}</strong>
-          </div>
-          <p v-for="date in quoteDates" :key="date" class="wallet-capital__hint">
-            PTAX de venda do fechamento de {{ walletQuoteDate(date) }}, a última publicada; a mesma
-            taxa vale nos dois sentidos.
-          </p>
-        </div>
+        <contract-wallet-sources :flow="flow" :currency="currency" />
         <label-form text-label="Observação (opcional)"
           ><q-input
             v-model="note"
@@ -265,19 +97,11 @@
   </q-dialog>
 </template>
 <script setup>
-import { computed, ref, watch } from 'vue'
+import { computed } from 'vue'
 import ResourceState from 'src/components/Finance/ResourceState.vue'
 import LabelForm from 'src/components/Form/LabelForm.vue'
+import ContractWalletSources from './ContractWalletSources.vue'
 import { useContractWalletCapital } from 'src/composables/useContractWalletCapital'
-import {
-  walletCapitalCurrencies,
-  walletCapitalTypes,
-  walletCapitalType,
-  walletLineKey,
-  walletMoney,
-  walletRateLabel,
-  walletQuoteDate,
-} from 'src/services/contractWalletCapital'
 const props = defineProps({
   currency: { type: String, required: true },
   existingIds: { type: Array, default: () => [] },
@@ -285,6 +109,7 @@ const props = defineProps({
   lookup: { type: Function, default: undefined },
 })
 const emit = defineEmits(['close', 'confirm'])
+const flow = useContractWalletCapital(props, emit)
 const {
   customers,
   wallets,
@@ -293,52 +118,15 @@ const {
   lines,
   note,
   picking,
-  tab,
-  quotes,
   state,
-  options,
   loadingQuotes,
-  existingIds,
   loadCustomers,
-  loadWallets,
   choose,
-  canAdd,
-  add,
-  loadQuote,
-  setAmount,
-  remove,
   back,
   confirm,
-} = useContractWalletCapital(props, emit)
+} = flow
 const configNode = computed(() => (lines.value.length > 1 ? '2325-594' : '2325-394'))
-const quoteDates = computed(() => [
-  ...new Set(state.value.rows.map((line) => line.quote?.referenceDate).filter(Boolean)),
-])
-const amountTexts = ref({})
-watch(
-  () => client.value?.customerId,
-  () => {
-    amountTexts.value = {}
-  },
-)
-function removeLine(line) {
-  delete amountTexts.value[walletLineKey(line)]
-  remove(walletLineKey(line))
-}
 const asset = (node, name) => `/icons/contracts/wallet-capital/${node}-img${name}.svg`
-const symbol = (code) =>
-  walletCapitalCurrencies.find((currency) => currency.code === code)?.symbol || code
-const amountLabel = (value) =>
-  value == null
-    ? ''
-    : new Intl.NumberFormat('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 }).format(
-        Number(value),
-      )
-function updateAmount(line, value) {
-  amountTexts.value[walletLineKey(line)] = value
-  const source = lines.value.find((item) => walletLineKey(item) === walletLineKey(line))
-  if (source) setAmount(source, value)
-}
 </script>
 <style scoped>
 .wallet-capital {

@@ -12,6 +12,7 @@ export async function distributionCustomers({ search = '' } = {}, active = () =>
       customerId: card.customerId || card.id,
       displayName: customerDisplayName(card.displayName || card.primaryName),
       maskedDocument: customerMaskedDocument(card.maskedDocument),
+      status: card.status,
       personType: card.personType || card.customerKind || card.kind,
     })),
   }

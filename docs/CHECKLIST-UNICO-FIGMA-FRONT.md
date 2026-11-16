@@ -6,7 +6,7 @@ Atualização: 16/11/2026. Este é o índice desta revisão ampla. Evidências a
 
 - [ ] Todos os frames/estados abaixo comparados visualmente, inclusive erro, vazio e retorno.
 - [ ] Fluxos de escrita e leitura integrados testados com dados fictícios.
-- [x] Admin: lint e build aprovados; 354 testes locais passaram (incluem 8 testes de estudo já existentes no worktree e a cobertura dos itens 136 e 137).
+- [x] Admin: lint e build aprovados; 361 testes locais passaram (353 versionados + 8 de estudo já existentes no worktree; cobertura dos itens 136–138).
 - [ ] Reexecutar os checks após concluir as demais telas; Área do Cliente ainda não alterada nesta rodada.
 - [ ] Deploy confirmado e testes repetidos nas URLs publicadas.
 - [x] Pendências de frontend separadas das pendências reais da API, do designer e da limitação de consulta ao Figma.
@@ -28,7 +28,7 @@ Retorno recebido após a auditoria do inventário. **A definição da distribui�
 
 **Leitura dos registros históricos:** as menções antigas a “distribuição após CT05 sem desenho” foram superadas pelo retorno do QA e pelo item 136 abaixo. Não reabrir essa cobrança ao designer.
 
-**Impacto no checklist:** esta é uma ampliação/detalhamento recebido depois da base de 309 entradas/279 frames. Os percentuais da auditoria abaixo descrevem aquele inventário e não incluem automaticamente todos os nós novos nem botões/frames de regras como entregas independentes. Recuperar os contextos e deduplicar antes de recalcular. Não manter distribuição CT05 como desenho ausente; o capital atribuído do item 136 foi implementado e publicado, com limites de teste registrados abaixo. A análise inicial não implementou os itens 136–141. O item 136 avançou na entrega descrita abaixo; o item 137 avançou no fluxo e nas prévias descritos abaixo; sua gravação integrada permanece bloqueada. Os itens 138–141 continuam separados.
+**Impacto no checklist:** esta é uma ampliação/detalhamento recebido depois da base de 309 entradas/279 frames. Os percentuais da auditoria abaixo descrevem aquele inventário e não incluem automaticamente todos os nós novos nem botões/frames de regras como entregas independentes. Recuperar os contextos e deduplicar antes de recalcular. Não manter distribuição CT05 como desenho ausente; o capital atribuído do item 136 foi implementado e publicado, com limites de teste registrados abaixo. A análise inicial não implementou os itens 136–141. O item 136 avançou na entrega descrita abaixo; o item 137 avançou no fluxo e nas prévias descritos abaixo; sua gravação integrada permanece bloqueada. O item 138 avançou na interface/prévias e nos testes abaixo; confirmação financeira permanece bloqueada. Os itens 139–141 continuam separados.
 
 ## Item 136 — Distribuir capital entre clientes · 16/11
 
@@ -83,6 +83,24 @@ Retorno recebido após a auditoria do inventário. **A definição da distribui�
 **Já disponíveis na API:** carteiras por cliente com currencyId/available/reserved, catálogo completo das sete moedas e GET /admin/exchange-rates/latest com taxa, fonte, data e IDs. Esses recursos foram usados com sucesso; não são novas pendências. **Designer:** nenhuma nova pendência para o item 137 após a autorização de manter Remover cliente. A falha de aportes atribuídos do item 136 permanece independente.
 
 **Evidências:** [referências, consulta real e capturas](evidence/qa-2026-11-16-wallet-capital/). Detector: nenhum antipadrão; avisos de paleta/raio/tipografia correspondem aos frames recuperados e ao fundo CT09 existente, sem redesenho global. Dados das capturas são fictícios.
+
+## Item 138 — Entrada em contrato aberto · 16/11
+
+**Estado:** interface e prévias implementadas; lint/build e 361 testes locais aprovados (353 versionados). Publicação e reteste no ambiente publicado em andamento. A inclusão financeira integrada permanece bloqueada; não houve débito nem inclusão de participante nesta rodada.
+
+- [x] Figma recuperado integralmente: 2328:281 (seletor Depósito), 2328:353 (moeda firmada), 2329:281 (três origens e conversão), 2329:617 (saldo insuficiente). Capturas/contextos e SVGs arquivados; nenhum campo/ação novo fora desses estados.
+- [x] Modal cresce conforme o preenchimento: participante e status real; moedas do aporte por carteira; conversão apenas se necessária; impacto imediato, tabela Antes/Depois, data de entrada, índice e auditoria prevista com observação opcional.
+- [x] Editor de carteiras/conversão extraído do item 137 e reutilizado nos dois fluxos. Strategy usa disponível do saldo parado; Depósito usa disponível, excluindo reserva. Mesma moeda nas duas carteiras permanece separada; pares repetidos ou zerados desabilitados. PTAX real, taxa completa no cálculo e data na exibição.
+- [x] Excesso de saldo marca a linha em vermelho, oculta conversão/Impacto/Auditoria e desabilita Confirmar inclusão. Duplicidade de cliente e submissão por teclado com projeções incompletas também bloqueadas. Cancelar/fechar não escreve e reabrir começa limpo.
+- [x] Participações calculadas sobre capital atual retornado pela API, mantendo a proporção dos anteriores. Arredondamento pelo maior resto, com empate pela ordem da lista, fecha em 100,00%; não grava percentuais arredondados. Não substituir posição atual por capital inicial, nem índice atual pelo índice histórico de conexão ou por 100.
+- [x] Testes controlados com templates reais: moeda firmada sem quadro de câmbio; três origens (BRL Depósito + USD/EUR Strategy) totalizam BRL 50.000,00; capital 557.200,00 → 607.200,00, novo cliente 8,23%, anteriores 91,77%; Antes/Depois fecham em 100,00%. Índice vem apenas do motor principal conectado. Capital/percentuais/índice ausentes, data inválida, saldo insuficiente e falha de confirmação preservando dados cobertos.
+- [x] Navegador local: estado inicial, busca/seleção/status, duplicidade de Éric no contrato QA 136, seleção de Éric no Vintage Strategy (USD), BRL disponível 47.500,00, aporte BRL 100,00 → USD 17,44 com PTAX real; excesso 47.500,01 oculta Impacto/Auditoria; indisponibilidade de capital/índice mostrada sem números fictícios. Cancelar/reabrir limpo. Modal em 375 px sem overflow horizontal, rodapé adaptado e viewport restaurado. SVGs visíveis carregados, ícones de 16 px mantidos e vetores do fechar no tamanho nativo.
+- [ ] **Backend — contrato de inclusão multiorigem:** POST /admin/contracts/{id}/participants usa AddContractParticipantRequest apenas com clientId/allocatedAmount e additionalProperties:false. Falta receber/devolver carteira, moeda, valor de origem e convertido, cotação/IDs, data/índice de entrada e observação previstos no Figma. O front não achata a seleção em um valor e não envia allocatedAmount:null como no fluxo anterior.
+- [ ] **Backend — inclusão atômica:** revalidar cada saldo/cotação ao confirmar, efetuar os débitos juntos, registrar aportes por origem, snapshot de entrada, participações oficiais e performance sem herdar o período anterior. Falhas precisam identificar cliente/carteira/moeda; não usar transferências avulsas como substituição. Confirmar está protegido contra escrita sem esse contrato.
+- [ ] **Dados reais de homologação / motor:** os seis contratos da consulta retornam currentBalance:null. No contrato QA 136, o motor principal retorna PendingConnection/currentIndex:null. Esses campos já existem na API; não é pedido de criar campos adicionais. É necessário disponibilizar posição e índice válidos para testar o impacto positivo contra dados reais; a consulta atual não permite concluir se basta preparar a fixture/conectar motor ou se há implementação pendente na projeção.
+- [ ] **Reteste integrado pendente:** inclusão concluída com débito correto, concorrência de saldos, rejeição por linha, índice/data oficiais, persistência da observação, histórico e participações devolvidas. O cenário positivo de impacto foi validado automaticamente com dados controlados, não como inclusão real no navegador. Contas Éric/Cláudio só têm Free/BRL; mistura de carteiras/moedas foi coberta automaticamente, sem fabricar saldos na API.
+
+**Designer:** nenhuma nova dependência para estes quatro estados. **Já disponíveis:** busca/status de clientes, carteiras com moeda/disponível/reservado e PTAX. Não cobrar esses recursos como ausentes. [Evidências desta rodada](evidence/qa-2026-11-16-open-contract-entry/). Avisos de raio/paleta/tipografia do detector seguem as referências do Figma; nenhum antipadrão detectado.
 
 ## Auditoria do inventário — classificação de 16/11
 

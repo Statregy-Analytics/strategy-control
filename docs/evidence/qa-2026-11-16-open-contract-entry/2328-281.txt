@@ -1,0 +1,157 @@
+const imgUser = "https://www.figma.com/api/mcp/asset/9cdd9ece-82f7-4c2c-9d1d-97d6d7dc636c.svg";
+const imgChevronDown = "https://www.figma.com/api/mcp/asset/3cf3ca48-0aba-4862-9c9e-e7adc8a01553.svg";
+const imgWallet = "https://www.figma.com/api/mcp/asset/fc6e6ab4-d734-45a4-8a72-1a5f87887431.svg";
+const imgPlus = "https://www.figma.com/api/mcp/asset/83603144-942b-42c1-92f8-7e464fe3af12.svg";
+
+export default function Ct091DdAdicionarMoedaListaAbertaAbaCarteiraDeDepositoDesignGlass() {
+  return (
+    <div className="backdrop-blur-[20px] border border-[rgba(255,255,255,0.12)] border-solid content-stretch drop-shadow-[4px_4px_6px_rgba(0,0,0,0.13)] flex flex-col gap-[16px] items-start p-[24px] relative rounded-[12px] size-full" data-node-id="2328:281" style={{ backgroundImage: "linear-gradient(211.54259451514167deg, rgba(0, 0, 0, 0.118) 0.52072%, rgba(0, 0, 0, 0.039) 51.124%, rgba(0, 0, 0, 0.02) 99.479%), linear-gradient(211.54259451514167deg, rgba(0, 0, 0, 0.078) 0.52072%, rgba(0, 0, 0, 0.039) 51.124%, rgba(0, 0, 0, 0.01) 99.479%)" }} data-name="CT09.1 · DD · Adicionar moeda · lista aberta · aba Carteira de Depósito · DESIGN GLASS">
+      <div className="border-[rgba(255,255,255,0.12)] border-b-[0.8px] border-solid content-stretch flex gap-[var(--sa-spacing-8,8px)] items-center pb-[var(--sa-spacing-8,8.8px)] relative shrink-0 w-full" data-node-id="2335:281" data-name="Seção · 1. Participante">
+        <div className="relative shrink-0 size-[16px]" data-node-id="2335:287" data-name="User">
+          <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgUser} />
+        </div>
+        <div className="relative shrink-0" data-node-id="2335:285" data-name="Heading 3">
+          <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex flex-col items-start relative size-full">
+            <p className="[word-break:break-word] font-['Inter:Bold'] font-bold leading-[16px] not-italic relative shrink-0 text-[12px] text-[color:var(--sa-color-text-primary,white)] tracking-[0.6px] uppercase whitespace-nowrap" data-node-id="2335:286">
+              1. Participante
+            </p>
+          </div>
+        </div>
+      </div>
+      <div className="content-stretch flex flex-col gap-[8px] items-start relative shrink-0 w-full" data-node-id="2335:290" data-name="Cliente">
+        <div className="content-stretch flex flex-col gap-[8px] items-start relative shrink-0 w-full" data-node-id="2335:295" data-name="Campo · Cliente">
+          <p className="[word-break:break-word] font-['Inter:Medium'] font-medium leading-[normal] not-italic relative shrink-0 text-[14px] text-[color:var(--sa-color-text-primary,white)] whitespace-nowrap" data-node-id="2335:296">
+            Cliente
+          </p>
+          <div className="border-[0.8px] border-[rgba(255,255,255,0.12)] border-solid content-stretch flex gap-[8px] h-[36px] items-center px-[12px] relative rounded-[8px] shrink-0 w-full" data-node-id="2335:291" style={{ backgroundImage: "linear-gradient(181.893379964877deg, rgba(0, 0, 0, 0.118) 0.52072%, rgba(0, 0, 0, 0.039) 51.124%, rgba(0, 0, 0, 0.02) 99.479%), linear-gradient(181.893379964877deg, rgba(0, 0, 0, 0.078) 0.52072%, rgba(0, 0, 0, 0.039) 51.124%, rgba(0, 0, 0, 0.01) 99.479%)" }} data-name="Input">
+            <p className="[word-break:break-word] flex-[1_0_0] font-['Inter:Medium'] font-medium leading-[normal] min-w-px not-italic relative text-[14px] text-[color:var(--sa-color-text-primary,white)]" data-node-id="2335:292">
+              Ana Paula Ferreira (PF)
+            </p>
+            <div className="relative shrink-0 size-[16px]" data-node-id="2335:293" data-name="ChevronDown">
+              <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgChevronDown} />
+            </div>
+          </div>
+        </div>
+        <div className="content-stretch flex items-start relative shrink-0" data-node-id="2335:297" data-name="status">
+          <div className="bg-[var(--color\/v2\/bg\/status-positive,rgba(0,122,85,0.2))] border-[0.8px] border-[var(--color\/v2\/border\/status-positive,#74ffa0)] border-solid content-stretch flex items-center px-[8px] py-[3px] relative rounded-[8px] shrink-0" data-node-id="2335:298" data-name="Badge · Ativo">
+            <p className="[word-break:break-word] font-['Inter:Medium'] font-medium leading-[normal] not-italic relative shrink-0 text-[10px] text-[color:var(--color\/v2\/text\/status-positive,#74ffa0)] whitespace-nowrap" data-node-id="2335:299">
+              Ativo
+            </p>
+          </div>
+        </div>
+      </div>
+      <div className="border-[rgba(255,255,255,0.12)] border-b-[0.8px] border-solid content-stretch flex gap-[var(--sa-spacing-8,8px)] items-center pb-[var(--sa-spacing-8,8.8px)] relative shrink-0 w-full" data-node-id="2335:300" data-name="Seção · 2. Origem do aporte">
+        <div className="relative shrink-0 size-[16px]" data-node-id="2335:306" data-name="Wallet">
+          <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgWallet} />
+        </div>
+        <div className="relative shrink-0" data-node-id="2335:304" data-name="Heading 3">
+          <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex flex-col items-start relative size-full">
+            <p className="[word-break:break-word] font-['Inter:Bold'] font-bold leading-[16px] not-italic relative shrink-0 text-[12px] text-[color:var(--sa-color-text-primary,white)] tracking-[0.6px] uppercase whitespace-nowrap" data-node-id="2335:305">
+              2. Origem do aporte
+            </p>
+          </div>
+        </div>
+      </div>
+      <div className="content-stretch flex flex-col gap-[8px] items-start relative shrink-0 w-full" data-node-id="2335:316" data-name="Moedas do aporte">
+        <div className="[word-break:break-word] content-stretch flex flex-col gap-[4px] items-start not-italic relative shrink-0 w-full" data-node-id="2335:317" data-name="Moedas do aporte · título">
+          <p className="font-['Inter:Medium'] font-medium leading-[normal] relative shrink-0 text-[14px] text-[color:var(--sa-color-text-primary,white)] whitespace-nowrap" data-node-id="2335:318">
+            Moedas do aporte
+          </p>
+          <p className="font-['Inter:Regular'] font-normal leading-[18px] min-w-full relative shrink-0 text-[12px] text-[color:var(--sa-color-text-muted,rgba(255,255,255,0.6))] w-[min-content]" data-node-id="2335:319">
+            Uma ou mais moedas, da Carteira Strategy (saldo parado) ou da Carteira de Depósito do cliente; a mesma moeda pode vir das duas carteiras, uma linha para cada. Moeda diferente da firmada (BRL) é convertida pela última PTAX de venda.
+          </p>
+        </div>
+        <div className="border-[1.2px] border-[var(--sa-color-border-action,#2b7fff)] border-solid content-stretch flex gap-[8px] items-center justify-center px-[12px] py-[8px] relative rounded-[8px] shrink-0 w-full" data-node-id="2335:320" data-name="Adicionar moeda">
+          <div className="relative shrink-0 size-[16px]" data-node-id="2335:321" data-name="Plus">
+            <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgPlus} />
+          </div>
+          <p className="[word-break:break-word] font-['Inter:Medium'] font-medium leading-[normal] not-italic relative shrink-0 text-[14px] text-[color:var(--sa-color-text-primary,white)] whitespace-nowrap" data-node-id="2335:324">
+            Adicionar moeda
+          </p>
+        </div>
+        <div className="border-[0.8px] border-[rgba(255,255,255,0.12)] border-solid content-stretch drop-shadow-[0px_8px_12px_rgba(0,0,0,0.35)] flex flex-col gap-[2px] items-start p-[4px] relative rounded-[8px] shrink-0 w-full" data-node-id="2335:325" style={{ backgroundImage: "linear-gradient(194.92154897493137deg, rgba(0, 0, 0, 0.118) 0.52072%, rgba(0, 0, 0, 0.039) 51.124%, rgba(0, 0, 0, 0.02) 99.479%), linear-gradient(194.92154897493137deg, rgba(0, 0, 0, 0.078) 0.52072%, rgba(0, 0, 0, 0.039) 51.124%, rgba(0, 0, 0, 0.01) 99.479%)" }} data-name="Lista de moedas (aberta)">
+          <div className="bg-[var(--sa-color-bg-surface,rgba(255,255,255,0.06))] content-stretch flex gap-[4px] items-start overflow-clip p-[3px] relative rounded-[6px] shrink-0 w-full" data-node-id="2376:281" data-name="Abas · carteira">
+            <div className="content-stretch flex flex-[1_0_0] items-center justify-center min-w-px overflow-clip px-[10px] py-[6px] relative rounded-[5px]" data-node-id="2376:282" data-name="Aba · Carteira Strategy">
+              <p className="[word-break:break-word] font-['Inter:Medium'] font-medium leading-[normal] not-italic relative shrink-0 text-[13px] text-[color:var(--sa-color-text-secondary,rgba(255,255,255,0.72))] whitespace-nowrap" data-node-id="2376:283">
+                Carteira Strategy
+              </p>
+            </div>
+            <div className="bg-[var(--sa-color-bg-glass-strong,rgba(255,255,255,0.1))] border-[0.8px] border-[var(--sa-color-border-action,#2b7fff)] border-solid content-stretch flex flex-[1_0_0] items-center justify-center min-w-px overflow-clip px-[10px] py-[6px] relative rounded-[5px]" data-node-id="2376:284" data-name="Aba · Carteira de Depósito · selecionada">
+              <p className="[word-break:break-word] font-['Inter:Semi_Bold'] font-semibold leading-[normal] not-italic relative shrink-0 text-[13px] text-[color:var(--sa-color-text-primary,white)] whitespace-nowrap" data-node-id="2376:285">
+                Carteira de Depósito
+              </p>
+            </div>
+          </div>
+          <div className="[word-break:break-word] bg-[var(--sa-color-bg-glass-strong,rgba(255,255,255,0.1))] content-stretch flex gap-[8px] items-center leading-[normal] not-italic px-[10px] py-[8px] relative rounded-[6px] shrink-0 w-full" data-node-id="2335:326" data-name="Opção · BRL · Real brasileiro">
+            <p className="flex-[1_0_0] font-['Inter:Medium'] font-medium min-w-px relative text-[14px] text-[color:var(--sa-color-text-primary,white)]" data-node-id="2335:327">
+              BRL · Real brasileiro
+            </p>
+            <p className="font-['Inter:Semi_Bold'] font-semibold relative shrink-0 text-[12px] text-[color:var(--sa-color-text-secondary,rgba(255,255,255,0.72))] whitespace-nowrap" data-node-id="2335:328">
+              R$ 60.000,00
+            </p>
+          </div>
+          <div className="[word-break:break-word] content-stretch flex gap-[8px] items-center leading-[normal] not-italic px-[10px] py-[8px] relative rounded-[6px] shrink-0 w-full" data-node-id="2335:329" data-name="Opção · USD · Dólar americano">
+            <p className="flex-[1_0_0] font-['Inter:Medium'] font-medium min-w-px relative text-[14px] text-[color:var(--sa-color-text-primary,white)]" data-node-id="2335:330">
+              USD · Dólar americano
+            </p>
+            <p className="font-['Inter:Semi_Bold'] font-semibold relative shrink-0 text-[12px] text-[color:var(--sa-color-text-secondary,rgba(255,255,255,0.72))] whitespace-nowrap" data-node-id="2335:331">
+              US$ 1.200,00
+            </p>
+          </div>
+          <div className="[word-break:break-word] content-stretch flex gap-[8px] items-center leading-[normal] not-italic px-[10px] py-[8px] relative rounded-[6px] shrink-0 w-full" data-node-id="2335:332" data-name="Opção · EUR · Euro">
+            <p className="flex-[1_0_0] font-['Inter:Medium'] font-medium min-w-px relative text-[14px] text-[color:var(--sa-color-text-primary,white)]" data-node-id="2335:333">
+              EUR · Euro
+            </p>
+            <p className="font-['Inter:Semi_Bold'] font-semibold relative shrink-0 text-[12px] text-[color:var(--sa-color-text-secondary,rgba(255,255,255,0.72))] whitespace-nowrap" data-node-id="2335:334">
+              € 0,00
+            </p>
+          </div>
+          <div className="[word-break:break-word] content-stretch flex gap-[8px] items-center leading-[normal] not-italic px-[10px] py-[8px] relative rounded-[6px] shrink-0 w-full" data-node-id="2335:335" data-name="Opção · CAD · Dólar canadense">
+            <p className="flex-[1_0_0] font-['Inter:Medium'] font-medium min-w-px relative text-[14px] text-[color:var(--sa-color-text-primary,white)]" data-node-id="2335:336">
+              CAD · Dólar canadense
+            </p>
+            <p className="font-['Inter:Semi_Bold'] font-semibold relative shrink-0 text-[12px] text-[color:var(--sa-color-text-secondary,rgba(255,255,255,0.72))] whitespace-nowrap" data-node-id="2335:337">
+              C$ 0,00
+            </p>
+          </div>
+          <div className="[word-break:break-word] content-stretch flex gap-[8px] items-center leading-[normal] not-italic px-[10px] py-[8px] relative rounded-[6px] shrink-0 w-full" data-node-id="2335:338" data-name="Opção · JPY · Iene japonês">
+            <p className="flex-[1_0_0] font-['Inter:Medium'] font-medium min-w-px relative text-[14px] text-[color:var(--sa-color-text-primary,white)]" data-node-id="2335:339">
+              JPY · Iene japonês
+            </p>
+            <p className="font-['Inter:Semi_Bold'] font-semibold relative shrink-0 text-[12px] text-[color:var(--sa-color-text-secondary,rgba(255,255,255,0.72))] whitespace-nowrap" data-node-id="2335:340">
+              ¥ 0
+            </p>
+          </div>
+          <div className="[word-break:break-word] content-stretch flex gap-[8px] items-center leading-[normal] not-italic px-[10px] py-[8px] relative rounded-[6px] shrink-0 w-full" data-node-id="2335:341" data-name="Opção · CNY · Yuan chinês">
+            <p className="flex-[1_0_0] font-['Inter:Medium'] font-medium min-w-px relative text-[14px] text-[color:var(--sa-color-text-primary,white)]" data-node-id="2335:342">
+              CNY · Yuan chinês
+            </p>
+            <p className="font-['Inter:Semi_Bold'] font-semibold relative shrink-0 text-[12px] text-[color:var(--sa-color-text-secondary,rgba(255,255,255,0.72))] whitespace-nowrap" data-node-id="2335:343">
+              CN¥ 0,00
+            </p>
+          </div>
+          <div className="[word-break:break-word] content-stretch flex gap-[8px] items-center leading-[normal] not-italic px-[10px] py-[8px] relative rounded-[6px] shrink-0 w-full" data-node-id="2335:344" data-name="Opção · AUD · Dólar australiano">
+            <p className="flex-[1_0_0] font-['Inter:Medium'] font-medium min-w-px relative text-[14px] text-[color:var(--sa-color-text-primary,white)]" data-node-id="2335:345">
+              AUD · Dólar australiano
+            </p>
+            <p className="font-['Inter:Semi_Bold'] font-semibold relative shrink-0 text-[12px] text-[color:var(--sa-color-text-secondary,rgba(255,255,255,0.72))] whitespace-nowrap" data-node-id="2335:346">
+              A$ 0,00
+            </p>
+          </div>
+        </div>
+      </div>
+      <p className="[word-break:break-word] font-['Inter:Regular'] font-normal leading-[18px] not-italic relative shrink-0 text-[12px] text-[color:var(--sa-color-text-muted,rgba(255,255,255,0.6))] w-full" data-node-id="2335:347">
+        Aba Carteira de Depósito aberta: o saldo de cada moeda na Carteira de Depósito de Ana Paula Ferreira; na aba Carteira Strategy aparece o saldo parado (rendendo). A que não tem saldo aparece zerada. Só dá para escolher moeda com saldo e que ainda não está no aporte por aquela carteira.
+      </p>
+    </div>
+  );
+}
+SUPER CRITICAL: The generated React+Tailwind code MUST be converted to match the target project's technology stack and styling system.
+1. Analyze the target codebase to identify: technology stack, styling approach, component patterns, and design tokens
+2. Convert React syntax to the target framework/library
+3. Transform all Tailwind classes to the target styling system while preserving exact visual design
+4. Follow the project's existing patterns and conventions
+DO NOT install any Tailwind as a dependency unless the user instructs you to do so.
+
+Node ids have been added to the code as data attributes, e.g. `data-node-id="1:2"`.
+The generated code contains image and SVG URL constants, e.g. const image = 'https://www.figma.com/api/mcp/asset/550e8400-e29b-41d4-a716-446655440000.png'. These URLs are temporary download sources and expire after 7 days. Download each asset into the project with curl -L, then replace its URL in the generated code with a reference to the downloaded asset. Never use the temporary URLs as runtime image sources.
