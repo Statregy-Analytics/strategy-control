@@ -1,0 +1,75 @@
+{
+  "base": "https://admin.strategyanalytics.com.br/",
+  "entry": "/assets/index-C2fah4C5.js",
+  "workspaceBundle": "AdminWorkspacePage-DylB8M12.js",
+  "EC01InPublishedBundle": true,
+  "assets": [
+    {
+      "path": "icons/logics/identity/activity.svg",
+      "status": 200,
+      "matchesLocal": true,
+      "sha256": "649cc8cb8a55868422dcb455178e09359d3e44857d858024b4a7e5a0dfcdeabf"
+    },
+    {
+      "path": "icons/logics/identity/box.svg",
+      "status": 200,
+      "matchesLocal": true,
+      "sha256": "5733161df18212e456cecad351d0334e5b16822450703f3328dc14006a1385b4"
+    },
+    {
+      "path": "icons/logics/identity/chart-pie.svg",
+      "status": 200,
+      "matchesLocal": true,
+      "sha256": "260b59c77e6e1c5dec5e647651b9ac95e8381b4f5349b6a8299359e8ca31242d"
+    },
+    {
+      "path": "icons/logics/identity/check.svg",
+      "status": 200,
+      "matchesLocal": true,
+      "sha256": "0274d0adab350f105eae7e74eac8dbcef4de74100f2b5d91be7449901b18c21c"
+    },
+    {
+      "path": "icons/logics/identity/chevron.svg",
+      "status": 200,
+      "matchesLocal": true,
+      "sha256": "eea1d7d8daca2d4943179e58ead13109995aac1373f1979c2b493b55f6d0a638"
+    },
+    {
+      "path": "icons/logics/identity/cpu.svg",
+      "status": 200,
+      "matchesLocal": true,
+      "sha256": "a68f0e1549fac41334ce6b44a451637469df788c9512965393aba4b440b80d4a"
+    },
+    {
+      "path": "icons/logics/identity/heading-box.svg",
+      "status": 200,
+      "matchesLocal": true,
+      "sha256": "1f8dafa53c792374e5ff4ce9734a5d0d3bad4925e0f89e042046e9c662cf2a12"
+    },
+    {
+      "path": "icons/logics/identity/layers.svg",
+      "status": 200,
+      "matchesLocal": true,
+      "sha256": "13d8d1c569aadef95eb6c5b7aede96f71611e72631deed9c8248d9958485c803"
+    },
+    {
+      "path": "icons/logics/identity/shield.svg",
+      "status": 200,
+      "matchesLocal": true,
+      "sha256": "caa990072477502094cb2343829c5e27696df17c7074801bce0c9728ded37fa3"
+    },
+    {
+      "path": "icons/logics/identity/trending-up.svg",
+      "status": 200,
+      "matchesLocal": true,
+      "sha256": "ed6f10b28c27ebef50fad8d1fba3e57c011e091c8938be3c14f6e191f3166f4c"
+    },
+    {
+      "path": "icons/logics/identity/zap.svg",
+      "status": 200,
+      "matchesLocal": true,
+      "sha256": "854b02f0977fb2ae720b4d493d4864268ae0212e911b831decfe905dc94ccea5"
+    }
+  ],
+  "method": "HTTP only; no browser layout or interaction validated"
+}

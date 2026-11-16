@@ -47,5 +47,20 @@
     "console"
   ],
   "operationalWrites": 0,
-  "published": false
+  "published": {
+    "commit": "655ad6a0753915bffb752e2ff827791d0e6be49b",
+    "url": "https://admin.strategyanalytics.com.br/",
+    "deployId": 43915027527,
+    "conclusion": "success",
+    "checks": [
+      "dependency audit",
+      "tests",
+      "lint",
+      "build",
+      "upload",
+      "activate"
+    ],
+    "httpEvidence": "published-http.json",
+    "browserRetest": "not performed"
+  }
 }
