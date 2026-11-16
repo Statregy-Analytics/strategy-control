@@ -6,10 +6,27 @@ Atualização: 16/11/2026. Este é o índice desta revisão ampla. Evidências a
 
 - [ ] Todos os frames/estados abaixo comparados visualmente, inclusive erro, vazio e retorno.
 - [ ] Fluxos de escrita e leitura integrados testados com dados fictícios.
-- [x] Admin: lint e build aprovados; 326 testes locais passaram (incluem 8 testes de estudo já existentes no worktree; quatro novos testes da prévia EC02 neste complemento).
+- [x] Admin: lint e build aprovados; 330 testes locais passaram (incluem 8 testes de estudo já existentes no worktree; quatro novos testes da identidade EC01 neste complemento).
 - [ ] Reexecutar os checks após concluir as demais telas; Área do Cliente ainda não alterada nesta rodada.
 - [ ] Deploy confirmado e testes repetidos nas URLs publicadas.
 - [x] Pendências de frontend separadas das pendências reais da API, do designer e da limitação de consulta ao Figma.
+
+## EC01 — Identidade do Motor configurada (16/11)
+
+- [x] Referência 1484:79229 reconfirmada, com contexto completo e screenshot em [evidence/qa-2026-11-16-identity](evidence/qa-2026-11-16-identity). Onze SVGs originais locais: Box do título/ChevronDown 16 px, oito ícones de escolha 20 px e Check 22 px. Arquivos não vazios e dimensões raiz verificadas.
+- [x] Extraído LogicIdentity, reutilizando ProfileSection, LabelForm, GlassSelect e QInput. Mesmos seis campos: Nome/ID na primeira linha, Descrição completa e Status/Moeda/Tipo na terceira; campos de 36 px, rótulos externos e espaçamentos de 24 px. Nenhum campo ou ação extra.
+- [x] Oito escolhas de ícone com os valores internos existentes (incluindo activity1), seleção azul, sete amostras circulares de cor e check selecionado. Cores visuais atualizadas para os valores explícitos do frame; a primeira opção escura conserva #153d49 no rascunho, sem migração de dados. A prévia EC02 segue as escolhas do formulário. Não há persistência nova.
+- [x] ID automático bloqueado e sem ID de exemplo; moedas vêm das opções reais já carregadas e status mantém as nomenclaturas existentes. Tipo de Motor continua sem opções inventadas e bloqueado. O exemplo Variação Indexada não foi adotado como enum de API sem contrato.
+- [x] Quatro testes SSR/script do componente: três inputs/três seletores, moedas/status reais e ausência de exemplos; atualização/limpeza dos textos e seleção de moeda preservando ciclo; oito ações de ícone/sete de cor emitindo cópias independentes; identificação fornecida e marcação das escolhas atuais. ProfileSection, LabelForm e GlassSelect são reais; controles Quasar são adaptadores. Ações de ícone/cor são testadas pela função de emissão real, não por clique/teclado no navegador.
+- [x] Lint, build, diff da entrega e 330 testes locais aprovados (oito de estudo preexistentes fora da entrega). Detector sinalizou Consolas fora do DESIGN.md antigo; mantida exclusivamente no ID porque consta explicitamente no Figma. Demais avisos de cor/medida também seguem a referência; não foi alterado o design system global.
+- [ ] Publicação e confirmação HTTP após o deploy.
+- [ ] Navegador: comparação visual com o frame, seis campos/ícones/cores, fontes e contraste, dimensões efetivas, seleção por clique e teclado, foco, menus de status/moeda, interação com prévia, quebra em celular, nomes longos, Cancelar/retornar e console.
+
+**Limitação de validação:** checks executados em código/SSR. Não houve nova tentativa de navegador após a interrupção anterior por impossibilidade de confirmar a URL no Windows. Responsividade e estados visuais de seleção/foco estão implementados, mas ainda não observados no navegador; não declarar o EC01 visualmente homologado.
+
+**API:** permanece o contrato reconfirmado no EC03 de 16/11: catálogo de motores oferece metadados, sem a configuração operacional completa do formulário (tipo, moeda firmada, status operacional, ícone/cor e parâmetros). Não foi criada escrita alternativa de configuração no endpoint de metadados; o fluxo de salvar operacional continua pendente. Evidência do contrato em api-review.json do EC03. Não há nova falha de API confirmada nesta rodada.
+
+**Designer:** nenhum novo bloqueio para o estado configurado recuperado. Oito ícones/sete cores são escolhas já existentes, ajustadas ao desenho; os menus abertos e telas completas permanecem com a revisão própria do inventário.
 
 ## EC02.1 / EC02.2 / EC02.3 — prévia do motor em criação (16/11)
 
@@ -543,7 +560,7 @@ Legenda: **Preparado / revisão pendente** = há código novo, mas a validação
 | [1484:77407](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-77407) | F02 · Criar e abrir lógica · Fluxos principais                                                | Revalidar                                                                |
 | [1484:77408](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-77408) | LG04 · SP · Criar nova lógica · SUBPÁGINA · DESIGN GLASS                                      | Preparado / revisão pendente                                             |
 | [1484:78227](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-78227) | LG05 · PB · Lógica aberta · TELA BASE · DESIGN GLASS                                          | Preparado / revisão pendente                                             |
-| [1484:79229](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-79229) | EC01 · Identidade configurada · ícone Distribuição + azul                                     | Preparado / revisão pendente                                             |
+| [1484:79229](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-79229) | EC01 · Identidade configurada · ícone Distribuição + azul                                     | Composto; SSR/checks aprovados; publicação e navegador pendentes                                             |
 | [1484:79361](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-79361) | EC02.1 · Preview · Alpha-2 Institucional                                                      | Publicado; SSR/checks e HTTP aprovados; revisão visual e fluxos no navegador pendentes                                             |
 | [1484:79457](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-79457) | EC02.2 · Preview · Delta-Green                                                                | Publicado; SSR/checks e HTTP aprovados; revisão visual e fluxos no navegador pendentes                                             |
 | [1484:79553](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-79553) | EC02.3 · Preview · Atlas-Orange                                                               | Publicado; SSR/checks e HTTP aprovados; revisão visual e fluxos no navegador pendentes                                             |

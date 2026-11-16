@@ -53,61 +53,12 @@
             body-id="logic-configuration-fields"
             :intensity-invalid="intensityConstraint === false"
           >
-            <profile-section
+            <logic-identity
               v-if="!recordId"
-              title="Identidade do Motor"
-              icon-src="/icons/workspaces/box.svg"
-              caption="Defina como esse motor será identificado no sistema."
-              ><div class="workspace-form-grid">
-                <workspace-field
-                  v-model="form.name"
-                  :field="{ label: 'Nome do Motor *', placeholder: 'Ex: Alpha-2 Institutional' }"
-                /><workspace-field
-                  :model-value="source?.code || ''"
-                  :field="{ label: 'ID (Automático)', disabled: true, placeholder: '—' }"
-                /><workspace-field
-                  v-model="form.description"
-                  :field="{
-                    label: 'Descrição Interna',
-                    wide: true,
-                    placeholder: 'Descrição técnica ou administrativa do motor',
-                  }"
-                /><workspace-field
-                  v-model="form.status"
-                  :field="{ label: 'Status Inicial', kind: 'select', options: logicStatuses }"
-                /><workspace-field
-                  v-model="form.currency"
-                  :field="{ label: 'Moeda Firmada *', kind: 'select', options: currencyOptions }"
-                /><workspace-field
-                  v-model="form.engineType"
-                  :field="{ label: 'Tipo de Motor', kind: 'select', options: [], disabled: true }"
-                />
-              </div>
-              <p>Ícone Representativo</p>
-              <div class="logic-icons">
-                <q-btn
-                  v-for="icon in icons"
-                  :key="icon.value"
-                  outline
-                  no-caps
-                  :aria-pressed="form.icon === icon.value"
-                  @click="form.icon = icon.value"
-                  ><workspace-icon :name="icon.value" />{{ icon.label }}</q-btn
-                >
-              </div>
-              <p>Cor Institucional</p>
-              <div class="logic-colors">
-                <button
-                  v-for="color in colors"
-                  :key="color"
-                  :style="{ background: color }"
-                  :aria-label="'Cor ' + color"
-                  :aria-pressed="form.color === color"
-                  @click="form.color = color"
-                >
-                  <workspace-icon v-if="form.color === color" name="check" />
-                </button></div
-            ></profile-section>
+              v-model="form"
+              :currencies="currencyOptions"
+              :code="source?.code || ''"
+            />
             <template v-for="section in sections" :key="section.title">
               <logic-frequency
                 v-if="section.key === 'frequency'"
@@ -218,7 +169,6 @@
 import { computed, nextTick, onScopeDispose, ref, watch } from 'vue'
 import ProfileSection from 'src/components/Entity/ProfileSection.vue'
 import ResourceState from 'src/components/Finance/ResourceState.vue'
-import WorkspaceIcon from './WorkspaceIcon.vue'
 import WorkspaceField from './WorkspaceField.vue'
 import LogicPerformance from './LogicPerformance.vue'
 import LogicValidation from './LogicValidation.vue'
@@ -230,12 +180,12 @@ import LogicLimits from './LogicLimits.vue'
 import LogicSovereign from './LogicSovereign.vue'
 import LogicFrequency from './LogicFrequency.vue'
 import LogicDraftPreview from './LogicDraftPreview.vue'
+import LogicIdentity from './LogicIdentity.vue'
 import { useFinanceResource } from 'src/composables/useFinanceResource'
 import { financeGet, columns } from 'src/services/financeService'
 import { getPreferenceCatalog } from 'src/services/customerService'
 import {
   initialLogic,
-  logicStatuses,
   projectedFinalIndex,
   validateLogic,
   logicRuleResults,
@@ -283,17 +233,6 @@ watch(
 const baseline = ref('')
 const dirty = computed(() => JSON.stringify(form.value) !== baseline.value),
   validationError = computed(() => validateLogic(form.value))
-const colors = ['#153d49', '#1043e9', '#00b6cf', '#008641', '#35291c', '#f00000', '#be0000']
-const icons = [
-  { label: 'Distribuição', value: 'chart-pie' },
-  { label: 'Oscilação', value: 'activity1' },
-  { label: 'Performance', value: 'trending-up' },
-  { label: 'Rápida', value: 'zap' },
-  { label: 'Segurança', value: 'shield' },
-  { label: 'Estrutural', value: 'box' },
-  { label: 'Composta', value: 'layers' },
-  { label: 'Algorítmica', value: 'cpu' },
-]
 const fields = (items) =>
   items.map(([key, label, kind = 'number', extra = {}]) => ({ key, label, kind, ...extra }))
 const sections = computed(() => [
@@ -470,35 +409,6 @@ onScopeDispose(() => {
   outline: 2px solid #00a3ff;
   outline-offset: 4px;
   border-radius: 14px;
-}
-.logic-icons {
-  display: flex;
-  gap: 10px;
-  flex-wrap: wrap;
-}
-.logic-icons .q-btn :deep(.q-btn__content) {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-.logic-icons [aria-pressed='true'] {
-  color: #00a3ff;
-  border-color: #00a3ff;
-}
-.logic-colors {
-  display: flex;
-  gap: 12px;
-}
-.logic-colors button {
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  cursor: pointer;
-}
-.logic-colors button[aria-pressed='true'] {
-  outline: 2px solid #00a3ff;
-  outline-offset: 3px;
 }
 .logic-existing {
   max-width: 1552px;

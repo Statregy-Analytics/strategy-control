@@ -1,0 +1,51 @@
+{
+  "date": "2026-11-16",
+  "frame": "1484:79229",
+  "checks": {
+    "lint": "pass",
+    "build": "pass",
+    "diffOfDelivery": "pass",
+    "localTests": 330,
+    "existingStudyTestsOutsideScope": 8,
+    "newTests": 4,
+    "detector": "Consolas flag retained because explicitly specified for ID in Figma"
+  },
+  "assets": {
+    "heading-box.svg": [
+      16,
+      16
+    ],
+    "chevron.svg": [
+      16,
+      16
+    ],
+    "iconChoices": {
+      "count": 8,
+      "size": [
+        20,
+        20
+      ]
+    },
+    "check.svg": [
+      22,
+      22
+    ]
+  },
+  "tests": [
+    "SSR existing fields, catalog and missing sample ID",
+    "edit/clear identity preserving other draft fields",
+    "actual setter emits independent icon/color choices",
+    "provided ID and current selection markup"
+  ],
+  "browserValidation": "not performed",
+  "unvalidated": [
+    "visual desktop/mobile comparison",
+    "effective contrast, fonts, dimensions and icon loading",
+    "native clicks, keyboard and focus",
+    "select popups and interaction with preview",
+    "cancel/return transitions",
+    "console"
+  ],
+  "operationalWrites": 0,
+  "published": false
+}
