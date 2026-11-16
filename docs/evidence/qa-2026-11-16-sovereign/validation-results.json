@@ -1,14 +1,15 @@
 {
   "date": "2026-11-16",
   "frame": "1484:79941",
-  "implementation": "local only",
+  "implementation": "published; browser validation pending",
   "checks": {
     "lint": "pass",
     "build": "pass",
     "localTests": 318,
     "existingStudyTestsOutsideScope": 8,
     "newSSRTests": 3,
-    "detectorAntiPatterns": 0
+    "detectorAntiPatterns": 0,
+    "diffOfDelivery": "pass"
   },
   "assets": {
     "target-heading.svg": {
@@ -35,6 +36,21 @@
     "console"
   ],
   "operationalWrites": 0,
-  "published": false,
+  "published": {
+    "commit": "472e20c01898a3f7e92c17d9b72d993b0ffe6937",
+    "url": "https://admin.strategyanalytics.com.br/",
+    "deployId": 43901095972,
+    "conclusion": "success",
+    "checks": [
+      "dependency audit",
+      "tests",
+      "lint",
+      "build",
+      "upload",
+      "activate"
+    ],
+    "httpEvidence": "published-http.json",
+    "browserRetest": "not performed"
+  },
   "backend": "existing operational-projection/configuration dependency recorded on 2026-11-15; not rechecked today"
 }

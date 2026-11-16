@@ -1,0 +1,21 @@
+{
+  "base": "https://admin.strategyanalytics.com.br/",
+  "entry": "/assets/index-BxukhSXb.js",
+  "workspaceBundle": "AdminWorkspacePage-BXjj1yxi.js",
+  "EC07InPublishedBundle": true,
+  "assets": [
+    {
+      "path": "icons/logics/sovereign/target-heading.svg",
+      "status": 200,
+      "matchesLocal": true,
+      "sha256": "cfcf4dae28f3294269995f7ff8f1b736c749412910b4920cae535868cb1aa33a"
+    },
+    {
+      "path": "icons/logics/sovereign/target-principle.svg",
+      "status": 200,
+      "matchesLocal": true,
+      "sha256": "39c11de23767d4d58458868b8b04f2af2a30facd4f6792908243e755493a5596"
+    }
+  ],
+  "method": "HTTP only; no browser layout or interaction validated"
+}
