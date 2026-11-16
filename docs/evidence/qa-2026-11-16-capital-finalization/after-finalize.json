@@ -1,0 +1,114 @@
+{
+  "contract": {
+    "id": "9a5aca18-182f-4493-b47e-5cf25454ad2e",
+    "publicCode": "CTR-26AB2AB6",
+    "name": "QA 136 - distribuicao atribuida - teste ficticio 16-11",
+    "registrationStatus": "Created",
+    "term": {
+      "value": 1,
+      "unit": "Month"
+    },
+    "startDate": "2026-11-16",
+    "expectedEndDate": "2026-12-16",
+    "currency": {
+      "id": "f39ba6d7-e6ca-4367-9f7e-81850804447d",
+      "isoCode": "BRL",
+      "name": "Real brasileiro"
+    },
+    "initialContractualCapital": 0.3,
+    "initialConsolidatedCapital": 0.3,
+    "currentBalance": null,
+    "initialCapitalOrigin": {
+      "id": "c0a1b2c3-0001-4c0a-9a00-000000000001",
+      "code": "CONTRACT_VALUE",
+      "name": "Valor do contrato"
+    },
+    "financialNotes": "QA 136: contrato fictício para testar distribuição e finalização com capital atribuído; não deve debitar carteiras.",
+    "businessStatus": {
+      "id": "81e8ecba-5d28-4f42-bdc7-729a07f4c3a0",
+      "code": "ACTIVE",
+      "name": "Ativo"
+    },
+    "primaryEngine": {
+      "engineId": "e99dec56-2b66-4cab-9bb3-12e084834817",
+      "code": "QUANT_CORE",
+      "name": "Quant Core",
+      "connectionStatus": "PendingConnection"
+    },
+    "participants": [
+      {
+        "participantId": "832e0795-4d7d-4ca5-875e-a3f7c8d8c471",
+        "clientId": "cf2f5863-d234-42d9-9cc1-95881c05dbd1",
+        "displayName": "Éric Vicente",
+        "personType": "PF",
+        "allocatedAmount": 0.1,
+        "allocationPercentage": 33.3333,
+        "contributedAmount": 0,
+        "baseAmount": 0.1,
+        "linkedAtUtc": "2026-11-16T17:53:08.039377+00:00"
+      },
+      {
+        "participantId": "92ff571e-3241-472a-8057-b28fc226fda8",
+        "clientId": "026a7899-756d-40a7-b5e9-8a3abb60cc54",
+        "displayName": "Claudio Manhães",
+        "personType": "PJ",
+        "allocatedAmount": 0.2,
+        "allocationPercentage": 66.6667,
+        "contributedAmount": 0,
+        "baseAmount": 0.2,
+        "linkedAtUtc": "2026-11-16T17:53:08.039404+00:00"
+      }
+    ],
+    "createdAtUtc": "2026-11-16T17:53:08.039137+00:00",
+    "updatedAtUtc": "2026-11-16T18:11:06.898905+00:00",
+    "finalizedAtUtc": "2026-11-16T18:11:06.89886+00:00",
+    "version": 4,
+    "assetUniverseSummary": {
+      "assetCount": 0,
+      "marketCount": 0,
+      "currencyCount": 0,
+      "networkCount": 0
+    }
+  },
+  "transactions": {
+    "pagination": {
+      "page": 1,
+      "pageSize": 100,
+      "totalItems": 0,
+      "totalPages": 0,
+      "hasNextPage": false,
+      "hasPreviousPage": false
+    },
+    "data": [],
+    "success": true,
+    "requestId": "01a1e58e94bb77b9bae2ee3e86649550",
+    "correlationId": "01a1e58e94bb76b99efde34d66af340f",
+    "errors": []
+  },
+  "transactionDetails": [],
+  "walletsAfter": {
+    "cf2f5863-d234-42d9-9cc1-95881c05dbd1": [
+      {
+        "id": "44fd4a72-9880-445f-957d-ec99b48d273f",
+        "type": "Free",
+        "currencyId": "f39ba6d7-e6ca-4367-9f7e-81850804447d",
+        "currencyIsoCode": "BRL",
+        "balance": 50000.0,
+        "reserved": 2500.0,
+        "available": 47500.0
+      }
+    ],
+    "026a7899-756d-40a7-b5e9-8a3abb60cc54": [
+      {
+        "id": "a4a754a8-ce55-4d03-9822-012df4c3d737",
+        "type": "Free",
+        "currencyId": "f39ba6d7-e6ca-4367-9f7e-81850804447d",
+        "currencyIsoCode": "BRL",
+        "balance": 25000.0,
+        "reserved": 0,
+        "available": 25000.0
+      }
+    ]
+  },
+  "walletsUnchanged": true
+}

@@ -1,0 +1,78 @@
+{
+  "date": "2026-11-16",
+  "browser": "Codex in-app browser, abas já autenticadas pelo usuário; sem controle do Edge pessoal",
+  "environments": [
+    "https://admin.strategyanalytics.com.br",
+    "http://localhost:8080"
+  ],
+  "sourceCommits": [
+    "0eb22ea57e762fc22207601df5d59c7319ba78a2",
+    "f6ec400b414c92142722be072033c4acda95328f"
+  ],
+  "deployRuns": [
+    43926962399,
+    43927449195
+  ],
+  "browserValidation": true,
+  "browserScenariosPassed": [
+    "Retomada do rascunho e seleção múltipla",
+    "Falta/excesso e botão de confirmação bloqueado",
+    "Soma exata em centavos",
+    "Participante zero bloqueado mesmo com soma fechada (local)",
+    "Cliente novo em branco e confirmação bloqueada",
+    "Voltar preserva valores; fechar/cancelar preserva o contrato",
+    "Percentual calcula valor; valor calcula percentual",
+    "Busca por Jane e busca sem resultados mantêm selecionados",
+    "Maior resto: 0.01/0.01/0.01 de 0.03 exibe 33.34/33.33/33.33 (local)",
+    "Larguras 375/1440 sem overflow horizontal no modal (local)",
+    "Capital ausente bloqueia Continuar (homologação)",
+    "Salvar rascunho, recarregar e manter valores",
+    "Criar Contrato: status Created, negócio Ativo e consolidado 0.30",
+    "Cards e lista exibem 33,33%/66,67%",
+    "Saldo zero branco confirmado no CSS computado em homologação"
+  ],
+  "viewports": [
+    {
+      "width": 375,
+      "dialogWidth": 312,
+      "scrollWidth": 310,
+      "clientWidth": 310
+    },
+    {
+      "width": 1440,
+      "dialogWidth": 512,
+      "scrollWidth": 510,
+      "clientWidth": 510
+    }
+  ],
+  "temporaryViewportReset": true,
+  "checks": {
+    "lint": "pass",
+    "build": "pass",
+    "diffCheck": "pass",
+    "localTestsPassed": 342,
+    "versionedTests": 334
+  },
+  "financial": {
+    "contractId": "9a5aca18-182f-4493-b47e-5cf25454ad2e",
+    "capital": 0.3,
+    "allocatedAmounts": [
+      0.1,
+      0.2
+    ],
+    "consolidated": 0.3,
+    "walletBalanceReservedAvailableUnchanged": true,
+    "invalidFinalization": [
+      "under:400 contract.allocation_sum_mismatch",
+      "over:400 contract.allocation_sum_mismatch",
+      "zero:400 contract.allocation_amount_invalid"
+    ],
+    "invalidDraftId": "c80f43b7-95e0-4e95-be4a-3ed5bbc74f1d",
+    "invalidFixtureLeftAs": "Rascunho de teste, capital 0.03, distribuição válida 0.01/0.02 após as rejeições; não finalizado."
+  },
+  "backendBlock": {
+    "issue": "A API não expõe os aportes atribuídos do contrato finalizado. contributedAmount continua 0 nos dois participantes; GET admin/transactions filtrado só por contractId retorna 0 itens. Não substituímos por lançamento fictício no front.",
+    "recheckedAt": "2026-11-16T18:19:46.079350+00:00"
+  },
+  "remainingBrowserLimits": "Erro/retry e descarte de respostas atrasadas foram testados de forma controlada em código; não foi provocada indisponibilidade real da API no navegador."
+}

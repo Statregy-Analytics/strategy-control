@@ -1,0 +1,34 @@
+{
+  "checkedAt": "2026-11-16T18:19:46.079350+00:00",
+  "contractId": "9a5aca18-182f-4493-b47e-5cf25454ad2e",
+  "registrationStatus": "Created",
+  "consolidated": 0.3,
+  "assignedAmounts": [
+    0.1,
+    0.2
+  ],
+  "officialPercentages": [
+    33.3333,
+    66.6667
+  ],
+  "contributedAmounts": [
+    0,
+    0
+  ],
+  "transactions": {
+    "pagination": {
+      "page": 1,
+      "pageSize": 100,
+      "totalItems": 0,
+      "totalPages": 0,
+      "hasNextPage": false,
+      "hasPreviousPage": false
+    },
+    "data": [],
+    "success": true,
+    "requestId": "01a1e59625c47b54ae45f5e437526b58",
+    "correlationId": "01a1e59625c474f49cd8c2b54ac6c92d",
+    "errors": []
+  },
+  "walletsUnchanged": true
+}

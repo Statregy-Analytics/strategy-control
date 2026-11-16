@@ -1,0 +1,291 @@
+Browser tab: 1, Title: "Strategy Analytics - contracts", URL: "https://admin.strategyanalytics.com.br/contracts?contractId=9a5aca18-182f-4493-b47e-5cf25454ad2e".
+1 AXWebArea Strategy Analytics - contracts, URL: admin.strategyanalytics.com.br/contracts?contractId=9a5aca18-182f-4493-b47e-5cf25454ad2e
+	2 container
+		3 toolbar
+			4 button Abrir navegação
+			5 text Strategy Analytics
+		6 container
+			7 button Voltar para contratos
+			8 heading QA 136 - distribuicao atribuida - teste ficticio 16-11, Value: 1
+				9 text QA 136 - distribuicao atribuida - teste ficticio 16-11
+			10 text ATIVO Atualizado 16/11/2026, 15:11:06
+			11 button Editar Contrato
+			12 text INÍCIO DO CONTRATO
+			13 text 16/11/2026
+			14 text FIM DO CONTRATO
+			15 text 16/12/2026
+			16 text CAPITAL INICIAL CONTRATUAL
+			17 text R$ 0,30
+			18 text CAPITAL CONSOLIDADO
+			19 text R$ 0,30
+			20 text Inicial + aportes
+			21 text SALDO ATUAL
+			22 text Indisponível
+			23 text MOEDA FIRMADA
+			24 text BRL
+		25 container
+			26 heading RESUMO OPERACIONAL, Value: 2
+				27 text RESUMO OPERACIONAL
+			28 container
+				29 heading Clientes Vinculados, Value: 2
+					30 text Clientes Vinculados
+				31 text 2
+				32 checkbox Cards, Value: 1
+					288 container
+					289 text Cards
+				33 checkbox Lista, Value: 0
+					287 text Lista
+				34 button Adicionar
+			290 container
+				291 heading Éric Vicente, Value: 3
+					292 text Éric Vicente
+				293 text Vínculo desde 16/11/2026
+				294 definition list
+					295 container PARTICIPAÇÃO
+						296 text PARTICIPAÇÃO
+					297 text 33,33%
+					298 container APORTES TOTAIS
+						299 text APORTES TOTAIS
+					300 text R$ 0,00
+					301 container RETIRADAS TOTAIS
+						302 text RETIRADAS TOTAIS
+					303 text Indisponível
+					304 container POSIÇÃO ATUAL
+						305 text POSIÇÃO ATUAL
+					306 text Indisponível
+				307 button Ver Detalhes
+				308 button (collapsed) Description: Ações de Éric Vicente, Secondary Actions: Expand
+			309 container
+				310 heading Claudio Manhães, Value: 3
+					311 text Claudio Manhães
+				312 text Vínculo desde 16/11/2026
+				313 definition list
+					314 container PARTICIPAÇÃO
+						315 text PARTICIPAÇÃO
+					316 text 66,67%
+					317 container APORTES TOTAIS
+						318 text APORTES TOTAIS
+					319 text R$ 0,00
+					320 container RETIRADAS TOTAIS
+						321 text RETIRADAS TOTAIS
+					322 text Indisponível
+					323 container POSIÇÃO ATUAL
+						324 text POSIÇÃO ATUAL
+					325 text Indisponível
+				326 button Ver Detalhes
+				327 button (collapsed) Description: Ações de Claudio Manhães, Secondary Actions: Expand
+			73 button (collapsed) Description: Expandir, Secondary Actions: Expand
+				74 text MOTORES E OPERAÇÕES DO CONTRATO
+				75 text Motores vinculados, distribuição e operações do contrato.
+				76 text Conexão pendente
+			77 button (collapsed) Description: Expandir, Secondary Actions: Expand
+				78 text ATIVOS DO CONTRATO
+				79 text 0 ativos vinculados
+			80 button (collapsed) Description: Expandir, Secondary Actions: Expand
+				81 text DÍVIDAS VINCULADAS AO CONTRATO
+				82 text 0 dívidas • Saldo total: R$ 0,00 • Próx. vencimento: —
+			83 button (collapsed) Description: Expandir, Secondary Actions: Expand
+				84 text DOCUMENTOS DO CONTRATO
+				85 text 0 documentos
+			86 container
+				87 heading Histórico de Aportes do Capital Base, Value: 2
+					88 text Histórico de Aportes do Capital Base
+				89 text Capital Inicial: R$ 0,30 · Consolidado: R$ 0,30
+			90 container
+				91 table
+					92 row
+						93 cell
+							94 text Data
+						95 cell
+							96 text Tipo de Aporte
+						97 cell
+							98 text Valor
+						99 cell
+							100 text Moeda
+						101 cell
+							102 text Origem / Canal
+						103 cell
+							104 text Responsável
+				105 text Nenhum aporte adicional registrado.
+			106 container
+				107 heading Performance Histórica, Value: 2
+					108 text Performance Histórica
+				109 checkbox Tabela, Value: 1
+				110 checkbox Gráfico, Value: 0
+				111 button Ver Histórico Completo
+			112 table
+				113 row
+					114 cell
+						115 text Indicador / Data
+					116 cell
+						117 text —
+				118 row
+					119 cell
+						120 text CAPITAL ATUAL (EVOLUTIVO)
+					121 cell
+						122 text Indisponível
+				123 row
+					124 cell
+						125 text CAPITAL CONSOLIDADO ATUAL
+					126 cell
+						127 text Indisponível
+				128 row
+					129 cell
+						130 text RETORNO ACUMULADO DO CONTRATO
+					131 cell
+						132 text Indisponível
+				133 row
+					134 cell
+						135 text RETORNO DIÁRIO DO CONTRATO
+					136 cell
+						137 text Indisponível
+				138 row
+					139 cell
+						140 text PREÇO DE REFERÊNCIA DE ABERTURA
+					141 cell
+						142 text Indisponível
+				143 row
+					144 cell
+						145 text PREÇO DE REFERÊNCIA DE FECHAMENTO
+					146 cell
+						147 text Indisponível
+				148 row
+					149 cell
+						150 text MOTOR PRINCIPAL APLICADO
+					151 cell
+						152 text Indisponível
+				153 row
+					154 cell
+						155 text MOTOR DE DIVIDENDOS APLICADO
+					156 cell
+						157 text Indisponível
+				158 row
+					159 cell
+						160 text DIVIDENDOS PAGOS
+					161 cell
+						162 text Indisponível
+				163 row
+					164 cell
+						165 text DIVIDENDOS PAGOS (% DO VALOR)
+					166 cell
+						167 text Indisponível
+				168 row
+					169 cell
+						170 text CLIENTES VINCULADOS NA ATUALIZAÇÃO
+					171 cell
+						172 text Indisponível
+			173 text Nota técnica: a composição exibida representa os clientes e percentuais vigentes no momento da atualização.
+			174 container contract-history
+				175 heading Histórico de Alterações, Value: 2
+					176 text Histórico de Alterações
+				177 table
+					178 row
+						179 cell
+							180 text Data/Hora
+						181 cell
+							182 text Autor
+						183 cell
+							184 text Alteração
+						185 cell
+							186 text Anterior → Novo
+					187 row
+						188 cell
+							189 text 16/11/2026, 15:11:06
+						190 cell
+							191 text Local Admin
+						192 cell
+							193 text Alteração
+						194 cell
+							195 text Initial Consolidated Capital: — → 0.30
+					196 row
+						197 cell
+							198 text 16/11/2026, 15:11:06
+						199 cell
+							200 text Local Admin
+						201 cell
+							202 text Mudança de status
+						203 cell
+							204 text Registration Status: Rascunho → Created
+					205 row
+						206 cell
+							207 text 16/11/2026, 15:11:06
+						208 cell
+							209 text Local Admin
+						210 cell
+							211 text Alteração
+						212 cell
+							213 text Finalized At Utc: — → 2026-11-16T18:11:06.8988602+00:00
+					214 row
+						215 cell
+							216 text 16/11/2026, 15:11:06
+						217 cell
+							218 text Local Admin
+						219 cell
+							220 text Alteração
+						221 cell
+							222 text Finalized By: — → 11111111-1111-1111-1111-111111111111
+					223 row
+						224 cell
+							225 text 16/11/2026, 15:10:34
+						226 cell
+							227 text Local Admin
+						228 cell
+							229 text Alteração
+						230 cell
+							231 text Observação financeira: Teste fictício de rascunho, sem finalizar contrato e sem movimentar carteiras. → QA 136: contrato fictício para testar distribuição e finalização com capital atribuído; não deve debitar carteiras.
+					232 row
+						233 cell
+							234 text 16/11/2026, 15:10:34
+						235 cell
+							236 text Local Admin
+						237 cell
+							238 text Alteração
+						239 cell
+							240 text Term Unit: — → Month
+					241 row
+						242 cell
+							243 text 16/11/2026, 15:10:34
+						244 cell
+							245 text Local Admin
+						246 cell
+							247 text Alteração
+						248 cell
+							249 text Business Status Id: — → 81e8ecba-5d28-4f42-bdc7-729a07f4c3a0
+					250 row
+						251 cell
+							252 text 16/11/2026, 15:10:34
+						253 cell
+							254 text Local Admin
+						255 cell
+							256 text Alteração
+						257 cell
+							258 text Start Date: — → 2026-11-16
+					259 row
+						260 cell
+							261 text 16/11/2026, 15:10:34
+						262 cell
+							263 text Local Admin
+						264 cell
+							265 text Alteração
+						266 cell
+							267 text Term Value: — → 1
+					268 row
+						269 cell
+							270 text 16/11/2026, 15:10:34
+						271 cell
+							272 text Local Admin
+						273 cell
+							274 text Alteração
+						275 cell
+							276 text End Date: — → 2026-12-16
+					277 row
+						278 cell
+							279 text 16/11/2026, 14:53:08
+						280 cell
+							281 text Local Admin
+						282 cell
+							283 text Criação
+						284 cell
+							285 text —
+
+The focused UI element is 288 container

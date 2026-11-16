@@ -1,0 +1,64 @@
+{
+  "draftId": "c80f43b7-95e0-4e95-be4a-3ed5bbc74f1d",
+  "capital": 0.03,
+  "scenarios": [
+    {
+      "scenario": "under",
+      "allocatedAmounts": [
+        0.01,
+        0.01
+      ],
+      "saveStatus": 200,
+      "finalizeOrValidationStatus": 400,
+      "errors": [
+        {
+          "code": "contract.allocation_sum_mismatch",
+          "message": "The sum of allocated amounts must equal the initial contractual capital.",
+          "field": "clientAllocations",
+          "retryAfterSeconds": null
+        }
+      ],
+      "registrationStatus": "Draft",
+      "blockedWithoutFinalization": true
+    },
+    {
+      "scenario": "over",
+      "allocatedAmounts": [
+        0.02,
+        0.02
+      ],
+      "saveStatus": 200,
+      "finalizeOrValidationStatus": 400,
+      "errors": [
+        {
+          "code": "contract.allocation_sum_mismatch",
+          "message": "The sum of allocated amounts must equal the initial contractual capital.",
+          "field": "clientAllocations",
+          "retryAfterSeconds": null
+        }
+      ],
+      "registrationStatus": "Draft",
+      "blockedWithoutFinalization": true
+    },
+    {
+      "scenario": "zero_participant",
+      "allocatedAmounts": [
+        0.03,
+        0
+      ],
+      "saveStatus": 200,
+      "finalizeOrValidationStatus": 400,
+      "errors": [
+        {
+          "code": "contract.allocation_amount_invalid",
+          "message": "Allocated amount must be greater than zero to finalize.",
+          "field": "clientAllocations[1].allocatedAmount",
+          "retryAfterSeconds": null
+        }
+      ],
+      "registrationStatus": "Draft",
+      "blockedWithoutFinalization": true
+    }
+  ],
+  "walletsUnchanged": true
+}

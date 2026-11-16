@@ -1,0 +1,24 @@
+{
+  "cf2f5863-d234-42d9-9cc1-95881c05dbd1": [
+    {
+      "id": "44fd4a72-9880-445f-957d-ec99b48d273f",
+      "type": "Free",
+      "currencyId": "f39ba6d7-e6ca-4367-9f7e-81850804447d",
+      "currencyIsoCode": "BRL",
+      "balance": 50000.0,
+      "reserved": 2500.0,
+      "available": 47500.0
+    }
+  ],
+  "026a7899-756d-40a7-b5e9-8a3abb60cc54": [
+    {
+      "id": "a4a754a8-ce55-4d03-9822-012df4c3d737",
+      "type": "Free",
+      "currencyId": "f39ba6d7-e6ca-4367-9f7e-81850804447d",
+      "currencyIsoCode": "BRL",
+      "balance": 25000.0,
+      "reserved": 0,
+      "available": 25000.0
+    }
+  ]
+}
