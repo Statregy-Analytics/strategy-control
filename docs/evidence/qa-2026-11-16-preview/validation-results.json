@@ -40,5 +40,20 @@
     "form cancel/return transitions"
   ],
   "operationalWrites": 0,
-  "published": false
+  "published": {
+    "commit": "7a67b61307b99262a4f74834aae3e5bfc55f55a2",
+    "url": "https://admin.strategyanalytics.com.br/",
+    "deployId": 43913646297,
+    "conclusion": "success",
+    "checks": [
+      "dependency audit",
+      "tests",
+      "lint",
+      "build",
+      "upload",
+      "activate"
+    ],
+    "httpEvidence": "published-http.json",
+    "browserRetest": "not performed"
+  }
 }
