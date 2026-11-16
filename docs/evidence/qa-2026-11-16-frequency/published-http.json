@@ -1,0 +1,27 @@
+{
+  "base": "https://admin.strategyanalytics.com.br/",
+  "entry": "/assets/index-nZPfnIYr.js",
+  "workspaceBundle": "AdminWorkspacePage-d4dpXoAP.js",
+  "EC03InPublishedBundle": true,
+  "assets": [
+    {
+      "path": "icons/logics/frequency/clock.svg",
+      "status": 200,
+      "matchesLocal": true,
+      "sha256": "893efa8d30adb452eb518f7ca36888a035b3e49131608f479a7398fb85b050aa"
+    },
+    {
+      "path": "icons/logics/frequency/chevron.svg",
+      "status": 200,
+      "matchesLocal": true,
+      "sha256": "eea1d7d8daca2d4943179e58ead13109995aac1373f1979c2b493b55f6d0a638"
+    },
+    {
+      "path": "icons/logics/frequency/calendar.svg",
+      "status": 200,
+      "matchesLocal": true,
+      "sha256": "738892e4dc4ed93559e0953a8873d60f96fe71117181fcc934369d29866483cd"
+    }
+  ],
+  "method": "HTTP only; no browser layout or interaction validated"
+}

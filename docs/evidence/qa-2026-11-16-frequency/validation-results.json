@@ -39,6 +39,21 @@
     "cancel/collapse/history transitions",
     "console"
   ],
-  "published": false,
+  "published": {
+    "commit": "81d1e4bbf4b58b49ab7444ccd8baf96a036755b8",
+    "url": "https://admin.strategyanalytics.com.br/",
+    "deployId": 43902508086,
+    "conclusion": "success",
+    "checks": [
+      "dependency audit",
+      "tests",
+      "lint",
+      "build",
+      "upload",
+      "activate"
+    ],
+    "httpEvidence": "published-http.json",
+    "browserRetest": "not performed"
+  },
   "apiReview": "api-review.json"
 }
