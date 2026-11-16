@@ -32,5 +32,12 @@
       "2324:839"
     ]
   },
-  "deployment": "pending"
+  "deployment": {
+    "conclusion": "success",
+    "runId": 43924111026,
+    "url": "https://github.com/Statregy-Analytics/strategy-control/actions/runs/43924111026",
+    "commit": "ca793227334bf5de0be7ba0a53efd6408b6ecaef",
+    "httpBundleVerified": true,
+    "httpAssetsVerified": 9
+  }
 }

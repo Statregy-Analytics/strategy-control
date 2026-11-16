@@ -1,0 +1,28 @@
+{
+  "date": "2026-11-16",
+  "sourceCommits": {
+    "admin": "773bb7304bfe86088588c16e24f59e3d378064b6",
+    "portal": "33b0c570bd26709494272c95ae79dc283f8c3c44"
+  },
+  "checks": {
+    "inventoryEntries": 309,
+    "uniqueNodeIds": 309,
+    "originalRevalidarReviewed": 222,
+    "unclassified": 0,
+    "categoryTotalsMatchDenominator": true,
+    "frontStateTotalsMatchDenominator": true,
+    "sourcesAndEvidenceExist": true,
+    "deliveryDiffCheck": "pass"
+  },
+  "originalRevalidarClassification": {
+    "Já correto": 50,
+    "Agregador/conexão": 28,
+    "Bloqueio designer/produto": 4,
+    "Bloqueio backend": 31,
+    "Ajuste de front": 109
+  },
+  "runtimeChanged": false,
+  "browserTestsExecuted": 0,
+  "businessWritesExecuted": 0,
+  "percentMeaning": "Equal-weight deliverable frame count; not hours. Correct means historical evidence and source audited, not a new acceptance test."
+}

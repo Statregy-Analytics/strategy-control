@@ -1,0 +1,64 @@
+{
+  "date": "2026-11-16",
+  "url": "https://admin.strategyanalytics.com.br/",
+  "sourceCommit": "ca793227334bf5de0be7ba0a53efd6408b6ecaef",
+  "deployRun": "https://github.com/Statregy-Analytics/strategy-control/actions/runs/43924111026",
+  "conclusion": "success",
+  "entry": "/assets/index-DJIve6w-.js",
+  "contractChunk": "/assets/ContractsPage-BpME2AhH.js",
+  "markers": {
+    "capital-distribution": true,
+    "assigned-clients": true,
+    "Confirmar Distribuição": true,
+    "Selecionados": true
+  },
+  "assets": [
+    {
+      "path": "/icons/contracts/distribution/search.svg",
+      "httpStatus": 200,
+      "matchesLocal": true
+    },
+    {
+      "path": "/icons/contracts/distribution/close.svg",
+      "httpStatus": 200,
+      "matchesLocal": true
+    },
+    {
+      "path": "/icons/contracts/distribution/business.svg",
+      "httpStatus": 200,
+      "matchesLocal": true
+    },
+    {
+      "path": "/icons/contracts/distribution/plus.svg",
+      "httpStatus": 200,
+      "matchesLocal": true
+    },
+    {
+      "path": "/icons/contracts/distribution/user.svg",
+      "httpStatus": 200,
+      "matchesLocal": true
+    },
+    {
+      "path": "/icons/contracts/distribution/warning.svg",
+      "httpStatus": 200,
+      "matchesLocal": true
+    },
+    {
+      "path": "/icons/contracts/distribution/users.svg",
+      "httpStatus": 200,
+      "matchesLocal": true
+    },
+    {
+      "path": "/icons/contracts/distribution/check.svg",
+      "httpStatus": 200,
+      "matchesLocal": true
+    },
+    {
+      "path": "/icons/contracts/distribution/info.svg",
+      "httpStatus": 200,
+      "matchesLocal": true
+    }
+  ],
+  "browserValidated": false,
+  "scope": "Presença do bundle e ícones publicados por HTTP; não comprova interação ou fidelidade visual no navegador."
+}
