@@ -23,7 +23,11 @@ Esta rodada reúne os ajustes funcionais que ainda estavam na fila. **Não decla
 - [x] Dados controlados no navegador: linha de motor ativo, métricas conhecidas e indisponíveis, Editar emitindo a ação correta e Pausar desabilitado. Nenhum motor fictício foi salvo na API.
 - [x] Nova Transação: MD01, MD02, MD03 e MD04.2 percorridos no navegador local; ícones originais, escolha/Voltar, saldo e prazo. MD01/MD03 conferidos em 390px sem overflow; chevrons e CircleAlert em 16px nativos.
 - [x] Revisão local da correção: banco mascarado legível, valor original, diferença, carteiras e transação em processamento reais; falha de uma seção não fabrica saldos. Não se executou correção financeira de depósito.
-- [ ] Publicação e smoke tests nas URLs publicadas: em andamento, registrar ao fechar.
+- [x] Publicação final: Admin `9090770` (deploy `43962874878`) e Cliente `63c4227` (deploy `43960587467`), ambos concluídos com sucesso. Releases anteriores deste lote: Admin `02c1e8a`, Cliente `1942950`.
+- [x] Smoke tests publicados: seleção MD01; depósito MD02; saque MD03; transferência MD04/MD04.2; Voltar/fechar; abertura/cancelamento de MD07 sem nova escrita; leitura do histórico e destinatário da solicitação cancelada. Assets sem falha e modal sem overflow horizontal na conferência desktop.
+- [x] Portal publicado: saque direto com R$ 47.500 disponíveis, recuperação existente aberta sem solicitar código, bloqueio real de nível nas rotas Alavancagem/Minhas Alavancagens/colateral e navegação concluída ao Perfil.
+
+As duas rotas de ofertas e o colateral não foram homologados com conta real nível 3; os guards do colateral foram exercitados automaticamente no código real, e as listas preenchidas foram testadas em harness local. Edição pendente/correção não tiveram escrita bancária integrada nesta rodada, pelos limites abaixo. O ciclo de aprovação/execução financeira completo continua sem homologação, embora criação/cancelamento tenham passado com a API real.
 
 ### Bloqueios e limites confirmados nesta rodada
 

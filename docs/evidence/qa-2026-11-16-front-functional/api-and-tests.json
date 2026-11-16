@@ -618,8 +618,34 @@
       "collateral cannot advance to unpersisted confirmation",
       "restored final collateral step clamped",
       "offer/loan/wallet templates compile"
-    ]
+    ],
+    "browserPublished": [
+      "MD01/MD02/MD03/MD04.2, back/close and native assets without failed images",
+      "MD07 opened and canceled without creating another financial request",
+      "canceled transfer detail: localized type, real recipient, status/history, no ledger execution",
+      "withdrawal standalone: confirmed BRL47500 available; existing recovery UI without sending email",
+      "level block on leverage/my-leverages/collateral and completed navigation to profile"
+    ],
+    "versionedTotal": 803
   },
   "harnessesRemoved": true,
-  "financialExecutionPerformed": false
+  "financialExecutionPerformed": false,
+  "publication": {
+    "admin": {
+      "commit": "9090770",
+      "run": 43962874878,
+      "status": "success",
+      "url": "https://admin.strategyanalytics.com.br"
+    },
+    "client": {
+      "commit": "63c4227",
+      "run": 43960587467,
+      "status": "success",
+      "url": "https://hml.strategyanalytics.com.br"
+    }
+  },
+  "temporaryFilesRemoved": [
+    "strategy-control/qa-functional.html",
+    "Strategy-analytics-v2/qa-functional.html"
+  ]
 }
