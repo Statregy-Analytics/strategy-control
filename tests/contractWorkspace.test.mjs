@@ -3,6 +3,7 @@ import assert from 'node:assert/strict'
 import vm from 'node:vm'
 import { readFileSync } from 'node:fs'
 import * as vue from 'vue'
+import { walletCapitalBlocked } from '../src/services/contractWalletCapital.js'
 import { distributionState } from '../src/services/contractDistribution.js'
 import { readCurrentPages } from '../src/services/requestContext.js'
 import { useFinanceResource } from '../src/composables/useFinanceResource.js'
@@ -77,6 +78,7 @@ async function setup({
   const modules = {
     vue,
     'src/services/contractDistribution': { distributionState },
+    'src/services/contractWalletCapital': { walletCapitalBlocked },
     'src/services/requestContext': { readCurrentPages },
     './useFinanceResource': { useFinanceResource },
     'src/services/financeService': { financeGet: get, financeWrite: write },
@@ -297,5 +299,18 @@ test('136: closed decimal allocation uses only existing draft fields before fina
   const refresh = h.reads.filter((read) => read.path === 'admin/transactions').at(-1)
   assert.equal(refresh.params.contractId, 'contract')
   assert.equal(refresh.params.status, 'Completed')
+  h.dispose()
+})
+
+test('137: wallet origin never writes totals without the source-wallet contract', async () => {
+  const h = await setup()
+  fill(h)
+  h.catalog.state.data.origins = [{ id: 'origin', code: 'CLIENT_WALLET' }]
+  for (const finalize of [false, true]) {
+    assert.equal(await h.save(finalize), false)
+    assert.equal(h.writes.length, 0)
+    assert.equal(h.form.value.clientAllocations[0].allocatedAmount, 100)
+  }
+  assert.equal(h.error.value, walletCapitalBlocked)
   h.dispose()
 })

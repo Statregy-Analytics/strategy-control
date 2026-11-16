@@ -1,0 +1,195 @@
+const imgUser = "https://www.figma.com/api/mcp/asset/30888d5f-7a4f-45d4-9d43-c36be21a69c6.svg";
+const imgPlus = "https://www.figma.com/api/mcp/asset/3ea2ec79-77fe-4fab-a12d-0bda78df952f.svg";
+const imgArrowRightLeft = "https://www.figma.com/api/mcp/asset/eb227492-2fb5-46b0-90c0-6a366dd1d685.svg";
+const imgIcon = "https://www.figma.com/api/mcp/asset/ab69b25e-1212-4f90-8021-bbae6c9af45a.svg";
+
+export default function Ct059MdConfigurarVinculoUmaMoedaDiferenteDaFirmadaUsdDesignGlass() {
+  return (
+    <div className="backdrop-blur-[20px] border border-[rgba(255,255,255,0.12)] border-solid drop-shadow-[4px_4px_6px_rgba(0,0,0,0.13)] relative rounded-[12px] size-full" data-node-id="2325:394" style={{ backgroundImage: "linear-gradient(215.51115312337186deg, rgba(0, 0, 0, 0.118) 0.52072%, rgba(0, 0, 0, 0.039) 51.124%, rgba(0, 0, 0, 0.02) 99.479%), linear-gradient(215.51115312337186deg, rgba(0, 0, 0, 0.078) 0.52072%, rgba(0, 0, 0, 0.039) 51.124%, rgba(0, 0, 0, 0.01) 99.479%)" }} data-name="CT05.9 · MD · Configurar vínculo · uma moeda diferente da firmada (USD) · DESIGN GLASS">
+      <div className="absolute border-[rgba(255,255,255,0.12)] border-b-[0.8px] border-solid content-stretch flex flex-col gap-[var(--sa-spacing-8,8px)] items-start left-[-0.2px] pb-[var(--sa-spacing-16,16.8px)] pt-[var(--sa-spacing-16,16px)] px-[var(--sa-spacing-24,24px)] top-[-0.2px] w-[510.4px]" data-node-id="2325:395" data-name="Container">
+        <div className="relative shrink-0 w-full" data-node-id="2325:396" data-name="DialogTitle">
+          <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex flex-col items-start relative size-full">
+            <p className="[word-break:break-word] font-['Inter:Bold'] font-bold leading-[20px] not-italic relative shrink-0 text-[14px] text-[color:var(--sa-color-text-primary,white)] tracking-[0.7px] uppercase whitespace-nowrap" data-node-id="2325:397">
+              Configurar Vínculo
+            </p>
+          </div>
+        </div>
+      </div>
+      <div className="absolute content-stretch flex flex-col items-start left-[-0.2px] top-[69px] w-[510.4px]" data-node-id="2325:398" data-name="Container">
+        <div className="relative shrink-0 w-full" data-node-id="2325:399" data-name="Container">
+          <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex flex-col gap-[16px] items-start p-[var(--sa-spacing-24,24px)] relative size-full">
+            <div className="bg-[var(--sa-color-bg-surface,rgba(255,255,255,0.06))] border-[0.8px] border-[var(--sa-color-border-default,rgba(255,255,255,0.2))] border-solid relative rounded-[10px] shrink-0 w-full" data-node-id="2334:281" data-name="Cliente selecionado">
+              <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex gap-[12px] items-center px-[16px] py-[12px] relative size-full">
+                <div className="bg-[var(--color\/v2\/bg\/status-closed,rgba(0,0,0,0.1))] border-[0.8px] border-[var(--color\/v2\/border\/status-closed,white)] border-solid content-stretch flex items-center justify-center p-[0.8px] relative rounded-[26843500px] shrink-0 size-[32px]" data-node-id="2334:282" data-name="Container">
+                  <div className="relative shrink-0 size-[14px]" data-node-id="2334:283" data-name="User">
+                    <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgUser} />
+                  </div>
+                </div>
+                <div className="[word-break:break-word] content-stretch flex flex-[1_0_0] flex-col gap-[2px] items-start leading-[normal] min-w-px not-italic relative whitespace-nowrap" data-node-id="2334:286" data-name="dados">
+                  <p className="font-['Inter:Semi_Bold'] font-semibold relative shrink-0 text-[14px] text-[color:var(--sa-color-text-primary,white)]" data-node-id="2334:287">
+                    Roberto Carlos da Silva
+                  </p>
+                  <p className="font-['Inter:Regular'] font-normal relative shrink-0 text-[10px] text-[color:var(--sa-color-text-muted,rgba(255,255,255,0.6))]" data-node-id="2334:288">
+                    123.456.789-00
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div className="relative shrink-0 w-full" data-node-id="2334:297" data-name="Moedas do aporte · título">
+              <div className="[word-break:break-word] bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex flex-col gap-[4px] items-start not-italic relative size-full">
+                <p className="font-['Inter:Medium'] font-medium leading-[normal] relative shrink-0 text-[14px] text-[color:var(--sa-color-text-primary,white)] whitespace-nowrap" data-node-id="2334:298">
+                  Moedas do aporte
+                </p>
+                <p className="font-['Inter:Regular'] font-normal leading-[18px] min-w-full relative shrink-0 text-[12px] text-[color:var(--sa-color-text-muted,rgba(255,255,255,0.6))] w-[min-content]" data-node-id="2334:299">
+                  Uma ou mais moedas, da Carteira Strategy (saldo parado) ou da Carteira de Depósito do cliente; a mesma moeda pode vir das duas carteiras, uma linha para cada. Moeda diferente da firmada (BRL) é convertida pela última PTAX de venda.
+                </p>
+              </div>
+            </div>
+            <div className="bg-[var(--sa-color-bg-surface,rgba(255,255,255,0.06))] border-[0.8px] border-[var(--sa-color-border-default,rgba(255,255,255,0.2))] border-solid relative rounded-[10px] shrink-0 w-full" data-node-id="2334:300" data-name="Moeda · USD">
+              <div className="[word-break:break-word] bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex flex-col gap-[8px] items-start not-italic px-[14px] py-[12px] relative size-full">
+                <div className="content-stretch flex gap-[8px] items-center leading-[normal] relative shrink-0 w-full" data-node-id="2334:301" data-name="topo">
+                  <p className="flex-[1_0_0] font-['Inter:Semi_Bold'] font-semibold min-w-px relative text-[13px] text-[color:var(--sa-color-text-primary,white)]" data-node-id="2334:302">
+                    USD · Carteira Strategy
+                  </p>
+                  <p className="font-['Inter:Regular'] font-normal relative shrink-0 text-[12px] text-[color:var(--sa-color-text-secondary,rgba(255,255,255,0.72))] whitespace-nowrap" data-node-id="2334:303">
+                    Saldo parado: US$ 80.000,00
+                  </p>
+                </div>
+                <div className="border-[1.2px] border-[var(--sa-color-border-action,#2b7fff)] border-solid content-stretch flex font-['Inter:Bold'] font-bold gap-[8px] h-[36px] items-center leading-[normal] px-[12px] relative rounded-[8px] shrink-0 w-full" data-node-id="2334:304" style={{ backgroundImage: "linear-gradient(182.02101933421835deg, rgba(0, 0, 0, 0.118) 0.52072%, rgba(0, 0, 0, 0.039) 51.124%, rgba(0, 0, 0, 0.02) 99.479%), linear-gradient(182.02101933421835deg, rgba(0, 0, 0, 0.078) 0.52072%, rgba(0, 0, 0, 0.039) 51.124%, rgba(0, 0, 0, 0.01) 99.479%)" }} data-name="Input">
+                  <p className="relative shrink-0 text-[12px] text-[color:var(--sa-color-text-muted,rgba(255,255,255,0.6))] whitespace-nowrap" data-node-id="2334:305">
+                    US$
+                  </p>
+                  <p className="flex-[1_0_0] min-w-px relative text-[14px] text-[color:var(--sa-color-text-primary,white)]" data-node-id="2334:306">
+                    60.000,00
+                  </p>
+                </div>
+                <p className="font-['Inter:Regular'] font-normal leading-[18px] relative shrink-0 text-[12px] text-[color:var(--sa-color-text-secondary,rgba(255,255,255,0.72))] w-full" data-node-id="2334:307">
+                  × 5,0000 (PTAX de venda de 13/11/2026) = R$ 300.000,00
+                </p>
+                <div className="content-stretch flex items-center justify-between leading-[normal] relative shrink-0 text-[12px] text-[color:var(--sa-color-text-muted,rgba(255,255,255,0.6))] w-full whitespace-nowrap" data-node-id="2334:308" data-name="rodapé">
+                  <p className="font-['Inter:Regular'] font-normal relative shrink-0" data-node-id="2334:309">
+                    Saldo parado após: US$ 20.000,00
+                  </p>
+                  <p className="font-['Inter:Medium'] font-medium relative shrink-0" data-node-id="2334:310">
+                    Remover
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div className="border-[0.8px] border-[var(--sa-color-border-default,rgba(255,255,255,0.2))] border-dashed relative rounded-[8px] shrink-0 w-full" data-node-id="2334:311" data-name="Adicionar moeda">
+              <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex gap-[8px] items-center justify-center px-[12px] py-[8px] relative size-full">
+                <div className="relative shrink-0 size-[16px]" data-node-id="2334:312" data-name="Plus">
+                  <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgPlus} />
+                </div>
+                <p className="[word-break:break-word] font-['Inter:Medium'] font-medium leading-[normal] not-italic relative shrink-0 text-[14px] text-[color:var(--sa-color-text-secondary,rgba(255,255,255,0.72))] whitespace-nowrap" data-node-id="2334:315">
+                  Adicionar moeda
+                </p>
+              </div>
+            </div>
+            <div className="bg-[var(--sa-color-bg-surface,rgba(255,255,255,0.06))] border-[0.8px] border-[var(--sa-color-border-default,rgba(255,255,255,0.2))] border-solid relative rounded-[10px] shrink-0 w-full" data-node-id="2334:316" data-name="Conversão para a moeda firmada">
+              <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex flex-col gap-[10px] items-start px-[16px] py-[14px] relative size-full">
+                <div className="content-stretch flex gap-[8px] items-center relative shrink-0 w-full" data-node-id="2334:317" data-name="título · Conversão para a moeda firmada (BRL)">
+                  <div className="relative shrink-0 size-[16px]" data-node-id="2334:318" data-name="ArrowRightLeft">
+                    <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgArrowRightLeft} />
+                  </div>
+                  <p className="[word-break:break-word] font-['Inter:Semi_Bold'] font-semibold leading-[normal] not-italic relative shrink-0 text-[12px] text-[color:var(--sa-color-text-primary,white)] whitespace-nowrap" data-node-id="2334:323">
+                    Conversão para a moeda firmada (BRL)
+                  </p>
+                </div>
+                <div className="content-stretch flex flex-col items-start relative shrink-0 w-full" data-node-id="2334:324" data-name="tabela">
+                  <div className="[word-break:break-word] content-stretch flex font-['Inter:Medium'] font-medium gap-[8px] items-center leading-[normal] not-italic py-[7px] relative shrink-0 text-[12px] text-[color:var(--sa-color-text-muted,rgba(255,255,255,0.6))] w-full" data-node-id="2334:325" data-name="linha · Moeda">
+                    <p className="relative shrink-0 w-[104px]" data-node-id="2334:326">
+                      Origem
+                    </p>
+                    <p className="relative shrink-0 w-[109px]" data-node-id="2334:327">
+                      Valor de origem
+                    </p>
+                    <p className="relative shrink-0 text-right w-[88px]" data-node-id="2334:328">
+                      PTAX (venda)
+                    </p>
+                    <p className="relative shrink-0 text-right w-[104px]" data-node-id="2334:329">
+                      Em BRL
+                    </p>
+                  </div>
+                  <div className="bg-[var(--sa-color-bg-glass-strong,rgba(255,255,255,0.1))] h-px relative shrink-0 w-full" data-node-id="2334:330" data-name="divisor" />
+                  <div className="[word-break:break-word] content-stretch flex gap-[8px] items-center leading-[normal] not-italic py-[7px] relative shrink-0 text-[12px] w-full" data-node-id="2334:331" data-name="linha · USD">
+                    <p className="font-['Inter:Regular'] font-normal relative shrink-0 text-[color:var(--sa-color-text-primary,white)] w-[104px]" data-node-id="2334:332">
+                      USD · Strategy
+                    </p>
+                    <p className="font-['Inter:Regular'] font-normal relative shrink-0 text-[color:var(--sa-color-text-primary,white)] w-[109px]" data-node-id="2334:333">
+                      US$ 60.000,00
+                    </p>
+                    <p className="font-['Inter:Regular'] font-normal relative shrink-0 text-[color:var(--sa-color-text-secondary,rgba(255,255,255,0.72))] text-right w-[88px]" data-node-id="2334:334">
+                      5,0000
+                    </p>
+                    <p className="font-['Inter:Semi_Bold'] font-semibold relative shrink-0 text-[color:var(--sa-color-text-primary,white)] text-right w-[104px]" data-node-id="2334:335">
+                      R$ 300.000,00
+                    </p>
+                  </div>
+                  <div className="bg-[var(--sa-color-bg-glass-strong,rgba(255,255,255,0.1))] h-px relative shrink-0 w-full" data-node-id="2334:336" data-name="divisor" />
+                  <div className="[word-break:break-word] content-stretch flex font-['Inter:Bold'] font-bold items-center justify-between leading-[normal] not-italic pt-[8px] relative shrink-0 text-[color:var(--sa-color-text-primary,white)] w-full whitespace-nowrap" data-node-id="2334:337" data-name="linha · total">
+                    <p className="relative shrink-0 text-[12px]" data-node-id="2334:338">
+                      Total do aporte
+                    </p>
+                    <p className="relative shrink-0 text-[16px]" data-node-id="2334:339">
+                      R$ 300.000,00
+                    </p>
+                  </div>
+                </div>
+                <p className="[word-break:break-word] font-['Inter:Regular'] font-normal leading-[18px] not-italic relative shrink-0 text-[12px] text-[color:var(--sa-color-text-muted,rgba(255,255,255,0.6))] w-full" data-node-id="2334:340">
+                  PTAX de venda do fechamento de 13/11/2026, a última publicada; a mesma taxa vale nos dois sentidos.
+                </p>
+              </div>
+            </div>
+            <div className="relative shrink-0 w-full" data-node-id="2334:368" data-name="Campo · Observação (opcional)">
+              <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex flex-col gap-[8px] items-start relative size-full">
+                <p className="[word-break:break-word] font-['Inter:Medium'] font-medium leading-[normal] not-italic relative shrink-0 text-[14px] text-[color:var(--sa-color-text-primary,white)] whitespace-nowrap" data-node-id="2334:369">
+                  Observação (opcional)
+                </p>
+                <div className="border-[0.8px] border-[rgba(255,255,255,0.12)] border-solid content-stretch flex h-[64px] items-start px-[12px] py-[10px] relative rounded-[8px] shrink-0 w-full" data-node-id="2334:366" style={{ backgroundImage: "linear-gradient(183.3604632297849deg, rgba(0, 0, 0, 0.118) 0.52072%, rgba(0, 0, 0, 0.039) 51.124%, rgba(0, 0, 0, 0.02) 99.479%), linear-gradient(183.3604632297849deg, rgba(0, 0, 0, 0.078) 0.52072%, rgba(0, 0, 0, 0.039) 51.124%, rgba(0, 0, 0, 0.01) 99.479%)" }} data-name="Textarea">
+                  <p className="[word-break:break-word] flex-[1_0_0] font-['Inter:Regular'] font-normal leading-[normal] min-w-px not-italic relative text-[14px] text-[color:var(--sa-color-text-muted,rgba(255,255,255,0.6))]" data-node-id="2334:367">
+                    Informações adicionais sobre este vínculo...
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div className="absolute border-[rgba(255,255,255,0.12)] border-solid border-t-[0.8px] content-stretch flex flex-col items-start left-[-0.2px] pb-[var(--sa-spacing-16,16px)] pt-[var(--sa-spacing-16,16.8px)] px-[var(--sa-spacing-24,24px)] rounded-[8px] top-[791.4px] w-[510.4px]" data-node-id="2325:497" style={{ backgroundImage: "linear-gradient(183.27295796393673deg, rgba(0, 0, 0, 0.118) 0.52072%, rgba(0, 0, 0, 0.039) 51.124%, rgba(0, 0, 0, 0.02) 99.479%), linear-gradient(183.27295796393673deg, rgba(0, 0, 0, 0.078) 0.52072%, rgba(0, 0, 0, 0.039) 51.124%, rgba(0, 0, 0, 0.01) 99.479%)" }} data-name="Container">
+        <div className="relative shrink-0 w-[462px]" data-node-id="2325:498" data-name="Container">
+          <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex gap-[var(--sa-spacing-12,12px)] items-start relative size-full">
+            <div className="bg-[var(--sa-color-bg-surface,rgba(255,255,255,0.06))] border-[0.8px] border-[var(--sa-color-border-default,rgba(255,255,255,0.2))] border-solid flex-[226_0_0] h-[36px] min-w-px relative rounded-[var(--sa-radius-8,8px)]" data-node-id="2325:499" data-name="Botão ação nível 1">
+              <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex items-center justify-center px-[14.8px] py-[var(--sa-spacing-8,8.8px)] relative size-full">
+                <p className="[word-break:break-word] font-['Inter:Medium'] font-medium leading-[20px] not-italic relative shrink-0 text-[14px] text-[color:var(--sa-color-text-secondary,rgba(255,255,255,0.72))] text-center whitespace-nowrap" data-node-id="2325:500">
+                  Voltar
+                </p>
+              </div>
+            </div>
+            <div className="bg-[var(--sa-color-bg-glass,rgba(255,255,255,0.06))] border-[length:var(----sa-stroke-1,1px)] border-[var(--sa-color-border-strong,rgba(255,255,255,0.28))] border-solid flex-[224_0_0] h-[36px] min-w-px relative rounded-[var(--sa-radius-8,8px)]" data-node-id="2325:501" data-name="Botão ação nível 1">
+              <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex items-center justify-center px-[15px] py-[var(--sa-spacing-8,9px)] relative size-full">
+                <p className="[word-break:break-word] font-['Inter:Medium'] font-medium leading-[20px] not-italic relative shrink-0 text-[14px] text-[color:var(--sa-color-text-primary,white)] text-center whitespace-nowrap" data-node-id="2325:502">
+                  Confirmar Vínculo
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div className="absolute content-stretch flex flex-col items-start justify-center left-[478.2px] opacity-70 rounded-[2px] top-[15.8px]" data-node-id="2325:503" data-name="DialogClose">
+        <div className="relative shrink-0 size-[16px]" data-node-id="2325:504" data-name="Icon">
+          <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgIcon} />
+        </div>
+      </div>
+    </div>
+  );
+}
+SUPER CRITICAL: The generated React+Tailwind code MUST be converted to match the target project's technology stack and styling system.
+1. Analyze the target codebase to identify: technology stack, styling approach, component patterns, and design tokens
+2. Convert React syntax to the target framework/library
+3. Transform all Tailwind classes to the target styling system while preserving exact visual design
+4. Follow the project's existing patterns and conventions
+DO NOT install any Tailwind as a dependency unless the user instructs you to do so.
+
+Node ids have been added to the code as data attributes, e.g. `data-node-id="1:2"`.
+The generated code contains image and SVG URL constants, e.g. const image = 'https://www.figma.com/api/mcp/asset/550e8400-e29b-41d4-a716-446655440000.png'. These URLs are temporary download sources and expire after 7 days. Download each asset into the project with curl -L, then replace its URL in the generated code with a reference to the downloaded asset. Never use the temporary URLs as runtime image sources.

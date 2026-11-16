@@ -1,3 +1,4 @@
+import { walletCapitalBlocked } from './contractWalletCapital.js'
 export function positiveAmount(value) {
   if (
     value === null ||
@@ -58,6 +59,7 @@ export function buildContractTerm(term) {
 }
 export function buildDraftPayload(form, term) {
   const allocations = form.clientAllocations || []
+  if (allocations.some((row) => row.walletSources?.length)) throw new Error(walletCapitalBlocked)
   if (allocations.some((p) => !p.clientId))
     throw new Error('Selecione o cliente de cada participação ou remova a linha vazia.')
   if (new Set(allocations.map((p) => p.clientId)).size !== allocations.length)

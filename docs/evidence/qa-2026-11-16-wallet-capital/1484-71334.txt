@@ -1,0 +1,911 @@
+<frame id="1484:71334" name="CT04 · SP · Criar novo contrato · Tela única completa · DESIGN GLASS" x="80" y="80" width="2048" height="3975.800048828125">
+  <frame id="1484:71335" name="Body" x="0" y="0" width="2048" height="720">
+    <frame id="1484:71336" name="Container" x="0" y="0" width="2048" height="3975.800048828125">
+      <frame id="1484:71337" name="Bve" x="0" y="0" width="2048" height="3975.800048828125">
+        <frame id="1484:71338" name="Sidebar" x="0" y="0" width="256" height="720">
+          <frame id="1484:71339" name="Container" x="0" y="0" width="255.1999969482422" height="80">
+            <frame id="1484:71340" name="Heading 1" x="36.599998474121094" y="20.03499984741211" width="182" height="39.130001068115234">
+              <frame id="1484:71341" name="logo · com símbolo" x="0" y="0" width="182" height="39.130001068115234" />
+            </frame>
+          </frame>
+          <frame id="1484:71348" name="ScrollAreaViewport" x="0" y="80" width="255.1999969482422" height="437.20001220703125">
+            <frame id="1484:71349" name="Container" x="0" y="16" width="255.1999969482422" height="237.60000610351562">
+              <frame id="1484:71350" name="Button" x="12" y="0" width="231.1999969482422" height="36">
+                <frame id="1484:71351" name="Users" x="12" y="8" width="20" height="20" />
+                <frame id="1484:71356" name="Text" x="44" y="8" width="56" height="20">
+                  <text id="1484:71357" name="Clientes" x="1" y="0" width="54" height="20" />
+                </frame>
+              </frame>
+              <frame id="1484:71358" name="Button:margin" x="12" y="36" width="231.1999969482422" height="42">
+                <frame id="1484:71359" name="Button" x="0" y="4" width="231.1999969482422" height="38">
+                  <frame id="1484:71360" name="Activity" x="13" y="9" width="20" height="20" />
+                  <frame id="1484:71362" name="Text" x="45" y="9" width="69" height="20">
+                    <text id="1484:71363" name="Contratos" x="1" y="0" width="67" height="20" />
+                  </frame>
+                </frame>
+              </frame>
+              <frame id="1484:71364" name="Button:margin" x="12" y="78" width="231.1999969482422" height="40">
+                <frame id="1484:71365" name="Button" x="0" y="4" width="231.1999969482422" height="36">
+                  <frame id="1484:71366" name="ChartPie" x="12" y="8" width="20" height="20" />
+                  <frame id="1484:71369" name="Text" x="44" y="8" width="54" height="20">
+                    <text id="1484:71370" name="Lógicas" x="1" y="0" width="52" height="20" />
+                  </frame>
+                </frame>
+              </frame>
+              <frame id="1484:71371" name="Button:margin" x="12" y="118" width="231.1999969482422" height="40">
+                <frame id="1484:71372" name="Button" x="0" y="4" width="231.1999969482422" height="36">
+                  <frame id="1484:71373" name="ArrowRightLeft" x="12" y="8" width="20" height="20" />
+                  <frame id="1484:71378" name="Text" x="44" y="8" width="79" height="20">
+                    <text id="1484:71379" name="Transações" x="1" y="0" width="77" height="20" />
+                  </frame>
+                </frame>
+              </frame>
+              <frame id="1484:71380" name="Button:margin" x="12" y="158" width="231.1999969482422" height="40">
+                <frame id="1484:71381" name="Button" x="0" y="4" width="231.1999969482422" height="36">
+                  <frame id="1484:71382" name="Landmark" x="12" y="8" width="20" height="20" />
+                  <frame id="1484:71389" name="Text" x="44" y="8" width="51" height="20">
+                    <text id="1484:71390" name="Crédito" x="1" y="0" width="49" height="20" />
+                  </frame>
+                </frame>
+              </frame>
+              <frame id="1484:71391" name="Button:margin" x="12" y="198" width="231.1999969482422" height="40">
+                <frame id="1484:71392" name="Button" x="0" y="4" width="231.1999969482422" height="36">
+                  <frame id="1484:71393" name="FileText" x="12" y="8" width="20" height="20" />
+                  <frame id="1484:71399" name="Text" x="44" y="8" width="93" height="20">
+                    <text id="1484:71400" name="Comunicados" x="1" y="0" width="91" height="20" />
+                  </frame>
+                </frame>
+              </frame>
+            </frame>
+          </frame>
+          <frame id="1484:71401" name="Container" x="0" y="517.2000122070312" width="255.1999969482422" height="202.8000030517578">
+            <frame id="1484:71402" name="Container" x="0" y="0.800000011920929" width="255.1999969482422" height="202">
+              <frame id="1484:71403" name="Button" x="12" y="12" width="231.1999969482422" height="36">
+                <frame id="1484:71404" name="Settings" x="12" y="8" width="20" height="20" />
+                <frame id="1484:71407" name="Text" x="44" y="8" width="97" height="20">
+                  <text id="1484:71408" name="Configurações" x="0" y="0" width="97" height="20" />
+                </frame>
+              </frame>
+              <frame id="1484:71409" name="Container:margin" x="12" y="48" width="231.1999969482422" height="62">
+                <frame id="1484:71410" name="Container" x="0" y="4" width="231.1999969482422" height="58">
+                  <frame id="1484:71411" name="Avatar" x="13" y="13" width="32" height="32">
+                    <frame id="1484:71412" name="AvatarImage" x="0" y="0" width="32" height="32" />
+                  </frame>
+                  <frame id="1484:71413" name="Container" x="57" y="13.50624942779541" width="161.1999969482422" height="30.98750114440918">
+                    <frame id="1484:71414" name="Paragraph" x="0" y="0" width="161.1999969482422" height="15.987500190734863">
+                      <text id="1484:71415" name="Admin User" x="0" y="0" width="67" height="16" />
+                    </frame>
+                    <frame id="1484:71416" name="Paragraph" x="0" y="15.987500190734863" width="161.1999969482422" height="15">
+                      <text id="1484:71417" name="admin@sa.com" x="0" y="0" width="72" height="15" />
+                    </frame>
+                  </frame>
+                </frame>
+              </frame>
+              <frame id="1484:71418" name="Button:margin" x="12" y="110" width="231.1999969482422" height="40">
+                <frame id="1484:71419" name="Button" x="0" y="4" width="231.1999969482422" height="36">
+                  <frame id="1484:71420" name="Grid3x3" x="12" y="8" width="20" height="20" />
+                  <frame id="1484:71426" name="Text" x="44" y="8" width="102" height="20">
+                    <text id="1484:71427" name="Trocar Sistema" x="1" y="0" width="100" height="20" />
+                  </frame>
+                </frame>
+              </frame>
+              <frame id="1484:71428" name="Button:margin" x="12" y="150" width="231.1999969482422" height="40">
+                <frame id="1484:71429" name="Button" x="0" y="4" width="231.1999969482422" height="36">
+                  <frame id="1484:71430" name="LogOut" x="12" y="8" width="20" height="20" />
+                  <frame id="1484:71434" name="Text" x="44" y="8" width="26" height="20">
+                    <text id="1484:71435" name="Sair" x="0" y="0" width="26" height="20" />
+                  </frame>
+                </frame>
+              </frame>
+            </frame>
+          </frame>
+          <frame id="1484:71436" name="Button" x="243.203125" y="348" width="24" height="24">
+            <frame id="1484:71437" name="ChevronLeft" x="6" y="6" width="12" height="12" />
+          </frame>
+        </frame>
+        <frame id="1484:71439" name="Hfe" x="256" y="0" width="1792" height="3975.800048828125">
+          <frame id="1484:71440" name="Header" x="0" y="0" width="1792" height="80.80000305175781">
+            <frame id="1484:71441" name="Container:margin" x="0" y="0" width="1792" height="80">
+              <frame id="1484:71442" name="Container" x="256" y="0" width="1280" height="80">
+                <frame id="1484:71443" name="Container" x="24" y="18" width="393.9624938964844" height="44">
+                  <frame id="1484:71444" name="Button" x="0" y="4" width="36" height="36">
+                    <frame id="1484:71445" name="ArrowLeft" x="10" y="10" width="16" height="16" />
+                  </frame>
+                  <frame id="1484:71448" name="Container" x="52" y="0" width="341.9624938964844" height="44">
+                    <frame id="1484:71449" name="Heading 1" x="0" y="0" width="341.9624938964844" height="28">
+                      <text id="1484:71450" name="Novo Contrato" x="0" y="0" width="142" height="28" />
+                    </frame>
+                    <frame id="1484:71451" name="Paragraph" x="0" y="28" width="341.9624938964844" height="16">
+                      <text id="1484:71452" name="Preencha os dados para registrar um novo contrato " x="0" y="0" width="367" height="16" />
+                    </frame>
+                  </frame>
+                </frame>
+                <frame id="1484:71453" name="Container" x="860.7999877929688" y="22" width="395.20001220703125" height="36">
+                  <frame id="1484:71454" name="Botão ação nível 1" x="0" y="0" width="89.5999984741211" height="36">
+                    <text id="1484:71455" name="Cancelar" x="14.800000190734863" y="8" width="60" height="20" />
+                  </frame>
+                  <frame id="1484:71456" name="Botão ação nível 1" x="101.5999984741211" y="0" width="141.60000610351562" height="36">
+                    <text id="1484:71457" name="Salvar Rascunho" x="14.800000190734863" y="8" width="112" height="20" />
+                  </frame>
+                  <frame id="1484:71458" name="Botão ação nível 1" x="255.20001220703125" y="0" width="140" height="36">
+                    <text id="1484:71459" name="Criar Contrato" x="22" y="8" width="96" height="20" />
+                  </frame>
+                </frame>
+              </frame>
+            </frame>
+          </frame>
+          <frame id="1484:71460" name="Main Content" x="0" y="80.80000305175781" width="1792" height="3895">
+            <frame id="1484:71461" name="Container:margin" x="24" y="40" width="1744" height="3815">
+              <frame id="1484:71462" name="Container" x="232" y="0" width="1280" height="3815">
+                <frame id="1484:71463" name="Container" x="0" y="0" width="842.60009765625" height="3815">
+                  <frame id="1484:71464" name="Container" x="0" y="0" width="842.60009765625" height="214.60000610351562">
+                    <frame id="1484:71465" name="Container" x="0.800000011920929" y="0.800000011920929" width="841.0001220703125" height="83">
+                      <frame id="1484:71466" name="Container" x="23.999755859375" y="24" width="793.0625" height="28">
+                        <frame id="1484:71467" name="Container" x="0" y="0" width="28" height="28">
+                          <frame id="1484:71468" name="FileText" x="6" y="6" width="16" height="16" />
+                        </frame>
+                        <frame id="1484:71474" name="Heading 4" x="36" y="2" width="163" height="24">
+                          <text id="1484:71475" name="Informações Básicas" x="0" y="0" width="163" height="24" />
+                        </frame>
+                      </frame>
+                    </frame>
+                    <frame id="1484:71476" name="Container" x="0.800000011920929" y="107.80000305175781" width="841.0001220703125" height="106">
+                      <frame id="1484:71477" name="Label" x="24" y="24" width="793.0001220703125" height="14">
+                        <text id="1484:71478" name="Nome do Contrato" x="0" y="0" width="124" height="14" />
+                      </frame>
+                      <frame id="1484:71479" name="Text Input:margin" x="24" y="38" width="793.0001220703125" height="44">
+                        <frame id="1484:71480" name="Text Input" x="0" y="8" width="793.0625" height="36">
+                          <text id="1484:71481" name="Ex: Contrato Alpha 2026-Q1" x="12.800000190734863" y="9.5" width="767.4625244140625" height="17" />
+                        </frame>
+                      </frame>
+                    </frame>
+                  </frame>
+                  <frame id="1484:71482" name="Container:margin" x="0" y="214.60000610351562" width="842.60009765625" height="348.1875">
+                    <frame id="1484:71483" name="Container" x="0" y="32" width="842.60009765625" height="316.1875">
+                      <frame id="1484:71484" name="Container" x="0.800000011920929" y="0.800000011920929" width="841.06201171875" height="83">
+                        <frame id="1484:71485" name="Container" x="23.999755859375" y="24" width="793.0625" height="28">
+                          <frame id="1484:71486" name="Container" x="0" y="0" width="28" height="28">
+                            <frame id="1484:71487" name="Calendar" x="6" y="6" width="16" height="16" />
+                          </frame>
+                          <frame id="1484:71492" name="Heading 4" x="36" y="2" width="140" height="24">
+                            <text id="1484:71493" name="Vigência e Prazos" x="0" y="0" width="140" height="24" />
+                          </frame>
+                        </frame>
+                      </frame>
+                      <frame id="1484:71494" name="Container" x="0.800000011920929" y="107.80000305175781" width="841.06298828125" height="207.58749389648438">
+                        <frame id="1484:71495" name="Container" x="24" y="24" width="384.5249938964844" height="58">
+                          <frame id="1484:71496" name="Label" x="0" y="0" width="384.5249938964844" height="14">
+                            <text id="1484:71497" name="Prazo do Contrato" x="0" y="0" width="122" height="14" />
+                          </frame>
+                          <frame id="1484:71498" name="Container" x="0" y="14" width="384.5249938964844" height="44">
+                            <frame id="1484:71499" name="Number Input" x="0" y="8" width="256.5249938964844" height="36">
+                              <text id="1484:71500" name="5" x="12.800000190734863" y="8" width="230.92498779296875" height="20" />
+                            </frame>
+                            <frame id="1484:71501" name="SlotClone" x="264.5249938964844" y="8" width="120" height="36">
+                              <frame id="1484:71502" name="SelectValue" x="12.800000190734863" y="8" width="34" height="20">
+                                <text id="1484:71503" name="Anos" x="0" y="0" width="34" height="20" />
+                              </frame>
+                              <frame id="1484:71504" name="ChevronDown" x="91.20000457763672" y="10" width="16" height="16" />
+                            </frame>
+                          </frame>
+                        </frame>
+                        <frame id="1484:71506" name="Container" x="432.5252380371094" y="24" width="384.5375061035156" height="58">
+                          <frame id="1484:71507" name="Label" x="0" y="0" width="384.5375061035156" height="14">
+                            <text id="1484:71508" name="Início do Contrato" x="0" y="0" width="120" height="14" />
+                          </frame>
+                          <frame id="1484:71509" name="Date Picker:margin" x="0" y="14" width="384.5375061035156" height="44">
+                            <frame id="1484:71510" name="Date Picker" x="0" y="8" width="384.5375061035156" height="36" />
+                          </frame>
+                        </frame>
+                        <frame id="1484:71511" name="Container" x="24.000244140625" y="106" width="793.0625" height="77.5875015258789">
+                          <frame id="1484:71512" name="Container" x="16.799999237060547" y="16.793750762939453" width="198.10000610351562" height="44">
+                            <frame id="1484:71513" name="Container" x="0" y="2" width="40" height="40">
+                              <frame id="1484:71514" name="Clock" x="10" y="10" width="20" height="20" />
+                            </frame>
+                            <frame id="1484:71517" name="Container" x="52" y="0" width="146.10000610351562" height="44">
+                              <frame id="1484:71518" name="Container" x="0" y="0" width="146.10000610351562" height="16">
+                                <text id="1484:71519" name="Previsão de Término" x="0" y="0" width="150" height="16" />
+                              </frame>
+                              <frame id="1484:71520" name="Container" x="0" y="16" width="146.10000610351562" height="28">
+                                <text id="1484:71521" name="24/08/2031" x="0" y="0" width="106" height="28" />
+                              </frame>
+                            </frame>
+                          </frame>
+                          <frame id="1484:71522" name="Container" x="576.2625122070312" y="22.793750762939453" width="200" height="32">
+                            <text id="1484:71523" name="Calculado automaticamente com base no prazo seleci" x="0" y="0" width="200" height="32" />
+                          </frame>
+                        </frame>
+                      </frame>
+                    </frame>
+                  </frame>
+                  <frame id="1484:71524" name="Container:margin" x="0" y="562.7874755859375" width="842.60009765625" height="896.574951171875">
+                    <frame id="1484:71525" name="Container" x="0" y="32" width="842.60009765625" height="864.574951171875">
+                      <frame id="1484:71526" name="Container" x="0.800000011920929" y="0.800000011920929" width="841.0001220703125" height="83">
+                        <frame id="1484:71527" name="Container" x="23.999755859375" y="24" width="793.0625" height="28">
+                          <frame id="1484:71528" name="Container" x="0" y="0" width="28" height="28">
+                            <frame id="1484:71529" name="Coins" x="6" y="6" width="16" height="16" />
+                          </frame>
+                          <frame id="1484:71534" name="Heading 4" x="36" y="2" width="153" height="24">
+                            <text id="1484:71535" name="Financeiro e Moeda" x="0" y="0" width="153" height="24" />
+                          </frame>
+                        </frame>
+                      </frame>
+                      <frame id="1484:71536" name="Container" x="0.800000011920929" y="107.80000305175781" width="841.0001220703125" height="755.9749755859375">
+                        <frame id="1484:71537" name="Container" x="23.96856689453125" y="24" width="793.06298828125" height="89.98750305175781">
+                          <frame id="1484:71538" name="Container" x="0" y="0" width="384.5249938964844" height="89.98750305175781">
+                            <frame id="1484:71539" name="Label" x="0" y="0" width="384.5249938964844" height="14">
+                              <text id="1484:71540" name="Moeda Firmada" x="0" y="0" width="104" height="14" />
+                            </frame>
+                            <frame id="1484:71541" name="SlotClone:margin" x="0" y="14" width="384.5249938964844" height="44">
+                              <frame id="1484:71542" name="SlotClone" x="0" y="8" width="384.5249938964844" height="36">
+                                <frame id="1484:71543" name="SelectValue" x="12.800000190734863" y="4" width="160" height="28">
+                                  <frame id="1484:71544" name="SelectItemText" x="0" y="0" width="160" height="28">
+                                    <frame id="1484:71545" name="Text" x="0" y="0" width="18" height="28">
+                                      <text id="1484:71546" name="🇧🇷" x="0" y="0" width="18" height="28" />
+                                    </frame>
+                                    <frame id="1484:71547" name="Text" x="26" y="4" width="95" height="20">
+                                      <text id="1484:71548" name="Real Brasileiro" x="0" y="0" width="95" height="20" />
+                                    </frame>
+                                    <frame id="1484:71549" name="Text" x="129" y="6" width="31" height="16">
+                                      <text id="1484:71550" name="(BRL)" x="0" y="0" width="31" height="16" />
+                                    </frame>
+                                  </frame>
+                                </frame>
+                                <frame id="1484:71551" name="ChevronDown" x="355.7249755859375" y="10" width="16" height="16" />
+                              </frame>
+                            </frame>
+                          </frame>
+                          <frame id="1484:71553" name="Container" x="408.5252380371094" y="0" width="384.5375061035156" height="89.98750305175781">
+                            <frame id="1484:71554" name="Label" x="0" y="0" width="384.5375061035156" height="14">
+                              <text id="1484:71555" name="Capital Inicial Contratual" x="0" y="0" width="164" height="14" />
+                              <frame id="1484:71556" name="Text" x="172" y="0" width="12" height="14" hidden="true">
+                                <text id="1484:71557" name="*" x="4" y="0" width="8" height="14" />
+                              </frame>
+                            </frame>
+                            <frame id="1484:71558" name="Container" x="0" y="14" width="384.5375061035156" height="52">
+                              <frame id="1484:71559" name="Text Input" x="0" y="8" width="384.5375061035156" height="44">
+                                <text id="1484:71560" name="0,00" x="48.79999923706055" y="13.5" width="322.9375" height="17" />
+                              </frame>
+                              <text id="1484:71561" name="R$" x="11.828125" y="18" width="21" height="24" />
+                            </frame>
+                            <frame id="1484:71562" name="Paragraph" x="0" y="66" width="384.5375061035156" height="24">
+                              <text id="1484:71563" name="Este valor será distribuído entre os clientes vinc" x="0" y="8" width="304" height="16" />
+                            </frame>
+                          </frame>
+                        </frame>
+                        <frame id="1484:71564" name="Separator:margin" x="24" y="113.98750305175781" width="793.0625" height="25">
+                          <frame id="1484:71565" name="Separator" x="0" y="24" width="793.0625" height="1" />
+                        </frame>
+                        <frame id="1484:71566" name="Container" x="24" y="138.9875030517578" width="793.0001220703125" height="236.39999389648438">
+                          <frame id="1484:71567" name="Label" x="0" y="24" width="793.0001220703125" height="20">
+                            <text id="1484:71568" name="Origem do Capital Inicial *" x="0" y="0" width="178" height="20" />
+                          </frame>
+                          <frame id="1484:71569" name="SlotClone:margin" x="0" y="44" width="793.0001220703125" height="192.39999389648438">
+                            <frame id="1484:71570" name="SlotClone" x="-0.03094482421875" y="12" width="793.06201171875" height="180.39999389648438">
+                              <frame id="1484:71571" name="Container" x="-0.000244140625" y="0" width="793.0625" height="180.39999389648438">
+                                <frame id="1484:71572" name="Container" x="0" y="0" width="793.0625" height="74.20000457763672">
+                                  <frame id="1484:71573" name="Radio:margin" x="17.600000381469727" y="17.600000381469727" width="28" height="20">
+                                    <frame id="1484:71574" name="Radio" x="0" y="4" width="16" height="16" />
+                                  </frame>
+                                  <frame id="1484:71578" name="Label" x="45.599998474121094" y="17.600000381469727" width="729.8624877929688" height="39">
+                                    <frame id="1484:71579" name="Container" x="0" y="3.5" width="204" height="32">
+                                      <text id="1484:71580" name="Atribuir valor do contrato ao cliente/clientes" x="0" y="0" width="204" height="28" />
+                                    </frame>
+                                    <frame id="1484:71581" name="Container" x="212" y="0" width="519" height="39">
+                                      <text id="1484:71582" name="O capital inicial informado será distribuído entre" x="0" y="0" width="519" height="39" />
+                                    </frame>
+                                  </frame>
+                                </frame>
+                                <frame id="1484:71583" name="Container:margin" x="0" y="74.20000457763672" width="793.0625" height="106.19999694824219">
+                                  <frame id="1484:71584" name="Container" x="0" y="12" width="793.0625" height="94.19999694824219">
+                                    <frame id="1484:71585" name="Radio:margin" x="17.600000381469727" y="17.600000381469727" width="28" height="20">
+                                      <frame id="2355:377" name="Radio" x="0" y="4" width="16" height="16">
+                                        <frame id="2355:378" name="Presence" x="0.7999995350837708" y="7.999950408935547" width="14.40000057220459" height="0.00009999999747378752">
+                                          <frame id="2355:379" name="Circle" x="3.20001220703125" y="-4" width="8" height="8" />
+                                        </frame>
+                                      </frame>
+                                    </frame>
+                                    <frame id="1484:71587" name="Label" x="45.599998474121094" y="17.600000381469727" width="729.8624877929688" height="59">
+                                      <frame id="1484:71588" name="Container" x="0" y="13.5" width="199" height="32">
+                                        <text id="1484:71589" name="Formar capital a partir de carteira do cliente" x="0" y="0" width="199" height="28" />
+                                      </frame>
+                                      <frame id="1484:71590" name="Container" x="207" y="0" width="524" height="59">
+                                        <text id="1484:71591" name="O capital será formado debitando valores das carte" x="0" y="0" width="524" height="59" />
+                                      </frame>
+                                    </frame>
+                                  </frame>
+                                </frame>
+                              </frame>
+                            </frame>
+                          </frame>
+                        </frame>
+                        <frame id="1484:71592" name="Container:margin" x="24" y="375.38751220703125" width="793.0001220703125" height="239.9875030517578">
+                          <frame id="1484:71593" name="Container" x="0" y="24" width="793.0001220703125" height="215.9875030517578">
+                            <frame id="1484:71594" name="Container" x="0" y="0" width="793.0499877929688" height="89.98750305175781">
+                              <frame id="1484:71595" name="Label" x="0" y="0" width="793.0499877929688" height="14">
+                                <text id="1484:71596" name="Capital Consolidado Inicial" x="0" y="0" width="177" height="14" />
+                              </frame>
+                              <frame id="1484:71597" name="Container:margin" x="0" y="14" width="793.0499877929688" height="52">
+                                <frame id="1484:71598" name="Container" x="0" y="8" width="793.0499877929688" height="44">
+                                  <text id="1484:71599" name="R$" x="11.825024604797363" y="10" width="21" height="24" />
+                                  <frame id="1484:71600" name="Text Input" x="0" y="0" width="793.0625" height="44">
+                                    <text id="1484:71601" name="0,00" x="48.79999923706055" y="12" width="731.4625244140625" height="20" />
+                                  </frame>
+                                </frame>
+                              </frame>
+                              <frame id="1484:71602" name="Paragraph" x="0" y="66" width="793.0499877929688" height="24">
+                                <text id="1484:71603" name="Soma dos aportes, já convertidos para a moeda firmada" x="0" y="8" width="318" height="16" />
+                              </frame>
+                            </frame>
+                            <frame id="1484:71604" name="Container" x="0" y="113.98750305175781" width="793.0499877929688" height="102">
+                              <frame id="1484:71605" name="Label" x="0" y="0" width="793.0499877929688" height="14">
+                                <text id="1484:71606" name="Observação Financeira" x="0" y="0" width="154" height="14" />
+                              </frame>
+                              <frame id="1484:71607" name="Text Area:margin" x="0" y="14" width="793.0499877929688" height="88">
+                                <frame id="1484:71608" name="Text Area" x="0" y="8" width="793.0625" height="80">
+                                  <text id="1484:71609" name="Informações adicionais sobre o contrato..." x="12.800000190734863" y="8.800000190734863" width="767.4625244140625" height="20" />
+                                </frame>
+                              </frame>
+                            </frame>
+                          </frame>
+                        </frame>
+                        <frame id="1484:71610" name="Container:margin" x="24" y="615.375" width="793.0001220703125" height="116.5999984741211">
+                          <frame id="1484:71611" name="Container" x="0" y="24" width="793.0001220703125" height="92.5999984741211">
+                            <frame id="1484:71612" name="Container" x="16.799999237060547" y="16.799999237060547" width="759.4625244140625" height="59">
+                              <frame id="1484:71613" name="Info:margin" x="0" y="0" width="20" height="22">
+                                <frame id="1484:71614" name="Info" x="0" y="2" width="20" height="20" />
+                              </frame>
+                              <frame id="1484:71618" name="Container" x="32" y="0" width="727.4625244140625" height="59">
+                                <text id="1484:71619" name="A moeda firmada define a moeda oficial do contrato" x="0" y="0" width="728" height="59" />
+                              </frame>
+                            </frame>
+                          </frame>
+                        </frame>
+                      </frame>
+                    </frame>
+                  </frame>
+                  <frame id="1484:71620" name="Container:margin" x="0" y="1459.3624267578125" width="842.60009765625" height="505.1625061035156">
+                    <frame id="1484:71621" name="Container" x="0" y="32" width="842.60009765625" height="473.1625061035156">
+                      <frame id="1484:71622" name="Container" x="0.800000011920929" y="0.800000011920929" width="841.0001220703125" height="83">
+                        <frame id="1484:71623" name="Container" x="23.999755859375" y="24" width="793.0625" height="28">
+                          <frame id="1484:71624" name="Container" x="0" y="0" width="28" height="28">
+                            <frame id="1484:71625" name="ChartPie" x="6" y="6" width="16" height="16" />
+                          </frame>
+                          <frame id="1484:71628" name="Heading 4" x="36" y="2" width="120" height="24">
+                            <text id="1484:71629" name="Motor Principal" x="0" y="0" width="120" height="24" />
+                          </frame>
+                        </frame>
+                      </frame>
+                      <frame id="1484:71630" name="Container" x="0.800000011920929" y="107.80000305175781" width="841.0001220703125" height="364.5625">
+                        <frame id="1484:71631" name="Container" x="23.96856689453125" y="24" width="793.06298828125" height="219.96249389648438">
+                          <frame id="1484:71632" name="Container" x="0" y="0" width="384.5249938964844" height="105.9749984741211">
+                            <frame id="1484:71633" name="Label" x="0" y="0" width="384.5249938964844" height="14">
+                              <text id="1484:71634" name="Motor Principal" x="0" y="0" width="102" height="14" />
+                              <frame id="1484:71635" name="Text" x="110" y="0" width="8" height="14">
+                                <text id="1484:71636" name="*" x="0" y="0" width="8" height="14" />
+                              </frame>
+                            </frame>
+                            <frame id="1484:71637" name="SlotClone:margin" x="0" y="14" width="384.5249938964844" height="44">
+                              <frame id="1484:71638" name="SlotClone" x="0" y="8" width="384.5249938964844" height="36">
+                                <frame id="1484:71639" name="SelectValue" x="12.800000190734863" y="8" width="120" height="20">
+                                  <text id="1484:71640" name="Selecione o motor" x="0" y="0" width="120" height="20" />
+                                </frame>
+                                <frame id="1484:71641" name="ChevronDown" x="355.7249755859375" y="10" width="16" height="16" />
+                              </frame>
+                            </frame>
+                          </frame>
+                          <frame id="1484:71643" name="Container" x="408.5252380371094" y="0" width="384.5375061035156" height="105.9749984741211">
+                            <frame id="1484:71644" name="Label" x="0" y="0" width="384.5375061035156" height="14">
+                              <text id="1484:71645" name="Índice do Motor na Conexão" x="0" y="0" width="189" height="14" />
+                            </frame>
+                            <frame id="1484:71646" name="Text Input:margin" x="0" y="14" width="384.5375061035156" height="52">
+                              <frame id="1484:71647" name="Text Input" x="0" y="8" width="384.5375061035156" height="44">
+                                <text id="1484:71648" name="Selecione o motor" x="12.800000190734863" y="14" width="358.9375" height="16" />
+                              </frame>
+                            </frame>
+                            <frame id="1484:71649" name="Paragraph" x="0" y="66" width="384.5375061035156" height="40">
+                              <text id="1484:71650" name="Preenchido automaticamente ao selecionar o motor, " x="0" y="8" width="385" height="32" />
+                            </frame>
+                          </frame>
+                          <frame id="1484:71651" name="Container" x="0.000244140625" y="129.97500610351562" width="793.0625" height="89.98750305175781">
+                            <frame id="1484:71652" name="Label" x="0" y="0" width="793.0625" height="14">
+                              <text id="1484:71653" name="Data e Hora de Conexão ao Motor" x="0" y="0" width="227" height="14" />
+                            </frame>
+                            <frame id="1484:71654" name="Container" x="0" y="14" width="793.0625" height="52">
+                              <frame id="1484:71655" name="Text Input" x="0" y="8" width="793.0625" height="44">
+                                <text id="1484:71656" name="25/08/2026 22:35:47" x="12.800000190734863" y="12" width="767.4625244140625" height="20" />
+                              </frame>
+                            </frame>
+                            <frame id="1484:71657" name="Paragraph" x="0" y="66" width="793.0625" height="24">
+                              <text id="1484:71658" name="Data e hora precisas (com segundos) da conexão ao " x="0" y="8" width="674" height="16" />
+                            </frame>
+                          </frame>
+                        </frame>
+                        <frame id="1484:71659" name="Container:margin" x="24" y="243.96249389648438" width="793.0001220703125" height="96.5999984741211">
+                          <frame id="1484:71660" name="Container" x="0" y="24" width="793.0001220703125" height="72.5999984741211">
+                            <frame id="1484:71661" name="Container" x="16.799999237060547" y="16.799999237060547" width="759.4625244140625" height="39">
+                              <frame id="1484:71662" name="Info:margin" x="0" y="0" width="20" height="22">
+                                <frame id="1484:71663" name="Info" x="0" y="2" width="20" height="20" />
+                              </frame>
+                              <frame id="1484:71667" name="Container" x="32" y="0" width="727.4625244140625" height="39">
+                                <text id="1484:71668" name="Importante: O contrato será vinculado ao motor pri" x="0" y="0" width="728" height="39" />
+                              </frame>
+                            </frame>
+                          </frame>
+                        </frame>
+                      </frame>
+                    </frame>
+                  </frame>
+                  <frame id="1484:71669" name="Container:margin" x="0" y="1964.52490234375" width="842.60009765625" height="246.60000610351562">
+                    <frame id="1484:71670" name="Container" x="0" y="32" width="842.60009765625" height="214.60000610351562">
+                      <frame id="1484:71671" name="Container" x="0.800000011920929" y="0.800000011920929" width="841.0001220703125" height="83">
+                        <frame id="1484:71672" name="Container" x="23.999755859375" y="24" width="793.0625" height="28">
+                          <frame id="1484:71673" name="Container" x="0" y="0" width="28" height="28">
+                            <frame id="1484:71674" name="Activity" x="6" y="6" width="16" height="16" />
+                          </frame>
+                          <frame id="1484:71676" name="Heading 4" x="36" y="2" width="102" height="24">
+                            <text id="1484:71677" name="Status Inicial" x="0" y="0" width="102" height="24" />
+                          </frame>
+                        </frame>
+                      </frame>
+                      <frame id="1484:71678" name="Container" x="0.800000011920929" y="107.80000305175781" width="841.0001220703125" height="106">
+                        <frame id="1484:71679" name="Label" x="24" y="24" width="793.0001220703125" height="14">
+                          <text id="1484:71680" name="Status Inicial do Contrato" x="0" y="0" width="170" height="14" />
+                        </frame>
+                        <frame id="1484:71681" name="SlotClone:margin" x="24" y="38" width="793.0001220703125" height="44">
+                          <frame id="1484:71682" name="SlotClone" x="0" y="8" width="793.0625" height="36">
+                            <frame id="1484:71683" name="SelectValue" x="12.800000190734863" y="8" width="65" height="20">
+                              <text id="1484:71684" name="Rascunho" x="0" y="0" width="65" height="20" />
+                            </frame>
+                            <frame id="1484:71685" name="ChevronDown" x="764.2625122070312" y="10" width="16" height="16" />
+                          </frame>
+                        </frame>
+                      </frame>
+                    </frame>
+                  </frame>
+                  <frame id="1484:71687" name="Container:margin" x="0" y="2211.125" width="842.60009765625" height="1087.9375">
+                    <frame id="1484:71688" name="Container" x="0" y="32" width="842.60009765625" height="1055.9375">
+                      <frame id="1484:71689" name="Container" x="0.800000011920929" y="0.800000011920929" width="841.0001220703125" height="96.98750305175781">
+                        <frame id="1484:71690" name="Container" x="23.999755859375" y="24" width="793.0625" height="42">
+                          <frame id="1484:71691" name="Container" x="0" y="0" width="456.1750183105469" height="42">
+                            <frame id="1484:71692" name="Container" x="0" y="7" width="28" height="28">
+                              <frame id="1484:71693" name="ChartColumn" x="6" y="6" width="16" height="16" />
+                            </frame>
+                            <frame id="1484:71698" name="Container" x="36" y="0" width="420.1750183105469" height="42">
+                              <frame id="1484:71699" name="Heading 4" x="0" y="0" width="420.1750183105469" height="24">
+                                <text id="1484:71700" name="Universo de Ativos do Contrato" x="0" y="0" width="244" height="24" />
+                              </frame>
+                              <frame id="1484:71701" name="Paragraph" x="0" y="24" width="420.1750183105469" height="18">
+                                <text id="1484:71702" name="Ativos, bolsas e moedas elegíveis dentro da políti" x="0" y="2" width="452" height="16" />
+                              </frame>
+                            </frame>
+                          </frame>
+                          <frame id="1484:71703" name="Text" x="721.0625" y="9.5" width="72" height="23">
+                            <text id="1484:71704" name="Opcional" x="9.5" y="3.5" width="51" height="16" />
+                          </frame>
+                        </frame>
+                      </frame>
+                      <frame id="1484:71705" name="Container" x="0.800000011920929" y="121.78750610351562" width="841.0001220703125" height="933.3499755859375">
+                        <frame id="1484:71706" name="Container" x="24" y="24" width="793.0001220703125" height="45.599998474121094">
+                          <frame id="1484:71707" name="Paragraph" x="12.800000190734863" y="12.800000190734863" width="767.400146484375" height="20">
+                            <text id="1484:71708" name="Informação: Esta lista representa o universo permi" x="0" y="0" width="745" height="20" />
+                          </frame>
+                        </frame>
+                        <frame id="1484:71709" name="Container" x="24" y="69.5999984741211" width="793.0001220703125" height="452.5625">
+                          <frame id="1484:71710" name="Label" x="0" y="24" width="793.0001220703125" height="20">
+                            <text id="1484:71711" name="Usar conjunto pronto" x="0" y="0" width="145" height="20" />
+                          </frame>
+                          <frame id="1484:71712" name="Container:margin" x="0" y="44" width="793.0001220703125" height="408.5625">
+                            <frame id="1484:71713" name="Container" x="-0.03143310546875" y="12" width="793.06298828125" height="396.5625">
+                              <frame id="1484:71714" name="Container" x="0" y="0.00025177001953125" width="390.5249938964844" height="124.1875">
+                                <frame id="1484:71715" name="Container" x="13.600000381469727" y="13.600000381469727" width="363.3249816894531" height="65">
+                                  <frame id="1484:71716" name="Container" x="0" y="0" width="363.32501220703125" height="20">
+                                    <text id="1484:71717" name="Global Equities" x="0" y="0" width="103" height="20" />
+                                  </frame>
+                                  <frame id="1484:71718" name="Container" x="0" y="20" width="363.32501220703125" height="18">
+                                    <text id="1484:71719" name="320 ativos · 8 mercados · 6 moedas" x="0" y="2" width="203" height="16" />
+                                  </frame>
+                                  <frame id="1484:71720" name="Container" x="0" y="38" width="363.32501220703125" height="19">
+                                    <text id="1484:71721" name="Atualizado em 07/05/2026" x="0" y="4" width="126" height="15" />
+                                  </frame>
+                                </frame>
+                                <frame id="1484:71722" name="Button" x="13.600000381469727" y="78.59999084472656" width="363.32501220703125" height="32">
+                                  <text id="1484:71723" name="Usar conjunto" x="141.16249084472656" y="8" width="81" height="16" />
+                                </frame>
+                              </frame>
+                              <frame id="1484:71724" name="Container" x="402.5252380371094" y="0.00025177001953125" width="390.5375061035156" height="124.1875">
+                                <frame id="1484:71725" name="Container" x="13.600000381469727" y="13.600000381469727" width="363.3374938964844" height="65">
+                                  <frame id="1484:71726" name="Container" x="0" y="0" width="363.3374938964844" height="20">
+                                    <text id="1484:71727" name="EUA — NASDAQ + NYSE" x="0" y="0" width="165" height="20" />
+                                  </frame>
+                                  <frame id="1484:71728" name="Container" x="0" y="20" width="363.3374938964844" height="18">
+                                    <text id="1484:71729" name="180 ativos · 2 mercados · 1 moeda" x="0" y="2" width="193" height="16" />
+                                  </frame>
+                                  <frame id="1484:71730" name="Container" x="0" y="38" width="363.3374938964844" height="19">
+                                    <text id="1484:71731" name="Atualizado em 08/05/2026" x="0" y="4" width="127" height="15" />
+                                  </frame>
+                                </frame>
+                                <frame id="1484:71732" name="Button" x="13.600000381469727" y="78.59999084472656" width="363.3374938964844" height="32">
+                                  <text id="1484:71733" name="Usar conjunto" x="141.16873168945312" y="8" width="81" height="16" />
+                                </frame>
+                              </frame>
+                              <frame id="1484:71734" name="Container" x="0" y="136.18826293945312" width="390.5249938964844" height="124.1875">
+                                <frame id="1484:71735" name="Container" x="13.600000381469727" y="13.600000381469727" width="363.3249816894531" height="65">
+                                  <frame id="1484:71736" name="Container" x="0" y="0" width="363.32501220703125" height="20">
+                                    <text id="1484:71737" name="Cripto — Redes principais" x="0" y="0" width="177" height="20" />
+                                  </frame>
+                                  <frame id="1484:71738" name="Container" x="0" y="20" width="363.32501220703125" height="18">
+                                    <text id="1484:71739" name="45 ativos · 7 mercados · 12 moedas" x="0" y="2" width="200" height="16" />
+                                  </frame>
+                                  <frame id="1484:71740" name="Container" x="0" y="38" width="363.32501220703125" height="19">
+                                    <text id="1484:71741" name="Atualizado em 09/05/2026" x="0" y="4" width="127" height="15" />
+                                  </frame>
+                                </frame>
+                                <frame id="1484:71742" name="Button" x="13.600000381469727" y="78.59999084472656" width="363.32501220703125" height="32">
+                                  <text id="1484:71743" name="Usar conjunto" x="141.16249084472656" y="8" width="81" height="16" />
+                                </frame>
+                              </frame>
+                              <frame id="1484:71744" name="Container" x="402.5252380371094" y="136.18826293945312" width="390.5375061035156" height="124.1875">
+                                <frame id="1484:71745" name="Container" x="13.600000381469727" y="13.600000381469727" width="363.3374938964844" height="65">
+                                  <frame id="1484:71746" name="Container" x="0" y="0" width="363.3374938964844" height="20">
+                                    <text id="1484:71747" name="B3 + NASDAQ" x="0" y="0" width="95" height="20" />
+                                  </frame>
+                                  <frame id="1484:71748" name="Container" x="0" y="20" width="363.3374938964844" height="18">
+                                    <text id="1484:71749" name="210 ativos · 2 mercados · 2 moedas" x="0" y="2" width="201" height="16" />
+                                  </frame>
+                                  <frame id="1484:71750" name="Container" x="0" y="38" width="363.3374938964844" height="19">
+                                    <text id="1484:71751" name="Atualizado em 06/05/2026" x="0" y="4" width="127" height="15" />
+                                  </frame>
+                                </frame>
+                                <frame id="1484:71752" name="Button" x="13.600000381469727" y="78.59999084472656" width="363.3374938964844" height="32">
+                                  <text id="1484:71753" name="Usar conjunto" x="141.16873168945312" y="8" width="81" height="16" />
+                                </frame>
+                              </frame>
+                              <frame id="1484:71754" name="Container" x="0" y="272.3762512207031" width="390.5249938964844" height="124.1875">
+                                <frame id="1484:71755" name="Container" x="13.600000381469727" y="13.600000381469727" width="363.3249816894531" height="65">
+                                  <frame id="1484:71756" name="Container" x="0" y="0" width="363.32501220703125" height="20">
+                                    <text id="1484:71757" name="Mercados Emergentes" x="0" y="0" width="155" height="20" />
+                                  </frame>
+                                  <frame id="1484:71758" name="Container" x="0" y="20" width="363.32501220703125" height="18">
+                                    <text id="1484:71759" name="155 ativos · 5 mercados · 4 moedas" x="0" y="2" width="201" height="16" />
+                                  </frame>
+                                  <frame id="1484:71760" name="Container" x="0" y="38" width="363.32501220703125" height="19">
+                                    <text id="1484:71761" name="Atualizado em 05/05/2026" x="0" y="4" width="126" height="15" />
+                                  </frame>
+                                </frame>
+                                <frame id="1484:71762" name="Button" x="13.600000381469727" y="78.59999084472656" width="363.32501220703125" height="32">
+                                  <text id="1484:71763" name="Usar conjunto" x="141.16249084472656" y="8" width="81" height="16" />
+                                </frame>
+                              </frame>
+                            </frame>
+                          </frame>
+                        </frame>
+                        <frame id="1484:71764" name="Separator:margin" x="24" y="522.1624755859375" width="793.0625" height="25">
+                          <frame id="1484:71765" name="Separator" x="0" y="24" width="793.0625" height="1" />
+                        </frame>
+                        <frame id="1484:71766" name="Container" x="24" y="547.1624755859375" width="793.0001220703125" height="56">
+                          <frame id="1484:71767" name="Container" x="0" y="24" width="440.8000183105469" height="32">
+                            <frame id="1484:71768" name="Button" x="0" y="0" width="147.60000610351562" height="32">
+                              <frame id="1484:71769" name="Plus" x="10.800000190734863" y="8" width="16" height="16" />
+                              <text id="1484:71772" name="Adicionar Ativo" x="34.79999923706055" y="6" width="102" height="20" />
+                            </frame>
+                            <frame id="1484:71773" name="Button" x="155.60000610351562" y="0" width="142.60000610351562" height="32">
+                              <frame id="1484:71774" name="Upload" x="10.800000190734863" y="8" width="16" height="16" />
+                              <text id="1484:71778" name="Importar Excel" x="34.79999923706055" y="6" width="97" height="20" />
+                            </frame>
+                            <frame id="1484:71779" name="Button" x="306.20001220703125" y="0" width="134.60000610351562" height="32">
+                              <frame id="1484:71780" name="Upload" x="10.800000190734863" y="8" width="16" height="16" />
+                              <text id="1484:71784" name="Importar PDF" x="34.79999923706055" y="6" width="89" height="20" />
+                            </frame>
+                          </frame>
+                          <frame id="1484:71785" name="Button" x="612.400146484375" y="24" width="180.60000610351562" height="32">
+                            <frame id="1484:71786" name="Download" x="10.800000190734863" y="8" width="16" height="16" />
+                            <text id="1484:71790" name="Baixar modelo Excel" x="34.79999923706055" y="6" width="135" height="20" />
+                          </frame>
+                        </frame>
+                        <frame id="1484:71791" name="Container:margin" x="24" y="603.1624755859375" width="793.0001220703125" height="139.1999969482422">
+                          <frame id="1484:71792" name="Container" x="0" y="24" width="793.0001220703125" height="115.19999694824219">
+                            <frame id="1484:71793" name="ChartColumn:margin" x="25.600006103515625" y="25.600000381469727" width="741.8001098632812" height="40">
+                              <frame id="1484:71794" name="ChartColumn" x="350.9000549316406" y="0" width="40" height="40" />
+                            </frame>
+                            <frame id="1484:71799" name="Paragraph" x="25.600000381469727" y="65.5999984741211" width="741.8001098632812" height="24">
+                              <text id="1484:71800" name="Nenhum ativo elegível cadastrado para este contrat" x="218.90005493164062" y="8" width="304" height="16" />
+                            </frame>
+                          </frame>
+                        </frame>
+                        <frame id="1484:71801" name="Separator:margin" x="24" y="742.3624877929688" width="793.0625" height="25">
+                          <frame id="1484:71802" name="Separator" x="0" y="24" width="793.0625" height="1" />
+                        </frame>
+                        <frame id="1484:71803" name="Container" x="24" y="767.3624877929688" width="793.0001220703125" height="141.9875030517578">
+                          <frame id="1484:71804" name="Container" x="0" y="24" width="793.0001220703125" height="38">
+                            <frame id="1484:71805" name="Label" x="0" y="0" width="793.0001220703125" height="20">
+                              <text id="1484:71806" name="Composição Estratégica" x="0" y="0" width="168" height="20" />
+                            </frame>
+                            <frame id="1484:71807" name="Paragraph" x="0" y="20" width="793.0001220703125" height="18">
+                              <text id="1484:71808" name="Defina a distribuição estratégica do contrato por " x="0" y="2" width="382" height="16" />
+                            </frame>
+                          </frame>
+                          <frame id="1484:71809" name="Container:margin" x="0" y="62" width="793.0001220703125" height="79.98750305175781">
+                            <frame id="1484:71810" name="Container" x="0" y="16" width="793.0001220703125" height="63.98749923706055">
+                              <frame id="1484:71811" name="Container" x="0.00025177001953125" y="0" width="253.6875" height="63.98749923706055">
+                                <frame id="1484:71812" name="Label" x="0" y="0" width="253.6875" height="16">
+                                  <text id="1484:71813" name="Intradiário (%)" x="0" y="0" width="81" height="16" />
+                                </frame>
+                                <frame id="1484:71814" name="Text Input:margin" x="0" y="16" width="253.6875" height="48">
+                                  <frame id="1484:71815" name="Text Input" x="0" y="8" width="253.6875" height="40">
+                                    <text id="1484:71816" name="0" x="12.800000190734863" y="11.5" width="228.08749389648438" height="17" />
+                                  </frame>
+                                </frame>
+                              </frame>
+                              <frame id="1484:71817" name="Container" x="269.688232421875" y="0" width="253.6875" height="63.98749923706055">
+                                <frame id="1484:71818" name="Label" x="0" y="0" width="253.6875" height="16">
+                                  <text id="1484:71819" name="Núcleo (%)" x="0" y="0" width="63" height="16" />
+                                </frame>
+                                <frame id="1484:71820" name="Text Input:margin" x="0" y="16" width="253.6875" height="48">
+                                  <frame id="1484:71821" name="Text Input" x="0" y="8" width="253.6875" height="40">
+                                    <text id="1484:71822" name="0" x="12.800000190734863" y="11.5" width="228.08749389648438" height="17" />
+                                  </frame>
+                                </frame>
+                              </frame>
+                              <frame id="1484:71823" name="Container" x="539.376220703125" y="0" width="253.6875" height="63.98749923706055">
+                                <frame id="1484:71824" name="Label" x="0" y="0" width="253.6875" height="16">
+                                  <text id="1484:71825" name="Tática (%)" x="0" y="0" width="58" height="16" />
+                                </frame>
+                                <frame id="1484:71826" name="Text Input:margin" x="0" y="16" width="253.6875" height="48">
+                                  <frame id="1484:71827" name="Text Input" x="0" y="8" width="253.6875" height="40">
+                                    <text id="1484:71828" name="0" x="12.800000190734863" y="11.5" width="228.08749389648438" height="17" />
+                                  </frame>
+                                </frame>
+                              </frame>
+                            </frame>
+                          </frame>
+                        </frame>
+                      </frame>
+                    </frame>
+                  </frame>
+                  <frame id="1484:71829" name="Container:margin" x="0" y="3299.0625" width="842.60009765625" height="410.5874938964844">
+                    <frame id="1484:71830" name="Container" x="0" y="32" width="842.60009765625" height="378.5874938964844">
+                      <frame id="1484:71831" name="Container" x="0.800000011920929" y="0.800000011920929" width="841.0001220703125" height="96.98750305175781">
+                        <frame id="1484:71832" name="Container" x="23.999755859375" y="24" width="793.0625" height="42">
+                          <frame id="1484:71833" name="Container" x="0" y="0" width="268.11248779296875" height="42">
+                            <frame id="1484:71834" name="Container" x="0" y="7" width="28" height="28">
+                              <frame id="1484:71835" name="Upload" x="6" y="6" width="16" height="16" />
+                            </frame>
+                            <frame id="1484:71839" name="Container" x="36" y="0" width="232.1125030517578" height="42">
+                              <frame id="1484:71840" name="Heading 4" x="0" y="0" width="232.1125030517578" height="24">
+                                <text id="1484:71841" name="Documentos do Contrato" x="0" y="0" width="197" height="24" />
+                              </frame>
+                              <frame id="1484:71842" name="Paragraph" x="0" y="24" width="232.1125030517578" height="18">
+                                <text id="1484:71843" name="Repositório de arquivos digitais do contrato" x="0" y="2" width="247" height="16" />
+                              </frame>
+                            </frame>
+                          </frame>
+                          <frame id="1484:71844" name="Text" x="721.0625" y="9.5" width="72" height="23">
+                            <text id="1484:71845" name="Opcional" x="9.5" y="3.5" width="51" height="16" />
+                          </frame>
+                        </frame>
+                      </frame>
+                      <frame id="1484:71846" name="Container" x="0.800000011920929" y="121.78750610351562" width="841.0001220703125" height="256">
+                        <frame id="1484:71847" name="Container" x="23.96856689453125" y="24" width="793.06298828125" height="208">
+                          <frame id="1484:71848" name="Button" x="0" y="0" width="388.5249938964844" height="96">
+                            <frame id="1484:71849" name="Upload:margin" x="186.2624969482422" y="24" width="16" height="24">
+                              <frame id="1484:71850" name="Upload" x="0" y="0" width="16" height="16" />
+                            </frame>
+                            <text id="1484:71854" name="Contrato Digitalizado" x="133.2624969482422" y="56" width="122" height="16" />
+                          </frame>
+                          <frame id="1484:71855" name="Button" x="404.5252380371094" y="0" width="388.5375061035156" height="96">
+                            <frame id="1484:71856" name="Upload:margin" x="186.2687530517578" y="24" width="16" height="24">
+                              <frame id="1484:71857" name="Upload" x="0" y="0" width="16" height="16" />
+                            </frame>
+                            <text id="1484:71861" name="Documento Complementar" x="116.76875305175781" y="56" width="155" height="16" />
+                          </frame>
+                          <frame id="1484:71862" name="Button" x="0" y="112" width="388.5249938964844" height="96">
+                            <frame id="1484:71863" name="Upload:margin" x="186.2624969482422" y="24" width="16" height="24">
+                              <frame id="1484:71864" name="Upload" x="0" y="0" width="16" height="16" />
+                            </frame>
+                            <text id="1484:71868" name="Termo de Adesão" x="143.7624969482422" y="56" width="101" height="16" />
+                          </frame>
+                          <frame id="1484:71869" name="Button" x="404.5252380371094" y="112" width="388.5375061035156" height="96">
+                            <frame id="1484:71870" name="Upload:margin" x="186.2687530517578" y="24" width="16" height="24">
+                              <frame id="1484:71871" name="Upload" x="0" y="0" width="16" height="16" />
+                            </frame>
+                            <text id="1484:71875" name="Outros Documentos" x="136.7687530517578" y="56" width="115" height="16" />
+                          </frame>
+                        </frame>
+                      </frame>
+                    </frame>
+                  </frame>
+                  <frame id="1484:71876" name="Container:margin" x="0" y="3709.64990234375" width="842.60009765625" height="104.5999984741211">
+                    <frame id="1484:71877" name="Container" x="0" y="32" width="842.60009765625" height="72.5999984741211">
+                      <frame id="1484:71878" name="Container" x="16.799999237060547" y="16.799999237060547" width="809.0625" height="39">
+                        <frame id="1484:71879" name="CircleAlert:margin" x="0" y="0" width="20" height="22">
+                          <frame id="1484:71880" name="CircleAlert" x="0" y="2" width="20" height="20" />
+                        </frame>
+                        <frame id="1484:71884" name="Container" x="32" y="0" width="777.0625" height="39">
+                          <text id="1484:71885" name="Auditoria: A criação do contrato registrará client" x="0" y="0" width="778" height="39" />
+                        </frame>
+                      </frame>
+                    </frame>
+                  </frame>
+                </frame>
+                <frame id="1484:71886" name="Container" x="874.6000366210938" y="0" width="405.29998779296875" height="3815">
+                  <frame id="1484:71887" name="Container" x="0" y="0" width="405.29998779296875" height="417.20001220703125">
+                    <frame id="1484:71888" name="Container" x="0.800000011920929" y="0.800000011920929" width="403.6999816894531" height="82.80000305175781">
+                      <frame id="1484:71889" name="Container" x="24" y="24" width="355.7250061035156" height="28">
+                        <frame id="1484:71890" name="Container" x="0" y="0" width="193" height="28">
+                          <frame id="1484:71891" name="Container" x="0" y="0" width="28" height="28">
+                            <frame id="1484:71892" name="Users" x="6" y="6" width="16" height="16" />
+                          </frame>
+                          <frame id="1484:71897" name="Heading 4" x="36" y="2" width="157" height="24">
+                            <text id="1484:71898" name="Clientes Vinculados" x="0" y="0" width="157" height="24" />
+                          </frame>
+                        </frame>
+                        <frame id="1484:71899" name="Text" x="326.7250061035156" y="2.5" width="29" height="23">
+                          <text id="1484:71900" name="0" x="9.5" y="3.5" width="8" height="16" />
+                        </frame>
+                      </frame>
+                      <rounded-rectangle id="1484:71901" name="border/bottom · cabeçalho" x="0" y="64" width="404" height="1" />
+                    </frame>
+                    <frame id="1484:71902" name="Container" x="0.800000011920929" y="107.60000610351562" width="403.6999816894531" height="308.8000183105469">
+                      <frame id="1484:71903" name="ScrollArea:margin" x="16" y="16.000015258789062" width="371.7250061035156" height="200">
+                        <frame id="1484:71904" name="ScrollArea" x="-8" y="0" width="387.7250061035156" height="200">
+                          <frame id="1484:71905" name="ScrollAreaViewport" x="8" y="0" width="371.7250061035156" height="160">
+                            <frame id="1484:71906" name="Container" x="0" y="0" width="371.7250061035156" height="160">
+                              <frame id="1484:71907" name="Users:margin" x="169.8625030517578" y="40" width="32" height="40">
+                                <frame id="1484:71908" name="Users" x="0" y="0" width="32" height="32" />
+                              </frame>
+                              <frame id="1484:71913" name="Text" x="-24.137496948242188" y="80" width="420" height="40">
+                                <text id="1484:71914" name="Nenhum cliente vinculado. Escolha antes a moeda firmada e adicione pelo menos um." x="16" y="0" width="388" height="40" />
+                              </frame>
+                            </frame>
+                          </frame>
+                        </frame>
+                      </frame>
+                      <frame id="1484:71915" name="Container:margin" x="16" y="216.00003051757812" width="371.6999816894531" height="68.80000305175781">
+                        <frame id="1484:71916" name="Container" x="0" y="16" width="371.7250061035156" height="52.79999923706055">
+                          <frame id="1484:71917" name="Button" x="0" y="16.800018310546875" width="371.7250061035156" height="36">
+                            <frame id="1484:71918" name="Plus:margin" x="112.36250305175781" y="10" width="24" height="16">
+                              <frame id="1484:71919" name="Plus" x="0" y="0" width="16" height="16" />
+                            </frame>
+                            <text id="1484:71922" name="Adicionar Cliente" x="144.3625030517578" y="8" width="115" height="20" />
+                          </frame>
+                        </frame>
+                      </frame>
+                    </frame>
+                  </frame>
+                  <frame id="1484:71923" name="Container:margin" x="0" y="417.20001220703125" width="405.29998779296875" height="631.1375122070312">
+                    <frame id="1484:71924" name="Container" x="0" y="24" width="405.29998779296875" height="607.1375122070312">
+                      <frame id="1484:71925" name="Container" x="0.800000011920929" y="0.800000011920929" width="403.6999816894531" height="83">
+                        <frame id="1484:71926" name="Container" x="24" y="24" width="355.7250061035156" height="28">
+                          <frame id="1484:71927" name="Container" x="0" y="0" width="28" height="28">
+                            <frame id="1484:71928" name="FileText" x="6" y="6" width="16" height="16" />
+                          </frame>
+                          <frame id="1484:71934" name="Heading 4" x="36" y="2" width="161" height="24">
+                            <text id="1484:71935" name="Resumo do Contrato" x="0" y="0" width="161" height="24" />
+                          </frame>
+                        </frame>
+                      </frame>
+                      <frame id="1484:71936" name="Container" x="0.800000011920929" y="107.80000305175781" width="403.6999816894531" height="498.5375061035156">
+                        <frame id="1484:71937" name="Container" x="16" y="16" width="371.6999816894531" height="36">
+                          <frame id="1484:71938" name="Container" x="0" y="0" width="371.6999816894531" height="16">
+                            <text id="1484:71939" name="Nome" x="0" y="0" width="39" height="16" />
+                          </frame>
+                          <frame id="1484:71940" name="Container" x="0" y="16" width="371.6999816894531" height="20">
+                            <text id="1484:71941" name="—" x="0" y="4" width="12" height="16" />
+                          </frame>
+                        </frame>
+                        <frame id="1484:71942" name="Separator:margin" x="16" y="52" width="371.7250061035156" height="13">
+                          <frame id="1484:71943" name="Separator" x="0" y="12" width="371.7250061035156" height="1" />
+                        </frame>
+                        <frame id="1484:71944" name="Container" x="16" y="65" width="371.6999816894531" height="44">
+                          <frame id="1484:71945" name="Container" x="0" y="8" width="371.6999816894531" height="16">
+                            <text id="1484:71946" name="Clientes Vinculados" x="0" y="0" width="154" height="16" />
+                          </frame>
+                          <frame id="1484:71947" name="Container" x="0" y="24" width="371.6999816894531" height="20">
+                            <text id="1484:71948" name="0 cliente(s)" x="0" y="4" width="67" height="16" />
+                          </frame>
+                        </frame>
+                        <frame id="1484:71949" name="Container:margin" x="16" y="109" width="371.6999816894531" height="47.974998474121094">
+                          <frame id="1484:71950" name="Container" x="-0.0130157470703125" y="12" width="371.72601318359375" height="35.974998474121094">
+                            <frame id="1484:71951" name="Container" x="0.00025177001953125" y="-0.0000019073486328125" width="179.8625030517578" height="35.97500228881836">
+                              <frame id="1484:71952" name="Container" x="0" y="0" width="179.8625030517578" height="16">
+                                <text id="1484:71953" name="Capital Inicial" x="0" y="0" width="107" height="16" />
+                              </frame>
+                              <frame id="1484:71954" name="Container" x="0" y="16" width="179.8625030517578" height="20">
+                                <text id="1484:71955" name="R$ 0,00" x="0" y="4" width="46" height="16" />
+                              </frame>
+                            </frame>
+                            <frame id="1484:71956" name="Container" x="191.86325073242188" y="-0.0000019073486328125" width="179.8625030517578" height="35.97500228881836">
+                              <frame id="1484:71957" name="Container" x="0" y="0" width="179.8625030517578" height="16">
+                                <text id="1484:71958" name="Consolidado" x="0" y="0" width="96" height="16" />
+                              </frame>
+                              <frame id="1484:71959" name="Container" x="0" y="16" width="179.8625030517578" height="20">
+                                <text id="1484:71960" name="R$ 0,00" x="0" y="4" width="47" height="16" />
+                              </frame>
+                            </frame>
+                          </frame>
+                        </frame>
+                        <frame id="1484:71961" name="Separator:margin" x="16" y="156.97500610351562" width="371.7250061035156" height="13">
+                          <frame id="1484:71962" name="Separator" x="0" y="12" width="371.7250061035156" height="1" />
+                        </frame>
+                        <frame id="1484:71963" name="Container" x="16" y="169.97500610351562" width="371.6999816894531" height="44">
+                          <frame id="1484:71964" name="Container" x="0" y="8" width="371.6999816894531" height="16">
+                            <text id="1484:71965" name="Moeda Firmada" x="0" y="0" width="111" height="16" />
+                          </frame>
+                          <frame id="1484:71966" name="Container" x="0" y="24" width="371.6999816894531" height="20">
+                            <text id="1484:71967" name="Real Brasileiro" x="0" y="4" width="83" height="16" />
+                          </frame>
+                        </frame>
+                        <frame id="1484:71968" name="Container" x="16" y="213.97500610351562" width="371.6999816894531" height="48">
+                          <frame id="1484:71969" name="Container" x="0" y="12" width="371.6999816894531" height="16">
+                            <text id="1484:71970" name="Origem do Capital" x="0" y="0" width="134" height="16" />
+                          </frame>
+                          <frame id="1484:71971" name="Container" x="0" y="28" width="371.6999816894531" height="20">
+                            <text id="1484:71972" name="Carteira dos clientes" x="0" y="4" width="121" height="16" />
+                          </frame>
+                        </frame>
+                        <frame id="1484:71973" name="Separator:margin" x="16" y="261.9750061035156" width="371.7250061035156" height="13">
+                          <frame id="1484:71974" name="Separator" x="0" y="12" width="371.7250061035156" height="1" />
+                        </frame>
+                        <frame id="1484:71975" name="Container" x="16" y="274.9750061035156" width="371.6999816894531" height="44">
+                          <frame id="1484:71976" name="Container" x="0" y="8" width="371.6999816894531" height="16">
+                            <text id="1484:71977" name="Motor Principal" x="0" y="0" width="119" height="16" />
+                          </frame>
+                          <frame id="1484:71978" name="Container" x="0" y="24" width="371.6999816894531" height="20">
+                            <text id="1484:71979" name="—" x="0" y="4" width="12" height="16" />
+                          </frame>
+                        </frame>
+                        <frame id="1484:71980" name="Container" x="16" y="318.9750061035156" width="371.6999816894531" height="45">
+                          <frame id="1484:71981" name="Container" x="0" y="12" width="371.6999816894531" height="14">
+                            <text id="1484:71982" name="Data/Hora da Conexão" x="0" y="0" width="140" height="14" />
+                          </frame>
+                          <frame id="1484:71983" name="Container" x="0" y="26" width="371.6999816894531" height="19">
+                            <text id="1484:71984" name="25/08/2026, 22:35:47" x="0" y="4" width="119" height="15" />
+                          </frame>
+                        </frame>
+                        <frame id="1484:71985" name="Separator:margin" x="16" y="363.9750061035156" width="371.7250061035156" height="13">
+                          <frame id="1484:71986" name="Separator" x="0" y="12" width="371.7250061035156" height="1" />
+                        </frame>
+                        <frame id="1484:71987" name="Container:margin" x="16" y="376.9750061035156" width="371.6999816894531" height="43.974998474121094">
+                          <frame id="1484:71988" name="Container" x="-0.0130157470703125" y="8" width="371.72601318359375" height="35.974998474121094">
+                            <frame id="1484:71989" name="Container" x="0.00025177001953125" y="-0.0000019073486328125" width="179.8625030517578" height="35.97500228881836">
+                              <frame id="1484:71990" name="Container" x="0" y="0" width="179.8625030517578" height="16">
+                                <text id="1484:71991" name="Prazo" x="0" y="0" width="45" height="16" />
+                              </frame>
+                              <frame id="1484:71992" name="Container" x="0" y="16" width="179.8625030517578" height="20">
+                                <text id="1484:71993" name="5 anos" x="0" y="4" width="39" height="16" />
+                              </frame>
+                            </frame>
+                            <frame id="1484:71994" name="Container" x="191.86325073242188" y="-0.0000019073486328125" width="179.8625030517578" height="35.97500228881836">
+                              <frame id="1484:71995" name="Container" x="0" y="0" width="179.8625030517578" height="16">
+                                <text id="1484:71996" name="Término" x="0" y="0" width="60" height="16" />
+                              </frame>
+                              <frame id="1484:71997" name="Container" x="0" y="16" width="179.8625030517578" height="20">
+                                <text id="1484:71998" name="24/08/2031" x="0" y="4" width="70" height="16" />
+                              </frame>
+                            </frame>
+                          </frame>
+                        </frame>
+                        <frame id="1484:71999" name="Container" x="16" y="420.95001220703125" width="371.6999816894531" height="53.587501525878906">
+                          <frame id="1484:72000" name="Container" x="0" y="12" width="371.6999816894531" height="20">
+                            <text id="1484:72001" name="Status Inicial" x="0" y="0" width="102" height="16" />
+                          </frame>
+                          <frame id="1484:72002" name="Container" x="0" y="32" width="371.6999816894531" height="21.587501525878906">
+                            <frame id="1484:72003" name="Text" x="0" y="0.00004863739013671875" width="70.3125" height="21.587499618530273">
+                              <text id="1484:72004" name="Rascunho" x="6.65625" y="2.7937498092651367" width="57" height="16" />
+                            </frame>
+                          </frame>
+                        </frame>
+                      </frame>
+                    </frame>
+                  </frame>
+                </frame>
+              </frame>
+            </frame>
+          </frame>
+        </frame>
+      </frame>
+    </frame>
+  </frame>
+</frame>
+IMPORTANT: The design was too large to fit into context with get_design_context. Instead you have received a sparse metadata response, you MUST call get_design_context on the IDs of the sublayers to get the full code. Split up the calls to ensure the sublayers do not also exceed the context limit.

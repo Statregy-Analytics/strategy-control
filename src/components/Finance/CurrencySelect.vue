@@ -59,10 +59,16 @@ const load = () =>
       ? (await financeGet(`admin/customers/${props.customerId}/wallets`)).data
       : []
   })
-watch([() => props.customerId, () => props.useCatalog], load, { immediate: true })
+watch([() => (props.useCatalog ? null : props.customerId), () => props.useCatalog], load, {
+  immediate: true,
+})
 watch(
-  () => options.value.find((option) => option.id === props.modelValue)?.name || 'BRL',
-  (code) => emit('currency-code', code),
+  () =>
+    options.value.find((option) => option.id === props.modelValue)?.name ||
+    (props.modelValue ? null : 'BRL'),
+  (code) => {
+    if (code) emit('currency-code', code)
+  },
   { immediate: true },
 )
 </script>

@@ -1,0 +1,104 @@
+const imgUsers = "https://www.figma.com/api/mcp/asset/72ab15e2-337b-4153-887c-46a527f8e051.svg";
+const imgUsers1 = "https://www.figma.com/api/mcp/asset/beaca59e-d2e3-4ef6-984a-a4e83622fb13.svg";
+const imgPlus = "https://www.figma.com/api/mcp/asset/9b37cfbd-97b1-44e2-b0e0-cc7af75b929f.svg";
+
+export default function Container() {
+  return (
+    <div className="backdrop-blur-[20px] border-[0.8px] border-[rgba(255,255,255,0.12)] border-solid content-stretch drop-shadow-[4px_4px_6px_rgba(0,0,0,0.13)] flex flex-col gap-[var(--sa-spacing-24,24px)] items-start p-[0.8px] relative rounded-[var(--sa-radius-14,14px)] size-full" data-node-id="1484:71887" style={{ backgroundImage: "linear-gradient(203.5907619107166deg, rgba(0, 0, 0, 0.118) 0.52072%, rgba(0, 0, 0, 0.039) 51.124%, rgba(0, 0, 0, 0.02) 99.479%), linear-gradient(203.5907619107166deg, rgba(0, 0, 0, 0.078) 0.52072%, rgba(0, 0, 0, 0.039) 51.124%, rgba(0, 0, 0, 0.01) 99.479%)" }} data-name="Container">
+      <div className="border-[rgba(255,255,255,0.12)] border-b-[0.8px] border-solid relative rounded-[8px] shrink-0 w-full" data-node-id="1484:71888" style={{ backgroundImage: "linear-gradient(184.9729549755048deg, rgba(0, 0, 0, 0.118) 0.52072%, rgba(0, 0, 0, 0.039) 51.124%, rgba(0, 0, 0, 0.02) 99.479%), linear-gradient(184.9729549755048deg, rgba(0, 0, 0, 0.078) 0.52072%, rgba(0, 0, 0, 0.039) 51.124%, rgba(0, 0, 0, 0.01) 99.479%)" }} data-name="Container">
+        <div className="bg-clip-padding border-0 border-[transparent] border-solid gap-x-[6px] gap-y-[6px] grid grid-cols-[_355.73px] grid-rows-[__28px_0px] overflow-clip pb-[24.8px] pt-[24px] px-[24px] relative rounded-[inherit] size-full">
+          <div className="col-1 justify-self-stretch relative row-1 self-start shrink-0" data-node-id="1484:71889" data-name="Container">
+            <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex items-center justify-between relative size-full">
+              <div className="relative shrink-0" data-node-id="1484:71890" data-name="Container">
+                <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex gap-[var(--sa-spacing-8,8px)] items-center relative size-full">
+                  <div className="relative rounded-[var(--sa-radius-4,4px)] shrink-0" data-node-id="1484:71891" data-name="Container">
+                    <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex flex-col items-start p-[var(--sa-spacing-6,6px)] relative size-full">
+                      <div className="relative shrink-0 size-[16px]" data-node-id="1484:71892" data-name="Users">
+                        <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgUsers} />
+                      </div>
+                    </div>
+                  </div>
+                  <div className="relative shrink-0" data-node-id="1484:71897" data-name="Heading 4">
+                    <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex flex-col items-start relative size-full">
+                      <p className="[word-break:break-word] font-['Inter:Bold'] font-bold leading-[24px] not-italic relative shrink-0 text-[16px] text-[color:var(--sa-color-text-primary,white)] whitespace-nowrap" data-node-id="1484:71898">
+                        Clientes Vinculados
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div className="bg-[rgba(0,0,0,0.2)] border-[0.5px] border-solid border-white relative rounded-[8px] shrink-0" data-node-id="1484:71899" data-name="Text">
+                <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex gap-[var(--sa-spacing-4,4px)] items-center justify-center overflow-clip pl-[9.5px] pr-[11.5px] py-[3.5px] relative rounded-[inherit] size-full">
+                  <p className="[word-break:break-word] font-['Inter:Medium'] font-medium leading-[16px] not-italic relative shrink-0 text-[12px] text-white whitespace-nowrap" data-node-id="1484:71900">
+                    0
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="absolute bg-[rgba(255,255,255,0.05)] h-px left-0 right-[-0.3px] top-[64px]" data-node-id="1484:71901" data-name="border/bottom · cabeçalho" />
+        </div>
+      </div>
+      <div className="h-[308.8px] relative shrink-0 w-full" data-node-id="1484:71902" data-name="Container">
+        <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex flex-col items-start pb-[var(--sa-spacing-24,24px)] pt-[var(--sa-spacing-16,16px)] px-[var(--sa-spacing-16,16px)] relative size-full">
+          <div className="flex-[200_0_0] min-h-px relative w-[371.725px]" data-node-id="1484:71903" data-name="ScrollArea:margin">
+            <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex flex-col items-start relative size-full">
+              <div className="absolute content-stretch flex flex-col items-start left-[-8px] max-h-[400px] min-h-[200px] px-[var(--sa-spacing-8,8px)] top-0" data-node-id="1484:71904" data-name="ScrollArea">
+                <div className="h-[160px] relative shrink-0 w-[371.725px]" data-node-id="1484:71905" data-name="ScrollAreaViewport">
+                  <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex flex-col items-start overflow-clip relative rounded-[inherit] size-full">
+                    <div className="border-[1.6px] border-[rgba(255,255,255,0.12)] border-dashed h-[160px] relative rounded-[var(--sa-radius-10,10px)] shrink-0 w-[371.725px]" data-node-id="1484:71906" data-name="Container">
+                      <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex flex-col items-center justify-center p-[1.6px] relative size-full">
+                        <div className="relative shrink-0" data-node-id="1484:71907" data-name="Users:margin">
+                          <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex flex-col items-start pb-[var(--sa-spacing-8,8px)] relative size-full">
+                            <div className="relative shrink-0 size-[32px]" data-node-id="1484:71908" data-name="Users">
+                              <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgUsers1} />
+                            </div>
+                          </div>
+                        </div>
+                        <div className="relative shrink-0" data-node-id="1484:71913" data-name="Text">
+                          <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex flex-col items-center px-[var(--sa-spacing-16,16px)] relative size-full">
+                            <div className="[word-break:break-word] font-['Inter:Regular'] font-normal leading-[0] not-italic relative shrink-0 text-[14px] text-[color:var(--sa-color-text-primary,white)] text-center whitespace-nowrap" data-node-id="1484:71914">
+                              <p className="leading-[20px] mb-0">Nenhum cliente vinculado.</p>
+                              <p className="leading-[20px]">Escolha antes a moeda firmada e adicione pelo menos um.</p>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="relative shrink-0 w-full" data-node-id="1484:71915" data-name="Container:margin">
+            <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex flex-col items-start pt-[var(--sa-spacing-16,16px)] relative size-full">
+              <div className="border-[rgba(255,255,255,0.12)] border-solid border-t-[0.8px] h-[52.8px] relative shrink-0 w-[371.725px]" data-node-id="1484:71916" data-name="Container">
+                <div className="absolute border-[0.8px] border-[rgba(255,255,255,0.12)] border-dashed content-stretch flex gap-[var(--sa-spacing-8,8px)] h-[36px] items-center justify-center left-0 px-[var(--sa-spacing-12,12.8px)] py-[var(--sa-spacing-8,8.8px)] rounded-[var(--sa-radius-8,8px)] top-[16px] w-[371.725px]" data-node-id="1484:71917" style={{ backgroundImage: "linear-gradient(182.35272901906367deg, rgba(0, 0, 0, 0.118) 0.52072%, rgba(0, 0, 0, 0.039) 51.124%, rgba(0, 0, 0, 0.02) 99.479%), linear-gradient(182.35272901906367deg, rgba(0, 0, 0, 0.078) 0.52072%, rgba(0, 0, 0, 0.039) 51.124%, rgba(0, 0, 0, 0.01) 99.479%)" }} data-name="Button">
+                  <div className="relative shrink-0" data-node-id="1484:71918" data-name="Plus:margin">
+                    <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex items-start pr-[var(--sa-spacing-8,8px)] relative size-full">
+                      <div className="relative shrink-0 size-[16px]" data-node-id="1484:71919" data-name="Plus">
+                        <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgPlus} />
+                      </div>
+                    </div>
+                  </div>
+                  <p className="[word-break:break-word] font-['Inter:Medium'] font-medium leading-[20px] not-italic relative shrink-0 text-[14px] text-[color:var(--sa-color-text-primary,white)] text-center whitespace-nowrap" data-node-id="1484:71922">
+                    Adicionar Cliente
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+SUPER CRITICAL: The generated React+Tailwind code MUST be converted to match the target project's technology stack and styling system.
+1. Analyze the target codebase to identify: technology stack, styling approach, component patterns, and design tokens
+2. Convert React syntax to the target framework/library
+3. Transform all Tailwind classes to the target styling system while preserving exact visual design
+4. Follow the project's existing patterns and conventions
+DO NOT install any Tailwind as a dependency unless the user instructs you to do so.
+
+Node ids have been added to the code as data attributes, e.g. `data-node-id="1:2"`.
+The generated code contains image and SVG URL constants, e.g. const image = 'https://www.figma.com/api/mcp/asset/550e8400-e29b-41d4-a716-446655440000.png'. These URLs are temporary download sources and expire after 7 days. Download each asset into the project with curl -L, then replace its URL in the generated code with a reference to the downloaded asset. Never use the temporary URLs as runtime image sources.

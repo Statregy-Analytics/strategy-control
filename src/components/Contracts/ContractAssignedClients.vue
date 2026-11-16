@@ -1,15 +1,36 @@
 <template>
-  <div class="assigned-clients">
+  <div class="assigned-clients" :class="{ 'assigned-clients--wallet': walletMode }">
     <div v-for="(row, index) in allocations" :key="row.clientId" class="assigned-clients__card">
       <div class="assigned-clients__heading">
         <span class="assigned-clients__avatar"
-          ><img src="/icons/contracts/distribution/user.svg" alt=""
+          ><img
+            :src="
+              walletMode
+                ? '/icons/contracts/wallet-capital/2325-797-imgUser.svg'
+                : '/icons/contracts/distribution/user.svg'
+            "
+            alt=""
         /></span>
         <div>
           <strong>{{ row.displayName || 'Cliente' }}</strong
           ><small>{{ documentLabel(row) }}</small>
-          <span class="assigned-clients__badge">Atribuído</span>
+          <template v-if="walletMode"
+            ><span v-for="tag in walletTags(row)" :key="tag" class="assigned-clients__badge">{{
+              tag
+            }}</span></template
+          >
+          <span v-else class="assigned-clients__badge">Atribuído</span>
         </div>
+        <q-btn
+          v-if="walletMode"
+          flat
+          round
+          dense
+          icon="close"
+          class="assigned-clients__remove"
+          :aria-label="`Remover cliente ${row.displayName}`"
+          @click="$emit('remove', row.clientId)"
+        />
       </div>
       <dl>
         <div>
@@ -21,25 +42,58 @@
           <dd>{{ state.percentages[index].replace('.', ',') }}%</dd>
         </div>
       </dl>
+      <p v-if="walletMode" class="assigned-clients__origin">
+        Origem:
+        {{
+          row.walletSources?.length
+            ? row.walletSources.map(walletOriginLabel).join(' + ')
+            : 'Origens do aporte indisponíveis nesta consulta.'
+        }}
+      </p>
     </div>
     <div v-if="allocations.length" class="assigned-clients__total">
-      <span>Total distribuído</span
+      <span>{{ walletMode ? 'Capital consolidado' : 'Total distribuído' }}</span
       ><strong
         >{{ money(centsDecimal(state.total), currency) }} ·
         {{ state.totalPercentage.replace('.', ',') }}%</strong
       >
     </div>
-    <p v-if="allocations.length">
+    <p v-if="walletMode && allocations.length">
+      Os valores saem da carteira escolhida em cada linha do vínculo (saldo parado da Carteira
+      Strategy ou saldo da Carteira de Depósito) quando o contrato é criado. A participação de cada
+      um é o aporte dele ÷ a soma dos aportes, e muda enquanto clientes são adicionados.
+    </p>
+    <p v-else-if="allocations.length">
       Para incluir outro cliente, use Adicionar Cliente: a distribuição reabre com os valores já
       atribuídos e o cliente novo em branco; a soma tem de fechar com o Capital Inicial Contratual.
     </p>
     <div v-else class="contract-empty">
-      <img src="/icons/contracts/users-empty.svg" alt="" />
-      <p>Nenhum cliente vinculado. Adicione pelo menos um.</p>
+      <img
+        :src="
+          walletMode
+            ? '/icons/contracts/wallet-capital/1484-71887-imgUsers1.svg'
+            : '/icons/contracts/users-empty.svg'
+        "
+        alt=""
+      />
+      <p>
+        {{
+          walletMode
+            ? 'Nenhum cliente vinculado. Escolha antes a moeda firmada e adicione pelo menos um.'
+            : 'Nenhum cliente vinculado. Adicione pelo menos um.'
+        }}
+      </p>
     </div>
     <div class="assigned-clients__action">
-      <q-btn outline no-caps class="full-width" @click="$emit('add')"
-        ><img src="/icons/contracts/distribution/plus.svg" alt="" />Adicionar Cliente</q-btn
+      <q-btn outline no-caps class="full-width" :disable="!allowAdd" @click="$emit('add')"
+        ><img
+          :src="
+            walletMode
+              ? '/icons/contracts/wallet-capital/2325-797-imgPlus.svg'
+              : '/icons/contracts/distribution/plus.svg'
+          "
+          alt=""
+        />Adicionar Cliente</q-btn
       >
     </div>
   </div>
@@ -49,14 +103,30 @@ import { computed, watch, onScopeDispose } from 'vue'
 import { distributionState, centsDecimal } from 'src/services/contractDistribution'
 import { distributionCustomers } from 'src/services/contractDistributionCustomers'
 import { useFinanceResource } from 'src/composables/useFinanceResource'
+import { walletCapitalTypes, walletOriginLabel } from 'src/services/contractWalletCapital'
 import { money } from 'src/services/financeService'
 const props = defineProps({
+  walletMode: Boolean,
+  allowAdd: { type: Boolean, default: true },
   allocations: { type: Array, required: true },
   capital: { type: [String, Number], default: null },
   currency: { type: String, default: 'BRL' },
   lookup: { type: Function, default: distributionCustomers },
 })
-defineEmits(['add'])
+defineEmits(['add', 'remove'])
+const walletTags = (row) =>
+  walletCapitalTypes
+    .map((type) => {
+      const codes = [
+        ...new Set(
+          (row.walletSources || [])
+            .filter((line) => line.type === type.key)
+            .map((line) => line.currencyIsoCode),
+        ),
+      ]
+      return codes.length ? `${type.label} · ${codes.join(', ')}` : null
+    })
+    .filter(Boolean)
 const state = computed(() => distributionState(props.allocations, props.capital))
 const metadata = useFinanceResource()
 let active = true
@@ -87,6 +157,18 @@ function documentLabel(row) {
 }
 </script>
 <style scoped>
+.assigned-clients--wallet .contract-empty {
+  min-height: 160px;
+  padding: 24px 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  text-align: center;
+  border: 1px dashed #ffffff1f;
+  border-radius: 10px;
+}
 .assigned-clients {
   display: flex;
   flex-direction: column;
@@ -116,6 +198,17 @@ function documentLabel(row) {
   font-size: 14px;
   font-weight: 600;
   line-height: 20px;
+}
+.assigned-clients :deep(.assigned-clients__remove) {
+  min-height: 20px;
+  height: 20px;
+  width: 20px;
+  padding: 0;
+  color: #ffffffb8;
+  background: transparent;
+}
+.assigned-clients__origin {
+  padding-top: 10px;
 }
 .assigned-clients__heading small {
   font-size: 10px;

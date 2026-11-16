@@ -2,6 +2,7 @@ import { ref, computed, watch, onScopeDispose } from 'vue'
 import { useFinanceResource } from './useFinanceResource'
 import { financeGet, financeWrite } from 'src/services/financeService'
 import { buildDraftPayload, buildContractTerm } from 'src/services/financeModels'
+import { walletCapitalBlocked } from 'src/services/contractWalletCapital'
 import { distributionState } from 'src/services/contractDistribution'
 import { readCurrentPages } from 'src/services/requestContext'
 import { getApiErrorMessage } from 'src/services/apiError'
@@ -193,6 +194,15 @@ export function useContractWorkspace(props, emit, notify) {
     error.value = ''
     let payload
     try {
+      const capitalOrigin = catalog.state.data?.origins?.find(
+        (origin) => origin.id === form.value.initialCapitalOriginId,
+      )
+      if (
+        draft.value &&
+        capitalOrigin?.code === 'CLIENT_WALLET' &&
+        (finalize || form.value.clientAllocations.length)
+      )
+        throw Error(walletCapitalBlocked)
       const term = buildContractTerm(
         termUnit.value || (termValue.value !== null && termValue.value !== '')
           ? { value: termValue.value, unit: termUnit.value }

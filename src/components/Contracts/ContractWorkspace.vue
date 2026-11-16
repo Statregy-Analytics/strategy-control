@@ -141,28 +141,41 @@
                 <span>Calculado automaticamente com base no prazo selecionado</span>
               </div></contract-panel
             >
-            <contract-panel title="Financeiro e Moeda" icon="coins"
+            <contract-panel
+              title="Financeiro e Moeda"
+              :icon="walletOrigin ? 'wallet-capital/1484-71525-imgCoins' : 'coins'"
               ><resource-state :state="catalog.state" @retry="loadCatalog"
                 ><div class="contract-row">
                   <label-form text-label="Moeda Firmada"
                     ><currency-select
                       v-model="form.currencyId"
-                      :use-catalog="selectedOrigin?.code === 'CONTRACT_VALUE'"
+                      :use-catalog="true"
                       :customer-id="form.clientAllocations[0]?.clientId"
                       :current="currentCurrency"
-                      :disable="!draft"
+                      :disable="!draft || (walletOrigin && form.clientAllocations.length > 0)"
                       @currency-code="currencyCode = $event" /></label-form
                   ><label-form text-label="Capital Inicial Contratual"
-                    ><money-input
+                    ><q-input
+                      v-if="walletOrigin"
+                      :model-value="money(form.initialContractualCapital, currencyCode)"
+                      outlined
+                      dense
+                      readonly
+                      aria-label="Capital Inicial Contratual"
+                    />
+                    <money-input
+                      v-else
                       v-model="form.initialContractualCapital"
                       :currency="currencyCode"
                       outlined
                       dense
                       :disable="!draft"
                       aria-label="Capital Inicial Contratual"
-                    /><small
-                      >Distribuído entre os clientes vinculados, em valor ou em percentual.</small
-                    ></label-form
+                    /><small>{{
+                      walletOrigin
+                        ? 'Calculado: soma dos aportes dos clientes vinculados'
+                        : 'Distribuído entre os clientes vinculados, em valor ou em percentual.'
+                    }}</small></label-form
                   >
                 </div>
                 <label-form text-label="Origem do Capital Inicial" class="contract-spacing"
@@ -182,7 +195,9 @@
                       /><small>{{
                         origin.code === 'CONTRACT_VALUE'
                           ? 'O admin digita o capital do contrato e quanto é de cada cliente, em valor ou em percentual. Esse capital não sai de nenhuma carteira: fica só no contrato.'
-                          : origin.description
+                          : origin.code === 'CLIENT_WALLET'
+                            ? 'O capital é a soma do que cada cliente coloca da Carteira Strategy ou da Carteira de Depósito dele, em uma ou mais moedas. Moeda diferente da firmada é convertida pela última PTAX de venda.'
+                            : origin.description
                       }}</small></label
                     >
                   </div></label-form
@@ -190,7 +205,7 @@
                 <label-form text-label="Capital Consolidado Inicial" class="contract-spacing"
                   ><q-input
                     :model-value="
-                      draft && selectedOrigin?.code === 'CONTRACT_VALUE'
+                      draft && ['CONTRACT_VALUE', 'CLIENT_WALLET'].includes(selectedOrigin?.code)
                         ? money(form.initialContractualCapital, currencyCode)
                         : money(detail.state.data?.initialConsolidatedCapital, currencyCode)
                     "
@@ -200,6 +215,8 @@
                     aria-label="Capital Consolidado Inicial"
                   /><small v-if="selectedOrigin?.code === 'CONTRACT_VALUE'"
                     >Igual ao capital inicial contratual</small
+                  ><small v-else-if="walletOrigin"
+                    >Soma dos aportes, já convertidos para a moeda firmada</small
                   ></label-form
                 >
                 <label-form text-label="Observação Financeira" class="contract-spacing"
@@ -210,8 +227,17 @@
                     type="textarea"
                     rows="3"
                     placeholder="Informações adicionais sobre o contrato..."
-                    aria-label="Observação Financeira" /></label-form></resource-state
-            ></contract-panel>
+                    aria-label="Observação Financeira"
+                /></label-form>
+                <p v-if="walletOrigin" class="contract-audit-note">
+                  <img src="/icons/contracts/wallet-capital/1484-71525-imgInfo.svg" alt="" />A moeda
+                  firmada define a moeda oficial do contrato e a base da performance. Valores de
+                  carteiras em outras moedas são convertidos pela última PTAX de venda do Banco
+                  Central; o aporte registra a moeda e o valor de origem, a cotação e o valor
+                  convertido.
+                </p></resource-state
+              ></contract-panel
+            >
             <contract-panel title="Motor Principal" icon="engine"
               ><resource-state :state="catalog.state" @retry="loadCatalog"
                 ><div class="contract-row">
@@ -367,14 +393,17 @@
           <aside class="contract-side">
             <contract-panel
               title="Clientes Vinculados"
-              :icon="selectedOrigin?.code === 'CONTRACT_VALUE' ? 'distribution/users' : 'users'"
+              :icon="walletOrigin ? 'wallet-capital/2325-797-imgUsers' : 'distribution/users'"
               ><template #actions
                 ><span class="contract-optional">{{
                   form.clientAllocations.length
                 }}</span></template
               >
               <contract-assigned-clients
-                v-if="selectedOrigin?.code === 'CONTRACT_VALUE'"
+                v-if="['CONTRACT_VALUE', 'CLIENT_WALLET'].includes(selectedOrigin?.code)"
+                :wallet-mode="walletOrigin"
+                :allow-add="!walletOrigin || !!form.currencyId"
+                @remove="removeClient"
                 :allocations="form.clientAllocations"
                 :capital="form.initialContractualCapital"
                 :currency="currencyCode"
@@ -702,8 +731,15 @@
       @confirm="form.clientAllocations = $event"
       @close="clientOpen = false"
     />
+    <contract-wallet-capital
+      v-if="clientOpen && draft && walletOrigin && form.currencyId"
+      :currency="currencyCode"
+      :existing-ids="form.clientAllocations.map((row) => row.clientId)"
+      @confirm="form.clientAllocations.push($event)"
+      @close="clientOpen = false"
+    />
     <q-dialog
-      v-if="draft && selectedOrigin?.code !== 'CONTRACT_VALUE'"
+      v-if="draft && !['CONTRACT_VALUE', 'CLIENT_WALLET'].includes(selectedOrigin?.code)"
       v-model="clientOpen"
       :persistent="busy"
       ><q-card class="contract-modal"
@@ -771,6 +807,7 @@ import { onBeforeRouteLeave, onBeforeRouteUpdate } from 'vue-router'
 import ContractPanel from './ContractPanel.vue'
 import ContractCapitalDistribution from './ContractCapitalDistribution.vue'
 import ContractAssignedClients from './ContractAssignedClients.vue'
+import ContractWalletCapital from './ContractWalletCapital.vue'
 import ContractPerformance from './ContractPerformance.vue'
 import ContractAssets from './ContractAssets.vue'
 import ContractAssetDialog from './ContractAssetDialog.vue'
@@ -795,6 +832,8 @@ import {
   endpointLabel,
   columns,
 } from 'src/services/financeService'
+import { centsDecimal } from 'src/services/contractDistribution'
+import { walletCapitalTotal } from 'src/services/contractWalletCapital'
 import { contractPercentageLabel } from 'src/services/contractDistribution'
 import { contractMovements } from 'src/services/contractMovements'
 import { contractTermOptions, contractEndDate } from 'src/services/financeModels'
@@ -877,6 +916,17 @@ watch(
 )
 const selectedOrigin = computed(() =>
   catalog.state.data?.origins.find((o) => o.id === form.value.initialCapitalOriginId),
+)
+const walletOrigin = computed(() => selectedOrigin.value?.code === 'CLIENT_WALLET')
+watch(
+  [walletOrigin, () => form.value.clientAllocations],
+  () => {
+    if (walletOrigin.value && draft.value) {
+      const total = walletCapitalTotal(form.value.clientAllocations || [])
+      form.value.initialContractualCapital = total === null ? null : centsDecimal(total)
+    }
+  },
+  { deep: true },
 )
 const primaryConnection = computed(() =>
   engines.state.data?.find((e) => e.engineId === form.value.primaryEngineId),
@@ -963,7 +1013,7 @@ const summary = computed(() => [
   {
     label: 'Consolidado',
     value:
-      draft.value && selectedOrigin.value?.code === 'CONTRACT_VALUE'
+      draft.value && ['CONTRACT_VALUE', 'CLIENT_WALLET'].includes(selectedOrigin.value?.code)
         ? money(form.value.initialContractualCapital, currencyCode.value)
         : money(detail.state.data?.initialConsolidatedCapital, currencyCode.value),
   },

@@ -6,6 +6,7 @@ import { parse, compileScript, compileTemplate } from '@vue/compiler-sfc'
 import * as Vue from 'vue'
 import { renderToString } from '@vue/server-renderer'
 import * as model from '../src/services/contractDistribution.js'
+import * as walletCapital from '../src/services/contractWalletCapital.js'
 import { buildDraftPayload } from '../src/services/financeModels.js'
 import { useFinanceResource } from '../src/composables/useFinanceResource.js'
 import { readCurrentPages } from '../src/services/requestContext.js'
@@ -101,16 +102,18 @@ async function compile(path, inlineTemplate = false) {
       ? Vue
       : name === 'src/composables/useFinanceResource'
         ? { useFinanceResource }
-        : name === 'src/services/contractDistribution'
-          ? model
-          : name === 'src/services/contractDistributionCustomers'
-            ? { distributionCustomers: async () => ({ customers: [] }) }
-            : name === 'src/services/financeService'
-              ? {
-                  money: (value, currency) =>
-                    new Intl.NumberFormat('pt-BR', { style: 'currency', currency }).format(value),
-                }
-              : { default: await compile(name, true) }
+        : name === 'src/services/contractWalletCapital'
+          ? walletCapital
+          : name === 'src/services/contractDistribution'
+            ? model
+            : name === 'src/services/contractDistributionCustomers'
+              ? { distributionCustomers: async () => ({ customers: [] }) }
+              : name === 'src/services/financeService'
+                ? {
+                    money: (value, currency) =>
+                      new Intl.NumberFormat('pt-BR', { style: 'currency', currency }).format(value),
+                  }
+                : { default: await compile(name, true) }
   const linker = async (name) => {
     const exports = await exportsFor(name)
     return new vm.SyntheticModule(
@@ -482,6 +485,14 @@ test('136: assigned currency selector uses catalog IDs without requiring a clien
   assert.deepEqual(clean(h.options.value), [{ id: 'usd-id', name: 'USD' }])
   assert.deepEqual(reads, ['preferences/catalog'])
   assert.ok(events.some(([name, value]) => name === 'currency-code' && value === 'USD'))
+  const readCount = reads.length
+  props.customerId = 'first-wallet-client'
+  await tick()
+  assert.equal(reads.length, readCount)
+  assert.equal(
+    events.some(([name, value]) => name === 'currency-code' && value === 'BRL'),
+    false,
+  )
   fail = true
   await h.load()
   assert.ok(h.resource.state.error)

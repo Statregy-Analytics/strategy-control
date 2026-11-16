@@ -1,0 +1,75 @@
+const imgCircleAlert = "https://www.figma.com/api/mcp/asset/062af1b5-7aef-43f3-93b1-aa8016e32635.svg";
+
+export default function Ct0512EMoedaAcimaDoSaldoDaCarteiraDesignGlass() {
+  return (
+    <div className="backdrop-blur-[20px] border border-[rgba(255,255,255,0.12)] border-solid content-stretch drop-shadow-[4px_4px_6px_rgba(0,0,0,0.13)] flex flex-col gap-[16px] items-start p-[24px] relative rounded-[12px] size-full" data-node-id="2326:335" style={{ backgroundImage: "linear-gradient(196.94030904234586deg, rgba(0, 0, 0, 0.118) 0.52072%, rgba(0, 0, 0, 0.039) 51.124%, rgba(0, 0, 0, 0.02) 99.479%), linear-gradient(196.94030904234586deg, rgba(0, 0, 0, 0.078) 0.52072%, rgba(0, 0, 0, 0.039) 51.124%, rgba(0, 0, 0, 0.01) 99.479%)" }} data-name="CT05.12 · E · Moeda acima do saldo da carteira · DESIGN GLASS">
+      <p className="[word-break:break-word] font-['Inter:Medium'] font-medium leading-[normal] not-italic relative shrink-0 text-[14px] text-[color:var(--sa-color-text-primary,white)] whitespace-nowrap" data-node-id="2334:549">
+        Moedas do aporte
+      </p>
+      <div className="bg-[var(--sa-color-bg-surface,rgba(255,255,255,0.06))] border-[0.8px] border-[var(--sa-color-border-default,rgba(255,255,255,0.2))] border-solid content-stretch flex flex-col gap-[8px] items-start px-[14px] py-[12px] relative rounded-[10px] shrink-0 w-full" data-node-id="2334:550" data-name="Moeda · EUR">
+        <div className="[word-break:break-word] content-stretch flex gap-[8px] items-center leading-[normal] not-italic relative shrink-0 w-full" data-node-id="2334:551" data-name="topo">
+          <p className="flex-[1_0_0] font-['Inter:Semi_Bold'] font-semibold min-w-px relative text-[13px] text-[color:var(--sa-color-text-primary,white)]" data-node-id="2334:552">
+            EUR · Carteira Strategy
+          </p>
+          <p className="font-['Inter:Regular'] font-normal relative shrink-0 text-[12px] text-[color:var(--sa-color-text-secondary,rgba(255,255,255,0.72))] whitespace-nowrap" data-node-id="2334:553">
+            Saldo parado: € 15.000,00
+          </p>
+        </div>
+        <div className="[word-break:break-word] border-[1.2px] border-[var(--color\/v2\/border\/status-negative,#ffc9c9)] border-solid content-stretch flex font-['Inter:Bold'] font-bold gap-[8px] h-[36px] items-center leading-[normal] not-italic px-[12px] relative rounded-[8px] shrink-0 w-full" data-node-id="2334:554" style={{ backgroundImage: "linear-gradient(182.02288733630337deg, rgba(0, 0, 0, 0.118) 0.52072%, rgba(0, 0, 0, 0.039) 51.124%, rgba(0, 0, 0, 0.02) 99.479%), linear-gradient(182.02288733630337deg, rgba(0, 0, 0, 0.078) 0.52072%, rgba(0, 0, 0, 0.039) 51.124%, rgba(0, 0, 0, 0.01) 99.479%)" }} data-name="Input">
+          <p className="relative shrink-0 text-[12px] text-[color:var(--sa-color-text-muted,rgba(255,255,255,0.6))] whitespace-nowrap" data-node-id="2334:555">
+            €
+          </p>
+          <p className="flex-[1_0_0] min-w-px relative text-[14px] text-[color:var(--sa-color-text-primary,white)]" data-node-id="2334:556">
+            20.000,00
+          </p>
+        </div>
+        <div className="content-stretch flex gap-[6px] items-center relative shrink-0 w-full" data-node-id="2334:557" data-name="erro">
+          <div className="relative shrink-0 size-[14px]" data-node-id="2334:558" data-name="CircleAlert">
+            <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgCircleAlert} />
+          </div>
+          <p className="[word-break:break-word] flex-[1_0_0] font-['Inter:Medium'] font-medium leading-[16px] min-w-px not-italic relative text-[12px] text-[color:var(--color\/v2\/text\/status-negative,#ffc9c9)]" data-node-id="2334:562">
+            Saldo parado insuficiente em EUR na Carteira Strategy: disponível € 15.000,00.
+          </p>
+        </div>
+        <div className="[word-break:break-word] content-stretch flex items-center justify-between leading-[normal] not-italic relative shrink-0 text-[12px] text-[color:var(--sa-color-text-muted,rgba(255,255,255,0.6))] w-full whitespace-nowrap" data-node-id="2334:563" data-name="rodapé">
+          <p className="font-['Inter:Regular'] font-normal relative shrink-0" data-node-id="2334:564">{` `}</p>
+          <p className="font-['Inter:Medium'] font-medium relative shrink-0" data-node-id="2334:565">
+            Remover
+          </p>
+        </div>
+      </div>
+      <p className="[word-break:break-word] font-['Inter:Regular'] font-normal leading-[18px] min-w-full not-italic relative shrink-0 text-[12px] text-[color:var(--sa-color-text-muted,rgba(255,255,255,0.6))] w-[min-content]" data-node-id="2334:566">
+        Enquanto o valor de alguma linha passar do saldo da carteira de onde sai, a conversão não aparece e Confirmar Vínculo fica desabilitado.
+      </p>
+      <div className="content-stretch flex flex-col items-start py-[var(--sa-spacing-16,16px)] relative rounded-[8px] shrink-0 w-full" data-node-id="2334:567" data-name="Container">
+        <div className="relative shrink-0 w-[462px]" data-node-id="2334:568" data-name="Container">
+          <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex gap-[var(--sa-spacing-12,12px)] items-start relative size-full">
+            <div className="bg-[var(--sa-color-bg-surface,rgba(255,255,255,0.06))] border-[0.8px] border-[var(--sa-color-border-default,rgba(255,255,255,0.2))] border-solid flex-[226_0_0] h-[36px] min-w-px relative rounded-[var(--sa-radius-8,8px)]" data-node-id="2334:569" data-name="Botão ação nível 1">
+              <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex items-center justify-center px-[14.8px] py-[var(--sa-spacing-8,8.8px)] relative size-full">
+                <p className="[word-break:break-word] font-['Inter:Medium'] font-medium leading-[20px] not-italic relative shrink-0 text-[14px] text-[color:var(--sa-color-text-secondary,rgba(255,255,255,0.72))] text-center whitespace-nowrap" data-node-id="2334:570">
+                  Voltar
+                </p>
+              </div>
+            </div>
+            <div className="bg-[var(--sa-color-bg-glass,rgba(255,255,255,0.06))] border-[length:var(----sa-stroke-1,1px)] border-[var(--sa-color-border-strong,rgba(255,255,255,0.28))] border-solid flex-[224_0_0] h-[36px] min-w-px opacity-40 relative rounded-[var(--sa-radius-8,8px)]" data-node-id="2334:571" data-name="Botão ação nível 1">
+              <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex items-center justify-center px-[15px] py-[var(--sa-spacing-8,9px)] relative size-full">
+                <p className="[word-break:break-word] font-['Inter:Medium'] font-medium leading-[20px] not-italic relative shrink-0 text-[14px] text-[color:var(--sa-color-text-primary,white)] text-center whitespace-nowrap" data-node-id="2334:572">
+                  Confirmar Vínculo
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+SUPER CRITICAL: The generated React+Tailwind code MUST be converted to match the target project's technology stack and styling system.
+1. Analyze the target codebase to identify: technology stack, styling approach, component patterns, and design tokens
+2. Convert React syntax to the target framework/library
+3. Transform all Tailwind classes to the target styling system while preserving exact visual design
+4. Follow the project's existing patterns and conventions
+DO NOT install any Tailwind as a dependency unless the user instructs you to do so.
+
+Node ids have been added to the code as data attributes, e.g. `data-node-id="1:2"`.
+The generated code contains image and SVG URL constants, e.g. const image = 'https://www.figma.com/api/mcp/asset/550e8400-e29b-41d4-a716-446655440000.png'. These URLs are temporary download sources and expire after 7 days. Download each asset into the project with curl -L, then replace its URL in the generated code with a reference to the downloaded asset. Never use the temporary URLs as runtime image sources.
