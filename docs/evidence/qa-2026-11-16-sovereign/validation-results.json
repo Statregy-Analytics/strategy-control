@@ -1,0 +1,40 @@
+{
+  "date": "2026-11-16",
+  "frame": "1484:79941",
+  "implementation": "local only",
+  "checks": {
+    "lint": "pass",
+    "build": "pass",
+    "localTests": 318,
+    "existingStudyTestsOutsideScope": 8,
+    "newSSRTests": 3,
+    "detectorAntiPatterns": 0
+  },
+  "assets": {
+    "target-heading.svg": {
+      "width": 16,
+      "height": 16
+    },
+    "target-principle.svg": {
+      "width": 20,
+      "height": 20
+    }
+  },
+  "SSR": [
+    "three blocked inputs; missing values stay blank",
+    "known zero target preserved; existing final-index projection reused; model not rounded",
+    "original parameters update and clear; stale finalIndex ignored"
+  ],
+  "browserValidation": "not performed; prior Windows browser control stopped because current URL could not be confirmed",
+  "unvalidated": [
+    "rendered comparison to Figma",
+    "desktop/mobile geometry and contrast",
+    "loaded icons and effective size",
+    "real Quasar interactions",
+    "history/collapse/cancel transitions",
+    "console"
+  ],
+  "operationalWrites": 0,
+  "published": false,
+  "backend": "existing operational-projection/configuration dependency recorded on 2026-11-15; not rechecked today"
+}

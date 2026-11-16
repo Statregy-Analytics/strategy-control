@@ -1,15 +1,32 @@
 # Checklist único — telas do Figma e integração
 
-Atualização: 15/11/2026. Este é o índice desta revisão ampla. Evidências anteriores continuam nos documentos vinculados; uma tela existente não é automaticamente considerada revalidada nesta rodada.
+Atualização: 16/11/2026. Este é o índice desta revisão ampla. Evidências anteriores continuam nos documentos vinculados; uma tela existente não é automaticamente considerada revalidada nesta rodada.
 
 ## Critério de conclusão
 
 - [ ] Todos os frames/estados abaixo comparados visualmente, inclusive erro, vazio e retorno.
 - [ ] Fluxos de escrita e leitura integrados testados com dados fictícios.
-- [x] Admin: lint e build aprovados; 315 testes locais passaram (incluem 8 testes de estudo já existentes no worktree; 307 versionados neste complemento).
+- [x] Admin: lint e build aprovados; 318 testes locais passaram (incluem 8 testes de estudo já existentes no worktree; três novos testes do EC07 nesta implementação).
 - [ ] Reexecutar os checks após concluir as demais telas; Área do Cliente ainda não alterada nesta rodada.
 - [ ] Deploy confirmado e testes repetidos nas URLs publicadas.
 - [x] Pendências de frontend separadas das pendências reais da API, do designer e da limitação de consulta ao Figma.
+
+## EC07 — Fechamento Soberano (16/11)
+
+- [x] Implementação baseada no contexto completo já recuperado do frame 1484:79941, arquivado com screenshot em [evidence/qa-2026-11-16-sovereign](evidence/qa-2026-11-16-sovereign). Dois SVGs originais locais: Target de 16 px no título e de 20 px no princípio; arquivos não vazios e dimensões raiz verificadas.
+- [x] Reutilizados ProfileSection, LabelForm e QInput. Três campos existentes bloqueados inclusive na edição: Índice Inicial do Ciclo, Alvo do Ciclo e Índice Final Obrigatório. Divisor, rótulos de 12 px, inputs de 36 px, paleta/glass e bloco Princípio do Fechamento Soberano seguem a referência. Nenhum campo ou ação extra.
+- [x] Índice final continua usando projectedFinalIndex do formulário original; não há segundo estado, valor padrão de motor real, gravação nem afirmação de fechamento aplicado. Valores ausentes ficam vazios; alvo zero conhecido é preservado. Índices são apresentados com quatro casas; alvo com duas, sem alterar a precisão do modelo.
+- [x] Três testes de renderização SSR do componente real: ausência de dados e bloqueio dos campos; alvo zero/projeção/precisão do modelo; alteração e limpeza dos parâmetros originais, ignorando índice final antigo. Componentes visuais são substituídos por adaptadores no teste; isto não valida layout, Quasar real ou interação de navegador.
+- [x] Lint e build aprovados; 318 testes locais passaram, incluindo oito testes de estudo preexistentes fora desta entrega. Detector do componente: zero antipadrões; avisos de escala do DESIGN.md antigo mantidos por corresponderem aos valores explícitos do Figma.
+- [ ] Revisão visual renderizada em desktop e celular: comparação de dimensões/espaçamentos, contraste efetivo, divisor, ícones carregados e sua geometria final, quebra do título/princípio e ausência de excesso horizontal.
+- [ ] Navegador: validar atualização ao editar parâmetros, limpeza, Cancelar, recolher/reabrir configuração, ida/volta do LG09 e ausência de erros no console. A regra de uma coluna abaixo de 600 px está implementada, mas ainda não observada no navegador.
+- [ ] Publicação e reteste em homologação. Esta rodada permanece local; não houve commit, push ou deploy do EC07.
+
+**Limitação de validação:** na tentativa anterior, o controle do navegador foi interrompido por não conseguir confirmar a URL atual no Windows. Nesta implementação foram executados somente os checks de código/SSR; não declarar o EC07 homologado ou visualmente aprovado.
+
+**API:** permanece a dependência já documentada no exame de 15/11: catálogo sem projeção/configuração operacional do ciclo e sem gravação desses parâmetros. O EC07 só apresenta os campos do formulário existente e o cálculo de projeção; não comprova execução/fechamento soberano no backend. A API não foi reconsultada nesta rodada; não há novo bloqueio confirmado.
+
+**Designer:** nenhum novo bloqueio para este frame. Os demais frames continuam com o próprio estado no inventário.
 
 ## EC06 — limites diários e mensais (15/11)
 
@@ -497,7 +514,7 @@ Legenda: **Preparado / revisão pendente** = há código novo, mas a validação
 | [1484:79802](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-79802) | EC05.1 · Zona de amortecimento · desativada                                                   | Composição/estados testados; projeção e gravação dependem da API                                             |
 | [1484:79819](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-79819) | EC05.2 · Zona de amortecimento · ativada + tabela                                             | Composição/estados testados; projeção e gravação dependem da API                                             |
 | [1484:79883](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-79883) | EC06 · Limites operacionais · regra contornada                                                | Composição/edição testadas; projeção e gravação dependem da API                                             |
-| [1484:79941](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-79941) | EC07 · Fechamento soberano · separador                                                        | Preparado / revisão pendente                                             |
+| [1484:79941](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-79941) | EC07 · Fechamento soberano · separador                                                        | Implementado localmente; SSR/checks aprovados; revisão visual/navegador e publicação pendentes                                             |
 | [1484:79981](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-79981) | F03 · Edição da lógica · Simulações + validação                                               | Revalidar                                                                |
 | [1484:79982](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-79982) | LG06 · PE · Modo de edição · Simulação abaixo · TELA BASE DE EDIÇÃO · DESIGN GLASS            | Preparado / revisão pendente                                             |
 | [1484:82147](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-82147) | LG07 · EC · Simulação ao lado · PAINEL DE ESTADOS DO COMPONENTE · DESIGN GLASS                | Preparado / revisão pendente                                             |

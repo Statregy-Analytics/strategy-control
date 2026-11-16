@@ -125,6 +125,7 @@
                 v-model="form"
                 :disabled="!editing"
               />
+              <logic-sovereign v-else-if="section.key === 'sovereign'" :model-value="form" />
               <profile-section v-else :title="section.title" :caption="section.caption"
                 ><div class="workspace-form-grid">
                   <template v-for="field in section.fields" :key="field.key"
@@ -135,10 +136,6 @@
                       @update:model-value="form[field.key] = $event"
                   /></template>
                 </div>
-                <p v-if="section.key === 'sovereign'" class="workspace-muted">
-                  As bandas e probabilidades controlam o percurso. O fechamento soberano controla o
-                  índice final do ciclo trimestral.
-                </p>
               </profile-section>
             </template>
             <profile-section
@@ -246,6 +243,7 @@ import LogicConfiguration from './LogicConfiguration.vue'
 import LogicDampingZone from './LogicDampingZone.vue'
 import LogicProbability from './LogicProbability.vue'
 import LogicLimits from './LogicLimits.vue'
+import LogicSovereign from './LogicSovereign.vue'
 import { useFinanceResource } from 'src/composables/useFinanceResource'
 import { financeGet, columns } from 'src/services/financeService'
 import { getPreferenceCatalog } from 'src/services/customerService'
@@ -376,17 +374,7 @@ const sections = computed(() => [
   {
     key: 'sovereign',
     title: 'Fechamento Soberano',
-    caption: 'Garantia do índice final ao término do ciclo trimestral.',
-    fields: fields([
-      ['initialIndex', 'Índice Inicial do Ciclo', 'number', { disabled: true }],
-      ['target', 'Alvo do Ciclo', 'number', { disabled: true }],
-      [
-        'finalIndex',
-        'Índice Final Obrigatório',
-        'number',
-        { computed: projectedFinalIndex, disabled: true },
-      ],
-    ]),
+    fields: [],
   },
 ])
 const linkedColumns = columns(
