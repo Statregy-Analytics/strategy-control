@@ -1,0 +1,144 @@
+[
+  {
+    "id": "01b837f5-4b9c-4171-a5d0-fee468ac6df1",
+    "publicCode": "CTR-E976C745",
+    "name": "Legacy Prime",
+    "registrationStatus": "Created",
+    "term": {
+      "value": 5,
+      "unit": "Year"
+    },
+    "startDate": "2023-11-20",
+    "expectedEndDate": "2028-11-20",
+    "currency": {
+      "id": "9bd50b81-47f2-42c3-b854-937624b40d4d",
+      "isoCode": "USD",
+      "name": "Dólar americano"
+    },
+    "initialContractualCapital": 500000.0,
+    "initialConsolidatedCapital": 500000.0,
+    "currentBalance": null,
+    "initialCapitalOrigin": {
+      "id": "c0a1b2c3-0001-4c0a-9a00-000000000001",
+      "code": "CONTRACT_VALUE",
+      "name": "Valor do contrato"
+    },
+    "financialNotes": "Carteira patrimonial de longo prazo (originalmente em JPY).",
+    "businessStatus": {
+      "id": "81e8ecba-5d28-4f42-bdc7-729a07f4c3a0",
+      "code": "ACTIVE",
+      "name": "Ativo"
+    },
+    "primaryEngine": {
+      "engineId": "e99dec56-2b66-4cab-9bb3-12e084834817",
+      "code": "QUANT_CORE",
+      "name": "Quant Core",
+      "connectionStatus": "PendingConnection"
+    },
+    "participants": [
+      {
+        "participantId": "bc24b93d-af81-4721-834c-d2ccd145acce",
+        "clientId": "23b8042b-a4e2-40fd-9b90-a670fa276c0b",
+        "displayName": "Homologação Pessoa Física",
+        "personType": "PF",
+        "allocatedAmount": 300000.0,
+        "allocationPercentage": 60.0,
+        "contributedAmount": 0,
+        "baseAmount": 300000.0,
+        "linkedAtUtc": "2026-10-10T20:46:21.046932+00:00"
+      },
+      {
+        "participantId": "57c7f1c3-4cfb-4025-855b-6149ccfb1985",
+        "clientId": "cf2f5863-d234-42d9-9cc1-95881c05dbd1",
+        "displayName": "Éric Vicente",
+        "personType": "PF",
+        "allocatedAmount": 200000.0,
+        "allocationPercentage": 40.0,
+        "contributedAmount": 0,
+        "baseAmount": 200000.0,
+        "linkedAtUtc": "2026-10-10T20:46:21.046962+00:00"
+      }
+    ],
+    "createdAtUtc": "2026-10-10T20:46:21.046771+00:00",
+    "updatedAtUtc": "2026-11-13T03:20:35.846119+00:00",
+    "finalizedAtUtc": "2026-10-10T20:46:22.644687+00:00",
+    "version": 3,
+    "assetUniverseSummary": {
+      "assetCount": 0,
+      "marketCount": 0,
+      "currencyCount": 0,
+      "networkCount": 0
+    }
+  },
+  {
+    "id": "5df8fc11-d8aa-41a3-af08-0c76454e9b81",
+    "publicCode": "CTR-F65C316E",
+    "name": "Alpha Hedge Fund",
+    "registrationStatus": "Created",
+    "term": {
+      "value": 3,
+      "unit": "Year"
+    },
+    "startDate": "2025-03-15",
+    "expectedEndDate": "2028-03-15",
+    "currency": {
+      "id": "9bd50b81-47f2-42c3-b854-937624b40d4d",
+      "isoCode": "USD",
+      "name": "Dólar americano"
+    },
+    "initialContractualCapital": 125000.0,
+    "initialConsolidatedCapital": 125000.0,
+    "currentBalance": null,
+    "initialCapitalOrigin": {
+      "id": "c0a1b2c3-0001-4c0a-9a00-000000000001",
+      "code": "CONTRACT_VALUE",
+      "name": "Valor do contrato"
+    },
+    "financialNotes": "Fundo hedge multimercado em USD.",
+    "businessStatus": {
+      "id": "81e8ecba-5d28-4f42-bdc7-729a07f4c3a0",
+      "code": "ACTIVE",
+      "name": "Ativo"
+    },
+    "primaryEngine": {
+      "engineId": "e99dec56-2b66-4cab-9bb3-12e084834817",
+      "code": "QUANT_CORE",
+      "name": "Quant Core",
+      "connectionStatus": "PendingConnection"
+    },
+    "participants": [
+      {
+        "participantId": "c765cebf-49ea-4e12-b967-d818f5295895",
+        "clientId": "101044c1-60c2-4039-b4bb-3235a913217a",
+        "displayName": "HPJ Homologação",
+        "personType": "PJ",
+        "allocatedAmount": 75000.0,
+        "allocationPercentage": 60.0,
+        "contributedAmount": 0,
+        "baseAmount": 75000.0,
+        "linkedAtUtc": "2026-10-10T20:46:12.057228+00:00"
+      },
+      {
+        "participantId": "3f8e47c6-e744-4462-b010-232c2159a507",
+        "clientId": "cf2f5863-d234-42d9-9cc1-95881c05dbd1",
+        "displayName": "Éric Vicente",
+        "personType": "PF",
+        "allocatedAmount": 50000.0,
+        "allocationPercentage": 40.0,
+        "contributedAmount": 0,
+        "baseAmount": 50000.0,
+        "linkedAtUtc": "2026-10-10T20:46:12.249722+00:00"
+      }
+    ],
+    "createdAtUtc": "2026-10-10T20:46:11.666679+00:00",
+    "updatedAtUtc": "2026-10-10T20:46:14.166102+00:00",
+    "finalizedAtUtc": "2026-10-10T20:46:14.16596+00:00",
+    "version": 1,
+    "assetUniverseSummary": {
+      "assetCount": 0,
+      "marketCount": 0,
+      "currencyCount": 0,
+      "networkCount": 0
+    }
+  }
+]

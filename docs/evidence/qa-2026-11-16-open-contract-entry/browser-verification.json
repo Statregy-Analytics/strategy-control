@@ -1,0 +1,34 @@
+{
+  "checkedAt": "2026-11-16T19:21:51.191Z",
+  "runtime": "6a22117f34e02801e17a3fff99df9a0d10f5b7c1",
+  "published": "https://admin.strategyanalytics.com.br/contracts?contractId=01b837f5-4b9c-4171-a5d0-fee468ac6df1",
+  "passed": [
+    "Vintage Strategy CLOSED: Adicionar disabled",
+    "Legacy Prime ACTIVE: Adicionar opens entry",
+    "Claudio selection and actual status/type",
+    "wallet tabs and seven currencies",
+    "Free BRL available25000",
+    "BRL25000.01 insufficient: conversion/impact/audit hidden and confirm disabled",
+    "BRL200 converts USD34.89 using real PTAX",
+    "current capital/index unavailable: no fabricated values and confirm disabled",
+    "cancel/reopen clears unsent entry",
+    "Eric already linked: duplicate rejected",
+    "shared editor regression137 tested locally",
+    "375px local modal no horizontal overflow; viewport reset"
+  ],
+  "notValidatedIntegrated": [
+    "actual inclusion and atomic debits",
+    "positive impact against real current capital/index",
+    "official snapshots/share persistence/history",
+    "concurrent wallet changes and structured errors"
+  ],
+  "controlledTests": [
+    "three wallet/currency sources",
+    "same currency without FX",
+    "dilution before/after and largest remainder100%",
+    "missing current capital/index/date blocks keyboard submit",
+    "failed confirmation retains source amounts",
+    "stale wallet and quote responses and retries"
+  ],
+  "financialWrites": false
+}

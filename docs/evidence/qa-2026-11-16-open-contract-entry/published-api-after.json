@@ -1,0 +1,19 @@
+{
+  "checkedAtUtc": "2026-11-16T19:21:30.292960+00:00",
+  "contractId": "01b837f5-4b9c-4171-a5d0-fee468ac6df1",
+  "version": 3,
+  "sameVersion": true,
+  "sameParticipants": true,
+  "wallets": [
+    {
+      "id": "a4a754a8-ce55-4d03-9822-012df4c3d737",
+      "type": "Free",
+      "currencyId": "f39ba6d7-e6ca-4367-9f7e-81850804447d",
+      "currencyIsoCode": "BRL",
+      "balance": 25000.0,
+      "reserved": 0,
+      "available": 25000.0
+    }
+  ],
+  "financialWrites": false
+}
