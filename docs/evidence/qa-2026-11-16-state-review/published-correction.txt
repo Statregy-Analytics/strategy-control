@@ -1,0 +1,113 @@
+- banner:
+  - toolbar:
+    - button "Abrir navegação":
+    - generic: Strategy Analytics
+- main:
+  - generic: Transações e carteiras
+  - region "Visão consolidada das carteiras":
+    - button "Carteira Total —" [pressed]:
+      - generic: Carteira Total
+      - strong: —
+    - button "Carteira de Depósito —":
+      - generic: Carteira de Depósito
+      - strong: —
+    - button "Carteira Strategy —":
+      - generic: Carteira Strategy
+      - strong: —
+    - button "Carteira de Patrimônio —":
+      - generic: Carteira de Patrimônio
+      - strong: —
+    - paragraph: Total = Depósito + Strategy + Patrimônio, por moeda. Valores de moedas diferentes não são somados.
+  - tablist:
+    - tab "Transações" [selected]:
+      - generic: Transações
+    - tab "Carteiras":
+      - generic: Carteiras
+  - separator
+  - textbox "Buscar solicitações"
+  - button "Nova transação":
+    - generic: Nova transação
+  - generic: Solicitações pendentes
+  - progressbar "Carregando"
+  - generic: Histórico de transações
+  - progressbar "Carregando"
+- dialog:
+  - generic: Solicitação de transação
+  - button "Fechar painel":
+  - separator
+  - alert:
+    - generic: person
+    - text: "ID #REQ-2026-C175D385"
+    - generic: Éric Vicente
+    - status: Validada
+  - generic: Movimentação
+  - term: Tipo
+  - definition: Saque
+  - term: Valor
+  - definition: R$ 2.500,00
+  - term: Origem
+  - definition: Livre
+  - term: Destino
+  - definition: BRB - Banco de Brasília S.A. · ****2345
+  - term: Solicitada em
+  - definition: 10/10/2026
+  - generic: Aprovação e execução
+  - button "Solicitar correção":
+    - generic: Solicitar correção
+  - generic: Motivo / observação
+  - textbox "Motivo da ação"
+  - button "Rejeitar":
+    - generic: Rejeitar
+  - button "Cancelar":
+    - generic: Cancelar
+  - generic: Observações
+  - paragraph: Teste
+  - button "Adicionar observação":
+    - generic: Adicionar observação
+  - generic: Documentos
+  - paragraph: Nenhum documento vinculado.
+  - paragraph: A vinculação de documentos estará disponível após a definição dos tipos de vínculo aceitos.
+  - generic: Livro-razão
+  - table:
+    - rowgroup:
+      - row "Conta Direção Valor Data":
+        - columnheader "Conta"
+        - columnheader "Direção"
+        - columnheader "Valor"
+        - columnheader "Data"
+    - rowgroup
+  - generic: warning
+  - text: Nenhum lançamento executado
+  - generic: Histórico
+  - table:
+    - rowgroup:
+      - row "Ação Status Data":
+        - columnheader "Ação"
+        - columnheader "Status"
+        - columnheader "Data"
+    - rowgroup:
+      - row "Criação Aguardando validação 10/10/2026":
+        - cell "Criação"
+        - cell "Aguardando validação"
+        - cell "10/10/2026"
+      - row "Validar Validada 10/10/2026":
+        - cell "Validar"
+        - cell "Validada"
+        - cell "10/10/2026"
+  - generic: "Registros por página:"
+  - generic: "5"
+  - combobox "Registros por página:": "5"
+  - generic: arrow_drop_down
+  - generic: 1-2 de 2
+- dialog:
+  - heading "Solicitar correção" [level=2]
+  - paragraph: Solicitar correção ao responsável
+  - generic: Descrição da correção necessária
+  - textbox "Descrição da correção necessária" [active]:
+    - /placeholder: Descreva o que precisa ser corrigido
+    - text: "Conferência publicada: motivo obrigatório e cancelamento sem alterar o pedido existente."
+  - contentinfo:
+    - button "Voltar":
+      - generic: Voltar
+    - button "Confirmar Ação":
+      - generic: Confirmar Ação

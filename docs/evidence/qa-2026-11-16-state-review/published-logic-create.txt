@@ -1,0 +1,196 @@
+- banner:
+  - toolbar:
+    - button "Abrir navegação":
+    - generic: Strategy Analytics
+- main:
+  - button "Voltar para lógicas":
+    - generic: Voltar para lógicas
+  - heading "Criar Novo Motor de Variação Indexada" [level=1]
+  - paragraph: Configure identidade, ciclo, limites, intensidade, fechamento soberano e vínculos contratuais.
+  - button "Cancelar":
+    - generic: Cancelar
+  - button "Salvar Rascunho":
+    - generic: Salvar Rascunho
+  - button "Confirmar e Criar":
+    - generic: Confirmar e Criar
+  - main:
+    - region "Identidade do Motor":
+      - heading "Identidade do Motor" [level=2]
+      - paragraph: Defina como esse motor será identificado no sistema.
+      - generic: Nome do Motor *
+      - textbox "Nome do Motor *": QA publicação — não salvar
+      - generic: ID (Automático)
+      - textbox "ID (Automático)" [disabled]:
+        - /placeholder: —
+      - generic: Descrição Interna
+      - textbox "Descrição Interna"
+      - generic: Status Inicial
+      - generic: Em Análise
+      - combobox "Status Inicial": Em Análise
+      - generic: Moeda Firmada *
+      - generic: Selecione
+      - combobox "Moeda Firmada *": Selecione
+      - generic: Tipo de Motor
+      - generic: Selecione
+      - combobox "Tipo de Motor" [disabled]: Selecione
+      - group "Ícone Representativo":
+        - paragraph: Ícone Representativo
+        - button "Distribuição" [active] [pressed]
+        - button "Oscilação"
+        - button "Performance"
+        - button "Rápida"
+        - button "Segurança"
+        - button "Estrutural"
+        - button "Composta"
+        - button "Algorítmica"
+      - group "Cor Institucional":
+        - paragraph: Cor Institucional
+        - 'button "Cor #153d49" [pressed]'
+        - 'button "Cor #1447e6"'
+        - 'button "Cor #00b8db"'
+        - 'button "Cor #008236"'
+        - 'button "Cor #fee685"'
+        - 'button "Cor #e7000b"'
+        - 'button "Cor #c10007"'
+    - heading "Ciclo Trimestral" [level=2]
+    - paragraph: Defina o período, índices e alvo do ciclo operacional.
+    - generic: Índice Inicial do Motor
+    - spinbutton "Índice Inicial do Motor": "100"
+    - generic: Alvo do Ciclo Trimestral (%) *
+    - spinbutton "Alvo do Ciclo Trimestral (%) *"
+    - generic: Índice Final Obrigatório — calculado
+    - spinbutton "Índice Final Obrigatório — calculado" [disabled]
+    - generic: Data de Início do Ciclo
+    - textbox "Data de Início do Ciclo"
+    - generic: Data de Fechamento do Ciclo
+    - textbox "Data de Fechamento do Ciclo"
+    - region "Frequência de Atualização":
+      - heading "Frequência de Atualização" [level=2]
+      - paragraph: Configure o intervalo e ritmo de execução do motor.
+      - generic: Intervalo Operacional *
+      - generic: Selecione
+      - combobox "Intervalo Operacional *" [disabled]: Selecione
+      - generic: Atualizações por Dia
+      - textbox "Atualizações por Dia" [disabled]
+      - generic: Primeira Execução
+      - textbox "Primeira Execução"
+      - generic: Última Atualização
+      - textbox "Última Atualização" [disabled]: —
+      - generic: Próxima Atualização
+      - textbox "Próxima Atualização" [disabled]: —
+      - generic: Atualizações Estimadas no Ciclo
+      - textbox "Atualizações Estimadas no Ciclo" [disabled]
+    - region "Probabilidade Direcional Base":
+      - heading "Probabilidade Direcional Base" [level=2]
+      - paragraph: Configure a probabilidade de variação positiva ou negativa.
+      - generic: Chance Positiva (%)
+      - spinbutton "Chance Positiva (%)": "50"
+      - generic: "%"
+      - generic: Chance Negativa (%)
+      - spinbutton "Chance Negativa (%)" [disabled]: "50"
+      - generic: "%"
+      - paragraph: Barra Visual 100%
+      - img "Alta 50%; Baixa 50%":
+        - generic: Alta 50%
+        - generic: Baixa 50%
+      - paragraph:
+        - generic: "Soma atual:"
+        - strong: 100%
+      - strong: "Regra:"
+      - text: A soma das chances deve ser sempre 100%.
+    - heading "Intensidade por Atualização" [level=2]
+    - paragraph: Configure a magnitude de cada variação dentro dos limites.
+    - generic: Modo de Intensidade
+    - generic: Selecione
+    - combobox "Modo de Intensidade": Selecione
+    - generic: Intensidade Configurada (%)
+    - spinbutton "Intensidade Configurada (%)"
+    - region "Limites Operacionais":
+      - heading "Limites Operacionais" [level=2]
+      - paragraph: Defina as bandas de variação diária e mensal.
+      - heading "Limite Diário" [level=3]
+      - generic: Teto Diário (%)
+      - textbox "Teto Diário (%)"
+      - generic: "%"
+      - generic: Piso Diário (%)
+      - textbox "Piso Diário (%)"
+      - generic: "%"
+      - heading "Limite Mensal" [level=3]
+      - generic: Teto Mensal (%)
+      - textbox "Teto Mensal (%)"
+      - generic: "%"
+      - generic: Piso Mensal (%)
+      - textbox "Piso Mensal (%)"
+      - generic: "%"
+      - paragraph: O limite efetivo considera simultaneamente a banda diária e a banda mensal.
+    - region "Zona de Amortecimento das Bordas":
+      - heading "Zona de Amortecimento das Bordas" [level=2]
+      - paragraph: Ajuste dinâmico de probabilidade nas proximidades dos limites.
+      - text: Ativar Zona de Amortecimento
+      - paragraph: Quando ativada, ajusta a chance positiva ou negativa conforme o índice se aproxima do teto ou do piso diário.
+      - switch "Ativar Zona de Amortecimento"
+    - region "Fechamento Soberano":
+      - heading "Fechamento Soberano" [level=2]
+      - paragraph: Garantia do índice final ao término do ciclo trimestral.
+      - generic: Índice Inicial do Ciclo
+      - textbox "Índice Inicial do Ciclo" [disabled]: 100,0000
+      - generic: Alvo do Ciclo
+      - textbox "Alvo do Ciclo" [disabled]
+      - generic: Índice Final Obrigatório
+      - textbox "Índice Final Obrigatório" [disabled]
+      - heading "Princípio do Fechamento Soberano" [level=3]
+      - paragraph: As bandas e probabilidades controlam o percurso. O fechamento soberano controla o índice final do ciclo trimestral.
+    - heading "Vincular Papéis/Contratos (Opcional)" [level=2]
+    - paragraph: Associe contratos ou papéis existentes agora ou faça depois.
+    - textbox "Buscar contrato ou papel por nome ou ID":
+      - /placeholder: Buscar contrato ou papel por nome ou ID...
+    - list:
+      - checkbox "Vincular QA 136 - distribuicao atribuida - teste ficticio 16-11":
+      - text: QA 136 - distribuicao atribuida - teste ficticio 16-11
+      - generic: CTR-26AB2AB6
+      - checkbox "Vincular Vintage Strategy":
+      - text: Vintage Strategy
+      - generic: CTR-E9E28B59
+      - checkbox "Vincular Legacy Prime":
+      - text: Legacy Prime
+      - generic: CTR-E976C745
+      - checkbox "Vincular Gamma Yield Secure":
+      - text: Gamma Yield Secure
+      - generic: CTR-7110739C
+      - checkbox "Vincular Beta Growth Spec":
+      - text: Beta Growth Spec
+      - generic: CTR-403B56CC
+      - checkbox "Vincular Alpha Hedge Fund":
+      - text: Alpha Hedge Fund
+      - generic: CTR-F65C316E
+    - paragraph: Importante sobre Vínculos
+    - text: Papéis vinculados após o início do ciclo não herdam performance anterior. A valorização passa a ser calculada a partir do índice na conexão.
+    - complementary "Pré-visualização do motor":
+      - heading "QA publicação — não salvar" [level=2]
+      - generic: —
+      - generic: —
+      - generic: Status
+      - generic: Em Análise
+      - generic: Configuração
+      - generic: —
+      - generic: Moeda Firmada
+      - strong: Indisponível
+      - term: Moeda Firmada
+      - definition: Indisponível
+      - term: Ciclo Trimestral
+      - definition: Indisponível
+      - term: Índice Inicial
+      - definition: 100,0000
+      - term: Índice Atual
+      - definition: Indisponível
+      - term: Alvo do Ciclo
+      - definition: Indisponível
+      - term: Índice Final Obrigatório
+      - definition: Indisponível
+      - term: Intervalo Operacional
+      - definition: Indisponível
+      - term: Próxima Atualização
+      - definition: Indisponível
+      - term: Papéis/Contratos Vinculados
+      - definition: "0"
+      - generic: Pré-visualização do motor

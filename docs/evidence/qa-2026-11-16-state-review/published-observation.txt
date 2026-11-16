@@ -1,0 +1,136 @@
+- banner:
+  - toolbar:
+    - button "Abrir navegação":
+    - generic: Strategy Analytics
+- main:
+  - generic: Transações e carteiras
+  - region "Visão consolidada das carteiras":
+    - button "Carteira Total —" [pressed]:
+      - generic: Carteira Total
+      - strong: —
+    - button "Carteira de Depósito —":
+      - generic: Carteira de Depósito
+      - strong: —
+    - button "Carteira Strategy —":
+      - generic: Carteira Strategy
+      - strong: —
+    - button "Carteira de Patrimônio —":
+      - generic: Carteira de Patrimônio
+      - strong: —
+    - paragraph: Total = Depósito + Strategy + Patrimônio, por moeda. Valores de moedas diferentes não são somados.
+  - tablist:
+    - tab "Transações" [selected]:
+      - generic: Transações
+    - tab "Carteiras":
+      - generic: Carteiras
+  - separator
+  - textbox "Buscar solicitações"
+  - button "Nova transação":
+    - generic: Nova transação
+  - generic: Solicitações pendentes
+  - table:
+    - rowgroup:
+      - row "Data/Hora ID Tipo Cliente Origem Destino Valor Status Responsável":
+        - columnheader "Data/Hora"
+        - columnheader "ID"
+        - columnheader "Tipo"
+        - columnheader "Cliente"
+        - columnheader "Origem"
+        - columnheader "Destino"
+        - columnheader "Valor"
+        - columnheader "Status"
+        - columnheader "Responsável"
+        - columnheader
+    - rowgroup
+  - generic: warning
+  - text: Nenhum registro encontrado
+  - generic: "Itens por página:"
+  - generic: "10"
+  - combobox "Itens por página": "10"
+  - generic: keyboard_arrow_down
+  - generic: Mostrando 0 a 0 de 0 registros
+  - generic: Página 1 de 1
+  - button "Anterior" [disabled]:
+    - generic: Anterior
+  - navigation "Paginação":
+    - button "1":
+      - generic: "1"
+  - button "Próximo" [disabled]:
+    - generic: Próximo
+  - generic: Histórico de transações
+  - progressbar "Carregando"
+- dialog:
+  - generic: Solicitação de transação
+  - button "Fechar painel":
+  - separator
+  - alert:
+    - generic: person
+    - text: "ID #REQ-2026-CF7A287A"
+    - generic: Éric Vicente
+    - status: Cancelada
+  - generic: Movimentação
+  - term: Tipo
+  - definition: Depósito
+  - term: Valor
+  - definition: R$ 0,01
+  - term: Origem
+  - definition: Banco do Brasil S.A. · ****1873
+  - term: Destino
+  - definition: Livre
+  - term: Solicitada em
+  - definition: 16/11/2026
+  - generic: Aprovação e execução
+  - paragraph: Nenhuma ação disponível para o estado atual.
+  - generic: Observações
+  - paragraph: "QA E07 16/11: deposito ficticio para solicitar correcao e cancelar; nao aprovar/executar."
+  - button "Adicionar observação":
+    - generic: Adicionar observação
+  - generic: Documentos
+  - paragraph: Nenhum documento vinculado.
+  - generic: Livro-razão
+  - table:
+    - rowgroup:
+      - row "Conta Direção Valor Data":
+        - columnheader "Conta"
+        - columnheader "Direção"
+        - columnheader "Valor"
+        - columnheader "Data"
+    - rowgroup
+  - generic: warning
+  - text: Nenhum lançamento executado
+  - generic: Histórico
+  - table:
+    - rowgroup:
+      - row "Ação Status Data":
+        - columnheader "Ação"
+        - columnheader "Status"
+        - columnheader "Data"
+    - rowgroup:
+      - row "Criação Aguardando comprovante 16/11/2026":
+        - cell "Criação"
+        - cell "Aguardando comprovante"
+        - cell "16/11/2026"
+      - row "Solicitar correção Correção solicitada 16/11/2026":
+        - cell "Solicitar correção"
+        - cell "Correção solicitada"
+        - cell "16/11/2026"
+      - row "Cancelar Cancelada 16/11/2026":
+        - cell "Cancelar"
+        - cell "Cancelada"
+        - cell "16/11/2026"
+  - generic: "Registros por página:"
+  - generic: "5"
+  - combobox "Registros por página:": "5"
+  - generic: arrow_drop_down
+  - generic: 1-3 de 3
+- dialog:
+  - heading "Adicionar observação" [level=2]
+  - generic: Observação Interna
+  - textbox "Observação Interna" [active]:
+    - /placeholder: Adicione uma observação que ficará registrada no histórico
+    - text: Conferência da versão publicada; cancelar sem gravar.
+  - contentinfo:
+    - button "Voltar":
+      - generic: Voltar
+    - button "Confirmar Ação":
+      - generic: Confirmar Ação

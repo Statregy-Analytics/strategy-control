@@ -29,5 +29,17 @@
     "operational engine persistence",
     "financial execution and bank creation flow"
   ],
-  "published": false
+  "published": {
+    "commit": "0ccab41",
+    "workflowRun": 43972715009,
+    "conclusion": "success",
+    "smoke": [
+      "translated correction history",
+      "observation open, text and cancel without writing",
+      "receipt download and close",
+      "correction open, reason and cancel without changing existing request",
+      "logic create, name reflected in preview and return without saving"
+    ],
+    "limitations": "Integrated correction/observation writes ran through local frontend against HML API. Published smoke did not repeat financial request creation or correction writes."
+  }
 }

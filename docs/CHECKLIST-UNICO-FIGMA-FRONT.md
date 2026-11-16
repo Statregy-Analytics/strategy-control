@@ -25,7 +25,7 @@ Atualização: 16/11/2026. Este é o índice desta revisão ampla. Evidências a
 - [x] Crédito: estado vazio real consultado. Comunicados: listagem com publicado/arquivado e navegação do publicado percorridas, sem escrita. **Smoke tests; não encerram a comparação integral dos grupos R01/M01/M03.**
 - [x] Admin: lint e build aprovados; **387 testes locais = 379 versionados + 8 de estudo preexistentes**, incluindo seis novos testes de falha, duplicidade, descarte, versão/permissão, correção e observação. Área do Cliente sem alteração nesta rodada.
 - [x] Harness temporário removido antes do build. `git diff --check` dos arquivos desta entrega aprovado. A verificação global apontou whitespace no Swagger modificado anteriormente no worktree; essa alteração alheia foi preservada e não entra no commit.
-- [ ] Publicação e smoke tests na URL publicada — registrar o release após o deploy.
+- [x] Publicado em **0ccab41**, deploy **43972715009** concluído com sucesso (testes, lint, build, upload e ativação). Smoke tests no Admin publicado: histórico de correção traduzido, E10 abrir/preencher/Voltar, E09 baixar/Confirmar, E07 abrir/preencher/Voltar sem alterar o saque existente e criação/prévia de Lógicas sem salvar. Console sem erros na conferência de Transações. [Evidências publicadas](evidence/qa-2026-11-16-state-review/published-correction.txt).
 
 ### O que continua aberto, sem transferir trabalho de front para o backend
 
