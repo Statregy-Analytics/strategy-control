@@ -1,0 +1,125 @@
+const imgArrowDownLeft = "https://www.figma.com/api/mcp/asset/6e10885c-5a6b-4c0b-84cf-b7842c3738cf.svg";
+const imgArrowUpRight = "https://www.figma.com/api/mcp/asset/b26d38e7-aafc-4518-a4fc-e296c299edb7.svg";
+const imgArrowRightLeft = "https://www.figma.com/api/mcp/asset/93438d62-f07b-4010-9fba-f72f2b49b985.svg";
+const imgVector = "https://www.figma.com/api/mcp/asset/a9f11c06-1d4e-4a18-9534-150a02c9221d.svg";
+const imgVector1 = "https://www.figma.com/api/mcp/asset/592c9e6b-2b84-46af-9f57-dc37725ec729.svg";
+
+export default function Md01NovaTransacaoSelecaoDeTipo() {
+  return (
+    <div className="backdrop-blur-[20px] border-[0.8px] border-[var(--color\/v2\/text\/nav-active,white)] border-solid drop-shadow-[4px_4px_6px_rgba(0,0,0,0.13)] gap-x-[16px] gap-y-[16px] grid grid-cols-[_462.40px] grid-rows-[__46px_398.35px] p-[24.8px] relative rounded-[14px] size-full" data-node-id="1484:86271" style={{ backgroundImage: "linear-gradient(89.75340369972056deg, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0.03) 50.059%, rgba(255, 255, 255, 0.07) 100.06%)" }} data-name="MD01 · Nova transação · Seleção de tipo">
+      <div className="col-1 justify-self-stretch relative row-1 self-stretch shrink-0" data-node-id="1484:86272" data-name="DialogHeader">
+        <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex flex-col gap-[var(--sa-spacing-8,8px)] items-start relative size-full">
+          <div className="relative shrink-0 w-full" data-node-id="1484:86273" data-name="DialogTitle">
+            <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex flex-col items-start relative size-full">
+              <p className="[word-break:break-word] font-['Inter:Semi_Bold'] font-semibold leading-[18px] not-italic relative shrink-0 text-[18px] text-[color:var(--sa-color-text-primary,white)] whitespace-nowrap" data-node-id="1484:86274">
+                Nova Transação
+              </p>
+            </div>
+          </div>
+          <div className="relative shrink-0 w-full" data-node-id="1484:86275" data-name="DialogDescription">
+            <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex flex-col items-start relative size-full">
+              <p className="[word-break:break-word] font-['Inter:Regular'] font-normal leading-[20px] not-italic relative shrink-0 text-[14px] text-[color:var(--sa-color-text-secondary,rgba(255,255,255,0.72))] whitespace-nowrap" data-node-id="1484:86276">
+                Selecione o tipo de operação que deseja realizar
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div className="col-1 justify-self-stretch relative rounded-[var(--sa-radius-8,8px)] row-2 self-stretch shrink-0" data-node-id="1484:86277" data-name="Container">
+        <div className="bg-clip-padding border-0 border-[transparent] border-solid gap-x-[16px] gap-y-[16px] grid grid-cols-[__223.20px_223.20px] grid-rows-[__155.18px_179.18px] py-[24px] relative size-full">
+          <div className="border-[length:var(----sa-stroke-1,1px)] border-[var(--sa-color-border-selection-option,rgba(255,255,255,0.2))] border-solid col-1 justify-self-stretch relative rounded-[var(--sa-radius-5,5px)] row-1 self-stretch shrink-0" data-node-id="1484:86278" style={{ backgroundImage: "linear-gradient(89.64668964165354deg, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0.03) 50.059%, rgba(255, 255, 255, 0.07) 100.06%)" }} data-name="Opção · Depósito">
+            <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex flex-col items-start justify-center p-[var(--sa-spacing-24,25px)] relative size-full">
+              <div className="relative shrink-0 size-[32px]" data-node-id="1484:86279" data-name="ArrowDownLeft">
+                <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgArrowDownLeft} />
+              </div>
+              <div className="h-[36px] relative shrink-0 w-[172px]" data-node-id="1484:86282" data-name="Heading 3">
+                <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex flex-col items-center pt-[var(--sa-spacing-12,12px)] relative size-full">
+                  <p className="[word-break:break-word] font-['Inter:Semi_Bold'] font-semibold leading-[24px] not-italic relative shrink-0 text-[16px] text-[color:var(--sa-color-text-primary,white)] text-center whitespace-nowrap" data-node-id="1484:86283">
+                    Depósito
+                  </p>
+                </div>
+              </div>
+              <div className="relative shrink-0 w-full" data-node-id="1484:86284" data-name="Paragraph:margin">
+                <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex flex-col items-center pt-[var(--sa-spacing-4,4px)] relative size-full">
+                  <p className="[word-break:break-word] font-['Inter:Regular'] font-normal leading-[16px] not-italic relative shrink-0 text-[12px] text-[color:var(--sa-color-text-secondary,rgba(255,255,255,0.72))] text-center w-[172px]" data-node-id="1484:86285">
+                    Entrada de recursos na Carteira de Depósito
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="border-[length:var(----sa-stroke-1,1px)] border-[var(--sa-color-border-selection-option,rgba(255,255,255,0.2))] border-solid col-2 justify-self-stretch relative rounded-[var(--sa-radius-5,5px)] row-1 self-stretch shrink-0" data-node-id="1484:86286" style={{ backgroundImage: "linear-gradient(89.64668964165354deg, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0.03) 50.059%, rgba(255, 255, 255, 0.07) 100.06%)" }} data-name="Opção · Saque">
+            <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex flex-col items-start justify-center p-[var(--sa-spacing-24,25px)] relative size-full">
+              <div className="relative shrink-0 size-[32px]" data-node-id="1484:86287" data-name="ArrowUpRight">
+                <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgArrowUpRight} />
+              </div>
+              <div className="h-[36px] relative shrink-0 w-[172px]" data-node-id="1484:86290" data-name="Heading 3">
+                <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex flex-col items-center pt-[var(--sa-spacing-12,12px)] relative size-full">
+                  <p className="[word-break:break-word] font-['Inter:Semi_Bold'] font-semibold leading-[24px] not-italic relative shrink-0 text-[16px] text-[color:var(--sa-color-text-primary,white)] text-center whitespace-nowrap" data-node-id="1484:86291">
+                    Saque
+                  </p>
+                </div>
+              </div>
+              <div className="relative shrink-0 w-full" data-node-id="1484:86292" data-name="Paragraph:margin">
+                <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex flex-col items-center pt-[var(--sa-spacing-4,4px)] relative size-full">
+                  <p className="[word-break:break-word] font-['Inter:Regular'] font-normal leading-[16px] not-italic relative shrink-0 text-[12px] text-[color:var(--sa-color-text-secondary,rgba(255,255,255,0.72))] text-center w-[172px]" data-node-id="1484:86293">
+                    Retirada de recursos da Carteira de Depósito
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="border-[length:var(----sa-stroke-1,1px)] border-[var(--sa-color-border-selection-option,rgba(255,255,255,0.2))] border-solid col-[1/span_2] justify-self-stretch relative rounded-[var(--sa-radius-5,5px)] row-2 self-stretch shrink-0" data-node-id="1484:86294" style={{ backgroundImage: "linear-gradient(89.36611258026255deg, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0.03) 50.059%, rgba(255, 255, 255, 0.07) 100.06%)" }} data-name="Opção · Transferência">
+            <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex flex-col items-start justify-center p-[var(--sa-spacing-24,25px)] relative size-full">
+              <div className="relative shrink-0 size-[32px]" data-node-id="1484:86295" data-name="ArrowRightLeft">
+                <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgArrowRightLeft} />
+              </div>
+              <div className="relative shrink-0 w-full" data-node-id="1484:86300" data-name="Heading 3:margin">
+                <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex flex-col items-center pt-[var(--sa-spacing-12,12px)] relative size-full">
+                  <p className="[word-break:break-word] font-['Inter:Semi_Bold'] font-semibold leading-[24px] not-italic relative shrink-0 text-[16px] text-[color:var(--sa-color-text-primary,white)] text-center w-[172px]" data-node-id="1484:86301">
+                    Transferência entre Carteiras
+                  </p>
+                </div>
+              </div>
+              <div className="relative shrink-0 w-full" data-node-id="1484:86302" data-name="Paragraph:margin">
+                <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex flex-col items-center pt-[var(--sa-spacing-4,4px)] relative size-full">
+                  <p className="[word-break:break-word] font-['Inter:Regular'] font-normal leading-[16px] not-italic relative shrink-0 text-[12px] text-[color:var(--sa-color-text-secondary,rgba(255,255,255,0.72))] text-center w-[172px]" data-node-id="1484:86303">
+                    Entre a Carteira de Depósito e a Carteira Strategy
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div className="absolute left-[478.4px] opacity-70 rounded-[2px] size-[16px] top-[16.02px]" data-node-id="1484:86315" data-name="DialogClose">
+        <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex flex-col items-start justify-center relative size-full">
+          <div className="h-[16px] relative shrink-0 w-full" data-node-id="1484:86316" data-name="Icon">
+            <div className="bg-clip-padding border-0 border-[transparent] border-solid overflow-clip relative rounded-[inherit] size-full">
+              <div className="absolute inset-1/4" data-node-id="1484:86317" data-name="Vector">
+                <div className="absolute inset-[-8.33%]">
+                  <img alt="" className="block max-w-none size-full" src={imgVector} />
+                </div>
+              </div>
+              <div className="absolute inset-1/4" data-node-id="1484:86318" data-name="Vector">
+                <div className="absolute inset-[-8.33%]">
+                  <img alt="" className="block max-w-none size-full" src={imgVector1} />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+SUPER CRITICAL: The generated React+Tailwind code MUST be converted to match the target project's technology stack and styling system.
+1. Analyze the target codebase to identify: technology stack, styling approach, component patterns, and design tokens
+2. Convert React syntax to the target framework/library
+3. Transform all Tailwind classes to the target styling system while preserving exact visual design
+4. Follow the project's existing patterns and conventions
+DO NOT install any Tailwind as a dependency unless the user instructs you to do so.
+
+Node ids have been added to the code as data attributes, e.g. `data-node-id="1:2"`.
+These styles are contained in the design: SA/Gradient/Glass Control: , SA/Glass/Surface Subtle: Effect(type: BACKGROUND_BLUR, radius: 40); Effect(type: DROP_SHADOW, color: #00000021, offset: (4, 4), radius: 12, spread: 0).
+The generated code contains image and SVG URL constants, e.g. const image = 'https://www.figma.com/api/mcp/asset/550e8400-e29b-41d4-a716-446655440000.png'. These URLs are temporary download sources and expire after 7 days. Download each asset into the project with curl -L, then replace its URL in the generated code with a reference to the downloaded asset. Never use the temporary URLs as runtime image sources.

@@ -8,19 +8,20 @@ Esta rodada reúne os ajustes funcionais que ainda estavam na fila. **Não decla
 
 | Grupo | Front entregue nesta rodada | Limite atual |
 | --- | --- | --- |
-| T01/T02 — Transações | Adapter de criação com catálogo/IDs reais, consulta de saldo antes de gravar, transferência para outro cliente, confirmação MD07 com senha, motivo obrigatório ao recusar/cancelar, edição pendente por PUT + observação separada com retomada parcial, correção com origens consultadas e links original/correção. | Não classificar envio bancário, upload, redução multiorigem ou execução final como homologados: bloqueios específicos abaixo. |
+| T01/T02 — Transações | MD01–MD04/MD04.2 em modal compacto, seleção separada do formulário, Voltar e campos na ordem aprovada, sem o resumo extra do painel legado; adapter de criação com catálogo/IDs reais, consulta de saldo antes de gravar, transferência para outro cliente, confirmação MD07 com senha, motivo obrigatório ao recusar/cancelar, edição pendente por PUT + observação separada com retomada parcial, correção com origens consultadas e links original/correção. | Não classificar envio bancário, upload, redução multiorigem ou execução final como homologados: bloqueios específicos abaixo. |
 | P01 — Saque | Pai do modal e rota direta conectados ao adapter; rota direta carrega saldo real; resolução do currencyId pela carteira Free; recuperação reutiliza o formulário existente. Nenhum campo do desenho foi retirado. | DTO do saque não recebe a senha e contas não informam moeda. Adapter recusa confirmar sem esse contrato; não descarta a senha nem mostra sucesso. |
-| P06 — Empréstimos/alavancagem | Minhas Alavancagens usa GET /client/loans completo/paginado, grupos e dívida por moeda; detalhe por ID lê a API. Bloqueio consulta nível real e protege rotas diretas. Removidos dados/valores padrão fictícios e sucessos de upload/pagamento simulados. Ofertas sem endpoint ficam com erro/retry em vez de ofertas falsas. | Faltam dados de parcelas/etapas, ofertas/propostas/simulações/solicitações e pagamentos. Listagem informativa já existe e está integrada; não cobrá-la novamente. |
+| P06 — Empréstimos/alavancagem | Minhas Alavancagens usa GET /client/loans completo/paginado, grupos e dívida por moeda; detalhe por ID lê a API. Bloqueio consulta nível real e protege rotas diretas. Removidos dados/valores padrão fictícios e sucessos de upload/pagamento simulados. Ofertas e parcelas simuladas sem endpoint ficam com erro/retry em vez de ofertas falsas. O colateral não chega à confirmação final local; uma etapa final restaurada é limitada à etapa anterior ao envio. | Faltam dados de parcelas/etapas, ofertas/propostas/simulações/solicitações e pagamentos. Listagem informativa já existe e está integrada; não cobrá-la novamente. |
 | L02 — Motor ativo | Composição da linha ativa conforme 1484:77384, Pausar/Editar/Entrar, navegação existente e valores indisponíveis preservados. Status ativo exige status explícito, nunca isSelectable. | Catálogo não retorna estado operacional/métricas e não há pausa operacional. Pausar fica desabilitado; frame preenchido validado com fixture controlada. |
 
 ### Testes executados
 
 - [x] Admin: lint, build, diff check e **381 testes locais (373 versionados + 8 do estudo preexistente)**. Incluem testes de saldo insuficiente/desconhecido, currencyId real, destinatário diferente, senha, falha sem sucesso falso, limpeza da senha, edição parcial e correção sem origem presumida.
-- [x] Cliente: lint, build, diff check e **428 testes**. Paginação completa, descarte de consulta obsoleta, dívida separada por moeda, valores desconhecidos, nível real e bloqueio do saque sem confirmação de senha suportada.
+- [x] Cliente: lint, build, diff check e **430 testes**. Paginação completa, descarte de consulta obsoleta, dívida separada por moeda, valores desconhecidos, nível real e bloqueio do saque sem confirmação de senha suportada.
 - [x] Navegador local real: transferência fictícia de **R$ 0,01** entre Éric e Cláudio. Senha incorreta rejeitada; senha válida criou `REQ-2026-1F08A2D4` em PendingValidation. Cancelamento com motivo/senha válido concluído. Não foi aprovada nem executada. Estado final Canceled, **zero execuções e zero lançamentos**; saldos/reservas de ambos exatamente iguais aos anteriores. [Evidência](evidence/qa-2026-11-16-front-functional/wallets-after-cancellation.json).
 - [x] Navegador local real: modal e rota de saque com saldos, recuperação existente sem enviar e-mail, bloqueio de nível de Alavancagem e de Minhas Alavancagens, navegação ao Perfil. A conta Éric consultada retornou nível 0; não usar o valor legado do store.
 - [x] Dados controlados no navegador: empréstimos ativos/quitados, agrupamento, expansão, valores não disponíveis, vazio confirmado, erro com retry. Corrigida sobreposição das métricas em celular; conferência em **390px**, grade em uma coluna, sem overflow horizontal. Harness removido antes do build.
 - [x] Dados controlados no navegador: linha de motor ativo, métricas conhecidas e indisponíveis, Editar emitindo a ação correta e Pausar desabilitado. Nenhum motor fictício foi salvo na API.
+- [x] Nova Transação: MD01, MD02, MD03 e MD04.2 percorridos no navegador local; ícones originais, escolha/Voltar, saldo e prazo. MD01/MD03 conferidos em 390px sem overflow; chevrons e CircleAlert em 16px nativos.
 - [x] Revisão local da correção: banco mascarado legível, valor original, diferença, carteiras e transação em processamento reais; falha de uma seção não fabrica saldos. Não se executou correção financeira de depósito.
 - [ ] Publicação e smoke tests nas URLs publicadas: em andamento, registrar ao fechar.
 
@@ -42,7 +43,7 @@ Os bloqueios 136–141 continuam como na entrega anterior. Nenhum novo campo/aç
 - [ ] Todos os frames/estados abaixo comparados visualmente, inclusive erro, vazio e retorno.
 - [ ] Fluxos de escrita e leitura integrados testados com dados fictícios.
 - [x] Admin: lint e build aprovados; 381 testes locais passaram (373 versionados + 8 de estudo já existentes no worktree; cobertura de contratos e operações).
-- [x] Checks desta entrega 139–141: Admin e Área do Cliente com lint/build aprovados; Cliente com 428 testes. Reexecutar ao alterar os demais itens.
+- [x] Checks desta entrega 139–141: Admin e Área do Cliente com lint/build aprovados; Cliente com 430 testes. Reexecutar ao alterar os demais itens.
 - [ ] Deploy confirmado e testes repetidos nas URLs publicadas.
 - [x] Pendências de frontend separadas das pendências reais da API, do designer e da limitação de consulta ao Figma.
 

@@ -590,19 +590,21 @@
       "versioned": 373,
       "unrelatedStudy": 8
     },
-    "client": 428,
+    "client": 430,
     "lint": "passed",
     "build": "passed",
     "browserReal": [
       "transfer request created with valid password after invalid password rejected",
       "cancel with reason and password; zero executions/ledger; original balances restored",
       "level 0 blocked on direct leverage/my-leverages routes; profile navigation",
-      "withdrawal modal and standalone route load real wallet balances; recovery form reused without sending email"
+      "withdrawal modal and standalone route load real wallet balances; recovery form reused without sending email",
+      "MD01/MD02/MD03/MD04.2 split selection/form, native icons and 390px MD01/MD03 without overflow"
     ],
     "browserControlled": [
       "loan statuses, expansion, missing metrics, empty/error/retry",
       "390px loan cards without metric overlap or horizontal overflow",
-      "active engine row events; pause disabled; missing values not filled"
+      "active engine row events; pause disabled; missing values not filled",
+      "active engine actions hidden outside hover/focus, revealed by Tab; pause stays disabled"
     ],
     "notValidated": [
       "complete approval/execution cycle",
@@ -611,6 +613,11 @@
       "multi-origin deposit correction",
       "real level-3 customer with populated loans",
       "all 85 remaining comparison frames"
+    ],
+    "guardTests": [
+      "collateral cannot advance to unpersisted confirmation",
+      "restored final collateral step clamped",
+      "offer/loan/wallet templates compile"
     ]
   },
   "harnessesRemoved": true,

@@ -216,14 +216,7 @@
         ><title-card title="Carteiras do cliente" /><q-card-section
           ><customer-portfolio :customer-id="portfolioCustomer" /></q-card-section></q-card
     ></q-dialog>
-    <q-dialog
-      v-model="createOpen"
-      :persistent="createBusy"
-      position="right"
-      full-height
-      full-width
-      maximized
-      class="control-width"
+    <q-dialog v-model="createOpen" :persistent="createBusy"
       ><transaction-create
         :submit-operation="submitAdminTransaction"
         @busy="createBusy = $event"
