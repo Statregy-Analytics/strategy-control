@@ -273,6 +273,7 @@ export function useContractWorkspace(props, emit, notify) {
       loadEngines()
       loadDebts()
       loadHistory()
+      loadContributions()
       notify({ type: 'positive', message: finalize ? 'Contrato criado.' : 'Contrato salvo.' })
       emit('saved', id.value)
       return true

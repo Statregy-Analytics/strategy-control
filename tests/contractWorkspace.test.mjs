@@ -294,5 +294,8 @@ test('136: closed decimal allocation uses only existing draft fields before fina
     h.writes.some((write) => /wallet|transaction/.test(write.path)),
     false,
   )
+  const refresh = h.reads.filter((read) => read.path === 'admin/transactions').at(-1)
+  assert.equal(refresh.params.contractId, 'contract')
+  assert.equal(refresh.params.status, 'Completed')
   h.dispose()
 })
