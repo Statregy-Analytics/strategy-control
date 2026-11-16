@@ -472,7 +472,7 @@
                 outline
                 no-caps
                 label="Adicionar"
-                :disable="busy"
+                :disable="busy || !canAddContractParticipant(detail.state.data)"
                 @click="clientOpen = true"
             /></template>
             <div v-if="!detail.state.data?.participants?.length" class="contract-empty">
@@ -717,7 +717,7 @@
       ></resource-state>
     </main>
     <contract-participant-dialog
-      v-if="clientOpen && !draft"
+      v-if="clientOpen && !draft && canAddContractParticipant(detail.state.data)"
       :busy="busy"
       :existing-ids="(detail.state.data?.participants || []).map((p) => p.clientId)"
       :submit="includeParticipant"
@@ -837,7 +837,10 @@ import {
   columns,
 } from 'src/services/financeService'
 import { centsDecimal } from 'src/services/contractDistribution'
-import { participantEntryBlocked } from 'src/services/contractParticipantEntry'
+import {
+  participantEntryBlocked,
+  canAddContractParticipant,
+} from 'src/services/contractParticipantEntry'
 import { walletCapitalTotal } from 'src/services/contractWalletCapital'
 import { contractPercentageLabel } from 'src/services/contractDistribution'
 import { contractMovements } from 'src/services/contractMovements'

@@ -689,3 +689,29 @@ test('138: unavailable current capital/index blocks even keyboard submission; fa
   assert.equal(failed.control.error.value, entry.participantEntryBlocked)
   assert.equal(failed.control.flow.lines.value[0].amount, '145000.00')
 })
+
+test('138: adding a participant is offered only for a finalized active contract', () => {
+  for (const status of ['CLOSED', 'SUSPENDED', 'CANCELLED', null])
+    assert.equal(
+      entry.canAddContractParticipant({
+        registrationStatus: 'Created',
+        businessStatus: { code: status },
+      }),
+      false,
+    )
+  assert.equal(
+    entry.canAddContractParticipant({
+      registrationStatus: 'Draft',
+      businessStatus: { code: 'ACTIVE' },
+    }),
+    false,
+  )
+  assert.equal(entry.canAddContractParticipant(null), false)
+  assert.equal(
+    entry.canAddContractParticipant({
+      registrationStatus: 'Created',
+      businessStatus: { code: 'ACTIVE' },
+    }),
+    true,
+  )
+})

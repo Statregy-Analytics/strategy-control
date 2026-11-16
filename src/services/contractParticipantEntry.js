@@ -113,3 +113,10 @@ export function validEntryDate(value) {
     parsed.toISOString().slice(0, 10) === value
   )
 }
+
+export function canAddContractParticipant(contract) {
+  return (
+    ['Created', 'Finalized'].includes(contract?.registrationStatus) &&
+    contract?.businessStatus?.code === 'ACTIVE'
+  )
+}
