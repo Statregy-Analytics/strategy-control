@@ -63,9 +63,18 @@
           >
           <template #body-cell-destination="p"
             ><q-td :props="p"
-              ><div>{{ contractEndpoint(p.row.destination, p.row.currencyIsoCode).title }}</div>
+              ><div>
+                {{
+                  p.row.destinationClient?.name ||
+                  contractEndpoint(p.row.destination, p.row.currencyIsoCode).title
+                }}
+              </div>
               <small>{{
-                contractEndpoint(p.row.destination, p.row.currencyIsoCode).detail
+                p.row.destinationClient
+                  ? contractEndpoint(p.row.destination, p.row.currencyIsoCode).title +
+                    ' · ' +
+                    (p.row.currencyIsoCode || '')
+                  : contractEndpoint(p.row.destination, p.row.currencyIsoCode).detail
               }}</small></q-td
             ></template
           >
@@ -73,9 +82,7 @@
             ><q-td :props="p"
               ><strong>{{ money(p.row.amount, p.row.currencyIsoCode) }}</strong
               ><small v-if="p.row.conversion"
-                >{{
-                  money(p.row.conversion.sourceAmount, p.row.conversion.sourceCurrencyIsoCode)
-                }}
+                >{{ money(p.row.conversion.sourceAmount, p.row.conversion.sourceCurrencyIsoCode) }}
                 ×
                 {{
                   Number(p.row.conversion.exchangeRate).toLocaleString('pt-BR', {
@@ -137,9 +144,18 @@
           >
           <template #body-cell-destination="p"
             ><q-td :props="p"
-              ><div>{{ contractEndpoint(p.row.destination, p.row.currencyIsoCode).title }}</div>
+              ><div>
+                {{
+                  p.row.destinationClient?.name ||
+                  contractEndpoint(p.row.destination, p.row.currencyIsoCode).title
+                }}
+              </div>
               <small>{{
-                contractEndpoint(p.row.destination, p.row.currencyIsoCode).detail
+                p.row.destinationClient
+                  ? contractEndpoint(p.row.destination, p.row.currencyIsoCode).title +
+                    ' · ' +
+                    (p.row.currencyIsoCode || '')
+                  : contractEndpoint(p.row.destination, p.row.currencyIsoCode).detail
               }}</small></q-td
             ></template
           >
@@ -147,9 +163,7 @@
             ><q-td :props="p"
               ><strong>{{ money(p.row.amount, p.row.currencyIsoCode) }}</strong
               ><small v-if="p.row.conversion"
-                >{{
-                  money(p.row.conversion.sourceAmount, p.row.conversion.sourceCurrencyIsoCode)
-                }}
+                >{{ money(p.row.conversion.sourceAmount, p.row.conversion.sourceCurrencyIsoCode) }}
                 ×
                 {{
                   Number(p.row.conversion.exchangeRate).toLocaleString('pt-BR', {
@@ -210,7 +224,10 @@
       full-width
       maximized
       class="control-width"
-      ><transaction-create @busy="createBusy = $event" @created="onCreated"
+      ><transaction-create
+        :submit-operation="submitAdminTransaction"
+        @busy="createBusy = $event"
+        @created="onCreated"
     /></q-dialog>
     <q-dialog
       v-model="dialog"
@@ -250,6 +267,26 @@
             <q-card-section>
               <q-banner v-if="error" role="alert">{{ error }}</q-banner>
               <form-section title="Movimentação">
+                <p v-if="detail.state.data.correctsTransactionId" class="text-muted">
+                  Esta transação corrige
+                  <q-btn
+                    flat
+                    dense
+                    no-caps
+                    label="Ver transação original"
+                    @click="open(detail.state.data.correctsTransactionId)"
+                  />
+                </p>
+                <p v-if="detail.state.data.correctedByTransactionId" class="text-muted">
+                  Esta transação foi corrigida.
+                  <q-btn
+                    flat
+                    dense
+                    no-caps
+                    label="Ver correção"
+                    @click="open(detail.state.data.correctedByTransactionId)"
+                  />
+                </p>
                 <dl class="finance-facts">
                   <dt>Tipo</dt>
                   <dd>{{ financeLabel(detail.state.data.type) }}</dd>
@@ -258,12 +295,37 @@
                   <dt>Origem</dt>
                   <dd>{{ endpointLabel(detail.state.data.source) }}</dd>
                   <dt>Destino</dt>
-                  <dd>{{ endpointLabel(detail.state.data.destination) }}</dd>
+                  <dd>
+                    {{
+                      [
+                        detail.state.data.destinationClient?.name,
+                        endpointLabel(detail.state.data.destination),
+                      ]
+                        .filter(Boolean)
+                        .join(' · ')
+                    }}
+                  </dd>
                   <dt>Solicitada em</dt>
                   <dd>{{ dateLabel(detail.state.data.requestedAtUtc) }}</dd>
                 </dl>
               </form-section>
               <form-section title="Aprovação e execução">
+                <q-btn
+                  v-if="detail.state.data.availableActions?.includes('CorrectDeposit')"
+                  flat
+                  no-caps
+                  label="Corrigir"
+                  :disable="busy"
+                  @click="correctingTransaction = true"
+                />
+                <q-btn
+                  v-if="canEditTransaction"
+                  flat
+                  no-caps
+                  label="Editar dados"
+                  :disable="busy"
+                  @click="editingTransaction = true"
+                />
                 <p v-if="!workflowActions.length" class="text-muted">
                   Nenhuma ação disponível para o estado atual.
                 </p>
@@ -369,6 +431,29 @@
           </template>
         </resource-state> </q-card
     ></q-dialog>
+    <transaction-edit
+      v-if="correctingTransaction && detail.state.data"
+      correction
+      :record="detail.state.data"
+      @busy="busy = $event"
+      @close="correctingTransaction = false"
+      @saved="onTransactionEdited"
+    />
+    <transaction-edit
+      v-if="editingTransaction && detail.state.data"
+      :record="detail.state.data"
+      @busy="busy = $event"
+      @close="editingTransaction = false"
+      @saved="onTransactionEdited"
+    />
+    <transaction-password
+      v-if="actionToConfirm"
+      :summary="confirmationSummary"
+      :submit="executeConfirmed"
+      @busy="busy = $event"
+      @close="actionToConfirm = null"
+      @completed="actionToConfirm = null"
+    />
   </q-page>
 </template>
 <script setup>
@@ -407,6 +492,9 @@ import LabelForm from 'src/components/Form/LabelForm.vue'
 import FinanceTable from 'src/components/Finance/FinanceTable.vue'
 import ResourceState from 'src/components/Finance/ResourceState.vue'
 import TransactionCreate from 'src/components/Finance/TransactionCreate.vue'
+import TransactionEdit from 'src/components/Finance/TransactionEdit.vue'
+import TransactionPassword from 'src/components/Finance/TransactionPassword.vue'
+import { submitAdminTransaction } from 'src/services/transactionOperations'
 import CustomerPortfolio from 'src/components/Finance/CustomerPortfolio.vue'
 import { useFinanceResource } from 'src/composables/useFinanceResource'
 import {
@@ -493,6 +581,9 @@ function onCreated(value) {
   open(value)
 }
 function open(value) {
+  actionToConfirm.value = null
+  editingTransaction.value = false
+  correctingTransaction.value = false
   id.value = value
   dialog.value = true
   error.value = ''
@@ -517,36 +608,62 @@ async function addObservation() {
     busy.value = false
   }
 }
+function onTransactionEdited() {
+  correctingTransaction.value = false
+  editingTransaction.value = false
+  busy.value = false
+  loadDetail()
+  table.value?.reload()
+  pendingTable.value?.reload()
+}
+const correctingTransaction = ref(false)
+const editingTransaction = ref(false)
+const canEditTransaction = computed(
+  () =>
+    detail.state.data?.type === 'Deposit' &&
+    ['AwaitingReceipt', 'PendingValidation', 'Validated'].includes(detail.state.data.status),
+)
+const actionSnapshot = ref(null)
+const actionToConfirm = ref(null)
+const confirmationSummary = computed(() => actionSnapshot.value?.summary || '')
 function confirmAction(action) {
   if (busy.value || !workflowActions.value.includes(action)) return
-  $q.dialog({
-    title: financeLabel(action),
-    message: `Confirma esta ação na solicitação ${detail.state.data.requestNumber}, no valor de ${money(detail.state.data.amount, detail.state.data.currency.isoCode)}?`,
-    cancel: true,
-    persistent: true,
-  }).onOk(async () => {
-    busy.value = true
-    error.value = ''
-    try {
-      await financeWrite('post', `admin/transactions/${id.value}/actions`, {
-        action,
-        reason: reason.value || null,
-        expectedVersion: detail.state.data.version,
-      })
-      reason.value = ''
-      await loadDetail()
-      table.value?.reload()
-      pendingTable.value?.reload()
-    } catch (e) {
-      error.value =
-        e.response?.status === 409
-          ? 'A solicitação foi alterada. O estado será atualizado; revise antes de tentar novamente.'
-          : 'Não foi possível executar a ação. Verifique as permissões e o motivo informado.'
-      if (e.response?.status === 409) await loadDetail()
-    } finally {
-      busy.value = false
-    }
-  })
+  if (['Reject', 'Cancel'].includes(action) && !reason.value.trim()) {
+    error.value = 'Informe o motivo antes de continuar.'
+    return
+  }
+  const record = detail.state.data
+  actionSnapshot.value = {
+    id: record.id,
+    version: record.version,
+    action,
+    reason: reason.value.trim() || null,
+    summary: `${financeLabel(action)}: ${record.requestNumber} · ${money(record.amount, record.currency.isoCode)}`,
+  }
+  actionToConfirm.value = action
+}
+async function executeConfirmed(password) {
+  const record = detail.state.data
+  const intent = actionSnapshot.value
+  const action = intent?.action
+  if (!intent || intent.id !== record?.id || intent.version !== record?.version)
+    throw Error('A solicitação mudou. Feche a confirmação e revise os dados.')
+  if (!record || !workflowActions.value.includes(action)) throw Error('Ação indisponível.')
+  try {
+    await financeWrite('post', `admin/transactions/${record.id}/actions`, {
+      action,
+      reason: intent.reason,
+      expectedVersion: intent.version,
+      password,
+    })
+    reason.value = ''
+    await loadDetail()
+    table.value?.reload()
+    pendingTable.value?.reload()
+  } catch (e) {
+    if (e.response?.status === 409) await loadDetail()
+    throw e
+  }
 }
 const route = useRoute()
 watch(

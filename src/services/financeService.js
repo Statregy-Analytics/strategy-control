@@ -45,6 +45,11 @@ export const dateLabel = (value) =>
     ? new Date(value.length === 10 ? `${value}T12:00:00` : value).toLocaleDateString('pt-BR')
     : '—'
 const labels = {
+  InterCustomerTransfer: 'Transferência entre clientes',
+  Error: 'Erro',
+  CorrectDeposit: 'Corrigir depósito',
+  Loan: 'Empréstimo',
+  Leverage: 'Alavancagem',
   AwaitingReceipt: 'Aguardando comprovante',
   PaidOff: 'Quitado',
   AssetRecord: 'Patrimônio declarado',
@@ -66,7 +71,6 @@ const labels = {
   RealEstate: 'Imóvel',
   Vehicle: 'Veículo',
   Consortium: 'Consórcio',
-  Loan: 'Empréstimo',
   Transaction: 'Movimentações',
   Contracts: 'Contratos',
   Ledger: 'Livro-razão',

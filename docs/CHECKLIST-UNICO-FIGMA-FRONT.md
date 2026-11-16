@@ -2,12 +2,47 @@
 
 Atualização: 16/11/2026. Este é o índice desta revisão ampla. Evidências anteriores continuam nos documentos vinculados; uma tela existente não é automaticamente considerada revalidada nesta rodada.
 
+## Fechamento conjunto de pendências funcionais · T01/T02, P01/P06 e L02 · 16/11
+
+Esta rodada reúne os ajustes funcionais que ainda estavam na fila. **Não declara todos os 279 frames/temas comparados.** A revisão visual integral dos grupos marcados como validação pendente continua separada; não é falha presumida do backend. Os números percentuais da auditoria anterior são uma fotografia anterior às entregas 136–141 e a este lote, não um novo percentual medido.
+
+| Grupo | Front entregue nesta rodada | Limite atual |
+| --- | --- | --- |
+| T01/T02 — Transações | Adapter de criação com catálogo/IDs reais, consulta de saldo antes de gravar, transferência para outro cliente, confirmação MD07 com senha, motivo obrigatório ao recusar/cancelar, edição pendente por PUT + observação separada com retomada parcial, correção com origens consultadas e links original/correção. | Não classificar envio bancário, upload, redução multiorigem ou execução final como homologados: bloqueios específicos abaixo. |
+| P01 — Saque | Pai do modal e rota direta conectados ao adapter; rota direta carrega saldo real; resolução do currencyId pela carteira Free; recuperação reutiliza o formulário existente. Nenhum campo do desenho foi retirado. | DTO do saque não recebe a senha e contas não informam moeda. Adapter recusa confirmar sem esse contrato; não descarta a senha nem mostra sucesso. |
+| P06 — Empréstimos/alavancagem | Minhas Alavancagens usa GET /client/loans completo/paginado, grupos e dívida por moeda; detalhe por ID lê a API. Bloqueio consulta nível real e protege rotas diretas. Removidos dados/valores padrão fictícios e sucessos de upload/pagamento simulados. Ofertas sem endpoint ficam com erro/retry em vez de ofertas falsas. | Faltam dados de parcelas/etapas, ofertas/propostas/simulações/solicitações e pagamentos. Listagem informativa já existe e está integrada; não cobrá-la novamente. |
+| L02 — Motor ativo | Composição da linha ativa conforme 1484:77384, Pausar/Editar/Entrar, navegação existente e valores indisponíveis preservados. Status ativo exige status explícito, nunca isSelectable. | Catálogo não retorna estado operacional/métricas e não há pausa operacional. Pausar fica desabilitado; frame preenchido validado com fixture controlada. |
+
+### Testes executados
+
+- [x] Admin: lint, build, diff check e **381 testes locais (373 versionados + 8 do estudo preexistente)**. Incluem testes de saldo insuficiente/desconhecido, currencyId real, destinatário diferente, senha, falha sem sucesso falso, limpeza da senha, edição parcial e correção sem origem presumida.
+- [x] Cliente: lint, build, diff check e **428 testes**. Paginação completa, descarte de consulta obsoleta, dívida separada por moeda, valores desconhecidos, nível real e bloqueio do saque sem confirmação de senha suportada.
+- [x] Navegador local real: transferência fictícia de **R$ 0,01** entre Éric e Cláudio. Senha incorreta rejeitada; senha válida criou `REQ-2026-1F08A2D4` em PendingValidation. Cancelamento com motivo/senha válido concluído. Não foi aprovada nem executada. Estado final Canceled, **zero execuções e zero lançamentos**; saldos/reservas de ambos exatamente iguais aos anteriores. [Evidência](evidence/qa-2026-11-16-front-functional/wallets-after-cancellation.json).
+- [x] Navegador local real: modal e rota de saque com saldos, recuperação existente sem enviar e-mail, bloqueio de nível de Alavancagem e de Minhas Alavancagens, navegação ao Perfil. A conta Éric consultada retornou nível 0; não usar o valor legado do store.
+- [x] Dados controlados no navegador: empréstimos ativos/quitados, agrupamento, expansão, valores não disponíveis, vazio confirmado, erro com retry. Corrigida sobreposição das métricas em celular; conferência em **390px**, grade em uma coluna, sem overflow horizontal. Harness removido antes do build.
+- [x] Dados controlados no navegador: linha de motor ativo, métricas conhecidas e indisponíveis, Editar emitindo a ação correta e Pausar desabilitado. Nenhum motor fictício foi salvo na API.
+- [x] Revisão local da correção: banco mascarado legível, valor original, diferença, carteiras e transação em processamento reais; falha de uma seção não fabrica saldos. Não se executou correção financeira de depósito.
+- [ ] Publicação e smoke tests nas URLs publicadas: em andamento, registrar ao fechar.
+
+### Bloqueios e limites confirmados nesta rodada
+
+1. **Moeda das contas bancárias (Admin e Cliente):** CustomerBankAccountResponse e ClientBankAccountResponse não incluem currencyId/currencyIsoCode. As contas reais do Éric/Cláudio vieram sem moeda. O Figma exige mesma moeda; não presumir BRL pelo banco/país. Isso bloqueia os cenários bancários de depósito/saque/edição compatíveis.
+2. **Confirmação do saque:** CreateClientWithdrawalRequest aceita apenas currencyId, destinationBankAccountId e amount, com additionalProperties:false. Não recebe a senha do desenho nem há endpoint de verificação equivalente documentado. Não tratar senha preenchida no front como senha validada.
+3. **Transferência entre carteiras próprias no portal:** o DTO de /client/transactions/transfers é intercliente (recipientStrategyId obrigatório). Não reutilizar ID de terceiro nem enviar transferência própria por suposição. O fluxo intercliente já existente continua separado.
+4. **Comprovantes bancários:** upload genérico exige documentTypeId; não foi encontrado tipo de comprovante de depósito/bancário no catálogo consultado. Não usar comprovante de renda/residência/investimento no lugar. EditTransactionRequest também não recebe comprovante; AttachTransactionDocumentRequest existe, mas depende de um documento corretamente tipado. A observação existente é gravada no endpoint próprio, não é falta de API.
+5. **Correção de depósito conforme MD08:** CorrectDepositRequest expõe um differenceSource e um pendingTransactionId; o desenho permite dividir a diferença entre múltiplas carteiras/operacões, cada qual com valor. Falta representar essas partes e confirmar o vocabulário da origem. Também não há banco/comprovante nesse corpo. Redução permanece protegida; não executar débitos/edições separadas para imitar uma correção atômica. Aumento sem novas origens tem adapter testado de forma controlada, não execução real no ambiente.
+6. **Empréstimos:** ClientLoanResponse não traz próxima parcela, cronograma, parcelas quitadas, data de quitação ou etapas do funil. Não deduzir parcela de principal ÷ prazo nem exibir 0% sem dados. Ofertas/propostas, seleção/envio, uploads de solicitação e pagamentos precisam de contratos HTTP específicos; GET /client/loans não é um funil de crédito. A consulta administrativa de empréstimos retornou zero itens nesta rodada; cenário preenchido foi controlado, não massa real nível 3.
+7. **Homologação de aprovação/execução:** foi testada criação/cancelamento real com senha, não o ciclo financeiro completo. Outras ações só aparecem conforme availableActions do registro; não habilitar aprovação indisponível nem fabricar outro administrador para contornar a política. Isso é limite de teste/massa/permissão, não novo bug confirmado da API.
+8. **L02:** estado e pausa operacionais seguem ausentes; catálogo selecionável não equivale a motor ativo.
+
+Os bloqueios 136–141 continuam como na entrega anterior. Nenhum novo campo/ação foi acrescentado fora dos frames recuperados. As telas preenchidas em harness não são prova de persistência integrada; os arquivos temporários foram excluídos dos dois projetos.
+
 ## Critério de conclusão
 
 - [ ] Todos os frames/estados abaixo comparados visualmente, inclusive erro, vazio e retorno.
 - [ ] Fluxos de escrita e leitura integrados testados com dados fictícios.
-- [x] Admin: lint e build aprovados; 372 testes locais passaram (364 versionados + 8 de estudo já existentes no worktree; cobertura dos itens 136–141).
-- [x] Checks desta entrega 139–141: Admin e Área do Cliente com lint/build aprovados; Cliente com 423 testes. Reexecutar ao alterar os demais itens.
+- [x] Admin: lint e build aprovados; 381 testes locais passaram (373 versionados + 8 de estudo já existentes no worktree; cobertura de contratos e operações).
+- [x] Checks desta entrega 139–141: Admin e Área do Cliente com lint/build aprovados; Cliente com 428 testes. Reexecutar ao alterar os demais itens.
 - [ ] Deploy confirmado e testes repetidos nas URLs publicadas.
 - [x] Pendências de frontend separadas das pendências reais da API, do designer e da limitação de consulta ao Figma.
 
@@ -663,11 +698,11 @@ Esta auditoria altera somente documentação/evidências. Os relatórios histór
 
 Fila vigente após a auditoria de 16/11; substitui a lista genérica anterior. A ordem abaixo não reabre contratos já entregues.
 
-- [ ] **T01/T02 — Admin Transações:** conectar envio real, senha de confirmação, outro cliente, edição pendente e correção de depósito aos contratos já existentes. Sem movimentações reais apenas para prova visual.
-- [ ] **P01 — Saque do portal:** conectar submitOperation nos pais existentes e testar retorno/erro/sucesso com a massa adequada.
-- [ ] **P06 — Crédito/alavancagem do portal:** retirar dados/uploads simulados das rotas ativas, usar leituras reais já existentes e regra oficial de nível; separar solicitações/ofertas ainda sem contrato.
-- [ ] **P05 — Oferta de contrato do portal:** recuperar referência completa e conectar os estados que não estão nas páginas roteadas de lista/detalhe. Não presumir novo bloqueio externo.
-- [ ] **L02 — Motor ativo em hover:** compor o estado Pausar/Editar/Entrar aprovado; manter pausa indisponível até contrato operacional.
+- [x] **T01/T02 — Admin Transações:** adapters, confirmação e telas conectados; testes e limites por operação na entrega conjunta acima. Integração bancária/multiorigem segue bloqueada; não marcar o ciclo inteiro homologado.
+- [x] **P01 — Saque do portal:** pais/adapters conectados; bloqueios reais de moeda bancária e senha descritos acima. Sucesso integrado ainda pendente.
+- [x] **P06 — Crédito/alavancagem do portal:** leituras reais e regra de nível, sem dados/uploads/pagamentos fictícios; limites de dados/funil e de comparação integral documentados acima.
+- [x] **P05 — Oferta de contrato do portal:** fluxo em cinco etapas conectado na entrega 139–141. Persistência depende da API do item 141; comparação integral de variantes permanece separada.
+- [x] **L02 — Motor ativo em hover:** linha ativa composta e testada de forma controlada; pausa desabilitada até contrato operacional. Não inferir estado a partir de isSelectable.
 - [ ] **85 frames na fila de validação:** grupos C03/C06, L01/L04, T03, R01/R02, M01/M03 e P04/P12/P14. Comparar composição/estados, teclado, responsividade, ida/volta e falhas; ajustar somente diferenças confirmadas. Não são 85 bugs já diagnosticados.
 - [ ] **Regressão:** preservar cenários históricos dos itens Já correto e campos suportados dos bloqueados. Nenhum reteste atual de navegador foi executado nesta auditoria.
 

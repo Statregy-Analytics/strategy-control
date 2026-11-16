@@ -1,0 +1,67 @@
+export default function Ec031MotorAtivoEmHoverPausarEditarEntrar() {
+  return (
+    <div className="bg-[rgba(255,255,255,0.06)] border border-[rgba(0,163,255,0.4)] border-solid drop-shadow-[0px_6px_7px_rgba(0,0,0,0.22)] relative rounded-[12px] size-full" data-node-id="1484:77384" data-name="EC03.1 · Motor ativo em hover · Pausar · Editar · Entrar">
+      <div className="absolute bg-[rgba(31,219,140,0.1)] border border-[rgba(31,219,140,0.46)] border-solid left-[17px] rounded-[10px] size-[48px] top-[27px]" data-node-id="1484:77385" data-name="Ícone · Motor">
+        <div className="-translate-x-1/2 -translate-y-1/2 [word-break:break-word] absolute flex flex-col font-['Inter:Regular'] font-normal justify-center leading-[0] left-[23px] not-italic size-[48px] text-[#1fdb8c] text-[25px] text-center top-[23px]" data-node-id="1484:77386">
+          <p className="leading-[normal]">◔</p>
+        </div>
+      </div>
+      <div className="-translate-y-1/2 [word-break:break-word] absolute flex flex-col font-['Inter:Semi_Bold'] font-semibold h-[24px] justify-center leading-[0] left-[81px] not-italic text-[16px] text-[color:var(--sa-color-text-primary,white)] top-[29px] w-[210px]" data-node-id="1484:77387">
+        <p className="leading-[normal]">Theta-Yield</p>
+      </div>
+      <div className="-translate-y-1/2 [word-break:break-word] absolute flex flex-col font-['Inter:Regular'] font-normal h-[18px] justify-center leading-[0] left-[81px] not-italic text-[10px] text-[rgba(171,184,204,0.72)] top-[52px] w-[155px]" data-node-id="1484:77388">
+        <p className="leading-[normal]">MOTOR-2024-055</p>
+      </div>
+      <div className="absolute bg-[var(--color\/v2\/bg\/status-positive,rgba(0,122,85,0.2))] border-[0.8px] border-[var(--color\/v2\/border\/status-positive,#74ffa0)] border-solid content-stretch flex items-center justify-center left-[241px] px-[8px] py-[3px] rounded-[8px] top-[41px]" data-node-id="1484:77389" data-name="Status · Ativo">
+        <div className="[word-break:break-word] flex flex-col font-['Inter:Medium'] font-medium justify-center leading-[0] not-italic relative shrink-0 text-[10px] text-[color:var(--color\/v2\/text\/status-positive,#74ffa0)] text-center tracking-[0.25px] uppercase whitespace-nowrap" data-node-id="1484:77390">
+          <p className="leading-[normal]">Ativo</p>
+        </div>
+      </div>
+      <div className="-translate-y-1/2 [word-break:break-word] absolute flex flex-col font-['Inter:Semi_Bold'] font-semibold h-[52px] justify-center leading-[0] left-[349px] not-italic text-[12px] text-[color:var(--sa-color-text-primary,white)] top-[47px] w-[110px]" data-node-id="1484:77391">
+        <p className="leading-[normal] mb-0">ÍNDICE ATUAL</p>
+        <p className="leading-[normal]">103,2500</p>
+      </div>
+      <div className="-translate-y-1/2 [word-break:break-word] absolute flex flex-col font-['Inter:Semi_Bold'] font-semibold h-[52px] justify-center leading-[0] left-[474px] not-italic text-[12px] text-[color:var(--color\/v2\/text\/value-positive,#66e59e)] top-[47px] w-[110px]" data-node-id="1484:77392">
+        <p className="leading-[normal] mb-0">PERF. CICLO</p>
+        <p className="leading-[normal]">+3,25%</p>
+      </div>
+      <div className="-translate-y-1/2 [word-break:break-word] absolute flex flex-col font-['Inter:Semi_Bold'] font-semibold h-[52px] justify-center leading-[0] left-[594px] not-italic text-[12px] text-[color:var(--sa-color-text-primary,white)] top-[47px] w-[78px]" data-node-id="1484:77393">
+        <p className="leading-[normal] mb-0">VÍNCULOS</p>
+        <p className="leading-[normal]">1</p>
+      </div>
+      <div className="[word-break:break-word] absolute bg-[rgba(0,163,255,0.07)] border border-[rgba(0,163,255,0.3)] border-solid h-[64px] leading-[0] left-[703px] not-italic rounded-[9px] text-center top-[23px] w-[56px]" data-node-id="1484:77394" data-name="Botão hover · Pausar">
+        <div className="-translate-x-1/2 -translate-y-1/2 absolute flex flex-col font-['Inter:Semi_Bold'] font-semibold h-[30px] justify-center left-[27px] text-[18px] text-[color:var(--sa-color-text-secondary,rgba(255,255,255,0.72))] top-[17px] w-[56px]" data-node-id="1484:77395">
+          <p className="leading-[normal]">Ⅱ</p>
+        </div>
+        <div className="-translate-x-1/2 -translate-y-1/2 absolute flex flex-col font-['Inter:Medium'] font-medium h-[22px] justify-center left-[27px] text-[10px] text-[color:var(--sa-color-text-primary,white)] top-[44px] w-[56px]" data-node-id="1484:77396">
+          <p className="leading-[normal]">Pausar</p>
+        </div>
+      </div>
+      <div className="[word-break:break-word] absolute bg-[rgba(0,163,255,0.07)] border border-[rgba(0,163,255,0.3)] border-solid h-[64px] leading-[0] left-[771px] not-italic rounded-[9px] text-center top-[23px] w-[56px]" data-node-id="1484:77397" data-name="Botão hover · Editar">
+        <div className="-translate-x-1/2 -translate-y-1/2 absolute flex flex-col font-['Inter:Semi_Bold'] font-semibold h-[30px] justify-center left-[27px] text-[18px] text-[color:var(--sa-color-text-secondary,rgba(255,255,255,0.72))] top-[17px] w-[56px]" data-node-id="1484:77398">
+          <p className="leading-[normal]">✎</p>
+        </div>
+        <div className="-translate-x-1/2 -translate-y-1/2 absolute flex flex-col font-['Inter:Medium'] font-medium h-[22px] justify-center left-[27px] text-[10px] text-[color:var(--sa-color-text-primary,white)] top-[44px] w-[56px]" data-node-id="1484:77399">
+          <p className="leading-[normal]">Editar</p>
+        </div>
+      </div>
+      <div className="[word-break:break-word] absolute bg-[rgba(0,163,255,0.16)] border border-[rgba(0,163,255,0.72)] border-solid h-[64px] leading-[0] left-[839px] not-italic rounded-[9px] text-center top-[23px] w-[56px]" data-node-id="1484:77400" data-name="Botão hover · Entrar">
+        <div className="-translate-x-1/2 -translate-y-1/2 absolute flex flex-col font-['Inter:Semi_Bold'] font-semibold h-[30px] justify-center left-[27px] text-[25px] text-[color:var(--sa-color-text-secondary,rgba(255,255,255,0.72))] top-[17px] w-[56px]" data-node-id="1484:77401">
+          <p className="leading-[normal]">›</p>
+        </div>
+        <div className="-translate-x-1/2 -translate-y-1/2 absolute flex flex-col font-['Inter:Medium'] font-medium h-[22px] justify-center left-[27px] text-[10px] text-[color:var(--sa-color-text-primary,white)] top-[44px] w-[56px]" data-node-id="1484:77402">
+          <p className="leading-[normal]">Entrar</p>
+        </div>
+      </div>
+    </div>
+  );
+}
+SUPER CRITICAL: The generated React+Tailwind code MUST be converted to match the target project's technology stack and styling system.
+1. Analyze the target codebase to identify: technology stack, styling approach, component patterns, and design tokens
+2. Convert React syntax to the target framework/library
+3. Transform all Tailwind classes to the target styling system while preserving exact visual design
+4. Follow the project's existing patterns and conventions
+DO NOT install any Tailwind as a dependency unless the user instructs you to do so.
+
+Node ids have been added to the code as data attributes, e.g. `data-node-id="1:2"`.
+The generated code contains image and SVG URL constants, e.g. const image = 'https://www.figma.com/api/mcp/asset/550e8400-e29b-41d4-a716-446655440000.png'. These URLs are temporary download sources and expire after 7 days. Download each asset into the project with curl -L, then replace its URL in the generated code with a reference to the downloaded asset. Never use the temporary URLs as runtime image sources.

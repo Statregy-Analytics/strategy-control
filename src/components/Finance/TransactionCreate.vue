@@ -18,7 +18,9 @@
           </button>
         </div>
         <form-section title="Cliente e movimentação">
-          <label-form text-label="Cliente"><customer-select v-model="clientId" /></label-form>
+          <label-form :text-label="otherClient ? 'Cliente de origem' : 'Cliente'"
+            ><customer-select v-model="clientId"
+          /></label-form>
           <label-form
             v-if="kind !== 'transfer'"
             class="q-mt-md"
@@ -26,6 +28,21 @@
             ><q-input model-value="Carteira de Depósito" outlined dense readonly
           /></label-form>
           <template v-else>
+            <div class="q-my-md row q-gutter-sm" role="group" aria-label="Transferir para">
+              <q-btn
+                outline
+                no-caps
+                label="Mesmo cliente"
+                :aria-pressed="!otherClient"
+                @click="otherClient = false"
+              /><q-btn
+                outline
+                no-caps
+                label="Outro cliente"
+                :aria-pressed="otherClient"
+                @click="otherClient = true"
+              />
+            </div>
             <label-form class="q-mt-md" text-label="Carteira de origem"
               ><q-select
                 v-model="from"
@@ -36,16 +53,20 @@
                 dense
                 aria-label="Carteira de origem"
             /></label-form>
+            <label-form v-if="otherClient" class="q-mt-md" text-label="Cliente de destino"
+              ><customer-select
+                v-model="destinationClientId"
+                placeholder="Busque o cliente de destino (nome, ID Strategy ou documento)"
+            /></label-form>
             <label-form class="q-mt-md" text-label="Carteira de destino"
               ><q-select
-                :model-value="to"
+                v-model="to"
                 :options="walletOptions"
                 emit-value
                 map-options
                 outlined
                 dense
                 aria-label="Carteira de destino"
-                @update:model-value="from = $event === 'deposit' ? 'strategy' : 'deposit'"
             /></label-form>
           </template>
           <label-form class="q-mt-md" text-label="Moeda"
@@ -94,8 +115,8 @@
               </label-form>
             </resource-state>
             <p v-if="clientId && !banks.state.loading && !bankOptions.length" class="text-caption">
-              Nenhuma conta com moeda {{ currency }} confirmada. Confira o cadastro bancário do
-              cliente.
+              Nenhuma conta com moeda {{ currency }} confirmada. A moeda das contas bancárias está
+              indisponível.
             </p>
           </template>
           <label-form
@@ -136,7 +157,9 @@
                 ? 'Aguarda confirmação administrativa. O cliente não envia comprovante pelo portal.'
                 : kind === 'withdrawal'
                   ? 'Saque exclusivamente da Carteira de Depósito para conta do mesmo titular e moeda.'
-                  : 'Transferência automática entre carteiras do mesmo cliente e na mesma moeda, sem aprovação manual ou Senha de Saque.'
+                  : otherClient
+                    ? 'Transferência na mesma moeda para o cliente selecionado, confirmada com a senha do admin.'
+                    : 'Transferência automática entre carteiras do mesmo cliente e na mesma moeda, sem aprovação manual ou Senha de Saque.'
             }}
           </p>
         </form-section>
@@ -158,16 +181,26 @@
               !submitOperation ||
               !clientId ||
               Number(amount) <= 0 ||
-              (kind !== 'transfer' && !bankId)
+              (kind !== 'transfer' && !bankId) ||
+              (kind === 'transfer' &&
+                otherClient &&
+                (!destinationClientId || destinationClientId === clientId))
             "
           />
         </div>
       </q-form>
     </q-card-section>
+    <transaction-password
+      v-if="passwordForm"
+      :summary="`Transferência para outro cliente · ${walletMoney(amount, currency)}`"
+      :submit="save"
+      @close="passwordForm = null"
+    />
   </q-card>
 </template>
 <script setup>
 import { computed, onScopeDispose, ref, watch } from 'vue'
+import TransactionPassword from './TransactionPassword.vue'
 import TitleCard from 'src/components/Card/TitleCard.vue'
 import FormSection from 'src/components/Entity/FormSection.vue'
 import LabelForm from 'src/components/Form/LabelForm.vue'
@@ -194,6 +227,9 @@ const props = defineProps({
 const emit = defineEmits(['created', 'busy'])
 const kind = ref('deposit'),
   clientId = ref(null),
+  otherClient = ref(false),
+  destinationClientId = ref(null),
+  passwordForm = ref(null),
   currency = ref('BRL'),
   from = ref('deposit'),
   amount = ref(0),
@@ -230,10 +266,34 @@ const currencyOptions = WALLET_CURRENCIES.map((item) => ({
   label: item.code + ' · ' + item.name,
   value: item.code,
 }))
-const to = computed(() => (from.value === 'deposit' ? 'strategy' : 'deposit'))
-const available = computed(() =>
-  walletBalance(props.model, kind.value === 'withdrawal' ? 'deposit' : from.value, currency.value),
-)
+const to = ref('strategy')
+watch(from, () => {
+  if (!otherClient.value) to.value = from.value === 'deposit' ? 'strategy' : 'deposit'
+})
+watch(otherClient, () => {
+  destinationClientId.value = null
+  to.value = from.value === 'deposit' ? 'strategy' : 'deposit'
+})
+const wallets = useFinanceResource()
+const available = computed(() => {
+  if (props.model)
+    return walletBalance(
+      props.model,
+      kind.value === 'withdrawal' ? 'deposit' : from.value,
+      currency.value,
+    )
+  const rows = wallets.state.data?.filter(
+    (row) =>
+      row.type === (kind.value === 'withdrawal' || from.value === 'deposit' ? 'Free' : 'Applied') &&
+      row.currencyIsoCode === currency.value,
+  )
+  if (
+    !rows?.length ||
+    rows.some((row) => row.available == null || !Number.isFinite(Number(row.available)))
+  )
+    return null
+  return rows.reduce((sum, row) => sum + Number(row.available), 0)
+})
 const deadline = computed(() =>
   kind.value === 'deposit'
     ? 'Após confirmação administrativa'
@@ -272,6 +332,9 @@ watch(clientId, () => {
   bankId.value = null
   receiptFile.value = null
   loadBanks()
+  wallets.load(async () =>
+    clientId.value ? (await financeGet(`admin/customers/${clientId.value}/wallets`)).data : [],
+  )
 })
 watch([currency, kind], () => {
   bankId.value = null
@@ -280,10 +343,11 @@ watch([currency, kind], () => {
 watch(busy, (value) => emit('busy', value))
 onScopeDispose(() => {
   bankRevision++
+  wallets.reset()
   banks.reset()
   bankCatalog.reset()
 })
-async function save() {
+async function save(password) {
   if (busy.value || !props.submitOperation || !clientId.value || Number(amount.value) <= 0) return
   if (kind.value !== 'transfer' && !bankOptions.value.some((bank) => bank.value === bankId.value))
     return
@@ -291,11 +355,18 @@ async function save() {
     error.value = 'Confira o saldo disponível antes de continuar.'
     return
   }
+  if (kind.value === 'transfer' && otherClient.value && typeof password !== 'string') {
+    passwordForm.value = true
+    return
+  }
   busy.value = true
   error.value = ''
   try {
     const result = await props.submitOperation({
       kind: kind.value,
+      otherClient: otherClient.value,
+      destinationClientId: destinationClientId.value,
+      password: typeof password === 'string' ? password : undefined,
       clientId: clientId.value,
       currency: currency.value,
       amount: amount.value,
@@ -305,9 +376,15 @@ async function save() {
       receiptFile: kind.value === 'deposit' ? receiptFile.value : undefined,
       observation: observation.value.trim() || null,
     })
+    passwordForm.value = null
     emit('created', result.id)
-  } catch {
-    error.value = 'Não foi possível criar a solicitação. Confira os dados e tente novamente.'
+    return result
+  } catch (e) {
+    error.value =
+      !e.response && !e.config
+        ? e.message
+        : 'Não foi possível criar a solicitação. Confira os dados e tente novamente.'
+    if (typeof password === 'string') throw e
   } finally {
     busy.value = false
   }

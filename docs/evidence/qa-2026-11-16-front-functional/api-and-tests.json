@@ -1,0 +1,618 @@
+{
+  "date": "2026-11-16",
+  "source": "https://strategyanalytics.codebiz.com.br/openapi/v1.json",
+  "schemas": {
+    "CreateClientWithdrawalRequest": {
+      "required": [
+        "currencyId",
+        "destinationBankAccountId",
+        "amount"
+      ],
+      "type": "object",
+      "properties": {
+        "currencyId": {
+          "type": "string",
+          "format": "uuid",
+          "example": "3fa85f64-5717-4562-b3fc-2c963f66afa6"
+        },
+        "destinationBankAccountId": {
+          "type": "string",
+          "format": "uuid",
+          "example": "3fa85f64-5717-4562-b3fc-2c963f66afa6"
+        },
+        "amount": {
+          "pattern": "^-?(?:0|[1-9]\\d*)(?:\\.\\d+)?$",
+          "type": [
+            "number",
+            "string"
+          ],
+          "format": "double",
+          "example": 1000.0
+        }
+      },
+      "additionalProperties": false
+    },
+    "CreateClientTransferRequest": {
+      "required": [
+        "recipientStrategyId",
+        "currencyId",
+        "sourceWallet",
+        "destinationWallet",
+        "amount",
+        "withdrawalPassword"
+      ],
+      "type": "object",
+      "properties": {
+        "recipientStrategyId": {
+          "type": "string"
+        },
+        "currencyId": {
+          "type": "string",
+          "format": "uuid",
+          "example": "3fa85f64-5717-4562-b3fc-2c963f66afa6"
+        },
+        "sourceWallet": {
+          "type": "string"
+        },
+        "destinationWallet": {
+          "type": "string"
+        },
+        "amount": {
+          "pattern": "^-?(?:0|[1-9]\\d*)(?:\\.\\d+)?$",
+          "type": [
+            "number",
+            "string"
+          ],
+          "format": "double",
+          "example": 1000.0
+        },
+        "withdrawalPassword": {
+          "type": [
+            "null",
+            "string"
+          ]
+        }
+      },
+      "additionalProperties": false
+    },
+    "CorrectDepositRequest": {
+      "required": [
+        "correctAmount",
+        "reason",
+        "differenceSource",
+        "pendingTransactionId",
+        "password",
+        "expectedVersion"
+      ],
+      "type": "object",
+      "properties": {
+        "correctAmount": {
+          "pattern": "^-?(?:0|[1-9]\\d*)(?:\\.\\d+)?$",
+          "type": [
+            "number",
+            "string"
+          ],
+          "format": "double",
+          "example": 1000.0
+        },
+        "reason": {
+          "type": [
+            "null",
+            "string"
+          ]
+        },
+        "differenceSource": {
+          "type": [
+            "null",
+            "string"
+          ]
+        },
+        "pendingTransactionId": {
+          "type": [
+            "null",
+            "string"
+          ],
+          "format": "uuid",
+          "example": "3fa85f64-5717-4562-b3fc-2c963f66afa6"
+        },
+        "password": {
+          "type": [
+            "null",
+            "string"
+          ]
+        },
+        "expectedVersion": {
+          "pattern": "^-?(?:0|[1-9]\\d*)$",
+          "type": [
+            "null",
+            "integer",
+            "string"
+          ],
+          "format": "int32"
+        }
+      },
+      "additionalProperties": false
+    },
+    "EditTransactionRequest": {
+      "required": [
+        "amount",
+        "bankAccountId",
+        "expectedVersion"
+      ],
+      "type": "object",
+      "properties": {
+        "amount": {
+          "pattern": "^-?(?:0|[1-9]\\d*)(?:\\.\\d+)?$",
+          "type": [
+            "number",
+            "string"
+          ],
+          "format": "double",
+          "example": 1000.0
+        },
+        "bankAccountId": {
+          "type": [
+            "null",
+            "string"
+          ],
+          "format": "uuid",
+          "example": "3fa85f64-5717-4562-b3fc-2c963f66afa6"
+        },
+        "expectedVersion": {
+          "pattern": "^-?(?:0|[1-9]\\d*)$",
+          "type": [
+            "null",
+            "integer",
+            "string"
+          ],
+          "format": "int32"
+        }
+      },
+      "additionalProperties": false
+    },
+    "TransactionActionRequest": {
+      "required": [
+        "action",
+        "reason",
+        "expectedVersion"
+      ],
+      "type": "object",
+      "properties": {
+        "action": {
+          "type": "string"
+        },
+        "reason": {
+          "type": [
+            "null",
+            "string"
+          ]
+        },
+        "expectedVersion": {
+          "pattern": "^-?(?:0|[1-9]\\d*)$",
+          "type": [
+            "null",
+            "integer",
+            "string"
+          ],
+          "format": "int32"
+        },
+        "password": {
+          "type": [
+            "null",
+            "string"
+          ]
+        }
+      },
+      "additionalProperties": false
+    },
+    "CustomerBankAccountResponse": {
+      "required": [
+        "id",
+        "customerId",
+        "bankId",
+        "branch",
+        "accountNumber",
+        "accountNumberMasked",
+        "accountDigit",
+        "accountType",
+        "holderType",
+        "holderName",
+        "holderDocument",
+        "holderDocumentMasked",
+        "pixKey",
+        "pixKeyMasked",
+        "pixKeyType",
+        "isPrimary",
+        "status",
+        "createdAtUtc",
+        "updatedAtUtc",
+        "archivedAtUtc"
+      ],
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "format": "uuid",
+          "example": "3fa85f64-5717-4562-b3fc-2c963f66afa6"
+        },
+        "customerId": {
+          "type": "string",
+          "format": "uuid",
+          "example": "3fa85f64-5717-4562-b3fc-2c963f66afa6"
+        },
+        "bankId": {
+          "type": "string",
+          "format": "uuid",
+          "example": "3fa85f64-5717-4562-b3fc-2c963f66afa6"
+        },
+        "branch": {
+          "type": "string"
+        },
+        "accountNumber": {
+          "type": "string"
+        },
+        "accountNumberMasked": {
+          "type": [
+            "null",
+            "string"
+          ]
+        },
+        "accountDigit": {
+          "type": [
+            "null",
+            "string"
+          ]
+        },
+        "accountType": {
+          "type": "string"
+        },
+        "holderType": {
+          "type": "string"
+        },
+        "holderName": {
+          "type": [
+            "null",
+            "string"
+          ]
+        },
+        "holderDocument": {
+          "type": [
+            "null",
+            "string"
+          ]
+        },
+        "holderDocumentMasked": {
+          "type": [
+            "null",
+            "string"
+          ]
+        },
+        "pixKey": {
+          "type": [
+            "null",
+            "string"
+          ]
+        },
+        "pixKeyMasked": {
+          "type": [
+            "null",
+            "string"
+          ]
+        },
+        "pixKeyType": {
+          "type": [
+            "null",
+            "string"
+          ]
+        },
+        "isPrimary": {
+          "type": "boolean",
+          "example": true
+        },
+        "status": {
+          "type": "string"
+        },
+        "createdAtUtc": {
+          "type": "string",
+          "format": "date-time",
+          "example": "2026-11-16T00:00:00Z"
+        },
+        "updatedAtUtc": {
+          "type": [
+            "null",
+            "string"
+          ],
+          "format": "date-time",
+          "example": "2026-11-16T00:00:00Z"
+        },
+        "archivedAtUtc": {
+          "type": [
+            "null",
+            "string"
+          ],
+          "format": "date-time",
+          "example": "2026-11-16T00:00:00Z"
+        }
+      }
+    },
+    "ClientBankAccountResponse": {
+      "required": [
+        "id",
+        "customerId",
+        "bankId",
+        "branch",
+        "accountNumberMasked",
+        "accountDigit",
+        "accountType",
+        "holderType",
+        "holderName",
+        "holderDocumentMasked",
+        "pixKeyMasked",
+        "pixKeyType",
+        "isPrimary",
+        "status",
+        "createdAtUtc",
+        "updatedAtUtc",
+        "archivedAtUtc"
+      ],
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "format": "uuid",
+          "example": "3fa85f64-5717-4562-b3fc-2c963f66afa6"
+        },
+        "customerId": {
+          "type": "string",
+          "format": "uuid",
+          "example": "3fa85f64-5717-4562-b3fc-2c963f66afa6"
+        },
+        "bankId": {
+          "type": "string",
+          "format": "uuid",
+          "example": "3fa85f64-5717-4562-b3fc-2c963f66afa6"
+        },
+        "branch": {
+          "type": "string"
+        },
+        "accountNumberMasked": {
+          "type": [
+            "null",
+            "string"
+          ]
+        },
+        "accountDigit": {
+          "type": [
+            "null",
+            "string"
+          ]
+        },
+        "accountType": {
+          "type": "string"
+        },
+        "holderType": {
+          "type": "string"
+        },
+        "holderName": {
+          "type": [
+            "null",
+            "string"
+          ]
+        },
+        "holderDocumentMasked": {
+          "type": [
+            "null",
+            "string"
+          ]
+        },
+        "pixKeyMasked": {
+          "type": [
+            "null",
+            "string"
+          ]
+        },
+        "pixKeyType": {
+          "type": [
+            "null",
+            "string"
+          ]
+        },
+        "isPrimary": {
+          "type": "boolean",
+          "example": true
+        },
+        "status": {
+          "type": "string"
+        },
+        "createdAtUtc": {
+          "type": "string",
+          "format": "date-time",
+          "example": "2026-11-16T00:00:00Z"
+        },
+        "updatedAtUtc": {
+          "type": [
+            "null",
+            "string"
+          ],
+          "format": "date-time",
+          "example": "2026-11-16T00:00:00Z"
+        },
+        "archivedAtUtc": {
+          "type": [
+            "null",
+            "string"
+          ],
+          "format": "date-time",
+          "example": "2026-11-16T00:00:00Z"
+        }
+      }
+    },
+    "ClientLoanResponse": {
+      "required": [
+        "id",
+        "publicCode",
+        "contract",
+        "kind",
+        "currencyIsoCode",
+        "principalAmount",
+        "outstandingAmount",
+        "interestRatePercent",
+        "termMonths",
+        "leverageRatio",
+        "purpose",
+        "collateral",
+        "startDate",
+        "dueDate",
+        "status",
+        "createdAtUtc",
+        "updatedAtUtc"
+      ],
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "format": "uuid",
+          "example": "3fa85f64-5717-4562-b3fc-2c963f66afa6"
+        },
+        "publicCode": {
+          "type": "string"
+        },
+        "contract": {
+          "oneOf": [
+            {
+              "type": "null"
+            },
+            {
+              "$ref": "#/components/schemas/LoanContractResponse"
+            }
+          ]
+        },
+        "kind": {
+          "type": "string"
+        },
+        "currencyIsoCode": {
+          "type": "string",
+          "example": "EUR"
+        },
+        "principalAmount": {
+          "pattern": "^-?(?:0|[1-9]\\d*)(?:\\.\\d+)?$",
+          "type": [
+            "number",
+            "string"
+          ],
+          "format": "double",
+          "example": 1000.0
+        },
+        "outstandingAmount": {
+          "pattern": "^-?(?:0|[1-9]\\d*)(?:\\.\\d+)?$",
+          "type": [
+            "null",
+            "number",
+            "string"
+          ],
+          "format": "double",
+          "example": 1000.0
+        },
+        "interestRatePercent": {
+          "pattern": "^-?(?:0|[1-9]\\d*)(?:\\.\\d+)?$",
+          "type": [
+            "null",
+            "number",
+            "string"
+          ],
+          "format": "double"
+        },
+        "termMonths": {
+          "pattern": "^-?(?:0|[1-9]\\d*)$",
+          "type": [
+            "null",
+            "integer",
+            "string"
+          ],
+          "format": "int32"
+        },
+        "leverageRatio": {
+          "pattern": "^-?(?:0|[1-9]\\d*)(?:\\.\\d+)?$",
+          "type": [
+            "null",
+            "number",
+            "string"
+          ],
+          "format": "double"
+        },
+        "purpose": {
+          "type": [
+            "null",
+            "string"
+          ]
+        },
+        "collateral": {
+          "type": [
+            "null",
+            "string"
+          ]
+        },
+        "startDate": {
+          "type": [
+            "null",
+            "string"
+          ],
+          "format": "date",
+          "example": "2026-11-16"
+        },
+        "dueDate": {
+          "type": [
+            "null",
+            "string"
+          ],
+          "format": "date",
+          "example": "2026-11-16"
+        },
+        "status": {
+          "type": "string"
+        },
+        "createdAtUtc": {
+          "type": "string",
+          "format": "date-time",
+          "example": "2026-11-16T00:00:00Z"
+        },
+        "updatedAtUtc": {
+          "type": "string",
+          "format": "date-time",
+          "example": "2026-11-16T00:00:00Z"
+        }
+      }
+    }
+  },
+  "tests": {
+    "admin": {
+      "local": 381,
+      "versioned": 373,
+      "unrelatedStudy": 8
+    },
+    "client": 428,
+    "lint": "passed",
+    "build": "passed",
+    "browserReal": [
+      "transfer request created with valid password after invalid password rejected",
+      "cancel with reason and password; zero executions/ledger; original balances restored",
+      "level 0 blocked on direct leverage/my-leverages routes; profile navigation",
+      "withdrawal modal and standalone route load real wallet balances; recovery form reused without sending email"
+    ],
+    "browserControlled": [
+      "loan statuses, expansion, missing metrics, empty/error/retry",
+      "390px loan cards without metric overlap or horizontal overflow",
+      "active engine row events; pause disabled; missing values not filled"
+    ],
+    "notValidated": [
+      "complete approval/execution cycle",
+      "bank operations requiring unknown bank currency",
+      "password-confirmed client withdrawal",
+      "multi-origin deposit correction",
+      "real level-3 customer with populated loans",
+      "all 85 remaining comparison frames"
+    ]
+  },
+  "harnessesRemoved": true,
+  "financialExecutionPerformed": false
+}

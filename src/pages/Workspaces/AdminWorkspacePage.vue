@@ -209,6 +209,22 @@
             hide-pagination
             :pagination="{ rowsPerPage: 0 }"
             no-data-label="Nenhum registro encontrado."
+            ><template v-if="module === 'logic'" #body="p"
+              ><q-tr v-if="['Active', 'Ativo'].includes(p.row.status)" :props="p"
+                ><q-td :colspan="p.cols.length"
+                  ><logic-active-row
+                    :record="p.row"
+                    @select="openRow(p.row, $event)" /></q-td></q-tr
+              ><q-tr v-else :props="p"
+                ><q-td v-for="column in p.cols" :key="column.name" :props="{ ...p, col: column }"
+                  ><row-actions
+                    v-if="column.name === 'actions'"
+                    dark
+                    :actions="recordActions"
+                    @select="openRow(p.row, $event)"
+                  /><template v-else>{{ column.value }}</template></q-td
+                ></q-tr
+              ></template
             ><template #body-cell-status="p"
               ><q-td :props="p"
                 ><publication-status
@@ -267,6 +283,7 @@
   </q-page>
 </template>
 <script setup>
+import LogicActiveRow from 'src/components/Workspaces/LogicActiveRow.vue'
 import LogicCard from 'src/components/Workspaces/LogicCard.vue'
 import PublicationStatus from 'src/components/Workspaces/PublicationStatus.vue'
 import { computed, ref, watch, onScopeDispose } from 'vue'
