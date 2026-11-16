@@ -1,0 +1,60 @@
+const imgWhisk93C52372B3 = "https://www.figma.com/api/mcp/asset/d6617b32-90a7-4547-92d3-cdc4483364f5.png";
+const imgPlus = "https://www.figma.com/api/mcp/asset/9eb357c2-48e1-472f-bdbb-aa0fcb6b92a8.svg";
+const imgExternalLink = "https://www.figma.com/api/mcp/asset/4ec0b794-7035-46b5-8dc2-a39a3e33ba29.svg";
+
+export default function BannerContrato() {
+  return (
+    <div className="border-[var(--success\/400,#74e239)] border-b-[0.5px] border-l-4 border-r-[0.5px] border-solid border-t-[0.5px] content-stretch flex gap-[12px] items-center overflow-clip px-[16px] py-[12px] relative rounded-[8px] shadow-[0px_0px_16px_4px_rgba(116,226,57,0.12)] size-full" data-node-id="1:69607" style={{ backgroundImage: "linear-gradient(181.75132643236543deg, rgba(255, 255, 255, 0.16) 0.52072%, rgba(255, 255, 255, 0.04) 50%, rgba(255, 255, 255, 0.01) 99.479%)" }} data-name="banner-contrato">
+      <div className="content-stretch flex items-center justify-center p-[8px] relative rounded-[1px] shrink-0" data-node-id="1:69610" style={{ backgroundImage: "linear-gradient(202.9886527725518deg, rgba(255, 255, 255, 0.06) 0.52072%, rgba(255, 255, 255, 0.01) 79.688%)" }} data-name="Icon">
+        <div className="relative shrink-0 size-[88px]" data-node-id="1:69611" data-name="Whisk_93c52372b3">
+          <div className="absolute inset-0 overflow-hidden pointer-events-none">
+            <img alt="" className="absolute h-[146.34%] left-[-81.95%] max-w-none top-[-21.95%] w-[266.41%]" src={imgWhisk93C52372B3} />
+          </div>
+        </div>
+      </div>
+      <div className="content-stretch flex flex-[1_0_0] flex-col gap-[8px] items-start min-w-px relative" data-node-id="1:69612" data-name="Card Content">
+        <div className="border border-[var(--active,#00a3ff)] border-solid content-stretch flex gap-[4px] items-center px-[var(--radius---4,12px)] py-[var(--space--2,4px)] relative rounded-[var(--components\/tag\/global\/borderradiussm,4px)] shrink-0" data-node-id="1:69613" style={{ backgroundImage: "linear-gradient(182.72116824202328deg, rgba(255, 255, 255, 0.16) 0.52072%, rgba(255, 255, 255, 0.04) 50%, rgba(255, 255, 255, 0.01) 99.479%)" }} data-name="*Tag* / Icon">
+          <div className="relative shrink-0 size-[12px]" data-node-id="I1:69613;412:13400" data-name="plus">
+            <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgPlus} />
+          </div>
+          <p className="[word-break:break-word] font-['Inter:Regular'] font-normal leading-[1.35] not-italic relative shrink-0 text-[14px] text-[color:var(--neutral\/white,white)] whitespace-nowrap" data-node-id="I1:69613;412:13399">
+            Oportunidade de Investimento
+          </p>
+        </div>
+        <p className="[word-break:break-word] font-['Inter:Bold'] font-bold leading-[1.35] min-w-full not-italic relative shrink-0 text-[17px] text-[color:var(--neutral\/white,white)] w-[min-content]" data-node-id="1:69614">{` Contrato em Alta com Rendimentos de até 16% ao ano!`}</p>
+        <p className="[word-break:break-word] font-['Inter:Regular'] font-normal leading-[1.35] not-italic relative shrink-0 text-[14px] text-[color:var(--neutral\/300,#bdbdbd)] whitespace-nowrap" data-node-id="1:69615">
+          Diversifique sua Carteira e Aumente seus Ganhos. Aproveite agora!
+        </p>
+      </div>
+      <div className="content-stretch flex gap-[8px] items-center justify-center overflow-clip p-[8px] relative rounded-[4px] shrink-0" data-node-id="1:69616" data-name="button">
+        <div className="content-stretch flex items-center justify-center relative shrink-0" data-node-id="I1:69616;188:2618" data-name="Text Container">
+          <p className="[word-break:break-word] font-['Roboto:Medium'] font-medium leading-none relative shrink-0 text-[20px] text-[color:var(--active,#00a3ff)] tracking-[0.5px] whitespace-nowrap" data-node-id="I1:69616;188:2619" style={{ fontVariationSettings: '"wdth" 100' }}>
+            Quero Conhecer
+          </p>
+        </div>
+        <div className="relative shrink-0 size-[24px]" data-node-id="I1:69616;188:2620" data-name="external-link">
+          <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgExternalLink} />
+        </div>
+      </div>
+    </div>
+  );
+}
+SUPER CRITICAL: The generated React+Tailwind code MUST be converted to match the target project's technology stack and styling system.
+1. Analyze the target codebase to identify: technology stack, styling approach, component patterns, and design tokens
+2. Convert React syntax to the target framework/library
+3. Transform all Tailwind classes to the target styling system while preserving exact visual design
+4. Follow the project's existing patterns and conventions
+DO NOT install any Tailwind as a dependency unless the user instructs you to do so.
+
+Node ids have been added to the code as data attributes, e.g. `data-node-id="1:2"`.
+These styles are contained in the design: grad - glass low: , S.A/14/R: Font(family: "Inter", style: Regular, size: 14, weight: 400, lineHeight: 1.350000023841858, letterSpacing: 0), grad - glass primary: , S.A/17/B: Font(family: "Inter", style: Bold, size: 17, weight: 700, lineHeight: 1.350000023841858, letterSpacing: 0).
+Component descriptions: The following components have usage descriptions or documentation links defined in Figma. These descriptions provide important context about the intended usage, best practices, and any constraints for each component. Follow these guidelines when implementing or using these components.
+
+## *Tag* / Icon
+**Node ID:** 1:22908
+
+import { TwitterOutlined } from '@ant-design/icons'; import { Tag } from 'antd'; import React from 'react'; const App = () => ( <Tag icon={<TwitterOutlined />} color="#55acee"> Twitter </Tag> ); export default App;
+
+**Documentation:**
+- [https://ant.design/components/tag/](https://ant.design/components/tag/)
+The generated code contains image and SVG URL constants, e.g. const image = 'https://www.figma.com/api/mcp/asset/550e8400-e29b-41d4-a716-446655440000.png'. These URLs are temporary download sources and expire after 7 days. Download each asset into the project with curl -L, then replace its URL in the generated code with a reference to the downloaded asset. Never use the temporary URLs as runtime image sources.

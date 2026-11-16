@@ -1,0 +1,199 @@
+.contract-flow {
+  width: 512px;
+  max-width: calc(100vw - 32px);
+  max-height: calc(100dvh - 32px);
+  display: flex;
+  flex-direction: column;
+  color: #fff;
+  background: linear-gradient(215deg, #0000001f, #00000005), rgba(23, 29, 43, 0.96);
+  border: 1px solid #ffffff1f;
+  border-radius: 12px;
+  backdrop-filter: blur(20px);
+  box-shadow: 4px 4px 12px #0002;
+}
+.contract-flow header {
+  padding: 16px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  border-bottom: 1px solid #ffffff1f;
+  flex-shrink: 0;
+}
+.contract-flow h2 {
+  margin: 0;
+  font-size: 14px;
+  line-height: 20px;
+  letter-spacing: 0.7px;
+  font-weight: 700;
+  text-transform: uppercase;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.contract-flow__body {
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  overflow-y: auto;
+  min-height: 0;
+  scrollbar-color: #ffffff60 transparent;
+}
+.contract-flow footer {
+  padding: 16px 24px;
+  border-top: 1px solid #ffffff1f;
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  flex-shrink: 0;
+}
+.contract-flow button:focus-visible {
+  outline: 2px solid #2b7fff;
+  outline-offset: 2px;
+}
+.contract-flow .q-btn {
+  color: #fff;
+  border-radius: 8px;
+  font-size: 14px;
+  line-height: 20px;
+  min-height: 36px;
+}
+.contract-flow .q-btn--outline:before {
+  border-color: #ffffff33;
+}
+.contract-flow__facts {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px 16px;
+  margin: 0;
+}
+.contract-flow dt,
+.contract-flow h3 {
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 16px;
+  color: #ffffffb8;
+  margin: 0 0 6px;
+  text-transform: uppercase;
+}
+.contract-flow dd {
+  margin: 0;
+  font-size: 14px;
+  line-height: 20px;
+  overflow-wrap: anywhere;
+}
+.contract-flow small,
+.contract-flow__muted {
+  color: #ffffffb8;
+  font-size: 12px;
+  line-height: 18px;
+}
+.contract-flow small {
+  display: block;
+}
+.contract-flow__section {
+  border-top: 1px solid #ffffff1a;
+  padding-top: 18px;
+}
+.contract-flow__box {
+  background: #ffffff0f;
+  border: 1px solid #ffffff33;
+  border-radius: 10px;
+  padding: 14px 16px;
+  font-size: 12px;
+  line-height: 20px;
+}
+.contract-flow p {
+  margin: 0;
+}
+.contract-flow table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 12px;
+  table-layout: fixed;
+  color: #fff;
+}
+.contract-flow td,
+.contract-flow th {
+  text-align: left;
+  padding: 8px;
+  border-bottom: 1px solid #ffffff1a;
+  overflow-wrap: anywhere;
+}
+.contract-flow th {
+  font-size: 10px;
+  text-transform: uppercase;
+}
+.contract-flow__actions {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+.contract-flow__actions .q-btn {
+  font-size: 12px;
+  justify-content: flex-start;
+  text-align: left;
+  background: #ffffff0f;
+}
+.contract-flow__actions img {
+  margin-right: 8px;
+  flex-shrink: 0;
+}
+.contract-flow__badge {
+  display: inline-block;
+  border: 1px solid #2b7fff;
+  border-radius: 8px;
+  padding: 2px 8px;
+  background: #ffffff1a;
+  color: #bedbff;
+  font-size: 10px;
+  line-height: 14px;
+}
+.contract-flow__badge.completed,
+.contract-flow__badge.Fulfilled {
+  color: #74ffa0;
+  border-color: #74ffa0;
+  background: #007a5533;
+}
+.contract-flow__badge.pending,
+.contract-flow__badge.InContact {
+  color: #fee685;
+  border-color: #fee685;
+  background: #bb4d0033;
+}
+.contract-flow__badge.negative {
+  color: #ffc9c9;
+  border-color: #ffc9c9;
+}
+.contract-flow__error {
+  color: #ffc9c9;
+  font-size: 12px;
+  line-height: 18px;
+  overflow-wrap: anywhere;
+}
+.contract-flow input,
+.contract-flow textarea {
+  color: #fff !important;
+}
+@media (max-width: 480px) {
+  .contract-flow__body {
+    padding: 16px;
+  }
+  .contract-flow header,
+  .contract-flow footer {
+    padding: 16px;
+  }
+  .contract-flow__actions {
+    grid-template-columns: 1fr;
+  }
+  .contract-flow__facts {
+    gap: 14px 10px;
+  }
+}
+
+.contract-flow__badge.Canceled {
+  color: #ffffffb8;
+  border-color: #ffffff47;
+  background: #ffffff1a;
+}

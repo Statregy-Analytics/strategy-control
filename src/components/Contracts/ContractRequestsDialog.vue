@@ -1,0 +1,208 @@
+<template>
+  <q-dialog :model-value="true" @update:model-value="$emit('close')"
+    ><q-card class="contract-flow contract-requests"
+      ><header>
+        <h2>Solicitações de Contrato</h2>
+        <q-btn flat round dense aria-label="Fechar" @click="$emit('close')"
+          ><img :src="icon('Icon')" alt=""
+        /></q-btn>
+      </header>
+      <div class="contract-flow__body">
+        <div class="contract-flow__box contract-requests__info">
+          <img :src="icon('Info')" alt="" />
+          <p>
+            Pedidos feitos pelos clientes no "Quero Conhecer" da Área do Cliente. Nada sai da
+            carteira do cliente: o assessor entra em contato, combina a moeda firmada e as moedas e
+            cria o contrato ou inclui o cliente num contrato aberto.
+          </p>
+        </div>
+        <div class="contract-requests__filters" role="tablist" aria-label="Status da solicitação">
+          <button
+            v-for="item in requestStatuses"
+            :key="item.value"
+            role="tab"
+            :aria-selected="status === item.value"
+            @click="status = item.value"
+          >
+            {{ item.label }} <strong>{{ counts[item.value] ?? '—' }}</strong>
+          </button>
+        </div>
+        <resource-state :state="resource.state" @retry="load"
+          ><table>
+            <thead>
+              <tr>
+                <th>Enviada em</th>
+                <th>Cliente</th>
+                <th>Objetivo e prazo</th>
+                <th>Valor</th>
+                <th>Status</th>
+                <th />
+              </tr>
+            </thead>
+            <tbody>
+              <tr v-for="row in rows" :key="row.id">
+                <td>{{ when(row.submittedAtUtc) }}</td>
+                <td>
+                  <strong>{{ row.client?.displayName || 'Indisponível' }}</strong
+                  ><small>{{ row.code }}</small>
+                </td>
+                <td>
+                  {{ row.answers?.objective || 'Indisponível'
+                  }}<small>{{ row.answers?.period || 'Indisponível' }}</small>
+                </td>
+                <td>
+                  <strong>{{ requestAmountLabel(row, money) }}</strong
+                  ><small>{{ requestModalityLabel(row, money) }}</small>
+                </td>
+                <td>
+                  <span class="contract-flow__badge" :class="row.status">{{
+                    requestStatusLabel(row.status)
+                  }}</span
+                  ><small v-if="row.status === 'Fulfilled'">{{
+                    row.contract?.name || 'Contrato indisponível'
+                  }}</small
+                  ><small v-if="row.status === 'Canceled'">{{
+                    row.cancellationReason || 'Motivo indisponível'
+                  }}</small>
+                </td>
+                <td>
+                  <button class="contract-requests__open" @click="$emit('open', row.id)">
+                    Abrir
+                  </button>
+                </td>
+              </tr>
+              <tr v-if="!rows.length">
+                <td colspan="6">Nenhuma solicitação encontrada.</td>
+              </tr>
+            </tbody>
+          </table></resource-state
+        >
+      </div>
+      <footer><q-btn outline no-caps label="Fechar" @click="$emit('close')" /></footer></q-card
+  ></q-dialog>
+</template>
+<script setup>
+import { ref, computed, onScopeDispose } from 'vue'
+import ResourceState from 'src/components/Finance/ResourceState.vue'
+import { useFinanceResource } from 'src/composables/useFinanceResource'
+import { money } from 'src/services/financeService'
+import {
+  listContractRequests,
+  requestStatuses,
+  requestStatusLabel,
+  requestAmountLabel,
+  requestModalityLabel,
+} from 'src/services/contractRequests'
+const props = defineProps({ read: { type: Function, default: listContractRequests } })
+const emit = defineEmits(['close', 'open', 'count'])
+const resource = useFinanceResource(),
+  status = ref('All')
+let active = true
+const rows = computed(() =>
+  (resource.state.data?.items || []).filter(
+    (row) => status.value === 'All' || row.status === status.value,
+  ),
+)
+const counts = computed(() => resource.state.data?.counts || {})
+const when = (value) =>
+  value
+    ? new Date(value).toLocaleString('pt-BR', {
+        day: '2-digit',
+        month: '2-digit',
+        year: 'numeric',
+        hour: '2-digit',
+        minute: '2-digit',
+      })
+    : 'Indisponível'
+const icon = (name) => '/icons/contracts/flows/2360-281-img' + name + '.svg'
+async function load() {
+  await resource.load(async () => {
+    const result = await props.read()
+    if (!Array.isArray(result?.items)) throw Error('Solicitações indisponíveis.')
+    return result
+  })
+  if (active && !resource.state.error) emit('count', counts.value.New ?? null)
+}
+onScopeDispose(() => {
+  active = false
+  resource.reset()
+})
+load()
+</script>
+<style src="./contractFlow.scss" lang="scss"></style>
+<style scoped>
+.contract-requests {
+  width: 840px;
+  max-width: calc(100vw - 32px);
+}
+.contract-requests__info {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+}
+.contract-requests__info img {
+  flex-shrink: 0;
+}
+.contract-requests__filters {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.contract-requests__filters button {
+  border: 1px solid #ffffff33;
+  border-radius: 20px;
+  padding: 6px 12px;
+  background: transparent;
+  color: #ffffffb8;
+  font-size: 12px;
+}
+.contract-requests__filters button[aria-selected='true'] {
+  border-color: #2b7fff;
+  background: #ffffff1a;
+  color: #fff;
+}
+.contract-requests__filters strong {
+  margin-left: 4px;
+}
+.contract-requests th:nth-child(1) {
+  width: 14%;
+}
+.contract-requests th:nth-child(2) {
+  width: 23%;
+}
+.contract-requests th:nth-child(3) {
+  width: 22%;
+}
+.contract-requests th:nth-child(4) {
+  width: 21%;
+}
+.contract-requests th:nth-child(5) {
+  width: 14%;
+}
+.contract-requests th:last-child {
+  width: 6%;
+}
+.contract-requests td {
+  padding: 12px 8px;
+  vertical-align: top;
+}
+.contract-requests__open {
+  border: 0;
+  background: transparent;
+  color: #bedbff;
+  padding: 0;
+  font-size: 12px;
+  cursor: pointer;
+}
+.contract-requests tr:hover {
+  background: #ffffff0a;
+}
+@media (max-width: 600px) {
+  .contract-requests table {
+    min-width: 700px;
+  }
+  .contract-requests .contract-flow__body > div:last-child {
+    overflow-x: auto;
+  }
+}
+</style>

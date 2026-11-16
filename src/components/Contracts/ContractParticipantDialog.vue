@@ -21,6 +21,7 @@
             ><customer-select
               v-model="selected"
               :clearable="false"
+            :current="initialClient"
               :disable="pending"
               :lookup="lookup"
               :selected-label="
@@ -225,6 +226,7 @@ import {
   validEntryDate,
 } from 'src/services/contractParticipantEntry'
 const props = defineProps({
+  initialClient:{type:Object,default:null},
   submit: { type: Function, required: true },
   existingIds: { type: Array, default: () => [] },
   busy: Boolean,
@@ -271,6 +273,7 @@ function resolveClient(customer) {
   else flow.choose(customer)
 }
 const duplicate = computed(() => props.existingIds.includes(selected.value))
+watch(()=>props.initialClient,value=>{if(value){selected.value=value.customerId;resolveClient(value)}},{immediate:true})
 const hasConversion = computed(() =>
   state.value.rows.some((row) => row.currencyIsoCode !== props.currency),
 )

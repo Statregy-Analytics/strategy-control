@@ -1,0 +1,950 @@
+const imgIcon = "https://www.figma.com/api/mcp/asset/bf61c929-8d74-47ae-b21a-58a89430fcc4.svg";
+const imgIcon1 = "https://www.figma.com/api/mcp/asset/9ab78f5b-b9be-4f78-986d-93ff6aac463d.svg";
+const imgIcon2 = "https://www.figma.com/api/mcp/asset/99b5d97f-6089-4869-890c-dfc7b31148c1.svg";
+const imgIcon3 = "https://www.figma.com/api/mcp/asset/e60030a6-d058-468b-994f-dcaf51b7e427.svg";
+
+export default function P012EcExtratoLancamentosDeContratoAportePorMoedaDividendoEResgatePorParticipante() {
+  return (
+    <div className="backdrop-blur-[20px] bg-[var(--sa-color-bg-surface,rgba(255,255,255,0.06))] border-[0.8px] border-[rgba(255,255,255,0.2)] border-solid content-stretch flex flex-col gap-[var(--sa-spacing-24,24px)] items-start overflow-clip relative rounded-[var(--sa-radius-14,14px)] shadow-[4px_4px_12px_0px_rgba(0,0,0,0.13)] size-full" data-node-id="2349:281" data-name="P01.2 · EC · Extrato · Lançamentos de contrato (aporte por moeda; dividendo e resgate por participante)">
+      <div className="content-stretch flex flex-col items-start overflow-clip relative shrink-0 w-[1400.8px]" data-node-id="2349:282" data-name="Container">
+        <div className="h-[894.8px] overflow-clip relative shrink-0 w-full" data-node-id="2349:283" data-name="Table">
+          <div className="[word-break:break-word] absolute bg-[rgba(255,255,255,0.06)] border-[rgba(255,255,255,0.2)] border-b-[0.8px] border-solid font-['Inter:Bold'] font-bold h-[40px] leading-[16px] left-0 not-italic rounded-tl-[14px] rounded-tr-[14px] text-[12px] text-[color:var(--sa-color-text-primary,white)] top-0 uppercase w-[1400.8px] whitespace-nowrap" data-node-id="2349:284" data-name="TableRow">
+            <p className="absolute left-[8px] top-[11.8px]" data-node-id="2349:285">
+              Data/Hora
+            </p>
+            <p className="absolute left-[119.42px] top-[11.8px]" data-node-id="2349:286">
+              ID
+            </p>
+            <p className="absolute left-[253.21px] top-[11.8px]" data-node-id="2349:287">
+              Tipo
+            </p>
+            <p className="absolute left-[448.19px] top-[11.8px]" data-node-id="2349:288">
+              Cliente
+            </p>
+            <p className="absolute left-[645.38px] top-[11.8px]" data-node-id="2349:289">
+              Origem
+            </p>
+            <p className="absolute left-[813.04px] top-[11.8px]" data-node-id="2349:290">
+              Destino
+            </p>
+            <p className="absolute left-[980.7px] top-[11.8px]" data-node-id="2349:291">
+              Valor
+            </p>
+            <p className="absolute left-[1114.63px] top-[11.8px]" data-node-id="2349:292">
+              Status
+            </p>
+            <p className="absolute left-[1224.24px] top-[11.8px]" data-node-id="2349:293">
+              Responsável
+            </p>
+          </div>
+          <div className="absolute border-[rgba(255,255,255,0.12)] border-b-[0.8px] border-solid h-[56.8px] left-0 top-[40px] w-[1400.8px]" data-node-id="2355:381" data-name="TableRow · TRX-2026-00421 · Aporte Atribuído">
+            <p className="[word-break:break-word] absolute font-['Inter:Regular'] font-normal leading-[16px] left-[8px] not-italic text-[12px] text-[color:var(--sa-color-text-secondary,rgba(255,255,255,0.72))] top-[20.4px] whitespace-nowrap" data-node-id="2355:382">
+              14/11/2026 09:30
+            </p>
+            <p className="[word-break:break-word] absolute font-['DM_Mono:Regular'] leading-[16px] left-[119.42px] not-italic text-[12px] text-[rgba(255,255,255,0.76)] top-[20.4px] whitespace-nowrap" data-node-id="2355:383">
+              TRX-2026-00421
+            </p>
+            <div className="absolute content-stretch flex gap-[var(--sa-spacing-8,8px)] items-center left-[253.21px] top-[12px] w-[178.975px]" data-node-id="2355:384" data-name="TransactionsScreen">
+              <div className="relative shrink-0 size-[16px]" data-node-id="2355:385" data-name="Icon">
+                <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgIcon} />
+              </div>
+              <div className="[word-break:break-word] content-stretch flex flex-col font-['Inter:Medium'] font-medium items-start leading-[16px] not-italic relative shrink-0 text-[color:var(--sa-color-text-secondary,rgba(255,255,255,0.72))] whitespace-nowrap" data-node-id="2355:388" data-name="Text">
+                <p className="relative shrink-0 text-[12px]" data-node-id="2355:389">
+                  Aporte Atribuído
+                </p>
+                <p className="opacity-60 relative shrink-0 text-[11px]" data-node-id="2355:407">
+                  criação · 10,00%
+                </p>
+              </div>
+            </div>
+            <p className="[word-break:break-word] absolute font-['Inter:Medium'] font-medium leading-[16px] left-[448.19px] not-italic text-[12px] text-[color:var(--sa-color-text-secondary,rgba(255,255,255,0.72))] top-[20.4px] whitespace-nowrap" data-node-id="2355:390">
+              Roberto Carlos da Silva
+            </p>
+            <div className="[word-break:break-word] absolute content-stretch flex flex-col font-['Inter:Regular'] font-normal items-start leading-[16px] left-[645.38px] max-w-[150px] not-italic overflow-clip text-[color:var(--sa-color-text-secondary,rgba(255,255,255,0.72))] top-[12px] w-[150px] whitespace-nowrap" data-node-id="2355:391" data-name="TransactionsScreen">
+              <p className="relative shrink-0 text-[12px]" data-node-id="2355:392">
+                Atribuído pelo admin
+              </p>
+              <p className="relative shrink-0 text-[11px]" data-node-id="2355:408">
+                não sai de carteira
+              </p>
+            </div>
+            <div className="[word-break:break-word] absolute content-stretch flex flex-col font-['Inter:Regular'] font-normal items-start leading-[16px] left-[813.04px] max-w-[150px] not-italic overflow-clip text-[color:var(--sa-color-text-secondary,rgba(255,255,255,0.72))] top-[12px] w-[150px] whitespace-nowrap" data-node-id="2355:393" data-name="TransactionsScreen">
+              <p className="relative shrink-0 text-[12px]" data-node-id="2355:394">
+                Beta 2026
+              </p>
+              <p className="relative shrink-0 text-[11px]" data-node-id="2355:409">
+                contrato · BRL
+              </p>
+            </div>
+            <p className="[word-break:break-word] absolute font-['Inter:Bold'] font-bold leading-[20px] left-[980.7px] not-italic text-[14px] text-[color:var(--color\/v2\/text\/value-positive,#66e59e)] top-[18px] whitespace-nowrap" data-node-id="2355:395">
+              R$ 10.000,00
+            </p>
+            <div className="absolute bg-[var(--color\/v2\/bg\/status-positive,rgba(0,122,85,0.2))] border-[0.8px] border-[var(--color\/v2\/border\/status-positive,#74ffa0)] border-solid content-stretch flex gap-[var(--sa-spacing-4,4px)] items-center justify-center left-[1114.63px] overflow-clip pl-[7px] pr-[9px] py-[3px] rounded-[8px] top-[18.46px]" data-node-id="2355:396" data-name="Badge">
+              <div className="relative shrink-0 size-[12px]" data-node-id="2355:397" data-name="Icon">
+                <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgIcon1} />
+              </div>
+              <p className="[word-break:break-word] font-['Inter:Medium'] font-medium leading-[14.286px] not-italic relative shrink-0 text-[10px] text-[color:var(--color\/v2\/text\/status-positive,#74ffa0)] tracking-[0.25px] uppercase whitespace-nowrap" data-node-id="2355:400">
+                Processada
+              </p>
+            </div>
+            <p className="[word-break:break-word] absolute font-['Inter:Regular'] font-normal leading-[16px] left-[1224.24px] not-italic text-[12px] text-[color:var(--sa-color-text-secondary,rgba(255,255,255,0.72))] top-[20.4px] whitespace-nowrap" data-node-id="2355:401">
+              Admin
+            </p>
+            <div className="absolute content-stretch flex gap-[var(--sa-spacing-6,6px)] items-center justify-center left-[1360.74px] px-[var(--sa-spacing-10,10px)] rounded-[var(--sa-radius-8,8px)] size-[32px] top-[12.4px]" data-node-id="2355:402" data-name="Button">
+              <div className="relative shrink-0 size-[16px]" data-node-id="2355:403" data-name="Icon">
+                <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgIcon2} />
+              </div>
+            </div>
+          </div>
+          <div className="absolute border-[rgba(255,255,255,0.12)] border-b-[0.8px] border-solid h-[56.8px] left-0 top-[97px] w-[1400.8px]" data-node-id="2355:410" data-name="TableRow · TRX-2026-00422 · Aporte Atribuído">
+            <p className="[word-break:break-word] absolute font-['Inter:Regular'] font-normal leading-[16px] left-[8px] not-italic text-[12px] text-[color:var(--sa-color-text-secondary,rgba(255,255,255,0.72))] top-[20.4px] whitespace-nowrap" data-node-id="2355:411">
+              14/11/2026 09:30
+            </p>
+            <p className="[word-break:break-word] absolute font-['DM_Mono:Regular'] leading-[16px] left-[119.42px] not-italic text-[12px] text-[rgba(255,255,255,0.76)] top-[20.4px] whitespace-nowrap" data-node-id="2355:412">
+              TRX-2026-00422
+            </p>
+            <div className="absolute content-stretch flex gap-[var(--sa-spacing-8,8px)] items-center left-[253.21px] top-[12px] w-[178.975px]" data-node-id="2355:413" data-name="TransactionsScreen">
+              <div className="relative shrink-0 size-[16px]" data-node-id="2355:414" data-name="Icon">
+                <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgIcon} />
+              </div>
+              <div className="[word-break:break-word] content-stretch flex flex-col font-['Inter:Medium'] font-medium items-start leading-[16px] not-italic relative shrink-0 text-[color:var(--sa-color-text-secondary,rgba(255,255,255,0.72))] whitespace-nowrap" data-node-id="2355:417" data-name="Text">
+                <p className="relative shrink-0 text-[12px]" data-node-id="2355:418">
+                  Aporte Atribuído
+                </p>
+                <p className="opacity-60 relative shrink-0 text-[11px]" data-node-id="2355:436">
+                  criação · 75,00%
+                </p>
+              </div>
+            </div>
+            <p className="[word-break:break-word] absolute font-['Inter:Medium'] font-medium leading-[16px] left-[448.19px] not-italic text-[12px] text-[color:var(--sa-color-text-secondary,rgba(255,255,255,0.72))] top-[20.4px] whitespace-nowrap" data-node-id="2355:419">
+              Mariana Alencar
+            </p>
+            <div className="[word-break:break-word] absolute content-stretch flex flex-col font-['Inter:Regular'] font-normal items-start leading-[16px] left-[645.38px] max-w-[150px] not-italic overflow-clip text-[color:var(--sa-color-text-secondary,rgba(255,255,255,0.72))] top-[12px] w-[150px] whitespace-nowrap" data-node-id="2355:420" data-name="TransactionsScreen">
+              <p className="relative shrink-0 text-[12px]" data-node-id="2355:421">
+                Atribuído pelo admin
+              </p>
+              <p className="relative shrink-0 text-[11px]" data-node-id="2355:437">
+                não sai de carteira
+              </p>
+            </div>
+            <div className="[word-break:break-word] absolute content-stretch flex flex-col font-['Inter:Regular'] font-normal items-start leading-[16px] left-[813.04px] max-w-[150px] not-italic overflow-clip text-[color:var(--sa-color-text-secondary,rgba(255,255,255,0.72))] top-[12px] w-[150px] whitespace-nowrap" data-node-id="2355:422" data-name="TransactionsScreen">
+              <p className="relative shrink-0 text-[12px]" data-node-id="2355:423">
+                Beta 2026
+              </p>
+              <p className="relative shrink-0 text-[11px]" data-node-id="2355:438">
+                contrato · BRL
+              </p>
+            </div>
+            <p className="[word-break:break-word] absolute font-['Inter:Bold'] font-bold leading-[20px] left-[980.7px] not-italic text-[14px] text-[color:var(--color\/v2\/text\/value-positive,#66e59e)] top-[18px] whitespace-nowrap" data-node-id="2355:424">
+              R$ 75.000,00
+            </p>
+            <div className="absolute bg-[var(--color\/v2\/bg\/status-positive,rgba(0,122,85,0.2))] border-[0.8px] border-[var(--color\/v2\/border\/status-positive,#74ffa0)] border-solid content-stretch flex gap-[var(--sa-spacing-4,4px)] items-center justify-center left-[1114.63px] overflow-clip pl-[7px] pr-[9px] py-[3px] rounded-[8px] top-[18.46px]" data-node-id="2355:425" data-name="Badge">
+              <div className="relative shrink-0 size-[12px]" data-node-id="2355:426" data-name="Icon">
+                <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgIcon1} />
+              </div>
+              <p className="[word-break:break-word] font-['Inter:Medium'] font-medium leading-[14.286px] not-italic relative shrink-0 text-[10px] text-[color:var(--color\/v2\/text\/status-positive,#74ffa0)] tracking-[0.25px] uppercase whitespace-nowrap" data-node-id="2355:429">
+                Processada
+              </p>
+            </div>
+            <p className="[word-break:break-word] absolute font-['Inter:Regular'] font-normal leading-[16px] left-[1224.24px] not-italic text-[12px] text-[color:var(--sa-color-text-secondary,rgba(255,255,255,0.72))] top-[20.4px] whitespace-nowrap" data-node-id="2355:430">
+              Admin
+            </p>
+            <div className="absolute content-stretch flex gap-[var(--sa-spacing-6,6px)] items-center justify-center left-[1360.74px] px-[var(--sa-spacing-10,10px)] rounded-[var(--sa-radius-8,8px)] size-[32px] top-[12.4px]" data-node-id="2355:431" data-name="Button">
+              <div className="relative shrink-0 size-[16px]" data-node-id="2355:432" data-name="Icon">
+                <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgIcon2} />
+              </div>
+            </div>
+          </div>
+          <div className="absolute border-[rgba(255,255,255,0.12)] border-b-[0.8px] border-solid h-[56.8px] left-0 top-[154px] w-[1400.8px]" data-node-id="2355:439" data-name="TableRow · TRX-2026-00423 · Aporte Atribuído">
+            <p className="[word-break:break-word] absolute font-['Inter:Regular'] font-normal leading-[16px] left-[8px] not-italic text-[12px] text-[color:var(--sa-color-text-secondary,rgba(255,255,255,0.72))] top-[20.4px] whitespace-nowrap" data-node-id="2355:440">
+              14/11/2026 09:30
+            </p>
+            <p className="[word-break:break-word] absolute font-['DM_Mono:Regular'] leading-[16px] left-[119.42px] not-italic text-[12px] text-[rgba(255,255,255,0.76)] top-[20.4px] whitespace-nowrap" data-node-id="2355:441">
+              TRX-2026-00423
+            </p>
+            <div className="absolute content-stretch flex gap-[var(--sa-spacing-8,8px)] items-center left-[253.21px] top-[12px] w-[178.975px]" data-node-id="2355:442" data-name="TransactionsScreen">
+              <div className="relative shrink-0 size-[16px]" data-node-id="2355:443" data-name="Icon">
+                <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgIcon} />
+              </div>
+              <div className="[word-break:break-word] content-stretch flex flex-col font-['Inter:Medium'] font-medium items-start leading-[16px] not-italic relative shrink-0 text-[color:var(--sa-color-text-secondary,rgba(255,255,255,0.72))] whitespace-nowrap" data-node-id="2355:446" data-name="Text">
+                <p className="relative shrink-0 text-[12px]" data-node-id="2355:447">
+                  Aporte Atribuído
+                </p>
+                <p className="opacity-60 relative shrink-0 text-[11px]" data-node-id="2355:465">
+                  criação · 15,00%
+                </p>
+              </div>
+            </div>
+            <p className="[word-break:break-word] absolute font-['Inter:Medium'] font-medium leading-[16px] left-[448.19px] not-italic text-[12px] text-[color:var(--sa-color-text-secondary,rgba(255,255,255,0.72))] top-[20.4px] whitespace-nowrap" data-node-id="2355:448">
+              Ana Paula Ferreira
+            </p>
+            <div className="[word-break:break-word] absolute content-stretch flex flex-col font-['Inter:Regular'] font-normal items-start leading-[16px] left-[645.38px] max-w-[150px] not-italic overflow-clip text-[color:var(--sa-color-text-secondary,rgba(255,255,255,0.72))] top-[12px] w-[150px] whitespace-nowrap" data-node-id="2355:449" data-name="TransactionsScreen">
+              <p className="relative shrink-0 text-[12px]" data-node-id="2355:450">
+                Atribuído pelo admin
+              </p>
+              <p className="relative shrink-0 text-[11px]" data-node-id="2355:466">
+                não sai de carteira
+              </p>
+            </div>
+            <div className="[word-break:break-word] absolute content-stretch flex flex-col font-['Inter:Regular'] font-normal items-start leading-[16px] left-[813.04px] max-w-[150px] not-italic overflow-clip text-[color:var(--sa-color-text-secondary,rgba(255,255,255,0.72))] top-[12px] w-[150px] whitespace-nowrap" data-node-id="2355:451" data-name="TransactionsScreen">
+              <p className="relative shrink-0 text-[12px]" data-node-id="2355:452">
+                Beta 2026
+              </p>
+              <p className="relative shrink-0 text-[11px]" data-node-id="2355:467">
+                contrato · BRL
+              </p>
+            </div>
+            <p className="[word-break:break-word] absolute font-['Inter:Bold'] font-bold leading-[20px] left-[980.7px] not-italic text-[14px] text-[color:var(--color\/v2\/text\/value-positive,#66e59e)] top-[18px] whitespace-nowrap" data-node-id="2355:453">
+              R$ 15.000,00
+            </p>
+            <div className="absolute bg-[var(--color\/v2\/bg\/status-positive,rgba(0,122,85,0.2))] border-[0.8px] border-[var(--color\/v2\/border\/status-positive,#74ffa0)] border-solid content-stretch flex gap-[var(--sa-spacing-4,4px)] items-center justify-center left-[1114.63px] overflow-clip pl-[7px] pr-[9px] py-[3px] rounded-[8px] top-[18.46px]" data-node-id="2355:454" data-name="Badge">
+              <div className="relative shrink-0 size-[12px]" data-node-id="2355:455" data-name="Icon">
+                <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgIcon1} />
+              </div>
+              <p className="[word-break:break-word] font-['Inter:Medium'] font-medium leading-[14.286px] not-italic relative shrink-0 text-[10px] text-[color:var(--color\/v2\/text\/status-positive,#74ffa0)] tracking-[0.25px] uppercase whitespace-nowrap" data-node-id="2355:458">
+                Processada
+              </p>
+            </div>
+            <p className="[word-break:break-word] absolute font-['Inter:Regular'] font-normal leading-[16px] left-[1224.24px] not-italic text-[12px] text-[color:var(--sa-color-text-secondary,rgba(255,255,255,0.72))] top-[20.4px] whitespace-nowrap" data-node-id="2355:459">
+              Admin
+            </p>
+            <div className="absolute content-stretch flex gap-[var(--sa-spacing-6,6px)] items-center justify-center left-[1360.74px] px-[var(--sa-spacing-10,10px)] rounded-[var(--sa-radius-8,8px)] size-[32px] top-[12.4px]" data-node-id="2355:460" data-name="Button">
+              <div className="relative shrink-0 size-[16px]" data-node-id="2355:461" data-name="Icon">
+                <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgIcon2} />
+              </div>
+            </div>
+          </div>
+          <div className="absolute border-[rgba(255,255,255,0.12)] border-b-[0.8px] border-solid h-[56.8px] left-0 top-[211px] w-[1400.8px]" data-node-id="2349:433" data-name="TableRow · TRX-2026-00412 · Aporte em Contrato">
+            <p className="[word-break:break-word] absolute font-['Inter:Regular'] font-normal leading-[16px] left-[8px] not-italic text-[12px] text-[color:var(--sa-color-text-secondary,rgba(255,255,255,0.72))] top-[20.4px] whitespace-nowrap" data-node-id="2349:434">
+              13/11/2026 14:05
+            </p>
+            <p className="[word-break:break-word] absolute font-['DM_Mono:Regular'] leading-[16px] left-[119.42px] not-italic text-[12px] text-[rgba(255,255,255,0.76)] top-[20.4px] whitespace-nowrap" data-node-id="2349:435">
+              TRX-2026-00412
+            </p>
+            <div className="absolute content-stretch flex gap-[var(--sa-spacing-8,8px)] items-center left-[253.21px] top-[12px] w-[178.975px]" data-node-id="2349:436" data-name="TransactionsScreen">
+              <div className="relative shrink-0 size-[16px]" data-node-id="2349:437" data-name="Icon">
+                <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgIcon} />
+              </div>
+              <div className="[word-break:break-word] content-stretch flex flex-col font-['Inter:Medium'] font-medium items-start leading-[16px] not-italic relative shrink-0 text-[color:var(--sa-color-text-secondary,rgba(255,255,255,0.72))] whitespace-nowrap" data-node-id="2349:440" data-name="Text">
+                <p className="relative shrink-0 text-[12px]" data-node-id="2349:441">
+                  Aporte em Contrato
+                </p>
+                <p className="opacity-60 relative shrink-0 text-[11px]" data-node-id="2349:459">
+                  entrada · parte 1 de 3
+                </p>
+              </div>
+            </div>
+            <p className="[word-break:break-word] absolute font-['Inter:Medium'] font-medium leading-[16px] left-[448.19px] not-italic text-[12px] text-[color:var(--sa-color-text-secondary,rgba(255,255,255,0.72))] top-[20.4px] whitespace-nowrap" data-node-id="2349:442">
+              Ana Paula Ferreira
+            </p>
+            <div className="[word-break:break-word] absolute content-stretch flex flex-col font-['Inter:Regular'] font-normal items-start leading-[16px] left-[645.38px] max-w-[150px] not-italic overflow-clip text-[color:var(--sa-color-text-secondary,rgba(255,255,255,0.72))] top-[12px] w-[150px] whitespace-nowrap" data-node-id="2349:443" data-name="TransactionsScreen">
+              <p className="relative shrink-0 text-[12px]" data-node-id="2349:444">
+                Carteira de Depósito
+              </p>
+              <p className="relative shrink-0 text-[11px]" data-node-id="2349:460">
+                BRL
+              </p>
+            </div>
+            <div className="[word-break:break-word] absolute content-stretch flex flex-col font-['Inter:Regular'] font-normal items-start leading-[16px] left-[813.04px] max-w-[150px] not-italic overflow-clip text-[color:var(--sa-color-text-secondary,rgba(255,255,255,0.72))] top-[12px] w-[150px] whitespace-nowrap" data-node-id="2349:445" data-name="TransactionsScreen">
+              <p className="relative shrink-0 text-[12px]" data-node-id="2349:446">
+                Master Premium 2025
+              </p>
+              <p className="relative shrink-0 text-[11px]" data-node-id="2349:461">
+                contrato · BRL
+              </p>
+            </div>
+            <p className="[word-break:break-word] absolute font-['Inter:Bold'] font-bold leading-[20px] left-[980.7px] not-italic text-[14px] text-[color:var(--color\/v2\/text\/value-positive,#66e59e)] top-[18px] whitespace-nowrap" data-node-id="2349:447">
+              R$ 19.500,00
+            </p>
+            <div className="absolute bg-[var(--color\/v2\/bg\/status-positive,rgba(0,122,85,0.2))] border-[0.8px] border-[var(--color\/v2\/border\/status-positive,#74ffa0)] border-solid content-stretch flex gap-[var(--sa-spacing-4,4px)] items-center justify-center left-[1114.63px] overflow-clip pl-[7px] pr-[9px] py-[3px] rounded-[8px] top-[18.46px]" data-node-id="2349:448" data-name="Badge">
+              <div className="relative shrink-0 size-[12px]" data-node-id="2349:449" data-name="Icon">
+                <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgIcon1} />
+              </div>
+              <p className="[word-break:break-word] font-['Inter:Medium'] font-medium leading-[14.286px] not-italic relative shrink-0 text-[10px] text-[color:var(--color\/v2\/text\/status-positive,#74ffa0)] tracking-[0.25px] uppercase whitespace-nowrap" data-node-id="2349:452">
+                Processada
+              </p>
+            </div>
+            <p className="[word-break:break-word] absolute font-['Inter:Regular'] font-normal leading-[16px] left-[1224.24px] not-italic text-[12px] text-[color:var(--sa-color-text-secondary,rgba(255,255,255,0.72))] top-[20.4px] whitespace-nowrap" data-node-id="2349:453">
+              Admin
+            </p>
+            <div className="absolute content-stretch flex gap-[var(--sa-spacing-6,6px)] items-center justify-center left-[1360.74px] px-[var(--sa-spacing-10,10px)] rounded-[var(--sa-radius-8,8px)] size-[32px] top-[12.4px]" data-node-id="2349:454" data-name="Button">
+              <div className="relative shrink-0 size-[16px]" data-node-id="2349:455" data-name="Icon">
+                <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgIcon2} />
+              </div>
+            </div>
+          </div>
+          <div className="absolute border-[rgba(255,255,255,0.12)] border-b-[0.8px] border-solid h-[56.8px] left-0 top-[268px] w-[1400.8px]" data-node-id="2349:462" data-name="TableRow · TRX-2026-00413 · Aporte em Contrato">
+            <p className="[word-break:break-word] absolute font-['Inter:Regular'] font-normal leading-[16px] left-[8px] not-italic text-[12px] text-[color:var(--sa-color-text-secondary,rgba(255,255,255,0.72))] top-[20.4px] whitespace-nowrap" data-node-id="2349:463">
+              13/11/2026 14:05
+            </p>
+            <p className="[word-break:break-word] absolute font-['DM_Mono:Regular'] leading-[16px] left-[119.42px] not-italic text-[12px] text-[rgba(255,255,255,0.76)] top-[20.4px] whitespace-nowrap" data-node-id="2349:464">
+              TRX-2026-00413
+            </p>
+            <div className="absolute content-stretch flex gap-[var(--sa-spacing-8,8px)] items-center left-[253.21px] top-[12px] w-[178.975px]" data-node-id="2349:465" data-name="TransactionsScreen">
+              <div className="relative shrink-0 size-[16px]" data-node-id="2349:466" data-name="Icon">
+                <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgIcon} />
+              </div>
+              <div className="[word-break:break-word] content-stretch flex flex-col font-['Inter:Medium'] font-medium items-start leading-[16px] not-italic relative shrink-0 text-[color:var(--sa-color-text-secondary,rgba(255,255,255,0.72))] whitespace-nowrap" data-node-id="2349:469" data-name="Text">
+                <p className="relative shrink-0 text-[12px]" data-node-id="2349:470">
+                  Aporte em Contrato
+                </p>
+                <p className="opacity-60 relative shrink-0 text-[11px]" data-node-id="2349:488">
+                  entrada · parte 2 de 3
+                </p>
+              </div>
+            </div>
+            <p className="[word-break:break-word] absolute font-['Inter:Medium'] font-medium leading-[16px] left-[448.19px] not-italic text-[12px] text-[color:var(--sa-color-text-secondary,rgba(255,255,255,0.72))] top-[20.4px] whitespace-nowrap" data-node-id="2349:471">
+              Ana Paula Ferreira
+            </p>
+            <div className="[word-break:break-word] absolute content-stretch flex flex-col font-['Inter:Regular'] font-normal items-start leading-[16px] left-[645.38px] max-w-[150px] not-italic overflow-clip text-[color:var(--sa-color-text-secondary,rgba(255,255,255,0.72))] top-[12px] w-[150px] whitespace-nowrap" data-node-id="2349:472" data-name="TransactionsScreen">
+              <p className="relative shrink-0 text-[12px]" data-node-id="2349:473">
+                Carteira Strategy
+              </p>
+              <p className="relative shrink-0 text-[11px]" data-node-id="2349:489">
+                USD · saldo parado
+              </p>
+            </div>
+            <div className="[word-break:break-word] absolute content-stretch flex flex-col font-['Inter:Regular'] font-normal items-start leading-[16px] left-[813.04px] max-w-[150px] not-italic overflow-clip text-[color:var(--sa-color-text-secondary,rgba(255,255,255,0.72))] top-[12px] w-[150px] whitespace-nowrap" data-node-id="2349:474" data-name="TransactionsScreen">
+              <p className="relative shrink-0 text-[12px]" data-node-id="2349:475">
+                Master Premium 2025
+              </p>
+              <p className="relative shrink-0 text-[11px]" data-node-id="2349:490">
+                contrato · BRL
+              </p>
+            </div>
+            <p className="[word-break:break-word] absolute font-['Inter:Bold'] font-bold leading-[20px] left-[980.7px] not-italic text-[14px] text-[color:var(--color\/v2\/text\/value-positive,#66e59e)] top-[10px] whitespace-nowrap" data-node-id="2349:476">
+              R$ 25.000,00
+            </p>
+            <div className="absolute bg-[var(--color\/v2\/bg\/status-positive,rgba(0,122,85,0.2))] border-[0.8px] border-[var(--color\/v2\/border\/status-positive,#74ffa0)] border-solid content-stretch flex gap-[var(--sa-spacing-4,4px)] items-center justify-center left-[1114.63px] overflow-clip pl-[7px] pr-[9px] py-[3px] rounded-[8px] top-[18.46px]" data-node-id="2349:477" data-name="Badge">
+              <div className="relative shrink-0 size-[12px]" data-node-id="2349:478" data-name="Icon">
+                <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgIcon1} />
+              </div>
+              <p className="[word-break:break-word] font-['Inter:Medium'] font-medium leading-[14.286px] not-italic relative shrink-0 text-[10px] text-[color:var(--color\/v2\/text\/status-positive,#74ffa0)] tracking-[0.25px] uppercase whitespace-nowrap" data-node-id="2349:481">
+                Processada
+              </p>
+            </div>
+            <p className="[word-break:break-word] absolute font-['Inter:Regular'] font-normal leading-[16px] left-[1224.24px] not-italic text-[12px] text-[color:var(--sa-color-text-secondary,rgba(255,255,255,0.72))] top-[20.4px] whitespace-nowrap" data-node-id="2349:482">
+              Admin
+            </p>
+            <div className="absolute content-stretch flex gap-[var(--sa-spacing-6,6px)] items-center justify-center left-[1360.74px] px-[var(--sa-spacing-10,10px)] rounded-[var(--sa-radius-8,8px)] size-[32px] top-[12.4px]" data-node-id="2349:483" data-name="Button">
+              <div className="relative shrink-0 size-[16px]" data-node-id="2349:484" data-name="Icon">
+                <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgIcon2} />
+              </div>
+            </div>
+            <p className="[word-break:break-word] absolute font-['Inter:Regular'] font-normal leading-[16px] left-[980.7px] not-italic text-[11px] text-[color:var(--sa-color-text-secondary,rgba(255,255,255,0.72))] top-[30px] whitespace-nowrap" data-node-id="2349:487">
+              US$ 5.000,00 × 5,0000
+            </p>
+          </div>
+          <div className="absolute border-[rgba(255,255,255,0.12)] border-b-[0.8px] border-solid h-[56.8px] left-0 top-[325px] w-[1400.8px]" data-node-id="2349:491" data-name="TableRow · TRX-2026-00414 · Aporte em Contrato">
+            <p className="[word-break:break-word] absolute font-['Inter:Regular'] font-normal leading-[16px] left-[8px] not-italic text-[12px] text-[color:var(--sa-color-text-secondary,rgba(255,255,255,0.72))] top-[20.4px] whitespace-nowrap" data-node-id="2349:492">
+              13/11/2026 14:05
+            </p>
+            <p className="[word-break:break-word] absolute font-['DM_Mono:Regular'] leading-[16px] left-[119.42px] not-italic text-[12px] text-[rgba(255,255,255,0.76)] top-[20.4px] whitespace-nowrap" data-node-id="2349:493">
+              TRX-2026-00414
+            </p>
+            <div className="absolute content-stretch flex gap-[var(--sa-spacing-8,8px)] items-center left-[253.21px] top-[12px] w-[178.975px]" data-node-id="2349:494" data-name="TransactionsScreen">
+              <div className="relative shrink-0 size-[16px]" data-node-id="2349:495" data-name="Icon">
+                <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgIcon} />
+              </div>
+              <div className="[word-break:break-word] content-stretch flex flex-col font-['Inter:Medium'] font-medium items-start leading-[16px] not-italic relative shrink-0 text-[color:var(--sa-color-text-secondary,rgba(255,255,255,0.72))] whitespace-nowrap" data-node-id="2349:498" data-name="Text">
+                <p className="relative shrink-0 text-[12px]" data-node-id="2349:499">
+                  Aporte em Contrato
+                </p>
+                <p className="opacity-60 relative shrink-0 text-[11px]" data-node-id="2349:517">
+                  entrada · parte 3 de 3
+                </p>
+              </div>
+            </div>
+            <p className="[word-break:break-word] absolute font-['Inter:Medium'] font-medium leading-[16px] left-[448.19px] not-italic text-[12px] text-[color:var(--sa-color-text-secondary,rgba(255,255,255,0.72))] top-[20.4px] whitespace-nowrap" data-node-id="2349:500">
+              Ana Paula Ferreira
+            </p>
+            <div className="[word-break:break-word] absolute content-stretch flex flex-col font-['Inter:Regular'] font-normal items-start leading-[16px] left-[645.38px] max-w-[150px] not-italic overflow-clip text-[color:var(--sa-color-text-secondary,rgba(255,255,255,0.72))] top-[12px] w-[150px] whitespace-nowrap" data-node-id="2349:501" data-name="TransactionsScreen">
+              <p className="relative shrink-0 text-[12px]" data-node-id="2349:502">
+                Carteira Strategy
+              </p>
+              <p className="relative shrink-0 text-[11px]" data-node-id="2349:518">
+                EUR · saldo parado
+              </p>
+            </div>
+            <div className="[word-break:break-word] absolute content-stretch flex flex-col font-['Inter:Regular'] font-normal items-start leading-[16px] left-[813.04px] max-w-[150px] not-italic overflow-clip text-[color:var(--sa-color-text-secondary,rgba(255,255,255,0.72))] top-[12px] w-[150px] whitespace-nowrap" data-node-id="2349:503" data-name="TransactionsScreen">
+              <p className="relative shrink-0 text-[12px]" data-node-id="2349:504">
+                Master Premium 2025
+              </p>
+              <p className="relative shrink-0 text-[11px]" data-node-id="2349:519">
+                contrato · BRL
+              </p>
+            </div>
+            <p className="[word-break:break-word] absolute font-['Inter:Bold'] font-bold leading-[20px] left-[980.7px] not-italic text-[14px] text-[color:var(--color\/v2\/text\/value-positive,#66e59e)] top-[10px] whitespace-nowrap" data-node-id="2349:505">
+              R$ 5.500,00
+            </p>
+            <div className="absolute bg-[var(--color\/v2\/bg\/status-positive,rgba(0,122,85,0.2))] border-[0.8px] border-[var(--color\/v2\/border\/status-positive,#74ffa0)] border-solid content-stretch flex gap-[var(--sa-spacing-4,4px)] items-center justify-center left-[1114.63px] overflow-clip pl-[7px] pr-[9px] py-[3px] rounded-[8px] top-[18.46px]" data-node-id="2349:506" data-name="Badge">
+              <div className="relative shrink-0 size-[12px]" data-node-id="2349:507" data-name="Icon">
+                <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgIcon1} />
+              </div>
+              <p className="[word-break:break-word] font-['Inter:Medium'] font-medium leading-[14.286px] not-italic relative shrink-0 text-[10px] text-[color:var(--color\/v2\/text\/status-positive,#74ffa0)] tracking-[0.25px] uppercase whitespace-nowrap" data-node-id="2349:510">
+                Processada
+              </p>
+            </div>
+            <p className="[word-break:break-word] absolute font-['Inter:Regular'] font-normal leading-[16px] left-[1224.24px] not-italic text-[12px] text-[color:var(--sa-color-text-secondary,rgba(255,255,255,0.72))] top-[20.4px] whitespace-nowrap" data-node-id="2349:511">
+              Admin
+            </p>
+            <div className="absolute content-stretch flex gap-[var(--sa-spacing-6,6px)] items-center justify-center left-[1360.74px] px-[var(--sa-spacing-10,10px)] rounded-[var(--sa-radius-8,8px)] size-[32px] top-[12.4px]" data-node-id="2349:512" data-name="Button">
+              <div className="relative shrink-0 size-[16px]" data-node-id="2349:513" data-name="Icon">
+                <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgIcon2} />
+              </div>
+            </div>
+            <p className="[word-break:break-word] absolute font-['Inter:Regular'] font-normal leading-[16px] left-[980.7px] not-italic text-[11px] text-[color:var(--sa-color-text-secondary,rgba(255,255,255,0.72))] top-[30px] whitespace-nowrap" data-node-id="2349:516">
+              € 1.000,00 × 5,5000
+            </p>
+          </div>
+          <div className="absolute border-[rgba(255,255,255,0.12)] border-b-[0.8px] border-solid h-[56.8px] left-0 top-[382px] w-[1400.8px]" data-node-id="2349:520" data-name="TableRow · TRX-2026-00409 · Aporte em Contrato">
+            <p className="[word-break:break-word] absolute font-['Inter:Regular'] font-normal leading-[16px] left-[8px] not-italic text-[12px] text-[color:var(--sa-color-text-secondary,rgba(255,255,255,0.72))] top-[20.4px] whitespace-nowrap" data-node-id="2349:521">
+              13/11/2026 10:00
+            </p>
+            <p className="[word-break:break-word] absolute font-['DM_Mono:Regular'] leading-[16px] left-[119.42px] not-italic text-[12px] text-[rgba(255,255,255,0.76)] top-[20.4px] whitespace-nowrap" data-node-id="2349:522">
+              TRX-2026-00409
+            </p>
+            <div className="absolute content-stretch flex gap-[var(--sa-spacing-8,8px)] items-center left-[253.21px] top-[12px] w-[178.975px]" data-node-id="2349:523" data-name="TransactionsScreen">
+              <div className="relative shrink-0 size-[16px]" data-node-id="2349:524" data-name="Icon">
+                <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgIcon} />
+              </div>
+              <div className="[word-break:break-word] content-stretch flex flex-col font-['Inter:Medium'] font-medium items-start leading-[16px] not-italic relative shrink-0 text-[color:var(--sa-color-text-secondary,rgba(255,255,255,0.72))] whitespace-nowrap" data-node-id="2349:527" data-name="Text">
+                <p className="relative shrink-0 text-[12px]" data-node-id="2349:528">
+                  Aporte em Contrato
+                </p>
+                <p className="opacity-60 relative shrink-0 text-[11px]" data-node-id="2349:546">
+                  criação · parte 1 de 1
+                </p>
+              </div>
+            </div>
+            <p className="[word-break:break-word] absolute font-['Inter:Medium'] font-medium leading-[16px] left-[448.19px] not-italic text-[12px] text-[color:var(--sa-color-text-secondary,rgba(255,255,255,0.72))] top-[20.4px] whitespace-nowrap" data-node-id="2349:529">
+              Roberto Carlos da Silva
+            </p>
+            <div className="[word-break:break-word] absolute content-stretch flex flex-col font-['Inter:Regular'] font-normal items-start leading-[16px] left-[645.38px] max-w-[150px] not-italic overflow-clip text-[color:var(--sa-color-text-secondary,rgba(255,255,255,0.72))] top-[12px] w-[150px] whitespace-nowrap" data-node-id="2349:530" data-name="TransactionsScreen">
+              <p className="relative shrink-0 text-[12px]" data-node-id="2349:531">
+                Carteira Strategy
+              </p>
+              <p className="relative shrink-0 text-[11px]" data-node-id="2349:547">
+                USD · saldo parado
+              </p>
+            </div>
+            <div className="[word-break:break-word] absolute content-stretch flex flex-col font-['Inter:Regular'] font-normal items-start leading-[16px] left-[813.04px] max-w-[150px] not-italic overflow-clip text-[color:var(--sa-color-text-secondary,rgba(255,255,255,0.72))] top-[12px] w-[150px] whitespace-nowrap" data-node-id="2349:532" data-name="TransactionsScreen">
+              <p className="relative shrink-0 text-[12px]" data-node-id="2349:533">
+                Alpha 2026-Q1
+              </p>
+              <p className="relative shrink-0 text-[11px]" data-node-id="2349:548">
+                contrato · BRL
+              </p>
+            </div>
+            <p className="[word-break:break-word] absolute font-['Inter:Bold'] font-bold leading-[20px] left-[980.7px] not-italic text-[14px] text-[color:var(--color\/v2\/text\/value-positive,#66e59e)] top-[10px] whitespace-nowrap" data-node-id="2349:534">
+              R$ 300.000,00
+            </p>
+            <div className="absolute bg-[var(--color\/v2\/bg\/status-positive,rgba(0,122,85,0.2))] border-[0.8px] border-[var(--color\/v2\/border\/status-positive,#74ffa0)] border-solid content-stretch flex gap-[var(--sa-spacing-4,4px)] items-center justify-center left-[1114.63px] overflow-clip pl-[7px] pr-[9px] py-[3px] rounded-[8px] top-[18.46px]" data-node-id="2349:535" data-name="Badge">
+              <div className="relative shrink-0 size-[12px]" data-node-id="2349:536" data-name="Icon">
+                <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgIcon1} />
+              </div>
+              <p className="[word-break:break-word] font-['Inter:Medium'] font-medium leading-[14.286px] not-italic relative shrink-0 text-[10px] text-[color:var(--color\/v2\/text\/status-positive,#74ffa0)] tracking-[0.25px] uppercase whitespace-nowrap" data-node-id="2349:539">
+                Processada
+              </p>
+            </div>
+            <p className="[word-break:break-word] absolute font-['Inter:Regular'] font-normal leading-[16px] left-[1224.24px] not-italic text-[12px] text-[color:var(--sa-color-text-secondary,rgba(255,255,255,0.72))] top-[20.4px] whitespace-nowrap" data-node-id="2349:540">
+              Admin
+            </p>
+            <div className="absolute content-stretch flex gap-[var(--sa-spacing-6,6px)] items-center justify-center left-[1360.74px] px-[var(--sa-spacing-10,10px)] rounded-[var(--sa-radius-8,8px)] size-[32px] top-[12.4px]" data-node-id="2349:541" data-name="Button">
+              <div className="relative shrink-0 size-[16px]" data-node-id="2349:542" data-name="Icon">
+                <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgIcon2} />
+              </div>
+            </div>
+            <p className="[word-break:break-word] absolute font-['Inter:Regular'] font-normal leading-[16px] left-[980.7px] not-italic text-[11px] text-[color:var(--sa-color-text-secondary,rgba(255,255,255,0.72))] top-[30px] whitespace-nowrap" data-node-id="2349:545">
+              US$ 60.000,00 × 5,0000
+            </p>
+          </div>
+          <div className="absolute border-[rgba(255,255,255,0.12)] border-b-[0.8px] border-solid h-[56.8px] left-0 top-[439px] w-[1400.8px]" data-node-id="2349:549" data-name="TableRow · TRX-2026-00410 · Aporte em Contrato">
+            <p className="[word-break:break-word] absolute font-['Inter:Regular'] font-normal leading-[16px] left-[8px] not-italic text-[12px] text-[color:var(--sa-color-text-secondary,rgba(255,255,255,0.72))] top-[20.4px] whitespace-nowrap" data-node-id="2349:550">
+              13/11/2026 10:00
+            </p>
+            <p className="[word-break:break-word] absolute font-['DM_Mono:Regular'] leading-[16px] left-[119.42px] not-italic text-[12px] text-[rgba(255,255,255,0.76)] top-[20.4px] whitespace-nowrap" data-node-id="2349:551">
+              TRX-2026-00410
+            </p>
+            <div className="absolute content-stretch flex gap-[var(--sa-spacing-8,8px)] items-center left-[253.21px] top-[12px] w-[178.975px]" data-node-id="2349:552" data-name="TransactionsScreen">
+              <div className="relative shrink-0 size-[16px]" data-node-id="2349:553" data-name="Icon">
+                <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgIcon} />
+              </div>
+              <div className="[word-break:break-word] content-stretch flex flex-col font-['Inter:Medium'] font-medium items-start leading-[16px] not-italic relative shrink-0 text-[color:var(--sa-color-text-secondary,rgba(255,255,255,0.72))] whitespace-nowrap" data-node-id="2349:556" data-name="Text">
+                <p className="relative shrink-0 text-[12px]" data-node-id="2349:557">
+                  Aporte em Contrato
+                </p>
+                <p className="opacity-60 relative shrink-0 text-[11px]" data-node-id="2349:575">
+                  criação · parte 1 de 2
+                </p>
+              </div>
+            </div>
+            <p className="[word-break:break-word] absolute font-['Inter:Medium'] font-medium leading-[16px] left-[448.19px] not-italic text-[12px] text-[color:var(--sa-color-text-secondary,rgba(255,255,255,0.72))] top-[20.4px] whitespace-nowrap" data-node-id="2349:558">
+              Mariana Alencar
+            </p>
+            <div className="[word-break:break-word] absolute content-stretch flex flex-col font-['Inter:Regular'] font-normal items-start leading-[16px] left-[645.38px] max-w-[150px] not-italic overflow-clip text-[color:var(--sa-color-text-secondary,rgba(255,255,255,0.72))] top-[12px] w-[150px] whitespace-nowrap" data-node-id="2349:559" data-name="TransactionsScreen">
+              <p className="relative shrink-0 text-[12px]" data-node-id="2349:560">
+                Carteira de Depósito
+              </p>
+              <p className="relative shrink-0 text-[11px]" data-node-id="2349:576">
+                BRL
+              </p>
+            </div>
+            <div className="[word-break:break-word] absolute content-stretch flex flex-col font-['Inter:Regular'] font-normal items-start leading-[16px] left-[813.04px] max-w-[150px] not-italic overflow-clip text-[color:var(--sa-color-text-secondary,rgba(255,255,255,0.72))] top-[12px] w-[150px] whitespace-nowrap" data-node-id="2349:561" data-name="TransactionsScreen">
+              <p className="relative shrink-0 text-[12px]" data-node-id="2349:562">
+                Alpha 2026-Q1
+              </p>
+              <p className="relative shrink-0 text-[11px]" data-node-id="2349:577">
+                contrato · BRL
+              </p>
+            </div>
+            <p className="[word-break:break-word] absolute font-['Inter:Bold'] font-bold leading-[20px] left-[980.7px] not-italic text-[14px] text-[color:var(--color\/v2\/text\/value-positive,#66e59e)] top-[18px] whitespace-nowrap" data-node-id="2349:563">
+              R$ 145.000,00
+            </p>
+            <div className="absolute bg-[var(--color\/v2\/bg\/status-positive,rgba(0,122,85,0.2))] border-[0.8px] border-[var(--color\/v2\/border\/status-positive,#74ffa0)] border-solid content-stretch flex gap-[var(--sa-spacing-4,4px)] items-center justify-center left-[1114.63px] overflow-clip pl-[7px] pr-[9px] py-[3px] rounded-[8px] top-[18.46px]" data-node-id="2349:564" data-name="Badge">
+              <div className="relative shrink-0 size-[12px]" data-node-id="2349:565" data-name="Icon">
+                <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgIcon1} />
+              </div>
+              <p className="[word-break:break-word] font-['Inter:Medium'] font-medium leading-[14.286px] not-italic relative shrink-0 text-[10px] text-[color:var(--color\/v2\/text\/status-positive,#74ffa0)] tracking-[0.25px] uppercase whitespace-nowrap" data-node-id="2349:568">
+                Processada
+              </p>
+            </div>
+            <p className="[word-break:break-word] absolute font-['Inter:Regular'] font-normal leading-[16px] left-[1224.24px] not-italic text-[12px] text-[color:var(--sa-color-text-secondary,rgba(255,255,255,0.72))] top-[20.4px] whitespace-nowrap" data-node-id="2349:569">
+              Admin
+            </p>
+            <div className="absolute content-stretch flex gap-[var(--sa-spacing-6,6px)] items-center justify-center left-[1360.74px] px-[var(--sa-spacing-10,10px)] rounded-[var(--sa-radius-8,8px)] size-[32px] top-[12.4px]" data-node-id="2349:570" data-name="Button">
+              <div className="relative shrink-0 size-[16px]" data-node-id="2349:571" data-name="Icon">
+                <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgIcon2} />
+              </div>
+            </div>
+          </div>
+          <div className="absolute border-[rgba(255,255,255,0.12)] border-b-[0.8px] border-solid h-[56.8px] left-0 top-[496px] w-[1400.8px]" data-node-id="2349:578" data-name="TableRow · TRX-2026-00411 · Aporte em Contrato">
+            <p className="[word-break:break-word] absolute font-['Inter:Regular'] font-normal leading-[16px] left-[8px] not-italic text-[12px] text-[color:var(--sa-color-text-secondary,rgba(255,255,255,0.72))] top-[20.4px] whitespace-nowrap" data-node-id="2349:579">
+              13/11/2026 10:00
+            </p>
+            <p className="[word-break:break-word] absolute font-['DM_Mono:Regular'] leading-[16px] left-[119.42px] not-italic text-[12px] text-[rgba(255,255,255,0.76)] top-[20.4px] whitespace-nowrap" data-node-id="2349:580">
+              TRX-2026-00411
+            </p>
+            <div className="absolute content-stretch flex gap-[var(--sa-spacing-8,8px)] items-center left-[253.21px] top-[12px] w-[178.975px]" data-node-id="2349:581" data-name="TransactionsScreen">
+              <div className="relative shrink-0 size-[16px]" data-node-id="2349:582" data-name="Icon">
+                <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgIcon} />
+              </div>
+              <div className="[word-break:break-word] content-stretch flex flex-col font-['Inter:Medium'] font-medium items-start leading-[16px] not-italic relative shrink-0 text-[color:var(--sa-color-text-secondary,rgba(255,255,255,0.72))] whitespace-nowrap" data-node-id="2349:585" data-name="Text">
+                <p className="relative shrink-0 text-[12px]" data-node-id="2349:586">
+                  Aporte em Contrato
+                </p>
+                <p className="opacity-60 relative shrink-0 text-[11px]" data-node-id="2349:604">
+                  criação · parte 2 de 2
+                </p>
+              </div>
+            </div>
+            <p className="[word-break:break-word] absolute font-['Inter:Medium'] font-medium leading-[16px] left-[448.19px] not-italic text-[12px] text-[color:var(--sa-color-text-secondary,rgba(255,255,255,0.72))] top-[20.4px] whitespace-nowrap" data-node-id="2349:587">
+              Mariana Alencar
+            </p>
+            <div className="[word-break:break-word] absolute content-stretch flex flex-col font-['Inter:Regular'] font-normal items-start leading-[16px] left-[645.38px] max-w-[150px] not-italic overflow-clip text-[color:var(--sa-color-text-secondary,rgba(255,255,255,0.72))] top-[12px] w-[150px] whitespace-nowrap" data-node-id="2349:588" data-name="TransactionsScreen">
+              <p className="relative shrink-0 text-[12px]" data-node-id="2349:589">
+                Carteira Strategy
+              </p>
+              <p className="relative shrink-0 text-[11px]" data-node-id="2349:605">
+                EUR · saldo parado
+              </p>
+            </div>
+            <div className="[word-break:break-word] absolute content-stretch flex flex-col font-['Inter:Regular'] font-normal items-start leading-[16px] left-[813.04px] max-w-[150px] not-italic overflow-clip text-[color:var(--sa-color-text-secondary,rgba(255,255,255,0.72))] top-[12px] w-[150px] whitespace-nowrap" data-node-id="2349:590" data-name="TransactionsScreen">
+              <p className="relative shrink-0 text-[12px]" data-node-id="2349:591">
+                Alpha 2026-Q1
+              </p>
+              <p className="relative shrink-0 text-[11px]" data-node-id="2349:606">
+                contrato · BRL
+              </p>
+            </div>
+            <p className="[word-break:break-word] absolute font-['Inter:Bold'] font-bold leading-[20px] left-[980.7px] not-italic text-[14px] text-[color:var(--color\/v2\/text\/value-positive,#66e59e)] top-[10px] whitespace-nowrap" data-node-id="2349:592">
+              R$ 55.000,00
+            </p>
+            <div className="absolute bg-[var(--color\/v2\/bg\/status-positive,rgba(0,122,85,0.2))] border-[0.8px] border-[var(--color\/v2\/border\/status-positive,#74ffa0)] border-solid content-stretch flex gap-[var(--sa-spacing-4,4px)] items-center justify-center left-[1114.63px] overflow-clip pl-[7px] pr-[9px] py-[3px] rounded-[8px] top-[18.46px]" data-node-id="2349:593" data-name="Badge">
+              <div className="relative shrink-0 size-[12px]" data-node-id="2349:594" data-name="Icon">
+                <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgIcon1} />
+              </div>
+              <p className="[word-break:break-word] font-['Inter:Medium'] font-medium leading-[14.286px] not-italic relative shrink-0 text-[10px] text-[color:var(--color\/v2\/text\/status-positive,#74ffa0)] tracking-[0.25px] uppercase whitespace-nowrap" data-node-id="2349:597">
+                Processada
+              </p>
+            </div>
+            <p className="[word-break:break-word] absolute font-['Inter:Regular'] font-normal leading-[16px] left-[1224.24px] not-italic text-[12px] text-[color:var(--sa-color-text-secondary,rgba(255,255,255,0.72))] top-[20.4px] whitespace-nowrap" data-node-id="2349:598">
+              Admin
+            </p>
+            <div className="absolute content-stretch flex gap-[var(--sa-spacing-6,6px)] items-center justify-center left-[1360.74px] px-[var(--sa-spacing-10,10px)] rounded-[var(--sa-radius-8,8px)] size-[32px] top-[12.4px]" data-node-id="2349:599" data-name="Button">
+              <div className="relative shrink-0 size-[16px]" data-node-id="2349:600" data-name="Icon">
+                <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgIcon2} />
+              </div>
+            </div>
+            <p className="[word-break:break-word] absolute font-['Inter:Regular'] font-normal leading-[16px] left-[980.7px] not-italic text-[11px] text-[color:var(--sa-color-text-secondary,rgba(255,255,255,0.72))] top-[30px] whitespace-nowrap" data-node-id="2349:603">
+              € 10.000,00 × 5,5000
+            </p>
+          </div>
+          <div className="absolute border-[rgba(255,255,255,0.12)] border-b-[0.8px] border-solid h-[56.8px] left-0 top-[553px] w-[1400.8px]" data-node-id="2349:607" data-name="TableRow · TRX-2026-00402 · Resgate de Contrato">
+            <p className="[word-break:break-word] absolute font-['Inter:Regular'] font-normal leading-[16px] left-[8px] not-italic text-[12px] text-[color:var(--sa-color-text-secondary,rgba(255,255,255,0.72))] top-[20.4px] whitespace-nowrap" data-node-id="2349:608">
+              12/11/2026 09:00
+            </p>
+            <p className="[word-break:break-word] absolute font-['DM_Mono:Regular'] leading-[16px] left-[119.42px] not-italic text-[12px] text-[rgba(255,255,255,0.76)] top-[20.4px] whitespace-nowrap" data-node-id="2349:609">
+              TRX-2026-00402
+            </p>
+            <div className="absolute content-stretch flex gap-[var(--sa-spacing-8,8px)] items-center left-[253.21px] top-[12px] w-[178.975px]" data-node-id="2349:610" data-name="TransactionsScreen">
+              <div className="relative shrink-0 size-[16px]" data-node-id="2349:611" data-name="Icon">
+                <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgIcon3} />
+              </div>
+              <div className="[word-break:break-word] content-stretch flex flex-col font-['Inter:Medium'] font-medium items-start leading-[16px] not-italic relative shrink-0 text-[color:var(--sa-color-text-secondary,rgba(255,255,255,0.72))] whitespace-nowrap" data-node-id="2349:614" data-name="Text">
+                <p className="relative shrink-0 text-[12px]" data-node-id="2349:615">
+                  Resgate de Contrato
+                </p>
+                <p className="opacity-60 relative shrink-0 text-[11px]" data-node-id="2349:632">
+                  liquidação · 62,50%
+                </p>
+              </div>
+            </div>
+            <p className="[word-break:break-word] absolute font-['Inter:Medium'] font-medium leading-[16px] left-[448.19px] not-italic text-[12px] text-[color:var(--sa-color-text-secondary,rgba(255,255,255,0.72))] top-[20.4px] whitespace-nowrap" data-node-id="2349:616">
+              Roberto Carlos da Silva
+            </p>
+            <div className="[word-break:break-word] absolute content-stretch flex flex-col font-['Inter:Regular'] font-normal items-start leading-[16px] left-[645.38px] max-w-[150px] not-italic overflow-clip text-[color:var(--sa-color-text-secondary,rgba(255,255,255,0.72))] top-[12px] w-[150px] whitespace-nowrap" data-node-id="2349:617" data-name="TransactionsScreen">
+              <p className="relative shrink-0 text-[12px]" data-node-id="2349:618">
+                Global Equity 2024
+              </p>
+              <p className="relative shrink-0 text-[11px]" data-node-id="2349:633">
+                contrato · USD
+              </p>
+            </div>
+            <div className="[word-break:break-word] absolute content-stretch flex flex-col font-['Inter:Regular'] font-normal items-start leading-[16px] left-[813.04px] max-w-[150px] not-italic overflow-clip text-[color:var(--sa-color-text-secondary,rgba(255,255,255,0.72))] top-[12px] w-[150px] whitespace-nowrap" data-node-id="2349:619" data-name="TransactionsScreen">
+              <p className="relative shrink-0 text-[12px]" data-node-id="2349:620">
+                Carteira Strategy
+              </p>
+              <p className="relative shrink-0 text-[11px]" data-node-id="2349:634">
+                USD · saldo parado
+              </p>
+            </div>
+            <p className="[word-break:break-word] absolute font-['Inter:Bold'] font-bold leading-[20px] left-[980.7px] not-italic text-[14px] text-[color:var(--sa-color-text-primary,white)] top-[18px] whitespace-nowrap" data-node-id="2349:621">
+              US$ 30.000,00
+            </p>
+            <div className="absolute bg-[var(--color\/v2\/bg\/status-positive,rgba(0,122,85,0.2))] border-[0.8px] border-[var(--color\/v2\/border\/status-positive,#74ffa0)] border-solid content-stretch flex gap-[var(--sa-spacing-4,4px)] items-center justify-center left-[1114.63px] overflow-clip pl-[7px] pr-[9px] py-[3px] rounded-[8px] top-[18.46px]" data-node-id="2349:622" data-name="Badge">
+              <div className="relative shrink-0 size-[12px]" data-node-id="2349:623" data-name="Icon">
+                <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgIcon1} />
+              </div>
+              <p className="[word-break:break-word] font-['Inter:Medium'] font-medium leading-[14.286px] not-italic relative shrink-0 text-[10px] text-[color:var(--color\/v2\/text\/status-positive,#74ffa0)] tracking-[0.25px] uppercase whitespace-nowrap" data-node-id="2349:626">
+                Processada
+              </p>
+            </div>
+            <p className="[word-break:break-word] absolute font-['Inter:Regular'] font-normal leading-[16px] left-[1224.24px] not-italic text-[12px] text-[color:var(--sa-color-text-secondary,rgba(255,255,255,0.72))] top-[20.4px] whitespace-nowrap" data-node-id="2349:627">
+              Sistema Automático
+            </p>
+            <div className="absolute content-stretch flex gap-[var(--sa-spacing-6,6px)] items-center justify-center left-[1360.74px] px-[var(--sa-spacing-10,10px)] rounded-[var(--sa-radius-8,8px)] size-[32px] top-[12.4px]" data-node-id="2349:628" data-name="Button">
+              <div className="relative shrink-0 size-[16px]" data-node-id="2349:629" data-name="Icon">
+                <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgIcon2} />
+              </div>
+            </div>
+          </div>
+          <div className="absolute border-[rgba(255,255,255,0.12)] border-b-[0.8px] border-solid h-[56.8px] left-0 top-[610px] w-[1400.8px]" data-node-id="2349:635" data-name="TableRow · TRX-2026-00403 · Resgate de Contrato">
+            <p className="[word-break:break-word] absolute font-['Inter:Regular'] font-normal leading-[16px] left-[8px] not-italic text-[12px] text-[color:var(--sa-color-text-secondary,rgba(255,255,255,0.72))] top-[20.4px] whitespace-nowrap" data-node-id="2349:636">
+              12/11/2026 09:00
+            </p>
+            <p className="[word-break:break-word] absolute font-['DM_Mono:Regular'] leading-[16px] left-[119.42px] not-italic text-[12px] text-[rgba(255,255,255,0.76)] top-[20.4px] whitespace-nowrap" data-node-id="2349:637">
+              TRX-2026-00403
+            </p>
+            <div className="absolute content-stretch flex gap-[var(--sa-spacing-8,8px)] items-center left-[253.21px] top-[12px] w-[178.975px]" data-node-id="2349:638" data-name="TransactionsScreen">
+              <div className="relative shrink-0 size-[16px]" data-node-id="2349:639" data-name="Icon">
+                <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgIcon3} />
+              </div>
+              <div className="[word-break:break-word] content-stretch flex flex-col font-['Inter:Medium'] font-medium items-start leading-[16px] not-italic relative shrink-0 text-[color:var(--sa-color-text-secondary,rgba(255,255,255,0.72))] whitespace-nowrap" data-node-id="2349:642" data-name="Text">
+                <p className="relative shrink-0 text-[12px]" data-node-id="2349:643">
+                  Resgate de Contrato
+                </p>
+                <p className="opacity-60 relative shrink-0 text-[11px]" data-node-id="2349:660">
+                  liquidação · 37,50%
+                </p>
+              </div>
+            </div>
+            <p className="[word-break:break-word] absolute font-['Inter:Medium'] font-medium leading-[16px] left-[448.19px] not-italic text-[12px] text-[color:var(--sa-color-text-secondary,rgba(255,255,255,0.72))] top-[20.4px] whitespace-nowrap" data-node-id="2349:644">
+              Tech Solutions LTDA
+            </p>
+            <div className="[word-break:break-word] absolute content-stretch flex flex-col font-['Inter:Regular'] font-normal items-start leading-[16px] left-[645.38px] max-w-[150px] not-italic overflow-clip text-[color:var(--sa-color-text-secondary,rgba(255,255,255,0.72))] top-[12px] w-[150px] whitespace-nowrap" data-node-id="2349:645" data-name="TransactionsScreen">
+              <p className="relative shrink-0 text-[12px]" data-node-id="2349:646">
+                Global Equity 2024
+              </p>
+              <p className="relative shrink-0 text-[11px]" data-node-id="2349:661">
+                contrato · USD
+              </p>
+            </div>
+            <div className="[word-break:break-word] absolute content-stretch flex flex-col font-['Inter:Regular'] font-normal items-start leading-[16px] left-[813.04px] max-w-[150px] not-italic overflow-clip text-[color:var(--sa-color-text-secondary,rgba(255,255,255,0.72))] top-[12px] w-[150px] whitespace-nowrap" data-node-id="2349:647" data-name="TransactionsScreen">
+              <p className="relative shrink-0 text-[12px]" data-node-id="2349:648">
+                Carteira Strategy
+              </p>
+              <p className="relative shrink-0 text-[11px]" data-node-id="2349:662">
+                USD · saldo parado
+              </p>
+            </div>
+            <p className="[word-break:break-word] absolute font-['Inter:Bold'] font-bold leading-[20px] left-[980.7px] not-italic text-[14px] text-[color:var(--sa-color-text-primary,white)] top-[18px] whitespace-nowrap" data-node-id="2349:649">
+              US$ 18.000,00
+            </p>
+            <div className="absolute bg-[var(--color\/v2\/bg\/status-positive,rgba(0,122,85,0.2))] border-[0.8px] border-[var(--color\/v2\/border\/status-positive,#74ffa0)] border-solid content-stretch flex gap-[var(--sa-spacing-4,4px)] items-center justify-center left-[1114.63px] overflow-clip pl-[7px] pr-[9px] py-[3px] rounded-[8px] top-[18.46px]" data-node-id="2349:650" data-name="Badge">
+              <div className="relative shrink-0 size-[12px]" data-node-id="2349:651" data-name="Icon">
+                <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgIcon1} />
+              </div>
+              <p className="[word-break:break-word] font-['Inter:Medium'] font-medium leading-[14.286px] not-italic relative shrink-0 text-[10px] text-[color:var(--color\/v2\/text\/status-positive,#74ffa0)] tracking-[0.25px] uppercase whitespace-nowrap" data-node-id="2349:654">
+                Processada
+              </p>
+            </div>
+            <p className="[word-break:break-word] absolute font-['Inter:Regular'] font-normal leading-[16px] left-[1224.24px] not-italic text-[12px] text-[color:var(--sa-color-text-secondary,rgba(255,255,255,0.72))] top-[20.4px] whitespace-nowrap" data-node-id="2349:655">
+              Sistema Automático
+            </p>
+            <div className="absolute content-stretch flex gap-[var(--sa-spacing-6,6px)] items-center justify-center left-[1360.74px] px-[var(--sa-spacing-10,10px)] rounded-[var(--sa-radius-8,8px)] size-[32px] top-[12.4px]" data-node-id="2349:656" data-name="Button">
+              <div className="relative shrink-0 size-[16px]" data-node-id="2349:657" data-name="Icon">
+                <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgIcon2} />
+              </div>
+            </div>
+          </div>
+          <div className="absolute border-[rgba(255,255,255,0.12)] border-b-[0.8px] border-solid h-[56.8px] left-0 top-[667px] w-[1400.8px]" data-node-id="2349:663" data-name="TableRow · TRX-2026-00395 · Dividendo de Contrato">
+            <p className="[word-break:break-word] absolute font-['Inter:Regular'] font-normal leading-[16px] left-[8px] not-italic text-[12px] text-[color:var(--sa-color-text-secondary,rgba(255,255,255,0.72))] top-[20.4px] whitespace-nowrap" data-node-id="2349:664">
+              10/11/2026 09:00
+            </p>
+            <p className="[word-break:break-word] absolute font-['DM_Mono:Regular'] leading-[16px] left-[119.42px] not-italic text-[12px] text-[rgba(255,255,255,0.76)] top-[20.4px] whitespace-nowrap" data-node-id="2349:665">
+              TRX-2026-00395
+            </p>
+            <div className="absolute content-stretch flex gap-[var(--sa-spacing-8,8px)] items-center left-[253.21px] top-[12px] w-[178.975px]" data-node-id="2349:666" data-name="TransactionsScreen">
+              <div className="relative shrink-0 size-[16px]" data-node-id="2349:667" data-name="Icon">
+                <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgIcon3} />
+              </div>
+              <div className="[word-break:break-word] content-stretch flex flex-col font-['Inter:Medium'] font-medium items-start leading-[16px] not-italic relative shrink-0 text-[color:var(--sa-color-text-secondary,rgba(255,255,255,0.72))] whitespace-nowrap" data-node-id="2349:670" data-name="Text">
+                <p className="relative shrink-0 text-[12px]" data-node-id="2349:671">
+                  Dividendo de Contrato
+                </p>
+                <p className="opacity-60 relative shrink-0 text-[11px]" data-node-id="2349:688">
+                  out/2026 · 53,84%
+                </p>
+              </div>
+            </div>
+            <p className="[word-break:break-word] absolute font-['Inter:Medium'] font-medium leading-[16px] left-[448.19px] not-italic text-[12px] text-[color:var(--sa-color-text-secondary,rgba(255,255,255,0.72))] top-[20.4px] whitespace-nowrap" data-node-id="2349:672">
+              Roberto Carlos da Silva
+            </p>
+            <div className="[word-break:break-word] absolute content-stretch flex flex-col font-['Inter:Regular'] font-normal items-start leading-[16px] left-[645.38px] max-w-[150px] not-italic overflow-clip text-[color:var(--sa-color-text-secondary,rgba(255,255,255,0.72))] top-[12px] w-[150px] whitespace-nowrap" data-node-id="2349:673" data-name="TransactionsScreen">
+              <p className="relative shrink-0 text-[12px]" data-node-id="2349:674">
+                Master Premium 2025
+              </p>
+              <p className="relative shrink-0 text-[11px]" data-node-id="2349:689">
+                contrato · BRL
+              </p>
+            </div>
+            <div className="[word-break:break-word] absolute content-stretch flex flex-col font-['Inter:Regular'] font-normal items-start leading-[16px] left-[813.04px] max-w-[150px] not-italic overflow-clip text-[color:var(--sa-color-text-secondary,rgba(255,255,255,0.72))] top-[12px] w-[150px] whitespace-nowrap" data-node-id="2349:675" data-name="TransactionsScreen">
+              <p className="relative shrink-0 text-[12px]" data-node-id="2349:676">
+                Carteira de Depósito
+              </p>
+              <p className="relative shrink-0 text-[11px]" data-node-id="2349:690">
+                BRL
+              </p>
+            </div>
+            <p className="[word-break:break-word] absolute font-['Inter:Bold'] font-bold leading-[20px] left-[980.7px] not-italic text-[14px] text-[color:var(--sa-color-text-primary,white)] top-[18px] whitespace-nowrap" data-node-id="2349:677">
+              R$ 1.500,00
+            </p>
+            <div className="absolute bg-[var(--color\/v2\/bg\/status-positive,rgba(0,122,85,0.2))] border-[0.8px] border-[var(--color\/v2\/border\/status-positive,#74ffa0)] border-solid content-stretch flex gap-[var(--sa-spacing-4,4px)] items-center justify-center left-[1114.63px] overflow-clip pl-[7px] pr-[9px] py-[3px] rounded-[8px] top-[18.46px]" data-node-id="2349:678" data-name="Badge">
+              <div className="relative shrink-0 size-[12px]" data-node-id="2349:679" data-name="Icon">
+                <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgIcon1} />
+              </div>
+              <p className="[word-break:break-word] font-['Inter:Medium'] font-medium leading-[14.286px] not-italic relative shrink-0 text-[10px] text-[color:var(--color\/v2\/text\/status-positive,#74ffa0)] tracking-[0.25px] uppercase whitespace-nowrap" data-node-id="2349:682">
+                Processada
+              </p>
+            </div>
+            <p className="[word-break:break-word] absolute font-['Inter:Regular'] font-normal leading-[16px] left-[1224.24px] not-italic text-[12px] text-[color:var(--sa-color-text-secondary,rgba(255,255,255,0.72))] top-[20.4px] whitespace-nowrap" data-node-id="2349:683">
+              Sistema Automático
+            </p>
+            <div className="absolute content-stretch flex gap-[var(--sa-spacing-6,6px)] items-center justify-center left-[1360.74px] px-[var(--sa-spacing-10,10px)] rounded-[var(--sa-radius-8,8px)] size-[32px] top-[12.4px]" data-node-id="2349:684" data-name="Button">
+              <div className="relative shrink-0 size-[16px]" data-node-id="2349:685" data-name="Icon">
+                <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgIcon2} />
+              </div>
+            </div>
+          </div>
+          <div className="absolute border-[rgba(255,255,255,0.12)] border-b-[0.8px] border-solid h-[56.8px] left-0 top-[724px] w-[1400.8px]" data-node-id="2349:691" data-name="TableRow · TRX-2026-00396 · Dividendo de Contrato">
+            <p className="[word-break:break-word] absolute font-['Inter:Regular'] font-normal leading-[16px] left-[8px] not-italic text-[12px] text-[color:var(--sa-color-text-secondary,rgba(255,255,255,0.72))] top-[20.4px] whitespace-nowrap" data-node-id="2349:692">
+              10/11/2026 09:00
+            </p>
+            <p className="[word-break:break-word] absolute font-['DM_Mono:Regular'] leading-[16px] left-[119.42px] not-italic text-[12px] text-[rgba(255,255,255,0.76)] top-[20.4px] whitespace-nowrap" data-node-id="2349:693">
+              TRX-2026-00396
+            </p>
+            <div className="absolute content-stretch flex gap-[var(--sa-spacing-8,8px)] items-center left-[253.21px] top-[12px] w-[178.975px]" data-node-id="2349:694" data-name="TransactionsScreen">
+              <div className="relative shrink-0 size-[16px]" data-node-id="2349:695" data-name="Icon">
+                <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgIcon3} />
+              </div>
+              <div className="[word-break:break-word] content-stretch flex flex-col font-['Inter:Medium'] font-medium items-start leading-[16px] not-italic relative shrink-0 text-[color:var(--sa-color-text-secondary,rgba(255,255,255,0.72))] whitespace-nowrap" data-node-id="2349:698" data-name="Text">
+                <p className="relative shrink-0 text-[12px]" data-node-id="2349:699">
+                  Dividendo de Contrato
+                </p>
+                <p className="opacity-60 relative shrink-0 text-[11px]" data-node-id="2349:716">
+                  out/2026 · 35,90%
+                </p>
+              </div>
+            </div>
+            <p className="[word-break:break-word] absolute font-['Inter:Medium'] font-medium leading-[16px] left-[448.19px] not-italic text-[12px] text-[color:var(--sa-color-text-secondary,rgba(255,255,255,0.72))] top-[20.4px] whitespace-nowrap" data-node-id="2349:700">
+              Mariana Alencar
+            </p>
+            <div className="[word-break:break-word] absolute content-stretch flex flex-col font-['Inter:Regular'] font-normal items-start leading-[16px] left-[645.38px] max-w-[150px] not-italic overflow-clip text-[color:var(--sa-color-text-secondary,rgba(255,255,255,0.72))] top-[12px] w-[150px] whitespace-nowrap" data-node-id="2349:701" data-name="TransactionsScreen">
+              <p className="relative shrink-0 text-[12px]" data-node-id="2349:702">
+                Master Premium 2025
+              </p>
+              <p className="relative shrink-0 text-[11px]" data-node-id="2349:717">
+                contrato · BRL
+              </p>
+            </div>
+            <div className="[word-break:break-word] absolute content-stretch flex flex-col font-['Inter:Regular'] font-normal items-start leading-[16px] left-[813.04px] max-w-[150px] not-italic overflow-clip text-[color:var(--sa-color-text-secondary,rgba(255,255,255,0.72))] top-[12px] w-[150px] whitespace-nowrap" data-node-id="2349:703" data-name="TransactionsScreen">
+              <p className="relative shrink-0 text-[12px]" data-node-id="2349:704">
+                Carteira Strategy
+              </p>
+              <p className="relative shrink-0 text-[11px]" data-node-id="2349:718">
+                BRL · saldo parado
+              </p>
+            </div>
+            <p className="[word-break:break-word] absolute font-['Inter:Bold'] font-bold leading-[20px] left-[980.7px] not-italic text-[14px] text-[color:var(--sa-color-text-primary,white)] top-[18px] whitespace-nowrap" data-node-id="2349:705">
+              R$ 1.000,00
+            </p>
+            <div className="absolute bg-[var(--color\/v2\/bg\/status-positive,rgba(0,122,85,0.2))] border-[0.8px] border-[var(--color\/v2\/border\/status-positive,#74ffa0)] border-solid content-stretch flex gap-[var(--sa-spacing-4,4px)] items-center justify-center left-[1114.63px] overflow-clip pl-[7px] pr-[9px] py-[3px] rounded-[8px] top-[18.46px]" data-node-id="2349:706" data-name="Badge">
+              <div className="relative shrink-0 size-[12px]" data-node-id="2349:707" data-name="Icon">
+                <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgIcon1} />
+              </div>
+              <p className="[word-break:break-word] font-['Inter:Medium'] font-medium leading-[14.286px] not-italic relative shrink-0 text-[10px] text-[color:var(--color\/v2\/text\/status-positive,#74ffa0)] tracking-[0.25px] uppercase whitespace-nowrap" data-node-id="2349:710">
+                Processada
+              </p>
+            </div>
+            <p className="[word-break:break-word] absolute font-['Inter:Regular'] font-normal leading-[16px] left-[1224.24px] not-italic text-[12px] text-[color:var(--sa-color-text-secondary,rgba(255,255,255,0.72))] top-[20.4px] whitespace-nowrap" data-node-id="2349:711">
+              Sistema Automático
+            </p>
+            <div className="absolute content-stretch flex gap-[var(--sa-spacing-6,6px)] items-center justify-center left-[1360.74px] px-[var(--sa-spacing-10,10px)] rounded-[var(--sa-radius-8,8px)] size-[32px] top-[12.4px]" data-node-id="2349:712" data-name="Button">
+              <div className="relative shrink-0 size-[16px]" data-node-id="2349:713" data-name="Icon">
+                <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgIcon2} />
+              </div>
+            </div>
+          </div>
+          <div className="absolute border-[rgba(255,255,255,0.12)] border-b-[0.8px] border-solid h-[56.8px] left-0 top-[781px] w-[1400.8px]" data-node-id="2349:719" data-name="TableRow · TRX-2026-00397 · Dividendo de Contrato">
+            <p className="[word-break:break-word] absolute font-['Inter:Regular'] font-normal leading-[16px] left-[8px] not-italic text-[12px] text-[color:var(--sa-color-text-secondary,rgba(255,255,255,0.72))] top-[20.4px] whitespace-nowrap" data-node-id="2349:720">
+              10/11/2026 09:00
+            </p>
+            <p className="[word-break:break-word] absolute font-['DM_Mono:Regular'] leading-[16px] left-[119.42px] not-italic text-[12px] text-[rgba(255,255,255,0.76)] top-[20.4px] whitespace-nowrap" data-node-id="2349:721">
+              TRX-2026-00397
+            </p>
+            <div className="absolute content-stretch flex gap-[var(--sa-spacing-8,8px)] items-center left-[253.21px] top-[12px] w-[178.975px]" data-node-id="2349:722" data-name="TransactionsScreen">
+              <div className="relative shrink-0 size-[16px]" data-node-id="2349:723" data-name="Icon">
+                <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgIcon3} />
+              </div>
+              <div className="[word-break:break-word] content-stretch flex flex-col font-['Inter:Medium'] font-medium items-start leading-[16px] not-italic relative shrink-0 text-[color:var(--sa-color-text-secondary,rgba(255,255,255,0.72))] whitespace-nowrap" data-node-id="2349:726" data-name="Text">
+                <p className="relative shrink-0 text-[12px]" data-node-id="2349:727">
+                  Dividendo de Contrato
+                </p>
+                <p className="opacity-60 relative shrink-0 text-[11px]" data-node-id="2349:744">
+                  out/2026 · 8,97%
+                </p>
+              </div>
+            </div>
+            <p className="[word-break:break-word] absolute font-['Inter:Medium'] font-medium leading-[16px] left-[448.19px] not-italic text-[12px] text-[color:var(--sa-color-text-secondary,rgba(255,255,255,0.72))] top-[20.4px] whitespace-nowrap" data-node-id="2349:728">
+              Grupo Alpha Ltda
+            </p>
+            <div className="[word-break:break-word] absolute content-stretch flex flex-col font-['Inter:Regular'] font-normal items-start leading-[16px] left-[645.38px] max-w-[150px] not-italic overflow-clip text-[color:var(--sa-color-text-secondary,rgba(255,255,255,0.72))] top-[12px] w-[150px] whitespace-nowrap" data-node-id="2349:729" data-name="TransactionsScreen">
+              <p className="relative shrink-0 text-[12px]" data-node-id="2349:730">
+                Master Premium 2025
+              </p>
+              <p className="relative shrink-0 text-[11px]" data-node-id="2349:745">
+                contrato · BRL
+              </p>
+            </div>
+            <div className="[word-break:break-word] absolute content-stretch flex flex-col font-['Inter:Regular'] font-normal items-start leading-[16px] left-[813.04px] max-w-[150px] not-italic overflow-clip text-[color:var(--sa-color-text-secondary,rgba(255,255,255,0.72))] top-[12px] w-[150px] whitespace-nowrap" data-node-id="2349:731" data-name="TransactionsScreen">
+              <p className="relative shrink-0 text-[12px]" data-node-id="2349:732">
+                Carteira Strategy
+              </p>
+              <p className="relative shrink-0 text-[11px]" data-node-id="2349:746">
+                BRL · saldo parado
+              </p>
+            </div>
+            <p className="[word-break:break-word] absolute font-['Inter:Bold'] font-bold leading-[20px] left-[980.7px] not-italic text-[14px] text-[color:var(--sa-color-text-primary,white)] top-[18px] whitespace-nowrap" data-node-id="2349:733">
+              R$ 250,00
+            </p>
+            <div className="absolute bg-[var(--color\/v2\/bg\/status-positive,rgba(0,122,85,0.2))] border-[0.8px] border-[var(--color\/v2\/border\/status-positive,#74ffa0)] border-solid content-stretch flex gap-[var(--sa-spacing-4,4px)] items-center justify-center left-[1114.63px] overflow-clip pl-[7px] pr-[9px] py-[3px] rounded-[8px] top-[18.46px]" data-node-id="2349:734" data-name="Badge">
+              <div className="relative shrink-0 size-[12px]" data-node-id="2349:735" data-name="Icon">
+                <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgIcon1} />
+              </div>
+              <p className="[word-break:break-word] font-['Inter:Medium'] font-medium leading-[14.286px] not-italic relative shrink-0 text-[10px] text-[color:var(--color\/v2\/text\/status-positive,#74ffa0)] tracking-[0.25px] uppercase whitespace-nowrap" data-node-id="2349:738">
+                Processada
+              </p>
+            </div>
+            <p className="[word-break:break-word] absolute font-['Inter:Regular'] font-normal leading-[16px] left-[1224.24px] not-italic text-[12px] text-[color:var(--sa-color-text-secondary,rgba(255,255,255,0.72))] top-[20.4px] whitespace-nowrap" data-node-id="2349:739">
+              Sistema Automático
+            </p>
+            <div className="absolute content-stretch flex gap-[var(--sa-spacing-6,6px)] items-center justify-center left-[1360.74px] px-[var(--sa-spacing-10,10px)] rounded-[var(--sa-radius-8,8px)] size-[32px] top-[12.4px]" data-node-id="2349:740" data-name="Button">
+              <div className="relative shrink-0 size-[16px]" data-node-id="2349:741" data-name="Icon">
+                <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgIcon2} />
+              </div>
+            </div>
+          </div>
+          <div className="absolute border-[rgba(255,255,255,0.12)] border-b-[0.8px] border-solid h-[56.8px] left-0 top-[838px] w-[1400.8px]" data-node-id="2349:747" data-name="TableRow · TRX-2026-00398 · Dividendo de Contrato">
+            <p className="[word-break:break-word] absolute font-['Inter:Regular'] font-normal leading-[16px] left-[8px] not-italic text-[12px] text-[color:var(--sa-color-text-secondary,rgba(255,255,255,0.72))] top-[20.4px] whitespace-nowrap" data-node-id="2349:748">
+              10/11/2026 09:00
+            </p>
+            <p className="[word-break:break-word] absolute font-['DM_Mono:Regular'] leading-[16px] left-[119.42px] not-italic text-[12px] text-[rgba(255,255,255,0.76)] top-[20.4px] whitespace-nowrap" data-node-id="2349:749">
+              TRX-2026-00398
+            </p>
+            <div className="absolute content-stretch flex gap-[var(--sa-spacing-8,8px)] items-center left-[253.21px] top-[12px] w-[178.975px]" data-node-id="2349:750" data-name="TransactionsScreen">
+              <div className="relative shrink-0 size-[16px]" data-node-id="2349:751" data-name="Icon">
+                <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgIcon3} />
+              </div>
+              <div className="[word-break:break-word] content-stretch flex flex-col font-['Inter:Medium'] font-medium items-start leading-[16px] not-italic relative shrink-0 text-[color:var(--sa-color-text-secondary,rgba(255,255,255,0.72))] whitespace-nowrap" data-node-id="2349:754" data-name="Text">
+                <p className="relative shrink-0 text-[12px]" data-node-id="2349:755">
+                  Dividendo de Contrato
+                </p>
+                <p className="opacity-60 relative shrink-0 text-[11px]" data-node-id="2349:772">
+                  out/2026 · 1,29%
+                </p>
+              </div>
+            </div>
+            <p className="[word-break:break-word] absolute font-['Inter:Medium'] font-medium leading-[16px] left-[448.19px] not-italic text-[12px] text-[color:var(--sa-color-text-secondary,rgba(255,255,255,0.72))] top-[20.4px] whitespace-nowrap" data-node-id="2349:756">
+              Marcos Vinicius
+            </p>
+            <div className="[word-break:break-word] absolute content-stretch flex flex-col font-['Inter:Regular'] font-normal items-start leading-[16px] left-[645.38px] max-w-[150px] not-italic overflow-clip text-[color:var(--sa-color-text-secondary,rgba(255,255,255,0.72))] top-[12px] w-[150px] whitespace-nowrap" data-node-id="2349:757" data-name="TransactionsScreen">
+              <p className="relative shrink-0 text-[12px]" data-node-id="2349:758">
+                Master Premium 2025
+              </p>
+              <p className="relative shrink-0 text-[11px]" data-node-id="2349:773">
+                contrato · BRL
+              </p>
+            </div>
+            <div className="[word-break:break-word] absolute content-stretch flex flex-col font-['Inter:Regular'] font-normal items-start leading-[16px] left-[813.04px] max-w-[150px] not-italic overflow-clip text-[color:var(--sa-color-text-secondary,rgba(255,255,255,0.72))] top-[12px] w-[150px] whitespace-nowrap" data-node-id="2349:759" data-name="TransactionsScreen">
+              <p className="relative shrink-0 text-[12px]" data-node-id="2349:760">
+                Carteira de Depósito
+              </p>
+              <p className="relative shrink-0 text-[11px]" data-node-id="2349:774">
+                BRL
+              </p>
+            </div>
+            <p className="[word-break:break-word] absolute font-['Inter:Bold'] font-bold leading-[20px] left-[980.7px] not-italic text-[14px] text-[color:var(--sa-color-text-primary,white)] top-[18px] whitespace-nowrap" data-node-id="2349:761">
+              R$ 36,00
+            </p>
+            <div className="absolute bg-[var(--color\/v2\/bg\/status-positive,rgba(0,122,85,0.2))] border-[0.8px] border-[var(--color\/v2\/border\/status-positive,#74ffa0)] border-solid content-stretch flex gap-[var(--sa-spacing-4,4px)] items-center justify-center left-[1114.63px] overflow-clip pl-[7px] pr-[9px] py-[3px] rounded-[8px] top-[18.46px]" data-node-id="2349:762" data-name="Badge">
+              <div className="relative shrink-0 size-[12px]" data-node-id="2349:763" data-name="Icon">
+                <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgIcon1} />
+              </div>
+              <p className="[word-break:break-word] font-['Inter:Medium'] font-medium leading-[14.286px] not-italic relative shrink-0 text-[10px] text-[color:var(--color\/v2\/text\/status-positive,#74ffa0)] tracking-[0.25px] uppercase whitespace-nowrap" data-node-id="2349:766">
+                Processada
+              </p>
+            </div>
+            <p className="[word-break:break-word] absolute font-['Inter:Regular'] font-normal leading-[16px] left-[1224.24px] not-italic text-[12px] text-[color:var(--sa-color-text-secondary,rgba(255,255,255,0.72))] top-[20.4px] whitespace-nowrap" data-node-id="2349:767">
+              Sistema Automático
+            </p>
+            <div className="absolute content-stretch flex gap-[var(--sa-spacing-6,6px)] items-center justify-center left-[1360.74px] px-[var(--sa-spacing-10,10px)] rounded-[var(--sa-radius-8,8px)] size-[32px] top-[12.4px]" data-node-id="2349:768" data-name="Button">
+              <div className="relative shrink-0 size-[16px]" data-node-id="2349:769" data-name="Icon">
+                <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgIcon2} />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+SUPER CRITICAL: The generated React+Tailwind code MUST be converted to match the target project's technology stack and styling system.
+1. Analyze the target codebase to identify: technology stack, styling approach, component patterns, and design tokens
+2. Convert React syntax to the target framework/library
+3. Transform all Tailwind classes to the target styling system while preserving exact visual design
+4. Follow the project's existing patterns and conventions
+DO NOT install any Tailwind as a dependency unless the user instructs you to do so.
+
+Node ids have been added to the code as data attributes, e.g. `data-node-id="1:2"`.
+The generated code contains image and SVG URL constants, e.g. const image = 'https://www.figma.com/api/mcp/asset/550e8400-e29b-41d4-a716-446655440000.png'. These URLs are temporary download sources and expire after 7 days. Download each asset into the project with curl -L, then replace its URL in the generated code with a reference to the downloaded asset. Never use the temporary URLs as runtime image sources.

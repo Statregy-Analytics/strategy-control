@@ -1,5 +1,10 @@
 <template>
   <div class="contract-workspace" :class="{ 'contract-workspace--open': !editing }">
+    <contract-request-banner
+      v-if="requestContext"
+      :context="requestContext"
+      @open="$emit('request', $event)"
+    />
     <header class="contract-heading">
       <div class="contract-heading__bar">
         <div class="contract-heading__identity">
@@ -396,11 +401,24 @@
               :icon="walletOrigin ? 'wallet-capital/2325-797-imgUsers' : 'distribution/users'"
               ><template #actions
                 ><span class="contract-optional">{{
-                  form.clientAllocations.length
+                  form.clientAllocations.length + (pendingRequest ? 1 : 0)
                 }}</span></template
               >
+              <contract-request-client
+                v-if="pendingRequest"
+                :context="requestContext"
+                :capital="form.initialContractualCapital"
+                :currency="currencyCode"
+                :show-footer="!form.clientAllocations.length"
+                :currency-selected="!!form.currencyId"
+                @configure="configureRequest"
+                @add="clientOpen = true" />
               <contract-assigned-clients
-                v-if="['CONTRACT_VALUE', 'CLIENT_WALLET'].includes(selectedOrigin?.code)"
+                v-if="
+                  ['CONTRACT_VALUE', 'CLIENT_WALLET'].includes(selectedOrigin?.code) &&
+                  (!pendingRequest || form.clientAllocations.length)
+                "
+                :request-context="requestContext"
                 :wallet-mode="walletOrigin"
                 :allow-add="!walletOrigin || !!form.currencyId"
                 @remove="removeClient"
@@ -408,7 +426,12 @@
                 :capital="form.initialContractualCapital"
                 :currency="currencyCode"
                 @add="clientOpen = true" />
-              <template v-else>
+              <template
+                v-if="
+                  !pendingRequest &&
+                  !['CONTRACT_VALUE', 'CLIENT_WALLET'].includes(selectedOrigin?.code)
+                "
+              >
                 <div v-if="!form.clientAllocations.length" class="contract-empty">
                   <img src="/icons/contracts/users-empty.svg" alt="" />
                   <p>Nenhum cliente vinculado. Adicione pelo menos um.</p>
@@ -719,6 +742,7 @@
     <contract-participant-dialog
       v-if="clientOpen && !draft && canAddContractParticipant(detail.state.data)"
       :busy="busy"
+      :initial-client="entryRequested ? requestContext?.client : null"
       :existing-ids="(detail.state.data?.participants || []).map((p) => p.clientId)"
       :submit="includeParticipant"
       :currency="currencyCode"
@@ -738,6 +762,7 @@
     <contract-wallet-capital
       v-if="clientOpen && draft && walletOrigin && form.currencyId"
       :currency="currencyCode"
+      :initial-client="configuringRequest ? requestContext?.client : null"
       :existing-ids="form.clientAllocations.map((row) => row.clientId)"
       @confirm="form.clientAllocations.push($event)"
       @close="clientOpen = false"
@@ -808,6 +833,8 @@
 import { ref, computed, watch, nextTick, onScopeDispose } from 'vue'
 import { useQuasar } from 'quasar'
 import { onBeforeRouteLeave, onBeforeRouteUpdate } from 'vue-router'
+import ContractRequestBanner from './ContractRequestBanner.vue'
+import ContractRequestClient from './ContractRequestClient.vue'
 import ContractPanel from './ContractPanel.vue'
 import ContractCapitalDistribution from './ContractCapitalDistribution.vue'
 import ContractAssignedClients from './ContractAssignedClients.vue'
@@ -851,8 +878,11 @@ import { downloadDocument, getDocumentTemporaryUrl } from 'src/services/document
 const props = defineProps({
   contractId: { type: String, default: null },
   historyRequested: Boolean,
+  sourceRequestId: { type: String, default: null },
+  requestContext: { type: Object, default: null },
+  entryRequested: Boolean,
 })
-const emit = defineEmits(['close', 'saved'])
+const emit = defineEmits(['close', 'saved', 'request'])
 const $q = useQuasar()
 const {
   id,
@@ -935,6 +965,35 @@ watch(
     }
   },
   { deep: true },
+)
+const configuringRequest = ref(false)
+const pendingRequest = computed(
+  () =>
+    draft.value &&
+    !!props.requestContext &&
+    !form.value.clientAllocations.some(
+      (row) => row.clientId === props.requestContext.client.customerId,
+    ),
+)
+function configureRequest() {
+  configuringRequest.value = true
+  clientOpen.value = true
+}
+watch(clientOpen, (value) => {
+  if (!value) configuringRequest.value = false
+})
+watch(
+  () => [props.entryRequested, props.requestContext, detail.state.loading],
+  () => {
+    if (
+      props.entryRequested &&
+      props.requestContext &&
+      !detail.state.loading &&
+      canAddContractParticipant(detail.state.data)
+    )
+      clientOpen.value = true
+  },
+  { immediate: true },
 )
 const primaryConnection = computed(() =>
   engines.state.data?.find((e) => e.engineId === form.value.primaryEngineId),

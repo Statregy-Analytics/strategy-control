@@ -1,0 +1,286 @@
+const imgArrowLeft = "https://www.figma.com/api/mcp/asset/1d25f59d-a45f-40dd-a492-f9c6370495ce.svg";
+
+export default function ModalContrato() {
+  return (
+    <div className="backdrop-blur-[16px] border-2 border-[var(--brand-blue\/400,#2cb7ff)] border-solid content-stretch flex flex-col items-start overflow-clip relative rounded-[8px] shadow-[0px_0px_48px_12px_rgba(0,163,255,0.24)] size-full" data-node-id="1:41693" style={{ backgroundImage: "linear-gradient(214.85576389327372deg, rgba(0, 0, 0, 0.24) 0.52072%, rgba(0, 0, 0, 0.08) 51.124%, rgba(0, 0, 0, 0.04) 99.479%)" }} data-name="Modal - Contrato">
+      <div className="content-stretch flex flex-[1_0_0] flex-col gap-[40px] items-start min-h-px overflow-clip pb-[24px] pt-[48px] px-[32px] relative w-full" data-node-id="1:41694" data-name="Content">
+        <div className="content-stretch flex flex-col gap-[12px] items-start relative shrink-0 w-full" data-node-id="1:41695" data-name="Steps">
+          <div className="content-stretch flex gap-[8px] items-center overflow-clip relative rounded-[4px] shrink-0 w-full" data-node-id="1:41696" data-name="steps bar">
+            <div className="bg-[var(--active,#00a3ff)] flex-[1_0_0] h-[8px] min-w-px relative" data-node-id="1:41697" data-name="step 1" />
+            <div className="bg-[var(--active,#00a3ff)] flex-[1_0_0] h-[8px] min-w-px relative" data-node-id="1:41698" data-name="step 2" />
+            <div className="bg-[var(--active,#00a3ff)] flex-[1_0_0] h-[8px] min-w-px relative" data-node-id="1:41699" data-name="step 5" />
+            <div className="bg-[var(--active,#00a3ff)] flex-[1_0_0] h-[8px] min-w-px relative" data-node-id="1:41700" data-name="step 4" />
+            <div className="bg-[var(--neutral\/950,#292929)] flex-[1_0_0] h-[8px] min-w-px relative" data-node-id="1:41701" data-name="step 3" />
+          </div>
+          <div className="[word-break:break-word] content-stretch flex gap-[4px] items-start leading-[1.35] not-italic relative shrink-0 text-[20px] w-full whitespace-nowrap" data-node-id="1:41702" data-name="Stepper">
+            <p className="font-['Inter:Medium'] font-medium relative shrink-0 text-[color:var(--neutral\/white,white)]" data-node-id="1:41703">
+              Passo 4
+            </p>
+            <p className="font-['Inter:Regular'] font-normal relative shrink-0 text-[color:var(--neutral\/400,#989898)]" data-node-id="1:41704">
+              / 5
+            </p>
+          </div>
+        </div>
+        <div className="backdrop-blur-[16px] border border-[rgba(239,239,239,0.16)] border-solid content-stretch flex flex-[1_0_0] flex-col items-start min-h-px overflow-clip relative rounded-[8px] w-full" data-node-id="1:41705" style={{ backgroundImage: "linear-gradient(211.59235799904667deg, rgba(0, 0, 0, 0.24) 0.52072%, rgba(0, 0, 0, 0.08) 51.124%, rgba(0, 0, 0, 0.04) 99.479%)" }} data-name="Block">
+          <div className="content-stretch flex flex-[1_0_0] flex-col gap-[32px] items-start min-h-px overflow-clip px-[32px] py-[24px] relative w-full" data-node-id="1:41706" data-name="Content">
+            <div className="[word-break:break-word] content-stretch flex flex-col gap-[12px] items-start justify-center not-italic relative shrink-0 w-full" data-node-id="1:41707" data-name="Heading">
+              <p className="font-['Inter:Bold'] font-bold leading-[1.5] min-w-full relative shrink-0 text-[24px] text-[color:var(--neutral\/white,white)] w-[min-content]" data-node-id="1:41710">
+                Tipos de Ativos
+              </p>
+              <p className="font-['Inter:Regular'] font-normal leading-[1.35] min-w-full relative shrink-0 text-[17px] text-[color:var(--neutral\/300,#bdbdbd)] w-[min-content]" data-node-id="1:41711">
+                Selecione os tipos de ativos que você deseja
+              </p>
+            </div>
+            <div className="content-stretch flex flex-[1_0_0] gap-[24px] items-start min-h-px relative w-full" data-node-id="1:41712" data-name="Form + Scroll">
+              <div className="content-stretch flex flex-[1_0_0] flex-col gap-[24px] h-full items-start min-w-px overflow-clip relative" data-node-id="1:41713" data-name="List Buttons">
+                <div className="backdrop-blur-[20px] border border-[rgba(239,239,239,0.08)] border-solid content-stretch flex gap-[12px] items-center p-[12px] relative rounded-[8px] shadow-[4px_4px_12px_0px_rgba(0,0,0,0.24)] shrink-0 w-full" data-node-id="1:41714" style={{ backgroundImage: "linear-gradient(182.03195831109417deg, rgba(255, 255, 255, 0.16) 0.52072%, rgba(255, 255, 255, 0.04) 50%, rgba(255, 255, 255, 0.01) 99.479%)" }} data-name="Button Selectable -">
+                  <div className="content-stretch flex gap-[8px] items-center relative shrink-0" data-node-id="1:41717" data-name="Form Item / Horizontal">
+                    <div className="content-stretch flex items-start relative shrink-0" data-node-id="I1:41717;4064:39555" data-name="Switch Wrapper">
+                      <button className="bg-[var(--colors\/base\/success\/200,#c3c3c3)] content-stretch cursor-pointer flex h-[22px] items-center min-w-[44px] relative rounded-[20px] shrink-0 w-[44px]" data-node-id="I1:41717;4064:39556" data-name="*Switch* / Basic">
+                        <div className="content-stretch flex h-[22px] items-center overflow-clip p-[var(--components\/switch\/component\/trackpadding,2px)] relative shrink-0 w-[44px]" data-node-id="I1:41717;4064:39556;1252:38799" data-name="Content">
+                          <div className="grid-cols-[max-content] grid-rows-[max-content] inline-grid leading-[0] place-items-start relative shrink-0" data-node-id="I1:41717;4064:39556;396:12958" data-name="Handle">
+                            <div className="bg-[var(--neutral\/white,white)] col-1 ml-0 mt-0 relative rounded-[16px] row-1 shadow-[0px_2px_4px_0px_rgba(0,35,11,0.2)] size-[18px]" data-node-id="I1:41717;4064:39556;396:12959" data-name="Handle BG" />
+                          </div>
+                        </div>
+                      </button>
+                    </div>
+                  </div>
+                  <div className="content-stretch flex flex-col gap-[8px] items-start justify-center relative shrink-0" data-node-id="1:41718" data-name="Text">
+                    <div className="[word-break:break-word] flex flex-col font-['Inter:Medium'] font-medium justify-center leading-[0] not-italic relative shrink-0 text-[17px] text-[color:var(--neutral\/white,white)] whitespace-nowrap" data-node-id="1:41719">
+                      <p className="leading-[1.35]">Ações</p>
+                    </div>
+                  </div>
+                </div>
+                <div className="backdrop-blur-[20px] border border-[rgba(239,239,239,0.08)] border-solid content-stretch flex gap-[12px] items-center p-[12px] relative rounded-[8px] shadow-[4px_4px_12px_0px_rgba(0,0,0,0.24)] shrink-0 w-full" data-node-id="1:41721" style={{ backgroundImage: "linear-gradient(182.03195831109417deg, rgba(255, 255, 255, 0.16) 0.52072%, rgba(255, 255, 255, 0.04) 50%, rgba(255, 255, 255, 0.01) 99.479%)" }} data-name="Button Selectable -">
+                  <div className="content-stretch flex gap-[8px] items-center relative shrink-0" data-node-id="1:41724" data-name="Form Item / Horizontal">
+                    <div className="content-stretch flex items-start relative shrink-0" data-node-id="I1:41724;4064:39555" data-name="Switch Wrapper">
+                      <button className="bg-[var(--neutral\/300,#bdbdbd)] content-stretch cursor-pointer flex h-[22px] items-center min-w-[44px] relative rounded-[20px] shrink-0 w-[44px]" data-node-id="I1:41724;4064:39556" data-name="*Switch* / Basic">
+                        <div className="content-stretch flex h-[22px] items-center overflow-clip p-[var(--components\/switch\/component\/trackpadding,2px)] relative shrink-0 w-[44px]" data-node-id="I1:41724;4064:39556;1252:38799" data-name="Content">
+                          <div className="grid-cols-[max-content] grid-rows-[max-content] inline-grid leading-[0] place-items-start relative shrink-0" data-node-id="I1:41724;4064:39556;396:12958" data-name="Handle">
+                            <div className="bg-[var(--neutral\/white,white)] col-1 ml-0 mt-0 relative rounded-[16px] row-1 shadow-[0px_2px_4px_0px_rgba(0,35,11,0.2)] size-[18px]" data-node-id="I1:41724;4064:39556;396:12959" data-name="Handle BG" />
+                          </div>
+                        </div>
+                      </button>
+                    </div>
+                  </div>
+                  <div className="content-stretch flex flex-col gap-[8px] items-start justify-center relative shrink-0" data-node-id="1:41725" data-name="Text">
+                    <div className="[word-break:break-word] flex flex-col font-['Inter:Medium'] font-medium justify-center leading-[0] not-italic relative shrink-0 text-[17px] text-[color:var(--neutral\/white,white)] whitespace-nowrap" data-node-id="1:41726">
+                      <p className="leading-[1.35]">ETFs</p>
+                    </div>
+                  </div>
+                </div>
+                <div className="backdrop-blur-[20px] border border-[rgba(239,239,239,0.08)] border-solid content-stretch flex gap-[12px] items-center p-[12px] relative rounded-[8px] shadow-[4px_4px_12px_0px_rgba(0,0,0,0.24)] shrink-0 w-full" data-node-id="1:41728" style={{ backgroundImage: "linear-gradient(182.03195831109417deg, rgba(255, 255, 255, 0.16) 0.52072%, rgba(255, 255, 255, 0.04) 50%, rgba(255, 255, 255, 0.01) 99.479%)" }} data-name="Button Selectable -">
+                  <div className="content-stretch flex gap-[8px] items-center relative shrink-0" data-node-id="1:41731" data-name="Form Item / Horizontal">
+                    <div className="content-stretch flex items-start relative shrink-0" data-node-id="I1:41731;4064:39555" data-name="Switch Wrapper">
+                      <button className="bg-[var(--neutral\/300,#bdbdbd)] content-stretch cursor-pointer flex h-[22px] items-center min-w-[44px] relative rounded-[20px] shrink-0 w-[44px]" data-node-id="I1:41731;4064:39556" data-name="*Switch* / Basic">
+                        <div className="content-stretch flex h-[22px] items-center overflow-clip p-[var(--components\/switch\/component\/trackpadding,2px)] relative shrink-0 w-[44px]" data-node-id="I1:41731;4064:39556;1252:38799" data-name="Content">
+                          <div className="grid-cols-[max-content] grid-rows-[max-content] inline-grid leading-[0] place-items-start relative shrink-0" data-node-id="I1:41731;4064:39556;396:12958" data-name="Handle">
+                            <div className="bg-[var(--neutral\/white,white)] col-1 ml-0 mt-0 relative rounded-[16px] row-1 shadow-[0px_2px_4px_0px_rgba(0,35,11,0.2)] size-[18px]" data-node-id="I1:41731;4064:39556;396:12959" data-name="Handle BG" />
+                          </div>
+                        </div>
+                      </button>
+                    </div>
+                  </div>
+                  <div className="content-stretch flex flex-[1_0_0] flex-col gap-[5px] items-start justify-center min-w-px relative" data-node-id="1:41732" data-name="Text">
+                    <div className="[word-break:break-word] flex flex-col font-['Inter:Medium'] font-medium justify-center leading-[0] min-w-full not-italic relative shrink-0 text-[17px] text-[color:var(--neutral\/white,white)] w-[min-content]" data-node-id="1:41733">
+                      <p className="leading-[1.35]">Títulos (renda fixa, bonds, debêntures, treasuries)</p>
+                    </div>
+                  </div>
+                </div>
+                <div className="backdrop-blur-[20px] border border-[rgba(239,239,239,0.08)] border-solid content-stretch flex gap-[12px] items-center p-[12px] relative rounded-[8px] shadow-[4px_4px_12px_0px_rgba(0,0,0,0.24)] shrink-0 w-full" data-node-id="1:41735" style={{ backgroundImage: "linear-gradient(182.03195831109417deg, rgba(255, 255, 255, 0.16) 0.52072%, rgba(255, 255, 255, 0.04) 50%, rgba(255, 255, 255, 0.01) 99.479%)" }} data-name="Button Selectable -">
+                  <div className="content-stretch flex gap-[8px] items-center relative shrink-0" data-node-id="1:41738" data-name="Form Item / Horizontal">
+                    <div className="content-stretch flex items-start relative shrink-0" data-node-id="I1:41738;4064:39555" data-name="Switch Wrapper">
+                      <button className="bg-[var(--neutral\/300,#bdbdbd)] content-stretch cursor-pointer flex h-[22px] items-center min-w-[44px] relative rounded-[20px] shrink-0 w-[44px]" data-node-id="I1:41738;4064:39556" data-name="*Switch* / Basic">
+                        <div className="content-stretch flex h-[22px] items-center overflow-clip p-[var(--components\/switch\/component\/trackpadding,2px)] relative shrink-0 w-[44px]" data-node-id="I1:41738;4064:39556;1252:38799" data-name="Content">
+                          <div className="grid-cols-[max-content] grid-rows-[max-content] inline-grid leading-[0] place-items-start relative shrink-0" data-node-id="I1:41738;4064:39556;396:12958" data-name="Handle">
+                            <div className="bg-[var(--neutral\/white,white)] col-1 ml-0 mt-0 relative rounded-[16px] row-1 shadow-[0px_2px_4px_0px_rgba(0,35,11,0.2)] size-[18px]" data-node-id="I1:41738;4064:39556;396:12959" data-name="Handle BG" />
+                          </div>
+                        </div>
+                      </button>
+                    </div>
+                  </div>
+                  <div className="content-stretch flex flex-col gap-[8px] items-start justify-center relative shrink-0" data-node-id="1:41739" data-name="Text">
+                    <div className="[word-break:break-word] flex flex-col font-['Inter:Medium'] font-medium justify-center leading-[0] not-italic relative shrink-0 text-[17px] text-[color:var(--neutral\/white,white)] whitespace-nowrap" data-node-id="1:41740">
+                      <p className="leading-[1.35]">Opções</p>
+                    </div>
+                  </div>
+                </div>
+                <div className="backdrop-blur-[20px] border border-[rgba(239,239,239,0.08)] border-solid content-stretch flex gap-[12px] items-center p-[12px] relative rounded-[8px] shadow-[4px_4px_12px_0px_rgba(0,0,0,0.24)] shrink-0 w-full" data-node-id="1:41742" style={{ backgroundImage: "linear-gradient(182.03195831109417deg, rgba(255, 255, 255, 0.16) 0.52072%, rgba(255, 255, 255, 0.04) 50%, rgba(255, 255, 255, 0.01) 99.479%)" }} data-name="Button Selectable -">
+                  <div className="content-stretch flex gap-[8px] items-center relative shrink-0" data-node-id="1:41745" data-name="Form Item / Horizontal">
+                    <div className="content-stretch flex items-start relative shrink-0" data-node-id="I1:41745;4064:39555" data-name="Switch Wrapper">
+                      <button className="bg-[var(--neutral\/300,#bdbdbd)] content-stretch cursor-pointer flex h-[22px] items-center min-w-[44px] relative rounded-[20px] shrink-0 w-[44px]" data-node-id="I1:41745;4064:39556" data-name="*Switch* / Basic">
+                        <div className="content-stretch flex h-[22px] items-center overflow-clip p-[var(--components\/switch\/component\/trackpadding,2px)] relative shrink-0 w-[44px]" data-node-id="I1:41745;4064:39556;1252:38799" data-name="Content">
+                          <div className="grid-cols-[max-content] grid-rows-[max-content] inline-grid leading-[0] place-items-start relative shrink-0" data-node-id="I1:41745;4064:39556;396:12958" data-name="Handle">
+                            <div className="bg-[var(--neutral\/white,white)] col-1 ml-0 mt-0 relative rounded-[16px] row-1 shadow-[0px_2px_4px_0px_rgba(0,35,11,0.2)] size-[18px]" data-node-id="I1:41745;4064:39556;396:12959" data-name="Handle BG" />
+                          </div>
+                        </div>
+                      </button>
+                    </div>
+                  </div>
+                  <div className="content-stretch flex flex-col gap-[8px] items-start justify-center relative shrink-0" data-node-id="1:41746" data-name="Text">
+                    <div className="[word-break:break-word] flex flex-col font-['Inter:Medium'] font-medium justify-center leading-[0] not-italic relative shrink-0 text-[17px] text-[color:var(--neutral\/white,white)] whitespace-nowrap" data-node-id="1:41747">
+                      <p className="leading-[1.35]">Criptoativos</p>
+                    </div>
+                  </div>
+                </div>
+                <div className="backdrop-blur-[20px] border border-[rgba(239,239,239,0.08)] border-solid content-stretch flex gap-[12px] items-center p-[12px] relative rounded-[8px] shadow-[4px_4px_12px_0px_rgba(0,0,0,0.24)] shrink-0 w-full" data-node-id="1:41749" style={{ backgroundImage: "linear-gradient(182.03195831109417deg, rgba(255, 255, 255, 0.16) 0.52072%, rgba(255, 255, 255, 0.04) 50%, rgba(255, 255, 255, 0.01) 99.479%)" }} data-name="Button Selectable -">
+                  <div className="content-stretch flex gap-[8px] items-center relative shrink-0" data-node-id="1:41752" data-name="Form Item / Horizontal">
+                    <div className="content-stretch flex items-start relative shrink-0" data-node-id="I1:41752;4064:39555" data-name="Switch Wrapper">
+                      <button className="bg-[var(--neutral\/300,#bdbdbd)] content-stretch cursor-pointer flex h-[22px] items-center min-w-[44px] relative rounded-[20px] shrink-0 w-[44px]" data-node-id="I1:41752;4064:39556" data-name="*Switch* / Basic">
+                        <div className="content-stretch flex h-[22px] items-center overflow-clip p-[var(--components\/switch\/component\/trackpadding,2px)] relative shrink-0 w-[44px]" data-node-id="I1:41752;4064:39556;1252:38799" data-name="Content">
+                          <div className="grid-cols-[max-content] grid-rows-[max-content] inline-grid leading-[0] place-items-start relative shrink-0" data-node-id="I1:41752;4064:39556;396:12958" data-name="Handle">
+                            <div className="bg-[var(--neutral\/white,white)] col-1 ml-0 mt-0 relative rounded-[16px] row-1 shadow-[0px_2px_4px_0px_rgba(0,35,11,0.2)] size-[18px]" data-node-id="I1:41752;4064:39556;396:12959" data-name="Handle BG" />
+                          </div>
+                        </div>
+                      </button>
+                    </div>
+                  </div>
+                  <div className="content-stretch flex flex-col gap-[5px] items-start justify-center relative shrink-0" data-node-id="1:41753" data-name="Text">
+                    <div className="[word-break:break-word] flex flex-col font-['Inter:Medium'] font-medium justify-center leading-[0] not-italic relative shrink-0 text-[17px] text-[color:var(--neutral\/white,white)] whitespace-nowrap" data-node-id="1:41754">
+                      <p className="leading-[1.35]">Fundos Imobiliários</p>
+                    </div>
+                  </div>
+                </div>
+                <div className="backdrop-blur-[20px] border border-[rgba(239,239,239,0.08)] border-solid content-stretch flex gap-[12px] items-center p-[12px] relative rounded-[8px] shadow-[4px_4px_12px_0px_rgba(0,0,0,0.24)] shrink-0 w-full" data-node-id="1:41756" style={{ backgroundImage: "linear-gradient(182.03195831109417deg, rgba(255, 255, 255, 0.16) 0.52072%, rgba(255, 255, 255, 0.04) 50%, rgba(255, 255, 255, 0.01) 99.479%)" }} data-name="Button Selectable -">
+                  <div className="content-stretch flex gap-[8px] items-center relative shrink-0" data-node-id="1:41759" data-name="Form Item / Horizontal">
+                    <div className="content-stretch flex items-start relative shrink-0" data-node-id="I1:41759;4064:39555" data-name="Switch Wrapper">
+                      <button className="bg-[var(--neutral\/300,#bdbdbd)] content-stretch cursor-pointer flex h-[22px] items-center min-w-[44px] relative rounded-[20px] shrink-0 w-[44px]" data-node-id="I1:41759;4064:39556" data-name="*Switch* / Basic">
+                        <div className="content-stretch flex h-[22px] items-center overflow-clip p-[var(--components\/switch\/component\/trackpadding,2px)] relative shrink-0 w-[44px]" data-node-id="I1:41759;4064:39556;1252:38799" data-name="Content">
+                          <div className="grid-cols-[max-content] grid-rows-[max-content] inline-grid leading-[0] place-items-start relative shrink-0" data-node-id="I1:41759;4064:39556;396:12958" data-name="Handle">
+                            <div className="bg-[var(--neutral\/white,white)] col-1 ml-0 mt-0 relative rounded-[16px] row-1 shadow-[0px_2px_4px_0px_rgba(0,35,11,0.2)] size-[18px]" data-node-id="I1:41759;4064:39556;396:12959" data-name="Handle BG" />
+                          </div>
+                        </div>
+                      </button>
+                    </div>
+                  </div>
+                  <div className="content-stretch flex flex-[1_0_0] flex-col gap-[8px] items-start justify-center min-w-px relative" data-node-id="1:41760" data-name="Text">
+                    <div className="[word-break:break-word] flex flex-col font-['Inter:Medium'] font-medium justify-center leading-[0] min-w-full not-italic relative shrink-0 text-[17px] text-[color:var(--neutral\/white,white)] w-[min-content]" data-node-id="1:41761">
+                      <p className="leading-[1.35]">Commodities (ouro, petróleo, agrícolas, metais)</p>
+                    </div>
+                  </div>
+                </div>
+                <div className="backdrop-blur-[20px] border border-[rgba(239,239,239,0.08)] border-solid content-stretch flex gap-[12px] items-center p-[12px] relative rounded-[8px] shadow-[4px_4px_12px_0px_rgba(0,0,0,0.24)] shrink-0 w-full" data-node-id="1:41763" style={{ backgroundImage: "linear-gradient(182.03195831109417deg, rgba(255, 255, 255, 0.16) 0.52072%, rgba(255, 255, 255, 0.04) 50%, rgba(255, 255, 255, 0.01) 99.479%)" }} data-name="Button Selectable -">
+                  <div className="content-stretch flex gap-[8px] items-center relative shrink-0" data-node-id="1:41766" data-name="Form Item / Horizontal">
+                    <div className="content-stretch flex items-start relative shrink-0" data-node-id="I1:41766;4064:39555" data-name="Switch Wrapper">
+                      <button className="bg-[var(--neutral\/300,#bdbdbd)] content-stretch cursor-pointer flex h-[22px] items-center min-w-[44px] relative rounded-[20px] shrink-0 w-[44px]" data-node-id="I1:41766;4064:39556" data-name="*Switch* / Basic">
+                        <div className="content-stretch flex h-[22px] items-center overflow-clip p-[var(--components\/switch\/component\/trackpadding,2px)] relative shrink-0 w-[44px]" data-node-id="I1:41766;4064:39556;1252:38799" data-name="Content">
+                          <div className="grid-cols-[max-content] grid-rows-[max-content] inline-grid leading-[0] place-items-start relative shrink-0" data-node-id="I1:41766;4064:39556;396:12958" data-name="Handle">
+                            <div className="bg-[var(--neutral\/white,white)] col-1 ml-0 mt-0 relative rounded-[16px] row-1 shadow-[0px_2px_4px_0px_rgba(0,35,11,0.2)] size-[18px]" data-node-id="I1:41766;4064:39556;396:12959" data-name="Handle BG" />
+                          </div>
+                        </div>
+                      </button>
+                    </div>
+                  </div>
+                  <div className="content-stretch flex flex-[1_0_0] flex-col gap-[8px] items-start justify-center min-w-px relative" data-node-id="1:41767" data-name="Text">
+                    <div className="[word-break:break-word] flex flex-col font-['Inter:Medium'] font-medium justify-center leading-[0] min-w-full not-italic relative shrink-0 text-[17px] text-[color:var(--neutral\/white,white)] w-[min-content]" data-node-id="1:41768">
+                      <p className="leading-[1.35]">Derivativos (futuros, swaps, CFDs)</p>
+                    </div>
+                  </div>
+                </div>
+                <div className="backdrop-blur-[20px] border border-[rgba(239,239,239,0.08)] border-solid content-stretch flex gap-[12px] items-center p-[12px] relative rounded-[8px] shadow-[4px_4px_12px_0px_rgba(0,0,0,0.24)] shrink-0 w-full" data-node-id="1:41770" style={{ backgroundImage: "linear-gradient(182.03195831109417deg, rgba(255, 255, 255, 0.16) 0.52072%, rgba(255, 255, 255, 0.04) 50%, rgba(255, 255, 255, 0.01) 99.479%)" }} data-name="Button Selectable -">
+                  <div className="content-stretch flex gap-[8px] items-center relative shrink-0" data-node-id="1:41773" data-name="Form Item / Horizontal">
+                    <div className="content-stretch flex items-start relative shrink-0" data-node-id="I1:41773;4064:39555" data-name="Switch Wrapper">
+                      <button className="bg-[var(--neutral\/300,#bdbdbd)] content-stretch cursor-pointer flex h-[22px] items-center min-w-[44px] relative rounded-[20px] shrink-0 w-[44px]" data-node-id="I1:41773;4064:39556" data-name="*Switch* / Basic">
+                        <div className="content-stretch flex h-[22px] items-center overflow-clip p-[var(--components\/switch\/component\/trackpadding,2px)] relative shrink-0 w-[44px]" data-node-id="I1:41773;4064:39556;1252:38799" data-name="Content">
+                          <div className="grid-cols-[max-content] grid-rows-[max-content] inline-grid leading-[0] place-items-start relative shrink-0" data-node-id="I1:41773;4064:39556;396:12958" data-name="Handle">
+                            <div className="bg-[var(--neutral\/white,white)] col-1 ml-0 mt-0 relative rounded-[16px] row-1 shadow-[0px_2px_4px_0px_rgba(0,35,11,0.2)] size-[18px]" data-node-id="I1:41773;4064:39556;396:12959" data-name="Handle BG" />
+                          </div>
+                        </div>
+                      </button>
+                    </div>
+                  </div>
+                  <div className="content-stretch flex flex-col gap-[5px] items-start justify-center relative shrink-0" data-node-id="1:41774" data-name="Text">
+                    <div className="[word-break:break-word] flex flex-col font-['Inter:Medium'] font-medium justify-center leading-[0] not-italic relative shrink-0 text-[17px] text-[color:var(--neutral\/white,white)] whitespace-nowrap" data-node-id="1:41775">
+                      <p className="leading-[1.35]">Venture Capital</p>
+                    </div>
+                  </div>
+                </div>
+                <div className="backdrop-blur-[20px] border border-[rgba(239,239,239,0.08)] border-solid content-stretch flex gap-[12px] items-center p-[12px] relative rounded-[8px] shadow-[4px_4px_12px_0px_rgba(0,0,0,0.24)] shrink-0 w-full" data-node-id="1:41777" style={{ backgroundImage: "linear-gradient(182.03195831109417deg, rgba(255, 255, 255, 0.16) 0.52072%, rgba(255, 255, 255, 0.04) 50%, rgba(255, 255, 255, 0.01) 99.479%)" }} data-name="Button Selectable -">
+                  <div className="content-stretch flex gap-[8px] items-center relative shrink-0" data-node-id="1:41780" data-name="Form Item / Horizontal">
+                    <div className="content-stretch flex items-start relative shrink-0" data-node-id="I1:41780;4064:39555" data-name="Switch Wrapper">
+                      <button className="bg-[var(--neutral\/300,#bdbdbd)] content-stretch cursor-pointer flex h-[22px] items-center min-w-[44px] relative rounded-[20px] shrink-0 w-[44px]" data-node-id="I1:41780;4064:39556" data-name="*Switch* / Basic">
+                        <div className="content-stretch flex h-[22px] items-center overflow-clip p-[var(--components\/switch\/component\/trackpadding,2px)] relative shrink-0 w-[44px]" data-node-id="I1:41780;4064:39556;1252:38799" data-name="Content">
+                          <div className="grid-cols-[max-content] grid-rows-[max-content] inline-grid leading-[0] place-items-start relative shrink-0" data-node-id="I1:41780;4064:39556;396:12958" data-name="Handle">
+                            <div className="bg-[var(--neutral\/white,white)] col-1 ml-0 mt-0 relative rounded-[16px] row-1 shadow-[0px_2px_4px_0px_rgba(0,35,11,0.2)] size-[18px]" data-node-id="I1:41780;4064:39556;396:12959" data-name="Handle BG" />
+                          </div>
+                        </div>
+                      </button>
+                    </div>
+                  </div>
+                  <div className="content-stretch flex flex-col gap-[8px] items-start justify-center relative shrink-0" data-node-id="1:41781" data-name="Text">
+                    <div className="[word-break:break-word] flex flex-col font-['Inter:Medium'] font-medium justify-center leading-[0] not-italic relative shrink-0 text-[17px] text-[color:var(--neutral\/white,white)] whitespace-nowrap" data-node-id="1:41782">
+                      <p className="leading-[1.35]">Forex</p>
+                    </div>
+                  </div>
+                </div>
+                <div className="backdrop-blur-[20px] border border-[rgba(239,239,239,0.08)] border-solid content-stretch flex gap-[12px] items-center p-[12px] relative rounded-[8px] shadow-[4px_4px_12px_0px_rgba(0,0,0,0.24)] shrink-0 w-full" data-node-id="1:41784" style={{ backgroundImage: "linear-gradient(182.03195831109417deg, rgba(255, 255, 255, 0.16) 0.52072%, rgba(255, 255, 255, 0.04) 50%, rgba(255, 255, 255, 0.01) 99.479%)" }} data-name="Button Selectable -">
+                  <div className="content-stretch flex gap-[8px] items-center relative shrink-0" data-node-id="1:41787" data-name="Form Item / Horizontal">
+                    <div className="content-stretch flex items-start relative shrink-0" data-node-id="I1:41787;4064:39555" data-name="Switch Wrapper">
+                      <button className="bg-[var(--neutral\/300,#bdbdbd)] content-stretch cursor-pointer flex h-[22px] items-center min-w-[44px] relative rounded-[20px] shrink-0 w-[44px]" data-node-id="I1:41787;4064:39556" data-name="*Switch* / Basic">
+                        <div className="content-stretch flex h-[22px] items-center overflow-clip p-[var(--components\/switch\/component\/trackpadding,2px)] relative shrink-0 w-[44px]" data-node-id="I1:41787;4064:39556;1252:38799" data-name="Content">
+                          <div className="grid-cols-[max-content] grid-rows-[max-content] inline-grid leading-[0] place-items-start relative shrink-0" data-node-id="I1:41787;4064:39556;396:12958" data-name="Handle">
+                            <div className="bg-[var(--neutral\/white,white)] col-1 ml-0 mt-0 relative rounded-[16px] row-1 shadow-[0px_2px_4px_0px_rgba(0,35,11,0.2)] size-[18px]" data-node-id="I1:41787;4064:39556;396:12959" data-name="Handle BG" />
+                          </div>
+                        </div>
+                      </button>
+                    </div>
+                  </div>
+                  <div className="content-stretch flex flex-col gap-[5px] items-start justify-center relative shrink-0" data-node-id="1:41788" data-name="Text">
+                    <div className="[word-break:break-word] flex flex-col font-['Inter:Medium'] font-medium justify-center leading-[0] not-italic relative shrink-0 text-[17px] text-[color:var(--neutral\/white,white)] whitespace-nowrap" data-node-id="1:41789">
+                      <p className="leading-[1.35]">Hedge Funds</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div className="bg-[var(--neutral\/950,#292929)] content-stretch flex h-full items-start overflow-clip relative rounded-[8px] shrink-0" data-node-id="1:41791" data-name="scroll">
+                <div className="bg-[var(--neutral\/200,#dcdcdc)] h-[100px] relative rounded-[8px] shrink-0 w-[6px]" data-node-id="1:41792" data-name="scroll bar" />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div className="content-stretch flex items-center justify-between px-[32px] py-[16px] relative shrink-0 w-full" data-node-id="1:41793" data-name="Buttons">
+        <button className="content-stretch cursor-pointer flex gap-[8px] h-[40px] items-center justify-center py-[8px] relative shrink-0" data-node-id="1:41794" data-name="button">
+          <div className="relative shrink-0 size-[24px]" data-node-id="I1:41794;302:12520" data-name="arrow-left">
+            <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgArrowLeft} />
+          </div>
+          <div className="content-stretch flex items-center justify-center relative shrink-0" data-node-id="I1:41794;302:12521" data-name="Text Container">
+            <p className="[word-break:break-word] font-['Roboto:Medium'] font-medium leading-none relative shrink-0 text-[14px] text-[color:var(--neutral\/100,#efefef)] text-left tracking-[0.5px] whitespace-nowrap" data-node-id="I1:41794;302:12522" style={{ fontVariationSettings: '"wdth" 100' }}>
+              Voltar
+            </p>
+          </div>
+        </button>
+        <div className="bg-[var(--active,#00a3ff)] border-2 border-[var(--active,#00a3ff)] border-solid content-stretch flex h-[40px] items-center justify-center px-[12px] py-[8px] relative rounded-[4px] shrink-0" data-node-id="1:41795" data-name="button">
+          <div className="content-stretch flex items-center justify-center relative shrink-0" data-node-id="I1:41795;302:12531" data-name="Text Container">
+            <p className="[word-break:break-word] font-['Roboto:Medium'] font-medium leading-none relative shrink-0 text-[14px] text-white tracking-[0.5px] whitespace-nowrap" data-node-id="I1:41795;302:12532" style={{ fontVariationSettings: '"wdth" 100' }}>
+              Prosseguir
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+SUPER CRITICAL: The generated React+Tailwind code MUST be converted to match the target project's technology stack and styling system.
+1. Analyze the target codebase to identify: technology stack, styling approach, component patterns, and design tokens
+2. Convert React syntax to the target framework/library
+3. Transform all Tailwind classes to the target styling system while preserving exact visual design
+4. Follow the project's existing patterns and conventions
+DO NOT install any Tailwind as a dependency unless the user instructs you to do so.
+
+Node ids have been added to the code as data attributes, e.g. `data-node-id="1:2"`.
+These styles are contained in the design: S.A/20/M: Font(family: "Inter", style: Medium, size: 20, weight: 500, lineHeight: 1.350000023841858, letterSpacing: 0), S.A/20/R: Font(family: "Inter", style: Regular, size: 20, weight: 400, lineHeight: 1.350000023841858, letterSpacing: 0), S.A/Heading/Sm: Font(family: "Inter", style: Bold, size: 24, weight: 700, lineHeight: 1.5, letterSpacing: 0), S.A/17/R: Font(family: "Inter", style: Regular, size: 17, weight: 400, lineHeight: 1.350000023841858, letterSpacing: 0), Component/Switch/handleShadow: Effect(type: DROP_SHADOW, color: #00230B33, offset: (0, 2), radius: 4, spread: 0), S.A/17/M: Font(family: "Inter", style: Medium, size: 17, weight: 500, lineHeight: 1.350000023841858, letterSpacing: 0), grad - glass primary: , grey-border 8%: #EFEFEF, shadow+blur: Effect(type: BACKGROUND_BLUR, radius: 40); Effect(type: DROP_SHADOW, color: #0000003D, offset: (4, 4), radius: 12, spread: 0), grad-glass dark: ,, grey-border 16%: #EFEFEF, Button/S: Font(family: "Roboto", style: Medium, size: 14, weight: 500, lineHeight: 1, letterSpacing: 0.5), Default/White: #FFFFFF, modal effect -md: Effect(type: BACKGROUND_BLUR, radius: 32); Effect(type: DROP_SHADOW, color: #00A3FF3D, offset: (0, 0), radius: 48, spread: 12).
+Component descriptions: The following components have usage descriptions or documentation links defined in Figma. These descriptions provide important context about the intended usage, best practices, and any constraints for each component. Follow these guidelines when implementing or using these components.
+
+## Form Item / Horizontal
+**Node ID:** 1:21790
+
+**Documentation:**
+- [https://ant.design/components/form/](https://ant.design/components/form/)
+
+## *Switch* / Basic
+**Node ID:** 1:20562
+
+**Documentation:**
+- [https://ant.design/components/switch/](https://ant.design/components/switch/)
+The generated code contains image and SVG URL constants, e.g. const image = 'https://www.figma.com/api/mcp/asset/550e8400-e29b-41d4-a716-446655440000.png'. These URLs are temporary download sources and expire after 7 days. Download each asset into the project with curl -L, then replace its URL in the generated code with a reference to the downloaded asset. Never use the temporary URLs as runtime image sources.

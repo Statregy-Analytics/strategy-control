@@ -1,0 +1,101 @@
+{
+  "date": "2026-11-16",
+  "items": [
+    139,
+    140,
+    141
+  ],
+  "api": {
+    "documentedRequestPaths": [],
+    "schemas": {
+      "AddContractParticipantRequest": [
+        "clientId",
+        "allocatedAmount"
+      ],
+      "ApiResponseOfTransactionDetailResponse": [
+        "data",
+        "success",
+        "requestId",
+        "correlationId",
+        "errors"
+      ],
+      "ContractClientAllocationRequest": [
+        "clientId",
+        "allocatedAmount"
+      ],
+      "TransactionConversionResponse": [
+        "sourceCurrencyIsoCode",
+        "sourceAmount",
+        "exchangeRate",
+        "rateSource",
+        "quotedAtUtc",
+        "quotes"
+      ],
+      "TransactionDetailResponse": [
+        "id",
+        "requestNumber",
+        "type",
+        "status",
+        "availableActions",
+        "attentionRequired",
+        "client",
+        "source",
+        "destination",
+        "currency",
+        "amount",
+        "requestedAtUtc",
+        "dueAtUtc",
+        "observation",
+        "createdBy",
+        "documents",
+        "observations",
+        "statusHistory",
+        "executions",
+        "ledgerEntries",
+        "updatedAtUtc",
+        "completedAtUtc",
+        "version",
+        "correctsTransactionId",
+        "correctedByTransactionId",
+        "destinationClient",
+        "conversion"
+      ]
+    },
+    "contractOperationList": {
+      "query": "GET /admin/transactions?type=ContractOperation&pageSize=20",
+      "items": 0
+    }
+  },
+  "tests": {
+    "admin": {
+      "local": 372,
+      "versioned": 364,
+      "unrelatedLocalStudy": 8
+    },
+    "client": 423,
+    "lint": "passed both",
+    "build": "passed both",
+    "browserLocalReal": [
+      "Eric five request steps, backtracking, invalid amounts and blocked submission preserving responses",
+      "Admin request list independent error/retry, unknown counts"
+    ],
+    "browserControlled": [
+      "status filters and populated detail",
+      "contact transition and note retained",
+      "cancel requires reason, closed state actions disabled",
+      "source banner and pending client without presuming allocated capital",
+      "historic conversion and audit labels",
+      "observation error retains text",
+      "transaction detail no longer closes when clicking actions",
+      "375px transaction detail without horizontal overflow"
+    ]
+  },
+  "notValidatedIntegrated": [
+    "request persistence and transitions: no documented API routes",
+    "grouped contribution parts, entry share, balances before/after: no documented metadata",
+    "real contract-operation detail: no returned operation to open",
+    "actual request-linked create/include: API linkage not available"
+  ],
+  "financialWritesPerformed": false,
+  "temporaryHarnessRemoved": true
+}

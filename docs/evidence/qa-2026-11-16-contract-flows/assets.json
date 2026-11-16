@@ -1,0 +1,152 @@
+[
+  {
+    "node": "1-45461",
+    "name": "imgArrowLeft",
+    "file": "../Strategy-analytics-v2/public/system/icons/contracts/request/1-45461-imgArrowLeft.svg"
+  },
+  {
+    "node": "2366-281",
+    "name": "imgUsers",
+    "file": "public/icons/contracts/flows/2366-281-imgUsers.svg"
+  },
+  {
+    "node": "2366-281",
+    "name": "imgUser",
+    "file": "public/icons/contracts/flows/2366-281-imgUser.svg"
+  },
+  {
+    "node": "2366-281",
+    "name": "imgIconeCarteira",
+    "file": "public/icons/contracts/flows/2366-281-imgIconeCarteira.svg"
+  },
+  {
+    "node": "2366-281",
+    "name": "imgPlus",
+    "file": "public/icons/contracts/flows/2366-281-imgPlus.svg"
+  },
+  {
+    "node": "2362-281",
+    "name": "imgIconeUser",
+    "file": "public/icons/contracts/flows/2362-281-imgIconeUser.svg"
+  },
+  {
+    "node": "2362-281",
+    "name": "imgIconePlus",
+    "file": "public/icons/contracts/flows/2362-281-imgIconePlus.svg"
+  },
+  {
+    "node": "2362-281",
+    "name": "imgIconeUsers",
+    "file": "public/icons/contracts/flows/2362-281-imgIconeUsers.svg"
+  },
+  {
+    "node": "2362-281",
+    "name": "imgIconeAlert",
+    "file": "public/icons/contracts/flows/2362-281-imgIconeAlert.svg"
+  },
+  {
+    "node": "2362-281",
+    "name": "imgIcon",
+    "file": "public/icons/contracts/flows/2362-281-imgIcon.svg"
+  },
+  {
+    "node": "2366-364",
+    "name": "imgInfo",
+    "file": "public/icons/contracts/flows/2366-364-imgInfo.svg"
+  },
+  {
+    "node": "1-41693",
+    "name": "imgArrowLeft",
+    "file": "../Strategy-analytics-v2/public/system/icons/contracts/request/1-41693-imgArrowLeft.svg"
+  },
+  {
+    "node": "2350-281",
+    "name": "imgArrowDownLeft",
+    "file": "public/icons/contracts/flows/2350-281-imgArrowDownLeft.svg"
+  },
+  {
+    "node": "2350-281",
+    "name": "imgIcon",
+    "file": "public/icons/contracts/flows/2350-281-imgIcon.svg"
+  },
+  {
+    "node": "2350-281",
+    "name": "imgCircleCheck",
+    "file": "public/icons/contracts/flows/2350-281-imgCircleCheck.svg"
+  },
+  {
+    "node": "2350-281",
+    "name": "imgEye",
+    "file": "public/icons/contracts/flows/2350-281-imgEye.svg"
+  },
+  {
+    "node": "2350-281",
+    "name": "imgMessageSquare",
+    "file": "public/icons/contracts/flows/2350-281-imgMessageSquare.svg"
+  },
+  {
+    "node": "2350-281",
+    "name": "imgVector",
+    "file": "public/icons/contracts/flows/2350-281-imgVector.svg"
+  },
+  {
+    "node": "2350-281",
+    "name": "imgVector1",
+    "file": "public/icons/contracts/flows/2350-281-imgVector1.svg"
+  },
+  {
+    "node": "2363-281",
+    "name": "imgIconeSolicitacoes",
+    "file": "public/icons/contracts/flows/2363-281-imgIconeSolicitacoes.svg"
+  },
+  {
+    "node": "2363-281",
+    "name": "imgPlus",
+    "file": "public/icons/contracts/flows/2363-281-imgPlus.svg"
+  },
+  {
+    "node": "1-69607",
+    "name": "imgWhisk93C52372B3",
+    "file": "../Strategy-analytics-v2/public/system/icons/contracts/request/1-69607-imgWhisk93C52372B3.png"
+  },
+  {
+    "node": "1-69607",
+    "name": "imgPlus",
+    "file": "../Strategy-analytics-v2/public/system/icons/contracts/request/1-69607-imgPlus.svg"
+  },
+  {
+    "node": "1-69607",
+    "name": "imgExternalLink",
+    "file": "../Strategy-analytics-v2/public/system/icons/contracts/request/1-69607-imgExternalLink.svg"
+  },
+  {
+    "node": "2349-281",
+    "name": "imgIcon",
+    "file": "public/icons/contracts/flows/2349-281-imgIcon.svg"
+  },
+  {
+    "node": "2349-281",
+    "name": "imgIcon1",
+    "file": "public/icons/contracts/flows/2349-281-imgIcon1.svg"
+  },
+  {
+    "node": "2349-281",
+    "name": "imgIcon2",
+    "file": "public/icons/contracts/flows/2349-281-imgIcon2.svg"
+  },
+  {
+    "node": "2349-281",
+    "name": "imgIcon3",
+    "file": "public/icons/contracts/flows/2349-281-imgIcon3.svg"
+  },
+  {
+    "node": "2360-281",
+    "name": "imgInfo",
+    "file": "public/icons/contracts/flows/2360-281-imgInfo.svg"
+  },
+  {
+    "node": "2360-281",
+    "name": "imgIcon",
+    "file": "public/icons/contracts/flows/2360-281-imgIcon.svg"
+  }
+]

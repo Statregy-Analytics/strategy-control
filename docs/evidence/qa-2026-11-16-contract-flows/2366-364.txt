@@ -1,0 +1,82 @@
+const imgInfo = "https://www.figma.com/api/mcp/asset/3c2651a3-ea10-429c-a591-f801a5602753.svg";
+
+export default function Ct045EcAvisoDaSolicitacaoDeOrigemTopoDaCriacaoDesignGlass() {
+  return (
+    <div className="bg-[var(--sa-color-bg-glass-strong,rgba(255,255,255,0.1))] border border-[var(--sa-color-border-action,#2b7fff)] border-solid content-stretch flex flex-col gap-[12px] items-start px-[20px] py-[16px] relative rounded-[12px] size-full" data-node-id="2366:364" data-name="CT04.5 · EC · Aviso da solicitação de origem (topo da criação) · DESIGN GLASS">
+      <div className="content-stretch flex gap-[10px] items-center relative shrink-0 w-full" data-node-id="2366:365" data-name="topo">
+        <div className="relative shrink-0 size-[18px]" data-node-id="2366:366" data-name="Info">
+          <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgInfo} />
+        </div>
+        <div className="[word-break:break-word] content-stretch flex flex-[1_0_0] flex-col gap-[2px] items-start leading-[normal] min-w-px not-italic relative" data-node-id="2366:370" data-name="título">
+          <p className="font-['Inter:Semi_Bold'] font-semibold relative shrink-0 text-[14px] text-[color:var(--sa-color-text-primary,white)] w-full" data-node-id="2366:371">
+            Contrato a partir da solicitação SOL-2026-00021
+          </p>
+          <p className="font-['Inter:Regular'] font-normal relative shrink-0 text-[12px] text-[color:var(--sa-color-text-secondary,rgba(255,255,255,0.72))] w-full" data-node-id="2366:372">
+            Holding Investimentos SA · enviada em 14/11/2026 10:12
+          </p>
+        </div>
+        <p className="[word-break:break-word] font-['Inter:Medium'] font-medium leading-[normal] not-italic relative shrink-0 text-[12px] text-[color:var(--sa-color-text-info,#bedbff)] whitespace-nowrap" data-node-id="2366:373">
+          Ver solicitação
+        </p>
+      </div>
+      <div className="[word-break:break-word] content-stretch flex font-['Inter:Medium'] font-medium gap-[16px] items-start leading-[normal] not-italic relative shrink-0 w-full" data-node-id="2366:374" data-name="respostas">
+        <div className="content-stretch flex flex-[1_0_0] flex-col gap-[8px] items-start min-w-px relative" data-node-id="2366:375" data-name="coluna">
+          <div className="content-stretch flex flex-col gap-[2px] items-start relative shrink-0 w-full" data-node-id="2366:377" data-name="resposta">
+            <p className="relative shrink-0 text-[11px] text-[color:var(--sa-color-text-secondary,rgba(255,255,255,0.72))] w-full" data-node-id="2366:378">
+              Objetivo de investimento
+            </p>
+            <p className="relative shrink-0 text-[13px] text-[color:var(--sa-color-text-primary,white)] w-full" data-node-id="2366:379">
+              Crescimento de Capital
+            </p>
+          </div>
+          <div className="content-stretch flex flex-col gap-[2px] items-start relative shrink-0 w-full" data-node-id="2366:380" data-name="resposta">
+            <p className="relative shrink-0 text-[11px] text-[color:var(--sa-color-text-secondary,rgba(255,255,255,0.72))] w-full" data-node-id="2366:381">
+              Período
+            </p>
+            <p className="relative shrink-0 text-[13px] text-[color:var(--sa-color-text-primary,white)] w-full" data-node-id="2366:382">
+              Médio Prazo: 3 a 5 anos
+            </p>
+          </div>
+          <div className="content-stretch flex flex-col gap-[2px] items-start relative shrink-0 w-full" data-node-id="2366:383" data-name="resposta">
+            <p className="relative shrink-0 text-[11px] text-[color:var(--sa-color-text-secondary,rgba(255,255,255,0.72))] w-full" data-node-id="2366:384">
+              Modalidade e valor
+            </p>
+            <p className="relative shrink-0 text-[13px] text-[color:var(--sa-color-text-primary,white)] w-full" data-node-id="2366:385">
+              Aplicação Híbrida: R$ 500.000,00 no início e R$ 20.000,00 por mês
+            </p>
+          </div>
+        </div>
+        <div className="content-stretch flex flex-[1_0_0] flex-col gap-[8px] items-start min-w-px relative" data-node-id="2366:376" data-name="coluna">
+          <div className="content-stretch flex flex-col gap-[2px] items-start relative shrink-0 w-full" data-node-id="2366:386" data-name="resposta">
+            <p className="relative shrink-0 text-[11px] text-[color:var(--sa-color-text-secondary,rgba(255,255,255,0.72))] w-full" data-node-id="2366:387">
+              Tipos de ativos
+            </p>
+            <p className="relative shrink-0 text-[13px] text-[color:var(--sa-color-text-primary,white)] w-full" data-node-id="2366:388">
+              Ações, ETFs e Fundos Imobiliários
+            </p>
+          </div>
+          <div className="content-stretch flex flex-col gap-[2px] items-start relative shrink-0 w-full" data-node-id="2366:389" data-name="resposta">
+            <p className="relative shrink-0 text-[11px] text-[color:var(--sa-color-text-secondary,rgba(255,255,255,0.72))] w-full" data-node-id="2366:390">
+              Regiões
+            </p>
+            <p className="relative shrink-0 text-[13px] text-[color:var(--sa-color-text-primary,white)] w-full" data-node-id="2366:391">
+              EUA, Brasil (B3) e Zona do Euro
+            </p>
+          </div>
+        </div>
+      </div>
+      <p className="[word-break:break-word] font-['Inter:Regular'] font-normal leading-[18px] not-italic relative shrink-0 text-[12px] text-[color:var(--sa-color-text-secondary,rgba(255,255,255,0.72))] w-full" data-node-id="2366:392">
+        Use como referência em Vigência e Prazos e no Universo de Ativos do Contrato. O cliente já está em Clientes Vinculados; ao criar o contrato, a solicitação passa a Atendida.
+      </p>
+    </div>
+  );
+}
+SUPER CRITICAL: The generated React+Tailwind code MUST be converted to match the target project's technology stack and styling system.
+1. Analyze the target codebase to identify: technology stack, styling approach, component patterns, and design tokens
+2. Convert React syntax to the target framework/library
+3. Transform all Tailwind classes to the target styling system while preserving exact visual design
+4. Follow the project's existing patterns and conventions
+DO NOT install any Tailwind as a dependency unless the user instructs you to do so.
+
+Node ids have been added to the code as data attributes, e.g. `data-node-id="1:2"`.
+The generated code contains image and SVG URL constants, e.g. const image = 'https://www.figma.com/api/mcp/asset/550e8400-e29b-41d4-a716-446655440000.png'. These URLs are temporary download sources and expire after 7 days. Download each asset into the project with curl -L, then replace its URL in the generated code with a reference to the downloaded asset. Never use the temporary URLs as runtime image sources.

@@ -1,0 +1,297 @@
+const imgIconeUser = "https://www.figma.com/api/mcp/asset/3073161b-00d0-45ea-a58f-ac3543c6f99a.svg";
+const imgIconePlus = "https://www.figma.com/api/mcp/asset/f38318c5-73e4-4fbf-909c-45183b6386d7.svg";
+const imgIconeUsers = "https://www.figma.com/api/mcp/asset/29402cea-a67c-4c5d-b947-42681f5c363b.svg";
+const imgIconeAlert = "https://www.figma.com/api/mcp/asset/3be32d86-0918-4c26-96d0-a1414eb2caa4.svg";
+const imgIcon = "https://www.figma.com/api/mcp/asset/b7b1d1d8-4009-48fd-8f82-c553e2e9e64a.svg";
+
+export default function Ct25MdSolicitacaoDeContratoDetalhesDesignGlass() {
+  return (
+    <div className="backdrop-blur-[20px] border border-[rgba(255,255,255,0.12)] border-solid drop-shadow-[4px_4px_6px_rgba(0,0,0,0.13)] relative rounded-[12px] size-full" data-node-id="2362:281" style={{ backgroundImage: "linear-gradient(226.38805955209597deg, rgba(0, 0, 0, 0.118) 0.52072%, rgba(0, 0, 0, 0.039) 51.124%, rgba(0, 0, 0, 0.02) 99.479%), linear-gradient(226.38805955209597deg, rgba(0, 0, 0, 0.078) 0.52072%, rgba(0, 0, 0, 0.039) 51.124%, rgba(0, 0, 0, 0.01) 99.479%)" }} data-name="CT25 · MD · Solicitação de contrato · Detalhes · DESIGN GLASS">
+      <div className="absolute border-[rgba(255,255,255,0.12)] border-b-[0.8px] border-solid content-stretch flex flex-col gap-[var(--sa-spacing-8,8px)] items-start left-[-0.2px] pb-[var(--sa-spacing-16,16.8px)] pt-[var(--sa-spacing-16,16px)] px-[var(--sa-spacing-24,24px)] top-[-0.2px] w-[510.4px]" data-node-id="2362:282" data-name="Container">
+        <div className="relative shrink-0 w-full" data-node-id="2362:283" data-name="DialogTitle">
+          <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex flex-col items-start relative size-full">
+            <p className="[word-break:break-word] font-['Inter:Bold'] font-bold leading-[20px] not-italic relative shrink-0 text-[14px] text-[color:var(--sa-color-text-primary,white)] tracking-[0.7px] uppercase whitespace-nowrap" data-node-id="2362:284">
+              Solicitação SOL-2026-00021
+            </p>
+          </div>
+        </div>
+      </div>
+      <div className="absolute content-stretch flex flex-col items-start left-[-0.2px] top-[69px] w-[510.4px]" data-node-id="2362:285" data-name="Container">
+        <div className="relative shrink-0 w-full" data-node-id="2362:286" data-name="Container">
+          <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex flex-col gap-[18px] items-start p-[var(--sa-spacing-24,24px)] relative size-full">
+            <div className="relative shrink-0 w-full" data-node-id="2362:398" data-name="linha">
+              <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex gap-[16px] items-start relative size-full">
+                <div className="[word-break:break-word] content-stretch flex flex-[1_0_0] flex-col gap-[6px] items-start leading-[normal] min-w-px not-italic relative" data-node-id="2362:399" data-name="campo">
+                  <p className="font-['Inter:Semi_Bold'] font-semibold relative shrink-0 text-[12px] text-[color:var(--sa-color-text-secondary,rgba(255,255,255,0.72))] uppercase whitespace-nowrap" data-node-id="2362:401">
+                    Cliente
+                  </p>
+                  <p className="font-['Inter:Medium'] font-medium min-w-full relative shrink-0 text-[16px] text-[color:var(--sa-color-text-primary,white)] w-[min-content]" data-node-id="2362:394">
+                    Holding Investimentos SA
+                  </p>
+                  <p className="font-['Inter:Regular'] font-normal min-w-full relative shrink-0 text-[11px] text-[color:var(--sa-color-text-muted,rgba(255,255,255,0.6))] w-[min-content]" data-node-id="2362:395">
+                    12.345.678/0001-90
+                  </p>
+                </div>
+                <div className="content-stretch flex flex-[1_0_0] flex-col gap-[6px] items-start min-w-px relative" data-node-id="2362:400" data-name="campo">
+                  <p className="[word-break:break-word] font-['Inter:Semi_Bold'] font-semibold leading-[normal] not-italic relative shrink-0 text-[12px] text-[color:var(--sa-color-text-secondary,rgba(255,255,255,0.72))] uppercase whitespace-nowrap" data-node-id="2362:402">
+                    Status
+                  </p>
+                  <div className="bg-[var(--sa-color-bg-glass-strong,rgba(255,255,255,0.1))] border-[0.8px] border-[var(--sa-color-border-action,#2b7fff)] border-solid content-stretch flex items-center px-[8px] py-[3px] relative rounded-[8px] shrink-0" data-node-id="2362:396" data-name="Badge · Nova">
+                    <p className="[word-break:break-word] font-['Inter:Medium'] font-medium leading-[normal] not-italic relative shrink-0 text-[10px] text-[color:var(--sa-color-text-info,#bedbff)] whitespace-nowrap" data-node-id="2362:397">
+                      Nova
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div className="relative shrink-0 w-full" data-node-id="2362:406" data-name="linha">
+              <div className="[word-break:break-word] bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex gap-[16px] items-start leading-[normal] not-italic relative size-full">
+                <div className="content-stretch flex flex-[1_0_0] flex-col gap-[6px] items-start min-w-px relative" data-node-id="2362:407" data-name="campo">
+                  <p className="font-['Inter:Semi_Bold'] font-semibold relative shrink-0 text-[12px] text-[color:var(--sa-color-text-secondary,rgba(255,255,255,0.72))] uppercase whitespace-nowrap" data-node-id="2362:409">
+                    Enviada em
+                  </p>
+                  <p className="font-['Inter:Medium'] font-medium min-w-full relative shrink-0 text-[14px] text-[color:var(--sa-color-text-primary,white)] w-[min-content]" data-node-id="2362:403">
+                    14/11/2026 10:12
+                  </p>
+                </div>
+                <div className="content-stretch flex flex-[1_0_0] flex-col gap-[6px] items-start min-w-px relative" data-node-id="2362:408" data-name="campo">
+                  <p className="font-['Inter:Semi_Bold'] font-semibold relative shrink-0 text-[12px] text-[color:var(--sa-color-text-secondary,rgba(255,255,255,0.72))] uppercase whitespace-nowrap" data-node-id="2362:410">
+                    Contato
+                  </p>
+                  <p className="font-['Inter:Medium'] font-medium min-w-full relative shrink-0 text-[14px] text-[color:var(--sa-color-text-primary,white)] w-[min-content]" data-node-id="2362:404">
+                    financeiro@exemplo.com
+                  </p>
+                  <p className="font-['Inter:Regular'] font-normal min-w-full relative shrink-0 text-[12px] text-[color:var(--sa-color-text-secondary,rgba(255,255,255,0.72))] w-[min-content]" data-node-id="2362:405">
+                    (11) 90000-0000
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div className="bg-[var(--sa-color-bg-surface,rgba(255,255,255,0.06))] border-[0.8px] border-[var(--sa-color-border-default,rgba(255,255,255,0.2))] border-solid relative rounded-[10px] shrink-0 w-full" data-node-id="2362:411" data-name="O que o cliente preencheu">
+              <div className="[word-break:break-word] bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex flex-col gap-[12px] items-start leading-[normal] not-italic px-[16px] py-[14px] relative size-full">
+                <p className="font-['Inter:Semi_Bold'] font-semibold relative shrink-0 text-[12px] text-[color:var(--sa-color-text-secondary,rgba(255,255,255,0.72))] uppercase w-full" data-node-id="2362:412">
+                  O que o cliente preencheu
+                </p>
+                <div className="content-stretch flex flex-col font-['Inter:Medium'] font-medium gap-[2px] items-start relative shrink-0 w-full" data-node-id="2362:413" data-name="resposta">
+                  <p className="relative shrink-0 text-[11px] text-[color:var(--sa-color-text-secondary,rgba(255,255,255,0.72))] w-full" data-node-id="2362:414">
+                    1 · Objetivo de investimento
+                  </p>
+                  <p className="relative shrink-0 text-[13px] text-[color:var(--sa-color-text-primary,white)] w-full" data-node-id="2362:415">
+                    Crescimento de Capital
+                  </p>
+                </div>
+                <div className="content-stretch flex flex-col font-['Inter:Medium'] font-medium gap-[2px] items-start relative shrink-0 w-full" data-node-id="2362:416" data-name="resposta">
+                  <p className="relative shrink-0 text-[11px] text-[color:var(--sa-color-text-secondary,rgba(255,255,255,0.72))] w-full" data-node-id="2362:417">
+                    2 · Período
+                  </p>
+                  <p className="relative shrink-0 text-[13px] text-[color:var(--sa-color-text-primary,white)] w-full" data-node-id="2362:418">
+                    Médio Prazo: 3 a 5 anos
+                  </p>
+                </div>
+                <div className="content-stretch flex flex-col font-['Inter:Medium'] font-medium gap-[2px] items-start relative shrink-0 w-full" data-node-id="2362:419" data-name="resposta">
+                  <p className="relative shrink-0 text-[11px] text-[color:var(--sa-color-text-secondary,rgba(255,255,255,0.72))] w-full" data-node-id="2362:420">
+                    3 · Modalidade e valor
+                  </p>
+                  <p className="relative shrink-0 text-[13px] text-[color:var(--sa-color-text-primary,white)] w-full" data-node-id="2362:421">
+                    Aplicação Híbrida: R$ 500.000,00 no início e R$ 20.000,00 por mês
+                  </p>
+                </div>
+                <div className="content-stretch flex flex-col font-['Inter:Medium'] font-medium gap-[2px] items-start relative shrink-0 w-full" data-node-id="2362:422" data-name="resposta">
+                  <p className="relative shrink-0 text-[11px] text-[color:var(--sa-color-text-secondary,rgba(255,255,255,0.72))] w-full" data-node-id="2362:423">
+                    4 · Tipos de ativos
+                  </p>
+                  <p className="relative shrink-0 text-[13px] text-[color:var(--sa-color-text-primary,white)] w-full" data-node-id="2362:424">
+                    Ações, ETFs e Fundos Imobiliários
+                  </p>
+                </div>
+                <div className="content-stretch flex flex-col font-['Inter:Medium'] font-medium gap-[2px] items-start relative shrink-0 w-full" data-node-id="2362:425" data-name="resposta">
+                  <p className="relative shrink-0 text-[11px] text-[color:var(--sa-color-text-secondary,rgba(255,255,255,0.72))] w-full" data-node-id="2362:426">
+                    5 · Regiões
+                  </p>
+                  <p className="relative shrink-0 text-[13px] text-[color:var(--sa-color-text-primary,white)] w-full" data-node-id="2362:427">
+                    EUA, Brasil (B3) e Zona do Euro
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div className="bg-[var(--sa-color-bg-surface,rgba(255,255,255,0.06))] border-[0.8px] border-[var(--sa-color-border-default,rgba(255,255,255,0.2))] border-solid relative rounded-[10px] shrink-0 w-full" data-node-id="2362:428" data-name="Saldos do cliente">
+              <div className="[word-break:break-word] bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex flex-col gap-[10px] items-start not-italic px-[16px] py-[14px] relative size-full">
+                <p className="font-['Inter:Semi_Bold'] font-semibold leading-[normal] relative shrink-0 text-[12px] text-[color:var(--sa-color-text-secondary,rgba(255,255,255,0.72))] uppercase w-full" data-node-id="2362:429">
+                  Saldos do cliente (só para consulta)
+                </p>
+                <div className="content-stretch flex flex-col gap-[2px] items-start overflow-clip relative shrink-0 w-full" data-node-id="2379:282" data-name="Carteira Strategy · saldo parado">
+                  <p className="font-['Inter:Regular'] font-normal leading-[18px] relative shrink-0 text-[12px] text-[color:var(--sa-color-text-secondary,rgba(255,255,255,0.72))] w-full" data-node-id="2379:283">
+                    Carteira Strategy · saldo parado
+                  </p>
+                  <p className="font-['Inter:Bold'] font-bold leading-[normal] relative shrink-0 text-[13px] text-[color:var(--sa-color-text-primary,white)] w-full" data-node-id="2362:430">
+                    R$ 320.000,00 · US$ 40.000,00 · € 25.000,00
+                  </p>
+                </div>
+                <div className="content-stretch flex flex-col gap-[2px] items-start overflow-clip relative shrink-0 w-full" data-node-id="2379:284" data-name="Carteira de Depósito · saldo">
+                  <p className="font-['Inter:Regular'] font-normal leading-[18px] relative shrink-0 text-[12px] text-[color:var(--sa-color-text-secondary,rgba(255,255,255,0.72))] w-full" data-node-id="2379:285">
+                    Carteira de Depósito
+                  </p>
+                  <p className="font-['Inter:Bold'] font-bold leading-[normal] relative shrink-0 text-[13px] text-[color:var(--sa-color-text-primary,white)] w-full" data-node-id="2379:286">
+                    R$ 60.000,00
+                  </p>
+                </div>
+                <p className="font-['Inter:Regular'] font-normal leading-[18px] relative shrink-0 text-[12px] text-[color:var(--sa-color-text-secondary,rgba(255,255,255,0.72))] w-full" data-node-id="2362:431">
+                  As outras moedas estão zeradas nas duas carteiras. A solicitação não mexe em saldo: o dinheiro só sai quando o contrato é criado ou a inclusão é confirmada.
+                </p>
+              </div>
+            </div>
+            <div className="relative shrink-0 w-full" data-node-id="2362:432" data-name="Campo · Observação do atendimento">
+              <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex flex-col gap-[8px] items-start relative size-full">
+                <p className="[word-break:break-word] font-['Inter:Semi_Bold'] font-semibold leading-[normal] not-italic relative shrink-0 text-[12px] text-[color:var(--sa-color-text-secondary,rgba(255,255,255,0.72))] uppercase whitespace-nowrap" data-node-id="2362:433">
+                  Observação do atendimento
+                </p>
+                <div className="border-[0.8px] border-[rgba(255,255,255,0.12)] border-solid content-stretch flex flex-col h-[72px] items-start px-[12px] py-[10px] relative rounded-[8px] shrink-0 w-full" data-node-id="2362:434" style={{ backgroundImage: "linear-gradient(183.77937108591146deg, rgba(0, 0, 0, 0.118) 0.52072%, rgba(0, 0, 0, 0.039) 51.124%, rgba(0, 0, 0, 0.02) 99.479%), linear-gradient(183.77937108591146deg, rgba(0, 0, 0, 0.078) 0.52072%, rgba(0, 0, 0, 0.039) 51.124%, rgba(0, 0, 0, 0.01) 99.479%)" }} data-name="Textarea">
+                  <p className="[word-break:break-word] font-['Inter:Regular'] font-normal leading-[18px] not-italic relative shrink-0 text-[13px] text-[color:var(--sa-color-text-muted,rgba(255,255,255,0.6))] w-full" data-node-id="2362:435">
+                    Anote o que foi combinado com o cliente: moeda firmada, moedas, carteiras e contrato.
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div className="relative shrink-0 w-full" data-node-id="2362:436" data-name="Container:margin">
+              <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex flex-col items-start pt-[var(--sa-spacing-24,24px)] relative size-full">
+                <div className="border-[rgba(38,158,214,0.2)] border-solid border-t-[0.8px] content-stretch flex flex-col items-start pt-[var(--sa-spacing-16,16.8px)] relative shrink-0 w-full" data-node-id="2362:437" data-name="Container">
+                  <div className="relative shrink-0 w-full" data-node-id="2362:438" data-name="Label">
+                    <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex flex-col items-start relative size-full">
+                      <p className="[word-break:break-word] font-['Inter:Semi_Bold'] font-semibold leading-[16px] not-italic relative shrink-0 text-[12px] text-[color:var(--sa-color-text-secondary,rgba(255,255,255,0.72))] uppercase whitespace-nowrap" data-node-id="2362:439">
+                        Ações Disponíveis
+                      </p>
+                    </div>
+                  </div>
+                  <div className="relative shrink-0 w-full" data-node-id="2362:440" data-name="Container:margin">
+                    <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex flex-col items-start pt-[var(--sa-spacing-12,12px)] relative size-full">
+                      <div className="gap-x-[12px] gap-y-[12px] grid grid-cols-[__225.20px_225.20px] grid-rows-[__36px_36px] relative shrink-0 w-full" data-node-id="2362:441" data-name="Container">
+                        <div className="bg-[var(--sa-color-bg-surface,rgba(255,255,255,0.06))] border border-[rgba(38,158,214,0.12)] border-solid col-1 h-[36px] justify-self-stretch relative rounded-[var(--sa-radius-8,8px)] row-1 self-start shadow-[0px_0px_0px_0px_rgba(161,161,161,0.5)] shrink-0" data-node-id="2362:442" data-name="Button">
+                          <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex gap-[var(--sa-spacing-8,8px)] items-center px-[var(--sa-spacing-12,13px)] py-[var(--sa-spacing-8,9px)] relative size-full">
+                            <div className="relative shrink-0 size-[16px]" data-node-id="2362:494" data-name="Ícone · user">
+                              <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgIconeUser} />
+                            </div>
+                            <p className="[word-break:break-word] font-['Inter:Medium'] font-medium leading-[20px] not-italic relative shrink-0 text-[14px] text-[color:var(--sa-color-text-secondary,rgba(255,255,255,0.72))] text-center whitespace-nowrap" data-node-id="2362:446">
+                              Marcar como em contato
+                            </p>
+                          </div>
+                        </div>
+                        <div className="bg-[var(--sa-color-bg-surface,rgba(255,255,255,0.06))] border-[0.8px] border-[rgba(38,158,214,0.12)] border-solid col-2 h-[36px] justify-self-stretch relative rounded-[var(--sa-radius-8,8px)] row-1 self-start shrink-0" data-node-id="2362:447" data-name="Button">
+                          <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex gap-[var(--sa-spacing-8,8px)] items-center px-[var(--sa-spacing-12,12.8px)] py-[var(--sa-spacing-8,8.8px)] relative size-full">
+                            <div className="relative shrink-0 size-[16px]" data-node-id="2362:497" data-name="Ícone · plus">
+                              <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgIconePlus} />
+                            </div>
+                            <p className="[word-break:break-word] font-['Inter:Medium'] font-medium leading-[20px] not-italic relative shrink-0 text-[14px] text-[color:var(--sa-color-text-secondary,rgba(255,255,255,0.72))] text-center whitespace-nowrap" data-node-id="2362:451">
+                              Criar contrato
+                            </p>
+                          </div>
+                        </div>
+                        <div className="bg-[var(--sa-color-bg-surface,rgba(255,255,255,0.06))] border-[0.8px] border-[rgba(38,158,214,0.12)] border-solid col-1 h-[36px] justify-self-stretch relative rounded-[var(--sa-radius-8,8px)] row-2 self-start shrink-0" data-node-id="2362:452" data-name="Button">
+                          <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex gap-[var(--sa-spacing-8,8px)] items-center px-[var(--sa-spacing-12,12.8px)] py-[var(--sa-spacing-8,8.8px)] relative size-full">
+                            <div className="relative shrink-0 size-[16px]" data-node-id="2362:500" data-name="Ícone · users">
+                              <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgIconeUsers} />
+                            </div>
+                            <p className="[word-break:break-word] font-['Inter:Medium'] font-medium leading-[20px] not-italic relative shrink-0 text-[14px] text-[color:var(--sa-color-text-secondary,rgba(255,255,255,0.72))] text-center whitespace-nowrap" data-node-id="2362:455">
+                              Incluir em contrato aberto
+                            </p>
+                          </div>
+                        </div>
+                        <div className="bg-[var(--sa-color-bg-surface,rgba(255,255,255,0.06))] border border-[rgba(38,158,214,0.12)] border-solid col-2 h-[36px] justify-self-stretch relative rounded-[var(--sa-radius-8,8px)] row-2 self-start shadow-[0px_0px_0px_0px_rgba(161,161,161,0.5)] shrink-0" data-node-id="2362:473" data-name="Button">
+                          <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex gap-[var(--sa-spacing-8,8px)] items-center px-[var(--sa-spacing-12,13px)] py-[var(--sa-spacing-8,9px)] relative size-full">
+                            <div className="relative shrink-0 size-[16px]" data-node-id="2362:505" data-name="Ícone · alert">
+                              <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgIconeAlert} />
+                            </div>
+                            <p className="[word-break:break-word] font-['Inter:Medium'] font-medium leading-[20px] not-italic relative shrink-0 text-[14px] text-[color:var(--color\/v2\/text\/status-negative,#ffc9c9)] text-center whitespace-nowrap" data-node-id="2362:477">
+                              Cancelar solicitação
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div className="relative shrink-0 w-full" data-node-id="2362:456" data-name="Histórico de Alterações:margin">
+              <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex flex-col items-start pt-[var(--sa-spacing-24,24px)] relative size-full">
+                <div className="border-[rgba(38,158,214,0.2)] border-solid border-t-[0.8px] content-stretch flex flex-col items-start pt-[var(--sa-spacing-16,16.8px)] relative shrink-0 w-full" data-node-id="2362:457" data-name="Container">
+                  <div className="relative shrink-0 w-full" data-node-id="2362:458" data-name="Label">
+                    <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex flex-col items-start relative size-full">
+                      <p className="[word-break:break-word] font-['Inter:Semi_Bold'] font-semibold leading-[16px] not-italic relative shrink-0 text-[12px] text-[color:var(--sa-color-text-secondary,rgba(255,255,255,0.72))] uppercase whitespace-nowrap" data-node-id="2362:459">
+                        Histórico de Alterações
+                      </p>
+                    </div>
+                  </div>
+                  <div className="relative shrink-0 w-full" data-node-id="2362:460" data-name="Container:margin">
+                    <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex flex-col items-start pt-[var(--sa-spacing-12,12px)] relative size-full">
+                      <div className="border-[0.8px] border-[rgba(255,255,255,0.12)] border-solid content-stretch flex flex-col items-start overflow-clip p-[0.8px] relative rounded-[var(--sa-radius-10,10px)] shrink-0 w-full" data-node-id="2362:461" data-name="Tabela · Histórico de Alterações">
+                        <div className="h-[61px] max-h-[192px] relative shrink-0 w-[461px]" data-node-id="2362:462" data-name="Container">
+                          <div className="[word-break:break-word] bg-clip-padding border-0 border-[transparent] border-solid not-italic overflow-clip relative rounded-[inherit] size-full text-[color:var(--sa-color-text-primary,white)] whitespace-nowrap">
+                            <div className="absolute border-[length:var(----sa-stroke-1,1px)] border-[rgba(255,255,255,0.12)] border-solid font-['Inter:Bold'] font-bold h-[29px] leading-[13.333px] left-0 rounded-[8px] text-[10px] top-[0.01px] tracking-[0.5px] uppercase w-[461px]" data-node-id="2362:463" style={{ backgroundImage: "linear-gradient(181.52872503184676deg, rgba(0, 0, 0, 0.118) 0.52072%, rgba(0, 0, 0, 0.039) 51.124%, rgba(0, 0, 0, 0.02) 99.479%), linear-gradient(181.52872503184676deg, rgba(0, 0, 0, 0.078) 0.52072%, rgba(0, 0, 0, 0.039) 51.124%, rgba(0, 0, 0, 0.01) 99.479%)" }} data-name="Table Header">
+                              <p className="absolute left-[7.1px] top-[6.24px]" data-node-id="2362:464">
+                                Data/Hora
+                              </p>
+                              <p className="absolute left-[120px] top-[6.24px]" data-node-id="2362:465">
+                                Autor
+                              </p>
+                              <p className="absolute left-[176px] top-[6.24px]" data-node-id="2362:466">
+                                Alteração
+                              </p>
+                              <p className="absolute left-[288px] top-[6.24px]" data-node-id="2362:467">
+                                Anterior → Novo
+                              </p>
+                            </div>
+                            <div className="absolute h-[32px] leading-[16px] left-0 text-[12px] top-[29.16px] w-[461px]" data-node-id="2362:468" data-name="Table Body">
+                              <p className="absolute font-['Inter:Regular'] font-normal left-[8.1px] top-[8.01px]" data-node-id="2362:469">
+                                14/11/2026 10:12
+                              </p>
+                              <p className="absolute font-['Inter:Regular'] font-normal left-[121px] top-[8.01px]" data-node-id="2362:470">
+                                Cliente
+                              </p>
+                              <p className="absolute font-['Inter:Medium'] font-medium left-[177px] top-[8.01px]" data-node-id="2362:471">
+                                Solicitação criada
+                              </p>
+                              <p className="absolute font-['Inter:Regular'] font-normal left-[289px] top-[8.01px]" data-node-id="2362:472">
+                                Nova
+                              </p>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div className="absolute border-[rgba(255,255,255,0.12)] border-solid border-t-[0.8px] content-stretch flex flex-col items-start left-[-0.2px] pb-[var(--sa-spacing-16,16px)] pt-[var(--sa-spacing-16,16.8px)] px-[var(--sa-spacing-24,24px)] rounded-[8px] top-[1197px] w-[510.4px]" data-node-id="2362:384" style={{ backgroundImage: "linear-gradient(183.27295796393673deg, rgba(0, 0, 0, 0.118) 0.52072%, rgba(0, 0, 0, 0.039) 51.124%, rgba(0, 0, 0, 0.02) 99.479%), linear-gradient(183.27295796393673deg, rgba(0, 0, 0, 0.078) 0.52072%, rgba(0, 0, 0, 0.039) 51.124%, rgba(0, 0, 0, 0.01) 99.479%)" }} data-name="Container">
+        <div className="relative shrink-0 w-full" data-node-id="2362:385" data-name="Container">
+          <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex gap-[var(--sa-spacing-12,12px)] items-start justify-end relative size-full">
+            <div className="bg-[var(--sa-color-bg-surface,rgba(255,255,255,0.06))] border-[0.8px] border-[var(--sa-color-border-default,rgba(255,255,255,0.2))] border-solid h-[36px] relative rounded-[var(--sa-radius-8,8px)] shrink-0" data-node-id="2362:386" data-name="Botão ação nível 1">
+              <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex items-center justify-center px-[14.8px] py-[var(--sa-spacing-8,8.8px)] relative size-full">
+                <p className="[word-break:break-word] font-['Inter:Medium'] font-medium leading-[20px] not-italic relative shrink-0 text-[14px] text-[color:var(--sa-color-text-secondary,rgba(255,255,255,0.72))] text-center whitespace-nowrap" data-node-id="2362:387">
+                  Fechar
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div className="absolute content-stretch flex flex-col items-start justify-center left-[478.2px] opacity-70 rounded-[2px] top-[15.8px]" data-node-id="2362:390" data-name="DialogClose">
+        <div className="relative shrink-0 size-[16px]" data-node-id="2362:391" data-name="Icon">
+          <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgIcon} />
+        </div>
+      </div>
+    </div>
+  );
+}
+SUPER CRITICAL: The generated React+Tailwind code MUST be converted to match the target project's technology stack and styling system.
+1. Analyze the target codebase to identify: technology stack, styling approach, component patterns, and design tokens
+2. Convert React syntax to the target framework/library
+3. Transform all Tailwind classes to the target styling system while preserving exact visual design
+4. Follow the project's existing patterns and conventions
+DO NOT install any Tailwind as a dependency unless the user instructs you to do so.
+
+Node ids have been added to the code as data attributes, e.g. `data-node-id="1:2"`.
+The generated code contains image and SVG URL constants, e.g. const image = 'https://www.figma.com/api/mcp/asset/550e8400-e29b-41d4-a716-446655440000.png'. These URLs are temporary download sources and expire after 7 days. Download each asset into the project with curl -L, then replace its URL in the generated code with a reference to the downloaded asset. Never use the temporary URLs as runtime image sources.

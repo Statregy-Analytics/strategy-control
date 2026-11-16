@@ -314,3 +314,13 @@ test('137: wallet origin never writes totals without the source-wallet contract'
   assert.equal(h.error.value, walletCapitalBlocked)
   h.dispose()
 })
+
+test('request-origin draft cannot persist or finalize without API linkage', async () => {
+  const h = await setup()
+  fill(h)
+  h.props.sourceRequestId = 'request'
+  assert.equal(await h.save(false), false)
+  assert.equal(await h.save(true), false)
+  assert.equal(h.writes.length, 0)
+  h.dispose()
+})

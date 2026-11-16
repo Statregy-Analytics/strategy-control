@@ -1,5 +1,5 @@
 <template>
-  <q-page class="q-pa-md">
+  <q-page class="q-pa-md transactions-page">
     <title-page title="Transações e carteiras" />
     <wallet-overview :details="false" initial-type="total" @select="selectWallet" />
     <q-tabs v-model="tab" align="left" dense active-color="primary"
@@ -38,11 +38,71 @@
           :params="{ attentionRequired: true, search: search || undefined }"
           :columns="transactionColumns"
         >
+          <template #body-cell-type="p"
+            ><q-td :props="p"
+              ><div class="contract-transaction-type">
+                <img
+                  v-if="isContractTransaction(p.row)"
+                  :src="
+                    '/icons/contracts/flows/2349-281-img' +
+                    (p.row.source?.kind === 'Contract' ? 'Icon3' : 'Icon') +
+                    '.svg'
+                  "
+                  alt=""
+                />{{ contractTransactionLabel(p.row) || financeLabel(p.row.type) }}
+              </div></q-td
+            ></template
+          >
+          <template #body-cell-source="p"
+            ><q-td :props="p"
+              ><div>{{ contractEndpoint(p.row.source, contractSourceCurrency(p.row)).title }}</div>
+              <small>{{
+                contractEndpoint(p.row.source, contractSourceCurrency(p.row)).detail
+              }}</small></q-td
+            ></template
+          >
+          <template #body-cell-destination="p"
+            ><q-td :props="p"
+              ><div>{{ contractEndpoint(p.row.destination, p.row.currencyIsoCode).title }}</div>
+              <small>{{
+                contractEndpoint(p.row.destination, p.row.currencyIsoCode).detail
+              }}</small></q-td
+            ></template
+          >
+          <template #body-cell-amount="p"
+            ><q-td :props="p"
+              ><strong>{{ money(p.row.amount, p.row.currencyIsoCode) }}</strong
+              ><small v-if="p.row.conversion"
+                >{{
+                  money(p.row.conversion.sourceAmount, p.row.conversion.sourceCurrencyIsoCode)
+                }}
+                ×
+                {{
+                  Number(p.row.conversion.exchangeRate).toLocaleString('pt-BR', {
+                    minimumFractionDigits: 4,
+                    maximumFractionDigits: 4,
+                  })
+                }}</small
+              ></q-td
+            ></template
+          >
+          <template #body-cell-status="p"
+            ><q-td :props="p"
+              ><span class="contract-flow__badge" :class="contractTransactionTone(p.row)"
+                ><img
+                  v-if="p.row.status === 'Completed'"
+                  src="/icons/contracts/flows/2349-281-imgIcon1.svg"
+                  alt=""
+                />{{
+                  p.row.status === 'Completed' ? 'Processada' : financeLabel(p.row.status)
+                }}</span
+              ></q-td
+            ></template
+          >
           <template #body-cell-actions="p"
             ><q-td :props="p"
-              ><row-actions
-                :actions="[{ name: 'open', label: 'Abrir solicitação', icon: 'visibility' }]"
-                @select="open(p.row.id)" /></q-td
+              ><q-btn flat dense aria-label="Abrir transação" @click="open(p.row.id)"
+                ><img src="/icons/contracts/flows/2349-281-imgIcon2.svg" alt="" /></q-btn></q-td
           ></template>
         </finance-table>
       </form-section>
@@ -52,17 +112,74 @@
           path="admin/transactions"
           :params="{ search: search || undefined }"
           :columns="transactionColumns"
-          ><template #body-cell-actions="p"
+          ><template #body-cell-type="p"
             ><q-td :props="p"
-              ><row-actions
-                :actions="[{ name: 'open', label: 'Abrir solicitação', icon: 'visibility' }]"
-                @select="open(p.row.id)" /></q-td></template
+              ><div class="contract-transaction-type">
+                <img
+                  v-if="isContractTransaction(p.row)"
+                  :src="
+                    '/icons/contracts/flows/2349-281-img' +
+                    (p.row.source?.kind === 'Contract' ? 'Icon3' : 'Icon') +
+                    '.svg'
+                  "
+                  alt=""
+                />{{ contractTransactionLabel(p.row) || financeLabel(p.row.type) }}
+              </div></q-td
+            ></template
+          >
+          <template #body-cell-source="p"
+            ><q-td :props="p"
+              ><div>{{ contractEndpoint(p.row.source, contractSourceCurrency(p.row)).title }}</div>
+              <small>{{
+                contractEndpoint(p.row.source, contractSourceCurrency(p.row)).detail
+              }}</small></q-td
+            ></template
+          >
+          <template #body-cell-destination="p"
+            ><q-td :props="p"
+              ><div>{{ contractEndpoint(p.row.destination, p.row.currencyIsoCode).title }}</div>
+              <small>{{
+                contractEndpoint(p.row.destination, p.row.currencyIsoCode).detail
+              }}</small></q-td
+            ></template
+          >
+          <template #body-cell-amount="p"
+            ><q-td :props="p"
+              ><strong>{{ money(p.row.amount, p.row.currencyIsoCode) }}</strong
+              ><small v-if="p.row.conversion"
+                >{{
+                  money(p.row.conversion.sourceAmount, p.row.conversion.sourceCurrencyIsoCode)
+                }}
+                ×
+                {{
+                  Number(p.row.conversion.exchangeRate).toLocaleString('pt-BR', {
+                    minimumFractionDigits: 4,
+                    maximumFractionDigits: 4,
+                  })
+                }}</small
+              ></q-td
+            ></template
+          >
+          <template #body-cell-status="p"
+            ><q-td :props="p"
+              ><span class="contract-flow__badge" :class="contractTransactionTone(p.row)"
+                ><img
+                  v-if="p.row.status === 'Completed'"
+                  src="/icons/contracts/flows/2349-281-imgIcon1.svg"
+                  alt=""
+                />{{
+                  p.row.status === 'Completed' ? 'Processada' : financeLabel(p.row.status)
+                }}</span
+              ></q-td
+            ></template
+          >
+          <template #body-cell-actions="p"
+            ><q-td :props="p"
+              ><q-btn flat dense aria-label="Abrir transação" @click="open(p.row.id)"
+                ><img
+                  src="/icons/contracts/flows/2349-281-imgIcon2.svg"
+                  alt="" /></q-btn></q-td></template
         ></finance-table>
-        <p class="text-caption q-mt-md">
-          Aportes e resgates de contratos, rendimentos e inclusão/remoção de patrimônio serão
-          registrados automaticamente. A consulta desses novos lançamentos aguarda a liberação do
-          serviço.
-        </p>
       </form-section>
     </div>
     <div v-else-if="tab === 'wallets'">
@@ -97,17 +214,28 @@
     /></q-dialog>
     <q-dialog
       v-model="dialog"
-      position="right"
-      full-height
-      full-width
-      maximized
-      class="control-width"
+      :position="contractDetail ? 'standard' : 'right'"
+      :full-height="!contractDetail"
+      :full-width="!contractDetail"
+      :maximized="!contractDetail"
+      :class="{ 'control-width': !contractDetail }"
       :persistent="busy"
       @show="showAuditHistory"
       ><q-card
-        ><title-card title="Solicitação de transação" :disable-close="busy" /><q-separator />
+        ><title-card
+          v-if="!contractDetail"
+          title="Solicitação de transação"
+          :disable-close="busy"
+        /><q-separator />
         <resource-state :state="detail.state" @retry="loadDetail">
-          <template v-if="detail.state.data">
+          <contract-transaction-detail
+            v-if="contractDetail && detail.state.data"
+            :record="detail.state.data"
+            @close="dialog = false"
+            @changed="loadDetail"
+            @busy="busy = $event"
+          />
+          <template v-else-if="detail.state.data">
             <entity-header
               :id="detail.state.data.requestNumber"
               :name="
@@ -257,6 +385,14 @@ const walletType = ref('total'),
   portfolioCustomer = ref(null),
   portfolioOpen = ref(false)
 
+import ContractTransactionDetail from 'src/components/Contracts/ContractTransactionDetail.vue'
+import {
+  isContractTransaction,
+  contractTransactionLabel,
+  contractEndpoint,
+  contractSourceCurrency,
+  contractTransactionTone,
+} from 'src/services/contractTransactionView'
 import WalletDirectory from 'src/components/Finance/WalletDirectory.vue'
 import WalletOverview from 'src/components/Finance/WalletOverview.vue'
 
@@ -267,7 +403,6 @@ import TitlePage from 'src/components/TitlePage.vue'
 import TitleCard from 'src/components/Card/TitleCard.vue'
 import EntityHeader from 'src/components/Entity/EntityHeader.vue'
 import FormSection from 'src/components/Entity/FormSection.vue'
-import RowActions from 'src/components/Entity/RowActions.vue'
 import LabelForm from 'src/components/Form/LabelForm.vue'
 import FinanceTable from 'src/components/Finance/FinanceTable.vue'
 import ResourceState from 'src/components/Finance/ResourceState.vue'
@@ -297,6 +432,7 @@ const $q = useQuasar(),
   error = ref(''),
   reason = ref('')
 const observation = ref('')
+const contractDetail = computed(() => isContractTransaction(detail.state.data))
 const workflowActions = computed(() =>
   (detail.state.data?.availableActions || []).filter(
     (action) =>
@@ -313,13 +449,29 @@ const workflowActions = computed(() =>
   ),
 )
 const transactionColumns = columns([
-  ['requestNumber', 'Solicitação'],
+  [
+    'requestedAtUtc',
+    'Data/Hora',
+    (r) => (r.requestedAtUtc ? new Date(r.requestedAtUtc).toLocaleString('pt-BR') : '—'),
+  ],
+  ['requestNumber', 'ID'],
+  ['type', 'Tipo'],
   ['clientName', 'Cliente'],
-  ['type', 'Tipo', (r) => financeLabel(r.type)],
-  ['amount', 'Valor', (r) => money(r.amount, r.currencyIsoCode)],
-  ['status', 'Status', (r) => financeLabel(r.status)],
-  ['requestedAtUtc', 'Data', (r) => dateLabel(r.requestedAtUtc)],
-  ['actions', 'Ações'],
+  ['source', 'Origem'],
+  ['destination', 'Destino'],
+  ['amount', 'Valor'],
+  ['status', 'Status'],
+  [
+    'createdBy',
+    'Responsável',
+    (r) =>
+      r.createdBy?.displayName ||
+      { Admin: 'Admin', System: 'Sistema Automático', Client: 'Cliente', Customer: 'Cliente' }[
+        r.createdBy?.type
+      ] ||
+      'Indisponível',
+  ],
+  ['actions', ''],
 ])
 const ledgerColumns = columns([
   ['accountType', 'Conta', (r) => financeLabel(r.accountType)],
@@ -424,5 +576,36 @@ async function showAuditHistory() {
 .finance-facts dd {
   margin: 0;
   overflow-wrap: anywhere;
+}
+.transactions-page :deep(.contract-transaction-type) {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.transactions-page :deep(.contract-flow__badge) {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+</style>
+
+<style scoped>
+.transactions-page :deep(.q-table td small) {
+  display: block;
+  color: #ffffffb8;
+  font-size: 11px;
+}
+.transactions-page :deep(.q-table td strong) {
+  color: inherit;
+}
+.transactions-page :deep(.contract-transaction-type) {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.transactions-page :deep(.contract-flow__badge) {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
 }
 </style>

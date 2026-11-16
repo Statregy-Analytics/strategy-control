@@ -182,6 +182,8 @@ export function useContractWalletCapital(props, emit) {
     wallets.reset()
   })
   loadCustomers()
+  if (props.initialClient && !existingIds.value.includes(props.initialClient.customerId))
+    choose(props.initialClient)
   return {
     customers,
     wallets,

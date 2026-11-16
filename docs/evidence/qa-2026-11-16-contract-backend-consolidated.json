@@ -1,0 +1,73 @@
+{
+  "checkedAtUtc": "2026-11-16T19:35:11.067771+00:00",
+  "assignedContract": {
+    "id": "9a5aca18-182f-4493-b47e-5cf25454ad2e",
+    "capital": 0.3,
+    "currentBalance": null,
+    "participants": [
+      {
+        "allocatedAmount": 0.1,
+        "contributedAmount": 0
+      },
+      {
+        "allocatedAmount": 0.2,
+        "contributedAmount": 0
+      }
+    ],
+    "transactions": []
+  },
+  "engine": [
+    {
+      "connectionStatus": "PendingConnection",
+      "currentIndex": null
+    }
+  ],
+  "allocationFields": [
+    "clientId",
+    "allocatedAmount"
+  ],
+  "entryFields": [
+    "clientId",
+    "allocatedAmount"
+  ],
+  "requestPaths": [],
+  "detailFields": [
+    "id",
+    "requestNumber",
+    "type",
+    "status",
+    "availableActions",
+    "attentionRequired",
+    "client",
+    "source",
+    "destination",
+    "currency",
+    "amount",
+    "requestedAtUtc",
+    "dueAtUtc",
+    "observation",
+    "createdBy",
+    "documents",
+    "observations",
+    "statusHistory",
+    "executions",
+    "ledgerEntries",
+    "updatedAtUtc",
+    "completedAtUtc",
+    "version",
+    "correctsTransactionId",
+    "correctedByTransactionId",
+    "destinationClient",
+    "conversion"
+  ],
+  "ledgerFields": [
+    "id",
+    "accountType",
+    "walletId",
+    "contractId",
+    "bankAccountId",
+    "direction",
+    "amount",
+    "effectiveAtUtc"
+  ]
+}

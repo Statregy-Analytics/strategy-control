@@ -103,6 +103,7 @@ import LabelForm from 'src/components/Form/LabelForm.vue'
 import ContractWalletSources from './ContractWalletSources.vue'
 import { useContractWalletCapital } from 'src/composables/useContractWalletCapital'
 const props = defineProps({
+  initialClient: { type: Object, default: null },
   currency: { type: String, required: true },
   existingIds: { type: Array, default: () => [] },
   read: { type: Function, default: undefined },

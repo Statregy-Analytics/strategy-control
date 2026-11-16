@@ -194,6 +194,10 @@ export function useContractWorkspace(props, emit, notify) {
     error.value = ''
     let payload
     try {
+      if (props.sourceRequestId)
+        throw Error(
+          'Não foi possível vincular o contrato à solicitação. Os dados foram mantidos nesta tela.',
+        )
       const capitalOrigin = catalog.state.data?.origins?.find(
         (origin) => origin.id === form.value.initialCapitalOriginId,
       )

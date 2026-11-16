@@ -14,6 +14,11 @@
         <div>
           <strong>{{ row.displayName || 'Cliente' }}</strong
           ><small>{{ documentLabel(row) }}</small>
+          <span
+            v-if="requestContext?.client.customerId === row.clientId"
+            class="assigned-clients__badge"
+            >Solicitação {{ requestContext.code }}</span
+          >
           <template v-if="walletMode"
             ><span v-for="tag in walletTags(row)" :key="tag" class="assigned-clients__badge">{{
               tag
@@ -106,6 +111,7 @@ import { useFinanceResource } from 'src/composables/useFinanceResource'
 import { walletCapitalTypes, walletOriginLabel } from 'src/services/contractWalletCapital'
 import { money } from 'src/services/financeService'
 const props = defineProps({
+  requestContext: { type: Object, default: null },
   walletMode: Boolean,
   allowAdd: { type: Boolean, default: true },
   allocations: { type: Array, required: true },

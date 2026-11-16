@@ -5,9 +5,17 @@
         <h1>Contratos</h1>
         <p>Selecione um contrato existente ou crie um novo contrato.</p>
       </div>
-      <q-btn outline no-caps label="Criar Novo Contrato" @click="$emit('open')"
-        ><workspace-icon name="plus"
-      /></q-btn>
+      <div class="contract-selection-header-actions">
+        <q-btn outline no-caps @click="$emit('requests')"
+          ><img
+            src="/icons/contracts/flows/2363-281-imgIconeSolicitacoes.svg"
+            alt=""
+          />Solicitações<q-badge v-if="newRequests !== null">{{ newRequests }}</q-badge></q-btn
+        ><q-btn v-if="!selectionOnly" outline no-caps @click="$emit('open')"
+          ><img src="/icons/contracts/flows/2363-281-imgPlus.svg" alt="" />Criar Novo
+          Contrato</q-btn
+        >
+      </div>
       <div class="workspace-toolbar">
         <q-input
           v-model="search"
@@ -168,7 +176,8 @@ import WorkspaceIcon from 'src/components/Workspaces/WorkspaceIcon.vue'
 import { useFinanceResource } from 'src/composables/useFinanceResource'
 import { financeGet, money, dateLabel, financeLabel, columns } from 'src/services/financeService'
 import { readContractSelection, filterContractSelection } from 'src/services/contractSelectionModel'
-defineEmits(['open'])
+defineEmits(['open', 'requests'])
+const props = defineProps({ newRequests: { type: Number, default: null }, selectionOnly: Boolean })
 const resource = useFinanceResource(),
   search = ref(''),
   client = ref(null),
@@ -196,13 +205,20 @@ const engines = computed(() => [
   ).values(),
 ])
 const filtered = computed(() =>
-  filterContractSelection(resource.state.data || [], {
-    search: search.value,
-    client: client.value,
-    engine: engine.value,
-    period: period.value,
-    sort: sort.value,
-  }),
+  filterContractSelection(
+    (resource.state.data || []).filter(
+      (row) =>
+        !props.selectionOnly ||
+        (row.businessStatus?.code === 'ACTIVE' && row.registrationStatus !== 'Draft'),
+    ),
+    {
+      search: search.value,
+      client: client.value,
+      engine: engine.value,
+      period: period.value,
+      sort: sort.value,
+    },
+  ),
 )
 const pageRows = filtered
 function universe(row) {
@@ -240,7 +256,28 @@ onScopeDispose(() => {
   resource.reset()
 })
 </script>
-<style src="src/css/workspaces.scss" lang="scss"></style>
+<style src="src/css/workspaces.scss" lang="scss">
+.contract-selection-header-actions {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.contract-selection-header-actions .q-btn {
+  height: 36px;
+  font-size: 14px;
+  background: #ffffff0f;
+  gap: 16px;
+}
+.contract-selection-header-actions .q-badge {
+  border-radius: 10px;
+  background: #2b7fff;
+  font-size: 11px;
+}
+.contract-selection-header-actions :deep(.q-btn__content) {
+  gap: 16px;
+}
+</style>
 <style scoped>
 .contract-selection .workspace-header {
   flex-wrap: wrap;
@@ -396,5 +433,25 @@ onScopeDispose(() => {
     grid-column: 2;
     grid-row: 1/4;
   }
+}
+.contract-selection-header-actions {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.contract-selection-header-actions .q-btn {
+  height: 36px;
+  font-size: 14px;
+  background: #ffffff0f;
+  gap: 16px;
+}
+.contract-selection-header-actions .q-badge {
+  border-radius: 10px;
+  background: #2b7fff;
+  font-size: 11px;
+}
+.contract-selection-header-actions :deep(.q-btn__content) {
+  gap: 16px;
 }
 </style>
