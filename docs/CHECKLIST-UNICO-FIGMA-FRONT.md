@@ -39,7 +39,12 @@ Retorno recebido após a auditoria do inventário. **A definição da distribui�
 - [x] Testes controlados no navegador: filtros Todas/Atendidas, abrir detalhe, marcar Em contato, cancelar com motivo obrigatório, ações bloqueadas após cancelamento, criar contexto com aporte não presumido, câmbio histórico e falha de observação mantendo texto. Harness temporário removido; nenhum registro fictício foi inserido no bundle ou na API.
 - [x] Revisão visual de lista/detalhes/banner e largura de 375px no detalhe de transação; sem overflow horizontal nesse detalhe. Corrigido contêiner do diálogo que fechava ao clicar nas ações. Não declarar todos os demais breakpoints homologados.
 - [x] Checks: Admin 372 testes locais (364 versionados + 8 do estudo externo), Cliente 423 testes; lint/build de ambos. Checks finais repetidos após a correção visual do contêiner.
-- [ ] Publicação e smoke tests nas duas URLs: em execução; registrar hashes/resultados ao fechar.
+- [x] Publicação: Admin `5b7c2b5`, deploy `43949526316` concluído; Cliente `5e0b9da`, deploy `43949415375` concluído. Ambos com sucesso.
+- [x] Homologação publicada com Éric: cinco passos, valor zero bloqueado, retomada de valores/ativos/regiões, envio sem região bloqueado e falha final mantendo respostas. Imagens carregadas e página desktop sem overflow horizontal.
+- [x] Admin publicado: filtros/retentativa sem contadores falsos; detalhe direto com erro independente; tabela de transações reais e depósito de R$ 50.000 do Éric com ledger/histórico preservados. Sem escrita financeira.
+- [ ] Homologação integrada das solicitações e dos novos lançamentos de contrato depende dos endpoints e dados abaixo. Não confundir estes bloqueios com testes controlados concluídos.
+
+Evidência estruturada: [resultados e limites dos testes](evidence/qa-2026-11-16-contract-flows/results.json). A primeira abertura do portal coincidiu com a troca de release e registrou chunks antigos ausentes; após recarregar com deploy concluído, o login e todas as etapas foram percorridos. Responsividade de 375px foi verificada no detalhe de transação controlado; o navegador manteve 1280px na aba do cliente publicado, portanto esse fluxo não está marcado como validado em celular.
 
 **Bloqueios reais:**
 

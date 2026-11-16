@@ -88,7 +88,15 @@
       "observation error retains text",
       "transaction detail no longer closes when clicking actions",
       "375px transaction detail without horizontal overflow"
-    ]
+    ],
+    "browserPublished": [
+      "Admin request filters/retry: unavailable state and unknown counts; direct detail unavailable independently",
+      "Admin real transaction list and existing Eric BRL50000 deposit, ledger and history opened without financial writes",
+      "Client Eric: five steps, zero initial amount rejected, selections/values preserved on backtracking, disabled send until region, retry error preserves step5 answers",
+      "No broken images or page horizontal overflow in published client desktop"
+    ],
+    "viewportLimit": "375px verified only on controlled transaction-detail tab; client published remained 1280px, not claimed as mobile validation",
+    "deploymentReload": "First login overlapped release activation and logged old missing dynamic chunks; refreshed after successful deploy, login and entire request navigation then passed."
   },
   "notValidatedIntegrated": [
     "request persistence and transitions: no documented API routes",
@@ -97,5 +105,19 @@
     "actual request-linked create/include: API linkage not available"
   ],
   "financialWritesPerformed": false,
-  "temporaryHarnessRemoved": true
+  "temporaryHarnessRemoved": true,
+  "publication": {
+    "admin": {
+      "commit": "5b7c2b5",
+      "run": 43949526316,
+      "result": "success",
+      "url": "https://admin.strategyanalytics.com.br"
+    },
+    "client": {
+      "commit": "5e0b9da",
+      "run": 43949415375,
+      "result": "success",
+      "url": "https://hml.strategyanalytics.com.br"
+    }
+  }
 }
