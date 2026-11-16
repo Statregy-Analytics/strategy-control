@@ -6,10 +6,28 @@ Atualização: 16/11/2026. Este é o índice desta revisão ampla. Evidências a
 
 - [ ] Todos os frames/estados abaixo comparados visualmente, inclusive erro, vazio e retorno.
 - [ ] Fluxos de escrita e leitura integrados testados com dados fictícios.
-- [x] Admin: lint e build aprovados; 322 testes locais passaram (incluem 8 testes de estudo já existentes no worktree; quatro novos testes do EC03 neste complemento).
+- [x] Admin: lint e build aprovados; 326 testes locais passaram (incluem 8 testes de estudo já existentes no worktree; quatro novos testes da prévia EC02 neste complemento).
 - [ ] Reexecutar os checks após concluir as demais telas; Área do Cliente ainda não alterada nesta rodada.
 - [ ] Deploy confirmado e testes repetidos nas URLs publicadas.
 - [x] Pendências de frontend separadas das pendências reais da API, do designer e da limitação de consulta ao Figma.
+
+## EC02.1 / EC02.2 / EC02.3 — prévia do motor em criação (16/11)
+
+- [x] Três referências reconfirmadas: 1484:79361 Alpha-2 Institucional, 1484:79457 Delta-Green e 1484:79553 Atlas-Orange. Contextos completos e screenshots arquivados em [evidence/qa-2026-11-16-preview](evidence/qa-2026-11-16-preview).
+- [x] Prévia simplificada substituída pela composição do desenho: faixa de cor, identidade/ID/configuração, status, moeda firmada, ciclo, índices, alvo, intervalo, próxima atualização, vínculos e rodapé. Só apresentação do rascunho, sem novos campos editáveis ou ações. Nome/cor/ícone permanecem ligados às escolhas existentes; a paleta do formulário não foi alterada nesta entrega.
+- [x] ChartPie original de 24 px e Clock original de 12 px salvos localmente. Os SVGs dos três estados foram comparados por SHA-256 e são idênticos (assets-review.json). Outros ícones continuam dinâmicos, usando WorkspaceIcon existente em sua dimensão nativa.
+- [x] A prévia continua exclusiva da criação; configuração Válida só aparece quando validateLogic do editor aprova o rascunho. Incompleta aparece sem validação positiva, com travessão. Não há ID automático fictício. Moeda usa o catálogo real ou o código escolhido; ciclo só formata datas completas válidas, incluindo passagem entre anos.
+- [x] Índice inicial não é mais apresentado como índice atual real. Índice Atual e Próxima Atualização permanecem indisponíveis sem projeção operacional. Índice final usa projectedFinalIndex existente; alvo zero e quantidade zero de contratos selecionados no rascunho são preservados. Não se copiam os 4 vínculos/data/intervalo dos exemplos.
+- [x] Quatro testes SSR do componente e WorkspaceIcon reais: três nomes/cores e validação/projeção; ausência de validação positiva/dados operacionais inventados; mudança/limpeza de alvo, zero, ícone e escape do nome; datas inválidas e ciclo entre anos. Sem controles Quasar neste componente. Isto valida a renderização HTML, não o CSS/layout no navegador.
+- [x] Lint, build, diff da entrega e 326 testes locais aprovados (oito de estudo preexistentes fora da entrega). Detector: zero antipadrões; avisos do DESIGN.md antigo mantidos por corresponderem à referência explícita.
+- [ ] Publicação e confirmação HTTP após o deploy.
+- [ ] Navegador: comparação dos três estados com o Figma, largura/altura/espaçamento, opacidade/contraste efetivo, ícones carregados e dimensão renderizada, títulos/códigos longos, cor/status/badges, rolagem sticky, celular sem excesso horizontal e retorno/cancelamento do formulário.
+
+**Limitação de validação:** não houve nova automação de navegador após a interrupção anterior por impossibilidade de confirmar a URL no Windows. A prévia tem quebra de texto, largura flexível e sticky desativado no breakpoint existente de 1100 px, mas estes comportamentos ainda não foram observados no navegador. Não declarar revisão visual ou fluxo integrado homologado.
+
+**API:** permanece a dependência reconfirmada no EC03 de 16/11 (api-review.json daquele complemento): catálogo sem projeção operacional e sem gravação da configuração. A prévia não cria motor nem grava status/cor/ícone/parâmetros, não transforma isSelectable em status e não apresenta o rascunho como dado persistido. Nenhum novo bloqueio de API foi inventado.
+
+**Designer:** os três frames diferem em nome e faixa de cor; essas diferenças são dados da prévia. Estados de configuração inválida/incompleta não foram inventados como novo desenho: a prévia só mostra o badge positivo quando a validação existente conclui. Identidade EC01 e formulários completos continuam com a revisão separada do inventário.
 
 ## EC03 — Frequência de Atualização (16/11)
 
@@ -525,9 +543,9 @@ Legenda: **Preparado / revisão pendente** = há código novo, mas a validação
 | [1484:77408](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-77408) | LG04 · SP · Criar nova lógica · SUBPÁGINA · DESIGN GLASS                                      | Preparado / revisão pendente                                             |
 | [1484:78227](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-78227) | LG05 · PB · Lógica aberta · TELA BASE · DESIGN GLASS                                          | Preparado / revisão pendente                                             |
 | [1484:79229](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-79229) | EC01 · Identidade configurada · ícone Distribuição + azul                                     | Preparado / revisão pendente                                             |
-| [1484:79361](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-79361) | EC02.1 · Preview · Alpha-2 Institucional                                                      | Preparado / revisão pendente                                             |
-| [1484:79457](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-79457) | EC02.2 · Preview · Delta-Green                                                                | Preparado / revisão pendente                                             |
-| [1484:79553](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-79553) | EC02.3 · Preview · Atlas-Orange                                                               | Preparado / revisão pendente                                             |
+| [1484:79361](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-79361) | EC02.1 · Preview · Alpha-2 Institucional                                                      | Composto; SSR/checks aprovados; publicação e navegador pendentes                                             |
+| [1484:79457](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-79457) | EC02.2 · Preview · Delta-Green                                                                | Composto; SSR/checks aprovados; publicação e navegador pendentes                                             |
+| [1484:79553](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-79553) | EC02.3 · Preview · Atlas-Orange                                                               | Composto; SSR/checks aprovados; publicação e navegador pendentes                                             |
 | [1484:79652](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-79652) | EC03 · Frequência · data e hora preenchidas                                                   | Publicado; SSR/checks e HTTP aprovados; revisão visual/calendário/navegação pendentes                                             |
 | [1484:79712](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-79712) | EC04.1 · Probabilidade · 50/50 · soma válida                                                  | Estados compostos/testados; consulta e gravação dependem da API                                             |
 | [1484:79755](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-79755) | EC04.2 · Probabilidade · 60/50 · soma 110% inválida                                           | Estados compostos/testados; consulta e gravação dependem da API                                             |

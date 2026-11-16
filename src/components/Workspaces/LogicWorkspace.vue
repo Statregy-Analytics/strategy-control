@@ -175,33 +175,12 @@
               ></profile-section
             >
           </logic-configuration>
-          <aside
+          <logic-draft-preview
             v-if="!recordId"
-            class="workspace-record logic-preview"
-            :style="{ borderColor: form.color }"
-          >
-            <workspace-icon :name="form.icon" />
-            <h2>{{ form.name || 'Prévia do motor' }}</h2>
-            <q-badge outline>{{ form.status }}</q-badge>
-            <dl>
-              <div>
-                <dt>Índice Atual</dt>
-                <dd>{{ form.initialIndex ?? '—' }}</dd>
-              </div>
-              <div>
-                <dt>Alvo do Ciclo</dt>
-                <dd>{{ form.target == null ? '—' : form.target + '%' }}</dd>
-              </div>
-              <div>
-                <dt>Final Obrigatório</dt>
-                <dd>{{ finalIndex ?? '—' }}</dd>
-              </div>
-              <div>
-                <dt>Papéis/Contratos</dt>
-                <dd>{{ form.contracts.length }}</dd>
-              </div>
-            </dl>
-          </aside>
+            :model-value="form"
+            :currencies="currencyOptions"
+            :configuration-valid="!validationError"
+          />
         </div>
         <template v-if="recordId"
           ><section
@@ -250,6 +229,7 @@ import LogicProbability from './LogicProbability.vue'
 import LogicLimits from './LogicLimits.vue'
 import LogicSovereign from './LogicSovereign.vue'
 import LogicFrequency from './LogicFrequency.vue'
+import LogicDraftPreview from './LogicDraftPreview.vue'
 import { useFinanceResource } from 'src/composables/useFinanceResource'
 import { financeGet, columns } from 'src/services/financeService'
 import { getPreferenceCatalog } from 'src/services/customerService'
@@ -302,7 +282,6 @@ watch(
 
 const baseline = ref('')
 const dirty = computed(() => JSON.stringify(form.value) !== baseline.value),
-  finalIndex = computed(() => projectedFinalIndex(form.value)),
   validationError = computed(() => validateLogic(form.value))
 const colors = ['#153d49', '#1043e9', '#00b6cf', '#008641', '#35291c', '#f00000', '#be0000']
 const icons = [
@@ -520,21 +499,6 @@ onScopeDispose(() => {
 .logic-colors button[aria-pressed='true'] {
   outline: 2px solid #00a3ff;
   outline-offset: 3px;
-}
-.logic-preview {
-  position: sticky;
-  top: 24px;
-}
-.logic-preview dl {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 20px;
-}
-.logic-preview dt {
-  font-size: 11px;
-}
-.logic-preview dd {
-  margin: 8px 0;
 }
 .logic-existing {
   max-width: 1552px;

@@ -1,0 +1,44 @@
+{
+  "date": "2026-11-16",
+  "frames": [
+    "1484:79361",
+    "1484:79457",
+    "1484:79553"
+  ],
+  "checks": {
+    "lint": "pass",
+    "build": "pass",
+    "diffOfDelivery": "pass",
+    "localTests": 326,
+    "existingStudyTestsOutsideScope": 8,
+    "newSSRTests": 4,
+    "detectorAntiPatterns": 0
+  },
+  "assets": {
+    "chart-pie.svg": [
+      24,
+      24
+    ],
+    "clock.svg": [
+      12,
+      12
+    ],
+    "identicalAcrossVariants": "assets-review.json"
+  },
+  "SSR": [
+    "three draft variants, validation and projection",
+    "no operational current index or positive validity from incomplete data",
+    "zero target, clearing, dynamic icon and escaped name",
+    "cross-year cycle and invalid dates"
+  ],
+  "browserValidation": "not performed",
+  "unvalidated": [
+    "desktop/mobile visual comparison",
+    "effective geometry, contrast and opacity",
+    "real icon loading and size",
+    "long content and sticky scrolling",
+    "form cancel/return transitions"
+  ],
+  "operationalWrites": 0,
+  "published": false
+}
