@@ -531,11 +531,7 @@
                   <div>
                     <dt>Participação</dt>
                     <dd>
-                      {{
-                        p.allocationPercentage == null
-                          ? 'Indisponível'
-                          : p.allocationPercentage + '%'
-                      }}
+                      {{ contractPercentageLabel(p.allocationPercentage) }}
                     </dd>
                   </div>
                   <div>
@@ -799,6 +795,7 @@ import {
   endpointLabel,
   columns,
 } from 'src/services/financeService'
+import { contractPercentageLabel } from 'src/services/contractDistribution'
 import { contractMovements } from 'src/services/contractMovements'
 import { contractTermOptions, contractEndDate } from 'src/services/financeModels'
 import { auditAction, auditField, auditValue } from 'src/services/auditModel'
@@ -916,12 +913,7 @@ const participantColumns = computed(() =>
     [
       'allocationPercentage',
       'Participação',
-      (row) =>
-        row.allocationPercentage == null
-          ? 'Indisponível'
-          : new Intl.NumberFormat('pt-BR', { maximumFractionDigits: 2 }).format(
-              row.allocationPercentage,
-            ) + '%',
+      (row) => contractPercentageLabel(row.allocationPercentage),
     ],
     ['contributedAmount', 'Aportes', (row) => money(row.contributedAmount, currencyCode.value)],
     ['withdrawals', 'Retiradas', () => 'Indisponível'],

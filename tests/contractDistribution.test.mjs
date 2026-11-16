@@ -55,6 +55,12 @@ test('136: localized input, limits and percentage conversion retain cent precisi
 })
 
 test('136: largest remainder closes 100.00%, breaks ties by row order and preserves partial/over totals', () => {
+  assert.equal(model.contractPercentageLabel(33.3333), '33,33%')
+  assert.equal(model.contractPercentageLabel(66.6667), '66,67%')
+  assert.equal(model.contractPercentageLabel(50), '50,00%')
+  assert.equal(model.contractPercentageLabel(null), 'Indisponível')
+  assert.equal(model.contractPercentageLabel(undefined), 'Indisponível')
+  assert.equal(model.contractPercentageLabel('not-a-number'), 'Indisponível')
   assert.deepEqual(model.distributionState(allocation(1, 1, 1), 3).percentages, [
     '33.34',
     '33.33',

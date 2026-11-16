@@ -549,7 +549,7 @@ header img {
 .capital-distribution__totals-grid > div:last-child strong {
   color: #fee685;
 }
-.capital-distribution__totals.closed strong {
+.capital-distribution__totals.closed .capital-distribution__totals-grid strong {
   color: #fff;
 }
 .capital-distribution__totals .negative {

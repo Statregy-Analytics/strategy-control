@@ -1,4 +1,15 @@
 // Money is compared as integer cents; percentages are display values, never payload fields.
+export function contractPercentageLabel(value) {
+  if (value === null || value === undefined || value === '' || !Number.isFinite(Number(value)))
+    return 'Indisponível'
+  return (
+    new Intl.NumberFormat('pt-BR', {
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2,
+    }).format(Number(value)) + '%'
+  )
+}
+
 export function capitalCents(value) {
   if (value === null || value === undefined || value === '') return null
   const text = String(value)
