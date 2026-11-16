@@ -45,6 +45,8 @@ export const dateLabel = (value) =>
     ? new Date(value.length === 10 ? `${value}T12:00:00` : value).toLocaleDateString('pt-BR')
     : '—'
 const labels = {
+  RequestCorrection: 'Solicitar correção',
+  CorrectionRequested: 'Correção solicitada',
   InterCustomerTransfer: 'Transferência entre clientes',
   Error: 'Erro',
   CorrectDeposit: 'Corrigir depósito',

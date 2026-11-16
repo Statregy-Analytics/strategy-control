@@ -2,6 +2,39 @@
 
 Atualização: 16/11/2026. Este é o índice desta revisão ampla. Evidências anteriores continuam nos documentos vinculados; uma tela existente não é automaticamente considerada revalidada nesta rodada.
 
+## Revisão conjunta de estados — Transações e Lógicas · 16/11
+
+**Escopo desta rodada:** E07, E09 e E10 de Transações; revisão em navegador dos seis componentes/variantes de L04 já publicados. Não representa conclusão integral de T03, Crédito, Comunicados ou dos 279 frames. O inventário percentual antigo permanece histórico; esta seção registra a validação incremental, sem reaproveitar os percentuais como se fossem uma nova medição.
+
+| Referência | Resultado do front | Validação / limite |
+| --- | --- | --- |
+| E07 · `1484:86822` | Modal glass com descrição obrigatória, Voltar e Confirmar Ação; respeita availableActions e versão; texto preservado em erro, bloqueio de envio duplicado. Status e ação traduzidos. | **API real + navegador:** `REQ-2026-CF7A287A` passou de AwaitingReceipt para CorrectionRequested e depois Canceled, com motivo e senha no cancelamento. Zero execuções e zero lançamentos. A criação da massa foi por API; isso não homologa o formulário bancário, que mantém o bloqueio de moeda. |
+| E09 · `1484:86864` | Documento vinculado abre o painel aprovado; Download PDF usa a rota autenticada existente. Download mantém o painel aberto; Confirmar Ação/Voltar encerram sem outra escrita. | **API real + navegador:** comprovante fictício do depósito do Éric baixado; consulta independente confirmou resposta com cabeçalho PDF. Não houve novo upload ou vínculo documental. |
+| E10 · `1484:86887` | Observação Interna no modal aprovado, com confirmação, erro e retenção do texto; substitui o formulário inline legado. | **API real + navegador:** nota gravada e relida na transferência fictícia cancelada `REQ-2026-1F08A2D4`. Sem alteração financeira. |
+| L04 · EC01 Identidade `1484:79229` | Conferidos nome, descrição, ID automático bloqueado, status, moeda, ícone e cor. | Navegador local, componentes reais; seleção/reflexo na prévia e criação integrada percorridos sem salvar motor. Tipo operacional continua sem catálogo da API. |
+| L04 · prévias Alpha/Delta/Atlas `1484:79361`, `1484:79457`, `1484:79553` | Variantes conferidas com referências recuperadas; mudanças de nome, ícone, cor e BRL/USD refletem na prévia. | Dados controlados no navegador; não são motores persistidos nem prova de performance operacional. |
+| L04 · Frequência `1484:79652` e Fechamento Soberano `1484:79941` | Conferidos composição, campos bloqueados, dados ausentes e cálculo 100 + 10% = 110. | Navegador local desktop/celular e fluxo de criação integrado. Intervalos, atualizações e persistência operacional ainda dependem da API; nenhum valor operacional fictício foi gravado. |
+
+### Verificações desta rodada
+
+- [x] Conferência visual dos três modais com contexto completo e imagens do Figma; ícone original baixado como asset local.
+- [x] E07: abertura/cancelamento em pedido existente sem alterá-lo; envio integrado em registro fictício próprio, histórico e cancelamento final confirmados.
+- [x] E09: download integrado do comprovante existente e confirmação sem nova chamada de escrita. Erro/retry do painel exercitados em dados controlados e testes.
+- [x] E10: vazio não envia; nota persistida e relida; falha controlada preserva o texto, sem sucesso falso.
+- [x] Celular de 390px: modal de observação e componentes de Lógicas sem overflow horizontal. Screenshots e snapshots em [evidências](evidence/qa-2026-11-16-state-review/).
+- [x] Crédito: estado vazio real consultado. Comunicados: listagem com publicado/arquivado e navegação do publicado percorridas, sem escrita. **Smoke tests; não encerram a comparação integral dos grupos R01/M01/M03.**
+- [x] Admin: lint e build aprovados; **387 testes locais = 379 versionados + 8 de estudo preexistentes**, incluindo seis novos testes de falha, duplicidade, descarte, versão/permissão, correção e observação. Área do Cliente sem alteração nesta rodada.
+- [x] Harness temporário removido antes do build. `git diff --check` dos arquivos desta entrega aprovado. A verificação global apontou whitespace no Swagger modificado anteriormente no worktree; essa alteração alheia foi preservada e não entra no commit.
+- [ ] Publicação e smoke tests na URL publicada — registrar o release após o deploy.
+
+### O que continua aberto, sem transferir trabalho de front para o backend
+
+- **Front/validação:** os demais estados de T03 e a comparação integral das telas de Crédito/Comunicados continuam na fila. A listagem global de carteiras ainda não está conectada ao componente: `GET /admin/wallets` existe. Não solicitar sua criação novamente. A resposta traz saldo nativo por carteira/moeda, não o consolidado completo com contratos, patrimônio e rendimento; não apresentar somente Applied como capital Strategy completo nem somar BRL com USD.
+- **Backend já confirmado:** tipo de documento bancário para upload/vínculo de comprovante; moeda das contas; confirmação do saque; correção multiorigem; persistência/configuração operacional do motor e funil/parcelas de crédito permanecem nos limites descritos abaixo. Ações RequestCorrection e AddObservation e download de documentos **existem e passaram**, portanto não são pendência de API.
+- **Designer:** não houve nova necessidade de desenho nesta rodada; as decisões anteriores sobre distribuição/importação e painéis não desenhados continuam separadas nos itens respectivos.
+
+[Resultados integrados do depósito e comprovante](evidence/qa-2026-11-16-state-review/api-results.json). Os dados controlados foram usados somente para os estados sem massa/contrato operacional, sem publicar fixtures nem criar campos ou ações extras.
+
 ## Fechamento conjunto de pendências funcionais · T01/T02, P01/P06 e L02 · 16/11
 
 Esta rodada reúne os ajustes funcionais que ainda estavam na fila. **Não declara todos os 279 frames/temas comparados.** A revisão visual integral dos grupos marcados como validação pendente continua separada; não é falha presumida do backend. Os números percentuais da auditoria anterior são uma fotografia anterior às entregas 136–141 e a este lote, não um novo percentual medido.

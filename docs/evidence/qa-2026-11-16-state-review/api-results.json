@@ -1,0 +1,18 @@
+{
+  "requestNumber": "REQ-2026-CF7A287A",
+  "transactionId": "732c7614-f4f1-4856-bd96-1959de790690",
+  "finalStatus": "Canceled",
+  "ledgerEntries": 0,
+  "executions": 0,
+  "historyActions": [
+    "Create",
+    "RequestCorrection",
+    "Cancel"
+  ],
+  "receipt": {
+    "filename": "comprovante-deposito-teste-eric.pdf",
+    "bytes": 193,
+    "pdfHeader": true
+  },
+  "creation": "API fixture setup; E07 and cancellation submitted through browser UI; not homologation of bank creation form"
+}

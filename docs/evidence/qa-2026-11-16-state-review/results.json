@@ -1,0 +1,33 @@
+{
+  "date": "2026-11-16",
+  "references": [
+    "1484:86822",
+    "1484:86864",
+    "1484:86887",
+    "1484:79229",
+    "1484:79361",
+    "1484:79457",
+    "1484:79553",
+    "1484:79652",
+    "1484:79941"
+  ],
+  "automated": {
+    "local": 387,
+    "versioned": 379,
+    "preexistingUntracked": 8
+  },
+  "browser": {
+    "transactionCorrection": "real API: request correction, history, cancel with password",
+    "observation": "real API: write/read on cancelled test transfer",
+    "receipt": "real API: download existing fictitious receipt",
+    "logic": "real components with controlled draft values, plus integrated creation without persistence",
+    "mobileWidth": 390
+  },
+  "notClosed": [
+    "other T03 states and wallet directory integration",
+    "whole Credit and Communication groups",
+    "operational engine persistence",
+    "financial execution and bank creation flow"
+  ],
+  "published": false
+}

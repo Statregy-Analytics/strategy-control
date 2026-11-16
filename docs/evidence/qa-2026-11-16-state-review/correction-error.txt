@@ -1,0 +1,117 @@
+- main:
+  - button "Correção"
+  - button "Observação"
+  - button "Comprovante"
+  - checkbox "Falhar" [checked]
+  - text: Falhar
+  - paragraph: "Chamadas: 1"
+  - button "Delta"
+  - button "Atlas"
+  - button "Alpha"
+  - region "Identidade do Motor":
+    - heading "Identidade do Motor" [level=2]
+    - paragraph: Defina como esse motor será identificado no sistema.
+    - generic: Nome do Motor *
+    - textbox "Nome do Motor *": Alpha-2
+    - generic: ID (Automático)
+    - textbox "ID (Automático)" [disabled]:
+      - /placeholder: —
+    - generic: Descrição Interna
+    - textbox "Descrição Interna"
+    - generic: Status Inicial
+    - generic: Em Análise
+    - combobox "Status Inicial": Em Análise
+    - generic: Moeda Firmada *
+    - generic: Real brasileiro (BRL)
+    - combobox "Moeda Firmada *": Real brasileiro (BRL)
+    - generic: Tipo de Motor
+    - generic: Selecione
+    - combobox "Tipo de Motor" [disabled]: Selecione
+    - group "Ícone Representativo":
+      - paragraph: Ícone Representativo
+      - button "Distribuição" [pressed]
+      - button "Oscilação"
+      - button "Performance"
+      - button "Rápida"
+      - button "Segurança"
+      - button "Estrutural"
+      - button "Composta"
+      - button "Algorítmica"
+    - group "Cor Institucional":
+      - paragraph: Cor Institucional
+      - 'button "Cor #153d49"'
+      - 'button "Cor #1447e6" [pressed]'
+      - 'button "Cor #00b8db"'
+      - 'button "Cor #008236"'
+      - 'button "Cor #fee685"'
+      - 'button "Cor #e7000b"'
+      - 'button "Cor #c10007"'
+  - region "Frequência de Atualização":
+    - heading "Frequência de Atualização" [level=2]
+    - paragraph: Configure o intervalo e ritmo de execução do motor.
+    - generic: Intervalo Operacional *
+    - generic: Selecione
+    - combobox "Intervalo Operacional *" [disabled]: Selecione
+    - generic: Atualizações por Dia
+    - textbox "Atualizações por Dia" [disabled]
+    - generic: Primeira Execução
+    - textbox "Primeira Execução"
+    - generic: Última Atualização
+    - textbox "Última Atualização" [disabled]: —
+    - generic: Próxima Atualização
+    - textbox "Próxima Atualização" [disabled]: —
+    - generic: Atualizações Estimadas no Ciclo
+    - textbox "Atualizações Estimadas no Ciclo" [disabled]
+  - region "Fechamento Soberano":
+    - heading "Fechamento Soberano" [level=2]
+    - paragraph: Garantia do índice final ao término do ciclo trimestral.
+    - generic: Índice Inicial do Ciclo
+    - textbox "Índice Inicial do Ciclo" [disabled]: 100,0000
+    - generic: Alvo do Ciclo
+    - textbox "Alvo do Ciclo" [disabled]: 10,00
+    - generic: Índice Final Obrigatório
+    - textbox "Índice Final Obrigatório" [disabled]: 110,0000
+    - heading "Princípio do Fechamento Soberano" [level=3]
+    - paragraph: As bandas e probabilidades controlam o percurso. O fechamento soberano controla o índice final do ciclo trimestral.
+  - complementary "Pré-visualização do motor":
+    - heading "Alpha-2" [level=2]
+    - generic: —
+    - generic: Válida
+    - generic: Status
+    - generic: Em Análise
+    - generic: Configuração
+    - generic: Válida
+    - generic: Moeda Firmada
+    - strong: Real brasileiro (BRL)
+    - term: Moeda Firmada
+    - definition: BRL
+    - term: Ciclo Trimestral
+    - definition: Indisponível
+    - term: Índice Inicial
+    - definition: 100,0000
+    - term: Índice Atual
+    - definition: Indisponível
+    - term: Alvo do Ciclo
+    - definition: 10,00%
+    - term: Índice Final Obrigatório
+    - definition: 110,0000
+    - term: Intervalo Operacional
+    - definition: Indisponível
+    - term: Próxima Atualização
+    - definition: Indisponível
+    - term: Papéis/Contratos Vinculados
+    - definition: "0"
+    - generic: Pré-visualização do motor
+- dialog:
+  - heading "Solicitar correção" [level=2]
+  - paragraph: Solicitar correção ao responsável
+  - generic: Descrição da correção necessária
+  - textbox "Descrição da correção necessária":
+    - /placeholder: Descreva o que precisa ser corrigido
+    - text: Preservar texto após falha
+  - alert: Não foi possível concluir a ação. Tente novamente.
+  - contentinfo:
+    - button "Voltar":
+      - generic: Voltar
+    - button "Confirmar Ação":
+      - generic: Confirmar Ação

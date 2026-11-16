@@ -1,0 +1,60 @@
+- banner:
+  - toolbar:
+    - button "Abrir navegação":
+    - generic: Strategy Analytics
+- main:
+  - heading "Crédito" [level=1]
+  - paragraph: Gestão de operações, parceiros, regras comerciais, comissões e propostas vinculadas a crédito e consórcio.
+  - main:
+    - generic: Operações Ativas
+    - strong: Indisponível
+    - generic: Pendentes
+    - strong: Indisponível
+    - generic: Em Documentação
+    - strong: Indisponível
+    - generic: Propostas Finais
+    - strong: Indisponível
+    - generic: Em Assinatura
+    - strong: Indisponível
+    - generic: Contratadas
+    - strong: Indisponível
+    - button "Operações" [pressed]:
+      - generic: Operações
+    - button "Parceiros":
+      - generic: Parceiros
+    - textbox "Buscar por cliente, ID, parceiro ou tipo de crédito..."
+    - generic: Status
+    - combobox "Status"
+    - button "Lista" [pressed]:
+      - generic: Lista
+    - button "Cards":
+      - generic: Cards
+    - button "Kanban":
+      - generic: Kanban
+    - button "Nova Operação":
+      - generic: Nova Operação
+    - button "Operações em Aberto" [pressed]:
+      - generic: Operações em Aberto
+    - button "Operações Finalizadas":
+      - generic: Operações Finalizadas
+    - button "Operações Canceladas/Recusadas":
+      - generic: Operações Canceladas/Recusadas
+    - table:
+      - rowgroup:
+        - row "ID Cliente Tipo Valor Solicitado Garantia/Produto Etapa Parceiros Propostas Pendências Origem Responsável Atualização":
+          - columnheader "ID"
+          - columnheader "Cliente"
+          - columnheader "Tipo"
+          - columnheader "Valor Solicitado"
+          - columnheader "Garantia/Produto"
+          - columnheader "Etapa"
+          - columnheader "Parceiros"
+          - columnheader "Propostas"
+          - columnheader "Pendências"
+          - columnheader "Origem"
+          - columnheader "Responsável"
+          - columnheader "Atualização"
+          - columnheader
+      - rowgroup
+    - generic: warning
+    - text: Nenhum registro encontrado.

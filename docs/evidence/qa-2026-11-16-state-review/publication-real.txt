@@ -1,0 +1,98 @@
+- banner:
+  - toolbar:
+    - button "Abrir navegação":
+    - generic: Strategy Analytics
+- main:
+  - button "Comunicados":
+    - generic: Comunicados
+  - heading "Editar Conteúdo" [level=1]
+  - generic: Publicado
+  - button "Descartar":
+    - generic: Descartar
+  - button "Salvar Rascunho" [disabled]:
+    - generic: Salvar Rascunho
+  - button "Publicar Agora" [disabled]:
+    - generic: Publicar Agora
+  - main:
+    - textbox "Título do conteúdo":
+      - /placeholder: Digite o título...
+      - text: QA 12/11 - integração fictícia
+    - textbox "Subtítulo ou resumo":
+      - /placeholder: Adicione um subtítulo ou resumo (opcional)...
+      - text: Teste de leitura em homologação
+    - textbox "Conteúdo da publicação":
+      - /placeholder: Escreva um parágrafo...
+      - text: Comunicado fictício para validar a integração da Área do Cliente. Sem efeito comercial. Teste
+    - text: Como adicionar mídia ao conteúdo
+    - paragraph: Use os blocos do editor acima para inserir imagens, vídeos, documentos e links exatamente onde você quer que apareçam no texto.
+    - complementary:
+      - heading "Configurações de Publicação" [level=2]
+      - generic: Categoria do Conteúdo
+      - textbox "Categoria do Conteúdo" [disabled]: Indisponível
+      - generic: Categoria definida na criação
+      - paragraph: Status Atual
+      - status: Publicado
+      - paragraph: Agendamento
+      - button "Publicar Agora" [pressed]:
+        - generic: Publicar Agora
+      - button "Programar" [disabled]:
+        - generic: Programar
+      - generic: Redator / Autor
+      - generic: Selecione o redator
+      - combobox "Redator / Autor" [disabled]: Selecione o redator
+      - button "Criar novo redator":
+        - generic: Criar novo redator
+      - paragraph: Temas do Conteúdo *
+      - textbox "Tema do conteúdo":
+        - /placeholder: "Ex: Economia, Política..."
+      - button "Adicionar tema"
+      - generic: Usado para organização, busca e sugestões de conteúdos relacionados
+      - heading "Imagem de Capa" [level=2]
+      - generic: Clique para adicionar imagem de capa
+      - button "Imagem de capa"
+      - heading "Índice do Conteúdo" [level=2]
+      - paragraph: Gerado automaticamente a partir dos tópicos H2 e H3
+      - paragraph: Adicione tópicos H2 e H3 no editor para gerar o índice
+      - heading "Disparo de Notificações" [level=2]
+      - checkbox "Notificação Push (App)":
+        - generic: Notificação Push (App)
+      - generic: Envia um alerta para o celular dos clientes.
+      - checkbox "Disparo de E-mail":
+        - generic: Disparo de E-mail
+      - generic: Envia o comunicado completo por e-mail.
+      - button "Visualizar como Cliente":
+        - generic: Visualizar como Cliente
+    - heading "Histórico de Alterações" [level=2]
+    - table:
+      - rowgroup:
+        - row "Data/Hora Autor Alteração Anterior → Novo":
+          - columnheader "Data/Hora"
+          - columnheader "Autor"
+          - columnheader "Alteração"
+          - columnheader "Anterior → Novo"
+      - rowgroup:
+        - 'row "15/11/2026 18:15 Local Admin Alteração Conteúdo: Comunicado fictício para validar a integração da Área do Cliente. Sem efeito comercial. → Comunicado fictício para validar a integração da Área do Cliente. Sem efeito comercial. Teste"':
+          - cell "15/11/2026 18:15"
+          - cell "Local Admin"
+          - cell "Alteração"
+          - 'cell "Conteúdo: Comunicado fictício para validar a integração da Área do Cliente. Sem efeito comercial. → Comunicado fictício para validar a integração da Área do Cliente. Sem efeito comercial. Teste"'
+        - 'row "12/11/2026 13:39 Local Admin Mudança de status Status: Rascunho → Publicado"':
+          - cell "12/11/2026 13:39"
+          - cell "Local Admin"
+          - cell "Mudança de status"
+          - 'cell "Status: Rascunho → Publicado"'
+        - 'row "12/11/2026 13:39 Local Admin Alteração Publicado por: — → 11111111-1111-1111-1111-111111111111"':
+          - cell "12/11/2026 13:39"
+          - cell "Local Admin"
+          - cell "Alteração"
+          - 'cell "Publicado por: — → 11111111-1111-1111-1111-111111111111"'
+        - 'row "12/11/2026 13:39 Local Admin Alteração Publicado em: — → 2026-11-12T13:39:53.4554084+00:00"':
+          - cell "12/11/2026 13:39"
+          - cell "Local Admin"
+          - cell "Alteração"
+          - 'cell "Publicado em: — → 2026-11-12T13:39:53.4554084+00:00"'
+        - row "12/11/2026 13:39 Local Admin Criação —":
+          - cell "12/11/2026 13:39"
+          - cell "Local Admin"
+          - cell "Criação"
+          - cell "—"

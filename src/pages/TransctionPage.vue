@@ -319,10 +319,24 @@
                   :disable="busy"
                   @click="editingTransaction = true"
                 />
-                <p v-if="!workflowActions.length" class="text-muted">
+                <q-btn
+                  v-if="detail.state.data.availableActions?.includes('RequestCorrection')"
+                  flat
+                  no-caps
+                  label="Solicitar correção"
+                  :disable="busy"
+                  @click="openState('correction')"
+                />
+                <p
+                  v-if="
+                    !workflowActions.length &&
+                    !detail.state.data.availableActions?.includes('RequestCorrection')
+                  "
+                  class="text-muted"
+                >
                   Nenhuma ação disponível para o estado atual.
                 </p>
-                <template v-else
+                <template v-if="workflowActions.length"
                   ><label-form text-label="Motivo / observação"
                     ><q-input
                       v-model="reason"
@@ -359,30 +373,14 @@
                   <div>{{ note.content }}</div>
                   <small>{{ dateLabel(note.createdAtUtc) }}</small>
                 </div>
-                <q-form
+                <q-btn
                   v-if="detail.state.data.availableActions.includes('AddObservation')"
-                  :inert="busy || undefined"
-                  @submit="addObservation"
-                >
-                  <label-form text-label="Nova observação"
-                    ><q-input
-                      v-model="observation"
-                      outlined
-                      dense
-                      type="textarea"
-                      aria-label="Nova observação"
-                      :rules="[(v) => !!v?.trim() || 'Informe uma observação']"
-                  /></label-form>
-                  <q-btn
-                    type="submit"
-                    flat
-                    dense
-                    no-caps
-                    color="primary"
-                    label="Adicionar observação"
-                    :loading="busy"
-                  />
-                </q-form>
+                  outline
+                  no-caps
+                  label="Adicionar observação"
+                  :disable="busy"
+                  @click="openState('observation')"
+                />
               </form-section>
               <form-section title="Documentos">
                 <p v-if="!detail.state.data.documents?.length" class="text-muted">
@@ -392,7 +390,13 @@
                   v-for="document in detail.state.data.documents || []"
                   :key="document.documentId"
                 >
-                  {{ document.fileName }}
+                  <q-btn
+                    flat
+                    no-caps
+                    :label="document.fileName || 'Ver comprovante'"
+                    :disable="busy"
+                    @click="openState('receipt', document)"
+                  />
                 </div>
                 <p
                   v-if="detail.state.data.availableActions.includes('AttachDocument')"
@@ -447,6 +451,15 @@
       @close="actionToConfirm = null"
       @completed="actionToConfirm = null"
     />
+    <transaction-state-dialog
+      v-if="stateDialog"
+      :key="stateDialog.key"
+      :mode="stateDialog.mode"
+      :submit="submitState"
+      @busy="busy = $event"
+      @close="stateDialog = null"
+      @completed="stateCompleted"
+    />
   </q-page>
 </template>
 <script setup>
@@ -486,6 +499,8 @@ import FinanceTable from 'src/components/Finance/FinanceTable.vue'
 import ResourceState from 'src/components/Finance/ResourceState.vue'
 import TransactionCreate from 'src/components/Finance/TransactionCreate.vue'
 import TransactionEdit from 'src/components/Finance/TransactionEdit.vue'
+import TransactionStateDialog from 'src/components/Finance/TransactionStateDialog.vue'
+import { downloadDocument } from 'src/services/documentAdminService'
 import TransactionPassword from 'src/components/Finance/TransactionPassword.vue'
 import { submitAdminTransaction } from 'src/services/transactionOperations'
 import CustomerPortfolio from 'src/components/Finance/CustomerPortfolio.vue'
@@ -512,7 +527,7 @@ const $q = useQuasar(),
   busy = ref(false),
   error = ref(''),
   reason = ref('')
-const observation = ref('')
+const stateDialog = ref(null)
 const contractDetail = computed(() => isContractTransaction(detail.state.data))
 const workflowActions = computed(() =>
   (detail.state.data?.availableActions || []).filter(
@@ -574,6 +589,7 @@ function onCreated(value) {
   open(value)
 }
 function open(value) {
+  stateDialog.value = null
   actionToConfirm.value = null
   editingTransaction.value = false
   correctingTransaction.value = false
@@ -581,25 +597,72 @@ function open(value) {
   dialog.value = true
   error.value = ''
   reason.value = ''
-  observation.value = ''
   loadDetail()
 }
-async function addObservation() {
-  if (busy.value || !observation.value.trim()) return
-  busy.value = true
-  error.value = ''
-  try {
-    await financeWrite('post', `admin/transactions/${id.value}/observations`, {
-      content: observation.value.trim(),
-    })
-    observation.value = ''
-    await loadDetail()
-    $q.notify({ type: 'positive', message: 'Observação registrada.' })
-  } catch {
-    error.value = 'Não foi possível registrar a observação. Tente novamente.'
-  } finally {
-    busy.value = false
+function openState(mode, document = null) {
+  if (busy.value) return
+  const record = detail.state.data
+  if (!record) return
+  const action = mode === 'correction' ? 'RequestCorrection' : 'AddObservation'
+  if (mode !== 'receipt' && !record.availableActions?.includes(action)) return
+  stateDialog.value = {
+    mode,
+    key: `${record.id}:${mode}`,
+    id: record.id,
+    version: record.version,
+    document,
   }
+}
+async function submitState(content) {
+  const intent = stateDialog.value
+  const record = detail.state.data
+  if (!intent || !dialog.value || record?.id !== intent.id || record.version !== intent.version)
+    throw Error('A solicitação mudou. Abra a ação novamente.')
+  if (intent.mode === 'receipt') {
+    const document = intent.document
+    if (!record.documents?.some((item) => item.documentId === document?.documentId))
+      throw Error('Documento indisponível.')
+    const { data } = await downloadDocument(document.documentId)
+    if (stateDialog.value !== intent || !dialog.value) return
+    const url = URL.createObjectURL(data)
+    const link = window.document.createElement('a')
+    link.href = url
+    link.download = (document.fileName || 'comprovante.pdf').replace(/[\\/]/g, '_')
+    link.click()
+    setTimeout(() => URL.revokeObjectURL(url), 1000)
+    return
+  }
+  const action = intent.mode === 'correction' ? 'RequestCorrection' : 'AddObservation'
+  if (!record.availableActions?.includes(action) || !content.trim())
+    throw Error('Ação indisponível.')
+  try {
+    if (intent.mode === 'correction')
+      await financeWrite('post', `admin/transactions/${intent.id}/actions`, {
+        action,
+        reason: content.trim(),
+        expectedVersion: intent.version,
+      })
+    else
+      await financeWrite('post', `admin/transactions/${intent.id}/observations`, {
+        content: content.trim(),
+      })
+  } catch (e) {
+    if (e.response?.status === 409) await loadDetail()
+    throw e
+  }
+}
+function stateCompleted() {
+  const mode = stateDialog.value?.mode
+  stateDialog.value = null
+  busy.value = false
+  if (mode === 'receipt') return
+  loadDetail()
+  table.value?.reload()
+  pendingTable.value?.reload()
+  $q.notify({
+    type: 'positive',
+    message: mode === 'correction' ? 'Correção solicitada.' : 'Observação registrada.',
+  })
 }
 function onTransactionEdited() {
   correctingTransaction.value = false
