@@ -1,0 +1,35 @@
+{
+  "checkedAt": "2026-11-16T18:55:50.672Z",
+  "local": "http://localhost:8080/contracts?new=1",
+  "published": "https://admin.strategyanalytics.com.br/contracts?new=1",
+  "localPassed": [
+    "empty-search and search-return",
+    "available balance excludes reserved",
+    "zero and repeated currency-wallet options disabled",
+    "insufficient balance hides conversion and disables confirmation",
+    "BRL to USD actual PTAX",
+    "Back restores amount and note",
+    "two customers total USD52.33 and percentages33.33/66.67",
+    "currency locked with clients; remove all unlocks",
+    "same currency identity calculation",
+    "375px no horizontal overflow; viewport reset"
+  ],
+  "publishedPassed": [
+    "requires currency before adding customer",
+    "actual wallet balance 47500BRL",
+    "seven currency picker",
+    "47500.01BRL insufficient",
+    "100BRL converts17.44USD",
+    "client confirmation retains USD without temporary BRL",
+    "save and finalize show write guard, preserve preview",
+    "approved remove action unlocks currency"
+  ],
+  "notValidatedIntegrated": [
+    "persist multi-origin wallet lines",
+    "atomic debit and finalization",
+    "wallet availability changed server-side between preview and creation",
+    "official source and quote history",
+    "real multiple-wallet and multiple-currency sources; accounts only FreeBRL"
+  ],
+  "financialWrites": false
+}

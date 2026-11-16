@@ -6,7 +6,7 @@ Atualização: 16/11/2026. Este é o índice desta revisão ampla. Evidências a
 
 - [ ] Todos os frames/estados abaixo comparados visualmente, inclusive erro, vazio e retorno.
 - [ ] Fluxos de escrita e leitura integrados testados com dados fictícios.
-- [x] Admin: lint e build aprovados; 354 testes locais passaram (incluem 8 testes de estudo já existentes no worktree e 12 cenários novos do item 136).
+- [x] Admin: lint e build aprovados; 354 testes locais passaram (incluem 8 testes de estudo já existentes no worktree e a cobertura dos itens 136 e 137).
 - [ ] Reexecutar os checks após concluir as demais telas; Área do Cliente ainda não alterada nesta rodada.
 - [ ] Deploy confirmado e testes repetidos nas URLs publicadas.
 - [x] Pendências de frontend separadas das pendências reais da API, do designer e da limitação de consulta ao Figma.
@@ -63,7 +63,7 @@ Retorno recebido após a auditoria do inventário. **A definição da distribui�
 
 ## Item 137 — Capital vindo de carteiras · 16/11
 
-**Estado:** interface e prévia implementadas conforme as referências recuperadas; testes locais concluídos. Publicação e reteste no ambiente publicado em andamento. **Não considerar o fluxo financeiro integrado concluído:** a API atual não recebe as origens selecionadas no vínculo.
+**Estado:** interface e prévia implementadas, publicadas e retestadas no Admin em homologação. Commit 784385c; [deploy 43933492504](https://github.com/Statregy-Analytics/strategy-control/actions/runs/43933492504) concluído com sucesso. **Não considerar o fluxo financeiro integrado concluído:** a API atual não recebe as origens selecionadas no vínculo.
 
 - [x] Contextos e capturas recuperados: seleção 2325:281; configuração 2325:394/594; seletor 2326:281; saldo insuficiente 2326:335; card 2325:797; Financeiro e Moeda 1484:71525; vazio 1484:71887. A raiz 1484:71334 veio esparsa; os filhos completos foram consultados antes da implementação. SVGs originais servidos localmente.
 - [x] Moeda firmada escolhida antes dos vínculos; bloqueada com clientes, liberada ao remover todos. A ação existente Remover cliente foi mantida com autorização explícita do usuário. Capital inicial e consolidado calculados pela soma convertida, sem digitação manual.
@@ -77,6 +77,8 @@ Retorno recebido após a auditoria do inventário. **A definição da distribui�
 - [ ] **Backend — gravar origem por linha:** SaveContractDraftRequest.clientAllocations usa ContractClientAllocationRequest, com apenas clientId/allocatedAmount e additionalProperties:false. É necessário receber e devolver carteira, moeda, valor de origem, cotação/identificadores e observação do vínculo previstos no desenho; total isolado não preserva a seleção.
 - [ ] **Backend — criação financeira:** definir o contrato para revalidar disponibilidade e cotação, debitar atomicamente as carteiras selecionadas apenas ao criar, gerar os aportes/históricos e devolver falhas identificando cliente/carteira/moeda para a linha correta. POST finalize não recebe corpo na OpenAPI atual. Não compor transferências avulsas no front para tentar reproduzir essa operação.
 - [ ] **Homologação integrada pendente:** salvar/reabrir vínculos multiorigem, criar com débito correto, saldo alterado entre prévia/criação, erro por linha, histórico oficial e rastreio da conversão só podem ser aprovados após o contrato de escrita. O front bloqueia a gravação/finalização desses vínculos sem descartar as fontes e sem debitar saldos. Não foram enviados campos não documentados.
+
+- [x] **Publicado e retestado:** selecionar USD, adicionar Éric, sete moedas, BRL disponível 47.500,00, excesso 47.500,01 bloqueado, BRL 100,00 convertido em USD 17,44, card/total mantêm USD sem oscilação, Salvar/Criar preservam a prévia com bloqueio de escrita, Remover libera a moeda. Bundle ContractsPage-B8jw_VWR.js confirmado e 26 SVGs publicados idênticos aos locais. Capturas e browser-verification.json arquivados. Carteiras reconsultadas após os testes locais permanecem intactas (api-after.json). Nenhum contrato/carteira foi alterado nesta rodada do item 137.
 
 **Já disponíveis na API:** carteiras por cliente com currencyId/available/reserved, catálogo completo das sete moedas e GET /admin/exchange-rates/latest com taxa, fonte, data e IDs. Esses recursos foram usados com sucesso; não são novas pendências. **Designer:** nenhuma nova pendência para o item 137 após a autorização de manter Remover cliente. A falha de aportes atribuídos do item 136 permanece independente.
 

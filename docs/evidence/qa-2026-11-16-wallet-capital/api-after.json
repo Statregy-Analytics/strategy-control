@@ -1,0 +1,179 @@
+{
+  "checkedAtUtc": "2026-11-16T18:53:23.848667+00:00",
+  "wallets": {
+    "eric": [
+      {
+        "id": "44fd4a72-9880-445f-957d-ec99b48d273f",
+        "type": "Free",
+        "currencyId": "f39ba6d7-e6ca-4367-9f7e-81850804447d",
+        "currencyIsoCode": "BRL",
+        "balance": 50000.0,
+        "reserved": 2500.0,
+        "available": 47500.0
+      }
+    ],
+    "claudio": [
+      {
+        "id": "a4a754a8-ce55-4d03-9822-012df4c3d737",
+        "type": "Free",
+        "currencyId": "f39ba6d7-e6ca-4367-9f7e-81850804447d",
+        "currencyIsoCode": "BRL",
+        "balance": 25000.0,
+        "reserved": 0,
+        "available": 25000.0
+      }
+    ]
+  },
+  "quote": {
+    "fromIsoCode": "BRL",
+    "toIsoCode": "USD",
+    "rate": 0.174447003,
+    "referenceDate": "2026-11-16",
+    "source": "BcbPtax",
+    "quotes": [
+      {
+        "id": "84891dbc-f8d8-4a88-8241-a6659fc421e8",
+        "currencyIsoCode": "USD",
+        "referenceDate": "2026-11-16",
+        "brlPerUnit": 5.7324,
+        "source": "BcbPtax",
+        "recordedAtUtc": "2026-11-16T18:28:58.909337+00:00"
+      }
+    ]
+  },
+  "SaveContractDraftRequest": {
+    "required": [
+      "name",
+      "term",
+      "startDate",
+      "currencyId",
+      "initialContractualCapital",
+      "initialCapitalOriginId",
+      "financialNotes",
+      "primaryEngineId",
+      "initialContractStatusId",
+      "clientAllocations"
+    ],
+    "type": "object",
+    "properties": {
+      "name": {
+        "type": [
+          "null",
+          "string"
+        ],
+        "example": "Jane Doe"
+      },
+      "term": {
+        "oneOf": [
+          {
+            "type": "null"
+          },
+          {
+            "$ref": "#/components/schemas/ContractTermRequest"
+          }
+        ]
+      },
+      "startDate": {
+        "type": [
+          "null",
+          "string"
+        ],
+        "format": "date",
+        "example": "2026-11-16"
+      },
+      "currencyId": {
+        "type": [
+          "null",
+          "string"
+        ],
+        "format": "uuid",
+        "example": "3fa85f64-5717-4562-b3fc-2c963f66afa6"
+      },
+      "initialContractualCapital": {
+        "pattern": "^-?(?:0|[1-9]\\d*)(?:\\.\\d+)?$",
+        "type": [
+          "null",
+          "number",
+          "string"
+        ],
+        "format": "double"
+      },
+      "initialCapitalOriginId": {
+        "type": [
+          "null",
+          "string"
+        ],
+        "format": "uuid",
+        "example": "3fa85f64-5717-4562-b3fc-2c963f66afa6"
+      },
+      "financialNotes": {
+        "type": [
+          "null",
+          "string"
+        ],
+        "example": "Example description."
+      },
+      "primaryEngineId": {
+        "type": [
+          "null",
+          "string"
+        ],
+        "format": "uuid",
+        "example": "3fa85f64-5717-4562-b3fc-2c963f66afa6"
+      },
+      "initialContractStatusId": {
+        "type": [
+          "null",
+          "string"
+        ],
+        "format": "uuid",
+        "example": "3fa85f64-5717-4562-b3fc-2c963f66afa6"
+      },
+      "clientAllocations": {
+        "type": [
+          "null",
+          "array"
+        ],
+        "items": {
+          "$ref": "#/components/schemas/ContractClientAllocationRequest"
+        }
+      },
+      "assetUniverse": {
+        "oneOf": [
+          {
+            "type": "null"
+          },
+          {
+            "$ref": "#/components/schemas/ContractAssetSelectionRequest"
+          }
+        ]
+      }
+    },
+    "additionalProperties": false
+  },
+  "ContractClientAllocationRequest": {
+    "required": [
+      "clientId",
+      "allocatedAmount"
+    ],
+    "type": "object",
+    "properties": {
+      "clientId": {
+        "type": "string",
+        "format": "uuid",
+        "example": "3fa85f64-5717-4562-b3fc-2c963f66afa6"
+      },
+      "allocatedAmount": {
+        "pattern": "^-?(?:0|[1-9]\\d*)(?:\\.\\d+)?$",
+        "type": [
+          "null",
+          "number",
+          "string"
+        ],
+        "format": "double",
+        "example": 1000.0
+      }
+    },
+    "additionalProperties": false
+  }
+}
