@@ -2,6 +2,7 @@ import { ref, computed, watch, onScopeDispose } from 'vue'
 import { useFinanceResource } from './useFinanceResource'
 import { financeGet, financeWrite } from 'src/services/financeService'
 import { buildDraftPayload, buildContractTerm } from 'src/services/financeModels'
+import { distributionState } from 'src/services/contractDistribution'
 import { readCurrentPages } from 'src/services/requestContext'
 import { getApiErrorMessage } from 'src/services/apiError'
 
@@ -92,6 +93,14 @@ export function useContractWorkspace(props, emit, notify) {
     })
   const loadPresets = () =>
     presets.load(async () => (await financeGet('admin/contracts/catalog/asset-sets')).data || [])
+  watch(
+    () => catalog.state.data,
+    (value) => {
+      if (!id.value && !form.value.initialCapitalOriginId)
+        form.value.initialCapitalOriginId =
+          value?.origins?.find((origin) => origin.code === 'CLIENT_WALLET')?.id ?? null
+    },
+  )
   const loadSection = (resource, suffix, params) => {
     const key = id.value
     if (!key) return Promise.resolve()
@@ -203,6 +212,22 @@ export function useContractWorkspace(props, emit, notify) {
       )
         throw Error(
           'Confira nome, prazo, início, moeda, capital, origem, motor, status e clientes antes de criar o contrato.',
+        )
+      const origin = catalog.state.data?.origins?.find(
+        (item) => item.id === form.value.initialCapitalOriginId,
+      )
+      if (finalize && draft.value && !origin)
+        throw Error(
+          'Carregue as origens do capital e selecione uma origem válida antes de criar o contrato.',
+        )
+      if (
+        finalize &&
+        draft.value &&
+        origin?.code === 'CONTRACT_VALUE' &&
+        !distributionState(form.value.clientAllocations, form.value.initialContractualCapital).valid
+      )
+        throw Error(
+          'Distribua o capital inicial entre os clientes, com valor positivo para cada um e soma igual ao capital contratual.',
         )
       payload = draft.value
         ? buildDraftPayload(form.value, term)

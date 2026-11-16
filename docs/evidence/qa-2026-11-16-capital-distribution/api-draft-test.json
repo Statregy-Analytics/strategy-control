@@ -1,0 +1,23 @@
+{
+  "date": "2026-11-16",
+  "environment": "https://strategyanalytics.codebiz.com.br/api/v1/",
+  "scenarios": [
+    {
+      "scenario": "POST draft + GET detail, allocated 0.10/0.20",
+      "passed": true,
+      "registrationStatus": "Draft",
+      "initialConsolidatedCapital": null
+    },
+    {
+      "scenario": "PUT draft + GET detail, allocated 0.15/0.15",
+      "passed": true
+    },
+    {
+      "scenario": "No wallet change during draft create/update",
+      "passed": true
+    }
+  ],
+  "financialFinalizationExecuted": false,
+  "draftId": "9a5aca18-182f-4493-b47e-5cf25454ad2e",
+  "draftLeftAs": "Rascunho fictício identificado como QA 136, capital BRL 0.30, distribuição 0.15/0.15. Sem finalização."
+}

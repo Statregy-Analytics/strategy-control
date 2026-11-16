@@ -1,0 +1,42 @@
+{
+  "origins": [
+    {
+      "id": "c0a1b2c3-0001-4c0a-9a00-000000000001",
+      "code": "CONTRACT_VALUE",
+      "name": "Valor do contrato",
+      "description": "Atribui ao contrato o valor do capital inicial contratual: o capital consolidado inicial é igual ao capital contratual.",
+      "isActive": true,
+      "displayOrder": 1
+    },
+    {
+      "id": "c0a1b2c3-0002-4c0a-9a00-000000000002",
+      "code": "CLIENT_WALLET",
+      "name": "Carteira do cliente",
+      "description": "Forma o capital a partir da carteira do cliente: o capital consolidado inicial corresponde à soma das origens efetivadas.",
+      "isActive": true,
+      "displayOrder": 2
+    }
+  ],
+  "lookupEnvelopeKeys": [
+    "data",
+    "success",
+    "requestId",
+    "correlationId",
+    "errors"
+  ],
+  "lookupDataKeys": [
+    "customers",
+    "totalItems"
+  ],
+  "customerFieldNames": [
+    "customerId",
+    "displayName",
+    "kind",
+    "status",
+    "maskedContact",
+    "riskClassification",
+    "complianceStatus",
+    "updatedAtUtc"
+  ],
+  "writes": "Login somente; sem escrita de contrato, carteira ou transação."
+}

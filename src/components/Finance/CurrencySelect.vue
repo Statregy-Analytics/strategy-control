@@ -16,9 +16,11 @@
     />
     <p v-if="!options.length" class="text-caption q-mt-sm">
       {{
-        customerId
-          ? 'Nenhuma moeda disponível nas carteiras deste cliente.'
-          : 'Selecione um cliente para consultar as moedas disponíveis.'
+        useCatalog
+          ? 'Nenhuma moeda disponível no catálogo.'
+          : customerId
+            ? 'Nenhuma moeda disponível nas carteiras deste cliente.'
+            : 'Selecione um cliente para consultar as moedas disponíveis.'
       }}
     </p>
   </resource-state>
@@ -30,6 +32,7 @@ import { useFinanceResource } from 'src/composables/useFinanceResource'
 import { financeGet } from 'src/services/financeService'
 const props = defineProps({
   disable: Boolean,
+  useCatalog: Boolean,
   customerId: { type: String, default: null },
   modelValue: { type: String, default: null },
   current: { type: Object, default: null },
@@ -45,10 +48,18 @@ const options = computed(() => {
   return [...new Map(items.filter((i) => i.id).map((i) => [i.id, i])).values()]
 })
 const load = () =>
-  resource.load(async () =>
-    props.customerId ? (await financeGet(`admin/customers/${props.customerId}/wallets`)).data : [],
-  )
-watch(() => props.customerId, load, { immediate: true })
+  resource.load(async () => {
+    if (props.useCatalog) {
+      const catalog = (await financeGet('preferences/catalog')).data
+      return (catalog?.currencies || [])
+        .filter((currency) => currency.id)
+        .map((currency) => ({ currencyId: currency.id, currencyIsoCode: currency.value }))
+    }
+    return props.customerId
+      ? (await financeGet(`admin/customers/${props.customerId}/wallets`)).data
+      : []
+  })
+watch([() => props.customerId, () => props.useCatalog], load, { immediate: true })
 watch(
   () => options.value.find((option) => option.id === props.modelValue)?.name || 'BRL',
   (code) => emit('currency-code', code),

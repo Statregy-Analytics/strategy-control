@@ -3,6 +3,7 @@ import assert from 'node:assert/strict'
 import vm from 'node:vm'
 import { readFileSync } from 'node:fs'
 import * as vue from 'vue'
+import { distributionState } from '../src/services/contractDistribution.js'
 import { readCurrentPages } from '../src/services/requestContext.js'
 import { useFinanceResource } from '../src/composables/useFinanceResource.js'
 import {
@@ -44,6 +45,8 @@ async function setup({
   const get = async (path, params) => {
     reads.push({ path, params })
     if (path === 'admin/audit/changes' || path === 'admin/transactions') return { data: [] }
+    if (path.endsWith('/catalog/capital-origins'))
+      return { data: [{ id: 'origin', code: 'CONTRACT_VALUE' }] }
     if (path.includes('/catalog/')) return { data: [] }
     if (path.endsWith('/assets')) return assetDelay ? assetDelay : { data: { items: [] } }
     if (path.endsWith('/engines') && engineFailure) throw Error('controlled unavailable')
@@ -73,6 +76,7 @@ async function setup({
   }
   const modules = {
     vue,
+    'src/services/contractDistribution': { distributionState },
     'src/services/requestContext': { readCurrentPages },
     './useFinanceResource': { useFinanceResource },
     'src/services/financeService': { financeGet: get, financeWrite: write },
@@ -236,5 +240,59 @@ test('CT07 uses contract-scoped audit and completed contract operations, not an 
   assert.equal(contributions.params.contractId, 'contract')
   assert.equal(contributions.params.type, 'ContractOperation')
   assert.equal(contributions.params.status, 'Completed')
+  h.dispose()
+})
+
+test('136: invalid assigned distribution blocks all writes, including after capital changes', async () => {
+  const h = await setup()
+  fill(h)
+  for (const allocations of [
+    [{ clientId: 'a', allocatedAmount: '99.99' }],
+    [{ clientId: 'a', allocatedAmount: '100.01' }],
+    [
+      { clientId: 'a', allocatedAmount: 100 },
+      { clientId: 'b', allocatedAmount: 0 },
+    ],
+    [
+      { clientId: 'a', allocatedAmount: 100 },
+      { clientId: 'b', allocatedAmount: null },
+    ],
+    [
+      { clientId: 'a', allocatedAmount: 50 },
+      { clientId: 'a', allocatedAmount: 50 },
+    ],
+  ]) {
+    h.form.value.clientAllocations = allocations
+    assert.equal(await h.save(true), false)
+    assert.equal(h.writes.length, 0)
+  }
+  fill(h)
+  h.form.value.initialContractualCapital = 200
+  assert.equal(await h.save(true), false)
+  assert.equal(h.writes.length, 0)
+  h.catalog.state.data = null
+  assert.equal(await h.save(true), false)
+  assert.equal(h.writes.length, 0)
+  h.dispose()
+})
+
+test('136: closed decimal allocation uses only existing draft fields before finalizing', async () => {
+  const h = await setup()
+  fill(h)
+  h.form.value.initialContractualCapital = '0.30'
+  h.form.value.clientAllocations = [
+    { clientId: 'a', displayName: 'QA', maskedDocument: '****0000', allocatedAmount: '0.10' },
+    { clientId: 'b', allocatedAmount: '0.20' },
+  ]
+  assert.equal(await h.save(true), true)
+  assert.deepEqual(h.writes[0].payload.clientAllocations, [
+    { clientId: 'a', allocatedAmount: 0.1 },
+    { clientId: 'b', allocatedAmount: 0.2 },
+  ])
+  assert.equal(h.writes[0].payload.initialCapitalOriginId, 'origin')
+  assert.equal(
+    h.writes.some((write) => /wallet|transaction/.test(write.path)),
+    false,
+  )
   h.dispose()
 })

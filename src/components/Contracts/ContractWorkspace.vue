@@ -147,6 +147,7 @@
                   <label-form text-label="Moeda Firmada"
                     ><currency-select
                       v-model="form.currencyId"
+                      :use-catalog="selectedOrigin?.code === 'CONTRACT_VALUE'"
                       :customer-id="form.clientAllocations[0]?.clientId"
                       :current="currentCurrency"
                       :disable="!draft"
@@ -160,7 +161,7 @@
                       :disable="!draft"
                       aria-label="Capital Inicial Contratual"
                     /><small
-                      >Este valor será distribuído entre os clientes vinculados</small
+                      >Distribuído entre os clientes vinculados, em valor ou em percentual.</small
                     ></label-form
                   >
                 </div>
@@ -178,7 +179,11 @@
                               ? 'Formar capital a partir de carteira do cliente'
                               : origin.name
                         "
-                      /><small>{{ origin.description }}</small></label
+                      /><small>{{
+                        origin.code === 'CONTRACT_VALUE'
+                          ? 'O admin digita o capital do contrato e quanto é de cada cliente, em valor ou em percentual. Esse capital não sai de nenhuma carteira: fica só no contrato.'
+                          : origin.description
+                      }}</small></label
                     >
                   </div></label-form
                 >
@@ -193,7 +198,10 @@
                     dense
                     readonly
                     aria-label="Capital Consolidado Inicial"
-                /></label-form>
+                  /><small v-if="selectedOrigin?.code === 'CONTRACT_VALUE'"
+                    >Igual ao capital inicial contratual</small
+                  ></label-form
+                >
                 <label-form text-label="Observação Financeira" class="contract-spacing"
                   ><q-input
                     v-model="form.financialNotes"
@@ -357,40 +365,49 @@
             </p>
           </div>
           <aside class="contract-side">
-            <contract-panel title="Clientes Vinculados" icon="users"
+            <contract-panel
+              title="Clientes Vinculados"
+              :icon="selectedOrigin?.code === 'CONTRACT_VALUE' ? 'distribution/users' : 'users'"
               ><template #actions
                 ><span class="contract-optional">{{
                   form.clientAllocations.length
                 }}</span></template
               >
-              <div v-if="!form.clientAllocations.length" class="contract-empty">
-                <img src="/icons/contracts/users-empty.svg" alt="" />
-                <p>Nenhum cliente vinculado. Adicione pelo menos um.</p>
-              </div>
-              <div
-                v-for="p in form.clientAllocations"
-                :key="p.clientId"
-                class="contract-client-line"
-              >
-                <strong>{{ p.displayName || participantName(p.clientId) }}</strong
-                ><q-btn
-                  flat
-                  round
-                  dense
-                  icon="close"
-                  aria-label="Remover cliente"
+              <contract-assigned-clients
+                v-if="selectedOrigin?.code === 'CONTRACT_VALUE'"
+                :allocations="form.clientAllocations"
+                :capital="form.initialContractualCapital"
+                :currency="currencyCode"
+                @add="clientOpen = true" />
+              <template v-else>
+                <div v-if="!form.clientAllocations.length" class="contract-empty">
+                  <img src="/icons/contracts/users-empty.svg" alt="" />
+                  <p>Nenhum cliente vinculado. Adicione pelo menos um.</p>
+                </div>
+                <div
+                  v-for="p in form.clientAllocations"
+                  :key="p.clientId"
+                  class="contract-client-line"
+                >
+                  <strong>{{ p.displayName || participantName(p.clientId) }}</strong
+                  ><q-btn
+                    flat
+                    round
+                    dense
+                    icon="close"
+                    aria-label="Remover cliente"
+                    :disable="!draft"
+                    @click="removeClient(p.clientId)"
+                  />
+                </div>
+                <q-btn
+                  outline
+                  no-caps
+                  label="Adicionar Cliente"
+                  class="full-width"
                   :disable="!draft"
-                  @click="removeClient(p.clientId)"
-                />
-              </div>
-              <q-btn
-                outline
-                no-caps
-                label="Adicionar Cliente"
-                class="full-width"
-                :disable="!draft"
-                @click="clientOpen = true"
-            /></contract-panel>
+                  @click="clientOpen = true" /></template
+            ></contract-panel>
             <contract-panel title="Resumo do Contrato" icon="summary"
               ><dl class="contract-summary">
                 <div v-for="item in summary" :key="item.label">
@@ -681,7 +698,18 @@
       :submit="includeParticipant"
       @close="clientOpen = false"
     />
-    <q-dialog v-if="draft" v-model="clientOpen" :persistent="busy"
+    <contract-capital-distribution
+      v-if="clientOpen && draft && selectedOrigin?.code === 'CONTRACT_VALUE'"
+      :allocations="form.clientAllocations"
+      :capital="form.initialContractualCapital"
+      :currency="currencyCode"
+      @confirm="form.clientAllocations = $event"
+      @close="clientOpen = false"
+    />
+    <q-dialog
+      v-if="draft && selectedOrigin?.code !== 'CONTRACT_VALUE'"
+      v-model="clientOpen"
+      :persistent="busy"
       ><q-card class="contract-modal"
         ><h2>{{ draft ? 'Selecionar clientes para vincular' : 'Adicionar cliente vinculado' }}</h2>
         <customer-select v-model="selectedClient" @resolved="selectedClientData = $event" />
@@ -745,6 +773,8 @@ import { ref, computed, watch, nextTick, onScopeDispose } from 'vue'
 import { useQuasar } from 'quasar'
 import { onBeforeRouteLeave, onBeforeRouteUpdate } from 'vue-router'
 import ContractPanel from './ContractPanel.vue'
+import ContractCapitalDistribution from './ContractCapitalDistribution.vue'
+import ContractAssignedClients from './ContractAssignedClients.vue'
 import ContractPerformance from './ContractPerformance.vue'
 import ContractAssets from './ContractAssets.vue'
 import ContractAssetDialog from './ContractAssetDialog.vue'

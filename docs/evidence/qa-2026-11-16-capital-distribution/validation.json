@@ -1,0 +1,36 @@
+{
+  "date": "2026-11-16",
+  "item": 136,
+  "checks": {
+    "lint": "pass",
+    "build": "pass",
+    "diffCheck": "pass",
+    "localTestsPassed": 342,
+    "versionedTestsExpected": 334,
+    "newTests": 12,
+    "unrelatedLocalStudyTests": 8
+  },
+  "browserValidation": {
+    "executed": false,
+    "reason": "Controle de navegador indisponível nesta rodada; SSR dos templates com adaptadores Quasar não substitui validação visual/interativa."
+  },
+  "integratedApi": {
+    "draftCreationAndUpdate": "pass",
+    "walletsUnchangedDuringDraft": "pass",
+    "finalizationExecuted": false
+  },
+  "figma": {
+    "fileKey": "i2jizg7UtPyg3KjAOvuFtI",
+    "nodes": [
+      "2323:281",
+      "2323:551",
+      "2323:735",
+      "2324:299",
+      "2324:476",
+      "2324:655",
+      "2355:281",
+      "2324:839"
+    ]
+  },
+  "deployment": "pending"
+}
