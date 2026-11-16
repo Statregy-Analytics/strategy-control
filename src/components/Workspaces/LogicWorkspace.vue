@@ -109,8 +109,13 @@
                 </button></div
             ></profile-section>
             <template v-for="section in sections" :key="section.title">
+              <logic-frequency
+                v-if="section.key === 'frequency'"
+                v-model="form"
+                :disabled="!editing"
+              />
               <logic-damping-zone
-                v-if="section.key === 'buffer'"
+                v-else-if="section.key === 'buffer'"
                 v-model="form.buffer"
                 :disabled="!editing"
               />
@@ -244,6 +249,7 @@ import LogicDampingZone from './LogicDampingZone.vue'
 import LogicProbability from './LogicProbability.vue'
 import LogicLimits from './LogicLimits.vue'
 import LogicSovereign from './LogicSovereign.vue'
+import LogicFrequency from './LogicFrequency.vue'
 import { useFinanceResource } from 'src/composables/useFinanceResource'
 import { financeGet, columns } from 'src/services/financeService'
 import { getPreferenceCatalog } from 'src/services/customerService'
@@ -332,15 +338,7 @@ const sections = computed(() => [
   {
     key: 'frequency',
     title: 'Frequência de Atualização',
-    caption: 'Configure o intervalo e ritmo de execução do motor.',
-    fields: fields([
-      ['interval', 'Intervalo Operacional *', 'select', { options: [], disabled: true }],
-      ['updatesPerDay', 'Atualizações por Dia', 'number', { disabled: true }],
-      ['firstRun', 'Primeira Execução', 'datetime'],
-      ['lastRun', 'Última Atualização', 'text', { disabled: true }],
-      ['nextRun', 'Próxima Atualização', 'text', { disabled: true }],
-      ['estimatedUpdates', 'Atualizações Estimadas no Ciclo', 'number', { disabled: true }],
-    ]),
+    fields: [],
   },
   {
     key: 'probability',

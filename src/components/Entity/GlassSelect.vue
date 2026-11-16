@@ -18,7 +18,7 @@
     hide-bottom-space
     emit-value
     map-options
-    dropdown-icon="img:/icons/client-profile/form-chevron.svg"
+    :dropdown-icon="dropdownIcon"
     :popup-content-class="['profile-glass-menu', popupClass].filter(Boolean).join(' ')"
     behavior="menu"
     :options-dense="true"
@@ -56,6 +56,7 @@ defineProps({
   options: { type: Array, default: () => [] },
   placeholder: { type: String, default: '' },
   popupClass: { type: String, default: '' },
+  dropdownIcon: { type: String, default: 'img:/icons/client-profile/form-chevron.svg' },
 })
 defineEmits(['update:modelValue'])
 </script>

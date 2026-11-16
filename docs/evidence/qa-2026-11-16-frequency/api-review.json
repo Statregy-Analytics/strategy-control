@@ -1,0 +1,581 @@
+{
+  "date": "2026-11-16",
+  "engineResponse": {
+    "required": [
+      "id",
+      "code",
+      "name",
+      "description",
+      "isSelectable",
+      "createdAtUtc",
+      "updatedAtUtc"
+    ],
+    "type": "object",
+    "properties": {
+      "id": {
+        "type": "string",
+        "format": "uuid",
+        "example": "3fa85f64-5717-4562-b3fc-2c963f66afa6"
+      },
+      "code": {
+        "type": "string"
+      },
+      "name": {
+        "type": "string",
+        "example": "Jane Doe"
+      },
+      "description": {
+        "type": [
+          "null",
+          "string"
+        ],
+        "example": "Example description."
+      },
+      "isSelectable": {
+        "type": "boolean",
+        "example": true
+      },
+      "createdAtUtc": {
+        "type": "string",
+        "format": "date-time",
+        "example": "2026-11-16T00:00:00Z"
+      },
+      "updatedAtUtc": {
+        "type": [
+          "null",
+          "string"
+        ],
+        "format": "date-time",
+        "example": "2026-11-16T00:00:00Z"
+      }
+    }
+  },
+  "enginePaths": {
+    "/api/v1/admin/contracts/catalog/engines": {
+      "get": {
+        "tags": [
+          "Contract Catalogs"
+        ],
+        "operationId": "ListContractEngines",
+        "parameters": [
+          {
+            "name": "includeNonSelectable",
+            "in": "query",
+            "schema": {
+              "type": "boolean",
+              "example": true
+            }
+          },
+          {
+            "name": "X-Workspace-Id",
+            "in": "header",
+            "description": "Workspace to operate against. Optional: falls back to the workspace claim on the access token, or to the user's only workspace when they belong to just one.",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponseOfIReadOnlyCollectionOfEngineResponse"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Too many requests. Only enabled when Security:RateLimiting:Enabled is true. Empty body — the global rate limiter rejects the request before it reaches application code."
+          },
+          "401": {
+            "description": "Authentication is required, or the supplied token is missing/invalid/expired. Usually an empty body (rejected before reaching application code); a small number of endpoints can instead throw an application-level auth.* error that carries the ApiErrorResponse envelope (see the 'default' response)."
+          },
+          "403": {
+            "description": "The authenticated caller does not satisfy this endpoint's authorization policy. Usually an empty body (rejected by the authorization middleware); some endpoints instead throw an application-level forbidden.* error (e.g. no workspace selected, user not linked to a customer) that carries the ApiErrorResponse envelope (see the 'default' response)."
+          },
+          "default": {
+            "description": "Error response for any status code not documented explicitly above. Follows the shared ApiErrorResponse envelope.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {},
+                    "success": {
+                      "type": "boolean",
+                      "example": true
+                    },
+                    "requestId": {
+                      "type": "string"
+                    },
+                    "correlationId": {
+                      "type": [
+                        "null",
+                        "string"
+                      ]
+                    },
+                    "errors": {
+                      "type": "array",
+                      "items": {
+                        "required": [
+                          "code",
+                          "message"
+                        ],
+                        "type": "object",
+                        "properties": {
+                          "code": {
+                            "type": "string"
+                          },
+                          "message": {
+                            "type": "string",
+                            "example": "Example description."
+                          },
+                          "field": {
+                            "type": [
+                              "null",
+                              "string"
+                            ]
+                          },
+                          "retryAfterSeconds": {
+                            "pattern": "^-?(?:0|[1-9]\\d*)$",
+                            "type": [
+                              "null",
+                              "integer",
+                              "string"
+                            ],
+                            "format": "int32"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {}
+        ]
+      },
+      "post": {
+        "tags": [
+          "Contract Catalogs"
+        ],
+        "operationId": "CreateContractEngine",
+        "parameters": [
+          {
+            "name": "Idempotency-Key",
+            "in": "header",
+            "description": "Client-generated key that makes this 'contracts.catalog.engines.create' request safe to retry. Replaying the same key with the same payload replays the original response; replaying it with a different payload returns 409.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "X-Workspace-Id",
+            "in": "header",
+            "description": "Workspace to operate against. Optional: falls back to the workspace claim on the access token, or to the user's only workspace when they belong to just one.",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateEngineRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponseOfEngineResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Conflict",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Too many requests. Only enabled when Security:RateLimiting:Enabled is true. Empty body — the global rate limiter rejects the request before it reaches application code."
+          },
+          "401": {
+            "description": "Authentication is required, or the supplied token is missing/invalid/expired. Usually an empty body (rejected before reaching application code); a small number of endpoints can instead throw an application-level auth.* error that carries the ApiErrorResponse envelope (see the 'default' response)."
+          },
+          "403": {
+            "description": "The authenticated caller does not satisfy this endpoint's authorization policy. Usually an empty body (rejected by the authorization middleware); some endpoints instead throw an application-level forbidden.* error (e.g. no workspace selected, user not linked to a customer) that carries the ApiErrorResponse envelope (see the 'default' response)."
+          },
+          "default": {
+            "description": "Error response for any status code not documented explicitly above. Follows the shared ApiErrorResponse envelope.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {},
+                    "success": {
+                      "type": "boolean",
+                      "example": true
+                    },
+                    "requestId": {
+                      "type": "string"
+                    },
+                    "correlationId": {
+                      "type": [
+                        "null",
+                        "string"
+                      ]
+                    },
+                    "errors": {
+                      "type": "array",
+                      "items": {
+                        "required": [
+                          "code",
+                          "message"
+                        ],
+                        "type": "object",
+                        "properties": {
+                          "code": {
+                            "type": "string"
+                          },
+                          "message": {
+                            "type": "string",
+                            "example": "Example description."
+                          },
+                          "field": {
+                            "type": [
+                              "null",
+                              "string"
+                            ]
+                          },
+                          "retryAfterSeconds": {
+                            "pattern": "^-?(?:0|[1-9]\\d*)$",
+                            "type": [
+                              "null",
+                              "integer",
+                              "string"
+                            ],
+                            "format": "int32"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {}
+        ]
+      }
+    },
+    "/api/v1/admin/contracts/catalog/engines/{engineId}": {
+      "patch": {
+        "tags": [
+          "Contract Catalogs"
+        ],
+        "operationId": "UpdateContractEngine",
+        "parameters": [
+          {
+            "name": "engineId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "example": "3fa85f64-5717-4562-b3fc-2c963f66afa6"
+            }
+          },
+          {
+            "name": "Idempotency-Key",
+            "in": "header",
+            "description": "Client-generated key that makes this 'contracts.catalog.engines.update' request safe to retry. Replaying the same key with the same payload replays the original response; replaying it with a different payload returns 409.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "X-Workspace-Id",
+            "in": "header",
+            "description": "Workspace to operate against. Optional: falls back to the workspace claim on the access token, or to the user's only workspace when they belong to just one.",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateEngineRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponseOfEngineResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Too many requests. Only enabled when Security:RateLimiting:Enabled is true. Empty body — the global rate limiter rejects the request before it reaches application code."
+          },
+          "401": {
+            "description": "Authentication is required, or the supplied token is missing/invalid/expired. Usually an empty body (rejected before reaching application code); a small number of endpoints can instead throw an application-level auth.* error that carries the ApiErrorResponse envelope (see the 'default' response)."
+          },
+          "403": {
+            "description": "The authenticated caller does not satisfy this endpoint's authorization policy. Usually an empty body (rejected by the authorization middleware); some endpoints instead throw an application-level forbidden.* error (e.g. no workspace selected, user not linked to a customer) that carries the ApiErrorResponse envelope (see the 'default' response)."
+          },
+          "default": {
+            "description": "Error response for any status code not documented explicitly above. Follows the shared ApiErrorResponse envelope.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {},
+                    "success": {
+                      "type": "boolean",
+                      "example": true
+                    },
+                    "requestId": {
+                      "type": "string"
+                    },
+                    "correlationId": {
+                      "type": [
+                        "null",
+                        "string"
+                      ]
+                    },
+                    "errors": {
+                      "type": "array",
+                      "items": {
+                        "required": [
+                          "code",
+                          "message"
+                        ],
+                        "type": "object",
+                        "properties": {
+                          "code": {
+                            "type": "string"
+                          },
+                          "message": {
+                            "type": "string",
+                            "example": "Example description."
+                          },
+                          "field": {
+                            "type": [
+                              "null",
+                              "string"
+                            ]
+                          },
+                          "retryAfterSeconds": {
+                            "pattern": "^-?(?:0|[1-9]\\d*)$",
+                            "type": [
+                              "null",
+                              "integer",
+                              "string"
+                            ],
+                            "format": "int32"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {}
+        ]
+      }
+    },
+    "/api/v1/admin/contracts/{contractId}/engines": {
+      "get": {
+        "tags": [
+          "Contracts"
+        ],
+        "operationId": "ListContractEngineLinks",
+        "parameters": [
+          {
+            "name": "contractId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "example": "3fa85f64-5717-4562-b3fc-2c963f66afa6"
+            }
+          },
+          {
+            "name": "X-Workspace-Id",
+            "in": "header",
+            "description": "Workspace to operate against. Optional: falls back to the workspace claim on the access token, or to the user's only workspace when they belong to just one.",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponseOfIReadOnlyCollectionOfContractEngineLinkResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Too many requests. Only enabled when Security:RateLimiting:Enabled is true. Empty body — the global rate limiter rejects the request before it reaches application code."
+          },
+          "401": {
+            "description": "Authentication is required, or the supplied token is missing/invalid/expired. Usually an empty body (rejected before reaching application code); a small number of endpoints can instead throw an application-level auth.* error that carries the ApiErrorResponse envelope (see the 'default' response)."
+          },
+          "403": {
+            "description": "The authenticated caller does not satisfy this endpoint's authorization policy. Usually an empty body (rejected by the authorization middleware); some endpoints instead throw an application-level forbidden.* error (e.g. no workspace selected, user not linked to a customer) that carries the ApiErrorResponse envelope (see the 'default' response)."
+          },
+          "default": {
+            "description": "Error response for any status code not documented explicitly above. Follows the shared ApiErrorResponse envelope.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {},
+                    "success": {
+                      "type": "boolean",
+                      "example": true
+                    },
+                    "requestId": {
+                      "type": "string"
+                    },
+                    "correlationId": {
+                      "type": [
+                        "null",
+                        "string"
+                      ]
+                    },
+                    "errors": {
+                      "type": "array",
+                      "items": {
+                        "required": [
+                          "code",
+                          "message"
+                        ],
+                        "type": "object",
+                        "properties": {
+                          "code": {
+                            "type": "string"
+                          },
+                          "message": {
+                            "type": "string",
+                            "example": "Example description."
+                          },
+                          "field": {
+                            "type": [
+                              "null",
+                              "string"
+                            ]
+                          },
+                          "retryAfterSeconds": {
+                            "pattern": "^-?(?:0|[1-9]\\d*)$",
+                            "type": [
+                              "null",
+                              "integer",
+                              "string"
+                            ],
+                            "format": "int32"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {}
+        ]
+      }
+    }
+  }
+}

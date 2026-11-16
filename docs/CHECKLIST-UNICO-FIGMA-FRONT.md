@@ -6,10 +6,27 @@ Atualização: 16/11/2026. Este é o índice desta revisão ampla. Evidências a
 
 - [ ] Todos os frames/estados abaixo comparados visualmente, inclusive erro, vazio e retorno.
 - [ ] Fluxos de escrita e leitura integrados testados com dados fictícios.
-- [x] Admin: lint e build aprovados; 318 testes locais passaram (incluem 8 testes de estudo já existentes no worktree; três novos testes do EC07 nesta implementação).
+- [x] Admin: lint e build aprovados; 322 testes locais passaram (incluem 8 testes de estudo já existentes no worktree; quatro novos testes do EC03 neste complemento).
 - [ ] Reexecutar os checks após concluir as demais telas; Área do Cliente ainda não alterada nesta rodada.
 - [ ] Deploy confirmado e testes repetidos nas URLs publicadas.
 - [x] Pendências de frontend separadas das pendências reais da API, do designer e da limitação de consulta ao Figma.
+
+## EC03 — Frequência de Atualização (16/11)
+
+- [x] Referência 1484:79652 reconfirmada com contexto completo e screenshot arquivados em [evidence/qa-2026-11-16-frequency](evidence/qa-2026-11-16-frequency). Clock, ChevronDown e Calendar originais locais, não vazios e com dimensões raiz de 16 × 16 px.
+- [x] Seis campos existentes organizados como no desenho: Intervalo Operacional/Atualizações por Dia; Primeira Execução/Última Atualização/Próxima Atualização; Atualizações Estimadas no Ciclo em largura total. Reutilizados ProfileSection, LabelForm, GlassSelect e QInput, com campos de 36 px e espaçamentos de 24 px. Sem campos ou ações extras.
+- [x] Primeira Execução mantém datetime-local e edição pelo formulário original; leitura bloqueia o campo. Quatro resultados calculados e intervalo sem opções reais permanecem bloqueados. Nenhum valor 48/4368, data de exemplo, agendamento calculado ou catálogo de intervalos foi injetado. Zero recebido é preservado; datas de atualização ausentes aparecem como travessão.
+- [x] GlassSelect recebeu dropdownIcon opcional, mantendo exatamente o ícone anterior por padrão. O EC03 passa o SVG de 16 px do frame, sem alterar os demais seletores.
+- [x] Quatro testes SSR: ausência de dados sem exemplos/opções fictícios; valores conhecidos/zero sem cálculo inventado; editar/limpar Primeira Execução emitindo cópia do formulário e preservando os outros campos; leitura bloqueada e seta padrão do GlassSelect preservada. ProfileSection, LabelForm e GlassSelect reais são compilados no teste; controles Quasar são adaptadores, portanto o teste não valida interação nativa ou layout.
+- [x] Lint, build, diff da entrega e 322 testes locais aprovados (oito testes de estudo preexistentes fora da entrega). Detector do componente: zero antipadrões; medidas explícitas do Figma mantidas nos avisos do DESIGN.md antigo.
+- [ ] Publicação e confirmação HTTP após o deploy.
+- [ ] Navegador: comparação visual desktop/celular, 2/3/1 colunas e quebra para uma coluna, ausência de overflow, contraste/medidas/ícones carregados, calendário nativo por clique e teclado, preenchimento/limpeza/Cancelar, recolher/reabrir configuração, retorno do LG09 e console.
+
+**Limitação de validação:** os checks desta rodada são código/SSR. Não houve nova automação de navegador, após a interrupção anterior por impossibilidade de confirmar a URL no Windows. Responsividade e posicionamento do indicador nativo de calendário estão implementados, mas ainda não observados no navegador; não declarar estes fluxos homologados.
+
+**API:** OpenAPI reconsultada em 16/11: EngineResponse continua com id/code/name/description/isSelectable/createdAtUtc/updatedAtUtc; não há intervalo operacional, execuções/dia, agendamento ou estimativas, nem gravação operacional nos três caminhos de engines. Campos/dados derivados não são presumidos a partir de metadados; a seleção de intervalo permanece bloqueada sem opções. Evidência api-review.json. Sem nova escrita ou falha de negócio induzida para teste.
+
+**Designer:** nenhum novo bloqueio para o frame preenchido recuperado. O desenho do calendário aberto e das opções de intervalo não foi presumido; o campo existente conserva o seletor nativo e o intervalo aguarda seu catálogo real.
 
 ## EC07 — Fechamento Soberano (16/11)
 
@@ -510,7 +527,7 @@ Legenda: **Preparado / revisão pendente** = há código novo, mas a validação
 | [1484:79361](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-79361) | EC02.1 · Preview · Alpha-2 Institucional                                                      | Preparado / revisão pendente                                             |
 | [1484:79457](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-79457) | EC02.2 · Preview · Delta-Green                                                                | Preparado / revisão pendente                                             |
 | [1484:79553](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-79553) | EC02.3 · Preview · Atlas-Orange                                                               | Preparado / revisão pendente                                             |
-| [1484:79652](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-79652) | EC03 · Frequência · data e hora preenchidas                                                   | Preparado / revisão pendente                                             |
+| [1484:79652](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-79652) | EC03 · Frequência · data e hora preenchidas                                                   | Composto; SSR/checks aprovados; publicação e navegador pendentes                                             |
 | [1484:79712](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-79712) | EC04.1 · Probabilidade · 50/50 · soma válida                                                  | Estados compostos/testados; consulta e gravação dependem da API                                             |
 | [1484:79755](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-79755) | EC04.2 · Probabilidade · 60/50 · soma 110% inválida                                           | Estados compostos/testados; consulta e gravação dependem da API                                             |
 | [1484:79802](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-79802) | EC05.1 · Zona de amortecimento · desativada                                                   | Composição/estados testados; projeção e gravação dependem da API                                             |

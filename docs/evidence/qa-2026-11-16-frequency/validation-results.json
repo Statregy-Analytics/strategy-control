@@ -1,0 +1,44 @@
+{
+  "date": "2026-11-16",
+  "frame": "1484:79652",
+  "checks": {
+    "lint": "pass",
+    "build": "pass",
+    "diffOfDelivery": "pass",
+    "localTests": 322,
+    "existingStudyTestsOutsideScope": 8,
+    "newSSRTests": 4,
+    "detectorAntiPatterns": 0
+  },
+  "assets": {
+    "clock.svg": [
+      16,
+      16
+    ],
+    "chevron.svg": [
+      16,
+      16
+    ],
+    "calendar.svg": [
+      16,
+      16
+    ]
+  },
+  "SSR": [
+    "missing data, no illustrative schedule/counts/options",
+    "known zero counts and existing dates preserved",
+    "firstRun editing/clearing, unrelated draft preserved, read-only blocked",
+    "shared GlassSelect default arrow unchanged"
+  ],
+  "operationalWrites": 0,
+  "browserValidation": "not performed",
+  "unvalidated": [
+    "rendered desktop/mobile comparison",
+    "effective icon geometry and loading",
+    "native calendar layout and keyboard/pointer interaction",
+    "cancel/collapse/history transitions",
+    "console"
+  ],
+  "published": false,
+  "apiReview": "api-review.json"
+}
