@@ -542,9 +542,12 @@
       "evidence": "docs/evidence/qa-2026-11-17-loan-offers/results.json"
     },
     "1:54430": {
-      "front": "adjustment",
-      "reason": "Documentação do imóvel ainda requer composição específica do frame e contrato de upload/vínculo da solicitação; documentos de empréstimos existentes são outro fluxo.",
-      "evidence": "docs/evidence/qa-2026-11-17-loan-offers/results.json"
+      "front": "done",
+      "reason": "Documentação de imóvel composta com os oito grupos do Figma, ativos nativos, passo 6/7, listagem/remoção, erro/retry e estado sem integração. Componentes reais testados no navegador local; envio/persistência integrados e pedido de ajuda dependem do contrato da solicitação.",
+      "evidence": "docs/evidence/qa-2026-11-17-deploy-documents/results.json",
+      "blockers": [
+        "backend"
+      ]
     },
     "1:54617": {
       "front": "adjustment",

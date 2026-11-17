@@ -1,0 +1,500 @@
+const imgAvatar = "https://www.figma.com/api/mcp/asset/0407c82e-d10c-4a2b-8208-363be491e8d6.png";
+const imgWhisk95A26Fbc4C3 = "https://www.figma.com/api/mcp/asset/dfda0030-c9f4-4904-aac6-c8ca3a2a43f9.png";
+const imgGroup = "https://www.figma.com/api/mcp/asset/ca8d339f-cab1-49d5-a9aa-d36173adcd22.svg";
+const imgGroup1 = "https://www.figma.com/api/mcp/asset/5077115a-709b-4183-9173-79eaceaa0350.svg";
+const imgHome = "https://www.figma.com/api/mcp/asset/7c91b0b5-7c30-481f-95e0-990f42a87030.svg";
+const imgFileDollar = "https://www.figma.com/api/mcp/asset/281097d3-afc4-444f-ad50-3b08947e9a5f.svg";
+const imgSpeakerphone = "https://www.figma.com/api/mcp/asset/e6a88c9c-e0fd-4ac6-bbc0-f969b50dcd9d.svg";
+const imgReceipt2 = "https://www.figma.com/api/mcp/asset/969d2930-868b-40a1-b8c9-bca28d1aa90e.svg";
+const imgBell = "https://www.figma.com/api/mcp/asset/b09419c0-3e93-441f-9715-d452da3b287f.svg";
+const imgArrowLeft = "https://www.figma.com/api/mcp/asset/671e7165-73ce-403b-98a1-09cfef652de8.svg";
+const imgStar = "https://www.figma.com/api/mcp/asset/6f8cd226-a018-49a9-ac4b-d5bfdf0e6528.svg";
+const imgMessages = "https://www.figma.com/api/mcp/asset/0b810c38-c7c7-4471-b7e7-f8fdc73b6f42.svg";
+const imgInbox = "https://www.figma.com/api/mcp/asset/1900e0e6-f562-476e-886f-19f484bc9cd2.svg";
+const imgIconPaperClipOutlined = "https://www.figma.com/api/mcp/asset/87019b53-746e-4c25-aec1-c4c11e843b16.svg";
+const imgTrash = "https://www.figma.com/api/mcp/asset/41f4ed07-210b-41f5-a003-07762f24d763.svg";
+const imgArrowLeft1 = "https://www.figma.com/api/mcp/asset/4340121c-e411-4469-9df6-b8fb1f859cbc.svg";
+const imgIconJamIconsOutlineLogosArrowRight = "https://www.figma.com/api/mcp/asset/3e509089-a47d-42ee-99b3-2d73baa0d5c9.svg";
+
+export default function UiFluxoSolicitarEmprestimo() {
+  return (
+    <div className="content-stretch flex flex-col items-start relative size-full" data-node-id="1:54430" style={{ backgroundImage: "linear-gradient(229.9224355870903deg, rgb(121, 24, 35) 0.17422%, rgb(51, 10, 15) 9.0927%, rgb(9, 12, 21) 39.128%, rgb(9, 41, 62) 73.446%, rgb(17, 77, 118) 99.826%)" }} data-name="[UI] FLUXO - SOLICITAR EMPRÉSTIMO -">
+      <div className="content-stretch flex flex-col items-start pb-[16px] pt-[24px] px-[48px] relative shrink-0 w-[1920px]" data-node-id="1:54431" data-name="Nav-container">
+        <div className="backdrop-blur-[16px] content-stretch flex gap-[40px] items-center overflow-clip px-[24px] py-[16px] relative rounded-[8px] shadow-[4px_4px_48px_16px_rgba(0,0,0,0.24)] shrink-0 w-full" data-node-id="1:54432" style={{ backgroundImage: "linear-gradient(181.21251493722855deg, rgba(255, 255, 255, 0.16) 0.52072%, rgba(255, 255, 255, 0.04) 50%, rgba(255, 255, 255, 0.01) 99.479%)" }} data-name="Navigation Bar">
+          <div className="content-stretch flex flex-col items-start relative shrink-0 w-[234px]" data-node-id="1:54433" data-name="Left Content">
+            <div className="h-[48px] overflow-clip relative shrink-0 w-[152px]" data-node-id="1:54434" data-name="Strategy Analytics - Gestão de Investimentos e Serviços Financeiros-0 1">
+              <div className="absolute contents inset-[15.86%_-0.01%_15.86%_0.01%]" data-node-id="1:54435" data-name="Clip path group">
+                <div className="absolute inset-[15.86%_0_15.86%_0.01%] mask-alpha mask-intersect mask-no-clip mask-no-repeat mask-size-[152px_32.773px]" data-node-id="1:54438" style={{ maskImage: `url("${imgGroup}")` }} data-name="Group">
+                  <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgGroup1} />
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="content-stretch flex flex-[1_0_0] gap-[16px] items-center justify-center min-w-px relative" data-node-id="1:54444" data-name="Navigation Itens">
+            <div className="content-stretch flex gap-[var(--components\/menu\/global\/marginxs,8px)] items-center px-[var(--space\/padding\/paddingsm,12px)] py-[var(--space--5,16px)] relative rounded-[var(--radius---2,4px)] shrink-0" data-node-id="1:54445" data-name="Menu Item">
+              <div className="content-stretch flex gap-[8px] items-center relative shrink-0" data-node-id="1:54446" data-name="Content">
+                <div className="content-stretch flex gap-[8px] items-center relative shrink-0" data-node-id="1:54447" data-name="Title menu">
+                  <div className="relative shrink-0 size-[24px]" data-node-id="1:54448" data-name="home">
+                    <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgHome} />
+                  </div>
+                  <p className="[word-break:break-word] font-['Inter:Medium'] font-medium leading-[1.35] not-italic relative shrink-0 text-[20px] text-[color:var(--neutral\/600,#656565)] whitespace-nowrap" data-node-id="1:54449">
+                    Home
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div className="content-stretch flex gap-[var(--components\/menu\/global\/marginxs,8px)] items-center px-[var(--space\/padding\/paddingsm,12px)] py-[var(--space--5,16px)] relative rounded-[var(--radius---2,4px)] shrink-0" data-node-id="1:54451" data-name="Menu Item">
+              <div className="content-stretch flex gap-[8px] items-center relative shrink-0" data-node-id="1:54452" data-name="Content">
+                <div className="content-stretch flex gap-[8px] items-center relative shrink-0" data-node-id="1:54453" data-name="Title menu">
+                  <div className="relative shrink-0 size-[24px]" data-node-id="1:54454" data-name="file-dollar">
+                    <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgFileDollar} />
+                  </div>
+                  <p className="[word-break:break-word] font-['Inter:Medium'] font-medium leading-[1.35] not-italic relative shrink-0 text-[20px] text-[color:var(--neutral\/600,#656565)] whitespace-nowrap" data-node-id="1:54455">
+                    Contratos
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div className="content-stretch flex gap-[var(--components\/menu\/global\/marginxs,8px)] items-center px-[var(--space\/padding\/paddingsm,12px)] py-[var(--space--5,16px)] relative rounded-[var(--radius---2,4px)] shrink-0" data-node-id="1:54458" data-name="Menu Item">
+              <div className="content-stretch flex gap-[8px] items-center relative shrink-0" data-node-id="1:54459" data-name="Content">
+                <div className="content-stretch flex gap-[8px] items-center relative shrink-0" data-node-id="1:54460" data-name="Title menu">
+                  <div className="relative shrink-0 size-[24px]" data-node-id="1:54461" data-name="speakerphone">
+                    <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgSpeakerphone} />
+                  </div>
+                  <p className="[word-break:break-word] font-['Inter:Medium'] font-medium leading-[1.35] not-italic relative shrink-0 text-[20px] text-[color:var(--neutral\/600,#656565)] whitespace-nowrap" data-node-id="1:54462">
+                    Comunicação
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div className="border-[var(--active,#00a3ff)] border-b-3 border-solid content-stretch flex gap-[var(--components\/menu\/global\/marginxs,8px)] items-center px-[var(--space--7,24px)] py-[var(--space--5,16px)] relative rounded-[var(--radius---2,4px)] shrink-0" data-node-id="1:54464" style={{ backgroundImage: "linear-gradient(186.96128122465487deg, rgba(255, 255, 255, 0.16) 0.52072%, rgba(255, 255, 255, 0.04) 50%, rgba(255, 255, 255, 0.01) 99.479%)" }} data-name="Menu Item">
+              <div className="content-stretch flex gap-[8px] items-center relative shrink-0" data-node-id="1:54465" data-name="Content">
+                <div className="content-stretch flex gap-[8px] items-center relative shrink-0" data-node-id="1:54466" data-name="Title menu">
+                  <div className="relative shrink-0 size-[24px]" data-node-id="1:54467" data-name="receipt-2">
+                    <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgReceipt2} />
+                  </div>
+                  <p className="[word-break:break-word] font-['Inter:Medium'] font-medium leading-[1.35] not-italic relative shrink-0 text-[20px] text-[color:var(--neutral\/white,white)] whitespace-nowrap" data-node-id="1:54468">
+                    Empréstimos
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="content-stretch flex gap-[16px] items-center justify-end relative shrink-0" data-node-id="1:54470" data-name="Right Content">
+            <div className="backdrop-blur-[20px] bg-[rgba(255,255,255,0.08)] border border-[rgba(239,239,239,0.16)] border-solid content-stretch flex gap-[8px] items-center overflow-clip p-[12px] relative rounded-[4px] shadow-[4px_4px_12px_0px_rgba(0,0,0,0.24)] shrink-0" data-node-id="1:54471" data-name="Relógio">
+              <p className="[word-break:break-word] font-['Inter:Regular'] font-normal leading-[1.35] not-italic relative shrink-0 text-[20px] text-[color:var(--neutral\/white,white)] whitespace-nowrap" data-node-id="1:54473">
+                TER
+              </p>
+              <div className="bg-[var(--neutral\/400,#989898)] h-[12px] opacity-32 relative shrink-0 w-px" data-node-id="1:54474" data-name="divider" />
+              <div className="[word-break:break-word] content-stretch flex font-['Inter:Regular'] font-normal gap-[4px] items-center leading-[1.35] not-italic relative shrink-0 text-[20px] whitespace-nowrap" data-node-id="1:54475" data-name="Horário">
+                <p className="relative shrink-0 text-[color:var(--neutral\/white,white)]" data-node-id="1:54476">
+                  12
+                </p>
+                <p className="relative shrink-0 text-[color:var(--neutral\/400,#989898)]" data-node-id="1:54477">
+                  :
+                </p>
+                <p className="relative shrink-0 text-[color:var(--neutral\/white,white)]" data-node-id="1:54478">
+                  42
+                </p>
+                <p className="relative shrink-0 text-[color:var(--neutral\/400,#989898)]" data-node-id="1:54479">
+                  :
+                </p>
+                <p className="relative shrink-0 text-[color:var(--neutral\/white,white)]" data-node-id="1:54480">
+                  05
+                </p>
+              </div>
+            </div>
+            <div className="content-stretch flex flex-col items-center justify-center relative shrink-0" data-node-id="1:54481" data-name="*Button*">
+              <div className="content-stretch flex gap-[var(--components\/button\/global\/marginxs,8px)] items-center justify-center relative shrink-0 size-[40px]" data-node-id="I1:54481;376:23104" data-name="Content">
+                <div className="relative shrink-0 size-[24px]" data-node-id="I1:54481;376:23105" data-name="bell">
+                  <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgBell} />
+                </div>
+              </div>
+            </div>
+            <div className="border border-[var(--active,#00a3ff)] border-solid content-stretch flex gap-[8px] items-start p-[8px] relative rounded-[96px] shrink-0 size-[40px]" data-node-id="1:54482" data-name="*Avatar*">
+              <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none rounded-[96px] size-full" src={imgAvatar} />
+            </div>
+          </div>
+        </div>
+      </div>
+      <div className="content-stretch flex flex-col gap-[64px] items-center px-[48px] py-[24px] relative shrink-0 w-full" data-node-id="1:54483" data-name="Page Content">
+        <div className="content-stretch flex flex-col items-start justify-center relative shrink-0 w-full" data-node-id="1:54484" data-name="Top Content">
+          <div className="content-stretch flex gap-[16px] items-center relative shrink-0 w-full" data-node-id="1:54485" data-name="Headline">
+            <div className="content-stretch flex gap-[26.667px] items-center justify-center relative shrink-0" data-node-id="1:54486" data-name="button">
+              <div className="relative shrink-0 size-[40px]" data-node-id="I1:54486;188:2617" data-name="arrow-left">
+                <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgArrowLeft} />
+              </div>
+            </div>
+          </div>
+        </div>
+        <div className="content-stretch flex gap-[160px] items-start pb-[48px] px-[140px] relative shrink-0 w-full" data-node-id="1:54488" data-name="Main Content">
+          <div className="content-stretch flex flex-[1_0_0] flex-col gap-[40px] items-start min-w-px relative" data-node-id="1:54489" data-name="Content">
+            <div className="border border-[rgba(239,239,239,0.08)] border-solid content-stretch flex items-center justify-center p-[16px] relative rounded-[8px] shrink-0" data-node-id="1:54490" style={{ backgroundImage: "linear-gradient(201.1559723956863deg, rgba(255, 255, 255, 0.16) 0.52072%, rgba(255, 255, 255, 0.04) 50%, rgba(255, 255, 255, 0.01) 99.479%)" }} data-name="Icon">
+              <div className="flex items-center justify-center relative shrink-0" data-node-id="1:54491">
+                <div className="-scale-y-100 flex-none rotate-180">
+                  <div className="h-[155px] relative w-[173px]" data-name="Whisk_95a26fbc4c 3">
+                    <div className="absolute inset-0 overflow-hidden pointer-events-none">
+                      <img alt="" className="absolute h-[102.74%] left-[-36.25%] max-w-none top-[-1.37%] w-[168.22%]" src={imgWhisk95A26Fbc4C3} />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div className="[word-break:break-word] content-stretch flex flex-col gap-[12px] items-start not-italic relative shrink-0 w-full" data-node-id="1:54492" data-name="Text">
+              <p className="font-['Inter:Bold'] font-bold leading-[1.5] relative shrink-0 text-[41px] text-[color:var(--neutral\/white,white)] w-full" data-node-id="1:54493">
+                Faça uma Simulação com seu Imóvel em Garantia
+              </p>
+              <p className="font-['Inter:Regular'] font-normal leading-[0] relative shrink-0 text-[24px] text-[color:var(--neutral\/400,#989898)] w-full" data-node-id="1:54494">
+                <span className="leading-[1.35] text-[color:var(--neutral\/200,#dcdcdc)]">Preencha corretamente com seus dados</span>
+                <span className="leading-[1.35]">{` para iniciarmos a simulação. Depois, analisaremos seu perfil e retornaremos com uma `}</span>
+                <span className="leading-[1.35] text-[color:var(--neutral\/200,#dcdcdc)]">proposta especial para você.</span>
+              </p>
+            </div>
+            <div className="border-[var(--active,#00a3ff)] border-l-2 border-solid content-stretch flex gap-[12px] items-center px-[16px] py-[12px] relative rounded-[4px] shrink-0 w-full" data-node-id="1:54495" style={{ backgroundImage: "linear-gradient(182.1396978449663deg, rgba(255, 255, 255, 0.16) 0.52072%, rgba(255, 255, 255, 0.04) 50%, rgba(255, 255, 255, 0.01) 99.479%)" }} data-name="Notification">
+              <div className="content-stretch flex items-center justify-center p-[4px] relative rounded-[4px] shrink-0" data-node-id="1:54496" style={{ backgroundImage: "linear-gradient(202.9886527725518deg, rgba(0, 0, 0, 0.24) 0.52072%, rgba(0, 0, 0, 0.08) 51.124%, rgba(0, 0, 0, 0.04) 99.479%)" }} data-name="Icon Container">
+                <div className="relative shrink-0 size-[24px]" data-node-id="1:54497" data-name="star">
+                  <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgStar} />
+                </div>
+              </div>
+              <div className="content-stretch flex flex-[1_0_0] flex-col items-start justify-center min-w-px relative" data-node-id="1:54498" data-name="Title + Subtitle">
+                <div className="[word-break:break-word] font-['Inter:Regular'] font-normal leading-[0] not-italic relative shrink-0 text-[14px] text-[color:var(--neutral\/300,#bdbdbd)] w-full whitespace-pre-wrap" data-node-id="1:54499">
+                  <p className="leading-[1.35] mb-0">{`Fique tranquilo(a), mesmo que você saia da página os arquivos ficarão registrados aqui. `}</p>
+                  <p className="leading-[1.35]">Retorne quando tiver os documentos para continuar o processo.</p>
+                </div>
+              </div>
+            </div>
+            <div className="bg-[var(--neutral\/white,white)] border-2 border-[var(--neutral\/white,white)] border-solid content-stretch flex gap-[8px] items-center justify-center px-[12px] py-[8px] relative rounded-[4px] shrink-0" data-node-id="1:54500" data-name="button">
+              <div className="content-stretch flex items-center justify-center relative shrink-0" data-node-id="I1:54500;302:12531" data-name="Text Container">
+                <p className="[word-break:break-word] font-['Roboto:Medium'] font-medium leading-none relative shrink-0 text-[14px] text-[color:var(--active,#00a3ff)] tracking-[0.5px] whitespace-nowrap" data-node-id="I1:54500;302:12532" style={{ fontVariationSettings: '"wdth" 100' }}>
+                  Solicitar Ajuda para um Assessor
+                </p>
+              </div>
+              <div className="relative shrink-0 size-[24px]" data-node-id="I1:54500;302:12534" data-name="messages">
+                <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgMessages} />
+              </div>
+            </div>
+          </div>
+          <div className="content-stretch flex flex-col gap-[64px] items-start pt-[8px] relative shrink-0 w-[680px]" data-node-id="1:54501" data-name="Right Column">
+            <div className="content-stretch flex flex-col gap-[12px] items-start relative shrink-0 w-full" data-node-id="1:54502" data-name="Steps">
+              <div className="content-stretch flex gap-[8px] items-center overflow-clip relative rounded-[4px] shrink-0 w-full" data-node-id="1:54503" data-name="steps bar">
+                <div className="bg-[var(--active,#00a3ff)] flex-[1_0_0] h-[8px] min-w-px relative" data-node-id="1:54504" data-name="step 1" />
+                <div className="bg-[var(--active,#00a3ff)] flex-[1_0_0] h-[8px] min-w-px relative" data-node-id="1:54505" data-name="step 2" />
+                <div className="bg-[var(--active,#00a3ff)] flex-[1_0_0] h-[8px] min-w-px relative" data-node-id="1:54506" data-name="step 3" />
+                <div className="bg-[var(--active,#00a3ff)] flex-[1_0_0] h-[8px] min-w-px relative" data-node-id="1:54507" data-name="step 4" />
+                <div className="bg-[var(--active,#00a3ff)] flex-[1_0_0] h-[8px] min-w-px relative" data-node-id="1:54508" data-name="step 5" />
+                <div className="bg-[var(--neutral\/950,#292929)] flex-[1_0_0] h-[8px] min-w-px relative" data-node-id="1:54509" data-name="step 9" />
+              </div>
+              <div className="[word-break:break-word] content-stretch flex gap-[4px] items-start leading-[1.35] not-italic relative shrink-0 text-[20px] w-full whitespace-nowrap" data-node-id="1:54510" data-name="Stepper">
+                <p className="font-['Inter:Medium'] font-medium relative shrink-0 text-[color:var(--neutral\/white,white)]" data-node-id="1:54511">
+                  Passo 6
+                </p>
+                <p className="font-['Inter:Regular'] font-normal relative shrink-0 text-[color:var(--neutral\/400,#989898)]" data-node-id="1:54512">
+                  / 7
+                </p>
+              </div>
+            </div>
+            <div className="backdrop-blur-[16px] border border-[rgba(239,239,239,0.16)] border-solid content-stretch flex flex-col items-start overflow-clip relative rounded-[8px] shrink-0 w-full" data-node-id="1:54513" style={{ backgroundImage: "linear-gradient(229.06327784163463deg, rgba(0, 0, 0, 0.24) 0.52072%, rgba(0, 0, 0, 0.08) 51.124%, rgba(0, 0, 0, 0.04) 99.479%)" }} data-name="Form Step">
+              <div className="content-stretch flex flex-col gap-[32px] items-start px-[32px] py-[24px] relative shrink-0 w-full" data-node-id="1:54514" data-name="Content">
+                <div className="content-stretch flex gap-[12px] items-center relative shrink-0 w-full" data-node-id="1:54515" data-name="Heading">
+                  <p className="[word-break:break-word] flex-[1_0_0] font-['Inter:Bold'] font-bold leading-[1.5] min-w-px not-italic relative text-[24px] text-[color:var(--neutral\/white,white)]" data-node-id="1:54518">
+                    Documentações Importantes
+                  </p>
+                </div>
+                <div className="content-stretch flex flex-col gap-[24px] items-start justify-center relative shrink-0 w-full" data-node-id="1:54519" data-name="Form">
+                  <div className="border-[rgba(239,239,239,0.08)] border-b border-solid content-stretch flex flex-col gap-[12px] items-start pb-[24px] relative shrink-0 w-full" data-node-id="1:54520" data-name="File Field">
+                    <div className="content-stretch flex flex-col items-start relative shrink-0 w-full" data-node-id="1:54521" data-name="Form Item / Vertical">
+                      <div className="content-stretch flex gap-[var(--space\/margin\/marginxxs,4px)] items-center pb-[var(--space\/padding\/paddingxs,8px)] relative shrink-0 w-full" data-node-id="1:54522" data-name="Input Label Vertical">
+                        <p className="[word-break:break-word] font-['Inter:Medium'] font-medium leading-[1.35] not-italic relative shrink-0 text-[14px] text-[color:var(--neutral\/white,white)] whitespace-nowrap" data-node-id="I1:54522;388:11481">
+                          Foto da sua CNH/RG (frente e verso)
+                        </p>
+                      </div>
+                      <div className="border border-[var(--active,#00a3ff)] border-dashed content-stretch flex flex-col gap-[12px] items-center px-[16px] py-[24px] relative rounded-[var(--space--2,4px)] shrink-0 w-full" data-node-id="1:54523" style={{ backgroundImage: "linear-gradient(184.05756066108228deg, rgba(255, 255, 255, 0.16) 0.52072%, rgba(255, 255, 255, 0.04) 50%, rgba(255, 255, 255, 0.01) 99.479%)" }} data-name="*Upload* / Drag and Drop">
+                        <div className="relative shrink-0 size-[24px]" data-node-id="1:54524" data-name="inbox">
+                          <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgInbox} />
+                        </div>
+                        <div className="content-stretch flex flex-col gap-[4px] items-center overflow-clip relative shrink-0 w-full" data-node-id="1:54525" data-name="Text Wrapper">
+                          <div className="[word-break:break-word] flex flex-col font-['Inter:Medium'] font-medium justify-center leading-[0] not-italic relative shrink-0 text-[14px] text-[color:var(--neutral\/100,#efefef)] text-center w-full" data-node-id="1:54526">
+                            <p className="leading-[1.35]">Clique aqui ou arraste arquivos para fazer o upload</p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div className="content-stretch flex flex-col gap-[8px] items-start relative shrink-0 w-full" data-node-id="1:54529" data-name="List - Files Uploaded">
+                      <div className="content-stretch flex gap-[var(--components\/upload\/global\/marginxs,8px)] items-start relative shrink-0 w-full" data-node-id="1:54530" data-name="Upload List Item / Basic">
+                        <div className="content-stretch flex flex-[1_0_0] gap-[var(--components\/upload\/global\/marginxs,8px)] items-center min-w-px relative" data-node-id="I1:54530;397:11746" data-name="Name Wrapper">
+                          <div className="relative shrink-0 size-[22px]" data-node-id="I1:54530;397:11747" data-name="Icon / PaperClipOutlined">
+                            <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgIconPaperClipOutlined} />
+                          </div>
+                          <div className="[word-break:break-word] flex flex-[1_0_0] flex-col font-['Inter:Regular'] font-normal justify-center leading-[0] min-w-px not-italic relative text-[14px] text-[color:var(--neutral\/200,#dcdcdc)]" data-node-id="I1:54530;397:11748">
+                            <p className="leading-[1.35]">filename.png</p>
+                          </div>
+                        </div>
+                        <div className="relative shrink-0 size-[22px]" data-node-id="I1:54530;397:11749" data-name="trash">
+                          <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgTrash} />
+                        </div>
+                      </div>
+                      <div className="content-stretch flex gap-[var(--components\/upload\/global\/marginxs,8px)] items-start relative shrink-0 w-full" data-node-id="1:54531" data-name="Upload List Item / Basic">
+                        <div className="content-stretch flex flex-[1_0_0] gap-[var(--components\/upload\/global\/marginxs,8px)] items-center min-w-px relative" data-node-id="I1:54531;397:11746" data-name="Name Wrapper">
+                          <div className="relative shrink-0 size-[22px]" data-node-id="I1:54531;397:11747" data-name="Icon / PaperClipOutlined">
+                            <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgIconPaperClipOutlined} />
+                          </div>
+                          <div className="[word-break:break-word] flex flex-[1_0_0] flex-col font-['Inter:Regular'] font-normal justify-center leading-[0] min-w-px not-italic relative text-[14px] text-[color:var(--neutral\/200,#dcdcdc)]" data-node-id="I1:54531;397:11748">
+                            <p className="leading-[1.35]">filename.png</p>
+                          </div>
+                        </div>
+                        <div className="relative shrink-0 size-[22px]" data-node-id="I1:54531;397:11749" data-name="trash">
+                          <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgTrash} />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="border-[rgba(239,239,239,0.08)] border-b border-solid content-stretch flex flex-col gap-[12px] items-start pb-[24px] relative shrink-0 w-full" data-node-id="1:54532" data-name="File Field">
+                    <div className="content-stretch flex flex-col items-start relative shrink-0 w-full" data-node-id="1:54533" data-name="Form Item / Vertical">
+                      <div className="content-stretch flex gap-[var(--space\/margin\/marginxxs,4px)] items-center pb-[var(--space\/padding\/paddingxs,8px)] relative shrink-0 w-full" data-node-id="1:54534" data-name="Input Label Vertical">
+                        <p className="[word-break:break-word] font-['Inter:Medium'] font-medium leading-[1.35] not-italic relative shrink-0 text-[14px] text-[color:var(--neutral\/white,white)] whitespace-nowrap" data-node-id="I1:54534;388:11481">
+                          Foto da CNH/RG do seu Cônjuge (frente e verso)
+                        </p>
+                      </div>
+                      <div className="border border-[var(--active,#00a3ff)] border-dashed content-stretch flex flex-col gap-[12px] items-center px-[16px] py-[24px] relative rounded-[var(--space--2,4px)] shrink-0 w-full" data-node-id="1:54535" style={{ backgroundImage: "linear-gradient(184.05756066108228deg, rgba(255, 255, 255, 0.16) 0.52072%, rgba(255, 255, 255, 0.04) 50%, rgba(255, 255, 255, 0.01) 99.479%)" }} data-name="*Upload* / Drag and Drop">
+                        <div className="relative shrink-0 size-[24px]" data-node-id="1:54536" data-name="inbox">
+                          <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgInbox} />
+                        </div>
+                        <div className="content-stretch flex flex-col gap-[4px] items-center overflow-clip relative shrink-0 w-full" data-node-id="1:54537" data-name="Text Wrapper">
+                          <div className="[word-break:break-word] flex flex-col font-['Inter:Medium'] font-medium justify-center leading-[0] not-italic relative shrink-0 text-[14px] text-[color:var(--neutral\/100,#efefef)] text-center w-full" data-node-id="1:54538">
+                            <p className="leading-[1.35]">Clique aqui ou arraste arquivos para fazer o upload</p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div className="content-stretch flex flex-col items-start relative shrink-0 w-full" data-node-id="1:54541" data-name="List - Files Uploaded">
+                      <div className="content-stretch flex gap-[var(--components\/upload\/global\/marginxs,8px)] items-start relative shrink-0 w-full" data-node-id="1:54542" data-name="Upload List Item / Basic">
+                        <div className="content-stretch flex flex-[1_0_0] gap-[var(--components\/upload\/global\/marginxs,8px)] items-center min-w-px relative" data-node-id="I1:54542;397:11746" data-name="Name Wrapper">
+                          <div className="relative shrink-0 size-[22px]" data-node-id="I1:54542;397:11747" data-name="Icon / PaperClipOutlined">
+                            <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgIconPaperClipOutlined} />
+                          </div>
+                          <div className="[word-break:break-word] flex flex-[1_0_0] flex-col font-['Inter:Regular'] font-normal justify-center leading-[0] min-w-px not-italic relative text-[14px] text-[color:var(--neutral\/200,#dcdcdc)]" data-node-id="I1:54542;397:11748">
+                            <p className="leading-[1.35]">filename.png</p>
+                          </div>
+                        </div>
+                        <div className="relative shrink-0 size-[22px]" data-node-id="I1:54542;397:11749" data-name="trash">
+                          <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgTrash} />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="border-[rgba(239,239,239,0.08)] border-b border-solid content-stretch flex flex-col gap-[12px] items-start pb-[24px] relative shrink-0 w-full" data-node-id="1:54543" data-name="File Field">
+                    <div className="content-stretch flex flex-col items-start relative shrink-0 w-full" data-node-id="1:54544" data-name="Form Item / Vertical">
+                      <div className="content-stretch flex gap-[var(--space\/margin\/marginxxs,4px)] items-center pb-[var(--space\/padding\/paddingxs,8px)] relative shrink-0 w-full" data-node-id="1:54545" data-name="Input Label Vertical">
+                        <p className="[word-break:break-word] font-['Inter:Medium'] font-medium leading-[1.35] not-italic relative shrink-0 text-[14px] text-[color:var(--neutral\/white,white)] whitespace-nowrap" data-node-id="I1:54545;388:11481">
+                          Certidão de Casamento
+                        </p>
+                      </div>
+                      <div className="border border-[var(--active,#00a3ff)] border-dashed content-stretch flex flex-col gap-[12px] items-center px-[16px] py-[24px] relative rounded-[var(--space--2,4px)] shrink-0 w-full" data-node-id="1:54546" style={{ backgroundImage: "linear-gradient(184.05756066108228deg, rgba(255, 255, 255, 0.16) 0.52072%, rgba(255, 255, 255, 0.04) 50%, rgba(255, 255, 255, 0.01) 99.479%)" }} data-name="*Upload* / Drag and Drop">
+                        <div className="relative shrink-0 size-[24px]" data-node-id="1:54547" data-name="inbox">
+                          <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgInbox} />
+                        </div>
+                        <div className="content-stretch flex flex-col gap-[4px] items-center overflow-clip relative shrink-0 w-full" data-node-id="1:54548" data-name="Text Wrapper">
+                          <div className="[word-break:break-word] flex flex-col font-['Inter:Medium'] font-medium justify-center leading-[0] not-italic relative shrink-0 text-[14px] text-[color:var(--neutral\/100,#efefef)] text-center w-full" data-node-id="1:54549">
+                            <p className="leading-[1.35]">Clique aqui ou arraste arquivos para fazer o upload</p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div className="content-stretch flex flex-col gap-[8px] items-start relative shrink-0 w-full" data-node-id="1:54552" data-name="List - Files Uploaded">
+                      <div className="content-stretch flex gap-[var(--components\/upload\/global\/marginxs,8px)] items-start relative shrink-0 w-full" data-node-id="1:54553" data-name="Upload List Item / Basic">
+                        <div className="content-stretch flex flex-[1_0_0] gap-[var(--components\/upload\/global\/marginxs,8px)] items-center min-w-px relative" data-node-id="I1:54553;397:11746" data-name="Name Wrapper">
+                          <div className="relative shrink-0 size-[22px]" data-node-id="I1:54553;397:11747" data-name="Icon / PaperClipOutlined">
+                            <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgIconPaperClipOutlined} />
+                          </div>
+                          <div className="[word-break:break-word] flex flex-[1_0_0] flex-col font-['Inter:Regular'] font-normal justify-center leading-[0] min-w-px not-italic relative text-[14px] text-[color:var(--neutral\/200,#dcdcdc)]" data-node-id="I1:54553;397:11748">
+                            <p className="leading-[1.35]">filename.png</p>
+                          </div>
+                        </div>
+                        <div className="relative shrink-0 size-[22px]" data-node-id="I1:54553;397:11749" data-name="trash">
+                          <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgTrash} />
+                        </div>
+                      </div>
+                      <div className="content-stretch flex gap-[var(--components\/upload\/global\/marginxs,8px)] items-start relative shrink-0 w-full" data-node-id="1:54554" data-name="Upload List Item / Basic">
+                        <div className="content-stretch flex flex-[1_0_0] gap-[var(--components\/upload\/global\/marginxs,8px)] items-center min-w-px relative" data-node-id="I1:54554;397:11746" data-name="Name Wrapper">
+                          <div className="relative shrink-0 size-[22px]" data-node-id="I1:54554;397:11747" data-name="Icon / PaperClipOutlined">
+                            <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgIconPaperClipOutlined} />
+                          </div>
+                          <div className="[word-break:break-word] flex flex-[1_0_0] flex-col font-['Inter:Regular'] font-normal justify-center leading-[0] min-w-px not-italic relative text-[14px] text-[color:var(--neutral\/200,#dcdcdc)]" data-node-id="I1:54554;397:11748">
+                            <p className="leading-[1.35]">filename.png</p>
+                          </div>
+                        </div>
+                        <div className="relative shrink-0 size-[22px]" data-node-id="I1:54554;397:11749" data-name="trash">
+                          <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgTrash} />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="border-[rgba(239,239,239,0.08)] border-b border-solid content-stretch flex flex-col gap-[12px] items-start pb-[24px] relative shrink-0 w-full" data-node-id="1:54555" data-name="File Field">
+                    <div className="content-stretch flex flex-col items-start relative shrink-0 w-full" data-node-id="1:54556" data-name="Form Item / Vertical">
+                      <div className="content-stretch flex gap-[var(--space\/margin\/marginxxs,4px)] items-center pb-[var(--space\/padding\/paddingxs,8px)] relative shrink-0 w-full" data-node-id="1:54557" data-name="Input Label Vertical">
+                        <p className="[word-break:break-word] font-['Inter:Medium'] font-medium leading-[1.35] not-italic relative shrink-0 text-[14px] text-[color:var(--neutral\/white,white)] whitespace-nowrap" data-node-id="I1:54557;388:11481">
+                          Foto do IPTU ( Capa com CEP e primeira página contendo a metragem do imóvel)
+                        </p>
+                      </div>
+                      <div className="border border-[var(--active,#00a3ff)] border-dashed content-stretch flex flex-col gap-[12px] items-center px-[16px] py-[24px] relative rounded-[var(--space--2,4px)] shrink-0 w-full" data-node-id="1:54558" style={{ backgroundImage: "linear-gradient(184.05756066108228deg, rgba(255, 255, 255, 0.16) 0.52072%, rgba(255, 255, 255, 0.04) 50%, rgba(255, 255, 255, 0.01) 99.479%)" }} data-name="*Upload* / Drag and Drop">
+                        <div className="relative shrink-0 size-[24px]" data-node-id="1:54559" data-name="inbox">
+                          <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgInbox} />
+                        </div>
+                        <div className="content-stretch flex flex-col gap-[4px] items-center overflow-clip relative shrink-0 w-full" data-node-id="1:54560" data-name="Text Wrapper">
+                          <div className="[word-break:break-word] flex flex-col font-['Inter:Medium'] font-medium justify-center leading-[0] not-italic relative shrink-0 text-[14px] text-[color:var(--neutral\/100,#efefef)] text-center w-full" data-node-id="1:54561">
+                            <p className="leading-[1.35]">Clique aqui ou arraste arquivos para fazer o upload</p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div className="content-stretch flex flex-col items-start relative shrink-0 w-full" data-node-id="1:54564" data-name="List - Files Uploaded">
+                      <div className="content-stretch flex gap-[var(--components\/upload\/global\/marginxs,8px)] items-start relative shrink-0 w-full" data-node-id="1:54565" data-name="Upload List Item / Basic">
+                        <div className="content-stretch flex flex-[1_0_0] gap-[var(--components\/upload\/global\/marginxs,8px)] items-center min-w-px relative" data-node-id="I1:54565;397:11746" data-name="Name Wrapper">
+                          <div className="relative shrink-0 size-[22px]" data-node-id="I1:54565;397:11747" data-name="Icon / PaperClipOutlined">
+                            <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgIconPaperClipOutlined} />
+                          </div>
+                          <div className="[word-break:break-word] flex flex-[1_0_0] flex-col font-['Inter:Regular'] font-normal justify-center leading-[0] min-w-px not-italic relative text-[14px] text-[color:var(--neutral\/200,#dcdcdc)]" data-node-id="I1:54565;397:11748">
+                            <p className="leading-[1.35]">filename.png</p>
+                          </div>
+                        </div>
+                        <div className="relative shrink-0 size-[22px]" data-node-id="I1:54565;397:11749" data-name="trash">
+                          <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgTrash} />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="border-[rgba(239,239,239,0.08)] border-b border-solid content-stretch flex flex-col gap-[12px] items-start pb-[24px] relative shrink-0 w-full" data-node-id="1:54566" data-name="File Field">
+                    <div className="content-stretch flex flex-col items-start relative shrink-0 w-full" data-node-id="1:54567" data-name="Form Item / Vertical">
+                      <div className="content-stretch flex gap-[var(--space\/margin\/marginxxs,4px)] items-center pb-[var(--space\/padding\/paddingxs,8px)] relative shrink-0 w-full" data-node-id="1:54568" data-name="Input Label Vertical">
+                        <p className="[word-break:break-word] font-['Inter:Medium'] font-medium leading-[1.35] not-italic relative shrink-0 text-[14px] text-[color:var(--neutral\/white,white)] whitespace-nowrap" data-node-id="I1:54568;388:11481">
+                          Comprovante de Endereco do Contratante
+                        </p>
+                      </div>
+                      <div className="border border-[var(--active,#00a3ff)] border-dashed content-stretch flex flex-col gap-[12px] items-center px-[16px] py-[24px] relative rounded-[var(--space--2,4px)] shrink-0 w-full" data-node-id="1:54569" style={{ backgroundImage: "linear-gradient(184.05756066108228deg, rgba(255, 255, 255, 0.16) 0.52072%, rgba(255, 255, 255, 0.04) 50%, rgba(255, 255, 255, 0.01) 99.479%)" }} data-name="*Upload* / Drag and Drop">
+                        <div className="relative shrink-0 size-[24px]" data-node-id="1:54570" data-name="inbox">
+                          <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgInbox} />
+                        </div>
+                        <div className="content-stretch flex flex-col gap-[4px] items-center overflow-clip relative shrink-0 w-full" data-node-id="1:54571" data-name="Text Wrapper">
+                          <div className="[word-break:break-word] flex flex-col font-['Inter:Medium'] font-medium justify-center leading-[0] not-italic relative shrink-0 text-[14px] text-[color:var(--neutral\/100,#efefef)] text-center w-full" data-node-id="1:54572">
+                            <p className="leading-[1.35]">Clique aqui ou arraste arquivos para fazer o upload</p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="border-[rgba(239,239,239,0.08)] border-b border-solid content-stretch flex flex-col gap-[12px] items-start pb-[24px] relative shrink-0 w-full" data-node-id="1:54578" data-name="File Field">
+                    <div className="content-stretch flex flex-col items-start relative shrink-0 w-full" data-node-id="1:54579" data-name="Form Item / Vertical">
+                      <div className="content-stretch flex gap-[var(--space\/margin\/marginxxs,4px)] items-center pb-[var(--space\/padding\/paddingxs,8px)] relative shrink-0 w-full" data-node-id="1:54580" data-name="Input Label Vertical">
+                        <p className="[word-break:break-word] font-['Inter:Medium'] font-medium leading-[1.35] not-italic relative shrink-0 text-[14px] text-[color:var(--neutral\/white,white)] whitespace-nowrap" data-node-id="I1:54580;388:11481">
+                          Extrato Bancário (Assalariado: Últimos 4 meses; PJ: Últimos 7 meses)
+                        </p>
+                      </div>
+                      <div className="border border-[var(--active,#00a3ff)] border-dashed content-stretch flex flex-col gap-[12px] items-center px-[16px] py-[24px] relative rounded-[var(--space--2,4px)] shrink-0 w-full" data-node-id="1:54581" style={{ backgroundImage: "linear-gradient(184.05756066108228deg, rgba(255, 255, 255, 0.16) 0.52072%, rgba(255, 255, 255, 0.04) 50%, rgba(255, 255, 255, 0.01) 99.479%)" }} data-name="*Upload* / Drag and Drop">
+                        <div className="relative shrink-0 size-[24px]" data-node-id="1:54582" data-name="inbox">
+                          <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgInbox} />
+                        </div>
+                        <div className="content-stretch flex flex-col gap-[4px] items-center overflow-clip relative shrink-0 w-full" data-node-id="1:54583" data-name="Text Wrapper">
+                          <div className="[word-break:break-word] flex flex-col font-['Inter:Medium'] font-medium justify-center leading-[0] not-italic relative shrink-0 text-[14px] text-[color:var(--neutral\/100,#efefef)] text-center w-full" data-node-id="1:54584">
+                            <p className="leading-[1.35]">Clique aqui ou arraste arquivos para fazer o upload</p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="border-[rgba(239,239,239,0.08)] border-b border-solid content-stretch flex flex-col gap-[12px] items-start pb-[24px] relative shrink-0 w-full" data-node-id="1:54590" data-name="File Field">
+                    <div className="content-stretch flex flex-col items-start relative shrink-0 w-full" data-node-id="1:54591" data-name="Form Item / Vertical">
+                      <div className="content-stretch flex gap-[var(--space\/margin\/marginxxs,4px)] items-center pb-[var(--space\/padding\/paddingxs,8px)] relative shrink-0 w-full" data-node-id="1:54592" data-name="Input Label Vertical">
+                        <p className="[word-break:break-word] font-['Inter:Medium'] font-medium leading-[1.35] not-italic relative shrink-0 text-[14px] text-[color:var(--neutral\/white,white)] whitespace-nowrap" data-node-id="I1:54592;388:11481">
+                          Fotos do Imóvel
+                        </p>
+                      </div>
+                      <div className="border border-[var(--active,#00a3ff)] border-dashed content-stretch flex flex-col gap-[12px] items-center px-[16px] py-[24px] relative rounded-[var(--space--2,4px)] shrink-0 w-full" data-node-id="1:54593" style={{ backgroundImage: "linear-gradient(184.05756066108228deg, rgba(255, 255, 255, 0.16) 0.52072%, rgba(255, 255, 255, 0.04) 50%, rgba(255, 255, 255, 0.01) 99.479%)" }} data-name="*Upload* / Drag and Drop">
+                        <div className="relative shrink-0 size-[24px]" data-node-id="1:54594" data-name="inbox">
+                          <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgInbox} />
+                        </div>
+                        <div className="content-stretch flex flex-col gap-[4px] items-center overflow-clip relative shrink-0 w-full" data-node-id="1:54595" data-name="Text Wrapper">
+                          <div className="[word-break:break-word] flex flex-col font-['Inter:Medium'] font-medium justify-center leading-[0] not-italic relative shrink-0 text-[14px] text-[color:var(--neutral\/100,#efefef)] text-center w-full" data-node-id="1:54596">
+                            <p className="leading-[1.35]">Clique aqui ou arraste arquivos para fazer o upload</p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div className="content-stretch flex flex-col gap-[8px] items-start relative shrink-0 w-full" data-node-id="1:54599" data-name="List - Files Uploaded">
+                      <div className="content-stretch flex gap-[var(--components\/upload\/global\/marginxs,8px)] items-start relative shrink-0 w-full" data-node-id="1:54600" data-name="Upload List Item / Basic">
+                        <div className="content-stretch flex flex-[1_0_0] gap-[var(--components\/upload\/global\/marginxs,8px)] items-center min-w-px relative" data-node-id="I1:54600;397:11746" data-name="Name Wrapper">
+                          <div className="relative shrink-0 size-[22px]" data-node-id="I1:54600;397:11747" data-name="Icon / PaperClipOutlined">
+                            <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgIconPaperClipOutlined} />
+                          </div>
+                          <div className="[word-break:break-word] flex flex-[1_0_0] flex-col font-['Inter:Regular'] font-normal justify-center leading-[0] min-w-px not-italic relative text-[14px] text-[color:var(--neutral\/200,#dcdcdc)]" data-node-id="I1:54600;397:11748">
+                            <p className="leading-[1.35]">filename.png</p>
+                          </div>
+                        </div>
+                        <div className="relative shrink-0 size-[22px]" data-node-id="I1:54600;397:11749" data-name="trash">
+                          <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgTrash} />
+                        </div>
+                      </div>
+                      <div className="content-stretch flex gap-[var(--components\/upload\/global\/marginxs,8px)] items-start relative shrink-0 w-full" data-node-id="1:54601" data-name="Upload List Item / Basic">
+                        <div className="content-stretch flex flex-[1_0_0] gap-[var(--components\/upload\/global\/marginxs,8px)] items-center min-w-px relative" data-node-id="I1:54601;397:11746" data-name="Name Wrapper">
+                          <div className="relative shrink-0 size-[22px]" data-node-id="I1:54601;397:11747" data-name="Icon / PaperClipOutlined">
+                            <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgIconPaperClipOutlined} />
+                          </div>
+                          <div className="[word-break:break-word] flex flex-[1_0_0] flex-col font-['Inter:Regular'] font-normal justify-center leading-[0] min-w-px not-italic relative text-[14px] text-[color:var(--neutral\/200,#dcdcdc)]" data-node-id="I1:54601;397:11748">
+                            <p className="leading-[1.35]">filename.png</p>
+                          </div>
+                        </div>
+                        <div className="relative shrink-0 size-[22px]" data-node-id="I1:54601;397:11749" data-name="trash">
+                          <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgTrash} />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="content-stretch flex flex-col gap-[12px] items-start pb-[24px] relative shrink-0 w-full" data-node-id="1:54602" data-name="File Field">
+                    <div className="content-stretch flex flex-col items-start relative shrink-0 w-full" data-node-id="1:54603" data-name="Form Item / Vertical">
+                      <div className="content-stretch flex gap-[var(--space\/margin\/marginxxs,4px)] items-center pb-[var(--space\/padding\/paddingxs,8px)] relative shrink-0 w-full" data-node-id="1:54604" data-name="Input Label Vertical">
+                        <p className="[word-break:break-word] font-['Inter:Medium'] font-medium leading-[1.35] not-italic relative shrink-0 text-[14px] text-[color:var(--neutral\/white,white)] whitespace-nowrap" data-node-id="I1:54604;388:11481">
+                          Matricula do Imóvel e Habite-se
+                        </p>
+                      </div>
+                      <div className="border border-[var(--neutral\/400,#989898)] border-dashed content-stretch flex flex-col gap-[12px] items-center px-[16px] py-[24px] relative rounded-[var(--space--2,4px)] shrink-0 w-full" data-node-id="1:54605" style={{ backgroundImage: "linear-gradient(184.05756066108228deg, rgba(255, 255, 255, 0.16) 0.52072%, rgba(255, 255, 255, 0.04) 50%, rgba(255, 255, 255, 0.01) 99.479%)" }} data-name="*Upload* / Drag and Drop">
+                        <div className="relative shrink-0 size-[24px]" data-node-id="1:54606" data-name="inbox">
+                          <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgInbox} />
+                        </div>
+                        <div className="content-stretch flex flex-col gap-[4px] items-center overflow-clip relative shrink-0 w-full" data-node-id="1:54607" data-name="Text Wrapper">
+                          <div className="[word-break:break-word] flex flex-col font-['Inter:Medium'] font-medium justify-center leading-[0] not-italic relative shrink-0 text-[14px] text-[color:var(--neutral\/100,#efefef)] text-center w-full" data-node-id="1:54608">
+                            <p className="leading-[1.35]">Clique aqui ou arraste arquivos para fazer o upload</p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div className="content-stretch flex items-center justify-between px-[32px] py-[16px] relative shrink-0 w-full" data-node-id="1:54614" data-name="Buttons">
+                <button className="content-stretch cursor-pointer flex gap-[8px] h-[40px] items-center opacity-0 py-[8px] relative shrink-0 w-[129px]" data-node-id="1:54615" data-name="button">
+                  <div className="relative shrink-0 size-[24px]" data-node-id="I1:54615;302:12520" data-name="arrow-left">
+                    <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgArrowLeft1} />
+                  </div>
+                  <div className="content-stretch flex items-center justify-center relative shrink-0" data-node-id="I1:54615;302:12521" data-name="Text Container">
+                    <p className="[word-break:break-word] font-['Roboto:Medium'] font-medium leading-none relative shrink-0 text-[14px] text-[color:var(--neutral\/400,#989898)] text-left tracking-[0.5px] whitespace-nowrap" data-node-id="I1:54615;302:12522" style={{ fontVariationSettings: '"wdth" 100' }}>
+                      Voltar
+                    </p>
+                  </div>
+                </button>
+                <div className="bg-[var(--active,#00a3ff)] border-2 border-[var(--active,#00a3ff)] border-solid content-stretch flex gap-[8px] items-center justify-center px-[12px] py-[8px] relative rounded-[4px] shrink-0" data-node-id="1:54616" data-name="button">
+                  <div className="content-stretch flex items-center justify-center relative shrink-0" data-node-id="I1:54616;302:12531" data-name="Text Container">
+                    <p className="[word-break:break-word] font-['Roboto:Medium'] font-medium leading-none relative shrink-0 text-[14px] text-white tracking-[0.5px] whitespace-nowrap" data-node-id="I1:54616;302:12532" style={{ fontVariationSettings: '"wdth" 100' }}>
+                      Prosseguir
+                    </p>
+                  </div>
+                  <div className="relative shrink-0 size-[24px]" data-node-id="I1:54616;302:12534" data-name="icon / jam-icons / outline & logos / arrow-right">
+                    <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgIconJamIconsOutlineLogosArrowRight} />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}

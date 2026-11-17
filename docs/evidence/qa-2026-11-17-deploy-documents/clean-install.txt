@@ -1,0 +1,21 @@
+npm warn deprecated eslint@9.39.5: This version is no longer supported. Please see https://eslint.org/version-support for other options.
+
+> strategy-analytics@0.0.1 postinstall
+> node scripts/security/patch-picomatch.mjs
+
+Applied verified picomatch repeated-extglob mitigation
+
+added 439 packages, and audited 440 packages in 1m
+
+128 packages are looking for funding
+  run `npm fund` for details
+
+16 vulnerabilities (1 moderate, 15 high)
+
+To address issues that do not require attention, run:
+  npm audit fix
+
+To address all issues (including breaking changes), run:
+  npm audit fix --force
+
+Run `npm audit` for details.

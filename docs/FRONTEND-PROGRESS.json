@@ -11,12 +11,12 @@
   },
   "metrics": {
     "total": 279,
-    "done": 187,
+    "done": 188,
     "validation": 85,
-    "adjustment": 7,
-    "implemented": 272,
-    "implementedPercent": 97.5,
-    "readyPercent": 67
+    "adjustment": 6,
+    "implemented": 273,
+    "implementedPercent": 97.8,
+    "readyPercent": 67.4
   },
   "withoutLinkedFigmaReference": {
     "count": 13,
@@ -5286,12 +5286,12 @@
       "link": "[1:54430](https://www.figma.com/design/BaDXlWpxbIoY4azOaQnXgv?node-id=1-54430)",
       "counted": true,
       "group": "P06",
-      "category": "Ajuste de front",
-      "front": "adjustment",
+      "category": "Bloqueio backend",
+      "front": "done",
       "blockers": [
         "backend"
       ],
-      "reason": "Documentação do imóvel ainda requer composição específica do frame e contrato de upload/vínculo da solicitação; documentos de empréstimos existentes são outro fluxo.",
+      "reason": "Documentação de imóvel composta com os oito grupos do Figma, ativos nativos, passo 6/7, listagem/remoção, erro/retry e estado sem integração. Componentes reais testados no navegador local; envio/persistência integrados e pedido de ajuda dependem do contrato da solicitação.",
       "sources": [
         "portal:src/system/pages/loan/LoanPage.vue",
         "portal:src/system/pages/leverage/LeveragePage.vue",
@@ -5300,7 +5300,7 @@
       ],
       "evidence": [
         "docs/evidence/qa-2026-11-16-inventory/api-contract-review.json",
-        "docs/evidence/qa-2026-11-17-loan-offers/results.json"
+        "docs/evidence/qa-2026-11-17-deploy-documents/results.json"
       ],
       "browser": "código confirmado; fluxos legados não homologados",
       "historicalCategory": "Ajuste de front"

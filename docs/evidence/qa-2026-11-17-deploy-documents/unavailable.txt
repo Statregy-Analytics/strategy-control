@@ -1,0 +1,49 @@
+- main:
+  - navigation:
+    - generic: Prévia local controlada · sem API
+    - button "Alternar integração" [active]
+    - button "Falhar leitura"
+    - button "Alternar falha envio"
+  - button "Voltar"
+  - heading "Faça uma Simulação com seu Imóvel em Garantia" [level=1]
+  - paragraph:
+    - strong: Preencha corretamente com seus dados
+    - text: para iniciarmos a simulação. Depois, analisaremos seu perfil e retornaremos com uma
+    - strong: proposta especial para você.
+  - paragraph: Envio de documentos indisponível no momento.
+  - button "Solicitar Ajuda para um Assessor" [disabled]
+  - progressbar
+  - progressbar
+  - progressbar
+  - progressbar
+  - progressbar
+  - progressbar
+  - text: Passo 6 / 7
+  - heading "Documentações Importantes" [level=2]
+  - generic: Foto da sua CNH/RG (frente e verso)
+  - generic: Clique aqui ou arraste arquivos para fazer o upload
+  - button "Foto da sua CNH/RG (frente e verso) Clique aqui ou arraste arquivos para fazer o upload" [disabled]
+  - generic: Foto da CNH/RG do seu Cônjuge (frente e verso)
+  - generic: Clique aqui ou arraste arquivos para fazer o upload
+  - button "Foto da CNH/RG do seu Cônjuge (frente e verso) Clique aqui ou arraste arquivos para fazer o upload" [disabled]
+  - generic: Certidão de Casamento
+  - generic: Clique aqui ou arraste arquivos para fazer o upload
+  - button "Certidão de Casamento Clique aqui ou arraste arquivos para fazer o upload" [disabled]
+  - generic: Foto do IPTU ( Capa com CEP e primeira página contendo a metragem do imóvel)
+  - generic: Clique aqui ou arraste arquivos para fazer o upload
+  - button "Foto do IPTU ( Capa com CEP e primeira página contendo a metragem do imóvel) Clique aqui ou arraste arquivos para fazer o upload" [disabled]
+  - generic: Comprovante de Endereco do Contratante
+  - generic: Clique aqui ou arraste arquivos para fazer o upload
+  - button "Comprovante de Endereco do Contratante Clique aqui ou arraste arquivos para fazer o upload" [disabled]
+  - generic: "Extrato Bancário (Assalariado: Últimos 4 meses; PJ: Últimos 7 meses)"
+  - generic: Clique aqui ou arraste arquivos para fazer o upload
+  - 'button "Extrato Bancário (Assalariado: Últimos 4 meses; PJ: Últimos 7 meses) Clique aqui ou arraste arquivos para fazer o upload" [disabled]'
+  - generic: Fotos do Imóvel
+  - generic: Clique aqui ou arraste arquivos para fazer o upload
+  - button "Fotos do Imóvel Clique aqui ou arraste arquivos para fazer o upload" [disabled]
+  - generic: Matricula do Imóvel e Habite-se
+  - generic: Clique aqui ou arraste arquivos para fazer o upload
+  - button "Matricula do Imóvel e Habite-se Clique aqui ou arraste arquivos para fazer o upload" [disabled]
+  - button "Prosseguir" [disabled]:
+    - generic: Prosseguir
+  - status: Prosseguiu sem sucesso financeiro fictício

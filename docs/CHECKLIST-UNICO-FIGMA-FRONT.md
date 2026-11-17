@@ -10,15 +10,28 @@ Atualizado em 2026-11-17. Contagem por **telas e estados independentes do Figma*
 | Situação | Quantidade |
 | --- | ---: |
 | Total inventariado | **279** |
-| Prontas no frontend | **187** |
+| Prontas no frontend | **188** |
 | Implementadas, aguardando revalidação/comparação completa | **85** |
-| Ainda exigem implementação, complemento ou correção | **7** |
-| Com implementação existente (prontas + revalidação) | **272 / 279 (97,5%)** |
+| Ainda exigem implementação, complemento ou correção | **6** |
+| Com implementação existente (prontas + revalidação) | **273 / 279 (97,8%)** |
 
-**Para encerrar o front faltam 7 itens de implementação/ajuste e 85 de revalidação.** “Pronto no frontend” não significa fluxo integrado liberado: dependências de backend/designer podem afetar também telas prontas. Os números não classificam toda pendência como tela nova nem como problema de API. A comparação de Crédito, carteira global e editor editorial que não foi concluída integralmente permanece em revalidação.
+**Para encerrar o front faltam 6 itens de implementação/ajuste e 85 de revalidação.** “Pronto no frontend” não significa fluxo integrado liberado: dependências de backend/designer podem afetar também telas prontas. Os números não classificam toda pendência como tela nova nem como problema de API. A comparação de Crédito, carteira global e editor editorial que não foi concluída integralmente permanece em revalidação.
 
 Fonte por frame: [progresso atual](FRONTEND-PROGRESS.json). A base anterior permanece histórica; [atualizações com evidências](FRONTEND-PROGRESS-OVERRIDES.json) registram cada mudança. Ao finalizar **cada entrega**, atualizar os IDs comprovados, executar `node scripts/frontend-progress.mjs` e informar este panorama na resposta final.
 <!-- frontend-progress:end -->
+
+## Entrega 17/11 — mitigação do deploy e documentação de imóvel
+
+**Publicado em homologação:** `2e4ed10`, incluindo o lote anterior `265dd49`. [CI 44149644465 aprovado](https://github.com/WillTbn/Strategy-analytics-v2/actions/runs/44149644465): auditoria, testes, build, upload e ativação. Chunk e seis ativos novos conferidos por HTTP. A rota publicada carregou a proteção de Nível 3; a sessão atual não permite comparar a tela inteira em homologação. Os estados preenchidos foram validados no navegador local, sem contornar o nível.
+
+- [x] Proteção conservadora de `picomatch` aplicada no postinstall e verificada por versão/SHA-256; instalação limpa e regressões com timeout passaram. A auditoria integral continua ativa. Só o advisory exato, já mitigado no código instalado, e os seus efeitos transitivos são aceitos; novos alertas altos/críticos continuam bloqueando. O relatório npm ainda lista o alerta por não existir release oficial corrigida.
+- [x] Frame 1:54430: oito grupos documentais, ativos nativos, dois arquivos de identificação, remoção, falha/retry, leitura, estado sem API e responsividade. 461 testes passaram. Nenhum campo/ação extra.
+- [x] Prévia controlada e dados fictícios ficam apenas nas evidências; harness removido antes do build/publicação.
+- [ ] Validação integrada de upload/retomada/remoção e ajuda depende da API da solicitação. Não confundir com documentos de empréstimos já cadastrados.
+- [ ] Seis ajustes restantes: quatro detalhes extensos de empréstimos, documentação de automóvel com inconsistência no desenho e extrato corrigido; as 85 revalidações seguem individualmente no inventário. Isso não significa seis telas novas nem 100% homologado.
+
+[Evidências e limites](evidence/qa-2026-11-17-deploy-documents/results.json) · [Publicação](evidence/qa-2026-11-17-deploy-documents/publication.json). Nenhuma nova superfície sem referência; 13 anteriores continuam registradas para Éric.
+
 
 ## Entrega 17/11 — catálogo e estados de ofertas de empréstimos/consórcio
 
@@ -1162,7 +1175,7 @@ Legenda vigente: classificação de 16/11 por código e evidências, detalhada e
 | [1:54054](https://www.figma.com/design/BaDXlWpxbIoY4azOaQnXgv?node-id=1-54054)     | [UI] FLUXO - SOLICITAR EMPRÉSTIMO -                                          | Pronto no front · P06 |
 | [1:54146](https://www.figma.com/design/BaDXlWpxbIoY4azOaQnXgv?node-id=1-54146)     | [UI] FLUXO - SOLICITAR EMPRÉSTIMO -                                          | Pronto no front · P06 |
 | [1:54266](https://www.figma.com/design/BaDXlWpxbIoY4azOaQnXgv?node-id=1-54266)     | [UI] FLUXO - SOLICITAR EMPRÉSTIMO -                                          | Pronto no front · P06 |
-| [1:54430](https://www.figma.com/design/BaDXlWpxbIoY4azOaQnXgv?node-id=1-54430)     | [UI] FLUXO - SOLICITAR EMPRÉSTIMO -                                          | Implementação/ajuste pendente · P06 |
+| [1:54430](https://www.figma.com/design/BaDXlWpxbIoY4azOaQnXgv?node-id=1-54430)     | [UI] FLUXO - SOLICITAR EMPRÉSTIMO -                                          | Pronto no front · P06 |
 | [1:54617](https://www.figma.com/design/BaDXlWpxbIoY4azOaQnXgv?node-id=1-54617)     | [UI] FLUXO - SOLICITAR EMPRÉSTIMO -                                          | Implementação/ajuste pendente · P06 |
 | [1:54810](https://www.figma.com/design/BaDXlWpxbIoY4azOaQnXgv?node-id=1-54810)     | OFERTAS CONSÓRCIO - LISTA                                                    | Pronto no front · P06 |
 | [1:55081](https://www.figma.com/design/BaDXlWpxbIoY4azOaQnXgv?node-id=1-55081)     | OFERTAS CONSÓRCIO - CARDS                                                    | Pronto no front · P06 |

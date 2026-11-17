@@ -1,0 +1,11 @@
+<template><main style="background:linear-gradient(230deg,#791823 0%,#330a0f 9%,#090c15 39%,#09293e 73%,#114d76 100%);min-height:100vh"><nav style="padding:16px;display:flex;gap:12px;flex-wrap:wrap"><span>Prévia local controlada · sem API</span><button @click="available=!available;revision++">Alternar integração</button><button @click="failRead=true;revision++">Falhar leitura</button><button @click="failWrite=!failWrite">Alternar falha envio</button></nav><property-loan-documents :key="revision" :reader="available?read:null" :uploader="available?upload:null" :remover="available?remove:null" :can-continue="available" :proceed-action="available?proceed:null" :help-action="available?help:null" @back="message='Voltou'"/><p role="status" style="padding:16px">{{message}}</p></main></template>
+<script setup>
+import{ref}from'vue';import PropertyLoanDocuments from './system/components/loan/PropertyLoanDocuments.vue';
+const available=ref(true),revision=ref(0),failRead=ref(false),failWrite=ref(true),message=ref('');let sequence=0;
+let rows=[{id:'qa-1',group:'identification',name:'frente-ficticia.pdf'},{id:'qa-2',group:'identification',name:'verso-ficticio.pdf'},{id:'qa-3',group:'photos',name:'foto-ficticia-com-nome-longo-para-conferir-quebra-sem-estouro-no-card.png'}];
+async function read(){if(failRead.value){failRead.value=false;throw Error('qa')}return rows.map(r=>({...r}))}
+async function upload(group,file){if(failWrite.value)throw Error('qa');const row={id:'upload-'+(++sequence),name:file.name,group};rows.push(row);return row}
+async function remove(file){if(failWrite.value)throw Error('qa');rows=rows.filter(r=>r.id!==file.id);return{removed:true}}
+async function proceed(){if(failWrite.value)throw Error('qa');message.value='Prosseguiu sem sucesso financeiro fictício'}
+async function help(){message.value='Ajuda acionada no teste controlado'}
+</script>

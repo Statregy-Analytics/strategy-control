@@ -1,0 +1,56 @@
+{
+  "entryStatus": 200,
+  "scripts": [
+    {
+      "path": "/assets/index-DXZYnKrw.js",
+      "status": 200,
+      "documentationChunk": [
+        "assets/PropertyLoanDocumentsPage-synAdgie.js",
+        "component:()=>H(()=>import(`./PropertyLoanDocumentsPage-synAdgie.js"
+      ]
+    },
+    {
+      "path": "assets/PropertyLoanDocumentsPage-synAdgie.js",
+      "status": 200,
+      "hasUnavailableMessage": true
+    }
+  ],
+  "assets": [
+    {
+      "name": "attachment.svg",
+      "status": 200,
+      "contentType": "image/svg+xml",
+      "matchesLocal": true
+    },
+    {
+      "name": "house.png",
+      "status": 200,
+      "contentType": "image/png",
+      "matchesLocal": true
+    },
+    {
+      "name": "inbox.svg",
+      "status": 200,
+      "contentType": "image/svg+xml",
+      "matchesLocal": true
+    },
+    {
+      "name": "messages.svg",
+      "status": 200,
+      "contentType": "image/svg+xml",
+      "matchesLocal": true
+    },
+    {
+      "name": "star.svg",
+      "status": 200,
+      "contentType": "image/svg+xml",
+      "matchesLocal": true
+    },
+    {
+      "name": "trash.svg",
+      "status": 200,
+      "contentType": "image/svg+xml",
+      "matchesLocal": true
+    }
+  ]
+}

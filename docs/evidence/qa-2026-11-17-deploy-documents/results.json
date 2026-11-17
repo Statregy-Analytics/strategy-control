@@ -1,0 +1,42 @@
+{
+  "date": "2026-11-17",
+  "frame": "1:54430",
+  "frontend": "Documentações Importantes de imóvel; oito grupos sem campos ou ações extras.",
+  "browserLocal": [
+    "Composição desktop: duas colunas, painel de 680px e ativos carregados.",
+    "390px: clientWidth e scrollWidth de 375px; nenhum overflow horizontal.",
+    "Falha de remoção preserva arquivo; nova tentativa confirmada remove.",
+    "Falha ao prosseguir preserva lista; retry aciona somente callback controlado.",
+    "Erro de leitura impede ações; Tentar novamente recupera lista.",
+    "Sem adaptadores: oito uploads, ajuda e Prosseguir desabilitados; aviso não promete persistência inexistente."
+  ],
+  "automatedTests": 461,
+  "limits": [
+    "Arquivos preenchidos e callbacks são fictícios locais; não foram enviados à API.",
+    "Falta API de documentação vinculada à solicitação e ajuda ao assessor; endpoints de documentos de empréstimos existentes continuam preservados.",
+    "Documentação de automóvel ainda depende da correção do desenho que mostra imóvel/IPTU."
+  ],
+  "security": {
+    "mitigation": "Recusa de extglobs repetidos no parser antes da geração de regex, com versão e fingerprints fixos.",
+    "audit": "npm audit integral permanece; exceção limitada ao advisory exato apenas com proteção instalada e regressões passando. Outros altos/críticos bloqueiam.",
+    "npmAuditStillReports": "O registry ainda lista picomatch vulnerável, pois não há release oficial corrigida; esta é mitigação local documentada.",
+    "cleanInstall": "npm ci e gate auditados em /tmp/strategy-security-ci, sem interromper os servidores locais."
+  },
+  "newSurfacesWithoutFigma": 0,
+  "publication": "Publicado e ativado com CI completo aprovado; assets e chunk conferidos por HTTP. Navegador de homologação validou gate Nível 3. Ver publication.json.",
+  "portalCommits": {
+    "security": "8b25573",
+    "documentation": "2e4ed1032daedd950d44477194b55c2b45835490"
+  },
+  "checks": {
+    "portalLint": "passed",
+    "portalBuild": "passed; última correção de borda incluída na compilação CI",
+    "portalTests": "461 passed",
+    "cleanInstallAndAudit": "passed",
+    "scopedDiffCheck": "passed",
+    "ci": "Instalação, audit, lint, 461 testes, build, upload e ativação passaram na versão final.",
+    "adminLint": "passed",
+    "adminBuild": "passed"
+  },
+  "hmlBrowserLimit": "Sessão atual abaixo do Nível 3: comparação completa da tela publicada não executada nessa conta. Isso é restrição esperada de nível/massa, não bug de backend."
+}

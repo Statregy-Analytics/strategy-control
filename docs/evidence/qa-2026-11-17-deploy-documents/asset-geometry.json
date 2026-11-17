@@ -1,0 +1,85 @@
+{
+  "assets": [
+    {
+      "h": 40,
+      "loaded": true,
+      "src": "/figma/loan-request/back.svg",
+      "w": 40
+    },
+    {
+      "h": 159.234375,
+      "loaded": true,
+      "src": "/figma/loan-documents/house.png",
+      "w": 291.015625
+    },
+    {
+      "h": 24,
+      "loaded": true,
+      "src": "/figma/loan-documents/star.svg",
+      "w": 24
+    },
+    {
+      "h": 24,
+      "loaded": true,
+      "src": "/figma/loan-documents/messages.svg",
+      "w": 24
+    },
+    {
+      "h": 24,
+      "loaded": true,
+      "src": "/figma/loan-documents/inbox.svg",
+      "w": 24
+    },
+    {
+      "h": 24,
+      "loaded": true,
+      "src": "/figma/loan-documents/inbox.svg",
+      "w": 24
+    },
+    {
+      "h": 24,
+      "loaded": true,
+      "src": "/figma/loan-documents/inbox.svg",
+      "w": 24
+    },
+    {
+      "h": 24,
+      "loaded": true,
+      "src": "/figma/loan-documents/inbox.svg",
+      "w": 24
+    },
+    {
+      "h": 24,
+      "loaded": true,
+      "src": "/figma/loan-documents/inbox.svg",
+      "w": 24
+    },
+    {
+      "h": 24,
+      "loaded": true,
+      "src": "/figma/loan-documents/inbox.svg",
+      "w": 24
+    },
+    {
+      "h": 24,
+      "loaded": true,
+      "src": "/figma/loan-documents/inbox.svg",
+      "w": 24
+    },
+    {
+      "h": 24,
+      "loaded": true,
+      "src": "/figma/loan-documents/inbox.svg",
+      "w": 24
+    },
+    {
+      "h": 24,
+      "loaded": true,
+      "src": "/figma/loan-request/next.svg",
+      "w": 24
+    }
+  ],
+  "client": 1265,
+  "scroll": 1265,
+  "width": 1280
+}

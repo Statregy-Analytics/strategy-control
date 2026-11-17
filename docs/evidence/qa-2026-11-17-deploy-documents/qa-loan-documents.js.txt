@@ -1,0 +1,1 @@
+import {createApp} from 'vue';import {Quasar} from 'quasar';import 'quasar/dist/quasar.css';import Review from './src/qa-loan-documents.vue';createApp(Review).use(Quasar,{config:{brand:{primary:'#00a3ff'}}}).mount('#q-app');

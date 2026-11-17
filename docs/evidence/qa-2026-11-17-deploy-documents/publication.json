@@ -1,0 +1,13 @@
+{
+  "published": true,
+  "commit": "2e4ed1032daedd950d44477194b55c2b45835490",
+  "run": "https://github.com/WillTbn/Strategy-analytics-v2/actions/runs/44149644465",
+  "conclusion": "success",
+  "includedPreviousBatch": "265dd49 (catálogo/ofertas/consórcio/colateral antes bloqueados no audit)",
+  "audit": "success; npm audit integral mais verificação da mitigação de fonte e regressões",
+  "upload": "success",
+  "activate": "success",
+  "http": "Entrada e chunk PropertyLoanDocumentsPage retornaram 200; seis ativos nativos iguais aos arquivos locais. Ver http-publication.json.",
+  "browser": "Rota publicada carregou a proteção de Nível 3 com a sessão atual. A conta não satisfaz o nível; não foi promovida nem a proteção contornada.",
+  "limits": "Tela preenchida, falhas, remoção e retomada testadas no navegador local com dados controlados. Envio/persistência reais continuam dependentes da API de solicitação. Não declarar fluxo financeiro homologado."
+}
