@@ -12,9 +12,10 @@
     "test": "node --experimental-vm-modules --test tests/*.test.mjs",
     "dev": "quasar dev",
     "build": "quasar build",
-    "postinstall": "quasar prepare",
+    "postinstall": "node scripts/security/patch-picomatch.mjs && quasar prepare",
     "predev": "node scripts/prepare-pdf-assets.mjs",
-    "prebuild": "node scripts/prepare-pdf-assets.mjs"
+    "prebuild": "node scripts/prepare-pdf-assets.mjs",
+    "audit:security": "node scripts/security/audit.mjs"
   },
   "dependencies": {
     "@quasar/extras": "^1.16.4",
@@ -49,5 +50,8 @@
   "allowScripts": {
     "@parcel/watcher@2.6.0": true,
     "esbuild@0.25.12": true
+  },
+  "overrides": {
+    "picomatch": "4.0.7"
   }
 }

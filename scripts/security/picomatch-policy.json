@@ -1,0 +1,8 @@
+{
+  "advisory": "https://github.com/advisories/GHSA-fc5q-39xc-vjpf",
+  "version": "4.0.7",
+  "originalSha256": "4e1e05447668aa1e94366c5516a2bcd8f5fff800cc92b1d0cd7d77703b8618c4",
+  "patchedSha256": "685fa92181d16ccff7b0c29da6e500d0ff603f902213b977470b65ad04bdbc42",
+  "needle": "  if (typeof input !== 'string') {\n    throw new TypeError('Expected a string');\n  }\n",
+  "guard": "\n  // Local GHSA-fc5q-39xc-vjpf mitigation: reject repeated extglobs before regex generation.\n  // Deliberately conservative: this build does not support +(...) or *(...).\n  if (/[+*]\\(/.test(input)) {\n    throw new SyntaxError('Repeated extglobs are disabled by the build security policy');\n  }\n"
+}
