@@ -1,0 +1,89 @@
+{
+  "commit": "594624c18cd61906e9a587eff94a591749fa0c47",
+  "run": 44196297311,
+  "url": "https://github.com/Statregy-Analytics/strategy-control/actions/runs/44196297311",
+  "assets": [
+    {
+      "path": "public/icons/publication/editor-index.svg",
+      "status": 200,
+      "matchesLocal": true,
+      "sha256": "1572f54f0cf1fb05e8736f29bcfdcd8dfe97cb399ad0eeb943fb5599aeb2436b"
+    },
+    {
+      "path": "public/icons/publication/editor-notifications.svg",
+      "status": 200,
+      "matchesLocal": true,
+      "sha256": "fd7e224f6037c986b4c1ec88e07caf14d522d803f3f6825cdaa0957c7d38f2dd"
+    },
+    {
+      "path": "public/icons/publication/editor-theme-plus.svg",
+      "status": 200,
+      "matchesLocal": true,
+      "sha256": "dfef3b250ec40ed56d72c144151343c0042808c756c330a0ec8cf848becc3839"
+    },
+    {
+      "path": "public/icons/publication/editor-cover-empty.svg",
+      "status": 200,
+      "matchesLocal": true,
+      "sha256": "a31beac37b31f8113a9922de6980038fa44c70532bf213296c7bb91c92c6c708"
+    },
+    {
+      "path": "public/icons/publication/editor-publish.svg",
+      "status": 200,
+      "matchesLocal": true,
+      "sha256": "147560e3f8358fcea062da5b0a85c7cd98439c91b89b220c488d0d453f785501"
+    },
+    {
+      "path": "public/icons/publication/editor-information.svg",
+      "status": 200,
+      "matchesLocal": true,
+      "sha256": "4f78c4e15ffec9d4a08d952012cd37c999f3aa625ff1cac8a40cf61c7cdbbebf"
+    },
+    {
+      "path": "public/icons/publication/editor-preview.svg",
+      "status": 200,
+      "matchesLocal": true,
+      "sha256": "43b1f4e23682298047a6b015e44e08534682602ae29137f80a6406f7eda94df3"
+    },
+    {
+      "path": "public/icons/publication/editor-back.svg",
+      "status": 200,
+      "matchesLocal": true,
+      "sha256": "ed67668a0847e42ccdfd6abaa317fcf017aae773bb1b2dc6006437b008ce0d2b"
+    },
+    {
+      "path": "public/icons/publication/editor-author-plus.svg",
+      "status": 200,
+      "matchesLocal": true,
+      "sha256": "0e8dcaef684c5e87ddd87d130175f4bc0e8e9cc61ab1e2e8ca3f179c11e846e1"
+    },
+    {
+      "path": "public/icons/publication/editor-save.svg",
+      "status": 200,
+      "matchesLocal": true,
+      "sha256": "ed62ba5a7c37af1accd66458f3c0f6cf4a2b0805eb4c0bad778e170f94e67b54"
+    },
+    {
+      "path": "public/icons/publication/editor-cover-heading.svg",
+      "status": 200,
+      "matchesLocal": true,
+      "sha256": "c5caa5e13e35de4b87c4ebb21463502c960ebc2f3e2ba5bd03dd9788d6aef1e6"
+    },
+    {
+      "path": "public/icons/publication/editor-related.svg",
+      "status": 200,
+      "matchesLocal": true,
+      "sha256": "da6c4d5977361281cd5a7dcb790a55d83c774595b66abea3d99e848d41782f07"
+    },
+    {
+      "path": "public/icons/publication/editor-chevron.svg",
+      "status": 200,
+      "matchesLocal": true,
+      "sha256": "eea1d7d8daca2d4943179e58ead13109995aac1373f1979c2b493b55f6d0a638"
+    }
+  ],
+  "entryScripts": [
+    "/assets/index-BDs6SdHs.js"
+  ],
+  "browser": "Report files and one-page PDF render, WAV metadata duration=1/readyState=4, additive attachments, validation/unavailable save, mobile390 no overflow; Insight cover/preview; Official fields/83px textarea; archived read-only and real history. No writes to announcement records."
+}

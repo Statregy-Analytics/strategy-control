@@ -1,0 +1,47 @@
+{
+  "date": "2026-11-17",
+  "frames": [
+    "1484:96882",
+    "1484:97193",
+    "1484:97530",
+    "1484:97906"
+  ],
+  "figmaFile": "i2jizg7UtPyg3KjAOvuFtI",
+  "references": "Full design context and screenshot recovered separately for all four frames in this review. Native assets copied without geometry edits.",
+  "localBrowser": {
+    "passed": [
+      "Insight: title/body/theme and customer preview",
+      "Official: required title validation, field layout, 83px body textarea",
+      "Report: empty PDF rejected, valid fictitious one-page PDF rendered, WAV selected",
+      "Report: two successive complementary selections preserve earlier files and deduplicate",
+      "Cover: valid PNG preview; invalid text file refused without replacing the PNG",
+      "Archived existing announcement: fields read-only, save/publish disabled, real independent history loaded",
+      "390px mobile report: one column, no horizontal overflow after responsive layout settled",
+      "Native icons all loaded"
+    ],
+    "writes": "No announcement created, published, archived or changed. No client notifications dispatched. File previews local only."
+  },
+  "automation": {
+    "tests": 423,
+    "lint": "passed, including final presentation change",
+    "audit": "passed with existing verified picomatch mitigation; full audit remains enabled",
+    "build": "local passed; CI build passed on final committed source",
+    "diffCheck": "scoped and staged passed"
+  },
+  "remainingFront": [
+    "CO04/CO05: real block editor/media insertion and H2/H3 index are incomplete. Plain textarea is not a completed rich editor. Reclassified to adjustment.",
+    "CO06: layout and file interactions reviewed, but index behavior without body editor remains unvalidated; retain validation."
+  ],
+  "designer": [
+    "References show media hint but not opened block/media selector or H2/H3 controls. Need these states to finish without inventing UI.",
+    "Report shows a H2/H3 index but has PDF and no body editor; define PDF outline versus another source.",
+    "Scheduling choice exists, but opened date/time controls are not in the recovered frames."
+  ],
+  "backend": [
+    "Announcement POST/PUT/publish already exist; metadata contract lacks editorial type, author, themes, cover/report/audio/attachments, scheduling and push/email preferences. Preserve category/audience; do not silently drop extra settings.",
+    "New editorial creation and unsupported extras are explicitly unavailable, without fake success. Existing plain title/summary/body edit integration remains."
+  ],
+  "publication": "https://github.com/Statregy-Analytics/strategy-control/actions/runs/44196297311",
+  "unreferencedSurfaces": 13,
+  "homologationBrowser": "Report files and one-page PDF render, WAV metadata duration=1/readyState=4, additive attachments, validation/unavailable save, mobile390 no overflow; Insight cover/preview; Official fields/83px textarea; archived read-only and real history. No writes to announcement records."
+}

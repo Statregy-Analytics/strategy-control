@@ -678,6 +678,26 @@
       "front": "done",
       "reason": "Referências de alta fidelidade comparadas aos componentes reais: lista/cards/Kanban, seletor de modo, etapas padrão/atual e seleções tipo/cliente. Navegador local: dados controlados, vazios, campos ausentes, abertura por teclado/coluna fora da área visível e responsividade; consulta de clientes real. Kanban não inventa etapa a partir de status; projeção comercial e criação inicial seguem limites HTTP documentados.",
       "evidence": "docs/evidence/qa-2026-11-17-credit-directory/results.json"
+    },
+    "1484:96882": {
+      "front": "adjustment",
+      "reason": "CO04 comparado: composição/ativos corrigidos, prévia e capa testadas. Editor de blocos/mídia e H2/H3 ainda incompleto; não aprovar textarea como editor completo. Precisa estados abertos do designer e contrato editorial da API.",
+      "evidence": "docs/evidence/qa-2026-11-17-editor/results.json"
+    },
+    "1484:97193": {
+      "front": "adjustment",
+      "reason": "CO05 comparado: composição/ativos e obrigatórios corrigidos. Blocos/mídia e índice H2/H3 ainda precisam implementação e referência dos controles; persistência de metadados depende da API.",
+      "evidence": "docs/evidence/qa-2026-11-17-editor/results.json"
+    },
+    "1484:97530": {
+      "front": "validation",
+      "reason": "CO06: composição, PDF/áudio/anexos sucessivos e celular testados. Índice H2/H3 sem editor de corpo não está definido; reter comparação completa até esclarecer a origem do índice, sem inventar controles.",
+      "evidence": "docs/evidence/qa-2026-11-17-editor/results.json"
+    },
+    "1484:97906": {
+      "front": "done",
+      "reason": "Painel editorial: composição, ativos nativos, estados de publicação, notificações e histórico real de arquivado conferidos; campos bloqueados e ações impedidas sem sucesso fictício. Agendamento/gravação editorial ampliada dependem do contrato HTTP e do estado aberto do designer.",
+      "evidence": "docs/evidence/qa-2026-11-17-editor/results.json"
     }
   }
 }

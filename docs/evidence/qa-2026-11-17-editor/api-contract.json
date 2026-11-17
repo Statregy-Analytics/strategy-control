@@ -1,0 +1,179 @@
+{
+  "source": "https://strategyanalytics.codebiz.com.br/openapi/v1.json",
+  "checkedAt": "2026-11-17",
+  "paths": {
+    "/api/v1/admin/announcements": [
+      "post",
+      "get"
+    ],
+    "/api/v1/admin/announcements/{announcementId}": [
+      "get",
+      "put"
+    ],
+    "/api/v1/admin/announcements/{announcementId}/publish": [
+      "post"
+    ],
+    "/api/v1/admin/announcements/{announcementId}/archive": [
+      "post"
+    ],
+    "/api/v1/admin/announcements/{announcementId}/history": [
+      "get"
+    ],
+    "/api/v1/admin/announcements/{announcementId}/reads": [
+      "get"
+    ]
+  },
+  "schemas": {
+    "AnnouncementRequest": {
+      "required": [
+        "title",
+        "summary",
+        "body",
+        "category",
+        "audience",
+        "clientIds",
+        "contractIds"
+      ],
+      "type": "object",
+      "properties": {
+        "title": {
+          "type": [
+            "null",
+            "string"
+          ]
+        },
+        "summary": {
+          "type": [
+            "null",
+            "string"
+          ]
+        },
+        "body": {
+          "type": [
+            "null",
+            "string"
+          ]
+        },
+        "category": {
+          "type": [
+            "null",
+            "string"
+          ]
+        },
+        "audience": {
+          "type": [
+            "null",
+            "string"
+          ]
+        },
+        "clientIds": {
+          "type": [
+            "null",
+            "array"
+          ],
+          "items": {
+            "type": "string",
+            "format": "uuid",
+            "example": "3fa85f64-5717-4562-b3fc-2c963f66afa6"
+          }
+        },
+        "contractIds": {
+          "type": [
+            "null",
+            "array"
+          ],
+          "items": {
+            "type": "string",
+            "format": "uuid",
+            "example": "3fa85f64-5717-4562-b3fc-2c963f66afa6"
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "AnnouncementResponse": {
+      "required": [
+        "id",
+        "publicCode",
+        "title",
+        "summary",
+        "body",
+        "category",
+        "status",
+        "audience",
+        "readCount",
+        "createdAtUtc",
+        "updatedAtUtc",
+        "publishedAtUtc",
+        "archivedAtUtc"
+      ],
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "format": "uuid",
+          "example": "3fa85f64-5717-4562-b3fc-2c963f66afa6"
+        },
+        "publicCode": {
+          "type": "string"
+        },
+        "title": {
+          "type": "string"
+        },
+        "summary": {
+          "type": [
+            "null",
+            "string"
+          ]
+        },
+        "body": {
+          "type": "string"
+        },
+        "category": {
+          "type": "string"
+        },
+        "status": {
+          "type": "string"
+        },
+        "audience": {
+          "$ref": "#/components/schemas/AnnouncementAudienceResponse"
+        },
+        "readCount": {
+          "pattern": "^-?(?:0|[1-9]\\d*)$",
+          "type": [
+            "integer",
+            "string"
+          ],
+          "format": "int32"
+        },
+        "createdAtUtc": {
+          "type": "string",
+          "format": "date-time",
+          "example": "2026-11-17T00:00:00Z"
+        },
+        "updatedAtUtc": {
+          "type": "string",
+          "format": "date-time",
+          "example": "2026-11-17T00:00:00Z"
+        },
+        "publishedAtUtc": {
+          "type": [
+            "null",
+            "string"
+          ],
+          "format": "date-time",
+          "example": "2026-11-17T00:00:00Z"
+        },
+        "archivedAtUtc": {
+          "type": [
+            "null",
+            "string"
+          ],
+          "format": "date-time",
+          "example": "2026-11-17T00:00:00Z"
+        }
+      }
+    }
+  },
+  "note": "POST/PUT/publish já existem. Faltam tipo editorial e contrato de metadados, arquivos, autor, temas, agendamento e notificações. Não foi inferida correspondência entre tipo do Figma e category da API."
+}

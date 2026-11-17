@@ -11,12 +11,12 @@
   },
   "metrics": {
     "total": 279,
-    "done": 215,
-    "validation": 57,
-    "adjustment": 7,
-    "implemented": 272,
-    "implementedPercent": 97.5,
-    "readyPercent": 77.1
+    "done": 216,
+    "validation": 54,
+    "adjustment": 9,
+    "implemented": 270,
+    "implementedPercent": 96.8,
+    "readyPercent": 77.4
   },
   "withoutLinkedFigmaReference": {
     "count": 13,
@@ -4074,17 +4074,18 @@
       "counted": true,
       "group": "M03",
       "category": "Ajuste de front",
-      "front": "validation",
+      "front": "adjustment",
       "blockers": [
         "designer",
         "backend"
       ],
-      "reason": "Estado aberto de mídia/H2/H3 e escolha de data de Programar não estão definidos nos contextos recuperados; editor completo não concluído. Metadados/anexos também exigem contrato.",
+      "reason": "CO04 comparado: composição/ativos corrigidos, prévia e capa testadas. Editor de blocos/mídia e H2/H3 ainda incompleto; não aprovar textarea como editor completo. Precisa estados abertos do designer e contrato editorial da API.",
       "sources": [
         "src/components/Workspaces/PublicationWorkspace.vue"
       ],
       "evidence": [
-        "docs/CHECKLIST-UNICO-FIGMA-FRONT.md#definições-do-designer"
+        "docs/CHECKLIST-UNICO-FIGMA-FRONT.md#definições-do-designer",
+        "docs/evidence/qa-2026-11-17-editor/results.json"
       ],
       "browser": "histórica; não repetida em 16/11",
       "historicalCategory": "Ajuste de front"
@@ -4098,17 +4099,18 @@
       "counted": true,
       "group": "M03",
       "category": "Ajuste de front",
-      "front": "validation",
+      "front": "adjustment",
       "blockers": [
         "designer",
         "backend"
       ],
-      "reason": "Estado aberto de mídia/H2/H3 e escolha de data de Programar não estão definidos nos contextos recuperados; editor completo não concluído. Metadados/anexos também exigem contrato.",
+      "reason": "CO05 comparado: composição/ativos e obrigatórios corrigidos. Blocos/mídia e índice H2/H3 ainda precisam implementação e referência dos controles; persistência de metadados depende da API.",
       "sources": [
         "src/components/Workspaces/PublicationWorkspace.vue"
       ],
       "evidence": [
-        "docs/CHECKLIST-UNICO-FIGMA-FRONT.md#definições-do-designer"
+        "docs/CHECKLIST-UNICO-FIGMA-FRONT.md#definições-do-designer",
+        "docs/evidence/qa-2026-11-17-editor/results.json"
       ],
       "browser": "histórica; não repetida em 16/11",
       "historicalCategory": "Ajuste de front"
@@ -4127,12 +4129,13 @@
         "designer",
         "backend"
       ],
-      "reason": "Estado aberto de mídia/H2/H3 e escolha de data de Programar não estão definidos nos contextos recuperados; editor completo não concluído. Metadados/anexos também exigem contrato.",
+      "reason": "CO06: composição, PDF/áudio/anexos sucessivos e celular testados. Índice H2/H3 sem editor de corpo não está definido; reter comparação completa até esclarecer a origem do índice, sem inventar controles.",
       "sources": [
         "src/components/Workspaces/PublicationWorkspace.vue"
       ],
       "evidence": [
-        "docs/CHECKLIST-UNICO-FIGMA-FRONT.md#definições-do-designer"
+        "docs/CHECKLIST-UNICO-FIGMA-FRONT.md#definições-do-designer",
+        "docs/evidence/qa-2026-11-17-editor/results.json"
       ],
       "browser": "histórica; não repetida em 16/11",
       "historicalCategory": "Ajuste de front"
@@ -4145,18 +4148,19 @@
       "link": "[1484:97906](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-97906)",
       "counted": true,
       "group": "M03",
-      "category": "Ajuste de front",
-      "front": "validation",
+      "category": "Bloqueio backend",
+      "front": "done",
       "blockers": [
         "designer",
         "backend"
       ],
-      "reason": "Estado aberto de mídia/H2/H3 e escolha de data de Programar não estão definidos nos contextos recuperados; editor completo não concluído. Metadados/anexos também exigem contrato.",
+      "reason": "Painel editorial: composição, ativos nativos, estados de publicação, notificações e histórico real de arquivado conferidos; campos bloqueados e ações impedidas sem sucesso fictício. Agendamento/gravação editorial ampliada dependem do contrato HTTP e do estado aberto do designer.",
       "sources": [
         "src/components/Workspaces/PublicationWorkspace.vue"
       ],
       "evidence": [
-        "docs/CHECKLIST-UNICO-FIGMA-FRONT.md#definições-do-designer"
+        "docs/CHECKLIST-UNICO-FIGMA-FRONT.md#definições-do-designer",
+        "docs/evidence/qa-2026-11-17-editor/results.json"
       ],
       "browser": "histórica; não repetida em 16/11",
       "historicalCategory": "Ajuste de front"

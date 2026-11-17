@@ -10,15 +10,31 @@ Atualizado em 2026-11-17. Contagem por **telas e estados independentes do Figma*
 | Situação | Quantidade |
 | --- | ---: |
 | Total inventariado | **279** |
-| Prontas no frontend | **215** |
-| Implementadas, aguardando revalidação/comparação completa | **57** |
-| Ainda exigem implementação, complemento ou correção | **7** |
-| Com implementação existente (prontas + revalidação) | **272 / 279 (97,5%)** |
+| Prontas no frontend | **216** |
+| Implementadas, aguardando revalidação/comparação completa | **54** |
+| Ainda exigem implementação, complemento ou correção | **9** |
+| Com implementação existente (prontas + revalidação) | **270 / 279 (96,8%)** |
 
-**Para encerrar o front faltam 7 itens de implementação/ajuste e 57 de revalidação.** “Pronto no frontend” não significa fluxo integrado liberado: dependências de backend/designer podem afetar também telas prontas. Os números não classificam toda pendência como tela nova nem como problema de API. A comparação de Crédito, carteira global e editor editorial que não foi concluída integralmente permanece em revalidação.
+**Para encerrar o front faltam 9 itens de implementação/ajuste e 54 de revalidação.** “Pronto no frontend” não significa fluxo integrado liberado: dependências de backend/designer podem afetar também telas prontas. Os números não classificam toda pendência como tela nova nem como problema de API. A comparação de Crédito, carteira global e editor editorial que não foi concluída integralmente permanece em revalidação.
 
 Fonte por frame: [progresso atual](FRONTEND-PROGRESS.json). A base anterior permanece histórica; [atualizações com evidências](FRONTEND-PROGRESS-OVERRIDES.json) registram cada mudança. Ao finalizar **cada entrega**, atualizar os IDs comprovados, executar `node scripts/frontend-progress.mjs` e informar este panorama na resposta final.
 <!-- frontend-progress:end -->
+
+## Entrega 17/11 — revisão dos editores editoriais
+
+**Publicado em homologação:** `594624c`, [deploy 44196297311 aprovado](https://github.com/Statregy-Analytics/strategy-control/actions/runs/44196297311), incluindo auditoria, testes, lint, build, upload e ativação. CO04 (Insight), CO05 (Comunicado Oficial), CO06 (Relatório) e o painel editorial EC02 foram comparados com os contextos completos e screenshots recuperados. Não foram adicionados campos ou ações fora do desenho.
+
+- [x] Cabeçalho, ícones nativos, categoria bloqueada, status, proporções, agendamento, capa, notificações e histórico ajustados. Relatório mantém código/versão/período em três colunas; celular em uma. Contraste dos checkboxes corrigido e breadcrumb diferencia edição.
+- [x] Anexos complementares passam a acumular seleções sem perder arquivos anteriores nem duplicá-los. Arquivo vazio/inválido não substitui a seleção anterior. Validação assíncrona não atualiza outro tipo de arquivo, componente desativado ou desmontado.
+- [x] Navegador local: prévia do Insight, temas, obrigatórios, capa PNG válida e arquivo recusado sem perda, PDF fictício renderizado, WAV, anexos sucessivos, arquivado somente leitura e histórico real. Relatório a 390 px sem overflow. Nenhum comunicado enviado a clientes ou registro alterado.
+- [x] 423 testes, lint, build e auditoria passaram. Em homologação: PDF renderizado, áudio com 1 segundo e player pronto, anexos sucessivos preservados/deduplicados, obrigatórios e gravação indisponível sem sucesso fictício, celular sem overflow, prévia/capa do Insight, campos do Comunicado Oficial, arquivado somente leitura e histórico real. Treze ativos publicados conferidos por HTTP e hash.
+- [ ] **Front + designer:** CO04/CO05 ainda não têm editor real de blocos/mídia e índice H2/H3. O textarea não atende esse comportamento; dois estados saem de revalidação e entram em ajuste. Faltam as referências abertas dos controles, sem criar um menu ou toolbar por conta própria.
+- [ ] **Designer:** CO06 traz índice H2/H3 mas não possui editor de corpo; esclarecer se o índice vem do PDF ou de outra origem. Permanece em revalidação, apesar de composição e arquivos testados. Agendamento não mostra os controles abertos de data/hora nas referências recuperadas.
+- [ ] **Backend:** POST/PUT/publish de comunicados já existem. Falta o contrato editorial de tipo, autor, temas, metadados, capa/PDF/áudio/anexos, agendamento e notificações. Sem conversão arbitrária para `category` e sem descartar configurações silenciosamente. Criação editorial e extras não suportados continuam indisponíveis; edição textual existente foi preservada.
+
+**Panorama revisto:** 279 estados, 216 prontos, 54 em revalidação e 9 ajustes; implementação existente **96,8%**. A redução de 97,5% decorre de duas lacunas de implementação agora comprovadas, não de remoção de telas. O painel editorial EC02 foi revalidado; CO04/CO05 não foram encerrados por inferência. Permanecem 13 superfícies sem frame para avaliação de Éric; nenhuma nova nesta rodada.
+
+[Resultados e limites](evidence/qa-2026-11-17-editor/results.json) · [Contrato HTTP atual](evidence/qa-2026-11-17-editor/api-contract.json) · [Publicação e arquivos conferidos](evidence/qa-2026-11-17-editor/publication.json).
 
 ## Entrega 17/11 — Crédito: Lista, Cards, Kanban e seleções
 
@@ -1165,10 +1181,10 @@ Legenda vigente: classificação de 16/11 por código e evidências, detalhada e
 | [1484:96758](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-96758) | CO07 · MD · Criar novo redator · MODAL FIXO · ALTURA NATURAL · DESIGN GLASS                   | Pronto no front · M02 |
 | [1484:96838](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-96838) | CO08 · MD · Prévia · Visualização do cliente · MODAL FIXO · DESIGN GLASS                      | Pronto no front · M01 |
 | [1484:96881](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-96881) | F03 · Editores de conteúdo · Insight / Comunicado / Relatório                                 | Agregador/conexão — fora do percentual; ver estados filhos |
-| [1484:96882](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-96882) | CO04 · SP · Criar Insight · EDITOR BASE · DESIGN GLASS                                        | Implementado · revalidar · M03 |
-| [1484:97193](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-97193) | CO05 · SP · Criar Comunicado Oficial · VARIAÇÃO EDITORIAL · DESIGN GLASS                      | Implementado · revalidar · M03 |
+| [1484:96882](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-96882) | CO04 · SP · Criar Insight · EDITOR BASE · DESIGN GLASS                                        | Implementação/ajuste pendente · M03 |
+| [1484:97193](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-97193) | CO05 · SP · Criar Comunicado Oficial · VARIAÇÃO EDITORIAL · DESIGN GLASS                      | Implementação/ajuste pendente · M03 |
 | [1484:97530](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-97530) | CO06 · SP · Criar Relatório · EDITOR ESPECÍFICO · DESIGN GLASS                                | Implementado · revalidar · M03 |
-| [1484:97906](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-97906) | EC02 · Painel de estados do componente · Editor                                               | Implementado · revalidar · M03 |
+| [1484:97906](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-97906) | EC02 · Painel de estados do componente · Editor                                               | Pronto no front · M03 |
 | [2255:282](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=2255-282)     | F01 · Configurações › Auditoria · Consulta geral                                              | Agregador/conexão — fora do percentual; ver estados filhos |
 | [2255:283](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=2255-283)     | AU01 · SP · Configurações › Auditoria · Consulta geral                                        | Pronto no front · M04 |
 
