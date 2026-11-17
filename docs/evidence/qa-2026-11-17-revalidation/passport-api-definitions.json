@@ -1,0 +1,80 @@
+{
+  "date": "2026-11-17",
+  "readOnly": true,
+  "results": [
+    {
+      "country": "BR",
+      "status": 200,
+      "fields": [
+        {
+          "code": "documentNumber",
+          "label": "Número do passaporte",
+          "type": "string",
+          "required": true,
+          "sensitive": true,
+          "options": null
+        },
+        {
+          "code": "issuer",
+          "label": "Órgão emissor",
+          "type": "string",
+          "required": false,
+          "sensitive": false,
+          "options": null
+        }
+      ]
+    },
+    {
+      "country": "PT",
+      "status": 200,
+      "fields": [
+        {
+          "code": "documentNumber",
+          "label": "Número do passaporte",
+          "type": "string",
+          "required": true,
+          "sensitive": true,
+          "options": null
+        },
+        {
+          "code": "issuer",
+          "label": "Órgão emissor",
+          "type": "string",
+          "required": false,
+          "sensitive": false,
+          "options": null
+        }
+      ]
+    },
+    {
+      "country": "US",
+      "status": 404,
+      "fields": null
+    },
+    {
+      "country": "AR",
+      "status": 404,
+      "fields": null
+    },
+    {
+      "country": "JP",
+      "status": 404,
+      "fields": null
+    },
+    {
+      "country": "CN",
+      "status": 404,
+      "fields": null
+    },
+    {
+      "country": "ZA",
+      "status": 404,
+      "fields": null
+    },
+    {
+      "country": "AU",
+      "status": 404,
+      "fields": null
+    }
+  ]
+}

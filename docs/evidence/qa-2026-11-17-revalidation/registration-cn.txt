@@ -1,0 +1,67 @@
+- main:
+  - navigation:
+    - generic: Prévia local controlada · sem API
+    - button "Alavancagens"
+    - button "us-ca"
+    - button "south-america"
+    - button "jp"
+    - button "cn" [active]
+    - button "europe"
+    - button "africa"
+    - button "au"
+    - button "Falhar leitura"
+    - button "Esvaziar"
+    - button "Recarregar"
+  - main:
+    - img "Strategy Analytics"
+    - paragraph: Etapa 5 de 7
+    - heading "Documento e endereço" [level=1]
+    - progressbar "Progresso do cadastro"
+    - paragraph: "País de residência: 🇨🇳 China"
+    - heading "Endereço" [level=2]
+    - generic: Província
+    - generic: Selecione
+    - combobox "Província": Selecione
+    - generic: Cidade
+    - textbox "Cidade":
+      - /placeholder: ""
+    - generic: Distrito
+    - textbox "Distrito":
+      - /placeholder: ""
+    - generic: Código postal
+    - textbox "Código postal":
+      - /placeholder: "000000"
+    - generic: Endereço
+    - textbox "Endereço":
+      - /placeholder: Rua, número, prédio e apartamento
+    - heading "Documento" [level=2]
+    - paragraph: Tipo de documento
+    - group "Tipo de documento":
+      - button "Carteira de identidade de residente" [pressed]
+      - button "Passaporte"
+    - generic: Número do documento
+    - textbox "Número do documento":
+      - /placeholder: 18 dígitos
+    - generic: Data de validade
+    - textbox "Data de validade":
+      - /placeholder: aaaa/mm/dd
+    - generic: Número fiscal (se for diferente do documento)
+    - textbox "Número fiscal (se for diferente do documento)":
+      - /placeholder: ""
+    - generic: Nome em chinês (opcional)
+    - textbox "Nome em chinês (opcional)":
+      - /placeholder: 张伟
+    - heading "Foto ou arquivo do documento" [level=3]
+    - button "Frente do documento":
+      - strong: Frente do documento
+      - generic: Clique ou arraste a foto ou o arquivo
+    - button "Verso do documento":
+      - strong: Verso do documento
+      - generic: Clique ou arraste a foto ou o arquivo
+    - paragraph: Foto nítida, sem reflexo e com todas as bordas aparecendo.
+    - paragraph: "Se escolher Passaporte: número, país emissor, data de expedição, validade e a foto da página com seus dados."
+    - button "Voltar":
+      - generic: Voltar
+    - button "Continuar":
+      - generic: Continuar
+  - status: · /

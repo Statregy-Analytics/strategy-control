@@ -10,15 +10,29 @@ Atualizado em 2026-11-17. Contagem por **telas e estados independentes do Figma*
 | Situação | Quantidade |
 | --- | ---: |
 | Total inventariado | **279** |
-| Prontas no frontend | **188** |
-| Implementadas, aguardando revalidação/comparação completa | **85** |
-| Ainda exigem implementação, complemento ou correção | **6** |
-| Com implementação existente (prontas + revalidação) | **273 / 279 (97,8%)** |
+| Prontas no frontend | **197** |
+| Implementadas, aguardando revalidação/comparação completa | **75** |
+| Ainda exigem implementação, complemento ou correção | **7** |
+| Com implementação existente (prontas + revalidação) | **272 / 279 (97,5%)** |
 
-**Para encerrar o front faltam 6 itens de implementação/ajuste e 85 de revalidação.** “Pronto no frontend” não significa fluxo integrado liberado: dependências de backend/designer podem afetar também telas prontas. Os números não classificam toda pendência como tela nova nem como problema de API. A comparação de Crédito, carteira global e editor editorial que não foi concluída integralmente permanece em revalidação.
+**Para encerrar o front faltam 7 itens de implementação/ajuste e 75 de revalidação.** “Pronto no frontend” não significa fluxo integrado liberado: dependências de backend/designer podem afetar também telas prontas. Os números não classificam toda pendência como tela nova nem como problema de API. A comparação de Crédito, carteira global e editor editorial que não foi concluída integralmente permanece em revalidação.
 
 Fonte por frame: [progresso atual](FRONTEND-PROGRESS.json). A base anterior permanece histórica; [atualizações com evidências](FRONTEND-PROGRESS-OVERRIDES.json) registram cada mudança. Ao finalizar **cada entrega**, atualizar os IDs comprovados, executar `node scripts/frontend-progress.mjs` e informar este panorama na resposta final.
 <!-- frontend-progress:end -->
+
+## Entrega 17/11 — revisão dos 85 estados pendentes
+
+**Publicado em homologação:** `d7553f7`, [deploy 44167286327 aprovado](https://github.com/WillTbn/Strategy-analytics-v2/actions/runs/44167286327), incluindo upload e ativação. Novos chunk e ativos conferidos por HTTP. A rota publicada continua protegida por Nível 3 para a sessão atual; estados preenchidos foram testados localmente com dados controlados. Listas de alavancagem e variantes internacionais do cadastro. Nove estados de front revalidados localmente; um reclassificado como ajuste comprovado (Japão). Os outros 75 continuam abertos: não foram aprovados por inferência.
+
+- [x] Alavancagens Ativas, Em Simulação e Quitadas: composição, rótulos, ícones nativos, expansão, percentuais conhecidos e dados indisponíveis. Troca de abas sem manter painel anterior. Filtro de parcelas pendentes passa a remover parcelas pagas; falhas preservam a seleção.
+- [x] Componentes antigos de pagamento deixam de usar desconto fixo, chave Pix de exemplo e sucesso simulado. Sem dados/adaptador a ação fica indisponível; comprovante recusado não avança. Preparação visual não encerra os três frames de pagamento: confirmação final e fluxo integrado ainda precisam revisão.
+- [x] Cadastro internacional: seis variações comparadas; subdivisões reais nos selects existentes de conta nova, país emissor preenchido pelo catálogo e retomada do passaporte. Consulta/envio usam o `countryId` do país emissor, independentemente da residência. Nenhum campo novo.
+- [x] 477 testes passaram; lint, build e auditoria passaram. Navegador local com componentes reais: estados preenchidos, vazios, falha/retry, datas, passaporte e responsividade. Prévia controlada removida antes do build.
+- [ ] Japão: implementar preenchimento por código postal conforme o desenho. A indisponibilidade é explícita; não há sucesso fictício nem pendência de API inventada.
+- [ ] API/configuração: definições de Passaporte consultadas retornam 200 para Brasil/Portugal e 404 para os seis outros países emissores consultados. Isso não bloqueia automaticamente um residente desses países que possua passaporte emitido em país atendido. Verificar os tipos nacionais e combinações aprovadas antes do teste integrado internacional.
+- [ ] Pagamentos/cronograma: completar o fluxo apenas com cotação, cronograma e confirmação reais; nenhum débito/transação foi executado nesta rodada. Não confundir listagem disponível com endpoint de pagamento.
+
+[Resultados e limites](evidence/qa-2026-11-17-revalidation/results.json) · [Índice dos 85 estados](evidence/qa-2026-11-17-revalidation/revalidation-85-index.json). Nenhuma nova superfície sem referência; permanecem 13 para Éric. [Publicação e arquivos conferidos](evidence/qa-2026-11-17-revalidation/publication.json). A sessão de homologação não permite validar os estados preenchidos por causa do Nível 3; essa restrição não foi contornada.
 
 ## Entrega 17/11 — mitigação do deploy e documentação de imóvel
 
@@ -1188,12 +1202,12 @@ Legenda vigente: classificação de 16/11 por código e evidências, detalhada e
 | [1:55919](https://www.figma.com/design/BaDXlWpxbIoY4azOaQnXgv?node-id=1-55919)     | [UI] FLUXO - SOLICITAR EMPRÉSTIMO -                                          | Pronto no front · P06 |
 | [1:56020](https://www.figma.com/design/BaDXlWpxbIoY4azOaQnXgv?node-id=1-56020)     | [UI] FLUXO - SOLICITAR EMPRÉSTIMO -                                          | Pronto no front · P06 |
 | [1:56115](https://www.figma.com/design/BaDXlWpxbIoY4azOaQnXgv?node-id=1-56115)     | [UI] FLUXO - SOLICITAR EMPRÉSTIMO -                                          | Pronto no front · P06 |
-| [1:56231](https://www.figma.com/design/BaDXlWpxbIoY4azOaQnXgv?node-id=1-56231)     | [UI] ALAVANCAGEM - MINHAS ALAVANCAGENS - STATUS ATIVAS                       | Implementado · revalidar · P06 |
+| [1:56231](https://www.figma.com/design/BaDXlWpxbIoY4azOaQnXgv?node-id=1-56231)     | [UI] ALAVANCAGEM - MINHAS ALAVANCAGENS - STATUS ATIVAS                       | Pronto no front · P06 |
 | [1:57431](https://www.figma.com/design/BaDXlWpxbIoY4azOaQnXgv?node-id=1-57431)     | [UI] ALAVANCAGEM - MINHAS ALAVANCAGENS - STATUS ATIVAS                       | Implementado · revalidar · P06 |
 | [1:58679](https://www.figma.com/design/BaDXlWpxbIoY4azOaQnXgv?node-id=1-58679)     | [UI] ALAVANCAGEM - MINHAS ALAVANCAGENS - STATUS ATIVAS                       | Implementado · revalidar · P06 |
 | [1:59912](https://www.figma.com/design/BaDXlWpxbIoY4azOaQnXgv?node-id=1-59912)     | [UI] ALAVANCAGEM - MINHAS ALAVANCAGENS - STATUS ATIVAS                       | Implementado · revalidar · P06 |
-| [1:61125](https://www.figma.com/design/BaDXlWpxbIoY4azOaQnXgv?node-id=1-61125)     | [UI] ALAVANCAGEM - MINHAS ALAVANCAGENS - STATUS EM ANÁLISE                   | Implementado · revalidar · P06 |
-| [1:62011](https://www.figma.com/design/BaDXlWpxbIoY4azOaQnXgv?node-id=1-62011)     | [UI] ALAVANCAGEM - MINHAS ALAVANCAGENS - STATUS QUITADOS                     | Implementado · revalidar · P06 |
+| [1:61125](https://www.figma.com/design/BaDXlWpxbIoY4azOaQnXgv?node-id=1-61125)     | [UI] ALAVANCAGEM - MINHAS ALAVANCAGENS - STATUS EM ANÁLISE                   | Pronto no front · P06 |
+| [1:62011](https://www.figma.com/design/BaDXlWpxbIoY4azOaQnXgv?node-id=1-62011)     | [UI] ALAVANCAGEM - MINHAS ALAVANCAGENS - STATUS QUITADOS                     | Pronto no front · P06 |
 | [1:64153](https://www.figma.com/design/BaDXlWpxbIoY4azOaQnXgv?node-id=1-64153)     | [UI] COMUNICAÇÃO (List View)                                                 | Pronto no front · P07 |
 | [1:64344](https://www.figma.com/design/BaDXlWpxbIoY4azOaQnXgv?node-id=1-64344)     | [UI] COMUNICAÇÃO (Card View)                                                 | Pronto no front · P07 |
 | [1:64591](https://www.figma.com/design/BaDXlWpxbIoY4azOaQnXgv?node-id=1-64591)     | [UI] COMUNICAÇÃO - COMUNICADO S.A - PÁG ESPECIFICA                           | Pronto no front · P07 |
@@ -1233,13 +1247,13 @@ Legenda vigente: classificação de 16/11 por código e evidências, detalhada e
 | [9:26067](https://www.figma.com/design/BaDXlWpxbIoY4azOaQnXgv?node-id=9-26067)     | [UI] CADASTRO - Enviado para análise                                         | Pronto no front · P13 |
 | [9:26096](https://www.figma.com/design/BaDXlWpxbIoY4azOaQnXgv?node-id=9-26096)     | [UI] PERFIL - Dados Pessoais - Pendente                                      | Pronto no front · P13 |
 | [6:25690](https://www.figma.com/design/BaDXlWpxbIoY4azOaQnXgv?node-id=6-25690)     | [UI] CADASTRO - 5 Documento e endereço - Brasil                              | Pronto no front · P13 |
-| [37:27142](https://www.figma.com/design/BaDXlWpxbIoY4azOaQnXgv?node-id=37-27142)   | [UI] CADASTRO - 5 Documento e endereço - Estados Unidos e Canadá             | Implementado · revalidar · P14 |
-| [37:27262](https://www.figma.com/design/BaDXlWpxbIoY4azOaQnXgv?node-id=37-27262)   | [UI] CADASTRO - 5 Documento e endereço - América do Sul (Argentina)          | Implementado · revalidar · P14 |
-| [37:27382](https://www.figma.com/design/BaDXlWpxbIoY4azOaQnXgv?node-id=37-27382)   | [UI] CADASTRO - 5 Documento e endereço - Japão                               | Implementado · revalidar · P14 |
-| [37:27502](https://www.figma.com/design/BaDXlWpxbIoY4azOaQnXgv?node-id=37-27502)   | [UI] CADASTRO - 5 Documento e endereço - China                               | Implementado · revalidar · P14 |
-| [37:27622](https://www.figma.com/design/BaDXlWpxbIoY4azOaQnXgv?node-id=37-27622)   | [UI] CADASTRO - 5 Documento e endereço - Europa (Portugal)                   | Implementado · revalidar · P14 |
-| [37:27742](https://www.figma.com/design/BaDXlWpxbIoY4azOaQnXgv?node-id=37-27742)   | [UI] CADASTRO - 5 Documento e endereço - África (África do Sul)              | Implementado · revalidar · P14 |
-| [37:27862](https://www.figma.com/design/BaDXlWpxbIoY4azOaQnXgv?node-id=37-27862)   | [UI] CADASTRO - 5 Documento e endereço - Austrália                           | Implementado · revalidar · P14 |
+| [37:27142](https://www.figma.com/design/BaDXlWpxbIoY4azOaQnXgv?node-id=37-27142)   | [UI] CADASTRO - 5 Documento e endereço - Estados Unidos e Canadá             | Pronto no front · P14 |
+| [37:27262](https://www.figma.com/design/BaDXlWpxbIoY4azOaQnXgv?node-id=37-27262)   | [UI] CADASTRO - 5 Documento e endereço - América do Sul (Argentina)          | Pronto no front · P14 |
+| [37:27382](https://www.figma.com/design/BaDXlWpxbIoY4azOaQnXgv?node-id=37-27382)   | [UI] CADASTRO - 5 Documento e endereço - Japão                               | Implementação/ajuste pendente · P14 |
+| [37:27502](https://www.figma.com/design/BaDXlWpxbIoY4azOaQnXgv?node-id=37-27502)   | [UI] CADASTRO - 5 Documento e endereço - China                               | Pronto no front · P14 |
+| [37:27622](https://www.figma.com/design/BaDXlWpxbIoY4azOaQnXgv?node-id=37-27622)   | [UI] CADASTRO - 5 Documento e endereço - Europa (Portugal)                   | Pronto no front · P14 |
+| [37:27742](https://www.figma.com/design/BaDXlWpxbIoY4azOaQnXgv?node-id=37-27742)   | [UI] CADASTRO - 5 Documento e endereço - África (África do Sul)              | Pronto no front · P14 |
+| [37:27862](https://www.figma.com/design/BaDXlWpxbIoY4azOaQnXgv?node-id=37-27862)   | [UI] CADASTRO - 5 Documento e endereço - Austrália                           | Pronto no front · P14 |
 | [121:27090](https://www.figma.com/design/BaDXlWpxbIoY4azOaQnXgv?node-id=121-27090) | [EC] CADASTRO - 1 Criar conta · E-mail já confirmado (aviso abaixo do campo) | Pronto no front · P13 |
 
 ## Evidência desta rodada

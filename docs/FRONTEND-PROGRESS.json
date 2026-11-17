@@ -11,12 +11,12 @@
   },
   "metrics": {
     "total": 279,
-    "done": 188,
-    "validation": 85,
-    "adjustment": 6,
-    "implemented": 273,
-    "implementedPercent": 97.8,
-    "readyPercent": 67.4
+    "done": 197,
+    "validation": 75,
+    "adjustment": 7,
+    "implemented": 272,
+    "implementedPercent": 97.5,
+    "readyPercent": 70.6
   },
   "withoutLinkedFigmaReference": {
     "count": 13,
@@ -5637,12 +5637,12 @@
       "link": "[1:56231](https://www.figma.com/design/BaDXlWpxbIoY4azOaQnXgv?node-id=1-56231)",
       "counted": true,
       "group": "P06",
-      "category": "Ajuste de front",
-      "front": "validation",
+      "category": "Bloqueio backend",
+      "front": "done",
       "blockers": [
         "backend"
       ],
-      "reason": "Consulta paginada e estados de empréstimos corrigidos; há teste controlado de ativos/quitados, mas falta comparação integral dos seis frames e massa real adequada.",
+      "reason": "Listas ativa/em análise/quitada e componentes expandidos comparados aos filhos de alta fidelidade do Figma. Valores ausentes não são simulados. Estados controlados, falha/retry, filtro, navegação e responsividade testados localmente. Cronograma e pagamento integrado continuam dependências separadas.",
       "sources": [
         "portal:src/system/pages/loan/LoanPage.vue",
         "portal:src/system/pages/leverage/LeveragePage.vue",
@@ -5651,7 +5651,7 @@
       ],
       "evidence": [
         "docs/evidence/qa-2026-11-16-inventory/api-contract-review.json",
-        "docs/evidence/qa-2026-11-16-front-functional/api-and-tests.json"
+        "docs/evidence/qa-2026-11-17-revalidation/results.json"
       ],
       "browser": "código confirmado; fluxos legados não homologados",
       "historicalCategory": "Ajuste de front"
@@ -5745,12 +5745,12 @@
       "link": "[1:61125](https://www.figma.com/design/BaDXlWpxbIoY4azOaQnXgv?node-id=1-61125)",
       "counted": true,
       "group": "P06",
-      "category": "Ajuste de front",
-      "front": "validation",
+      "category": "Bloqueio backend",
+      "front": "done",
       "blockers": [
         "backend"
       ],
-      "reason": "Consulta paginada e estados de empréstimos corrigidos; há teste controlado de ativos/quitados, mas falta comparação integral dos seis frames e massa real adequada.",
+      "reason": "Listas ativa/em análise/quitada e componentes expandidos comparados aos filhos de alta fidelidade do Figma. Valores ausentes não são simulados. Estados controlados, falha/retry, filtro, navegação e responsividade testados localmente. Cronograma e pagamento integrado continuam dependências separadas.",
       "sources": [
         "portal:src/system/pages/loan/LoanPage.vue",
         "portal:src/system/pages/leverage/LeveragePage.vue",
@@ -5759,7 +5759,7 @@
       ],
       "evidence": [
         "docs/evidence/qa-2026-11-16-inventory/api-contract-review.json",
-        "docs/evidence/qa-2026-11-16-front-functional/api-and-tests.json"
+        "docs/evidence/qa-2026-11-17-revalidation/results.json"
       ],
       "browser": "código confirmado; fluxos legados não homologados",
       "historicalCategory": "Ajuste de front"
@@ -5772,12 +5772,12 @@
       "link": "[1:62011](https://www.figma.com/design/BaDXlWpxbIoY4azOaQnXgv?node-id=1-62011)",
       "counted": true,
       "group": "P06",
-      "category": "Ajuste de front",
-      "front": "validation",
+      "category": "Bloqueio backend",
+      "front": "done",
       "blockers": [
         "backend"
       ],
-      "reason": "Consulta paginada e estados de empréstimos corrigidos; há teste controlado de ativos/quitados, mas falta comparação integral dos seis frames e massa real adequada.",
+      "reason": "Listas ativa/em análise/quitada e componentes expandidos comparados aos filhos de alta fidelidade do Figma. Valores ausentes não são simulados. Estados controlados, falha/retry, filtro, navegação e responsividade testados localmente. Cronograma e pagamento integrado continuam dependências separadas.",
       "sources": [
         "portal:src/system/pages/loan/LoanPage.vue",
         "portal:src/system/pages/leverage/LeveragePage.vue",
@@ -5786,7 +5786,7 @@
       ],
       "evidence": [
         "docs/evidence/qa-2026-11-16-inventory/api-contract-review.json",
-        "docs/evidence/qa-2026-11-16-front-functional/api-and-tests.json"
+        "docs/evidence/qa-2026-11-17-revalidation/results.json"
       ],
       "browser": "código confirmado; fluxos legados não homologados",
       "historicalCategory": "Ajuste de front"
@@ -6725,16 +6725,17 @@
       "link": "[37:27142](https://www.figma.com/design/BaDXlWpxbIoY4azOaQnXgv?node-id=37-27142)",
       "counted": true,
       "group": "P14",
-      "category": "Ajuste de front",
-      "front": "validation",
+      "category": "Já correto",
+      "front": "done",
       "blockers": [],
-      "reason": "Existem definições/validações por variante; teste integrado BR não aprova os outros sete países/regiões. Executar massa e catálogo por país antes de atribuir falha ao backend.",
+      "reason": "Composição da variação comparada ao Figma no navegador local: endereço, documento, passaporte, datas e anexos. Selects de subdivisões e país emissor corrigidos; integração por país exige catálogo documental correspondente. Não representa envio internacional homologado.",
       "sources": [
         "portal:src/services/registrationDocuments.js",
         "portal:src/system/pages/registration/RegistrationDocumentPage.vue"
       ],
       "evidence": [
-        "docs/CHECKLIST-CADASTRO-SETE-ETAPAS.md"
+        "docs/CHECKLIST-CADASTRO-SETE-ETAPAS.md",
+        "docs/evidence/qa-2026-11-17-revalidation/results.json"
       ],
       "browser": "validações locais por variante; upload/retomada integrados pendentes",
       "historicalCategory": "Ajuste de front"
@@ -6747,16 +6748,17 @@
       "link": "[37:27262](https://www.figma.com/design/BaDXlWpxbIoY4azOaQnXgv?node-id=37-27262)",
       "counted": true,
       "group": "P14",
-      "category": "Ajuste de front",
-      "front": "validation",
+      "category": "Já correto",
+      "front": "done",
       "blockers": [],
-      "reason": "Existem definições/validações por variante; teste integrado BR não aprova os outros sete países/regiões. Executar massa e catálogo por país antes de atribuir falha ao backend.",
+      "reason": "Composição da variação comparada ao Figma no navegador local: endereço, documento, passaporte, datas e anexos. Selects de subdivisões e país emissor corrigidos; integração por país exige catálogo documental correspondente. Não representa envio internacional homologado.",
       "sources": [
         "portal:src/services/registrationDocuments.js",
         "portal:src/system/pages/registration/RegistrationDocumentPage.vue"
       ],
       "evidence": [
-        "docs/CHECKLIST-CADASTRO-SETE-ETAPAS.md"
+        "docs/CHECKLIST-CADASTRO-SETE-ETAPAS.md",
+        "docs/evidence/qa-2026-11-17-revalidation/results.json"
       ],
       "browser": "validações locais por variante; upload/retomada integrados pendentes",
       "historicalCategory": "Ajuste de front"
@@ -6770,15 +6772,16 @@
       "counted": true,
       "group": "P14",
       "category": "Ajuste de front",
-      "front": "validation",
+      "front": "adjustment",
       "blockers": [],
-      "reason": "Existem definições/validações por variante; teste integrado BR não aprova os outros sete países/regiões. Executar massa e catálogo por país antes de atribuir falha ao backend.",
+      "reason": "Composição conferida; falta implementar o preenchimento de província/cidade por código postal mostrado no Figma. A tela agora informa indisponibilidade e permite preenchimento manual. Fonte/contrato de consulta ainda não definido; não é atribuído como bug da API.",
       "sources": [
         "portal:src/services/registrationDocuments.js",
         "portal:src/system/pages/registration/RegistrationDocumentPage.vue"
       ],
       "evidence": [
-        "docs/CHECKLIST-CADASTRO-SETE-ETAPAS.md"
+        "docs/CHECKLIST-CADASTRO-SETE-ETAPAS.md",
+        "docs/evidence/qa-2026-11-17-revalidation/jp-postal-unavailable.txt"
       ],
       "browser": "validações locais por variante; upload/retomada integrados pendentes",
       "historicalCategory": "Ajuste de front"
@@ -6791,16 +6794,17 @@
       "link": "[37:27502](https://www.figma.com/design/BaDXlWpxbIoY4azOaQnXgv?node-id=37-27502)",
       "counted": true,
       "group": "P14",
-      "category": "Ajuste de front",
-      "front": "validation",
+      "category": "Já correto",
+      "front": "done",
       "blockers": [],
-      "reason": "Existem definições/validações por variante; teste integrado BR não aprova os outros sete países/regiões. Executar massa e catálogo por país antes de atribuir falha ao backend.",
+      "reason": "Composição da variação comparada ao Figma no navegador local: endereço, documento, passaporte, datas e anexos. Selects de subdivisões e país emissor corrigidos; integração por país exige catálogo documental correspondente. Não representa envio internacional homologado.",
       "sources": [
         "portal:src/services/registrationDocuments.js",
         "portal:src/system/pages/registration/RegistrationDocumentPage.vue"
       ],
       "evidence": [
-        "docs/CHECKLIST-CADASTRO-SETE-ETAPAS.md"
+        "docs/CHECKLIST-CADASTRO-SETE-ETAPAS.md",
+        "docs/evidence/qa-2026-11-17-revalidation/results.json"
       ],
       "browser": "validações locais por variante; upload/retomada integrados pendentes",
       "historicalCategory": "Ajuste de front"
@@ -6813,16 +6817,17 @@
       "link": "[37:27622](https://www.figma.com/design/BaDXlWpxbIoY4azOaQnXgv?node-id=37-27622)",
       "counted": true,
       "group": "P14",
-      "category": "Ajuste de front",
-      "front": "validation",
+      "category": "Já correto",
+      "front": "done",
       "blockers": [],
-      "reason": "Existem definições/validações por variante; teste integrado BR não aprova os outros sete países/regiões. Executar massa e catálogo por país antes de atribuir falha ao backend.",
+      "reason": "Composição da variação comparada ao Figma no navegador local: endereço, documento, passaporte, datas e anexos. Selects de subdivisões e país emissor corrigidos; integração por país exige catálogo documental correspondente. Não representa envio internacional homologado.",
       "sources": [
         "portal:src/services/registrationDocuments.js",
         "portal:src/system/pages/registration/RegistrationDocumentPage.vue"
       ],
       "evidence": [
-        "docs/CHECKLIST-CADASTRO-SETE-ETAPAS.md"
+        "docs/CHECKLIST-CADASTRO-SETE-ETAPAS.md",
+        "docs/evidence/qa-2026-11-17-revalidation/results.json"
       ],
       "browser": "validações locais por variante; upload/retomada integrados pendentes",
       "historicalCategory": "Ajuste de front"
@@ -6835,16 +6840,17 @@
       "link": "[37:27742](https://www.figma.com/design/BaDXlWpxbIoY4azOaQnXgv?node-id=37-27742)",
       "counted": true,
       "group": "P14",
-      "category": "Ajuste de front",
-      "front": "validation",
+      "category": "Já correto",
+      "front": "done",
       "blockers": [],
-      "reason": "Existem definições/validações por variante; teste integrado BR não aprova os outros sete países/regiões. Executar massa e catálogo por país antes de atribuir falha ao backend.",
+      "reason": "Composição da variação comparada ao Figma no navegador local: endereço, documento, passaporte, datas e anexos. Selects de subdivisões e país emissor corrigidos; integração por país exige catálogo documental correspondente. Não representa envio internacional homologado.",
       "sources": [
         "portal:src/services/registrationDocuments.js",
         "portal:src/system/pages/registration/RegistrationDocumentPage.vue"
       ],
       "evidence": [
-        "docs/CHECKLIST-CADASTRO-SETE-ETAPAS.md"
+        "docs/CHECKLIST-CADASTRO-SETE-ETAPAS.md",
+        "docs/evidence/qa-2026-11-17-revalidation/results.json"
       ],
       "browser": "validações locais por variante; upload/retomada integrados pendentes",
       "historicalCategory": "Ajuste de front"
@@ -6857,16 +6863,17 @@
       "link": "[37:27862](https://www.figma.com/design/BaDXlWpxbIoY4azOaQnXgv?node-id=37-27862)",
       "counted": true,
       "group": "P14",
-      "category": "Ajuste de front",
-      "front": "validation",
+      "category": "Já correto",
+      "front": "done",
       "blockers": [],
-      "reason": "Existem definições/validações por variante; teste integrado BR não aprova os outros sete países/regiões. Executar massa e catálogo por país antes de atribuir falha ao backend.",
+      "reason": "Composição da variação comparada ao Figma no navegador local: endereço, documento, passaporte, datas e anexos. Selects de subdivisões e país emissor corrigidos; integração por país exige catálogo documental correspondente. Não representa envio internacional homologado.",
       "sources": [
         "portal:src/services/registrationDocuments.js",
         "portal:src/system/pages/registration/RegistrationDocumentPage.vue"
       ],
       "evidence": [
-        "docs/CHECKLIST-CADASTRO-SETE-ETAPAS.md"
+        "docs/CHECKLIST-CADASTRO-SETE-ETAPAS.md",
+        "docs/evidence/qa-2026-11-17-revalidation/results.json"
       ],
       "browser": "validações locais por variante; upload/retomada integrados pendentes",
       "historicalCategory": "Ajuste de front"

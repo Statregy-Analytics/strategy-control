@@ -1,0 +1,31 @@
+- main:
+  - navigation:
+    - generic: Prévia local controlada · sem API
+    - button "Alavancagens"
+    - button "Resumo parcelas"
+    - button "Pix parcelas"
+    - button "us-ca"
+    - button "south-america"
+    - button "jp"
+    - button "cn"
+    - button "europe"
+    - button "africa"
+    - button "au"
+    - button "Falhar leitura"
+    - button "Esvaziar"
+    - button "Recarregar"
+  - heading "Pagamento de Parcelas" [level=2]
+  - paragraph: Escaneie o QR Code ou copie a Chave PIX abaixo. Salve o comprovante para anexá-lo em seguida.
+  - generic: QA-FICTICIO-SEM-VALOR
+  - button "Copiar Chave PIX":
+    - generic: Copiar Chave PIX
+  - generic: Comprovante de Pagamento
+  - generic: Clique aqui ou arraste arquivos para fazer o upload
+  - button "Comprovante de Pagamento Clique aqui ou arraste arquivos para fazer o upload"
+  - paragraph: qa-loan-receipt.pdf
+  - alert: Não foi possível enviar o comprovante. Tente novamente.
+  - button "Voltar":
+    - generic: Voltar
+  - button "Finalizar Pagamento" [active]:
+    - generic: Finalizar Pagamento
+  - status: · /

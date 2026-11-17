@@ -1,0 +1,79 @@
+{
+  "date": "2026-11-17",
+  "baseline": {
+    "done": 188,
+    "validation": 85,
+    "adjustment": 6
+  },
+  "reviewed": 10,
+  "closedValidation": [
+    "1:56231",
+    "1:61125",
+    "1:62011",
+    "37:27142",
+    "37:27262",
+    "37:27502",
+    "37:27622",
+    "37:27742",
+    "37:27862"
+  ],
+  "movedToAdjustment": [
+    "37:27382"
+  ],
+  "notClosed": 75,
+  "tests": {
+    "passed": 477,
+    "failed": 0,
+    "lint": "passed",
+    "securityAudit": "passed; mitigation remains verified, no bypass",
+    "build": "passed"
+  },
+  "browser": {
+    "environment": "localhost:9010, actual Vue components in temporary isolated harness",
+    "fictitiousData": true,
+    "harnessPublished": false,
+    "scenarios": [
+      "loan active/review/settled tabs, missing values and actual principal/currency",
+      "expand/collapse and existing detail link",
+      "pending installment toggle removes paid rows",
+      "failure/retry, empty and stale selection handling",
+      "no adapter disables financial actions",
+      "receipt rejection preserves file without simulated success",
+      "quote has no invented discount; requires supplied valid data",
+      "seven country variants and passports; invalid dates",
+      "real province selection for new account",
+      "phone widths without document horizontal overflow",
+      "JP manual fallback exposes missing autofill"
+    ],
+    "limits": [
+      "No repayment or loan financial transaction executed",
+      "Expanded installment data is controlled; current list endpoint has no full schedule",
+      "Country-specific upload/retake not validated with an account for each country",
+      "Six country screens front-ready does not mean backend supports every local document type",
+      "Three payment parent frames remain validation: no complete integrated flow or third confirmation modal"
+    ]
+  },
+  "api": {
+    "existing": "Provided-document countryId and data-definition country parameter used for passport issuing country; no new issuerCountry API field required",
+    "readOnlyVerified": "Passport data-definition BR/PT 200; US/AR/JP/CN/ZA/AU 404 for those issuing countries",
+    "configurationLimit": "404 concerns country/type catalogue combination; residents may use an accepted foreign-issued passport. Do not infer all residents of those countries are blocked.",
+    "jp": "Autofill source/contract not defined; implementation pending, no backend defect asserted"
+  },
+  "newUnreferencedSurfaces": 0,
+  "publication": {
+    "commit": "d7553f761055673ec1db994d787d097420bcfbd5",
+    "workflow": "https://github.com/WillTbn/Strategy-analytics-v2/actions/runs/44167286327",
+    "conclusion": "success",
+    "upload": "success",
+    "activation": "success",
+    "httpVerification": "new loan chunk and five native/license assets 200; hashes match",
+    "browser": "Published route loaded with level-3 guard; current session cannot validate the full populated page in HML",
+    "proof": "hml-level-gate-after-deploy.png"
+  },
+  "commit": "d7553f761055673ec1db994d787d097420bcfbd5",
+  "documentationChecks": {
+    "adminLint": "passed",
+    "adminBuild": "passed",
+    "diffCheck": "passed on changed/staged files; unrelated work preserved"
+  }
+}

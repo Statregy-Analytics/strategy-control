@@ -1,0 +1,161 @@
+- main:
+  - navigation:
+    - generic: Prévia local controlada · sem API
+    - button "Alavancagens"
+    - button "Resumo parcelas"
+    - button "Pix parcelas"
+    - button "us-ca"
+    - button "south-america"
+    - button "jp"
+    - button "cn"
+    - button "europe"
+    - button "africa"
+    - button "au"
+    - button "Falhar leitura"
+    - button "Esvaziar"
+    - button "Recarregar"
+  - main:
+    - img "Strategy Analytics"
+    - paragraph: Etapa 5 de 7
+    - heading "Documento e endereço" [level=1]
+    - progressbar "Progresso do cadastro"
+    - paragraph: "País de residência: 🇺🇸 Estados Unidos"
+    - heading "Endereço" [level=2]
+    - generic: Endereço
+    - textbox "Endereço":
+      - /placeholder: Número e rua
+    - generic: Apto, suíte ou unidade (opcional)
+    - textbox "Apto, suíte ou unidade (opcional)":
+      - /placeholder: ""
+    - generic: Cidade
+    - textbox "Cidade":
+      - /placeholder: ""
+    - generic: Estado
+    - generic: California
+    - combobox "Estado" [active]: California
+    - generic: ZIP code
+    - textbox "ZIP code":
+      - /placeholder: "00000"
+    - heading "Documento" [level=2]
+    - generic: Número fiscal (SSN ou ITIN)
+    - textbox "Número fiscal (SSN ou ITIN)":
+      - /placeholder: 000-00-0000
+    - paragraph: Tipo de documento
+    - group "Tipo de documento":
+      - button "Carteira de motorista" [pressed]
+      - button "State ID"
+      - button "Passaporte"
+    - generic: Número do documento
+    - textbox "Número do documento":
+      - /placeholder: Digite o número
+    - generic: Estado emissor
+    - generic: Selecione
+    - combobox "Estado emissor": Selecione
+    - generic: Data de validade
+    - textbox "Data de validade":
+      - /placeholder: mm/dd/aaaa
+    - heading "Foto ou arquivo do documento" [level=3]
+    - button "Frente do documento":
+      - strong: Frente do documento
+      - generic: Clique ou arraste a foto ou o arquivo
+    - button "Verso do documento":
+      - strong: Verso do documento
+      - generic: Clique ou arraste a foto ou o arquivo
+    - paragraph: Foto nítida, sem reflexo e com todas as bordas aparecendo.
+    - paragraph: "Se escolher Passaporte: número, país emissor, data de expedição, validade e a foto da página com seus dados."
+    - button "Voltar":
+      - generic: Voltar
+    - button "Continuar":
+      - generic: Continuar
+  - status: · /
+- listbox:
+  - option "Alabama":
+    - generic: Alabama
+  - option "Alaska":
+    - generic: Alaska
+  - option "American Samoa":
+    - generic: American Samoa
+  - option "Arizona":
+    - generic: Arizona
+  - option "Arkansas":
+    - generic: Arkansas
+  - option "California":
+    - generic: California
+  - option "Colorado":
+    - generic: Colorado
+  - option "Connecticut":
+    - generic: Connecticut
+  - option "Delaware":
+    - generic: Delaware
+  - option "District of Columbia":
+    - generic: District of Columbia
+  - option "Florida":
+    - generic: Florida
+  - option "Georgia":
+    - generic: Georgia
+  - option "Guam":
+    - generic: Guam
+  - option "Hawaii":
+    - generic: Hawaii
+  - option "Idaho":
+    - generic: Idaho
+  - option "Illinois":
+    - generic: Illinois
+  - option "Indiana":
+    - generic: Indiana
+  - option "Iowa":
+    - generic: Iowa
+  - option "Kansas":
+    - generic: Kansas
+  - option "Kentucky":
+    - generic: Kentucky
+  - option "Louisiana":
+    - generic: Louisiana
+  - option "Maine":
+    - generic: Maine
+  - option "Maryland":
+    - generic: Maryland
+  - option "Massachusetts":
+    - generic: Massachusetts
+  - option "Michigan":
+    - generic: Michigan
+  - option "Minnesota":
+    - generic: Minnesota
+  - option "Mississippi":
+    - generic: Mississippi
+  - option "Missouri":
+    - generic: Missouri
+  - option "Montana":
+    - generic: Montana
+  - option "Nebraska":
+    - generic: Nebraska
+  - option "Nevada":
+    - generic: Nevada
+  - option "New Hampshire":
+    - generic: New Hampshire
+  - option "New Jersey":
+    - generic: New Jersey
+  - option "New Mexico":
+    - generic: New Mexico
+  - option "New York":
+    - generic: New York
+  - option "North Carolina":
+    - generic: North Carolina
+  - option "North Dakota":
+    - generic: North Dakota
+  - option "Northern Mariana Islands":
+    - generic: Northern Mariana Islands
+  - option "Ohio":
+    - generic: Ohio
+  - option "Oklahoma":
+    - generic: Oklahoma
+  - option "Oregon":
+    - generic: Oregon
+  - option "Pennsylvania":
+    - generic: Pennsylvania
+  - option "Puerto Rico":
+    - generic: Puerto Rico
+  - option "Rhode Island":
+    - generic: Rhode Island
+  - option "South Carolina":
+    - generic: South Carolina

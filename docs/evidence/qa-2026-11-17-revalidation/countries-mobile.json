@@ -1,0 +1,37 @@
+[
+  {
+    "country": "us-ca",
+    "client": 375,
+    "scroll": 375
+  },
+  {
+    "country": "south-america",
+    "client": 375,
+    "scroll": 375
+  },
+  {
+    "country": "jp",
+    "client": 375,
+    "scroll": 375
+  },
+  {
+    "country": "cn",
+    "client": 375,
+    "scroll": 375
+  },
+  {
+    "country": "europe",
+    "client": 375,
+    "scroll": 375
+  },
+  {
+    "country": "africa",
+    "client": 375,
+    "scroll": 375
+  },
+  {
+    "country": "au",
+    "client": 375,
+    "scroll": 375
+  }
+]

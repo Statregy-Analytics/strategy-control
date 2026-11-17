@@ -122,9 +122,9 @@
       "blockers": []
     },
     "1:56231": {
-      "front": "validation",
-      "reason": "Consulta paginada e estados de empréstimos corrigidos; há teste controlado de ativos/quitados, mas falta comparação integral dos seis frames e massa real adequada.",
-      "evidence": "docs/evidence/qa-2026-11-16-front-functional/api-and-tests.json"
+      "front": "done",
+      "reason": "Listas ativa/em análise/quitada e componentes expandidos comparados aos filhos de alta fidelidade do Figma. Valores ausentes não são simulados. Estados controlados, falha/retry, filtro, navegação e responsividade testados localmente. Cronograma e pagamento integrado continuam dependências separadas.",
+      "evidence": "docs/evidence/qa-2026-11-17-revalidation/results.json"
     },
     "1:57431": {
       "front": "validation",
@@ -142,14 +142,14 @@
       "evidence": "docs/evidence/qa-2026-11-16-front-functional/api-and-tests.json"
     },
     "1:61125": {
-      "front": "validation",
-      "reason": "Consulta paginada e estados de empréstimos corrigidos; há teste controlado de ativos/quitados, mas falta comparação integral dos seis frames e massa real adequada.",
-      "evidence": "docs/evidence/qa-2026-11-16-front-functional/api-and-tests.json"
+      "front": "done",
+      "reason": "Listas ativa/em análise/quitada e componentes expandidos comparados aos filhos de alta fidelidade do Figma. Valores ausentes não são simulados. Estados controlados, falha/retry, filtro, navegação e responsividade testados localmente. Cronograma e pagamento integrado continuam dependências separadas.",
+      "evidence": "docs/evidence/qa-2026-11-17-revalidation/results.json"
     },
     "1:62011": {
-      "front": "validation",
-      "reason": "Consulta paginada e estados de empréstimos corrigidos; há teste controlado de ativos/quitados, mas falta comparação integral dos seis frames e massa real adequada.",
-      "evidence": "docs/evidence/qa-2026-11-16-front-functional/api-and-tests.json"
+      "front": "done",
+      "reason": "Listas ativa/em análise/quitada e componentes expandidos comparados aos filhos de alta fidelidade do Figma. Valores ausentes não são simulados. Estados controlados, falha/retry, filtro, navegação e responsividade testados localmente. Cronograma e pagamento integrado continuam dependências separadas.",
+      "evidence": "docs/evidence/qa-2026-11-17-revalidation/results.json"
     },
     "1484:93838": {
       "front": "done",
@@ -553,6 +553,41 @@
       "front": "adjustment",
       "reason": "Referência recuperada de automóvel usa título Imóvel e campos IPTU/imóvel: designer deve confirmar campos corretos antes da implementação; API de solicitação/vínculo ainda ausente.",
       "evidence": "docs/evidence/qa-2026-11-17-loan-offers/results.json"
+    },
+    "37:27142": {
+      "front": "done",
+      "reason": "Composição da variação comparada ao Figma no navegador local: endereço, documento, passaporte, datas e anexos. Selects de subdivisões e país emissor corrigidos; integração por país exige catálogo documental correspondente. Não representa envio internacional homologado.",
+      "evidence": "docs/evidence/qa-2026-11-17-revalidation/results.json"
+    },
+    "37:27262": {
+      "front": "done",
+      "reason": "Composição da variação comparada ao Figma no navegador local: endereço, documento, passaporte, datas e anexos. Selects de subdivisões e país emissor corrigidos; integração por país exige catálogo documental correspondente. Não representa envio internacional homologado.",
+      "evidence": "docs/evidence/qa-2026-11-17-revalidation/results.json"
+    },
+    "37:27502": {
+      "front": "done",
+      "reason": "Composição da variação comparada ao Figma no navegador local: endereço, documento, passaporte, datas e anexos. Selects de subdivisões e país emissor corrigidos; integração por país exige catálogo documental correspondente. Não representa envio internacional homologado.",
+      "evidence": "docs/evidence/qa-2026-11-17-revalidation/results.json"
+    },
+    "37:27622": {
+      "front": "done",
+      "reason": "Composição da variação comparada ao Figma no navegador local: endereço, documento, passaporte, datas e anexos. Selects de subdivisões e país emissor corrigidos; integração por país exige catálogo documental correspondente. Não representa envio internacional homologado.",
+      "evidence": "docs/evidence/qa-2026-11-17-revalidation/results.json"
+    },
+    "37:27742": {
+      "front": "done",
+      "reason": "Composição da variação comparada ao Figma no navegador local: endereço, documento, passaporte, datas e anexos. Selects de subdivisões e país emissor corrigidos; integração por país exige catálogo documental correspondente. Não representa envio internacional homologado.",
+      "evidence": "docs/evidence/qa-2026-11-17-revalidation/results.json"
+    },
+    "37:27862": {
+      "front": "done",
+      "reason": "Composição da variação comparada ao Figma no navegador local: endereço, documento, passaporte, datas e anexos. Selects de subdivisões e país emissor corrigidos; integração por país exige catálogo documental correspondente. Não representa envio internacional homologado.",
+      "evidence": "docs/evidence/qa-2026-11-17-revalidation/results.json"
+    },
+    "37:27382": {
+      "front": "adjustment",
+      "reason": "Composição conferida; falta implementar o preenchimento de província/cidade por código postal mostrado no Figma. A tela agora informa indisponibilidade e permite preenchimento manual. Fonte/contrato de consulta ainda não definido; não é atribuído como bug da API.",
+      "evidence": "docs/evidence/qa-2026-11-17-revalidation/jp-postal-unavailable.txt"
     }
   }
 }

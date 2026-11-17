@@ -1,0 +1,52 @@
+{
+  "run": "https://github.com/WillTbn/Strategy-analytics-v2/actions/runs/44167286327",
+  "conclusion": "success",
+  "commit": "d7553f761055673ec1db994d787d097420bcfbd5",
+  "entry": "assets/index-DqfErCv3.js",
+  "chunks": [
+    {
+      "path": "assets/MyLeveragesPage-DM8kY9fi.js",
+      "status": 200,
+      "bytes": 10279,
+      "containsNewLoanLabels": true
+    },
+    {
+      "path": "assets/MyLeveragesPage-DM8kY9fi.js",
+      "status": 200,
+      "bytes": 10279,
+      "containsNewLoanLabels": true
+    }
+  ],
+  "assets": [
+    {
+      "path": "figma/my-leverage/active.svg",
+      "status": 200,
+      "sha256": "0640ecb79f848d15afe6e90d5999a704f13d326c32d1e3c2aeee1fe9ca48eb34",
+      "matchesLocal": true
+    },
+    {
+      "path": "figma/my-leverage/settled.svg",
+      "status": 200,
+      "sha256": "1cd54c2f8fb94c76b6179461ad01f1c5a92ddce3028aeb41a611a951c0e8875b",
+      "matchesLocal": true
+    },
+    {
+      "path": "figma/my-leverage/property.svg",
+      "status": 200,
+      "sha256": "aff306e36c08938ccf1caaf081ee2744d9f640d6d62924d62f200d0bdf3dbd9a",
+      "matchesLocal": true
+    },
+    {
+      "path": "figma/my-leverage/payment-upload.svg",
+      "status": 200,
+      "sha256": "98bc7f422f846d517e2ed110f1d0f711499d6caf556757f52310c55b7c8dc912",
+      "matchesLocal": true
+    },
+    {
+      "path": "licenses/iso-3166-2.txt",
+      "status": 200,
+      "sha256": "25c0309972a0ac7ed86eeaf35b5e4d8b0b1245844a2a66c15197471467d36dc4",
+      "matchesLocal": true
+    }
+  ]
+}

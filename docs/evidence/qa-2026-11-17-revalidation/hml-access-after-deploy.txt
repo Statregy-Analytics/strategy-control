@@ -1,0 +1,31 @@
+- banner:
+  - toolbar:
+    - link:
+      - /url: /system/dashboard
+      - button:
+    - link "Home":
+      - /url: /system/dashboard
+    - link "Contratos":
+      - /url: /system/contracts
+    - link "Comunicação":
+      - /url: /system/communication
+    - link "Alavancagem":
+      - /url: /system/leverage
+    - timer "TER 17:16:38":
+      - generic: TER
+      - generic: 17:16:38
+    - link "Abrir Perfil Resumido":
+      - /url: /system/config
+      - generic: person
+- contentinfo:
+  - paragraph: © 2026 Strategy Analytics v2.1
+- dialog:
+  - img "bloqueio"
+  - paragraph: Desbloqueie essa Área ao atingir o Nível 3!
+  - paragraph: Você pode subir de níveis ao acessar a Área Perfil e preencher documentos e informações patrimoniais. Faça isso agora e aproveite o máximo da plataforma!
+  - link "Voltar":
+    - /url: /system/dashboard
+    - text: Voltar
+  - link "Quero Desbloquear a Área":
+    - /url: /system/config/profile
+    - text: Quero Desbloquear a Área

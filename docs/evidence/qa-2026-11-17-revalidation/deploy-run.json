@@ -1,0 +1,129 @@
+{
+  "conclusion": "success",
+  "jobs": [
+    {
+      "completedAt": "2026-11-17T20:15:54Z",
+      "conclusion": "success",
+      "databaseId": 134336613598,
+      "name": "Build and deploy",
+      "startedAt": "2026-11-17T20:15:08Z",
+      "status": "completed",
+      "steps": [
+        {
+          "completedAt": "2026-11-17T20:15:09Z",
+          "conclusion": "success",
+          "name": "Set up job",
+          "number": 1,
+          "startedAt": "2026-11-17T20:15:08Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-11-17T20:15:13Z",
+          "conclusion": "success",
+          "name": "Check out repository",
+          "number": 2,
+          "startedAt": "2026-11-17T20:15:09Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-11-17T20:15:15Z",
+          "conclusion": "success",
+          "name": "Set up Node.js",
+          "number": 3,
+          "startedAt": "2026-11-17T20:15:13Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-11-17T20:15:22Z",
+          "conclusion": "success",
+          "name": "Install dependencies",
+          "number": 4,
+          "startedAt": "2026-11-17T20:15:15Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-11-17T20:15:23Z",
+          "conclusion": "success",
+          "name": "Audit dependencies",
+          "number": 5,
+          "startedAt": "2026-11-17T20:15:22Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-11-17T20:15:25Z",
+          "conclusion": "success",
+          "name": "Lint",
+          "number": 6,
+          "startedAt": "2026-11-17T20:15:23Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-11-17T20:15:28Z",
+          "conclusion": "success",
+          "name": "Test",
+          "number": 7,
+          "startedAt": "2026-11-17T20:15:25Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-11-17T20:15:33Z",
+          "conclusion": "success",
+          "name": "Build SPA",
+          "number": 8,
+          "startedAt": "2026-11-17T20:15:28Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-11-17T20:15:33Z",
+          "conclusion": "success",
+          "name": "Configure SSH",
+          "number": 9,
+          "startedAt": "2026-11-17T20:15:33Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-11-17T20:15:49Z",
+          "conclusion": "success",
+          "name": "Upload release",
+          "number": 10,
+          "startedAt": "2026-11-17T20:15:33Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-11-17T20:15:51Z",
+          "conclusion": "success",
+          "name": "Activate release",
+          "number": 11,
+          "startedAt": "2026-11-17T20:15:49Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-11-17T20:15:51Z",
+          "conclusion": "success",
+          "name": "Post Set up Node.js",
+          "number": 21,
+          "startedAt": "2026-11-17T20:15:51Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-11-17T20:15:51Z",
+          "conclusion": "success",
+          "name": "Post Check out repository",
+          "number": 22,
+          "startedAt": "2026-11-17T20:15:51Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-11-17T20:15:51Z",
+          "conclusion": "success",
+          "name": "Complete job",
+          "number": 23,
+          "startedAt": "2026-11-17T20:15:51Z",
+          "status": "completed"
+        }
+      ],
+      "url": "https://github.com/WillTbn/Strategy-analytics-v2/actions/runs/44167286327/job/134336613598"
+    }
+  ],
+  "status": "completed"
+}

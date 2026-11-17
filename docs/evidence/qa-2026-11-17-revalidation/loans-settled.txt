@@ -1,0 +1,195 @@
+- main:
+  - navigation:
+    - generic: Prévia local controlada · sem API
+    - button "Alavancagens"
+    - button "us-ca"
+    - button "south-america"
+    - button "jp"
+    - button "cn"
+    - button "europe"
+    - button "africa"
+    - button "au"
+    - button "Falhar leitura"
+    - button "Esvaziar"
+    - button "Recarregar"
+  - heading "Visão Geral" [level=2]
+  - article:
+    - generic: Total de Empréstimos
+    - strong: 2 vigentes
+  - article:
+    - generic: Dívida Total
+    - strong: R$ 450.000,00
+  - article:
+    - generic: Próxima Parcela
+    - strong: —
+    - generic: Indisponível
+  - article:
+    - generic: Empréstimos em Análise
+    - strong: "1"
+  - heading "Suas Alavancagens" [level=2]
+  - tablist:
+    - tab "Em Simulação":
+      - generic: Em Simulação
+    - tab "Ativas":
+      - generic: Ativas
+    - tab "Quitadas" [active] [selected]:
+      - generic: Quitadas
+  - tabpanel:
+    - heading "Empréstimo de R$ 500.000,00" [level=3]
+    - generic: Com Garantia de Automóvel
+    - term: Próxima Parcela
+    - definition:
+      - strong: —
+      - text: "Ven.: —"
+    - term: Status das Parcelas
+    - definition:
+      - strong: —
+      - text: de —
+    - term: Juros
+    - definition: 1,09%
+    - term: Administradora
+    - definition:
+      - generic: —
+    - progressbar "Quitação indisponível":
+      - generic: —
+      - generic: Quitação
+    - button "Expandir Empréstimo de R$ 500.000,00"
+    - heading "Empréstimo de R$ 200.000,00" [level=3]
+    - generic: Com Garantia de Imóvel
+    - term: Próxima Parcela
+    - definition:
+      - strong: —
+      - text: "Ven.: —"
+    - term: Status das Parcelas
+    - definition:
+      - strong: —
+      - text: de —
+    - term: Juros
+    - definition: —
+    - term: Administradora
+    - definition:
+      - generic: —
+    - progressbar "Quitação indisponível":
+      - generic: —
+      - generic: Quitação
+    - button "Expandir Empréstimo de R$ 200.000,00"
+  - tabpanel:
+    - generic: Empréstimo de R$ 100.000,00
+    - generic: Colateral
+    - text: Status do Processo
+    - paragraph: UnderReview
+    - link "Ver Empréstimo":
+      - /url: /system/loan?hash=00000000-0000-4000-8000-000000000003
+      - generic: Ver Empréstimo
+  - tabpanel:
+    - heading "Empréstimo de R$ 500.000,00" [level=3]
+    - generic: Com Garantia de Automóvel
+    - term: Valor da Parcela
+    - definition:
+      - strong: —
+    - term: Status das Parcelas
+    - definition:
+      - strong: —
+      - text: de —
+    - term: Juros
+    - definition: —
+    - term: Administradora
+    - definition:
+      - generic: —
+    - term: Quitado em
+    - definition: —
+    - progressbar "100% de quitação":
+      - generic: 100%
+      - generic: Quitação
+    - button "Expandir Empréstimo de R$ 500.000,00"
+  - heading "Estado expandido preenchido · dados de teste" [level=2]
+  - heading "Empréstimo de R$ 500.000,00" [level=3]
+  - generic: Com Garantia de Automóvel
+  - term: Próxima Parcela
+  - definition:
+    - strong: R$ 10.833,00
+    - text: "Ven.: 02/06/25"
+  - term: Status das Parcelas
+  - definition:
+    - strong: 12 pagas
+    - text: de 40
+  - term: Juros
+  - definition: 1,09% ao mês
+  - term: Administradora
+  - definition:
+    - img "Inter"
+  - progressbar "30% de quitação":
+    - generic: 30%
+    - generic: Quitação
+  - switch "Exibir somente parcelas pendentes":
+    - generic: Exibir somente parcelas pendentes
+  - button "Pagar parcelas selecionadas" [disabled]:
+    - generic: Pagar parcelas selecionadas
+  - button "Baixar Extrato de Parcelas":
+    - generic: Baixar Extrato de Parcelas
+  - generic: Tabela de Parcelas
+  - table:
+    - rowgroup:
+      - row "Select all rows N° da Parcela Vencimento Valor da Parcela (R$) Status Comprovante do Pagamento":
+        - columnheader "Select all rows":
+          - checkbox "Select all rows":
+        - columnheader "N° da Parcela":
+          - text: N° da Parcela
+          - generic: arrow_upward
+        - columnheader "Vencimento":
+          - text: Vencimento
+          - generic: arrow_upward
+        - columnheader "Valor da Parcela (R$)":
+          - generic: arrow_upward
+          - text: Valor da Parcela (R$)
+        - columnheader "Status":
+          - text: Status
+          - generic: arrow_upward
+        - columnheader "Comprovante do Pagamento"
+        - columnheader
+    - rowgroup:
+      - 'row "Select row 01/40 05/05/2025 10.833,00 Pago: 04/05/25 ficticio.pdf"':
+        - cell "Select row":
+          - checkbox "Select row":
+        - cell "01/40"
+        - cell "05/05/2025"
+        - cell "10.833,00"
+        - 'cell "Pago: 04/05/25"':
+          - 'status "Pago: 04/05/25"'
+        - cell "ficticio.pdf":
+          - generic: ficticio.pdf
+        - cell
+      - 'row "Select row 02/40 05/06/2025 10.833,00 Atrasado: 2 dias Fazer Upload Pagar agora"':
+        - cell "Select row":
+          - checkbox "Select row":
+        - cell "02/40"
+        - cell "05/06/2025"
+        - cell "10.833,00"
+        - 'cell "Atrasado: 2 dias"':
+          - 'status "Atrasado: 2 dias"'
+        - cell "Fazer Upload":
+          - button "Fazer Upload" [disabled]:
+            - generic: Fazer Upload
+        - cell "Pagar agora":
+          - button "Pagar agora" [disabled]:
+            - generic: Pagar agora
+      - row "Select row 03/40 05/07/2025 10.833,00 Em aberto Fazer Upload Pagar agora Antecipar":
+        - cell "Select row":
+          - checkbox "Select row":
+        - cell "03/40"
+        - cell "05/07/2025"
+        - cell "10.833,00"
+        - cell "Em aberto":
+          - status "Em aberto"
+        - cell "Fazer Upload":
+          - button "Fazer Upload" [disabled]:
+            - generic: Fazer Upload
+        - cell "Pagar agora Antecipar":
+          - button "Pagar agora" [disabled]:
+            - generic: Pagar agora
+          - button "Antecipar" [disabled]:
+            - generic: Antecipar
+  - link "Ver Empréstimo":
+    - /url: /system/loan?hash=00000000-0000-4000-8000-000000000001
+  - button "Recolher Empréstimo de R$ 500.000,00" [expanded]
+  - status: · /

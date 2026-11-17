@@ -1,0 +1,488 @@
+[
+  {
+    "assets": [
+      {
+        "h": 32.765625,
+        "loaded": true,
+        "src": "/system/icons/auth/logo.svg",
+        "w": 152
+      },
+      {
+        "h": 18,
+        "loaded": true,
+        "src": "/system/icons/auth/select-down.svg",
+        "w": 18
+      },
+      {
+        "h": 28,
+        "loaded": true,
+        "src": "/system/icons/auth/upload.svg",
+        "w": 28
+      },
+      {
+        "h": 28,
+        "loaded": true,
+        "src": "/system/icons/auth/upload.svg",
+        "w": 28
+      },
+      {
+        "h": 24,
+        "loaded": true,
+        "src": "/system/icons/auth/enter.svg",
+        "w": 24
+      }
+    ],
+    "client": 1265,
+    "fields": [
+      {
+        "label": "Rua",
+        "placeholder": ""
+      },
+      {
+        "label": "Número",
+        "placeholder": "000"
+      },
+      {
+        "label": "Andar e apartamento (opcional)",
+        "placeholder": ""
+      },
+      {
+        "label": "Cidade",
+        "placeholder": ""
+      },
+      {
+        "label": "Província",
+        "placeholder": null
+      },
+      {
+        "label": "Código postal",
+        "placeholder": "Ex.: C1425DKF"
+      },
+      {
+        "label": "Número do DNI",
+        "placeholder": "00.000.000"
+      },
+      {
+        "label": "CUIL ou CUIT",
+        "placeholder": "00-00000000-0"
+      },
+      {
+        "label": "Data de emissão",
+        "placeholder": "dd/mm/aaaa"
+      },
+      {
+        "label": "Data de validade",
+        "placeholder": "dd/mm/aaaa"
+      },
+      {
+        "label": "Frente do documento",
+        "placeholder": null
+      },
+      {
+        "label": "Verso do documento",
+        "placeholder": null
+      }
+    ],
+    "residence": "País de residência: 🇦🇷 Argentina",
+    "scroll": 1265
+  },
+  {
+    "assets": [
+      {
+        "h": 32.765625,
+        "loaded": true,
+        "src": "/system/icons/auth/logo.svg",
+        "w": 152
+      },
+      {
+        "h": 18,
+        "loaded": true,
+        "src": "/system/icons/auth/select-down.svg",
+        "w": 18
+      },
+      {
+        "h": 28,
+        "loaded": true,
+        "src": "/system/icons/auth/upload.svg",
+        "w": 28
+      },
+      {
+        "h": 28,
+        "loaded": true,
+        "src": "/system/icons/auth/upload.svg",
+        "w": 28
+      },
+      {
+        "h": 24,
+        "loaded": true,
+        "src": "/system/icons/auth/enter.svg",
+        "w": 24
+      }
+    ],
+    "client": 1265,
+    "fields": [
+      {
+        "label": "Código postal",
+        "placeholder": "000-0000"
+      },
+      {
+        "label": "Província",
+        "placeholder": null
+      },
+      {
+        "label": "Cidade ou distrito",
+        "placeholder": ""
+      },
+      {
+        "label": "Endereço (chōme, banchi, gō)",
+        "placeholder": "0-0-0"
+      },
+      {
+        "label": "Prédio e apartamento (opcional)",
+        "placeholder": ""
+      },
+      {
+        "label": "My Number (マイナンバー)",
+        "placeholder": "0000 0000 0000"
+      },
+      {
+        "label": "Número do documento",
+        "placeholder": "Digite o número"
+      },
+      {
+        "label": "Data de validade",
+        "placeholder": "aaaa/mm/dd"
+      },
+      {
+        "label": "Nome em katakana (フリガナ)",
+        "placeholder": "ヤマダ タロウ"
+      },
+      {
+        "label": "Frente do documento",
+        "placeholder": null
+      },
+      {
+        "label": "Verso do documento",
+        "placeholder": null
+      }
+    ],
+    "residence": "País de residência: 🇯🇵 Japão",
+    "scroll": 1265
+  },
+  {
+    "assets": [
+      {
+        "h": 32.765625,
+        "loaded": true,
+        "src": "/system/icons/auth/logo.svg",
+        "w": 152
+      },
+      {
+        "h": 18,
+        "loaded": true,
+        "src": "/system/icons/auth/select-down.svg",
+        "w": 18
+      },
+      {
+        "h": 28,
+        "loaded": true,
+        "src": "/system/icons/auth/upload.svg",
+        "w": 28
+      },
+      {
+        "h": 28,
+        "loaded": true,
+        "src": "/system/icons/auth/upload.svg",
+        "w": 28
+      },
+      {
+        "h": 24,
+        "loaded": true,
+        "src": "/system/icons/auth/enter.svg",
+        "w": 24
+      }
+    ],
+    "client": 1265,
+    "fields": [
+      {
+        "label": "Província",
+        "placeholder": null
+      },
+      {
+        "label": "Cidade",
+        "placeholder": ""
+      },
+      {
+        "label": "Distrito",
+        "placeholder": ""
+      },
+      {
+        "label": "Código postal",
+        "placeholder": "000000"
+      },
+      {
+        "label": "Endereço",
+        "placeholder": "Rua, número, prédio e apartamento"
+      },
+      {
+        "label": "Número do documento",
+        "placeholder": "18 dígitos"
+      },
+      {
+        "label": "Data de validade",
+        "placeholder": "aaaa/mm/dd"
+      },
+      {
+        "label": "Número fiscal (se for diferente do documento)",
+        "placeholder": ""
+      },
+      {
+        "label": "Nome em chinês (opcional)",
+        "placeholder": "张伟"
+      },
+      {
+        "label": "Frente do documento",
+        "placeholder": null
+      },
+      {
+        "label": "Verso do documento",
+        "placeholder": null
+      }
+    ],
+    "residence": "País de residência: 🇨🇳 China",
+    "scroll": 1265
+  },
+  {
+    "assets": [
+      {
+        "h": 32.765625,
+        "loaded": true,
+        "src": "/system/icons/auth/logo.svg",
+        "w": 152
+      },
+      {
+        "h": 28,
+        "loaded": true,
+        "src": "/system/icons/auth/upload.svg",
+        "w": 28
+      },
+      {
+        "h": 28,
+        "loaded": true,
+        "src": "/system/icons/auth/upload.svg",
+        "w": 28
+      },
+      {
+        "h": 24,
+        "loaded": true,
+        "src": "/system/icons/auth/enter.svg",
+        "w": 24
+      }
+    ],
+    "client": 1265,
+    "fields": [
+      {
+        "label": "Morada",
+        "placeholder": "Rua e número"
+      },
+      {
+        "label": "Complemento (opcional)",
+        "placeholder": "Andar, porta..."
+      },
+      {
+        "label": "Código postal",
+        "placeholder": "0000-000"
+      },
+      {
+        "label": "Localidade",
+        "placeholder": ""
+      },
+      {
+        "label": "Número fiscal (NIF)",
+        "placeholder": "000 000 000"
+      },
+      {
+        "label": "Número do documento",
+        "placeholder": "Digite o número"
+      },
+      {
+        "label": "Data de validade",
+        "placeholder": "dd/mm/aaaa"
+      },
+      {
+        "label": "Frente do documento",
+        "placeholder": null
+      },
+      {
+        "label": "Verso do documento",
+        "placeholder": null
+      }
+    ],
+    "residence": "País de residência: 🇵🇹 Portugal",
+    "scroll": 1265
+  },
+  {
+    "assets": [
+      {
+        "h": 32.765625,
+        "loaded": true,
+        "src": "/system/icons/auth/logo.svg",
+        "w": 152
+      },
+      {
+        "h": 18,
+        "loaded": true,
+        "src": "/system/icons/auth/select-down.svg",
+        "w": 18
+      },
+      {
+        "h": 28,
+        "loaded": true,
+        "src": "/system/icons/auth/upload.svg",
+        "w": 28
+      },
+      {
+        "h": 28,
+        "loaded": true,
+        "src": "/system/icons/auth/upload.svg",
+        "w": 28
+      },
+      {
+        "h": 24,
+        "loaded": true,
+        "src": "/system/icons/auth/enter.svg",
+        "w": 24
+      }
+    ],
+    "client": 1265,
+    "fields": [
+      {
+        "label": "Endereço",
+        "placeholder": "Número e rua"
+      },
+      {
+        "label": "Bairro ou subúrbio",
+        "placeholder": ""
+      },
+      {
+        "label": "Cidade",
+        "placeholder": ""
+      },
+      {
+        "label": "Província",
+        "placeholder": null
+      },
+      {
+        "label": "Código postal (se houver)",
+        "placeholder": "0000"
+      },
+      {
+        "label": "Número de identidade",
+        "placeholder": "13 dígitos"
+      },
+      {
+        "label": "Número fiscal",
+        "placeholder": "10 dígitos"
+      },
+      {
+        "label": "Frente do documento",
+        "placeholder": null
+      },
+      {
+        "label": "Verso do documento",
+        "placeholder": null
+      }
+    ],
+    "residence": "País de residência: 🇿🇦 África do Sul",
+    "scroll": 1265
+  },
+  {
+    "assets": [
+      {
+        "h": 32.765625,
+        "loaded": true,
+        "src": "/system/icons/auth/logo.svg",
+        "w": 152
+      },
+      {
+        "h": 18,
+        "loaded": true,
+        "src": "/system/icons/auth/select-down.svg",
+        "w": 18
+      },
+      {
+        "h": 18,
+        "loaded": true,
+        "src": "/system/icons/auth/select-down.svg",
+        "w": 18
+      },
+      {
+        "h": 28,
+        "loaded": true,
+        "src": "/system/icons/auth/upload.svg",
+        "w": 28
+      },
+      {
+        "h": 28,
+        "loaded": true,
+        "src": "/system/icons/auth/upload.svg",
+        "w": 28
+      },
+      {
+        "h": 24,
+        "loaded": true,
+        "src": "/system/icons/auth/enter.svg",
+        "w": 24
+      }
+    ],
+    "client": 1265,
+    "fields": [
+      {
+        "label": "Endereço",
+        "placeholder": "Unidade, número e rua"
+      },
+      {
+        "label": "Subúrbio",
+        "placeholder": ""
+      },
+      {
+        "label": "Estado ou território",
+        "placeholder": null
+      },
+      {
+        "label": "Código postal",
+        "placeholder": "0000"
+      },
+      {
+        "label": "Número fiscal (TFN, opcional)",
+        "placeholder": "000 000 000"
+      },
+      {
+        "label": "Número da carteira",
+        "placeholder": "Digite o número"
+      },
+      {
+        "label": "Número do cartão",
+        "placeholder": "Digite o número"
+      },
+      {
+        "label": "Estado emissor",
+        "placeholder": null
+      },
+      {
+        "label": "Data de validade",
+        "placeholder": "dd/mm/aaaa"
+      },
+      {
+        "label": "Frente do documento",
+        "placeholder": null
+      },
+      {
+        "label": "Verso do documento",
+        "placeholder": null
+      }
+    ],
+    "residence": "País de residência: 🇦🇺 Austrália",
+    "scroll": 1265
+  }
+]
