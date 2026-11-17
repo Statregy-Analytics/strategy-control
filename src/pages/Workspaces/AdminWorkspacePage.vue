@@ -97,13 +97,22 @@
             class="workspace-search"
             :placeholder="searchPlaceholder"
             :aria-label="searchPlaceholder"
-            ><template #prepend><workspace-icon name="search" /></template></q-input
+            ><template #prepend
+              ><img
+                v-if="module !== 'logic'"
+                :src="
+                  '/icons/workspace-review/' +
+                  (module === 'credit' ? 'credit-search' : 'publication-search') +
+                  '.svg'
+                "
+                alt="" /><workspace-icon v-else name="search" /></template></q-input
           ><glass-select
             v-if="module === 'credit'"
             v-model="kindFilter"
             :options="creditKindOptions"
             placeholder="Tipo de operação"
             aria-label="Tipo de operação"
+            dropdown-icon="img:/icons/workspace-review/credit-chevron.svg"
             clearable
           />
           <glass-select
@@ -112,6 +121,7 @@
             :options="contentTypes"
             placeholder="Tipo"
             aria-label="Tipo"
+            dropdown-icon="img:/icons/workspace-review/publication-chevron.svg"
             disable
           />
           <glass-select
@@ -120,6 +130,11 @@
             :options="statusOptions"
             placeholder="Status"
             aria-label="Status"
+            :dropdown-icon="
+              'img:/icons/workspace-review/' +
+              (module === 'credit' ? 'credit-chevron' : 'publication-chevron') +
+              '.svg'
+            "
             :disable="tab !== 'main'"
             clearable
           /><compact-glass-select
@@ -135,6 +150,7 @@
             :options="[]"
             placeholder="Redator"
             aria-label="Redator"
+            dropdown-icon="img:/icons/workspace-review/publication-chevron.svg"
             disable
           /><compact-glass-select
             v-if="module === 'logic'"
@@ -178,7 +194,7 @@
               no-caps
               :label="tab === 'partners' ? 'Criar Parceiro' : 'Nova Operação'"
               @click="create"
-              ><workspace-icon name="plus" /></q-btn
+              ><img src="/icons/workspace-review/credit-new.svg" alt="" /></q-btn
           ></template>
         </div>
         <q-banner v-if="error" class="workspace-error" role="alert">{{ error }}</q-banner>
@@ -962,5 +978,20 @@ onScopeDispose(() => {
   .workspace-cards--credit {
     grid-template-columns: minmax(0, 1fr);
   }
+}
+</style>
+
+<style scoped>
+.workspace--credit :deep(.q-select__dropdown-icon),
+.workspace--communication :deep(.q-select__dropdown-icon) {
+  width: 16px;
+  height: 16px;
+  font-size: 16px;
+}
+</style>
+<style scoped>
+.workspace--credit .workspace-toolbar .q-btn :deep(.q-btn__content) {
+  flex-direction: row-reverse;
+  gap: 8px;
 }
 </style>

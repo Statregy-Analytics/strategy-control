@@ -243,10 +243,11 @@
             portfolioSection === 'statement' ? 'Extrato' : 'Carteiras do cliente'
           " /><q-card-section
           ><customer-portfolio
-            :key="portfolioCustomer + ':' + portfolioSection"
+            :key="portfolioCustomer + ':' + portfolioSection + ':' + portfolioWalletType"
             :customer-id="portfolioCustomer"
             :embedded="portfolioSection === 'statement'"
             :focus-statement="portfolioSection === 'statement'"
+            :wallet-type="portfolioWalletType"
             @changed="loadGlobalPortfolio" /></q-card-section></q-card
     ></q-dialog>
     <q-dialog v-model="createOpen" :persistent="createBusy"
@@ -500,12 +501,14 @@ function selectWallet(type) {
   walletType.value = type
   tab.value = 'wallets'
 }
-function openPortfolio(id, section = 'portfolio') {
+function openPortfolio(id, section = 'portfolio', wallet = null) {
+  portfolioWalletType.value = wallet
   portfolioSection.value = section
   portfolioCustomer.value = id
   portfolioOpen.value = true
 }
 
+const portfolioWalletType = ref(null)
 const portfolioSection = ref('portfolio')
 const walletType = ref('total'),
   portfolioCustomer = ref(null),

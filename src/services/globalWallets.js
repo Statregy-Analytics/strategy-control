@@ -3,7 +3,9 @@ import { projectPortfolio } from './portfolioProjection.js'
 
 const typeNames = { deposit: 'Free', strategy: 'Applied' }
 const amount = (value) =>
-  value !== null && value !== undefined && value !== '' && Number.isFinite(Number(value))
+  (typeof value === 'number' || typeof value === 'string') &&
+  value !== '' &&
+  Number.isFinite(Number(value))
     ? Number(value)
     : null
 const sum = (values) =>
@@ -92,6 +94,7 @@ export function globalWalletRows(data) {
         clientCode: client.strategyId || null,
         maskedDocument: client.maskedDocument || null,
         code: wallets.length === 1 ? wallets[0].id : null,
+        ledgerWalletIds: wallets.map((w) => w.id),
         status: states.length === 1 ? states[0] : null,
         currencies,
         principalCurrency: currencies.length === 1 ? currencies[0].currency : null,

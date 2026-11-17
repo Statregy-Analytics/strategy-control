@@ -84,6 +84,7 @@ test('native currencies stay separate; contract capital is included without inve
   assert.equal(row.base, null)
   assert.equal(row.yieldPercentage, null)
   assert.equal(row.code, null)
+  assert.deepEqual(row.ledgerWalletIds, [])
   assert.equal(row.clientCode, 'SA-QA')
   assert.deepEqual(
     globalWalletSummary(data).total.currencies.map((c) => [c.currency, c.balance]),

@@ -9,7 +9,7 @@
     <template v-else>
       <form-section title="Visão consolidada (Carteira)">
         <resource-state :state="portfolio.state" @retry="loadPortfolio"
-          ><wallet-overview :model="resolvedWalletModel">
+          ><wallet-overview :model="resolvedWalletModel" :initial-type="walletType">
             <template #contracts
               ><resource-state :state="portfolio.state" @retry="loadPortfolio">
                 <p
@@ -152,6 +152,7 @@ const props = defineProps({
   customerId: { type: String, default: null },
   embedded: { type: Boolean, default: false },
   focusStatement: { type: Boolean, default: false },
+  walletType: { type: String, default: null },
   walletModel: { type: Object, default: null },
 })
 const emit = defineEmits(['currencies', 'calculated', 'changed'])
@@ -167,6 +168,9 @@ const resolvedWalletModel = computed(
   () => props.walletModel || projectPortfolio(portfolio.state.data),
 )
 const statementPanel = ref(null)
+const statementWallet = computed(
+  () => ({ deposit: 'Free', strategy: 'Applied', assets: 'AssetRecord' })[props.walletType],
+)
 let revision = 0
 watch(
   () => [props.focusStatement, statement.state.loading, statement.state.data],
@@ -214,7 +218,9 @@ const loadWallets = () =>
   wallets.load(async () => {
     const data = (await financeGet(`admin/customers/${customerId.value}/wallets`)).data
     if (!Array.isArray(data)) throw new Error('Não foi possível confirmar as carteiras.')
-    return data
+    return statementWallet.value
+      ? data.filter((wallet) => wallet.type === statementWallet.value)
+      : data
   })
 watch(
   () => props.customerId,
@@ -263,7 +269,12 @@ async function exportStatement() {
   try {
     await financeExport(
       `admin/customers/${id}/statement/export`,
-      { format: 'csv', dateFrom: dateFrom.value || undefined, dateTo: dateTo.value || undefined },
+      {
+        format: 'csv',
+        dateFrom: dateFrom.value || undefined,
+        dateTo: dateTo.value || undefined,
+        wallet: statementWallet.value,
+      },
       'extrato.csv',
       active,
     )

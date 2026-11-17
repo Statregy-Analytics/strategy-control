@@ -147,7 +147,13 @@
             dense
             no-caps
             label="Ver Movimentações"
-            @click="emit('open', row.customerId, 'statement')"
+            :disable="row.ledgerWalletIds?.length === 0"
+            :title="
+              row.ledgerWalletIds?.length === 0
+                ? 'Movimentações ainda não disponíveis para esta carteira.'
+                : undefined
+            "
+            @click="emit('open', row.customerId, 'statement', row.type)"
             ><img src="/icons/workspace-review/eye.svg" alt=""
           /></q-btn>
           <q-btn
@@ -165,7 +171,7 @@
             "
             @click="
               type === 'total' || row.type === 'deposit'
-                ? emit('open', row.customerId)
+                ? emit('open', row.customerId, 'portfolio', row.type)
                 : toggle(row.key)
             "
           />
@@ -193,11 +199,16 @@
               v-if="column.name === 'actions'"
               :actions="[
                 { name: 'expand', label: 'Ver detalhes', icon: 'expand_more' },
-                { name: 'open', label: 'Ver movimentações', icon: 'visibility' },
+                {
+                  name: 'open',
+                  label: 'Ver movimentações',
+                  icon: 'visibility',
+                  disabled: scope.row.ledgerWalletIds?.length === 0,
+                },
               ]"
               @select="
                 $event === 'open'
-                  ? emit('open', scope.row.customerId, 'statement')
+                  ? emit('open', scope.row.customerId, 'statement', scope.row.type)
                   : toggle(scope.row.key)
               "
             /><template v-else>{{ column.value }}</template></q-td

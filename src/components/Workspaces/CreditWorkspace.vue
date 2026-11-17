@@ -50,7 +50,12 @@
           debounce="350"
           placeholder="Buscar cliente por nome, CPF ou CNPJ..."
           aria-label="Buscar cliente por nome, CPF ou CNPJ"
-          @update:model-value="lookup" /><resource-state :state="customers.state" @retry="lookup"
+          @update:model-value="lookup"
+          ><template #prepend
+            ><img
+              src="/icons/workspace-review/credit-customer-search.svg"
+              alt="" /></template></q-input
+        ><resource-state :state="customers.state" @retry="lookup"
           ><button
             v-for="customer in customers.state.data || []"
             :key="customer.customerId"

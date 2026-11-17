@@ -21,11 +21,12 @@
           v-for="action in actions"
           :key="action.name"
           clickable
+          :disable="Boolean(action.disabled)"
           v-close-popup
           class="row-action"
           :class="action.color ? `text-${action.color}` : undefined"
           role="menuitem"
-          @click="emit('select', action.name)"
+          @click="!action.disabled && emit('select', action.name)"
         >
           <q-item-section avatar><q-icon :name="action.icon" size="18px" /></q-item-section>
           <q-item-section>{{ action.label }}</q-item-section>
