@@ -7,6 +7,10 @@ export const publicationFileRules = {
   },
 }
 export async function validatePublicationFiles(files, kind) {
+  if (!Array.isArray(files) || !files.length) return 'Selecione pelo menos um arquivo.'
+  if (kind !== 'attachments' && files.length !== 1) return 'Selecione um único arquivo.'
+  if (files.some((file) => !file || !Number.isFinite(file.size) || file.size <= 0))
+    return 'Selecione um arquivo não vazio.'
   const rule = publicationFileRules[kind]
   if (!rule) return ''
   for (const file of files) {
@@ -19,4 +23,27 @@ export async function validatePublicationFiles(files, kind) {
     }
   }
   return ''
+}
+
+export function validatePublicationCover(file) {
+  return file &&
+    typeof file.type === 'string' &&
+    file.type.startsWith('image/') &&
+    Number.isFinite(file.size) &&
+    file.size > 0
+    ? ''
+    : 'Selecione uma imagem de capa válida e não vazia.'
+}
+export function mergePublicationAttachments(current, selected) {
+  const key = (f) => [f.name, f.size, f.type, f.lastModified].join('\u0000')
+  const seen = new Set((current || []).map(key))
+  return [
+    ...(current || []),
+    ...selected.filter((file) => {
+      const k = key(file)
+      if (seen.has(k)) return false
+      seen.add(k)
+      return true
+    }),
+  ]
 }

@@ -1,12 +1,20 @@
 <template>
-  <div class="workspace">
+  <div class="workspace publication-editor-page">
     <header class="workspace-header">
-      <div>
-        <q-btn flat no-caps label="Comunicados" @click="$emit('close')"
-          ><workspace-icon name="arrow-left"
+      <div class="publication-heading">
+        <q-btn flat dense aria-label="Voltar para Comunicados" @click="$emit('close')"
+          ><img src="/icons/publication/editor-back.svg" alt=""
         /></q-btn>
-        <h1>{{ recordId ? 'Editar Conteúdo' : 'Novo ' + (kind || 'Conteúdo') }}</h1>
-        <publication-status :status="source?.status || (recordId ? null : 'Draft')" />
+        <div>
+          <p class="publication-breadcrumb">
+            <span>Comunicados</span> / Administração /
+            {{ recordId ? 'Editar Conteúdo' : 'Novo Conteúdo' }}
+          </p>
+          <div class="publication-title">
+            <h1>{{ recordId ? 'Editar Conteúdo' : 'Novo ' + (kind || 'Conteúdo') }}</h1>
+            <publication-status :status="source?.status || (recordId ? null : 'Draft')" />
+          </div>
+        </div>
       </div>
       <div class="workspace-actions">
         <q-btn flat no-caps label="Descartar" :disable="busy" @click="$emit('close')" /><q-btn
@@ -16,7 +24,7 @@
           :loading="busy"
           :disable="locked || (recordId && !dirty)"
           @click="save(false)"
-          ><workspace-icon name="save" /></q-btn
+          ><img src="/icons/publication/editor-save.svg" alt="" /></q-btn
         ><q-btn
           outline
           no-caps
@@ -24,7 +32,7 @@
           :loading="busy"
           :disable="locked || source?.status === 'Published'"
           @click="save(true)"
-          ><workspace-icon name="send"
+          ><img src="/icons/publication/editor-publish.svg" alt=""
         /></q-btn>
       </div>
     </header>
@@ -35,7 +43,7 @@
           <div>
             <template v-if="kind === 'Relatório'"
               ><profile-section title="Dados Básicos do Relatório"
-                ><div class="workspace-form-grid">
+                ><div class="workspace-form-grid publication-report-grid">
                   <workspace-field
                     v-model="form.title"
                     :field="{
@@ -46,13 +54,13 @@
                     }"
                   /><workspace-field
                     v-model="form.code"
-                    :field="{ readonly: locked, label: 'Código' }"
+                    :field="{ readonly: locked, label: 'Código', placeholder: 'REL-2026-001' }"
                   /><workspace-field
                     v-model="form.version"
-                    :field="{ readonly: locked, label: 'Versão' }"
+                    :field="{ readonly: locked, label: 'Versão', placeholder: '1.0' }"
                   /><workspace-field
                     v-model="form.period"
-                    :field="{ readonly: locked, label: 'Período' }"
+                    :field="{ readonly: locked, label: 'Período', placeholder: 'Q1 2026' }"
                   /><workspace-field
                     v-model="form.summary"
                     :field="{
@@ -110,35 +118,44 @@
                 outlined
                 dark
                 type="textarea"
-                rows="14"
+                rows="3"
                 placeholder="Escreva um parágrafo..."
                 aria-label="Conteúdo da publicação"
                 :readonly="locked"
               />
+              <div class="publication-editor-rule" />
               <div class="publication-media-help">
-                Como adicionar mídia ao conteúdo
+                💡 Como adicionar mídia ao conteúdo
                 <p>
                   Use os blocos do editor acima para inserir imagens, vídeos, documentos e links
-                  exatamente onde você quer que apareçam no texto.
+                  exatamente onde você quer que apareçam no texto. Clique no botão + entre os blocos
+                  para escolher o tipo de mídia.
                 </p>
               </div></profile-section
             >
           </div>
           <aside>
-            <profile-section title="Configurações de Publicação"
-              ><workspace-field
-                :model-value="kind || 'Indisponível'"
-                :field="{
-                  readonly: locked,
-                  label: 'Categoria do Conteúdo',
-                  disabled: true,
-                  hint: 'Categoria definida na criação',
-                }"
-              />
-              <p>Status Atual</p>
-              <q-badge outline
-                >{{ workspaceStatus(source?.status || (recordId ? null : 'Draft'))
-                }}{{ !source || source.status === 'Draft' ? ' (Não visível)' : '' }}</q-badge
+            <profile-section title="Configurações de Publicação" class="publication-settings">
+              <p class="publication-label">Categoria do Conteúdo</p>
+              <div
+                class="publication-category"
+                role="textbox"
+                aria-label="Categoria do Conteúdo"
+                aria-readonly="true"
+              >
+                <div>
+                  <strong>{{ kind || 'Indisponível' }}</strong
+                  ><small>Categoria definida na criação</small>
+                </div>
+                <span>Bloqueado</span>
+              </div>
+              <p class="publication-label">Status Atual</p>
+              <span class="publication-current-status"
+                ><i
+                  :data-status="source?.status || (recordId ? null : 'Draft')"
+                  aria-hidden="true"
+                />{{ workspaceStatus(source?.status || (recordId ? null : 'Draft'))
+                }}{{ !source || source.status === 'Draft' ? ' (Não visível)' : '' }}</span
               >
               <p>Agendamento</p>
               <q-btn-toggle
@@ -158,15 +175,17 @@
                   options: [],
                   disabled: true,
                   placeholder: 'Selecione o redator',
+                  dropdownIcon: 'img:/icons/publication/editor-chevron.svg',
                 }"
               /><q-btn
                 outline
                 no-caps
                 label="Criar novo redator"
                 :disable="locked"
-                class="full-width q-mt-sm"
+                class="full-width q-mt-sm publication-author-create"
                 @click="authorOpen = true"
-              />
+                ><img src="/icons/publication/editor-author-plus.svg" alt=""
+              /></q-btn>
               <p>Temas do Conteúdo *</p>
               <div class="row no-wrap items-center">
                 <q-input
@@ -184,7 +203,7 @@
                   aria-label="Adicionar tema"
                   :disable="locked"
                   @click="addTheme"
-                  ><workspace-icon name="plus"
+                  ><img src="/icons/publication/editor-theme-plus.svg" alt=""
                 /></q-btn>
               </div>
               <q-chip
@@ -196,23 +215,30 @@
               ><small
                 >Usado para organização, busca e sugestões de conteúdos relacionados</small
               ></profile-section
-            ><profile-section v-if="kind !== 'Relatório'" title="Imagem de Capa"
-              ><img
-                v-if="coverUrl"
-                :src="coverUrl"
-                alt="Capa selecionada"
-                class="publication-cover" /><q-file
-                v-model="form.cover"
-                :disable="locked"
-                outlined
-                dark
-                dense
-                accept="image/*"
-                label="Clique para adicionar imagem de capa"
-                aria-label="Imagem de capa" /></profile-section
+            ><profile-section
+              v-if="kind !== 'Relatório'"
+              title="Imagem de Capa"
+              icon-src="/icons/publication/editor-cover-heading.svg"
+              class="publication-cover-section"
+              ><label class="publication-cover-picker"
+                ><img
+                  v-if="coverUrl"
+                  :src="coverUrl"
+                  alt="Capa selecionada"
+                  class="publication-cover" /><template v-else
+                  ><img src="/icons/publication/editor-cover-empty.svg" alt="" /><span
+                    >Clique para adicionar imagem de capa</span
+                  ></template
+                ><input
+                  type="file"
+                  accept="image/*"
+                  aria-label="Imagem de capa"
+                  :disabled="locked"
+                  @change="chooseCover" /></label></profile-section
             ><profile-section
               v-if="kind === 'Insight'"
               title="Insights Relacionados"
+              icon-src="/icons/publication/editor-related.svg"
               caption="Define o que aparecerá na coluna direita"
               ><workspace-field
                 v-model="form.relatedMode"
@@ -222,22 +248,36 @@
                   disabled: locked,
                   kind: 'select',
                   options: ['Baseado em Tema'],
+                  dropdownIcon: 'img:/icons/publication/editor-chevron.svg',
                 }"
               />
-              <p>Sugere conteúdos baseados nos temas cadastrados acima.</p></profile-section
+              <p class="publication-label">Configuração</p>
+              <p class="publication-related-hint">
+                Sugere conteúdos baseados nos temas cadastrados acima.
+              </p>
+              <p v-if="!form.themes.length" class="publication-related-empty">
+                Adicione temas acima para ativar sugestões automáticas
+              </p>
+              <p v-else class="publication-related-empty">
+                Consulta de sugestões indisponível.
+              </p></profile-section
             ><profile-section
               v-else
               title="Índice do Conteúdo"
+              icon-src="/icons/publication/editor-index.svg"
               caption="Gerado automaticamente a partir dos tópicos H2 e H3"
               ><p>Adicione tópicos H2 e H3 no editor para gerar o índice</p></profile-section
-            ><profile-section v-if="kind === 'Comunicado Oficial'" title="Informações do Comunicado"
+            ><profile-section
+              v-if="kind === 'Comunicado Oficial'"
+              title="Informações do Comunicado"
+              icon-src="/icons/publication/editor-information.svg"
               ><div class="workspace-form-grid">
                 <workspace-field
                   v-model="form.code"
                   :field="{ readonly: locked, label: 'Código *', placeholder: 'Ex: COM-2024-001' }"
                 /><workspace-field
                   v-model="form.version"
-                  :field="{ readonly: locked, label: 'Versão' }"
+                  :field="{ readonly: locked, label: 'Versão', placeholder: '1.0' }"
                 /><workspace-field
                   v-model="form.notes"
                   :field="{ readonly: locked, label: 'Notas', kind: 'textarea', wide: true }"
@@ -248,22 +288,30 @@
                   v-model="form.bibliography"
                   :field="{ readonly: locked, label: 'Bibliografia', kind: 'textarea', wide: true }"
                 /></div></profile-section
-            ><profile-section title="Disparo de Notificações"
+            ><profile-section
+              title="Disparo de Notificações"
+              icon-src="/icons/publication/editor-notifications.svg"
+              class="publication-notifications"
               ><q-checkbox
+                dark
                 v-model="form.push"
                 label="Notificação Push (App)"
                 :disable="locked"
               /><small>Envia um alerta para o celular dos clientes.</small
-              ><q-checkbox v-model="form.email" label="Disparo de E-mail" :disable="locked" /><small
-                >Envia o comunicado completo por e-mail.</small
-              ></profile-section
+              ><q-checkbox
+                dark
+                v-model="form.email"
+                label="Disparo de E-mail"
+                :disable="locked"
+              /><small>Envia o comunicado completo por e-mail.</small></profile-section
             ><q-btn
               outline
               no-caps
               label="Visualizar como Cliente"
               class="full-width"
               @click="previewOpen = true"
-            />
+              ><img src="/icons/publication/editor-preview.svg" alt=""
+            /></q-btn>
           </aside>
         </div>
       </resource-state>
@@ -300,7 +348,6 @@ import { onBeforeRouteLeave, onBeforeRouteUpdate } from 'vue-router'
 import ProfileSection from 'src/components/Entity/ProfileSection.vue'
 import ResourceState from 'src/components/Finance/ResourceState.vue'
 import WorkspaceField from './WorkspaceField.vue'
-import WorkspaceIcon from './WorkspaceIcon.vue'
 import AuthorDialog from './AuthorDialog.vue'
 import PublicationUpload from './PublicationUpload.vue'
 import PublicationPreview from './PublicationPreview.vue'
@@ -315,6 +362,7 @@ import {
   workspaceStatus,
 } from 'src/services/adminWorkspaceModel'
 import { auditAction, auditField, auditValue, auditDate } from 'src/services/auditModel'
+import { validatePublicationCover } from 'src/services/publicationFiles'
 const props = defineProps({
     recordId: { type: String, default: null },
     kind: { type: String, default: null },
@@ -390,6 +438,19 @@ const historyColumns = columns([
         : '—',
   ],
 ])
+function chooseCover(event) {
+  if (locked.value) return
+  const file = event.target.files?.[0]
+  event.target.value = ''
+  if (!file) return
+  const message = validatePublicationCover(file)
+  if (message) {
+    error.value = message
+    return
+  }
+  form.value.cover = file
+  error.value = ''
+}
 function addTheme() {
   if (locked.value) return
   const value = themeInput.value.trim()
@@ -567,3 +628,5 @@ onScopeDispose(() => {
   display: block;
 }
 </style>
+
+<style scoped src="./publicationEditor.scss"></style>

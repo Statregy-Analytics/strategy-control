@@ -43,9 +43,13 @@
   </div>
 </template>
 <script setup>
-import { computed, onScopeDispose, ref } from 'vue'
+import { computed, watch, onScopeDispose, ref } from 'vue'
 import PdfPreview from 'src/components/Entity/PdfPreview.vue'
-import { publicationFileRules, validatePublicationFiles } from 'src/services/publicationFiles'
+import {
+  publicationFileRules,
+  validatePublicationFiles,
+  mergePublicationAttachments,
+} from 'src/services/publicationFiles'
 const props = defineProps({
   modelValue: { default: null },
   kind: { type: String, required: true },
@@ -56,7 +60,17 @@ const emit = defineEmits(['update:modelValue'])
 const input = ref(null),
   checking = ref(false),
   error = ref('')
-let active = true
+let active = true,
+  generation = 0
+watch(
+  () => [props.kind, props.disabled],
+  () => {
+    generation++
+    checking.value = false
+    error.value = ''
+  },
+  { flush: 'sync' },
+)
 const files = computed(() =>
   Array.isArray(props.modelValue) ? props.modelValue : props.modelValue ? [props.modelValue] : [],
 )
@@ -94,15 +108,22 @@ async function selectFiles(event) {
   event.target.value = ''
   if (!selected.length) return
   checking.value = true
+  const version = ++generation,
+    kind = props.kind
   try {
-    const message = await validatePublicationFiles(selected, props.kind)
-    if (!active || props.disabled) return
+    const message = await validatePublicationFiles(selected, kind)
+    if (!active || props.disabled || version !== generation) return
     error.value = message
-    if (!message) emit('update:modelValue', props.kind === 'attachments' ? selected : selected[0])
+    if (!message)
+      emit(
+        'update:modelValue',
+        kind === 'attachments' ? mergePublicationAttachments(files.value, selected) : selected[0],
+      )
   } catch {
-    if (active) error.value = 'Não foi possível ler o arquivo. Selecione novamente.'
+    if (active && version === generation)
+      error.value = 'Não foi possível ler o arquivo. Selecione novamente.'
   } finally {
-    if (active) checking.value = false
+    if (active && version === generation) checking.value = false
   }
 }
 onScopeDispose(() => {
