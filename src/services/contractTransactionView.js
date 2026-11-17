@@ -77,7 +77,7 @@ export function contractSourceCurrency(row) {
 export function contractTransactionTone(row) {
   return row?.status === 'Completed'
     ? 'completed'
-    : row?.status === 'Canceled' || row?.status === 'Rejected'
+    : row?.status === 'Canceled' || row?.status === 'Rejected' || row?.status === 'Error'
       ? 'negative'
       : 'pending'
 }

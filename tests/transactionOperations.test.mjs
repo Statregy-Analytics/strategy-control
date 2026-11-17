@@ -268,7 +268,9 @@ test('partial pending edit preserves the saved version and retries only the fail
   await h.save()
   assert.equal(writes.filter((w) => w.method === 'put').length, 1)
   assert.equal(writes.filter((w) => w.path.endsWith('/observations')).length, 2)
-  assert.equal(h.note.value, '')
+  assert.equal(h.note.value, 'QA')
+  await h.save()
+  assert.equal(writes.filter((w) => w.path.endsWith('/observations')).length, 2)
   stop()
 })
 test('decreasing correction never guesses origins; increasing correction uses documented password/version', async () => {

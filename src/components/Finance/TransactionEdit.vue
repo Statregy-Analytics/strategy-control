@@ -13,15 +13,12 @@
               {{ record.client?.name }}
             </p>
           </div>
-          <q-btn
-            flat
-            round
-            dense
-            icon="close"
-            aria-label="Fechar edição"
-            :disable="busy"
-            @click="$emit('close')"
-          />
+          <q-btn flat round dense aria-label="Fechar edição" :disable="busy" @click="$emit('close')"
+            ><span class="transaction-edit__close"
+              ><img src="/icons/transactions/imgVector.svg" alt="" /><img
+                src="/icons/transactions/imgVector1.svg"
+                alt="" /></span
+          ></q-btn>
         </header>
         <p v-if="!correction" class="transaction-edit__info">
           Solicitação pendente: corrija o valor se estiver errado, informe o banco de envio e anexe
@@ -47,7 +44,8 @@
               outlined
               dense
               aria-label="Banco de origem"
-              :display-value="selectedBankLabel" /></label-form
+              :display-value="selectedBankLabel"
+              dropdown-icon="img:/icons/transactions/create/1484-86319-imgChevronDown.svg" /></label-form
         ></resource-state>
         <p
           v-if="!banks.state.loading && !banks.state.error && !bankOptions.length"
@@ -67,20 +65,24 @@
           <p>Valor com erro: {{ money(record.amount, record.currency?.isoCode) }}</p>
           <section v-if="difference > 0">
             <h3>De onde sai a diferença ({{ money(difference, record.currency?.isoCode) }})</h3>
-            <resource-state :state="sources.state" @retry="loadSources"
-              ><label-form v-for="source in sourceRows" :key="source.key" :text-label="source.label"
-                ><money-input
+            <resource-state :state="sources.state" @retry="loadSources">
+              <div v-for="source in sourceRows" :key="source.key" class="transaction-edit__source">
+                <div>
+                  <span>{{ source.label }}</span
+                  ><small
+                    >Disponível: {{ money(source.available, record.currency?.isoCode) }}</small
+                  >
+                </div>
+                <money-input
                   v-model="amounts[source.key]"
                   :currency="record.currency?.isoCode"
                   outlined
                   dense
                   :aria-label="source.label"
-                /><small
-                  >Disponível: {{ money(source.available, record.currency?.isoCode) }}</small
-                ></label-form
-              ></resource-state
-            >
-            <p>
+                />
+              </div>
+            </resource-state>
+            <p class="transaction-edit__total">
               Total: {{ money(sourceTotal, record.currency?.isoCode) }} de
               {{ money(difference, record.currency?.isoCode) }}
             </p>
@@ -150,7 +152,7 @@ const props = defineProps({
 const emit = defineEmits(['close', 'saved', 'busy'])
 const amount = ref(props.record.amount),
   bankId = ref(props.record.source?.id || null),
-  note = ref(''),
+  note = ref(props.correction ? '' : props.record.observation || ''),
   file = ref(null),
   busy = ref(false),
   error = ref(''),
@@ -209,13 +211,14 @@ const loadSources = () =>
 let active = true,
   version = props.record.version,
   savedAmount = props.record.amount,
-  savedBank = bankId.value
+  savedBank = bankId.value,
+  savedNote = note.value.trim()
 const changed = computed(
   () =>
     Number(amount.value) !== Number(savedAmount) ||
     bankId.value !== savedBank ||
     !!file.value ||
-    !!note.value.trim(),
+    note.value.trim() !== savedNote,
 )
 const bankOptions = computed(() =>
   (banks.state.data || [])
@@ -296,6 +299,10 @@ async function save() {
     error.value = 'Não foi possível enviar esse comprovante. O arquivo foi mantido.'
     return
   }
+  if (savedNote && !note.value.trim()) {
+    error.value = 'Não foi possível remover a observação original. Os dados foram mantidos.'
+    return
+  }
   busy.value = true
   emit('busy', true)
   error.value = ''
@@ -310,11 +317,11 @@ async function save() {
       savedAmount = amount.value
       savedBank = bankId.value
     }
-    if (note.value.trim()) {
+    if (note.value.trim() && note.value.trim() !== savedNote) {
       await props.write('post', `admin/transactions/${props.record.id}/observations`, {
         content: note.value.trim(),
       })
-      note.value = ''
+      savedNote = note.value.trim()
     }
     if (active) {
       busy.value = false
@@ -424,5 +431,60 @@ footer {
   line-height: 20px;
   font-weight: 500;
   margin: 16px 0 8px;
+}
+.transaction-edit__close {
+  display: block;
+  position: relative;
+  width: 16px;
+  height: 16px;
+}
+.transaction-edit__close img {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+.transaction-edit :deep(.q-field__control) {
+  border-radius: 8px;
+  background: #ffffff0f;
+}
+.transaction-edit :deep(.q-field__control:before) {
+  border-color: #269ed64d;
+}
+.transaction-edit :deep(.q-select__dropdown-icon) {
+  width: 16px;
+  height: 16px;
+}
+.transaction-edit header > div {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+.transaction-edit__source {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 128px;
+  gap: 12px;
+  padding: 8px;
+  margin-bottom: 8px;
+  border-radius: 8px;
+  background: #ffffff0a;
+  align-items: center;
+}
+.transaction-edit__source span {
+  display: block;
+  font-size: 14px;
+  overflow-wrap: anywhere;
+}
+.transaction-edit__source small {
+  font-size: 12px;
+}
+.transaction-edit__total {
+  text-align: right;
+  color: #7bf1a8;
+  font-size: 12px;
+}
+@media (max-width: 420px) {
+  .transaction-edit__source {
+    grid-template-columns: minmax(0, 1fr) 104px;
+  }
 }
 </style>

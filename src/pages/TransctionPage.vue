@@ -42,7 +42,7 @@
         <finance-table
           ref="pendingTable"
           path="admin/transactions"
-          :params="{ attentionRequired: true, search: search || undefined }"
+          :params="pendingParams"
           :columns="transactionColumns"
         >
           <template #body-cell-type="p"
@@ -102,7 +102,12 @@
           >
           <template #body-cell-status="p"
             ><q-td :props="p"
-              ><span class="contract-flow__badge" :class="contractTransactionTone(p.row)"
+              ><span
+                class="contract-flow__badge"
+                :class="[
+                  contractTransactionTone(p.row),
+                  { 'transaction-error': p.row.status === 'Error' },
+                ]"
                 ><img
                   v-if="p.row.status === 'Completed'"
                   src="/icons/contracts/flows/2349-281-imgIcon1.svg"
@@ -124,7 +129,7 @@
         <finance-table
           ref="table"
           path="admin/transactions"
-          :params="{ search: search || undefined }"
+          :params="historyParams"
           :columns="transactionColumns"
           ><template #body-cell-type="p"
             ><q-td :props="p"
@@ -183,7 +188,12 @@
           >
           <template #body-cell-status="p"
             ><q-td :props="p"
-              ><span class="contract-flow__badge" :class="contractTransactionTone(p.row)"
+              ><span
+                class="contract-flow__badge"
+                :class="[
+                  contractTransactionTone(p.row),
+                  { 'transaction-error': p.row.status === 'Error' },
+                ]"
                 ><img
                   v-if="p.row.status === 'Completed'"
                   src="/icons/contracts/flows/2349-281-imgIcon1.svg"
@@ -256,21 +266,8 @@
         @busy="createBusy = $event"
         @created="onCreated"
     /></q-dialog>
-    <q-dialog
-      v-model="dialog"
-      :position="contractDetail ? 'standard' : 'right'"
-      :full-height="!contractDetail"
-      :full-width="!contractDetail"
-      :maximized="!contractDetail"
-      :class="{ 'control-width': !contractDetail }"
-      :persistent="busy"
-      @show="showAuditHistory"
-      ><q-card
-        ><title-card
-          v-if="!contractDetail"
-          title="Solicitação de transação"
-          :disable-close="busy"
-        /><q-separator />
+    <q-dialog v-model="dialog" :persistent="busy" @show="showAuditHistory">
+      <q-card class="transaction-detail-host">
         <resource-state :state="detail.state" @retry="loadDetail">
           <contract-transaction-detail
             v-if="contractDetail && detail.state.data"
@@ -279,189 +276,21 @@
             @changed="onTransactionEdited"
             @busy="busy = $event"
           />
-          <template v-else-if="detail.state.data">
-            <entity-header
-              :id="detail.state.data.requestNumber"
-              :name="
-                detail.state.data.client.displayName || detail.state.data.client.name || 'Cliente'
-              "
-              ><template #status
-                ><q-badge class="q-ml-md">{{
-                  financeLabel(detail.state.data.status)
-                }}</q-badge></template
-              ></entity-header
-            >
-            <q-card-section>
-              <q-banner v-if="error" role="alert">{{ error }}</q-banner>
-              <form-section title="Movimentação">
-                <p v-if="detail.state.data.correctsTransactionId" class="text-muted">
-                  Esta transação corrige
-                  <q-btn
-                    flat
-                    dense
-                    no-caps
-                    label="Ver transação original"
-                    @click="open(detail.state.data.correctsTransactionId)"
-                  />
-                </p>
-                <p v-if="detail.state.data.correctedByTransactionId" class="text-muted">
-                  Esta transação foi corrigida.
-                  <q-btn
-                    flat
-                    dense
-                    no-caps
-                    label="Ver correção"
-                    @click="open(detail.state.data.correctedByTransactionId)"
-                  />
-                </p>
-                <dl class="finance-facts">
-                  <dt>Tipo</dt>
-                  <dd>{{ financeLabel(detail.state.data.type) }}</dd>
-                  <dt>Valor</dt>
-                  <dd>{{ money(detail.state.data.amount, detail.state.data.currency.isoCode) }}</dd>
-                  <dt>Origem</dt>
-                  <dd>{{ endpointLabel(detail.state.data.source) }}</dd>
-                  <dt>Destino</dt>
-                  <dd>
-                    {{
-                      [
-                        detail.state.data.destinationClient?.name,
-                        endpointLabel(detail.state.data.destination),
-                      ]
-                        .filter(Boolean)
-                        .join(' · ')
-                    }}
-                  </dd>
-                  <dt>Solicitada em</dt>
-                  <dd>{{ dateLabel(detail.state.data.requestedAtUtc) }}</dd>
-                </dl>
-              </form-section>
-              <form-section title="Aprovação e execução">
-                <q-btn
-                  v-if="detail.state.data.availableActions?.includes('CorrectDeposit')"
-                  flat
-                  no-caps
-                  label="Corrigir"
-                  :disable="busy"
-                  @click="correctingTransaction = true"
-                />
-                <q-btn
-                  v-if="canEditTransaction"
-                  flat
-                  no-caps
-                  label="Editar dados"
-                  :disable="busy"
-                  @click="editingTransaction = true"
-                />
-                <q-btn
-                  v-if="detail.state.data.availableActions?.includes('RequestCorrection')"
-                  flat
-                  no-caps
-                  label="Solicitar correção"
-                  :disable="busy"
-                  @click="openState('correction')"
-                />
-                <p
-                  v-if="
-                    !workflowActions.length &&
-                    !detail.state.data.availableActions?.includes('RequestCorrection')
-                  "
-                  class="text-muted"
-                >
-                  Nenhuma ação disponível para o estado atual.
-                </p>
-                <template v-if="workflowActions.length"
-                  ><label-form text-label="Motivo / observação"
-                    ><q-input
-                      v-model="reason"
-                      type="textarea"
-                      outlined
-                      dense
-                      aria-label="Motivo da ação" /></label-form
-                  ><q-btn
-                    v-for="action in workflowActions"
-                    :key="action"
-                    flat
-                    dense
-                    no-caps
-                    color="primary"
-                    class="q-mt-sm q-mr-sm"
-                    :label="financeLabel(action)"
-                    :disable="busy"
-                    @click="confirmAction(action)"
-                /></template>
-              </form-section>
-              <form-section title="Observações">
-                <p v-if="detail.state.data.observation">{{ detail.state.data.observation }}</p>
-                <p
-                  v-if="!detail.state.data.observation && !detail.state.data.observations?.length"
-                  class="text-muted"
-                >
-                  Nenhuma observação registrada.
-                </p>
-                <div
-                  v-for="note in detail.state.data.observations || []"
-                  :key="note.id"
-                  class="q-mb-md"
-                >
-                  <div>{{ note.content }}</div>
-                  <small>{{ dateLabel(note.createdAtUtc) }}</small>
-                </div>
-                <q-btn
-                  v-if="detail.state.data.availableActions.includes('AddObservation')"
-                  outline
-                  no-caps
-                  label="Adicionar observação"
-                  :disable="busy"
-                  @click="openState('observation')"
-                />
-              </form-section>
-              <form-section title="Documentos">
-                <p v-if="!detail.state.data.documents?.length" class="text-muted">
-                  Nenhum documento vinculado.
-                </p>
-                <div
-                  v-for="document in detail.state.data.documents || []"
-                  :key="document.documentId"
-                >
-                  <q-btn
-                    flat
-                    no-caps
-                    :label="document.fileName || 'Ver comprovante'"
-                    :disable="busy"
-                    @click="openState('receipt', document)"
-                  />
-                </div>
-                <p
-                  v-if="detail.state.data.availableActions.includes('AttachDocument')"
-                  class="text-muted"
-                >
-                  A vinculação de documentos estará disponível após a definição dos tipos de vínculo
-                  aceitos.
-                </p>
-              </form-section>
-              <form-section title="Livro-razão"
-                ><q-table
-                  flat
-                  dense
-                  :rows="detail.state.data.ledgerEntries"
-                  :columns="ledgerColumns"
-                  row-key="id"
-                  no-data-label="Nenhum lançamento executado"
-              /></form-section>
-              <form-section id="transaction-history" title="Histórico"
-                ><q-table
-                  flat
-                  dense
-                  :rows="detail.state.data.statusHistory"
-                  :columns="historyColumns"
-                  row-key="id"
-                  no-data-label="Nenhum evento registrado"
-              /></form-section>
-            </q-card-section>
-          </template>
-        </resource-state> </q-card
-    ></q-dialog>
+          <transaction-detail
+            v-else-if="detail.state.data"
+            :key="detail.state.data.id"
+            :record="detail.state.data"
+            :busy="busy"
+            @close="dialog = false"
+            @action="startWorkflow"
+            @edit="editingTransaction = true"
+            @correct="correctingTransaction = true"
+            @state="openState"
+            @open="open"
+          />
+        </resource-state>
+      </q-card>
+    </q-dialog>
     <transaction-edit
       v-if="correctingTransaction && detail.state.data"
       correction
@@ -536,28 +365,19 @@ import { useQuasar } from 'quasar'
 import { useRoute } from 'vue-router'
 import TitlePage from 'src/components/TitlePage.vue'
 import TitleCard from 'src/components/Card/TitleCard.vue'
-import EntityHeader from 'src/components/Entity/EntityHeader.vue'
 import FormSection from 'src/components/Entity/FormSection.vue'
-import LabelForm from 'src/components/Form/LabelForm.vue'
 import FinanceTable from 'src/components/Finance/FinanceTable.vue'
 import ResourceState from 'src/components/Finance/ResourceState.vue'
 import TransactionCreate from 'src/components/Finance/TransactionCreate.vue'
 import TransactionEdit from 'src/components/Finance/TransactionEdit.vue'
+import TransactionDetail from 'src/components/Finance/TransactionDetail.vue'
 import TransactionStateDialog from 'src/components/Finance/TransactionStateDialog.vue'
 import { downloadDocument } from 'src/services/documentAdminService'
 import TransactionPassword from 'src/components/Finance/TransactionPassword.vue'
 import { submitAdminTransaction } from 'src/services/transactionOperations'
 import CustomerPortfolio from 'src/components/Finance/CustomerPortfolio.vue'
 import { useFinanceResource } from 'src/composables/useFinanceResource'
-import {
-  financeGet,
-  financeWrite,
-  columns,
-  financeLabel,
-  money,
-  dateLabel,
-  endpointLabel,
-} from 'src/services/financeService'
+import { financeGet, financeWrite, columns, financeLabel, money } from 'src/services/financeService'
 const $q = useQuasar(),
   detail = useFinanceResource(),
   tab = ref('transactions'),
@@ -572,6 +392,11 @@ const $q = useQuasar(),
   error = ref(''),
   reason = ref('')
 const stateDialog = ref(null)
+const pendingParams = computed(() => ({
+  attentionRequired: true,
+  search: search.value || undefined,
+}))
+const historyParams = computed(() => ({ search: search.value || undefined }))
 const globalPortfolio = useFinanceResource()
 const globalRequest = createRequestContext()
 const globalRows = computed(() => globalWalletRows(globalPortfolio.state.data))
@@ -630,19 +455,13 @@ const transactionColumns = columns([
   ],
   ['actions', ''],
 ])
-const ledgerColumns = columns([
-  ['accountType', 'Conta', (r) => financeLabel(r.accountType)],
-  ['direction', 'Direção', (r) => financeLabel(r.direction)],
-  ['amount', 'Valor', (r) => money(r.amount, detail.state.data?.currency.isoCode)],
-  ['effectiveAtUtc', 'Data', (r) => dateLabel(r.effectiveAtUtc)],
-])
-const historyColumns = columns([
-  ['action', 'Ação', (r) => financeLabel(r.action)],
-  ['toStatus', 'Status', (r) => financeLabel(r.toStatus)],
-  ['occurredAtUtc', 'Data', (r) => dateLabel(r.occurredAtUtc)],
-])
 const loadDetail = () =>
-  detail.load(async () => (await financeGet(`admin/transactions/${id.value}`)).data)
+  detail.load(async () => {
+    const currentId = id.value
+    const record = (await financeGet(`admin/transactions/${currentId}`)).data
+    if (record?.id !== currentId) throw Error('Não foi possível confirmar a solicitação.')
+    return record
+  })
 function onCreated(value) {
   loadGlobalPortfolio()
   createOpen.value = false
@@ -665,7 +484,15 @@ function openState(mode, document = null) {
   if (busy.value) return
   const record = detail.state.data
   if (!record) return
-  const action = mode === 'correction' ? 'RequestCorrection' : 'AddObservation'
+  const action = {
+    correction: 'RequestCorrection',
+    observation: 'AddObservation',
+    approve: 'Approve',
+    reject: 'Reject',
+    execute: 'Execute',
+    cancel: 'Cancel',
+    attachment: 'AttachDocument',
+  }[mode]
   if (mode !== 'receipt' && !record.availableActions?.includes(action)) return
   stateDialog.value = {
     mode,
@@ -680,6 +507,24 @@ async function submitState(content) {
   const record = detail.state.data
   if (!intent || !dialog.value || record?.id !== intent.id || record.version !== intent.version)
     throw Error('A solicitação mudou. Abra a ação novamente.')
+  if (intent.mode === 'attachment')
+    throw Error('Envio de comprovante indisponível. Os dados foram mantidos.')
+  if (['approve', 'reject', 'execute', 'cancel'].includes(intent.mode)) {
+    const action = { approve: 'Approve', reject: 'Reject', execute: 'Execute', cancel: 'Cancel' }[
+      intent.mode
+    ]
+    if (!record.availableActions?.includes(action) || !workflowActions.value.includes(action))
+      throw Error('Ação indisponível.')
+    if (['reject', 'cancel'].includes(intent.mode) && !content.trim())
+      throw Error('Informe o motivo.')
+    if (intent.mode === 'execute' && content !== 'CONFIRMAR') throw Error('Digite CONFIRMAR.')
+    return {
+      action,
+      id: intent.id,
+      version: intent.version,
+      reason: intent.mode === 'execute' ? '' : content.trim(),
+    }
+  }
   if (intent.mode === 'receipt') {
     const document = intent.document
     if (!record.documents?.some((item) => item.documentId === document?.documentId))
@@ -713,10 +558,17 @@ async function submitState(content) {
     throw e
   }
 }
-function stateCompleted() {
+function stateCompleted(result) {
   const mode = stateDialog.value?.mode
   stateDialog.value = null
   busy.value = false
+  if (['approve', 'reject', 'execute', 'cancel'].includes(mode)) {
+    if (result?.id !== detail.state.data?.id || result?.version !== detail.state.data?.version)
+      return
+    reason.value = result.reason
+    confirmAction(result.action)
+    return
+  }
   if (mode === 'receipt') return
   loadDetail()
   table.value?.reload()
@@ -737,14 +589,17 @@ function onTransactionEdited() {
 }
 const correctingTransaction = ref(false)
 const editingTransaction = ref(false)
-const canEditTransaction = computed(
-  () =>
-    detail.state.data?.type === 'Deposit' &&
-    ['AwaitingReceipt', 'PendingValidation', 'Validated'].includes(detail.state.data.status),
-)
 const actionSnapshot = ref(null)
 const actionToConfirm = ref(null)
 const confirmationSummary = computed(() => actionSnapshot.value?.summary || '')
+function startWorkflow(action) {
+  if (!workflowActions.value.includes(action)) return
+  const mode = { Approve: 'approve', Reject: 'reject', Execute: 'execute', Cancel: 'cancel' }[
+    action
+  ]
+  if (mode) openState(mode)
+  else confirmAction(action)
+}
 function confirmAction(action) {
   if (busy.value || !workflowActions.value.includes(action)) return
   if (['Reject', 'Cancel'].includes(action) && !reason.value.trim()) {
@@ -767,7 +622,8 @@ async function executeConfirmed(password) {
   const action = intent?.action
   if (!intent || intent.id !== record?.id || intent.version !== record?.version)
     throw Error('A solicitação mudou. Feche a confirmação e revise os dados.')
-  if (!record || !workflowActions.value.includes(action)) throw Error('Ação indisponível.')
+  if (!record?.availableActions?.includes(action) || !workflowActions.value.includes(action))
+    throw Error('Ação indisponível.')
   try {
     await financeWrite('post', `admin/transactions/${record.id}/actions`, {
       action,
@@ -805,6 +661,16 @@ async function showAuditHistory() {
 }
 </script>
 <style scoped>
+.transaction-detail-host {
+  max-width: calc(100vw - 32px);
+  background: transparent;
+  width: 512px;
+  max-height: calc(100dvh - 32px);
+  overflow: auto;
+  box-shadow: none;
+  border-radius: 12px;
+  scrollbar-color: #ffffff60 #18212e;
+}
 .finance-facts {
   display: grid;
   grid-template-columns: minmax(90px, 1fr) 2fr;
@@ -827,6 +693,10 @@ async function showAuditHistory() {
 </style>
 
 <style scoped>
+.transactions-page :deep(tr:has(.transaction-error) td:not(:nth-child(8)):not(:last-child)) {
+  color: #ffffff80;
+  text-decoration: line-through;
+}
 .transactions-page :deep(.q-table td small) {
   display: block;
   color: #ffffffb8;
@@ -834,6 +704,21 @@ async function showAuditHistory() {
 }
 .transactions-page :deep(.q-table td strong) {
   color: inherit;
+}
+.transactions-page :deep(.q-table__container) {
+  background: transparent;
+  color: #fff;
+  border: 1px solid #ffffff1f;
+  border-radius: 10px;
+}
+.transactions-page :deep(.q-table thead) {
+  background: #ffffff0a;
+}
+.transactions-page :deep(.q-table th),
+.transactions-page :deep(.q-table td),
+.transactions-page :deep(.q-table__bottom) {
+  color: #fff;
+  border-color: #ffffff1f;
 }
 .transactions-page :deep(.contract-transaction-type) {
   display: flex;
