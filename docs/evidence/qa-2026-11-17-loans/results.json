@@ -1,0 +1,97 @@
+{
+  "date": "2026-11-17",
+  "portalCommit": "2bc8d70b18fb9df43bd0a9def1cdd0502fb04824",
+  "figmaFile": "BaDXlWpxbIoY4azOaQnXgv",
+  "figmaSession": "fd563cf1-2134-44ae-9eab-ce9d8f552a36",
+  "scope": "P06 — formulários iniciais de imóvel e automóvel, simular consórcio, preparação do colateral; sem novas rotas/campos/ações de produto.",
+  "automated": {
+    "portalTests": 438,
+    "failed": 0,
+    "lint": "passed",
+    "build": "passed",
+    "scopedDiffCheck": "passed",
+    "globalDiffCheckLimit": "Whitespace preexistente em PRODUCT.md do portal e docs/Api/milestone-3-swagger.json do Admin; arquivos preservados. Diff dos commits deste lote passou.",
+    "adminLint": "passed",
+    "adminBuild": "passed",
+    "adminLocalTests": 402,
+    "adminVersionedTests": 394,
+    "adminExistingUntrackedStudyTests": 8
+  },
+  "browser": {
+    "kind": "Componentes reais montados em prévia local temporária com leitores de perfil controlados; nenhum POST/PUT financeiro.",
+    "sizes": [
+      {
+        "width": 1920,
+        "height": 1080
+      },
+      {
+        "width": 390,
+        "height": 844
+      }
+    ],
+    "passed": [
+      "Valor vazio e fora dos limites impede avanço; lápis edita MoneyInput; slider acompanha centavos/valor numérico.",
+      "Motivo vazio impede avanço; seleção por Enter e retorno por teclado.",
+      "Prazo obrigatório; nome/contato/CPF somente leitura usando apresentação mascarada existente.",
+      "Cônjuge explícito; CPF inválido impede avanço; desmarcar limpa CPF/RG sem alterar o perfil.",
+      "Tipo/valor/CEP/número/metragem do imóvel; CEP incompleto rejeitado; Não sei meu CEP e Imóvel sem Número limpam dados incompatíveis.",
+      "Retorno preserva complemento, metragem e valor; saldo a pagar não usa o complemento; mudar para não financiado limpa saldo.",
+      "Automóvel isolado do imóvel, motivos adicionais e informações cadastrais corretas; catálogo e FIPE indisponíveis, sem nove modelos falsos.",
+      "Consórcio: crédito e parcela preservados separadamente, abas por setas e navegação nomeada para ofertas existentes.",
+      "Falha do perfil exibe Tentar novamente; retry recupera dados sem substituir por exemplos fictícios.",
+      "Colateral: motivo, valor e parcelamento obrigatórios; resumo conserva escolhas, não inventa taxas nem total; não chega a sucesso local.",
+      "Corrigido overflow no colateral mobile; clientWidth=scrollWidth=375 em viewport 390 com scrollbar.",
+      "Verificados ativos nativos não vazios e dimensões dos SVGs; indicadores inativos têm contraste #292929.",
+      "Conta real local continua bloqueada pelo nível documental real abaixo de 3; nenhum bypass da autorização."
+    ],
+    "limits": [
+      "A prévia não prova persistência, aprovação, cotação, parcelas ou upload vinculado a uma solicitação.",
+      "Não houve operação financeira nem concessão de crédito.",
+      "Estado de modelos preenchidos e valores reais de parcelas/resumo não foi validado; contrato HTTP não existe no OpenAPI consultado.",
+      "Fluxos integrados liberados em nível 3 não foram percorridos com uma conta de teste desse nível."
+    ]
+  },
+  "backend": {
+    "verified": "OpenAPI público consultado novamente em 17/11; api-paths.json preserva as rotas relevantes.",
+    "missing": [
+      "Simulação/ofertas de empréstimo com garantia, consórcio e colateral, com condições/parcelas/cotação reais.",
+      "Catálogo de modelos e referência/valor FIPE para o formulário do veículo.",
+      "Criação/envio da solicitação e vínculo de anexos ao pedido do cliente."
+    ],
+    "existing": [
+      "Consultas GET de empréstimos do cliente, documentos, URL temporária e histórico. CRUD administrativo de empréstimos existe; não deve ser confundido com solicitação do cliente."
+    ]
+  },
+  "designer": {
+    "newBlocks": [],
+    "note": "Sem campo ou ação extra autorizado/inventado neste lote. Referências de detalhe empilhado ainda esparsas não foram usadas para uma composição nova."
+  },
+  "withoutFigma": {
+    "newSurfaces": 0,
+    "trackedSurfaces": 13,
+    "note": "As 13 entradas anteriores continuam para Éric; são superfícies/adaptações e não 13 telas novas."
+  },
+  "publication": {
+    "run": 44099385877,
+    "status": "completed",
+    "conclusion": "success",
+    "url": "https://hml.strategyanalytics.com.br",
+    "steps": [
+      "Lint",
+      "Test",
+      "Build SPA",
+      "Upload release",
+      "Activate release"
+    ],
+    "browser": "Rotas de garantia, consórcio e colateral abertas no domínio publicado; bloqueio de nível 3 preservado para a sessão real. Não foi validado um pedido integrado de nível 3.",
+    "assets": "Chunks publicados dos novos componentes conferidos por HTTP; quatro ativos nativos comparados por hash com o código local; publication-assets.json."
+  },
+  "progress": {
+    "total": 279,
+    "done": 170,
+    "validation": 87,
+    "adjustment": 22,
+    "implemented": 257,
+    "implementedPercent": 92.1
+  }
+}

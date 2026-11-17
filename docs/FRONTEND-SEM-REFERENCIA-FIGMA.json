@@ -107,5 +107,7 @@
       "origin": "Campos condicionais já existentes no fluxo reutilizado",
       "decision": "Os seis frames P05 recuperados mostram o passo 3 sem seleção; vincular o estado selecionado e seus campos de valor ao desenho correspondente. Não foram acrescentados campos neste lote."
     }
-  ]
+  ],
+  "reviewedAt": "2026-11-17",
+  "latestReview": "Empréstimos/consórcio/colateral deste lote reutilizam os frames P06 recuperados; nenhum campo, ação ou rota sem desenho acrescentado. Os estados indisponíveis são tratamentos de API, não novas telas."
 }

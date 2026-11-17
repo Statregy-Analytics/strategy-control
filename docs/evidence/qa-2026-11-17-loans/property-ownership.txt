@@ -1,0 +1,68 @@
+- paragraph: Prévia controlada dos componentes reais · dados fictícios · sem escrita na API
+- navigation:
+  - button "Imóvel"
+  - button "Automóvel"
+  - button "Consórcio"
+  - button "Colateral"
+  - button "Alternar falha do perfil"
+- button "Voltar"
+- heading "Faça uma Simulação com seu Imóvel em Garantia" [level=1]
+- paragraph: Preencha corretamente com seus dados para iniciarmos a simulação. Depois, analisaremos seu perfil e retornaremos com uma proposta especial para você.
+- progressbar
+- progressbar
+- progressbar
+- progressbar
+- progressbar
+- progressbar
+- progressbar
+- text: Passo 4/ 7
+- heading "Informações do Imóvel" [level=2]
+- group "O Imóvel está no Nome de Quem?":
+  - generic: O Imóvel está no Nome de Quem?
+  - checkbox "Meu Nome"
+  - text: Meu Nome
+  - checkbox "Cônjuge"
+  - text: Cônjuge
+  - checkbox "Pai/Mãe"
+  - text: Pai/Mãe
+  - checkbox "Filho(a)"
+  - text: Filho(a)
+  - checkbox "Outro"
+  - text: Outro
+- group "O Imóvel ainda está sendo pago?":
+  - generic: O Imóvel ainda está sendo pago?
+  - radio "Sim"
+  - text: Sim
+  - radio "Não"
+  - text: Não
+- generic: Quanto falta para pagar? (R$)
+- generic: R$
+- textbox "Quanto falta para pagar?" [disabled]: 0,00
+- group "Você tem a Matrícula do Imóvel?":
+  - generic: Você tem a Matrícula do Imóvel?
+  - radio "Sim"
+  - text: Sim
+  - radio "Não"
+  - text: Não
+  - radio "Não sei"
+  - text: Não sei
+  - paragraph: O que é matrícula?
+- group "Imóvel possui Habite-se?":
+  - generic: Imóvel possui Habite-se?
+  - radio "Tem"
+  - text: Tem
+  - radio "Não tem"
+  - text: Não tem
+  - radio "Não sei"
+  - text: Não sei
+  - paragraph: O que é Habite-se?
+- group "Contratação de crédito seria feita por você ou sua empresa?":
+  - generic: Contratação de crédito seria feita por você ou sua empresa?
+  - radio "Por mim"
+  - text: Por mim
+  - radio "Pela empresa"
+  - text: Pela empresa
+- status: A simulação e o envio desta solicitação ainda não estão disponíveis.
+- button "Prosseguir" [disabled]:
+  - generic: Prosseguir
+- status: "Destino de ofertas: /offers · Sem envio"

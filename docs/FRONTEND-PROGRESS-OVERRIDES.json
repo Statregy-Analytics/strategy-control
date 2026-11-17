@@ -323,6 +323,142 @@
       "blockers": [
         "backend"
       ]
+    },
+    "1:50860": {
+      "front": "done",
+      "reason": "Composição recuperada do Figma, ativos nativos, validações e navegação testados no navegador em componentes reais com dados controlados. Dados cadastrais usam leitores existentes; cotação/solicitação continuam bloqueadas sem API. Não representa homologação integrada.",
+      "evidence": "docs/evidence/qa-2026-11-17-loans/results.json",
+      "blockers": [
+        "backend"
+      ]
+    },
+    "1:52217": {
+      "front": "done",
+      "reason": "Composição recuperada do Figma, ativos nativos, validações e navegação testados no navegador em componentes reais com dados controlados. Dados cadastrais usam leitores existentes; cotação/solicitação continuam bloqueadas sem API. Não representa homologação integrada.",
+      "evidence": "docs/evidence/qa-2026-11-17-loans/results.json",
+      "blockers": [
+        "backend"
+      ]
+    },
+    "1:52330": {
+      "front": "done",
+      "reason": "Composição recuperada do Figma, ativos nativos, validações e navegação testados no navegador em componentes reais com dados controlados. Dados cadastrais usam leitores existentes; cotação/solicitação continuam bloqueadas sem API. Não representa homologação integrada.",
+      "evidence": "docs/evidence/qa-2026-11-17-loans/results.json",
+      "blockers": [
+        "backend"
+      ]
+    },
+    "1:52424": {
+      "front": "done",
+      "reason": "Composição recuperada do Figma, ativos nativos, validações e navegação testados no navegador em componentes reais com dados controlados. Dados cadastrais usam leitores existentes; cotação/solicitação continuam bloqueadas sem API. Não representa homologação integrada.",
+      "evidence": "docs/evidence/qa-2026-11-17-loans/results.json",
+      "blockers": [
+        "backend"
+      ]
+    },
+    "1:52520": {
+      "front": "done",
+      "reason": "Composição recuperada do Figma, ativos nativos, validações e navegação testados no navegador em componentes reais com dados controlados. Dados cadastrais usam leitores existentes; cotação/solicitação continuam bloqueadas sem API. Não representa homologação integrada.",
+      "evidence": "docs/evidence/qa-2026-11-17-loans/results.json",
+      "blockers": [
+        "backend"
+      ]
+    },
+    "1:52616": {
+      "front": "done",
+      "reason": "Composição recuperada do Figma, ativos nativos, validações e navegação testados no navegador em componentes reais com dados controlados. Dados cadastrais usam leitores existentes; cotação/solicitação continuam bloqueadas sem API. Não representa homologação integrada.",
+      "evidence": "docs/evidence/qa-2026-11-17-loans/results.json",
+      "blockers": [
+        "backend"
+      ]
+    },
+    "1:53739": {
+      "front": "done",
+      "reason": "Composição recuperada do Figma, ativos nativos, validações e navegação testados no navegador em componentes reais com dados controlados. Dados cadastrais usam leitores existentes; cotação/solicitação continuam bloqueadas sem API. Não representa homologação integrada.",
+      "evidence": "docs/evidence/qa-2026-11-17-loans/results.json",
+      "blockers": [
+        "backend"
+      ]
+    },
+    "1:53839": {
+      "front": "done",
+      "reason": "Composição recuperada do Figma, ativos nativos, validações e navegação testados no navegador em componentes reais com dados controlados. Dados cadastrais usam leitores existentes; cotação/solicitação continuam bloqueadas sem API. Não representa homologação integrada.",
+      "evidence": "docs/evidence/qa-2026-11-17-loans/results.json",
+      "blockers": [
+        "backend"
+      ]
+    },
+    "1:53960": {
+      "front": "done",
+      "reason": "Composição recuperada do Figma, ativos nativos, validações e navegação testados no navegador em componentes reais com dados controlados. Dados cadastrais usam leitores existentes; cotação/solicitação continuam bloqueadas sem API. Não representa homologação integrada.",
+      "evidence": "docs/evidence/qa-2026-11-17-loans/results.json",
+      "blockers": [
+        "backend"
+      ]
+    },
+    "1:54054": {
+      "front": "done",
+      "reason": "Composição recuperada do Figma, ativos nativos, validações e navegação testados no navegador em componentes reais com dados controlados. Dados cadastrais usam leitores existentes; cotação/solicitação continuam bloqueadas sem API. Não representa homologação integrada.",
+      "evidence": "docs/evidence/qa-2026-11-17-loans/results.json",
+      "blockers": [
+        "backend"
+      ]
+    },
+    "1:55357": {
+      "front": "done",
+      "reason": "Composição recuperada do Figma, ativos nativos, validações e navegação testados no navegador em componentes reais com dados controlados. Dados cadastrais usam leitores existentes; cotação/solicitação continuam bloqueadas sem API. Não representa homologação integrada.",
+      "evidence": "docs/evidence/qa-2026-11-17-loans/results.json",
+      "blockers": [
+        "backend"
+      ]
+    },
+    "1:55448": {
+      "front": "done",
+      "reason": "Composição recuperada do Figma, ativos nativos, validações e navegação testados no navegador em componentes reais com dados controlados. Dados cadastrais usam leitores existentes; cotação/solicitação continuam bloqueadas sem API. Não representa homologação integrada.",
+      "evidence": "docs/evidence/qa-2026-11-17-loans/results.json",
+      "blockers": [
+        "backend"
+      ]
+    },
+    "1:55709": {
+      "front": "done",
+      "reason": "Composição recuperada do Figma, ativos nativos, validações e navegação testados no navegador em componentes reais com dados controlados. Dados cadastrais usam leitores existentes; cotação/solicitação continuam bloqueadas sem API. Não representa homologação integrada.",
+      "evidence": "docs/evidence/qa-2026-11-17-loans/results.json",
+      "blockers": [
+        "backend"
+      ]
+    },
+    "1:55832": {
+      "front": "done",
+      "reason": "Composição recuperada do Figma, ativos nativos, validações e navegação testados no navegador em componentes reais com dados controlados. Dados cadastrais usam leitores existentes; cotação/solicitação continuam bloqueadas sem API. Não representa homologação integrada.",
+      "evidence": "docs/evidence/qa-2026-11-17-loans/results.json",
+      "blockers": [
+        "backend"
+      ]
+    },
+    "1:55919": {
+      "front": "validation",
+      "reason": "Parcelamento e resumo compostos e navegáveis; estados indisponíveis testados em desktop/celular. Valores de parcelas, juros e condições reais ainda exigem contrato de simulação e revalidação do estado preenchido; confirmação não é enviada.",
+      "evidence": "docs/evidence/qa-2026-11-17-loans/results.json",
+      "blockers": [
+        "backend"
+      ]
+    },
+    "1:56020": {
+      "front": "validation",
+      "reason": "Parcelamento e resumo compostos e navegáveis; estados indisponíveis testados em desktop/celular. Valores de parcelas, juros e condições reais ainda exigem contrato de simulação e revalidação do estado preenchido; confirmação não é enviada.",
+      "evidence": "docs/evidence/qa-2026-11-17-loans/results.json",
+      "blockers": [
+        "backend"
+      ]
+    },
+    "1:54146": {
+      "front": "adjustment",
+      "reason": "Corrigidos proprietário, placa, condição de pagamento e remoção dos modelos/FIPE fictícios. Estado com modelos selecionáveis e referência FIPE precisa concluir integração/composição a partir de catálogo real; não contabilizado como pronto.",
+      "evidence": "docs/evidence/qa-2026-11-17-loans/results.json",
+      "blockers": [
+        "backend"
+      ]
     }
   }
 }

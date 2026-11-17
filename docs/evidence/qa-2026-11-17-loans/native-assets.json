@@ -1,0 +1,126 @@
+[
+  {
+    "file": "public/figma/loan-request/back.svg",
+    "bytes": 747,
+    "sha256": "caab012da6ada0b58344f40a712ee7a8d49c6c9dcb74fe0db427205b7bf17c95",
+    "root": "<svg preserveAspectRatio=\"none\" overflow=\"visible\" style=\"display: block;\" width=\"40\" height=\"40\" viewBox=\"0 0 40 40\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\">"
+  },
+  {
+    "file": "public/figma/loan-request/car.png",
+    "bytes": 425004,
+    "sha256": "c4ff06c5fd4b07a67d5dbc6f7b79cae59fd05deded34982511f020369faa3b03"
+  },
+  {
+    "file": "public/figma/loan-request/chart.svg",
+    "bytes": 1729,
+    "sha256": "46fc64d1bafa3cfcdb4238fe3ba27c8a6535f37b7b6d4b37be5759d127ede2b9",
+    "root": "<svg preserveAspectRatio=\"none\" overflow=\"visible\" style=\"display: block;\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\">"
+  },
+  {
+    "file": "public/figma/loan-request/checkbox.svg",
+    "bytes": 751,
+    "sha256": "76ff15bdcb46bda004eb6e79becb225687063475718f0b231e3efc837aafc518",
+    "root": "<svg preserveAspectRatio=\"none\" overflow=\"visible\" style=\"display: block;\" width=\"16\" height=\"16\" viewBox=\"0 0 16 16\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\">"
+  },
+  {
+    "file": "public/figma/loan-request/chevron.svg",
+    "bytes": 475,
+    "sha256": "beaf9783193112fe2eb3635fbb34dd666a145410dad2b0f9ae715d6ed62ef144",
+    "root": "<svg preserveAspectRatio=\"none\" overflow=\"visible\" style=\"display: block;\" width=\"16\" height=\"16\" viewBox=\"0 0 16 16\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\">"
+  },
+  {
+    "file": "public/figma/loan-request/dots.svg",
+    "bytes": 1590,
+    "sha256": "24b6bc94c7cfce2b643f9ed48564a256a122ea031326d60eecfb3c15bb0fd40c",
+    "root": "<svg preserveAspectRatio=\"none\" overflow=\"visible\" style=\"display: block;\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\">"
+  },
+  {
+    "file": "public/figma/loan-request/handle.svg",
+    "bytes": 313,
+    "sha256": "3343b60782fa87b5b71456c65633fd56cabd164f68fccaee5efcbe8658344d08",
+    "root": "<svg preserveAspectRatio=\"none\" overflow=\"visible\" style=\"display: block;\" width=\"14.5\" height=\"14\" viewBox=\"0 0 14.5 14\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\">"
+  },
+  {
+    "file": "public/figma/loan-request/home.svg",
+    "bytes": 1191,
+    "sha256": "6b28b1e12df03a63aa732d825a9f310a16e183c3266e8ab2c2826e6d91f5f44f",
+    "root": "<svg preserveAspectRatio=\"none\" overflow=\"visible\" style=\"display: block;\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\">"
+  },
+  {
+    "file": "public/figma/loan-request/house.png",
+    "bytes": 469807,
+    "sha256": "d8b8d3b82ec9c28e7fdf32c42113002247db2e01dc02abee35355644eb951c85"
+  },
+  {
+    "file": "public/figma/loan-request/info.svg",
+    "bytes": 1567,
+    "sha256": "d74a3af3b78097a5842b804ace9e91e1e0ebbb6b44ca88bf9b55cde6b9176b4a",
+    "root": "<svg preserveAspectRatio=\"none\" overflow=\"visible\" style=\"display: block;\" width=\"16\" height=\"16\" viewBox=\"0 0 16 16\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\">"
+  },
+  {
+    "file": "public/figma/loan-request/mark-active.svg",
+    "bytes": 261,
+    "sha256": "f2c946ab7ec1fca0143d9330a8f9bc33f5069059e5c9658b0390446be2bff146",
+    "root": "<svg preserveAspectRatio=\"none\" overflow=\"visible\" style=\"display: block;\" width=\"8\" height=\"8\" viewBox=\"0 0 8 8\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\">"
+  },
+  {
+    "file": "public/figma/loan-request/mark.svg",
+    "bytes": 320,
+    "sha256": "be928f6969f6d4939f2834bcd5ceb0feb6b9a19f37637073afa8537ec2afc18f",
+    "root": "<svg preserveAspectRatio=\"none\" overflow=\"visible\" style=\"display: block;\" width=\"8\" height=\"8\" viewBox=\"0 0 8 8\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\">"
+  },
+  {
+    "file": "public/figma/loan-request/next.svg",
+    "bytes": 1274,
+    "sha256": "8645a99713e15be380ecda033ddd79fe3efaed874f29e6ad47da6ed6c40b753e",
+    "root": "<svg preserveAspectRatio=\"none\" overflow=\"visible\" style=\"display: block;\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\">"
+  },
+  {
+    "file": "public/figma/loan-request/pencil.svg",
+    "bytes": 1036,
+    "sha256": "4a291e83cbb33efc4ff713f1b62e5f9e1b24e873fa15038da8d7c2ac67fc2b23",
+    "root": "<svg preserveAspectRatio=\"none\" overflow=\"visible\" style=\"display: block;\" width=\"14\" height=\"14\" viewBox=\"0 0 14 14\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\">"
+  },
+  {
+    "file": "public/figma/loan-request/previous.svg",
+    "bytes": 701,
+    "sha256": "c18fce76565b54f9134a59d07f131042bb8643739f256bdd581faeb4d6d8de12",
+    "root": "<svg preserveAspectRatio=\"none\" overflow=\"visible\" style=\"display: block;\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\">"
+  },
+  {
+    "file": "public/figma/loan-request/radio.svg",
+    "bytes": 273,
+    "sha256": "7160bfef1fee2da3cc9f07f543d0cb45e00246b15969c46b3d7992205846b260",
+    "root": "<svg preserveAspectRatio=\"none\" overflow=\"visible\" style=\"display: block;\" width=\"16\" height=\"16\" viewBox=\"0 0 16 16\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\">"
+  },
+  {
+    "file": "public/figma/loan-request/receipt.svg",
+    "bytes": 1098,
+    "sha256": "1aea78dd3ab936e000e29178fb5f079ef99c3b062f242e82dbf3257bf181b8c5",
+    "root": "<svg preserveAspectRatio=\"none\" overflow=\"visible\" style=\"display: block;\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\">"
+  },
+  {
+    "file": "public/figma/loan-request/refund.svg",
+    "bytes": 865,
+    "sha256": "e3df882330ed1b872eb1325eeec667270bf10544b33a2d4aa7848af9fc1fbbe6",
+    "root": "<svg preserveAspectRatio=\"none\" overflow=\"visible\" style=\"display: block;\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\">"
+  },
+  {
+    "file": "public/figma/loan-request/shopping.svg",
+    "bytes": 1586,
+    "sha256": "cd1bb0d5a3e3576fdd2648b27a762855da26d9ff651db8d188b51630f556174d",
+    "root": "<svg preserveAspectRatio=\"none\" overflow=\"visible\" style=\"display: block;\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\">"
+  },
+  {
+    "file": "public/figma/loan-request/suv.svg",
+    "bytes": 2305,
+    "sha256": "41055cf18815c80666eb03e21103eb046387aa1f848146b8cb2a938af1881a81",
+    "root": "<svg preserveAspectRatio=\"none\" overflow=\"visible\" style=\"display: block;\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\">"
+  },
+  {
+    "file": "public/figma/loan-request/warning.svg",
+    "bytes": 1567,
+    "sha256": "bd50486a0aabf261c94479729890a36f46e56087cab7f41ce4b03f881731e1c8",
+    "root": "<svg preserveAspectRatio=\"none\" overflow=\"visible\" style=\"display: block;\" width=\"16\" height=\"16\" viewBox=\"0 0 16 16\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\">"
+  }
+]

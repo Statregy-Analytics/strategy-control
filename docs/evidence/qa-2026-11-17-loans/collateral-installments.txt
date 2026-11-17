@@ -1,0 +1,26 @@
+- paragraph: Prévia controlada dos componentes reais · dados fictícios · sem escrita na API
+- navigation:
+  - button "Imóvel"
+  - button "Automóvel"
+  - button "Consórcio"
+  - button "Colateral"
+  - button "Alternar falha do perfil"
+- button "Voltar" [active]
+- heading "Solicitar Empréstimo" [level=1]
+- generic: Quanto melhor seu Perfil de investimento, melhor as condições de Empréstimo (juros, parcelas,...)
+- heading "Parcelamento" [level=2]
+- paragraph:
+  - text: "Valor do Empréstimo:"
+  - strong: R$ 200.000,00
+- button "60x" [pressed]
+- button "90x"
+- button "120x"
+- button "150x"
+- button "180x"
+- button "210x"
+- button "240x"
+- status: Valores de parcelas e juros indisponíveis.
+- button "Voltar"
+- button "Prosseguir":
+  - generic: Prosseguir
+- status: "Destino de ofertas: /offers · Sem envio"

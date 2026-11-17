@@ -1,0 +1,55 @@
+{
+  "entry": "/assets/index-DvZ-FaBb.js",
+  "chunks": [
+    {
+      "name": "SecuredLoanPage",
+      "path": "/assets/SecuredLoanPage-DLHyN-ru.js",
+      "bytes": 2491,
+      "sha256": "c5873430a5614bd7b2f5f2c665ae28bc80ae9bbe19f0be705293481b146b907e",
+      "hasNewWizard": true
+    },
+    {
+      "name": "ConsortiumLoanPage",
+      "path": "/assets/ConsortiumLoanPage-CIiILX5d.js",
+      "bytes": 2507,
+      "sha256": "b81b1a9c1951a1a55b34edf71fe08f041ce2f2d0c504b847a54a9f800713d97c",
+      "hasNewWizard": true
+    },
+    {
+      "name": "CollateraLoanPage",
+      "path": "/assets/CollateraLoanPage-BbUFv4vB.js",
+      "bytes": 4480,
+      "sha256": "569d619d85a8f4255122aa2518e28f53098aa2f6e1d58ecbe8f683b339e7311f",
+      "hasNewWizard": true
+    },
+    {
+      "name": "SecuredRequestWizard",
+      "path": "/assets/SecuredRequestWizard-BxKgWbns.js",
+      "bytes": 18020,
+      "sha256": "3189dfcec423379ab8b6cb5909f5c060c7f48736f5d87ce3479c8071fad40f38",
+      "hasNewWizard": true
+    }
+  ],
+  "nativeAssets": [
+    {
+      "path": "house.png",
+      "bytes": 469807,
+      "matchesLocal": true
+    },
+    {
+      "path": "car.png",
+      "bytes": 425004,
+      "matchesLocal": true
+    },
+    {
+      "path": "handle.svg",
+      "bytes": 313,
+      "matchesLocal": true
+    },
+    {
+      "path": "back.svg",
+      "bytes": 747,
+      "matchesLocal": true
+    }
+  ]
+}
