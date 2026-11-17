@@ -34,17 +34,26 @@
       </section>
       <div class="partner-tabs" role="tablist" aria-label="Informações do parceiro">
         <q-btn
-          v-for="item in tabs"
+          v-for="(item, index) in tabs"
           :key="item"
           outline
           no-caps
           :label="item"
           role="tab"
           :aria-selected="tab === item"
+          :tabindex="tab === item ? 0 : -1"
+          :id="`${tabId}-${index}`"
+          :aria-controls="`${tabId}-panel`"
+          @keydown="moveTab($event, index)"
           @click="tab = item"
         />
       </div>
-      <div class="partner-tab-body" role="tabpanel" :aria-label="tab">
+      <div
+        class="partner-tab-body"
+        role="tabpanel"
+        :id="`${tabId}-panel`"
+        :aria-labelledby="`${tabId}-${tabs.indexOf(tab)}`"
+      >
         <template v-if="tab === 'Dados Gerais'">
           <section class="partner-info">
             <h4>Dados Gerais</h4>
@@ -107,11 +116,24 @@
   </q-dialog>
 </template>
 <script setup>
-import { computed, ref, watch } from 'vue'
+import { computed, ref, watch, useId, nextTick } from 'vue'
 import { dateLabel } from 'src/services/financeService'
 const props = defineProps({ partner: { type: Object, default: null } })
 defineEmits(['close', 'edit'])
 const tab = ref('Dados Gerais')
+const tabId = useId()
+function moveTab(event, index) {
+  const target = {
+    ArrowRight: (index + 1) % tabs.length,
+    ArrowLeft: (index + tabs.length - 1) % tabs.length,
+    Home: 0,
+    End: tabs.length - 1,
+  }[event.key]
+  if (target === undefined) return
+  event.preventDefault()
+  tab.value = tabs[target]
+  nextTick(() => document.getElementById(`${tabId}-${target}`)?.focus())
+}
 const tabs = [
   'Dados Gerais',
   'Serviços',
@@ -275,12 +297,12 @@ header > .q-btn {
   padding: 0 8px;
   border-radius: 8px;
   color: var(--sa-muted, rgba(255, 255, 255, 0.72));
-  background: rgba(255, 255, 255, 0.04);
+  background: linear-gradient(89deg, #ffffff14, #ffffff08 50%, #ffffff12);
   font-size: 14px;
 }
 .partner-tabs [aria-selected='true'] {
   color: var(--sa-text, #fff);
-  background: rgba(255, 255, 255, 0.1);
+  background: linear-gradient(89deg, #ffffff1f, #ffffff0d 50%, #ffffff1a);
 }
 .partner-tab-body {
   display: grid;
@@ -363,5 +385,18 @@ footer img {
   header p {
     font-size: 12px;
   }
+}
+</style>
+
+<style scoped>
+.partner-tabs .q-btn:focus-visible {
+  outline: 2px solid #00a3ff;
+  outline-offset: 3px;
+}
+.partner-tabs .q-btn:deep(:before) {
+  border-color: #ffffff33;
+}
+.partner-tabs .q-btn[aria-selected='true']:deep(:before) {
+  border-color: #ffffff42;
 }
 </style>

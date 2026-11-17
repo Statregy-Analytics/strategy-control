@@ -12,7 +12,10 @@
   <q-dialog v-else :model-value="true" @update:model-value="!$event && $emit('close')"
     ><q-card
       class="workspace-modal"
-      :class="{ 'workspace-modal--wide': recordId || (partner && step === 2) }"
+      :class="[
+        partner ? 'credit-partner-form' : '',
+        { 'workspace-modal--wide': recordId || (partner && step === 2) },
+      ]"
       ><div class="workspace-modal-heading">
         <h2>
           {{
@@ -20,19 +23,29 @@
               ? 'Detalhes da Operação'
               : partner
                 ? step === 1
-                  ? 'Criar Novo Parceiro - Dados Básicos'
-                  : 'Criar Novo Parceiro - Regras de Negócio'
+                  ? initialPartner
+                    ? 'Editar Parceiro - Dados Básicos'
+                    : 'Criar Novo Parceiro - Dados Básicos'
+                  : initialPartner
+                    ? 'Editar Parceiro - Regras de Negócio'
+                    : 'Criar Novo Parceiro - Regras de Negócio'
                 : 'Nova Operação de Crédito'
           }}
         </h2>
         <q-btn flat dense aria-label="Fechar" @click="$emit('close')"
-          ><img src="/icons/workspace-review/credit-close.svg" alt=""
+          ><span v-if="partner" class="partner-form-close"
+            ><img src="/icons/partners/form-close-a.svg" alt="" /><img
+              src="/icons/partners/form-close-b.svg"
+              alt="" /></span
+          ><img v-else src="/icons/workspace-review/credit-close.svg" alt=""
         /></q-btn>
       </div>
       <p>
         {{
           partner
-            ? 'Preencha os dados básicos e selecione os produtos do parceiro'
+            ? step === 1
+              ? 'Preencha os dados básicos e selecione os produtos do parceiro'
+              : 'Configure as regras de negócio para os produtos habilitados'
             : recordId
               ? ''
               : 'Selecione o cliente para esta operação'
@@ -85,18 +98,21 @@
             @click="createOperation"
           /></div
       ></template>
-      <template v-else-if="step === 1"
-        ><label-form text-label="Foto / Logo do Parceiro"
-          ><q-file
-            v-model="logo"
-            outlined
-            dark
-            dense
-            accept="image/png,image/jpeg,image/svg+xml"
-            max-file-size="2097152"
-            label="Upload"
-            @rejected="error = 'Selecione PNG, JPG ou SVG até 2MB.'"
-          /><small>PNG, JPG ou SVG até 2MB</small></label-form
+      <div v-if="partner" class="partner-progress" aria-label="Etapas do parceiro">
+        <span :class="{ current: step === 1 }"></span><span :class="{ current: step === 2 }"></span>
+      </div>
+      <template v-if="partner && step === 1"
+        ><label-form text-label="Foto / Logo do Parceiro" class="partner-logo-field">
+          <div class="partner-upload">
+            <label class="partner-upload-trigger"
+              ><img src="/icons/partners/form-upload.svg" alt="" /><span>Upload</span
+              ><input
+                type="file"
+                accept="image/png,image/jpeg,image/svg+xml"
+                aria-label="Upload do logo do parceiro"
+                @change="chooseLogo" /></label
+            ><small>{{ logo?.name || 'PNG, JPG ou SVG até 2MB' }}</small>
+          </div> </label-form
         ><workspace-field
           v-model="partnerForm.name"
           :field="{
@@ -105,17 +121,17 @@
           }" />
         <h3>Tipo de Parceiro *</h3>
         <button
-          v-for="type in partnerTypes"
+          v-for="(type, index) in partnerTypes"
           :key="type"
-          class="workspace-choice"
+          class="workspace-choice partner-type"
           :aria-pressed="partnerForm.type === type"
           @click="partnerForm.type = type"
         >
-          {{ type }}
+          <img :src="'/icons/partners/' + partnerTypeIcons[index] + '.svg'" alt="" />{{ type }}
         </button>
         <h3>Serviços/Produtos Oferecidos pelo Parceiro *</h3>
         <p>Produtos que o parceiro possui em seu portfólio</p>
-        <q-list
+        <q-list class="partner-products-list"
           ><q-item v-for="product in partnerProducts" :key="product"
             ><q-item-section
               ><q-checkbox
@@ -128,113 +144,173 @@
             outline
             no-caps
             label="Continuar"
+            :disable="!basicsValid"
             @click="nextPartner"
           /></div
       ></template>
-      <template v-else
-        ><h3>{{ partnerForm.name }}</h3>
-        <p>{{ partnerForm.type }} · {{ partnerForm.products.length }} oferecidos</p>
-        <q-banner class="bg-transparent"
+      <template v-else-if="partner && step === 2"
+        ><div class="partner-form-summary">
+          <div class="partner-summary-avatar">
+            <img
+              v-if="logoPreview || initialPartner?.logoUrl"
+              :src="logoPreview || initialPartner.logoUrl"
+              alt="Logo do parceiro"
+            /><span v-else>{{ partnerForm.name.charAt(0) }}</span>
+          </div>
+          <div>
+            <strong>{{ partnerForm.name }}</strong
+            ><small>{{ partnerForm.type }}</small>
+          </div>
+          <div class="partner-summary-counts">
+            <small>{{ partnerForm.products.length }} oferecido(s)</small
+            ><span>— habilitado(s)</span>
+          </div>
+        </div>
+        <q-banner class="partner-rules-notice"
           >Configure as regras de negócio apenas para os produtos habilitados para a Strategy
-          Analytics.</q-banner
+          Analytics.<small
+            >Produtos oferecidos mas não habilitados não precisam de regras neste momento.</small
+          ></q-banner
         >
         <section v-for="product in partnerForm.products" :key="product" class="credit-product">
-          <h3>{{ product }}</h3>
-          <h4>Regras Gerais do Produto</h4>
-          <div class="workspace-form-grid">
-            <workspace-field
-              v-for="field in ruleFields"
-              :key="field.key"
-              v-model="rules[product][field.key]"
-              :field="field"
-            />
-          </div>
-          <div class="workspace-actions">
-            <h4>LTV por Tipo de Garantia</h4>
-            <q-btn outline no-caps label="Adicionar tipo" @click="addCollateral(product)" />
-          </div>
-          <q-table
-            dark
-            flat
-            dense
-            :rows="rules[product].collaterals"
-            :columns="collateralColumns"
-            row-key="key"
-            hide-pagination
-            ><template #body="p"
-              ><q-tr :props="p"
-                ><q-td
-                  ><q-input
-                    v-model="p.row.name"
-                    outlined
-                    dense
-                    dark
-                    aria-label="Tipo de Garantia" /></q-td
-                ><q-td
-                  ><glass-select
-                    v-model="p.row.accepted"
-                    :options="['Sim', 'Sob análise', 'Não']"
-                    aria-label="Aceito?" /></q-td
-                ><q-td
-                  ><q-input
-                    v-model="p.row.ltv"
-                    type="number"
-                    min="0"
-                    max="100"
-                    outlined
-                    dense
-                    dark
-                    aria-label="LTV Máximo (%)" /></q-td
-                ><q-td
-                  ><q-input
-                    v-model="p.row.min"
-                    type="number"
-                    min="0"
-                    outlined
-                    dense
-                    dark
-                    aria-label="Valor Min. Imóvel" /></q-td
-                ><q-td
-                  ><q-input
-                    v-model="p.row.max"
-                    type="number"
-                    min="0"
-                    outlined
-                    dense
-                    dark
-                    aria-label="Valor Max. Imóvel" /></q-td
-                ><q-td
-                  ><q-input
-                    v-model="p.row.notes"
-                    outlined
-                    dense
-                    dark
-                    aria-label="Observação" /></q-td></q-tr></template
-          ></q-table>
-          <h4>Carência / Início de Pagamento</h4>
-          <div class="workspace-form-grid">
-            <workspace-field
-              v-for="field in graceFields"
-              :key="field.key"
-              v-model="rules[product][field.key]"
-              :field="field"
-            />
-          </div>
-          <h4>Regiões e Imóveis</h4>
-          <div class="workspace-form-grid">
-            <workspace-field
-              v-for="field in regionFields"
-              :key="field.key"
-              v-model="rules[product][field.key]"
-              :field="field"
-            />
-          </div>
+          <h3>
+            <img
+              v-if="product === partnerProducts[0]"
+              src="/icons/partners/rules-house.svg"
+              alt=""
+            />{{ product }}
+          </h3>
+          <template v-if="product === partnerProducts[0]"
+            ><div class="credit-product-body">
+              <h4>Regras Gerais do Produto</h4>
+              <div class="workspace-form-grid">
+                <workspace-field
+                  v-for="field in ruleFields"
+                  :key="field.key"
+                  v-model="rules[product][field.key]"
+                  :field="field"
+                />
+              </div>
+              <div class="workspace-actions">
+                <h4>LTV por Tipo de Garantia</h4>
+                <q-btn outline no-caps label="Adicionar tipo" @click="addCollateral(product)"
+                  ><img src="/icons/partners/rules-plus.svg" alt=""
+                /></q-btn>
+              </div>
+              <q-table
+                dark
+                flat
+                dense
+                :rows="rules[product].collaterals"
+                :columns="collateralColumns"
+                row-key="key"
+                hide-pagination
+                ><template #body="p"
+                  ><q-tr :props="p"
+                    ><q-td
+                      ><span v-if="!p.row.editing">{{ p.row.name || '—' }}</span
+                      ><q-input
+                        v-else
+                        v-model="p.row.name"
+                        outlined
+                        dense
+                        dark
+                        aria-label="Tipo de Garantia" /></q-td
+                    ><q-td
+                      ><partner-acceptance-badge
+                        v-if="!p.row.editing"
+                        :value="p.row.accepted" /><glass-select
+                        v-else
+                        v-model="p.row.accepted"
+                        :options="['Sim', 'Sob análise', 'Não']"
+                        dropdown-icon="img:/icons/partners/rules-chevron.svg"
+                        aria-label="Aceito?" /></q-td
+                    ><q-td
+                      ><span v-if="!p.row.editing">{{
+                        p.row.accepted === 'Não' ? '—' : (p.row.ltv ?? '—')
+                      }}</span
+                      ><q-input
+                        v-else
+                        v-model="p.row.ltv"
+                        type="text"
+                        min="0"
+                        max="100"
+                        outlined
+                        dense
+                        dark
+                        aria-label="LTV Máximo (%)" /></q-td
+                    ><q-td
+                      ><span v-if="!p.row.editing">{{
+                        p.row.accepted === 'Não' ? '—' : (p.row.min ?? '—')
+                      }}</span
+                      ><q-input
+                        v-else
+                        v-model="p.row.min"
+                        type="number"
+                        min="0"
+                        outlined
+                        dense
+                        dark
+                        aria-label="Valor Min. Imóvel" /></q-td
+                    ><q-td
+                      ><span v-if="!p.row.editing">{{
+                        p.row.accepted === 'Não' ? '—' : (p.row.max ?? '—')
+                      }}</span
+                      ><q-input
+                        v-else
+                        v-model="p.row.max"
+                        type="number"
+                        min="0"
+                        outlined
+                        dense
+                        dark
+                        aria-label="Valor Max. Imóvel" /></q-td
+                    ><q-td
+                      ><span v-if="!p.row.editing">{{ p.row.notes ?? '—' }}</span
+                      ><q-input
+                        v-else
+                        v-model="p.row.notes"
+                        outlined
+                        dense
+                        dark
+                        aria-label="Observação" /></q-td
+                    ><q-td
+                      ><q-btn
+                        flat
+                        dense
+                        :aria-label="'Editar garantia ' + (p.row.name || 'nova')"
+                        :aria-pressed="p.row.editing"
+                        @click="p.row.editing = !p.row.editing"
+                        ><img
+                          src="/icons/partners/rules-edit.svg"
+                          alt="" /></q-btn></q-td></q-tr></template
+              ></q-table>
+              <h4>Carência / Início de Pagamento</h4>
+              <div class="workspace-form-grid">
+                <workspace-field
+                  v-for="field in graceFields"
+                  :key="field.key"
+                  v-model="rules[product][field.key]"
+                  :field="field"
+                />
+              </div>
+              <h4>Regiões e Imóveis</h4>
+              <div class="workspace-form-grid partner-region-grid">
+                <workspace-field
+                  v-for="field in regionFields"
+                  :key="field.key"
+                  v-model="rules[product][field.key]"
+                  :field="field"
+                />
+              </div></div
+          ></template>
+          <p v-else role="status">Configuração de regras indisponível para este produto.</p>
         </section>
         <div class="workspace-actions">
           <q-btn outline no-caps label="Voltar" @click="step = 1" /><q-btn
             outline
             no-caps
-            label="Criar Parceiro"
+            :label="initialPartner ? 'Salvar Parceiro' : 'Criar Parceiro'"
             @click="savePartner"
           /></div
       ></template> </q-card
@@ -242,7 +318,15 @@
 </template>
 <script setup>
 import CreditWizardSteps from './CreditWizardSteps.vue'
-import { onScopeDispose, ref } from 'vue'
+import { computed, watch, onScopeDispose, ref } from 'vue'
+import PartnerAcceptanceBadge from './PartnerAcceptanceBadge.vue'
+import {
+  initialPartnerForm,
+  validPartnerBasics,
+  partnerRuleError,
+  validPartnerLogo,
+  partnerTypeIcons,
+} from 'src/services/creditPartnerForm'
 import { useRouter } from 'vue-router'
 import LabelForm from 'src/components/Form/LabelForm.vue'
 import GlassSelect from 'src/components/Entity/GlassSelect.vue'
@@ -258,6 +342,7 @@ const props = defineProps({
     recordId: { type: String, default: null },
     operationType: { type: String, default: null },
     partner: Boolean,
+    initialPartner: { type: Object, default: null },
   }),
   emit = defineEmits(['close', 'back']),
   router = useRouter()
@@ -270,8 +355,25 @@ const error = ref(''),
   documents = useFinanceResource(),
   history = useFinanceResource(),
   logo = ref(null),
-  partnerForm = ref({ name: '', type: null, products: [] }),
+  partnerForm = ref(initialPartnerForm(props.initialPartner)),
   rules = ref({})
+const basicsValid = computed(() => validPartnerBasics(partnerForm.value))
+const logoPreview = ref(null)
+watch(logo, (file) => {
+  if (logoPreview.value) URL.revokeObjectURL(logoPreview.value)
+  logoPreview.value = file ? URL.createObjectURL(file) : null
+})
+function chooseLogo(event) {
+  const file = event.target.files?.[0]
+  if (!file) return
+  if (!validPartnerLogo(file)) {
+    error.value = 'Selecione PNG, JPG ou SVG até 2MB.'
+    event.target.value = ''
+    return
+  }
+  logo.value = file
+  error.value = ''
+}
 let active = true,
   sequence = 0
 const collateralColumns = columns(
@@ -282,6 +384,7 @@ const collateralColumns = columns(
     'Valor Min. Imóvel',
     'Valor Max. Imóvel',
     'Observação',
+    '',
   ].map((x) => [x, x]),
 )
 const ruleFields = [
@@ -320,6 +423,8 @@ const regionFields = [
   { key: 'exceptions', label: 'Exceções operacionais', wide: true },
   { key: 'notes', label: 'Observações internas', kind: 'textarea', wide: true },
 ]
+for (const field of [...ruleFields, ...graceFields, ...regionFields])
+  if (field.kind === 'select') field.dropdownIcon = 'img:/icons/partners/rules-chevron.svg'
 async function lookup() {
   const r = ++sequence
   await customers.load(async () => {
@@ -352,21 +457,23 @@ function newClient() {
   router.push({ name: 'Clientes', query: { new: '1' } })
 }
 function nextPartner() {
-  if (
-    !partnerForm.value.name.trim() ||
-    !partnerForm.value.type ||
-    !partnerForm.value.products.length
-  ) {
+  if (!basicsValid.value) {
     error.value = 'Informe nome, tipo e pelo menos um produto.'
     return
   }
-  for (const product of partnerForm.value.products) rules.value[product] ??= { collaterals: [] }
+  rules.value = Object.fromEntries(
+    partnerForm.value.products.map((product) => [
+      product,
+      rules.value[product] || { collaterals: [] },
+    ]),
+  )
   error.value = ''
   step.value = 2
 }
 function addCollateral(product) {
   rules.value[product].collaterals.push({
     key: crypto.randomUUID(),
+    editing: true,
     name: '',
     accepted: null,
     ltv: null,
@@ -376,24 +483,10 @@ function addCollateral(product) {
   })
 }
 function savePartner() {
-  for (const r of Object.values(rules.value)) {
-    if (r.minAmount != null && r.maxAmount != null && Number(r.minAmount) > Number(r.maxAmount)) {
-      error.value = 'O valor máximo deve ser maior ou igual ao mínimo.'
-      return
-    }
-    if (
-      r.collaterals.some(
-        (c) =>
-          !c.name.trim() ||
-          !c.accepted ||
-          c.ltv == null ||
-          Number(c.ltv) < 0 ||
-          Number(c.ltv) > 100,
-      )
-    ) {
-      error.value = 'Revise tipo de garantia, aceite e LTV entre 0 e 100%.'
-      return
-    }
+  const validation = partnerRuleError(rules.value)
+  if (validation) {
+    error.value = validation
+    return
   }
   error.value = 'Não foi possível salvar o parceiro. Serviço indisponível no momento.'
 }
@@ -403,6 +496,7 @@ if (props.recordId) {
   loadHistory()
 } else if (!props.partner) lookup()
 onScopeDispose(() => {
+  if (logoPreview.value) URL.revokeObjectURL(logoPreview.value)
   active = false
   sequence++
   customers.reset()
@@ -469,3 +563,5 @@ onScopeDispose(() => {
   flex-direction: row-reverse;
 }
 </style>
+
+<style scoped src="./creditPartnerForm.scss"></style>

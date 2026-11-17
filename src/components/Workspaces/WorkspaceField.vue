@@ -4,6 +4,7 @@
       v-if="field.kind === 'select'"
       :model-value="modelValue"
       :options="options"
+      :dropdown-icon="field.dropdownIcon"
       :disable="field.disabled"
       :aria-label="field.label"
       :placeholder="field.placeholder || 'Selecione'"

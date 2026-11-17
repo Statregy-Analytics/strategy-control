@@ -378,6 +378,7 @@
       :record-id="creditRecord"
       :operation-type="selectedType"
       :partner="tab === 'partners'"
+      :initial-partner="editingPartner"
       @close="creditOpen = false"
       @back="backToCreditType"
     />
@@ -437,6 +438,7 @@ const tab = ref('main'),
   error = ref('')
 let active = true,
   revision = 0
+const editingPartner = ref(null)
 const definition = computed(() => workspaceTypes[props.module])
 const recordId = computed(() =>
   typeof route.query.id === 'string' &&
@@ -705,15 +707,20 @@ function create() {
   selectedType.value = null
   if (tab.value === 'authors') authorOpen.value = true
   else if (tab.value === 'partners') {
+    editingPartner.value = null
     creditRecord.value = null
     creditOpen.value = true
   } else if (props.module === 'logic') router.push({ query: { editor: 'new' } })
   else typeOpen.value = true
 }
-function editDirectory() {
+function editDirectory(row) {
   if (tab.value === 'authors')
     error.value = 'Não foi possível editar o redator. Serviço indisponível no momento.'
-  else creditOpen.value = true
+  else {
+    editingPartner.value = row
+    creditRecord.value = null
+    creditOpen.value = true
+  }
 }
 function backToCreditType() {
   creditOpen.value = false
