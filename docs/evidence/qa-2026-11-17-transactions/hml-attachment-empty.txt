@@ -1,0 +1,322 @@
+- banner:
+  - toolbar:
+    - button "Abrir navegação":
+    - generic: Strategy Analytics
+- main:
+  - generic: Transações e carteiras
+  - region "Visão consolidada das carteiras":
+    - button "Carteira Total R$ 1.946.436,55 US$ 1.114.626,50 € 619.752,25" [pressed]:
+      - generic: Carteira Total
+      - strong: R$ 1.946.436,55
+      - strong: US$ 1.114.626,50
+      - strong: € 619.752,25
+    - button "Carteira de Depósito R$ 75.000,00 US$ 0,00 € 0,00":
+      - generic: Carteira de Depósito
+      - strong: R$ 75.000,00
+      - strong: US$ 0,00
+      - strong: € 0,00
+    - button "Carteira Strategy R$ 261.500,30 US$ 725.000,00 € 230.000,00":
+      - generic: Carteira Strategy
+      - strong: R$ 261.500,30
+      - strong: US$ 725.000,00
+      - strong: € 230.000,00
+    - button "Carteira de Patrimônio R$ 1.609.936,25 US$ 389.626,50 € 389.752,25":
+      - generic: Carteira de Patrimônio
+      - strong: R$ 1.609.936,25
+      - strong: US$ 389.626,50
+      - strong: € 389.752,25
+    - paragraph: Total = Depósito + Strategy + Patrimônio, por moeda. Valores de moedas diferentes não são somados.
+  - tablist:
+    - tab "Transações" [selected]:
+      - generic: Transações
+    - tab "Carteiras":
+      - generic: Carteiras
+  - separator
+  - textbox "Buscar solicitações"
+  - button "Nova transação":
+    - generic: Nova transação
+  - generic: Solicitações pendentes
+  - table:
+    - rowgroup:
+      - row "Data/Hora ID Tipo Cliente Origem Destino Valor Status Responsável":
+        - columnheader "Data/Hora"
+        - columnheader "ID"
+        - columnheader "Tipo"
+        - columnheader "Cliente"
+        - columnheader "Origem"
+        - columnheader "Destino"
+        - columnheader "Valor"
+        - columnheader "Status"
+        - columnheader "Responsável"
+        - columnheader
+    - rowgroup
+  - generic: warning
+  - text: Nenhum registro encontrado
+  - generic: "Itens por página:"
+  - generic: "10"
+  - combobox "Itens por página": "10"
+  - generic: keyboard_arrow_down
+  - generic: Mostrando 0 a 0 de 0 registros
+  - generic: Página 1 de 1
+  - button "Anterior" [disabled]:
+    - generic: Anterior
+  - navigation "Paginação":
+    - button "1":
+      - generic: "1"
+  - button "Próximo" [disabled]:
+    - generic: Próximo
+  - generic: Histórico de transações
+  - table:
+    - rowgroup:
+      - row "Data/Hora ID Tipo Cliente Origem Destino Valor Status Responsável":
+        - columnheader "Data/Hora"
+        - columnheader "ID"
+        - columnheader "Tipo"
+        - columnheader "Cliente"
+        - columnheader "Origem"
+        - columnheader "Destino"
+        - columnheader "Valor"
+        - columnheader "Status"
+        - columnheader "Responsável"
+        - columnheader
+    - rowgroup:
+      - row "16/11/2026, 19:38:31 REQ-2026-CF7A287A Depósito Éric Vicente Banco do Brasil S.A. ****1873 Carteira de Depósito BRL R$ 0,01 Cancelada Local Admin Abrir transação":
+        - cell "16/11/2026, 19:38:31"
+        - cell "REQ-2026-CF7A287A"
+        - cell "Depósito":
+          - generic: Depósito
+        - cell "Éric Vicente"
+        - cell "Banco do Brasil S.A. ****1873":
+          - generic: Banco do Brasil S.A.
+          - generic: "****1873"
+        - cell "Carteira de Depósito BRL":
+          - generic: Carteira de Depósito
+          - generic: BRL
+        - cell "R$ 0,01":
+          - strong: R$ 0,01
+        - cell "Cancelada":
+          - generic: Cancelada
+        - cell "Local Admin"
+        - cell "Abrir transação":
+          - button "Abrir transação"
+      - row "16/11/2026, 17:58:19 REQ-2026-1F08A2D4 Transferência entre clientes Éric Vicente Carteira de Depósito BRL Carteira de Depósito BRL R$ 0,01 Cancelada Local Admin Abrir transação":
+        - cell "16/11/2026, 17:58:19"
+        - cell "REQ-2026-1F08A2D4"
+        - cell "Transferência entre clientes":
+          - generic: Transferência entre clientes
+        - cell "Éric Vicente"
+        - cell "Carteira de Depósito BRL":
+          - generic: Carteira de Depósito
+          - generic: BRL
+        - cell "Carteira de Depósito BRL":
+          - generic: Carteira de Depósito
+          - generic: BRL
+        - cell "R$ 0,01":
+          - strong: R$ 0,01
+        - cell "Cancelada":
+          - generic: Cancelada
+        - cell "Local Admin"
+        - cell "Abrir transação":
+          - button "Abrir transação"
+      - row "12/10/2026, 15:17:44 REQ-2026-ADB71B0D Depósito Éric Vicente Banco do Brasil S.A. ****1873 Carteira de Depósito BRL R$ 1,00 Cancelada Local Admin Abrir transação":
+        - cell "12/10/2026, 15:17:44"
+        - cell "REQ-2026-ADB71B0D"
+        - cell "Depósito":
+          - generic: Depósito
+        - cell "Éric Vicente"
+        - cell "Banco do Brasil S.A. ****1873":
+          - generic: Banco do Brasil S.A.
+          - generic: "****1873"
+        - cell "Carteira de Depósito BRL":
+          - generic: Carteira de Depósito
+          - generic: BRL
+        - cell "R$ 1,00":
+          - strong: R$ 1,00
+        - cell "Cancelada":
+          - generic: Cancelada
+        - cell "Local Admin"
+        - cell "Abrir transação":
+          - button "Abrir transação"
+      - row "10/10/2026, 17:31:10 REQ-2026-C175D385 Saque Éric Vicente Carteira de Depósito BRL BRB - Banco de Brasília S.A. ****2345 R$ 2.500,00 Validada Local Admin Abrir transação":
+        - cell "10/10/2026, 17:31:10"
+        - cell "REQ-2026-C175D385"
+        - cell "Saque":
+          - generic: Saque
+        - cell "Éric Vicente"
+        - cell "Carteira de Depósito BRL":
+          - generic: Carteira de Depósito
+          - generic: BRL
+        - cell "BRB - Banco de Brasília S.A. ****2345":
+          - generic: BRB - Banco de Brasília S.A.
+          - generic: "****2345"
+        - cell "R$ 2.500,00":
+          - strong: R$ 2.500,00
+        - cell "Validada":
+          - generic: Validada
+        - cell "Local Admin"
+        - cell "Abrir transação":
+          - button "Abrir transação"
+      - row "10/10/2026, 17:30:08 REQ-2026-238CC218 Saque Éric Vicente Carteira de Depósito BRL BRB - Banco de Brasília S.A. ****2345 R$ 2,50 Cancelada Local Admin Abrir transação":
+        - cell "10/10/2026, 17:30:08"
+        - cell "REQ-2026-238CC218"
+        - cell "Saque":
+          - generic: Saque
+        - cell "Éric Vicente"
+        - cell "Carteira de Depósito BRL":
+          - generic: Carteira de Depósito
+          - generic: BRL
+        - cell "BRB - Banco de Brasília S.A. ****2345":
+          - generic: BRB - Banco de Brasília S.A.
+          - generic: "****2345"
+        - cell "R$ 2,50":
+          - strong: R$ 2,50
+        - cell "Cancelada":
+          - generic: Cancelada
+        - cell "Local Admin"
+        - cell "Abrir transação":
+          - button "Abrir transação"
+      - row "10/10/2026, 17:11:56 REQ-2026-F73A22F2 Saque Éric Vicente Carteira de Depósito BRL BRB - Banco de Brasília S.A. ****2345 R$ 2,50 Rejeitada Local Admin Abrir transação":
+        - cell "10/10/2026, 17:11:56"
+        - cell "REQ-2026-F73A22F2"
+        - cell "Saque":
+          - generic: Saque
+        - cell "Éric Vicente"
+        - cell "Carteira de Depósito BRL":
+          - generic: Carteira de Depósito
+          - generic: BRL
+        - cell "BRB - Banco de Brasília S.A. ****2345":
+          - generic: BRB - Banco de Brasília S.A.
+          - generic: "****2345"
+        - cell "R$ 2,50":
+          - strong: R$ 2,50
+        - cell "Rejeitada":
+          - generic: Rejeitada
+        - cell "Local Admin"
+        - cell "Abrir transação":
+          - button "Abrir transação"
+      - row "09/10/2026, 10:36:27 REQ-2026-E0320E63 Depósito Claudio Manhães Banco do Brasil S.A. ****2377 Carteira de Depósito BRL R$ 25.000,00 Processada Local Admin Abrir transação":
+        - cell "09/10/2026, 10:36:27"
+        - cell "REQ-2026-E0320E63"
+        - cell "Depósito":
+          - generic: Depósito
+        - cell "Claudio Manhães"
+        - cell "Banco do Brasil S.A. ****2377":
+          - generic: Banco do Brasil S.A.
+          - generic: "****2377"
+        - cell "Carteira de Depósito BRL":
+          - generic: Carteira de Depósito
+          - generic: BRL
+        - cell "R$ 25.000,00":
+          - strong: R$ 25.000,00
+        - cell "Processada":
+          - generic: Processada
+        - cell "Local Admin"
+        - cell "Abrir transação":
+          - button "Abrir transação"
+      - row "09/10/2026, 10:36:24 REQ-2026-D578DE0D Depósito Éric Vicente Banco do Brasil S.A. ****1873 Carteira de Depósito BRL R$ 50.000,00 Processada Local Admin Abrir transação":
+        - cell "09/10/2026, 10:36:24"
+        - cell "REQ-2026-D578DE0D"
+        - cell "Depósito":
+          - generic: Depósito
+        - cell "Éric Vicente"
+        - cell "Banco do Brasil S.A. ****1873":
+          - generic: Banco do Brasil S.A.
+          - generic: "****1873"
+        - cell "Carteira de Depósito BRL":
+          - generic: Carteira de Depósito
+          - generic: BRL
+        - cell "R$ 50.000,00":
+          - strong: R$ 50.000,00
+        - cell "Processada":
+          - generic: Processada
+        - cell "Local Admin"
+        - cell "Abrir transação":
+          - button "Abrir transação"
+  - generic: "Itens por página:"
+  - generic: "10"
+  - combobox "Itens por página": "10"
+  - generic: keyboard_arrow_down
+  - generic: Mostrando 1 a 8 de 8 registros
+  - generic: Página 1 de 1
+  - button "Anterior" [disabled]:
+    - generic: Anterior
+  - navigation "Paginação":
+    - button "1":
+      - generic: "1"
+  - button "Próximo" [disabled]:
+    - generic: Próximo
+- dialog:
+  - 'generic "Solicitação: REQ-2026-C175D385"':
+    - banner:
+      - 'heading "Solicitação: REQ-2026-C175D385" [level=2]'
+      - paragraph: Detalhes completos da solicitação e ações disponíveis
+      - button "Fechar detalhes"
+    - term: Tipo de Operação
+    - definition: Saque
+    - term: Status Atual
+    - definition:
+      - generic: Validada
+    - term: Cliente
+    - definition: Éric Vicente
+    - generic: "ID: cf2f5863-d234-42d9-9cc1-95881c05dbd1"
+    - term: Responsável
+    - definition: Local Admin
+    - term: Origem
+    - definition: Carteira de Depósito
+    - term: Destino
+    - definition: BRB - Banco de Brasília S.A. · ****2345
+    - term: Valor
+    - definition: R$ 2.500,00
+    - term: Data da solicitação
+    - definition: 10/10/2026, 17:31
+    - term: Prazo
+    - definition: —
+    - heading "Observação" [level=3]
+    - paragraph: Teste
+    - heading "Ações Disponíveis" [level=3]
+    - button "Validar" [disabled]:
+      - generic: Validar
+    - button "Aprovar" [disabled]:
+      - generic: Aprovar
+    - button "Reprovar":
+      - generic: Reprovar
+    - button "Executar Operação" [disabled]:
+      - generic: Executar Operação
+    - button "Solicitar Correção":
+      - generic: Solicitar Correção
+    - button "Anexar Documento":
+      - generic: Anexar Documento
+    - button "Ver Comprovante" [disabled]:
+      - generic: Ver Comprovante
+    - button "Adicionar Observação":
+      - generic: Adicionar Observação
+    - button "Editar dados" [disabled]:
+      - generic: Editar dados
+    - button "Cancelar":
+      - generic: Cancelar
+    - heading "Histórico de Alterações" [level=3]
+    - table:
+      - rowgroup:
+        - row "Data/Hora Autor Alteração Anterior → Novo":
+          - columnheader "Data/Hora"
+          - columnheader "Autor"
+          - columnheader "Alteração"
+          - columnheader "Anterior → Novo"
+      - rowgroup:
+        - row "Nenhuma alteração registrada.":
+          - cell "Nenhuma alteração registrada."
+    - contentinfo:
+      - button "Fechar":
+        - generic: Fechar
+- dialog:
+  - heading "Anexar documento" [level=2]
+  - generic: Upload de Comprovante (PDF)
+  - button "Upload de Comprovante (PDF)"
+  - generic: Descrição do documento
+  - textbox "Descrição do documento":
+    - /placeholder: "Ex: Comprovante bancário"
+  - contentinfo:
+    - button "Voltar":
+      - generic: Voltar
+    - button "Confirmar Ação" [disabled]:
+      - generic: Confirmar Ação

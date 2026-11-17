@@ -62,11 +62,14 @@ Registro verificável por arquivo: [13 superfícies/adaptações](FRONTEND-SEM-R
 - [x] Dados controlados: aprovar/executar/cancelar, detalhe corrigido com original, formulário preenchido, redução protegida e arte de sucesso da oferta com retorno. **Nenhuma solicitação financeira, correção ou upload real foi executado nesta rodada.**
 - [x] 390px reais: detalhes/correção e oferta sem overflow horizontal no modal; capturas separadas de dados reais e controlados na pasta de evidências. Prévia de sucesso é exclusivamente controlada, sem prova de envio.
 - [x] Lint e build dos dois projetos aprovados; **402 testes locais do Admin (394 versionados + 8 preexistentes do estudo)** e **430 do Cliente** passaram. Diff check dos arquivos deste lote aprovado; Swagger preexistente com whitespace mantido fora da entrega. Assets nativos não vazios, nomes e dimensões verificados.
-- [ ] Publicação e reteste final: registrar os deploys após a ativação.
+- [x] Publicado: Admin aplicação `fa37752`, release `5d42fdf`, [deploy 44091747778](https://github.com/Statregy-Analytics/strategy-control/actions/runs/44091747778); Cliente `9b3b4ba`, [deploy 44091564550](https://github.com/WillTbn/Strategy-analytics-v2/actions/runs/44091564550). Ambos com build, upload e ativação concluídos.
+- [x] Reteste no Admin publicado: detalhes reais, reprovação até a senha sem envio, cancelamento vazio bloqueado, anexo vazio bloqueado, depósito do Cláudio de R$ 25.000,00 e abertura/fechamento da correção. Imagens nativas carregadas, detalhe sem overflow horizontal. Não houve confirmação financeira.
+- [x] Reteste no Cliente publicado: cinco passos, seleção de objetivo/período/modalidade/valor/ativo/região, envio indisponível sem sucesso falso e Voltar mantendo o ativo escolhido. Em 390px, modal com largura/scrollWidth de 326px. Prévia enviada ficou exclusivamente no harness local controlado, removido antes do build.
+- [x] E08 local com registro real: PDF fictício de 615 bytes selecionado; tentativa protegida manteve arquivo/descrição. Nenhum upload/vínculo foi enviado. A evidência não homologa persistência documental.
 
 **Pendências reais:** a API não informa valor extraído do comprovante nem data específica da correção no DTO de detalhe; ficam indisponíveis, sem copiar o valor da transação ou a data da última atualização. Falta confirmar tipo/país/role do arquivo de comprovante sem acrescentar campos ao desenho. EditTransactionRequest não substitui a observação original; o endpoint de notas apenas acrescenta. A redução multiorigem do MD08 não cabe no corpo escalar atual. O extrato corrigido P01.1 continua com ajuste de front e projeção integrada pendentes. O OpenAPI atual só tem consulta/detalhe/documentos/histórico de contratos no cliente: não tem envio dessa solicitação; o front preserva as respostas e não apresenta sucesso.
 
-O registro de superfícies sem frame vinculado está no início deste checklist, separado do percentual e com a origem de cada composição para avaliação de Éric. **Não foi preparada mensagem ao QA ou backend.**
+O registro de **13 superfícies/adaptações sem frame vinculado** está no início deste checklist, separado do percentual e com a origem de cada composição para avaliação de Éric. Não representa 13 telas novas. Os fundos completos da oferta, campos condicionais de valor e apresentação das bandeiras ainda permanecem na revalidação integral, sem aprovação por aproximação. **Não foi preparada mensagem ao QA ou backend.**
 
 ## Carteiras globais, Crédito e Comunicados · 16/11
 
@@ -342,14 +345,14 @@ O inventário tem **309 entradas**; **30 são agrupamentos/conexões**, sem entr
 
 Bloqueios secundários podem coexistir com trabalho de front; por isso a contagem de dependências não deve ser somada à tabela principal. “Bloqueio backend” não significa que o front inteiro do módulo esteja sem trabalho: usar a coluna de estado de implementação e o motivo de cada grupo.
 
-### Pendências confirmadas que são do front
+### Situação atual dos grupos da classificação inicial
 
-- **T01:** nova transação no Admin sem submitOperation conectado; há POST de depósitos, saques e transferências na API.
-- **T02:** confirmação sem senha administrativa; transferência para outro cliente, correção de depósito e edição pendente não conectadas, apesar de contratos HTTP existentes.
-- **P01:** saque do portal também depende de submitOperation não fornecido pelos pais; POST de saque existe.
+- **T01:** adapters de nova transação conectados em 16/11; os modais foram revisados e testados. Persistem limites integrados bancários documentados, não ausência genérica de submitOperation.
+- **T02/T03:** senha, transferência, edição e preparação da correção conectadas; detalhes e dez estados revisados em 17/11. O extrato corrigido P01.1 continua em ajuste. Upload e redução multiorigem mantêm bloqueios específicos; não reabrir a senha ou os endpoints existentes como ausentes.
+- **P01:** pais e rota direta do saque conectados em 16/11; permanecem as limitações de confirmação de senha e moeda bancária descritas na entrega. O POST de saque existe.
 - **P05:** fluxo de cinco passos confirmado conectado na página de Contratos em 17/11; os seis modais têm referência recuperada e permanecem em revalidação integral da página/estados condicionais. Envio depende de endpoint de solicitação, ausente no OpenAPI consultado.
-- **P06:** rotas de empréstimo/ofertas e Minhas Alavancagens usam JSON fictício e upload com temporizador; bloqueio inicial de alavancagem compara somente nível 1. Leituras informativas já possuem API; solicitações/ofertas de CRM não devem ser simuladas.
-- **L02:** estado ativo Pausar/Editar/Entrar ainda não está composto no LogicCard; executar Pausar também precisa do contrato operacional.
+- **P06:** lista informativa e bloqueio por nível oficial já corrigidos em 16/11. Ainda faltam composição/revisão dos fluxos de oferta, solicitação e garantias legados indicados por frame. Não simular etapas/uploads nem cobrar nova API para a listagem já integrada.
+- **L02:** estado ativo composto e testado em 16/11; executar Pausar permanece dependente do contrato operacional, com ação protegida.
 
 ### Evidências e limites da classificação
 
@@ -360,7 +363,7 @@ Bloqueios secundários podem coexistir com trabalho de front; por isso a contage
 - **Superado:** características genéricas de imóvel já existem e estão integradas. Renda, sessões por cliente, principal de conta única, documento mascarado, submit/consentimentos e alternativas de identificação não foram reabertos como endpoints ausentes.
 - **Não contar como entrega:** cabeçalhos F01/F02/F03/F04, conexões e setas Axx de protótipo. Seus estados filhos permanecem classificados.
 
-Esta auditoria altera somente documentação/evidências. Os relatórios históricos abaixo preservam seus resultados e limites; o resumo antigo “86% a revisar” foi substituído por esta base contável. Fonte completa por item, status anterior, motivo, arquivos e dependências: [classification.json](evidence/qa-2026-11-16-inventory/classification.json). Contratos conferidos: [api-contract-review.json](evidence/qa-2026-11-16-inventory/api-contract-review.json). O gerador classify_inventory.py valida cobertura, referências e totais; ele não testa UI.
+A auditoria inicial desta seção alterou somente documentação/evidências; as entregas posteriores estão registradas no início do checklist. Os relatórios históricos abaixo preservam seus resultados e limites; o resumo antigo “86% a revisar” foi substituído por esta base contável. Fonte completa por item, status anterior, motivo, arquivos e dependências: [classification.json](evidence/qa-2026-11-16-inventory/classification.json). Contratos conferidos: [api-contract-review.json](evidence/qa-2026-11-16-inventory/api-contract-review.json). O gerador classify_inventory.py valida cobertura, referências e totais; ele não testa UI.
 
 ### Matriz de motivos por grupo
 

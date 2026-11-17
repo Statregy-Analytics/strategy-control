@@ -27,9 +27,10 @@
     "controlled corrected detail, original link, independent history",
     "mobile 390px with no horizontal overflow in detail/correction",
     "real portal 5 steps, unavailable send preserving choices",
-    "controlled success preview and return without server submission"
+    "controlled success preview and return without server submission",
+    "real E08 selected 615-byte fictitious PDF; protected submission preserves file and description, no upload/link sent"
   ],
-  "published": false,
+  "published": true,
   "tests": {
     "adminLocal": 402,
     "adminVersioned": 394,
@@ -50,5 +51,45 @@
   "commits": {
     "adminApp": "fa37752",
     "portalApp": "9b3b4ba"
-  }
+  },
+  "deployments": {
+    "admin": {
+      "release": "5d42fdf41f32b546fc4624853215bb5b8c0a7863",
+      "app": "fa37752",
+      "run": 44091747778,
+      "conclusion": "success",
+      "url": "https://admin.strategyanalytics.com.br/transaction"
+    },
+    "portal": {
+      "release": "9b3b4ba420e4f1e41760daa2771e2d45da4d6061",
+      "run": 44091564550,
+      "conclusion": "success",
+      "url": "https://hml.strategyanalytics.com.br/system/contracts"
+    }
+  },
+  "publishedBrowser": [
+    "validated real withdrawal -> rejection reason -> password; close without sending",
+    "cancel reason initially disabled; return",
+    "attachment fields open only from allowed action; empty PDF cannot confirm",
+    "processed Claudio deposit 25000, masked bank, unavailable receipt amount, independent empty audit, correction opening/closing without writes",
+    "Admin detail no horizontal overflow; native images loaded and measured at Figma root dimensions",
+    "portal five steps, unavailable send retains choices and Back retains selected asset",
+    "portal mobile verified innerWidth390; modal clientWidth326 == scrollWidth326"
+  ],
+  "remainingFront": {
+    "adjustment": 38,
+    "validation": 85,
+    "note": "This delivery does not close the entire frontend request. P06 offer/request/collateral flows and corrected statement composition remain in adjustment; whole-frame comparisons remain in revalidation."
+  },
+  "withoutLinkedReference": {
+    "register": "docs/FRONTEND-SEM-REFERENCIA-FIGMA.json",
+    "surfacesAndAdaptations": 13,
+    "countedInFigmaProgress": false
+  },
+  "limits": [
+    "Approval/execution/cancellation were prepared and canceled at password gate, never financially executed.",
+    "Corrected detail and sent-offer success were tested with explicit controlled data only.",
+    "Whole P05 page backgrounds and conditional amount fields remain in revalidation. Existing region flag presentation is retained pending full comparison; new arrows and success art were checked.",
+    "No contract request or upload was reported as persisted."
+  ]
 }

@@ -1,0 +1,143 @@
+- banner:
+  - toolbar:
+    - link:
+      - /url: /system/dashboard
+      - button:
+    - link "Home":
+      - /url: /system/dashboard
+    - link "Contratos":
+      - /url: /system/contracts
+    - link "Comunicação":
+      - /url: /system/communication
+    - link "Alavancagem":
+      - /url: /system/leverage
+    - timer "TER 10:24:54":
+      - generic: TER
+      - generic: 10:24:54
+    - link "Abrir Perfil Resumido":
+      - /url: /system/config
+      - generic: person
+- main:
+  - generic: Meus contratos
+  - generic: Oportunidade de Investimento
+  - strong: Contrato em Alta com Rendimentos de até 16% ao ano!
+  - paragraph: Diversifique sua Carteira e Aumente seus Ganhos. Aproveite agora!
+  - button "Quero Conhecer":
+    - generic: Quero Conhecer
+  - table:
+    - rowgroup:
+      - row "Contrato Nome Status Minha participação Início Término Detalhes":
+        - columnheader "Contrato"
+        - columnheader "Nome"
+        - columnheader "Status"
+        - columnheader "Minha participação"
+        - columnheader "Início"
+        - columnheader "Término"
+        - columnheader "Detalhes"
+    - rowgroup:
+      - row "CTR-26AB2AB6 QA 136 - distribuicao atribuida - teste ficticio 16-11 Ativo R$ 0,10 16/11/2026 16/12/2026 Ver contrato":
+        - cell "CTR-26AB2AB6"
+        - cell "QA 136 - distribuicao atribuida - teste ficticio 16-11"
+        - cell "Ativo"
+        - cell "R$ 0,10"
+        - cell "16/11/2026"
+        - cell "16/12/2026"
+        - cell "Ver contrato":
+          - link "Ver contrato":
+            - /url: /system/contracts/9a5aca18-182f-4493-b47e-5cf25454ad2e
+            - generic: Ver contrato
+      - row "CTR-E976C745 Legacy Prime Ativo US$ 200.000,00 20/11/2023 20/11/2028 Ver contrato":
+        - cell "CTR-E976C745"
+        - cell "Legacy Prime"
+        - cell "Ativo"
+        - cell "US$ 200.000,00"
+        - cell "20/11/2023"
+        - cell "20/11/2028"
+        - cell "Ver contrato":
+          - link "Ver contrato":
+            - /url: /system/contracts/01b837f5-4b9c-4171-a5d0-fee468ac6df1
+            - generic: Ver contrato
+      - row "CTR-F65C316E Alpha Hedge Fund Ativo US$ 50.000,00 15/03/2025 15/03/2028 Ver contrato":
+        - cell "CTR-F65C316E"
+        - cell "Alpha Hedge Fund"
+        - cell "Ativo"
+        - cell "US$ 50.000,00"
+        - cell "15/03/2025"
+        - cell "15/03/2028"
+        - cell "Ver contrato":
+          - link "Ver contrato":
+            - /url: /system/contracts/5df8fc11-d8aa-41a3-af08-0c76454e9b81
+            - generic: Ver contrato
+  - generic: 3 registros
+- contentinfo:
+  - paragraph: © 2026 Strategy Analytics v2.1
+- dialog:
+  - progressbar
+  - progressbar
+  - progressbar
+  - progressbar
+  - progressbar
+  - text: Passo 5/ 5
+  - paragraph: Regiões
+  - paragraph: Define a alocação geográfica do portfólio
+  - list:
+    - button "EUA EUA New York Stock Exchange (NYSE), Nasdaq Stock Market (NASDAQ), NYSE American (NYSEAM), Chicago Board Options Exchange (CBOE)":
+      - switch "EUA" [checked]
+      - text: EUA
+      - generic: New York Stock Exchange (NYSE), Nasdaq Stock Market (NASDAQ), NYSE American (NYSEAM), Chicago Board Options Exchange (CBOE)
+    - button "China China Shanghai Stock Exchange (SSE), Shenzhen Stock Exchange (SZSE), Beijing Stock Exchange (BSE)":
+      - switch "China"
+      - text: China
+      - generic: Shanghai Stock Exchange (SSE), Shenzhen Stock Exchange (SZSE), Beijing Stock Exchange (BSE)
+    - button "Japão Japão Tokyo Stock Exchange (TSE), Osaka Exchange (OSE)":
+      - switch "Japão"
+      - text: Japão
+      - generic: Tokyo Stock Exchange (TSE), Osaka Exchange (OSE)
+    - button "Austrália Austrália Australian Securities Exchange (ASX)":
+      - switch "Austrália"
+      - text: Austrália
+      - generic: Australian Securities Exchange (ASX)
+    - button "Canadá Canadá Toronto Stock Exchange (TSX), TSX Venture Exchange (TSXV), Canadian Securities Exchange (CSE)":
+      - switch "Canadá"
+      - text: Canadá
+      - generic: Toronto Stock Exchange (TSX), TSX Venture Exchange (TSXV), Canadian Securities Exchange (CSE)
+    - button "Alemanha Alemanha Frankfurt Stock Exchange (FWB/Deutsche Börse)":
+      - switch "Alemanha"
+      - text: Alemanha
+      - generic: Frankfurt Stock Exchange (FWB/Deutsche Börse)
+    - button "Espanha Espanha Bolsa de Madrid":
+      - switch "Espanha"
+      - text: Espanha
+      - generic: Bolsa de Madrid
+    - button "Zona do Euro Zona do Euro Euronext (França, Países Baixos, Bélgica, Portugal, Itália, Irlanda, Noruega)":
+      - switch "Zona do Euro"
+      - text: Zona do Euro
+      - generic: Euronext (França, Países Baixos, Bélgica, Portugal, Itália, Irlanda, Noruega)
+    - button "Índia Índia National Stock Exchange (NSE), Bombay Stock Exchange (BSE)":
+      - switch "Índia"
+      - text: Índia
+      - generic: National Stock Exchange (NSE), Bombay Stock Exchange (BSE)
+    - button "Reino Unido Reino Unido London Stock Exchange (LSE), Alternative Investment Market (AIMX)":
+      - switch "Reino Unido"
+      - text: Reino Unido
+      - generic: London Stock Exchange (LSE), Alternative Investment Market (AIMX)
+    - button "Suíça Suíça SIX Swiss Exchange (XSWX)":
+      - switch "Suíça"
+      - text: Suíça
+      - generic: SIX Swiss Exchange (XSWX)
+    - button "Mercados Emergentes Globais Mercados Emergentes Globais Brasil (B3), Coreia do Sul (KRX), Taiwan (TWSE), México, (BMV), África do Sul (JSE), Turquia (BIST), Indonésia (IDX).":
+      - switch "Mercados Emergentes Globais"
+      - text: Mercados Emergentes Globais
+      - text: Brasil (B3),
+      - text: Coreia do Sul (KRX),
+      - text: Taiwan (TWSE),
+      - text: México,
+      - generic: (BMV),
+      - text: África do Sul (JSE),
+      - text: Turquia (BIST),
+      - text: Indonésia (IDX).
+  - alert: Não foi possível enviar sua solicitação. Suas respostas foram mantidas. Tente novamente.
+  - button "Voltar":
+    - generic: Voltar
+  - button "Enviar solicitação":
+    - generic: Enviar solicitação
