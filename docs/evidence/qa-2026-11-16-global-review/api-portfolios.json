@@ -1,0 +1,499 @@
+{
+  "records": [
+    {
+      "client": {
+        "customerId": "bbbcea42-7751-4701-8557-81a9ebc7ce22",
+        "displayName": "Jane Austin Doe",
+        "strategyId": "SA-52056963",
+        "status": "Archived",
+        "maskedDocument": "******8909"
+      },
+      "portfolio": {
+        "customerId": "bbbcea42-7751-4701-8557-81a9ebc7ce22",
+        "calculatedAtUtc": "2026-11-16T23:40:15.670951+00:00",
+        "isAutomaticallyCalculated": true,
+        "lastUpdatedAtUtc": null,
+        "currencies": []
+      }
+    },
+    {
+      "client": {
+        "customerId": "026a7899-756d-40a7-b5e9-8a3abb60cc54",
+        "displayName": "Claudio Manhães",
+        "strategyId": "SA-B47E6862",
+        "status": "Active",
+        "maskedDocument": null
+      },
+      "portfolio": {
+        "customerId": "026a7899-756d-40a7-b5e9-8a3abb60cc54",
+        "calculatedAtUtc": "2026-11-16T23:40:15.6803848+00:00",
+        "isAutomaticallyCalculated": true,
+        "lastUpdatedAtUtc": "2026-11-16T18:11:06.89886+00:00",
+        "currencies": [
+          {
+            "currencyId": "f39ba6d7-e6ca-4367-9f7e-81850804447d",
+            "currencyIsoCode": "BRL",
+            "baseEquity": 310.0,
+            "invested": 261500.2,
+            "investable": 25000.0,
+            "total": 286810.2,
+            "baseEquityBreakdown": {
+              "assetCount": 4,
+              "grossDeclaredValue": 400.0,
+              "financedBalance": 90.0
+            },
+            "investedBreakdown": {
+              "contractCount": 2,
+              "contractAllocation": 261500.2,
+              "contractContributions": 0
+            },
+            "wallets": [
+              {
+                "id": "a4a754a8-ce55-4d03-9822-012df4c3d737",
+                "type": "Free",
+                "currencyId": "f39ba6d7-e6ca-4367-9f7e-81850804447d",
+                "currencyIsoCode": "BRL",
+                "balance": 25000.0,
+                "reserved": 0,
+                "available": 25000.0
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "client": {
+        "customerId": "4ff8ec17-e9ea-416a-828c-b393d9b0119a",
+        "displayName": "Carlos Miguel",
+        "strategyId": "SA-05DCD53A",
+        "status": "Suspended",
+        "maskedDocument": null
+      },
+      "portfolio": {
+        "customerId": "4ff8ec17-e9ea-416a-828c-b393d9b0119a",
+        "calculatedAtUtc": "2026-11-16T23:40:15.9013004+00:00",
+        "isAutomaticallyCalculated": true,
+        "lastUpdatedAtUtc": null,
+        "currencies": []
+      }
+    },
+    {
+      "client": {
+        "customerId": "23b8042b-a4e2-40fd-9b90-a670fa276c0b",
+        "displayName": "Homologação Pessoa Física",
+        "strategyId": "SA-D85E86AC",
+        "status": "Active",
+        "maskedDocument": null
+      },
+      "portfolio": {
+        "customerId": "23b8042b-a4e2-40fd-9b90-a670fa276c0b",
+        "calculatedAtUtc": "2026-11-16T23:40:15.6872028+00:00",
+        "isAutomaticallyCalculated": true,
+        "lastUpdatedAtUtc": "2026-10-10T20:46:24.918444+00:00",
+        "currencies": [
+          {
+            "currencyId": "9bd50b81-47f2-42c3-b854-937624b40d4d",
+            "currencyIsoCode": "USD",
+            "baseEquity": 0,
+            "invested": 400000.0,
+            "investable": 0,
+            "total": 400000.0,
+            "baseEquityBreakdown": {
+              "assetCount": 0,
+              "grossDeclaredValue": 0,
+              "financedBalance": 0
+            },
+            "investedBreakdown": {
+              "contractCount": 2,
+              "contractAllocation": 400000.0,
+              "contractContributions": 0
+            },
+            "wallets": []
+          }
+        ]
+      }
+    },
+    {
+      "client": {
+        "customerId": "101044c1-60c2-4039-b4bb-3235a913217a",
+        "displayName": "HPJ Homologação",
+        "strategyId": "SA-56781CF7",
+        "status": "Active",
+        "maskedDocument": null
+      },
+      "portfolio": {
+        "customerId": "101044c1-60c2-4039-b4bb-3235a913217a",
+        "calculatedAtUtc": "2026-11-16T23:40:16.0847674+00:00",
+        "isAutomaticallyCalculated": true,
+        "lastUpdatedAtUtc": "2026-10-10T20:46:18.962322+00:00",
+        "currencies": [
+          {
+            "currencyId": "3dda9cd8-9584-4087-9e1e-5eef981cefc7",
+            "currencyIsoCode": "EUR",
+            "baseEquity": 0,
+            "invested": 230000.0,
+            "investable": 0,
+            "total": 230000.0,
+            "baseEquityBreakdown": {
+              "assetCount": 0,
+              "grossDeclaredValue": 0,
+              "financedBalance": 0
+            },
+            "investedBreakdown": {
+              "contractCount": 1,
+              "contractAllocation": 230000.0,
+              "contractContributions": 0
+            },
+            "wallets": []
+          },
+          {
+            "currencyId": "9bd50b81-47f2-42c3-b854-937624b40d4d",
+            "currencyIsoCode": "USD",
+            "baseEquity": 0,
+            "invested": 75000.0,
+            "investable": 0,
+            "total": 75000.0,
+            "baseEquityBreakdown": {
+              "assetCount": 0,
+              "grossDeclaredValue": 0,
+              "financedBalance": 0
+            },
+            "investedBreakdown": {
+              "contractCount": 1,
+              "contractAllocation": 75000.0,
+              "contractContributions": 0
+            },
+            "wallets": []
+          }
+        ]
+      }
+    },
+    {
+      "client": {
+        "customerId": "b96019ad-0ab1-4093-8047-d80e8b6d1f29",
+        "displayName": "Client Preferred Name",
+        "strategyId": "SA-68C6EED2",
+        "status": "Prospect",
+        "maskedDocument": null
+      },
+      "portfolio": {
+        "customerId": "b96019ad-0ab1-4093-8047-d80e8b6d1f29",
+        "calculatedAtUtc": "2026-11-16T23:40:16.3191534+00:00",
+        "isAutomaticallyCalculated": true,
+        "lastUpdatedAtUtc": "2026-11-01T12:38:21.118446+00:00",
+        "currencies": [
+          {
+            "currencyId": "f39ba6d7-e6ca-4367-9f7e-81850804447d",
+            "currencyIsoCode": "BRL",
+            "baseEquity": 850000.0,
+            "invested": 0,
+            "investable": 0,
+            "total": 850000.0,
+            "baseEquityBreakdown": {
+              "assetCount": 1,
+              "grossDeclaredValue": 850000.0,
+              "financedBalance": 0
+            },
+            "investedBreakdown": {
+              "contractCount": 0,
+              "contractAllocation": 0,
+              "contractContributions": 0
+            },
+            "wallets": []
+          }
+        ]
+      }
+    },
+    {
+      "client": {
+        "customerId": "cf2f5863-d234-42d9-9cc1-95881c05dbd1",
+        "displayName": "Éric Vicente",
+        "strategyId": "SA-B3A2E852",
+        "status": "Active",
+        "maskedDocument": null
+      },
+      "portfolio": {
+        "customerId": "cf2f5863-d234-42d9-9cc1-95881c05dbd1",
+        "calculatedAtUtc": "2026-11-16T23:40:16.0850932+00:00",
+        "isAutomaticallyCalculated": true,
+        "lastUpdatedAtUtc": "2026-11-16T18:11:06.89886+00:00",
+        "currencies": [
+          {
+            "currencyId": "f39ba6d7-e6ca-4367-9f7e-81850804447d",
+            "currencyIsoCode": "BRL",
+            "baseEquity": 370000.0,
+            "invested": 0.1,
+            "investable": 47500.0,
+            "total": 417500.1,
+            "baseEquityBreakdown": {
+              "assetCount": 2,
+              "grossDeclaredValue": 370000.0,
+              "financedBalance": 0
+            },
+            "investedBreakdown": {
+              "contractCount": 1,
+              "contractAllocation": 0.1,
+              "contractContributions": 0
+            },
+            "wallets": [
+              {
+                "id": "44fd4a72-9880-445f-957d-ec99b48d273f",
+                "type": "Free",
+                "currencyId": "f39ba6d7-e6ca-4367-9f7e-81850804447d",
+                "currencyIsoCode": "BRL",
+                "balance": 50000.0,
+                "reserved": 2500.0,
+                "available": 47500.0
+              }
+            ]
+          },
+          {
+            "currencyId": "9bd50b81-47f2-42c3-b854-937624b40d4d",
+            "currencyIsoCode": "USD",
+            "baseEquity": 0,
+            "invested": 250000.0,
+            "investable": 0,
+            "total": 250000.0,
+            "baseEquityBreakdown": {
+              "assetCount": 0,
+              "grossDeclaredValue": 0,
+              "financedBalance": 0
+            },
+            "investedBreakdown": {
+              "contractCount": 2,
+              "contractAllocation": 250000.0,
+              "contractContributions": 0
+            },
+            "wallets": []
+          }
+        ]
+      }
+    },
+    {
+      "client": {
+        "customerId": "46641101-e541-4a58-a6e0-14ea6bc75461",
+        "displayName": "TEste",
+        "strategyId": "SA-4E93BB85",
+        "status": "Active",
+        "maskedDocument": null
+      },
+      "portfolio": {
+        "customerId": "46641101-e541-4a58-a6e0-14ea6bc75461",
+        "calculatedAtUtc": "2026-11-16T23:40:16.2604399+00:00",
+        "isAutomaticallyCalculated": true,
+        "lastUpdatedAtUtc": null,
+        "currencies": []
+      }
+    },
+    {
+      "client": {
+        "customerId": "a7039210-a6b1-4b20-8d5e-04dac0c5e5b9",
+        "displayName": "Hercilio Luz",
+        "strategyId": "SA-57500050",
+        "status": "Prospect",
+        "maskedDocument": null
+      },
+      "portfolio": {
+        "customerId": "a7039210-a6b1-4b20-8d5e-04dac0c5e5b9",
+        "calculatedAtUtc": "2026-11-16T23:40:16.4489913+00:00",
+        "isAutomaticallyCalculated": true,
+        "lastUpdatedAtUtc": null,
+        "currencies": []
+      }
+    },
+    {
+      "client": {
+        "customerId": "a7c3aedc-1931-4ea4-82a4-fa4e41a42691",
+        "displayName": "Joao Caetano",
+        "strategyId": "SA-1328DD68",
+        "status": "Active",
+        "maskedDocument": null
+      },
+      "portfolio": {
+        "customerId": "a7c3aedc-1931-4ea4-82a4-fa4e41a42691",
+        "calculatedAtUtc": "2026-11-16T23:40:16.6919132+00:00",
+        "isAutomaticallyCalculated": true,
+        "lastUpdatedAtUtc": null,
+        "currencies": []
+      }
+    },
+    {
+      "client": {
+        "customerId": "8558fa32-31b1-413c-9740-6a3125bb1efe",
+        "displayName": "teste.teste",
+        "strategyId": "SA-BB95B8DC",
+        "status": "Prospect",
+        "maskedDocument": null
+      },
+      "portfolio": {
+        "customerId": "8558fa32-31b1-413c-9740-6a3125bb1efe",
+        "calculatedAtUtc": "2026-11-16T23:40:16.6322079+00:00",
+        "isAutomaticallyCalculated": true,
+        "lastUpdatedAtUtc": null,
+        "currencies": []
+      }
+    },
+    {
+      "client": {
+        "customerId": "4f3ee648-6aae-4c78-90d7-46e1cc10e039",
+        "displayName": "Jorge Nunes",
+        "strategyId": "SA-91EEC4D7",
+        "status": "Prospect",
+        "maskedDocument": "******4725"
+      },
+      "portfolio": {
+        "customerId": "4f3ee648-6aae-4c78-90d7-46e1cc10e039",
+        "calculatedAtUtc": "2026-11-16T23:40:16.7059494+00:00",
+        "isAutomaticallyCalculated": true,
+        "lastUpdatedAtUtc": "2026-10-24T21:38:45.311019+00:00",
+        "currencies": [
+          {
+            "currencyId": "f39ba6d7-e6ca-4367-9f7e-81850804447d",
+            "currencyIsoCode": "BRL",
+            "baseEquity": 389626.25,
+            "invested": 0,
+            "investable": 0,
+            "total": 389626.25,
+            "baseEquityBreakdown": {
+              "assetCount": 4,
+              "grossDeclaredValue": 477626.25,
+              "financedBalance": 88000.0
+            },
+            "investedBreakdown": {
+              "contractCount": 0,
+              "contractAllocation": 0,
+              "contractContributions": 0
+            },
+            "wallets": []
+          },
+          {
+            "currencyId": "3dda9cd8-9584-4087-9e1e-5eef981cefc7",
+            "currencyIsoCode": "EUR",
+            "baseEquity": 389752.25,
+            "invested": 0,
+            "investable": 0,
+            "total": 389752.25,
+            "baseEquityBreakdown": {
+              "assetCount": 4,
+              "grossDeclaredValue": 477752.25,
+              "financedBalance": 88000.0
+            },
+            "investedBreakdown": {
+              "contractCount": 0,
+              "contractAllocation": 0,
+              "contractContributions": 0
+            },
+            "wallets": []
+          },
+          {
+            "currencyId": "9bd50b81-47f2-42c3-b854-937624b40d4d",
+            "currencyIsoCode": "USD",
+            "baseEquity": 389626.5,
+            "invested": 0,
+            "investable": 0,
+            "total": 389626.5,
+            "baseEquityBreakdown": {
+              "assetCount": 4,
+              "grossDeclaredValue": 477626.5,
+              "financedBalance": 88000.0
+            },
+            "investedBreakdown": {
+              "contractCount": 0,
+              "contractAllocation": 0,
+              "contractContributions": 0
+            },
+            "wallets": []
+          }
+        ]
+      }
+    },
+    {
+      "client": {
+        "customerId": "456950a6-5b6e-4104-827e-8a3c3b663d45",
+        "displayName": "Éric Vicente teste novo",
+        "strategyId": "SA-FBD9E7BA",
+        "status": "Prospect",
+        "maskedDocument": "******7883"
+      },
+      "portfolio": {
+        "customerId": "456950a6-5b6e-4104-827e-8a3c3b663d45",
+        "calculatedAtUtc": "2026-11-16T23:40:17.0425744+00:00",
+        "isAutomaticallyCalculated": true,
+        "lastUpdatedAtUtc": null,
+        "currencies": []
+      }
+    },
+    {
+      "client": {
+        "customerId": "c683a86e-0c92-43b5-8bcc-b8248d331edd",
+        "displayName": "Marcos Marciano Katan",
+        "strategyId": "SA-0C314AAF",
+        "status": "Prospect",
+        "maskedDocument": "******7883"
+      },
+      "portfolio": {
+        "customerId": "c683a86e-0c92-43b5-8bcc-b8248d331edd",
+        "calculatedAtUtc": "2026-11-16T23:40:16.9977093+00:00",
+        "isAutomaticallyCalculated": true,
+        "lastUpdatedAtUtc": null,
+        "currencies": []
+      }
+    }
+  ],
+  "wallets": [
+    {
+      "id": "a4a754a8-ce55-4d03-9822-012df4c3d737",
+      "type": "Free",
+      "currencyId": "f39ba6d7-e6ca-4367-9f7e-81850804447d",
+      "currencyIsoCode": "BRL",
+      "client": {
+        "id": "026a7899-756d-40a7-b5e9-8a3abb60cc54",
+        "name": "Claudio Manhães"
+      },
+      "balance": 25000.0,
+      "reserved": 0,
+      "available": 25000.0,
+      "lastMovementAtUtc": "2026-10-09T13:47:44.966354+00:00",
+      "status": "Active",
+      "recentMovements": [
+        {
+          "transactionId": "e22924df-dd36-464a-a784-8d98c7930ca4",
+          "requestNumber": "REQ-2026-E0320E63",
+          "type": "Deposit",
+          "direction": "Credit",
+          "amount": 25000.0,
+          "balanceAfter": 25000.0,
+          "occurredAtUtc": "2026-10-09T13:47:44.966354+00:00"
+        }
+      ]
+    },
+    {
+      "id": "44fd4a72-9880-445f-957d-ec99b48d273f",
+      "type": "Free",
+      "currencyId": "f39ba6d7-e6ca-4367-9f7e-81850804447d",
+      "currencyIsoCode": "BRL",
+      "client": {
+        "id": "cf2f5863-d234-42d9-9cc1-95881c05dbd1",
+        "name": "Éric Vicente"
+      },
+      "balance": 50000.0,
+      "reserved": 2500.0,
+      "available": 47500.0,
+      "lastMovementAtUtc": "2026-10-09T13:47:40.924993+00:00",
+      "status": "Active",
+      "recentMovements": [
+        {
+          "transactionId": "9d2cb196-e5ad-485a-b4c6-90c41f499a4f",
+          "requestNumber": "REQ-2026-D578DE0D",
+          "type": "Deposit",
+          "direction": "Credit",
+          "amount": 50000.0,
+          "balanceAfter": 50000.0,
+          "occurredAtUtc": "2026-10-09T13:47:40.924993+00:00"
+        }
+      ]
+    }
+  ],
+  "notes": "Leitura independente; nenhuma operação financeira criada ou executada."
+}

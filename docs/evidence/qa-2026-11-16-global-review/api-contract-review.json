@@ -1,0 +1,179 @@
+{
+  "announcementSampleFields": [
+    "id",
+    "publicCode",
+    "title",
+    "summary",
+    "body",
+    "category",
+    "status",
+    "audience",
+    "readCount",
+    "createdAtUtc",
+    "updatedAtUtc",
+    "publishedAtUtc",
+    "archivedAtUtc"
+  ],
+  "announcementCount": 2,
+  "loanCount": 0,
+  "schemas": {
+    "CreateLoanRequest": {
+      "fields": [
+        "clientId",
+        "contractId",
+        "currencyId",
+        "kind",
+        "principalAmount",
+        "outstandingAmount",
+        "interestRatePercent",
+        "termMonths",
+        "leverageRatio",
+        "purpose",
+        "collateral",
+        "startDate",
+        "dueDate",
+        "notes"
+      ],
+      "required": [
+        "clientId",
+        "contractId",
+        "currencyId",
+        "kind",
+        "principalAmount",
+        "outstandingAmount",
+        "interestRatePercent",
+        "termMonths",
+        "leverageRatio",
+        "purpose",
+        "collateral",
+        "startDate",
+        "dueDate",
+        "notes"
+      ]
+    },
+    "LoanResponse": {
+      "fields": [
+        "id",
+        "publicCode",
+        "client",
+        "contract",
+        "kind",
+        "currencyIsoCode",
+        "principalAmount",
+        "outstandingAmount",
+        "interestRatePercent",
+        "termMonths",
+        "leverageRatio",
+        "purpose",
+        "collateral",
+        "startDate",
+        "dueDate",
+        "status",
+        "notes",
+        "createdAtUtc",
+        "updatedAtUtc"
+      ],
+      "required": [
+        "id",
+        "publicCode",
+        "client",
+        "contract",
+        "kind",
+        "currencyIsoCode",
+        "principalAmount",
+        "outstandingAmount",
+        "interestRatePercent",
+        "termMonths",
+        "leverageRatio",
+        "purpose",
+        "collateral",
+        "startDate",
+        "dueDate",
+        "status",
+        "notes",
+        "createdAtUtc",
+        "updatedAtUtc"
+      ]
+    },
+    "AnnouncementResponse": {
+      "fields": [
+        "id",
+        "publicCode",
+        "title",
+        "summary",
+        "body",
+        "category",
+        "status",
+        "audience",
+        "readCount",
+        "createdAtUtc",
+        "updatedAtUtc",
+        "publishedAtUtc",
+        "archivedAtUtc"
+      ],
+      "required": [
+        "id",
+        "publicCode",
+        "title",
+        "summary",
+        "body",
+        "category",
+        "status",
+        "audience",
+        "readCount",
+        "createdAtUtc",
+        "updatedAtUtc",
+        "publishedAtUtc",
+        "archivedAtUtc"
+      ]
+    },
+    "AdminWalletListItemResponse": {
+      "fields": [
+        "id",
+        "type",
+        "currencyId",
+        "currencyIsoCode",
+        "client",
+        "balance",
+        "reserved",
+        "available",
+        "lastMovementAtUtc",
+        "status",
+        "recentMovements"
+      ],
+      "required": [
+        "id",
+        "type",
+        "currencyId",
+        "currencyIsoCode",
+        "client",
+        "balance",
+        "reserved",
+        "available",
+        "lastMovementAtUtc",
+        "status",
+        "recentMovements"
+      ]
+    },
+    "FinancialSummaryCurrencyResponse": {
+      "fields": [
+        "currencyId",
+        "currencyIsoCode",
+        "free",
+        "applied",
+        "total",
+        "contracts"
+      ],
+      "required": [
+        "currencyId",
+        "currencyIsoCode",
+        "free",
+        "applied",
+        "total",
+        "contracts"
+      ]
+    }
+  },
+  "partnerPaths": [],
+  "ptaxEndpointExists": true
+}

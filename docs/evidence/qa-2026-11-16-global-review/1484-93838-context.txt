@@ -1,0 +1,324 @@
+const imgHouse = "https://www.figma.com/api/mcp/asset/e0502a98-769a-4b72-befe-086a49c180aa.svg";
+const imgCar = "https://www.figma.com/api/mcp/asset/c0f2adb3-99cf-49c7-8a15-8ef4f3f5eb83.svg";
+const imgBuilding2 = "https://www.figma.com/api/mcp/asset/16915faf-fe08-41bb-b729-8dd5c9736333.svg";
+const imgBriefcase = "https://www.figma.com/api/mcp/asset/8bdcc423-78b9-432e-8f64-f03060a82da3.svg";
+const imgInfo = "https://www.figma.com/api/mcp/asset/c7fe83ce-6d72-4473-aa22-9bc53166f219.svg";
+const imgIcon = "https://www.figma.com/api/mcp/asset/3319517a-1ae7-4e74-bc36-78ac862d8f9f.svg";
+
+export default function Cr04MdNovaOperacaoSelecaoDoTipoEstadoDesignGlass() {
+  return (
+    <div className="content-stretch flex flex-col items-start relative size-full" data-node-id="1484:93838" data-name="CR04 · MD · Nova operação · Seleção do tipo · ESTADO · DESIGN GLASS">
+      <div className="absolute backdrop-blur-[20px] border border-[rgba(255,255,255,0.12)] border-solid drop-shadow-[4px_4px_6px_rgba(0,0,0,0.13)] h-[659px] left-0 max-w-[512px] rounded-[var(--sa-radius-10,10px)] top-0 w-[512px]" data-node-id="1484:93839" style={{ backgroundImage: "linear-gradient(208.6365133701046deg, rgba(0, 0, 0, 0.118) 0.52072%, rgba(0, 0, 0, 0.039) 51.124%, rgba(0, 0, 0, 0.02) 99.479%), linear-gradient(208.6365133701046deg, rgba(0, 0, 0, 0.078) 0.52072%, rgba(0, 0, 0, 0.039) 51.124%, rgba(0, 0, 0, 0.01) 99.479%)" }} data-name="DismissableLayer">
+        <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex flex-col gap-[var(--sa-spacing-16,16px)] items-start max-w-[inherit] p-px relative size-full">
+          <div className="border-[var(--sa-color-border-default,rgba(255,255,255,0.2))] border-b-[0.8px] border-solid relative shrink-0 w-full" data-node-id="1484:93840" data-name="Container">
+            <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex flex-col items-start pb-[var(--sa-spacing-16,16.8px)] pt-[var(--sa-spacing-24,24px)] px-[var(--sa-spacing-24,24px)] relative size-full">
+              <div className="relative shrink-0 w-full" data-node-id="1484:93841" data-name="Container">
+                <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex flex-col gap-[var(--sa-spacing-8,8px)] items-start relative size-full">
+                  <div className="relative shrink-0 w-full" data-node-id="1484:93842" data-name="DialogTitle">
+                    <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex flex-col items-start relative size-full">
+                      <p className="[word-break:break-word] font-['Inter:Bold'] font-bold leading-[28px] not-italic relative shrink-0 text-[18px] text-[color:var(--sa-color-text-primary,white)] whitespace-nowrap" data-node-id="1484:93843">
+                        Nova Operação de Crédito
+                      </p>
+                    </div>
+                  </div>
+                  <div className="relative shrink-0 w-full" data-node-id="1484:93844" data-name="DialogDescription">
+                    <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex flex-col items-start relative size-full">
+                      <p className="[word-break:break-word] font-['Inter:Regular'] font-normal leading-[20px] not-italic relative shrink-0 text-[14px] text-[color:var(--sa-color-text-secondary,rgba(255,255,255,0.72))] whitespace-nowrap" data-node-id="1484:93845">
+                        Selecione o tipo de operação de crédito que deseja criar
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div className="relative shrink-0 w-full" data-node-id="1484:93846" data-name="Container:margin">
+                <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex flex-col items-center pt-[var(--sa-spacing-16,16px)] relative size-full">
+                  <div className="content-stretch flex gap-[var(--sa-spacing-12,12px)] items-center relative shrink-0 w-[462px]" data-node-id="1484:93847" data-name="Container">
+                    <div className="relative shrink-0" data-node-id="1484:93848" data-name="Container">
+                      <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex gap-[var(--sa-spacing-8,8px)] items-center relative size-full">
+                        <div className="bg-[var(--sa-color-bg-action-primary,rgba(255,255,255,0.6))] relative rounded-[26843500px] shrink-0 size-[32px]" data-node-id="1484:93849" data-name="Container">
+                          <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex items-center justify-center relative size-full">
+                            <p className="[word-break:break-word] font-['Inter:Bold'] font-bold leading-[16px] not-italic relative shrink-0 text-[12px] text-[color:var(--sa-color-text-inverse,black)] whitespace-nowrap" data-node-id="1484:93850">
+                              1
+                            </p>
+                          </div>
+                        </div>
+                        <div className="relative shrink-0" data-node-id="1484:93851" data-name="Text">
+                          <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex flex-col items-start relative size-full">
+                            <p className="[word-break:break-word] font-['Inter:Medium'] font-medium leading-[16px] not-italic relative shrink-0 text-[12px] text-[color:var(--sa-color-text-tertiary,rgba(255,255,255,0.6))] whitespace-nowrap" data-node-id="1484:93852">
+                              Tipo
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div className="bg-[#e2e8f0] flex-[296_0_0] h-[4px] min-w-px relative rounded-[var(--sa-radius-4,4px)]" data-node-id="1484:93853" data-name="Container" />
+                    <div className="relative shrink-0" data-node-id="1484:93854" data-name="Container">
+                      <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex gap-[var(--sa-spacing-8,8px)] items-center relative size-full">
+                        <div className="bg-[#e2e8f0] relative rounded-[26843500px] shrink-0 size-[32px]" data-node-id="1484:93855" data-name="Container">
+                          <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex items-center justify-center relative size-full">
+                            <p className="[word-break:break-word] font-['Inter:Bold'] font-bold leading-[16px] not-italic relative shrink-0 text-[12px] text-[color:var(--sa-color-text-secondary,rgba(255,255,255,0.72))] whitespace-nowrap" data-node-id="1484:93856">
+                              2
+                            </p>
+                          </div>
+                        </div>
+                        <div className="relative shrink-0" data-node-id="1484:93857" data-name="Text">
+                          <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex flex-col items-start relative size-full">
+                            <p className="[word-break:break-word] font-['Inter:Medium'] font-medium leading-[16px] not-italic relative shrink-0 text-[12px] text-[color:var(--sa-color-text-tertiary,rgba(255,255,255,0.6))] whitespace-nowrap" data-node-id="1484:93858">
+                              Cliente
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="h-[411px] relative shrink-0 w-full" data-node-id="1484:93859" data-name="Container">
+            <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex flex-col items-start px-[var(--sa-spacing-24,24px)] relative size-full">
+              <div className="relative shrink-0 w-full" data-node-id="1484:93860" data-name="Container">
+                <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex flex-col items-start py-[var(--sa-spacing-24,24px)] relative size-full">
+                  <div className="h-[363px] relative shrink-0 w-full" data-node-id="1484:93861" data-name="SlotClone">
+                    <div className="bg-clip-padding border-0 border-[transparent] border-solid gap-x-[12px] gap-y-[12px] grid grid-cols-[_462.40px] grid-rows-[_______41.60px_41.60px_41.60px_41.60px_41.60px_41.60px_41.60px] relative size-full">
+                      <div className="bg-[rgba(255,255,255,0.05)] border border-[var(--sa-color-border-glass,rgba(255,255,255,0.2))] border-solid col-1 justify-self-stretch relative rounded-[var(--sa-radius-10,10px)] row-1 self-stretch shrink-0" data-node-id="1484:93862" data-name="Container">
+                        <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex items-center p-[var(--sa-spacing-12,13px)] relative size-full">
+                          <div className="relative shrink-0" data-node-id="1484:93863" data-name="Radio:margin">
+                            <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex items-start pr-[var(--sa-spacing-12,12px)] relative size-full">
+                              <div className="bg-[rgba(255,255,255,0)] border-[0.8px] border-[rgba(0,0,0,0)] border-solid relative rounded-[26843500px] shadow-[0px_1px_2px_0px_rgba(0,0,0,0.05)] shrink-0 size-[16px]" data-node-id="1484:93864" data-name="Radio" />
+                            </div>
+                          </div>
+                          <div className="flex-[409_0_0] min-w-px relative" data-node-id="1484:93865" data-name="Label">
+                            <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex gap-[var(--sa-spacing-8,8px)] items-center relative size-full">
+                              <div className="relative shrink-0" data-node-id="1484:93866" data-name="Container">
+                                <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex gap-[var(--sa-spacing-8,8px)] items-center relative size-full">
+                                  <div className="relative shrink-0 size-[16px]" data-node-id="1484:93867" data-name="House">
+                                    <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgHouse} />
+                                  </div>
+                                  <div className="relative shrink-0" data-node-id="1484:93870" data-name="Text">
+                                    <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex flex-col items-start relative size-full">
+                                      <p className="[word-break:break-word] font-['Inter:Medium'] font-medium leading-[14px] not-italic relative shrink-0 text-[14px] text-[color:var(--sa-color-text-primary,white)] whitespace-nowrap" data-node-id="1484:93871">
+                                        Crédito com garantia de imóvel / Home Equity / CGI
+                                      </p>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div className="bg-[rgba(255,255,255,0.05)] border border-[var(--sa-color-border-glass,rgba(255,255,255,0.2))] border-solid col-1 justify-self-stretch relative rounded-[var(--sa-radius-10,10px)] row-2 self-stretch shrink-0" data-node-id="1484:93872" data-name="Container">
+                        <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex items-center p-[var(--sa-spacing-12,13px)] relative size-full">
+                          <div className="relative shrink-0" data-node-id="1484:93873" data-name="Radio:margin">
+                            <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex items-start pr-[var(--sa-spacing-12,12px)] relative size-full">
+                              <div className="bg-[rgba(255,255,255,0)] border-[0.8px] border-[rgba(0,0,0,0)] border-solid relative rounded-[26843500px] shadow-[0px_1px_2px_0px_rgba(0,0,0,0.05)] shrink-0 size-[16px]" data-node-id="1484:93874" data-name="Radio" />
+                            </div>
+                          </div>
+                          <div className="flex-[409_0_0] min-w-px relative" data-node-id="1484:93875" data-name="Label">
+                            <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex gap-[var(--sa-spacing-8,8px)] items-center relative size-full">
+                              <div className="relative shrink-0" data-node-id="1484:93876" data-name="Container">
+                                <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex gap-[var(--sa-spacing-8,8px)] items-center relative size-full">
+                                  <div className="relative shrink-0 size-[16px]" data-node-id="1484:93877" data-name="Car">
+                                    <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgCar} />
+                                  </div>
+                                  <div className="relative shrink-0" data-node-id="1484:93882" data-name="Text">
+                                    <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex flex-col items-start relative size-full">
+                                      <p className="[word-break:break-word] font-['Inter:Medium'] font-medium leading-[14px] not-italic relative shrink-0 text-[14px] text-[color:var(--sa-color-text-primary,white)] whitespace-nowrap" data-node-id="1484:93883">
+                                        Crédito com garantia de veículo / Auto Equity
+                                      </p>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div className="bg-[rgba(255,255,255,0.05)] border border-[var(--sa-color-border-glass,rgba(255,255,255,0.2))] border-solid col-1 justify-self-stretch relative rounded-[var(--sa-radius-10,10px)] row-3 self-stretch shrink-0" data-node-id="1484:93884" data-name="Container">
+                        <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex items-center p-[var(--sa-spacing-12,13px)] relative size-full">
+                          <div className="relative shrink-0" data-node-id="1484:93885" data-name="Radio:margin">
+                            <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex items-start pr-[var(--sa-spacing-12,12px)] relative size-full">
+                              <div className="bg-[rgba(255,255,255,0)] border-[0.8px] border-[rgba(0,0,0,0)] border-solid relative rounded-[26843500px] shadow-[0px_1px_2px_0px_rgba(0,0,0,0.05)] shrink-0 size-[16px]" data-node-id="1484:93886" data-name="Radio" />
+                            </div>
+                          </div>
+                          <div className="flex-[409_0_0] min-w-px relative" data-node-id="1484:93887" data-name="Label">
+                            <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex gap-[var(--sa-spacing-8,8px)] items-center relative size-full">
+                              <div className="relative shrink-0" data-node-id="1484:93888" data-name="Container">
+                                <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex gap-[var(--sa-spacing-8,8px)] items-center relative size-full">
+                                  <div className="relative shrink-0 size-[16px]" data-node-id="1484:93889" data-name="Building2">
+                                    <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgBuilding2} />
+                                  </div>
+                                  <div className="relative shrink-0" data-node-id="1484:93897" data-name="Text">
+                                    <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex flex-col items-start relative size-full">
+                                      <p className="[word-break:break-word] font-['Inter:Medium'] font-medium leading-[14px] not-italic relative shrink-0 text-[14px] text-[color:var(--sa-color-text-primary,white)] whitespace-nowrap" data-node-id="1484:93898">
+                                        Financiamento imobiliário
+                                      </p>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div className="bg-[rgba(255,255,255,0.05)] border border-[var(--sa-color-border-glass,rgba(255,255,255,0.2))] border-solid col-1 justify-self-stretch relative rounded-[var(--sa-radius-10,10px)] row-4 self-stretch shrink-0" data-node-id="1484:93899" data-name="Container">
+                        <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex items-center p-[var(--sa-spacing-12,13px)] relative size-full">
+                          <div className="relative shrink-0" data-node-id="1484:93900" data-name="Radio:margin">
+                            <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex items-start pr-[var(--sa-spacing-12,12px)] relative size-full">
+                              <div className="bg-[rgba(255,255,255,0)] border-[0.8px] border-[rgba(0,0,0,0)] border-solid relative rounded-[26843500px] shadow-[0px_1px_2px_0px_rgba(0,0,0,0.05)] shrink-0 size-[16px]" data-node-id="1484:93901" data-name="Radio" />
+                            </div>
+                          </div>
+                          <div className="flex-[409_0_0] min-w-px relative" data-node-id="1484:93902" data-name="Label">
+                            <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex gap-[var(--sa-spacing-8,8px)] items-center relative size-full">
+                              <div className="relative shrink-0" data-node-id="1484:93903" data-name="Container">
+                                <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex gap-[var(--sa-spacing-8,8px)] items-center relative size-full">
+                                  <div className="relative shrink-0 size-[16px]" data-node-id="1484:93904" data-name="Car">
+                                    <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgCar} />
+                                  </div>
+                                  <div className="relative shrink-0" data-node-id="1484:93909" data-name="Text">
+                                    <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex flex-col items-start relative size-full">
+                                      <p className="[word-break:break-word] font-['Inter:Medium'] font-medium leading-[14px] not-italic relative shrink-0 text-[14px] text-[color:var(--sa-color-text-primary,white)] whitespace-nowrap" data-node-id="1484:93910">
+                                        Financiamento de veículo
+                                      </p>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div className="bg-[rgba(255,255,255,0.05)] border border-[var(--sa-color-border-glass,rgba(255,255,255,0.2))] border-solid col-1 justify-self-stretch relative rounded-[var(--sa-radius-10,10px)] row-5 self-stretch shrink-0" data-node-id="1484:93911" data-name="Container">
+                        <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex items-center p-[var(--sa-spacing-12,13px)] relative size-full">
+                          <div className="relative shrink-0" data-node-id="1484:93912" data-name="Radio:margin">
+                            <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex items-start pr-[var(--sa-spacing-12,12px)] relative size-full">
+                              <div className="bg-[rgba(255,255,255,0)] border-[0.8px] border-[rgba(0,0,0,0)] border-solid relative rounded-[26843500px] shadow-[0px_1px_2px_0px_rgba(0,0,0,0.05)] shrink-0 size-[16px]" data-node-id="1484:93913" data-name="Radio" />
+                            </div>
+                          </div>
+                          <div className="flex-[409_0_0] min-w-px relative" data-node-id="1484:93914" data-name="Label">
+                            <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex gap-[var(--sa-spacing-8,8px)] items-center relative size-full">
+                              <div className="relative shrink-0" data-node-id="1484:93915" data-name="Container">
+                                <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex gap-[var(--sa-spacing-8,8px)] items-center relative size-full">
+                                  <div className="relative shrink-0 size-[16px]" data-node-id="1484:93916" data-name="Briefcase">
+                                    <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgBriefcase} />
+                                  </div>
+                                  <div className="relative shrink-0" data-node-id="1484:93919" data-name="Text">
+                                    <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex flex-col items-start relative size-full">
+                                      <p className="[word-break:break-word] font-['Inter:Medium'] font-medium leading-[14px] not-italic relative shrink-0 text-[14px] text-[color:var(--sa-color-text-primary,white)] whitespace-nowrap" data-node-id="1484:93920">
+                                        Consórcio
+                                      </p>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div className="bg-[rgba(255,255,255,0.05)] border border-[var(--sa-color-border-glass,rgba(255,255,255,0.2))] border-solid col-1 justify-self-stretch relative rounded-[var(--sa-radius-10,10px)] row-6 self-stretch shrink-0" data-node-id="1484:93921" data-name="Container">
+                        <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex items-center p-[var(--sa-spacing-12,13px)] relative size-full">
+                          <div className="relative shrink-0" data-node-id="1484:93922" data-name="Radio:margin">
+                            <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex items-start pr-[var(--sa-spacing-12,12px)] relative size-full">
+                              <div className="bg-[rgba(255,255,255,0)] border-[0.8px] border-[rgba(0,0,0,0)] border-solid relative rounded-[26843500px] shadow-[0px_1px_2px_0px_rgba(0,0,0,0.05)] shrink-0 size-[16px]" data-node-id="1484:93923" data-name="Radio" />
+                            </div>
+                          </div>
+                          <div className="flex-[409_0_0] min-w-px relative" data-node-id="1484:93924" data-name="Label">
+                            <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex gap-[var(--sa-spacing-8,8px)] items-center relative size-full">
+                              <div className="relative shrink-0" data-node-id="1484:93925" data-name="Container">
+                                <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex gap-[var(--sa-spacing-8,8px)] items-center relative size-full">
+                                  <div className="relative shrink-0 size-[16px]" data-node-id="1484:93926" data-name="Briefcase">
+                                    <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgBriefcase} />
+                                  </div>
+                                  <div className="relative shrink-0" data-node-id="1484:93929" data-name="Text">
+                                    <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex flex-col items-start relative size-full">
+                                      <p className="[word-break:break-word] font-['Inter:Medium'] font-medium leading-[14px] not-italic relative shrink-0 text-[14px] text-[color:var(--sa-color-text-primary,white)] whitespace-nowrap" data-node-id="1484:93930">
+                                        Crédito PJ
+                                      </p>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div className="bg-[rgba(255,255,255,0.05)] border border-[var(--sa-color-border-glass,rgba(255,255,255,0.2))] border-solid col-1 justify-self-stretch relative rounded-[var(--sa-radius-10,10px)] row-7 self-stretch shrink-0" data-node-id="1484:93931" data-name="Container">
+                        <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex items-center p-[var(--sa-spacing-12,13px)] relative size-full">
+                          <div className="relative shrink-0" data-node-id="1484:93932" data-name="Radio:margin">
+                            <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex items-start pr-[var(--sa-spacing-12,12px)] relative size-full">
+                              <div className="bg-[rgba(255,255,255,0)] border-[0.8px] border-[rgba(0,0,0,0)] border-solid relative rounded-[26843500px] shadow-[0px_1px_2px_0px_rgba(0,0,0,0.05)] shrink-0 size-[16px]" data-node-id="1484:93933" data-name="Radio" />
+                            </div>
+                          </div>
+                          <div className="flex-[409_0_0] min-w-px relative" data-node-id="1484:93934" data-name="Label">
+                            <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex gap-[var(--sa-spacing-8,8px)] items-center relative size-full">
+                              <div className="relative shrink-0" data-node-id="1484:93935" data-name="Container">
+                                <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex gap-[var(--sa-spacing-8,8px)] items-center relative size-full">
+                                  <div className="relative shrink-0 size-[16px]" data-node-id="1484:93936" data-name="Info">
+                                    <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgInfo} />
+                                  </div>
+                                  <div className="relative shrink-0" data-node-id="1484:93940" data-name="Text">
+                                    <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex flex-col items-start relative size-full">
+                                      <p className="[word-break:break-word] font-['Inter:Medium'] font-medium leading-[14px] not-italic relative shrink-0 text-[14px] text-[color:var(--sa-color-text-primary,white)] whitespace-nowrap" data-node-id="1484:93941">
+                                        Outro
+                                      </p>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="bg-[var(--sa-color-bg-surface,rgba(255,255,255,0.06))] border-[var(--sa-color-border-default,rgba(255,255,255,0.2))] border-solid border-t-[0.8px] relative shrink-0 w-full" data-node-id="1484:93942" data-name="Container">
+            <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex flex-col items-start pb-[var(--sa-spacing-16,16px)] pt-[var(--sa-spacing-16,16.8px)] px-[var(--sa-spacing-24,24px)] relative size-full">
+              <div className="relative shrink-0 w-[462px]" data-node-id="1484:93943" data-name="Container">
+                <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex gap-[var(--sa-spacing-12,12px)] items-start relative size-full">
+                  <div className="bg-[var(--sa-color-bg-surface,rgba(255,255,255,0.06))] border-[0.8px] border-[var(--sa-color-border-default,rgba(255,255,255,0.2))] border-solid flex-[226_0_0] h-[36px] min-w-px relative rounded-[var(--sa-radius-8,8px)]" data-node-id="1484:93944" data-name="Botão ação nível 1">
+                    <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex items-center justify-center px-[14.8px] py-[var(--sa-spacing-8,8.8px)] relative size-full">
+                      <p className="[word-break:break-word] font-['Inter:Medium'] font-medium leading-[20px] not-italic relative shrink-0 text-[14px] text-[color:var(--sa-color-text-secondary,rgba(255,255,255,0.72))] text-center whitespace-nowrap" data-node-id="1484:93945">
+                        Cancelar
+                      </p>
+                    </div>
+                  </div>
+                  <div className="bg-[var(--sa-color-bg-glass,rgba(255,255,255,0.06))] border-[length:var(----sa-stroke-1,1px)] border-[var(--sa-color-border-strong,rgba(255,255,255,0.28))] border-solid flex-[224_0_0] h-[36px] min-w-px opacity-50 relative rounded-[var(--sa-radius-8,8px)]" data-node-id="1484:93946" data-name="Botão ação nível 1">
+                    <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex items-center justify-center px-[15px] py-[var(--sa-spacing-8,9px)] relative size-full">
+                      <p className="[word-break:break-word] font-['Inter:Medium'] font-medium leading-[20px] not-italic relative shrink-0 text-[14px] text-[color:var(--sa-color-text-primary,white)] text-center whitespace-nowrap" data-node-id="1484:93947">
+                        Continuar
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="absolute left-[478.2px] opacity-70 rounded-[2px] top-[15.8px]" data-node-id="1484:93948" data-name="DialogClose">
+            <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex flex-col items-start justify-center relative size-full">
+              <div className="relative shrink-0 size-[16px]" data-node-id="1484:93949" data-name="Icon">
+                <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgIcon} />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+SUPER CRITICAL: The generated React+Tailwind code MUST be converted to match the target project's technology stack and styling system.
+1. Analyze the target codebase to identify: technology stack, styling approach, component patterns, and design tokens
+2. Convert React syntax to the target framework/library
+3. Transform all Tailwind classes to the target styling system while preserving exact visual design
+4. Follow the project's existing patterns and conventions
+DO NOT install any Tailwind as a dependency unless the user instructs you to do so.
+
+
+Node ids have been added to the code as data attributes, e.g. `data-node-id="1:2"`.
+
+The generated code contains image and SVG URL constants, e.g. const image = 'https://www.figma.com/api/mcp/asset/550e8400-e29b-41d4-a716-446655440000.png'. These URLs are temporary download sources and expire after 7 days. Download each asset into the project with curl -L, then replace its URL in the generated code with a reference to the downloaded asset. Never use the temporary URLs as runtime image sources.

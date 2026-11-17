@@ -1,0 +1,296 @@
+[
+  {
+    "name": "assets.svg",
+    "bytes": 504,
+    "width": "16",
+    "height": "16"
+  },
+  {
+    "name": "chevron.svg",
+    "bytes": 359,
+    "width": "16",
+    "height": "16"
+  },
+  {
+    "name": "contract.svg",
+    "bytes": 1095,
+    "width": "12",
+    "height": "12"
+  },
+  {
+    "name": "credit-active.svg",
+    "bytes": 516,
+    "width": "14",
+    "height": "14"
+  },
+  {
+    "name": "credit-briefcase.svg",
+    "bytes": 858,
+    "width": "16",
+    "height": "16"
+  },
+  {
+    "name": "credit-building.svg",
+    "bytes": 1818,
+    "width": "16",
+    "height": "16"
+  },
+  {
+    "name": "credit-car.svg",
+    "bytes": 1391,
+    "width": "16",
+    "height": "16"
+  },
+  {
+    "name": "credit-chevron.svg",
+    "bytes": 337,
+    "width": "16",
+    "height": "16"
+  },
+  {
+    "name": "credit-close.svg",
+    "bytes": 434,
+    "width": "16",
+    "height": "16"
+  },
+  {
+    "name": "credit-contracted.svg",
+    "bytes": 819,
+    "width": "14",
+    "height": "14"
+  },
+  {
+    "name": "credit-customer-search.svg",
+    "bytes": 655,
+    "width": "16",
+    "height": "16"
+  },
+  {
+    "name": "credit-documents.svg",
+    "bytes": 1292,
+    "width": "14",
+    "height": "14"
+  },
+  {
+    "name": "credit-file.svg",
+    "bytes": 1272,
+    "width": "20",
+    "height": "20"
+  },
+  {
+    "name": "credit-final.svg",
+    "bytes": 767,
+    "width": "14",
+    "height": "14"
+  },
+  {
+    "name": "credit-grid.svg",
+    "bytes": 1374,
+    "width": "16",
+    "height": "16"
+  },
+  {
+    "name": "credit-group-cancelled.svg",
+    "bytes": 914,
+    "width": "16",
+    "height": "16"
+  },
+  {
+    "name": "credit-group-closed.svg",
+    "bytes": 794,
+    "width": "16",
+    "height": "16"
+  },
+  {
+    "name": "credit-group-open.svg",
+    "bytes": 739,
+    "width": "16",
+    "height": "16"
+  },
+  {
+    "name": "credit-house.svg",
+    "bytes": 1088,
+    "width": "16",
+    "height": "16"
+  },
+  {
+    "name": "credit-info.svg",
+    "bytes": 856,
+    "width": "16",
+    "height": "16"
+  },
+  {
+    "name": "credit-kanban.svg",
+    "bytes": 791,
+    "width": "16",
+    "height": "16"
+  },
+  {
+    "name": "credit-list.svg",
+    "bytes": 1294,
+    "width": "16",
+    "height": "16"
+  },
+  {
+    "name": "credit-new.svg",
+    "bytes": 450,
+    "width": "16",
+    "height": "16"
+  },
+  {
+    "name": "credit-open.svg",
+    "bytes": 346,
+    "width": "16",
+    "height": "16"
+  },
+  {
+    "name": "credit-owner.svg",
+    "bytes": 690,
+    "width": "12",
+    "height": "12"
+  },
+  {
+    "name": "credit-pending.svg",
+    "bytes": 877,
+    "width": "14",
+    "height": "14"
+  },
+  {
+    "name": "credit-plus.svg",
+    "bytes": 454,
+    "width": "16",
+    "height": "16"
+  },
+  {
+    "name": "credit-search.svg",
+    "bytes": 611,
+    "width": "16",
+    "height": "16"
+  },
+  {
+    "name": "credit-sign.svg",
+    "bytes": 980,
+    "width": "14",
+    "height": "14"
+  },
+  {
+    "name": "credit-time.svg",
+    "bytes": 658,
+    "width": "12",
+    "height": "12"
+  },
+  {
+    "name": "deposit-global.svg",
+    "bytes": 1381,
+    "width": "16",
+    "height": "16"
+  },
+  {
+    "name": "deposit.svg",
+    "bytes": 1412,
+    "width": "20",
+    "height": "20"
+  },
+  {
+    "name": "eye.svg",
+    "bytes": 982,
+    "width": "16",
+    "height": "16"
+  },
+  {
+    "name": "filter.svg",
+    "bytes": 1148,
+    "width": "16",
+    "height": "16"
+  },
+  {
+    "name": "grid.svg",
+    "bytes": 1058,
+    "width": "16",
+    "height": "16"
+  },
+  {
+    "name": "list.svg",
+    "bytes": 1071,
+    "width": "16",
+    "height": "16"
+  },
+  {
+    "name": "partner-plus.svg",
+    "bytes": 450,
+    "width": "16",
+    "height": "16"
+  },
+  {
+    "name": "partner-search.svg",
+    "bytes": 655,
+    "width": "16",
+    "height": "16"
+  },
+  {
+    "name": "publication-archived.svg",
+    "bytes": 1029,
+    "width": "20",
+    "height": "20"
+  },
+  {
+    "name": "publication-authors.svg",
+    "bytes": 1353,
+    "width": "20",
+    "height": "20"
+  },
+  {
+    "name": "publication-chevron.svg",
+    "bytes": 359,
+    "width": "16",
+    "height": "16"
+  },
+  {
+    "name": "publication-draft.svg",
+    "bytes": 1282,
+    "width": "20",
+    "height": "20"
+  },
+  {
+    "name": "publication-published.svg",
+    "bytes": 772,
+    "width": "20",
+    "height": "20"
+  },
+  {
+    "name": "publication-review.svg",
+    "bytes": 754,
+    "width": "20",
+    "height": "20"
+  },
+  {
+    "name": "publication-search.svg",
+    "bytes": 655,
+    "width": "16",
+    "height": "16"
+  },
+  {
+    "name": "publication-total.svg",
+    "bytes": 1272,
+    "width": "20",
+    "height": "20"
+  },
+  {
+    "name": "search.svg",
+    "bytes": 655,
+    "width": "16",
+    "height": "16"
+  },
+  {
+    "name": "strategy.svg",
+    "bytes": 1265,
+    "width": "16",
+    "height": "16"
+  },
+  {
+    "name": "user.svg",
+    "bytes": 829,
+    "width": "16",
+    "height": "16"
+  }
+]

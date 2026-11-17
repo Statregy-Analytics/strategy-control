@@ -1,0 +1,114 @@
+- complementary:
+  - img "Strategy Analytics"
+  - list "Menu administrativo":
+    - link "Clientes":
+      - /url: /dataManagement
+      - generic: Clientes
+    - link "Contratos":
+      - /url: /contracts
+      - generic: Contratos
+    - link "Lógicas":
+      - /url: /logics
+      - generic: Lógicas
+    - link "Transações":
+      - /url: /transaction
+      - generic: Transações
+    - link "Crédito":
+      - /url: /credit
+      - generic: Crédito
+    - link "Comunicados":
+      - /url: /communications
+      - generic: Comunicados
+  - button "Expandir":
+    - generic: Configurações
+  - generic: person
+  - generic: Local Admin
+  - generic: admin@example.com
+  - link "Trocar Sistema":
+    - /url: /
+    - generic: Trocar Sistema
+  - button "Sair":
+    - generic: Sair
+  - button "Recolher menu"
+- main:
+  - heading "Crédito" [level=1]
+  - paragraph: Gestão de operações, parceiros, regras comerciais, comissões e propostas vinculadas a crédito e consórcio.
+  - main:
+    - generic: Operações Ativas
+    - strong: Indisponível
+    - generic: Pendentes
+    - strong: Indisponível
+    - generic: Em Documentação
+    - strong: Indisponível
+    - generic: Propostas Finais
+    - strong: Indisponível
+    - generic: Em Assinatura
+    - strong: Indisponível
+    - generic: Contratadas
+    - strong: Indisponível
+    - button "Operações" [pressed]:
+      - generic: Operações
+    - button "Parceiros":
+      - generic: Parceiros
+    - textbox "Buscar por cliente, ID, parceiro ou tipo de crédito..."
+    - generic: Tipo de operação
+    - combobox "Tipo de operação"
+    - generic: Status
+    - combobox "Status"
+    - group "Visualização das operações":
+      - button "Lista" [pressed]
+      - button "Cards"
+      - button "Kanban"
+    - button "Nova Operação":
+      - generic: Nova Operação
+    - group "Situação das operações":
+      - button "Operações em Aberto 0" [pressed]:
+        - text: Operações em Aberto
+        - generic: "0"
+      - button "Operações Finalizadas 0":
+        - text: Operações Finalizadas
+        - generic: "0"
+      - button "Operações Canceladas/Recusadas 0":
+        - text: Operações Canceladas/Recusadas
+        - generic: "0"
+    - table:
+      - rowgroup:
+        - row "ID Cliente Tipo Valor Solicitado Garantia/Produto Etapa Parceiros Propostas Pendências Origem Responsável Atualização":
+          - columnheader "ID"
+          - columnheader "Cliente"
+          - columnheader "Tipo"
+          - columnheader "Valor Solicitado"
+          - columnheader "Garantia/Produto"
+          - columnheader "Etapa"
+          - columnheader "Parceiros"
+          - columnheader "Propostas"
+          - columnheader "Pendências"
+          - columnheader "Origem"
+          - columnheader "Responsável"
+          - columnheader "Atualização"
+          - columnheader
+      - rowgroup
+    - generic: warning
+    - text: Nenhum registro encontrado.
+- dialog:
+  - heading "Nova Operação de Crédito" [level=2]
+  - button "Fechar":
+  - paragraph: Selecione o cliente para esta operação
+  - list "Etapas da nova operação":
+    - generic: "1"
+    - text: Tipo
+    - generic: "2"
+    - text: Cliente
+  - heading "Selecione o cliente" [level=3]
+  - textbox "Buscar cliente por nome, CPF ou CNPJ":
+    - /placeholder: Buscar cliente por nome, CPF ou CNPJ...
+    - text: Claudio
+  - button "Claudio Manhães joorge.will@gmail.com" [active] [pressed]:
+    - strong: Claudio Manhães
+    - generic: joorge.will@gmail.com
+  - button "Criar novo cliente":
+    - generic: Criar novo cliente
+  - button "Voltar":
+    - generic: Voltar
+  - button "Criar Operação":
+    - generic: Criar Operação

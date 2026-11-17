@@ -1,0 +1,79 @@
+- main:
+  - paragraph: Revisão controlada, sem persistência ou conexão a contas reais.
+  - button "Prévia formal"
+  - button "Depósitos"
+  - button "Total"
+  - button "Abrir operação QA-CONTROLADO":
+    - heading "Cliente fictício de teste" [level=2]
+    - text: QA-CONTROLADO
+    - generic: Etapa indisponível
+    - term: Tipo
+    - definition: Empréstimo
+    - term: Valor
+    - definition: R$ 125.000,00
+    - term: Garantia
+    - definition: Imóvel fictício
+    - generic: "Parceiros: —"
+    - generic: "Propostas: —"
+    - generic: "Pendências: —"
+    - generic: —
+    - generic: 16/11/2026
+  - status: Operação fictícia aberta
+  - button "Voltar para Extrato Global":
+    - generic: Voltar para Extrato Global
+  - heading "Carteira Total Consolidada" [level=2]
+  - paragraph: Todas as carteiras do sistema em uma visão unificada
+  - textbox "Buscar por cliente, ID, carteira, tipo..."
+  - generic: Tipo
+  - combobox "Tipo de carteira": Tipo
+  - generic: Status
+  - combobox "Status da carteira": Status
+  - generic: Maior valor
+  - combobox "Ordenar carteiras": Maior valor
+  - button "Mais Filtros":
+    - generic: Mais Filtros
+  - group "Visualização das carteiras":
+    - button "Cards"
+    - button "Lista" [active] [pressed]
+  - paragraph: 2 carteiras encontradas
+  - table:
+    - rowgroup:
+      - row "Carteira Cliente ID Cliente Moedas Saldo total Ações":
+        - columnheader "Carteira"
+        - columnheader "Cliente"
+        - columnheader "ID Cliente"
+        - columnheader "Moedas"
+        - columnheader "Saldo total"
+        - columnheader "Ações"
+    - rowgroup:
+      - row "Carteira de Depósito Cliente fictício com nome longo para conferir o comportamento no card SA-FICTICIO BRL · USD R$ 0,00 · US$ 1,000.00 Opções do registro":
+        - cell "Carteira de Depósito"
+        - cell "Cliente fictício com nome longo para conferir o comportamento no card"
+        - cell "SA-FICTICIO"
+        - cell "BRL · USD"
+        - cell "R$ 0,00 · US$ 1,000.00"
+        - cell "Opções do registro":
+          - button "Opções do registro":
+            - img: more_vert
+      - row "Carteira de Patrimônio Sem valor confirmado EUR — Opções do registro":
+        - cell "Carteira de Patrimônio"
+        - cell "Sem valor confirmado"
+        - cell
+        - cell "EUR"
+        - cell "—"
+        - cell "Opções do registro":
+          - button "Opções do registro":
+            - img: more_vert
+  - generic: "Itens por página:"
+  - generic: "10"
+  - combobox "Itens por página": "10"
+  - generic: keyboard_arrow_down
+  - generic: Mostrando 1 a 2 de 2 registros
+  - generic: Página 1 de 1
+  - button "Anterior" [disabled]:
+    - generic: Anterior
+  - navigation "Pagination":
+    - button "1":
+      - generic: "1"
+  - button "Próximo" [disabled]:
+    - generic: Próximo

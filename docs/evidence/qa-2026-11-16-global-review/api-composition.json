@@ -1,0 +1,72 @@
+{
+  "clients": 14,
+  "directoryRows": 10,
+  "summary": {
+    "source": "marco3",
+    "yieldAvailable": false,
+    "deposit": {
+      "currencies": [
+        {
+          "currency": "BRL",
+          "balance": 75000
+        },
+        {
+          "currency": "USD",
+          "balance": 0
+        },
+        {
+          "currency": "EUR",
+          "balance": 0
+        }
+      ]
+    },
+    "strategy": {
+      "currencies": [
+        {
+          "currency": "BRL",
+          "balance": 261500.3
+        },
+        {
+          "currency": "USD",
+          "balance": 725000
+        },
+        {
+          "currency": "EUR",
+          "balance": 230000
+        }
+      ]
+    },
+    "assets": {
+      "currencies": [
+        {
+          "currency": "BRL",
+          "balance": 1609936.25
+        },
+        {
+          "currency": "USD",
+          "balance": 389626.5
+        },
+        {
+          "currency": "EUR",
+          "balance": 389752.25
+        }
+      ]
+    },
+    "total": {
+      "currencies": [
+        {
+          "currency": "BRL",
+          "balance": 1946436.55
+        },
+        {
+          "currency": "USD",
+          "balance": 1114626.5
+        },
+        {
+          "currency": "EUR",
+          "balance": 619752.25
+        }
+      ]
+    }
+  }
+}

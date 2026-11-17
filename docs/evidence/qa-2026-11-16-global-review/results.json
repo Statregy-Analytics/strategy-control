@@ -1,0 +1,52 @@
+{
+  "date": "2026-11-16",
+  "api": {
+    "customers": 14,
+    "ledgerWallets": 2,
+    "directoryGroups": 10,
+    "independentSnapshot": "api-portfolios.json",
+    "composition": "api-composition.json",
+    "financialWrites": 0
+  },
+  "tests": {
+    "local": 395,
+    "versioned": 387,
+    "preexistingUntracked": 8,
+    "newTests": 8
+  },
+  "browser": {
+    "real": [
+      "global balances by currency",
+      "deposit wallets Eric and Claudio",
+      "customer search",
+      "credit type and customer selection",
+      "credit creation blocked without fabricated value",
+      "credit view switches and counts",
+      "partner tab without operation filters",
+      "publication status and empty search",
+      "Abrir Carteira then Ver Movimentações on same customer: existing real statement, separate mode and owner key"
+    ],
+    "controlled": [
+      "credit card keyboard opening",
+      "two currencies, zero and unknown balance",
+      "wallet list and USD filter",
+      "formal publication preview"
+    ],
+    "mobileWidth": 390,
+    "mobileOverflow": false
+  },
+  "progress": {
+    "total": 279,
+    "done": 146,
+    "validation": 80,
+    "adjustment": 53,
+    "implemented": 226,
+    "implementedPercent": 81
+  },
+  "limits": [
+    "Whole wallet header/list variants remain in revalidation; PTAX endpoint exists.",
+    "CRM/partners and editorial metadata are not supplied by the informational DTOs.",
+    "No loan creation, content publication, notification, document upload or financial execution in this batch."
+  ],
+  "published": false
+}

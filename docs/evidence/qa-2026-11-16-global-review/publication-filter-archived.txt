@@ -1,0 +1,101 @@
+- complementary:
+  - img "Strategy Analytics"
+  - list "Menu administrativo":
+    - link "Clientes":
+      - /url: /dataManagement
+      - generic: Clientes
+    - link "Contratos":
+      - /url: /contracts
+      - generic: Contratos
+    - link "Lógicas":
+      - /url: /logics
+      - generic: Lógicas
+    - link "Transações":
+      - /url: /transaction
+      - generic: Transações
+    - link "Crédito":
+      - /url: /credit
+      - generic: Crédito
+    - link "Comunicados":
+      - /url: /communications
+      - generic: Comunicados
+  - button "Expandir":
+    - generic: Configurações
+  - generic: person
+  - generic: Local Admin
+  - generic: admin@example.com
+  - link "Trocar Sistema":
+    - /url: /
+    - generic: Trocar Sistema
+  - button "Sair":
+    - generic: Sair
+  - button "Recolher menu"
+- main:
+  - heading "Gestão de Publicações" [level=1]
+  - button "Criar Novo Conteúdo":
+    - generic: Criar Novo Conteúdo
+  - main:
+    - tablist:
+      - tab "Conteúdos" [selected]:
+        - generic: Conteúdos
+      - tab "Redatores":
+        - generic: Redatores
+    - generic: Publicados
+    - strong: "1"
+    - generic: Rascunhos
+    - strong: "0"
+    - generic: Em Revisão
+    - strong: "0"
+    - generic: Arquivados
+    - strong: "1"
+    - generic: Total
+    - strong: "2"
+    - generic: Redatores
+    - strong: Indisponível
+    - textbox "Buscar por título, código, redator ou categoria..."
+    - generic: Tipo
+    - combobox "Tipo" [disabled]
+    - generic: Arquivado
+    - combobox "Status" [active]: Arquivado
+    - button "Limpar":
+      - generic: cancel
+    - generic: Redator
+    - combobox "Redator" [disabled]
+    - table:
+      - rowgroup:
+        - row "Título Tipo Código Versão Redator Status Criado Publicado Última Edição Anexos":
+          - columnheader "Título"
+          - columnheader "Tipo"
+          - columnheader "Código"
+          - columnheader "Versão"
+          - columnheader "Redator"
+          - columnheader "Status"
+          - columnheader "Criado"
+          - columnheader "Publicado"
+          - columnheader "Última Edição"
+          - columnheader "Anexos"
+          - columnheader
+      - rowgroup:
+        - row "QA132 - rascunho ficticio auditoria editado 12/11 — COM-BB0889A7 — — Arquivado 12/11/2026 — 12/11/2026 — Opções do registro":
+          - cell "QA132 - rascunho ficticio auditoria editado 12/11"
+          - cell "—"
+          - cell "COM-BB0889A7"
+          - cell "—"
+          - cell "—"
+          - cell "Arquivado":
+            - generic: Arquivado
+          - cell "12/11/2026"
+          - cell "—"
+          - cell "12/11/2026"
+          - cell "—"
+          - cell "Opções do registro":
+            - button "Opções do registro":
+- listbox:
+  - option "Publicado":
+    - generic: Publicado
+  - option "Rascunho":
+    - generic: Rascunho
+  - option "Em Revisão":
+    - generic: Em Revisão
+  - option "Arquivado":
+    - generic: Arquivado

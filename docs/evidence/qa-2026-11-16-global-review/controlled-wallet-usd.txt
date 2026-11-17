@@ -1,0 +1,75 @@
+- main:
+  - paragraph: Revisão controlada, sem persistência ou conexão a contas reais.
+  - button "Prévia formal"
+  - button "Depósitos"
+  - button "Total"
+  - button "Abrir operação QA-CONTROLADO":
+    - heading "Cliente fictício de teste" [level=2]
+    - text: QA-CONTROLADO
+    - generic: Etapa indisponível
+    - term: Tipo
+    - definition: Empréstimo
+    - term: Valor
+    - definition: R$ 125.000,00
+    - term: Garantia
+    - definition: Imóvel fictício
+    - generic: "Parceiros: —"
+    - generic: "Propostas: —"
+    - generic: "Pendências: —"
+    - generic: —
+    - generic: 16/11/2026
+  - status: Operação fictícia aberta
+  - button "Voltar para Extrato Global":
+    - generic: Voltar para Extrato Global
+  - heading "Carteira Total Consolidada" [level=2]
+  - paragraph: Todas as carteiras do sistema em uma visão unificada
+  - textbox "Buscar por cliente, ID, carteira, tipo..."
+  - generic: Tipo
+  - combobox "Tipo de carteira": Tipo
+  - generic: Status
+  - combobox "Status da carteira": Status
+  - generic: USD
+  - combobox "Filtrar moeda" [active]: USD
+  - button "Clear": cancel
+  - generic: Maior valor
+  - combobox "Ordenar carteiras": Maior valor
+  - button "Mais Filtros" [expanded]:
+    - generic: Mais Filtros
+  - group "Visualização das carteiras":
+    - button "Cards" [pressed]
+    - button "Lista"
+  - paragraph: 1 carteiras encontradas
+  - article:
+    - heading "Carteira de Depósito" [level=3]
+    - generic: —
+    - generic: Depósito
+    - paragraph: Cliente fictício com nome longo para conferir o comportamento no card
+    - paragraph: "ID: SA-FICTICIO"
+    - term: Saldo total
+    - definition: US$ 1,000.00
+    - generic: Ativa
+    - generic: —
+    - button "Ver Movimentações":
+      - generic: Ver Movimentações
+    - button "Abrir Carteira":
+      - generic: Abrir Carteira
+  - generic: "Itens por página:"
+  - generic: "10"
+  - combobox "Itens por página": "10"
+  - generic: keyboard_arrow_down
+  - generic: Mostrando 1 a 1 de 1 registros
+  - generic: Página 1 de 1
+  - button "Anterior" [disabled]:
+    - generic: Anterior
+  - navigation "Pagination":
+    - button "1":
+      - generic: "1"
+  - button "Próximo" [disabled]:
+    - generic: Próximo
+- listbox:
+  - option "BRL":
+    - generic: BRL
+  - option "EUR":
+    - generic: EUR
+  - option "USD":
+    - generic: USD

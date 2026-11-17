@@ -1,0 +1,180 @@
+- complementary:
+  - img "Strategy Analytics"
+  - list "Menu administrativo":
+    - link "Clientes":
+      - /url: /dataManagement
+      - generic: Clientes
+    - link "Contratos":
+      - /url: /contracts
+      - generic: Contratos
+    - link "Lógicas":
+      - /url: /logics
+      - generic: Lógicas
+    - link "Transações":
+      - /url: /transaction
+      - generic: Transações
+    - link "Crédito":
+      - /url: /credit
+      - generic: Crédito
+    - link "Comunicados":
+      - /url: /communications
+      - generic: Comunicados
+  - button "Expandir":
+    - generic: Configurações
+  - generic: person
+  - generic: Local Admin
+  - generic: admin@example.com
+  - link "Trocar Sistema":
+    - /url: /
+    - generic: Trocar Sistema
+  - button "Sair":
+    - generic: Sair
+  - button "Recolher menu"
+- main:
+  - generic: Transações e carteiras
+  - region "Visão consolidada das carteiras":
+    - button "Carteira Total R$ 1.946.436,55 US$ 1.114.626,50 € 619.752,25":
+      - generic: Carteira Total
+      - strong: R$ 1.946.436,55
+      - strong: US$ 1.114.626,50
+      - strong: € 619.752,25
+    - button "Carteira de Depósito R$ 75.000,00 US$ 0,00 € 0,00" [pressed]:
+      - generic: Carteira de Depósito
+      - strong: R$ 75.000,00
+      - strong: US$ 0,00
+      - strong: € 0,00
+    - button "Carteira Strategy R$ 261.500,30 US$ 725.000,00 € 230.000,00":
+      - generic: Carteira Strategy
+      - strong: R$ 261.500,30
+      - strong: US$ 725.000,00
+      - strong: € 230.000,00
+    - button "Carteira de Patrimônio R$ 1.609.936,25 US$ 389.626,50 € 389.752,25":
+      - generic: Carteira de Patrimônio
+      - strong: R$ 1.609.936,25
+      - strong: US$ 389.626,50
+      - strong: € 389.752,25
+    - paragraph: Total = Depósito + Strategy + Patrimônio, por moeda. Valores de moedas diferentes não são somados.
+  - tablist:
+    - tab "Transações":
+      - generic: Transações
+    - tab "Carteiras" [selected]:
+      - generic: Carteiras
+  - separator
+  - button "Voltar para Extrato Global":
+    - generic: Voltar para Extrato Global
+  - heading "Carteiras de Depósito" [level=2]
+  - paragraph: Recursos disponíveis para movimentação imediata
+  - textbox "Buscar por cliente, ID, carteira, moeda...": Éric
+  - button "Limpar":
+    - generic: cancel
+  - generic: Status
+  - combobox "Status da carteira": Status
+  - generic: Moeda
+  - combobox "Filtrar moeda": Moeda
+  - generic: Maior valor
+  - combobox "Ordenar carteiras": Maior valor
+  - button "Mais Filtros" [disabled]:
+    - generic: Mais Filtros
+  - group "Visualização das carteiras":
+    - button "Cards" [pressed]
+    - button "Lista"
+  - paragraph: 1 carteiras encontradas
+  - article:
+    - heading "Carteira de Depósito" [level=3]
+    - generic "44fd4a72-9880-445f-957d-ec99b48d273f"
+    - generic: Ativa
+    - paragraph: Éric Vicente
+    - paragraph: "ID: SA-B3A2E852"
+    - term: Saldo atual
+    - definition: R$ 50.000,00
+    - term: Última movimentação
+    - definition: 09/10/2026, 10:47:40
+    - button "Ver Movimentações":
+      - generic: Ver Movimentações
+    - button "Abrir Carteira":
+      - generic: Abrir Carteira
+  - generic: "Itens por página:"
+  - generic: "10"
+  - combobox "Itens por página": "10"
+  - generic: keyboard_arrow_down
+  - generic: Mostrando 1 a 1 de 1 registros
+  - generic: Página 1 de 1
+  - button "Anterior" [disabled]:
+    - generic: Anterior
+  - navigation "Paginação":
+    - button "1":
+      - generic: "1"
+  - button "Próximo" [disabled]:
+    - generic: Próximo
+  - button "Consultar carteiras de um cliente":
+    - generic: Consultar carteiras de um cliente
+- dialog:
+  - generic: Carteiras do cliente
+  - button "Fechar painel":
+  - generic: Cliente
+  - generic: Éric Vicente
+  - combobox "Cliente"
+  - button "Limpar":
+    - generic: cancel
+  - generic: arrow_drop_down
+  - generic: Visão consolidada (Carteira)
+  - region "Visão consolidada das carteiras":
+    - button "Carteira de Depósito R$ 50.000,00 US$ 0,00":
+      - generic: Carteira de Depósito
+      - strong: R$ 50.000,00
+      - strong: US$ 0,00
+    - button "Carteira Strategy R$ 0,10 US$ 250.000,00":
+      - generic: Carteira Strategy
+      - strong: R$ 0,10
+      - strong: US$ 250.000,00
+    - button "Patrimônio R$ 370.000,00 US$ 0,00":
+      - generic: Patrimônio
+      - strong: R$ 370.000,00
+      - strong: US$ 0,00
+    - button "Carteira Total R$ 420.000,10 US$ 250.000,00":
+      - generic: Carteira Total
+      - strong: R$ 420.000,10
+      - strong: US$ 250.000,00
+    - paragraph: Total = Depósito + Strategy + Patrimônio, por moeda. Valores de moedas diferentes não são somados.
+    - paragraph: Clique em uma carteira para ver só a composição dela
+    - heading "Composição da Carteira Total · Depósito + Strategy + Patrimônio" [level=3]
+    - table:
+      - rowgroup:
+        - row "Carteira / situação Valor Rendimento / origem Última atualização":
+          - columnheader "Carteira / situação"
+          - columnheader "Valor"
+          - columnheader "Rendimento / origem"
+          - columnheader "Última atualização"
+      - rowgroup:
+        - row "Depósito · BRL · Disponível R$ 47.500,00 Sem rendimento 16/11/2026, 15:11:06":
+          - cell "Depósito · BRL · Disponível"
+          - cell "R$ 47.500,00"
+          - cell "Sem rendimento"
+          - cell "16/11/2026, 15:11:06"
+        - row "Depósito · BRL · Reservado R$ 2.500,00 Sem rendimento 16/11/2026, 15:11:06":
+          - cell "Depósito · BRL · Reservado"
+          - cell "R$ 2.500,00"
+          - cell "Sem rendimento"
+          - cell "16/11/2026, 15:11:06"
+        - row "Strategy · BRL · Em contratos R$ 0,10 Rendimento ainda não disponível 16/11/2026, 15:11:06":
+          - cell "Strategy · BRL · Em contratos"
+          - cell "R$ 0,10"
+          - cell "Rendimento ainda não disponível"
+          - cell "16/11/2026, 15:11:06"
+        - row "Strategy · USD · Em contratos US$ 250.000,00 Rendimento ainda não disponível 16/11/2026, 15:11:06":
+          - cell "Strategy · USD · Em contratos"
+          - cell "US$ 250.000,00"
+          - cell "Rendimento ainda não disponível"
+          - cell "16/11/2026, 15:11:06"
+        - row "Patrimônio · BRL · 2 bens declarados R$ 370.000,00 Patrimônio declarado 16/11/2026, 15:11:06":
+          - cell "Patrimônio · BRL · 2 bens declarados"
+          - cell "R$ 370.000,00"
+          - cell "Patrimônio declarado"
+          - cell "16/11/2026, 15:11:06"
+  - generic: Extrato
+  - generic: De
+  - textbox "Extrato de"
+  - generic: Até
+  - textbox "Extrato até"
+  - button "Exportar extrato CSV":
+    - generic: Exportar extrato CSV

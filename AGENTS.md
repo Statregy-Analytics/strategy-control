@@ -47,3 +47,9 @@ Antes de concluir uma alteração:
 4. Faça uma revisão visual do fluxo afetado.
 5. Preserve alterações não relacionadas já existentes no worktree.
 6. Crie commits pequenos e descritivos somente quando solicitado.
+
+## Panorama obrigatório de cada entrega
+
+- Atualize os frames comprovados em `docs/FRONTEND-PROGRESS-OVERRIDES.json` e execute `node scripts/frontend-progress.mjs`.
+- Na resposta final, informe o total de telas/estados, quantos estão prontos no frontend, quantos aguardam revalidação e quantos precisam implementação/ajustes. Informe o percentual de implementação existente sem chamá-lo de homologação concluída.
+- Mantenha o checklist único como índice atual; dependências HTTP e dados controlados devem continuar explícitos.
