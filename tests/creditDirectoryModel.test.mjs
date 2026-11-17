@@ -1,5 +1,6 @@
 import test from 'node:test'
 import assert from 'node:assert/strict'
+import { workspaceStatus } from '../src/services/adminWorkspaceModel.js'
 import {
   creditStageGroups,
   creditStages,
@@ -53,6 +54,7 @@ test('paid off loans are finalized, refused/cancelled are separate, and status i
   for (const s of ['Cancelled', 'Canceled', 'Rejected'])
     assert.equal(creditOperationGroup(s), 'cancelled')
   assert.equal(creditOperationGroup('Active'), 'open')
+  assert.equal(workspaceStatus('PaidOff'), 'Quitado')
   assert.equal(creditStageGroups([{ status: 'Active' }]), null)
 })
 

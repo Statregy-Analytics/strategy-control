@@ -85,6 +85,7 @@ export function workspaceStatus(value) {
       Active: 'Ativo',
       Pending: 'Pendente',
       Settled: 'Quitado',
+      PaidOff: 'Quitado',
       Cancelled: 'Cancelado',
       Closed: 'Encerrado',
       Leverage: 'Alavancagem',
