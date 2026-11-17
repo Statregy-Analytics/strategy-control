@@ -37,7 +37,9 @@ Fonte por frame: [progresso atual](FRONTEND-PROGRESS.json). A base anterior perm
 - [x] Dados controlados: card de Crédito preenchido com teclado; carteira com duas moedas, zero e valor desconhecido; lista, busca vazia, filtro USD; CO08 formal e fechamento. Harness removido antes do build.
 - [x] Celular de **390px**: carteiras reais, carteira controlada e prévia formal sem overflow horizontal. Ícones conferidos em dimensões nativas, incluindo chevrons de 16px.
 - [x] Leitura independente da API arquivada e comparada com a projeção exibida. Não houve novos documentos, notificações, publicação de conteúdo ou débito/crédito durante esta rodada.
-- [ ] Deploy e reteste publicado — registrar o release após a publicação.
+- [x] Publicado no Admin: aplicação `5ae07eb`, release `90af6dd`, [deploy 43990656983](https://github.com/Statregy-Analytics/strategy-control/actions/runs/43990656983) concluído com sucesso, incluindo upload/ativação. Reteste publicado: totais por moeda, 10 agrupamentos, pesquisa do Éric e Lista; extrato do Cláudio `REQ-2026-E0320E63` de R$ 25.000,00, carteira Free correta. Movimentações desabilitadas nos agrupamentos sem ledger; nenhum extrato de Depósito reutilizado para Strategy/Patrimônio.
+- [x] Crédito publicado: Cards/Kanban, tipo → seleção real do Cláudio → Voltar/Cancelar, sem criar operação; Parceiros com toolbar própria e limite de API. Comunicados publicado: filtro Arquivado, busca vazia/retorno e ícones carregados. Os 49 SVGs foram conferidos no source/build; runtime de carteiras, Crédito e Comunicados sem imagens quebradas. Screenshots/snapshots publicados na pasta de evidências.
+- [x] Diff check dos arquivos deste lote aprovado. Swagger preexistente com whitespace preservado fora dos commits. Não houve teste integrado de criação de Crédito, publicação editorial, conversão integral do cabeçalho ou movimentos virtuais; esses limites permanecem abertos abaixo.
 
 ### Limites reais e trabalho que continua
 

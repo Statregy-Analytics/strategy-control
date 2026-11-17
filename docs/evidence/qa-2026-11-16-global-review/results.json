@@ -33,7 +33,17 @@
       "formal publication preview"
     ],
     "mobileWidth": 390,
-    "mobileOverflow": false
+    "mobileOverflow": false,
+    "published": [
+      "global totals match independent API snapshot by currency",
+      "10 wallet groups; only two ledger-backed movement actions enabled",
+      "Claudio statement REQ-2026-E0320E63 BRL25000; selected Free wallet",
+      "Eric search yields 3 groups; List switch",
+      "Credit Cards/Kanban, CR04 type -> CR05 Claudio selection -> Back/Cancel without write",
+      "Partners proper toolbar and API-unavailable state",
+      "Communications archived filter, empty search and return",
+      "native icons loaded on wallet directory, Credit customer selection and Communications"
+    ]
   },
   "progress": {
     "total": 279,
@@ -46,7 +56,15 @@
   "limits": [
     "Whole wallet header/list variants remain in revalidation; PTAX endpoint exists.",
     "CRM/partners and editorial metadata are not supplied by the informational DTOs.",
-    "No loan creation, content publication, notification, document upload or financial execution in this batch."
+    "No loan creation, content publication, notification, document upload or financial execution in this batch.",
+    "Virtual wallet movements remain disabled without native ledger IDs; statement and CSV filters preserve wallet type. Whole-frame and editorial/CRM revalidation remain open."
   ],
-  "published": false
+  "published": true,
+  "deployment": {
+    "commit": "90af6dd1a17f3c658ba35cb4682b6f9329cc74fc",
+    "applicationCommit": "5ae07eb",
+    "run": 43990656983,
+    "conclusion": "success",
+    "url": "https://admin.strategyanalytics.com.br"
+  }
 }

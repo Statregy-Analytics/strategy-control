@@ -1,0 +1,300 @@
+- complementary:
+  - img "Strategy Analytics"
+  - list "Menu administrativo":
+    - link "Clientes":
+      - /url: /dataManagement
+      - generic: Clientes
+    - link "Contratos":
+      - /url: /contracts
+      - generic: Contratos
+    - link "Lógicas":
+      - /url: /logics
+      - generic: Lógicas
+    - link "Transações":
+      - /url: /transaction
+      - generic: Transações
+    - link "Crédito":
+      - /url: /credit
+      - generic: Crédito
+    - link "Comunicados":
+      - /url: /communications
+      - generic: Comunicados
+  - button "Expandir":
+    - generic: Configurações
+  - generic: person
+  - generic: Local Admin
+  - generic: admin@example.com
+  - link "Trocar Sistema":
+    - /url: /
+    - generic: Trocar Sistema
+  - button "Sair":
+    - generic: Sair
+  - button "Recolher menu"
+- main:
+  - generic: Transações e carteiras
+  - region "Visão consolidada das carteiras":
+    - button "Carteira Total R$ 1.946.436,55 US$ 1.114.626,50 € 619.752,25" [pressed]:
+      - generic: Carteira Total
+      - strong: R$ 1.946.436,55
+      - strong: US$ 1.114.626,50
+      - strong: € 619.752,25
+    - button "Carteira de Depósito R$ 75.000,00 US$ 0,00 € 0,00":
+      - generic: Carteira de Depósito
+      - strong: R$ 75.000,00
+      - strong: US$ 0,00
+      - strong: € 0,00
+    - button "Carteira Strategy R$ 261.500,30 US$ 725.000,00 € 230.000,00":
+      - generic: Carteira Strategy
+      - strong: R$ 261.500,30
+      - strong: US$ 725.000,00
+      - strong: € 230.000,00
+    - button "Carteira de Patrimônio R$ 1.609.936,25 US$ 389.626,50 € 389.752,25":
+      - generic: Carteira de Patrimônio
+      - strong: R$ 1.609.936,25
+      - strong: US$ 389.626,50
+      - strong: € 389.752,25
+    - paragraph: Total = Depósito + Strategy + Patrimônio, por moeda. Valores de moedas diferentes não são somados.
+  - tablist:
+    - tab "Transações":
+      - generic: Transações
+    - tab "Carteiras" [selected]:
+      - generic: Carteiras
+  - separator
+  - button "Voltar para Extrato Global":
+    - generic: Voltar para Extrato Global
+  - heading "Carteira Total Consolidada" [level=2]
+  - paragraph: Todas as carteiras do sistema em uma visão unificada
+  - textbox "Buscar por cliente, ID, carteira, tipo..."
+  - generic: Tipo
+  - combobox "Tipo de carteira": Tipo
+  - generic: Status
+  - combobox "Status da carteira": Status
+  - generic: Maior valor
+  - combobox "Ordenar carteiras": Maior valor
+  - button "Mais Filtros":
+    - generic: Mais Filtros
+  - group "Visualização das carteiras":
+    - button "Cards" [pressed]
+    - button "Lista"
+  - paragraph: 10 carteiras encontradas
+  - article:
+    - heading "Carteira de Depósito" [level=3]
+    - generic "a4a754a8-ce55-4d03-9822-012df4c3d737"
+    - generic: Depósito
+    - paragraph: Claudio Manhães
+    - paragraph: "ID: SA-B47E6862"
+    - term: Saldo total
+    - definition: R$ 25.000,00
+    - generic: Ativa
+    - generic: 09/10/2026, 10:47:44
+    - button "Ver Movimentações":
+      - generic: Ver Movimentações
+    - button "Abrir Carteira":
+      - generic: Abrir Carteira
+  - article:
+    - heading "Carteira Strategy" [level=3]
+    - generic: —
+    - generic: Strategy
+    - paragraph: Claudio Manhães
+    - paragraph: "ID: SA-B47E6862"
+    - term: Saldo total
+    - definition: R$ 261.500,20
+    - paragraph: 2 contratos vinculados
+    - generic: —
+    - generic: —
+    - button "Ver Movimentações" [disabled]:
+      - generic: Ver Movimentações
+    - button "Abrir Carteira":
+      - generic: Abrir Carteira
+  - article:
+    - heading "Carteira de Patrimônio" [level=3]
+    - generic: —
+    - generic: Patrimônio
+    - paragraph: Claudio Manhães
+    - paragraph: "ID: SA-B47E6862"
+    - term: Saldo total
+    - definition: R$ 310,00
+    - term: Valorização
+    - definition: —
+    - generic: —
+    - generic: —
+    - button "Ver Movimentações" [disabled]:
+      - generic: Ver Movimentações
+    - button "Abrir Carteira":
+      - generic: Abrir Carteira
+  - article:
+    - heading "Carteira Strategy" [level=3]
+    - generic: —
+    - generic: Strategy
+    - paragraph: Homologação Pessoa Física
+    - paragraph: "ID: SA-D85E86AC"
+    - term: Saldo total
+    - definition: US$ 400.000,00
+    - paragraph: 2 contratos vinculados
+    - generic: —
+    - generic: —
+    - button "Ver Movimentações" [disabled]:
+      - generic: Ver Movimentações
+    - button "Abrir Carteira":
+      - generic: Abrir Carteira
+  - article:
+    - heading "Carteira Strategy" [level=3]
+    - generic: —
+    - generic: Strategy
+    - paragraph: HPJ Homologação
+    - paragraph: "ID: SA-56781CF7"
+    - term: Saldo total
+    - definition: € 230.000,00 · US$ 75.000,00
+    - paragraph: 2 contratos vinculados
+    - generic: —
+    - generic: —
+    - button "Ver Movimentações" [disabled]:
+      - generic: Ver Movimentações
+    - button "Abrir Carteira":
+      - generic: Abrir Carteira
+  - article:
+    - heading "Carteira de Patrimônio" [level=3]
+    - generic: —
+    - generic: Patrimônio
+    - paragraph: Client Preferred Name
+    - paragraph: "ID: SA-68C6EED2"
+    - term: Saldo total
+    - definition: R$ 850.000,00
+    - term: Valorização
+    - definition: —
+    - generic: —
+    - generic: —
+    - button "Ver Movimentações" [disabled]:
+      - generic: Ver Movimentações
+    - button "Abrir Carteira":
+      - generic: Abrir Carteira
+  - article:
+    - heading "Carteira de Depósito" [level=3]
+    - generic "44fd4a72-9880-445f-957d-ec99b48d273f"
+    - generic: Depósito
+    - paragraph: Éric Vicente
+    - paragraph: "ID: SA-B3A2E852"
+    - term: Saldo total
+    - definition: R$ 50.000,00
+    - generic: Ativa
+    - generic: 09/10/2026, 10:47:40
+    - button "Ver Movimentações":
+      - generic: Ver Movimentações
+    - button "Abrir Carteira":
+      - generic: Abrir Carteira
+  - article:
+    - heading "Carteira Strategy" [level=3]
+    - generic: —
+    - generic: Strategy
+    - paragraph: Éric Vicente
+    - paragraph: "ID: SA-B3A2E852"
+    - term: Saldo total
+    - definition: R$ 0,10 · US$ 250.000,00
+    - paragraph: 3 contratos vinculados
+    - generic: —
+    - generic: —
+    - button "Ver Movimentações" [disabled]:
+      - generic: Ver Movimentações
+    - button "Abrir Carteira":
+      - generic: Abrir Carteira
+  - article:
+    - heading "Carteira de Patrimônio" [level=3]
+    - generic: —
+    - generic: Patrimônio
+    - paragraph: Éric Vicente
+    - paragraph: "ID: SA-B3A2E852"
+    - term: Saldo total
+    - definition: R$ 370.000,00
+    - term: Valorização
+    - definition: —
+    - generic: —
+    - generic: —
+    - button "Ver Movimentações" [disabled]:
+      - generic: Ver Movimentações
+    - button "Abrir Carteira":
+      - generic: Abrir Carteira
+  - article:
+    - heading "Carteira de Patrimônio" [level=3]
+    - generic: —
+    - generic: Patrimônio
+    - paragraph: Jorge Nunes
+    - paragraph: "ID: SA-91EEC4D7 · ******4725"
+    - term: Saldo total
+    - definition: R$ 389.626,25 · € 389.752,25 · US$ 389.626,50
+    - term: Valorização
+    - definition: —
+    - generic: —
+    - generic: —
+    - button "Ver Movimentações" [disabled]:
+      - generic: Ver Movimentações
+    - button "Abrir Carteira":
+      - generic: Abrir Carteira
+  - generic: "Itens por página:"
+  - generic: "10"
+  - combobox "Itens por página": "10"
+  - generic: keyboard_arrow_down
+  - generic: Mostrando 1 a 10 de 10 registros
+  - generic: Página 1 de 1
+  - button "Anterior" [disabled]:
+    - generic: Anterior
+  - navigation "Paginação":
+    - button "1":
+      - generic: "1"
+  - button "Próximo" [disabled]:
+    - generic: Próximo
+  - button "Consultar carteiras de um cliente":
+    - generic: Consultar carteiras de um cliente
+- dialog:
+  - generic: Extrato
+  - button "Fechar painel":
+  - region "Visão consolidada das carteiras":
+    - button "Carteira de Depósito R$ 25.000,00" [pressed]:
+      - generic: Carteira de Depósito
+      - strong: R$ 25.000,00
+    - button "Carteira Strategy R$ 261.500,20":
+      - generic: Carteira Strategy
+      - strong: R$ 261.500,20
+    - button "Patrimônio R$ 310,00":
+      - generic: Patrimônio
+      - strong: R$ 310,00
+    - button "Carteira Total R$ 286.810,20":
+      - generic: Carteira Total
+      - strong: R$ 286.810,20
+    - paragraph: Total = Depósito + Strategy + Patrimônio, por moeda. Valores de moedas diferentes não são somados.
+    - paragraph: Clique de novo no card para desmarcar
+    - heading "Carteira de Depósito · saldos por moeda" [level=3]
+    - table:
+      - rowgroup:
+        - row "Moeda Saldo Último depósito Último saque":
+          - columnheader "Moeda"
+          - columnheader "Saldo"
+          - columnheader "Último depósito"
+          - columnheader "Último saque"
+      - rowgroup:
+        - row "BRL R$ 25.000,00 — —":
+          - cell "BRL"
+          - cell "R$ 25.000,00"
+          - cell "—"
+          - cell "—"
+    - paragraph: Sem rendimento. Saques em até 1 dia útil. Transferência para Strategy imediata.
+  - generic: Extrato da conta
+  - button "Exportar":
+    - generic: Exportar
+  - table:
+    - rowgroup:
+      - row "Data e hora Tipo Carteira Descrição Valor Saldo":
+        - columnheader "Data e hora"
+        - columnheader "Tipo"
+        - columnheader "Carteira"
+        - columnheader "Descrição"
+        - columnheader "Valor"
+        - columnheader "Saldo"
+    - rowgroup:
+      - row "09/10/2026, 10:47:44 Depósito Livre REQ-2026-E0320E63 R$ 25.000,00 R$ 25.000,00":
+        - cell "09/10/2026, 10:47:44"
+        - cell "Depósito":
+          - generic: Depósito
+        - cell "Livre"
+        - cell "REQ-2026-E0320E63"
+        - cell "R$ 25.000,00"
+        - cell "R$ 25.000,00"
