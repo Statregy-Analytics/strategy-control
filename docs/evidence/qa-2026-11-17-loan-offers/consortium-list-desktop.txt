@@ -1,0 +1,134 @@
+- main:
+  - paragraph: Prévia controlada · componentes reais · dados fictícios · sem escrita na API
+  - navigation:
+    - button "Alavancagem"
+    - button "Garantia"
+    - button "Consórcio"
+    - button "Veículo"
+    - button "Pré-aprovado imóvel"
+    - button "Pré-aprovado automóvel"
+    - button "Ofertas finais"
+    - button "Ofertas consórcio" [active]
+    - button "Colateral"
+    - button "Trocar tema"
+    - button "Alternar vazio"
+    - button "Falhar leitura uma vez"
+    - button "Alternar falha de envio"
+  - button "Voltar"
+  - heading "Ofertas de Consórcio" [level=1]
+  - paragraph: Estas são as Ofertas Finais após a Análise de Crédito. Aguarde receber todas para avaliar qual a melhor opção. Você pode analisar cada oferta individualmente antes de selecionar uma.
+  - generic: Principais Ofertas de Consórcio
+  - generic: Você pode analisar individualmente ao clicar em “Ver Oferta”, e depois, selecionar a Oferta que mais te agrada e prosseguir.
+  - article:
+    - img "C6"
+    - strong: "Valor: R$ 400.000,00"
+    - generic: Parcela mais barata
+    - paragraph: Parcelas reduzidas 50% até ser contemplado!
+    - term: "Parcela:"
+    - definition: R$ 10.833,33
+    - term: "Prazo:"
+    - definition: 178 meses
+    - term: "Taxa Adm.:"
+    - definition: 0,0787% ao mês
+    - term: "Lance Embutido:"
+    - definition: 15% do Crédito
+    - button "Ver Detalhes"
+    - button "Solicitar Contrato":
+      - generic: Solicitar Contrato
+  - article:
+    - img "Bradesco"
+    - strong: "Valor: R$ 410.000,00"
+    - generic: Melhor Oferta
+    - paragraph: Parcelas reduzidas 50% até ser contemplado!
+    - term: "Parcela:"
+    - definition: R$ 13.833,33
+    - term: "Prazo:"
+    - definition: 178 meses
+    - term: "Taxa Adm.:"
+    - definition: 0,0787% ao mês
+    - term: "Lance Embutido:"
+    - definition: 15% do Crédito
+    - button "Ver Detalhes"
+    - button "Solicitar Contrato":
+      - generic: Solicitar Contrato
+  - article:
+    - img "C6"
+    - strong: "Valor: R$ 420.000,00"
+    - generic: Prazo maior
+    - paragraph: Parcelas reduzidas 50% até ser contemplado!
+    - term: "Parcela:"
+    - definition: R$ 10.833,33
+    - term: "Prazo:"
+    - definition: 178 meses
+    - term: "Taxa Adm.:"
+    - definition: 0,0787% ao mês
+    - term: "Lance Embutido:"
+    - definition: 15% do Crédito
+    - button "Ver Detalhes"
+    - button "Solicitar Contrato":
+      - generic: Solicitar Contrato
+  - heading "Outras Ofertas" [level=2]
+  - group "Visualização das ofertas":
+    - button "Lista" [pressed]
+    - button "Card"
+  - article:
+    - img "Bradesco"
+    - strong: "Valor: R$ 430.000,00"
+    - paragraph: Parcelas reduzidas 50% até ser contemplado!
+    - term: "Parcela:"
+    - definition: R$ 13.833,33
+    - term: "Prazo:"
+    - definition: 178 meses
+    - term: "Taxa Adm.:"
+    - definition: 0,0787% ao mês
+    - term: "Lance Embutido:"
+    - definition: 15% do Crédito
+    - button "Ver Detalhes"
+    - button "Solicitar Contrato":
+      - generic: Solicitar Contrato
+  - article:
+    - img "C6"
+    - strong: "Valor: R$ 440.000,00"
+    - paragraph: Parcelas reduzidas 50% até ser contemplado!
+    - term: "Parcela:"
+    - definition: R$ 10.833,33
+    - term: "Prazo:"
+    - definition: 178 meses
+    - term: "Taxa Adm.:"
+    - definition: 0,0787% ao mês
+    - term: "Lance Embutido:"
+    - definition: 15% do Crédito
+    - button "Ver Detalhes"
+    - button "Solicitar Contrato":
+      - generic: Solicitar Contrato
+  - article:
+    - img "Bradesco"
+    - strong: "Valor: R$ 450.000,00"
+    - paragraph: Parcelas reduzidas 50% até ser contemplado!
+    - term: "Parcela:"
+    - definition: R$ 13.833,33
+    - term: "Prazo:"
+    - definition: 178 meses
+    - term: "Taxa Adm.:"
+    - definition: 0,0787% ao mês
+    - term: "Lance Embutido:"
+    - definition: 15% do Crédito
+    - button "Ver Detalhes"
+    - button "Solicitar Contrato":
+      - generic: Solicitar Contrato
+  - article:
+    - img "C6"
+    - strong: "Valor: R$ 460.000,00"
+    - paragraph: Parcelas reduzidas 50% até ser contemplado!
+    - term: "Parcela:"
+    - definition: R$ 10.833,33
+    - term: "Prazo:"
+    - definition: 178 meses
+    - term: "Taxa Adm.:"
+    - definition: 0,0787% ao mês
+    - term: "Lance Embutido:"
+    - definition: 15% do Crédito
+    - button "Ver Detalhes"
+    - button "Solicitar Contrato":
+      - generic: Solicitar Contrato
+  - status: "· Destino: /system/leverage"

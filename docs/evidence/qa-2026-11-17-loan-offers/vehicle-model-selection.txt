@@ -1,0 +1,64 @@
+- main:
+  - paragraph: Prévia controlada · componentes reais · dados fictícios · sem escrita na API
+  - navigation:
+    - button "Alavancagem"
+    - button "Garantia"
+    - button "Consórcio"
+    - button "Veículo"
+    - button "Pré-aprovado imóvel"
+    - button "Pré-aprovado automóvel"
+    - button "Ofertas finais"
+    - button "Ofertas consórcio"
+    - button "Colateral"
+    - button "Trocar tema"
+    - button "Alternar vazio"
+    - button "Falhar leitura uma vez"
+    - button "Alternar falha de envio"
+  - button "Voltar"
+  - heading "Faça uma Simulação com seu Carro em Garantia" [level=1]
+  - paragraph: Preencha corretamente com seus dados para iniciarmos a simulação. Depois, analisaremos seu perfil e retornaremos com uma proposta especial para você.
+  - progressbar
+  - progressbar
+  - progressbar
+  - progressbar
+  - progressbar
+  - progressbar
+  - progressbar
+  - text: Passo 4/ 7
+  - heading "Informações do Veículo" [level=2]
+  - generic: Carro usado está no nome de quem?
+  - combobox "Carro usado está no nome de quem?":
+    - option "Selecione uma opção" [disabled]
+    - option "Meu Nome" [selected]
+    - option "Cônjuge"
+    - option "Pai/Mãe"
+    - option "Filho(a)"
+    - option "Outro"
+  - generic: Qual a placa?
+  - textbox "Qual a placa?":
+    - /placeholder: AAA-0000
+    - text: ABC1D23
+  - generic: Qual o modelo do veículo? Clique para Selecionar
+  - button "Modelo fictício 1"
+  - button "Modelo fictício 2" [pressed]
+  - button "Modelo fictício 3"
+  - button "Modelo fictício 4"
+  - button "Modelo fictício 5"
+  - button "Modelo fictício 6"
+  - button "Modelo fictício 7"
+  - button "Modelo fictício 8"
+  - button "Modelo fictício 9"
+  - strong: R$ 69.796,00
+  - paragraph: Preço Médio com Base em Consulta pela FIPE · Referência fictícia QA · Novembro 2026
+  - group "Você está pagando o carro?":
+    - generic: Você está pagando o carro?
+    - radio "Sim"
+    - text: Sim
+    - radio "Não" [checked] [active]
+    - text: Não
+  - generic: Quanto falta para pagar? (R$)
+  - generic: R$
+  - textbox "Quanto falta para pagar?" [disabled]: 0,00
+  - button "Prosseguir" [disabled]:
+    - generic: Prosseguir
+  - status: "· Destino: /system/leverage"

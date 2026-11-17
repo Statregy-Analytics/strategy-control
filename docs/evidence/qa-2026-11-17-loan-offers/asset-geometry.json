@@ -1,0 +1,108 @@
+{
+  "assets": [
+    {
+      "height": 40,
+      "loaded": true,
+      "src": "/figma/loan-request/back.svg",
+      "width": 40
+    },
+    {
+      "height": 32,
+      "loaded": true,
+      "src": "/icons/banks/c6.png",
+      "width": 59
+    },
+    {
+      "height": 16,
+      "loaded": true,
+      "src": "/figma/loan-request/offer.svg",
+      "width": 16
+    },
+    {
+      "height": 15.5,
+      "loaded": true,
+      "src": "/icons/banks/bradesco.png",
+      "width": 64
+    },
+    {
+      "height": 16,
+      "loaded": true,
+      "src": "/figma/loan-request/offer.svg",
+      "width": 16
+    },
+    {
+      "height": 32,
+      "loaded": true,
+      "src": "/icons/banks/c6.png",
+      "width": 59
+    },
+    {
+      "height": 16,
+      "loaded": true,
+      "src": "/figma/loan-request/offer.svg",
+      "width": 16
+    },
+    {
+      "height": 16,
+      "loaded": true,
+      "src": "/figma/loan-request/list.svg",
+      "width": 16
+    },
+    {
+      "height": 16,
+      "loaded": true,
+      "src": "/figma/loan-request/grid.svg",
+      "width": 16
+    },
+    {
+      "height": 15.5,
+      "loaded": true,
+      "src": "/icons/banks/bradesco.png",
+      "width": 64
+    },
+    {
+      "height": 16,
+      "loaded": true,
+      "src": "/figma/loan-request/offer.svg",
+      "width": 16
+    },
+    {
+      "height": 32,
+      "loaded": true,
+      "src": "/icons/banks/c6.png",
+      "width": 59
+    },
+    {
+      "height": 16,
+      "loaded": true,
+      "src": "/figma/loan-request/offer.svg",
+      "width": 16
+    },
+    {
+      "height": 15.5,
+      "loaded": true,
+      "src": "/icons/banks/bradesco.png",
+      "width": 64
+    },
+    {
+      "height": 16,
+      "loaded": true,
+      "src": "/figma/loan-request/offer.svg",
+      "width": 16
+    },
+    {
+      "height": 32,
+      "loaded": true,
+      "src": "/icons/banks/c6.png",
+      "width": 59
+    },
+    {
+      "height": 16,
+      "loaded": true,
+      "src": "/figma/loan-request/offer.svg",
+      "width": 16
+    }
+  ],
+  "client": 1905,
+  "scroll": 1905
+}

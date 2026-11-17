@@ -1,0 +1,14 @@
+{
+  "commit": "265dd49a290d715e1e2c87c6e6d7c42fa0f7f26a",
+  "pushed": true,
+  "published": false,
+  "run": "https://github.com/WillTbn/Strategy-analytics-v2/actions/runs/44140408435",
+  "conclusion": "failure",
+  "failedStep": "Audit dependencies",
+  "reason": "picomatch <=4.0.7: GHSA-fc5q-39xc-vjpf; nenhuma versão corrigida publicada na consulta de 17/11. npm audit --audit-level=high falhou antes do build/upload/ativação.",
+  "advisory": "https://github.com/advisories/GHSA-fc5q-39xc-vjpf",
+  "npmLatestChecked": "4.0.7",
+  "hmlBrowserValidation": "Não executada para este commit: nova versão não publicada. Estados preenchidos foram testados apenas no navegador local com dados controlados.",
+  "securityControl": "Auditoria preservada; não foi criado bypass nem reduzido o nível exigido.",
+  "previousSuccessfulRun": "https://github.com/WillTbn/Strategy-analytics-v2/actions/runs/44099385877"
+}

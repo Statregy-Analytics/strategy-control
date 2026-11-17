@@ -437,28 +437,119 @@
       ]
     },
     "1:55919": {
-      "front": "validation",
-      "reason": "Parcelamento e resumo compostos e navegáveis; estados indisponíveis testados em desktop/celular. Valores de parcelas, juros e condições reais ainda exigem contrato de simulação e revalidação do estado preenchido; confirmação não é enviada.",
-      "evidence": "docs/evidence/qa-2026-11-17-loans/results.json",
-      "blockers": [
-        "backend"
-      ]
+      "front": "done",
+      "reason": "Composição recuperada do Figma e estados testados no navegador local com dados controlados: carregamento, indisponibilidade, erro/retry, seleção e confirmação condicionada. Não equivale a envio integrado em homologação.",
+      "evidence": "docs/evidence/qa-2026-11-17-loan-offers/results.json"
     },
     "1:56020": {
-      "front": "validation",
-      "reason": "Parcelamento e resumo compostos e navegáveis; estados indisponíveis testados em desktop/celular. Valores de parcelas, juros e condições reais ainda exigem contrato de simulação e revalidação do estado preenchido; confirmação não é enviada.",
-      "evidence": "docs/evidence/qa-2026-11-17-loans/results.json",
-      "blockers": [
-        "backend"
-      ]
+      "front": "done",
+      "reason": "Composição recuperada do Figma e estados testados no navegador local com dados controlados: carregamento, indisponibilidade, erro/retry, seleção e confirmação condicionada. Não equivale a envio integrado em homologação.",
+      "evidence": "docs/evidence/qa-2026-11-17-loan-offers/results.json"
     },
     "1:54146": {
+      "front": "done",
+      "reason": "Composição recuperada do Figma e estados testados no navegador local com dados controlados: carregamento, indisponibilidade, erro/retry, seleção e confirmação condicionada. Não equivale a envio integrado em homologação.",
+      "evidence": "docs/evidence/qa-2026-11-17-loan-offers/results.json"
+    },
+    "1:50557": {
+      "front": "done",
+      "reason": "Composição recuperada do Figma e estados testados no navegador local com dados controlados: carregamento, indisponibilidade, erro/retry, seleção e confirmação condicionada. Não equivale a envio integrado em homologação.",
+      "evidence": "docs/evidence/qa-2026-11-17-loan-offers/results.json"
+    },
+    "1:72668": {
+      "front": "done",
+      "reason": "Composição recuperada do Figma e estados testados no navegador local com dados controlados: carregamento, indisponibilidade, erro/retry, seleção e confirmação condicionada. Não equivale a envio integrado em homologação.",
+      "evidence": "docs/evidence/qa-2026-11-17-loan-offers/results.json"
+    },
+    "1:72787": {
+      "front": "done",
+      "reason": "Composição recuperada do Figma e estados testados no navegador local com dados controlados: carregamento, indisponibilidade, erro/retry, seleção e confirmação condicionada. Não equivale a envio integrado em homologação.",
+      "evidence": "docs/evidence/qa-2026-11-17-loan-offers/results.json"
+    },
+    "1:54266": {
+      "front": "done",
+      "reason": "Composição recuperada do Figma e estados testados no navegador local com dados controlados: carregamento, indisponibilidade, erro/retry, seleção e confirmação condicionada. Não equivale a envio integrado em homologação.",
+      "evidence": "docs/evidence/qa-2026-11-17-loan-offers/results.json"
+    },
+    "1:55539": {
+      "front": "done",
+      "reason": "Composição recuperada do Figma e estados testados no navegador local com dados controlados: carregamento, indisponibilidade, erro/retry, seleção e confirmação condicionada. Não equivale a envio integrado em homologação.",
+      "evidence": "docs/evidence/qa-2026-11-17-loan-offers/results.json"
+    },
+    "1:52719": {
+      "front": "done",
+      "reason": "Composição recuperada do Figma e estados testados no navegador local com dados controlados: carregamento, indisponibilidade, erro/retry, seleção e confirmação condicionada. Não equivale a envio integrado em homologação.",
+      "evidence": "docs/evidence/qa-2026-11-17-loan-offers/results.json"
+    },
+    "1:52928": {
+      "front": "done",
+      "reason": "Composição recuperada do Figma e estados testados no navegador local com dados controlados: carregamento, indisponibilidade, erro/retry, seleção e confirmação condicionada. Não equivale a envio integrado em homologação.",
+      "evidence": "docs/evidence/qa-2026-11-17-loan-offers/results.json"
+    },
+    "1:53140": {
+      "front": "done",
+      "reason": "Composição recuperada do Figma e estados testados no navegador local com dados controlados: carregamento, indisponibilidade, erro/retry, seleção e confirmação condicionada. Não equivale a envio integrado em homologação.",
+      "evidence": "docs/evidence/qa-2026-11-17-loan-offers/results.json"
+    },
+    "1:53568": {
+      "front": "done",
+      "reason": "Composição recuperada do Figma e estados testados no navegador local com dados controlados: carregamento, indisponibilidade, erro/retry, seleção e confirmação condicionada. Não equivale a envio integrado em homologação.",
+      "evidence": "docs/evidence/qa-2026-11-17-loan-offers/results.json"
+    },
+    "1:54810": {
+      "front": "done",
+      "reason": "Composição recuperada do Figma e estados testados no navegador local com dados controlados: carregamento, indisponibilidade, erro/retry, seleção e confirmação condicionada. Não equivale a envio integrado em homologação.",
+      "evidence": "docs/evidence/qa-2026-11-17-loan-offers/results.json"
+    },
+    "1:55081": {
+      "front": "done",
+      "reason": "Composição recuperada do Figma e estados testados no navegador local com dados controlados: carregamento, indisponibilidade, erro/retry, seleção e confirmação condicionada. Não equivale a envio integrado em homologação.",
+      "evidence": "docs/evidence/qa-2026-11-17-loan-offers/results.json"
+    },
+    "1:53312": {
+      "front": "done",
+      "reason": "Composição recuperada do Figma e estados testados no navegador local com dados controlados: carregamento, indisponibilidade, erro/retry, seleção e confirmação condicionada. Não equivale a envio integrado em homologação.",
+      "evidence": "docs/evidence/qa-2026-11-17-loan-offers/results.json"
+    },
+    "1:55637": {
+      "front": "done",
+      "reason": "Composição recuperada do Figma e estados testados no navegador local com dados controlados: carregamento, indisponibilidade, erro/retry, seleção e confirmação condicionada. Não equivale a envio integrado em homologação.",
+      "evidence": "docs/evidence/qa-2026-11-17-loan-offers/results.json"
+    },
+    "1:56115": {
+      "front": "done",
+      "reason": "Composição recuperada do Figma e estados testados no navegador local com dados controlados: carregamento, indisponibilidade, erro/retry, seleção e confirmação condicionada. Não equivale a envio integrado em homologação.",
+      "evidence": "docs/evidence/qa-2026-11-17-loan-offers/results.json"
+    },
+    "1:50960": {
       "front": "adjustment",
-      "reason": "Corrigidos proprietário, placa, condição de pagamento e remoção dos modelos/FIPE fictícios. Estado com modelos selecionáveis e referência FIPE precisa concluir integração/composição a partir de catálogo real; não contabilizado como pronto.",
-      "evidence": "docs/evidence/qa-2026-11-17-loans/results.json",
-      "blockers": [
-        "backend"
-      ]
+      "reason": "Detalhe informativo existente; falta concluir composição do frame extenso. Desenho mistura status Ativo com etapas editáveis e ações de solicitação; confirmar aplicação dessas ações ao detalhe ativo. DTO existente não fornece snapshot estruturado de imóvel/veículo, condições e proposta. Não solicitar nova listagem geral: GET /client/loans e /{id} já existem.",
+      "evidence": "docs/evidence/qa-2026-11-17-loan-offers/results.json"
+    },
+    "1:51347": {
+      "front": "adjustment",
+      "reason": "Detalhe informativo existente; falta concluir composição do frame extenso. Desenho mistura status Ativo com etapas editáveis e ações de solicitação; confirmar aplicação dessas ações ao detalhe ativo. DTO existente não fornece snapshot estruturado de imóvel/veículo, condições e proposta. Não solicitar nova listagem geral: GET /client/loans e /{id} já existem.",
+      "evidence": "docs/evidence/qa-2026-11-17-loan-offers/results.json"
+    },
+    "1:51728": {
+      "front": "adjustment",
+      "reason": "Detalhe informativo existente; falta concluir composição do frame extenso. Desenho mistura status Ativo com etapas editáveis e ações de solicitação; confirmar aplicação dessas ações ao detalhe ativo. DTO existente não fornece snapshot estruturado de imóvel/veículo, condições e proposta. Não solicitar nova listagem geral: GET /client/loans e /{id} já existem.",
+      "evidence": "docs/evidence/qa-2026-11-17-loan-offers/results.json"
+    },
+    "1:52034": {
+      "front": "adjustment",
+      "reason": "Detalhe informativo existente; falta concluir composição do frame extenso. Desenho mistura status Ativo com etapas editáveis e ações de solicitação; confirmar aplicação dessas ações ao detalhe ativo. DTO existente não fornece snapshot estruturado de imóvel/veículo, condições e proposta. Não solicitar nova listagem geral: GET /client/loans e /{id} já existem.",
+      "evidence": "docs/evidence/qa-2026-11-17-loan-offers/results.json"
+    },
+    "1:54430": {
+      "front": "adjustment",
+      "reason": "Documentação do imóvel ainda requer composição específica do frame e contrato de upload/vínculo da solicitação; documentos de empréstimos existentes são outro fluxo.",
+      "evidence": "docs/evidence/qa-2026-11-17-loan-offers/results.json"
+    },
+    "1:54617": {
+      "front": "adjustment",
+      "reason": "Referência recuperada de automóvel usa título Imóvel e campos IPTU/imóvel: designer deve confirmar campos corretos antes da implementação; API de solicitação/vínculo ainda ausente.",
+      "evidence": "docs/evidence/qa-2026-11-17-loan-offers/results.json"
     }
   }
 }

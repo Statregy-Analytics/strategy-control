@@ -1,0 +1,39 @@
+{
+  "/api/v1/admin/loans": [
+    "post",
+    "get"
+  ],
+  "/api/v1/admin/loans/{loanId}": [
+    "get",
+    "put"
+  ],
+  "/api/v1/admin/loans/{loanId}/status": [
+    "post"
+  ],
+  "/api/v1/admin/loans/{loanId}/documents": [
+    "get",
+    "post"
+  ],
+  "/api/v1/admin/loans/{loanId}/documents/{documentId}": [
+    "patch",
+    "delete"
+  ],
+  "/api/v1/admin/loans/{loanId}/history": [
+    "get"
+  ],
+  "/api/v1/client/loans": [
+    "get"
+  ],
+  "/api/v1/client/loans/{loanId}": [
+    "get"
+  ],
+  "/api/v1/client/loans/{loanId}/documents": [
+    "get"
+  ],
+  "/api/v1/client/loans/{loanId}/documents/{documentId}/temporary-url": [
+    "get"
+  ],
+  "/api/v1/client/loans/{loanId}/history": [
+    "get"
+  ]
+}

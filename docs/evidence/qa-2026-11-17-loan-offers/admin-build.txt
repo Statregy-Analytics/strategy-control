@@ -1,0 +1,211 @@
+
+> strategy-admin@0.0.1 prebuild
+> node scripts/prepare-pdf-assets.mjs
+
+
+> strategy-admin@0.0.1 build
+> quasar build
+
+
+[38;2;25;118;210m [39m[38;2;28;117;207m█[39m[38;2;31;115;204m█[39m[38;2;34;114;201m█[39m[38;2;37;112;197m█[39m[38;2;40;111;194m█[39m[38;2;43;109;191m█[39m[38;2;45;108;188m╗[39m[38;2;48;106;185m [39m[38;2;51;105;182m█[39m[38;2;54;104;178m█[39m[38;2;57;102;175m╗[39m[38;2;60;101;172m [39m[38;2;63;99;169m [39m[38;2;66;98;166m [39m[38;2;69;96;163m█[39m[38;2;72;95;159m█[39m[38;2;75;93;156m╗[39m[38;2;78;92;153m [39m[38;2;80;90;150m█[39m[38;2;83;89;147m█[39m[38;2;86;88;144m█[39m[38;2;89;86;140m█[39m[38;2;92;85;137m█[39m[38;2;95;83;134m╗[39m[38;2;98;82;131m [39m[38;2;101;80;128m█[39m[38;2;104;79;125m█[39m[38;2;107;77;121m█[39m[38;2;110;76;118m█[39m[38;2;113;75;115m█[39m[38;2;115;73;112m█[39m[38;2;118;72;109m█[39m[38;2;121;70;106m╗[39m[38;2;124;69;102m [39m[38;2;127;67;99m█[39m[38;2;130;66;96m█[39m[38;2;133;64;93m█[39m[38;2;136;63;90m█[39m[38;2;139;61;87m█[39m[38;2;142;60;83m╗[39m[38;2;145;59;80m [39m[38;2;148;57;77m█[39m[38;2;150;56;74m█[39m[38;2;153;54;71m█[39m[38;2;156;53;68m█[39m[38;2;159;51;64m█[39m[38;2;162;50;61m█[39m[38;2;165;48;58m╗[39m
+[38;2;25;118;210m█[39m[38;2;28;117;207m█[39m[38;2;31;115;204m╔[39m[38;2;34;114;201m═[39m[38;2;37;112;197m═[39m[38;2;40;111;194m═[39m[38;2;43;109;191m█[39m[38;2;45;108;188m█[39m[38;2;48;106;185m╗[39m[38;2;51;105;182m█[39m[38;2;54;104;178m█[39m[38;2;57;102;175m║[39m[38;2;60;101;172m [39m[38;2;63;99;169m [39m[38;2;66;98;166m [39m[38;2;69;96;163m█[39m[38;2;72;95;159m█[39m[38;2;75;93;156m║[39m[38;2;78;92;153m█[39m[38;2;80;90;150m█[39m[38;2;83;89;147m╔[39m[38;2;86;88;144m═[39m[38;2;89;86;140m═[39m[38;2;92;85;137m█[39m[38;2;95;83;134m█[39m[38;2;98;82;131m╗[39m[38;2;101;80;128m█[39m[38;2;104;79;125m█[39m[38;2;107;77;121m╔[39m[38;2;110;76;118m═[39m[38;2;113;75;115m═[39m[38;2;115;73;112m═[39m[38;2;118;72;109m═[39m[38;2;121;70;106m╝[39m[38;2;124;69;102m█[39m[38;2;127;67;99m█[39m[38;2;130;66;96m╔[39m[38;2;133;64;93m═[39m[38;2;136;63;90m═[39m[38;2;139;61;87m█[39m[38;2;142;60;83m█[39m[38;2;145;59;80m╗[39m[38;2;148;57;77m█[39m[38;2;150;56;74m█[39m[38;2;153;54;71m╔[39m[38;2;156;53;68m═[39m[38;2;159;51;64m═[39m[38;2;162;50;61m█[39m[38;2;165;48;58m█[39m[38;2;168;47;55m╗[39m
+[38;2;25;118;210m█[39m[38;2;28;117;207m█[39m[38;2;31;115;204m║[39m[38;2;34;114;201m [39m[38;2;37;112;197m [39m[38;2;40;111;194m [39m[38;2;43;109;191m█[39m[38;2;45;108;188m█[39m[38;2;48;106;185m║[39m[38;2;51;105;182m█[39m[38;2;54;104;178m█[39m[38;2;57;102;175m║[39m[38;2;60;101;172m [39m[38;2;63;99;169m [39m[38;2;66;98;166m [39m[38;2;69;96;163m█[39m[38;2;72;95;159m█[39m[38;2;75;93;156m║[39m[38;2;78;92;153m█[39m[38;2;80;90;150m█[39m[38;2;83;89;147m█[39m[38;2;86;88;144m█[39m[38;2;89;86;140m█[39m[38;2;92;85;137m█[39m[38;2;95;83;134m█[39m[38;2;98;82;131m║[39m[38;2;101;80;128m█[39m[38;2;104;79;125m█[39m[38;2;107;77;121m█[39m[38;2;110;76;118m█[39m[38;2;113;75;115m█[39m[38;2;115;73;112m█[39m[38;2;118;72;109m█[39m[38;2;121;70;106m╗[39m[38;2;124;69;102m█[39m[38;2;127;67;99m█[39m[38;2;130;66;96m█[39m[38;2;133;64;93m█[39m[38;2;136;63;90m█[39m[38;2;139;61;87m█[39m[38;2;142;60;83m█[39m[38;2;145;59;80m║[39m[38;2;148;57;77m█[39m[38;2;150;56;74m█[39m[38;2;153;54;71m█[39m[38;2;156;53;68m█[39m[38;2;159;51;64m█[39m[38;2;162;50;61m█[39m[38;2;165;48;58m╔[39m[38;2;168;47;55m╝[39m
+[38;2;25;118;210m█[39m[38;2;28;117;207m█[39m[38;2;31;115;204m║[39m[38;2;34;114;201m▄[39m[38;2;37;112;197m▄[39m[38;2;40;111;194m [39m[38;2;43;109;191m█[39m[38;2;45;108;188m█[39m[38;2;48;106;185m║[39m[38;2;51;105;182m█[39m[38;2;54;104;178m█[39m[38;2;57;102;175m║[39m[38;2;60;101;172m [39m[38;2;63;99;169m [39m[38;2;66;98;166m [39m[38;2;69;96;163m█[39m[38;2;72;95;159m█[39m[38;2;75;93;156m║[39m[38;2;78;92;153m█[39m[38;2;80;90;150m█[39m[38;2;83;89;147m╔[39m[38;2;86;88;144m═[39m[38;2;89;86;140m═[39m[38;2;92;85;137m█[39m[38;2;95;83;134m█[39m[38;2;98;82;131m║[39m[38;2;101;80;128m╚[39m[38;2;104;79;125m═[39m[38;2;107;77;121m═[39m[38;2;110;76;118m═[39m[38;2;113;75;115m═[39m[38;2;115;73;112m█[39m[38;2;118;72;109m█[39m[38;2;121;70;106m║[39m[38;2;124;69;102m█[39m[38;2;127;67;99m█[39m[38;2;130;66;96m╔[39m[38;2;133;64;93m═[39m[38;2;136;63;90m═[39m[38;2;139;61;87m█[39m[38;2;142;60;83m█[39m[38;2;145;59;80m║[39m[38;2;148;57;77m█[39m[38;2;150;56;74m█[39m[38;2;153;54;71m╔[39m[38;2;156;53;68m═[39m[38;2;159;51;64m═[39m[38;2;162;50;61m█[39m[38;2;165;48;58m█[39m[38;2;168;47;55m╗[39m
+[38;2;25;118;210m╚[39m[38;2;28;117;207m█[39m[38;2;31;115;204m█[39m[38;2;34;114;201m█[39m[38;2;37;112;197m█[39m[38;2;40;111;194m█[39m[38;2;43;109;191m█[39m[38;2;45;108;188m╔[39m[38;2;48;106;185m╝[39m[38;2;51;105;182m╚[39m[38;2;54;104;178m█[39m[38;2;57;102;175m█[39m[38;2;60;101;172m█[39m[38;2;63;99;169m█[39m[38;2;66;98;166m█[39m[38;2;69;96;163m█[39m[38;2;72;95;159m╔[39m[38;2;75;93;156m╝[39m[38;2;78;92;153m█[39m[38;2;80;90;150m█[39m[38;2;83;89;147m║[39m[38;2;86;88;144m [39m[38;2;89;86;140m [39m[38;2;92;85;137m█[39m[38;2;95;83;134m█[39m[38;2;98;82;131m║[39m[38;2;101;80;128m█[39m[38;2;104;79;125m█[39m[38;2;107;77;121m█[39m[38;2;110;76;118m█[39m[38;2;113;75;115m█[39m[38;2;115;73;112m█[39m[38;2;118;72;109m█[39m[38;2;121;70;106m║[39m[38;2;124;69;102m█[39m[38;2;127;67;99m█[39m[38;2;130;66;96m║[39m[38;2;133;64;93m [39m[38;2;136;63;90m [39m[38;2;139;61;87m█[39m[38;2;142;60;83m█[39m[38;2;145;59;80m║[39m[38;2;148;57;77m█[39m[38;2;150;56;74m█[39m[38;2;153;54;71m║[39m[38;2;156;53;68m [39m[38;2;159;51;64m [39m[38;2;162;50;61m█[39m[38;2;165;48;58m█[39m[38;2;168;47;55m║[39m
+[38;2;25;118;210m [39m[38;2;28;117;207m╚[39m[38;2;31;115;204m═[39m[38;2;34;114;201m═[39m[38;2;37;112;197m▀[39m[38;2;40;111;194m▀[39m[38;2;43;109;191m═[39m[38;2;45;108;188m╝[39m[38;2;48;106;185m [39m[38;2;51;105;182m [39m[38;2;54;104;178m╚[39m[38;2;57;102;175m═[39m[38;2;60;101;172m═[39m[38;2;63;99;169m═[39m[38;2;66;98;166m═[39m[38;2;69;96;163m═[39m[38;2;72;95;159m╝[39m[38;2;75;93;156m [39m[38;2;78;92;153m╚[39m[38;2;80;90;150m═[39m[38;2;83;89;147m╝[39m[38;2;86;88;144m [39m[38;2;89;86;140m [39m[38;2;92;85;137m╚[39m[38;2;95;83;134m═[39m[38;2;98;82;131m╝[39m[38;2;101;80;128m╚[39m[38;2;104;79;125m═[39m[38;2;107;77;121m═[39m[38;2;110;76;118m═[39m[38;2;113;75;115m═[39m[38;2;115;73;112m═[39m[38;2;118;72;109m═[39m[38;2;121;70;106m╝[39m[38;2;124;69;102m╚[39m[38;2;127;67;99m═[39m[38;2;130;66;96m╝[39m[38;2;133;64;93m [39m[38;2;136;63;90m [39m[38;2;139;61;87m╚[39m[38;2;142;60;83m═[39m[38;2;145;59;80m╝[39m[38;2;148;57;77m╚[39m[38;2;150;56;74m═[39m[38;2;153;54;71m╝[39m[38;2;156;53;68m [39m[38;2;159;51;64m [39m[38;2;162;50;61m╚[39m[38;2;165;48;58m═[39m[38;2;168;47;55m╝[39m
+
+
+ Build mode............. SPA
+ Pkg quasar............. v2.35.2
+ Pkg @quasar/app-vite... v3.10.3
+ Pkg vite............... v8.3.5
+ Debugging.............. no
+
+ App • Compiling quasar.config.js (no env prefix; no dotenv files)
+ App • Env • Client code prefix: QCLI_; no dotenv files
+ App • Removing build artifacts: /home/jorgenunes/Projetos/strategy-control/dist/spa
+
+ App •  WAIT  • Vite • Compiling SPA UI...
+[plugin builtin:vite-reporter]
+(!) Some chunks are larger than 500 kB after minification. Consider:
+- Using dynamic import() to code-split the application
+- Use build.rolldownOptions.output.codeSplitting to improve chunking: https://rolldown.rs/reference/OutputOptions.codeSplitting
+- Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.
+[33m[PLUGIN_TIMINGS] [0mJavaScript callbacks ran for 67.4s of this 189.6s build (36%).
+The slowest callbacks, timed inside each callback (the wait before a callback starts is excluded, the time it awaits is included):
+  - plugin vite:css-post renderChunk (21%, 40.6s, 94 calls)
+  - plugin vite:prepare-out-dir renderStart (4%, 6.9s, 1 call)
+  - plugin vite:build-html transform (1%, 2.3s, 1 call)
+Additional callback time came from the callbacks below and from callbacks under 1s.
+3 callbacks are listed without a time. Their calls overlapped, so the time inside one call includes work from other calls. To find their cost, profile the build with `node --cpu-prof`:
+  - plugin vite:css transform (137 calls)
+  - plugin vite:asset load (2 calls)
+  - plugin vite:vue transform (299 calls)
+See https://rolldown.rs/reference/InputOptions.checks#bundlertimings for more details.
+
+ App •  DONE  • Vite • Compiled SPA UI • 175635ms
+
+ Build summary with important files:
+ ╔═══════════════════════════════════════════════════════╦══════════════╦══════════════╗
+ ║                                                 Asset ║         Size ║      Gzipped ║
+ ╟───────────────────────────────────────────────────────╫──────────────╫──────────────╢
+ ║                 assets/AdminWorkspacePage-Dy7aLg2M.js ║    128.05 KB ║     35.44 KB ║
+ ║                       assets/AdvisorsPage-DnwmVLLJ.js ║     29.68 KB ║      7.40 KB ║
+ ║                          assets/AuditPage-Dyy8tMP9.js ║     14.03 KB ║      4.96 KB ║
+ ║                           assets/AuthPage-BjfIT8Nf.js ║      6.81 KB ║      2.46 KB ║
+ ║                           assets/AuthView-Bm4vb23N.js ║     10.06 KB ║      4.83 KB ║
+ ║                          assets/BanksPage-DV-r_edJ.js ║      9.36 KB ║      3.83 KB ║
+ ║                   assets/ClientDetailPage-CI7X7jBE.js ║    116.26 KB ║     34.19 KB ║
+ ║                        assets/ClientsPage-hBwK1mrI.js ║      4.56 KB ║      2.01 KB ║
+ ║                       assets/ClientsTable-BeqNadiV.js ║     11.63 KB ║      4.05 KB ║
+ ║                         assets/ClosePopup-I-txHWXn.js ║      0.67 KB ║      0.37 KB ║
+ ║                      assets/ContractsPage-zwDqGh3M.js ║    147.31 KB ║     40.19 KB ║
+ ║             assets/CustomerDocumentSelect-0Ax1i-GC.js ║      9.05 KB ║      3.74 KB ║
+ ║                 assets/CustomerIndicators-CFTpTauT.js ║      1.59 KB ║      0.81 KB ║
+ ║                  assets/CustomerPortfolio-DuEL0S49.js ║     43.60 KB ║     14.69 KB ║
+ ║                     assets/CustomerSelect-mBdoy7Tm.js ║      2.04 KB ║      1.00 KB ║
+ ║                     assets/DataIntakePage-B7yfRgUx.js ║    177.29 KB ║     51.37 KB ║
+ ║               assets/DocumentSettingsPage-Bi4IBw5u.js ║     17.98 KB ║      5.36 KB ║
+ ║                    assets/EditLandingPage-CCKv3ygH.js ║     69.24 KB ║     20.09 KB ║
+ ║                       assets/EntityHeader-CKE1_iP7.js ║      6.46 KB ║      2.74 KB ║
+ ║                   assets/EntityPagination-COfTxXQF.js ║      6.78 KB ║      2.60 KB ║
+ ║                  assets/EntityTableFooter-Cyer9NnO.js ║      2.22 KB ║      1.00 KB ║
+ ║                      assets/ErrorNotFound-D0OSQ6nb.js ║      0.54 KB ║      0.38 KB ║
+ ║                        assets/FormSection-6kS-mEOO.js ║      0.68 KB ║      0.40 KB ║
+ ║                        assets/GlassSelect-DKMfPM5l.js ║      1.93 KB ║      0.98 KB ║
+ ║                         assets/IconLogout-BTHP2IT0.js ║      0.95 KB ║      0.52 KB ║
+ ║                          assets/LabelForm-BqZ7IJu2.js ║      0.62 KB ║      0.41 KB ║
+ ║                           assets/LeadPage-CsSGmdlM.js ║     60.97 KB ║      9.19 KB ║
+ ║                         assets/MainLayout-BP9OZ52D.js ║     15.19 KB ║      5.80 KB ║
+ ║                     assets/ProfileSection-DmbHv-5N.js ║      0.94 KB ║      0.51 KB ║
+ ║                             assets/QBadge-BnjeYWzP.js ║      0.92 KB ║      0.52 KB ║
+ ║                            assets/QBanner-BD--c1io.js ║      0.86 KB ║      0.48 KB ║
+ ║                               assets/QBtn-B5njPI7e.js ║     31.38 KB ║     12.29 KB ║
+ ║                          assets/QBtnGroup-p0o2ym2v.js ║      0.68 KB ║      0.41 KB ║
+ ║                              assets/QDate-B_g9xqfj.js ║     32.48 KB ║     10.84 KB ║
+ ║                     assets/QExpansionItem-OgFGAu2T.js ║      4.72 KB ║      2.00 KB ║
+ ║                              assets/QFile-Hg-5vlxd.js ║      6.72 KB ║      2.94 KB ║
+ ║                              assets/QForm-BBaFmLIm.js ║      2.28 KB ║      1.07 KB ║
+ ║                            assets/QHeader-CFOxbCs8.js ║      2.37 KB ║      1.18 KB ║
+ ║                              assets/QItem-C8H3uAMb.js ║      2.21 KB ║      1.12 KB ║
+ ║                            assets/QLayout-Cr3i0BXx.js ║      5.47 KB ║      2.42 KB ║
+ ║                    assets/QLinearProgress-DLOAdRCR.js ║      1.77 KB ║      0.82 KB ║
+ ║                              assets/QList-zgKJbnbd.js ║      0.73 KB ║      0.42 KB ║
+ ║                              assets/QPage-BDQ2rGaH.js ║      0.88 KB ║      0.49 KB ║
+ ║                        assets/QPopupProxy-B8UIb9i7.js ║      1.18 KB ║      0.69 KB ║
+ ║                            assets/QSelect-BLtNEgW3.js ║     54.71 KB ║     18.53 KB ║
+ ║                               assets/QTab-D7CH6EjJ.js ║     11.21 KB ║      4.48 KB ║
+ ║                             assets/QTable-B38QsxXp.js ║     26.39 KB ║      8.78 KB ║
+ ║                           assets/QTooltip-B9jVGAtp.js ║      4.56 KB ║      2.06 KB ║
+ ║                                assets/QTr-Cp01N2Vo.js ║      0.47 KB ║      0.31 KB ║
+ ║                       assets/RegisterPage-C3zUOIuS.js ║      8.79 KB ║      2.97 KB ║
+ ║                      assets/ResourceState-BVYXayrL.js ║      0.77 KB ║      0.49 KB ║
+ ║                         assets/RowActions-DeV8BZIt.js ║      1.53 KB ║      0.80 KB ║
+ ║                assets/SystemSelectionPage-6I1hE2Nv.js ║      1.95 KB ║      1.02 KB ║
+ ║                          assets/TitleAuth--96mkYrY.js ║      1.28 KB ║      0.72 KB ║
+ ║                          assets/TitleCard-Cx_iw1zG.js ║      1.11 KB ║      0.67 KB ║
+ ║                          assets/TitlePage-cBZJDDup.js ║      2.83 KB ║      1.30 KB ║
+ ║                assets/TokenValidationPage-DE721yo0.js ║      3.89 KB ║      1.90 KB ║
+ ║                           assets/TouchPan-C5ho6fN3.js ║      5.97 KB ║      2.29 KB ║
+ ║                     assets/TransctionPage-DQld7nIq.js ║     77.00 KB ║     21.19 KB ║
+ ║                      assets/WorkspaceIcon-BGFfTqpT.js ║      7.46 KB ║      3.08 KB ║
+ ║          assets/_plugin-vue_export-helper-BDNMzG2s.js ║      0.08 KB ║      0.10 KB ║
+ ║                    assets/adminNavigation-BDm7mf21.js ║      1.69 KB ║      0.76 KB ║
+ ║                assets/adminWorkspaceModel-CGmtuSzA.js ║      8.23 KB ║      3.36 KB ║
+ ║                           assets/apiError-Ce6e48A3.js ║      2.17 KB ║      0.96 KB ║
+ ║                         assets/auditModel-C4qjKmth.js ║      4.93 KB ║      2.20 KB ║
+ ║                       assets/auditService-DQkvuxJx.js ║      2.60 KB ║      1.26 KB ║
+ ║                              assets/axios-BCyjEzj5.js ║     59.73 KB ║     22.18 KB ║
+ ║                        assets/bankCatalog-4QkBic8o.js ║      0.71 KB ║      0.46 KB ║
+ ║                             assets/client-DL13xPqi.js ║      0.67 KB ║      0.40 KB ║
+ ║               assets/customerPresentation-CxFy7yZI.js ║      1.89 KB ║      0.93 KB ║
+ ║                    assets/customerService-Cbd5Pmpp.js ║      2.34 KB ║      0.55 KB ║
+ ║               assets/documentAdminService-C--0kJm8.js ║      1.70 KB ║      0.56 KB ║
+ ║                     assets/documentWindow-l5O5fNJK.js ║      1.08 KB ║      0.57 KB ║
+ ║                              assets/event-DVx8h-wR.js ║      1.33 KB ║      0.57 KB ║
+ ║                            assets/filters-CyYzroYi.js ║      5.38 KB ║      3.92 KB ║
+ ║                      assets/financeModels-DlXmC44G.js ║      6.26 KB ║      2.55 KB ║
+ ║                     assets/financeService-BbOW7GNb.js ║      3.04 KB ║      1.58 KB ║
+ ║                               assets/i18n-BMMb_MrK.js ║     49.01 KB ║     16.74 KB ║
+ ║                              assets/index-DfuT20gq.js ║    117.84 KB ║     43.30 KB ║
+ ║                             assets/layout-D7UF0YEF.js ║      1.83 KB ║      0.65 KB ║
+ ║                                assets/pdf-DIzIXQR2.js ║    470.27 KB ║    137.87 KB ║
+ ║                     assets/requestContext-BkQRbpgb.js ║      0.54 KB ║      0.35 KB ║
+ ║           assets/runtime-core.esm-bundler-C_H0zkPj.js ║     67.00 KB ║     25.83 KB ║
+ ║                        assets/table-icons-CEeLCFba.js ║   2570.22 KB ║    486.45 KB ║
+ ║                       assets/use-checkbox-DcMIzNeA.js ║      3.44 KB ║      1.57 KB ║
+ ║                           assets/use-dark-BHObfh0O.js ║      0.12 KB ║      0.12 KB ║
+ ║                   assets/use-element-size-EQJC7h8y.js ║      0.90 KB ║      0.53 KB ║
+ ║                assets/use-key-composition-cD_gUsgo.js ║     17.08 KB ║      6.33 KB ║
+ ║                   assets/use-render-cache-CzDBy1a_.js ║      0.25 KB ║      0.17 KB ║
+ ║               assets/use-slide-transition-BlQjZVuO.js ║      1.88 KB ║      0.84 KB ║
+ ║                         assets/useCliente-D9KjO3YI.js ║     10.62 KB ║      1.51 KB ║
+ ║                 assets/useFinanceResource-BAWcncVr.js ║      0.66 KB ║      0.43 KB ║
+ ║                    assets/useNotification-CsHZ_tz3.js ║      2.73 KB ║      1.32 KB ║
+ ║                           assets/wrappers-BSAd4dc6.js ║      0.03 KB ║      0.05 KB ║
+ ║                vendor/pdfjs/6.5.438/pdf.worker.min.js ║   1242.10 KB ║    371.18 KB ║
+ ║    vendor/pdfjs/6.5.438/wasm/jbig2_nowasm_fallback.js ║    129.33 KB ║     40.93 KB ║
+ ║ vendor/pdfjs/6.5.438/wasm/openjpeg_nowasm_fallback.js ║    330.53 KB ║     88.26 KB ║
+ ║             vendor/pdfjs/6.5.438/wasm/quickjs-eval.js ║      6.09 KB ║      2.95 KB ║
+ ║            vendor/pdfjs/wasm/jbig2_nowasm_fallback.js ║    129.33 KB ║     40.93 KB ║
+ ║         vendor/pdfjs/wasm/openjpeg_nowasm_fallback.js ║    330.53 KB ║     88.26 KB ║
+ ║                     vendor/pdfjs/wasm/quickjs-eval.js ║      6.09 KB ║      2.95 KB ║
+ ╟───────────────────────────────────────────────────────╫──────────────╫──────────────╢
+ ║                assets/AdminWorkspacePage-C1Qed0Oi.css ║     70.36 KB ║     11.14 KB ║
+ ║                      assets/AdvisorsPage-D7C8__11.css ║      1.47 KB ║      0.49 KB ║
+ ║                         assets/AuditPage-CA5kQzgS.css ║      6.15 KB ║      1.49 KB ║
+ ║                          assets/AuthPage-Dv5tgryp.css ║      1.85 KB ║      0.34 KB ║
+ ║                          assets/AuthView-D0fBYtD3.css ║      0.63 KB ║      0.33 KB ║
+ ║                         assets/BanksPage-CFMXmQWp.css ║      0.05 KB ║      0.07 KB ║
+ ║                  assets/ClientDetailPage-DWbqZEVz.css ║     48.87 KB ║      8.07 KB ║
+ ║                       assets/ClientsPage-BUydiwdo.css ║      1.13 KB ║      0.40 KB ║
+ ║                      assets/ClientsTable-C2Awl0fD.css ║      7.79 KB ║      1.83 KB ║
+ ║                     assets/ContractsPage-CJcMzYpU.css ║     63.60 KB ║      8.82 KB ║
+ ║                assets/CustomerIndicators-ab5g5P84.css ║      1.46 KB ║      0.49 KB ║
+ ║                 assets/CustomerPortfolio-Dkd-ZAXe.css ║     12.02 KB ║      2.47 KB ║
+ ║                    assets/DataIntakePage-CZcd1AG3.css ║      1.45 KB ║      0.52 KB ║
+ ║              assets/DocumentSettingsPage-V5I8ZBtt.css ║      0.17 KB ║      0.11 KB ║
+ ║                   assets/EditLandingPage-Bd8j7gdg.css ║      1.17 KB ║      0.40 KB ║
+ ║                      assets/EntityHeader-tqUcZ8nk.css ║      0.43 KB ║      0.26 KB ║
+ ║                  assets/EntityPagination-D8xjyo-7.css ║      0.96 KB ║      0.34 KB ║
+ ║                 assets/EntityTableFooter-BtW0rKvt.css ║      0.59 KB ║      0.28 KB ║
+ ║                       assets/FormSection-B3z85S0z.css ║      0.23 KB ║      0.16 KB ║
+ ║                       assets/GlassSelect-CKqsnDqb.css ║      0.86 KB ║      0.43 KB ║
+ ║                        assets/MainLayout-Drinz7gg.css ║      2.61 KB ║      0.84 KB ║
+ ║                    assets/ProfileSection-D4_P2RCp.css ║      0.85 KB ║      0.40 KB ║
+ ║                        assets/RowActions-CprEa3gw.css ║      1.05 KB ║      0.41 KB ║
+ ║               assets/SystemSelectionPage-DpcagCtS.css ║      2.22 KB ║      0.78 KB ║
+ ║                         assets/TitlePage-BnRf2A0v.css ║      0.11 KB ║      0.12 KB ║
+ ║                    assets/TransctionPage-CKByLhha.css ║     19.44 KB ║      3.40 KB ║
+ ║                     assets/WorkspaceIcon-CFk7dZZe.css ║      6.90 KB ║      1.77 KB ║
+ ║                     assets/financeModels-DrsWUGZV.css ║      3.23 KB ║      1.01 KB ║
+ ║                             assets/index-BEBbGLAe.css ║    289.42 KB ║     59.03 KB ║
+ ╟───────────────────────────────────────────────────────╫──────────────╫──────────────╢
+ ║                                            index.html ║      1.23 KB ║      0.53 KB ║
+ ╠═══════════════════════════════════════════════════════╬══════════════╬══════════════╣
+ ║                                  Total JS (101 files) ║   6793.31 KB ║            - ║
+ ║                                  Total CSS (29 files) ║    547.05 KB ║            - ║
+ ║                                   Total HTML (1 file) ║      1.23 KB ║            - ║
+ ╚═══════════════════════════════════════════════════════╩══════════════╩══════════════╝
+
+
+ Build succeeded
+
+ Build mode............. SPA
+ Pkg quasar............. v2.35.2
+ Pkg @quasar/app-vite... v3.10.3
+ Pkg vite............... v8.3.5
+ Debugging.............. no
+ Browser target......... es2022|firefox115|chrome115|safari14
+ =======================
+ Output folder.......... /home/jorgenunes/Projetos/strategy-control/dist/spa
+
+ Tip: Built files are meant to be served over an HTTP server
+      Opening index.html over file:// won't work
+
+ Tip: You can use "quasar serve" command to create a web server,
+      both for testing or production. Type "quasar serve -h" for
+      parameters. Also, an npm script (usually named "start") can
+      be added for deployment environments.
+      If you're using Vue Router "history" mode, don't forget to
+      specify the "--history" parameter: "quasar serve --history"

@@ -109,5 +109,5 @@
     }
   ],
   "reviewedAt": "2026-11-17",
-  "latestReview": "Empréstimos/consórcio/colateral deste lote reutilizam os frames P06 recuperados; nenhum campo, ação ou rota sem desenho acrescentado. Os estados indisponíveis são tratamentos de API, não novas telas."
+  "latestReview": "Catálogo de alavancagem nos três temas, pré-ofertas, ofertas finais, consórcio lista/cards, modelos/FIPE e confirmações deste lote têm frames específicos recuperados. Nenhuma nova superfície sem referência. As 13 anteriores permanecem para avaliação de Éric; não entram no denominador de 279."
 }

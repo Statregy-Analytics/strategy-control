@@ -1,0 +1,22 @@
+- main:
+  - paragraph: Prévia controlada · componentes reais · dados fictícios · sem escrita na API
+  - navigation:
+    - button "Alavancagem"
+    - button "Garantia"
+    - button "Consórcio"
+    - button "Pré-aprovado imóvel"
+    - button "Pré-aprovado automóvel"
+    - button "Ofertas finais"
+    - button "Ofertas consórcio"
+    - button "Colateral"
+    - button "Trocar tema"
+    - button "Alternar vazio"
+    - button "Falhar leitura uma vez"
+    - button "Alternar falha de envio"
+  - button "Voltar"
+  - heading "Solicitação enviada!" [level=2]
+  - paragraph: Sua solicitação será analisada e logo um dos nossos Consultores entrará em contato.
+  - link "Ir para Contratos":
+    - /url: /system/contracts
+    - generic: Ir para Contratos
+  - status: "Abrir SA-QA-1 · Destino: /system/loan/securedLoan"

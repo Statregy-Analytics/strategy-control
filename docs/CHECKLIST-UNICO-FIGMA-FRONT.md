@@ -10,15 +10,29 @@ Atualizado em 2026-11-17. Contagem por **telas e estados independentes do Figma*
 | Situação | Quantidade |
 | --- | ---: |
 | Total inventariado | **279** |
-| Prontas no frontend | **170** |
-| Implementadas, aguardando revalidação/comparação completa | **87** |
-| Ainda exigem implementação, complemento ou correção | **22** |
-| Com implementação existente (prontas + revalidação) | **257 / 279 (92,1%)** |
+| Prontas no frontend | **187** |
+| Implementadas, aguardando revalidação/comparação completa | **85** |
+| Ainda exigem implementação, complemento ou correção | **7** |
+| Com implementação existente (prontas + revalidação) | **272 / 279 (97,5%)** |
 
-**Para encerrar o front faltam 22 itens de implementação/ajuste e 87 de revalidação.** “Pronto no frontend” não significa fluxo integrado liberado: dependências de backend/designer podem afetar também telas prontas. Os números não classificam toda pendência como tela nova nem como problema de API. A comparação de Crédito, carteira global e editor editorial que não foi concluída integralmente permanece em revalidação.
+**Para encerrar o front faltam 7 itens de implementação/ajuste e 85 de revalidação.** “Pronto no frontend” não significa fluxo integrado liberado: dependências de backend/designer podem afetar também telas prontas. Os números não classificam toda pendência como tela nova nem como problema de API. A comparação de Crédito, carteira global e editor editorial que não foi concluída integralmente permanece em revalidação.
 
 Fonte por frame: [progresso atual](FRONTEND-PROGRESS.json). A base anterior permanece histórica; [atualizações com evidências](FRONTEND-PROGRESS-OVERRIDES.json) registram cada mudança. Ao finalizar **cada entrega**, atualizar os IDs comprovados, executar `node scripts/frontend-progress.mjs` e informar este panorama na resposta final.
 <!-- frontend-progress:end -->
+
+## Entrega 17/11 — catálogo e estados de ofertas de empréstimos/consórcio
+
+**Publicação deste lote bloqueada:** commit `265dd49` enviado, mas [CI 44140408435](https://github.com/WillTbn/Strategy-analytics-v2/actions/runs/44140408435) falhou em `npm audit` por `picomatch`, ainda sem versão corrigida publicada. Não chegou a upload/ativação. Não houve validação desta versão no navegador de homologação; os testes de estados preenchidos são locais e controlados. A auditoria de segurança foi preservada.
+
+- [x] Alavancagem nos três temas, opções de garantia/consórcio, modelos de veículo/FIPE, pré-ofertas, ofertas finais, lista/cards de consórcio e confirmações: composição conforme referências recuperadas, sem campos ou ações extras.
+- [x] Estados preenchidos, indisponíveis, vazios, falha/retry, seleção por teclado, respostas antigas, alteração de prazo/valor e prevenção de confirmação/duplicação indevida testados com componentes reais no navegador local. 449 testes automatizados, lint e build local passaram.
+- [x] Harness e dados fictícios removidos antes da publicação; sucesso exige resposta explícita do envio. Rotas sem integração mostram indisponibilidade.
+- [ ] Homologação integrada de simulação/ofertas/envio/FIPE: endpoints não estão no OpenAPI consultado. GET de empréstimos, documentos e histórico já existem; não são pendências de criação de rota.
+- [ ] Concluir os quatro detalhes extensos (1:50960, 1:51347, 1:51728, 1:52034), dois estados de documentação (1:54430, 1:54617) e o extrato corrigido (2161:281). Isso soma sete ajustes; as demais revalidações seguem no inventário.
+- [ ] Designer: esclarecer ações editáveis dentro de empréstimo Ativo, divergência dos limites da opção Imóvel e título/campos de imóvel/IPTU no frame documental de automóvel. Não foram criados campos por suposição.
+
+Evidências e limites: [resultados](evidence/qa-2026-11-17-loan-offers/results.json), [contrato HTTP consultado](evidence/qa-2026-11-17-loan-offers/api-paths.json), [publicação e smoke](evidence/qa-2026-11-17-loan-offers/publication-assets.json). Nenhuma nova superfície sem referência: permanecem 13 para avaliação de Éric. Teste local controlado não significa fluxo financeiro homologado.
+
 
 <!-- frontend-no-reference:start -->
 ## Telas e adaptações sem frame vinculado — avaliação de Éric
@@ -1125,7 +1139,7 @@ Legenda vigente: classificação de 16/11 por código e evidências, detalhada e
 | [1:48631](https://www.figma.com/design/BaDXlWpxbIoY4azOaQnXgv?node-id=1-48631)     | [UI] CONTRATOS - PAG ESPECIFICA                                              | Implementado · revalidar · P04 |
 | [1:50141](https://www.figma.com/design/BaDXlWpxbIoY4azOaQnXgv?node-id=1-50141)     | [UI] CONTRATOS - PAG ESPECIFICA                                              | Implementado · revalidar · P04 |
 | [211:28821](https://www.figma.com/design/BaDXlWpxbIoY4azOaQnXgv?node-id=211-28821) | [EC] CONTRATOS - PAG ESPECIFICA · Operações · sem registro                   | Implementado · revalidar · P04 |
-| [1:50557](https://www.figma.com/design/BaDXlWpxbIoY4azOaQnXgv?node-id=1-50557)     | [UI] ALAVANCAGEM                                                             | Implementação/ajuste pendente · P06 |
+| [1:50557](https://www.figma.com/design/BaDXlWpxbIoY4azOaQnXgv?node-id=1-50557)     | [UI] ALAVANCAGEM                                                             | Pronto no front · P06 |
 | [1:50683](https://www.figma.com/design/BaDXlWpxbIoY4azOaQnXgv?node-id=1-50683)     | [UI] ALAVANCAGEM - BLOQUEADO                                                 | Pronto no front · P06 |
 | [1:50860](https://www.figma.com/design/BaDXlWpxbIoY4azOaQnXgv?node-id=1-50860)     | [UI] FLUXO - SOLICITAR EMPRÉSTIMO -                                          | Pronto no front · P06 |
 | [1:50960](https://www.figma.com/design/BaDXlWpxbIoY4azOaQnXgv?node-id=1-50960)     | [UI] ALAVANCAGEM - PÁG ALAVANCAGEM - GARANTIA IMÓVEL                         | Implementação/ajuste pendente · P06 |
@@ -1137,30 +1151,30 @@ Legenda vigente: classificação de 16/11 por código e evidências, detalhada e
 | [1:52424](https://www.figma.com/design/BaDXlWpxbIoY4azOaQnXgv?node-id=1-52424)     | [UI] FLUXO - SOLICITAR EMPRÉSTIMO -                                          | Pronto no front · P06 |
 | [1:52520](https://www.figma.com/design/BaDXlWpxbIoY4azOaQnXgv?node-id=1-52520)     | [UI] FLUXO - SOLICITAR EMPRÉSTIMO -                                          | Pronto no front · P06 |
 | [1:52616](https://www.figma.com/design/BaDXlWpxbIoY4azOaQnXgv?node-id=1-52616)     | [UI] FLUXO - SOLICITAR EMPRÉSTIMO -                                          | Pronto no front · P06 |
-| [1:52719](https://www.figma.com/design/BaDXlWpxbIoY4azOaQnXgv?node-id=1-52719)     | OFERTAS CRÉDITO PRÉ APROVADO                                                 | Implementação/ajuste pendente · P06 |
-| [1:52928](https://www.figma.com/design/BaDXlWpxbIoY4azOaQnXgv?node-id=1-52928)     | OFERTAS CRÉDITO PRÉ APROVADO                                                 | Implementação/ajuste pendente · P06 |
-| [1:53140](https://www.figma.com/design/BaDXlWpxbIoY4azOaQnXgv?node-id=1-53140)     | OFERTAS FINAIS CRÉDITO                                                       | Implementação/ajuste pendente · P06 |
-| [1:53312](https://www.figma.com/design/BaDXlWpxbIoY4azOaQnXgv?node-id=1-53312)     | OFERTAS FINAIS CRÉDITO                                                       | Implementação/ajuste pendente · P06 |
-| [1:53568](https://www.figma.com/design/BaDXlWpxbIoY4azOaQnXgv?node-id=1-53568)     | OFERTAS FINAIS CRÉDITO                                                       | Implementação/ajuste pendente · P06 |
+| [1:52719](https://www.figma.com/design/BaDXlWpxbIoY4azOaQnXgv?node-id=1-52719)     | OFERTAS CRÉDITO PRÉ APROVADO                                                 | Pronto no front · P06 |
+| [1:52928](https://www.figma.com/design/BaDXlWpxbIoY4azOaQnXgv?node-id=1-52928)     | OFERTAS CRÉDITO PRÉ APROVADO                                                 | Pronto no front · P06 |
+| [1:53140](https://www.figma.com/design/BaDXlWpxbIoY4azOaQnXgv?node-id=1-53140)     | OFERTAS FINAIS CRÉDITO                                                       | Pronto no front · P06 |
+| [1:53312](https://www.figma.com/design/BaDXlWpxbIoY4azOaQnXgv?node-id=1-53312)     | OFERTAS FINAIS CRÉDITO                                                       | Pronto no front · P06 |
+| [1:53568](https://www.figma.com/design/BaDXlWpxbIoY4azOaQnXgv?node-id=1-53568)     | OFERTAS FINAIS CRÉDITO                                                       | Pronto no front · P06 |
 | [1:53739](https://www.figma.com/design/BaDXlWpxbIoY4azOaQnXgv?node-id=1-53739)     | [UI] FLUXO - SOLICITAR EMPRÉSTIMO -                                          | Pronto no front · P06 |
 | [1:53839](https://www.figma.com/design/BaDXlWpxbIoY4azOaQnXgv?node-id=1-53839)     | [UI] FLUXO - SOLICITAR EMPRÉSTIMO -                                          | Pronto no front · P06 |
 | [1:53960](https://www.figma.com/design/BaDXlWpxbIoY4azOaQnXgv?node-id=1-53960)     | [UI] FLUXO - SOLICITAR EMPRÉSTIMO -                                          | Pronto no front · P06 |
 | [1:54054](https://www.figma.com/design/BaDXlWpxbIoY4azOaQnXgv?node-id=1-54054)     | [UI] FLUXO - SOLICITAR EMPRÉSTIMO -                                          | Pronto no front · P06 |
-| [1:54146](https://www.figma.com/design/BaDXlWpxbIoY4azOaQnXgv?node-id=1-54146)     | [UI] FLUXO - SOLICITAR EMPRÉSTIMO -                                          | Implementação/ajuste pendente · P06 |
-| [1:54266](https://www.figma.com/design/BaDXlWpxbIoY4azOaQnXgv?node-id=1-54266)     | [UI] FLUXO - SOLICITAR EMPRÉSTIMO -                                          | Implementação/ajuste pendente · P06 |
+| [1:54146](https://www.figma.com/design/BaDXlWpxbIoY4azOaQnXgv?node-id=1-54146)     | [UI] FLUXO - SOLICITAR EMPRÉSTIMO -                                          | Pronto no front · P06 |
+| [1:54266](https://www.figma.com/design/BaDXlWpxbIoY4azOaQnXgv?node-id=1-54266)     | [UI] FLUXO - SOLICITAR EMPRÉSTIMO -                                          | Pronto no front · P06 |
 | [1:54430](https://www.figma.com/design/BaDXlWpxbIoY4azOaQnXgv?node-id=1-54430)     | [UI] FLUXO - SOLICITAR EMPRÉSTIMO -                                          | Implementação/ajuste pendente · P06 |
 | [1:54617](https://www.figma.com/design/BaDXlWpxbIoY4azOaQnXgv?node-id=1-54617)     | [UI] FLUXO - SOLICITAR EMPRÉSTIMO -                                          | Implementação/ajuste pendente · P06 |
-| [1:54810](https://www.figma.com/design/BaDXlWpxbIoY4azOaQnXgv?node-id=1-54810)     | OFERTAS CONSÓRCIO - LISTA                                                    | Implementação/ajuste pendente · P06 |
-| [1:55081](https://www.figma.com/design/BaDXlWpxbIoY4azOaQnXgv?node-id=1-55081)     | OFERTAS CONSÓRCIO - CARDS                                                    | Implementação/ajuste pendente · P06 |
+| [1:54810](https://www.figma.com/design/BaDXlWpxbIoY4azOaQnXgv?node-id=1-54810)     | OFERTAS CONSÓRCIO - LISTA                                                    | Pronto no front · P06 |
+| [1:55081](https://www.figma.com/design/BaDXlWpxbIoY4azOaQnXgv?node-id=1-55081)     | OFERTAS CONSÓRCIO - CARDS                                                    | Pronto no front · P06 |
 | [1:55357](https://www.figma.com/design/BaDXlWpxbIoY4azOaQnXgv?node-id=1-55357)     | [UI] FLUXO - SOLICITAR CONSÓRCIO                                             | Pronto no front · P06 |
 | [1:55448](https://www.figma.com/design/BaDXlWpxbIoY4azOaQnXgv?node-id=1-55448)     | [UI] FLUXO - SOLICITAR EMPRÉSTIMO -                                          | Pronto no front · P06 |
-| [1:55539](https://www.figma.com/design/BaDXlWpxbIoY4azOaQnXgv?node-id=1-55539)     | [UI] FLUXO - SOLICITAR EMPRÉSTIMO -                                          | Implementação/ajuste pendente · P06 |
-| [1:55637](https://www.figma.com/design/BaDXlWpxbIoY4azOaQnXgv?node-id=1-55637)     | [UI] FLUXO - SOLICITAR EMPRÉSTIMO -                                          | Implementação/ajuste pendente · P06 |
+| [1:55539](https://www.figma.com/design/BaDXlWpxbIoY4azOaQnXgv?node-id=1-55539)     | [UI] FLUXO - SOLICITAR EMPRÉSTIMO -                                          | Pronto no front · P06 |
+| [1:55637](https://www.figma.com/design/BaDXlWpxbIoY4azOaQnXgv?node-id=1-55637)     | [UI] FLUXO - SOLICITAR EMPRÉSTIMO -                                          | Pronto no front · P06 |
 | [1:55709](https://www.figma.com/design/BaDXlWpxbIoY4azOaQnXgv?node-id=1-55709)     | [UI] FLUXO - SOLICITAR EMPRÉSTIMO -                                          | Pronto no front · P06 |
 | [1:55832](https://www.figma.com/design/BaDXlWpxbIoY4azOaQnXgv?node-id=1-55832)     | [UI] FLUXO - SOLICITAR EMPRÉSTIMO -                                          | Pronto no front · P06 |
-| [1:55919](https://www.figma.com/design/BaDXlWpxbIoY4azOaQnXgv?node-id=1-55919)     | [UI] FLUXO - SOLICITAR EMPRÉSTIMO -                                          | Implementado · revalidar · P06 |
-| [1:56020](https://www.figma.com/design/BaDXlWpxbIoY4azOaQnXgv?node-id=1-56020)     | [UI] FLUXO - SOLICITAR EMPRÉSTIMO -                                          | Implementado · revalidar · P06 |
-| [1:56115](https://www.figma.com/design/BaDXlWpxbIoY4azOaQnXgv?node-id=1-56115)     | [UI] FLUXO - SOLICITAR EMPRÉSTIMO -                                          | Implementação/ajuste pendente · P06 |
+| [1:55919](https://www.figma.com/design/BaDXlWpxbIoY4azOaQnXgv?node-id=1-55919)     | [UI] FLUXO - SOLICITAR EMPRÉSTIMO -                                          | Pronto no front · P06 |
+| [1:56020](https://www.figma.com/design/BaDXlWpxbIoY4azOaQnXgv?node-id=1-56020)     | [UI] FLUXO - SOLICITAR EMPRÉSTIMO -                                          | Pronto no front · P06 |
+| [1:56115](https://www.figma.com/design/BaDXlWpxbIoY4azOaQnXgv?node-id=1-56115)     | [UI] FLUXO - SOLICITAR EMPRÉSTIMO -                                          | Pronto no front · P06 |
 | [1:56231](https://www.figma.com/design/BaDXlWpxbIoY4azOaQnXgv?node-id=1-56231)     | [UI] ALAVANCAGEM - MINHAS ALAVANCAGENS - STATUS ATIVAS                       | Implementado · revalidar · P06 |
 | [1:57431](https://www.figma.com/design/BaDXlWpxbIoY4azOaQnXgv?node-id=1-57431)     | [UI] ALAVANCAGEM - MINHAS ALAVANCAGENS - STATUS ATIVAS                       | Implementado · revalidar · P06 |
 | [1:58679](https://www.figma.com/design/BaDXlWpxbIoY4azOaQnXgv?node-id=1-58679)     | [UI] ALAVANCAGEM - MINHAS ALAVANCAGENS - STATUS ATIVAS                       | Implementado · revalidar · P06 |
@@ -1189,8 +1203,8 @@ Legenda vigente: classificação de 16/11 por código e evidências, detalhada e
 | [1:68794](https://www.figma.com/design/BaDXlWpxbIoY4azOaQnXgv?node-id=1-68794)     | [UI] HOME - VERSÃO PADRÃO                                                    | Implementado · revalidar · P12 |
 | [1:69127](https://www.figma.com/design/BaDXlWpxbIoY4azOaQnXgv?node-id=1-69127)     | [UI] CONTRATOS - GERAL                                                       | Implementado · revalidar · P04 |
 | [1:70897](https://www.figma.com/design/BaDXlWpxbIoY4azOaQnXgv?node-id=1-70897)     | [UI] CONTRATOS - GERAL                                                       | Implementado · revalidar · P04 |
-| [1:72668](https://www.figma.com/design/BaDXlWpxbIoY4azOaQnXgv?node-id=1-72668)     | [UI] ALAVANCAGEM                                                             | Implementação/ajuste pendente · P06 |
-| [1:72787](https://www.figma.com/design/BaDXlWpxbIoY4azOaQnXgv?node-id=1-72787)     | [UI] ALAVANCAGEM                                                             | Implementação/ajuste pendente · P06 |
+| [1:72668](https://www.figma.com/design/BaDXlWpxbIoY4azOaQnXgv?node-id=1-72668)     | [UI] ALAVANCAGEM                                                             | Pronto no front · P06 |
+| [1:72787](https://www.figma.com/design/BaDXlWpxbIoY4azOaQnXgv?node-id=1-72787)     | [UI] ALAVANCAGEM                                                             | Pronto no front · P06 |
 | [1:72906](https://www.figma.com/design/BaDXlWpxbIoY4azOaQnXgv?node-id=1-72906)     | [UI] COMUNICAÇÃO (List View)                                                 | Implementado · revalidar · P12 |
 | [1:73097](https://www.figma.com/design/BaDXlWpxbIoY4azOaQnXgv?node-id=1-73097)     | [UI] COMUNICAÇÃO (List View)                                                 | Implementado · revalidar · P12 |
 | [1:73288](https://www.figma.com/design/BaDXlWpxbIoY4azOaQnXgv?node-id=1-73288)     | [UI] PERFIL - Pág Resumo - Dados Pessoais                                    | Implementado · revalidar · P12 |

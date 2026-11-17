@@ -1,0 +1,59 @@
+- main:
+  - paragraph: Prévia controlada · componentes reais · dados fictícios · sem escrita na API
+  - navigation:
+    - button "Alavancagem"
+    - button "Garantia"
+    - button "Consórcio"
+    - button "Pré-aprovado imóvel"
+    - button "Pré-aprovado automóvel"
+    - button "Ofertas finais"
+    - button "Ofertas consórcio"
+    - button "Colateral"
+    - button "Trocar tema"
+    - button "Alternar vazio"
+    - button "Falhar leitura uma vez"
+    - button "Alternar falha de envio"
+  - button "Voltar"
+  - heading "Ofertas Finais" [level=1]
+  - paragraph: Estas são as Ofertas Finais após a Análise de Crédito. Aguarde receber todas para avaliar qual a melhor opção. Você pode analisar cada oferta individualmente antes de selecionar uma.
+  - progressbar
+  - progressbar
+  - progressbar
+  - progressbar
+  - progressbar
+  - progressbar
+  - progressbar
+  - text: Passo 7/ 7
+  - generic: Ofertas Finais de Crédito
+  - generic: Você pode analisar individualmente ao clicar em “Ver Oferta”, e depois, selecionar a Oferta que mais te agrada e prosseguir.
+  - article:
+    - img "C6"
+    - 'button "Crédito Ofertado: R$ 600.000,00" [pressed]'
+    - generic: Aceito
+    - paragraph:
+      - strong: 60x de R$ 10.833,33
+      - generic: ▪
+      - generic: "Juros: 1,09% ao mês"
+    - button "Ver Oferta"
+  - article:
+    - img "Bradesco"
+    - 'button "Crédito Ofertado: R$ 500.000,00"'
+    - generic: Recebido
+    - paragraph:
+      - strong: 60x de R$ 13.833,33
+      - generic: ▪
+      - generic: "Juros: 2,09% ao mês"
+    - button "Ver Oferta"
+  - article:
+    - img "Inter"
+    - button "Solicitação de Crédito não aceita" [disabled]
+    - generic: Recusado
+    - paragraph: Motivo fictício para QA
+  - article:
+    - img "C6"
+    - button "Aguarde a Análise" [disabled]
+    - generic: Em Análise
+  - button "Prosseguir com Oferta Selecionada":
+    - generic: Prosseguir com Oferta Selecionada
+  - alert: Não foi possível concluir esta ação. Tente novamente.
+  - status: "· Destino: /system/loan/securedLoan"

@@ -1,0 +1,97 @@
+{
+  "note": "Leituras imediatas após troca de modo podem listar imagens ainda carregando. Não representam erros de download; a captura estabilizada e asset-geometry.json registram imagens carregadas.",
+  "immediateObservations": [
+    {
+      "mode": "Ofertas finais",
+      "client": 375,
+      "heading": "Ofertas Finais",
+      "missingImages": [
+        "/icons/banks/c6.png",
+        "/figma/loan-request/offer.svg",
+        "/icons/banks/bradesco.png",
+        "/figma/loan-request/offer.svg",
+        "/icons/banks/inter.png",
+        "/icons/banks/c6.png"
+      ],
+      "scroll": 375,
+      "width": 390
+    },
+    {
+      "mode": "Pré-aprovado imóvel",
+      "client": 375,
+      "heading": "Simule com seu Crédito Pré-Aprovado",
+      "missingImages": [
+        "/figma/loan-request/pencil.svg",
+        "/figma/loan-request/mark-active.svg",
+        "/figma/loan-request/mark.svg",
+        "/figma/loan-request/mark.svg",
+        "/figma/loan-request/info-limit.svg",
+        "/figma/loan-request/refresh.svg"
+      ],
+      "scroll": 375,
+      "width": 390
+    },
+    {
+      "mode": "Pré-aprovado automóvel",
+      "client": 375,
+      "heading": "Simule com seu Crédito Pré-Aprovado",
+      "missingImages": [],
+      "scroll": 375,
+      "width": 390
+    },
+    {
+      "mode": "Garantia",
+      "client": 375,
+      "heading": "Crédito Inteligente e Eficiente para Quem Precisa",
+      "missingImages": [
+        "/figma/loan-request/star.svg",
+        "/figma/loan-request/house.png",
+        "/figma/leverage/imgIconJamIconsOutlineLogosArrowRight.svg",
+        "/figma/loan-request/car.png",
+        "/figma/leverage/imgIconJamIconsOutlineLogosArrowRight.svg"
+      ],
+      "scroll": 375,
+      "width": 390
+    },
+    {
+      "mode": "Consórcio",
+      "client": 375,
+      "heading": "Consórcio Inteligente para Realizar Seus Planos",
+      "missingImages": [
+        "/figma/loan-request/pig.svg"
+      ],
+      "scroll": 375,
+      "width": 390
+    },
+    {
+      "mode": "Alavancagem",
+      "client": 375,
+      "heading": "Confira Formas de Alavancagem pela Strategy Analytics",
+      "missingImages": [
+        "/figma/leverage/imgWhisk41901F58Df2.png",
+        "/figma/leverage/imgId6HerfXiULogos1.png",
+        "/figma/leverage/imgLogo11.png",
+        "/figma/leverage/imgLogo2.png",
+        "/figma/leverage/imgImage257.png",
+        "/figma/leverage/imgImage261.png",
+        "/figma/leverage/imgImage259.png",
+        "/figma/leverage/imgImage262.png",
+        "/figma/leverage/imgImage258.png",
+        "/figma/leverage/imgImage264.png",
+        "/figma/leverage/imgWhiskEfef90628E.png",
+        "/figma/leverage/imgImage265.png",
+        "/figma/leverage/imgImage259.png",
+        "/figma/leverage/imgWhisk6079F395702.png",
+        "/figma/leverage/imgChatGptImage13DeAgoDe20250053212.png",
+        "/figma/leverage/imgChatGptImage13DeAgoDe20250053213.png",
+        "/figma/leverage/imgChatGptImage13DeAgoDe20250053214.png",
+        "/figma/leverage/imgChatGptImage13DeAgoDe20250053215.png",
+        "/figma/leverage/imgChatGptImage13DeAgoDe20252108132.png",
+        "/figma/leverage/imgChatGptImage13DeAgoDe20252108132.png",
+        "/figma/leverage/imgChatGptImage13DeAgoDe20252108132.png"
+      ],
+      "scroll": 375,
+      "width": 390
+    }
+  ]
+}

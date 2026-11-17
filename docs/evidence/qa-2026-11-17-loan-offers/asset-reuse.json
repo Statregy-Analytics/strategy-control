@@ -1,0 +1,15 @@
+{
+  "confirmationAsset": "public/figma/loan-request/success.png",
+  "sha256": "7edaf9fafa1aff63342ddb298f487b570a5eb01ba6bddd17ce2f28c8917d3351",
+  "otherFrames": [
+    {
+      "frame": "1:55637",
+      "samePng": true
+    },
+    {
+      "frame": "1:56115",
+      "samePng": true
+    }
+  ],
+  "productArtwork": "Os PNGs recuperados dos dois seletores foram comparados por SHA-256: são idênticos a house.png/car.png já versionados; reutilizados com os recortes do frame de opções."
+}

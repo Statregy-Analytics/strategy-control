@@ -1,0 +1,37 @@
+- main:
+  - paragraph: Prévia controlada · componentes reais · dados fictícios · sem escrita na API
+  - navigation:
+    - button "Alavancagem"
+    - button "Garantia"
+    - button "Consórcio"
+    - button "Pré-aprovado imóvel"
+    - button "Pré-aprovado automóvel"
+    - button "Ofertas finais"
+    - button "Ofertas consórcio"
+    - button "Colateral"
+    - button "Trocar tema"
+    - button "Alternar vazio"
+    - button "Falhar leitura uma vez"
+    - button "Alternar falha de envio"
+  - button "Voltar"
+  - heading "Solicitar Empréstimo" [level=1]
+  - generic: Quanto melhor seu Perfil de investimento, melhor as condições de Empréstimo (juros, parcelas,...)
+  - heading "Resumo" [level=2]
+  - heading "Solicitação de Empréstimo" [level=3]
+  - term: Valor do Empréstimo
+  - definition: R$ 200.000,00
+  - term: Total a Pagar
+  - definition: R$ 240.000,00
+  - term: Taxa de Juros
+  - definition: 1%
+  - term: Parcelamento
+  - definition: 60x · R$ 4.000,00
+  - term: Pagamento por Distrib. de Lucros
+  - definition: 20% (R$ 2.000,00)/mês
+  - checkbox "Eu confirmo e aceito as condições da simulação acima." [checked]
+  - text: Eu confirmo e aceito as condições da simulação acima.
+  - alert: Não foi possível enviar a simulação. Tente novamente.
+  - button "Voltar"
+  - button "Prosseguir":
+    - generic: Prosseguir
+  - status: "Abrir CON-QA-0 · Destino: /system/leverage"

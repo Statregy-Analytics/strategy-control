@@ -11,12 +11,12 @@
   },
   "metrics": {
     "total": 279,
-    "done": 170,
-    "validation": 87,
-    "adjustment": 22,
-    "implemented": 257,
-    "implementedPercent": 92.1,
-    "readyPercent": 60.9
+    "done": 187,
+    "validation": 85,
+    "adjustment": 7,
+    "implemented": 272,
+    "implementedPercent": 97.5,
+    "readyPercent": 67
   },
   "withoutLinkedFigmaReference": {
     "count": 13,
@@ -4667,12 +4667,12 @@
       "link": "[1:50557](https://www.figma.com/design/BaDXlWpxbIoY4azOaQnXgv?node-id=1-50557)",
       "counted": true,
       "group": "P06",
-      "category": "Ajuste de front",
-      "front": "adjustment",
+      "category": "Bloqueio backend",
+      "front": "done",
       "blockers": [
         "backend"
       ],
-      "reason": "Páginas roteadas usam JSON fake; uploads simulam com setTimeout; bloqueio de nível compara só ==1, não regra oficial de nível 3. Remover simulação e integrar leituras GET /client/loans existentes. Solicitações/ofertas/funil não têm contrato completo; não pedir nova API para a listagem já disponível.",
+      "reason": "Composição recuperada do Figma e estados testados no navegador local com dados controlados: carregamento, indisponibilidade, erro/retry, seleção e confirmação condicionada. Não equivale a envio integrado em homologação.",
       "sources": [
         "portal:src/system/pages/loan/LoanPage.vue",
         "portal:src/system/pages/leverage/LeveragePage.vue",
@@ -4680,7 +4680,8 @@
         "portal:src/system/layouts/loans/steps/DocUploadLoanLayout.vue"
       ],
       "evidence": [
-        "docs/evidence/qa-2026-11-16-inventory/api-contract-review.json"
+        "docs/evidence/qa-2026-11-16-inventory/api-contract-review.json",
+        "docs/evidence/qa-2026-11-17-loan-offers/results.json"
       ],
       "browser": "código confirmado; fluxos legados não homologados",
       "historicalCategory": "Ajuste de front"
@@ -4750,7 +4751,7 @@
       "blockers": [
         "backend"
       ],
-      "reason": "Páginas roteadas usam JSON fake; uploads simulam com setTimeout; bloqueio de nível compara só ==1, não regra oficial de nível 3. Remover simulação e integrar leituras GET /client/loans existentes. Solicitações/ofertas/funil não têm contrato completo; não pedir nova API para a listagem já disponível.",
+      "reason": "Detalhe informativo existente; falta concluir composição do frame extenso. Desenho mistura status Ativo com etapas editáveis e ações de solicitação; confirmar aplicação dessas ações ao detalhe ativo. DTO existente não fornece snapshot estruturado de imóvel/veículo, condições e proposta. Não solicitar nova listagem geral: GET /client/loans e /{id} já existem.",
       "sources": [
         "portal:src/system/pages/loan/LoanPage.vue",
         "portal:src/system/pages/leverage/LeveragePage.vue",
@@ -4758,7 +4759,8 @@
         "portal:src/system/layouts/loans/steps/DocUploadLoanLayout.vue"
       ],
       "evidence": [
-        "docs/evidence/qa-2026-11-16-inventory/api-contract-review.json"
+        "docs/evidence/qa-2026-11-16-inventory/api-contract-review.json",
+        "docs/evidence/qa-2026-11-17-loan-offers/results.json"
       ],
       "browser": "código confirmado; fluxos legados não homologados",
       "historicalCategory": "Ajuste de front"
@@ -4776,7 +4778,7 @@
       "blockers": [
         "backend"
       ],
-      "reason": "Páginas roteadas usam JSON fake; uploads simulam com setTimeout; bloqueio de nível compara só ==1, não regra oficial de nível 3. Remover simulação e integrar leituras GET /client/loans existentes. Solicitações/ofertas/funil não têm contrato completo; não pedir nova API para a listagem já disponível.",
+      "reason": "Detalhe informativo existente; falta concluir composição do frame extenso. Desenho mistura status Ativo com etapas editáveis e ações de solicitação; confirmar aplicação dessas ações ao detalhe ativo. DTO existente não fornece snapshot estruturado de imóvel/veículo, condições e proposta. Não solicitar nova listagem geral: GET /client/loans e /{id} já existem.",
       "sources": [
         "portal:src/system/pages/loan/LoanPage.vue",
         "portal:src/system/pages/leverage/LeveragePage.vue",
@@ -4784,7 +4786,8 @@
         "portal:src/system/layouts/loans/steps/DocUploadLoanLayout.vue"
       ],
       "evidence": [
-        "docs/evidence/qa-2026-11-16-inventory/api-contract-review.json"
+        "docs/evidence/qa-2026-11-16-inventory/api-contract-review.json",
+        "docs/evidence/qa-2026-11-17-loan-offers/results.json"
       ],
       "browser": "código confirmado; fluxos legados não homologados",
       "historicalCategory": "Ajuste de front"
@@ -4802,7 +4805,7 @@
       "blockers": [
         "backend"
       ],
-      "reason": "Páginas roteadas usam JSON fake; uploads simulam com setTimeout; bloqueio de nível compara só ==1, não regra oficial de nível 3. Remover simulação e integrar leituras GET /client/loans existentes. Solicitações/ofertas/funil não têm contrato completo; não pedir nova API para a listagem já disponível.",
+      "reason": "Detalhe informativo existente; falta concluir composição do frame extenso. Desenho mistura status Ativo com etapas editáveis e ações de solicitação; confirmar aplicação dessas ações ao detalhe ativo. DTO existente não fornece snapshot estruturado de imóvel/veículo, condições e proposta. Não solicitar nova listagem geral: GET /client/loans e /{id} já existem.",
       "sources": [
         "portal:src/system/pages/loan/LoanPage.vue",
         "portal:src/system/pages/leverage/LeveragePage.vue",
@@ -4810,7 +4813,8 @@
         "portal:src/system/layouts/loans/steps/DocUploadLoanLayout.vue"
       ],
       "evidence": [
-        "docs/evidence/qa-2026-11-16-inventory/api-contract-review.json"
+        "docs/evidence/qa-2026-11-16-inventory/api-contract-review.json",
+        "docs/evidence/qa-2026-11-17-loan-offers/results.json"
       ],
       "browser": "código confirmado; fluxos legados não homologados",
       "historicalCategory": "Ajuste de front"
@@ -4828,7 +4832,7 @@
       "blockers": [
         "backend"
       ],
-      "reason": "Páginas roteadas usam JSON fake; uploads simulam com setTimeout; bloqueio de nível compara só ==1, não regra oficial de nível 3. Remover simulação e integrar leituras GET /client/loans existentes. Solicitações/ofertas/funil não têm contrato completo; não pedir nova API para a listagem já disponível.",
+      "reason": "Detalhe informativo existente; falta concluir composição do frame extenso. Desenho mistura status Ativo com etapas editáveis e ações de solicitação; confirmar aplicação dessas ações ao detalhe ativo. DTO existente não fornece snapshot estruturado de imóvel/veículo, condições e proposta. Não solicitar nova listagem geral: GET /client/loans e /{id} já existem.",
       "sources": [
         "portal:src/system/pages/loan/LoanPage.vue",
         "portal:src/system/pages/leverage/LeveragePage.vue",
@@ -4836,7 +4840,8 @@
         "portal:src/system/layouts/loans/steps/DocUploadLoanLayout.vue"
       ],
       "evidence": [
-        "docs/evidence/qa-2026-11-16-inventory/api-contract-review.json"
+        "docs/evidence/qa-2026-11-16-inventory/api-contract-review.json",
+        "docs/evidence/qa-2026-11-17-loan-offers/results.json"
       ],
       "browser": "código confirmado; fluxos legados não homologados",
       "historicalCategory": "Ajuste de front"
@@ -4984,12 +4989,12 @@
       "link": "[1:52719](https://www.figma.com/design/BaDXlWpxbIoY4azOaQnXgv?node-id=1-52719)",
       "counted": true,
       "group": "P06",
-      "category": "Ajuste de front",
-      "front": "adjustment",
+      "category": "Bloqueio backend",
+      "front": "done",
       "blockers": [
         "backend"
       ],
-      "reason": "Páginas roteadas usam JSON fake; uploads simulam com setTimeout; bloqueio de nível compara só ==1, não regra oficial de nível 3. Remover simulação e integrar leituras GET /client/loans existentes. Solicitações/ofertas/funil não têm contrato completo; não pedir nova API para a listagem já disponível.",
+      "reason": "Composição recuperada do Figma e estados testados no navegador local com dados controlados: carregamento, indisponibilidade, erro/retry, seleção e confirmação condicionada. Não equivale a envio integrado em homologação.",
       "sources": [
         "portal:src/system/pages/loan/LoanPage.vue",
         "portal:src/system/pages/leverage/LeveragePage.vue",
@@ -4997,7 +5002,8 @@
         "portal:src/system/layouts/loans/steps/DocUploadLoanLayout.vue"
       ],
       "evidence": [
-        "docs/evidence/qa-2026-11-16-inventory/api-contract-review.json"
+        "docs/evidence/qa-2026-11-16-inventory/api-contract-review.json",
+        "docs/evidence/qa-2026-11-17-loan-offers/results.json"
       ],
       "browser": "código confirmado; fluxos legados não homologados",
       "historicalCategory": "Ajuste de front"
@@ -5010,12 +5016,12 @@
       "link": "[1:52928](https://www.figma.com/design/BaDXlWpxbIoY4azOaQnXgv?node-id=1-52928)",
       "counted": true,
       "group": "P06",
-      "category": "Ajuste de front",
-      "front": "adjustment",
+      "category": "Bloqueio backend",
+      "front": "done",
       "blockers": [
         "backend"
       ],
-      "reason": "Páginas roteadas usam JSON fake; uploads simulam com setTimeout; bloqueio de nível compara só ==1, não regra oficial de nível 3. Remover simulação e integrar leituras GET /client/loans existentes. Solicitações/ofertas/funil não têm contrato completo; não pedir nova API para a listagem já disponível.",
+      "reason": "Composição recuperada do Figma e estados testados no navegador local com dados controlados: carregamento, indisponibilidade, erro/retry, seleção e confirmação condicionada. Não equivale a envio integrado em homologação.",
       "sources": [
         "portal:src/system/pages/loan/LoanPage.vue",
         "portal:src/system/pages/leverage/LeveragePage.vue",
@@ -5023,7 +5029,8 @@
         "portal:src/system/layouts/loans/steps/DocUploadLoanLayout.vue"
       ],
       "evidence": [
-        "docs/evidence/qa-2026-11-16-inventory/api-contract-review.json"
+        "docs/evidence/qa-2026-11-16-inventory/api-contract-review.json",
+        "docs/evidence/qa-2026-11-17-loan-offers/results.json"
       ],
       "browser": "código confirmado; fluxos legados não homologados",
       "historicalCategory": "Ajuste de front"
@@ -5036,12 +5043,12 @@
       "link": "[1:53140](https://www.figma.com/design/BaDXlWpxbIoY4azOaQnXgv?node-id=1-53140)",
       "counted": true,
       "group": "P06",
-      "category": "Ajuste de front",
-      "front": "adjustment",
+      "category": "Bloqueio backend",
+      "front": "done",
       "blockers": [
         "backend"
       ],
-      "reason": "Páginas roteadas usam JSON fake; uploads simulam com setTimeout; bloqueio de nível compara só ==1, não regra oficial de nível 3. Remover simulação e integrar leituras GET /client/loans existentes. Solicitações/ofertas/funil não têm contrato completo; não pedir nova API para a listagem já disponível.",
+      "reason": "Composição recuperada do Figma e estados testados no navegador local com dados controlados: carregamento, indisponibilidade, erro/retry, seleção e confirmação condicionada. Não equivale a envio integrado em homologação.",
       "sources": [
         "portal:src/system/pages/loan/LoanPage.vue",
         "portal:src/system/pages/leverage/LeveragePage.vue",
@@ -5049,7 +5056,8 @@
         "portal:src/system/layouts/loans/steps/DocUploadLoanLayout.vue"
       ],
       "evidence": [
-        "docs/evidence/qa-2026-11-16-inventory/api-contract-review.json"
+        "docs/evidence/qa-2026-11-16-inventory/api-contract-review.json",
+        "docs/evidence/qa-2026-11-17-loan-offers/results.json"
       ],
       "browser": "código confirmado; fluxos legados não homologados",
       "historicalCategory": "Ajuste de front"
@@ -5062,12 +5070,12 @@
       "link": "[1:53312](https://www.figma.com/design/BaDXlWpxbIoY4azOaQnXgv?node-id=1-53312)",
       "counted": true,
       "group": "P06",
-      "category": "Ajuste de front",
-      "front": "adjustment",
+      "category": "Bloqueio backend",
+      "front": "done",
       "blockers": [
         "backend"
       ],
-      "reason": "Páginas roteadas usam JSON fake; uploads simulam com setTimeout; bloqueio de nível compara só ==1, não regra oficial de nível 3. Remover simulação e integrar leituras GET /client/loans existentes. Solicitações/ofertas/funil não têm contrato completo; não pedir nova API para a listagem já disponível.",
+      "reason": "Composição recuperada do Figma e estados testados no navegador local com dados controlados: carregamento, indisponibilidade, erro/retry, seleção e confirmação condicionada. Não equivale a envio integrado em homologação.",
       "sources": [
         "portal:src/system/pages/loan/LoanPage.vue",
         "portal:src/system/pages/leverage/LeveragePage.vue",
@@ -5075,7 +5083,8 @@
         "portal:src/system/layouts/loans/steps/DocUploadLoanLayout.vue"
       ],
       "evidence": [
-        "docs/evidence/qa-2026-11-16-inventory/api-contract-review.json"
+        "docs/evidence/qa-2026-11-16-inventory/api-contract-review.json",
+        "docs/evidence/qa-2026-11-17-loan-offers/results.json"
       ],
       "browser": "código confirmado; fluxos legados não homologados",
       "historicalCategory": "Ajuste de front"
@@ -5088,12 +5097,12 @@
       "link": "[1:53568](https://www.figma.com/design/BaDXlWpxbIoY4azOaQnXgv?node-id=1-53568)",
       "counted": true,
       "group": "P06",
-      "category": "Ajuste de front",
-      "front": "adjustment",
+      "category": "Bloqueio backend",
+      "front": "done",
       "blockers": [
         "backend"
       ],
-      "reason": "Páginas roteadas usam JSON fake; uploads simulam com setTimeout; bloqueio de nível compara só ==1, não regra oficial de nível 3. Remover simulação e integrar leituras GET /client/loans existentes. Solicitações/ofertas/funil não têm contrato completo; não pedir nova API para a listagem já disponível.",
+      "reason": "Composição recuperada do Figma e estados testados no navegador local com dados controlados: carregamento, indisponibilidade, erro/retry, seleção e confirmação condicionada. Não equivale a envio integrado em homologação.",
       "sources": [
         "portal:src/system/pages/loan/LoanPage.vue",
         "portal:src/system/pages/leverage/LeveragePage.vue",
@@ -5101,7 +5110,8 @@
         "portal:src/system/layouts/loans/steps/DocUploadLoanLayout.vue"
       ],
       "evidence": [
-        "docs/evidence/qa-2026-11-16-inventory/api-contract-review.json"
+        "docs/evidence/qa-2026-11-16-inventory/api-contract-review.json",
+        "docs/evidence/qa-2026-11-17-loan-offers/results.json"
       ],
       "browser": "código confirmado; fluxos legados não homologados",
       "historicalCategory": "Ajuste de front"
@@ -5222,12 +5232,12 @@
       "link": "[1:54146](https://www.figma.com/design/BaDXlWpxbIoY4azOaQnXgv?node-id=1-54146)",
       "counted": true,
       "group": "P06",
-      "category": "Ajuste de front",
-      "front": "adjustment",
+      "category": "Bloqueio backend",
+      "front": "done",
       "blockers": [
         "backend"
       ],
-      "reason": "Corrigidos proprietário, placa, condição de pagamento e remoção dos modelos/FIPE fictícios. Estado com modelos selecionáveis e referência FIPE precisa concluir integração/composição a partir de catálogo real; não contabilizado como pronto.",
+      "reason": "Composição recuperada do Figma e estados testados no navegador local com dados controlados: carregamento, indisponibilidade, erro/retry, seleção e confirmação condicionada. Não equivale a envio integrado em homologação.",
       "sources": [
         "portal:src/system/pages/loan/LoanPage.vue",
         "portal:src/system/pages/leverage/LeveragePage.vue",
@@ -5236,7 +5246,7 @@
       ],
       "evidence": [
         "docs/evidence/qa-2026-11-16-inventory/api-contract-review.json",
-        "docs/evidence/qa-2026-11-17-loans/results.json"
+        "docs/evidence/qa-2026-11-17-loan-offers/results.json"
       ],
       "browser": "código confirmado; fluxos legados não homologados",
       "historicalCategory": "Ajuste de front"
@@ -5249,12 +5259,12 @@
       "link": "[1:54266](https://www.figma.com/design/BaDXlWpxbIoY4azOaQnXgv?node-id=1-54266)",
       "counted": true,
       "group": "P06",
-      "category": "Ajuste de front",
-      "front": "adjustment",
+      "category": "Bloqueio backend",
+      "front": "done",
       "blockers": [
         "backend"
       ],
-      "reason": "Páginas roteadas usam JSON fake; uploads simulam com setTimeout; bloqueio de nível compara só ==1, não regra oficial de nível 3. Remover simulação e integrar leituras GET /client/loans existentes. Solicitações/ofertas/funil não têm contrato completo; não pedir nova API para a listagem já disponível.",
+      "reason": "Composição recuperada do Figma e estados testados no navegador local com dados controlados: carregamento, indisponibilidade, erro/retry, seleção e confirmação condicionada. Não equivale a envio integrado em homologação.",
       "sources": [
         "portal:src/system/pages/loan/LoanPage.vue",
         "portal:src/system/pages/leverage/LeveragePage.vue",
@@ -5262,7 +5272,8 @@
         "portal:src/system/layouts/loans/steps/DocUploadLoanLayout.vue"
       ],
       "evidence": [
-        "docs/evidence/qa-2026-11-16-inventory/api-contract-review.json"
+        "docs/evidence/qa-2026-11-16-inventory/api-contract-review.json",
+        "docs/evidence/qa-2026-11-17-loan-offers/results.json"
       ],
       "browser": "código confirmado; fluxos legados não homologados",
       "historicalCategory": "Ajuste de front"
@@ -5280,7 +5291,7 @@
       "blockers": [
         "backend"
       ],
-      "reason": "Páginas roteadas usam JSON fake; uploads simulam com setTimeout; bloqueio de nível compara só ==1, não regra oficial de nível 3. Remover simulação e integrar leituras GET /client/loans existentes. Solicitações/ofertas/funil não têm contrato completo; não pedir nova API para a listagem já disponível.",
+      "reason": "Documentação do imóvel ainda requer composição específica do frame e contrato de upload/vínculo da solicitação; documentos de empréstimos existentes são outro fluxo.",
       "sources": [
         "portal:src/system/pages/loan/LoanPage.vue",
         "portal:src/system/pages/leverage/LeveragePage.vue",
@@ -5288,7 +5299,8 @@
         "portal:src/system/layouts/loans/steps/DocUploadLoanLayout.vue"
       ],
       "evidence": [
-        "docs/evidence/qa-2026-11-16-inventory/api-contract-review.json"
+        "docs/evidence/qa-2026-11-16-inventory/api-contract-review.json",
+        "docs/evidence/qa-2026-11-17-loan-offers/results.json"
       ],
       "browser": "código confirmado; fluxos legados não homologados",
       "historicalCategory": "Ajuste de front"
@@ -5306,7 +5318,7 @@
       "blockers": [
         "backend"
       ],
-      "reason": "Páginas roteadas usam JSON fake; uploads simulam com setTimeout; bloqueio de nível compara só ==1, não regra oficial de nível 3. Remover simulação e integrar leituras GET /client/loans existentes. Solicitações/ofertas/funil não têm contrato completo; não pedir nova API para a listagem já disponível.",
+      "reason": "Referência recuperada de automóvel usa título Imóvel e campos IPTU/imóvel: designer deve confirmar campos corretos antes da implementação; API de solicitação/vínculo ainda ausente.",
       "sources": [
         "portal:src/system/pages/loan/LoanPage.vue",
         "portal:src/system/pages/leverage/LeveragePage.vue",
@@ -5314,7 +5326,8 @@
         "portal:src/system/layouts/loans/steps/DocUploadLoanLayout.vue"
       ],
       "evidence": [
-        "docs/evidence/qa-2026-11-16-inventory/api-contract-review.json"
+        "docs/evidence/qa-2026-11-16-inventory/api-contract-review.json",
+        "docs/evidence/qa-2026-11-17-loan-offers/results.json"
       ],
       "browser": "código confirmado; fluxos legados não homologados",
       "historicalCategory": "Ajuste de front"
@@ -5327,12 +5340,12 @@
       "link": "[1:54810](https://www.figma.com/design/BaDXlWpxbIoY4azOaQnXgv?node-id=1-54810)",
       "counted": true,
       "group": "P06",
-      "category": "Ajuste de front",
-      "front": "adjustment",
+      "category": "Bloqueio backend",
+      "front": "done",
       "blockers": [
         "backend"
       ],
-      "reason": "Páginas roteadas usam JSON fake; uploads simulam com setTimeout; bloqueio de nível compara só ==1, não regra oficial de nível 3. Remover simulação e integrar leituras GET /client/loans existentes. Solicitações/ofertas/funil não têm contrato completo; não pedir nova API para a listagem já disponível.",
+      "reason": "Composição recuperada do Figma e estados testados no navegador local com dados controlados: carregamento, indisponibilidade, erro/retry, seleção e confirmação condicionada. Não equivale a envio integrado em homologação.",
       "sources": [
         "portal:src/system/pages/loan/LoanPage.vue",
         "portal:src/system/pages/leverage/LeveragePage.vue",
@@ -5340,7 +5353,8 @@
         "portal:src/system/layouts/loans/steps/DocUploadLoanLayout.vue"
       ],
       "evidence": [
-        "docs/evidence/qa-2026-11-16-inventory/api-contract-review.json"
+        "docs/evidence/qa-2026-11-16-inventory/api-contract-review.json",
+        "docs/evidence/qa-2026-11-17-loan-offers/results.json"
       ],
       "browser": "código confirmado; fluxos legados não homologados",
       "historicalCategory": "Ajuste de front"
@@ -5353,12 +5367,12 @@
       "link": "[1:55081](https://www.figma.com/design/BaDXlWpxbIoY4azOaQnXgv?node-id=1-55081)",
       "counted": true,
       "group": "P06",
-      "category": "Ajuste de front",
-      "front": "adjustment",
+      "category": "Bloqueio backend",
+      "front": "done",
       "blockers": [
         "backend"
       ],
-      "reason": "Páginas roteadas usam JSON fake; uploads simulam com setTimeout; bloqueio de nível compara só ==1, não regra oficial de nível 3. Remover simulação e integrar leituras GET /client/loans existentes. Solicitações/ofertas/funil não têm contrato completo; não pedir nova API para a listagem já disponível.",
+      "reason": "Composição recuperada do Figma e estados testados no navegador local com dados controlados: carregamento, indisponibilidade, erro/retry, seleção e confirmação condicionada. Não equivale a envio integrado em homologação.",
       "sources": [
         "portal:src/system/pages/loan/LoanPage.vue",
         "portal:src/system/pages/leverage/LeveragePage.vue",
@@ -5366,7 +5380,8 @@
         "portal:src/system/layouts/loans/steps/DocUploadLoanLayout.vue"
       ],
       "evidence": [
-        "docs/evidence/qa-2026-11-16-inventory/api-contract-review.json"
+        "docs/evidence/qa-2026-11-16-inventory/api-contract-review.json",
+        "docs/evidence/qa-2026-11-17-loan-offers/results.json"
       ],
       "browser": "código confirmado; fluxos legados não homologados",
       "historicalCategory": "Ajuste de front"
@@ -5433,12 +5448,12 @@
       "link": "[1:55539](https://www.figma.com/design/BaDXlWpxbIoY4azOaQnXgv?node-id=1-55539)",
       "counted": true,
       "group": "P06",
-      "category": "Ajuste de front",
-      "front": "adjustment",
+      "category": "Bloqueio backend",
+      "front": "done",
       "blockers": [
         "backend"
       ],
-      "reason": "Páginas roteadas usam JSON fake; uploads simulam com setTimeout; bloqueio de nível compara só ==1, não regra oficial de nível 3. Remover simulação e integrar leituras GET /client/loans existentes. Solicitações/ofertas/funil não têm contrato completo; não pedir nova API para a listagem já disponível.",
+      "reason": "Composição recuperada do Figma e estados testados no navegador local com dados controlados: carregamento, indisponibilidade, erro/retry, seleção e confirmação condicionada. Não equivale a envio integrado em homologação.",
       "sources": [
         "portal:src/system/pages/loan/LoanPage.vue",
         "portal:src/system/pages/leverage/LeveragePage.vue",
@@ -5446,7 +5461,8 @@
         "portal:src/system/layouts/loans/steps/DocUploadLoanLayout.vue"
       ],
       "evidence": [
-        "docs/evidence/qa-2026-11-16-inventory/api-contract-review.json"
+        "docs/evidence/qa-2026-11-16-inventory/api-contract-review.json",
+        "docs/evidence/qa-2026-11-17-loan-offers/results.json"
       ],
       "browser": "código confirmado; fluxos legados não homologados",
       "historicalCategory": "Ajuste de front"
@@ -5459,12 +5475,12 @@
       "link": "[1:55637](https://www.figma.com/design/BaDXlWpxbIoY4azOaQnXgv?node-id=1-55637)",
       "counted": true,
       "group": "P06",
-      "category": "Ajuste de front",
-      "front": "adjustment",
+      "category": "Bloqueio backend",
+      "front": "done",
       "blockers": [
         "backend"
       ],
-      "reason": "Páginas roteadas usam JSON fake; uploads simulam com setTimeout; bloqueio de nível compara só ==1, não regra oficial de nível 3. Remover simulação e integrar leituras GET /client/loans existentes. Solicitações/ofertas/funil não têm contrato completo; não pedir nova API para a listagem já disponível.",
+      "reason": "Composição recuperada do Figma e estados testados no navegador local com dados controlados: carregamento, indisponibilidade, erro/retry, seleção e confirmação condicionada. Não equivale a envio integrado em homologação.",
       "sources": [
         "portal:src/system/pages/loan/LoanPage.vue",
         "portal:src/system/pages/leverage/LeveragePage.vue",
@@ -5472,7 +5488,8 @@
         "portal:src/system/layouts/loans/steps/DocUploadLoanLayout.vue"
       ],
       "evidence": [
-        "docs/evidence/qa-2026-11-16-inventory/api-contract-review.json"
+        "docs/evidence/qa-2026-11-16-inventory/api-contract-review.json",
+        "docs/evidence/qa-2026-11-17-loan-offers/results.json"
       ],
       "browser": "código confirmado; fluxos legados não homologados",
       "historicalCategory": "Ajuste de front"
@@ -5539,12 +5556,12 @@
       "link": "[1:55919](https://www.figma.com/design/BaDXlWpxbIoY4azOaQnXgv?node-id=1-55919)",
       "counted": true,
       "group": "P06",
-      "category": "Ajuste de front",
-      "front": "validation",
+      "category": "Bloqueio backend",
+      "front": "done",
       "blockers": [
         "backend"
       ],
-      "reason": "Parcelamento e resumo compostos e navegáveis; estados indisponíveis testados em desktop/celular. Valores de parcelas, juros e condições reais ainda exigem contrato de simulação e revalidação do estado preenchido; confirmação não é enviada.",
+      "reason": "Composição recuperada do Figma e estados testados no navegador local com dados controlados: carregamento, indisponibilidade, erro/retry, seleção e confirmação condicionada. Não equivale a envio integrado em homologação.",
       "sources": [
         "portal:src/system/pages/loan/LoanPage.vue",
         "portal:src/system/pages/leverage/LeveragePage.vue",
@@ -5553,7 +5570,7 @@
       ],
       "evidence": [
         "docs/evidence/qa-2026-11-16-inventory/api-contract-review.json",
-        "docs/evidence/qa-2026-11-17-loans/results.json"
+        "docs/evidence/qa-2026-11-17-loan-offers/results.json"
       ],
       "browser": "código confirmado; fluxos legados não homologados",
       "historicalCategory": "Ajuste de front"
@@ -5566,12 +5583,12 @@
       "link": "[1:56020](https://www.figma.com/design/BaDXlWpxbIoY4azOaQnXgv?node-id=1-56020)",
       "counted": true,
       "group": "P06",
-      "category": "Ajuste de front",
-      "front": "validation",
+      "category": "Bloqueio backend",
+      "front": "done",
       "blockers": [
         "backend"
       ],
-      "reason": "Parcelamento e resumo compostos e navegáveis; estados indisponíveis testados em desktop/celular. Valores de parcelas, juros e condições reais ainda exigem contrato de simulação e revalidação do estado preenchido; confirmação não é enviada.",
+      "reason": "Composição recuperada do Figma e estados testados no navegador local com dados controlados: carregamento, indisponibilidade, erro/retry, seleção e confirmação condicionada. Não equivale a envio integrado em homologação.",
       "sources": [
         "portal:src/system/pages/loan/LoanPage.vue",
         "portal:src/system/pages/leverage/LeveragePage.vue",
@@ -5580,7 +5597,7 @@
       ],
       "evidence": [
         "docs/evidence/qa-2026-11-16-inventory/api-contract-review.json",
-        "docs/evidence/qa-2026-11-17-loans/results.json"
+        "docs/evidence/qa-2026-11-17-loan-offers/results.json"
       ],
       "browser": "código confirmado; fluxos legados não homologados",
       "historicalCategory": "Ajuste de front"
@@ -5593,12 +5610,12 @@
       "link": "[1:56115](https://www.figma.com/design/BaDXlWpxbIoY4azOaQnXgv?node-id=1-56115)",
       "counted": true,
       "group": "P06",
-      "category": "Ajuste de front",
-      "front": "adjustment",
+      "category": "Bloqueio backend",
+      "front": "done",
       "blockers": [
         "backend"
       ],
-      "reason": "Páginas roteadas usam JSON fake; uploads simulam com setTimeout; bloqueio de nível compara só ==1, não regra oficial de nível 3. Remover simulação e integrar leituras GET /client/loans existentes. Solicitações/ofertas/funil não têm contrato completo; não pedir nova API para a listagem já disponível.",
+      "reason": "Composição recuperada do Figma e estados testados no navegador local com dados controlados: carregamento, indisponibilidade, erro/retry, seleção e confirmação condicionada. Não equivale a envio integrado em homologação.",
       "sources": [
         "portal:src/system/pages/loan/LoanPage.vue",
         "portal:src/system/pages/leverage/LeveragePage.vue",
@@ -5606,7 +5623,8 @@
         "portal:src/system/layouts/loans/steps/DocUploadLoanLayout.vue"
       ],
       "evidence": [
-        "docs/evidence/qa-2026-11-16-inventory/api-contract-review.json"
+        "docs/evidence/qa-2026-11-16-inventory/api-contract-review.json",
+        "docs/evidence/qa-2026-11-17-loan-offers/results.json"
       ],
       "browser": "código confirmado; fluxos legados não homologados",
       "historicalCategory": "Ajuste de front"
@@ -6293,12 +6311,12 @@
       "link": "[1:72668](https://www.figma.com/design/BaDXlWpxbIoY4azOaQnXgv?node-id=1-72668)",
       "counted": true,
       "group": "P06",
-      "category": "Ajuste de front",
-      "front": "adjustment",
+      "category": "Bloqueio backend",
+      "front": "done",
       "blockers": [
         "backend"
       ],
-      "reason": "Páginas roteadas usam JSON fake; uploads simulam com setTimeout; bloqueio de nível compara só ==1, não regra oficial de nível 3. Remover simulação e integrar leituras GET /client/loans existentes. Solicitações/ofertas/funil não têm contrato completo; não pedir nova API para a listagem já disponível.",
+      "reason": "Composição recuperada do Figma e estados testados no navegador local com dados controlados: carregamento, indisponibilidade, erro/retry, seleção e confirmação condicionada. Não equivale a envio integrado em homologação.",
       "sources": [
         "portal:src/system/pages/loan/LoanPage.vue",
         "portal:src/system/pages/leverage/LeveragePage.vue",
@@ -6306,7 +6324,8 @@
         "portal:src/system/layouts/loans/steps/DocUploadLoanLayout.vue"
       ],
       "evidence": [
-        "docs/evidence/qa-2026-11-16-inventory/api-contract-review.json"
+        "docs/evidence/qa-2026-11-16-inventory/api-contract-review.json",
+        "docs/evidence/qa-2026-11-17-loan-offers/results.json"
       ],
       "browser": "código confirmado; fluxos legados não homologados",
       "historicalCategory": "Ajuste de front"
@@ -6319,12 +6338,12 @@
       "link": "[1:72787](https://www.figma.com/design/BaDXlWpxbIoY4azOaQnXgv?node-id=1-72787)",
       "counted": true,
       "group": "P06",
-      "category": "Ajuste de front",
-      "front": "adjustment",
+      "category": "Bloqueio backend",
+      "front": "done",
       "blockers": [
         "backend"
       ],
-      "reason": "Páginas roteadas usam JSON fake; uploads simulam com setTimeout; bloqueio de nível compara só ==1, não regra oficial de nível 3. Remover simulação e integrar leituras GET /client/loans existentes. Solicitações/ofertas/funil não têm contrato completo; não pedir nova API para a listagem já disponível.",
+      "reason": "Composição recuperada do Figma e estados testados no navegador local com dados controlados: carregamento, indisponibilidade, erro/retry, seleção e confirmação condicionada. Não equivale a envio integrado em homologação.",
       "sources": [
         "portal:src/system/pages/loan/LoanPage.vue",
         "portal:src/system/pages/leverage/LeveragePage.vue",
@@ -6332,7 +6351,8 @@
         "portal:src/system/layouts/loans/steps/DocUploadLoanLayout.vue"
       ],
       "evidence": [
-        "docs/evidence/qa-2026-11-16-inventory/api-contract-review.json"
+        "docs/evidence/qa-2026-11-16-inventory/api-contract-review.json",
+        "docs/evidence/qa-2026-11-17-loan-offers/results.json"
       ],
       "browser": "código confirmado; fluxos legados não homologados",
       "historicalCategory": "Ajuste de front"

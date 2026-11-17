@@ -1,0 +1,67 @@
+{
+  "date": "2026-11-17",
+  "portalCommit": "265dd49",
+  "scope": "Frontend dos estados de alavancagem, ofertas de crédito/consórcio, modelos/FIPE e colateral",
+  "frames": [
+    "1:50557",
+    "1:72668",
+    "1:72787",
+    "1:54266",
+    "1:55539",
+    "1:52719",
+    "1:52928",
+    "1:53140",
+    "1:53568",
+    "1:54810",
+    "1:55081",
+    "1:53312",
+    "1:55637",
+    "1:56115",
+    "1:54146",
+    "1:55919",
+    "1:56020"
+  ],
+  "tests": {
+    "portalTests": 449,
+    "lint": "passed",
+    "localBuild": "passed na versão final 265dd49; compilação de produção concluída",
+    "diffCheck": "scoped passed",
+    "browser": "Componentes reais em harness local temporário, removido antes do commit",
+    "controlledFlows": [
+      "3 temas do catálogo e links existentes",
+      "seleção imóvel/automóvel",
+      "ofertas aprovadas, recebidas, recusadas e em análise; permissões explícitas",
+      "falha de leitura e retry; lista vazia",
+      "alteração de valor/prazo invalida seleção e resposta anterior",
+      "abertura de oferta não confirma solicitação",
+      "falha no envio preserva dados; retry; proteção contra envio duplicado",
+      "consórcio lista/cards e destaque",
+      "colateral: orçamento compatível, aceite, falha/retry e sucesso somente confirmado",
+      "9 modelos, seleção teclado, FIPE vinda do catálogo e quitação condicional",
+      "responsivo 390px sem overflow horizontal"
+    ],
+    "adminLint": "passed",
+    "adminBuild": "passed",
+    "portalFinalLint": "passed",
+    "portalFinalTests": "449 passed, 0 failed"
+  },
+  "limits": [
+    "Dados preenchidos e callbacks são controlados locais, não ofertas financeiras da API. Nenhum débito, solicitação financeira ou upload real realizado.",
+    "Rotas publicadas sem adaptadores exibem indisponibilidade e impedem confirmação fictícia.",
+    "Homologação integrada de ofertas/envio/FIPE depende de rotas ainda ausentes no OpenAPI.",
+    "Leitura GET de empréstimos/documentos/histórico já existe e permanece preservada."
+  ],
+  "backend": [
+    "Contrato para simulação, consulta de ofertas, detalhe de proposta, envio da solicitação e catálogo de modelos/FIPE.",
+    "Definir vínculo de documentos da solicitação; não confundir com anexos de empréstimos já existentes.",
+    "Detalhes extensos precisam snapshots de condições e dados submetidos que não constam no DTO atual."
+  ],
+  "designer": [
+    "Escolha Imóvel anuncia 5 mil–150 mil enquanto simulação desenhada permite 50 mil–3 milhões; confirmar regra/cópia.",
+    "Frame automóvel 1:54617 contém Imóvel/IPTU: confirmar campos.",
+    "Detalhes Ativos combinam simulação e ações editáveis; esclarecer aplicação no fluxo informativo."
+  ],
+  "withoutReferenceAdded": 0,
+  "existingWithoutReferenceSurfaces": 13,
+  "publication": "Commit/push concluídos; publicação BLOQUEADA na auditoria de dependências, antes de build/upload. Ver publication-assets.json."
+}
