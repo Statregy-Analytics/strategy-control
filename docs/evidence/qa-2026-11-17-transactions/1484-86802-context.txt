@@ -1,0 +1,75 @@
+export default function E06PainelDeEstadosDoComponenteExecutarOperacao() {
+  return (
+    <div className="backdrop-blur-[20px] border-[0.8px] border-[var(--color\/v2\/text\/nav-active,white)] border-solid drop-shadow-[4px_4px_6px_rgba(0,0,0,0.13)] relative rounded-[12px] size-full" data-node-id="1484:86802" style={{ backgroundImage: "linear-gradient(195.1338011561969deg, rgba(0, 0, 0, 0.118) 0.52072%, rgba(0, 0, 0, 0.039) 51.124%, rgba(0, 0, 0, 0.02) 99.479%), linear-gradient(195.1338011561969deg, rgba(0, 0, 0, 0.078) 0.52072%, rgba(0, 0, 0, 0.039) 51.124%, rgba(0, 0, 0, 0.01) 99.479%)" }} data-name="E06 · Painel de estados do componente · Executar operação">
+      <div className="absolute h-[160.4px] left-[24.2px] top-[89.2px] w-[462px]" data-node-id="1484:86803" data-name="Container">
+        <div className="absolute content-stretch flex flex-col items-start left-0 pt-[var(--sa-spacing-24,24px)] top-0 w-[462.4px]" data-node-id="1484:86804" data-name="Container:margin">
+          <div className="border-[rgba(255,255,255,0.18)] border-solid border-t-[0.8px] content-stretch flex flex-col items-start pt-[var(--sa-spacing-16,16.8px)] relative shrink-0 w-full" data-node-id="1484:86805" data-name="Container">
+            <div className="relative shrink-0 w-full" data-node-id="1484:86806" data-name="Container">
+              <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex flex-col items-start relative size-full">
+                <div className="border-[#c6d2ff] border-[0.8px] border-solid relative rounded-[var(--sa-radius-10,10px)] shrink-0 w-full" data-node-id="1484:86807" style={{ backgroundImage: "linear-gradient(87.51064762125297deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.035) 50.059%, rgba(255, 255, 255, 0.075) 100.06%)" }} data-name="Container">
+                  <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex flex-col items-start p-[var(--sa-spacing-12,12.8px)] relative size-full">
+                    <div className="relative shrink-0 w-[437px]" data-node-id="1484:86808" data-name="Paragraph">
+                      <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex flex-col items-start relative size-full">
+                        <p className="[word-break:break-word] font-['Inter:Regular'] font-normal leading-[20px] not-italic relative shrink-0 text-[#372aac] text-[14px] whitespace-nowrap" data-node-id="1484:86809">
+                          Você está executando esta operação
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div className="relative shrink-0 w-[462.4px]" data-node-id="1484:86810" data-name="Container">
+                  <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex flex-col items-start pt-[var(--sa-spacing-16,16px)] relative size-full">
+                    <div className="relative shrink-0 w-full" data-node-id="1484:86811" data-name="Label">
+                      <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex gap-[var(--sa-spacing-8,8px)] items-center relative size-full">
+                        <p className="[word-break:break-word] font-['Inter:Medium'] font-medium leading-[14px] not-italic relative shrink-0 text-[14px] text-[color:var(--sa-color-text-secondary,rgba(255,255,255,0.72))] whitespace-nowrap" data-node-id="1484:86812">
+                          Confirmação
+                        </p>
+                      </div>
+                    </div>
+                    <div className="relative shrink-0 w-full" data-node-id="1484:86813" data-name="Input:margin">
+                      <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex flex-col items-start pt-[var(--sa-spacing-8,8px)] relative size-full">
+                        <div className="backdrop-blur-[20px] border-[0.8px] border-[rgba(255,255,255,0.16)] border-solid content-stretch flex flex-col h-[36px] items-start justify-center overflow-clip px-[var(--sa-spacing-12,12.8px)] py-[var(--sa-spacing-4,4.8px)] relative rounded-[12px] shadow-[4px_4px_12px_0px_rgba(0,0,0,0.24)] shrink-0 w-[462px]" data-node-id="1484:86814" style={{ backgroundImage: "linear-gradient(181.893379964877deg, rgba(0, 0, 0, 0.24) 0.52072%, rgba(0, 0, 0, 0.08) 51.124%, rgba(0, 0, 0, 0.04) 99.479%), linear-gradient(181.893379964877deg, rgba(0, 0, 0, 0.16) 0.52072%, rgba(0, 0, 0, 0.08) 51.124%, rgba(0, 0, 0, 0.02) 99.479%)" }} data-name="Input">
+                          <p className="[word-break:break-word] font-['Inter:Regular'] font-normal leading-[normal] not-italic relative shrink-0 text-[14px] text-[color:var(--sa-color-text-secondary,rgba(255,255,255,0.72))] w-full" data-node-id="1484:86815">
+                            Digite CONFIRMAR para executar
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div className="absolute content-stretch flex gap-[var(--sa-spacing-8,8px)] items-start justify-end left-[24.2px] top-[265.6px] w-[462.4px]" data-node-id="1484:86816" data-name="DialogFooter">
+        <div className="bg-[var(--sa-color-bg-surface,rgba(255,255,255,0.06))] border-[0.8px] border-[var(--sa-color-border-default,rgba(255,255,255,0.2))] border-solid h-[36px] relative rounded-[var(--sa-radius-8,8px)] shrink-0" data-node-id="1484:86817" data-name="Botão ação nível 1">
+          <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex items-center justify-center px-[14.8px] py-[var(--sa-spacing-8,8.8px)] relative size-full">
+            <p className="[word-break:break-word] font-['Inter:Medium'] font-medium leading-[20px] not-italic relative shrink-0 text-[14px] text-[color:var(--sa-color-text-secondary,rgba(255,255,255,0.72))] text-center whitespace-nowrap" data-node-id="1484:86818">
+              Voltar
+            </p>
+          </div>
+        </div>
+        <div className="backdrop-blur-[20px] bg-[var(--sa-color-bg-glass,rgba(255,255,255,0.06))] border-[length:var(----sa-stroke-1,1px)] border-[var(--sa-color-border-strong,rgba(255,255,255,0.28))] border-solid drop-shadow-[4px_4px_6px_rgba(0,0,0,0.24)] h-[36px] relative rounded-[12px] shrink-0" data-node-id="1484:86819" data-name="Botão ação nível 1">
+          <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex items-center justify-center px-[15px] py-[var(--sa-spacing-8,9px)] relative size-full">
+            <p className="[word-break:break-word] font-['Inter:Medium'] font-medium leading-[20px] not-italic relative shrink-0 text-[14px] text-[color:var(--sa-color-text-primary,white)] text-center whitespace-nowrap" data-node-id="1484:86820">
+              Confirmar Ação
+            </p>
+          </div>
+        </div>
+      </div>
+      <p className="[word-break:break-word] absolute font-['Inter:Semi_Bold'] font-semibold leading-[normal] left-[24px] not-italic text-[18px] text-[color:var(--sa-color-text-primary,white)] top-[24px] w-[462px]" data-node-id="1484:86821">
+        Painel de estados do componente · E06 · Executar operação
+      </p>
+    </div>
+  );
+}
+SUPER CRITICAL: The generated React+Tailwind code MUST be converted to match the target project's technology stack and styling system.
+1. Analyze the target codebase to identify: technology stack, styling approach, component patterns, and design tokens
+2. Convert React syntax to the target framework/library
+3. Transform all Tailwind classes to the target styling system while preserving exact visual design
+4. Follow the project's existing patterns and conventions
+DO NOT install any Tailwind as a dependency unless the user instructs you to do so.
+
+Node ids have been added to the code as data attributes, e.g. `data-node-id="1:2"`.
+The generated code contains image and SVG URL constants, e.g. const image = 'https://www.figma.com/api/mcp/asset/550e8400-e29b-41d4-a716-446655440000.png'. These URLs are temporary download sources and expire after 7 days. Download each asset into the project with curl -L, then replace its URL in the generated code with a reference to the downloaded asset. Never use the temporary URLs as runtime image sources.

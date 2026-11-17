@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-16",
+  "updatedAt": "2026-11-17",
   "baseline": "docs/evidence/qa-2026-11-16-inventory/classification.json",
   "baselineSha256": "26c2a433d27898a864d7f1a0091a8aa30f218751b023914037090ae0d8652c26",
   "unit": "Frames/estados independentes do Figma, não rotas nem horas",
@@ -11,12 +11,18 @@
   },
   "metrics": {
     "total": 279,
-    "done": 146,
-    "validation": 80,
-    "adjustment": 53,
-    "implemented": 226,
-    "implementedPercent": 81,
-    "readyPercent": 52.3
+    "done": 156,
+    "validation": 85,
+    "adjustment": 38,
+    "implemented": 241,
+    "implementedPercent": 86.4,
+    "readyPercent": 55.9
+  },
+  "withoutLinkedFigmaReference": {
+    "count": 13,
+    "countedInFigmaProgress": false,
+    "register": "docs/FRONTEND-SEM-REFERENCIA-FIGMA.json",
+    "note": "Superfícies encontradas no código atual sem frame equivalente vinculado no inventário recuperado, para avaliação de Éric. Ausência de vínculo não prova ausência em todo o arquivo Figma. Inclui telas legadas, acessos auxiliares e adaptações autorizadas; não significa que todas foram criadas nesta entrega."
   },
   "items": [
     {
@@ -2599,16 +2605,19 @@
       "link": "[1484:86593](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-86593)",
       "counted": true,
       "group": "T02",
-      "category": "Ajuste de front",
-      "front": "adjustment",
-      "blockers": [],
-      "reason": "Confirmação atual envia action/reason/expectedVersion sem senha; não há destinatário na criação nem telas de correção/edição conectadas. Endpoints e campos correspondentes existem na OpenAPI; não cobrar como ausência de API.",
+      "category": "Bloqueio backend",
+      "front": "done",
+      "blockers": [
+        "backend"
+      ],
+      "reason": "Composição e estados implementados com referências completas recuperadas; testes de validação/concorrência e navegador local. Envio de anexo, redução multiorigem e campos ausentes da API permanecem limites de integração, não sucessos simulados.",
       "sources": [
         "src/pages/TransctionPage.vue",
         "src/components/Finance/TransactionCreate.vue"
       ],
       "evidence": [
-        "docs/evidence/qa-2026-11-16-inventory/api-contract-review.json"
+        "docs/evidence/qa-2026-11-16-inventory/api-contract-review.json",
+        "docs/evidence/qa-2026-11-17-transactions/results.json"
       ],
       "browser": "diagnóstico de código; não executadas operações financeiras",
       "historicalCategory": "Ajuste de front"
@@ -2667,16 +2676,17 @@
       "link": "[1484:86762](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-86762)",
       "counted": true,
       "group": "T02",
-      "category": "Ajuste de front",
-      "front": "adjustment",
+      "category": "Já correto",
+      "front": "done",
       "blockers": [],
-      "reason": "Confirmação atual envia action/reason/expectedVersion sem senha; não há destinatário na criação nem telas de correção/edição conectadas. Endpoints e campos correspondentes existem na OpenAPI; não cobrar como ausência de API.",
+      "reason": "Composição e estados implementados com referências completas recuperadas; testes de validação/concorrência e navegador local. Envio de anexo, redução multiorigem e campos ausentes da API permanecem limites de integração, não sucessos simulados.",
       "sources": [
         "src/pages/TransctionPage.vue",
         "src/components/Finance/TransactionCreate.vue"
       ],
       "evidence": [
-        "docs/evidence/qa-2026-11-16-inventory/api-contract-review.json"
+        "docs/evidence/qa-2026-11-16-inventory/api-contract-review.json",
+        "docs/evidence/qa-2026-11-17-transactions/results.json"
       ],
       "browser": "diagnóstico de código; não executadas operações financeiras",
       "historicalCategory": "Ajuste de front"
@@ -2689,16 +2699,17 @@
       "link": "[1484:86782](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-86782)",
       "counted": true,
       "group": "T02",
-      "category": "Ajuste de front",
-      "front": "adjustment",
+      "category": "Já correto",
+      "front": "done",
       "blockers": [],
-      "reason": "Confirmação atual envia action/reason/expectedVersion sem senha; não há destinatário na criação nem telas de correção/edição conectadas. Endpoints e campos correspondentes existem na OpenAPI; não cobrar como ausência de API.",
+      "reason": "Composição e estados implementados com referências completas recuperadas; testes de validação/concorrência e navegador local. Envio de anexo, redução multiorigem e campos ausentes da API permanecem limites de integração, não sucessos simulados.",
       "sources": [
         "src/pages/TransctionPage.vue",
         "src/components/Finance/TransactionCreate.vue"
       ],
       "evidence": [
-        "docs/evidence/qa-2026-11-16-inventory/api-contract-review.json"
+        "docs/evidence/qa-2026-11-16-inventory/api-contract-review.json",
+        "docs/evidence/qa-2026-11-17-transactions/results.json"
       ],
       "browser": "diagnóstico de código; não executadas operações financeiras",
       "historicalCategory": "Ajuste de front"
@@ -2711,16 +2722,17 @@
       "link": "[1484:86802](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-86802)",
       "counted": true,
       "group": "T02",
-      "category": "Ajuste de front",
-      "front": "adjustment",
+      "category": "Já correto",
+      "front": "done",
       "blockers": [],
-      "reason": "Confirmação atual envia action/reason/expectedVersion sem senha; não há destinatário na criação nem telas de correção/edição conectadas. Endpoints e campos correspondentes existem na OpenAPI; não cobrar como ausência de API.",
+      "reason": "Composição e estados implementados com referências completas recuperadas; testes de validação/concorrência e navegador local. Envio de anexo, redução multiorigem e campos ausentes da API permanecem limites de integração, não sucessos simulados.",
       "sources": [
         "src/pages/TransctionPage.vue",
         "src/components/Finance/TransactionCreate.vue"
       ],
       "evidence": [
-        "docs/evidence/qa-2026-11-16-inventory/api-contract-review.json"
+        "docs/evidence/qa-2026-11-16-inventory/api-contract-review.json",
+        "docs/evidence/qa-2026-11-17-transactions/results.json"
       ],
       "browser": "diagnóstico de código; não executadas operações financeiras",
       "historicalCategory": "Ajuste de front"
@@ -2757,17 +2769,20 @@
       "link": "[1484:86842](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-86842)",
       "counted": true,
       "group": "T03",
-      "category": "Ajuste de front",
-      "front": "validation",
-      "blockers": [],
-      "reason": "Componentes e consultas existem, mas falta comparação integral aos estados listados e regressão integrada. Isto é trabalho de validação do front, sem afirmar novo defeito visual ou ausência de API.",
+      "category": "Bloqueio backend",
+      "front": "done",
+      "blockers": [
+        "backend"
+      ],
+      "reason": "Composição e estados implementados com referências completas recuperadas; testes de validação/concorrência e navegador local. Envio de anexo, redução multiorigem e campos ausentes da API permanecem limites de integração, não sucessos simulados.",
       "sources": [
         "src/pages/TransctionPage.vue",
         "src/components/Finance/WalletDirectory.vue",
         "src/components/Finance/WalletOverview.vue"
       ],
       "evidence": [
-        "docs/CHECKLIST-UNICO-FIGMA-FRONT.md#ainda-é-trabalho-de-frontend"
+        "docs/CHECKLIST-UNICO-FIGMA-FRONT.md#ainda-é-trabalho-de-frontend",
+        "docs/evidence/qa-2026-11-17-transactions/results.json"
       ],
       "browser": "sem aprovação integral por frame",
       "historicalCategory": "Ajuste de front"
@@ -2897,16 +2912,19 @@
       "link": "[2160:281](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=2160-281)",
       "counted": true,
       "group": "T02",
-      "category": "Ajuste de front",
-      "front": "adjustment",
-      "blockers": [],
-      "reason": "Confirmação atual envia action/reason/expectedVersion sem senha; não há destinatário na criação nem telas de correção/edição conectadas. Endpoints e campos correspondentes existem na OpenAPI; não cobrar como ausência de API.",
+      "category": "Bloqueio backend",
+      "front": "done",
+      "blockers": [
+        "backend"
+      ],
+      "reason": "Composição e estados implementados com referências completas recuperadas; testes de validação/concorrência e navegador local. Envio de anexo, redução multiorigem e campos ausentes da API permanecem limites de integração, não sucessos simulados.",
       "sources": [
         "src/pages/TransctionPage.vue",
         "src/components/Finance/TransactionCreate.vue"
       ],
       "evidence": [
-        "docs/evidence/qa-2026-11-16-inventory/api-contract-review.json"
+        "docs/evidence/qa-2026-11-16-inventory/api-contract-review.json",
+        "docs/evidence/qa-2026-11-17-transactions/results.json"
       ],
       "browser": "diagnóstico de código; não executadas operações financeiras",
       "historicalCategory": "Ajuste de front"
@@ -2921,14 +2939,17 @@
       "group": "T02",
       "category": "Ajuste de front",
       "front": "adjustment",
-      "blockers": [],
-      "reason": "Confirmação atual envia action/reason/expectedVersion sem senha; não há destinatário na criação nem telas de correção/edição conectadas. Endpoints e campos correspondentes existem na OpenAPI; não cobrar como ausência de API.",
+      "blockers": [
+        "backend"
+      ],
+      "reason": "Erro passou a ter tratamento visual no histórico do Admin. O extrato corrigido completo ainda exige composição e vínculos entre original/correção/origens. TransactionSummaryResponse e lançamentos de extrato não trazem toda a decomposição do frame; não reconstruir a partir de valores soltos.",
       "sources": [
         "src/pages/TransctionPage.vue",
         "src/components/Finance/TransactionCreate.vue"
       ],
       "evidence": [
-        "docs/evidence/qa-2026-11-16-inventory/api-contract-review.json"
+        "docs/evidence/qa-2026-11-16-inventory/api-contract-review.json",
+        "docs/evidence/qa-2026-11-17-transactions/results.json"
       ],
       "browser": "diagnóstico de código; não executadas operações financeiras",
       "historicalCategory": "Ajuste de front"
@@ -2941,16 +2962,19 @@
       "link": "[2179:281](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=2179-281)",
       "counted": true,
       "group": "T02",
-      "category": "Ajuste de front",
-      "front": "adjustment",
-      "blockers": [],
-      "reason": "Confirmação atual envia action/reason/expectedVersion sem senha; não há destinatário na criação nem telas de correção/edição conectadas. Endpoints e campos correspondentes existem na OpenAPI; não cobrar como ausência de API.",
+      "category": "Bloqueio backend",
+      "front": "done",
+      "blockers": [
+        "backend"
+      ],
+      "reason": "Composição e estados implementados com referências completas recuperadas; testes de validação/concorrência e navegador local. Envio de anexo, redução multiorigem e campos ausentes da API permanecem limites de integração, não sucessos simulados.",
       "sources": [
         "src/pages/TransctionPage.vue",
         "src/components/Finance/TransactionCreate.vue"
       ],
       "evidence": [
-        "docs/evidence/qa-2026-11-16-inventory/api-contract-review.json"
+        "docs/evidence/qa-2026-11-16-inventory/api-contract-review.json",
+        "docs/evidence/qa-2026-11-17-transactions/results.json"
       ],
       "browser": "diagnóstico de código; não executadas operações financeiras",
       "historicalCategory": "Ajuste de front"
@@ -2963,16 +2987,19 @@
       "link": "[2179:355](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=2179-355)",
       "counted": true,
       "group": "T02",
-      "category": "Ajuste de front",
-      "front": "adjustment",
-      "blockers": [],
-      "reason": "Confirmação atual envia action/reason/expectedVersion sem senha; não há destinatário na criação nem telas de correção/edição conectadas. Endpoints e campos correspondentes existem na OpenAPI; não cobrar como ausência de API.",
+      "category": "Bloqueio backend",
+      "front": "done",
+      "blockers": [
+        "backend"
+      ],
+      "reason": "Composição e estados implementados com referências completas recuperadas; testes de validação/concorrência e navegador local. Envio de anexo, redução multiorigem e campos ausentes da API permanecem limites de integração, não sucessos simulados.",
       "sources": [
         "src/pages/TransctionPage.vue",
         "src/components/Finance/TransactionCreate.vue"
       ],
       "evidence": [
-        "docs/evidence/qa-2026-11-16-inventory/api-contract-review.json"
+        "docs/evidence/qa-2026-11-16-inventory/api-contract-review.json",
+        "docs/evidence/qa-2026-11-17-transactions/results.json"
       ],
       "browser": "diagnóstico de código; não executadas operações financeiras",
       "historicalCategory": "Ajuste de front"
@@ -2985,16 +3012,19 @@
       "link": "[2187:404](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=2187-404)",
       "counted": true,
       "group": "T02",
-      "category": "Ajuste de front",
-      "front": "adjustment",
-      "blockers": [],
-      "reason": "Confirmação atual envia action/reason/expectedVersion sem senha; não há destinatário na criação nem telas de correção/edição conectadas. Endpoints e campos correspondentes existem na OpenAPI; não cobrar como ausência de API.",
+      "category": "Bloqueio backend",
+      "front": "done",
+      "blockers": [
+        "backend"
+      ],
+      "reason": "Composição e estados implementados com referências completas recuperadas; testes de validação/concorrência e navegador local. Envio de anexo, redução multiorigem e campos ausentes da API permanecem limites de integração, não sucessos simulados.",
       "sources": [
         "src/pages/TransctionPage.vue",
         "src/components/Finance/TransactionCreate.vue"
       ],
       "evidence": [
-        "docs/evidence/qa-2026-11-16-inventory/api-contract-review.json"
+        "docs/evidence/qa-2026-11-16-inventory/api-contract-review.json",
+        "docs/evidence/qa-2026-11-17-transactions/results.json"
       ],
       "browser": "diagnóstico de código; não executadas operações financeiras",
       "historicalCategory": "Ajuste de front"
@@ -3007,16 +3037,17 @@
       "link": "[2282:289](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=2282-289)",
       "counted": true,
       "group": "T02",
-      "category": "Ajuste de front",
-      "front": "adjustment",
+      "category": "Já correto",
+      "front": "done",
       "blockers": [],
-      "reason": "Confirmação atual envia action/reason/expectedVersion sem senha; não há destinatário na criação nem telas de correção/edição conectadas. Endpoints e campos correspondentes existem na OpenAPI; não cobrar como ausência de API.",
+      "reason": "Composição e estados implementados com referências completas recuperadas; testes de validação/concorrência e navegador local. Envio de anexo, redução multiorigem e campos ausentes da API permanecem limites de integração, não sucessos simulados.",
       "sources": [
         "src/pages/TransctionPage.vue",
         "src/components/Finance/TransactionCreate.vue"
       ],
       "evidence": [
-        "docs/evidence/qa-2026-11-16-inventory/api-contract-review.json"
+        "docs/evidence/qa-2026-11-16-inventory/api-contract-review.json",
+        "docs/evidence/qa-2026-11-17-transactions/results.json"
       ],
       "browser": "diagnóstico de código; não executadas operações financeiras",
       "historicalCategory": "Ajuste de front"
@@ -4356,15 +4387,19 @@
       "counted": true,
       "group": "P05",
       "category": "Ajuste de front",
-      "front": "adjustment",
-      "blockers": [],
-      "reason": "As páginas roteadas oferecem tabela e detalhe resumido, sem composição/ação de oferta dos seis estados. Recuperar a referência completa e conectar os estados aprovados; isto não comprova ausência de API nem falta de desenho.",
+      "front": "validation",
+      "blockers": [
+        "backend",
+        "designer"
+      ],
+      "reason": "Fluxo existente confirmado conectado em ContractsPage → OpportunityInvestment, cinco passos testados. Referências dos seis modais recuperadas, variante de oferta ajustada; estado enviado somente em prévia controlada. Falta comparação integral da página de fundo e vínculo do estado selecionado dos valores no passo 3. Não há POST de solicitação de contrato no OpenAPI atual.",
       "sources": [
         "portal:src/router/routes.js",
         "portal:src/system/pages/contract/ContractsPage.vue"
       ],
       "evidence": [
-        "docs/CHECKLIST-UNICO-FIGMA-FRONT.md#ainda-é-trabalho-de-frontend"
+        "docs/CHECKLIST-UNICO-FIGMA-FRONT.md#ainda-é-trabalho-de-frontend",
+        "docs/evidence/qa-2026-11-17-transactions/results.json"
       ],
       "browser": "fluxo não integrado",
       "historicalCategory": "Ajuste de front"
@@ -4378,15 +4413,19 @@
       "counted": true,
       "group": "P05",
       "category": "Ajuste de front",
-      "front": "adjustment",
-      "blockers": [],
-      "reason": "As páginas roteadas oferecem tabela e detalhe resumido, sem composição/ação de oferta dos seis estados. Recuperar a referência completa e conectar os estados aprovados; isto não comprova ausência de API nem falta de desenho.",
+      "front": "validation",
+      "blockers": [
+        "backend",
+        "designer"
+      ],
+      "reason": "Fluxo existente confirmado conectado em ContractsPage → OpportunityInvestment, cinco passos testados. Referências dos seis modais recuperadas, variante de oferta ajustada; estado enviado somente em prévia controlada. Falta comparação integral da página de fundo e vínculo do estado selecionado dos valores no passo 3. Não há POST de solicitação de contrato no OpenAPI atual.",
       "sources": [
         "portal:src/router/routes.js",
         "portal:src/system/pages/contract/ContractsPage.vue"
       ],
       "evidence": [
-        "docs/CHECKLIST-UNICO-FIGMA-FRONT.md#ainda-é-trabalho-de-frontend"
+        "docs/CHECKLIST-UNICO-FIGMA-FRONT.md#ainda-é-trabalho-de-frontend",
+        "docs/evidence/qa-2026-11-17-transactions/results.json"
       ],
       "browser": "fluxo não integrado",
       "historicalCategory": "Ajuste de front"
@@ -4400,15 +4439,19 @@
       "counted": true,
       "group": "P05",
       "category": "Ajuste de front",
-      "front": "adjustment",
-      "blockers": [],
-      "reason": "As páginas roteadas oferecem tabela e detalhe resumido, sem composição/ação de oferta dos seis estados. Recuperar a referência completa e conectar os estados aprovados; isto não comprova ausência de API nem falta de desenho.",
+      "front": "validation",
+      "blockers": [
+        "backend",
+        "designer"
+      ],
+      "reason": "Fluxo existente confirmado conectado em ContractsPage → OpportunityInvestment, cinco passos testados. Referências dos seis modais recuperadas, variante de oferta ajustada; estado enviado somente em prévia controlada. Falta comparação integral da página de fundo e vínculo do estado selecionado dos valores no passo 3. Não há POST de solicitação de contrato no OpenAPI atual.",
       "sources": [
         "portal:src/router/routes.js",
         "portal:src/system/pages/contract/ContractsPage.vue"
       ],
       "evidence": [
-        "docs/CHECKLIST-UNICO-FIGMA-FRONT.md#ainda-é-trabalho-de-frontend"
+        "docs/CHECKLIST-UNICO-FIGMA-FRONT.md#ainda-é-trabalho-de-frontend",
+        "docs/evidence/qa-2026-11-17-transactions/results.json"
       ],
       "browser": "fluxo não integrado",
       "historicalCategory": "Ajuste de front"
@@ -4422,15 +4465,19 @@
       "counted": true,
       "group": "P05",
       "category": "Ajuste de front",
-      "front": "adjustment",
-      "blockers": [],
-      "reason": "As páginas roteadas oferecem tabela e detalhe resumido, sem composição/ação de oferta dos seis estados. Recuperar a referência completa e conectar os estados aprovados; isto não comprova ausência de API nem falta de desenho.",
+      "front": "validation",
+      "blockers": [
+        "backend",
+        "designer"
+      ],
+      "reason": "Fluxo existente confirmado conectado em ContractsPage → OpportunityInvestment, cinco passos testados. Referências dos seis modais recuperadas, variante de oferta ajustada; estado enviado somente em prévia controlada. Falta comparação integral da página de fundo e vínculo do estado selecionado dos valores no passo 3. Não há POST de solicitação de contrato no OpenAPI atual.",
       "sources": [
         "portal:src/router/routes.js",
         "portal:src/system/pages/contract/ContractsPage.vue"
       ],
       "evidence": [
-        "docs/CHECKLIST-UNICO-FIGMA-FRONT.md#ainda-é-trabalho-de-frontend"
+        "docs/CHECKLIST-UNICO-FIGMA-FRONT.md#ainda-é-trabalho-de-frontend",
+        "docs/evidence/qa-2026-11-17-transactions/results.json"
       ],
       "browser": "fluxo não integrado",
       "historicalCategory": "Ajuste de front"
@@ -4444,15 +4491,19 @@
       "counted": true,
       "group": "P05",
       "category": "Ajuste de front",
-      "front": "adjustment",
-      "blockers": [],
-      "reason": "As páginas roteadas oferecem tabela e detalhe resumido, sem composição/ação de oferta dos seis estados. Recuperar a referência completa e conectar os estados aprovados; isto não comprova ausência de API nem falta de desenho.",
+      "front": "validation",
+      "blockers": [
+        "backend",
+        "designer"
+      ],
+      "reason": "Fluxo existente confirmado conectado em ContractsPage → OpportunityInvestment, cinco passos testados. Referências dos seis modais recuperadas, variante de oferta ajustada; estado enviado somente em prévia controlada. Falta comparação integral da página de fundo e vínculo do estado selecionado dos valores no passo 3. Não há POST de solicitação de contrato no OpenAPI atual.",
       "sources": [
         "portal:src/router/routes.js",
         "portal:src/system/pages/contract/ContractsPage.vue"
       ],
       "evidence": [
-        "docs/CHECKLIST-UNICO-FIGMA-FRONT.md#ainda-é-trabalho-de-frontend"
+        "docs/CHECKLIST-UNICO-FIGMA-FRONT.md#ainda-é-trabalho-de-frontend",
+        "docs/evidence/qa-2026-11-17-transactions/results.json"
       ],
       "browser": "fluxo não integrado",
       "historicalCategory": "Ajuste de front"
@@ -4466,15 +4517,19 @@
       "counted": true,
       "group": "P05",
       "category": "Ajuste de front",
-      "front": "adjustment",
-      "blockers": [],
-      "reason": "As páginas roteadas oferecem tabela e detalhe resumido, sem composição/ação de oferta dos seis estados. Recuperar a referência completa e conectar os estados aprovados; isto não comprova ausência de API nem falta de desenho.",
+      "front": "validation",
+      "blockers": [
+        "backend",
+        "designer"
+      ],
+      "reason": "Fluxo existente confirmado conectado em ContractsPage → OpportunityInvestment, cinco passos testados. Referências dos seis modais recuperadas, variante de oferta ajustada; estado enviado somente em prévia controlada. Falta comparação integral da página de fundo e vínculo do estado selecionado dos valores no passo 3. Não há POST de solicitação de contrato no OpenAPI atual.",
       "sources": [
         "portal:src/router/routes.js",
         "portal:src/system/pages/contract/ContractsPage.vue"
       ],
       "evidence": [
-        "docs/CHECKLIST-UNICO-FIGMA-FRONT.md#ainda-é-trabalho-de-frontend"
+        "docs/CHECKLIST-UNICO-FIGMA-FRONT.md#ainda-é-trabalho-de-frontend",
+        "docs/evidence/qa-2026-11-17-transactions/results.json"
       ],
       "browser": "fluxo não integrado",
       "historicalCategory": "Ajuste de front"

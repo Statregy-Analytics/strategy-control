@@ -1,0 +1,5 @@
+Browser tab: 3, Title: "localhost:8080/qa-transaction-review.html", URL: "http://localhost:8080/qa-transaction-review.html".
+The following is a diff from the previous accessibility tree with ~ and + representing changed and added elements, respectively. Removed elements are summarized by ID range.
+~		93 text entry area (settable) Description: Motivo do cancelamento (obrigatório), Value: Cancelamento fictício sem envio, ID: f_4eadf771-2871-475b-87de-5e5dc344216c
+~		95 button Confirmar Ação
+The focused UI element is 93 text entry area (settable) Description: Motivo do cancelamento (obrigatório), Value: Cancelamento fictício sem envio, ID: f_4eadf771-2871-475b-87de-5e5dc344216c

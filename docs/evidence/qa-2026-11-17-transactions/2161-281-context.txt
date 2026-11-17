@@ -1,0 +1,313 @@
+const imgIcon = "https://www.figma.com/api/mcp/asset/86b0c589-7880-49d1-94fa-c6fd5644c81d.svg";
+const imgIcon1 = "https://www.figma.com/api/mcp/asset/23a76fad-55dc-4345-a3a5-aa9d8fa89141.svg";
+
+export default function P011EcExtratoDepositoCorrigido() {
+  return (
+    <div className="backdrop-blur-[20px] bg-[var(--sa-color-bg-surface,rgba(255,255,255,0.06))] border-[0.8px] border-[rgba(255,255,255,0.2)] border-solid content-stretch flex flex-col gap-[var(--sa-spacing-24,24px)] items-start overflow-clip relative rounded-[var(--sa-radius-14,14px)] shadow-[4px_4px_12px_0px_rgba(0,0,0,0.13)] size-full" data-node-id="2161:281" data-name="P01.1 · EC · Extrato · Depósito corrigido">
+      <div className="content-stretch flex flex-col items-start overflow-clip relative shrink-0 w-[1400.8px]" data-node-id="2161:282" data-name="Container">
+        <div className="h-[347.2px] overflow-clip relative shrink-0 w-full" data-node-id="2161:283" data-name="Table">
+          <div className="[word-break:break-word] absolute bg-[rgba(255,255,255,0.06)] border-[rgba(255,255,255,0.2)] border-b-[0.8px] border-solid font-['Inter:Bold'] font-bold h-[40px] leading-[16px] left-0 not-italic rounded-tl-[14px] rounded-tr-[14px] text-[12px] text-[color:var(--sa-color-text-primary,white)] top-0 uppercase w-[1400.8px] whitespace-nowrap" data-node-id="2161:284" data-name="TableRow">
+            <p className="absolute left-[8px] top-[11.8px]" data-node-id="2161:285">
+              Data/Hora
+            </p>
+            <p className="absolute left-[119.42px] top-[11.8px]" data-node-id="2161:286">
+              ID
+            </p>
+            <p className="absolute left-[253.21px] top-[11.8px]" data-node-id="2161:287">
+              Tipo
+            </p>
+            <p className="absolute left-[448.19px] top-[11.8px]" data-node-id="2161:288">
+              Cliente
+            </p>
+            <p className="absolute left-[645.38px] top-[11.8px]" data-node-id="2161:289">
+              Origem
+            </p>
+            <p className="absolute left-[813.04px] top-[11.8px]" data-node-id="2161:290">
+              Destino
+            </p>
+            <p className="absolute left-[980.7px] top-[11.8px]" data-node-id="2161:291">
+              Valor
+            </p>
+            <p className="absolute left-[1114.63px] top-[11.8px]" data-node-id="2161:292">
+              Status
+            </p>
+            <p className="absolute left-[1224.24px] top-[11.8px]" data-node-id="2161:293">
+              Responsável
+            </p>
+          </div>
+          <div className="absolute border-[rgba(255,255,255,0.12)] border-b-[0.8px] border-solid h-[80px] left-0 top-[40px] w-[1400.8px]" data-node-id="2161:550" data-name="TableRow">
+            <p className="[word-break:break-word] absolute font-['Inter:Regular'] font-normal leading-[16px] left-[8px] not-italic text-[12px] text-[color:var(--sa-color-text-secondary,rgba(255,255,255,0.72))] top-[20.4px] whitespace-nowrap" data-node-id="2161:551">
+              10/05/2026 09:15
+            </p>
+            <div className="absolute content-stretch flex gap-[var(--sa-spacing-8,8px)] items-center left-[253.21px] top-[12px] w-[178.975px]" data-node-id="2161:553" data-name="TransactionsScreen">
+              <div className="relative shrink-0 size-[16px]" data-node-id="2161:554" data-name="Icon">
+                <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgIcon} />
+              </div>
+              <div className="[word-break:break-word] content-stretch flex flex-col font-['Inter:Medium'] font-medium items-start leading-[16px] not-italic relative shrink-0 text-[color:var(--sa-color-text-secondary,rgba(255,255,255,0.72))] whitespace-nowrap" data-node-id="2161:557" data-name="Text">
+                <p className="relative shrink-0 text-[12px]" data-node-id="2161:558">
+                  Depósito
+                </p>
+                <p className="opacity-60 relative shrink-0 text-[11px]" data-node-id="2179:348">
+                  corrige TRX-2026-00137
+                </p>
+              </div>
+            </div>
+            <p className="[word-break:break-word] absolute font-['Inter:Medium'] font-medium leading-[16px] left-[448.19px] not-italic text-[12px] text-[color:var(--sa-color-text-secondary,rgba(255,255,255,0.72))] top-[20.4px] whitespace-nowrap" data-node-id="2161:559">
+              Carlos Eduardo Mendes
+            </p>
+            <div className="absolute content-stretch flex flex-col h-[15.988px] items-start left-[645.38px] max-w-[150px] overflow-clip top-[20.4px] w-[150px]" data-node-id="2161:560" data-name="TransactionsScreen">
+              <p className="[word-break:break-word] font-['Inter:Regular'] font-normal leading-[16px] not-italic relative shrink-0 text-[12px] text-[color:var(--sa-color-text-secondary,rgba(255,255,255,0.72))] whitespace-nowrap" data-node-id="2161:561">
+                Banco Safra - CC 112-4
+              </p>
+            </div>
+            <div className="absolute content-stretch flex flex-col h-[15.988px] items-start left-[813.04px] max-w-[150px] overflow-clip top-[20.4px] w-[150px]" data-node-id="2161:562" data-name="TransactionsScreen">
+              <p className="[word-break:break-word] font-['Inter:Regular'] font-normal leading-[16px] not-italic relative shrink-0 text-[12px] text-[color:var(--sa-color-text-secondary,rgba(255,255,255,0.72))] whitespace-nowrap" data-node-id="2161:563">
+                Carteira de Depósito
+              </p>
+            </div>
+            <p className="[word-break:break-word] absolute font-['Inter:Bold'] font-bold leading-[20px] left-[980.7px] not-italic text-[14px] text-[color:var(--color\/v2\/text\/value-positive,#66e59e)] top-[18.4px] whitespace-nowrap" data-node-id="2161:564">
+              R$ 5.000,00
+            </p>
+            <div className="absolute bg-[var(--color\/v2\/bg\/status-positive,rgba(0,122,85,0.2))] border-[0.8px] border-[var(--color\/v2\/border\/status-positive,#74ffa0)] border-solid content-stretch flex gap-[var(--sa-spacing-4,4px)] items-center justify-center left-[1114.63px] overflow-clip pl-[7px] pr-[9px] py-[3px] rounded-[8px] top-[18.46px]" data-node-id="2161:565" data-name="Badge">
+              <p className="[word-break:break-word] font-['Inter:Medium'] font-medium leading-[14.286px] not-italic relative shrink-0 text-[10px] text-[color:var(--color\/v2\/text\/status-positive,#74ffa0)] tracking-[0.25px] uppercase whitespace-nowrap" data-node-id="2161:569">
+                Processada
+              </p>
+            </div>
+            <p className="[word-break:break-word] absolute font-['Inter:Regular'] font-normal leading-[16px] left-[1224.24px] not-italic text-[12px] text-[color:var(--sa-color-text-secondary,rgba(255,255,255,0.72))] top-[20.4px] whitespace-nowrap" data-node-id="2161:570">
+              Admin
+            </p>
+            <div className="absolute content-stretch flex gap-[var(--sa-spacing-6,6px)] items-center justify-center left-[1360.74px] px-[var(--sa-spacing-10,10px)] rounded-[var(--sa-radius-8,8px)] size-[32px] top-[12.4px]" data-node-id="2161:571" data-name="Button">
+              <div className="relative shrink-0 size-[16px]" data-node-id="2161:572" data-name="Icon">
+                <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgIcon1} />
+              </div>
+            </div>
+            <p className="[word-break:break-word] absolute font-['DM_Mono:Regular'] leading-[normal] left-[119.42px] not-italic text-[12px] text-[rgba(255,255,255,0.76)] top-[20.4px] whitespace-nowrap" data-node-id="2161:575">
+              TRX-2026-00147
+            </p>
+            <p className="[word-break:break-word] absolute font-['Inter:Regular'] font-normal leading-[16px] left-[8px] not-italic text-[11px] text-[color:var(--sa-color-text-secondary,rgba(255,255,255,0.72))] top-[38.4px] whitespace-nowrap" data-node-id="2179:347">
+              original: 03/05/2026 11:02
+            </p>
+            <p className="[word-break:break-word] absolute font-['Inter:Regular'] font-normal leading-[16px] left-[8px] not-italic text-[11px] text-[color:var(--sa-color-text-secondary,rgba(255,255,255,0.72))] top-[58px] whitespace-nowrap" data-node-id="2184:363">
+              Diferença de R$ 45.000,00 tirada de: Carteira de Depósito R$ 5.000,00 · Carteira Strategy R$ 15.000,00 · saque TRX-2026-00143 R$ 15.000,00 · transferência TRX-2026-00145 R$ 10.000,00
+            </p>
+          </div>
+          <div className="absolute border-[rgba(255,255,255,0.12)] border-b-[0.8px] border-solid h-[56.8px] left-0 top-[290.4px] w-[1400.8px]" data-node-id="2161:602" data-name="TableRow">
+            <p className="[text-decoration-skip-ink:none] [text-underline-position:from-font] [word-break:break-word] absolute decoration-from-font decoration-solid font-['Inter:Regular'] font-normal leading-[16px] left-[8px] line-through not-italic opacity-55 text-[12px] text-[color:var(--sa-color-text-secondary,rgba(255,255,255,0.72))] top-[20.4px] whitespace-nowrap" data-node-id="2161:603">
+              03/05/2026 11:02
+            </p>
+            <div className="absolute content-stretch flex gap-[var(--sa-spacing-8,8px)] items-center left-[253.21px] top-[20.4px] w-[178.975px]" data-node-id="2161:605" data-name="TransactionsScreen">
+              <div className="relative shrink-0 size-[16px]" data-node-id="2161:606" data-name="Icon">
+                <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgIcon} />
+              </div>
+              <div className="content-stretch flex flex-col items-start relative shrink-0" data-node-id="2161:609" data-name="Text">
+                <p className="[text-decoration-skip-ink:none] [text-underline-position:from-font] [word-break:break-word] decoration-from-font decoration-solid font-['Inter:Medium'] font-medium leading-[16px] line-through not-italic opacity-55 relative shrink-0 text-[12px] text-[color:var(--sa-color-text-secondary,rgba(255,255,255,0.72))] whitespace-nowrap" data-node-id="2161:610">
+                  Depósito
+                </p>
+              </div>
+            </div>
+            <p className="[text-decoration-skip-ink:none] [text-underline-position:from-font] [word-break:break-word] absolute decoration-from-font decoration-solid font-['Inter:Medium'] font-medium leading-[16px] left-[448.19px] line-through not-italic opacity-55 text-[12px] text-[color:var(--sa-color-text-secondary,rgba(255,255,255,0.72))] top-[20.4px] whitespace-nowrap" data-node-id="2161:611">
+              Carlos Eduardo Mendes
+            </p>
+            <div className="absolute content-stretch flex flex-col h-[15.988px] items-start left-[645.38px] max-w-[150px] overflow-clip top-[20.4px] w-[150px]" data-node-id="2161:612" data-name="TransactionsScreen">
+              <p className="[text-decoration-skip-ink:none] [text-underline-position:from-font] [word-break:break-word] decoration-from-font decoration-solid font-['Inter:Regular'] font-normal leading-[16px] line-through not-italic opacity-55 relative shrink-0 text-[12px] text-[color:var(--sa-color-text-secondary,rgba(255,255,255,0.72))] whitespace-nowrap" data-node-id="2161:613">
+                Banco Safra - CC 112-4
+              </p>
+            </div>
+            <div className="absolute content-stretch flex flex-col h-[15.988px] items-start left-[813.04px] max-w-[150px] overflow-clip top-[20.4px] w-[150px]" data-node-id="2161:614" data-name="TransactionsScreen">
+              <p className="[text-decoration-skip-ink:none] [text-underline-position:from-font] [word-break:break-word] decoration-from-font decoration-solid font-['Inter:Regular'] font-normal leading-[16px] line-through not-italic opacity-55 relative shrink-0 text-[12px] text-[color:var(--sa-color-text-secondary,rgba(255,255,255,0.72))] whitespace-nowrap" data-node-id="2161:615">
+                Carteira de Depósito
+              </p>
+            </div>
+            <p className="[text-decoration-skip-ink:none] [text-underline-position:from-font] [word-break:break-word] absolute decoration-from-font decoration-solid font-['Inter:Bold'] font-bold leading-[20px] left-[980.7px] line-through not-italic opacity-55 text-[14px] text-[color:var(--color\/v2\/text\/value-positive,#66e59e)] top-[18.4px] whitespace-nowrap" data-node-id="2161:616">
+              R$ 50.000,00
+            </p>
+            <div className="absolute bg-[var(--color\/v2\/bg\/status-negative,rgba(193,0,7,0.2))] border-[0.8px] border-[var(--color\/v2\/border\/status-negative,#ffc9c9)] border-solid content-stretch flex gap-[var(--sa-spacing-4,4px)] items-center justify-center left-[1114.63px] overflow-clip pl-[7px] pr-[9px] py-[3px] rounded-[8px] top-[18.46px]" data-node-id="2161:617" data-name="Badge">
+              <p className="[word-break:break-word] font-['Inter:Medium'] font-medium leading-[14.286px] not-italic relative shrink-0 text-[10px] text-[color:var(--color\/v2\/text\/status-negative,#ffc9c9)] tracking-[0.25px] uppercase whitespace-nowrap" data-node-id="2161:621">
+                Erro
+              </p>
+            </div>
+            <p className="[text-decoration-skip-ink:none] [text-underline-position:from-font] [word-break:break-word] absolute decoration-from-font decoration-solid font-['Inter:Regular'] font-normal leading-[16px] left-[1224.24px] line-through not-italic opacity-55 text-[12px] text-[color:var(--sa-color-text-secondary,rgba(255,255,255,0.72))] top-[20.4px] whitespace-nowrap" data-node-id="2161:622">
+              Admin
+            </p>
+            <div className="absolute content-stretch flex gap-[var(--sa-spacing-6,6px)] items-center justify-center left-[1360.74px] px-[var(--sa-spacing-10,10px)] rounded-[var(--sa-radius-8,8px)] size-[32px] top-[12.4px]" data-node-id="2161:623" data-name="Button">
+              <div className="relative shrink-0 size-[16px]" data-node-id="2161:624" data-name="Icon">
+                <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgIcon1} />
+              </div>
+            </div>
+            <p className="[word-break:break-word] absolute font-['Inter:Regular'] font-normal leading-[16px] left-[980.7px] not-italic text-[11px] text-[color:var(--sa-color-text-secondary,rgba(255,255,255,0.72))] top-[39.4px] whitespace-nowrap" data-node-id="2161:627">
+              corrigida por TRX-2026-00147
+            </p>
+            <p className="[text-decoration-skip-ink:none] [text-underline-position:from-font] [word-break:break-word] absolute decoration-from-font decoration-solid font-['DM_Mono:Regular'] leading-[normal] left-[119.42px] line-through not-italic opacity-55 text-[12px] text-[rgba(255,255,255,0.76)] top-[20.4px] whitespace-nowrap" data-node-id="2179:349">
+              TRX-2026-00137
+            </p>
+          </div>
+          <div className="absolute border-[rgba(255,255,255,0.12)] border-b-[0.8px] border-solid h-[56.8px] left-0 top-[120px] w-[1400.8px]" data-node-id="2184:281" data-name="TableRow">
+            <p className="[word-break:break-word] absolute font-['Inter:Regular'] font-normal leading-[16px] left-[8px] not-italic text-[12px] text-[color:var(--sa-color-text-secondary,rgba(255,255,255,0.72))] top-[20.4px] whitespace-nowrap" data-node-id="2184:282">
+              10/05/2026 09:15
+            </p>
+            <div className="absolute content-stretch flex gap-[var(--sa-spacing-8,8px)] items-center left-[253.21px] top-[12px] w-[178.975px]" data-node-id="2184:284" data-name="TransactionsScreen">
+              <div className="relative shrink-0 size-[16px]" data-node-id="2184:285" data-name="Icon">
+                <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgIcon} />
+              </div>
+              <div className="[word-break:break-word] content-stretch flex flex-col font-['Inter:Medium'] font-medium items-start leading-[16px] not-italic relative shrink-0 text-[color:var(--sa-color-text-secondary,rgba(255,255,255,0.72))] whitespace-nowrap" data-node-id="2184:288" data-name="Text">
+                <p className="relative shrink-0 text-[12px]" data-node-id="2184:289">
+                  Saque
+                </p>
+                <p className="opacity-60 relative shrink-0 text-[11px]" data-node-id="2184:290">
+                  corrige TRX-2026-00143
+                </p>
+              </div>
+            </div>
+            <p className="[word-break:break-word] absolute font-['Inter:Medium'] font-medium leading-[16px] left-[448.19px] not-italic text-[12px] text-[color:var(--sa-color-text-secondary,rgba(255,255,255,0.72))] top-[20.4px] whitespace-nowrap" data-node-id="2184:291">
+              Carlos Eduardo Mendes
+            </p>
+            <div className="absolute content-stretch flex flex-col h-[15.988px] items-start left-[645.38px] max-w-[150px] overflow-clip top-[20.4px] w-[150px]" data-node-id="2184:292" data-name="TransactionsScreen">
+              <p className="[word-break:break-word] font-['Inter:Regular'] font-normal leading-[16px] not-italic relative shrink-0 text-[12px] text-[color:var(--sa-color-text-secondary,rgba(255,255,255,0.72))] whitespace-nowrap" data-node-id="2184:293">
+                Carteira de Depósito
+              </p>
+            </div>
+            <div className="absolute content-stretch flex flex-col h-[15.988px] items-start left-[813.04px] max-w-[150px] overflow-clip top-[20.4px] w-[150px]" data-node-id="2184:294" data-name="TransactionsScreen">
+              <p className="[word-break:break-word] font-['Inter:Regular'] font-normal leading-[16px] not-italic relative shrink-0 text-[12px] text-[color:var(--sa-color-text-secondary,rgba(255,255,255,0.72))] whitespace-nowrap" data-node-id="2184:295">
+                Banco Safra - CC 112-4
+              </p>
+            </div>
+            <p className="[word-break:break-word] absolute font-['Inter:Bold'] font-bold leading-[20px] left-[980.7px] not-italic text-[14px] text-[color:var(--color\/v2\/text\/value-positive,#66e59e)] top-[18.4px] whitespace-nowrap" data-node-id="2184:296">
+              R$ 5.000,00
+            </p>
+            <div className="absolute bg-[var(--color\/v2\/bg\/status-pending,rgba(187,77,0,0.2))] border-[0.8px] border-[var(--color\/v2\/border\/status-pending,#fee685)] border-solid content-stretch flex gap-[var(--sa-spacing-4,4px)] items-center justify-center left-[1114.63px] overflow-clip pl-[7px] pr-[9px] py-[3px] rounded-[8px] top-[18.46px]" data-node-id="2184:297" data-name="Badge">
+              <p className="[word-break:break-word] font-['Inter:Medium'] font-medium leading-[14.286px] not-italic relative shrink-0 text-[10px] text-[color:var(--color\/v2\/text\/status-pending,#fee685)] tracking-[0.25px] uppercase whitespace-nowrap" data-node-id="2184:301">
+                Pendente
+              </p>
+            </div>
+            <p className="[word-break:break-word] absolute font-['Inter:Regular'] font-normal leading-[16px] left-[1224.24px] not-italic text-[12px] text-[color:var(--sa-color-text-secondary,rgba(255,255,255,0.72))] top-[20.4px] whitespace-nowrap" data-node-id="2184:302">
+              Admin
+            </p>
+            <div className="absolute content-stretch flex gap-[var(--sa-spacing-6,6px)] items-center justify-center left-[1360.74px] px-[var(--sa-spacing-10,10px)] rounded-[var(--sa-radius-8,8px)] size-[32px] top-[12.4px]" data-node-id="2184:303" data-name="Button">
+              <div className="relative shrink-0 size-[16px]" data-node-id="2184:304" data-name="Icon">
+                <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgIcon1} />
+              </div>
+            </div>
+            <p className="[word-break:break-word] absolute font-['DM_Mono:Regular'] leading-[normal] left-[119.42px] not-italic text-[12px] text-[rgba(255,255,255,0.76)] top-[20.4px] whitespace-nowrap" data-node-id="2184:307">
+              TRX-2026-00148
+            </p>
+            <p className="[word-break:break-word] absolute font-['Inter:Regular'] font-normal leading-[16px] left-[8px] not-italic text-[11px] text-[color:var(--sa-color-text-secondary,rgba(255,255,255,0.72))] top-[38.4px] whitespace-nowrap" data-node-id="2184:308">
+              original: 04/05/2026 14:20
+            </p>
+            <p className="[word-break:break-word] absolute font-['Inter:Regular'] font-normal leading-[16px] left-[980.7px] not-italic text-[11px] text-[color:var(--sa-color-text-secondary,rgba(255,255,255,0.72))] top-[39.4px] whitespace-nowrap" data-node-id="2184:364">
+              pela correção do depósito TRX-2026-00137
+            </p>
+          </div>
+          <div className="absolute border-[rgba(255,255,255,0.12)] border-b-[0.8px] border-solid h-[56.8px] left-0 top-[233.6px] w-[1400.8px]" data-node-id="2184:309" data-name="TableRow">
+            <p className="[text-decoration-skip-ink:none] [text-underline-position:from-font] [word-break:break-word] absolute decoration-from-font decoration-solid font-['Inter:Regular'] font-normal leading-[16px] left-[8px] line-through not-italic opacity-55 text-[12px] text-[color:var(--sa-color-text-secondary,rgba(255,255,255,0.72))] top-[20.4px] whitespace-nowrap" data-node-id="2184:310">
+              04/05/2026 14:20
+            </p>
+            <div className="absolute content-stretch flex gap-[var(--sa-spacing-8,8px)] items-center left-[253.21px] top-[20.4px] w-[178.975px]" data-node-id="2184:312" data-name="TransactionsScreen">
+              <div className="relative shrink-0 size-[16px]" data-node-id="2184:313" data-name="Icon">
+                <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgIcon} />
+              </div>
+              <div className="content-stretch flex flex-col items-start relative shrink-0" data-node-id="2184:316" data-name="Text">
+                <p className="[text-decoration-skip-ink:none] [text-underline-position:from-font] [word-break:break-word] decoration-from-font decoration-solid font-['Inter:Medium'] font-medium leading-[16px] line-through not-italic opacity-55 relative shrink-0 text-[12px] text-[color:var(--sa-color-text-secondary,rgba(255,255,255,0.72))] whitespace-nowrap" data-node-id="2184:317">
+                  Saque
+                </p>
+              </div>
+            </div>
+            <p className="[text-decoration-skip-ink:none] [text-underline-position:from-font] [word-break:break-word] absolute decoration-from-font decoration-solid font-['Inter:Medium'] font-medium leading-[16px] left-[448.19px] line-through not-italic opacity-55 text-[12px] text-[color:var(--sa-color-text-secondary,rgba(255,255,255,0.72))] top-[20.4px] whitespace-nowrap" data-node-id="2184:318">
+              Carlos Eduardo Mendes
+            </p>
+            <div className="absolute content-stretch flex flex-col h-[15.988px] items-start left-[645.38px] max-w-[150px] overflow-clip top-[20.4px] w-[150px]" data-node-id="2184:319" data-name="TransactionsScreen">
+              <p className="[text-decoration-skip-ink:none] [text-underline-position:from-font] [word-break:break-word] decoration-from-font decoration-solid font-['Inter:Regular'] font-normal leading-[16px] line-through not-italic opacity-55 relative shrink-0 text-[12px] text-[color:var(--sa-color-text-secondary,rgba(255,255,255,0.72))] whitespace-nowrap" data-node-id="2184:320">
+                Carteira de Depósito
+              </p>
+            </div>
+            <div className="absolute content-stretch flex flex-col h-[15.988px] items-start left-[813.04px] max-w-[150px] overflow-clip top-[20.4px] w-[150px]" data-node-id="2184:321" data-name="TransactionsScreen">
+              <p className="[text-decoration-skip-ink:none] [text-underline-position:from-font] [word-break:break-word] decoration-from-font decoration-solid font-['Inter:Regular'] font-normal leading-[16px] line-through not-italic opacity-55 relative shrink-0 text-[12px] text-[color:var(--sa-color-text-secondary,rgba(255,255,255,0.72))] whitespace-nowrap" data-node-id="2184:322">
+                Banco Safra - CC 112-4
+              </p>
+            </div>
+            <p className="[text-decoration-skip-ink:none] [text-underline-position:from-font] [word-break:break-word] absolute decoration-from-font decoration-solid font-['Inter:Bold'] font-bold leading-[20px] left-[980.7px] line-through not-italic opacity-55 text-[14px] text-[color:var(--color\/v2\/text\/value-positive,#66e59e)] top-[18.4px] whitespace-nowrap" data-node-id="2184:323">
+              R$ 20.000,00
+            </p>
+            <div className="absolute bg-[var(--color\/v2\/bg\/status-negative,rgba(193,0,7,0.2))] border-[0.8px] border-[var(--color\/v2\/border\/status-negative,#ffc9c9)] border-solid content-stretch flex gap-[var(--sa-spacing-4,4px)] items-center justify-center left-[1114.63px] overflow-clip pl-[7px] pr-[9px] py-[3px] rounded-[8px] top-[18.46px]" data-node-id="2184:324" data-name="Badge">
+              <p className="[word-break:break-word] font-['Inter:Medium'] font-medium leading-[14.286px] not-italic relative shrink-0 text-[10px] text-[color:var(--color\/v2\/text\/status-negative,#ffc9c9)] tracking-[0.25px] uppercase whitespace-nowrap" data-node-id="2184:328">
+                Erro
+              </p>
+            </div>
+            <p className="[text-decoration-skip-ink:none] [text-underline-position:from-font] [word-break:break-word] absolute decoration-from-font decoration-solid font-['Inter:Regular'] font-normal leading-[16px] left-[1224.24px] line-through not-italic opacity-55 text-[12px] text-[color:var(--sa-color-text-secondary,rgba(255,255,255,0.72))] top-[20.4px] whitespace-nowrap" data-node-id="2184:329">
+              Admin
+            </p>
+            <div className="absolute content-stretch flex gap-[var(--sa-spacing-6,6px)] items-center justify-center left-[1360.74px] px-[var(--sa-spacing-10,10px)] rounded-[var(--sa-radius-8,8px)] size-[32px] top-[12.4px]" data-node-id="2184:330" data-name="Button">
+              <div className="relative shrink-0 size-[16px]" data-node-id="2184:331" data-name="Icon">
+                <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgIcon1} />
+              </div>
+            </div>
+            <p className="[word-break:break-word] absolute font-['Inter:Regular'] font-normal leading-[16px] left-[980.7px] not-italic text-[11px] text-[color:var(--sa-color-text-secondary,rgba(255,255,255,0.72))] top-[39.4px] whitespace-nowrap" data-node-id="2184:334">
+              corrigido por TRX-2026-00148 · depósito TRX-2026-00137
+            </p>
+            <p className="[text-decoration-skip-ink:none] [text-underline-position:from-font] [word-break:break-word] absolute decoration-from-font decoration-solid font-['DM_Mono:Regular'] leading-[normal] left-[119.42px] line-through not-italic opacity-55 text-[12px] text-[rgba(255,255,255,0.76)] top-[20.4px] whitespace-nowrap" data-node-id="2184:335">
+              TRX-2026-00143
+            </p>
+          </div>
+          <div className="absolute border-[rgba(255,255,255,0.12)] border-b-[0.8px] border-solid h-[56.8px] left-0 top-[176.8px] w-[1400.8px]" data-node-id="2184:336" data-name="TableRow">
+            <p className="[text-decoration-skip-ink:none] [text-underline-position:from-font] [word-break:break-word] absolute decoration-from-font decoration-solid font-['Inter:Regular'] font-normal leading-[16px] left-[8px] line-through not-italic opacity-55 text-[12px] text-[color:var(--sa-color-text-secondary,rgba(255,255,255,0.72))] top-[20.4px] whitespace-nowrap" data-node-id="2184:337">
+              05/05/2026 10:00
+            </p>
+            <div className="absolute content-stretch flex gap-[var(--sa-spacing-8,8px)] items-center left-[253.21px] top-[20.4px] w-[178.975px]" data-node-id="2184:339" data-name="TransactionsScreen">
+              <div className="relative shrink-0 size-[16px]" data-node-id="2184:340" data-name="Icon">
+                <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgIcon} />
+              </div>
+              <div className="content-stretch flex flex-col items-start relative shrink-0" data-node-id="2184:343" data-name="Text">
+                <p className="[text-decoration-skip-ink:none] [text-underline-position:from-font] [word-break:break-word] decoration-from-font decoration-solid font-['Inter:Medium'] font-medium leading-[16px] line-through not-italic opacity-55 relative shrink-0 text-[12px] text-[color:var(--sa-color-text-secondary,rgba(255,255,255,0.72))] whitespace-nowrap" data-node-id="2184:344">
+                  Transferência
+                </p>
+              </div>
+            </div>
+            <p className="[text-decoration-skip-ink:none] [text-underline-position:from-font] [word-break:break-word] absolute decoration-from-font decoration-solid font-['Inter:Medium'] font-medium leading-[16px] left-[448.19px] line-through not-italic opacity-55 text-[12px] text-[color:var(--sa-color-text-secondary,rgba(255,255,255,0.72))] top-[20.4px] whitespace-nowrap" data-node-id="2184:345">
+              Carlos Eduardo Mendes
+            </p>
+            <div className="absolute content-stretch flex flex-col h-[15.988px] items-start left-[645.38px] max-w-[150px] overflow-clip top-[20.4px] w-[150px]" data-node-id="2184:346" data-name="TransactionsScreen">
+              <p className="[text-decoration-skip-ink:none] [text-underline-position:from-font] [word-break:break-word] decoration-from-font decoration-solid font-['Inter:Regular'] font-normal leading-[16px] line-through not-italic opacity-55 relative shrink-0 text-[12px] text-[color:var(--sa-color-text-secondary,rgba(255,255,255,0.72))] whitespace-nowrap" data-node-id="2184:347">
+                Carteira Strategy
+              </p>
+            </div>
+            <div className="absolute content-stretch flex flex-col h-[15.988px] items-start left-[813.04px] max-w-[150px] overflow-clip top-[20.4px] w-[150px]" data-node-id="2184:348" data-name="TransactionsScreen">
+              <p className="[text-decoration-skip-ink:none] [text-underline-position:from-font] [word-break:break-word] decoration-from-font decoration-solid font-['Inter:Regular'] font-normal leading-[16px] line-through not-italic opacity-55 relative shrink-0 text-[12px] text-[color:var(--sa-color-text-secondary,rgba(255,255,255,0.72))] whitespace-nowrap" data-node-id="2184:349">
+                Carteira de Depósito
+              </p>
+            </div>
+            <p className="[text-decoration-skip-ink:none] [text-underline-position:from-font] [word-break:break-word] absolute decoration-from-font decoration-solid font-['Inter:Bold'] font-bold leading-[20px] left-[980.7px] line-through not-italic opacity-55 text-[14px] text-[color:var(--color\/v2\/text\/value-positive,#66e59e)] top-[18.4px] whitespace-nowrap" data-node-id="2184:350">
+              R$ 10.000,00
+            </p>
+            <div className="absolute bg-[var(--color\/v2\/bg\/status-negative,rgba(193,0,7,0.2))] border-[0.8px] border-[var(--color\/v2\/border\/status-negative,#ffc9c9)] border-solid content-stretch flex gap-[var(--sa-spacing-4,4px)] items-center justify-center left-[1114.63px] overflow-clip pl-[7px] pr-[9px] py-[3px] rounded-[8px] top-[18.46px]" data-node-id="2184:351" data-name="Badge">
+              <p className="[word-break:break-word] font-['Inter:Medium'] font-medium leading-[14.286px] not-italic relative shrink-0 text-[10px] text-[color:var(--color\/v2\/text\/status-negative,#ffc9c9)] tracking-[0.25px] uppercase whitespace-nowrap" data-node-id="2184:355">
+                Erro
+              </p>
+            </div>
+            <p className="[text-decoration-skip-ink:none] [text-underline-position:from-font] [word-break:break-word] absolute decoration-from-font decoration-solid font-['Inter:Regular'] font-normal leading-[16px] left-[1224.24px] line-through not-italic opacity-55 text-[12px] text-[color:var(--sa-color-text-secondary,rgba(255,255,255,0.72))] top-[20.4px] whitespace-nowrap" data-node-id="2184:356">
+              Admin
+            </p>
+            <div className="absolute content-stretch flex gap-[var(--sa-spacing-6,6px)] items-center justify-center left-[1360.74px] px-[var(--sa-spacing-10,10px)] rounded-[var(--sa-radius-8,8px)] size-[32px] top-[12.4px]" data-node-id="2184:357" data-name="Button">
+              <div className="relative shrink-0 size-[16px]" data-node-id="2184:358" data-name="Icon">
+                <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgIcon1} />
+              </div>
+            </div>
+            <p className="[word-break:break-word] absolute font-['Inter:Regular'] font-normal leading-[16px] left-[980.7px] not-italic text-[11px] text-[color:var(--sa-color-text-secondary,rgba(255,255,255,0.72))] top-[39.4px] whitespace-nowrap" data-node-id="2184:361">
+              zerada pela correção do depósito TRX-2026-00137
+            </p>
+            <p className="[text-decoration-skip-ink:none] [text-underline-position:from-font] [word-break:break-word] absolute decoration-from-font decoration-solid font-['DM_Mono:Regular'] leading-[normal] left-[119.42px] line-through not-italic opacity-55 text-[12px] text-[rgba(255,255,255,0.76)] top-[20.4px] whitespace-nowrap" data-node-id="2184:362">
+              TRX-2026-00145
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+SUPER CRITICAL: The generated React+Tailwind code MUST be converted to match the target project's technology stack and styling system.
+1. Analyze the target codebase to identify: technology stack, styling approach, component patterns, and design tokens
+2. Convert React syntax to the target framework/library
+3. Transform all Tailwind classes to the target styling system while preserving exact visual design
+4. Follow the project's existing patterns and conventions
+DO NOT install any Tailwind as a dependency unless the user instructs you to do so.
+
+Node ids have been added to the code as data attributes, e.g. `data-node-id="1:2"`.
+The generated code contains image and SVG URL constants, e.g. const image = 'https://www.figma.com/api/mcp/asset/550e8400-e29b-41d4-a716-446655440000.png'. These URLs are temporary download sources and expire after 7 days. Download each asset into the project with curl -L, then replace its URL in the generated code with a reference to the downloaded asset. Never use the temporary URLs as runtime image sources.

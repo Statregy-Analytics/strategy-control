@@ -1,0 +1,111 @@
+{
+  "updatedAt": "2026-11-17",
+  "scope": "Superfícies encontradas no código atual sem frame equivalente vinculado no inventário recuperado, para avaliação de Éric. Ausência de vínculo não prova ausência em todo o arquivo Figma. Inclui telas legadas, acessos auxiliares e adaptações autorizadas; não significa que todas foram criadas nesta entrega.",
+  "countInFigmaProgress": false,
+  "items": [
+    {
+      "id": "extra-forms",
+      "name": "Admin · Formulários",
+      "path": "/dataManagement/forms",
+      "source": "src/pages/DataManagement/DataIntakePage.vue",
+      "origin": "Integração administrativa anterior",
+      "decision": "Acesso em Configurações autorizado pelo usuário; confirmar desenho específico."
+    },
+    {
+      "id": "extra-banks",
+      "name": "Admin · Catálogo de Bancos",
+      "path": "/dataManagement/banks",
+      "source": "src/pages/DataManagement/BanksPage.vue",
+      "origin": "Integração administrativa anterior",
+      "decision": "Acesso em Configurações autorizado pelo usuário; C35 trata logos, não substitui o frame deste catálogo."
+    },
+    {
+      "id": "extra-document-settings",
+      "name": "Admin · Configuração documental",
+      "path": "/dataManagement/document-settings",
+      "source": "src/pages/DataManagement/DocumentSettingsPage.vue",
+      "origin": "Integração administrativa anterior",
+      "decision": "Acesso em Configurações autorizado pelo usuário; avaliar composição de lista/edição."
+    },
+    {
+      "id": "extra-leads",
+      "name": "Admin · Leads",
+      "path": "/dataManagement/leads",
+      "source": "src/pages/DataManagement/LeadPage.vue",
+      "origin": "Tela legada do projeto",
+      "decision": "Referência arquitetural de CRUD, sem frame próprio vinculado ao inventário atual; avaliar escopo e acesso."
+    },
+    {
+      "id": "extra-advisors",
+      "name": "Admin · Assessores",
+      "path": "/dataManagement/assessores",
+      "source": "src/pages/DataManagement/AdvisorsPage.vue",
+      "origin": "Tela legada do projeto",
+      "decision": "Referência arquitetural de CRUD, sem frame próprio vinculado ao inventário atual; avaliar escopo e acesso."
+    },
+    {
+      "id": "extra-landing-editor",
+      "name": "Admin · Edição de LP",
+      "path": "/edit-lp",
+      "source": "src/pages/LandingPage/EditLandingPage.vue",
+      "origin": "Tela legada, fora da revisão de cadastro/finanças",
+      "decision": "Confirmar se integra a entrega atual; não foi criada ou homologada neste lote."
+    },
+    {
+      "id": "extra-admin-register",
+      "name": "Admin · Registro de usuário legado",
+      "path": "/auth/register",
+      "source": "src/pages/Authentication/RegisterPage.vue",
+      "origin": "Rota legada de autenticação",
+      "decision": "Sem frame administrativo vinculado. Não confundir com o wizard de cadastro da Área do Cliente."
+    },
+    {
+      "id": "extra-admin-token",
+      "name": "Admin · Validação de token legada",
+      "path": "/auth/token-validation",
+      "source": "src/pages/Authentication/TokenValidationPage.vue",
+      "origin": "Rota legada de autenticação",
+      "decision": "Confirmar uso e vínculo com a recuperação/ativação aprovada; não criada neste lote."
+    },
+    {
+      "id": "extra-wallet-picker",
+      "name": "Admin · Consulta genérica de carteira por cliente",
+      "path": "/transaction · Consultar carteiras de um cliente",
+      "source": "src/components/Finance/CustomerPortfolio.vue",
+      "origin": "Composição auxiliar anterior à listagem global",
+      "decision": "Avaliar manutenção do acesso auxiliar e do formulário de exportação; não equivale aos cards globais do Figma."
+    },
+    {
+      "id": "extra-professional-fields",
+      "name": "Cliente · Etapa profissional antes dos documentos",
+      "path": "/cadastro/etapa-4",
+      "source": "portal:src/services/registrationEmployment.js",
+      "origin": "Adaptação autorizada pelo usuário, designer e QA",
+      "decision": "Troca das etapas e inclusão de ocupação/empregador autorizadas por regra do negócio. Moedas têm definição posterior de retirada; conferir frente ao desenho atualizado."
+    },
+    {
+      "id": "extra-consent-step7",
+      "name": "Cliente · Aceites reutilizados na revisão final",
+      "path": "/cadastro/etapa-7",
+      "source": "portal:src/services/registrationConsents.js",
+      "origin": "Adaptação autorizada pelo usuário",
+      "decision": "Usuário autorizou reutilizar o bloco de aceite na etapa 7 porque os termos versionados exigiam sessão; avaliar incorporação ao Figma."
+    },
+    {
+      "id": "extra-asset-required-fields",
+      "name": "Cliente · Campos obrigatórios complementares do patrimônio",
+      "path": "/system/config/profile · Patrimônio",
+      "source": "portal:src/system/pages/Config/ProfilePage.vue",
+      "origin": "Adaptação autorizada pelo usuário",
+      "decision": "Marca, ano e valor foram autorizados quando exigidos pela criação da API. Confirmar desenho consolidado; não são telas adicionais inventadas neste lote."
+    },
+    {
+      "id": "extra-request-values",
+      "name": "Cliente · Valores após selecionar modalidade da oferta",
+      "path": "/system/contracts · Quero Conhecer · passo 3",
+      "source": "portal:src/system/layouts/contracts/Form/ApplicationUnique.vue",
+      "origin": "Campos condicionais já existentes no fluxo reutilizado",
+      "decision": "Os seis frames P05 recuperados mostram o passo 3 sem seleção; vincular o estado selecionado e seus campos de valor ao desenho correspondente. Não foram acrescentados campos neste lote."
+    }
+  ]
+}

@@ -1,0 +1,46 @@
+const imgWhisk916E26874C = "https://www.figma.com/api/mcp/asset/a9647700-ebfb-4140-b7e9-1c995282367c.png";
+const imgIconJamIconsOutlineLogosArrowRight = "https://www.figma.com/api/mcp/asset/ca0eff42-7fd9-42c0-acc4-a77b72f98b22.svg";
+
+export default function ModalContrato() {
+  return (
+    <div className="backdrop-blur-[16px] border-2 border-[var(--brand-blue\/400,#2cb7ff)] border-solid content-stretch flex flex-col items-start overflow-clip relative rounded-[8px] shadow-[0px_0px_48px_12px_rgba(0,163,255,0.24)] size-full" data-node-id="1:45449" style={{ backgroundImage: "linear-gradient(205.60026668486762deg, rgba(0, 0, 0, 0.24) 0.52072%, rgba(0, 0, 0, 0.08) 51.124%, rgba(0, 0, 0, 0.04) 99.479%)" }} data-name="Modal - contrato">
+      <div className="content-stretch flex flex-col gap-[32px] items-center justify-center px-[32px] py-[24px] relative shrink-0 w-full" data-node-id="1:45450" data-name="Content">
+        <div className="h-[400px] relative shrink-0 w-[407px]" data-node-id="1:45451" data-name="Whisk_916e26874c">
+          <div className="absolute inset-0 overflow-hidden pointer-events-none">
+            <img alt="" className="absolute h-[108.87%] left-[-48.04%] max-w-none top-[-4.44%] w-[196.08%]" src={imgWhisk916E26874C} />
+          </div>
+        </div>
+        <div className="[word-break:break-word] content-stretch flex flex-col gap-[12px] items-start justify-center not-italic relative shrink-0 text-center w-full" data-node-id="1:45452" data-name="Heading">
+          <p className="font-['Inter:Bold'] font-bold leading-[1.5] min-w-full relative shrink-0 text-[24px] text-[color:var(--neutral\/white,white)] w-[min-content]" data-node-id="1:45455">
+            Solicitação de Contrato enviada!
+          </p>
+          <p className="font-['Inter:Regular'] font-normal leading-[1.35] relative shrink-0 text-[17px] text-[color:var(--neutral\/400,#989898)] w-[508px]" data-node-id="1:45456">
+            Sua solicitação será analisada e logo um dos nossos Consultores entrará em contato.
+          </p>
+        </div>
+      </div>
+      <div className="content-stretch flex gap-[24px] items-center justify-center px-[32px] py-[16px] relative shrink-0 w-full" data-node-id="1:45457" data-name="Buttons">
+        <div className="bg-[var(--active,#00a3ff)] border-2 border-[var(--active,#00a3ff)] border-solid content-stretch flex gap-[8px] items-center justify-center px-[12px] py-[8px] relative rounded-[4px] shrink-0" data-node-id="1:45459" data-name="button">
+          <div className="content-stretch flex items-center justify-center relative shrink-0" data-node-id="I1:45459;302:12531" data-name="Text Container">
+            <p className="[word-break:break-word] font-['Roboto:Medium'] font-medium leading-none relative shrink-0 text-[14px] text-white tracking-[0.5px] whitespace-nowrap" data-node-id="I1:45459;302:12532" style={{ fontVariationSettings: '"wdth" 100' }}>
+              Ir para Contratos
+            </p>
+          </div>
+          <div className="relative shrink-0 size-[24px]" data-node-id="I1:45459;302:12534" data-name="icon / jam-icons / outline & logos / arrow-right">
+            <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgIconJamIconsOutlineLogosArrowRight} />
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+SUPER CRITICAL: The generated React+Tailwind code MUST be converted to match the target project's technology stack and styling system.
+1. Analyze the target codebase to identify: technology stack, styling approach, component patterns, and design tokens
+2. Convert React syntax to the target framework/library
+3. Transform all Tailwind classes to the target styling system while preserving exact visual design
+4. Follow the project's existing patterns and conventions
+DO NOT install any Tailwind as a dependency unless the user instructs you to do so.
+
+Node ids have been added to the code as data attributes, e.g. `data-node-id="1:2"`.
+These styles are contained in the design: S.A/Heading/Sm: Font(family: "Inter", style: Bold, size: 24, weight: 700, lineHeight: 1.5, letterSpacing: 0), S.A/17/R: Font(family: "Inter", style: Regular, size: 17, weight: 400, lineHeight: 1.350000023841858, letterSpacing: 0), Default/White: #FFFFFF, Button/S: Font(family: "Roboto", style: Medium, size: 14, weight: 500, lineHeight: 1, letterSpacing: 0.5), grad-glass dark: ,, modal effect -md: Effect(type: BACKGROUND_BLUR, radius: 32); Effect(type: DROP_SHADOW, color: #00A3FF3D, offset: (0, 0), radius: 48, spread: 12).
+The generated code contains image and SVG URL constants, e.g. const image = 'https://www.figma.com/api/mcp/asset/550e8400-e29b-41d4-a716-446655440000.png'. These URLs are temporary download sources and expire after 7 days. Download each asset into the project with curl -L, then replace its URL in the generated code with a reference to the downloaded asset. Never use the temporary URLs as runtime image sources.

@@ -1,5 +1,17 @@
 import { readFileSync, writeFileSync } from 'node:fs'
 import { createHash } from 'node:crypto'
+import { existsSync } from 'node:fs'
+const noReference = JSON.parse(readFileSync('docs/FRONTEND-SEM-REFERENCIA-FIGMA.json', 'utf8'))
+for (const item of noReference.items) {
+  // The portal is a separate repository; verify its paths when the sibling checkout is present.
+  if (item.source.startsWith('portal:') && !existsSync('../Strategy-analytics-v2')) continue
+  const source = item.source.startsWith('portal:')
+    ? '../Strategy-analytics-v2/' + item.source.slice(7)
+    : item.source
+  if (!existsSync(source)) throw Error('Fonte de tela sem referência não encontrada: ' + source)
+}
+if (new Set(noReference.items.map((item) => item.id)).size !== noReference.items.length)
+  throw Error('Registro sem referência contém IDs duplicados.')
 const baselinePath = 'docs/evidence/qa-2026-11-16-inventory/classification.json'
 const baselineText = readFileSync(baselinePath, 'utf8'),
   baseline = JSON.parse(baselineText)
@@ -57,6 +69,12 @@ const report = {
     adjustment: 'Ainda precisa implementação/complemento/correção de frontend.',
   },
   metrics,
+  withoutLinkedFigmaReference: {
+    count: noReference.items.length,
+    countedInFigmaProgress: false,
+    register: 'docs/FRONTEND-SEM-REFERENCIA-FIGMA.json',
+    note: noReference.scope,
+  },
   items,
 }
 writeFileSync('docs/FRONTEND-PROGRESS.json', JSON.stringify(report, null, 2) + '\n')
@@ -103,5 +121,26 @@ checklist = checklist
     return line.replace(/\|[^|]*\|$/, '| ' + states[item.front] + ' · ' + item.group + ' |')
   })
   .join('\n')
+const noReferenceSection = `<!-- frontend-no-reference:start -->
+## Telas e adaptações sem frame vinculado — avaliação de Éric
+
+${noReference.scope} **Não entram nas ${total} telas/estados do percentual.** Nenhuma nova tela sem referência foi criada no lote de 17/11; os novos detalhes e estados de Transações têm IDs específicos abaixo.
+
+| Superfície | Origem | Avaliação pendente |
+| --- | --- | --- |
+${noReference.items.map((item) => `| ${item.name} · \`${item.path}\` | ${item.origin} | ${item.decision} |`).join('\n')}
+
+Registro verificável por arquivo: [${noReference.items.length} superfícies/adaptações](FRONTEND-SEM-REFERENCIA-FIGMA.json). Algumas são rotas legadas; outras são blocos dentro de telas já contadas. O registro não representa ${noReference.items.length} telas novas nem uma aprovação visual.
+<!-- frontend-no-reference:end -->`
+if (checklist.includes('<!-- frontend-no-reference:start -->'))
+  checklist = checklist.replace(
+    /<!-- frontend-no-reference:start -->[\s\S]*?<!-- frontend-no-reference:end -->/,
+    noReferenceSection,
+  )
+else
+  checklist = checklist.replace(
+    '<!-- frontend-progress:end -->',
+    '<!-- frontend-progress:end -->\n\n' + noReferenceSection,
+  )
 writeFileSync(path, checklist)
 console.log(JSON.stringify(metrics))

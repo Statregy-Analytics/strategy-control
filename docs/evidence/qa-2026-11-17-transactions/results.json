@@ -1,0 +1,54 @@
+{
+  "date": "2026-11-17",
+  "scope": {
+    "admin": "MD06, MD06.1, MD06.3, MD06.2, MD08, E04/E05/E06/E08/E11",
+    "portal": "seis modais de oferta P05; sem aprovação integral dos frames de fundo"
+  },
+  "financialWrites": 0,
+  "backendContractReview": {
+    "source": "https://strategyanalytics.codebiz.com.br/openapi/v1.json",
+    "actionsPassword": "existing; reused",
+    "history": "admin/audit/changes existing; reused",
+    "missingProjection": [
+      "receipt amount",
+      "specific corrected timestamp",
+      "correction origin parts and original/correction links in summary/statement DTOs"
+    ],
+    "attachment": "Upload and link routes exist; transaction proof type/country/role mapping is not established. No guessed mapping and no orphan upload.",
+    "pendingEdit": "amount/bank/version supported; original observation replacement is not in EditTransactionRequest. Added notes use existing append endpoint.",
+    "correction": "differenceSource/pendingTransactionId scalar shape does not represent the MD08 multiple-source amounts.",
+    "contractRequest": "No client contract-request submit route in current OpenAPI; no fake success."
+  },
+  "localBrowser": [
+    "real validated withdrawal details",
+    "real rejection reason -> password dialog without sending",
+    "controlled approve optional note; exact CONFIRMAR; required cancel reason",
+    "controlled filled edit; save disabled until change; discard",
+    "controlled corrected detail, original link, independent history",
+    "mobile 390px with no horizontal overflow in detail/correction",
+    "real portal 5 steps, unavailable send preserving choices",
+    "controlled success preview and return without server submission"
+  ],
+  "published": false,
+  "tests": {
+    "adminLocal": 402,
+    "adminVersioned": 394,
+    "preexistingUntracked": 8,
+    "portal": 430,
+    "lint": "passed both",
+    "build": "passed both",
+    "diffCheck": "scoped changes passed; preexisting Swagger whitespace preserved"
+  },
+  "progress": {
+    "total": 279,
+    "done": 156,
+    "validation": 85,
+    "adjustment": 38,
+    "implemented": 241,
+    "implementedPercent": 86.4
+  },
+  "commits": {
+    "adminApp": "fa37752",
+    "portalApp": "9b3b4ba"
+  }
+}

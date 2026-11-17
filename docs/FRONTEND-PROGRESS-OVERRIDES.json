@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-16",
+  "updatedAt": "2026-11-17",
   "method": "Estados de implementação atualizados apenas onde existe evidência específica; done significa front pronto, não ausência de dependência HTTP. validation é implementação existente que precisa revalidação/comparação. adjustment inclui completar/corrigir código e não significa necessariamente uma tela do zero.",
   "items": {
     "1484:79229": {
@@ -189,6 +189,140 @@
       "front": "done",
       "reason": "Base com filtros e ícones revistos; prévia formal desktop/celular exercitada. Metadados editoriais indisponíveis não foram inventados.",
       "evidence": "docs/evidence/qa-2026-11-16-global-review/results.json"
+    },
+    "1484:86593": {
+      "front": "done",
+      "reason": "Composição e estados implementados com referências completas recuperadas; testes de validação/concorrência e navegador local. Envio de anexo, redução multiorigem e campos ausentes da API permanecem limites de integração, não sucessos simulados.",
+      "evidence": "docs/evidence/qa-2026-11-17-transactions/results.json",
+      "blockers": [
+        "backend"
+      ]
+    },
+    "1484:86762": {
+      "front": "done",
+      "reason": "Composição e estados implementados com referências completas recuperadas; testes de validação/concorrência e navegador local. Envio de anexo, redução multiorigem e campos ausentes da API permanecem limites de integração, não sucessos simulados.",
+      "evidence": "docs/evidence/qa-2026-11-17-transactions/results.json",
+      "blockers": []
+    },
+    "1484:86782": {
+      "front": "done",
+      "reason": "Composição e estados implementados com referências completas recuperadas; testes de validação/concorrência e navegador local. Envio de anexo, redução multiorigem e campos ausentes da API permanecem limites de integração, não sucessos simulados.",
+      "evidence": "docs/evidence/qa-2026-11-17-transactions/results.json",
+      "blockers": []
+    },
+    "1484:86802": {
+      "front": "done",
+      "reason": "Composição e estados implementados com referências completas recuperadas; testes de validação/concorrência e navegador local. Envio de anexo, redução multiorigem e campos ausentes da API permanecem limites de integração, não sucessos simulados.",
+      "evidence": "docs/evidence/qa-2026-11-17-transactions/results.json",
+      "blockers": []
+    },
+    "2282:289": {
+      "front": "done",
+      "reason": "Composição e estados implementados com referências completas recuperadas; testes de validação/concorrência e navegador local. Envio de anexo, redução multiorigem e campos ausentes da API permanecem limites de integração, não sucessos simulados.",
+      "evidence": "docs/evidence/qa-2026-11-17-transactions/results.json",
+      "blockers": []
+    },
+    "2160:281": {
+      "front": "done",
+      "reason": "Composição e estados implementados com referências completas recuperadas; testes de validação/concorrência e navegador local. Envio de anexo, redução multiorigem e campos ausentes da API permanecem limites de integração, não sucessos simulados.",
+      "evidence": "docs/evidence/qa-2026-11-17-transactions/results.json",
+      "blockers": [
+        "backend"
+      ]
+    },
+    "2187:404": {
+      "front": "done",
+      "reason": "Composição e estados implementados com referências completas recuperadas; testes de validação/concorrência e navegador local. Envio de anexo, redução multiorigem e campos ausentes da API permanecem limites de integração, não sucessos simulados.",
+      "evidence": "docs/evidence/qa-2026-11-17-transactions/results.json",
+      "blockers": [
+        "backend"
+      ]
+    },
+    "2179:281": {
+      "front": "done",
+      "reason": "Composição e estados implementados com referências completas recuperadas; testes de validação/concorrência e navegador local. Envio de anexo, redução multiorigem e campos ausentes da API permanecem limites de integração, não sucessos simulados.",
+      "evidence": "docs/evidence/qa-2026-11-17-transactions/results.json",
+      "blockers": [
+        "backend"
+      ]
+    },
+    "2179:355": {
+      "front": "done",
+      "reason": "Composição e estados implementados com referências completas recuperadas; testes de validação/concorrência e navegador local. Envio de anexo, redução multiorigem e campos ausentes da API permanecem limites de integração, não sucessos simulados.",
+      "evidence": "docs/evidence/qa-2026-11-17-transactions/results.json",
+      "blockers": [
+        "backend"
+      ]
+    },
+    "1484:86842": {
+      "front": "done",
+      "reason": "Composição e estados implementados com referências completas recuperadas; testes de validação/concorrência e navegador local. Envio de anexo, redução multiorigem e campos ausentes da API permanecem limites de integração, não sucessos simulados.",
+      "evidence": "docs/evidence/qa-2026-11-17-transactions/results.json",
+      "blockers": [
+        "backend"
+      ]
+    },
+    "1:34294": {
+      "front": "validation",
+      "reason": "Fluxo existente confirmado conectado em ContractsPage → OpportunityInvestment, cinco passos testados. Referências dos seis modais recuperadas, variante de oferta ajustada; estado enviado somente em prévia controlada. Falta comparação integral da página de fundo e vínculo do estado selecionado dos valores no passo 3. Não há POST de solicitação de contrato no OpenAPI atual.",
+      "evidence": "docs/evidence/qa-2026-11-17-transactions/results.json",
+      "blockers": [
+        "backend",
+        "designer"
+      ]
+    },
+    "1:36148": {
+      "front": "validation",
+      "reason": "Fluxo existente confirmado conectado em ContractsPage → OpportunityInvestment, cinco passos testados. Referências dos seis modais recuperadas, variante de oferta ajustada; estado enviado somente em prévia controlada. Falta comparação integral da página de fundo e vínculo do estado selecionado dos valores no passo 3. Não há POST de solicitação de contrato no OpenAPI atual.",
+      "evidence": "docs/evidence/qa-2026-11-17-transactions/results.json",
+      "blockers": [
+        "backend",
+        "designer"
+      ]
+    },
+    "1:37994": {
+      "front": "validation",
+      "reason": "Fluxo existente confirmado conectado em ContractsPage → OpportunityInvestment, cinco passos testados. Referências dos seis modais recuperadas, variante de oferta ajustada; estado enviado somente em prévia controlada. Falta comparação integral da página de fundo e vínculo do estado selecionado dos valores no passo 3. Não há POST de solicitação de contrato no OpenAPI atual.",
+      "evidence": "docs/evidence/qa-2026-11-17-transactions/results.json",
+      "blockers": [
+        "backend",
+        "designer"
+      ]
+    },
+    "1:39818": {
+      "front": "validation",
+      "reason": "Fluxo existente confirmado conectado em ContractsPage → OpportunityInvestment, cinco passos testados. Referências dos seis modais recuperadas, variante de oferta ajustada; estado enviado somente em prévia controlada. Falta comparação integral da página de fundo e vínculo do estado selecionado dos valores no passo 3. Não há POST de solicitação de contrato no OpenAPI atual.",
+      "evidence": "docs/evidence/qa-2026-11-17-transactions/results.json",
+      "blockers": [
+        "backend",
+        "designer"
+      ]
+    },
+    "1:41796": {
+      "front": "validation",
+      "reason": "Fluxo existente confirmado conectado em ContractsPage → OpportunityInvestment, cinco passos testados. Referências dos seis modais recuperadas, variante de oferta ajustada; estado enviado somente em prévia controlada. Falta comparação integral da página de fundo e vínculo do estado selecionado dos valores no passo 3. Não há POST de solicitação de contrato no OpenAPI atual.",
+      "evidence": "docs/evidence/qa-2026-11-17-transactions/results.json",
+      "blockers": [
+        "backend",
+        "designer"
+      ]
+    },
+    "1:43678": {
+      "front": "validation",
+      "reason": "Fluxo existente confirmado conectado em ContractsPage → OpportunityInvestment, cinco passos testados. Referências dos seis modais recuperadas, variante de oferta ajustada; estado enviado somente em prévia controlada. Falta comparação integral da página de fundo e vínculo do estado selecionado dos valores no passo 3. Não há POST de solicitação de contrato no OpenAPI atual.",
+      "evidence": "docs/evidence/qa-2026-11-17-transactions/results.json",
+      "blockers": [
+        "backend",
+        "designer"
+      ]
+    },
+    "2161:281": {
+      "front": "adjustment",
+      "reason": "Erro passou a ter tratamento visual no histórico do Admin. O extrato corrigido completo ainda exige composição e vínculos entre original/correção/origens. TransactionSummaryResponse e lançamentos de extrato não trazem toda a decomposição do frame; não reconstruir a partir de valores soltos.",
+      "evidence": "docs/evidence/qa-2026-11-17-transactions/results.json",
+      "blockers": [
+        "backend"
+      ]
     }
   }
 }

@@ -1,24 +1,72 @@
 # Checklist único — telas do Figma e integração
 
-Atualização: 16/11/2026. Este é o índice desta revisão ampla. Evidências anteriores continuam nos documentos vinculados; uma tela existente não é automaticamente considerada revalidada nesta rodada.
+Atualização: 17/11/2026. Este é o índice desta revisão ampla. Evidências anteriores continuam nos documentos vinculados; uma tela existente não é automaticamente considerada revalidada nesta rodada.
 
 <!-- frontend-progress:start -->
 ## Panorama atual do frontend
 
-Atualizado em 2026-11-16. Contagem por **telas e estados independentes do Figma**, com peso igual; não é estimativa de horas. Os 30 agrupamentos/conexões do inventário foram excluídos.
+Atualizado em 2026-11-17. Contagem por **telas e estados independentes do Figma**, com peso igual; não é estimativa de horas. Os 30 agrupamentos/conexões do inventário foram excluídos.
 
 | Situação | Quantidade |
 | --- | ---: |
 | Total inventariado | **279** |
-| Prontas no frontend | **146** |
-| Implementadas, aguardando revalidação/comparação completa | **80** |
-| Ainda exigem implementação, complemento ou correção | **53** |
-| Com implementação existente (prontas + revalidação) | **226 / 279 (81,0%)** |
+| Prontas no frontend | **156** |
+| Implementadas, aguardando revalidação/comparação completa | **85** |
+| Ainda exigem implementação, complemento ou correção | **38** |
+| Com implementação existente (prontas + revalidação) | **241 / 279 (86,4%)** |
 
-**Para encerrar o front faltam 53 itens de implementação/ajuste e 80 de revalidação.** “Pronto no frontend” não significa fluxo integrado liberado: dependências de backend/designer podem afetar também telas prontas. Os números não classificam toda pendência como tela nova nem como problema de API. A comparação de Crédito, carteira global e editor editorial que não foi concluída integralmente permanece em revalidação.
+**Para encerrar o front faltam 38 itens de implementação/ajuste e 85 de revalidação.** “Pronto no frontend” não significa fluxo integrado liberado: dependências de backend/designer podem afetar também telas prontas. Os números não classificam toda pendência como tela nova nem como problema de API. A comparação de Crédito, carteira global e editor editorial que não foi concluída integralmente permanece em revalidação.
 
 Fonte por frame: [progresso atual](FRONTEND-PROGRESS.json). A base anterior permanece histórica; [atualizações com evidências](FRONTEND-PROGRESS-OVERRIDES.json) registram cada mudança. Ao finalizar **cada entrega**, atualizar os IDs comprovados, executar `node scripts/frontend-progress.mjs` e informar este panorama na resposta final.
 <!-- frontend-progress:end -->
+
+<!-- frontend-no-reference:start -->
+## Telas e adaptações sem frame vinculado — avaliação de Éric
+
+Superfícies encontradas no código atual sem frame equivalente vinculado no inventário recuperado, para avaliação de Éric. Ausência de vínculo não prova ausência em todo o arquivo Figma. Inclui telas legadas, acessos auxiliares e adaptações autorizadas; não significa que todas foram criadas nesta entrega. **Não entram nas 279 telas/estados do percentual.** Nenhuma nova tela sem referência foi criada no lote de 17/11; os novos detalhes e estados de Transações têm IDs específicos abaixo.
+
+| Superfície | Origem | Avaliação pendente |
+| --- | --- | --- |
+| Admin · Formulários · `/dataManagement/forms` | Integração administrativa anterior | Acesso em Configurações autorizado pelo usuário; confirmar desenho específico. |
+| Admin · Catálogo de Bancos · `/dataManagement/banks` | Integração administrativa anterior | Acesso em Configurações autorizado pelo usuário; C35 trata logos, não substitui o frame deste catálogo. |
+| Admin · Configuração documental · `/dataManagement/document-settings` | Integração administrativa anterior | Acesso em Configurações autorizado pelo usuário; avaliar composição de lista/edição. |
+| Admin · Leads · `/dataManagement/leads` | Tela legada do projeto | Referência arquitetural de CRUD, sem frame próprio vinculado ao inventário atual; avaliar escopo e acesso. |
+| Admin · Assessores · `/dataManagement/assessores` | Tela legada do projeto | Referência arquitetural de CRUD, sem frame próprio vinculado ao inventário atual; avaliar escopo e acesso. |
+| Admin · Edição de LP · `/edit-lp` | Tela legada, fora da revisão de cadastro/finanças | Confirmar se integra a entrega atual; não foi criada ou homologada neste lote. |
+| Admin · Registro de usuário legado · `/auth/register` | Rota legada de autenticação | Sem frame administrativo vinculado. Não confundir com o wizard de cadastro da Área do Cliente. |
+| Admin · Validação de token legada · `/auth/token-validation` | Rota legada de autenticação | Confirmar uso e vínculo com a recuperação/ativação aprovada; não criada neste lote. |
+| Admin · Consulta genérica de carteira por cliente · `/transaction · Consultar carteiras de um cliente` | Composição auxiliar anterior à listagem global | Avaliar manutenção do acesso auxiliar e do formulário de exportação; não equivale aos cards globais do Figma. |
+| Cliente · Etapa profissional antes dos documentos · `/cadastro/etapa-4` | Adaptação autorizada pelo usuário, designer e QA | Troca das etapas e inclusão de ocupação/empregador autorizadas por regra do negócio. Moedas têm definição posterior de retirada; conferir frente ao desenho atualizado. |
+| Cliente · Aceites reutilizados na revisão final · `/cadastro/etapa-7` | Adaptação autorizada pelo usuário | Usuário autorizou reutilizar o bloco de aceite na etapa 7 porque os termos versionados exigiam sessão; avaliar incorporação ao Figma. |
+| Cliente · Campos obrigatórios complementares do patrimônio · `/system/config/profile · Patrimônio` | Adaptação autorizada pelo usuário | Marca, ano e valor foram autorizados quando exigidos pela criação da API. Confirmar desenho consolidado; não são telas adicionais inventadas neste lote. |
+| Cliente · Valores após selecionar modalidade da oferta · `/system/contracts · Quero Conhecer · passo 3` | Campos condicionais já existentes no fluxo reutilizado | Os seis frames P05 recuperados mostram o passo 3 sem seleção; vincular o estado selecionado e seus campos de valor ao desenho correspondente. Não foram acrescentados campos neste lote. |
+
+Registro verificável por arquivo: [13 superfícies/adaptações](FRONTEND-SEM-REFERENCIA-FIGMA.json). Algumas são rotas legadas; outras são blocos dentro de telas já contadas. O registro não representa 13 telas novas nem uma aprovação visual.
+<!-- frontend-no-reference:end -->
+
+## Detalhes de Transações e oferta de contrato · 17/11
+
+### Front entregue e referências
+
+- **MD06 / MD06.1 / MD06.3:** substituído o detalhe lateral legado pelo modal aprovado, sem acrescentar campos. Dados/status/ações reais, observação, original da correção e histórico independente por registro. Links usam o ID real; resposta de outro registro é rejeitada. Ações sem permissão ficam desabilitadas. A transação original tem carregamento/erro próprio, sem esconder os demais dados.
+- **E04 / E05 / E06 / E11:** observação opcional ao aprovar, motivo obrigatório ao reprovar/cancelar e frase exata `CONFIRMAR` ao executar. Depois reutilizam **MD07**, sem antecipar escrita. Motivo, versão e permissão são conferidos novamente; alteração obsoleta não chega à confirmação.
+- **E08:** modal com PDF e descrição do desenho; validação de arquivo e preservação após falha. O botão abre quando `availableActions` autoriza. Não se faz upload isolado sem confirmar os parâmetros de classificação/vínculo. A API de anexar existe, mas essa associação ainda não está definida para o comprovante deste fluxo.
+- **MD06.2 / MD08:** retomada da observação, Salvar desabilitado sem alteração, ícones, campos e linhas das origens no padrão recuperado. Observação inalterada não é duplicada; retry de uma nota falha não repete valor/banco já gravados. Redução multiorigem e troca de comprovante permanecem protegidas enquanto não houver contrato compatível.
+- **Listas:** erro recebe tom negativo e tratamento riscado nos campos do lançamento; corrigido contraste do estado vazio. Abrir um modal/confirmar uma etapa não recarrega inutilmente as duas tabelas.
+- **P05 (seis frames de oferta):** recuperação completa dos modais revelou que o fluxo **já estava ligado** à página Contratos. Corrigido o registro de “desconectado”; variante de oferta tem largura, espaçamento, setas e switches ajustados, com a arte nativa do estado enviado. O fluxo de solicitação existente é reutilizado. Os seis frames passam a **implementado/revalidar**, pois a página de fundo e o estado selecionado dos valores ainda não têm comparação integral. Isso não representa seis telas novas implementadas neste lote.
+
+### Verificações e limites
+
+- [x] Testes automatizados dos estados: motivos vazios, frase exata, arquivo inválido, erro com retenção, fechamento durante consulta, versão/permissão alterada e separação entre preparação e escrita.
+- [x] Navegador local com API real: detalhes de solicitação e passagem de reprovação para senha, sem confirmar a operação. Oferta: abertura, passos 1–5 e envio indisponível preservando escolhas.
+- [x] Dados controlados: aprovar/executar/cancelar, detalhe corrigido com original, formulário preenchido, redução protegida e arte de sucesso da oferta com retorno. **Nenhuma solicitação financeira, correção ou upload real foi executado nesta rodada.**
+- [x] 390px reais: detalhes/correção e oferta sem overflow horizontal no modal; capturas separadas de dados reais e controlados na pasta de evidências. Prévia de sucesso é exclusivamente controlada, sem prova de envio.
+- [x] Lint e build dos dois projetos aprovados; **402 testes locais do Admin (394 versionados + 8 preexistentes do estudo)** e **430 do Cliente** passaram. Diff check dos arquivos deste lote aprovado; Swagger preexistente com whitespace mantido fora da entrega. Assets nativos não vazios, nomes e dimensões verificados.
+- [ ] Publicação e reteste final: registrar os deploys após a ativação.
+
+**Pendências reais:** a API não informa valor extraído do comprovante nem data específica da correção no DTO de detalhe; ficam indisponíveis, sem copiar o valor da transação ou a data da última atualização. Falta confirmar tipo/país/role do arquivo de comprovante sem acrescentar campos ao desenho. EditTransactionRequest não substitui a observação original; o endpoint de notas apenas acrescenta. A redução multiorigem do MD08 não cabe no corpo escalar atual. O extrato corrigido P01.1 continua com ajuste de front e projeção integrada pendentes. O OpenAPI atual só tem consulta/detalhe/documentos/histórico de contratos no cliente: não tem envio dessa solicitação; o front preserva as respostas e não apresenta sucesso.
+
+O registro de superfícies sem frame vinculado está no início deste checklist, separado do percentual e com a origem de cada composição para avaliação de Éric. **Não foi preparada mensagem ao QA ou backend.**
 
 ## Carteiras globais, Crédito e Comunicados · 16/11
 
@@ -299,7 +347,7 @@ Bloqueios secundários podem coexistir com trabalho de front; por isso a contage
 - **T01:** nova transação no Admin sem submitOperation conectado; há POST de depósitos, saques e transferências na API.
 - **T02:** confirmação sem senha administrativa; transferência para outro cliente, correção de depósito e edição pendente não conectadas, apesar de contratos HTTP existentes.
 - **P01:** saque do portal também depende de submitOperation não fornecido pelos pais; POST de saque existe.
-- **P05:** oferta de contrato não tem fluxo de etapas conectado no router. Recuperar a referência completa e conectar os estados; não foi presumido novo bloqueio de backend/designer.
+- **P05:** fluxo de cinco passos confirmado conectado na página de Contratos em 17/11; os seis modais têm referência recuperada e permanecem em revalidação integral da página/estados condicionais. Envio depende de endpoint de solicitação, ausente no OpenAPI consultado.
 - **P06:** rotas de empréstimo/ofertas e Minhas Alavancagens usam JSON fictício e upload com temporizador; bloqueio inicial de alavancagem compara somente nível 1. Leituras informativas já possuem API; solicitações/ofertas de CRM não devem ser simuladas.
 - **L02:** estado ativo Pausar/Editar/Entrar ainda não está composto no LogicCard; executar Pausar também precisa do contrato operacional.
 
@@ -355,7 +403,7 @@ Esta auditoria altera somente documentação/evidências. Os relatórios histór
 | P02 | Portal: Home com métricas do motor (1) · [evidência](../../Strategy-analytics-v2/docs/QA-2026-10-19-HOME.md) | implementação conferida | backend | Dados reais e tratamento de indisponibilidade implementados; gráfico/comparação/resultados dependem de projeção operacional. Não copiar curva de exemplo. Código: portal:src/system/pages/DashboardPage.vue, portal:src/system/components/wallet/WalletTotal.vue. Navegador: histórica; não repetida em 16/11. |
 | P03 | Portal: Home nova sem depósito (2) · [evidência](../../Strategy-analytics-v2/docs/QA-2026-10-19-HOME.md) | implementação conferida | — | Zero confirmado por consultas independentes, boas-vindas, períodos e navegação para Contratos têm evidências reais. Primeiro depósito não tem sucesso simulado. Código: portal:src/system/components/wallet/HomeEmptyState.vue. Navegador: histórica; não repetida em 16/11. |
 | P04 | Portal: contratos e variações completas (8) · [evidência](QA-2026-11-12-LISTA-CONTRATOS.md) | validação/comparação pendente; sem defeito adicional presumido | backend | Lista/detalhe genéricos integrados e testados funcionalmente; não comprovam a composição integral dos frames e temas. Métricas individuais/performance ainda têm lacunas registradas. Não marcar todos os desenhos como concluídos pela aprovação de navegação. Código: portal:src/system/pages/contract/ContractsPage.vue, portal:src/system/pages/contract/ContractPage.vue. Navegador: navegação/dados testados; composição integral pendente. |
-| P05 | Portal: oferta de contrato (6) · [evidência](CHECKLIST-UNICO-FIGMA-FRONT.md#ainda-é-trabalho-de-frontend) | implementação pendente confirmada | — | As páginas roteadas oferecem tabela e detalhe resumido, sem composição/ação de oferta dos seis estados. Recuperar a referência completa e conectar os estados aprovados; isto não comprova ausência de API nem falta de desenho. Código: portal:src/router/routes.js, portal:src/system/pages/contract/ContractsPage.vue. Navegador: fluxo não integrado. |
+| P05 | Oferta de contrato (6) — classificação histórica superada em 17/11 | Implementado · revalidar | backend/designer | Fluxo de cinco passos conectado e testado na página de Contratos; variante visual ajustada. Comparação integral do fundo/estados condicionais continua aberta. Envio sem endpoint no OpenAPI atual. Ver entrega de 17/11 acima. |
 | P06 | Portal: empréstimos/alavancagem legados (44) · [evidência](evidence/qa-2026-11-16-inventory/api-contract-review.json) | implementação pendente confirmada | backend | Páginas roteadas usam JSON fake; uploads simulam com setTimeout; bloqueio de nível compara só ==1, não regra oficial de nível 3. Remover simulação e integrar leituras GET /client/loans existentes. Solicitações/ofertas/funil não têm contrato completo; não pedir nova API para a listagem já disponível. Código: portal:src/system/pages/loan/LoanPage.vue, portal:src/system/pages/leverage/LeveragePage.vue, portal:src/system/layouts/leverage/yourLeverages/ActiveYourLeverages.vue, portal:src/system/layouts/loans/steps/DocUploadLoanLayout.vue. Navegador: código confirmado; fluxos legados não homologados. |
 | P07 | Portal: Comunicação e metadados (7) · [evidência](QA-2026-11-12-COMUNICADOS-TRANSFERENCIAS.md) | implementação conferida | backend, massa | Lista/card/detalhe têm testes reais de bloqueio e controlados de sucesso. Falta massa nível 2 para sucesso real; autor/capa/grupos/anexos/PDF continuam sem contrato completo registrado. Massa não é bug da API. Código: portal:src/system/layouts/communication/CommunicationLayout.vue. Navegador: bloqueio real e sucesso controlado; sucesso integrado pendente. |
 | P08 | Portal: Comunicação vazia e bloqueada (2) · [evidência](QA-2026-11-12-COMUNICADOS-TRANSFERENCIAS.md) | implementação conferida | — | Vazio/erro/bloqueio e retry têm testes controlados e bloqueio real de nível. Não pressupõe sucesso de publicação/recibo com nível 2. Código: portal:src/system/layouts/communication/CommunicationLayout.vue. Navegador: histórica; não repetida em 16/11. |
@@ -944,14 +992,14 @@ Legenda vigente: classificação de 16/11 por código e evidências, detalhada e
 | [1484:86319](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-86319) | MD02 · Nova transação · Depósito                                                              | Pronto no front · T01 |
 | [1484:86383](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-86383) | MD03 · Nova transação · Saque                                                                 | Pronto no front · T01 |
 | [1484:86476](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-86476) | MD04 · Nova transação · Transferência                                                         | Pronto no front · T01 |
-| [1484:86593](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-86593) | MD06 · Solicitação pendente · Detalhes + ações disponíveis                                    | Implementação/ajuste pendente · T02 |
+| [1484:86593](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-86593) | MD06 · Solicitação pendente · Detalhes + ações disponíveis                                    | Pronto no front · T02 |
 | [1484:86740](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-86740) | EC01 · Painel de estados do componente · Solicitação pendente                                 | Implementado · revalidar · T03 |
 | [1484:86742](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-86742) | E03 · Painel de estados do componente · Validar                                               | Implementado · revalidar · T03 |
-| [1484:86762](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-86762) | E04 · Painel de estados do componente · Aprovar                                               | Implementação/ajuste pendente · T02 |
-| [1484:86782](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-86782) | E05 · Painel de estados do componente · Rejeitar                                              | Implementação/ajuste pendente · T02 |
-| [1484:86802](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-86802) | E06 · Painel de estados do componente · Executar operação                                     | Implementação/ajuste pendente · T02 |
+| [1484:86762](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-86762) | E04 · Painel de estados do componente · Aprovar                                               | Pronto no front · T02 |
+| [1484:86782](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-86782) | E05 · Painel de estados do componente · Rejeitar                                              | Pronto no front · T02 |
+| [1484:86802](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-86802) | E06 · Painel de estados do componente · Executar operação                                     | Pronto no front · T02 |
 | [1484:86822](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-86822) | E07 · Painel de estados do componente · Solicitar correção                                    | Pronto no front · T03 |
-| [1484:86842](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-86842) | E08 · Painel de estados do componente · Anexar documento                                      | Implementado · revalidar · T03 |
+| [1484:86842](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-86842) | E08 · Painel de estados do componente · Anexar documento                                      | Pronto no front · T03 |
 | [1484:86864](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-86864) | E09 · Painel de estados do componente · Ver comprovante                                       | Pronto no front · T03 |
 | [1484:86887](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-86887) | E10 · Painel de estados do componente · Adicionar observação                                  | Pronto no front · T03 |
 | [1484:86903](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-86903) | A01 · clique                                                                                  | Agregador/conexão — fora do percentual; ver estados filhos |
@@ -962,12 +1010,12 @@ Legenda vigente: classificação de 16/11 por código e evidências, detalhada e
 | [2027:301](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=2027-301)     | MD04.1 · Nova transação · Transferência · Moeda aberta (todas as moedas)                      | Pronto no front · T01 |
 | [2152:329](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=2152-329)     | MD04.2 · Nova transação · Transferência · Para outro cliente                                  | Pronto no front · T02 |
 | [2153:281](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=2153-281)     | MD07 · Confirmar com senha · Executar, aprovar, reprovar ou cancelar transação                | Pronto no front · T02 |
-| [2160:281](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=2160-281)     | MD06.1 · Depósito processado · Detalhes + Corrigir                                            | Implementação/ajuste pendente · T02 |
+| [2160:281](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=2160-281)     | MD06.1 · Depósito processado · Detalhes + Corrigir                                            | Pronto no front · T02 |
 | [2161:281](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=2161-281)     | P01.1 · EC · Extrato · Depósito corrigido                                                     | Implementação/ajuste pendente · T02 |
-| [2179:281](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=2179-281)     | MD08 · Corrigir depósito · Dados certos e motivo (depois MD07 · senha)                        | Implementação/ajuste pendente · T02 |
-| [2179:355](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=2179-355)     | MD06.2 · Solicitação pendente · Editar dados                                                  | Implementação/ajuste pendente · T02 |
-| [2187:404](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=2187-404)     | MD06.3 · Transação corrigida · Detalhes com a transação original                              | Implementação/ajuste pendente · T02 |
-| [2282:289](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=2282-289)     | E11 · Painel de estados do componente · Cancelar                                              | Implementação/ajuste pendente · T02 |
+| [2179:281](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=2179-281)     | MD08 · Corrigir depósito · Dados certos e motivo (depois MD07 · senha)                        | Pronto no front · T02 |
+| [2179:355](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=2179-355)     | MD06.2 · Solicitação pendente · Editar dados                                                  | Pronto no front · T02 |
+| [2187:404](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=2187-404)     | MD06.3 · Transação corrigida · Detalhes com a transação original                              | Pronto no front · T02 |
+| [2282:289](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=2282-289)     | E11 · Painel de estados do componente · Cancelar                                              | Pronto no front · T02 |
 | [1484:86915](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-86915) | F02 · Carteiras · Cards ↔ Lista                                                               | Agregador/conexão — fora do percentual; ver estados filhos |
 | [1484:86920](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-86920) | V02 · Carteira Total · Cards                                                                  | Implementado · revalidar · T03 |
 | [1484:87711](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-87711) | V05 · Carteira de Depósito · Lista                                                            | Implementado · revalidar · T03 |
@@ -1043,12 +1091,12 @@ Legenda vigente: classificação de 16/11 por código e evidências, detalhada e
 | [1:31985](https://www.figma.com/design/BaDXlWpxbIoY4azOaQnXgv?node-id=1-31985)     | [UI] HOME - CONTA NOVA - Sem depósito                                        | Pronto no front · P03 |
 | [1:32335](https://www.figma.com/design/BaDXlWpxbIoY4azOaQnXgv?node-id=1-32335)     | [EC] HOME · Conta nova · Estados do gráfico e do período                     | Pronto no front · P03 |
 | [1:32479](https://www.figma.com/design/BaDXlWpxbIoY4azOaQnXgv?node-id=1-32479)     | [UI] CONTRATOS - GERAL                                                       | Implementado · revalidar · P04 |
-| [1:34294](https://www.figma.com/design/BaDXlWpxbIoY4azOaQnXgv?node-id=1-34294)     | [UI] CONTRATOS - OFERTA_CONTRATO - 1                                         | Implementação/ajuste pendente · P05 |
-| [1:36148](https://www.figma.com/design/BaDXlWpxbIoY4azOaQnXgv?node-id=1-36148)     | [UI] CONTRATOS - OFERTA_CONTRATO - 2                                         | Implementação/ajuste pendente · P05 |
-| [1:37994](https://www.figma.com/design/BaDXlWpxbIoY4azOaQnXgv?node-id=1-37994)     | [UI] CONTRATOS - OFERTA_CONTRATO - 3                                         | Implementação/ajuste pendente · P05 |
-| [1:39818](https://www.figma.com/design/BaDXlWpxbIoY4azOaQnXgv?node-id=1-39818)     | [UI] CONTRATOS - OFERTA_CONTRATO - 4                                         | Implementação/ajuste pendente · P05 |
-| [1:41796](https://www.figma.com/design/BaDXlWpxbIoY4azOaQnXgv?node-id=1-41796)     | [UI] CONTRATOS - OFERTA_CONTRATO - 5A                                        | Implementação/ajuste pendente · P05 |
-| [1:43678](https://www.figma.com/design/BaDXlWpxbIoY4azOaQnXgv?node-id=1-43678)     | [UI] CONTRATOS - OFERTA_CONTRATO - 5A                                        | Implementação/ajuste pendente · P05 |
+| [1:34294](https://www.figma.com/design/BaDXlWpxbIoY4azOaQnXgv?node-id=1-34294)     | [UI] CONTRATOS - OFERTA_CONTRATO - 1                                         | Implementado · revalidar · P05 |
+| [1:36148](https://www.figma.com/design/BaDXlWpxbIoY4azOaQnXgv?node-id=1-36148)     | [UI] CONTRATOS - OFERTA_CONTRATO - 2                                         | Implementado · revalidar · P05 |
+| [1:37994](https://www.figma.com/design/BaDXlWpxbIoY4azOaQnXgv?node-id=1-37994)     | [UI] CONTRATOS - OFERTA_CONTRATO - 3                                         | Implementado · revalidar · P05 |
+| [1:39818](https://www.figma.com/design/BaDXlWpxbIoY4azOaQnXgv?node-id=1-39818)     | [UI] CONTRATOS - OFERTA_CONTRATO - 4                                         | Implementado · revalidar · P05 |
+| [1:41796](https://www.figma.com/design/BaDXlWpxbIoY4azOaQnXgv?node-id=1-41796)     | [UI] CONTRATOS - OFERTA_CONTRATO - 5A                                        | Implementado · revalidar · P05 |
+| [1:43678](https://www.figma.com/design/BaDXlWpxbIoY4azOaQnXgv?node-id=1-43678)     | [UI] CONTRATOS - OFERTA_CONTRATO - 5A                                        | Implementado · revalidar · P05 |
 | [1:45691](https://www.figma.com/design/BaDXlWpxbIoY4azOaQnXgv?node-id=1-45691)     | [UI] CONTRATOS - PAG ESPECIFICA                                              | Implementado · revalidar · P04 |
 | [1:46764](https://www.figma.com/design/BaDXlWpxbIoY4azOaQnXgv?node-id=1-46764)     | [UI] CONTRATOS - PAG ESPECIFICA                                              | Implementado · revalidar · P04 |
 | [1:48631](https://www.figma.com/design/BaDXlWpxbIoY4azOaQnXgv?node-id=1-48631)     | [UI] CONTRATOS - PAG ESPECIFICA                                              | Implementado · revalidar · P04 |

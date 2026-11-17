@@ -1,0 +1,126 @@
+[
+  {
+    "repository": "Admin",
+    "path": "public/icons/transactions/detail/imgUpload1.svg",
+    "bytes": 822,
+    "width": "16",
+    "height": "16"
+  },
+  {
+    "repository": "Admin",
+    "path": "public/icons/transactions/detail/imgArrowDownLeft.svg",
+    "bytes": 487,
+    "width": "16",
+    "height": "16"
+  },
+  {
+    "repository": "Admin",
+    "path": "public/icons/transactions/detail/imgPen.svg",
+    "bytes": 994,
+    "width": "16",
+    "height": "16"
+  },
+  {
+    "repository": "Admin",
+    "path": "public/icons/transactions/detail/imgCircleCheck.svg",
+    "bytes": 798,
+    "width": "16",
+    "height": "16"
+  },
+  {
+    "repository": "Admin",
+    "path": "public/icons/transactions/detail/imgCheck.svg",
+    "bytes": 355,
+    "width": "16",
+    "height": "16"
+  },
+  {
+    "repository": "Admin",
+    "path": "public/icons/transactions/detail/imgEye.svg",
+    "bytes": 1026,
+    "width": "16",
+    "height": "16"
+  },
+  {
+    "repository": "Admin",
+    "path": "public/icons/transactions/detail/imgCircleAlert.svg",
+    "bytes": 929,
+    "width": "16",
+    "height": "16"
+  },
+  {
+    "repository": "Admin",
+    "path": "public/icons/transactions/detail/imgTriangleAlert.svg",
+    "bytes": 1184,
+    "width": "20",
+    "height": "20"
+  },
+  {
+    "repository": "Admin",
+    "path": "public/icons/transactions/detail/imgIcon1.svg",
+    "bytes": 790,
+    "width": "16",
+    "height": "16"
+  },
+  {
+    "repository": "Admin",
+    "path": "public/icons/transactions/detail/imgCorrectionCheck.svg",
+    "bytes": 796,
+    "width": "16",
+    "height": "16"
+  },
+  {
+    "repository": "Admin",
+    "path": "public/icons/transactions/detail/imgVector1.svg",
+    "bytes": 359,
+    "width": "9.33333",
+    "height": "9.33333"
+  },
+  {
+    "repository": "Admin",
+    "path": "public/icons/transactions/detail/imgIcon.svg",
+    "bytes": 478,
+    "width": "16",
+    "height": "16"
+  },
+  {
+    "repository": "Admin",
+    "path": "public/icons/transactions/detail/imgMessageSquare.svg",
+    "bytes": 621,
+    "width": "16",
+    "height": "16"
+  },
+  {
+    "repository": "Admin",
+    "path": "public/icons/transactions/detail/imgUpload.svg",
+    "bytes": 678,
+    "width": "12",
+    "height": "12"
+  },
+  {
+    "repository": "Admin",
+    "path": "public/icons/transactions/detail/imgVector.svg",
+    "bytes": 359,
+    "width": "9.33333",
+    "height": "9.33333"
+  },
+  {
+    "repository": "Cliente",
+    "path": "public/system/icons/contracts/offer/imgArrowLeft.svg",
+    "bytes": 701,
+    "width": "24",
+    "height": "24"
+  },
+  {
+    "repository": "Cliente",
+    "path": "public/system/icons/contracts/offer/success.png",
+    "bytes": 406289
+  },
+  {
+    "repository": "Cliente",
+    "path": "public/system/icons/contracts/offer/imgIconJamIconsOutlineLogosArrowRight.svg",
+    "bytes": 1274,
+    "width": "24",
+    "height": "24"
+  }
+]

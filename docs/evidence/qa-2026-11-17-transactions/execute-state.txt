@@ -1,0 +1,5 @@
+Browser tab: 3, Title: "localhost:8080/qa-transaction-review.html", URL: "http://localhost:8080/qa-transaction-review.html".
+The following is a diff from the previous accessibility tree with ~ and + representing changed and added elements, respectively. Removed elements are summarized by ID range.
+~		92 text field (settable) Description: Confirmação, Value: CONFIRMAR, ID: f_25392a1e-cc7c-468d-a632-1830545db436
+~		94 button Confirmar Ação
+The focused UI element is 92 text field (settable) Description: Confirmação, Value: CONFIRMAR, ID: f_25392a1e-cc7c-468d-a632-1830545db436

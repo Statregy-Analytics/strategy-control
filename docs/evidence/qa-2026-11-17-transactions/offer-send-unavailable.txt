@@ -1,0 +1,9 @@
+Browser tab: 4, Title: "Strategy Analytics - Contratos", URL: "http://localhost:9010/system/contracts".
+The following is a diff from the previous accessibility tree with ~ and + representing changed and added elements, respectively. Removed elements are summarized by ID range.
+~			8 container TER 10:06:40
+~				9 text TER 10 : 06 : 40
+~					205 switch Description: EUA, Value: 1
++		253 text Não foi possível enviar sua solicitação. Suas respostas foram mantidas. Tente novamente.
+~		171 button Enviar solicitação
++			254 image
+The focused UI element is 198 container

@@ -1,0 +1,6 @@
+Browser tab: 3, Title: "localhost:8080/qa-transaction-review.html", URL: "http://localhost:8080/qa-transaction-review.html".
+The following is a diff from the previous accessibility tree with ~ and + representing changed and added elements, respectively. Removed elements are summarized by ID range.
++					83 container
++					84 text Ver transação original
++		85 text original
+The focused UI element is 83 container

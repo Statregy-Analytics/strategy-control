@@ -1,0 +1,44 @@
+qa-transaction-review.html
+<!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"></head><body style="margin:0;background:#101522"><div id="q-app"></div><script type="module" src="/qa-transaction-review.js"></script></body></html>
+
+
+qa-transaction-review.js
+import {createApp} from 'vue'
+import {Quasar} from 'quasar'
+import 'quasar/dist/quasar.css'
+import '@quasar/extras/material-icons/material-icons.css'
+import Review from './src/qa-transaction-review.vue'
+createApp(Review).use(Quasar).mount('#q-app')
+
+
+src/qa-transaction-review.vue
+<template><div style="color:white;padding:16px"><p>Dados controlados · não integrado · nenhuma escrita financeira</p><div style="display:flex;gap:12px;flex-wrap:wrap"><button @click="status='PendingValidation'">Pendente</button><button @click="status='Completed'">Processado</button><button @click="status='Corrected'">Corrigido</button></div><div style="width:512px;max-width:100%;margin:24px auto"><transaction-detail :key="status" :record="record" :read="read" @action="openAction" @state="openState" @edit="editor=true" @correct="editor=true" @open="opened=$event" /></div><p role="status">{{opened}}</p><transaction-state-dialog v-if="mode" :mode="mode" :submit="async()=>{}" @close="mode=null" @completed="mode=null"/><transaction-edit v-if="editor" :correction="status==='Completed'" :record="record" :read="read" :write="async()=>{throw Error('Sem escrita na fixture')}" @close="editor=false"/></div></template>
+<script setup>
+import {ref,computed} from 'vue'
+import TransactionDetail from './components/Finance/TransactionDetail.vue'
+import TransactionStateDialog from './components/Finance/TransactionStateDialog.vue'
+import TransactionEdit from './components/Finance/TransactionEdit.vue'
+const status=ref('PendingValidation'),mode=ref(null),editor=ref(false),opened=ref('')
+const record=computed(()=>({id:'qa',version:1,requestNumber:'REQ-QA-CONTROLADO',type:'Deposit',status:status.value==='Corrected'?'PendingValidation':status.value,client:{id:'qa-client',name:'Cliente fictício de teste com nome longo para conferir a quebra de linha',publicCode:'SA-QA'},amount:5000,currency:{isoCode:'BRL'},source:{kind:'BankAccount',id:'qa-bank',bankName:'Banco fictício QA',accountNumberMasked:'****1234'},destination:{kind:'Wallet',walletType:'Free'},requestedAtUtc:'2026-11-17T12:00:00Z',completedAtUtc:status.value==='Completed'?'2026-11-17T14:00:00Z':null,dueAtUtc:null,attentionRequired:status.value==='PendingValidation',observation:'Observação fictícia para revisão visual, sem gravar na API.',observations:[],documents:[{documentId:'qa-doc',fileName:'comprovante-ficticio.pdf'}],availableActions:status.value==='Completed'?['CorrectDeposit','AddObservation']:['Validate','Approve','Reject','Execute','Cancel','RequestCorrection','AddObservation','AttachDocument'],correctsTransactionId:status.value==='Corrected'?'original':null}))
+async function read(path){if(path==='admin/audit/changes')return {data:[{id:'audit-qa',occurredAtUtc:'2026-11-17T14:00:00Z',actorType:'Admin',actorName:'Admin QA',action:'Updated',field:'Amount',oldValue:50000,newValue:5000,reason:'Teste fictício'}]};if(path.includes('/bank-accounts'))return {data:[{id:'qa-bank',bankName:'Banco fictício QA',accountNumberMasked:'****1234',currencyIsoCode:'BRL',status:'Active'}]};if(path.endsWith('/wallets'))return {data:[{id:'wallet-deposit',type:'Free',currencyIsoCode:'BRL',available:5000},{id:'wallet-strategy',type:'Applied',currencyIsoCode:'BRL',available:15000}]};if(path==='admin/transactions')return {data:[]};return {data:{...record.value,id:'original',requestNumber:'REQ-QA-ORIGINAL',status:'Error',amount:50000}}}
+function openAction(action){mode.value={Approve:'approve',Reject:'reject',Execute:'execute',Cancel:'cancel'}[action]||null}
+function openState(value){mode.value=value}
+</script>
+
+
+qa-offer-review.html
+<!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"></head><body style="margin:0;background:#101522"><div id="q-app"></div><script type="module" src="/qa-offer-review.js"></script></body></html>
+
+
+qa-offer-review.js
+import {createApp,h} from 'vue'
+import {Quasar} from 'quasar'
+import {createPinia} from 'pinia'
+import {createRouter,createMemoryHistory} from 'vue-router'
+import 'quasar/dist/quasar.css'
+import '@quasar/extras/material-icons/material-icons.css'
+import OpportunityInvestment from './src/system/layouts/contracts/OpportunityInvestment.vue'
+import {useInvestmentStore} from './src/stores/investments'
+const router=createRouter({history:createMemoryHistory(),routes:[{path:'/',component:{template:'<div/>'}},{path:'/contracts',name:'contracts',component:{template:'<div>Contratos</div>'}}]})
+const App={setup(){const store=useInvestmentStore();return ()=>h('div',{style:'padding:16px;color:white'},[h('p','Prévia controlada; sem envio de solicitação'),h('button',{onClick:()=>store.stepHighPerfomance=6},'Prévia enviada'),h('div',{style:'display:flex;justify-content:center;margin-top:24px'},[h(OpportunityInvestment,{offer:true})])])}}
+createApp(App).use(createPinia()).use(Quasar).use(router).mount('#q-app')
