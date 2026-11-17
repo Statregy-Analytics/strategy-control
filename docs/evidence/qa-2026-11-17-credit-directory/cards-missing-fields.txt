@@ -1,0 +1,28 @@
+- main:
+  - paragraph: Prévia local controlada · dados fictícios · sem API
+  - navigation:
+    - button "Alternar etapa indisponível"
+    - button "Alternar vazio"
+    - group "Visualização das operações":
+      - button "Lista"
+      - button "Cards" [active] [pressed]
+      - button "Kanban"
+  - button "Abrir operação QA-SEM-ETAPA":
+    - heading "Cliente de teste sem projeção" [level=2]
+    - text: QA-SEM-ETAPA
+    - generic: Etapa indisponível
+    - term: Tipo
+    - definition: —
+    - term: Valor
+    - definition: Indisponível
+    - term: Garantia
+    - definition: —
+    - generic: — parceiros
+    - generic: — propostas
+    - generic: — docs
+    - generic: —
+    - generic: —
+  - status: Abriu HE-QA002
+  - paragraph: Estados existentes de etapa
+  - generic: Iniciada
+  - generic: Documentação

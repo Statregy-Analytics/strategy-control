@@ -1,0 +1,14 @@
+{
+  "Lista": {
+    "client": 390,
+    "scroll": 390
+  },
+  "Cards": {
+    "client": 375,
+    "scroll": 375
+  },
+  "Kanban": {
+    "client": 390,
+    "scroll": 390
+  }
+}

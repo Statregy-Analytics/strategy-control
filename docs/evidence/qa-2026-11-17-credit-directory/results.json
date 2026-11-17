@@ -1,0 +1,138 @@
+{
+  "date": "2026-11-17",
+  "baseline": {
+    "done": 207,
+    "validation": 65,
+    "adjustment": 7
+  },
+  "closedFrames": [
+    "1484:92533",
+    "1484:92907",
+    "1484:93351",
+    "1484:93771",
+    "1484:94636",
+    "1484:94638",
+    "1484:94643",
+    "1484:94653"
+  ],
+  "closedCount": 8,
+  "stillValidation": 57,
+  "checks": {
+    "tests": 417,
+    "lint": "passed",
+    "audit": "passed with verified picomatch mitigation",
+    "build": "passed"
+  },
+  "browser": {
+    "local": [
+      "three views match the recovered references",
+      "all records grouped by explicit stage; missing stage shows unavailable instead of empty success",
+      "empty state has zero counts; missing amounts and counts are not invented",
+      "correct record opened in list/cards/Kanban; keyboard and offscreen column",
+      "three modes phone widths without document overflow",
+      "native asset dimensions and loading checked",
+      "type required and actual customer query, selection, search clears old selection, back retains type",
+      "stage pills standard/current applied through the detail component"
+    ],
+    "fixtures": "isolated local Vue harness, no API; removed before production build",
+    "financialWrites": false,
+    "notClaimed": [
+      "no real loan creation/finalization/financial action",
+      "no integrated commercial-stage/count/source/owner projection",
+      "no full approval of EC02 parent: Editar Operação state remains open"
+    ]
+  },
+  "backend": [
+    "GET and POST /admin/loans already exist",
+    "LoanResponse lacks commercial stage, partner/proposal/pending counts, origin and owner; do not derive them from financial status",
+    "CreateLoanRequest requires non-null principalAmount; type+client step does not supply financial amount or mapping to the commercial product catalogue. Need compatible draft/initial operation contract; no hidden zero values or extra UI fields",
+    "customer cards provide displayName/maskedDocument/primaryContact, not all locality/phone fields shown in the example"
+  ],
+  "designer": [
+    "complete Editar Operação flow remains to be checked; EC02 parent not closed by inference"
+  ],
+  "newUnreferencedSurfaces": 0,
+  "publication": {
+    "commit": "f74040acd2428edc5540e6d8b941b3c592c9afe4",
+    "run": "https://github.com/Statregy-Analytics/strategy-control/actions/runs/44187768793",
+    "conclusion": "success",
+    "assets": [
+      {
+        "path": "/icons/credit-directory/view-cards-off.svg",
+        "status": 200,
+        "sha256": "c018b75e2cb244b86375d959cbd31852cedf86da5879b75fc40b0665e3774eee",
+        "matchesLocal": true
+      },
+      {
+        "path": "/icons/credit-directory/file.svg",
+        "status": 200,
+        "sha256": "3b786b0fc087c5bc746da845e1805ac3f3f5a021b333ef1773d604be614dda05",
+        "matchesLocal": true
+      },
+      {
+        "path": "/icons/credit-directory/updated.svg",
+        "status": 200,
+        "sha256": "7a7a54d7720526c2008a843ae70fc053671be4ae0db3503b1d4bb9bf2253417e",
+        "matchesLocal": true
+      },
+      {
+        "path": "/icons/credit-directory/owner.svg",
+        "status": 200,
+        "sha256": "598995fcb192f031e21a5119a319db7d0a445019c9745d96e75207a4a6605e8c",
+        "matchesLocal": true
+      },
+      {
+        "path": "/icons/credit-directory/open.svg",
+        "status": 200,
+        "sha256": "374e717863ea3bd9703227000fd7469493d44fc85f85c1978dab72caddb250f3",
+        "matchesLocal": true
+      },
+      {
+        "path": "/icons/credit-directory/view-kanban-off.svg",
+        "status": 200,
+        "sha256": "6cf884ab044069ad701869c746e11d07c4dee84335c5c47a261e65717beae5f0",
+        "matchesLocal": true
+      },
+      {
+        "path": "/icons/credit-directory/view-cards-on.svg",
+        "status": 200,
+        "sha256": "f8810202ec59758f914750a3942b948673f8ce9d1e3bb5cf44303178c082c8b0",
+        "matchesLocal": true
+      },
+      {
+        "path": "/icons/credit-directory/customer.svg",
+        "status": 200,
+        "sha256": "0f4bb686b52afc4c68c22961938bd15f68e3f5b06844752ac72ef68b16b46acf",
+        "matchesLocal": true
+      },
+      {
+        "path": "/icons/credit-directory/view-list-on.svg",
+        "status": 200,
+        "sha256": "6879845d424c4a5a92341a5061f04b124a0afd621ecf41904f4affa1907d4a6f",
+        "matchesLocal": true
+      },
+      {
+        "path": "/icons/credit-directory/view-list-off.svg",
+        "status": 200,
+        "sha256": "7c61fa38271a3d94b0d2a0459fdcdd3574005ee50005dfb5504d886992a8cad0",
+        "matchesLocal": true
+      },
+      {
+        "path": "/icons/credit-directory/view-kanban-on.svg",
+        "status": 200,
+        "sha256": "0c6644b346cbf6134a67527adf77b5ad223f87facb512810ebb9522454c706ee",
+        "matchesLocal": true
+      }
+    ],
+    "browser": [
+      "three published modes and actual empty loan list",
+      "finalized group empty",
+      "phone widths 375/375 for all views",
+      "type required, existing test client selected from real API, creation remains explicitly blocked without writes"
+    ],
+    "notIntegrated": [
+      "populated commercial-stage/count projections; these were exercised only locally",
+      "actual loan creation/finalization/financial execution"
+    ]
+  }
+}

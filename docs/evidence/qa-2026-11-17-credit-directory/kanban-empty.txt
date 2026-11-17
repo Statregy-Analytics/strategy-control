@@ -1,0 +1,28 @@
+- main:
+  - paragraph: Prévia local controlada · dados fictícios · sem API
+  - navigation:
+    - button "Alternar etapa indisponível"
+    - button "Alternar vazio"
+    - group "Visualização das operações":
+      - button "Lista"
+      - button "Cards"
+      - button "Kanban" [active] [pressed]
+  - generic "Operações por etapa":
+    - heading "Iniciada" [level=2]
+    - generic: "0"
+    - heading "Pendente" [level=2]
+    - generic: "0"
+    - heading "Pré-proposta" [level=2]
+    - generic: "0"
+    - heading "Documentação" [level=2]
+    - generic: "0"
+    - heading "Proposta Final" [level=2]
+    - generic: "0"
+    - heading "Assinatura" [level=2]
+    - generic: "0"
+    - heading "Contratada" [level=2]
+    - generic: "0"
+  - status: Abriu HE-QA002
+  - paragraph: Estados existentes de etapa
+  - generic: Iniciada
+  - generic: Documentação

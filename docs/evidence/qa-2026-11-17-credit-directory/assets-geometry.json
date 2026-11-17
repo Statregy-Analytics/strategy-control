@@ -1,0 +1,152 @@
+{
+  "Lista": [
+    {
+      "height": 16,
+      "loaded": true,
+      "src": "/icons/credit-directory/view-list-on.svg",
+      "width": 16
+    },
+    {
+      "height": 16,
+      "loaded": true,
+      "src": "/icons/credit-directory/view-cards-off.svg",
+      "width": 16
+    },
+    {
+      "height": 16,
+      "loaded": true,
+      "src": "/icons/credit-directory/view-kanban-off.svg",
+      "width": 16
+    },
+    {
+      "height": 16,
+      "loaded": true,
+      "src": "/icons/credit-directory/customer.svg",
+      "width": 16
+    },
+    {
+      "height": 16,
+      "loaded": true,
+      "src": "/icons/credit-directory/open.svg",
+      "width": 16
+    },
+    {
+      "height": 16,
+      "loaded": true,
+      "src": "/icons/credit-directory/customer.svg",
+      "width": 16
+    },
+    {
+      "height": 16,
+      "loaded": true,
+      "src": "/icons/credit-directory/open.svg",
+      "width": 16
+    },
+    {
+      "height": 16,
+      "loaded": true,
+      "src": "/icons/credit-directory/customer.svg",
+      "width": 16
+    },
+    {
+      "height": 16,
+      "loaded": true,
+      "src": "/icons/credit-directory/open.svg",
+      "width": 16
+    }
+  ],
+  "Cards": [
+    {
+      "height": 16,
+      "loaded": true,
+      "src": "/icons/credit-directory/view-list-off.svg",
+      "width": 16
+    },
+    {
+      "height": 16,
+      "loaded": true,
+      "src": "/icons/credit-directory/view-cards-on.svg",
+      "width": 16
+    },
+    {
+      "height": 16,
+      "loaded": true,
+      "src": "/icons/credit-directory/view-kanban-off.svg",
+      "width": 16
+    },
+    {
+      "height": 20,
+      "loaded": true,
+      "src": "/icons/credit-directory/file.svg",
+      "width": 20
+    },
+    {
+      "height": 12,
+      "loaded": true,
+      "src": "/icons/credit-directory/owner.svg",
+      "width": 12
+    },
+    {
+      "height": 12,
+      "loaded": true,
+      "src": "/icons/credit-directory/updated.svg",
+      "width": 12
+    },
+    {
+      "height": 20,
+      "loaded": true,
+      "src": "/icons/credit-directory/file.svg",
+      "width": 20
+    },
+    {
+      "height": 12,
+      "loaded": true,
+      "src": "/icons/credit-directory/owner.svg",
+      "width": 12
+    },
+    {
+      "height": 12,
+      "loaded": true,
+      "src": "/icons/credit-directory/updated.svg",
+      "width": 12
+    },
+    {
+      "height": 20,
+      "loaded": true,
+      "src": "/icons/credit-directory/file.svg",
+      "width": 20
+    },
+    {
+      "height": 12,
+      "loaded": true,
+      "src": "/icons/credit-directory/owner.svg",
+      "width": 12
+    },
+    {
+      "height": 12,
+      "loaded": true,
+      "src": "/icons/credit-directory/updated.svg",
+      "width": 12
+    }
+  ],
+  "Kanban": [
+    {
+      "height": 16,
+      "loaded": true,
+      "src": "/icons/credit-directory/view-list-off.svg",
+      "width": 16
+    },
+    {
+      "height": 16,
+      "loaded": true,
+      "src": "/icons/credit-directory/view-cards-off.svg",
+      "width": 16
+    },
+    {
+      "height": 16,
+      "loaded": true,
+      "src": "/icons/credit-directory/view-kanban-on.svg",
+      "width": 16
+    }
+  ]
+}

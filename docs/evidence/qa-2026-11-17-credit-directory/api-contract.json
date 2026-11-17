@@ -1,0 +1,179 @@
+{
+  "source": "https://strategyanalytics.codebiz.com.br/openapi/v1.json",
+  "paths": {
+    "/api/v1/admin/loans": [
+      "post",
+      "get"
+    ],
+    "/api/v1/admin/loans/{loanId}": [
+      "get",
+      "put"
+    ],
+    "/api/v1/admin/loans/{loanId}/status": [
+      "post"
+    ],
+    "/api/v1/admin/loans/{loanId}/documents": [
+      "get",
+      "post"
+    ],
+    "/api/v1/admin/loans/{loanId}/documents/{documentId}": [
+      "patch",
+      "delete"
+    ],
+    "/api/v1/admin/loans/{loanId}/history": [
+      "get"
+    ]
+  },
+  "loanFields": [
+    "id",
+    "publicCode",
+    "client",
+    "contract",
+    "kind",
+    "currencyIsoCode",
+    "principalAmount",
+    "outstandingAmount",
+    "interestRatePercent",
+    "termMonths",
+    "leverageRatio",
+    "purpose",
+    "collateral",
+    "startDate",
+    "dueDate",
+    "status",
+    "notes",
+    "createdAtUtc",
+    "updatedAtUtc"
+  ],
+  "createLoanRequest": {
+    "required": [
+      "clientId",
+      "contractId",
+      "currencyId",
+      "kind",
+      "principalAmount",
+      "outstandingAmount",
+      "interestRatePercent",
+      "termMonths",
+      "leverageRatio",
+      "purpose",
+      "collateral",
+      "startDate",
+      "dueDate",
+      "notes"
+    ],
+    "type": "object",
+    "properties": {
+      "clientId": {
+        "type": "string",
+        "format": "uuid",
+        "example": "3fa85f64-5717-4562-b3fc-2c963f66afa6"
+      },
+      "contractId": {
+        "type": [
+          "null",
+          "string"
+        ],
+        "format": "uuid",
+        "example": "3fa85f64-5717-4562-b3fc-2c963f66afa6"
+      },
+      "currencyId": {
+        "type": [
+          "null",
+          "string"
+        ],
+        "format": "uuid",
+        "example": "3fa85f64-5717-4562-b3fc-2c963f66afa6"
+      },
+      "kind": {
+        "type": [
+          "null",
+          "string"
+        ]
+      },
+      "principalAmount": {
+        "pattern": "^-?(?:0|[1-9]\\d*)(?:\\.\\d+)?$",
+        "type": [
+          "number",
+          "string"
+        ],
+        "format": "double",
+        "example": 1000.0
+      },
+      "outstandingAmount": {
+        "pattern": "^-?(?:0|[1-9]\\d*)(?:\\.\\d+)?$",
+        "type": [
+          "null",
+          "number",
+          "string"
+        ],
+        "format": "double",
+        "example": 1000.0
+      },
+      "interestRatePercent": {
+        "pattern": "^-?(?:0|[1-9]\\d*)(?:\\.\\d+)?$",
+        "type": [
+          "null",
+          "number",
+          "string"
+        ],
+        "format": "double"
+      },
+      "termMonths": {
+        "pattern": "^-?(?:0|[1-9]\\d*)$",
+        "type": [
+          "null",
+          "integer",
+          "string"
+        ],
+        "format": "int32"
+      },
+      "leverageRatio": {
+        "pattern": "^-?(?:0|[1-9]\\d*)(?:\\.\\d+)?$",
+        "type": [
+          "null",
+          "number",
+          "string"
+        ],
+        "format": "double"
+      },
+      "purpose": {
+        "type": [
+          "null",
+          "string"
+        ]
+      },
+      "collateral": {
+        "type": [
+          "null",
+          "string"
+        ]
+      },
+      "startDate": {
+        "type": [
+          "null",
+          "string"
+        ],
+        "format": "date",
+        "example": "2026-11-17"
+      },
+      "dueDate": {
+        "type": [
+          "null",
+          "string"
+        ],
+        "format": "date",
+        "example": "2026-11-17"
+      },
+      "notes": {
+        "type": [
+          "null",
+          "string"
+        ],
+        "example": "Example description."
+      }
+    },
+    "additionalProperties": false
+  },
+  "note": "GET and POST admin/loans already exist. Commercial stage/counts/source/owner projection and type+client draft creation are not supplied by this schema; principalAmount is required and non-null. No new UI fields or invented financial defaults."
+}

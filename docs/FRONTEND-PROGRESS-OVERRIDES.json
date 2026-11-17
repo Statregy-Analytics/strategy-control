@@ -638,6 +638,46 @@
       "front": "done",
       "reason": "Referências de alta fidelidade recuperadas e componentes reais conferidos no navegador local. Cadastro básico, regras do produto Imóvel, detalhes, abas, três badges de aceite e seleção: avanço condicionado, voltar/preservar, erro sem sucesso simulado, arquivos e responsividade. Listagem/gravação/catálogos de parceiros não constam no OpenAPI atual; integração não homologada.",
       "evidence": "docs/evidence/qa-2026-11-17-partners/results.json"
+    },
+    "1484:92533": {
+      "front": "done",
+      "reason": "Referências de alta fidelidade comparadas aos componentes reais: lista/cards/Kanban, seletor de modo, etapas padrão/atual e seleções tipo/cliente. Navegador local: dados controlados, vazios, campos ausentes, abertura por teclado/coluna fora da área visível e responsividade; consulta de clientes real. Kanban não inventa etapa a partir de status; projeção comercial e criação inicial seguem limites HTTP documentados.",
+      "evidence": "docs/evidence/qa-2026-11-17-credit-directory/results.json"
+    },
+    "1484:92907": {
+      "front": "done",
+      "reason": "Referências de alta fidelidade comparadas aos componentes reais: lista/cards/Kanban, seletor de modo, etapas padrão/atual e seleções tipo/cliente. Navegador local: dados controlados, vazios, campos ausentes, abertura por teclado/coluna fora da área visível e responsividade; consulta de clientes real. Kanban não inventa etapa a partir de status; projeção comercial e criação inicial seguem limites HTTP documentados.",
+      "evidence": "docs/evidence/qa-2026-11-17-credit-directory/results.json"
+    },
+    "1484:93351": {
+      "front": "done",
+      "reason": "Referências de alta fidelidade comparadas aos componentes reais: lista/cards/Kanban, seletor de modo, etapas padrão/atual e seleções tipo/cliente. Navegador local: dados controlados, vazios, campos ausentes, abertura por teclado/coluna fora da área visível e responsividade; consulta de clientes real. Kanban não inventa etapa a partir de status; projeção comercial e criação inicial seguem limites HTTP documentados.",
+      "evidence": "docs/evidence/qa-2026-11-17-credit-directory/results.json"
+    },
+    "1484:93771": {
+      "front": "done",
+      "reason": "Referências de alta fidelidade comparadas aos componentes reais: lista/cards/Kanban, seletor de modo, etapas padrão/atual e seleções tipo/cliente. Navegador local: dados controlados, vazios, campos ausentes, abertura por teclado/coluna fora da área visível e responsividade; consulta de clientes real. Kanban não inventa etapa a partir de status; projeção comercial e criação inicial seguem limites HTTP documentados.",
+      "evidence": "docs/evidence/qa-2026-11-17-credit-directory/results.json"
+    },
+    "1484:94636": {
+      "front": "done",
+      "reason": "Referências de alta fidelidade comparadas aos componentes reais: lista/cards/Kanban, seletor de modo, etapas padrão/atual e seleções tipo/cliente. Navegador local: dados controlados, vazios, campos ausentes, abertura por teclado/coluna fora da área visível e responsividade; consulta de clientes real. Kanban não inventa etapa a partir de status; projeção comercial e criação inicial seguem limites HTTP documentados.",
+      "evidence": "docs/evidence/qa-2026-11-17-credit-directory/results.json"
+    },
+    "1484:94638": {
+      "front": "done",
+      "reason": "Referências de alta fidelidade comparadas aos componentes reais: lista/cards/Kanban, seletor de modo, etapas padrão/atual e seleções tipo/cliente. Navegador local: dados controlados, vazios, campos ausentes, abertura por teclado/coluna fora da área visível e responsividade; consulta de clientes real. Kanban não inventa etapa a partir de status; projeção comercial e criação inicial seguem limites HTTP documentados.",
+      "evidence": "docs/evidence/qa-2026-11-17-credit-directory/results.json"
+    },
+    "1484:94643": {
+      "front": "done",
+      "reason": "Referências de alta fidelidade comparadas aos componentes reais: lista/cards/Kanban, seletor de modo, etapas padrão/atual e seleções tipo/cliente. Navegador local: dados controlados, vazios, campos ausentes, abertura por teclado/coluna fora da área visível e responsividade; consulta de clientes real. Kanban não inventa etapa a partir de status; projeção comercial e criação inicial seguem limites HTTP documentados.",
+      "evidence": "docs/evidence/qa-2026-11-17-credit-directory/results.json"
+    },
+    "1484:94653": {
+      "front": "done",
+      "reason": "Referências de alta fidelidade comparadas aos componentes reais: lista/cards/Kanban, seletor de modo, etapas padrão/atual e seleções tipo/cliente. Navegador local: dados controlados, vazios, campos ausentes, abertura por teclado/coluna fora da área visível e responsividade; consulta de clientes real. Kanban não inventa etapa a partir de status; projeção comercial e criação inicial seguem limites HTTP documentados.",
+      "evidence": "docs/evidence/qa-2026-11-17-credit-directory/results.json"
     }
   }
 }

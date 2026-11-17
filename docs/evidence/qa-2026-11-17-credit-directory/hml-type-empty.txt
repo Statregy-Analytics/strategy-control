@@ -1,0 +1,76 @@
+- main:
+  - heading "Crédito" [level=1]
+  - paragraph: Gestão de operações, parceiros, regras comerciais, comissões e propostas vinculadas a crédito e consórcio.
+  - main:
+    - generic: Operações Ativas
+    - strong: Indisponível
+    - generic: Pendentes
+    - strong: Indisponível
+    - generic: Em Documentação
+    - strong: Indisponível
+    - generic: Propostas Finais
+    - strong: Indisponível
+    - generic: Em Assinatura
+    - strong: Indisponível
+    - generic: Contratadas
+    - strong: Indisponível
+    - button "Operações" [pressed]:
+      - generic: Operações
+    - button "Parceiros":
+      - generic: Parceiros
+    - textbox "Buscar por cliente, ID, parceiro ou tipo de crédito..."
+    - generic: Tipo de operação
+    - combobox "Tipo de operação"
+    - generic: Status
+    - combobox "Status"
+    - group "Visualização das operações":
+      - button "Lista"
+      - button "Cards"
+      - button "Kanban" [pressed]
+    - button "Nova Operação":
+      - generic: Nova Operação
+    - group "Situação das operações":
+      - button "Operações em Aberto 0":
+        - text: Operações em Aberto
+        - generic: "0"
+      - button "Operações Finalizadas 0" [pressed]:
+        - text: Operações Finalizadas
+        - generic: "0"
+      - button "Operações Canceladas/Recusadas 0":
+        - text: Operações Canceladas/Recusadas
+        - generic: "0"
+    - generic "Operações por etapa":
+      - heading "Iniciada" [level=2]
+      - generic: "0"
+      - heading "Pendente" [level=2]
+      - generic: "0"
+      - heading "Pré-proposta" [level=2]
+      - generic: "0"
+      - heading "Documentação" [level=2]
+      - generic: "0"
+      - heading "Proposta Final" [level=2]
+      - generic: "0"
+      - heading "Assinatura" [level=2]
+      - generic: "0"
+      - heading "Contratada" [level=2]
+      - generic: "0"
+- dialog:
+  - heading "Nova Operação de Crédito" [level=2]
+  - button "Fechar nova operação"
+  - paragraph: Selecione o tipo de operação de crédito que deseja criar
+  - list "Etapas da nova operação":
+    - generic: "1"
+    - text: Tipo
+    - generic: "2"
+    - text: Cliente
+  - button "Crédito com garantia de imóvel / Home Equity / CGI"
+  - button "Crédito com garantia de veículo / Auto Equity"
+  - button "Financiamento imobiliário"
+  - button "Financiamento de veículo"
+  - button "Consórcio"
+  - button "Crédito PJ"
+  - button "Outro"
+  - button "Cancelar":
+    - generic: Cancelar
+  - button "Continuar" [disabled]:
+    - generic: Continuar

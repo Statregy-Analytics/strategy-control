@@ -1,0 +1,97 @@
+- main:
+  - paragraph: Prévia local controlada · dados fictícios · sem API
+  - navigation:
+    - button "Alternar etapa indisponível"
+    - button "Alternar vazio"
+    - group "Visualização das operações":
+      - button "Lista" [pressed]
+      - button "Cards"
+      - button "Kanban"
+  - table:
+    - rowgroup:
+      - row "ID Cliente Tipo Valor Solicitado Garantia/Produto Etapa Parceiros Propostas Pendências Origem Responsável Atualização":
+        - columnheader "ID"
+        - columnheader "Cliente"
+        - columnheader "Tipo"
+        - columnheader "Valor Solicitado"
+        - columnheader "Garantia/Produto"
+        - columnheader "Etapa"
+        - columnheader "Parceiros"
+        - columnheader "Propostas"
+        - columnheader "Pendências"
+        - columnheader "Origem"
+        - columnheader "Responsável"
+        - columnheader "Atualização"
+        - columnheader
+    - rowgroup:
+      - row "HE-QA001 Cliente fictício QA Crédito imóvel R$ 250.000,00 Casa fictícia Documentação 4 bancos 1 proposta 2 pendências Área do Cliente Admin 17/11/2026 Abrir operação HE-QA001":
+        - cell "HE-QA001":
+          - button "HE-QA001"
+        - cell "Cliente fictício QA":
+          - generic: Cliente fictício QA
+        - cell "Crédito imóvel":
+          - generic: Crédito imóvel
+        - cell "R$ 250.000,00":
+          - strong: R$ 250.000,00
+        - cell "Casa fictícia"
+        - cell "Documentação":
+          - generic: Documentação
+        - cell "4 bancos":
+          - generic: 4 bancos
+        - cell "1 proposta":
+          - generic: 1 proposta
+        - cell "2 pendências":
+          - generic: 2 pendências
+        - cell "Área do Cliente"
+        - cell "Admin"
+        - cell "17/11/2026"
+        - cell "Abrir operação HE-QA001":
+          - button "Abrir operação HE-QA001"
+      - row "HE-QA002 Segundo cliente fictício QA Crédito veículo R$ 80.000,00 Veículo fictício Proposta Final 3 bancos 2 propostas — Admin Admin 17/11/2026 Abrir operação HE-QA002":
+        - cell "HE-QA002":
+          - button "HE-QA002"
+        - cell "Segundo cliente fictício QA":
+          - generic: Segundo cliente fictício QA
+        - cell "Crédito veículo":
+          - generic: Crédito veículo
+        - cell "R$ 80.000,00":
+          - strong: R$ 80.000,00
+        - cell "Veículo fictício"
+        - cell "Proposta Final":
+          - generic: Proposta Final
+        - cell "3 bancos":
+          - generic: 3 bancos
+        - cell "2 propostas":
+          - generic: 2 propostas
+        - cell "—"
+        - cell "Admin"
+        - cell "Admin"
+        - cell "17/11/2026"
+        - cell "Abrir operação HE-QA002":
+          - button "Abrir operação HE-QA002"
+      - row "HE-QA003 Empresa fictícia QA Consórcio R$ 200.000,00 Carta imobiliária fictícia Pré-proposta 5 bancos 3 propostas — Admin Admin 17/11/2026 Abrir operação HE-QA003":
+        - cell "HE-QA003":
+          - button "HE-QA003"
+        - cell "Empresa fictícia QA":
+          - generic: Empresa fictícia QA
+        - cell "Consórcio":
+          - generic: Consórcio
+        - cell "R$ 200.000,00":
+          - strong: R$ 200.000,00
+        - cell "Carta imobiliária fictícia"
+        - cell "Pré-proposta":
+          - generic: Pré-proposta
+        - cell "5 bancos":
+          - generic: 5 bancos
+        - cell "3 propostas":
+          - generic: 3 propostas
+        - cell "—"
+        - cell "Admin"
+        - cell "Admin"
+        - cell "17/11/2026"
+        - cell "Abrir operação HE-QA003":
+          - button "Abrir operação HE-QA003"
+  - status: Abriu HE-QA003
+  - paragraph: Estados existentes de etapa
+  - generic: Iniciada
+  - generic: Documentação

@@ -1,0 +1,33 @@
+
+> strategy-admin@0.0.1 audit:security
+> node scripts/security/audit.mjs
+
+{
+  "npmAudit": {
+    "info": 0,
+    "low": 0,
+    "moderate": 1,
+    "high": 15,
+    "critical": 0,
+    "total": 16
+  },
+  "blocked": [],
+  "mitigated": [
+    "picomatch",
+    "@parcel/watcher",
+    "@rollup/pluginutils",
+    "fdir",
+    "tinyglobby",
+    "unplugin",
+    "unplugin-utils",
+    "vite",
+    "vite-plugin-checker",
+    "@intlify/unplugin-vue-i18n",
+    "@quasar/vite-plugin",
+    "@typescript-eslint/typescript-estree",
+    "@vue-macros/common",
+    "vue-router",
+    "@quasar/app-vite"
+  ]
+}
+Security audit passed; the exact picomatch advisory is mitigated by verified source guard and subprocess regression checks.

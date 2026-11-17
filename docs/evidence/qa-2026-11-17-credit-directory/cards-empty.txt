@@ -1,0 +1,14 @@
+- main:
+  - paragraph: Prévia local controlada · dados fictícios · sem API
+  - navigation:
+    - button "Alternar etapa indisponível"
+    - button "Alternar vazio" [active]
+    - group "Visualização das operações":
+      - button "Lista"
+      - button "Cards" [pressed]
+      - button "Kanban"
+  - paragraph: Nenhum registro encontrado.
+  - status: Abriu HE-QA002
+  - paragraph: Estados existentes de etapa
+  - generic: Iniciada
+  - generic: Documentação

@@ -10,15 +10,30 @@ Atualizado em 2026-11-17. Contagem por **telas e estados independentes do Figma*
 | Situação | Quantidade |
 | --- | ---: |
 | Total inventariado | **279** |
-| Prontas no frontend | **207** |
-| Implementadas, aguardando revalidação/comparação completa | **65** |
+| Prontas no frontend | **215** |
+| Implementadas, aguardando revalidação/comparação completa | **57** |
 | Ainda exigem implementação, complemento ou correção | **7** |
 | Com implementação existente (prontas + revalidação) | **272 / 279 (97,5%)** |
 
-**Para encerrar o front faltam 7 itens de implementação/ajuste e 65 de revalidação.** “Pronto no frontend” não significa fluxo integrado liberado: dependências de backend/designer podem afetar também telas prontas. Os números não classificam toda pendência como tela nova nem como problema de API. A comparação de Crédito, carteira global e editor editorial que não foi concluída integralmente permanece em revalidação.
+**Para encerrar o front faltam 7 itens de implementação/ajuste e 57 de revalidação.** “Pronto no frontend” não significa fluxo integrado liberado: dependências de backend/designer podem afetar também telas prontas. Os números não classificam toda pendência como tela nova nem como problema de API. A comparação de Crédito, carteira global e editor editorial que não foi concluída integralmente permanece em revalidação.
 
 Fonte por frame: [progresso atual](FRONTEND-PROGRESS.json). A base anterior permanece histórica; [atualizações com evidências](FRONTEND-PROGRESS-OVERRIDES.json) registram cada mudança. Ao finalizar **cada entrega**, atualizar os IDs comprovados, executar `node scripts/frontend-progress.mjs` e informar este panorama na resposta final.
 <!-- frontend-progress:end -->
+
+## Entrega 17/11 — Crédito: Lista, Cards, Kanban e seleções
+
+**Publicado em homologação:** `f74040a`, [deploy 44187768793 aprovado](https://github.com/Statregy-Analytics/strategy-control/actions/runs/44187768793), com auditoria, testes, lint, build, upload e ativação. Oito estados revalidados: CR01, CR02, CR03, painel EC01 e EC02.S01–S04. O painel EC02 completo permanece aberto; a ação/fluxo de Editar Operação não foi aprovado por inferência dos quatro componentes.
+
+- [x] Lista com identificação, avatar nativo, badges, valores, contadores, origem/responsável e abertura do registro. Cards com garantia e valores, badges, rodapé e ativos nativos. Kanban renderiza as operações da etapa explícita e abre a operação correta por teclado, inclusive fora da área inicialmente visível.
+- [x] Um registro sem etapa comercial não vira quadro vazio nem é colocado em uma etapa a partir do status financeiro. Campo/contador ausente permanece indisponível; zero conhecido é preservado. `PaidOff` entra nas finalizadas e aparece como Quitado.
+- [x] Seletor Lista/Cards/Kanban com os ativos selecionados/padrão do Figma; etapas padrão/atual reutilizadas no detalhe. Atualizações recentes mostram Hoje/Ontem com horário; datas antigas permanecem como data.
+- [x] Seleção de tipo/cliente: avanço condicionado, consulta real de clientes, máscara da API, seleção, busca que limpa a seleção anterior e retorno preservando o tipo. Nenhuma operação financeira criada nem valor oculto inventado.
+- [x] 417 testes passaram; lint, build e auditoria passaram. Componentes reais exercitados localmente com dados fictícios, estados vazios/indisponíveis, teclado, abertura e celular. Prévia removida antes do build. Em homologação: três modos com a consulta vazia real, grupo de finalizadas, celular sem overflow e seleção de tipo/cliente de teste. Criação permaneceu bloqueada sem gravação; os estados preenchidos de etapa e contadores foram testados apenas localmente. Onze ativos publicados conferidos por HTTP e hash.
+- [ ] API: GET/POST de empréstimos **já existem**. Falta projeção comercial de etapa, parceiros, propostas, pendências, origem e responsável para preencher o desenho. O POST atual exige `principalAmount`; falta o contrato de criação inicial compatível com a etapa que só escolhe tipo e cliente, além da correspondência com os tipos comerciais. Não pedir uma rota já existente, adicionar campos fora do Figma ou usar valor zero fictício.
+- [ ] Seleção de cliente: localidade e outros contatos do exemplo não são devolvidos no card consultado. Não foram criados dados para ocupar essas linhas.
+- [ ] EC02 completo/Editar Operação segue em revalidação; os outros 57 estados e 7 ajustes continuam discriminados no inventário.
+
+[Resultados e limites](evidence/qa-2026-11-17-credit-directory/results.json) · [Contrato HTTP verificado](evidence/qa-2026-11-17-credit-directory/api-contract.json). Nenhuma nova superfície sem referência; permanecem 13 para avaliação de Éric.
 
 ## Entrega 17/11 — Parceiros de Crédito e estados EC03
 
@@ -1111,10 +1126,10 @@ Legenda vigente: classificação de 16/11 por código e evidências, detalhada e
 | [1484:91469](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-91469) | E01 · Carteira Strategy · Cards · Expandido                                                   | Implementado · revalidar · T03 |
 | [1484:92301](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-92301) | A06 · Cards · Recolher ↔ Expandir                                                             | Agregador/conexão — fora do percentual; ver estados filhos |
 | [1484:92532](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-92532) | F01 · Operações de crédito · Lista / Cards / Kanban                                           | Agregador/conexão — fora do percentual; ver estados filhos |
-| [1484:92533](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-92533) | CR01 · PB · Operações de crédito · Lista · TELA BASE · DESIGN GLASS                           | Implementado · revalidar · R01 |
-| [1484:92907](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-92907) | CR02 · SP · Operações de crédito · Cards · SUBPÁGINA · DESIGN GLASS                           | Implementado · revalidar · R01 |
-| [1484:93351](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-93351) | CR03 · SP · Operações de crédito · Kanban · SUBPÁGINA · DESIGN GLASS                          | Implementado · revalidar · R01 |
-| [1484:93771](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-93771) | EC01 · Painel de estados do componente · Visualização Lista / Cards / Kanban                  | Implementado · revalidar · R01 |
+| [1484:92533](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-92533) | CR01 · PB · Operações de crédito · Lista · TELA BASE · DESIGN GLASS                           | Pronto no front · R01 |
+| [1484:92907](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-92907) | CR02 · SP · Operações de crédito · Cards · SUBPÁGINA · DESIGN GLASS                           | Pronto no front · R01 |
+| [1484:93351](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-93351) | CR03 · SP · Operações de crédito · Kanban · SUBPÁGINA · DESIGN GLASS                          | Pronto no front · R01 |
+| [1484:93771](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-93771) | EC01 · Painel de estados do componente · Visualização Lista / Cards / Kanban                  | Pronto no front · R01 |
 | [1484:93774](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-93774) | EC01.1 · Lista selecionada                                                                    | Pronto no front · R01 |
 | [1484:93795](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-93795) | EC01.2 · Cards selecionado                                                                    | Pronto no front · R01 |
 | [1484:93816](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-93816) | EC01.3 · Kanban selecionado                                                                   | Pronto no front · R01 |
@@ -1123,10 +1138,10 @@ Legenda vigente: classificação de 16/11 por código e evidências, detalhada e
 | [1484:93952](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-93952) | CR05 · MD · Nova operação · Seleção do cliente · ESTADO · DESIGN GLASS                        | Pronto no front · R01 |
 | [1484:94059](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-94059) | CR06 · MD · Detalhes da operação · MODAL FIXO · DESIGN GLASS                                  | Pronto no front · R03 |
 | [1484:94631](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-94631) | EC02 · Painel de estados do componente · Nova operação                                        | Implementado · revalidar · R01 |
-| [1484:94636](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-94636) | EC02.S01 · Etapa padrão                                                                       | Implementado · revalidar · R01 |
-| [1484:94638](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-94638) | EC02.S02 · Etapa atual                                                                        | Implementado · revalidar · R01 |
-| [1484:94643](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-94643) | EC02.S03 · Tipo de operação                                                                   | Implementado · revalidar · R01 |
-| [1484:94653](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-94653) | EC02.S04 · Cliente selecionável                                                               | Implementado · revalidar · R01 |
+| [1484:94636](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-94636) | EC02.S01 · Etapa padrão                                                                       | Pronto no front · R01 |
+| [1484:94638](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-94638) | EC02.S02 · Etapa atual                                                                        | Pronto no front · R01 |
+| [1484:94643](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-94643) | EC02.S03 · Tipo de operação                                                                   | Pronto no front · R01 |
+| [1484:94653](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-94653) | EC02.S04 · Cliente selecionável                                                               | Pronto no front · R01 |
 | [1484:94673](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-94673) | EC02 · CONEXÃO · Fluxo → estados                                                              | Agregador/conexão — fora do percentual; ver estados filhos |
 | [1484:94676](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-94676) | F03 · Parceiros de crédito · Lista, criação e detalhes                                        | Agregador/conexão — fora do percentual; ver estados filhos |
 | [1484:94677](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-94677) | CR07 · PB · Parceiros de crédito · Lista · TELA BASE · DESIGN GLASS                           | Implementado · revalidar · R01 |

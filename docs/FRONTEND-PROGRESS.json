@@ -11,12 +11,12 @@
   },
   "metrics": {
     "total": 279,
-    "done": 207,
-    "validation": 65,
+    "done": 215,
+    "validation": 57,
     "adjustment": 7,
     "implemented": 272,
     "implementedPercent": 97.5,
-    "readyPercent": 74.2
+    "readyPercent": 77.1
   },
   "withoutLinkedFigmaReference": {
     "count": 13,
@@ -3267,19 +3267,20 @@
       "link": "[1484:92533](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-92533)",
       "counted": true,
       "group": "R01",
-      "category": "Ajuste de front",
-      "front": "validation",
+      "category": "Bloqueio backend",
+      "front": "done",
       "blockers": [
         "backend"
       ],
-      "reason": "Há Lista/Cards/Kanban e escolha de tipo/cliente com testes parciais; revisão completa ainda pendente. OpenAPI de loans é informativo e não fornece funil, propostas, parceiros e comissões.",
+      "reason": "Referências de alta fidelidade comparadas aos componentes reais: lista/cards/Kanban, seletor de modo, etapas padrão/atual e seleções tipo/cliente. Navegador local: dados controlados, vazios, campos ausentes, abertura por teclado/coluna fora da área visível e responsividade; consulta de clientes real. Kanban não inventa etapa a partir de status; projeção comercial e criação inicial seguem limites HTTP documentados.",
       "sources": [
         "src/components/Workspaces/CreditWorkspace.vue",
         "src/components/Workspaces/CreditOperationDetails.vue"
       ],
       "evidence": [
         "docs/CHECKLIST-UNICO-FIGMA-FRONT.md#cr06-e-lg08--complemento-de-1411",
-        "docs/evidence/qa-2026-11-16-inventory/api-contract-review.json"
+        "docs/evidence/qa-2026-11-16-inventory/api-contract-review.json",
+        "docs/evidence/qa-2026-11-17-credit-directory/results.json"
       ],
       "browser": "parcial/isolada histórica; não integral",
       "historicalCategory": "Ajuste de front"
@@ -3292,19 +3293,20 @@
       "link": "[1484:92907](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-92907)",
       "counted": true,
       "group": "R01",
-      "category": "Ajuste de front",
-      "front": "validation",
+      "category": "Bloqueio backend",
+      "front": "done",
       "blockers": [
         "backend"
       ],
-      "reason": "Há Lista/Cards/Kanban e escolha de tipo/cliente com testes parciais; revisão completa ainda pendente. OpenAPI de loans é informativo e não fornece funil, propostas, parceiros e comissões.",
+      "reason": "Referências de alta fidelidade comparadas aos componentes reais: lista/cards/Kanban, seletor de modo, etapas padrão/atual e seleções tipo/cliente. Navegador local: dados controlados, vazios, campos ausentes, abertura por teclado/coluna fora da área visível e responsividade; consulta de clientes real. Kanban não inventa etapa a partir de status; projeção comercial e criação inicial seguem limites HTTP documentados.",
       "sources": [
         "src/components/Workspaces/CreditWorkspace.vue",
         "src/components/Workspaces/CreditOperationDetails.vue"
       ],
       "evidence": [
         "docs/CHECKLIST-UNICO-FIGMA-FRONT.md#cr06-e-lg08--complemento-de-1411",
-        "docs/evidence/qa-2026-11-16-inventory/api-contract-review.json"
+        "docs/evidence/qa-2026-11-16-inventory/api-contract-review.json",
+        "docs/evidence/qa-2026-11-17-credit-directory/results.json"
       ],
       "browser": "parcial/isolada histórica; não integral",
       "historicalCategory": "Ajuste de front"
@@ -3317,19 +3319,20 @@
       "link": "[1484:93351](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-93351)",
       "counted": true,
       "group": "R01",
-      "category": "Ajuste de front",
-      "front": "validation",
+      "category": "Bloqueio backend",
+      "front": "done",
       "blockers": [
         "backend"
       ],
-      "reason": "Há Lista/Cards/Kanban e escolha de tipo/cliente com testes parciais; revisão completa ainda pendente. OpenAPI de loans é informativo e não fornece funil, propostas, parceiros e comissões.",
+      "reason": "Referências de alta fidelidade comparadas aos componentes reais: lista/cards/Kanban, seletor de modo, etapas padrão/atual e seleções tipo/cliente. Navegador local: dados controlados, vazios, campos ausentes, abertura por teclado/coluna fora da área visível e responsividade; consulta de clientes real. Kanban não inventa etapa a partir de status; projeção comercial e criação inicial seguem limites HTTP documentados.",
       "sources": [
         "src/components/Workspaces/CreditWorkspace.vue",
         "src/components/Workspaces/CreditOperationDetails.vue"
       ],
       "evidence": [
         "docs/CHECKLIST-UNICO-FIGMA-FRONT.md#cr06-e-lg08--complemento-de-1411",
-        "docs/evidence/qa-2026-11-16-inventory/api-contract-review.json"
+        "docs/evidence/qa-2026-11-16-inventory/api-contract-review.json",
+        "docs/evidence/qa-2026-11-17-credit-directory/results.json"
       ],
       "browser": "parcial/isolada histórica; não integral",
       "historicalCategory": "Ajuste de front"
@@ -3342,19 +3345,20 @@
       "link": "[1484:93771](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-93771)",
       "counted": true,
       "group": "R01",
-      "category": "Ajuste de front",
-      "front": "validation",
+      "category": "Bloqueio backend",
+      "front": "done",
       "blockers": [
         "backend"
       ],
-      "reason": "Há Lista/Cards/Kanban e escolha de tipo/cliente com testes parciais; revisão completa ainda pendente. OpenAPI de loans é informativo e não fornece funil, propostas, parceiros e comissões.",
+      "reason": "Referências de alta fidelidade comparadas aos componentes reais: lista/cards/Kanban, seletor de modo, etapas padrão/atual e seleções tipo/cliente. Navegador local: dados controlados, vazios, campos ausentes, abertura por teclado/coluna fora da área visível e responsividade; consulta de clientes real. Kanban não inventa etapa a partir de status; projeção comercial e criação inicial seguem limites HTTP documentados.",
       "sources": [
         "src/components/Workspaces/CreditWorkspace.vue",
         "src/components/Workspaces/CreditOperationDetails.vue"
       ],
       "evidence": [
         "docs/CHECKLIST-UNICO-FIGMA-FRONT.md#cr06-e-lg08--complemento-de-1411",
-        "docs/evidence/qa-2026-11-16-inventory/api-contract-review.json"
+        "docs/evidence/qa-2026-11-16-inventory/api-contract-review.json",
+        "docs/evidence/qa-2026-11-17-credit-directory/results.json"
       ],
       "browser": "parcial/isolada histórica; não integral",
       "historicalCategory": "Ajuste de front"
@@ -3537,19 +3541,20 @@
       "link": "[1484:94636](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-94636)",
       "counted": true,
       "group": "R01",
-      "category": "Ajuste de front",
-      "front": "validation",
+      "category": "Bloqueio backend",
+      "front": "done",
       "blockers": [
         "backend"
       ],
-      "reason": "Há Lista/Cards/Kanban e escolha de tipo/cliente com testes parciais; revisão completa ainda pendente. OpenAPI de loans é informativo e não fornece funil, propostas, parceiros e comissões.",
+      "reason": "Referências de alta fidelidade comparadas aos componentes reais: lista/cards/Kanban, seletor de modo, etapas padrão/atual e seleções tipo/cliente. Navegador local: dados controlados, vazios, campos ausentes, abertura por teclado/coluna fora da área visível e responsividade; consulta de clientes real. Kanban não inventa etapa a partir de status; projeção comercial e criação inicial seguem limites HTTP documentados.",
       "sources": [
         "src/components/Workspaces/CreditWorkspace.vue",
         "src/components/Workspaces/CreditOperationDetails.vue"
       ],
       "evidence": [
         "docs/CHECKLIST-UNICO-FIGMA-FRONT.md#cr06-e-lg08--complemento-de-1411",
-        "docs/evidence/qa-2026-11-16-inventory/api-contract-review.json"
+        "docs/evidence/qa-2026-11-16-inventory/api-contract-review.json",
+        "docs/evidence/qa-2026-11-17-credit-directory/results.json"
       ],
       "browser": "parcial/isolada histórica; não integral",
       "historicalCategory": "Ajuste de front"
@@ -3562,19 +3567,20 @@
       "link": "[1484:94638](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-94638)",
       "counted": true,
       "group": "R01",
-      "category": "Ajuste de front",
-      "front": "validation",
+      "category": "Bloqueio backend",
+      "front": "done",
       "blockers": [
         "backend"
       ],
-      "reason": "Há Lista/Cards/Kanban e escolha de tipo/cliente com testes parciais; revisão completa ainda pendente. OpenAPI de loans é informativo e não fornece funil, propostas, parceiros e comissões.",
+      "reason": "Referências de alta fidelidade comparadas aos componentes reais: lista/cards/Kanban, seletor de modo, etapas padrão/atual e seleções tipo/cliente. Navegador local: dados controlados, vazios, campos ausentes, abertura por teclado/coluna fora da área visível e responsividade; consulta de clientes real. Kanban não inventa etapa a partir de status; projeção comercial e criação inicial seguem limites HTTP documentados.",
       "sources": [
         "src/components/Workspaces/CreditWorkspace.vue",
         "src/components/Workspaces/CreditOperationDetails.vue"
       ],
       "evidence": [
         "docs/CHECKLIST-UNICO-FIGMA-FRONT.md#cr06-e-lg08--complemento-de-1411",
-        "docs/evidence/qa-2026-11-16-inventory/api-contract-review.json"
+        "docs/evidence/qa-2026-11-16-inventory/api-contract-review.json",
+        "docs/evidence/qa-2026-11-17-credit-directory/results.json"
       ],
       "browser": "parcial/isolada histórica; não integral",
       "historicalCategory": "Ajuste de front"
@@ -3587,19 +3593,20 @@
       "link": "[1484:94643](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-94643)",
       "counted": true,
       "group": "R01",
-      "category": "Ajuste de front",
-      "front": "validation",
+      "category": "Bloqueio backend",
+      "front": "done",
       "blockers": [
         "backend"
       ],
-      "reason": "Há Lista/Cards/Kanban e escolha de tipo/cliente com testes parciais; revisão completa ainda pendente. OpenAPI de loans é informativo e não fornece funil, propostas, parceiros e comissões.",
+      "reason": "Referências de alta fidelidade comparadas aos componentes reais: lista/cards/Kanban, seletor de modo, etapas padrão/atual e seleções tipo/cliente. Navegador local: dados controlados, vazios, campos ausentes, abertura por teclado/coluna fora da área visível e responsividade; consulta de clientes real. Kanban não inventa etapa a partir de status; projeção comercial e criação inicial seguem limites HTTP documentados.",
       "sources": [
         "src/components/Workspaces/CreditWorkspace.vue",
         "src/components/Workspaces/CreditOperationDetails.vue"
       ],
       "evidence": [
         "docs/CHECKLIST-UNICO-FIGMA-FRONT.md#cr06-e-lg08--complemento-de-1411",
-        "docs/evidence/qa-2026-11-16-inventory/api-contract-review.json"
+        "docs/evidence/qa-2026-11-16-inventory/api-contract-review.json",
+        "docs/evidence/qa-2026-11-17-credit-directory/results.json"
       ],
       "browser": "parcial/isolada histórica; não integral",
       "historicalCategory": "Ajuste de front"
@@ -3612,19 +3619,20 @@
       "link": "[1484:94653](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-94653)",
       "counted": true,
       "group": "R01",
-      "category": "Ajuste de front",
-      "front": "validation",
+      "category": "Bloqueio backend",
+      "front": "done",
       "blockers": [
         "backend"
       ],
-      "reason": "Há Lista/Cards/Kanban e escolha de tipo/cliente com testes parciais; revisão completa ainda pendente. OpenAPI de loans é informativo e não fornece funil, propostas, parceiros e comissões.",
+      "reason": "Referências de alta fidelidade comparadas aos componentes reais: lista/cards/Kanban, seletor de modo, etapas padrão/atual e seleções tipo/cliente. Navegador local: dados controlados, vazios, campos ausentes, abertura por teclado/coluna fora da área visível e responsividade; consulta de clientes real. Kanban não inventa etapa a partir de status; projeção comercial e criação inicial seguem limites HTTP documentados.",
       "sources": [
         "src/components/Workspaces/CreditWorkspace.vue",
         "src/components/Workspaces/CreditOperationDetails.vue"
       ],
       "evidence": [
         "docs/CHECKLIST-UNICO-FIGMA-FRONT.md#cr06-e-lg08--complemento-de-1411",
-        "docs/evidence/qa-2026-11-16-inventory/api-contract-review.json"
+        "docs/evidence/qa-2026-11-16-inventory/api-contract-review.json",
+        "docs/evidence/qa-2026-11-17-credit-directory/results.json"
       ],
       "browser": "parcial/isolada histórica; não integral",
       "historicalCategory": "Ajuste de front"

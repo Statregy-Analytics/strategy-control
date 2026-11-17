@@ -1,0 +1,50 @@
+- main:
+  - paragraph: Prévia local controlada · dados fictícios · sem API
+  - navigation:
+    - button "Alternar etapa indisponível"
+    - button "Alternar vazio"
+    - group "Visualização das operações":
+      - button "Lista"
+      - button "Cards"
+      - button "Kanban" [pressed]
+  - generic "Operações por etapa":
+    - heading "Iniciada" [level=2]
+    - generic: "0"
+    - heading "Pendente" [level=2]
+    - generic: "0"
+    - heading "Pré-proposta" [level=2]
+    - generic: "1"
+    - button "Abrir operação HE-QA003":
+      - heading "Empresa fictícia QA" [level=2]
+      - text: HE-QA003
+      - definition: Consórcio
+      - definition: R$ 200.000,00
+      - generic: 5 parceiros
+      - generic: 3 propostas
+    - heading "Documentação" [level=2]
+    - generic: "1"
+    - button "Abrir operação HE-QA001":
+      - heading "Cliente fictício QA" [level=2]
+      - text: HE-QA001
+      - definition: Crédito imóvel
+      - definition: R$ 250.000,00
+      - generic: 4 parceiros
+      - generic: 1 proposta
+      - generic: 2 docs
+    - heading "Proposta Final" [level=2]
+    - generic: "1"
+    - button "Abrir operação HE-QA002" [active]:
+      - heading "Segundo cliente fictício QA" [level=2]
+      - text: HE-QA002
+      - definition: Crédito veículo
+      - definition: R$ 80.000,00
+      - generic: 3 parceiros
+      - generic: 2 propostas
+    - heading "Assinatura" [level=2]
+    - generic: "0"
+    - heading "Contratada" [level=2]
+    - generic: "0"
+  - status: Abriu HE-QA002
+  - paragraph: Estados existentes de etapa
+  - generic: Iniciada
+  - generic: Documentação
