@@ -34,7 +34,7 @@
             /></template> </wallet-overview
         ></resource-state>
       </form-section>
-      <form-section :title="embedded ? '' : 'Extrato'">
+      <form-section ref="statementPanel" :title="embedded ? '' : 'Extrato'">
         <div v-if="embedded" class="statement-heading">
           <img src="/icons/client-profile/statement.svg" alt="" /><span>Extrato da conta</span
           ><q-btn
@@ -133,7 +133,7 @@
   </div>
 </template>
 <script setup>
-import { computed, onScopeDispose, ref, watch } from 'vue'
+import { computed, nextTick, onScopeDispose, ref, watch } from 'vue'
 import {
   statementTypePresentation,
   readCustomerStatement,
@@ -151,9 +151,10 @@ import { financeGet, financeExport, money, financeLabel } from 'src/services/fin
 const props = defineProps({
   customerId: { type: String, default: null },
   embedded: { type: Boolean, default: false },
+  focusStatement: { type: Boolean, default: false },
   walletModel: { type: Object, default: null },
 })
-const emit = defineEmits(['currencies', 'calculated'])
+const emit = defineEmits(['currencies', 'calculated', 'changed'])
 const customerId = ref(props.customerId),
   dateFrom = ref(''),
   dateTo = ref(''),
@@ -165,7 +166,18 @@ const portfolio = useFinanceResource(),
 const resolvedWalletModel = computed(
   () => props.walletModel || projectPortfolio(portfolio.state.data),
 )
+const statementPanel = ref(null)
 let revision = 0
+watch(
+  () => [props.focusStatement, statement.state.loading, statement.state.data],
+  async () => {
+    if (!props.focusStatement || statement.state.loading || statement.state.data === null) return
+    const current = revision
+    await nextTick()
+    if (current === revision) statementPanel.value?.$el?.scrollIntoView({ block: 'start' })
+  },
+  { flush: 'post' },
+)
 const displayCurrencies = computed(() => portfolio.state.data?.currencies || [])
 const loadStatement = () => {
   const version = revision
@@ -184,6 +196,7 @@ const loadStatement = () => {
 }
 function onAssetsChanged() {
   loadPortfolio()
+  emit('changed')
 }
 const readPortfolio = async (suffix) => {
   const id = customerId.value

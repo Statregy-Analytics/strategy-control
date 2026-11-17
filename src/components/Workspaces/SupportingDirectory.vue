@@ -21,11 +21,31 @@
           ><strong>Indisponível</strong>
         </div>
       </div>
+      <div class="workspace-toolbar">
+        <q-input
+          v-model="search"
+          outlined
+          dense
+          dark
+          clearable
+          placeholder="Buscar parceiro, produto ou regra..."
+          aria-label="Buscar parceiro, produto ou regra..."
+          ><template #prepend
+            ><img src="/icons/workspace-review/partner-search.svg" alt="" /></template></q-input
+        ><q-btn
+          class="partner-create"
+          outline
+          no-caps
+          label="Criar Parceiro"
+          @click="$emit('create')"
+          ><img src="/icons/workspace-review/partner-plus.svg" alt=""
+        /></q-btn>
+      </div>
       <q-table
         dark
         flat
         dense
-        :rows="rows"
+        :rows="filteredPartners"
         :columns="partnerColumns"
         row-key="id"
         hide-pagination
@@ -49,17 +69,28 @@
   </section>
 </template>
 <script setup>
-import { ref } from 'vue'
+import { computed, ref } from 'vue'
+import { foldSearch } from 'src/services/adminWorkspaceModel'
 import RowActions from 'src/components/Entity/RowActions.vue'
 import PartnerDetails from './PartnerDetails.vue'
 import AuthorCard from './AuthorCard.vue'
 import { columns, dateLabel } from 'src/services/financeService'
-defineProps({
+const props = defineProps({
   kind: { type: String, required: true },
   rows: { type: Array, default: () => [] },
   available: Boolean,
 })
-const emit = defineEmits(['edit'])
+const emit = defineEmits(['edit', 'create'])
+const search = ref('')
+const filteredPartners = computed(() =>
+  props.rows.filter(
+    (row) =>
+      !search.value ||
+      [row.name, row.type, ...(row.products || [])].some((v) =>
+        foldSearch(v).includes(foldSearch(search.value)),
+      ),
+  ),
+)
 function editSelected() {
   const row = selected.value
   selected.value = null
@@ -103,5 +134,20 @@ const partnerColumns = columns([
   .author-grid {
     grid-template-columns: 1fr;
   }
+}
+</style>
+
+<style scoped>
+.workspace-toolbar {
+  justify-content: space-between;
+}
+.workspace-toolbar .q-input {
+  flex: 1;
+  max-width: 520px;
+  min-width: 0;
+}
+.partner-create :deep(.q-btn__content) {
+  flex-direction: row-reverse;
+  gap: 8px;
 }
 </style>

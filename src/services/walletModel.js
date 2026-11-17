@@ -44,7 +44,7 @@ export function walletMoney(value, currency) {
   return (
     definition.symbol +
     ' ' +
-    new Intl.NumberFormat(currency === 'BRL' ? 'pt-BR' : 'en-US', {
+    new Intl.NumberFormat('pt-BR', {
       minimumFractionDigits: 2,
       maximumFractionDigits: 2,
     }).format(Number(value))

@@ -1,7 +1,14 @@
 <template>
   <q-page class="q-pa-md transactions-page">
     <title-page title="Transações e carteiras" />
-    <wallet-overview :details="false" initial-type="total" @select="selectWallet" />
+    <resource-state :state="globalPortfolio.state" @retry="loadGlobalPortfolio">
+      <wallet-overview
+        :model="globalSummary"
+        :details="false"
+        initial-type="total"
+        @select="selectWallet"
+      />
+    </resource-state>
     <q-tabs v-model="tab" align="left" dense active-color="primary"
       ><q-tab name="transactions" label="Transações" no-caps /><q-tab
         name="wallets"
@@ -197,7 +204,25 @@
       </form-section>
     </div>
     <div v-else-if="tab === 'wallets'">
-      <wallet-directory :type="walletType" @open="openPortfolio" /><q-btn
+      <resource-state
+        v-if="globalFailures"
+        :state="{
+          loading: false,
+          error:
+            'Não foi possível consultar a carteira de ' +
+            globalFailures +
+            ' cliente(s). Os demais resultados estão disponíveis.',
+        }"
+        @retry="loadGlobalPortfolio"
+      />
+      <resource-state :state="globalPortfolio.state" @retry="loadGlobalPortfolio"
+        ><wallet-directory
+          :type="walletType"
+          :rows="globalRows"
+          @open="openPortfolio"
+          @back="tab = 'transactions'"
+          @changed="loadGlobalPortfolio" /></resource-state
+      ><q-btn
         class="q-mt-md"
         outline
         no-caps
@@ -213,8 +238,16 @@
       maximized
       class="control-width"
       ><q-card
-        ><title-card title="Carteiras do cliente" /><q-card-section
-          ><customer-portfolio :customer-id="portfolioCustomer" /></q-card-section></q-card
+        ><title-card
+          :title="
+            portfolioSection === 'statement' ? 'Extrato' : 'Carteiras do cliente'
+          " /><q-card-section
+          ><customer-portfolio
+            :key="portfolioCustomer + ':' + portfolioSection"
+            :customer-id="portfolioCustomer"
+            :embedded="portfolioSection === 'statement'"
+            :focus-statement="portfolioSection === 'statement'"
+            @changed="loadGlobalPortfolio" /></q-card-section></q-card
     ></q-dialog>
     <q-dialog v-model="createOpen" :persistent="createBusy"
       ><transaction-create
@@ -242,7 +275,7 @@
             v-if="contractDetail && detail.state.data"
             :record="detail.state.data"
             @close="dialog = false"
-            @changed="loadDetail"
+            @changed="onTransactionEdited"
             @busy="busy = $event"
           />
           <template v-else-if="detail.state.data">
@@ -467,11 +500,13 @@ function selectWallet(type) {
   walletType.value = type
   tab.value = 'wallets'
 }
-function openPortfolio(id) {
+function openPortfolio(id, section = 'portfolio') {
+  portfolioSection.value = section
   portfolioCustomer.value = id
   portfolioOpen.value = true
 }
 
+const portfolioSection = ref('portfolio')
 const walletType = ref('total'),
   portfolioCustomer = ref(null),
   portfolioOpen = ref(false)
@@ -487,7 +522,13 @@ import {
 import WalletDirectory from 'src/components/Finance/WalletDirectory.vue'
 import WalletOverview from 'src/components/Finance/WalletOverview.vue'
 
-import { computed, ref, watch, nextTick } from 'vue'
+import { computed, ref, watch, nextTick, onMounted, onScopeDispose } from 'vue'
+import {
+  readGlobalPortfolios,
+  globalWalletRows,
+  globalWalletSummary,
+} from 'src/services/globalWallets'
+import { createRequestContext } from 'src/services/requestContext'
 import { useQuasar } from 'quasar'
 import { useRoute } from 'vue-router'
 import TitlePage from 'src/components/TitlePage.vue'
@@ -528,6 +569,23 @@ const $q = useQuasar(),
   error = ref(''),
   reason = ref('')
 const stateDialog = ref(null)
+const globalPortfolio = useFinanceResource()
+const globalRequest = createRequestContext()
+const globalRows = computed(() => globalWalletRows(globalPortfolio.state.data))
+const globalSummary = computed(() => globalWalletSummary(globalPortfolio.state.data))
+const globalFailures = computed(
+  () => globalPortfolio.state.data?.records.filter((r) => r.error).length || 0,
+)
+async function loadGlobalPortfolio() {
+  globalRequest.invalidate()
+  const current = globalRequest.capture()
+  await globalPortfolio.load(() => readGlobalPortfolios(financeGet, current))
+}
+onMounted(loadGlobalPortfolio)
+onScopeDispose(() => {
+  globalRequest.dispose()
+  globalPortfolio.reset()
+})
 const contractDetail = computed(() => isContractTransaction(detail.state.data))
 const workflowActions = computed(() =>
   (detail.state.data?.availableActions || []).filter(
@@ -583,6 +641,7 @@ const historyColumns = columns([
 const loadDetail = () =>
   detail.load(async () => (await financeGet(`admin/transactions/${id.value}`)).data)
 function onCreated(value) {
+  loadGlobalPortfolio()
   createOpen.value = false
   table.value?.reload()
   pendingTable.value?.reload()
@@ -665,6 +724,7 @@ function stateCompleted() {
   })
 }
 function onTransactionEdited() {
+  loadGlobalPortfolio()
   correctingTransaction.value = false
   editingTransaction.value = false
   busy.value = false
@@ -713,6 +773,7 @@ async function executeConfirmed(password) {
       password,
     })
     reason.value = ''
+    loadGlobalPortfolio()
     await loadDetail()
     table.value?.reload()
     pendingTable.value?.reload()

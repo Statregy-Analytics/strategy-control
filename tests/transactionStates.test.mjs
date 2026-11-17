@@ -123,6 +123,14 @@ async function setupPage() {
       quasar: { useQuasar: () => ({ notify() {} }) },
       'vue-router': { useRoute: () => ({ query: {} }) },
       'src/composables/useFinanceResource': { useFinanceResource },
+      'src/services/globalWallets': {
+        readGlobalPortfolios: async () => null,
+        globalWalletRows: () => null,
+        globalWalletSummary: () => null,
+      },
+      'src/services/requestContext': {
+        createRequestContext: () => ({ capture: () => () => true, invalidate() {}, dispose() {} }),
+      },
       'src/services/transactionOperations': { submitAdminTransaction() {} },
       'src/services/documentAdminService': {
         downloadDocument() {

@@ -107,9 +107,16 @@ export function filterWorkspace(rows, { search = '', status = null, sort = 'az' 
       (r) =>
         (!status || r.status === status) &&
         (!q ||
-          [r.name, r.title, r.code, r.publicCode, r.client?.displayName, r.kind].some((v) =>
-            foldSearch(v).includes(q),
-          )),
+          [
+            r.name,
+            r.title,
+            r.code,
+            r.publicCode,
+            r.client?.displayName,
+            r.client?.name,
+            r.kind,
+            workspaceStatus(r.kind),
+          ].some((v) => foldSearch(v).includes(q))),
     )
     .sort((a, b) =>
       sort === 'recent'

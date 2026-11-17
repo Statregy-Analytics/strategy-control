@@ -25,7 +25,9 @@
                 : 'Nova Operação de Crédito'
           }}
         </h2>
-        <q-btn flat dense icon="close" aria-label="Fechar" @click="$emit('close')" />
+        <q-btn flat dense aria-label="Fechar" @click="$emit('close')"
+          ><img src="/icons/workspace-review/credit-close.svg" alt=""
+        /></q-btn>
       </div>
       <p>
         {{
@@ -38,9 +40,7 @@
       </p>
       <q-banner v-if="error" class="workspace-error" role="alert">{{ error }}</q-banner>
       <template v-if="!partner"
-        ><div class="credit-steps">
-          <span>1 · Tipo</span><q-separator /><strong>2 · Cliente</strong>
-        </div>
+        ><credit-wizard-steps :step="2" />
         <h3>Selecione o cliente</h3>
         <q-input
           v-model="search"
@@ -59,15 +59,18 @@
             @click="selectedClient = customer"
           >
             <strong>{{ customer.displayName }}</strong
-            ><small v-if="customer.maskedDocument">{{ customer.maskedDocument }}</small>
+            ><small v-if="customer.maskedDocument">{{ customer.maskedDocument }}</small
+            ><small v-if="customer.primaryContact">{{ customer.primaryContact }}</small>
           </button>
           <p v-if="!customers.state.data?.length">Nenhum cliente encontrado.</p></resource-state
         ><q-btn
           outline
           no-caps
           label="Criar novo cliente"
-          class="full-width q-mt-lg"
-          @click="newClient" />
+          class="full-width q-mt-lg credit-create-client"
+          @click="newClient"
+          ><img src="/icons/workspace-review/credit-plus.svg" alt=""
+        /></q-btn>
         <div class="workspace-actions">
           <q-btn outline no-caps label="Voltar" @click="$emit('back')" /><q-btn
             outline
@@ -233,6 +236,7 @@
   ></q-dialog>
 </template>
 <script setup>
+import CreditWizardSteps from './CreditWizardSteps.vue'
 import { onScopeDispose, ref } from 'vue'
 import { useRouter } from 'vue-router'
 import LabelForm from 'src/components/Form/LabelForm.vue'
@@ -241,7 +245,8 @@ import ResourceState from 'src/components/Finance/ResourceState.vue'
 import WorkspaceField from './WorkspaceField.vue'
 import CreditOperationDetails from './CreditOperationDetails.vue'
 import { partnerTypes, partnerProducts } from 'src/services/adminWorkspaceModel'
-import { lookupCustomers } from 'src/services/customerService'
+import { listCustomerCards } from 'src/services/customerService'
+import { readCurrentPages } from 'src/services/requestContext'
 import { financeGet, columns } from 'src/services/financeService'
 import { useFinanceResource } from 'src/composables/useFinanceResource'
 const props = defineProps({
@@ -313,8 +318,13 @@ const regionFields = [
 async function lookup() {
   const r = ++sequence
   await customers.load(async () => {
-    const x = await lookupCustomers({ search: search.value, limit: 20 })
-    return active && r === sequence ? x.customers || [] : []
+    selectedClient.value = null
+    const rows = await readCurrentPages(
+      (page) =>
+        listCustomerCards({ search: search.value.trim() || undefined, page, pageSize: 100 }),
+      () => active && r === sequence,
+    )
+    return rows || []
   })
 }
 async function load() {
@@ -330,7 +340,7 @@ const loadHistory = () =>
   )
 function createOperation() {
   if (!selectedClient.value) return
-  error.value = 'Não foi possível criar a operação. Serviço indisponível no momento.'
+  error.value = 'Não foi possível criar a operação com os dados disponíveis.'
 }
 function newClient() {
   emit('close')
@@ -432,5 +442,25 @@ onScopeDispose(() => {
 .workspace-modal :deep(.q-table__container) {
   max-width: 100%;
   overflow: auto;
+}
+</style>
+
+<style scoped>
+.workspace-choice strong,
+.workspace-choice small {
+  display: block;
+  overflow-wrap: anywhere;
+}
+.workspace-choice small {
+  margin-top: 4px;
+  color: #ffffffb8;
+  font-size: 12px;
+}
+</style>
+
+<style scoped>
+.credit-create-client :deep(.q-btn__content) {
+  gap: 8px;
+  flex-direction: row-reverse;
 }
 </style>

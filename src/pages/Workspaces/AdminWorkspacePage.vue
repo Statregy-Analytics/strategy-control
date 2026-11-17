@@ -1,5 +1,5 @@
 <template>
-  <q-page class="workspace">
+  <q-page class="workspace" :class="'workspace--' + module">
     <logic-workspace
       v-if="editor && module === 'logic'"
       :key="editor + '-' + (recordId || 'new') + '-' + (contentKind || '')"
@@ -52,7 +52,15 @@
         <div v-if="tab === 'main' || module === 'credit'" class="workspace-metrics">
           <div v-for="(metric, i) in metrics" :key="metric.label" class="workspace-metric">
             <small>{{ metric.label }}</small
-            ><workspace-icon :name="metricIcons[i % metricIcons.length]" />
+            ><img
+              v-if="module !== 'logic'"
+              :src="
+                '/icons/workspace-review/' +
+                (module === 'credit' ? creditMetricIcons[i] : publicationMetricIcons[i]) +
+                '.svg'
+              "
+              alt=""
+            /><workspace-icon v-else :name="metricIcons[i % metricIcons.length]" />
             <strong>{{ metric.value }}</strong>
           </div>
         </div>
@@ -66,7 +74,15 @@
             ]"
           />
         </div>
-        <div v-if="!(module === 'communication' && tab === 'authors')" class="workspace-toolbar">
+        <div
+          v-if="
+            !(
+              (module === 'communication' && tab === 'authors') ||
+              (module === 'credit' && tab === 'partners')
+            )
+          "
+          class="workspace-toolbar"
+        >
           <q-btn-toggle
             v-if="module === 'logic'"
             v-model="view"
@@ -83,6 +99,22 @@
             :aria-label="searchPlaceholder"
             ><template #prepend><workspace-icon name="search" /></template></q-input
           ><glass-select
+            v-if="module === 'credit'"
+            v-model="kindFilter"
+            :options="creditKindOptions"
+            placeholder="Tipo de operação"
+            aria-label="Tipo de operação"
+            clearable
+          />
+          <glass-select
+            v-if="module === 'communication'"
+            v-model="kindFilter"
+            :options="contentTypes"
+            placeholder="Tipo"
+            aria-label="Tipo"
+            disable
+          />
+          <glass-select
             v-if="module !== 'logic'"
             v-model="status"
             :options="statusOptions"
@@ -97,13 +129,6 @@
             placeholder="Status: Todos"
             aria-label="Status"
             :menu-width="268"
-          /><glass-select
-            v-if="module === 'communication'"
-            v-model="kindFilter"
-            :options="contentTypes"
-            placeholder="Tipo"
-            disable
-            aria-label="Tipo"
           /><glass-select
             v-if="module === 'communication'"
             v-model="authorFilter"
@@ -125,11 +150,30 @@
             placeholder="Ordenar por"
             aria-label="Ordenar por"
           /><template v-if="module === 'credit'"
-            ><q-btn-toggle
+            ><div
               v-if="tab === 'main'"
-              v-model="view"
-              no-caps
-              :options="viewOptions" /><q-btn
+              class="workspace-view-toggle"
+              role="group"
+              aria-label="Visualização das operações"
+            >
+              <button
+                v-for="option in viewOptions"
+                :key="option.value"
+                :aria-label="option.label"
+                :aria-pressed="view === option.value"
+                @click="view = option.value"
+              >
+                <img
+                  :src="
+                    '/icons/workspace-review/credit-' +
+                    { list: 'list', cards: 'grid', kanban: 'kanban' }[option.value] +
+                    '.svg'
+                  "
+                  alt=""
+                />
+              </button>
+            </div>
+            <q-btn
               outline
               no-caps
               :label="tab === 'partners' ? 'Criar Parceiro' : 'Nova Operação'"
@@ -138,18 +182,29 @@
           ></template>
         </div>
         <q-banner v-if="error" class="workspace-error" role="alert">{{ error }}</q-banner>
-        <supporting-directory v-if="tab !== 'main'" :kind="tab" @edit="editDirectory" />
+        <supporting-directory
+          v-if="tab !== 'main'"
+          :kind="tab"
+          @edit="editDirectory"
+          @create="create"
+        />
         <resource-state v-else :state="resource.state" @retry="load">
-          <div v-if="module === 'credit'" class="workspace-tabs">
-            <q-btn-toggle
-              v-model="creditGroup"
-              no-caps
-              :options="[
-                { label: 'Operações em Aberto', value: 'open' },
-                { label: 'Operações Finalizadas', value: 'closed' },
-                { label: 'Operações Canceladas/Recusadas', value: 'cancelled' },
-              ]"
-            />
+          <div
+            v-if="module === 'credit'"
+            class="credit-operation-groups"
+            role="group"
+            aria-label="Situação das operações"
+          >
+            <button
+              v-for="group in creditGroups"
+              :key="group.value"
+              :aria-pressed="creditGroup === group.value"
+              @click="creditGroup = group.value"
+            >
+              <img :src="'/icons/workspace-review/credit-group-' + group.value + '.svg'" alt="" />{{
+                group.label
+              }}<span>{{ creditGroupCount(group.value) }}</span>
+            </button>
           </div>
           <div v-if="view === 'kanban'" class="workspace-kanban">
             <section v-for="stage in creditStages" :key="stage" class="workspace-record">
@@ -160,10 +215,18 @@
           <div
             v-else-if="view === 'cards'"
             class="workspace-cards"
-            :class="{ 'workspace-cards--logic': module === 'logic' }"
+            :class="{
+              'workspace-cards--logic': module === 'logic',
+              'workspace-cards--credit': module === 'credit',
+            }"
           >
             <template v-for="row in pageRows" :key="row.id">
               <logic-card v-if="module === 'logic'" :record="row" @select="openRow(row, $event)" />
+              <credit-operation-card
+                v-else-if="module === 'credit'"
+                :record="row"
+                @open="openRow(row, 'open')"
+              />
               <article v-else class="workspace-record">
                 <div class="workspace-record-head">
                   <div>
@@ -234,7 +297,15 @@
               ></template
             ><template #body-cell-actions="p"
               ><q-td :props="p"
+                ><q-btn
+                  v-if="module === 'credit'"
+                  flat
+                  dense
+                  :aria-label="'Abrir operação ' + p.row.publicCode"
+                  @click="openRow(p.row, 'open')"
+                  ><img src="/icons/workspace-review/credit-open.svg" alt="" /></q-btn
                 ><row-actions
+                  v-else
                   dark
                   :actions="recordActions"
                   @select="openRow(p.row, $event)" /></q-td></template
@@ -243,8 +314,18 @@
       </main>
     </template>
     <q-dialog v-model="typeOpen"
-      ><q-card class="workspace-modal"
-        ><h2>{{ module === 'credit' ? 'Nova Operação de Crédito' : 'Criar Novo Conteúdo' }}</h2>
+      ><q-card class="workspace-modal" :class="{ 'credit-type-modal': module === 'credit' }"
+        ><div class="workspace-modal-heading">
+          <h2>{{ module === 'credit' ? 'Nova Operação de Crédito' : 'Criar Novo Conteúdo' }}</h2>
+          <q-btn
+            v-if="module === 'credit'"
+            flat
+            dense
+            aria-label="Fechar nova operação"
+            @click="typeOpen = false"
+            ><img src="/icons/workspace-review/credit-close.svg" alt=""
+          /></q-btn>
+        </div>
         <p>
           {{
             module === 'credit'
@@ -252,14 +333,19 @@
               : 'Selecione o tipo de conteúdo que deseja criar'
           }}
         </p>
+        <credit-wizard-steps v-if="module === 'credit'" :step="1" />
         <button
-          v-for="type in module === 'credit' ? creditTypes : contentTypes"
+          v-for="(type, index) in module === 'credit' ? creditTypes : contentTypes"
           :key="type"
           class="workspace-choice"
           :aria-pressed="selectedType === type"
           @click="selectedType = type"
         >
-          {{ type }}
+          <img
+            v-if="module === 'credit'"
+            :src="'/icons/workspace-review/credit-' + creditTypeIcons[index] + '.svg'"
+            alt=""
+          />{{ type }}
         </button>
         <div class="workspace-actions">
           <q-btn flat no-caps label="Cancelar" v-close-popup /><q-btn
@@ -283,6 +369,8 @@
   </q-page>
 </template>
 <script setup>
+import CreditWizardSteps from 'src/components/Workspaces/CreditWizardSteps.vue'
+import CreditOperationCard from 'src/components/Workspaces/CreditOperationCard.vue'
 import LogicActiveRow from 'src/components/Workspaces/LogicActiveRow.vue'
 import LogicCard from 'src/components/Workspaces/LogicCard.vue'
 import PublicationStatus from 'src/components/Workspaces/PublicationStatus.vue'
@@ -358,6 +446,7 @@ const filtered = computed(() =>
       sort: sort.value,
     }).filter((r) => {
       if (props.module !== 'credit') return true
+      if (kindFilter.value && r.kind !== kindFilter.value) return false
       const closed = ['Settled', 'Closed'],
         cancelled = ['Cancelled', 'Canceled', 'Rejected']
       return creditGroup.value === 'closed'
@@ -402,6 +491,28 @@ const viewOptions = computed(() => [
   { label: 'Cards', value: 'cards' },
   ...(props.module === 'credit' ? [{ label: 'Kanban', value: 'kanban' }] : []),
 ])
+const creditKindOptions = computed(() =>
+  [...new Set((resource.state.data || []).map((r) => r.kind).filter(Boolean))].map((value) => ({
+    label: workspaceStatus(value),
+    value,
+  })),
+)
+const creditMetricIcons = [
+  'credit-active',
+  'credit-pending',
+  'credit-documents',
+  'credit-final',
+  'credit-sign',
+  'credit-contracted',
+]
+const publicationMetricIcons = [
+  'publication-published',
+  'publication-draft',
+  'publication-review',
+  'publication-archived',
+  'publication-total',
+  'publication-authors',
+]
 const metricIcons = [
   'activity1',
   'circle-check',
@@ -494,7 +605,31 @@ const logicCardLabels = [
   'Performance do Ciclo Atual',
   'Próxima Atualização',
 ]
-const creditStages = ['Iniciada', 'Pendente', 'Pré-proposta', 'Documentação', 'Proposta Final']
+const creditTypeIcons = ['house', 'car', 'building', 'car', 'briefcase', 'briefcase', 'info']
+const creditGroups = [
+  { value: 'open', label: 'Operações em Aberto' },
+  { value: 'closed', label: 'Operações Finalizadas' },
+  { value: 'cancelled', label: 'Operações Canceladas/Recusadas' },
+]
+function creditGroupCount(group) {
+  if (!resource.state.data) return '—'
+  return resource.state.data.filter((r) =>
+    group === 'closed'
+      ? ['Settled', 'Closed'].includes(r.status)
+      : group === 'cancelled'
+        ? ['Cancelled', 'Canceled', 'Rejected'].includes(r.status)
+        : !['Settled', 'Closed', 'Cancelled', 'Canceled', 'Rejected'].includes(r.status),
+  ).length
+}
+const creditStages = [
+  'Iniciada',
+  'Pendente',
+  'Pré-proposta',
+  'Documentação',
+  'Proposta Final',
+  'Assinatura',
+  'Contratada',
+]
 const recordActions = computed(() => [
   { name: 'open', label: 'Abrir', icon: 'visibility' },
   { name: 'edit', label: 'Editar', icon: 'edit' },
@@ -525,7 +660,7 @@ const tableColumns = computed(() =>
         ])
       : columns([
           ['publicCode', 'ID'],
-          ['client', 'Cliente', (r) => r.client?.displayName || '—'],
+          ['client', 'Cliente', (r) => r.client?.displayName || r.client?.name || '—'],
           ['kind', 'Tipo', (r) => workspaceStatus(r.kind)],
           [
             'principalAmount',
@@ -614,6 +749,9 @@ watch(
     tab.value = 'main'
     search.value = ''
     status.value = null
+    kindFilter.value = null
+    creditGroup.value = 'open'
+    authorFilter.value = null
     view.value = props.module === 'logic' ? 'cards' : 'list'
     load()
   },
@@ -664,7 +802,7 @@ onScopeDispose(() => {
 
 .workspace-kanban {
   display: grid;
-  grid-template-columns: repeat(5, minmax(230px, 1fr));
+  grid-template-columns: repeat(7, minmax(230px, 1fr));
   gap: 16px;
   overflow: auto;
   padding: 24px 0;
@@ -674,5 +812,155 @@ onScopeDispose(() => {
 }
 .workspace-tabs {
   margin-bottom: 24px;
+}
+</style>
+
+<style scoped>
+.workspace-view-toggle {
+  display: flex;
+  gap: 4px;
+  padding: 4px;
+  border: 1px solid #ffffff33;
+  border-radius: 8px;
+  margin-left: auto;
+}
+.workspace-view-toggle button {
+  display: grid;
+  place-items: center;
+  width: 32px;
+  height: 28px;
+  border: 0;
+  border-radius: 5px;
+  background: transparent;
+  cursor: pointer;
+}
+.workspace-view-toggle button[aria-pressed='true'] {
+  background: #ffffff26;
+}
+.workspace-view-toggle button:focus-visible {
+  outline: 2px solid #2b7fff;
+  outline-offset: 2px;
+}
+.workspace-metric > img {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+}
+.workspace-toolbar {
+  gap: 12px;
+}
+</style>
+
+<style scoped>
+.credit-operation-groups {
+  display: flex;
+  gap: 8px;
+  padding: 6px;
+  border: 1px solid #ffffff1f;
+  background: #ffffff08;
+  border-radius: 8px;
+  margin: 20px 0;
+}
+.credit-operation-groups button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  flex: 1;
+  padding: 8px;
+  border: 1px solid transparent;
+  border-radius: 5px;
+  color: #ffffffb8;
+  background: transparent;
+  font-size: 12px;
+  cursor: pointer;
+}
+.credit-operation-groups button[aria-pressed='true'] {
+  color: #fff;
+  background: #ffffff1a;
+  border-color: #ffffff33;
+}
+.credit-operation-groups span {
+  border: 1px solid #ffffff4d;
+  border-radius: 4px;
+  font-size: 10px;
+  padding: 0 5px;
+}
+.credit-type-modal .workspace-choice {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 42px;
+  padding: 10px;
+  font-size: 14px;
+}
+.credit-type-modal .workspace-actions {
+  margin: 40px -24px -24px;
+  padding: 16px 24px;
+  border-top: 1px solid #ffffff33;
+  display: flex;
+}
+.credit-type-modal .workspace-actions .q-btn {
+  flex: 1;
+}
+@media (max-width: 600px) {
+  .credit-operation-groups {
+    flex-direction: column;
+  }
+}
+</style>
+
+<style scoped>
+.workspace-metric {
+  position: relative;
+}
+.workspace--communication .workspace-metric {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 12px;
+  align-items: center;
+}
+.workspace--communication .workspace-metric > img {
+  position: static;
+  grid-column: 1;
+  grid-row: 1;
+}
+.workspace--communication .workspace-metric strong {
+  grid-column: 2;
+  grid-row: 1;
+}
+.workspace--communication .workspace-metric small {
+  grid-column: 1/-1;
+  grid-row: 2;
+  margin: 0;
+}
+.workspace--communication .workspace-metric:nth-child(1) {
+  color: #00c950;
+}
+.workspace--communication .workspace-metric:nth-child(2) {
+  color: #fee685;
+}
+.workspace--communication .workspace-metric:nth-child(3) {
+  color: #51a2ff;
+}
+.workspace--communication .workspace-toolbar .workspace-search {
+  max-width: 520px;
+}
+</style>
+
+<style scoped>
+.workspace-cards--credit {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+@media (max-width: 1300px) {
+  .workspace-cards--credit {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+@media (max-width: 800px) {
+  .workspace-cards--credit {
+    grid-template-columns: minmax(0, 1fr);
+  }
 }
 </style>

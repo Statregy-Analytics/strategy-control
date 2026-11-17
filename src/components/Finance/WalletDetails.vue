@@ -12,10 +12,14 @@
         Vínculos dos contratos ainda indisponíveis.
       </p></template
     >
-    <customer-assets v-else-if="row.type === 'assets'" :customer-id="row.customerId" />
+    <customer-assets
+      v-else-if="row.type === 'assets'"
+      :customer-id="row.customerId"
+      @changed="$emit('changed')"
+    />
     <wallet-overview
       v-else
-      :model="{ deposit: row, principalCurrency: row.principalCurrency }"
+      :model="row.model || { deposit: row, principalCurrency: row.principalCurrency }"
       initial-type="deposit"
     />
   </div>
@@ -24,5 +28,6 @@
 import ClientPortfolioContracts from 'src/components/Clients/ClientPortfolioContracts.vue'
 import CustomerAssets from './CustomerAssets.vue'
 import WalletOverview from './WalletOverview.vue'
+defineEmits(['changed'])
 defineProps({ row: { type: Object, required: true } })
 </script>

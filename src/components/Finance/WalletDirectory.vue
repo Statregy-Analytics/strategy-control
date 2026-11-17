@@ -1,81 +1,178 @@
 <template>
   <section class="wallet-directory">
+    <q-btn
+      flat
+      no-caps
+      class="directory-back"
+      label="Voltar para Extrato Global"
+      @click="emit('back')"
+    />
     <div class="directory-toolbar">
-      <div>
-        <h2>{{ titles[type] }}</h2>
-        <p>Uma carteira de cada tipo por cliente. Valores preservados por moeda.</p>
+      <h2>{{ titles[type] }}</h2>
+      <p>
+        {{
+          type === 'total'
+            ? 'Todas as carteiras do sistema em uma visão unificada'
+            : type === 'deposit'
+              ? 'Recursos disponíveis para movimentação imediata'
+              : 'Carteiras dos clientes'
+        }}
+      </p>
+      <div class="directory-filters">
+        <q-input
+          v-model="search"
+          outlined
+          dense
+          clearable
+          :placeholder="searchLabel"
+          :aria-label="searchLabel"
+        >
+          <template #prepend><img src="/icons/workspace-review/search.svg" alt="" /></template>
+        </q-input>
+        <glass-select
+          v-if="type === 'total'"
+          v-model="kind"
+          :options="typeOptions"
+          placeholder="Tipo"
+          aria-label="Tipo de carteira"
+          clearable
+          dropdown-icon="img:/icons/workspace-review/chevron.svg"
+        />
+        <glass-select
+          v-model="status"
+          :options="statusOptions"
+          placeholder="Status"
+          aria-label="Status da carteira"
+          clearable
+          dropdown-icon="img:/icons/workspace-review/chevron.svg"
+        />
+        <glass-select
+          v-if="type !== 'total' || moreFilters"
+          v-model="currency"
+          :options="currencyOptions"
+          placeholder="Moeda"
+          aria-label="Filtrar moeda"
+          clearable
+          dropdown-icon="img:/icons/workspace-review/chevron.svg"
+        />
+        <glass-select
+          v-model="sort"
+          :options="[{ label: 'Maior valor', value: 'desc', disable: !comparisonCurrency }]"
+          placeholder="Maior valor"
+          aria-label="Ordenar carteiras"
+          clearable
+          dropdown-icon="img:/icons/workspace-review/chevron.svg"
+        />
+        <q-btn
+          outline
+          no-caps
+          label="Mais Filtros"
+          :aria-expanded="moreFilters"
+          :disable="type !== 'total'"
+          @click="toggleFilters"
+          ><img src="/icons/workspace-review/filter.svg" alt=""
+        /></q-btn>
+        <div class="directory-view" role="group" aria-label="Visualização das carteiras">
+          <button
+            v-for="item in [
+              { key: 'cards', label: 'Cards', icon: 'grid' },
+              { key: 'list', label: 'Lista', icon: 'list' },
+            ]"
+            :key="item.key"
+            :aria-label="item.label"
+            :aria-pressed="view === item.key"
+            @click="view = item.key"
+          >
+            <img :src="'/icons/workspace-review/' + item.icon + '.svg'" alt="" />
+          </button>
+        </div>
       </div>
-      <q-btn-toggle
-        v-model="view"
-        no-caps
-        unelevated
-        toggle-color="primary"
-        :options="[
-          { label: 'Cards', value: 'cards', icon: 'grid_view' },
-          { label: 'Lista', value: 'list', icon: 'view_list' },
-        ]"
-      />
-    </div>
-    <div class="directory-filters">
-      <q-input
-        v-model="search"
-        outlined
-        dense
-        clearable
-        placeholder="Buscar cliente ou carteira"
-        aria-label="Buscar cliente ou carteira"
-      /><q-select
-        v-model="currency"
-        outlined
-        dense
-        emit-value
-        map-options
-        :options="currencyOptions"
-        aria-label="Filtrar moeda"
-      />
+      <p class="directory-count">{{ filtered.length }} carteiras encontradas</p>
     </div>
     <q-banner v-if="rows === null" class="q-my-md bg-transparent wallet-unavailable"
-      >A consulta das novas carteiras ainda não está disponível.</q-banner
+      >A consulta das carteiras ainda não está disponível.</q-banner
     >
     <div v-if="view === 'cards'" class="directory-cards">
       <article v-for="row in pageRows" :key="row.key" class="directory-card">
         <header>
-          <img src="/icons/wallets/wallet.svg" alt="" width="40" height="40" />
+          <span class="directory-card-icon"
+            ><img
+              :src="
+                '/icons/workspace-review/' +
+                (type === 'total' && row.type === 'deposit' ? 'deposit-global' : row.type) +
+                '.svg'
+              "
+              alt=""
+          /></span>
           <div>
             <h3>{{ label(row.type) }}</h3>
-            <small>{{ row.code || '—' }}</small>
+            <small :title="row.code || ''">{{ row.code || '—' }}</small>
           </div>
+          <span v-if="type === 'total'" class="directory-badge">{{
+            row.type === 'strategy' ? 'Strategy' : row.type === 'assets' ? 'Patrimônio' : 'Depósito'
+          }}</span>
+          <span v-else class="directory-badge" :class="{ positive: row.status === 'Active' }">{{
+            statusLabel(row.status)
+          }}</span>
         </header>
-        <p class="q-mt-md">{{ row.clientName }}</p>
-        <p class="text-caption">ID Cliente: {{ row.clientCode || '—' }}</p>
+        <p class="directory-client">
+          <img src="/icons/workspace-review/user.svg" alt="" />{{ row.clientName }}
+        </p>
+        <p class="directory-client-id">
+          ID: {{ row.clientCode || '—'
+          }}<template v-if="row.maskedDocument"> · {{ row.maskedDocument }}</template>
+        </p>
         <dl>
           <template v-for="field in fields(row)" :key="field.label"
             ><dt>{{ field.label }}</dt>
             <dd>{{ field.value }}</dd></template
           >
         </dl>
+        <p v-if="row.type === 'strategy'" class="directory-links">
+          <img src="/icons/workspace-review/contract.svg" alt="" />{{
+            row.contractCount == null
+              ? 'Vínculos indisponíveis'
+              : row.contractCount + ' contratos vinculados'
+          }}
+        </p>
+        <div v-if="type === 'total'" class="directory-state">
+          <span class="directory-badge" :class="{ positive: row.status === 'Active' }">{{
+            statusLabel(row.status)
+          }}</span
+          ><small>{{ date(row.lastMovement) }}</small>
+        </div>
         <div class="card-actions">
           <q-btn
             outline
             dense
             no-caps
-            label="Ver movimentações"
-            @click="emit('open', row.customerId)"
-          /><q-btn
+            label="Ver Movimentações"
+            @click="emit('open', row.customerId, 'statement')"
+            ><img src="/icons/workspace-review/eye.svg" alt=""
+          /></q-btn>
+          <q-btn
             outline
             dense
             no-caps
             :label="
-              row.type === 'strategy'
-                ? 'Ver contratos'
-                : row.type === 'assets'
-                  ? 'Ver bens'
-                  : 'Ver carteira'
+              type === 'total'
+                ? 'Abrir Carteira'
+                : row.type === 'strategy'
+                  ? 'Ver contratos'
+                  : row.type === 'assets'
+                    ? 'Ver bens'
+                    : 'Abrir Carteira'
             "
-            @click="toggle(row.key)"
+            @click="
+              type === 'total' || row.type === 'deposit'
+                ? emit('open', row.customerId)
+                : toggle(row.key)
+            "
           />
         </div>
-        <div v-if="expanded === row.key" class="q-mt-md"><wallet-details :row="row" /></div>
+        <div v-if="expanded === row.key" class="q-mt-md">
+          <wallet-details :row="row" @changed="emit('changed')" />
+        </div>
       </article>
     </div>
     <q-table
@@ -92,19 +189,22 @@
       <template #body="scope"
         ><q-tr :props="scope"
           ><q-td v-for="column in scope.cols" :key="column.name" :props="scope"
-            ><template v-if="column.name === 'actions'"
-              ><row-actions
-                :actions="[
-                  { name: 'expand', label: 'Ver detalhes', icon: 'expand_more' },
-                  { name: 'open', label: 'Ver movimentações', icon: 'visibility' },
-                ]"
-                @select="
-                  $event === 'open' ? emit('open', scope.row.customerId) : toggle(scope.row.key)
-                " /></template
-            ><template v-else>{{ column.value }}</template></q-td
+            ><row-actions
+              v-if="column.name === 'actions'"
+              :actions="[
+                { name: 'expand', label: 'Ver detalhes', icon: 'expand_more' },
+                { name: 'open', label: 'Ver movimentações', icon: 'visibility' },
+              ]"
+              @select="
+                $event === 'open'
+                  ? emit('open', scope.row.customerId, 'statement')
+                  : toggle(scope.row.key)
+              "
+            /><template v-else>{{ column.value }}</template></q-td
           ></q-tr
         ><q-tr v-if="expanded === scope.row.key"
-          ><q-td :colspan="columns.length"><wallet-details :row="scope.row" /></q-td></q-tr
+          ><q-td :colspan="columns.length"
+            ><wallet-details :row="scope.row" @changed="emit('changed')" /></q-td></q-tr
       ></template>
     </q-table>
     <p v-if="rows !== null && !filtered.length && view === 'cards'" class="q-pa-lg text-center">
@@ -125,15 +225,17 @@
 </template>
 <script setup>
 import { computed, ref, watch } from 'vue'
+import GlassSelect from 'src/components/Entity/GlassSelect.vue'
 import EntityTableFooter from 'src/components/Entity/EntityTableFooter.vue'
 import RowActions from 'src/components/Entity/RowActions.vue'
 import WalletDetails from './WalletDetails.vue'
-import { WALLET_CURRENCIES, WALLET_TYPES, walletMoney } from 'src/services/walletModel'
+import { WALLET_TYPES, walletMoney } from 'src/services/walletModel'
+import { foldSearch } from 'src/services/adminWorkspaceModel'
 const props = defineProps({
   type: { type: String, default: 'total' },
   rows: { type: Array, default: null },
 })
-const emit = defineEmits(['open'])
+const emit = defineEmits(['open', 'back', 'changed'])
 const titles = {
   total: 'Carteira Total Consolidada',
   deposit: 'Carteiras de Depósito',
@@ -143,38 +245,98 @@ const titles = {
 const label = (type) =>
   type === 'assets'
     ? 'Carteira de Patrimônio'
-    : WALLET_TYPES.find((item) => item.key === type)?.label || 'Carteira'
+    : WALLET_TYPES.find((i) => i.key === type)?.label || 'Carteira'
+const statusLabel = (value) =>
+  ({ Active: 'Ativa', Inactive: 'Inativa', Pending: 'Pendente' })[value] || '—'
 const view = ref('cards'),
   search = ref(''),
-  currency = ref('all'),
+  currency = ref(null),
+  kind = ref(null),
+  status = ref(null),
+  sort = ref(null),
+  moreFilters = ref(false),
   expanded = ref(null),
   page = ref(1),
   pageSize = ref(10)
-const currencyOptions = [
-  { label: 'Todas as moedas', value: 'all' },
-  ...WALLET_CURRENCIES.map((item) => ({ label: item.code, value: item.code })),
-]
-const filtered = computed(() =>
-  (props.rows || []).filter(
-    (row) =>
-      (props.type === 'total' || row.type === props.type) &&
-      (currency.value === 'all' ||
-        row.currencies?.some((item) => item.currency === currency.value)) &&
-      (!search.value ||
-        [row.clientName, row.clientCode, row.code].some((value) =>
-          String(value || '')
-            .toLocaleLowerCase()
-            .includes(search.value.toLocaleLowerCase()),
-        )),
-  ),
+const searchLabel = computed(() =>
+  props.type === 'total'
+    ? 'Buscar por cliente, ID, carteira, tipo...'
+    : 'Buscar por cliente, ID, carteira, moeda...',
 )
+const currencyOptions = computed(() =>
+  [
+    ...new Set(
+      (props.rows || [])
+        .filter((r) =>
+          props.type === 'total' ? !kind.value || r.type === kind.value : r.type === props.type,
+        )
+        .flatMap((r) => r.currencies?.map((c) => c.currency) || []),
+    ),
+  ]
+    .sort()
+    .map((code) => ({ label: code, value: code })),
+)
+const typeOptions = WALLET_TYPES.filter((t) => t.key !== 'total').map((t) => ({
+  label: t.label,
+  value: t.key,
+}))
+const statusOptions = computed(() =>
+  [...new Set((props.rows || []).map((r) => r.status).filter(Boolean))].map((value) => ({
+    label: statusLabel(value),
+    value,
+  })),
+)
+const comparisonCurrency = computed(
+  () =>
+    currency.value || (currencyOptions.value.length === 1 ? currencyOptions.value[0].value : null),
+)
+const filtered = computed(() => {
+  const rows = (props.rows || []).filter(
+    (r) =>
+      (props.type === 'total' || r.type === props.type) &&
+      (!kind.value || props.type !== 'total' || r.type === kind.value) &&
+      (!status.value || r.status === status.value) &&
+      (!currency.value || r.currencies?.some((c) => c.currency === currency.value)) &&
+      (!search.value ||
+        [
+          r.clientName,
+          r.clientCode,
+          r.code,
+          label(r.type),
+          r.maskedDocument,
+          ...(r.currencies || []).map((c) => c.currency),
+        ].some((v) => foldSearch(v).includes(foldSearch(search.value)))),
+  )
+  if (sort.value && comparisonCurrency.value)
+    rows.sort((a, b) => {
+      const x = a.currencies?.find((c) => c.currency === comparisonCurrency.value)?.balance,
+        y = b.currencies?.find((c) => c.currency === comparisonCurrency.value)?.balance
+      return x == null ? (y == null ? 0 : 1) : y == null ? -1 : Number(y) - Number(x)
+    })
+  return rows
+})
 const pageRows = computed(() =>
   filtered.value.slice((page.value - 1) * pageSize.value, page.value * pageSize.value),
 )
-watch([() => props.type, search, currency, () => props.rows], () => {
+watch([() => props.type, search, currency, kind, status, sort, () => props.rows], () => {
   page.value = 1
   expanded.value = null
 })
+watch(
+  () => props.type,
+  () => {
+    kind.value = null
+    status.value = null
+    currency.value = null
+  },
+)
+watch(comparisonCurrency, (value) => {
+  if (!value) sort.value = null
+})
+function toggleFilters() {
+  moreFilters.value = !moreFilters.value
+  if (!moreFilters.value) currency.value = null
+}
 function setPageSize(value) {
   pageSize.value = value
   page.value = 1
@@ -184,145 +346,290 @@ function toggle(key) {
 }
 const date = (value) =>
   value && !Number.isNaN(Date.parse(value)) ? new Date(value).toLocaleString('pt-BR') : '—'
+function displayAmounts(row, key = 'balance') {
+  return (
+    row.currencies
+      ?.filter((c) => !currency.value || c.currency === currency.value)
+      .map((c) => walletMoney(c[key], c.currency))
+      .join(' · ') || '—'
+  )
+}
 function fields(row) {
-  const totals = [
-    { label: 'Moedas', value: row.currencies?.map((item) => item.currency).join(' · ') || '—' },
-  ]
+  if (props.type === 'total')
+    return [
+      { label: 'Saldo total', value: displayAmounts(row) },
+      ...(row.type === 'assets'
+        ? [{ label: 'Valorização', value: row.appreciation == null ? '—' : row.appreciation + '%' }]
+        : []),
+    ]
   if (row.type === 'strategy')
-    totals.push(
+    return [
       { label: 'Capital base', value: walletMoney(row.base, row.principalCurrency) },
-      { label: 'Saldo atualizado', value: walletMoney(row.total, row.principalCurrency) },
+      { label: 'Saldo atualizado', value: walletMoney(row.updatedTotal, row.principalCurrency) },
       { label: 'Rendimento', value: row.yieldPercentage == null ? '—' : row.yieldPercentage + '%' },
-    )
-  else if (row.type === 'assets')
-    totals.push(
-      { label: 'Valor declarado', value: walletMoney(row.declared, row.principalCurrency) },
-      { label: 'Valor atual', value: walletMoney(row.total, row.principalCurrency) },
+    ]
+  if (row.type === 'assets')
+    return [
+      { label: 'Valor declarado', value: displayAmounts(row, 'declared') },
+      { label: 'Valor atual', value: walletMoney(row.currentTotal, row.principalCurrency) },
       { label: 'Valorização', value: row.appreciation == null ? '—' : row.appreciation + '%' },
-    )
-  else
-    totals.push(
-      { label: 'Saldo atual', value: walletMoney(row.total, row.principalCurrency) },
-      { label: 'Última movimentação', value: date(row.lastMovement) },
-    )
-  return totals
+    ]
+  return [
+    { label: 'Saldo atual', value: displayAmounts(row) },
+    { label: 'Última movimentação', value: date(row.lastMovement) },
+  ]
 }
 const columns = computed(() => [
-  { name: 'wallet', label: 'Carteira', field: (row) => label(row.type), align: 'left' },
+  { name: 'wallet', label: 'Carteira', field: (r) => label(r.type), align: 'left' },
   { name: 'client', label: 'Cliente', field: 'clientName', align: 'left' },
   { name: 'clientCode', label: 'ID Cliente', field: 'clientCode', align: 'left' },
   {
     name: 'currencies',
     label: 'Moedas',
-    field: (row) => row.currencies?.map((item) => item.currency).join(' · ') || '—',
+    field: (r) => r.currencies?.map((c) => c.currency).join(' · ') || '—',
     align: 'left',
   },
-  ...fields({ type: props.type })
-    .filter((field) => field.label !== 'Moedas')
-    .map((field) => ({
-      name: field.label,
-      label: field.label,
-      field: (row) =>
-        props.type === 'total' && field.label === 'Saldo atual'
-          ? walletMoney(row.total, row.principalCurrency)
-          : props.type === 'total' && field.label === 'Última movimentação'
-            ? date(row.lastMovement)
-            : fields(row).find((item) => item.label === field.label)?.value || '—',
-      align: 'right',
-    })),
+  ...fields({ type: props.type }).map((f) => ({
+    name: f.label,
+    label: f.label,
+    field: (r) => fields(r).find((v) => v.label === f.label)?.value || '—',
+    align: 'right',
+  })),
   { name: 'actions', label: 'Ações', field: 'key', align: 'right' },
 ])
 </script>
 <style scoped>
+.wallet-directory {
+  color: #fff;
+}
+.directory-back {
+  margin: 16px 0;
+  border: 1px solid #ffffff33;
+  border-radius: 8px;
+  background: #ffffff0f;
+}
 .directory-toolbar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 16px;
-  flex-wrap: wrap;
-  margin: 24px 0;
+  padding: 16px;
+  margin-bottom: 24px;
+  border: 1px solid #ffffff33;
+  border-radius: 12px;
+  background: linear-gradient(90deg, #ffffff0f, #ffffff05, #ffffff0f);
 }
 h2 {
   font-size: 20px;
-  line-height: 1.4;
-  margin: 0 0 6px;
+  line-height: 28px;
+  margin: 0 0 4px;
+  font-weight: 600;
 }
 .directory-toolbar p {
-  color: #ffffff99;
-  margin: 0;
+  color: #ffffffb8;
   font-size: 13px;
+  margin: 0;
 }
 .directory-filters {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-top: 16px;
+}
+.directory-filters > .q-input {
+  flex: 2 1 280px;
+  min-width: 0;
+}
+.directory-filters > :deep(.q-field) {
+  flex: 1 1 120px;
+  min-width: 0;
+}
+.directory-filters img {
+  flex: none;
+}
+.directory-filters .q-btn :deep(.q-btn__content),
+.card-actions .q-btn :deep(.q-btn__content) {
+  flex-direction: row-reverse;
+  gap: 8px;
+}
+.directory-view {
+  display: flex;
+  gap: 4px;
+  padding: 4px;
+  border: 1px solid #ffffff33;
+  border-radius: 8px;
+}
+.directory-view button {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) 180px;
-  gap: 16px;
-  margin-bottom: 24px;
+  place-items: center;
+  border: 0;
+  border-radius: 5px;
+  background: transparent;
+  width: 48px;
+  height: 32px;
+  cursor: pointer;
+}
+.directory-view button[aria-pressed='true'] {
+  background: #ffffff26;
+}
+.directory-count {
+  margin-top: 16px !important;
 }
 .directory-cards {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(min(100%, 340px), 1fr));
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 16px;
 }
 .directory-card {
   padding: 24px;
   border: 1px solid #ffffff33;
   border-radius: 14px;
-  background: #ffffff0f;
+  background: linear-gradient(90deg, #ffffff14, #ffffff08, #ffffff0f);
   backdrop-filter: blur(20px);
-  box-shadow: 4px 4px 12px #00000020;
   min-width: 0;
+  box-shadow: 4px 4px 6px #00000021;
 }
 .directory-card header {
   display: flex;
   gap: 12px;
-  align-items: center;
+  align-items: flex-start;
+}
+.directory-card header > div {
+  flex: 1;
+  min-width: 0;
+}
+.directory-card-icon {
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  border: 1px solid #ffffff33;
+  border-radius: 10px;
+  background: #ffffff0f;
+  flex: none;
 }
 h3 {
   font-size: 16px;
-  line-height: 1.5;
+  line-height: 24px;
   margin: 0;
+  font-weight: 600;
 }
 small,
-dt {
+dt,
+.directory-client-id {
   color: #ffffff99;
+}
+.directory-card header small {
+  display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 11px;
+}
+.directory-client {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  margin: 16px 0 6px;
+  overflow-wrap: anywhere;
+}
+.directory-client-id {
+  font-size: 12px;
+  margin: 0 0 16px;
+  overflow-wrap: anywhere;
+}
+.directory-badge {
+  display: inline-block;
+  border: 1px solid #ffffff80;
+  border-radius: 6px;
+  padding: 2px 8px;
+  font-size: 11px;
+  white-space: nowrap;
+}
+.directory-badge.positive {
+  color: #7bf1a8;
+  border-color: #00c950;
+  background: #00c9501a;
 }
 dl {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 12px;
-  border-block: 1px solid #ffffff20;
-  padding-block: 16px;
-  font-size: 14px;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 8px;
+  border-top: 1px solid #ffffff20;
+  padding-top: 16px;
+  font-size: 12px;
+  margin: 0;
 }
 dd {
   margin: 0;
-  text-align: right;
+  color: white;
+  font-size: 24px;
+  line-height: 32px;
+  font-weight: 700;
   overflow-wrap: anywhere;
+}
+.directory-links {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #ffffffb8;
+  font-size: 12px;
+  margin: 16px 0;
+}
+.directory-state {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  border-top: 1px solid #ffffff20;
+  padding-top: 12px;
+  margin-top: 16px;
+}
+.directory-state small {
+  font-size: 12px;
 }
 .card-actions {
   display: flex;
   gap: 8px;
+  margin-top: 16px;
   flex-wrap: wrap;
 }
-.card-actions :deep(.q-btn) {
+.card-actions .q-btn {
   flex: 1;
-}
-@media (max-width: 500px) {
-  .directory-filters {
-    grid-template-columns: 1fr;
-  }
-}
-.wallet-unavailable {
-  border: 1px solid #ffffff33;
   border-radius: 8px;
-  color: #dbdbdb;
+  background: #ffffff0f;
+  min-width: 130px;
+}
+button:focus-visible {
+  outline: 2px solid #2b7fff;
+  outline-offset: 3px;
 }
 .wallet-directory :deep(.q-table__container) {
+  color: #fff;
   background: #ffffff06;
   border: 1px solid #ffffff20;
   border-radius: 12px;
 }
 .wallet-directory :deep(th) {
   background: #ffffff08;
+}
+.wallet-unavailable {
+  border: 1px solid #ffffff33;
+  border-radius: 8px;
+  color: #fff;
+}
+@media (max-width: 1300px) {
+  .directory-cards {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+@media (max-width: 800px) {
+  .directory-cards {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+</style>
+<style scoped>
+.wallet-directory :deep(.q-select__dropdown-icon) {
+  width: 16px;
+  height: 16px;
+  font-size: 16px;
 }
 </style>
