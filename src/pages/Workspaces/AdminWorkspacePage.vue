@@ -166,29 +166,7 @@
             placeholder="Ordenar por"
             aria-label="Ordenar por"
           /><template v-if="module === 'credit'"
-            ><div
-              v-if="tab === 'main'"
-              class="workspace-view-toggle"
-              role="group"
-              aria-label="Visualização das operações"
-            >
-              <button
-                v-for="option in viewOptions"
-                :key="option.value"
-                :aria-label="option.label"
-                :aria-pressed="view === option.value"
-                @click="view = option.value"
-              >
-                <img
-                  :src="
-                    '/icons/workspace-review/credit-' +
-                    { list: 'list', cards: 'grid', kanban: 'kanban' }[option.value] +
-                    '.svg'
-                  "
-                  alt=""
-                />
-              </button>
-            </div>
+            ><credit-view-toggle v-if="tab === 'main'" v-model="view" />
             <q-btn
               outline
               no-caps
@@ -222,12 +200,12 @@
               }}<span>{{ creditGroupCount(group.value) }}</span>
             </button>
           </div>
-          <div v-if="view === 'kanban'" class="workspace-kanban">
-            <section v-for="stage in creditStages" :key="stage" class="workspace-record">
-              <h2>{{ stage }}</h2>
-              <p class="workspace-muted">Indisponível</p>
-            </section>
-          </div>
+          <credit-operation-directory
+            v-if="module === 'credit'"
+            :rows="pageRows"
+            :view="view"
+            @open="openRow($event, 'open')"
+          />
           <div
             v-else-if="view === 'cards'"
             class="workspace-cards"
@@ -238,11 +216,6 @@
           >
             <template v-for="row in pageRows" :key="row.id">
               <logic-card v-if="module === 'logic'" :record="row" @select="openRow(row, $event)" />
-              <credit-operation-card
-                v-else-if="module === 'credit'"
-                :record="row"
-                @open="openRow(row, 'open')"
-              />
               <article v-else class="workspace-record">
                 <div class="workspace-record-head">
                   <div>
@@ -387,7 +360,9 @@
 </template>
 <script setup>
 import CreditWizardSteps from 'src/components/Workspaces/CreditWizardSteps.vue'
-import CreditOperationCard from 'src/components/Workspaces/CreditOperationCard.vue'
+import CreditOperationDirectory from 'src/components/Workspaces/CreditOperationDirectory.vue'
+import CreditViewToggle from 'src/components/Workspaces/CreditViewToggle.vue'
+import { creditOperationGroup } from 'src/services/creditDirectoryModel'
 import LogicActiveRow from 'src/components/Workspaces/LogicActiveRow.vue'
 import LogicCard from 'src/components/Workspaces/LogicCard.vue'
 import PublicationStatus from 'src/components/Workspaces/PublicationStatus.vue'
@@ -465,13 +440,7 @@ const filtered = computed(() =>
     }).filter((r) => {
       if (props.module !== 'credit') return true
       if (kindFilter.value && r.kind !== kindFilter.value) return false
-      const closed = ['Settled', 'Closed'],
-        cancelled = ['Cancelled', 'Canceled', 'Rejected']
-      return creditGroup.value === 'closed'
-        ? closed.includes(r.status)
-        : creditGroup.value === 'cancelled'
-          ? cancelled.includes(r.status)
-          : ![...closed, ...cancelled].includes(r.status)
+      return creditOperationGroup(r.status) === creditGroup.value
     }),
     props.module === 'logic' ? logicSort.value : null,
   ),
@@ -504,11 +473,10 @@ const statusOptions = computed(() =>
         (value) => ({ label: workspaceStatus(value), value }),
       ),
 )
-const viewOptions = computed(() => [
+const viewOptions = [
   { label: 'Lista', value: 'list' },
   { label: 'Cards', value: 'cards' },
-  ...(props.module === 'credit' ? [{ label: 'Kanban', value: 'kanban' }] : []),
-])
+]
 const creditKindOptions = computed(() =>
   [...new Set((resource.state.data || []).map((r) => r.kind).filter(Boolean))].map((value) => ({
     label: workspaceStatus(value),
@@ -631,23 +599,8 @@ const creditGroups = [
 ]
 function creditGroupCount(group) {
   if (!resource.state.data) return '—'
-  return resource.state.data.filter((r) =>
-    group === 'closed'
-      ? ['Settled', 'Closed'].includes(r.status)
-      : group === 'cancelled'
-        ? ['Cancelled', 'Canceled', 'Rejected'].includes(r.status)
-        : !['Settled', 'Closed', 'Cancelled', 'Canceled', 'Rejected'].includes(r.status),
-  ).length
+  return resource.state.data.filter((r) => creditOperationGroup(r.status) === group).length
 }
-const creditStages = [
-  'Iniciada',
-  'Pendente',
-  'Pré-proposta',
-  'Documentação',
-  'Proposta Final',
-  'Assinatura',
-  'Contratada',
-]
 const recordActions = computed(() => [
   { name: 'open', label: 'Abrir', icon: 'visibility' },
   { name: 'edit', label: 'Editar', icon: 'edit' },
@@ -912,10 +865,10 @@ onScopeDispose(() => {
 .credit-type-modal .workspace-choice {
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
   gap: 8px;
   min-height: 42px;
-  padding: 10px;
+  padding: 12px 40px;
   font-size: 14px;
 }
 .credit-type-modal .workspace-actions {

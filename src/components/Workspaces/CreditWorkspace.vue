@@ -13,7 +13,7 @@
     ><q-card
       class="workspace-modal"
       :class="[
-        partner ? 'credit-partner-form' : '',
+        partner ? 'credit-partner-form' : 'credit-customer-modal',
         { 'workspace-modal--wide': recordId || (partner && step === 2) },
       ]"
       ><div class="workspace-modal-heading">
@@ -72,7 +72,7 @@
           ><button
             v-for="customer in customers.state.data || []"
             :key="customer.customerId"
-            class="workspace-choice"
+            class="workspace-choice credit-customer-choice"
             :aria-pressed="selectedClient?.customerId === customer.customerId"
             @click="selectedClient = customer"
           >
@@ -565,3 +565,37 @@ onScopeDispose(() => {
 </style>
 
 <style scoped src="./creditPartnerForm.scss"></style>
+
+<style scoped>
+.credit-customer-choice {
+  padding: 16px 40px;
+  min-height: 84px;
+  border-color: #ffffff33;
+  background: #ffffff0d;
+  border-radius: 10px;
+}
+.credit-customer-choice strong {
+  font:
+    600 14px/16px Inter,
+    sans-serif;
+}
+.credit-customer-choice small {
+  font:
+    500 12px/16px Inter,
+    sans-serif;
+}
+.credit-customer-choice[aria-pressed='true'] {
+  border-color: #ffffff80;
+  background: #ffffff1f;
+}
+.credit-customer-modal {
+  max-width: calc(100vw - 32px) !important;
+}
+.credit-customer-modal .workspace-actions > .q-btn {
+  flex: 1;
+}
+.credit-customer-choice:focus-visible {
+  outline: 2px solid #00a3ff;
+  outline-offset: 3px;
+}
+</style>

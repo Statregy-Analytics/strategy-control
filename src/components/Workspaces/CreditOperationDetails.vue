@@ -20,7 +20,7 @@
         </resource-state>
         <ol class="credit-detail__stages" aria-label="Etapas da operação">
           <li v-for="(stage, index) in stages" :key="stage">
-            <span>{{ stage }}</span
+            <credit-stage-badge :label="stage" :current="stage === record?.stage" />
             ><img v-if="index < stages.length - 1" src="/icons/credit/chevron-right.svg" alt="" />
           </li>
         </ol>
@@ -134,6 +134,8 @@
 </template>
 <script setup>
 import { computed } from 'vue'
+import CreditStageBadge from './CreditStageBadge.vue'
+import { creditStages as stages } from 'src/services/creditDirectoryModel'
 import { auditAction, auditDate, auditField } from 'src/services/auditModel'
 import FormSection from 'src/components/Entity/FormSection.vue'
 import ResourceState from 'src/components/Finance/ResourceState.vue'
@@ -159,15 +161,6 @@ const summary = computed(() => [
   { label: 'Criado em', value: dateLabel(record.value?.createdAtUtc) },
   { label: 'Atualizado', value: dateLabel(record.value?.updatedAtUtc) },
 ])
-const stages = [
-  'Iniciada',
-  'Pendente',
-  'Pré-proposta',
-  'Documentação',
-  'Proposta Final',
-  'Assinatura',
-  'Contratada',
-]
 const actions = [
   { label: 'Editar Operação', icon: 'pen' },
   { label: 'Solicitar Documento', icon: 'upload' },
@@ -278,7 +271,7 @@ const proposalColumns = columns(
   font-size: 12px;
   color: rgba(255, 255, 255, 0.72);
 }
-.credit-detail__stages span {
+.credit-detail__stages > li > span:not(.credit-stage) {
   padding: 6px 12px;
   border: 1px solid rgba(255, 255, 255, 0.2);
   border-radius: 100px;

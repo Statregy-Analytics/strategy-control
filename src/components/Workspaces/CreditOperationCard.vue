@@ -1,6 +1,10 @@
 <template>
   <article
     class="credit-operation-card"
+    :class="{
+      'credit-operation-card--compact': compact,
+      'credit-operation-card--property': property,
+    }"
     role="button"
     tabindex="0"
     :aria-label="'Abrir operação ' + record.publicCode"
@@ -9,14 +13,16 @@
     @keydown.space.prevent="$emit('open')"
   >
     <header>
-      <span class="credit-operation-card__icon"
-        ><img src="/icons/workspace-review/credit-file.svg" alt=""
+      <span v-if="!compact" class="credit-operation-card__icon"
+        ><img src="/icons/credit-directory/file.svg" alt=""
       /></span>
       <div>
         <h2>{{ record.client?.displayName || record.client?.name || '—' }}</h2>
         <small>{{ record.publicCode }}</small>
       </div>
-      <span class="credit-operation-card__badge">{{ record.stage || 'Etapa indisponível' }}</span>
+      <span v-if="!compact" class="credit-operation-card__badge">{{
+        record.stage || 'Etapa indisponível'
+      }}</span>
     </header>
     <dl>
       <div>
@@ -27,28 +33,43 @@
         <dt>Valor</dt>
         <dd>{{ money(record.principalAmount, record.currencyIsoCode) }}</dd>
       </div>
-      <div class="credit-operation-card__collateral">
+      <div v-if="!compact" class="credit-operation-card__collateral">
         <dt>Garantia</dt>
         <dd>{{ record.collateral || '—' }}</dd>
       </div>
     </dl>
     <div class="credit-operation-card__counts">
-      <span>Parceiros: —</span><span>Propostas: —</span><span>Pendências: —</span>
+      <span
+        >{{ counts.partners ?? '—' }} {{ counts.partners === 1 ? 'parceiro' : 'parceiros' }}</span
+      ><span :class="{ positive: counts.proposals > 0 }"
+        >{{ counts.proposals ?? '—' }} {{ counts.proposals === 1 ? 'proposta' : 'propostas' }}</span
+      ><span v-if="counts.pending !== 0" :class="{ pending: counts.pending !== null }"
+        >{{ counts.pending ?? '—' }} docs</span
+      >
     </div>
-    <footer>
-      <span><img src="/icons/workspace-review/credit-owner.svg" alt="" />—</span
+    <footer v-if="!compact">
+      <span
+        ><img src="/icons/credit-directory/owner.svg" alt="" />{{ record.ownerName || '—' }}</span
       ><span
-        ><img src="/icons/workspace-review/credit-time.svg" alt="" />{{
-          dateLabel(record.updatedAtUtc)
+        ><img src="/icons/credit-directory/updated.svg" alt="" />{{
+          creditUpdatedLabel(record.updatedAtUtc)
         }}</span
       >
     </footer>
   </article>
 </template>
 <script setup>
-import { money, dateLabel } from 'src/services/financeService'
+import { computed } from 'vue'
+import { creditCounts, creditUpdatedLabel } from 'src/services/creditDirectoryModel'
+import { money } from 'src/services/financeService'
 import { workspaceStatus } from 'src/services/adminWorkspaceModel'
-defineProps({ record: { type: Object, required: true } })
+const props = defineProps({ record: { type: Object, required: true }, compact: Boolean })
+const counts = computed(() => creditCounts(props.record))
+const property = computed(() =>
+  ['Crédito imóvel', 'Crédito com garantia de imóvel / Home Equity / CGI'].includes(
+    props.record.kind,
+  ),
+)
 defineEmits(['open'])
 </script>
 <style scoped>
@@ -149,5 +170,95 @@ footer span {
   display: flex;
   align-items: center;
   gap: 6px;
+}
+</style>
+
+<style scoped>
+.credit-operation-card__counts .positive {
+  color: #74ffa0;
+  border-color: #74ffa0;
+  background: #007a5533;
+}
+.credit-operation-card__counts .pending {
+  color: #ffd074;
+  border-color: #ffd074;
+  background: #a3680033;
+}
+.credit-operation-card__badge {
+  border-color: white;
+  background: #00000033;
+  border-radius: 8px;
+  font-size: 12px;
+}
+.credit-operation-card--compact {
+  padding: 16px;
+  border-radius: 10px;
+}
+.credit-operation-card--compact header {
+  display: block;
+}
+.credit-operation-card--compact h2 {
+  font-size: 14px;
+  font-weight: 700;
+}
+.credit-operation-card--compact dl {
+  display: flex;
+  flex-direction: column;
+  margin: 10px 0;
+  gap: 8px;
+}
+.credit-operation-card--compact dt {
+  display: none;
+}
+.credit-operation-card--compact dl > div:nth-child(2) dd {
+  font-weight: 700;
+}
+.credit-operation-card--compact .credit-operation-card__counts {
+  gap: 4px;
+}
+.credit-operation-card--compact .credit-operation-card__counts span {
+  font-size: 10px;
+  padding: 0 5px;
+}
+</style>
+
+<style scoped>
+.credit-operation-card:not(.credit-operation-card--compact) {
+  min-height: 258px;
+  display: flex;
+  flex-direction: column;
+}
+.credit-operation-card:not(.credit-operation-card--compact) footer {
+  margin-top: auto;
+  padding-top: 16px;
+}
+.credit-operation-card--property:not(.credit-operation-card--compact)
+  .credit-operation-card__collateral {
+  order: -1;
+}
+.credit-operation-card header small {
+  font:
+    400 12px/16px Consolas,
+    monospace;
+  color: #ffffffb8;
+}
+.credit-operation-card__counts span {
+  padding: 3px 8px;
+  border-radius: 8px;
+  letter-spacing: 0.25px;
+}
+.credit-operation-card__counts span:first-child {
+  font-size: 12px;
+  letter-spacing: 0;
+  border-color: white;
+}
+.credit-operation-card__counts .positive,
+.credit-operation-card__counts .pending {
+  text-transform: uppercase;
+}
+.credit-operation-card footer {
+  font-size: 12px;
+  line-height: 16px;
+  color: #ffffffb8;
 }
 </style>
