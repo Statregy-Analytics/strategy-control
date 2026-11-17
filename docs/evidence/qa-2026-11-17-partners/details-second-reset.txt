@@ -1,0 +1,113 @@
+- main:
+  - paragraph: Prévia local controlada · dados fictícios · sem API
+  - button "Alternar indisponibilidade"
+  - button "Esvaziar"
+  - generic: Parceiros Ativos
+  - strong: Indisponível
+  - generic: Produtos Cadastrados
+  - strong: Indisponível
+  - generic: Tabelas Vigentes
+  - strong: Indisponível
+  - generic: Tabelas Vencendo
+  - strong: Indisponível
+  - generic: Maior Comissão
+  - strong: Indisponível
+  - generic: Melhor Conversão
+  - strong: Indisponível
+  - textbox "Buscar parceiro, produto ou regra..."
+  - button "Criar Parceiro":
+    - generic: Criar Parceiro
+  - table:
+    - rowgroup:
+      - row "Parceiro Tipo Serviços Comissão Vigente Status Última Atualização":
+        - columnheader "Parceiro"
+        - columnheader "Tipo"
+        - columnheader "Serviços"
+        - columnheader "Comissão Vigente"
+        - columnheader "Status"
+        - columnheader "Última Atualização"
+        - columnheader
+    - rowgroup:
+      - row "Parceiro fictício QA P-QA01 Banco / Financeira — habilitado(s) 1 oferecido(s) Crédito com garantia de imóvel / Home Equity / CGI 4,0% Ativo 17/11/2026 Abrir parceiro Parceiro fictício QA":
+        - cell "Parceiro fictício QA P-QA01":
+          - button "Parceiro fictício QA P-QA01":
+            - strong: Parceiro fictício QA
+            - generic: P-QA01
+        - cell "Banco / Financeira":
+          - generic: Banco / Financeira
+        - cell "— habilitado(s) 1 oferecido(s) Crédito com garantia de imóvel / Home Equity / CGI":
+          - generic: — habilitado(s)
+          - generic: 1 oferecido(s)
+          - generic: Crédito com garantia de imóvel / Home Equity / CGI
+        - cell "4,0%":
+          - strong: 4,0%
+        - cell "Ativo":
+          - generic: Ativo
+        - cell "17/11/2026"
+        - cell "Abrir parceiro Parceiro fictício QA":
+          - button "Abrir parceiro Parceiro fictício QA"
+      - row "Segundo parceiro fictício QA P-QA02 Outro — habilitado(s) 0 oferecido(s) — — Inativo — Abrir parceiro Segundo parceiro fictício QA":
+        - cell "Segundo parceiro fictício QA P-QA02":
+          - button "Segundo parceiro fictício QA P-QA02":
+            - strong: Segundo parceiro fictício QA
+            - generic: P-QA02
+        - cell "Outro":
+          - generic: Outro
+        - cell "— habilitado(s) 0 oferecido(s) —":
+          - generic: — habilitado(s)
+          - generic: 0 oferecido(s)
+          - generic: —
+        - cell "—":
+          - strong: —
+        - cell "Inativo":
+          - generic: Inativo
+        - cell "—"
+        - cell "Abrir parceiro Segundo parceiro fictício QA":
+          - button "Abrir parceiro Segundo parceiro fictício QA"
+- dialog:
+  - banner:
+    - heading "Detalhes do Parceiro" [level=2]
+    - paragraph: Visualize e gerencie informações completas do parceiro
+    - status: Inativo
+    - button "Fechar detalhes do parceiro"
+  - heading "Segundo parceiro fictício QA" [level=3]
+  - paragraph: Outro
+  - text: Comissão
+  - text: Principal
+  - strong: Indisponível
+  - tablist "Informações do parceiro":
+    - tab "Dados Gerais" [selected]:
+      - generic: Dados Gerais
+    - tab "Serviços":
+      - generic: Serviços
+    - tab "Regras":
+      - generic: Regras
+    - tab "Comissão":
+      - generic: Comissão
+    - tab "Documentos":
+      - generic: Documentos
+    - tab "Procedimentos":
+      - generic: Procedimentos
+    - tab "Materiais":
+      - generic: Materiais
+    - tab "Histórico":
+      - generic: Histórico
+  - tabpanel "Dados Gerais":
+    - heading "Dados Gerais" [level=4]
+    - term: Tipo de Parceiro
+    - definition: Outro
+    - term: ID do Parceiro
+    - definition: P-QA02
+    - term: Status
+    - definition:
+      - status: Inativo
+    - term: Última Atualização
+    - definition: —
+    - heading "Contato" [level=4]
+    - paragraph: Não informado
+    - paragraph: Não informado
+  - contentinfo:
+    - button "Fechar":
+      - generic: Fechar
+    - button "Editar Parceiro":
+      - generic: Editar Parceiro

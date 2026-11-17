@@ -1,0 +1,165 @@
+- complementary:
+  - img "Strategy Analytics"
+  - list "Menu administrativo":
+    - link "Clientes":
+      - /url: /dataManagement
+      - generic: Clientes
+    - link "Contratos":
+      - /url: /contracts
+      - generic: Contratos
+    - link "Lógicas":
+      - /url: /logics
+      - generic: Lógicas
+    - link "Transações":
+      - /url: /transaction
+      - generic: Transações
+    - link "Crédito":
+      - /url: /credit
+      - generic: Crédito
+    - link "Comunicados":
+      - /url: /communications
+      - generic: Comunicados
+  - button "Expandir":
+    - generic: Configurações
+  - generic: person
+  - generic: Local Admin
+  - generic: admin@example.com
+  - link "Trocar Sistema":
+    - /url: /
+    - generic: Trocar Sistema
+  - button "Sair":
+    - generic: Sair
+  - button "Recolher menu"
+- main:
+  - heading "Crédito" [level=1]
+  - paragraph: Gestão de operações, parceiros, regras comerciais, comissões e propostas vinculadas a crédito e consórcio.
+  - main:
+    - generic: Operações Ativas
+    - strong: Indisponível
+    - generic: Pendentes
+    - strong: Indisponível
+    - generic: Em Documentação
+    - strong: Indisponível
+    - generic: Propostas Finais
+    - strong: Indisponível
+    - generic: Em Assinatura
+    - strong: Indisponível
+    - generic: Contratadas
+    - strong: Indisponível
+    - button "Operações":
+      - generic: Operações
+    - button "Parceiros" [pressed]:
+      - generic: Parceiros
+    - status:
+      - generic: Consulta indisponível.
+    - generic: Parceiros Ativos
+    - strong: Indisponível
+    - generic: Produtos Cadastrados
+    - strong: Indisponível
+    - generic: Tabelas Vigentes
+    - strong: Indisponível
+    - generic: Tabelas Vencendo
+    - strong: Indisponível
+    - generic: Maior Comissão
+    - strong: Indisponível
+    - generic: Melhor Conversão
+    - strong: Indisponível
+    - textbox "Buscar parceiro, produto ou regra..."
+    - button "Criar Parceiro":
+      - generic: Criar Parceiro
+    - table:
+      - rowgroup:
+        - row "Parceiro Tipo Serviços Comissão Vigente Status Última Atualização":
+          - columnheader "Parceiro"
+          - columnheader "Tipo"
+          - columnheader "Serviços"
+          - columnheader "Comissão Vigente"
+          - columnheader "Status"
+          - columnheader "Última Atualização"
+          - columnheader
+      - rowgroup
+    - generic: warning
+    - text: Consulta indisponível.
+- dialog:
+  - heading "Criar Novo Parceiro - Regras de Negócio" [level=2]
+  - button "Fechar"
+  - paragraph: Configure as regras de negócio para os produtos habilitados
+  - generic "Etapas do parceiro"
+  - generic: P
+  - strong: Parceiro fictício QA — não salvar
+  - generic: Banco / Financeira
+  - generic: 1 oferecido(s)
+  - generic: — habilitado(s)
+  - alert:
+    - text: Configure as regras de negócio apenas para os produtos habilitados para a Strategy Analytics.
+    - generic: Produtos oferecidos mas não habilitados não precisam de regras neste momento.
+  - heading "Crédito com garantia de imóvel / Home Equity / CGI" [level=3]
+  - heading "Regras Gerais do Produto" [level=4]
+  - generic: Valor mínimo da operação
+  - spinbutton "Valor mínimo da operação"
+  - generic: Valor máximo da operação
+  - spinbutton "Valor máximo da operação"
+  - generic: Comprometimento máximo da renda (%)
+  - spinbutton "Comprometimento máximo da renda (%)"
+  - generic: Prazo mínimo (meses)
+  - spinbutton "Prazo mínimo (meses)"
+  - generic: Prazo máximo (meses)
+  - spinbutton "Prazo máximo (meses)"
+  - generic: Taxa estimada (% a.m.)
+  - spinbutton "Taxa estimada (% a.m.)"
+  - generic: Taxa estimada (% a.a.)
+  - spinbutton "Taxa estimada (% a.a.)"
+  - generic: Sistema de amortização
+  - generic: Selecione
+  - combobox "Sistema de amortização" [disabled]: Selecione
+  - generic: Público aceito
+  - generic: Selecione
+  - combobox "Público aceito" [disabled]: Selecione
+  - heading "LTV por Tipo de Garantia" [level=4]
+  - button "Adicionar tipo":
+    - generic: Adicionar tipo
+  - table:
+    - rowgroup:
+      - row "Tipo de Garantia Aceito? LTV Máximo (%) Valor Min. Imóvel Valor Max. Imóvel Observação":
+        - columnheader "Tipo de Garantia"
+        - columnheader "Aceito?"
+        - columnheader "LTV Máximo (%)"
+        - columnheader "Valor Min. Imóvel"
+        - columnheader "Valor Max. Imóvel"
+        - columnheader "Observação"
+        - columnheader
+    - rowgroup
+  - generic: warning
+  - text: Sem dados disponíveis
+  - heading "Carência / Início de Pagamento" [level=4]
+  - generic: Possui carência?
+  - generic: Selecione
+  - combobox "Possui carência?": Selecione
+  - generic: Prazo de carência padrão
+  - spinbutton "Prazo de carência padrão"
+  - generic: Unidade
+  - generic: Selecione
+  - combobox "Unidade" [disabled]: Selecione
+  - generic: Prazo mínimo de carência
+  - spinbutton "Prazo mínimo de carência"
+  - generic: Prazo máximo de carência
+  - spinbutton "Prazo máximo de carência"
+  - generic: Regra da primeira parcela
+  - textbox "Regra da primeira parcela"
+  - generic: Observação sobre carência
+  - textbox "Observação sobre carência"
+  - heading "Regiões e Imóveis" [level=4]
+  - generic: Região de atuação
+  - textbox "Região de atuação"
+  - generic: Cidades/estados aceitos
+  - textbox "Cidades/estados aceitos"
+  - generic: Imóveis não aceitos
+  - textbox "Imóveis não aceitos"
+  - generic: Exceções operacionais
+  - textbox "Exceções operacionais"
+  - generic: Observações internas
+  - textbox "Observações internas"
+  - button "Voltar":
+    - generic: Voltar
+  - button "Criar Parceiro":
+    - generic: Criar Parceiro

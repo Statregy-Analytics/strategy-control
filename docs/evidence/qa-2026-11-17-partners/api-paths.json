@@ -1,0 +1,17 @@
+{
+  "source": "https://strategyanalytics.codebiz.com.br/openapi/v1.json",
+  "partnerPaths": [],
+  "loanPaths": [
+    "/api/v1/admin/loans",
+    "/api/v1/admin/loans/{loanId}",
+    "/api/v1/admin/loans/{loanId}/status",
+    "/api/v1/admin/loans/{loanId}/documents",
+    "/api/v1/admin/loans/{loanId}/documents/{documentId}",
+    "/api/v1/admin/loans/{loanId}/history",
+    "/api/v1/client/loans",
+    "/api/v1/client/loans/{loanId}",
+    "/api/v1/client/loans/{loanId}/documents",
+    "/api/v1/client/loans/{loanId}/documents/{documentId}/temporary-url",
+    "/api/v1/client/loans/{loanId}/history"
+  ]
+}

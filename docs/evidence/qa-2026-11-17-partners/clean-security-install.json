@@ -1,0 +1,7 @@
+{
+  "directory": "/tmp/strategy-control-security-t2fyyq_d",
+  "npmCi": "success; ignore-scripts in isolated install",
+  "sourcePatch": "verified hashes",
+  "audit": "passed",
+  "localDevServers": "not restarted"
+}

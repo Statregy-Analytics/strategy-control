@@ -1,0 +1,174 @@
+{
+  "date": "2026-11-17",
+  "baseline": {
+    "done": 197,
+    "validation": 75,
+    "adjustment": 7
+  },
+  "closedFrames": [
+    "1484:95173",
+    "1484:95475",
+    "1484:95847",
+    "1484:95957",
+    "1484:95962",
+    "1484:95964",
+    "1484:95970",
+    "1484:95972",
+    "1484:95974",
+    "1484:95984"
+  ],
+  "closedValidationCount": 10,
+  "stillValidation": 65,
+  "references": [
+    "1484:94677",
+    "1484:95173",
+    "1484:95475",
+    "1484:95847",
+    "1484:95957"
+  ],
+  "browser": {
+    "environment": "localhost:8080; actual components; isolated harness uses fictitious data and has no API",
+    "checked": [
+      "continue disabled without name/type/product",
+      "back preserves basic data and rule drafts",
+      "partner edit preserves name/type/products without mutating original row",
+      "numeric intervals, percentages and optional refused collateral LTV",
+      "Sim / Sob análise / Não and row edit toggle",
+      "local file rejection and valid fictitious PNG selection",
+      "all eight tabs; keyboard and partner switch resets tab/content",
+      "unknown/empty/unavailable values do not use example data",
+      "narrow screens without document overflow; wide modal 895px",
+      "only Home Equity uses the property rules drawn in CR09"
+    ],
+    "integrationLimits": [
+      "no partner routes found in current OpenAPI",
+      "no partner write or logo upload persisted",
+      "amortization, accepted audience, grace unit and actual enabled products await API/catalogue",
+      "six detail tabs besides General/Services indicate unavailable; no content invented",
+      "other product rules need design; home-equity fields not extrapolated to insurance/consortium"
+    ],
+    "harnessPublished": false,
+    "hml": [
+      "empty wizard disabled continue",
+      "fictional basic data enables continue",
+      "rules modal width895",
+      "all static form assets loaded; chevrons16px",
+      "mobile stable client390 scroll375 single-column",
+      "save blocked explicitly; dialog preserved; then closed without persistence"
+    ]
+  },
+  "security": {
+    "advisory": "https://github.com/advisories/GHSA-fc5q-39xc-vjpf",
+    "version": "4.0.7",
+    "officialPatchedRelease": "none at verification",
+    "mitigation": "same verified hash/guard and audit gate as the portal; no disabled audit",
+    "cleanInstall": "passed in isolated temp install; source hashes and subprocess security regression passed"
+  },
+  "checks": {
+    "testsPassed": 412,
+    "lint": "passed",
+    "build": "passed",
+    "audit": "passed with exact source mitigation"
+  },
+  "publication": {
+    "run": "https://github.com/Statregy-Analytics/strategy-control/actions/runs/44180206805",
+    "conclusion": "success",
+    "commit": "f92940dfc220dd157cd39a9e5145819a59a7c9fa",
+    "assets": [
+      {
+        "path": "/icons/partners/directory-open.svg",
+        "status": 200,
+        "matchesLocal": true,
+        "sha256": "374e717863ea3bd9703227000fd7469493d44fc85f85c1978dab72caddb250f3"
+      },
+      {
+        "path": "/icons/partners/type-briefcase.svg",
+        "status": 200,
+        "matchesLocal": true,
+        "sha256": "2f81ac84eae9140319b061322d8a21e20edd58adf69cf1a8030cac02bfd22e6f"
+      },
+      {
+        "path": "/icons/partners/form-close-b.svg",
+        "status": 200,
+        "matchesLocal": true,
+        "sha256": "8378d5ff811bed5819bb1975240eb64fc63f6653f38f9b5ea6acb591d9387802"
+      },
+      {
+        "path": "/icons/partners/type-bank.svg",
+        "status": 200,
+        "matchesLocal": true,
+        "sha256": "75d10c83bd7194ce5a287db680a0a85667128d20e29d9533343ae90134cf3748"
+      },
+      {
+        "path": "/icons/partners/rules-plus.svg",
+        "status": 200,
+        "matchesLocal": true,
+        "sha256": "2a5b3c6f81498e67ec4d7fb51e78e78d3a66362716c6c437170d1deabe1c54ac"
+      },
+      {
+        "path": "/icons/partners/form-upload.svg",
+        "status": 200,
+        "matchesLocal": true,
+        "sha256": "ae4995fa52dc47452bdd69df9b1b186750fa8e871b76de65ff5cfa8e49272521"
+      },
+      {
+        "path": "/icons/partners/type-money.svg",
+        "status": 200,
+        "matchesLocal": true,
+        "sha256": "2eee5572d5bb2d09598e476439c65df42ac76c7c2fd62aadd0c6507924ded580"
+      },
+      {
+        "path": "/icons/partners/type-users.svg",
+        "status": 200,
+        "matchesLocal": true,
+        "sha256": "978de52efba111262f1d7a10434e7863a61665ba10f58e32505221d8ea8874b0"
+      },
+      {
+        "path": "/icons/partners/type-other.svg",
+        "status": 200,
+        "matchesLocal": true,
+        "sha256": "d02d7871ca7acea9e2a9d8e7939043e78ad3954ac8e96f5e3d926bc0933fe067"
+      },
+      {
+        "path": "/icons/partners/form-close-a.svg",
+        "status": 200,
+        "matchesLocal": true,
+        "sha256": "c77d23c5ff0820aba024dd9a71cd1f1c379aa7966748b17958bd6301337bb985"
+      },
+      {
+        "path": "/icons/partners/rules-edit.svg",
+        "status": 200,
+        "matchesLocal": true,
+        "sha256": "c88e593e81f9232afd71c72f9e61f955ebda428e740ebafb04d93d35660ea27c"
+      },
+      {
+        "path": "/icons/partners/rules-house.svg",
+        "status": 200,
+        "matchesLocal": true,
+        "sha256": "26395891f425e9090a3abe5f4070f9b12c0f5f6b3ff90b5e0df7a87701e73783"
+      },
+      {
+        "path": "/icons/partners/rules-chevron.svg",
+        "status": 200,
+        "matchesLocal": true,
+        "sha256": "0e725ddc2cfe29062d1a0b9dfbfb81d87933a6932516a1fbce94cc9137361344"
+      },
+      {
+        "path": "/icons/partners/directory-bank.svg",
+        "status": 200,
+        "matchesLocal": true,
+        "sha256": "6892d5b4a5095d0204721537578cf714ce8d32b089376c4c5d7d401a63150920"
+      },
+      {
+        "path": "/icons/partners/type-house.svg",
+        "status": 200,
+        "matchesLocal": true,
+        "sha256": "2b21665e6441e9f870f2db599f27e6577b533a8ef494046fdd0db6ccd398b9ac"
+      }
+    ],
+    "browser": "Published wizard empty/mandatory/next/wide layout and mobile checked; save unavailable without simulated success. No record persisted. Populated directory/details exercised only with local fixtures; OpenAPI has no partner routes."
+  },
+  "newSurfacesWithoutReference": 0,
+  "notClosed": "CR07 complete base frame remains validation; directory work here is partial, not approval of the entire credit workspace",
+  "commit": "f92940dfc220dd157cd39a9e5145819a59a7c9fa"
+}

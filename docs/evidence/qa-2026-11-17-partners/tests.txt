@@ -1,0 +1,557 @@
+
+> strategy-admin@0.0.1 test
+> node --experimental-vm-modules --test tests/*.test.mjs
+
+✔ future currency defaults cover every approved residence group with the general secondary rule (2.903654ms)
+✔ automatic timezone follows the client device on every evaluation, never the legacy stored zone (30.961273ms)
+✔ explicit timezone including UTC wins over the current device and invalid selection is not disguised as automatic (2.327586ms)
+✔ missing or invalid device timezone has an explicit technical UTC fallback without generating a write (1.073946ms)
+✔ editing other preferences cannot persist an admin device timezone (1.814857ms)
+✔ localized country labels preserve API identifiers and never mutate the source catalog (8.593633ms)
+✔ country order follows the displayed locale and search keeps that order without accents or case (2.843904ms)
+✔ runtime locale failure uses English and incomplete rows never manufacture HTTP country IDs (1.570826ms)
+(node:943007) ExperimentalWarning: VM Modules is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ both landing page routes require authentication and administrator access (51.93074ms)
+✔ a customer token cannot open LP editing (15.931839ms)
+✔ administrator role comes from auth/me and allows editing (10.549269ms)
+✔ unverifiable or missing roles do not grant access (22.308406ms)
+✔ audit filter changes reuse only a verified admin session on the same page (10.834086ms)
+✔ audit verification cannot survive a changed token, missing token or an unverified role (6.766945ms)
+✔ date-only customer values keep the same calendar day in Sao Paulo (30.789625ms)
+✔ enabled menu items resolve to existing routes; unintegrated modules have no destination (4.198636ms)
+✔ customer detail belongs to Clientes; auxiliary pages do not (0.649566ms)
+✔ active menu matches full path segments, not unrelated prefixes (0.885553ms)
+✔ server availability does not enable prototype LP or arbitrary destinations (0.751531ms)
+✔ root selection requires authentication and does not redirect straight into a module (0.467018ms)
+✔ legacy dashboard opens the integrated client list and retains authentication (12.05653ms)
+✔ legacy LP entry renders the existing selection without weakening editor access (1.169871ms)
+✔ client discovery permissions never enable the administrative card; known staff roles still require server availability (0.95403ms)
+✔ timeline distinguishes archive from review even when both use DocumentReviewed (2.826592ms)
+✔ timeline preserves custom text and original audit data (1.247319ms)
+✔ missing titles use Portuguese labels without exposing unknown event codes (0.274218ms)
+✔ bank country labels use the real catalog and do not fall back to UUIDs (0.544694ms)
+✔ country selector excludes inactive countries and preserves IDs as values (1.978215ms)
+✔ country catalog follows pagination and deduplicates IDs (0.492447ms)
+✔ country catalog never reports a failed partial collection as complete (0.938592ms)
+✔ empty country catalog and inconsistent pagination are distinct (1.218983ms)
+✔ client display normalizes mixed case and accents without rewriting the source (4.07151ms)
+✔ bank branding uses the catalogue code and leaves unknown banks to initials (3.1118ms)
+✔ statement types use distinct presentations without treating every contract operation as a lock (1.884814ms)
+✔ workspace collection loads every page and deduplicates records (3.517972ms)
+✔ catalog selectability is not converted into operational status (0.937308ms)
+✔ partial or stale queries never return a successful partial list (1.194888ms)
+✔ malformed and unsuccessful collection envelopes are rejected (0.99824ms)
+✔ workspace filters search accents and preserve original collection order (1.249468ms)
+✔ editing text preserves category and targeted audience, never maps editorial groups (1.186306ms)
+✔ contract selection includes drafts, deduplicates and rejects partial failures (1.663576ms)
+✔ contract filters combine client, engine and localized date overlap (0.905884ms)
+✔ logic rejects incomplete, invalid probability and empty target (2.920269ms)
+(node:943032) ExperimentalWarning: VM Modules is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ a customer without a wallet uses the catalog BRL ID when creating an asset (18.691198ms)
+✔ missing catalog currency ID does not write with a code or invented ID (7.415025ms)
+✔ changing customer during currency resolution stops asset creation (20.607761ms)
+(node:943039) ExperimentalWarning: VM Modules is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ closing the editor invalidates an outstanding detail response (13.972647ms)
+✔ an older detail response cannot replace a newer asset draft (7.716202ms)
+✔ late success after customer switch cannot affect the new editor or start photo upload (9.510926ms)
+✔ late failure after customer switch cannot affect the new editor or start photo upload (12.17736ms)
+✔ customer switch during photo persistence prevents subsequent document reload and completion effects (6.955102ms)
+✔ leaving the screen during save prevents late upload, notification and refresh (4.605541ms)
+(node:943045) ExperimentalWarning: VM Modules is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ gallery resumes vehicle slot from document metadata and refreshes temporary URL when opening (8.411948ms)
+✔ photo catalog outage stays in its section and does not block saving unrelated asset fields (3.565961ms)
+✔ late document response cannot repopulate a disposed gallery (9.181423ms)
+(node:943052) ExperimentalWarning: VM Modules is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ new asset photo failure retries against created asset without a duplicate create (9.328138ms)
+✔ photo catalog and vehicle positions use stable metadata, not filenames or list order (2.412415ms)
+✔ rejects empty, non-image and oversized files before upload (2.173548ms)
+✔ partial link failure retains uploaded ID; retry links once without reuploading successful items (52.346274ms)
+✔ closing/changing customer during upload prevents a late link write (1.115411ms)
+✔ audit queries retain approved filters and resource scope without accepting arbitrary actor or customer IDs (5.388739ms)
+✔ record navigation opens supported histories and keeps other records in Audit (0.869399ms)
+✔ audit values protect passwords and nested sensitive data without inventing currency or zero values (20.630033ms)
+✔ impossible calendar days and incomplete resource scopes do not reach the API (0.678629ms)
+✔ audit date values stay in UTC and malformed currency metadata cannot break a row (9.230925ms)
+✔ module discovery reads every page and deletion pagination combines archive and delete (1.643409ms)
+✔ expired owner rejects a late response before exposing audit data (2.104709ms)
+✔ CSV export preserves quoted multiline text, masks values and uses the same deletion scope without pagination (2.823195ms)
+✔ record history reads every page with a fixed record scope and retains more than five rows (4.083706ms)
+✔ record history rejects a partial result and a retry starts at page one (3.073232ms)
+✔ expired record history stops before requesting the next page (2.964324ms)
+✔ record history never falls back to a global audit query for an invalid scope (5.022666ms)
+(node:943097) ExperimentalWarning: VM Modules is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ Admin startup handles network failure without confusing availability and authentication (8.606473ms)
+✔ Admin access guard handles network failure without granting access or expiring a transient session (5.180632ms)
+✔ Admin refresh network failure only clears genuinely rejected credentials (5.924959ms)
+✔ Admin startup handles 429 without confusing availability and authentication (18.095679ms)
+✔ Admin access guard handles 429 without granting access or expiring a transient session (2.024734ms)
+✔ Admin refresh 429 only clears genuinely rejected credentials (2.018192ms)
+✔ Admin startup handles 500 without confusing availability and authentication (1.341071ms)
+✔ Admin access guard handles 500 without granting access or expiring a transient session (2.674571ms)
+✔ Admin refresh 500 only clears genuinely rejected credentials (1.958797ms)
+✔ Admin startup handles 503 without confusing availability and authentication (1.747066ms)
+✔ Admin access guard handles 503 without granting access or expiring a transient session (2.11572ms)
+✔ Admin refresh 503 only clears genuinely rejected credentials (2.176787ms)
+✔ Admin startup handles 401 without confusing availability and authentication (1.787705ms)
+✔ Admin access guard handles 401 without granting access or expiring a transient session (2.488595ms)
+✔ Admin refresh 401 only clears genuinely rejected credentials (1.905389ms)
+✔ Admin startup handles 403 without confusing availability and authentication (1.604865ms)
+✔ Admin access guard handles 403 without granting access or expiring a transient session (2.046225ms)
+✔ Admin refresh 403 only clears genuinely rejected credentials (2.247551ms)
+✔ concurrent expired session queries share a keyed refresh and retry with renewed credentials (4.383885ms)
+✔ refresh availability failure preserves credentials and a later attempt has a new idempotency key (11.238583ms)
+✔ reads all 513 banks and resolves banks beyond the first page (4.137765ms)
+✔ empty catalog is accepted only when totals are consistent (0.749925ms)
+✔ a later network failure never publishes a partial catalog and retry starts over (0.811393ms)
+✔ rejects duplicates, missing pages, changing totals and unsuccessful envelopes (4.955775ms)
+(node:943110) ExperimentalWarning: VM Modules is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ search finds a bank on the third API page by code and unaccented name (83.082324ms)
+✔ search resets the current page and footer counts reflect filtered results (12.790723ms)
+✔ failure of a later catalog page never exposes a partial search and retry recovers (31.278186ms)
+✔ active filter applies to the complete catalog and preserves pagination totals (22.001904ms)
+(node:943118) ExperimentalWarning: VM Modules is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ bank creation does not write after disposal during validation (15.253445ms)
+✔ old bank creation failure does not notify a reopened form (26.538199ms)
+(node:943125) ExperimentalWarning: VM Modules is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ late account listing cannot replace another customer accounts (31.080103ms)
+✔ late edit detail cannot overwrite a newly opened bank form (13.350757ms)
+✔ leaving during bank form validation prevents a subsequent write (6.434232ms)
+✔ accepted old bank save cannot close the new customer form (8.922404ms)
+✔ late archive cannot dismiss another account confirmation (7.010613ms)
+✔ canceling bank form and reopening on the same customer ignores an old accepted save (6.939642ms)
+✔ financed asset preserves debt and only its own detail block (4.178641ms)
+✔ settling an asset omits forbidden remainingBalance and preserves hidden metadata (0.373515ms)
+✔ editing an asset under review does not silently approve it (0.316158ms)
+✔ investment never becomes financed and clears dormant maturity fields (0.281909ms)
+✔ invalid financial values and contradictory installments fail before HTTP (0.553686ms)
+✔ consortium derives settlement from the designed debt field (0.19946ms)
+✔ integer-only asset fields reject fractional and out-of-range input before HTTP (0.994309ms)
+✔ optional whole counts preserve null and zero; supported int32 boundary is accepted (0.202173ms)
+✔ asset currency remains available before wallet loading and after preference changes (0.42269ms)
+✔ legacy currency lookup only matches an explicit asset ID and never assumes BRL (0.298497ms)
+(node:943140) ExperimentalWarning: VM Modules is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ bank section resolves row and selected bank labels from subsequent catalog pages (10.079897ms)
+✔ catalog failure shows existing section error and retry restores the complete catalog (4.371593ms)
+✔ bank suggestions require text, search code/name and retain selected labels (7.800743ms)
+(node:943155) ExperimentalWarning: VM Modules is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ email queries use unified search in cards and table and restart pagination (16.744074ms)
+✔ rapid searches publish only the newest rows and pagination (3.437612ms)
+✔ switching from cards to table cannot be overwritten by a pending cards response (4.479688ms)
+✔ an old failure cannot remove a newer success or its available controls (2.946337ms)
+✔ a failed query clears old rows and recovers through the existing retry (15.571121ms)
+✔ leaving the list invalidates late responses without overwriting another view (282.906748ms)
+✔ zero results are a successful empty response rather than a network failure (1.446497ms)
+✔ a newer query started between resource resolution and publication invalidates the earlier result (1.370981ms)
+✔ Todos clears the server status filter, restarts pagination, and preserves other filters (1.668751ms)
+(node:943163) ExperimentalWarning: VM Modules is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ all six currency pairs send codes even when the catalog contains UUIDs (15.076234ms)
+✔ controlled profile editing emits the currency code without changing another field (5.562164ms)
+✔ fiscal documents returned under ACCOUNTING_FISCAL remain in the designed second group (5.796914ms)
+✔ files without individual requirements contribute to overview counters (0.568332ms)
+✔ contract values use the selected participant and never the whole contract capital (0.575871ms)
+✔ closed contracts and zero allocations are preserved as returned (0.441036ms)
+✔ onboarding personal documents without requirements remain individually reviewable in the first Figma group (2.935771ms)
+✔ asset photo uploads do not inflate counters of the four displayed document groups (1.219026ms)
+✔ participant base amount uses the API value including zero without borrowing whole-contract balances (0.493619ms)
+✔ catalog completes missing types without duplicating uploads or overriding allowed actions (1.299923ms)
+✔ linked asset files retain their own review state and never show another file (2.263824ms)
+✔ uploaded linked asset remains reviewable only with explicit overview permission (1.404535ms)
+✔ document counters exclude unlinked asset uploads and stay unknown while links are loading (1.130035ms)
+✔ uses complete counters, not the five recent alerts (1.944032ms)
+✔ uses card summary when alerts are unavailable (0.666598ms)
+✔ distinguishes zero from unavailable and accepts numeric strings (0.40759ms)
+✔ debt validation allows accrued balance greater than initial principal (2.95443ms)
+✔ debt validates real calendar dates, amounts and installment bounds (1.096546ms)
+✔ debt requires approved catalogs instead of guessing kind or amortization (0.692102ms)
+(node:943207) ExperimentalWarning: VM Modules is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ 136: blank, zero, under, over and exact cents are distinct; 0.10 + 0.20 closes 0.30 (10.726555ms)
+✔ 136: localized input, limits and percentage conversion retain cent precision without hidden distribution (0.593196ms)
+✔ 136: largest remainder closes 100.00%, breaks ties by row order and preserves partial/over totals (96.510076ms)
+✔ 136: multiple selection, back, cancel, confirm and reopening isolate parent state (17.84963ms)
+✔ 136: continue requires positive capital and selection; a cleared allocation stays null (1.159933ms)
+✔ 136: async search retries, ignores stale results and retains selected clients across searches (3.69636ms)
+✔ 136: actual templates render selection, missing capital, blank, under, over and closed states (60.439805ms)
+✔ 136: card renders assigned values and escaped customer names, without extra removal actions (10.331961ms)
+✔ 136: customer selection reads every real cards page and keeps only masked documents (8.222525ms)
+✔ 136: assigned currency selector uses catalog IDs without requiring a client wallet and isolates failures (41.809421ms)
+(node:943219) ExperimentalWarning: VM Modules is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ 141: missing API is an error, never a successful empty list or fake attendance (143.133149ms)
+✔ 141: real list template filters all status groups and keeps counters separate from visible rows (37.833555ms)
+✔ 141: empty result only follows a successful read, stale result after close emits no counter (6.233838ms)
+✔ 141: failure to mark contact preserves note and does not pretend a successful state transition (153.761346ms)
+✔ 141: attended/canceled records cannot reopen attendance or create a contract (6.208301ms)
+✔ 141: details render approved answers and available wallets without inventing other currency balances (10.193731ms)
+✔ 139: contract semantics use actual endpoints and do not label every yield as a contract dividend (0.796378ms)
+✔ 139: quote template uses stored rate/date, never the current PTAX endpoint or inferred balances (21.593478ms)
+✔ 139: completed detail renders only available contract/quote actions and actual audit values (126.897148ms)
+✔ only completed inflows of the selected contract/client enter contributions (2.026839ms)
+✔ movement totals preserve zero and never sum different currencies or missing values (0.368068ms)
+✔ contract terms clamp month ends and leap years without subtracting a day (1.69201ms)
+(node:943239) ExperimentalWarning: VM Modules is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ 137: seven currency options use available funds, keep wallets separate and never include contracted capital (355.294962ms)
+✔ 137: different currencies convert line by line with full PTAX precision and correct final rounding (3.33192ms)
+✔ 137: same currency can use both wallets but cannot repeat a wallet/currency pair (4.689357ms)
+✔ 137: unknown, wrong-direction or undocumented FX cannot become a valid contribution (21.13219ms)
+✔ 137: local confirmation copies source wallets/quotes without any write; Back restores unsent edits (308.118823ms)
+✔ 137: zero/used options are disabled and wallet retry revalidates amounts against changed funds (2.839128ms)
+✔ 137: failed FX retries independently; removing an unused pending quote does not block remaining rows (5.600115ms)
+✔ 137: stale wallet and FX responses cannot switch clients or overwrite a newer quote (2.257859ms)
+✔ 137: real templates show mixed wallet conversion and preserve the approved fields/actions (31.007209ms)
+✔ 137: insufficient wallet hides conversion and disables confirm in the rendered modal (8.274397ms)
+✔ 137: picker renders two tabs and exactly seven currencies with zero/used pairs disabled (28.66438ms)
+✔ 138: entry keeps prior value, dilutes shares and closes both columns to100 by largest remainder (2.683456ms)
+✔ 138: missing position is never replaced with initial capital, nor missing share inferred from old allocations (0.474216ms)
+✔ 138: index only comes from connected primary motor, never indexAtConnection or another motor (17.748836ms)
+✔ 138: same-currency template grows with impact, audit and original fields, no simulation action (17.068056ms)
+✔ 138: three source lines show conversion and renumber impact/audit without changing origin amounts (19.18948ms)
+✔ 138: insufficient source hides conversion, impact and audit and prevents submission (10.76593ms)
+✔ 138: unavailable current capital/index blocks even keyboard submission; failed confirmation preserves lines (36.61818ms)
+✔ 138: adding a participant is offered only for a finalized active contract (0.537116ms)
+(node:943243) ExperimentalWarning: VM Modules is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ new CT04 draft keeps nullable fields and existing draft endpoint; creation uses explicit finalization (59.315962ms)
+✔ CT04 incomplete or invalid finalization never writes; valid creation saves before finalization (19.956643ms)
+✔ failed finalization retries the saved draft instead of creating a duplicate or patching a finalized record (11.318317ms)
+✔ CT07 edits preserve immutable capital/currency and use the separate status endpoint (10.08464ms)
+✔ late asset loading does not overwrite unsaved contract edits; section errors remain isolated (10.987385ms)
+✔ duplicate save is ignored and disposal prevents late navigation or success (25.750475ms)
+✔ final contract term changes never send both term and endDate (15.812675ms)
+✔ CT07 uses contract-scoped audit and completed contract operations, not an unsupported transaction enum (9.842903ms)
+✔ 136: invalid assigned distribution blocks all writes, including after capital changes (11.713671ms)
+✔ 136: closed decimal allocation uses only existing draft fields before finalizing (11.962987ms)
+✔ 137: wallet origin never writes totals without the source-wallet contract (9.107565ms)
+✔ request-origin draft cannot persist or finalize without API linkage (10.09997ms)
+✔ partner continuation requires a real name, supported type and selected product; source is not mutated (1.008793ms)
+✔ partner rules reject nonfinite, negative, reversed and impossible percentages but allow zero (0.535526ms)
+✔ refused collateral does not require fictitious LTV; approved ones accept numeric or design Variable (0.324794ms)
+✔ optional logo accepts only actual supported nonempty files within two megabytes (0.208985ms)
+✔ new customer shows four zero metrics only after independent successful reads (1.365232ms)
+✔ existing assets, money and inconsistent currency rows are preserved (2.563612ms)
+✔ no wallets confirms no ledger entries without a fabricated request (1.149433ms)
+✔ zero wallet balance never substitutes for consulting its historical ledger (0.321528ms)
+✔ reads every wallet and page, preserving currencies and per-wallet balance (0.388062ms)
+✔ failed, missing, partial and duplicated ledger reads never become an empty statement (0.543717ms)
+✔ leaving or changing customer stops remaining statement queries (0.347705ms)
+✔ presentation binds Figma status names without changing API values (1.01758ms)
+✔ document masking preserves the server suffix without reconstructing hidden characters (105.101661ms)
+✔ filters search every server page, combine criteria, and paginate matching rows (2.274543ms)
+✔ a failed subsequent page never publishes a partial filtered result (0.941737ms)
+✔ superseded queries stop requesting subsequent pages (0.355116ms)
+✔ compliance presentation distinguishes alert from pending and keeps missing values unknown (0.436533ms)
+✔ alert filter searches every page and preserves original server status values (0.466432ms)
+✔ unified search sends names, emails, customer IDs and document numbers without intersecting a name filter (1.704128ms)
+✔ independent contact filter and empty search retain their existing semantics (0.553599ms)
+(node:943279) ExperimentalWarning: VM Modules is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ session rows use real dates, masked IP and equipment without inventing location or model (19.062079ms)
+✔ empty session collection and API failure are distinct, and retry recovers (9.600338ms)
+✔ late session list of another customer cannot repopulate the panel (18.388158ms)
+✔ revoking a session uses the customer route once and confirms the refreshed list (9.498644ms)
+✔ failed logout preserves rows and permits retry without announcing success (9.472947ms)
+✔ closing a panel during logout suppresses late effects and additional reads (4.757263ms)
+✔ old logout completion cannot clear another customer session rows or notify it (9.877182ms)
+✔ unknown session ID never generates a logout request (4.939503ms)
+✔ actual service addresses the customer sessions, handles 204 and rejects malformed lists (5.451463ms)
+✔ schema defaults cover omitted UI fields and attachments never enter data (3.454986ms)
+✔ drafts may be incomplete but invalid supplied values fail (236.688339ms)
+✔ real-estate conditional debt is required only when unpaid and removed when paid (102.587539ms)
+✔ published metadata narrows coarse role permissions (0.528504ms)
+✔ a property literally named required is preserved when relaxing draft validation (116.533792ms)
+✔ review requires an actual document, pending status and explicit API permission (2.434911ms)
+✔ approval adds no fields; rejection requires the designed reason and preserves both texts (2.384129ms)
+✔ empty reason does not write; error remains next to reason (2.613837ms)
+✔ busy and successful review cannot be double submitted (0.80677ms)
+✔ server failure permits retry and never reports approval (1.239798ms)
+✔ response for another document cannot announce success (1.124414ms)
+✔ late response after changing customer or closing cannot update the profile (1.08675ms)
+(node:943303) ExperimentalWarning: VM Modules is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ document type filtering ignores an older response (12.350108ms)
+✔ closing and reopening a document editor ignores the old countries (6.212588ms)
+✔ latest requested document definition remains visible (10.23316ms)
+✔ late country association does not clear another editor draft or announce success (4.318597ms)
+✔ a failed schema consultation is not treated as an empty successful catalog and retry recovers (5.831635ms)
+✔ CT06 maps displayed ISO to actual currency ID and preserves the stock market (2.0827ms)
+✔ CT06 reuses an identical asset without mutating the shared catalog (1.021466ms)
+(node:943312) ExperimentalWarning: VM Modules is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ statement response arriving after customer switch cannot download the old statement (8.664883ms)
+✔ current statement export downloads and releases the object URL (3.853434ms)
+✔ alternar depósito para saque não transporta a conta de origem nem comprovante (2.764492ms)
+✔ operação de contrato não envia moeda ou dados bancários do formulário anterior (0.55402ms)
+✔ nenhum valor inválido gera uma solicitação financeira (1.148597ms)
+✔ transferência sem fluxo integrado na interface é bloqueada antes da escrita (0.990552ms)
+✔ rascunho incompleto mantém campos nulos exigidos pelo contrato HTTP (1.015678ms)
+✔ prazo respeita unidades e limites confirmados pelo backend (2.264799ms)
+✔ participantes duplicados ou vazios não sobrescrevem alocações (0.794804ms)
+✔ retry após perda de resposta usa a mesma chave; nova ação usa outra (0.932189ms)
+✔ trocar cliente durante uma consulta não mostra o saldo anterior (3.031673ms)
+✔ fechar um detalhe invalida a resposta pendente e preserva outros blocos (1.022067ms)
+✔ global query reads all customer/wallet pages and includes customers with assets but no ledger wallet (10.602017ms)
+✔ native currencies stay separate; contract capital is included without invented return or FX (2.53224ms)
+✔ a failed client does not hide successful rows or produce a partial global total (1.636723ms)
+✔ wrong customer identity is rejected rather than displaying another portfolio (0.973938ms)
+✔ stale results are discarded and portfolio requests are bounded to four concurrent reads (24.455098ms)
+✔ unknown monetary fields are retained as unknown, not converted into zero (5.8499ms)
+✔ credit search accepts API client name and the visible Portuguese type without guessing CRM taxonomy (1.359238ms)
+✔ wallet amounts retain the Portuguese separators used by the approved design for every currency (28.282665ms)
+✔ logic dates require a nonempty complete set of valid timestamps (1.573393ms)
+✔ creation ordering ignores catalog edits and preserves source and ties (1.605099ms)
+✔ unknown dates preserve order and never fall back to a different date field (0.531588ms)
+✔ incomplete or malformed engine parameters do not manufacture an intensity alert (2.768838ms)
+✔ collapsed warning uses the existing strict positive and negative daily rules (0.662544ms)
+✔ invalid signs are left to configuration validation rather than mislabeled as a limit comparison (0.223108ms)
+✔ absent damping values keep the five design ranges without numerical examples (3.133678ms)
+✔ damping percentages preserve zero and signed bounds without coercing missing data (22.165713ms)
+✔ presentation values preserve supplied cells without replacing range identity or source (0.433819ms)
+(node:943361) ExperimentalWarning: VM Modules is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ the three EC02 variants use the draft name/color while sharing the real validation and projection (47.101367ms)
+✔ an incomplete draft never claims valid configuration or converts its initial index into a current index (2.128445ms)
+✔ draft changes, explicit zero, clearing and dynamic icons are reflected without mutating values (8.227511ms)
+✔ cycle preview preserves years across year boundaries and rejects missing or invalid dates (9.109788ms)
+(node:943369) ExperimentalWarning: VM Modules is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ EC03 keeps missing operational data empty, without sample counts or interval options (37.929058ms)
+✔ EC03 preserves actual zero counts and existing dates instead of deriving a schedule (9.172118ms)
+✔ EC03 date editing and clearing emit only a new firstRun value and retain unrelated draft fields (13.482923ms)
+✔ shared GlassSelect retains the original arrow unless an explicit override is supplied (5.789344ms)
+✔ LG09 preserves all eight groups and distinct repeated indicator rows (1.840925ms)
+✔ missing metrics never become a zero, false value, or object dump (1.471948ms)
+✔ cell presentation accepts only explicit tones and badges without inferring financial results (0.91835ms)
+(node:943373) ExperimentalWarning: VM Modules is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ EC01 renders existing fields, selected icon/color and real catalog without sample data (31.446079ms)
+✔ editing/clearing identity fields and selecting currency preserve unrelated cycle values (5.917914ms)
+✔ all existing icon and color actions emit independent copies without persisting or changing parameters (1.388193ms)
+✔ provided identifiers and user text are escaped; palette/icon state follows current props (8.145844ms)
+✔ unknown probability never turns into zero, a red total or a drawn distribution (2.176844ms)
+✔ valid and invalid totals keep original probabilities and normalize only graphic widths (0.661483ms)
+✔ display, save validation and validation modal share the probability decision (2.379743ms)
+✔ missing and invalid boundaries never receive a passed check (5.422912ms)
+✔ valid hierarchy respects negative floors and probability total (0.814862ms)
+(node:943395) ExperimentalWarning: VM Modules is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ EC07 leaves unavailable data empty and all three fields blocked without mutating the form (20.822959ms)
+✔ EC07 uses the existing projection, preserves a real zero target and only formats presentation (31.67369ms)
+✔ EC07 follows changes and clearing of the original cycle fields without storing a second final index (10.283542ms)
+✔ localized signed decimal editing accepts comma or point without inventing zero (2.206696ms)
+✔ localized display preserves known zero and precision while missing data stays empty (30.590275ms)
+✔ native number mode keeps its original numeric contract separate from localized text (0.500654ms)
+✔ portfolio separates Free, invested and Applied; includes assets once without trusting ambiguous legacy total (32.672825ms)
+✔ multiple currencies remain separate with no invented FX totals (1.128449ms)
+✔ confirmed empty portfolio shows zero but errors and missing fields never become zero (0.847498ms)
+✔ mismatched currency and duplicate currency blocks are rejected (0.428171ms)
+✔ client exposes available Free and Applied independently of home and never invents assets (1.120858ms)
+(node:943426) ExperimentalWarning: VM Modules is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ preferences of a previous customer cannot overwrite current fields or ready state (17.402281ms)
+✔ old preference save cannot notify another customer and repeated submits are blocked (10.707085ms)
+(node:943427) ExperimentalWarning: VM Modules is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ changing document resets loading; an old URL cannot open a tab or clear a newer request (102.690024ms)
+✔ changing customer resets download state and suppresses the old file download (11.523239ms)
+✔ late upload success cannot clear a new file, close its dialog or notify another customer (17.82809ms)
+✔ upload failure after leaving the screen produces no notification or refresh (27.518465ms)
+✔ upload respects API permission and double submit does not send another file (9.19218ms)
+✔ CPF and NIF upload preserve the API type, requirement and country without inventing identity metadata (10.502136ms)
+✔ document reserves a tab during click, isolates opener/referrer and preserves an opened file (6.939062ms)
+✔ switching customer closes only the pending reservation and a late URL is discarded (7.112959ms)
+✔ leaving closes pending document and prohibits later actions (7.394668ms)
+✔ duplicate opening sends one request; failure closes reserve and retry is available (7.411003ms)
+✔ invalid document URL leaves no empty tab and notifies the current customer (19.453478ms)
+[Vue warn]: Failed to resolve component: q-btn
+If this is a native custom element, make sure to exclude it from component resolution via compilerOptions.isCustomElement.
+  at <App fields= [
+  {
+    label: 'Renda mensal individual',
+    editKey: 'individualMonthlyIncome',
+    inputType: 'number'
+  }
+] values= {
+  individualMonthlyIncome: '10',
+  employerName: 'Empresa teste',
+  declaredNetWorth: null
+} editing=true  ... >
+[Vue warn]: Failed to resolve component: q-btn
+If this is a native custom element, make sure to exclude it from component resolution via compilerOptions.isCustomElement.
+  at <App fields= [
+  {
+    label: 'Renda mensal individual',
+    editKey: 'individualMonthlyIncome',
+    inputType: 'number'
+  }
+] values= {
+  individualMonthlyIncome: '10',
+  employerName: 'Empresa teste',
+  declaredNetWorth: null
+} editing=true  ... >
+[Vue warn]: Failed to resolve component: q-btn
+If this is a native custom element, make sure to exclude it from component resolution via compilerOptions.isCustomElement.
+  at <App fields= [
+  {
+    label: 'Renda mensal individual',
+    editKey: 'individualMonthlyIncome',
+    inputType: 'number'
+  }
+] values= {
+  individualMonthlyIncome: '10',
+  employerName: 'Empresa teste',
+  declaredNetWorth: null
+} editing=true  ... >
+[Vue warn]: Failed to resolve component: q-btn
+If this is a native custom element, make sure to exclude it from component resolution via compilerOptions.isCustomElement.
+  at <App fields= [
+  {
+    label: 'Renda mensal individual',
+    editKey: 'individualMonthlyIncome',
+    inputType: 'number'
+  }
+] values= {
+  individualMonthlyIncome: '10',
+  employerName: 'Empresa teste',
+  declaredNetWorth: null
+} editing=true  ... >
+[Vue warn]: Failed to resolve component: q-btn
+If this is a native custom element, make sure to exclude it from component resolution via compilerOptions.isCustomElement.
+  at <App fields= [
+  {
+    label: 'Renda mensal individual',
+    editKey: 'individualMonthlyIncome',
+    inputType: 'number'
+  }
+] values= {
+  occupation: 'Analista',
+  employerName: 'Empresa teste',
+  individualMonthlyIncome: '9007199254740993.01',
+  householdMonthlyIncome: '9007199254740993.10',
+  declaredNetWorth: 0
+} editing=true  ... >
+✔ the actual input template preserves precise decimal text, explicit zero and nullable clears (38.242508ms)
+✔ an amount typed through the real template reaches the section HTTP plan without rounding (7.253438ms)
+✔ existing publication stays locked until the requested record is loaded (2.903039ms)
+✔ archive and in-flight writes prevent edits while a new local draft remains editable (0.351191ms)
+✔ a failed refresh keeps a previously loaded publication locked (0.379071ms)
+✔ report accepts a PDF signature and rejects a renamed file before preview (3.756386ms)
+✔ report enforces displayed limits and audio formats, including browser WAV variants (1.643994ms)
+✔ complementary attachment selection does not invent a restriction absent from the frame (0.839426ms)
+✔ asset document validation rejects empty, unsupported and oversized files before writing (2.782297ms)
+✔ partial document link retry reuses the uploaded file and only unlinks relationships after successful uploads (56.299251ms)
+✔ leaving during upload prevents linking a file to another customer asset (0.791138ms)
+✔ all four approved asset editors contain the existing HTTP fields without simulating unsupported features (1.937873ms)
+✔ C32 separate city, state and country persist through the original address contract and retain other addresses (1.770405ms)
+✔ C32 can add the first residential address with the existing collection contract and leaves unrelated edits unblocked (1.299333ms)
+✔ editing uses an isolated copy and sends the entire ordered property list (5.840037ms)
+✔ removing all sends [] and an omitted draft field preserves the existing list (0.552037ms)
+✔ enforces limit and required bounded names/values before sending (1.663812ms)
+✔ owner changes, invalidation and disposal invalidate captured operations (1.855556ms)
+✔ a late page stops the chain without publishing partial rows (0.576512ms)
+✔ pagination returns all rows and preserves failure rather than partial success (1.93606ms)
+✔ invalid pagination and unsuccessful envelopes fail instead of looping or hiding errors (0.452425ms)
+✔ a stale route module opens the same-origin destination with its history query (3.644366ms)
+✔ a persistent module failure cannot reload forever; a successful fresh page clears the retry marker (0.773393ms)
+✔ ordinary errors, public routes, external URLs and inaccessible storage never trigger a reload (0.718855ms)
+✔ only one section; unchanged drafts never write; discard keeps original independent (4.75504ms)
+✔ late reads after dispose cannot reopen a former customer (1.006615ms)
+✔ late successful write cannot announce success after dispose (1.221972ms)
+✔ saving locks discard and other sections and validates before writing (1.026053ms)
+✔ partial saves retain draft; retry skips accepted operation and maps server field (2.100255ms)
+✔ discard after partial save refreshes real server data without claiming success (0.98895ms)
+✔ accepted fields become the baseline so a partial save can be corrected back (17.963423ms)
+✔ financial save preserves zero, null, currency and dates without adding UI fields (3.088654ms)
+✔ professional, preferences, account and compliance preserve required hidden metadata (1.831991ms)
+✔ identification replaces collections without dropping secondary records or sending documents (2.940163ms)
+✔ financial strings retain decimal precision without rewriting equivalent formatting (4.343232ms)
+✔ decimal validation preserves the existing household rule without floating point rounding (2.12522ms)
+✔ format-only financial editing stays clean and never writes or announces a save (1.24122ms)
+✔ identification rejects impossible and future birth dates without changing optionality (1.658194ms)
+✔ birth date validation blocks all section writes and correction can then be saved (1.144582ms)
+✔ neighborhood edits use the existing address contract and preserve secondary addresses (0.769217ms)
+✔ installed source guard and timed regression reject the vulnerable extglobs (86.132174ms)
+✔ audit accepts only mitigated leaf and transitive effects at the original high threshold (4.390935ms)
+✔ new direct high/critical advisories remain blocking, including in an inherited chain (0.420535ms)
+✔ new picomatch advisory, nested install or changed affected range cannot use the mitigation exception (0.490088ms)
+✔ audit errors, missing reports and inconsistent counts fail closed (0.990162ms)
+✔ source verification fails when the installed mitigation is missing or tampered (9.759983ms)
+(node:943505) ExperimentalWarning: VM Modules is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ selection binds server discovery to current authenticated Cliente profile (8.788229ms)
+✔ selection binds server discovery to current authenticated Admin profile (2.679211ms)
+✔ selection does not enable access while identity is pending or failed; retry rechecks identity (4.347811ms)
+✔ fresh Cliente login uses verified identity before selecting a destination (5.095371ms)
+✔ fresh Admin login uses verified identity before selecting a destination (3.201888ms)
+✔ identity failure during login does not navigate using a previous administrative profile (2.692331ms)
+✔ empty or invalid chart series never become example points (1.661679ms)
+✔ chart sorts timestamps, spaces actual time and handles constant or negative values (1.486168ms)
+✔ candles require actual OHLC and reject inconsistent high and low (0.455687ms)
+(node:943512) ExperimentalWarning: VM Modules is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ deposit uses the catalog ID and documented fields, never a currency guess (1.48074ms)
+✔ withdrawals and transfers reject unknown/insufficient balances before any write (0.331523ms)
+✔ inter-customer transfer requires another recipient and admin confirmation (0.306946ms)
+✔ submission reads fresh catalogs/balances and propagates failures without fake success (0.678868ms)
+✔ password failure clears secret, ends busy, and permits a deliberate retry (33.023693ms)
+✔ confirmation ends busy before completion so the parent cannot remain locked (6.181656ms)
+✔ transaction templates compile, including parent event handlers (205.398974ms)
+✔ partial pending edit preserves the saved version and retries only the failed observation (21.165352ms)
+✔ decreasing correction never guesses origins; increasing correction uses documented password/version (10.804685ms)
+[Vue warn]: onMounted is called when there is no active component instance to be associated with. Lifecycle injection APIs can only be used during execution of setup(). If you are using async setup(), make sure to register lifecycle hooks before the first await statement.
+[Vue warn]: onMounted is called when there is no active component instance to be associated with. Lifecycle injection APIs can only be used during execution of setup(). If you are using async setup(), make sure to register lifecycle hooks before the first await statement.
+[Vue warn]: onMounted is called when there is no active component instance to be associated with. Lifecycle injection APIs can only be used during execution of setup(). If you are using async setup(), make sure to register lifecycle hooks before the first await statement.
+[Vue warn]: onMounted is called when there is no active component instance to be associated with. Lifecycle injection APIs can only be used during execution of setup(). If you are using async setup(), make sure to register lifecycle hooks before the first await statement.
+[Vue warn]: onMounted is called when there is no active component instance to be associated with. Lifecycle injection APIs can only be used during execution of setup(). If you are using async setup(), make sure to register lifecycle hooks before the first await statement.
+[Vue warn]: onMounted is called when there is no active component instance to be associated with. Lifecycle injection APIs can only be used during execution of setup(). If you are using async setup(), make sure to register lifecycle hooks before the first await statement.
+[Vue warn]: onMounted is called when there is no active component instance to be associated with. Lifecycle injection APIs can only be used during execution of setup(). If you are using async setup(), make sure to register lifecycle hooks before the first await statement.
+[Vue warn]: onMounted is called when there is no active component instance to be associated with. Lifecycle injection APIs can only be used during execution of setup(). If you are using async setup(), make sure to register lifecycle hooks before the first await statement.
+[Vue warn]: onMounted is called when there is no active component instance to be associated with. Lifecycle injection APIs can only be used during execution of setup(). If you are using async setup(), make sure to register lifecycle hooks before the first await statement.
+[Vue warn]: onMounted is called when there is no active component instance to be associated with. Lifecycle injection APIs can only be used during execution of setup(). If you are using async setup(), make sure to register lifecycle hooks before the first await statement.
+(node:943531) ExperimentalWarning: VM Modules is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ correction and observation require text; failed submission retains it for retry (91.410166ms)
+✔ pending submissions cannot be duplicated or complete after the panel is disposed (15.071847ms)
+✔ receipt download keeps the panel open; confirmation closes without another download (11.826644ms)
+✔ workflow states validate their own reason or exact execution phrase before confirmation (57.253169ms)
+✔ attachment requires a nonempty PDF and preserves the selected file and description on failure (8.933515ms)
+✔ correction sends its own reason and version to the action endpoint, not a financial edit (55.393376ms)
+✔ changed version or removed permission prevents stale actions from being sent (63.009702ms)
+✔ observation uses the observation endpoint; read-only records cannot open write dialogs (19.796918ms)
+✔ workflow confirmation opens password intent without writing, preserving action reason and version (75.543447ms)
+✔ stale workflow version or lost permission never opens a password intent (33.847427ms)
+✔ transaction detail keeps unavailable actions disabled and uses current action permissions (22.420447ms)
+✔ original transaction is checked by identity and fails independently of detail and history (10.098537ms)
+✔ closing transaction detail discards late history and original responses (8.899465ms)
+✔ trusted-contact audit titles are translated without rewriting customer-entered text (1.705995ms)
+✔ current API removal and provided document update events stay in Portuguese (0.402037ms)
+✔ seven currencies retain missing values instead of fabricated zero balances (5.183082ms)
+✔ balance after operation never invents available funds or accepts overdrafts (0.454005ms)
+✔ only active accounts in the selected confirmed currency are eligible (0.326004ms)
+✔ withdrawal requires deposit balance, same-currency account and withdrawal password (0.536117ms)
+✔ transfer directions have distinct settlement rules and no password requirement (0.487073ms)
+✔ deposit respects configured currency minimum without assuming Figma example values (0.413224ms)
+✔ bank picker loads all pages and drops results from a closed context (2.439896ms)
+✔ consolidated total includes patrimony and never sums native currency balances (1.040707ms)
+✔ empty portfolio requires all three confirmed zero totals and a known principal currency (1.401743ms)
+✔ total composition preserves currencies and contract/idle split without invented example rows (1.719396ms)
+ℹ tests 412
+ℹ suites 0
+ℹ pass 412
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 2869.234385

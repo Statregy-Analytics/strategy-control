@@ -1,0 +1,55 @@
+{
+  "assets": [
+    {
+      "height": 9.328125,
+      "loaded": true,
+      "src": "/icons/partners/form-close-a.svg",
+      "width": 9.328125
+    },
+    {
+      "height": 9.328125,
+      "loaded": true,
+      "src": "/icons/partners/form-close-b.svg",
+      "width": 9.328125
+    },
+    {
+      "height": 20,
+      "loaded": true,
+      "src": "/icons/partners/rules-house.svg",
+      "width": 20
+    },
+    {
+      "height": 16,
+      "loaded": true,
+      "src": "/icons/partners/rules-chevron.svg",
+      "width": 16
+    },
+    {
+      "height": 16,
+      "loaded": true,
+      "src": "/icons/partners/rules-chevron.svg",
+      "width": 16
+    },
+    {
+      "height": 16,
+      "loaded": true,
+      "src": "/icons/partners/rules-plus.svg",
+      "width": 16
+    },
+    {
+      "height": 16,
+      "loaded": true,
+      "src": "/icons/partners/rules-chevron.svg",
+      "width": 16
+    },
+    {
+      "height": 16,
+      "loaded": true,
+      "src": "/icons/partners/rules-chevron.svg",
+      "width": 16
+    }
+  ],
+  "client": 1280,
+  "modal": 895,
+  "scroll": 1265
+}

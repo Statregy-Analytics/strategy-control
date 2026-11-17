@@ -1,0 +1,46 @@
+- main:
+  - paragraph: Prévia local controlada · dados fictícios · sem API
+  - button "Alternar indisponibilidade"
+  - button "Esvaziar"
+  - generic: Parceiros Ativos
+  - strong: Indisponível
+  - generic: Produtos Cadastrados
+  - strong: Indisponível
+  - generic: Tabelas Vigentes
+  - strong: Indisponível
+  - generic: Tabelas Vencendo
+  - strong: Indisponível
+  - generic: Maior Comissão
+  - strong: Indisponível
+  - generic: Melhor Conversão
+  - strong: Indisponível
+  - textbox "Buscar parceiro, produto ou regra..." [active]: BANCO
+  - button "Clear": cancel
+  - button "Criar Parceiro":
+    - generic: Criar Parceiro
+  - table:
+    - rowgroup:
+      - row "Parceiro Tipo Serviços Comissão Vigente Status Última Atualização":
+        - columnheader "Parceiro"
+        - columnheader "Tipo"
+        - columnheader "Serviços"
+        - columnheader "Comissão Vigente"
+        - columnheader "Status"
+        - columnheader "Última Atualização"
+        - columnheader
+    - rowgroup:
+      - row "Parceiro fictício QA P-QA01 Banco / Financeira Crédito com garantia de imóvel / Home Equity / CGI 4,0% Ativo 17/11/2026 Abrir parceiro Parceiro fictício QA":
+        - cell "Parceiro fictício QA P-QA01":
+          - button "Parceiro fictício QA P-QA01":
+            - strong: Parceiro fictício QA
+            - generic: P-QA01
+        - cell "Banco / Financeira":
+          - generic: Banco / Financeira
+        - cell "Crédito com garantia de imóvel / Home Equity / CGI"
+        - cell "4,0%":
+          - strong: 4,0%
+        - cell "Ativo":
+          - generic: Ativo
+        - cell "17/11/2026"
+        - cell "Abrir parceiro Parceiro fictício QA":
+          - button "Abrir parceiro Parceiro fictício QA"

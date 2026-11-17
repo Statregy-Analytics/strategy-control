@@ -588,6 +588,56 @@
       "front": "adjustment",
       "reason": "Composição conferida; falta implementar o preenchimento de província/cidade por código postal mostrado no Figma. A tela agora informa indisponibilidade e permite preenchimento manual. Fonte/contrato de consulta ainda não definido; não é atribuído como bug da API.",
       "evidence": "docs/evidence/qa-2026-11-17-revalidation/jp-postal-unavailable.txt"
+    },
+    "1484:95173": {
+      "front": "done",
+      "reason": "Referências de alta fidelidade recuperadas e componentes reais conferidos no navegador local. Cadastro básico, regras do produto Imóvel, detalhes, abas, três badges de aceite e seleção: avanço condicionado, voltar/preservar, erro sem sucesso simulado, arquivos e responsividade. Listagem/gravação/catálogos de parceiros não constam no OpenAPI atual; integração não homologada.",
+      "evidence": "docs/evidence/qa-2026-11-17-partners/results.json"
+    },
+    "1484:95475": {
+      "front": "done",
+      "reason": "Referências de alta fidelidade recuperadas e componentes reais conferidos no navegador local. Cadastro básico, regras do produto Imóvel, detalhes, abas, três badges de aceite e seleção: avanço condicionado, voltar/preservar, erro sem sucesso simulado, arquivos e responsividade. Listagem/gravação/catálogos de parceiros não constam no OpenAPI atual; integração não homologada.",
+      "evidence": "docs/evidence/qa-2026-11-17-partners/results.json"
+    },
+    "1484:95847": {
+      "front": "done",
+      "reason": "Referências de alta fidelidade recuperadas e componentes reais conferidos no navegador local. Cadastro básico, regras do produto Imóvel, detalhes, abas, três badges de aceite e seleção: avanço condicionado, voltar/preservar, erro sem sucesso simulado, arquivos e responsividade. Listagem/gravação/catálogos de parceiros não constam no OpenAPI atual; integração não homologada.",
+      "evidence": "docs/evidence/qa-2026-11-17-partners/results.json"
+    },
+    "1484:95957": {
+      "front": "done",
+      "reason": "Referências de alta fidelidade recuperadas e componentes reais conferidos no navegador local. Cadastro básico, regras do produto Imóvel, detalhes, abas, três badges de aceite e seleção: avanço condicionado, voltar/preservar, erro sem sucesso simulado, arquivos e responsividade. Listagem/gravação/catálogos de parceiros não constam no OpenAPI atual; integração não homologada.",
+      "evidence": "docs/evidence/qa-2026-11-17-partners/results.json"
+    },
+    "1484:95962": {
+      "front": "done",
+      "reason": "Referências de alta fidelidade recuperadas e componentes reais conferidos no navegador local. Cadastro básico, regras do produto Imóvel, detalhes, abas, três badges de aceite e seleção: avanço condicionado, voltar/preservar, erro sem sucesso simulado, arquivos e responsividade. Listagem/gravação/catálogos de parceiros não constam no OpenAPI atual; integração não homologada.",
+      "evidence": "docs/evidence/qa-2026-11-17-partners/results.json"
+    },
+    "1484:95964": {
+      "front": "done",
+      "reason": "Referências de alta fidelidade recuperadas e componentes reais conferidos no navegador local. Cadastro básico, regras do produto Imóvel, detalhes, abas, três badges de aceite e seleção: avanço condicionado, voltar/preservar, erro sem sucesso simulado, arquivos e responsividade. Listagem/gravação/catálogos de parceiros não constam no OpenAPI atual; integração não homologada.",
+      "evidence": "docs/evidence/qa-2026-11-17-partners/results.json"
+    },
+    "1484:95970": {
+      "front": "done",
+      "reason": "Referências de alta fidelidade recuperadas e componentes reais conferidos no navegador local. Cadastro básico, regras do produto Imóvel, detalhes, abas, três badges de aceite e seleção: avanço condicionado, voltar/preservar, erro sem sucesso simulado, arquivos e responsividade. Listagem/gravação/catálogos de parceiros não constam no OpenAPI atual; integração não homologada.",
+      "evidence": "docs/evidence/qa-2026-11-17-partners/results.json"
+    },
+    "1484:95972": {
+      "front": "done",
+      "reason": "Referências de alta fidelidade recuperadas e componentes reais conferidos no navegador local. Cadastro básico, regras do produto Imóvel, detalhes, abas, três badges de aceite e seleção: avanço condicionado, voltar/preservar, erro sem sucesso simulado, arquivos e responsividade. Listagem/gravação/catálogos de parceiros não constam no OpenAPI atual; integração não homologada.",
+      "evidence": "docs/evidence/qa-2026-11-17-partners/results.json"
+    },
+    "1484:95974": {
+      "front": "done",
+      "reason": "Referências de alta fidelidade recuperadas e componentes reais conferidos no navegador local. Cadastro básico, regras do produto Imóvel, detalhes, abas, três badges de aceite e seleção: avanço condicionado, voltar/preservar, erro sem sucesso simulado, arquivos e responsividade. Listagem/gravação/catálogos de parceiros não constam no OpenAPI atual; integração não homologada.",
+      "evidence": "docs/evidence/qa-2026-11-17-partners/results.json"
+    },
+    "1484:95984": {
+      "front": "done",
+      "reason": "Referências de alta fidelidade recuperadas e componentes reais conferidos no navegador local. Cadastro básico, regras do produto Imóvel, detalhes, abas, três badges de aceite e seleção: avanço condicionado, voltar/preservar, erro sem sucesso simulado, arquivos e responsividade. Listagem/gravação/catálogos de parceiros não constam no OpenAPI atual; integração não homologada.",
+      "evidence": "docs/evidence/qa-2026-11-17-partners/results.json"
     }
   }
 }

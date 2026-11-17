@@ -1,0 +1,159 @@
+- main:
+  - paragraph: Prévia local controlada · dados fictícios · sem API
+  - button "Alternar indisponibilidade"
+  - button "Esvaziar"
+  - generic: Parceiros Ativos
+  - strong: Indisponível
+  - generic: Produtos Cadastrados
+  - strong: Indisponível
+  - generic: Tabelas Vigentes
+  - strong: Indisponível
+  - generic: Tabelas Vencendo
+  - strong: Indisponível
+  - generic: Maior Comissão
+  - strong: Indisponível
+  - generic: Melhor Conversão
+  - strong: Indisponível
+  - textbox "Buscar parceiro, produto ou regra..."
+  - button "Criar Parceiro":
+    - generic: Criar Parceiro
+  - table:
+    - rowgroup:
+      - row "Parceiro Tipo Serviços Comissão Vigente Status Última Atualização":
+        - columnheader "Parceiro"
+        - columnheader "Tipo"
+        - columnheader "Serviços"
+        - columnheader "Comissão Vigente"
+        - columnheader "Status"
+        - columnheader "Última Atualização"
+        - columnheader
+    - rowgroup:
+      - row "Parceiro fictício QA P-QA01 Banco / Financeira — habilitado(s) 1 oferecido(s) Crédito com garantia de imóvel / Home Equity / CGI 4,0% Ativo 17/11/2026 Abrir parceiro Parceiro fictício QA":
+        - cell "Parceiro fictício QA P-QA01":
+          - button "Parceiro fictício QA P-QA01":
+            - strong: Parceiro fictício QA
+            - generic: P-QA01
+        - cell "Banco / Financeira":
+          - generic: Banco / Financeira
+        - cell "— habilitado(s) 1 oferecido(s) Crédito com garantia de imóvel / Home Equity / CGI":
+          - generic: — habilitado(s)
+          - generic: 1 oferecido(s)
+          - generic: Crédito com garantia de imóvel / Home Equity / CGI
+        - cell "4,0%":
+          - strong: 4,0%
+        - cell "Ativo":
+          - generic: Ativo
+        - cell "17/11/2026"
+        - cell "Abrir parceiro Parceiro fictício QA":
+          - button "Abrir parceiro Parceiro fictício QA"
+      - row "Segundo parceiro fictício QA P-QA02 Outro — habilitado(s) 0 oferecido(s) — — Inativo — Abrir parceiro Segundo parceiro fictício QA":
+        - cell "Segundo parceiro fictício QA P-QA02":
+          - button "Segundo parceiro fictício QA P-QA02":
+            - strong: Segundo parceiro fictício QA
+            - generic: P-QA02
+        - cell "Outro":
+          - generic: Outro
+        - cell "— habilitado(s) 0 oferecido(s) —":
+          - generic: — habilitado(s)
+          - generic: 0 oferecido(s)
+          - generic: —
+        - cell "—":
+          - strong: —
+        - cell "Inativo":
+          - generic: Inativo
+        - cell "—"
+        - cell "Abrir parceiro Segundo parceiro fictício QA":
+          - button "Abrir parceiro Segundo parceiro fictício QA"
+- dialog:
+  - heading "Editar Parceiro - Regras de Negócio" [level=2]
+  - button "Fechar"
+  - paragraph: Configure as regras de negócio para os produtos habilitados
+  - alert:
+    - generic: O valor máximo deve ser maior ou igual ao mínimo.
+  - generic "Etapas do parceiro"
+  - generic: S
+  - strong: Segundo parceiro fictício QA
+  - generic: Outro
+  - generic: 1 oferecido(s)
+  - generic: — habilitado(s)
+  - alert:
+    - text: Configure as regras de negócio apenas para os produtos habilitados para a Strategy Analytics.
+    - generic: Produtos oferecidos mas não habilitados não precisam de regras neste momento.
+  - heading "Crédito com garantia de imóvel / Home Equity / CGI" [level=3]
+  - heading "Regras Gerais do Produto" [level=4]
+  - generic: Valor mínimo da operação
+  - spinbutton "Valor mínimo da operação": "200"
+  - generic: Valor máximo da operação
+  - spinbutton "Valor máximo da operação": "100"
+  - generic: Comprometimento máximo da renda (%)
+  - spinbutton "Comprometimento máximo da renda (%)"
+  - generic: Prazo mínimo (meses)
+  - spinbutton "Prazo mínimo (meses)"
+  - generic: Prazo máximo (meses)
+  - spinbutton "Prazo máximo (meses)"
+  - generic: Taxa estimada (% a.m.)
+  - spinbutton "Taxa estimada (% a.m.)"
+  - generic: Taxa estimada (% a.a.)
+  - spinbutton "Taxa estimada (% a.a.)"
+  - generic: Sistema de amortização
+  - generic: Selecione
+  - combobox "Sistema de amortização" [disabled]: Selecione
+  - generic: Público aceito
+  - generic: Selecione
+  - combobox "Público aceito" [disabled]: Selecione
+  - heading "LTV por Tipo de Garantia" [level=4]
+  - button "Adicionar tipo":
+    - generic: Adicionar tipo
+  - table:
+    - rowgroup:
+      - row "Tipo de Garantia Aceito? LTV Máximo (%) Valor Min. Imóvel Valor Max. Imóvel Observação":
+        - columnheader "Tipo de Garantia"
+        - columnheader "Aceito?"
+        - columnheader "LTV Máximo (%)"
+        - columnheader "Valor Min. Imóvel"
+        - columnheader "Valor Max. Imóvel"
+        - columnheader "Observação"
+        - columnheader
+    - rowgroup:
+      - row "Garantia fictícia QA Não Variável — — Editar garantia Garantia fictícia QA":
+        - cell "Garantia fictícia QA"
+        - cell "Não":
+          - generic: Não
+        - cell "Variável"
+        - cell "—"
+        - cell "—"
+        - cell
+        - cell "Editar garantia Garantia fictícia QA":
+          - button "Editar garantia Garantia fictícia QA"
+  - heading "Carência / Início de Pagamento" [level=4]
+  - generic: Possui carência?
+  - generic: Selecione
+  - combobox "Possui carência?": Selecione
+  - generic: Prazo de carência padrão
+  - spinbutton "Prazo de carência padrão"
+  - generic: Unidade
+  - generic: Selecione
+  - combobox "Unidade" [disabled]: Selecione
+  - generic: Prazo mínimo de carência
+  - spinbutton "Prazo mínimo de carência"
+  - generic: Prazo máximo de carência
+  - spinbutton "Prazo máximo de carência"
+  - generic: Regra da primeira parcela
+  - textbox "Regra da primeira parcela"
+  - generic: Observação sobre carência
+  - textbox "Observação sobre carência"
+  - heading "Regiões e Imóveis" [level=4]
+  - generic: Região de atuação
+  - textbox "Região de atuação"
+  - generic: Cidades/estados aceitos
+  - textbox "Cidades/estados aceitos"
+  - generic: Imóveis não aceitos
+  - textbox "Imóveis não aceitos"
+  - generic: Exceções operacionais
+  - textbox "Exceções operacionais"
+  - generic: Observações internas
+  - textbox "Observações internas"
+  - button "Voltar":
+    - generic: Voltar
+  - button "Salvar Parceiro" [active]:
+    - generic: Salvar Parceiro

@@ -1,0 +1,148 @@
+- main:
+  - paragraph: Prévia local controlada · dados fictícios · sem API
+  - button "Alternar indisponibilidade"
+  - button "Esvaziar"
+  - generic: Parceiros Ativos
+  - strong: Indisponível
+  - generic: Produtos Cadastrados
+  - strong: Indisponível
+  - generic: Tabelas Vigentes
+  - strong: Indisponível
+  - generic: Tabelas Vencendo
+  - strong: Indisponível
+  - generic: Maior Comissão
+  - strong: Indisponível
+  - generic: Melhor Conversão
+  - strong: Indisponível
+  - textbox "Buscar parceiro, produto ou regra..."
+  - button "Criar Parceiro":
+    - generic: Criar Parceiro
+  - table:
+    - rowgroup:
+      - row "Parceiro Tipo Serviços Comissão Vigente Status Última Atualização":
+        - columnheader "Parceiro"
+        - columnheader "Tipo"
+        - columnheader "Serviços"
+        - columnheader "Comissão Vigente"
+        - columnheader "Status"
+        - columnheader "Última Atualização"
+        - columnheader
+    - rowgroup:
+      - row "Parceiro fictício QA P-QA01 Banco / Financeira — habilitado(s) 1 oferecido(s) Crédito com garantia de imóvel / Home Equity / CGI 4,0% Ativo 17/11/2026 Abrir parceiro Parceiro fictício QA":
+        - cell "Parceiro fictício QA P-QA01":
+          - button "Parceiro fictício QA P-QA01":
+            - strong: Parceiro fictício QA
+            - generic: P-QA01
+        - cell "Banco / Financeira":
+          - generic: Banco / Financeira
+        - cell "— habilitado(s) 1 oferecido(s) Crédito com garantia de imóvel / Home Equity / CGI":
+          - generic: — habilitado(s)
+          - generic: 1 oferecido(s)
+          - generic: Crédito com garantia de imóvel / Home Equity / CGI
+        - cell "4,0%":
+          - strong: 4,0%
+        - cell "Ativo":
+          - generic: Ativo
+        - cell "17/11/2026"
+        - cell "Abrir parceiro Parceiro fictício QA":
+          - button "Abrir parceiro Parceiro fictício QA"
+      - row "Segundo parceiro fictício QA P-QA02 Outro — habilitado(s) 0 oferecido(s) — — Inativo — Abrir parceiro Segundo parceiro fictício QA":
+        - cell "Segundo parceiro fictício QA P-QA02":
+          - button "Segundo parceiro fictício QA P-QA02":
+            - strong: Segundo parceiro fictício QA
+            - generic: P-QA02
+        - cell "Outro":
+          - generic: Outro
+        - cell "— habilitado(s) 0 oferecido(s) —":
+          - generic: — habilitado(s)
+          - generic: 0 oferecido(s)
+          - generic: —
+        - cell "—":
+          - strong: —
+        - cell "Inativo":
+          - generic: Inativo
+        - cell "—"
+        - cell "Abrir parceiro Segundo parceiro fictício QA":
+          - button "Abrir parceiro Segundo parceiro fictício QA"
+- dialog:
+  - heading "Editar Parceiro - Dados Básicos" [level=2]
+  - button "Fechar"
+  - paragraph: Preencha os dados básicos e selecione os produtos do parceiro
+  - generic "Etapas do parceiro"
+  - generic: Foto / Logo do Parceiro
+  - generic: Upload
+  - button "Upload do logo do parceiro" [active]
+  - generic: qa-partner-logo.png
+  - generic: Nome do Parceiro *
+  - textbox "Nome do Parceiro *":
+    - /placeholder: "Ex: Creditas, C6 Bank, Porto Seguro..."
+    - text: Segundo parceiro fictício QA
+  - heading "Tipo de Parceiro *" [level=3]
+  - button "Banco / Financeira"
+  - button "Administradora de Consórcio"
+  - button "Banco + Consórcio"
+  - button "Correspondente / Intermediador"
+  - button "Plataforma de crédito"
+  - button "Plataforma imobiliária / funding"
+  - button "Outro" [pressed]
+  - heading "Serviços/Produtos Oferecidos pelo Parceiro *" [level=3]
+  - paragraph: Produtos que o parceiro possui em seu portfólio
+  - list:
+    - checkbox "Crédito com garantia de imóvel / Home Equity / CGI":
+      - generic: Crédito com garantia de imóvel / Home Equity / CGI
+    - checkbox "Crédito com garantia de veículo / Auto Equity":
+      - generic: Crédito com garantia de veículo / Auto Equity
+    - checkbox "Financiamento imobiliário":
+      - generic: Financiamento imobiliário
+    - checkbox "Financiamento de veículos":
+      - generic: Financiamento de veículos
+    - checkbox "Consórcio imóvel":
+      - generic: Consórcio imóvel
+    - checkbox "Consórcio veículo":
+      - generic: Consórcio veículo
+    - checkbox "Consórcio serviço":
+      - generic: Consórcio serviço
+    - checkbox "Crédito PJ":
+      - generic: Crédito PJ
+    - checkbox "Consignado":
+      - generic: Consignado
+    - checkbox "Garantia locatícia":
+      - generic: Garantia locatícia
+    - checkbox "Seguro residencial":
+      - generic: Seguro residencial
+    - checkbox "Seguro auto" [checked]:
+      - generic: Seguro auto
+    - checkbox "Conta digital":
+      - generic: Conta digital
+    - checkbox "Investimentos":
+      - generic: Investimentos
+    - checkbox "Operações com recebíveis":
+      - generic: Operações com recebíveis
+    - checkbox "Plano empresário":
+      - generic: Plano empresário
+    - checkbox "Empréstimo ponte":
+      - generic: Empréstimo ponte
+    - checkbox "Financiamento de obras":
+      - generic: Financiamento de obras
+    - checkbox "Antecipação de carteira":
+      - generic: Antecipação de carteira
+    - checkbox "Antecipação de fornecedor":
+      - generic: Antecipação de fornecedor
+    - checkbox "Equity / Sociedade em SPE":
+      - generic: Equity / Sociedade em SPE
+    - checkbox "Risco sacado":
+      - generic: Risco sacado
+    - checkbox "Estruturação":
+      - generic: Estruturação
+    - checkbox "Intermediação":
+      - generic: Intermediação
+    - checkbox "Consultoria financeira":
+      - generic: Consultoria financeira
+    - checkbox "Due diligence":
+      - generic: Due diligence
+    - checkbox "Outros":
+      - generic: Outros
+  - button "Cancelar":
+    - generic: Cancelar
+  - button "Continuar":
+    - generic: Continuar

@@ -10,15 +10,30 @@ Atualizado em 2026-11-17. Contagem por **telas e estados independentes do Figma*
 | Situação | Quantidade |
 | --- | ---: |
 | Total inventariado | **279** |
-| Prontas no frontend | **197** |
-| Implementadas, aguardando revalidação/comparação completa | **75** |
+| Prontas no frontend | **207** |
+| Implementadas, aguardando revalidação/comparação completa | **65** |
 | Ainda exigem implementação, complemento ou correção | **7** |
 | Com implementação existente (prontas + revalidação) | **272 / 279 (97,5%)** |
 
-**Para encerrar o front faltam 7 itens de implementação/ajuste e 75 de revalidação.** “Pronto no frontend” não significa fluxo integrado liberado: dependências de backend/designer podem afetar também telas prontas. Os números não classificam toda pendência como tela nova nem como problema de API. A comparação de Crédito, carteira global e editor editorial que não foi concluída integralmente permanece em revalidação.
+**Para encerrar o front faltam 7 itens de implementação/ajuste e 65 de revalidação.** “Pronto no frontend” não significa fluxo integrado liberado: dependências de backend/designer podem afetar também telas prontas. Os números não classificam toda pendência como tela nova nem como problema de API. A comparação de Crédito, carteira global e editor editorial que não foi concluída integralmente permanece em revalidação.
 
 Fonte por frame: [progresso atual](FRONTEND-PROGRESS.json). A base anterior permanece histórica; [atualizações com evidências](FRONTEND-PROGRESS-OVERRIDES.json) registram cada mudança. Ao finalizar **cada entrega**, atualizar os IDs comprovados, executar `node scripts/frontend-progress.mjs` e informar este panorama na resposta final.
 <!-- frontend-progress:end -->
+
+## Entrega 17/11 — Parceiros de Crédito e estados EC03
+
+**Publicado em homologação:** `f92940d`, [deploy 44180206805 aprovado](https://github.com/Statregy-Analytics/strategy-control/actions/runs/44180206805), com auditoria, testes, build, upload e ativação. Dez estados retirados de revalidação: CR08, CR09 (regras de Imóvel), CR10 e painel/variantes EC03. A revisão da tabela de parceiros também avançou, mas CR07 completo continua aberto; não houve aprovação por inferência das demais telas de Crédito.
+
+- [x] Formulários com largura, progresso, upload, ícones nativos e campos existentes do desenho. Continuar só habilita com nome, tipo e produto. Modal de regras usa os 895 px do frame, sem limite acidental de 560 px.
+- [x] Retorno preserva os dados locais; edição recebe nome, tipo e produtos do parceiro selecionado. Valores, percentuais e intervalos inválidos são recusados. Garantia não aceita dispensa LTV obrigatório; os três badges e o lápis da linha seguem EC03.
+- [x] Detalhes: abas selecionadas/padrão, teclado, troca de parceiro sem dados anteriores, indisponibilidade sem conteúdo fictício. Tabela usa identificação, ícone, badges, comissão localizada e abertura direta, sem menu de ações extra.
+- [x] 412 testes, lint e build passaram; instalação limpa isolada e auditoria com mitigação verificada passaram. Upload local validado com arquivos fictícios (inválido e PNG válido); estados de erro e responsividade conferidos. Em homologação: obrigatório/avanço, modal de regras com 895 px, ícones nativos/chevron de 16 px e celular sem overflow após estabilização responsiva. Salvar permanece indisponível sem simular sucesso; teste encerrado sem gravar dados. A prévia controlada fica apenas nas evidências e foi removida do produto.
+- [x] Reutilizada no Admin a mitigação conservadora de picomatch já aplicada no portal. A auditoria inteira continua executada; novos alertas altos/críticos, fonte alterada ou outra cópia do pacote bloqueiam. Não foi feito downgrade do Quasar nem desativada auditoria.
+- [ ] Backend: OpenAPI atual não contém rotas de consulta/gravação de parceiros, logo, produtos habilitados e catálogos de regras. Não há persistência integrada homologada; nenhum sucesso foi simulado. Habilitação não é inferida da simples seleção de produto oferecido.
+- [ ] Designer: CR09 traz regras para Imóvel; os outros produtos não recebem os campos de imóvel por suposição. Precisam de referência/regra própria para concluir seus detalhes.
+- [ ] Continuam 65 estados em revalidação e 7 ajustes de front. A lista geral de Crédito não foi declarada pronta nesta rodada.
+
+[Resultados e limites](evidence/qa-2026-11-17-partners/results.json) · [Contrato HTTP consultado](evidence/qa-2026-11-17-partners/api-paths.json). Nenhuma nova superfície sem referência: permanecem 13 para avaliação de Éric.
 
 ## Entrega 17/11 — revisão dos 85 estados pendentes
 
@@ -1115,16 +1130,16 @@ Legenda vigente: classificação de 16/11 por código e evidências, detalhada e
 | [1484:94673](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-94673) | EC02 · CONEXÃO · Fluxo → estados                                                              | Agregador/conexão — fora do percentual; ver estados filhos |
 | [1484:94676](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-94676) | F03 · Parceiros de crédito · Lista, criação e detalhes                                        | Agregador/conexão — fora do percentual; ver estados filhos |
 | [1484:94677](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-94677) | CR07 · PB · Parceiros de crédito · Lista · TELA BASE · DESIGN GLASS                           | Implementado · revalidar · R01 |
-| [1484:95173](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-95173) | CR08 · MD · Novo parceiro · Etapa 1 · ESTADO · DESIGN GLASS                                   | Implementado · revalidar · R02 |
-| [1484:95475](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-95475) | CR09 · MD · Novo parceiro · Etapa 2 · ESTADO · DESIGN GLASS                                   | Implementado · revalidar · R02 |
-| [1484:95847](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-95847) | CR10 · MD · Detalhes do parceiro · MODAL FIXO · DESIGN GLASS                                  | Implementado · revalidar · R01 |
-| [1484:95957](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-95957) | EC03 · Painel de estados do componente · Parceiros                                            | Implementado · revalidar · R01 |
-| [1484:95962](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-95962) | EC03.S01 · Aba selecionada                                                                    | Implementado · revalidar · R01 |
-| [1484:95964](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-95964) | EC03.S02 · Aba padrão                                                                         | Implementado · revalidar · R01 |
-| [1484:95970](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-95970) | EC03.S03 · Status aceito                                                                      | Implementado · revalidar · R01 |
-| [1484:95972](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-95972) | EC03.S04 · Status em análise                                                                  | Implementado · revalidar · R01 |
-| [1484:95974](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-95974) | EC03.S05 · Status não aceito                                                                  | Implementado · revalidar · R01 |
-| [1484:95984](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-95984) | EC03.S08 · Linha de opção                                                                     | Implementado · revalidar · R01 |
+| [1484:95173](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-95173) | CR08 · MD · Novo parceiro · Etapa 1 · ESTADO · DESIGN GLASS                                   | Pronto no front · R02 |
+| [1484:95475](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-95475) | CR09 · MD · Novo parceiro · Etapa 2 · ESTADO · DESIGN GLASS                                   | Pronto no front · R02 |
+| [1484:95847](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-95847) | CR10 · MD · Detalhes do parceiro · MODAL FIXO · DESIGN GLASS                                  | Pronto no front · R01 |
+| [1484:95957](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-95957) | EC03 · Painel de estados do componente · Parceiros                                            | Pronto no front · R01 |
+| [1484:95962](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-95962) | EC03.S01 · Aba selecionada                                                                    | Pronto no front · R01 |
+| [1484:95964](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-95964) | EC03.S02 · Aba padrão                                                                         | Pronto no front · R01 |
+| [1484:95970](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-95970) | EC03.S03 · Status aceito                                                                      | Pronto no front · R01 |
+| [1484:95972](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-95972) | EC03.S04 · Status em análise                                                                  | Pronto no front · R01 |
+| [1484:95974](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-95974) | EC03.S05 · Status não aceito                                                                  | Pronto no front · R01 |
+| [1484:95984](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-95984) | EC03.S08 · Linha de opção                                                                     | Pronto no front · R01 |
 | [1484:95999](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-95999) | EC03 · CONEXÃO · Fluxo → estados                                                              | Agregador/conexão — fora do percentual; ver estados filhos |
 | [1484:96066](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-96066) | F01 · Comunicação · Conteúdos / Redatores                                                     | Agregador/conexão — fora do percentual; ver estados filhos |
 | [1484:96067](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-96067) | CO01 · PB · Comunicação · Conteúdos · TELA BASE · DESIGN GLASS                                | Pronto no front · M01 |

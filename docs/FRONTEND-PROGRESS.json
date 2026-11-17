@@ -11,12 +11,12 @@
   },
   "metrics": {
     "total": 279,
-    "done": 197,
-    "validation": 75,
+    "done": 207,
+    "validation": 65,
     "adjustment": 7,
     "implemented": 272,
     "implementedPercent": 97.5,
-    "readyPercent": 70.6
+    "readyPercent": 74.2
   },
   "withoutLinkedFigmaReference": {
     "count": 13,
@@ -3662,18 +3662,19 @@
       "link": "[1484:95173](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-95173)",
       "counted": true,
       "group": "R02",
-      "category": "Ajuste de front",
-      "front": "validation",
+      "category": "Bloqueio backend",
+      "front": "done",
       "blockers": [
         "designer",
         "backend"
       ],
-      "reason": "CR08/CR09 não definem como distinguir produtos oferecidos/habilitados; precisa decisão do designer/produto e persistência CRM. Composição integral não aprovada.",
+      "reason": "Referências de alta fidelidade recuperadas e componentes reais conferidos no navegador local. Cadastro básico, regras do produto Imóvel, detalhes, abas, três badges de aceite e seleção: avanço condicionado, voltar/preservar, erro sem sucesso simulado, arquivos e responsividade. Listagem/gravação/catálogos de parceiros não constam no OpenAPI atual; integração não homologada.",
       "sources": [
         "src/components/Workspaces/CreditWorkspace.vue"
       ],
       "evidence": [
-        "docs/CHECKLIST-UNICO-FIGMA-FRONT.md#definições-do-designer"
+        "docs/CHECKLIST-UNICO-FIGMA-FRONT.md#definições-do-designer",
+        "docs/evidence/qa-2026-11-17-partners/results.json"
       ],
       "browser": "histórica; não repetida em 16/11",
       "historicalCategory": "Ajuste de front"
@@ -3686,18 +3687,19 @@
       "link": "[1484:95475](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-95475)",
       "counted": true,
       "group": "R02",
-      "category": "Ajuste de front",
-      "front": "validation",
+      "category": "Bloqueio backend",
+      "front": "done",
       "blockers": [
         "designer",
         "backend"
       ],
-      "reason": "CR08/CR09 não definem como distinguir produtos oferecidos/habilitados; precisa decisão do designer/produto e persistência CRM. Composição integral não aprovada.",
+      "reason": "Referências de alta fidelidade recuperadas e componentes reais conferidos no navegador local. Cadastro básico, regras do produto Imóvel, detalhes, abas, três badges de aceite e seleção: avanço condicionado, voltar/preservar, erro sem sucesso simulado, arquivos e responsividade. Listagem/gravação/catálogos de parceiros não constam no OpenAPI atual; integração não homologada.",
       "sources": [
         "src/components/Workspaces/CreditWorkspace.vue"
       ],
       "evidence": [
-        "docs/CHECKLIST-UNICO-FIGMA-FRONT.md#definições-do-designer"
+        "docs/CHECKLIST-UNICO-FIGMA-FRONT.md#definições-do-designer",
+        "docs/evidence/qa-2026-11-17-partners/results.json"
       ],
       "browser": "histórica; não repetida em 16/11",
       "historicalCategory": "Ajuste de front"
@@ -3710,19 +3712,20 @@
       "link": "[1484:95847](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-95847)",
       "counted": true,
       "group": "R01",
-      "category": "Ajuste de front",
-      "front": "validation",
+      "category": "Bloqueio backend",
+      "front": "done",
       "blockers": [
         "backend"
       ],
-      "reason": "Há Lista/Cards/Kanban e escolha de tipo/cliente com testes parciais; revisão completa ainda pendente. OpenAPI de loans é informativo e não fornece funil, propostas, parceiros e comissões.",
+      "reason": "Referências de alta fidelidade recuperadas e componentes reais conferidos no navegador local. Cadastro básico, regras do produto Imóvel, detalhes, abas, três badges de aceite e seleção: avanço condicionado, voltar/preservar, erro sem sucesso simulado, arquivos e responsividade. Listagem/gravação/catálogos de parceiros não constam no OpenAPI atual; integração não homologada.",
       "sources": [
         "src/components/Workspaces/CreditWorkspace.vue",
         "src/components/Workspaces/CreditOperationDetails.vue"
       ],
       "evidence": [
         "docs/CHECKLIST-UNICO-FIGMA-FRONT.md#cr06-e-lg08--complemento-de-1411",
-        "docs/evidence/qa-2026-11-16-inventory/api-contract-review.json"
+        "docs/evidence/qa-2026-11-16-inventory/api-contract-review.json",
+        "docs/evidence/qa-2026-11-17-partners/results.json"
       ],
       "browser": "parcial/isolada histórica; não integral",
       "historicalCategory": "Ajuste de front"
@@ -3735,19 +3738,20 @@
       "link": "[1484:95957](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-95957)",
       "counted": true,
       "group": "R01",
-      "category": "Ajuste de front",
-      "front": "validation",
+      "category": "Bloqueio backend",
+      "front": "done",
       "blockers": [
         "backend"
       ],
-      "reason": "Há Lista/Cards/Kanban e escolha de tipo/cliente com testes parciais; revisão completa ainda pendente. OpenAPI de loans é informativo e não fornece funil, propostas, parceiros e comissões.",
+      "reason": "Referências de alta fidelidade recuperadas e componentes reais conferidos no navegador local. Cadastro básico, regras do produto Imóvel, detalhes, abas, três badges de aceite e seleção: avanço condicionado, voltar/preservar, erro sem sucesso simulado, arquivos e responsividade. Listagem/gravação/catálogos de parceiros não constam no OpenAPI atual; integração não homologada.",
       "sources": [
         "src/components/Workspaces/CreditWorkspace.vue",
         "src/components/Workspaces/CreditOperationDetails.vue"
       ],
       "evidence": [
         "docs/CHECKLIST-UNICO-FIGMA-FRONT.md#cr06-e-lg08--complemento-de-1411",
-        "docs/evidence/qa-2026-11-16-inventory/api-contract-review.json"
+        "docs/evidence/qa-2026-11-16-inventory/api-contract-review.json",
+        "docs/evidence/qa-2026-11-17-partners/results.json"
       ],
       "browser": "parcial/isolada histórica; não integral",
       "historicalCategory": "Ajuste de front"
@@ -3760,19 +3764,20 @@
       "link": "[1484:95962](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-95962)",
       "counted": true,
       "group": "R01",
-      "category": "Ajuste de front",
-      "front": "validation",
+      "category": "Bloqueio backend",
+      "front": "done",
       "blockers": [
         "backend"
       ],
-      "reason": "Há Lista/Cards/Kanban e escolha de tipo/cliente com testes parciais; revisão completa ainda pendente. OpenAPI de loans é informativo e não fornece funil, propostas, parceiros e comissões.",
+      "reason": "Referências de alta fidelidade recuperadas e componentes reais conferidos no navegador local. Cadastro básico, regras do produto Imóvel, detalhes, abas, três badges de aceite e seleção: avanço condicionado, voltar/preservar, erro sem sucesso simulado, arquivos e responsividade. Listagem/gravação/catálogos de parceiros não constam no OpenAPI atual; integração não homologada.",
       "sources": [
         "src/components/Workspaces/CreditWorkspace.vue",
         "src/components/Workspaces/CreditOperationDetails.vue"
       ],
       "evidence": [
         "docs/CHECKLIST-UNICO-FIGMA-FRONT.md#cr06-e-lg08--complemento-de-1411",
-        "docs/evidence/qa-2026-11-16-inventory/api-contract-review.json"
+        "docs/evidence/qa-2026-11-16-inventory/api-contract-review.json",
+        "docs/evidence/qa-2026-11-17-partners/results.json"
       ],
       "browser": "parcial/isolada histórica; não integral",
       "historicalCategory": "Ajuste de front"
@@ -3785,19 +3790,20 @@
       "link": "[1484:95964](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-95964)",
       "counted": true,
       "group": "R01",
-      "category": "Ajuste de front",
-      "front": "validation",
+      "category": "Bloqueio backend",
+      "front": "done",
       "blockers": [
         "backend"
       ],
-      "reason": "Há Lista/Cards/Kanban e escolha de tipo/cliente com testes parciais; revisão completa ainda pendente. OpenAPI de loans é informativo e não fornece funil, propostas, parceiros e comissões.",
+      "reason": "Referências de alta fidelidade recuperadas e componentes reais conferidos no navegador local. Cadastro básico, regras do produto Imóvel, detalhes, abas, três badges de aceite e seleção: avanço condicionado, voltar/preservar, erro sem sucesso simulado, arquivos e responsividade. Listagem/gravação/catálogos de parceiros não constam no OpenAPI atual; integração não homologada.",
       "sources": [
         "src/components/Workspaces/CreditWorkspace.vue",
         "src/components/Workspaces/CreditOperationDetails.vue"
       ],
       "evidence": [
         "docs/CHECKLIST-UNICO-FIGMA-FRONT.md#cr06-e-lg08--complemento-de-1411",
-        "docs/evidence/qa-2026-11-16-inventory/api-contract-review.json"
+        "docs/evidence/qa-2026-11-16-inventory/api-contract-review.json",
+        "docs/evidence/qa-2026-11-17-partners/results.json"
       ],
       "browser": "parcial/isolada histórica; não integral",
       "historicalCategory": "Ajuste de front"
@@ -3810,19 +3816,20 @@
       "link": "[1484:95970](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-95970)",
       "counted": true,
       "group": "R01",
-      "category": "Ajuste de front",
-      "front": "validation",
+      "category": "Bloqueio backend",
+      "front": "done",
       "blockers": [
         "backend"
       ],
-      "reason": "Há Lista/Cards/Kanban e escolha de tipo/cliente com testes parciais; revisão completa ainda pendente. OpenAPI de loans é informativo e não fornece funil, propostas, parceiros e comissões.",
+      "reason": "Referências de alta fidelidade recuperadas e componentes reais conferidos no navegador local. Cadastro básico, regras do produto Imóvel, detalhes, abas, três badges de aceite e seleção: avanço condicionado, voltar/preservar, erro sem sucesso simulado, arquivos e responsividade. Listagem/gravação/catálogos de parceiros não constam no OpenAPI atual; integração não homologada.",
       "sources": [
         "src/components/Workspaces/CreditWorkspace.vue",
         "src/components/Workspaces/CreditOperationDetails.vue"
       ],
       "evidence": [
         "docs/CHECKLIST-UNICO-FIGMA-FRONT.md#cr06-e-lg08--complemento-de-1411",
-        "docs/evidence/qa-2026-11-16-inventory/api-contract-review.json"
+        "docs/evidence/qa-2026-11-16-inventory/api-contract-review.json",
+        "docs/evidence/qa-2026-11-17-partners/results.json"
       ],
       "browser": "parcial/isolada histórica; não integral",
       "historicalCategory": "Ajuste de front"
@@ -3835,19 +3842,20 @@
       "link": "[1484:95972](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-95972)",
       "counted": true,
       "group": "R01",
-      "category": "Ajuste de front",
-      "front": "validation",
+      "category": "Bloqueio backend",
+      "front": "done",
       "blockers": [
         "backend"
       ],
-      "reason": "Há Lista/Cards/Kanban e escolha de tipo/cliente com testes parciais; revisão completa ainda pendente. OpenAPI de loans é informativo e não fornece funil, propostas, parceiros e comissões.",
+      "reason": "Referências de alta fidelidade recuperadas e componentes reais conferidos no navegador local. Cadastro básico, regras do produto Imóvel, detalhes, abas, três badges de aceite e seleção: avanço condicionado, voltar/preservar, erro sem sucesso simulado, arquivos e responsividade. Listagem/gravação/catálogos de parceiros não constam no OpenAPI atual; integração não homologada.",
       "sources": [
         "src/components/Workspaces/CreditWorkspace.vue",
         "src/components/Workspaces/CreditOperationDetails.vue"
       ],
       "evidence": [
         "docs/CHECKLIST-UNICO-FIGMA-FRONT.md#cr06-e-lg08--complemento-de-1411",
-        "docs/evidence/qa-2026-11-16-inventory/api-contract-review.json"
+        "docs/evidence/qa-2026-11-16-inventory/api-contract-review.json",
+        "docs/evidence/qa-2026-11-17-partners/results.json"
       ],
       "browser": "parcial/isolada histórica; não integral",
       "historicalCategory": "Ajuste de front"
@@ -3860,19 +3868,20 @@
       "link": "[1484:95974](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-95974)",
       "counted": true,
       "group": "R01",
-      "category": "Ajuste de front",
-      "front": "validation",
+      "category": "Bloqueio backend",
+      "front": "done",
       "blockers": [
         "backend"
       ],
-      "reason": "Há Lista/Cards/Kanban e escolha de tipo/cliente com testes parciais; revisão completa ainda pendente. OpenAPI de loans é informativo e não fornece funil, propostas, parceiros e comissões.",
+      "reason": "Referências de alta fidelidade recuperadas e componentes reais conferidos no navegador local. Cadastro básico, regras do produto Imóvel, detalhes, abas, três badges de aceite e seleção: avanço condicionado, voltar/preservar, erro sem sucesso simulado, arquivos e responsividade. Listagem/gravação/catálogos de parceiros não constam no OpenAPI atual; integração não homologada.",
       "sources": [
         "src/components/Workspaces/CreditWorkspace.vue",
         "src/components/Workspaces/CreditOperationDetails.vue"
       ],
       "evidence": [
         "docs/CHECKLIST-UNICO-FIGMA-FRONT.md#cr06-e-lg08--complemento-de-1411",
-        "docs/evidence/qa-2026-11-16-inventory/api-contract-review.json"
+        "docs/evidence/qa-2026-11-16-inventory/api-contract-review.json",
+        "docs/evidence/qa-2026-11-17-partners/results.json"
       ],
       "browser": "parcial/isolada histórica; não integral",
       "historicalCategory": "Ajuste de front"
@@ -3885,19 +3894,20 @@
       "link": "[1484:95984](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-95984)",
       "counted": true,
       "group": "R01",
-      "category": "Ajuste de front",
-      "front": "validation",
+      "category": "Bloqueio backend",
+      "front": "done",
       "blockers": [
         "backend"
       ],
-      "reason": "Há Lista/Cards/Kanban e escolha de tipo/cliente com testes parciais; revisão completa ainda pendente. OpenAPI de loans é informativo e não fornece funil, propostas, parceiros e comissões.",
+      "reason": "Referências de alta fidelidade recuperadas e componentes reais conferidos no navegador local. Cadastro básico, regras do produto Imóvel, detalhes, abas, três badges de aceite e seleção: avanço condicionado, voltar/preservar, erro sem sucesso simulado, arquivos e responsividade. Listagem/gravação/catálogos de parceiros não constam no OpenAPI atual; integração não homologada.",
       "sources": [
         "src/components/Workspaces/CreditWorkspace.vue",
         "src/components/Workspaces/CreditOperationDetails.vue"
       ],
       "evidence": [
         "docs/CHECKLIST-UNICO-FIGMA-FRONT.md#cr06-e-lg08--complemento-de-1411",
-        "docs/evidence/qa-2026-11-16-inventory/api-contract-review.json"
+        "docs/evidence/qa-2026-11-16-inventory/api-contract-review.json",
+        "docs/evidence/qa-2026-11-17-partners/results.json"
       ],
       "browser": "parcial/isolada histórica; não integral",
       "historicalCategory": "Ajuste de front"
