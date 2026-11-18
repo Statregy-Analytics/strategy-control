@@ -270,17 +270,29 @@
               <span>{{ assetCountLabel(scope.row.assetCount) }}</span
               ><small v-if="scope.row.assetDescription">{{ scope.row.assetDescription }}</small>
             </div>
-            <span
+            <div
               v-else-if="column.name === 'yield' || column.name === 'appreciation'"
               :class="{
                 'directory-positive':
                   Number(scope.row[column.name === 'yield' ? 'yieldPercentage' : 'appreciation']) >
                   0,
               }"
-              >{{
-                percentage(scope.row[column.name === 'yield' ? 'yieldPercentage' : 'appreciation'])
-              }}</span
             >
+              <span class="directory-count-cell"
+                ><img
+                  v-if="column.name === 'yield' && Number(scope.row.yieldPercentage) > 0"
+                  src="/icons/wallet-directory/yield.svg"
+                  alt=""
+                />{{
+                  percentage(
+                    scope.row[column.name === 'yield' ? 'yieldPercentage' : 'appreciation'],
+                  )
+                }}</span
+              >
+              <small v-if="column.name === 'yield'" class="directory-yield-amount">{{
+                walletMoney(scope.row.yieldAmount, scope.row.principalCurrency)
+              }}</small>
+            </div>
             <div v-else-if="column.name === 'actions'" class="directory-row-actions">
               <q-btn
                 flat
@@ -307,7 +319,7 @@
                 :aria-label="'Ver contratos de ' + scope.row.clientName"
                 :aria-expanded="expanded === scope.row.key"
                 @click="toggle(scope.row.key)"
-                ><img src="/icons/wallet-directory/contract.svg" alt=""
+                ><img src="/icons/wallet-directory/contracts-action.svg" alt=""
               /></q-btn>
             </div>
             <span
