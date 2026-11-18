@@ -1,0 +1,315 @@
+{
+  "bankLine": "Banco do Brasil S.A.****1873 · BRL",
+  "images": [
+    {
+      "height": 39.125,
+      "loaded": true,
+      "src": "/icons/admin-menu/logo.svg",
+      "width": 182
+    },
+    {
+      "height": 20,
+      "loaded": true,
+      "src": "/icons/admin-menu/clients.svg",
+      "width": 20
+    },
+    {
+      "height": 20,
+      "loaded": true,
+      "src": "/icons/admin-menu/contracts.svg",
+      "width": 20
+    },
+    {
+      "height": 20,
+      "loaded": true,
+      "src": "/icons/admin-menu/logics.svg",
+      "width": 20
+    },
+    {
+      "height": 20,
+      "loaded": true,
+      "src": "/icons/admin-menu/transactions-active.svg",
+      "width": 20
+    },
+    {
+      "height": 20,
+      "loaded": true,
+      "src": "/icons/admin-menu/credit.svg",
+      "width": 20
+    },
+    {
+      "height": 20,
+      "loaded": true,
+      "src": "/icons/admin-menu/communications.svg",
+      "width": 20
+    },
+    {
+      "height": 20,
+      "loaded": true,
+      "src": "/icons/admin-menu/settings.svg",
+      "width": 20
+    },
+    {
+      "height": 20,
+      "loaded": true,
+      "src": "/icons/admin-menu/systems.svg",
+      "width": 20
+    },
+    {
+      "height": 20,
+      "loaded": true,
+      "src": "/icons/admin-menu/logout.svg",
+      "width": 20
+    },
+    {
+      "height": 12,
+      "loaded": true,
+      "src": "/icons/admin-menu/collapse.svg",
+      "width": 12
+    },
+    {
+      "height": 16,
+      "loaded": true,
+      "src": "/icons/audit/export.svg",
+      "width": 16
+    },
+    {
+      "height": 16,
+      "loaded": true,
+      "src": "/icons/contracts/flows/2349-281-imgIcon.svg",
+      "width": 16
+    },
+    {
+      "height": 128,
+      "loaded": true,
+      "src": "/icons/wallet-directory/summary-watermark.svg",
+      "width": 128
+    },
+    {
+      "height": 16,
+      "loaded": true,
+      "src": "/icons/wallet-directory/summary-wallet.svg",
+      "width": 16
+    },
+    {
+      "height": 16,
+      "loaded": true,
+      "src": "/icons/wallet-directory/summary-wallet.svg",
+      "width": 16
+    },
+    {
+      "height": 12,
+      "loaded": true,
+      "src": "/icons/wallet-directory/summary-arrow.svg",
+      "width": 12
+    },
+    {
+      "height": 16,
+      "loaded": true,
+      "src": "/icons/wallet-directory/summary-wallet.svg",
+      "width": 16
+    },
+    {
+      "height": 12,
+      "loaded": true,
+      "src": "/icons/wallet-directory/summary-arrow.svg",
+      "width": 12
+    },
+    {
+      "height": 16,
+      "loaded": true,
+      "src": "/icons/wallet-directory/summary-strategy.svg",
+      "width": 16
+    },
+    {
+      "height": 12,
+      "loaded": true,
+      "src": "/icons/wallet-directory/summary-arrow.svg",
+      "width": 12
+    },
+    {
+      "height": 20,
+      "loaded": true,
+      "src": "/icons/transactions/directory/1484-85569-imgIcon.svg",
+      "width": 20
+    },
+    {
+      "height": 16,
+      "loaded": true,
+      "src": "/icons/audit/search.svg",
+      "width": 16
+    },
+    {
+      "height": 12,
+      "loaded": true,
+      "src": "/icons/audit/chevron.svg",
+      "width": 12
+    },
+    {
+      "height": 12,
+      "loaded": true,
+      "src": "/icons/audit/chevron.svg",
+      "width": 12
+    },
+    {
+      "height": 12,
+      "loaded": true,
+      "src": "/icons/audit/chevron.svg",
+      "width": 12
+    },
+    {
+      "height": 12,
+      "loaded": true,
+      "src": "/icons/audit/chevron.svg",
+      "width": 12
+    },
+    {
+      "height": 12,
+      "loaded": true,
+      "src": "/icons/audit/chevron.svg",
+      "width": 12
+    },
+    {
+      "height": 16,
+      "loaded": true,
+      "src": "/icons/audit/filter.svg",
+      "width": 16
+    },
+    {
+      "height": 16,
+      "loaded": true,
+      "src": "/icons/transactions/directory/1484-85582-imgIcon.svg",
+      "width": 16
+    },
+    {
+      "height": 12,
+      "loaded": true,
+      "src": "/icons/transactions/directory/1484-85993-imgIcon8.svg",
+      "width": 12
+    },
+    {
+      "height": 16,
+      "loaded": true,
+      "src": "/icons/audit/open.svg",
+      "width": 16
+    },
+    {
+      "height": 16,
+      "loaded": true,
+      "src": "/icons/transactions/directory/1484-85993-imgIcon3.svg",
+      "width": 16
+    },
+    {
+      "height": 12,
+      "loaded": true,
+      "src": "/icons/transactions/directory/1484-85993-imgIcon8.svg",
+      "width": 12
+    },
+    {
+      "height": 16,
+      "loaded": true,
+      "src": "/icons/audit/open.svg",
+      "width": 16
+    },
+    {
+      "height": 16,
+      "loaded": true,
+      "src": "/icons/transactions/directory/1484-85582-imgIcon.svg",
+      "width": 16
+    },
+    {
+      "height": 12,
+      "loaded": true,
+      "src": "/icons/transactions/directory/1484-85993-imgIcon8.svg",
+      "width": 12
+    },
+    {
+      "height": 16,
+      "loaded": true,
+      "src": "/icons/audit/open.svg",
+      "width": 16
+    },
+    {
+      "height": 16,
+      "loaded": true,
+      "src": "/icons/contracts/flows/2349-281-imgIcon3.svg",
+      "width": 16
+    },
+    {
+      "height": 16,
+      "loaded": true,
+      "src": "/icons/audit/open.svg",
+      "width": 16
+    },
+    {
+      "height": 16,
+      "loaded": true,
+      "src": "/icons/contracts/flows/2349-281-imgIcon3.svg",
+      "width": 16
+    },
+    {
+      "height": 12,
+      "loaded": true,
+      "src": "/icons/transactions/directory/1484-85993-imgIcon8.svg",
+      "width": 12
+    },
+    {
+      "height": 16,
+      "loaded": true,
+      "src": "/icons/audit/open.svg",
+      "width": 16
+    },
+    {
+      "height": 16,
+      "loaded": true,
+      "src": "/icons/contracts/flows/2349-281-imgIcon3.svg",
+      "width": 16
+    },
+    {
+      "height": 16,
+      "loaded": true,
+      "src": "/icons/audit/open.svg",
+      "width": 16
+    },
+    {
+      "height": 16,
+      "loaded": true,
+      "src": "/icons/transactions/directory/1484-85582-imgIcon.svg",
+      "width": 16
+    },
+    {
+      "height": 12,
+      "loaded": true,
+      "src": "/icons/transactions/directory/1484-85993-imgIcon1.svg",
+      "width": 12
+    },
+    {
+      "height": 16,
+      "loaded": true,
+      "src": "/icons/audit/open.svg",
+      "width": 16
+    },
+    {
+      "height": 16,
+      "loaded": true,
+      "src": "/icons/transactions/directory/1484-85582-imgIcon.svg",
+      "width": 16
+    },
+    {
+      "height": 12,
+      "loaded": true,
+      "src": "/icons/transactions/directory/1484-85993-imgIcon1.svg",
+      "width": 12
+    },
+    {
+      "height": 16,
+      "loaded": true,
+      "src": "/icons/audit/open.svg",
+      "width": 16
+    }
+  ],
+  "negativeBadge": "rgb(255, 201, 201)",
+  "outflowColor": "rgb(255, 138, 138)",
+  "viewport": 1706,
+  "width": 1691
+}

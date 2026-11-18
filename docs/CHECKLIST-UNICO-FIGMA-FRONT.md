@@ -10,15 +10,38 @@ Atualizado em 2026-11-18. Contagem por **telas e estados independentes do Figma*
 | Situação | Quantidade |
 | --- | ---: |
 | Total inventariado | **279** |
-| Prontas no frontend | **236** |
-| Implementadas, aguardando revalidação/comparação completa | **33** |
-| Ainda exigem implementação, complemento ou correção | **10** |
-| Com implementação existente (prontas + revalidação) | **269 / 279 (96,4%)** |
+| Prontas no frontend | **239** |
+| Implementadas, aguardando revalidação/comparação completa | **31** |
+| Ainda exigem implementação, complemento ou correção | **9** |
+| Com implementação existente (prontas + revalidação) | **270 / 279 (96,8%)** |
 
-**Para encerrar o front faltam 10 itens de implementação/ajuste e 33 de revalidação.** “Pronto no frontend” não significa fluxo integrado liberado: dependências de backend/designer podem afetar também telas prontas. Os números não classificam toda pendência como tela nova nem como problema de API. A comparação de Crédito, carteira global e editor editorial que não foi concluída integralmente permanece em revalidação.
+**Para encerrar o front faltam 9 itens de implementação/ajuste e 31 de revalidação.** “Pronto no frontend” não significa fluxo integrado liberado: dependências de backend/designer podem afetar também telas prontas. Os números não classificam toda pendência como tela nova nem como problema de API. A comparação de Crédito, carteira global e editor editorial que não foi concluída integralmente permanece em revalidação.
 
 Fonte por frame: [progresso atual](FRONTEND-PROGRESS.json). A base anterior permanece histórica; [atualizações com evidências](FRONTEND-PROGRESS-OVERRIDES.json) registram cada mudança. Ao finalizar **cada entrega**, atualizar os IDs comprovados, executar `node scripts/frontend-progress.mjs` e informar este panorama na resposta final.
 <!-- frontend-progress:end -->
+
+
+
+## Entrega 18/11 — Transações P01, validação E03 e extrato corrigido P01.1
+
+**Frontend publicado:** revisão `a4b520a`, [deploy 44339861937](https://github.com/Statregy-Analytics/strategy-control/actions/runs/44339861937). P01 (`1484:85378`), E03 (`1484:86742`) e P01.1 (`2161:281`) concluídos como telas/estados do frontend. Conforme a orientação atual, ausência de suporte HTTP não impede a composição visual e seus testes locais; não foram simuladas persistência nem movimentações no produto.
+
+- [x] P01: quatro carteiras no cabeçalho, indicação de capital base/percentual quando conhecidos, ícones e navegação existentes; solicitações pendentes em cards no lugar da tabela genérica, com cliente, fluxo, valor, status, vencimento, atenção e rodapé. Removidas as abas redundantes que não aparecem nesse frame; o retorno existente das carteiras ao extrato foi preservado.
+- [x] Histórico: composição do Figma, busca por ID/cliente/contrato, cinco filtros, Mais Filtros reutilizando os mesmos campos e paginação de 15 itens. A filtragem usa a consulta completa antes da paginação, inclusive Responsável, sem enviar parâmetro HTTP não confirmado. As consultas de pendentes, histórico e carteiras continuam independentes e descartam respostas de contextos encerrados. Labels dos selects são preservados durante recargas; não substituir nome do cliente por UUID.
+- [x] Valores/estados: Processada, Reprovada, Aguardando execução e Pendente de validação apresentados conforme os estados do desenho; desconhecidos mantêm seu valor real. Rendimento traduzido. Saques em vermelho `#ff8a8a`, entradas positivas em verde e movimentos neutros em branco; a família de correção conserva sua apresentação específica. Badges negativos usam `#ffc9c9`. Ícones nativos por tipo/status, sem desenhos substitutos ou alterações de viewBox.
+- [x] P01.1: original riscado e identificável, nova correção com referência à original/data, diferença com suas origens, solicitação reduzida e operação zerada, notas de vínculo e abertura por olho. A relação usa IDs, nunca valor/data coincidentes. O componente aceita os dados complementares de apresentação; sua ausência no produto não gera informações fictícias nem uma chamada de detalhe para cada linha.
+- [x] E03: Validar abre a observação opcional do desenho e segue para a confirmação por senha já existente. Cancelamento, observação vazia, retenção após falha, repetição e erro legível testados. Guardas de permissão, identidade e versão e bloqueio de envio duplicado preservados; não foi introduzida outra ação financeira.
+- [x] Navegador local controlado: 21 registros/dois grupos de paginação, cinco filtros combinados, limpar por teclado, nenhum resultado, abrir solicitação, erro/loading independentes, repetir consulta, vazio confirmado, cabeçalho positivo/zero/indisponível, barra de capital base, cinco casos da correção e estado Iniciada. Componentes reais por props, sem store/API fictícios. Prévia removida antes do build e arquivada somente em texto.
+- [x] Homologação: oito transações reais consultadas; busca de Cláudio, filtros de tipo/status/cliente/responsável, período sem resultados e limpeza, carteira → voltar preservando busca e nome selecionado, abertura dos detalhes da transação e histórico. Cores, moeda bancária e breakpoints conferidos na publicação final. Nenhuma validação/aprovação/execução/correção financeira foi enviada.
+- [x] Responsividade: documento de 375 px em viewport de 390 px, tabelas com rolagem interna e sem imagens ausentes. Corrigida a rolagem externa causada por um rótulo acessível posicionado fora do contêiner. IDs longos podem quebrar linha. Ícones de 12/16/20 px mantêm dimensões nativas.
+- [x] 470 testes locais, com oito testes preexistentes do usuário fora dos commits; 462 no CI. Lint, build e auditoria passaram, sem desativar proteção. Diff desta entrega aprovado; o diff integral ainda encontra whitespace preexistente no Swagger local, não incluído. Detector auxiliar: 64 avisos e um alerta sobre DM Mono, fonte explícita no Figma e ausente no DESIGN.md legado.
+- [ ] **Referência/designer — EC01 (`1484:86740`):** a prancha recuperada contém apenas título e superfície vazia, sem estados de produto. Não foi criada uma página para reproduzir a anotação. Os cards reais foram implementados no P01; EC01 permanece em revalidação para esclarecer o conteúdo/enquadramento no inventário, sem contá-lo como concluído.
+- [ ] **Integração posterior, sem bloquear o front:** exportação global, agregados de capital base e projeção da correção com vínculos/data/origens/reduções completas. O DTO resumido atual não contém todo esse conjunto. A apresentação está preparada e foi testada com dados controlados; não equivale a teste financeiro integrado nem a contrato HTTP novo. Não solicitar novamente endpoints que já existem.
+- [ ] **Validação financeira integrada:** ações de escrita foram exercitadas por testes isolados atrás da confirmação existente; esta rodada não executou ações em registros de homologação. Isso continua explícito, separado da conclusão das telas.
+
+Panorama: **279 estados, 239 prontos, 31 em revalidação e 9 em implementação/ajuste**. Implementação existente **270/279 (96,8%)**; prontos **85,7%**. Nenhuma nova superfície sem referência; permanecem **13** no registro para avaliação do Éric. Este percentual mede implementação de frontend, não homologação completa do sistema.
+
+[Resultados](evidence/qa-2026-11-18-transaction-directory/results.json) · [Referências](evidence/qa-2026-11-18-transaction-directory/references.json) · [Filhos com contexto completo](evidence/qa-2026-11-18-transaction-directory/high-fidelity.json) · [Publicação](evidence/qa-2026-11-18-transaction-directory/publication.json) · [Telas controladas](evidence/qa-2026-11-18-transaction-directory/local-directory-known.png) · [Publicado](evidence/qa-2026-11-18-transaction-directory/hml-directory.png).
 
 
 ## Entrega 18/11 — parceiros CR07 e estados de Nova operação EC02
@@ -241,7 +264,7 @@ Panorama desta rodada: **279 estados, 220 prontos, 50 em revalidação e 9 ajust
 - [x] Estados preenchidos, indisponíveis, vazios, falha/retry, seleção por teclado, respostas antigas, alteração de prazo/valor e prevenção de confirmação/duplicação indevida testados com componentes reais no navegador local. 449 testes automatizados, lint e build local passaram.
 - [x] Harness e dados fictícios removidos antes da publicação; sucesso exige resposta explícita do envio. Rotas sem integração mostram indisponibilidade.
 - [ ] Homologação integrada de simulação/ofertas/envio/FIPE: endpoints não estão no OpenAPI consultado. GET de empréstimos, documentos e histórico já existem; não são pendências de criação de rota.
-- [ ] Concluir os quatro detalhes extensos (1:50960, 1:51347, 1:51728, 1:52034), dois estados de documentação (1:54430, 1:54617) e o extrato corrigido (2161:281). Isso soma sete ajustes; as demais revalidações seguem no inventário.
+- [ ] Concluir os quatro detalhes extensos (1:50960, 1:51347, 1:51728, 1:52034), dois estados de documentação (1:54430, 1:54617) e o extrato corrigido (2161:281), concluído na revisão de 18/11 descrita no topo. A contagem de sete ajustes é histórica; as demais revalidações seguem no inventário.
 - [ ] Designer: esclarecer ações editáveis dentro de empréstimo Ativo, divergência dos limites da opção Imóvel e título/campos de imóvel/IPTU no frame documental de automóvel. Não foram criados campos por suposição.
 
 Evidências e limites: [resultados](evidence/qa-2026-11-17-loan-offers/results.json), [contrato HTTP consultado](evidence/qa-2026-11-17-loan-offers/api-paths.json), [publicação e smoke](evidence/qa-2026-11-17-loan-offers/publication-assets.json). Nenhuma nova superfície sem referência: permanecem 13 para avaliação de Éric. Teste local controlado não significa fluxo financeiro homologado.
@@ -314,7 +337,7 @@ Evidências e limites: [resultado desta rodada](evidence/qa-2026-11-17-loans/res
 - [x] Reteste no Cliente publicado: cinco passos, seleção de objetivo/período/modalidade/valor/ativo/região, envio indisponível sem sucesso falso e Voltar mantendo o ativo escolhido. Em 390px, modal com largura/scrollWidth de 326px. Prévia enviada ficou exclusivamente no harness local controlado, removido antes do build.
 - [x] E08 local com registro real: PDF fictício de 615 bytes selecionado; tentativa protegida manteve arquivo/descrição. Nenhum upload/vínculo foi enviado. A evidência não homologa persistência documental.
 
-**Pendências reais:** a API não informa valor extraído do comprovante nem data específica da correção no DTO de detalhe; ficam indisponíveis, sem copiar o valor da transação ou a data da última atualização. Falta confirmar tipo/país/role do arquivo de comprovante sem acrescentar campos ao desenho. EditTransactionRequest não substitui a observação original; o endpoint de notas apenas acrescenta. A redução multiorigem do MD08 não cabe no corpo escalar atual. O extrato corrigido P01.1 continua com ajuste de front e projeção integrada pendentes. O OpenAPI atual só tem consulta/detalhe/documentos/histórico de contratos no cliente: não tem envio dessa solicitação; o front preserva as respostas e não apresenta sucesso.
+**Pendências reais:** a API não informa valor extraído do comprovante nem data específica da correção no DTO de detalhe; ficam indisponíveis, sem copiar o valor da transação ou a data da última atualização. Falta confirmar tipo/país/role do arquivo de comprovante sem acrescentar campos ao desenho. EditTransactionRequest não substitui a observação original; o endpoint de notas apenas acrescenta. A redução multiorigem do MD08 não cabe no corpo escalar atual. O extrato corrigido P01.1 foi concluído no frontend em 18/11; a projeção integrada completa permanece discriminada, sem impedir a entrega visual. O OpenAPI atual só tem consulta/detalhe/documentos/histórico de contratos no cliente: não tem envio dessa solicitação; o front preserva as respostas e não apresenta sucesso.
 
 O registro de **13 superfícies/adaptações sem frame vinculado** está no início deste checklist, separado do percentual e com a origem de cada composição para avaliação de Éric. Não representa 13 telas novas. Os fundos completos da oferta, campos condicionais de valor e apresentação das bandeiras ainda permanecem na revalidação integral, sem aprovação por aproximação. **Não foi preparada mensagem ao QA ou backend.**
 
@@ -595,7 +618,7 @@ Bloqueios secundários podem coexistir com trabalho de front; por isso a contage
 ### Situação atual dos grupos da classificação inicial
 
 - **T01:** adapters de nova transação conectados em 16/11; os modais foram revisados e testados. Persistem limites integrados bancários documentados, não ausência genérica de submitOperation.
-- **T02/T03:** senha, transferência, edição e preparação da correção conectadas; detalhes e dez estados revisados em 17/11. O extrato corrigido P01.1 continua em ajuste. Upload e redução multiorigem mantêm bloqueios específicos; não reabrir a senha ou os endpoints existentes como ausentes.
+- **T02/T03:** senha, transferência, edição e preparação da correção conectadas; detalhes e dez estados revisados em 17/11. O extrato corrigido P01.1 foi concluído no frontend em 18/11; consultar a revisão mais recente. Upload e redução multiorigem mantêm bloqueios específicos; não reabrir a senha ou os endpoints existentes como ausentes.
 - **P01:** pais e rota direta do saque conectados em 16/11; permanecem as limitações de confirmação de senha e moeda bancária descritas na entrega. O POST de saque existe.
 - **P05:** fluxo de cinco passos confirmado conectado na página de Contratos em 17/11; os seis modais têm referência recuperada e permanecem em revalidação integral da página/estados condicionais. Envio depende de endpoint de solicitação, ausente no OpenAPI consultado.
 - **P06:** lista informativa e bloqueio por nível oficial já corrigidos em 16/11. Ainda faltam composição/revisão dos fluxos de oferta, solicitação e garantias legados indicados por frame. Não simular etapas/uploads nem cobrar nova API para a listagem já integrada.
@@ -1237,14 +1260,14 @@ Legenda vigente: classificação de 16/11 por código e evidências, detalhada e
 | [1484:83540](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-83540) | LG09 · SP · Histórico completo do motor · SUBPÁGINA · DESIGN GLASS                            | Pronto no front · L03 |
 | [1484:85344](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-85344) | LG11 · EC · Configuração do motor minimizada · PAINEL DE ESTADOS DO COMPONENTE · DESIGN GLASS | Pronto no front · L03 |
 | [1484:85374](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-85374) | F01 · Extrato + Solicitações + Nova transação                                                 | Agregador/conexão — fora do percentual; ver estados filhos |
-| [1484:85378](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-85378) | P01 · V01 · Transações · Extrato global + Solicitações                                        | Implementado · revalidar · T03 |
+| [1484:85378](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-85378) | P01 · V01 · Transações · Extrato global + Solicitações                                        | Pronto no front · T03 |
 | [1484:86271](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-86271) | MD01 · Nova transação · Seleção de tipo                                                       | Pronto no front · T01 |
 | [1484:86319](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-86319) | MD02 · Nova transação · Depósito                                                              | Pronto no front · T01 |
 | [1484:86383](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-86383) | MD03 · Nova transação · Saque                                                                 | Pronto no front · T01 |
 | [1484:86476](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-86476) | MD04 · Nova transação · Transferência                                                         | Pronto no front · T01 |
 | [1484:86593](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-86593) | MD06 · Solicitação pendente · Detalhes + ações disponíveis                                    | Pronto no front · T02 |
 | [1484:86740](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-86740) | EC01 · Painel de estados do componente · Solicitação pendente                                 | Implementado · revalidar · T03 |
-| [1484:86742](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-86742) | E03 · Painel de estados do componente · Validar                                               | Implementado · revalidar · T03 |
+| [1484:86742](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-86742) | E03 · Painel de estados do componente · Validar                                               | Pronto no front · T03 |
 | [1484:86762](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-86762) | E04 · Painel de estados do componente · Aprovar                                               | Pronto no front · T02 |
 | [1484:86782](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-86782) | E05 · Painel de estados do componente · Rejeitar                                              | Pronto no front · T02 |
 | [1484:86802](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-86802) | E06 · Painel de estados do componente · Executar operação                                     | Pronto no front · T02 |
@@ -1261,7 +1284,7 @@ Legenda vigente: classificação de 16/11 por código e evidências, detalhada e
 | [2152:329](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=2152-329)     | MD04.2 · Nova transação · Transferência · Para outro cliente                                  | Pronto no front · T02 |
 | [2153:281](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=2153-281)     | MD07 · Confirmar com senha · Executar, aprovar, reprovar ou cancelar transação                | Pronto no front · T02 |
 | [2160:281](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=2160-281)     | MD06.1 · Depósito processado · Detalhes + Corrigir                                            | Pronto no front · T02 |
-| [2161:281](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=2161-281)     | P01.1 · EC · Extrato · Depósito corrigido                                                     | Implementação/ajuste pendente · T02 |
+| [2161:281](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=2161-281)     | P01.1 · EC · Extrato · Depósito corrigido                                                     | Pronto no front · T02 |
 | [2179:281](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=2179-281)     | MD08 · Corrigir depósito · Dados certos e motivo (depois MD07 · senha)                        | Pronto no front · T02 |
 | [2179:355](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=2179-355)     | MD06.2 · Solicitação pendente · Editar dados                                                  | Pronto no front · T02 |
 | [2187:404](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=2187-404)     | MD06.3 · Transação corrigida · Detalhes com a transação original                              | Pronto no front · T02 |

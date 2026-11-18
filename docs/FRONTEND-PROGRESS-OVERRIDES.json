@@ -317,12 +317,9 @@
       ]
     },
     "2161:281": {
-      "front": "adjustment",
-      "reason": "Erro passou a ter tratamento visual no histórico do Admin. O extrato corrigido completo ainda exige composição e vínculos entre original/correção/origens. TransactionSummaryResponse e lançamentos de extrato não trazem toda a decomposição do frame; não reconstruir a partir de valores soltos.",
-      "evidence": "docs/evidence/qa-2026-11-17-transactions/results.json",
-      "blockers": [
-        "backend"
-      ]
+      "front": "done",
+      "reason": "Extrato corrigido implementado como apresentação: vínculos por ID, data original, erro riscado, diferença e origens, redução/zeramento e abertura. Cinco casos exercitados com dados controlados; projeção HTTP completa não foi simulada.",
+      "evidence": "docs/evidence/qa-2026-11-18-transaction-directory/results.json"
     },
     "1:50860": {
       "front": "done",
@@ -868,6 +865,24 @@
       "front": "done",
       "reason": "EC02 revalidado como referência de componentes, sem criar página extra: etapas padrão/atual, seleção de tipo/cliente, ações habilitadas/desabilitadas, retorno/descarte. Criar/editar operação comercial continua dependendo de contrato confirmado da API.",
       "evidence": "docs/evidence/qa-2026-11-18-credit-directory/results.json"
+    },
+    "1484:85378": {
+      "front": "done",
+      "reason": "P01 comparado com os filhos completos: cabeçalho/carteiras, solicitações em cards, cinco filtros, histórico e paginação; vazio/loading/erro/repetição independentes, navegação e responsividade testados. Dados ausentes não impedem a composição do frontend.",
+      "evidence": "docs/evidence/qa-2026-11-18-transaction-directory/results.json"
+    },
+    "1484:86742": {
+      "front": "done",
+      "reason": "Validar ligado ao fluxo existente de observação opcional seguido da confirmação por senha; retenção em erro, repetição, descarte e permissão/versão protegidos e testados.",
+      "evidence": "docs/evidence/qa-2026-11-18-transaction-directory/results.json"
+    },
+    "1484:86740": {
+      "front": "validation",
+      "reason": "A referência recuperada contém apenas título e superfície vazia de prancha, sem estados ou tela de produto. Não criar página nem aprovar um estado inexistente; esclarecer enquadramento do frame no inventário com designer. Os cards reais foram concluídos no P01.",
+      "evidence": "docs/evidence/qa-2026-11-18-transaction-directory/references.json",
+      "blockers": [
+        "designer"
+      ]
     }
   }
 }

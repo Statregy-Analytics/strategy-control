@@ -1,0 +1,30 @@
+<template>
+<div style="background:radial-gradient(ellipse at 80% 35%,#00527899,transparent 80%),#151521;color:white;min-height:100vh;padding:16px">
+<h1 style="font-size:20px">Prévia controlada de Transações — sem persistência</h1>
+<div style="display:flex;gap:12px;flex-wrap:wrap"><button @click="mode='known'">Dados controlados</button><button @click="mode='empty'">Vazio confirmado</button><button @click="mode='loading'">Carregando</button><button @click="mode='error'">Erro por seção</button><button @click="validation=true">Abrir validação</button><output>{{last}}</output></div>
+<wallet-overview :model="walletModel" :details="false" presentation="transactions" @select="last='Carteira '+$event"/><transaction-directory :pending="pending" :history="history" :corrections="corrections" @open="last='Aberto '+$event" @retry-history="mode='known';last='Consulta repetida'" @retry-pending="mode='known';last='Pendentes repetidos'"/>
+<transaction-state-dialog v-if="validation" mode="validate" :submit="submit" @close="validation=false" @completed="validation=false;last='Validação local confirmada'"/>
+</div>
+</template>
+<script setup>
+import {computed,ref} from 'vue'
+import WalletOverview from './components/Finance/WalletOverview.vue'
+import TransactionDirectory from './components/Finance/TransactionDirectory.vue'
+import TransactionStateDialog from './components/Finance/TransactionStateDialog.vue'
+const mode=ref('known'),last=ref(''),validation=ref(false)
+let attempts=0
+async function submit(){if(++attempts===1)throw Error('controlled error');return true}
+const base={type:'Deposit',status:'Completed',clientId:'qa-client',clientName:'Cliente Fictício QA',currencyIsoCode:'BRL',amount:5000,source:{kind:'External',bankName:'Banco Fictício',accountNumberMasked:'****1234'},destination:{kind:'Wallet',walletType:'Free'},requestedAtUtc:'2026-11-18T09:00:00Z',dueAtUtc:'2026-11-19T12:00:00Z',createdBy:{type:'Admin',displayName:'Admin Fictício'}}
+const records=[
+{...base,id:'new-deposit',requestNumber:'TRX-QA-147',correctsTransactionId:'old-deposit'},
+{...base,id:'new-withdrawal',type:'Withdrawal',status:'Pending',requestNumber:'TRX-QA-148',correctsTransactionId:'old-withdrawal',source:base.destination,destination:base.source},
+{...base,id:'zeroed-transfer',type:'WalletTransfer',status:'Error',requestNumber:'TRX-QA-145',amount:10000},
+{...base,id:'old-withdrawal',type:'Withdrawal',status:'Error',requestNumber:'TRX-QA-143',amount:20000,correctedByTransactionId:'new-withdrawal'},
+{...base,id:'old-deposit',status:'Error',requestNumber:'TRX-QA-137',amount:50000,correctedByTransactionId:'new-deposit'},
+...Array.from({length:16},(_,i)=>({...base,id:'extra-'+i,requestNumber:'TRX-OTHER-'+i,clientId:'qa-other',clientName:'Outro Cliente QA',type:i%2?'Yield':'Withdrawal',status:i===15?'Initiated':i%2?'Completed':'Cancelled',createdBy:{type:'System'},requestedAtUtc:'2026-10-01T09:00:00Z'}))
+]
+const corrections={'new-deposit':{difference:45000,currency:'BRL',sources:[{label:'Carteira de Depósito',amount:5000},{label:'Carteira Strategy',amount:15000},{label:'Saque TRX-QA-143',amount:15000},{label:'Transferência TRX-QA-145',amount:10000}]},'new-withdrawal':{depositRequestNumber:'TRX-QA-137'},'zeroed-transfer':{depositRequestNumber:'TRX-QA-137',zeroed:true},'old-withdrawal':{depositRequestNumber:'TRX-QA-137'}}
+const walletModel=computed(()=>mode.value==='error'?null:{yieldAvailable:true,baseCapitalAmount:mode.value==='empty'?0:8875000,baseCapitalCurrency:'USD',baseCapitalPercentage:mode.value==='empty'?0:62.5,fx:{'USD-BRL':{rate:5.23}},...Object.fromEntries([['total',14200000],['deposit',1500000],['strategy',8200000],['assets',4500000]].map(([type,balance])=>[type,{currencies:[{currency:'USD',balance:mode.value==='empty'?0:balance}]}]))})
+const pending=computed(()=>({data:mode.value==='empty'?[]:records.slice(0,4).map((r,i)=>({...r,status:['AwaitingReceipt','Approved','PendingValidation','Rejected'][i],attentionRequired:i===0||i===3})),loading:mode.value==='loading',error:mode.value==='error'?'Erro controlado nos pendentes':''}))
+const history=computed(()=>({data:mode.value==='empty'?[]:records,loading:false,error:''}))
+</script>

@@ -11,12 +11,12 @@
   },
   "metrics": {
     "total": 279,
-    "done": 236,
-    "validation": 33,
-    "adjustment": 10,
-    "implemented": 269,
-    "implementedPercent": 96.4,
-    "readyPercent": 84.6
+    "done": 239,
+    "validation": 31,
+    "adjustment": 9,
+    "implemented": 270,
+    "implementedPercent": 96.8,
+    "readyPercent": 85.7
   },
   "withoutLinkedFigmaReference": {
     "count": 13,
@@ -2511,17 +2511,18 @@
       "link": "[1484:85378](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-85378)",
       "counted": true,
       "group": "T03",
-      "category": "Ajuste de front",
-      "front": "validation",
+      "category": "Já correto",
+      "front": "done",
       "blockers": [],
-      "reason": "Componentes e consultas existem, mas falta comparação integral aos estados listados e regressão integrada. Isto é trabalho de validação do front, sem afirmar novo defeito visual ou ausência de API.",
+      "reason": "P01 comparado com os filhos completos: cabeçalho/carteiras, solicitações em cards, cinco filtros, histórico e paginação; vazio/loading/erro/repetição independentes, navegação e responsividade testados. Dados ausentes não impedem a composição do frontend.",
       "sources": [
         "src/pages/TransctionPage.vue",
         "src/components/Finance/WalletDirectory.vue",
         "src/components/Finance/WalletOverview.vue"
       ],
       "evidence": [
-        "docs/CHECKLIST-UNICO-FIGMA-FRONT.md#ainda-é-trabalho-de-frontend"
+        "docs/CHECKLIST-UNICO-FIGMA-FRONT.md#ainda-é-trabalho-de-frontend",
+        "docs/evidence/qa-2026-11-18-transaction-directory/results.json"
       ],
       "browser": "sem aprovação integral por frame",
       "historicalCategory": "Ajuste de front"
@@ -2653,15 +2654,18 @@
       "group": "T03",
       "category": "Ajuste de front",
       "front": "validation",
-      "blockers": [],
-      "reason": "Componentes e consultas existem, mas falta comparação integral aos estados listados e regressão integrada. Isto é trabalho de validação do front, sem afirmar novo defeito visual ou ausência de API.",
+      "blockers": [
+        "designer"
+      ],
+      "reason": "A referência recuperada contém apenas título e superfície vazia de prancha, sem estados ou tela de produto. Não criar página nem aprovar um estado inexistente; esclarecer enquadramento do frame no inventário com designer. Os cards reais foram concluídos no P01.",
       "sources": [
         "src/pages/TransctionPage.vue",
         "src/components/Finance/WalletDirectory.vue",
         "src/components/Finance/WalletOverview.vue"
       ],
       "evidence": [
-        "docs/CHECKLIST-UNICO-FIGMA-FRONT.md#ainda-é-trabalho-de-frontend"
+        "docs/CHECKLIST-UNICO-FIGMA-FRONT.md#ainda-é-trabalho-de-frontend",
+        "docs/evidence/qa-2026-11-18-transaction-directory/references.json"
       ],
       "browser": "sem aprovação integral por frame",
       "historicalCategory": "Ajuste de front"
@@ -2674,17 +2678,18 @@
       "link": "[1484:86742](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-86742)",
       "counted": true,
       "group": "T03",
-      "category": "Ajuste de front",
-      "front": "validation",
+      "category": "Já correto",
+      "front": "done",
       "blockers": [],
-      "reason": "Componentes e consultas existem, mas falta comparação integral aos estados listados e regressão integrada. Isto é trabalho de validação do front, sem afirmar novo defeito visual ou ausência de API.",
+      "reason": "Validar ligado ao fluxo existente de observação opcional seguido da confirmação por senha; retenção em erro, repetição, descarte e permissão/versão protegidos e testados.",
       "sources": [
         "src/pages/TransctionPage.vue",
         "src/components/Finance/WalletDirectory.vue",
         "src/components/Finance/WalletOverview.vue"
       ],
       "evidence": [
-        "docs/CHECKLIST-UNICO-FIGMA-FRONT.md#ainda-é-trabalho-de-frontend"
+        "docs/CHECKLIST-UNICO-FIGMA-FRONT.md#ainda-é-trabalho-de-frontend",
+        "docs/evidence/qa-2026-11-18-transaction-directory/results.json"
       ],
       "browser": "sem aprovação integral por frame",
       "historicalCategory": "Ajuste de front"
@@ -2958,19 +2963,17 @@
       "link": "[2161:281](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=2161-281)",
       "counted": true,
       "group": "T02",
-      "category": "Ajuste de front",
-      "front": "adjustment",
-      "blockers": [
-        "backend"
-      ],
-      "reason": "Erro passou a ter tratamento visual no histórico do Admin. O extrato corrigido completo ainda exige composição e vínculos entre original/correção/origens. TransactionSummaryResponse e lançamentos de extrato não trazem toda a decomposição do frame; não reconstruir a partir de valores soltos.",
+      "category": "Já correto",
+      "front": "done",
+      "blockers": [],
+      "reason": "Extrato corrigido implementado como apresentação: vínculos por ID, data original, erro riscado, diferença e origens, redução/zeramento e abertura. Cinco casos exercitados com dados controlados; projeção HTTP completa não foi simulada.",
       "sources": [
         "src/pages/TransctionPage.vue",
         "src/components/Finance/TransactionCreate.vue"
       ],
       "evidence": [
         "docs/evidence/qa-2026-11-16-inventory/api-contract-review.json",
-        "docs/evidence/qa-2026-11-17-transactions/results.json"
+        "docs/evidence/qa-2026-11-18-transaction-directory/results.json"
       ],
       "browser": "diagnóstico de código; não executadas operações financeiras",
       "historicalCategory": "Ajuste de front"

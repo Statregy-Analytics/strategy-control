@@ -1,0 +1,42 @@
+[
+  {
+    "id": "1484:85378",
+    "shot": {
+      "width": 1708,
+      "height": 2374,
+      "format": "png",
+      "original_width": 1709,
+      "original_height": 2376
+    }
+  },
+  {
+    "id": "1484:86740",
+    "shot": {
+      "width": 2374,
+      "height": 1681,
+      "format": "png",
+      "original_width": 2374,
+      "original_height": 1681
+    }
+  },
+  {
+    "id": "1484:86742",
+    "shot": {
+      "width": 536,
+      "height": 357,
+      "format": "png",
+      "original_width": 536,
+      "original_height": 356
+    }
+  },
+  {
+    "id": "2161:281",
+    "shot": {
+      "width": 1427,
+      "height": 373,
+      "format": "png",
+      "original_width": 1426,
+      "original_height": 373
+    }
+  }
+]

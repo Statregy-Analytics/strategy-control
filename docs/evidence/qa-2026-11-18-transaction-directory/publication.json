@@ -1,0 +1,184 @@
+{
+  "commit": "a4b520a91cea536c92c8cf1ffe1bc0763176da96",
+  "run": "https://github.com/Statregy-Analytics/strategy-control/actions/runs/44339861937",
+  "conclusion": "success",
+  "localTests": 470,
+  "ciTests": 462,
+  "checks": [
+    {
+      "path": "assets/TransctionPage-Dv4b-9Mm.js",
+      "sha256": "43174add7c78517a82278efa4d170bcc0f16bed1eb1d9027296d4b2dc713c34e",
+      "matchesLocalBuild": true
+    },
+    {
+      "path": "assets/TransctionPage-CN2sjjYq.css",
+      "sha256": "b6d410892d6d8056a48dcaf83760191230756d45eab021439bb3242df2db8f73",
+      "matchesLocalBuild": true
+    },
+    {
+      "path": "icons/audit/export.svg",
+      "sha256": "e4afba9862860a7714481a2f96e9f5c4904e2bc8e383ebef79713ff39aaf1d32",
+      "matchesReference": true
+    },
+    {
+      "path": "icons/contracts/flows/2349-281-imgIcon.svg",
+      "sha256": "610247425d4927296ed2d55b9eb2f998ee666ce0c71ee4a44de83f198f17028e",
+      "matchesReference": true
+    },
+    {
+      "path": "icons/wallet-directory/summary-watermark.svg",
+      "sha256": "78044a5069739bb4c912ea1d9cdaedd5c15a52336bc1461a1891f45b7b570881",
+      "matchesReference": true
+    },
+    {
+      "path": "icons/wallet-directory/summary-wallet.svg",
+      "sha256": "7dc5516bd463fd7db5f96d8d6619f50e1ad646d5755860d0111da2eb7c64550d",
+      "matchesReference": true
+    },
+    {
+      "path": "icons/wallet-directory/summary-arrow.svg",
+      "sha256": "b2a032e4b627f955cee4af5fad59dc11372abe55f877e689326633fffedef9f9",
+      "matchesReference": true
+    },
+    {
+      "path": "icons/wallet-directory/summary-strategy.svg",
+      "sha256": "c9e14cb1149dfb72848b57f872da1eaaa8518974d195e67e61f7a1fc1ede20a4",
+      "matchesReference": true
+    },
+    {
+      "path": "icons/transactions/directory/1484-85569-imgIcon.svg",
+      "sha256": "fab1018a12dd5649fe9373c8dc3e892cfac90981eca1fbf8763900c2d70e7fd4",
+      "matchesReference": true
+    },
+    {
+      "path": "icons/transactions/directory/1484-85582-imgIcon.svg",
+      "sha256": "f5610bbabc08b761daefbbb26b0603f0d360e98ea7118d075ec15da5c026c1de",
+      "matchesReference": true
+    },
+    {
+      "path": "icons/transactions/directory/1484-85582-imgIcon1.svg",
+      "sha256": "ed4464e17af8168846231633407770b57b6fecd5ddb442bc23af6fca2aec0a94",
+      "matchesReference": true
+    },
+    {
+      "path": "icons/transactions/directory/1484-85582-imgIcon2.svg",
+      "sha256": "6ee51ae16e6e328a7465f6ba884d5c4180e5e80742c5a04d995a5eacb002481a",
+      "matchesReference": true
+    },
+    {
+      "path": "icons/transactions/directory/1484-85582-imgIcon3.svg",
+      "sha256": "ccfdc21b9910b8b2a520e32d126802d07d84493a7e2196965bd633b34c4815a4",
+      "matchesReference": true
+    },
+    {
+      "path": "icons/transactions/directory/1484-85582-imgIcon4.svg",
+      "sha256": "f930c53ec49095ceb31179beb9c901e6986e83fc73ef83be23274fd6a97e73d6",
+      "matchesReference": true
+    },
+    {
+      "path": "icons/audit/open.svg",
+      "sha256": "89fa7f7ec6bc876994f3f4515a21c3fe901b3497e8bf51fb105c98c4e52a676e",
+      "matchesReference": true
+    },
+    {
+      "path": "icons/transactions/directory/1484-85582-imgIcon6.svg",
+      "sha256": "dc1a9c0180d861d93d2ca5082a6fc9cc3c14cd9654500f4f37a3032fdba1165c",
+      "matchesReference": true
+    },
+    {
+      "path": "icons/transactions/directory/1484-85582-imgIcon7.svg",
+      "sha256": "f5e5e6617849f93d46683189b71df610c47c70d611dd9a3f547be8197bf427a5",
+      "matchesReference": true
+    },
+    {
+      "path": "icons/audit/search.svg",
+      "sha256": "db871b9b9aae92ee3404359e71758dfa07c6ecfca45ff1c0adad00e945215e43",
+      "matchesReference": true
+    },
+    {
+      "path": "icons/audit/chevron.svg",
+      "sha256": "e2eac0a3637aa902b3e2b022820a86af04c59efe1f60c6ffc04941eaf7ff80db",
+      "matchesReference": true
+    },
+    {
+      "path": "icons/audit/filter.svg",
+      "sha256": "c44848d192011f57b278af29d3e274aa7c75deb79090874656eee962f7101f77",
+      "matchesReference": true
+    },
+    {
+      "path": "icons/transactions/directory/1484-85993-imgIcon1.svg",
+      "sha256": "723ac4cc868e202d24555b3e54e4cc871f763472ec6b3187016622f415a3abf5",
+      "matchesReference": true
+    },
+    {
+      "path": "icons/transactions/directory/1484-85993-imgIcon3.svg",
+      "sha256": "b438d6fa779dfc6be741ed3d99d442201b7f7a394b0585c21c4f893a4a98f6eb",
+      "matchesReference": true
+    },
+    {
+      "path": "icons/contracts/flows/2349-281-imgIcon3.svg",
+      "sha256": "74e161d4051946500f0bc98c217267247d57e090b9fa299835c3149e0d415ef1",
+      "matchesReference": true
+    },
+    {
+      "path": "icons/transactions/directory/1484-85993-imgIcon6.svg",
+      "sha256": "d8f4e848368c682e632b9d7f7d9dfbb9df7c975916b511146c62f484d7aa04e5",
+      "matchesReference": true
+    },
+    {
+      "path": "icons/transactions/directory/1484-85993-imgIcon7.svg",
+      "sha256": "375f1e731829e7e84ab76f23518261ca359d7e5f73f20eee94b3ef6bc0ecea3d",
+      "matchesReference": true
+    },
+    {
+      "path": "icons/transactions/directory/1484-85993-imgIcon8.svg",
+      "sha256": "a0dc7413bb8ce7458001fc64a721a81c4a4f5836088107a03a84bf5a19c14d9d",
+      "matchesReference": true
+    },
+    {
+      "path": "icons/transactions/directory/1484-85993-imgIcon9.svg",
+      "sha256": "5864d87b7e16bdee565b246092cbcae0d14fc19996ddf6515014d59260ad6cec",
+      "matchesReference": true
+    },
+    {
+      "path": "icons/transactions/directory/1484-85659-imgIcon2.svg",
+      "sha256": "40b3f3b28124c80c0b50ae2058a8dcc62c2cfcc4cca148d6911a4d7acb838dba",
+      "matchesReference": true
+    },
+    {
+      "path": "icons/contracts/flows/2349-281-imgIcon2.svg",
+      "sha256": "89fa7f7ec6bc876994f3f4515a21c3fe901b3497e8bf51fb105c98c4e52a676e",
+      "matchesReference": true
+    },
+    {
+      "path": "icons/transactions/directory/1484-85731-imgIcon2.svg",
+      "sha256": "68d7aeb7f320f122eb8152e26663609e984a8620f9a0d6a8f50cc6f4ade2dca8",
+      "matchesReference": true
+    },
+    {
+      "path": "icons/transactions/directory/1484-85731-imgIcon6.svg",
+      "sha256": "a16a48d0f025175f16eaeec0fd7641210611c0ead30cc55c8e5e98963f9899cb",
+      "matchesReference": true
+    },
+    {
+      "path": "icons/transactions/directory/1484-85809-imgIcon2.svg",
+      "sha256": "536be02cc47083bd31f1f9d83f280b462738b96da648264897876f4ad18025f5",
+      "matchesReference": true
+    },
+    {
+      "path": "icons/transactions/directory/1484-85876-imgIcon2.svg",
+      "sha256": "1643f4c84e2d7a3345f01d3cad1b9410fa5e92ab3ac9ad11d22cbfaed8cef426",
+      "matchesReference": true
+    },
+    {
+      "path": "icons/transactions/directory/1484-85876-imgIcon3.svg",
+      "sha256": "a1abf6ce5bc0c34269498cf8c4388b9626fa18178fb9a6f5cd151e8ccce6cf6c",
+      "matchesReference": true
+    },
+    {
+      "path": "icons/transactions/directory/1484-85876-imgIcon6.svg",
+      "sha256": "b9969cdf459f1c481a0c51eb49cc4d99e4ddb303eb26611b659f1202885da5db",
+      "matchesReference": true
+    }
+  ]
+}

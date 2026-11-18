@@ -1,0 +1,78 @@
+{
+  "date": "2026-11-18",
+  "sourceCommit": "a4b520a91cea536c92c8cf1ffe1bc0763176da96",
+  "frames": [
+    "1484:85378",
+    "1484:86742",
+    "2161:281"
+  ],
+  "notCountedAsDone": [
+    "1484:86740"
+  ],
+  "local": {
+    "tests": 470,
+    "userPreexistingUntrackedTests": 8,
+    "lint": "passed",
+    "build": "passed",
+    "audit": "passed",
+    "scopedDiff": "passed",
+    "fullDiff": "pre-existing Swagger whitespace at line61861; preserved and not staged",
+    "controlled": [
+      "Cards for pending requests and four status variants, explicit attention indicators and masked endpoints",
+      "Statement correction group: original/error struck through, new correction relation, original date, source difference and reduced/zeroed pending operations",
+      "Five filters combined, search including accent-folding, clear by keyboard, filter expansion, no results",
+      "Complete index filtered before local pagination; 21 rows, two pages, reset to first page on filter change",
+      "Loading/empty/error/retry independent by section; failed pending section does not hide history",
+      "Validate optional observation, failure preserves input, retry completes local callback; no real action sent",
+      "Header with positive, zero and unavailable data, base-capital progress62.5 and0; native icons",
+      "390px preview document375; table scrolls internally; no missing images",
+      "Confirmed bank currency appears in statement without inferring contract source currency from its destination; cross-currency regression test"
+    ],
+    "integratedLocal": [
+      "Actual statement with8 rows and real global balances",
+      "Claudio search returns1 row",
+      "Wallet card opens wallet directory; back preserves search",
+      "Open detail through same existing transaction handler"
+    ],
+    "preview": "temporary html/js/vue removed before build and archived only as txt"
+  },
+  "writesPerformed": false,
+  "frontendOnly": true,
+  "backendNotAGate": true,
+  "integrationLimits": [
+    "Export global has no confirmed endpoint and remains disabled",
+    "Summary list DTO does not project correction links, original dates and multiorigin reduction details; presentation accepts confirmed projections without fabricating data or issuing one request per row",
+    "Global base-capital amount/percentage absent from current aggregate remains unknown",
+    "Financial validation writes were tested in unit harness behind the existing password confirmation; no real operation approved/executed/canceled"
+  ],
+  "designer": [
+    "EC01 1484:86740 currently contains only the panel title and an empty design surface; no product screen or state was invented. Still validation for design/inventory clarification."
+  ],
+  "detector": {
+    "advisories": 64,
+    "warning": "DM Mono from Figma is absent in legacy DESIGN.md, retained per specific design",
+    "warnings": 1
+  },
+  "unlinkedSurfaces": 13,
+  "homologation": {
+    "run": "https://github.com/Statregy-Analytics/strategy-control/actions/runs/44339861937",
+    "ciTests": 462,
+    "passed": [
+      "Eight real rows; Claudio search returns one; type Deposit and status Processada combined",
+      "Client and responsible filters, period Today returns empty and keyboard clear restores result",
+      "Wallet directory and back preserve search plus selected client label",
+      "Actual transaction detail opens through eye and displays existing history/actions; no financial write",
+      "Final source: confirmed bank currency shown; outflow rgb255,138,138 and negative badge rgb255,201,201 match Figma",
+      "Desktop1706 document1691, mobile390 document375; internal ledger scroll; no missing images",
+      "Mobile keyboard opening of Claudio transaction and closing existing details"
+    ],
+    "finalSourceVisual": "passed",
+    "writesPerformed": false
+  },
+  "sourceCommits": [
+    "fc08e7844597d83b966e4baefbbe1c208a367303",
+    "b3c82094af0ce92c52dd9f114c9c64113ac1c1bd",
+    "5063aaf56ddabde59c2c61a9621c23fc7c0e8a64",
+    "a4b520a91cea536c92c8cf1ffe1bc0763176da96"
+  ]
+}
