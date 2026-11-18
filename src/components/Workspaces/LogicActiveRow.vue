@@ -214,4 +214,30 @@ button:focus-visible {
     pointer-events: auto;
   }
 }
+
+.logic-active-row__identity {
+  flex: 0 1 144px;
+}
+.logic-active-row dl {
+  display: grid;
+  grid-template-columns: 100px 96px 70px;
+  gap: 24px;
+  margin-left: 44px;
+}
+.logic-active-row nav {
+  margin-right: 12px;
+}
+@media (max-width: 900px) {
+  .logic-active-row__identity {
+    flex: 1;
+  }
+  .logic-active-row dl {
+    margin-left: 0;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    flex-basis: 100%;
+  }
+  .logic-active-row nav {
+    margin-right: 0;
+  }
+}
 </style>

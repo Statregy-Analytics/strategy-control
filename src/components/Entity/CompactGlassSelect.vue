@@ -7,6 +7,7 @@
     :popup-content-style="{ width: `${menuWidth}px` }"
     @update:model-value="$emit('update:modelValue', $event)"
   >
+    <template v-if="$slots.prepend" #prepend><slot name="prepend" /></template>
     <template #option="scope">
       <div class="compact-glass-row">
         <div v-if="scope.opt.groupLabel" class="compact-glass-group" role="presentation">
@@ -46,7 +47,7 @@ defineEmits(['update:modelValue'])
   padding: 7px 7px 13px;
   max-width: calc(100vw - 24px);
   border-radius: 10px;
-  background: rgba(25, 32, 43, 0.94);
+  background: rgba(255, 255, 255, 0.06);
   color: #fff;
   color-scheme: dark;
   scrollbar-color: rgba(255, 255, 255, 0.3) transparent;

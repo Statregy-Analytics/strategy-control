@@ -1,5 +1,14 @@
 <template>
   <q-page class="workspace" :class="'workspace--' + module">
+    <keep-alive>
+      <logic-selection
+        v-if="module === 'logic' && !editor"
+        :state="resource.state"
+        @retry="load"
+        @create="create"
+        @select="(row, action) => openRow(row, action)"
+      />
+    </keep-alive>
     <logic-workspace
       v-if="editor && module === 'logic'"
       :key="editor + '-' + (recordId || 'new') + '-' + (contentKind || '')"
@@ -17,7 +26,7 @@
       @close="closeEditor"
       @saved="onSaved"
     />
-    <template v-else>
+    <template v-else-if="module !== 'logic'">
       <header class="workspace-header">
         <div>
           <h1>{{ definition.title }}</h1>
@@ -359,6 +368,7 @@
   </q-page>
 </template>
 <script setup>
+import LogicSelection from 'src/components/Workspaces/LogicSelection.vue'
 import CreditWizardSteps from 'src/components/Workspaces/CreditWizardSteps.vue'
 import CreditOperationDirectory from 'src/components/Workspaces/CreditOperationDirectory.vue'
 import CreditViewToggle from 'src/components/Workspaces/CreditViewToggle.vue'

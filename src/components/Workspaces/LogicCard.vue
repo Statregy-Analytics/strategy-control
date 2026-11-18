@@ -1,5 +1,9 @@
 <template>
-  <article class="logic-card" :aria-label="`Motor ${record.name || record.code}`">
+  <article
+    class="logic-card"
+    :class="{ 'logic-card--closed': closed }"
+    :aria-label="`Motor ${record.name || record.code}`"
+  >
     <div class="logic-card-body">
       <header class="logic-card-heading">
         <logic-executive-summary
@@ -8,17 +12,13 @@
         >
           <div class="logic-card-identity">
             <span class="logic-card-symbol"
-              ><img src="/icons/logics/lg01/chart-pie.svg" alt=""
+              ><img src="/icons/logics/directory/cards-imgChartPie.svg" alt=""
             /></span>
             <div class="logic-card-title">
               <h2>{{ record.name || record.code }}</h2>
               <div class="logic-card-tags">
                 <span class="logic-card-code">{{ record.code || '—' }}</span>
-                <span class="logic-card-status"
-                  ><img v-if="closed" src="/icons/logics/lg01/circle-check.svg" alt="" />{{
-                    workspaceStatus(record.status)
-                  }}</span
-                >
+                <logic-status :value="record.status" />
               </div>
             </div>
           </div>
@@ -26,36 +26,48 @@
         <row-actions
           class="logic-card-options"
           dark
-          icon-src="/icons/logics/lg01/ellipsis.svg"
+          icon-src="/icons/logics/directory/cards-imgEllipsis.svg"
           :aria-label="`Opções do motor ${record.name || record.code}`"
           :actions="actions"
           @select="emit('select', $event)"
         />
       </header>
+      <div class="logic-card-recommendations">
+        <span v-for="tag in metrics.recommendations || []" :key="tag">{{ tag }}</span>
+      </div>
       <dl class="logic-card-metrics">
-        <div v-for="label in metrics" :key="label">
-          <dt>{{ label }}</dt>
+        <div v-for="metric in values" :key="metric.label">
+          <dt>{{ metric.label }}</dt>
           <dd>
             <img
-              v-if="label === 'Papéis/Contratos'"
-              src="/icons/logics/lg01/link.svg"
+              v-if="metric.label === 'Papéis/Contratos'"
+              src="/icons/logics/directory/cards-imgLink.svg"
               alt=""
-            />Indisponível
+            />{{ metric.value }}
           </dd>
         </div>
       </dl>
       <div class="logic-card-cycle">
-        <p><span>Ciclo Atual:</span><span>Indisponível</span></p>
-        <p><span>Performance do Ciclo Atual:</span><span>Indisponível</span></p>
+        <p>
+          <span>Ciclo Atual:</span><span>{{ cycle }}</span>
+        </p>
+        <p>
+          <span>Performance do Ciclo Atual:</span
+          ><span :class="performanceTone">{{ logicPercent(metrics.performancePercent) }}</span>
+        </p>
         <p>
           <span
-            ><img v-if="closed" src="/icons/logics/lg01/clock.svg" alt="" />{{
+            ><img src="/icons/logics/directory/cards-imgClock.svg" alt="" />{{
               closed ? 'Encerrado em:' : 'Próxima Atualização:'
             }}</span
-          ><span>Indisponível</span>
+          ><span>{{ logicDate(closed ? metrics.closedAt : metrics.nextUpdate) }}</span>
         </p>
       </div>
-      <div class="logic-card-closure"><span>Fechamento indisponível</span></div>
+      <div v-if="closed" class="logic-card-closure">
+        <span>{{
+          metrics.closureApplied === true ? 'Fechamento aplicado' : 'Fechamento indisponível'
+        }}</span>
+      </div>
     </div>
     <nav class="logic-card-actions" :aria-label="`Ações do motor ${record.name || record.code}`">
       <button
@@ -73,11 +85,47 @@
 import { computed } from 'vue'
 import RowActions from 'src/components/Entity/RowActions.vue'
 import LogicExecutiveSummary from './LogicExecutiveSummary.vue'
-import { workspaceStatus } from 'src/services/adminWorkspaceModel'
-const props = defineProps({ record: { type: Object, required: true } })
+import LogicStatus from './LogicStatus.vue'
+import {
+  logicState,
+  logicCount,
+  logicNumber,
+  logicIndex,
+  logicPercent,
+  logicDate,
+} from 'src/services/logicDirectoryModel'
+const props = defineProps({
+  record: { type: Object, required: true },
+  metrics: { type: Object, default: () => ({}) },
+})
 const emit = defineEmits(['select'])
-const closed = computed(() => ['Closed', 'Encerrado'].includes(props.record.status))
-const metrics = ['Índice Atual', 'Alvo do Ciclo', 'Final Obrigatório', 'Papéis/Contratos']
+const closed = computed(() => logicState(props.record.status) === 'closed')
+const values = computed(() => [
+  { label: 'Índice Atual', value: logicIndex(props.metrics.index) },
+  {
+    label: 'Alvo do Ciclo',
+    value:
+      logicNumber(props.metrics.target) === null
+        ? 'Indisponível'
+        : Number(props.metrics.target).toLocaleString('pt-BR') + '%',
+  },
+  { label: 'Final Obrigatório', value: logicIndex(props.metrics.finalIndex) },
+  { label: 'Papéis/Contratos', value: logicCount(props.metrics.links) },
+])
+const cycle = computed(() =>
+  props.metrics.cycleStart && props.metrics.cycleEnd
+    ? logicDate(props.metrics.cycleStart).split(',')[0] +
+      ' — ' +
+      logicDate(props.metrics.cycleEnd).split(',')[0]
+    : 'Indisponível',
+)
+const performanceTone = computed(() =>
+  logicNumber(props.metrics.performancePercent) > 0
+    ? 'positive'
+    : logicNumber(props.metrics.performancePercent) < 0
+      ? 'negative'
+      : '',
+)
 const actions = [
   { name: 'open', label: 'Abrir', icon: 'visibility' },
   { name: 'edit', label: 'Editar', icon: 'edit' },
@@ -98,7 +146,7 @@ const actions = [
 }
 .logic-card-body {
   padding: 20px;
-  min-height: 390px;
+  min-height: 330px;
 }
 .logic-card-heading {
   display: flex;
@@ -182,7 +230,7 @@ const actions = [
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 16px;
-  margin: 40px 0 0;
+  margin: 0;
   padding: 16px 0;
   border-top: 1px solid rgba(255, 255, 255, 0.05);
 }
@@ -297,5 +345,33 @@ const actions = [
     opacity: 1;
     pointer-events: auto;
   }
+}
+
+.logic-card--closed .logic-card-body {
+  min-height: 390px;
+}
+.logic-card-recommendations {
+  display: flex;
+  gap: 4px;
+  flex-wrap: wrap;
+  min-height: 20px;
+  margin: 16px 0;
+}
+.logic-card-recommendations span {
+  border: 0.5px solid #00c950;
+  border-radius: 8px;
+  background: #00c9501a;
+  color: #7bf1a8;
+  padding: 3px 8px;
+  font:
+    400 10px/15px Inter,
+    sans-serif;
+  text-transform: uppercase;
+}
+.logic-card-cycle .positive {
+  color: #74ffa0;
+}
+.logic-card-cycle .negative {
+  color: #ffb3b3;
 }
 </style>
