@@ -118,15 +118,12 @@
 <script setup>
 import { computed } from 'vue'
 import { financeLabel } from 'src/services/financeService'
-import {
-  contractTransactionLabel,
-  contractEndpoint,
-  contractSourceCurrency,
-} from 'src/services/contractTransactionView'
+import { contractTransactionLabel } from 'src/services/contractTransactionView'
 import { transactionDirectoryAssets } from 'src/services/transactionDirectoryAssets'
 import {
   transactionStatusLabel,
   transactionWhen as when,
+  transactionEndpointParts as endpointParts,
   transactionMoney as money,
   transactionActor as actor,
   transactionTone as tone,
@@ -154,14 +151,6 @@ const labels = [
 const assets = transactionDirectoryAssets['1484:85993']
 const isCorrection = (row) =>
   !!(row.correctsTransactionId || row.correctedByTransactionId || props.corrections[row.id])
-const endpointParts = (row, side) => {
-  const currency =
-    side === 'source' ? contractSourceCurrency(row) : row.currencyIsoCode || row.currency?.isoCode
-  const result = contractEndpoint(row[side], currency)
-  if (row[side]?.kind === 'External' && currency)
-    result.detail = [result.detail, currency].filter(Boolean).join(' · ')
-  return result
-}
 const statusIcon = (row) =>
   isCorrection(row)
     ? null

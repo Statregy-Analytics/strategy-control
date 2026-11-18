@@ -1,6 +1,6 @@
 import { foldSearch } from './adminWorkspaceModel.js'
 import { numberInputValue } from './numberInputValue.js'
-import { contractEndpoint } from './contractTransactionView.js'
+import { contractEndpoint, contractSourceCurrency } from './contractTransactionView.js'
 
 export const transactionWhen = (value, dateOnly = false) =>
   value && Number.isFinite(Date.parse(value))
@@ -120,4 +120,13 @@ export function transactionStatusLabel(status, fallback = '—') {
       PendingValidation: 'Pendente de validação',
     }[status] || fallback
   )
+}
+
+export function transactionEndpointParts(row, side) {
+  const currency =
+    side === 'source' ? contractSourceCurrency(row) : row.currencyIsoCode || row.currency?.isoCode
+  const result = contractEndpoint(row[side], currency)
+  if (row[side] && !['Wallet', 'Contract'].includes(row[side].kind) && currency)
+    result.detail = [result.detail, currency].filter(Boolean).join(' · ')
+  return result
 }

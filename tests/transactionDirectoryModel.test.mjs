@@ -9,6 +9,7 @@ import {
   transactionTone,
   transactionAmountTone,
   transactionStatusLabel,
+  transactionEndpointParts,
 } from '../src/services/transactionDirectoryModel.js'
 
 test('ledger preserves known zero and rejects absent or invalid money and unknown currency', () => {
@@ -116,4 +117,27 @@ test('transaction display labels follow the Figma states without interpreting un
   assert.equal(transactionStatusLabel('Rejected', 'Rejected'), 'Reprovada')
   assert.equal(transactionStatusLabel('Initiated', 'Initiated'), 'Iniciada')
   assert.equal(transactionStatusLabel('unknown', 'Valor real'), 'Valor real')
+})
+
+test('bank currency is displayed when known, while contract source currency is never inferred from the destination', () => {
+  const row = {
+    type: 'Deposit',
+    currencyIsoCode: 'BRL',
+    source: { kind: 'BankAccount', bankName: 'Banco QA', accountNumberMasked: '****1234' },
+  }
+  assert.equal(transactionEndpointParts(row, 'source').detail, '****1234 · BRL')
+  const contribution = {
+    type: 'ContractContribution',
+    currencyIsoCode: 'USD',
+    source: { kind: 'Wallet', walletType: 'Free' },
+    destination: { kind: 'Contract', contractName: 'Contrato QA' },
+  }
+  assert.equal(transactionEndpointParts(contribution, 'source').detail, '')
+  assert.equal(
+    transactionEndpointParts(
+      { ...contribution, conversion: { sourceCurrencyIsoCode: 'BRL' } },
+      'source',
+    ).detail,
+    'BRL',
+  )
 })
