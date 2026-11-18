@@ -7,13 +7,13 @@
       </div>
       <div class="contract-selection-header-actions">
         <q-btn outline no-caps @click="$emit('requests')"
-          ><img
-            src="/icons/contracts/flows/2363-281-imgIconeSolicitacoes.svg"
-            alt=""
-          />Solicitações<q-badge v-if="newRequests !== null">{{ newRequests }}</q-badge></q-btn
-        ><q-btn v-if="!selectionOnly" outline no-caps @click="$emit('open')"
-          ><img src="/icons/contracts/flows/2363-281-imgPlus.svg" alt="" />Criar Novo
-          Contrato</q-btn
+          ><img :src="image('header-imgIconeSolicitacoes')" alt="" />Solicitações<q-badge
+            v-if="newRequests !== null"
+            >{{ newRequests }}</q-badge
+          ></q-btn
+        >
+        <q-btn v-if="!selectionOnly" outline no-caps @click="$emit('open')"
+          ><img :src="image('header-imgPlus')" alt="" />Criar Novo Contrato</q-btn
         >
       </div>
       <div class="workspace-toolbar">
@@ -23,102 +23,134 @@
           dense
           dark
           clearable
+          hide-bottom-space
           class="workspace-search"
           placeholder="Buscar contrato por nome, cliente, motor ou ID"
           aria-label="Buscar contrato por nome, cliente, motor ou ID"
-          ><template #prepend><workspace-icon name="search" /></template></q-input
-        ><glass-select
+          ><template #prepend><img :src="image('header-imgSearch')" alt="" /></template
+        ></q-input>
+        <glass-select
           v-model="client"
           :options="clients"
           placeholder="Cliente"
           aria-label="Cliente"
+          :dropdown-icon="'img:' + image('header-imgChevronDown')"
           clearable
-        /><glass-select
+          ><template #prepend><img :src="image('header-imgUsers')" alt="" /></template
+        ></glass-select>
+        <glass-select
           v-model="engine"
           :options="engines"
           placeholder="Motor Principal"
           aria-label="Motor Principal"
+          :dropdown-icon="'img:' + image('header-imgChevronDown')"
           clearable
-        /><date-range-picker v-model="period" label="Vigência" /><glass-select
+          ><template #prepend><img :src="image('header-imgChartPie')" alt="" /></template
+        ></glass-select>
+        <date-range-picker v-model="period" label="Vigência"
+          ><template #icon><img :src="image('header-imgCalendar')" alt="" /></template
+        ></date-range-picker>
+        <glass-select
           v-model="sort"
+          class="contract-selection-sort"
           :options="[
             { label: 'A–Z', value: 'az' },
             { label: 'Mais recentes', value: 'recent' },
           ]"
           placeholder="Ordenar por"
           aria-label="Ordenar por"
-        />
-        <div class="workspace-actions">
+          :dropdown-icon="'img:' + image('header-imgChevronDown')"
+          ><template #prepend><img :src="image('header-imgArrowUpDown')" alt="" /></template
+        ></glass-select>
+        <div class="contract-selection-view" role="group" aria-label="Visualização dos contratos">
           <q-btn
-            outline
-            dense
-            aria-label="Cards"
-            :aria-pressed="view === 'cards'"
-            @click="view = 'cards'"
-            ><workspace-icon name="layout-grid" /></q-btn
-          ><q-btn
-            outline
+            flat
             dense
             aria-label="Lista"
             :aria-pressed="view === 'list'"
             @click="view = 'list'"
-            ><workspace-icon name="list"
+            ><img
+              :src="image(view === 'list' ? 'list-imgLayoutList' : 'header-imgLayoutList')"
+              alt="" /></q-btn
+          ><q-btn
+            flat
+            dense
+            aria-label="Cards"
+            :aria-pressed="view === 'cards'"
+            @click="view = 'cards'"
+            ><img
+              :src="image(view === 'cards' ? 'header-imgLayoutGrid' : 'list-imgLayoutGrid')"
+              alt=""
           /></q-btn>
         </div>
       </div>
     </header>
     <main class="workspace-main">
-      <resource-state :state="resource.state" @retry="load"
-        ><div v-if="view === 'cards'" class="contract-selection-cards">
+      <resource-state :state="resource.state" @retry="load">
+        <div v-if="view === 'cards'" class="contract-selection-cards">
           <article v-for="row in pageRows" :key="row.id" class="contract-selection-card">
-            <div class="contract-selection-card__title">
-              <workspace-icon name="contract-file-text" />
-              <div>
-                <small>{{ row.publicCode || row.id.slice(0, 8) }}</small>
-                <q-badge outline>{{
-                  row.businessStatus?.name || financeLabel(row.registrationStatus)
-                }}</q-badge>
-                <h2>
-                  <button @click="$emit('open', row.id)">
-                    {{ row.name || 'Contrato sem nome' }}
-                  </button>
-                </h2>
-                <small
-                  ><workspace-icon name="contract-clock" /> Criado em
-                  {{ dateLabel(row.createdAtUtc) }}</small
-                >
+            <div class="contract-selection-card__main">
+              <div class="contract-selection-card__title">
+                <span class="contract-selection-file"
+                  ><img :src="image('card-imgFileText')" alt=""
+                /></span>
+                <div>
+                  <div class="contract-selection-card__badges">
+                    <small class="contract-selection-id"
+                      >ID: {{ row.publicCode || row.id.slice(0, 8) }}</small
+                    ><contract-status-badge :status="contractSelectionStatus(row)" />
+                  </div>
+                  <h2>
+                    <button @click="$emit('open', row.id)">
+                      {{ row.name || 'Contrato sem nome' }}
+                    </button>
+                  </h2>
+                  <small class="contract-selection-created"
+                    ><img :src="image('card-imgClock')" alt="" />Criado em
+                    {{ day(row.createdAtUtc) }}</small
+                  >
+                </div>
               </div>
-            </div>
-            <div class="contract-selection-card__clients">
-              <small><workspace-icon name="contract-users" /> Cliente(s)</small>
-              <div class="contract-selection-clients">
-                <span v-for="c in row.clients || []" :key="c.clientId">{{ c.displayName }}</span
-                ><span v-if="!row.clients?.length">Nenhum cliente vinculado.</span>
+              <div class="contract-selection-card__clients">
+                <small><img :src="image('card-imgUsers')" alt="" />Cliente(s)</small>
+                <div class="contract-selection-clients">
+                  <span v-for="c in row.clients || []" :key="c.clientId">{{
+                    c.displayName || '—'
+                  }}</span
+                  ><span v-if="!row.clients?.length">Nenhum cliente vinculado.</span>
+                </div>
               </div>
             </div>
             <div class="contract-selection-card__data">
               <div>
-                <small><workspace-icon name="contract-coins" /> Capital Atual</small
+                <small><img :src="image('card-imgCoins')" alt="" />Capital Atual</small
                 ><strong>{{ money(row.currentCapital, row.currencyCode) }}</strong
-                ><small
+                ><small class="contract-selection-initial"
                   >Inicial: {{ money(row.initialContractualCapital, row.currencyCode) }}</small
                 >
               </div>
               <div>
-                <small><workspace-icon name="contract-calendar" /> Vigência</small>
-                <p>{{ dateLabel(row.startDate) }} — {{ dateLabel(row.endDate) }}</p>
+                <small><img :src="image('card-imgCalendar')" alt="" />Vigência</small>
+                <p>{{ day(row.startDate) }} - {{ day(row.endDate) }}</p>
               </div>
               <div>
-                <small><workspace-icon name="contract-chart-pie" /> Motor Principal</small>
-                <p>{{ row.primaryEngine?.name || '—' }}</p>
+                <small>Motor Principal</small>
+                <p>
+                  <img :src="image('card-imgChartPie')" alt="" />{{
+                    row.primaryEngine?.name || '—'
+                  }}
+                </p>
               </div>
               <div>
-                <small><workspace-icon name="contract-building2" /> Universo de Ativos</small>
-                <p>{{ universe(row) }}</p>
+                <small>Universo de Ativos</small>
+                <p>
+                  <img :src="image('card-imgBuilding2')" alt="" />{{ universe(row).assets }} ·
+                  {{ universe(row).markets }} · {{ universe(row).currencies }}
+                </p>
               </div>
               <div>
-                <small><workspace-icon name="contract-coins1" /> Operações Intradiárias</small>
-                <p>Indisponível</p>
+                <small>Operações Intradiárias</small>
+                <p><img :src="image('card-imgCoins1')" alt="" />Indisponível</p>
               </div>
             </div>
             <q-btn
@@ -127,13 +159,14 @@
               dense
               :aria-label="'Abrir ' + row.name"
               @click="$emit('open', row.id)"
-              ><workspace-icon name="contract-chevron-right"
+              ><img :src="image('card-imgChevronRight')" alt=""
             /></q-btn>
           </article>
           <div v-if="!pageRows.length" class="workspace-empty">Nenhum contrato encontrado.</div>
         </div>
         <q-table
           v-else
+          class="contract-selection-table"
           dark
           flat
           dense
@@ -143,47 +176,119 @@
           hide-pagination
           :pagination="{ rowsPerPage: 0 }"
           no-data-label="Nenhum contrato encontrado."
-          ><template #body-cell-name="p"
+        >
+          <template #body-cell-name="p"
             ><q-td :props="p"
-              ><q-btn
-                flat
-                no-caps
-                :label="p.row.name || 'Contrato sem nome'"
-                @click="$emit('open', p.row.id)"
-              /><small class="block"
-                >{{ p.row.publicCode }} ·
-                {{ p.row.businessStatus?.name || financeLabel(p.row.registrationStatus) }}</small
+              ><div class="contract-selection-table__identity">
+                <img :src="image('list-imgFileText1')" alt="" />
+                <div>
+                  <button @click="$emit('open', p.row.id)">
+                    {{ p.row.name || 'Contrato sem nome' }}
+                  </button>
+                  <div>
+                    <small>ID: {{ p.row.publicCode || p.row.id.slice(0, 8) }}</small
+                    ><contract-status-badge :status="contractSelectionStatus(p.row)" />
+                  </div>
+                </div></div></q-td
+          ></template>
+          <template #body-cell-clients="p"
+            ><q-td :props="p"
+              ><p
+                v-for="c in p.row.clients || []"
+                :key="c.clientId"
+                class="contract-selection-table__line"
+              >
+                <img :src="image('list-imgUser')" alt="" />{{ c.displayName || '—' }}
+              </p>
+              <span v-if="!p.row.clients?.length">—</span></q-td
+            ></template
+          >
+          <template #body-cell-currentCapital="p"
+            ><q-td :props="p"
+              ><strong>{{ money(p.row.currentCapital, p.row.currencyCode) }}</strong
+              ><small
+                >Ini: {{ money(p.row.initialContractualCapital, p.row.currencyCode) }}</small
               ></q-td
             ></template
-          ><template #body-cell-open="p"
+          >
+          <template #body-cell-term="p"
+            ><q-td :props="p"
+              ><div class="contract-selection-table__line">
+                {{ day(p.row.startDate) }}<img :src="image('list-imgArrowRight')" alt="" />{{
+                  day(p.row.endDate)
+                }}
+              </div>
+              <small>Vigência</small></q-td
+            ></template
+          >
+          <template #body-cell-engine="p"
+            ><q-td :props="p"
+              ><div class="contract-selection-table__line">
+                <img :src="image('list-imgChartPie2')" alt="" />{{
+                  p.row.primaryEngine?.name || '—'
+                }}
+              </div></q-td
+            ></template
+          >
+          <template #body-cell-assets="p"
+            ><q-td :props="p"
+              ><div class="contract-selection-table__line">
+                <img :src="image('list-imgBuilding2')" alt="" />
+                <div>
+                  {{ universe(p.row).assets
+                  }}<small>{{ universe(p.row).markets }} · {{ universe(p.row).currencies }}</small>
+                </div>
+              </div></q-td
+            ></template
+          >
+          <template #body-cell-intraday="p"
+            ><q-td :props="p"
+              ><div class="contract-selection-table__line">
+                <img :src="image('list-imgCoins')" alt="" />Indisponível
+              </div></q-td
+            ></template
+          >
+          <template #body-cell-open="p"
             ><q-td :props="p"
               ><q-btn
                 flat
                 dense
                 :aria-label="'Abrir ' + p.row.name"
                 @click="$emit('open', p.row.id)"
-                ><workspace-icon name="chevron-right" /></q-btn></q-td></template></q-table
-      ></resource-state>
+                ><img :src="image('list-imgChevronRight')" alt="" /></q-btn></q-td
+          ></template>
+        </q-table>
+      </resource-state>
     </main>
   </div>
 </template>
 <script setup>
+import 'src/css/workspaces.scss'
 import { computed, ref, onActivated, onDeactivated, onScopeDispose } from 'vue'
 import GlassSelect from 'src/components/Entity/GlassSelect.vue'
 import DateRangePicker from 'src/components/Form/DateRangePicker.vue'
 import ResourceState from 'src/components/Finance/ResourceState.vue'
-import WorkspaceIcon from 'src/components/Workspaces/WorkspaceIcon.vue'
 import { useFinanceResource } from 'src/composables/useFinanceResource'
-import { financeGet, money, dateLabel, financeLabel, columns } from 'src/services/financeService'
-import { readContractSelection, filterContractSelection } from 'src/services/contractSelectionModel'
+import { financeGet, money, dateLabel, columns } from 'src/services/financeService'
+import {
+  readContractSelection,
+  filterContractSelection,
+  contractSelectionStatus,
+  contractUniverseParts,
+} from 'src/services/contractSelectionModel'
+import ContractStatusBadge from './ContractStatusBadge.vue'
 defineEmits(['open', 'requests'])
-const props = defineProps({ newRequests: { type: Number, default: null }, selectionOnly: Boolean })
+const props = defineProps({
+  newRequests: { type: Number, default: null },
+  selectionOnly: Boolean,
+  read: { type: Function, default: financeGet },
+})
 const resource = useFinanceResource(),
   search = ref(''),
   client = ref(null),
   engine = ref(null),
   period = ref(null),
-  sort = ref('recent'),
+  sort = ref(null),
   view = ref('cards')
 let active = true,
   revision = 0
@@ -221,25 +326,23 @@ const filtered = computed(() =>
   ),
 )
 const pageRows = filtered
-function universe(row) {
-  const s = row.assetUniverseSummary
-  return s
-    ? `${s.assetCount} ativos · ${s.marketCount} mercados · ${s.currencyCount} moedas`
-    : 'Indisponível'
-}
+const image = (name) => '/icons/contracts/selection/' + name + '.svg'
+const universe = (row) => contractUniverseParts(row)
+const day = (value) =>
+  value && Number.isFinite(Date.parse(value)) ? dateLabel(value).split(',')[0] : '—'
 const tableColumns = columns([
   ['name', 'Contrato / Status'],
   ['clients', 'Cliente(s)', (r) => (r.clients || []).map((c) => c.displayName).join(', ') || '—'],
   ['currentCapital', 'Capital Atual', (r) => money(r.currentCapital, r.currencyCode)],
   ['term', 'Vigência', (r) => dateLabel(r.startDate) + ' — ' + dateLabel(r.endDate)],
   ['engine', 'Motor Principal', (r) => r.primaryEngine?.name || '—'],
-  ['assets', 'Universo de Ativos', universe],
+  ['assets', 'Universo de Ativos'],
   ['intraday', 'Operações Intra.', () => 'Indisponível'],
   ['open', ''],
 ])
 async function load() {
   const r = ++revision
-  await resource.load(() => readContractSelection(financeGet, () => active && r === revision))
+  await resource.load(() => readContractSelection(props.read, () => active && r === revision))
 }
 onActivated(() => {
   active = true
@@ -256,202 +359,4 @@ onScopeDispose(() => {
   resource.reset()
 })
 </script>
-<style src="src/css/workspaces.scss" lang="scss">
-.contract-selection-header-actions {
-  display: flex;
-  gap: 12px;
-  align-items: center;
-  flex-wrap: wrap;
-}
-.contract-selection-header-actions .q-btn {
-  height: 36px;
-  font-size: 14px;
-  background: #ffffff0f;
-  gap: 16px;
-}
-.contract-selection-header-actions .q-badge {
-  border-radius: 10px;
-  background: #2b7fff;
-  font-size: 11px;
-}
-.contract-selection-header-actions :deep(.q-btn__content) {
-  gap: 16px;
-}
-</style>
-<style scoped>
-.contract-selection .workspace-header {
-  flex-wrap: wrap;
-  padding: 24px 48px;
-}
-.contract-selection .workspace-toolbar {
-  width: 100%;
-  padding: 0;
-  margin: 16px 0 0;
-  border: 0;
-  background: none;
-}
-.contract-selection .workspace-toolbar :deep(.input-personal) {
-  width: auto;
-  min-width: 110px;
-  font-size: 12px;
-}
-.contract-selection .workspace-toolbar .workspace-actions {
-  order: 5;
-}
-.contract-selection .workspace-main {
-  max-width: 1660px;
-  padding-top: 32px;
-}
-.contract-selection-cards {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-}
-.contract-selection-card {
-  display: grid;
-  grid-template-columns: minmax(220px, 1.5fr) minmax(180px, 1fr) minmax(280px, 1.25fr) 40px;
-  align-items: center;
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  border-radius: 14px;
-  padding: 24px;
-  background: rgba(0, 0, 0, 0.06);
-  min-width: 0;
-  gap: 20px;
-}
-.contract-selection-card__title {
-  display: flex;
-  align-items: center;
-  gap: 20px;
-  min-width: 0;
-}
-.contract-selection-card__title > div {
-  min-width: 0;
-}
-.contract-selection-card small {
-  font-size: 10px;
-}
-.contract-selection-card .workspace-icon {
-  vertical-align: middle;
-  margin-right: 5px;
-}
-.contract-selection-card h2 {
-  margin: 8px 0;
-  font-size: 16px;
-  line-height: 24px;
-  overflow-wrap: anywhere;
-}
-.contract-selection-card h2 button {
-  font: inherit;
-  color: inherit;
-  background: none;
-  border: 0;
-  padding: 0;
-  cursor: pointer;
-  text-align: left;
-}
-.contract-selection-card__clients {
-  min-width: 0;
-}
-.contract-selection-clients {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 6px;
-  margin-top: 6px;
-}
-.contract-selection-clients span {
-  padding: 2px 6px;
-  background: rgba(255, 255, 255, 0.06);
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  border-radius: 3px;
-  font-size: 11px;
-  overflow-wrap: anywhere;
-}
-.contract-selection-card__data {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 12px;
-  align-items: start;
-  min-width: 0;
-}
-.contract-selection-card__data > div:nth-child(n + 3) {
-  grid-column: 1/-1;
-}
-.contract-selection-card__data p {
-  font-size: 11px;
-  margin: 6px 0;
-  overflow-wrap: anywhere;
-}
-.contract-selection-card__data small,
-.contract-selection-card__data strong {
-  display: block;
-}
-.contract-selection-card__data strong {
-  font-size: 16px;
-  margin: 6px 0;
-  overflow-wrap: anywhere;
-}
-.contract-selection-card__open {
-  height: 100%;
-  border-left: 1px solid rgba(255, 255, 255, 0.12);
-  border-radius: 0;
-}
-@media (max-width: 1200px) {
-  .contract-selection-card {
-    grid-template-columns: minmax(180px, 1fr) minmax(140px, 0.8fr) minmax(240px, 1.2fr) 28px;
-    gap: 12px;
-    padding: 20px;
-  }
-}
-@media (max-width: 900px) {
-  .contract-selection-card {
-    grid-template-columns: 1fr 1fr 28px;
-  }
-  .contract-selection-card__title {
-    grid-column: 1/3;
-  }
-  .contract-selection-card__open {
-    grid-column: 3;
-    grid-row: 1/3;
-  }
-}
-@media (max-width: 550px) {
-  .contract-selection .workspace-header {
-    padding: 20px;
-  }
-  .contract-selection-card {
-    padding: 16px;
-    grid-template-columns: minmax(0, 1fr) 28px;
-  }
-  .contract-selection-card__title {
-    grid-column: 1;
-  }
-  .contract-selection-card__clients,
-  .contract-selection-card__data {
-    grid-column: 1;
-  }
-  .contract-selection-card__open {
-    grid-column: 2;
-    grid-row: 1/4;
-  }
-}
-.contract-selection-header-actions {
-  display: flex;
-  gap: 12px;
-  align-items: center;
-  flex-wrap: wrap;
-}
-.contract-selection-header-actions .q-btn {
-  height: 36px;
-  font-size: 14px;
-  background: #ffffff0f;
-  gap: 16px;
-}
-.contract-selection-header-actions .q-badge {
-  border-radius: 10px;
-  background: #2b7fff;
-  font-size: 11px;
-}
-.contract-selection-header-actions :deep(.q-btn__content) {
-  gap: 16px;
-}
-</style>
+<style lang="scss" scoped src="./contractSelection.scss"></style>

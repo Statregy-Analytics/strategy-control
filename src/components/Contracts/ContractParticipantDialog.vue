@@ -4,7 +4,11 @@
     :persistent="pending"
     @update:model-value="!pending && $emit('close')"
   >
-    <q-card class="participant-dialog" aria-labelledby="participant-dialog-title">
+    <q-card
+      class="participant-dialog"
+      :class="{ 'participant-dialog--empty': !client }"
+      aria-labelledby="participant-dialog-title"
+    >
       <header>
         <h2 id="participant-dialog-title">
           <img :src="image('Plus1')" alt="" />Adicionar Participante ao Contrato
@@ -21,7 +25,7 @@
             ><customer-select
               v-model="selected"
               :clearable="false"
-            :current="initialClient"
+              :current="initialClient"
               :disable="pending"
               :lookup="lookup"
               :selected-label="
@@ -226,7 +230,7 @@ import {
   validEntryDate,
 } from 'src/services/contractParticipantEntry'
 const props = defineProps({
-  initialClient:{type:Object,default:null},
+  initialClient: { type: Object, default: null },
   submit: { type: Function, required: true },
   existingIds: { type: Array, default: () => [] },
   busy: Boolean,
@@ -273,7 +277,16 @@ function resolveClient(customer) {
   else flow.choose(customer)
 }
 const duplicate = computed(() => props.existingIds.includes(selected.value))
-watch(()=>props.initialClient,value=>{if(value){selected.value=value.customerId;resolveClient(value)}},{immediate:true})
+watch(
+  () => props.initialClient,
+  (value) => {
+    if (value) {
+      selected.value = value.customerId
+      resolveClient(value)
+    }
+  },
+  { immediate: true },
+)
 const hasConversion = computed(() =>
   state.value.rows.some((row) => row.currencyIsoCode !== props.currency),
 )
@@ -665,5 +678,26 @@ async function confirm() {
     margin-right: 8px;
     flex-shrink: 0;
   }
+}
+
+/* CT09 is the compact empty selection; item 138 expands only after selection. */
+.participant-dialog--empty {
+  width: 512px;
+}
+.participant-dialog--empty header {
+  min-height: 53px;
+}
+.participant-dialog--empty .participant-dialog__body {
+  gap: 12px;
+}
+
+.participant-dialog--empty header .q-btn {
+  min-width: 16px;
+  min-height: 16px;
+  width: 16px;
+  height: 16px;
+}
+.participant-dialog--empty :deep(.q-field) {
+  margin-top: 4px;
 }
 </style>

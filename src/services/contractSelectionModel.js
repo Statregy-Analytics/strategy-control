@@ -64,3 +64,34 @@ function rangeDate(value) {
       ? value
       : null
 }
+
+export function contractSelectionStatus(row) {
+  if (row?.registrationStatus === 'Draft') return { label: 'Rascunho', tone: 'inactive' }
+  const code = String(row?.businessStatus?.code || '').toUpperCase()
+  return {
+    label:
+      row?.businessStatus?.name ||
+      { ACTIVE: 'Ativo', BLOCKED: 'Bloqueado', UNDER_ANALYSIS: 'Em análise', CLOSED: 'Encerrado' }[
+        code
+      ] ||
+      '—',
+    tone: { ACTIVE: 'active', BLOCKED: 'blocked', UNDER_ANALYSIS: 'analysis' }[code] || 'inactive',
+  }
+}
+export function contractUniverseParts(row) {
+  const summary = row?.assetUniverseSummary
+  const count = (value, singular, plural) =>
+    value !== null &&
+    value !== undefined &&
+    typeof value !== 'boolean' &&
+    String(value).trim() !== '' &&
+    Number.isInteger(Number(value)) &&
+    Number(value) >= 0
+      ? Number(value) + ' ' + (Number(value) === 1 ? singular : plural)
+      : '—'
+  return {
+    assets: count(summary?.assetCount, 'ativo', 'ativos'),
+    markets: count(summary?.marketCount, 'mercado', 'mercados'),
+    currencies: count(summary?.currencyCount, 'moeda', 'moedas'),
+  }
+}

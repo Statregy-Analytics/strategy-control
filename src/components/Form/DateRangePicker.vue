@@ -5,7 +5,7 @@
     </span>
 
     <q-btn flat v-if="!localDateRange.to" :aria-label="label">
-      <IconCalendarEventFilled size="16" />
+      <slot name="icon"><IconCalendarEventFilled size="16" /></slot>
       <q-popup-proxy
         @before-show="updateProxy"
         cover
@@ -26,16 +26,20 @@
       style="font-size: 12px !important; border: 1px solid var(--Info-200, #b9e1ff)"
     >
       {{ localDateRange.from }} - {{ localDateRange.to }}
-      <IconX size="14" class="q-ml-xs cursor-pointer" @click.prevent="resetDateRange" />
+      <q-btn flat round dense :aria-label="'Limpar ' + label" @click.prevent="resetDateRange"
+        ><IconX size="14"
+      /></q-btn>
     </q-badge>
   </div>
 </template>
 
 <script>
 import { defineComponent, ref, watch } from 'vue'
+import { IconCalendarEventFilled, IconX } from '@tabler/icons-vue'
 
 export default defineComponent({
   name: 'DateRangePicker',
+  components: { IconCalendarEventFilled, IconX },
   props: {
     modelValue: {
       type: Object,
