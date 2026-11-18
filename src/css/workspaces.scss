@@ -395,3 +395,87 @@
 .workspace--credit .workspace-main > .workspace-metrics .workspace-metric > small {
   padding-right: 24px;
 }
+
+.workspace--credit .workspace-header {
+  max-width: 1800px;
+  margin: auto;
+  padding: 24px 24px 0;
+  border-bottom: 0;
+  background: transparent;
+}
+.workspace--credit .workspace-header h1 {
+  font:
+    700 24px/32px Inter,
+    sans-serif;
+  letter-spacing: -0.6px;
+}
+.workspace--credit .workspace-header p {
+  font:
+    400 14px/20px Inter,
+    sans-serif;
+  color: #ffffffb8;
+}
+.workspace--credit .workspace-main {
+  max-width: 1800px;
+  padding: 24px 24px 40px;
+}
+.workspace--credit .workspace-main > .workspace-metrics .workspace-metric {
+  min-height: 117.56px;
+  border: 1px solid #ffffff33;
+  border-radius: 14px;
+  background: #ffffff0f;
+  box-shadow: 4px 4px 6px #00000021;
+  backdrop-filter: blur(20px);
+}
+.workspace--credit .workspace-main > .workspace-metrics .workspace-metric small {
+  font:
+    600 12px/16px Inter,
+    sans-serif;
+  letter-spacing: 0.6px;
+  color: #ffffff99;
+  margin-bottom: 8px;
+}
+.workspace--credit .workspace-main > .workspace-metrics .workspace-metric strong {
+  font:
+    700 24px/32px Inter,
+    sans-serif;
+  overflow-wrap: anywhere;
+}
+.workspace--credit .workspace-tabs {
+  margin-top: 0;
+  padding-bottom: 24px;
+  border-bottom: 0.8px solid #ffffff1f;
+  margin-bottom: 24px;
+}
+.workspace--credit .workspace-tabs .q-btn-toggle {
+  width: 448px;
+  max-width: 100%;
+  min-height: 42px;
+  padding: 2px;
+  border-radius: 14px;
+}
+.workspace--credit .workspace-tabs .q-btn {
+  flex: 1;
+  min-height: 37px;
+  border-radius: 14px;
+  font:
+    600 14px/20px Inter,
+    sans-serif;
+  color: #ffffffb8;
+}
+.workspace--credit .workspace-tabs .q-btn.bg-primary {
+  border: 0.8px solid #ffffff42;
+  background: linear-gradient(89deg, #ffffff1f, #ffffff0d 50%, #ffffff1a) !important;
+  color: white;
+}
+@media (max-width: 650px) {
+  .workspace--credit .workspace-main {
+    padding: 24px 16px 32px;
+  }
+  .workspace--credit .workspace-header {
+    padding: 24px 16px 0;
+  }
+  .workspace--credit .workspace-main > .workspace-metrics .workspace-metric strong {
+    font-size: 20px;
+  }
+}
