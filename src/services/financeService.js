@@ -54,6 +54,7 @@ const labels = {
   Leverage: 'Alavancagem',
   AwaitingReceipt: 'Aguardando comprovante',
   PaidOff: 'Quitado',
+  Financed: 'Financiado',
   AssetRecord: 'Patrimônio declarado',
   Contract: 'Contrato',
   Validated: 'Validada',
