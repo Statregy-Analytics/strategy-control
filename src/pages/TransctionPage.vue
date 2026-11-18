@@ -1,5 +1,5 @@
 <template>
-  <q-page class="q-pa-md transactions-page">
+  <q-page class="transactions-page">
     <title-page
       ><template #heading
         ><h1 class="transaction-heading">Transações</h1>
@@ -12,215 +12,30 @@
             label="Exportar"
             disable
             title="Exportação global indisponível no momento."
-            ><img src="/icons/wallet-directory/download.svg" alt="" /></q-btn
+            ><img src="/icons/audit/export.svg" alt="" /></q-btn
           ><q-btn outline no-caps label="Nova Transação" @click="createOpen = true"
-            ><img src="/icons/wallet-directory/plus.svg" alt=""
+            ><img src="/icons/contracts/flows/2349-281-imgIcon.svg" alt=""
           /></q-btn></div></template
     ></title-page>
     <resource-state :state="globalPortfolio.state" @retry="loadGlobalPortfolio">
       <wallet-overview
         :model="globalSummary"
         :details="false"
+        presentation="transactions"
         :initial-type="tab === 'wallets' ? walletType : 'total'"
         @select="selectWallet"
       />
     </resource-state>
-    <q-tabs v-if="tab !== 'wallets'" v-model="tab" align="left" dense active-color="primary"
-      ><q-tab name="transactions" label="Transações" no-caps /><q-tab
-        name="wallets"
-        label="Carteiras"
-        no-caps
-    /></q-tabs>
-    <q-separator v-if="tab !== 'wallets'" />
-    <div v-if="tab === 'transactions'" class="q-pt-md">
-      <div class="row q-col-gutter-md q-mb-md">
-        <div class="col-12 col-sm">
-          <q-input
-            v-model="search"
-            outlined
-            dense
-            debounce="350"
-            placeholder="Buscar solicitações"
-            aria-label="Buscar solicitações"
-          />
-        </div>
-      </div>
-      <form-section title="Solicitações pendentes">
-        <finance-table
-          ref="pendingTable"
-          path="admin/transactions"
-          :params="pendingParams"
-          :columns="transactionColumns"
-        >
-          <template #body-cell-type="p"
-            ><q-td :props="p"
-              ><div class="contract-transaction-type">
-                <img
-                  v-if="isContractTransaction(p.row)"
-                  :src="
-                    '/icons/contracts/flows/2349-281-img' +
-                    (p.row.source?.kind === 'Contract' ? 'Icon3' : 'Icon') +
-                    '.svg'
-                  "
-                  alt=""
-                />{{ contractTransactionLabel(p.row) || financeLabel(p.row.type) }}
-              </div></q-td
-            ></template
-          >
-          <template #body-cell-source="p"
-            ><q-td :props="p"
-              ><div>{{ contractEndpoint(p.row.source, contractSourceCurrency(p.row)).title }}</div>
-              <small>{{
-                contractEndpoint(p.row.source, contractSourceCurrency(p.row)).detail
-              }}</small></q-td
-            ></template
-          >
-          <template #body-cell-destination="p"
-            ><q-td :props="p"
-              ><div>
-                {{
-                  p.row.destinationClient?.name ||
-                  contractEndpoint(p.row.destination, p.row.currencyIsoCode).title
-                }}
-              </div>
-              <small>{{
-                p.row.destinationClient
-                  ? contractEndpoint(p.row.destination, p.row.currencyIsoCode).title +
-                    ' · ' +
-                    (p.row.currencyIsoCode || '')
-                  : contractEndpoint(p.row.destination, p.row.currencyIsoCode).detail
-              }}</small></q-td
-            ></template
-          >
-          <template #body-cell-amount="p"
-            ><q-td :props="p"
-              ><strong>{{ money(p.row.amount, p.row.currencyIsoCode) }}</strong
-              ><small v-if="p.row.conversion"
-                >{{ money(p.row.conversion.sourceAmount, p.row.conversion.sourceCurrencyIsoCode) }}
-                ×
-                {{
-                  Number(p.row.conversion.exchangeRate).toLocaleString('pt-BR', {
-                    minimumFractionDigits: 4,
-                    maximumFractionDigits: 4,
-                  })
-                }}</small
-              ></q-td
-            ></template
-          >
-          <template #body-cell-status="p"
-            ><q-td :props="p"
-              ><span
-                class="contract-flow__badge"
-                :class="[
-                  contractTransactionTone(p.row),
-                  { 'transaction-error': p.row.status === 'Error' },
-                ]"
-                ><img
-                  v-if="p.row.status === 'Completed'"
-                  src="/icons/contracts/flows/2349-281-imgIcon1.svg"
-                  alt=""
-                />{{
-                  p.row.status === 'Completed' ? 'Processada' : financeLabel(p.row.status)
-                }}</span
-              ></q-td
-            ></template
-          >
-          <template #body-cell-actions="p"
-            ><q-td :props="p"
-              ><q-btn flat dense aria-label="Abrir transação" @click="open(p.row.id)"
-                ><img src="/icons/contracts/flows/2349-281-imgIcon2.svg" alt="" /></q-btn></q-td
-          ></template>
-        </finance-table>
-      </form-section>
-      <form-section title="Histórico de transações">
-        <finance-table
-          ref="table"
-          path="admin/transactions"
-          :params="historyParams"
-          :columns="transactionColumns"
-          ><template #body-cell-type="p"
-            ><q-td :props="p"
-              ><div class="contract-transaction-type">
-                <img
-                  v-if="isContractTransaction(p.row)"
-                  :src="
-                    '/icons/contracts/flows/2349-281-img' +
-                    (p.row.source?.kind === 'Contract' ? 'Icon3' : 'Icon') +
-                    '.svg'
-                  "
-                  alt=""
-                />{{ contractTransactionLabel(p.row) || financeLabel(p.row.type) }}
-              </div></q-td
-            ></template
-          >
-          <template #body-cell-source="p"
-            ><q-td :props="p"
-              ><div>{{ contractEndpoint(p.row.source, contractSourceCurrency(p.row)).title }}</div>
-              <small>{{
-                contractEndpoint(p.row.source, contractSourceCurrency(p.row)).detail
-              }}</small></q-td
-            ></template
-          >
-          <template #body-cell-destination="p"
-            ><q-td :props="p"
-              ><div>
-                {{
-                  p.row.destinationClient?.name ||
-                  contractEndpoint(p.row.destination, p.row.currencyIsoCode).title
-                }}
-              </div>
-              <small>{{
-                p.row.destinationClient
-                  ? contractEndpoint(p.row.destination, p.row.currencyIsoCode).title +
-                    ' · ' +
-                    (p.row.currencyIsoCode || '')
-                  : contractEndpoint(p.row.destination, p.row.currencyIsoCode).detail
-              }}</small></q-td
-            ></template
-          >
-          <template #body-cell-amount="p"
-            ><q-td :props="p"
-              ><strong>{{ money(p.row.amount, p.row.currencyIsoCode) }}</strong
-              ><small v-if="p.row.conversion"
-                >{{ money(p.row.conversion.sourceAmount, p.row.conversion.sourceCurrencyIsoCode) }}
-                ×
-                {{
-                  Number(p.row.conversion.exchangeRate).toLocaleString('pt-BR', {
-                    minimumFractionDigits: 4,
-                    maximumFractionDigits: 4,
-                  })
-                }}</small
-              ></q-td
-            ></template
-          >
-          <template #body-cell-status="p"
-            ><q-td :props="p"
-              ><span
-                class="contract-flow__badge"
-                :class="[
-                  contractTransactionTone(p.row),
-                  { 'transaction-error': p.row.status === 'Error' },
-                ]"
-                ><img
-                  v-if="p.row.status === 'Completed'"
-                  src="/icons/contracts/flows/2349-281-imgIcon1.svg"
-                  alt=""
-                />{{
-                  p.row.status === 'Completed' ? 'Processada' : financeLabel(p.row.status)
-                }}</span
-              ></q-td
-            ></template
-          >
-          <template #body-cell-actions="p"
-            ><q-td :props="p"
-              ><q-btn flat dense aria-label="Abrir transação" @click="open(p.row.id)"
-                ><img
-                  src="/icons/contracts/flows/2349-281-imgIcon2.svg"
-                  alt="" /></q-btn></q-td></template
-        ></finance-table>
-      </form-section>
-    </div>
-    <div v-else-if="tab === 'wallets'">
+    <keep-alive
+      ><transaction-directory
+        v-if="tab === 'transactions'"
+        :pending="pendingList.state"
+        :history="historyList.state"
+        @retry-pending="loadPendingList"
+        @retry-history="loadHistoryList"
+        @open="open"
+    /></keep-alive>
+    <div v-if="tab === 'wallets'">
       <resource-state
         v-if="globalFailures"
         :state="{
@@ -346,13 +161,7 @@ const walletType = ref('total'),
   portfolioOpen = ref(false)
 
 import ContractTransactionDetail from 'src/components/Contracts/ContractTransactionDetail.vue'
-import {
-  isContractTransaction,
-  contractTransactionLabel,
-  contractEndpoint,
-  contractSourceCurrency,
-  contractTransactionTone,
-} from 'src/services/contractTransactionView'
+import { isContractTransaction } from 'src/services/contractTransactionView'
 import { readGlobalWalletFx } from 'src/services/globalWalletFx'
 import WalletDirectory from 'src/components/Finance/WalletDirectory.vue'
 import WalletOverview from 'src/components/Finance/WalletOverview.vue'
@@ -363,13 +172,12 @@ import {
   globalWalletRows,
   globalWalletSummary,
 } from 'src/services/globalWallets'
-import { createRequestContext } from 'src/services/requestContext'
+import { createRequestContext, readCurrentPages } from 'src/services/requestContext'
 import { useQuasar } from 'quasar'
 import { useRoute } from 'vue-router'
 import TitlePage from 'src/components/TitlePage.vue'
 import TitleCard from 'src/components/Card/TitleCard.vue'
-import FormSection from 'src/components/Entity/FormSection.vue'
-import FinanceTable from 'src/components/Finance/FinanceTable.vue'
+import TransactionDirectory from 'src/components/Finance/TransactionDirectory.vue'
 import ResourceState from 'src/components/Finance/ResourceState.vue'
 import TransactionCreate from 'src/components/Finance/TransactionCreate.vue'
 import TransactionEdit from 'src/components/Finance/TransactionEdit.vue'
@@ -380,13 +188,10 @@ import TransactionPassword from 'src/components/Finance/TransactionPassword.vue'
 import { submitAdminTransaction } from 'src/services/transactionOperations'
 import CustomerPortfolio from 'src/components/Finance/CustomerPortfolio.vue'
 import { useFinanceResource } from 'src/composables/useFinanceResource'
-import { financeGet, financeWrite, columns, financeLabel, money } from 'src/services/financeService'
+import { financeGet, financeWrite, financeLabel, money } from 'src/services/financeService'
 const $q = useQuasar(),
   detail = useFinanceResource(),
   tab = ref('transactions'),
-  search = ref(''),
-  table = ref(),
-  pendingTable = ref(),
   dialog = ref(false),
   createOpen = ref(false),
   createBusy = ref(false),
@@ -395,11 +200,34 @@ const $q = useQuasar(),
   error = ref(''),
   reason = ref('')
 const stateDialog = ref(null)
-const pendingParams = computed(() => ({
-  attentionRequired: true,
-  search: search.value || undefined,
-}))
-const historyParams = computed(() => ({ search: search.value || undefined }))
+const pendingList = useFinanceResource(),
+  historyList = useFinanceResource()
+const pendingRequest = createRequestContext(),
+  historyRequest = createRequestContext()
+const readTransactions = (resource, context, params = {}) => {
+  context.invalidate()
+  const active = context.capture()
+  return resource.load(
+    async () =>
+      (await readCurrentPages(
+        (page) => financeGet('admin/transactions', { ...params, page, pageSize: 100 }),
+        active,
+      )) || [],
+  )
+}
+const loadPendingList = () =>
+  readTransactions(pendingList, pendingRequest, { attentionRequired: true })
+const loadHistoryList = () => readTransactions(historyList, historyRequest)
+onMounted(() => {
+  loadPendingList()
+  loadHistoryList()
+})
+onScopeDispose(() => {
+  pendingRequest.dispose()
+  historyRequest.dispose()
+  pendingList.reset()
+  historyList.reset()
+})
 const globalPortfolio = useFinanceResource()
 const globalRequest = createRequestContext()
 const globalRows = computed(() => globalWalletRows(globalPortfolio.state.data))
@@ -448,31 +276,6 @@ const workflowActions = computed(() =>
         action === 'Cancel'),
   ),
 )
-const transactionColumns = columns([
-  [
-    'requestedAtUtc',
-    'Data/Hora',
-    (r) => (r.requestedAtUtc ? new Date(r.requestedAtUtc).toLocaleString('pt-BR') : '—'),
-  ],
-  ['requestNumber', 'ID'],
-  ['type', 'Tipo'],
-  ['clientName', 'Cliente'],
-  ['source', 'Origem'],
-  ['destination', 'Destino'],
-  ['amount', 'Valor'],
-  ['status', 'Status'],
-  [
-    'createdBy',
-    'Responsável',
-    (r) =>
-      r.createdBy?.displayName ||
-      { Admin: 'Admin', System: 'Sistema Automático', Client: 'Cliente', Customer: 'Cliente' }[
-        r.createdBy?.type
-      ] ||
-      'Indisponível',
-  ],
-  ['actions', ''],
-])
 const loadDetail = () =>
   detail.load(async () => {
     const currentId = id.value
@@ -483,8 +286,8 @@ const loadDetail = () =>
 function onCreated(value) {
   loadGlobalPortfolio()
   createOpen.value = false
-  table.value?.reload()
-  pendingTable.value?.reload()
+  loadHistoryList()
+  loadPendingList()
   open(value)
 }
 function open(value) {
@@ -505,6 +308,7 @@ function openState(mode, document = null) {
   const action = {
     correction: 'RequestCorrection',
     observation: 'AddObservation',
+    validate: 'Validate',
     approve: 'Approve',
     reject: 'Reject',
     execute: 'Execute',
@@ -527,10 +331,14 @@ async function submitState(content) {
     throw Error('A solicitação mudou. Abra a ação novamente.')
   if (intent.mode === 'attachment')
     throw Error('Envio de comprovante indisponível. Os dados foram mantidos.')
-  if (['approve', 'reject', 'execute', 'cancel'].includes(intent.mode)) {
-    const action = { approve: 'Approve', reject: 'Reject', execute: 'Execute', cancel: 'Cancel' }[
-      intent.mode
-    ]
+  if (['validate', 'approve', 'reject', 'execute', 'cancel'].includes(intent.mode)) {
+    const action = {
+      validate: 'Validate',
+      approve: 'Approve',
+      reject: 'Reject',
+      execute: 'Execute',
+      cancel: 'Cancel',
+    }[intent.mode]
     if (!record.availableActions?.includes(action) || !workflowActions.value.includes(action))
       throw Error('Ação indisponível.')
     if (['reject', 'cancel'].includes(intent.mode) && !content.trim())
@@ -580,7 +388,7 @@ function stateCompleted(result) {
   const mode = stateDialog.value?.mode
   stateDialog.value = null
   busy.value = false
-  if (['approve', 'reject', 'execute', 'cancel'].includes(mode)) {
+  if (['validate', 'approve', 'reject', 'execute', 'cancel'].includes(mode)) {
     if (result?.id !== detail.state.data?.id || result?.version !== detail.state.data?.version)
       return
     reason.value = result.reason
@@ -589,8 +397,8 @@ function stateCompleted(result) {
   }
   if (mode === 'receipt') return
   loadDetail()
-  table.value?.reload()
-  pendingTable.value?.reload()
+  loadHistoryList()
+  loadPendingList()
   $q.notify({
     type: 'positive',
     message: mode === 'correction' ? 'Correção solicitada.' : 'Observação registrada.',
@@ -602,8 +410,8 @@ function onTransactionEdited() {
   editingTransaction.value = false
   busy.value = false
   loadDetail()
-  table.value?.reload()
-  pendingTable.value?.reload()
+  loadHistoryList()
+  loadPendingList()
 }
 const correctingTransaction = ref(false)
 const editingTransaction = ref(false)
@@ -612,9 +420,13 @@ const actionToConfirm = ref(null)
 const confirmationSummary = computed(() => actionSnapshot.value?.summary || '')
 function startWorkflow(action) {
   if (!workflowActions.value.includes(action)) return
-  const mode = { Approve: 'approve', Reject: 'reject', Execute: 'execute', Cancel: 'cancel' }[
-    action
-  ]
+  const mode = {
+    Validate: 'validate',
+    Approve: 'approve',
+    Reject: 'reject',
+    Execute: 'execute',
+    Cancel: 'cancel',
+  }[action]
   if (mode) openState(mode)
   else confirmAction(action)
 }
@@ -652,8 +464,8 @@ async function executeConfirmed(password) {
     reason.value = ''
     loadGlobalPortfolio()
     await loadDetail()
-    table.value?.reload()
-    pendingTable.value?.reload()
+    loadHistoryList()
+    loadPendingList()
   } catch (e) {
     if (e.response?.status === 409) await loadDetail()
     throw e
@@ -711,46 +523,6 @@ async function showAuditHistory() {
 </style>
 
 <style scoped>
-.transactions-page :deep(tr:has(.transaction-error) td:not(:nth-child(8)):not(:last-child)) {
-  color: #ffffff80;
-  text-decoration: line-through;
-}
-.transactions-page :deep(.q-table td small) {
-  display: block;
-  color: #ffffffb8;
-  font-size: 11px;
-}
-.transactions-page :deep(.q-table td strong) {
-  color: inherit;
-}
-.transactions-page :deep(.q-table__container) {
-  background: transparent;
-  color: #fff;
-  border: 1px solid #ffffff1f;
-  border-radius: 10px;
-}
-.transactions-page :deep(.q-table thead) {
-  background: #ffffff0a;
-}
-.transactions-page :deep(.q-table th),
-.transactions-page :deep(.q-table td),
-.transactions-page :deep(.q-table__bottom) {
-  color: #fff;
-  border-color: #ffffff1f;
-}
-.transactions-page :deep(.contract-transaction-type) {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-.transactions-page :deep(.contract-flow__badge) {
-  display: inline-flex;
-  align-items: center;
-  gap: 4px;
-}
-</style>
-
-<style scoped>
 .transaction-heading {
   font:
     700 20px/28px Inter,
@@ -785,5 +557,45 @@ async function showAuditHistory() {
 .transactions-page :deep(.title-page-heading-row) {
   align-items: flex-start;
   flex-wrap: wrap;
+}
+</style>
+
+<style scoped>
+.transactions-page :deep(.wallet-overview) {
+  padding: 0 24px 16px;
+  border-bottom: 0.8px solid #ffffff1f;
+}
+.transactions-page > .q-tabs {
+  margin: 16px 24px 0;
+}
+.transactions-page :deep(.TitlePage > .q-pa-md) {
+  padding: 16px 24px;
+}
+@media (max-width: 650px) {
+  .transactions-page :deep(.wallet-overview) {
+    padding: 0 16px 16px;
+  }
+  .transactions-page :deep(.TitlePage > .q-pa-md) {
+    padding: 16px;
+  }
+}
+</style>
+
+<style scoped>
+/* Keep the existing palette for embedded portfolio tables; the ledger owns its own styles. */
+.transactions-page :deep(.q-table__container) {
+  background: transparent;
+  color: white;
+  border: 1px solid #ffffff1f;
+  border-radius: 10px;
+}
+.transactions-page :deep(.q-table thead) {
+  background: #ffffff0a;
+}
+.transactions-page :deep(.q-table th),
+.transactions-page :deep(.q-table td),
+.transactions-page :deep(.q-table__bottom) {
+  color: white;
+  border-color: #ffffff1f;
 }
 </style>

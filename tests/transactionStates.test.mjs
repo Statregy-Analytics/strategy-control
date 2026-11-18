@@ -175,6 +175,7 @@ async function setupPage() {
         globalWalletSummary: () => null,
       },
       'src/services/requestContext': {
+        readCurrentPages,
         createRequestContext: () => ({ capture: () => () => true, invalidate() {}, dispose() {} }),
       },
       'src/services/transactionOperations': { submitAdminTransaction() {} },
@@ -359,4 +360,44 @@ test('closing transaction detail discards late history and original responses', 
   await Vue.nextTick()
   assert.equal(h.history.state.data, null)
   assert.equal(h.original.state.data, null)
+})
+
+test('validate modal allows an optional observation and retains it on failure', async () => {
+  let calls = 0
+  const { h, events, stop } = await setup(dialogFile, {
+    mode: 'validate',
+    submit: async () => {
+      calls++
+      throw Error('offline')
+    },
+  })
+  assert.equal(h.valid.value, true)
+  assert.equal(h.workflow.value.notice, 'Você está validando esta solicitação')
+  h.content.value = ' Conferência fictícia '
+  await h.confirm()
+  assert.equal(calls, 1)
+  assert.equal(h.content.value, ' Conferência fictícia ')
+  assert.ok(h.error.value)
+  assert.equal(
+    events.some(([event]) => event === 'completed'),
+    false,
+  )
+  stop()
+})
+test('validate opens the existing observation step and then requires the existing password confirmation', async () => {
+  const { h, record, writes, stop } = await setupPage()
+  record.availableActions = ['Validate']
+  h.startWorkflow('Validate')
+  assert.equal(h.stateDialog.value.mode, 'validate')
+  assert.equal(h.actionToConfirm.value, null)
+  const result = await h.submitState('')
+  assert.equal(result.action, 'Validate')
+  assert.equal(writes.length, 0)
+  h.stateCompleted(result)
+  assert.equal(h.actionToConfirm.value, 'Validate')
+  assert.equal(writes.length, 0)
+  await h.executeConfirmed('test-password')
+  assert.equal(writes.length, 1)
+  assert.equal(writes[0][2].action, 'Validate')
+  stop()
 })

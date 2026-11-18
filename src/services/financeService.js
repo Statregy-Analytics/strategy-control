@@ -51,6 +51,7 @@ const labels = {
   Error: 'Erro',
   CorrectDeposit: 'Corrigir depósito',
   Loan: 'Empréstimo',
+  Yield: 'Rendimento',
   Leverage: 'Alavancagem',
   AwaitingReceipt: 'Aguardando comprovante',
   PaidOff: 'Quitado',

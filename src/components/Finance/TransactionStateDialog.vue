@@ -101,12 +101,18 @@ const titles = {
   observation: 'Adicionar observação',
   receipt: 'Ver comprovante',
   attachment: 'Anexar documento',
+  validate: 'Validar',
   approve: 'Aprovar',
   reject: 'Rejeitar',
   execute: 'Executar operação',
   cancel: 'Cancelar solicitação',
 }
 const workflows = {
+  validate: {
+    notice: 'Você está validando esta solicitação',
+    label: 'Observação (opcional)',
+    placeholder: 'Adicione comentários sobre a validação',
+  },
   approve: {
     notice: 'Você está aprovando esta solicitação',
     label: 'Observação (opcional)',
@@ -143,7 +149,7 @@ const valid = computed(
           (!file.value.type || file.value.type === 'application/pdf'),
         )
       : false) ||
-    props.mode === 'approve' ||
+    ['validate', 'approve'].includes(props.mode) ||
     (props.mode === 'execute'
       ? content.value.trim() === 'CONFIRMAR'
       : props.mode !== 'attachment' && Boolean(content.value.trim())),
@@ -265,5 +271,28 @@ footer {
 }
 .transaction-state :deep(.q-field__control:before) {
   border-color: #ffffff29;
+}
+</style>
+
+<style scoped>
+.transaction-state__notice--validate {
+  color: #ffffffb8;
+  border: 0.8px solid #008236;
+  background: linear-gradient(87.5deg, #ffffff1a, #ffffff09 50%, #ffffff13);
+  font:
+    400 14px/20px Inter,
+    sans-serif;
+}
+.transaction-state :deep(textarea) {
+  min-height: 46px;
+}
+.transaction-state :deep(.q-field--textarea .q-field__control) {
+  min-height: 64px;
+}
+</style>
+
+<style scoped>
+.transaction-state [role='alert'] {
+  color: #ffa1ad !important;
 }
 </style>

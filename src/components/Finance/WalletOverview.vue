@@ -1,6 +1,14 @@
 <template>
   <section class="wallet-overview" aria-label="Visão consolidada das carteiras">
-    <div :class="['wallet-cards', { 'wallet-cards--global': !details }]">
+    <div
+      :class="[
+        'wallet-cards',
+        {
+          'wallet-cards--global': !details,
+          'wallet-cards--transactions': presentation === 'transactions',
+        },
+      ]"
+    >
       <button
         v-for="item in orderedTypes"
         :key="item.key"
@@ -21,7 +29,13 @@
               ><img
                 :src="
                   '/icons/wallet-directory/' +
-                  (item.key === 'strategy' ? 'summary-strategy' : 'summary-wallet') +
+                  ((
+                    presentation === 'transactions'
+                      ? item.key === 'assets'
+                      : item.key === 'strategy'
+                  )
+                    ? 'summary-strategy'
+                    : 'summary-wallet') +
                   '.svg'
                 "
                 alt=""
@@ -39,32 +53,56 @@
               }}</small
             >
           </div>
-          <small v-if="item.key === 'total'" class="wallet-global-caption">Moedas Criadas</small>
+          <small
+            v-if="item.key === 'total' && presentation !== 'transactions'"
+            class="wallet-global-caption"
+            >Moedas Criadas</small
+          >
           <div class="wallet-global-amounts">
             <strong>{{ walletMoney(globalWalletConverted(model, item.key).usd, 'USD') }}</strong>
             <div class="wallet-global-secondary">
               <span>{{ walletMoney(globalWalletConverted(model, item.key).brl, 'BRL') }}</span
               ><small>{{
                 model?.fx?.['USD-BRL']
-                  ? (item.key === 'total' ? 'USD = ' : 'Cotação USD → BRL · ') +
+                  ? (presentation === 'transactions'
+                      ? 'Cotação USD → BRL = '
+                      : item.key === 'total'
+                        ? 'USD = '
+                        : 'Cotação USD → BRL · ') +
                     Number(model.fx['USD-BRL'].rate).toLocaleString('pt-BR', {
                       maximumFractionDigits: 4,
                     }) +
-                    (item.key === 'total' ? ' BRL' : '')
+                    (presentation !== 'transactions' && item.key === 'total' ? ' BRL' : '')
                   : 'Cotação indisponível'
               }}</small>
             </div>
           </div>
           <div v-if="item.key === 'total'" class="wallet-global-circulation">
-            <span>Em circulação</span
+            <span>{{ presentation === 'transactions' ? 'Capital base' : 'Em circulação' }}</span
             ><strong>{{
-              walletMoney(model?.circulatingAmount, model?.circulatingCurrency)
+              walletMoney(
+                presentation === 'transactions'
+                  ? model?.baseCapitalAmount
+                  : model?.circulatingAmount,
+                presentation === 'transactions'
+                  ? model?.baseCapitalCurrency
+                  : model?.circulatingCurrency,
+              )
             }}</strong>
-            <div class="wallet-global-track" />
+            <div class="wallet-global-track">
+              <span
+                v-if="presentation === 'transactions' && baseProgress !== null"
+                :style="{ width: baseProgress + '%' }"
+              />
+            </div>
             <small>{{
-              model?.circulationPercentage == null
-                ? '—'
-                : model.circulationPercentage + '% do Total'
+              presentation === 'transactions'
+                ? baseProgress === null
+                  ? '—'
+                  : baseProgress + '% da Carteira Total'
+                : model?.circulationPercentage == null
+                  ? '—'
+                  : model.circulationPercentage + '% do Total'
             }}</small>
           </div>
           <span v-else class="wallet-global-arrow"
@@ -230,6 +268,7 @@
   </section>
 </template>
 <script setup>
+import { numberInputValue } from 'src/services/numberInputValue'
 import { globalWalletConverted } from 'src/services/globalWalletFx'
 import { walletDisplayAmounts } from 'src/services/portfolioProjection'
 import { computed, ref, watch } from 'vue'
@@ -245,6 +284,11 @@ const props = defineProps({
   initialType: { type: String, default: null },
   model: { type: Object, default: null },
   details: { type: Boolean, default: true },
+  presentation: { type: String, default: 'directory' },
+})
+const baseProgress = computed(() => {
+  const value = numberInputValue(props.model?.baseCapitalPercentage)
+  return value !== null && value >= 0 && value <= 100 ? value : null
 })
 const orderedTypes = computed(() =>
   props.details ? WALLET_TYPES : [WALLET_TYPES[3], ...WALLET_TYPES.slice(0, 3)],
@@ -604,5 +648,63 @@ dd {
   border-radius: 6px;
   padding: 1px 6px;
   white-space: nowrap;
+}
+</style>
+
+<style scoped>
+.wallet-cards--transactions .wallet-global-amounts {
+  margin-top: 14px;
+  padding-bottom: 4px;
+}
+.wallet-cards--transactions button {
+  padding: 16px;
+  min-height: 177px;
+  border-radius: 14px;
+}
+.wallet-cards--transactions button.selected {
+  border-color: #ffffff33;
+  background: linear-gradient(114deg, #ffffff0f, #ffffff14);
+}
+.wallet-cards--transactions .wallet-global-amounts strong {
+  font:
+    700 20px/28px Inter,
+    sans-serif;
+}
+.wallet-cards--transactions .wallet-global-circulation {
+  margin-top: 8px;
+  color: #00d68f;
+}
+.wallet-cards--transactions .wallet-global-circulation small {
+  color: #00d68f;
+}
+.wallet-cards--transactions .wallet-global-track {
+  background: #ffffff1a;
+}
+</style>
+
+<style scoped>
+.wallet-cards--transactions button {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+.wallet-cards--transactions .wallet-global-heading {
+  width: 100%;
+}
+.wallet-cards--transactions .wallet-global-secondary {
+  margin-top: 0;
+}
+.wallet-cards--transactions .wallet-global-circulation {
+  margin-top: auto;
+}
+</style>
+
+<style scoped>
+.wallet-cards--transactions .wallet-global-track > span {
+  display: block;
+  height: 6px;
+  background: #00d68f;
+  border-radius: 4px;
+  margin: 0;
 }
 </style>
