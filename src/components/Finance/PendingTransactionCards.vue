@@ -261,9 +261,9 @@ footer code {
   background: #bb4d0033;
 }
 .pending-transaction__main .pending-transaction__status.rejected {
-  color: #ffa1ad;
-  border-color: #ffa1ad;
-  background: #fb2c3633;
+  color: #ffc9c9;
+  border-color: #ffc9c9;
+  background: #c1000733;
 }
 </style>
 

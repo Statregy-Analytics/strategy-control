@@ -285,9 +285,9 @@ small {
   background: #007a5533;
 }
 .transaction-ledger__badge.negative {
-  color: #ffa1ad;
-  border-color: #ffa1ad;
-  background: #fb2c3633;
+  color: #ffc9c9;
+  border-color: #ffc9c9;
+  background: #c1000733;
 }
 .transaction-ledger__error .transaction-ledger__original {
   text-decoration: line-through;
@@ -340,7 +340,7 @@ strong.positive {
   color: #66e59e;
 }
 strong.negative {
-  color: #fb2c36;
+  color: #ff6467;
 }
 .transaction-ledger__badge {
   align-items: center;
