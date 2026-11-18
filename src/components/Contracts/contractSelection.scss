@@ -488,8 +488,8 @@
 }
 
 .contract-selection .workspace-toolbar :deep(.input-personal .q-badge) {
-  color: white;
-  background: #ffffff0f;
+  color: white !important;
+  background: #ffffff0f !important;
   border-color: #ffffff33 !important;
   padding: 4px 8px;
   gap: 8px;
