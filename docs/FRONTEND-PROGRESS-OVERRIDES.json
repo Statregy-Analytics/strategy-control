@@ -283,57 +283,52 @@
       ]
     },
     "1:34294": {
-      "front": "validation",
-      "reason": "Fluxo existente confirmado conectado em ContractsPage → OpportunityInvestment, cinco passos testados. Referências dos seis modais recuperadas, variante de oferta ajustada; estado enviado somente em prévia controlada. Falta comparação integral da página de fundo e vínculo do estado selecionado dos valores no passo 3. Não há POST de solicitação de contrato no OpenAPI atual.",
-      "evidence": "docs/evidence/qa-2026-11-17-transactions/results.json",
+      "front": "done",
+      "reason": "Lista recomposta com visão geral, performance e cards, três temas comparados. Oferta com fundo correto, ícones nativos por etapa, retorno entre passos, sucesso e encerramento corrigidos e testados no navegador. Dados positivos por props controladas; consulta/navegação reais preservadas; sem escrita simulada no produto.",
+      "evidence": "docs/evidence/qa-2026-11-18-review26/results.json",
       "blockers": [
-        "backend",
-        "designer"
+        "backend"
       ]
     },
     "1:36148": {
-      "front": "validation",
-      "reason": "Fluxo existente confirmado conectado em ContractsPage → OpportunityInvestment, cinco passos testados. Referências dos seis modais recuperadas, variante de oferta ajustada; estado enviado somente em prévia controlada. Falta comparação integral da página de fundo e vínculo do estado selecionado dos valores no passo 3. Não há POST de solicitação de contrato no OpenAPI atual.",
-      "evidence": "docs/evidence/qa-2026-11-17-transactions/results.json",
+      "front": "done",
+      "reason": "Lista recomposta com visão geral, performance e cards, três temas comparados. Oferta com fundo correto, ícones nativos por etapa, retorno entre passos, sucesso e encerramento corrigidos e testados no navegador. Dados positivos por props controladas; consulta/navegação reais preservadas; sem escrita simulada no produto.",
+      "evidence": "docs/evidence/qa-2026-11-18-review26/results.json",
       "blockers": [
-        "backend",
-        "designer"
+        "backend"
       ]
     },
     "1:37994": {
       "front": "validation",
-      "reason": "Fluxo existente confirmado conectado em ContractsPage → OpportunityInvestment, cinco passos testados. Referências dos seis modais recuperadas, variante de oferta ajustada; estado enviado somente em prévia controlada. Falta comparação integral da página de fundo e vínculo do estado selecionado dos valores no passo 3. Não há POST de solicitação de contrato no OpenAPI atual.",
-      "evidence": "docs/evidence/qa-2026-11-17-transactions/results.json",
+      "reason": "Modal inicial de modalidade recuperado e testado; o frame não mostra o estado após seleção nem os campos de valor condicionais já existentes. Sem criar campos novos nem aprovar essa composição por inferência. Retorno e preservação do valor foram testados.",
+      "evidence": "docs/evidence/qa-2026-11-18-review26/results.json",
       "blockers": [
-        "backend",
-        "designer"
+        "designer",
+        "backend"
       ]
     },
     "1:39818": {
-      "front": "validation",
-      "reason": "Fluxo existente confirmado conectado em ContractsPage → OpportunityInvestment, cinco passos testados. Referências dos seis modais recuperadas, variante de oferta ajustada; estado enviado somente em prévia controlada. Falta comparação integral da página de fundo e vínculo do estado selecionado dos valores no passo 3. Não há POST de solicitação de contrato no OpenAPI atual.",
-      "evidence": "docs/evidence/qa-2026-11-17-transactions/results.json",
+      "front": "done",
+      "reason": "Lista recomposta com visão geral, performance e cards, três temas comparados. Oferta com fundo correto, ícones nativos por etapa, retorno entre passos, sucesso e encerramento corrigidos e testados no navegador. Dados positivos por props controladas; consulta/navegação reais preservadas; sem escrita simulada no produto.",
+      "evidence": "docs/evidence/qa-2026-11-18-review26/results.json",
       "blockers": [
-        "backend",
-        "designer"
+        "backend"
       ]
     },
     "1:41796": {
-      "front": "validation",
-      "reason": "Fluxo existente confirmado conectado em ContractsPage → OpportunityInvestment, cinco passos testados. Referências dos seis modais recuperadas, variante de oferta ajustada; estado enviado somente em prévia controlada. Falta comparação integral da página de fundo e vínculo do estado selecionado dos valores no passo 3. Não há POST de solicitação de contrato no OpenAPI atual.",
-      "evidence": "docs/evidence/qa-2026-11-17-transactions/results.json",
+      "front": "done",
+      "reason": "Lista recomposta com visão geral, performance e cards, três temas comparados. Oferta com fundo correto, ícones nativos por etapa, retorno entre passos, sucesso e encerramento corrigidos e testados no navegador. Dados positivos por props controladas; consulta/navegação reais preservadas; sem escrita simulada no produto.",
+      "evidence": "docs/evidence/qa-2026-11-18-review26/results.json",
       "blockers": [
-        "backend",
-        "designer"
+        "backend"
       ]
     },
     "1:43678": {
-      "front": "validation",
-      "reason": "Fluxo existente confirmado conectado em ContractsPage → OpportunityInvestment, cinco passos testados. Referências dos seis modais recuperadas, variante de oferta ajustada; estado enviado somente em prévia controlada. Falta comparação integral da página de fundo e vínculo do estado selecionado dos valores no passo 3. Não há POST de solicitação de contrato no OpenAPI atual.",
-      "evidence": "docs/evidence/qa-2026-11-17-transactions/results.json",
+      "front": "done",
+      "reason": "Lista recomposta com visão geral, performance e cards, três temas comparados. Oferta com fundo correto, ícones nativos por etapa, retorno entre passos, sucesso e encerramento corrigidos e testados no navegador. Dados positivos por props controladas; consulta/navegação reais preservadas; sem escrita simulada no produto.",
+      "evidence": "docs/evidence/qa-2026-11-18-review26/results.json",
       "blockers": [
-        "backend",
-        "designer"
+        "backend"
       ]
     },
     "2161:281": {
@@ -902,6 +897,30 @@
       "evidence": "docs/evidence/qa-2026-11-18-transaction-directory/references.json",
       "blockers": [
         "designer"
+      ]
+    },
+    "1:32479": {
+      "front": "done",
+      "reason": "Lista recomposta com visão geral, performance e cards, três temas comparados. Oferta com fundo correto, ícones nativos por etapa, retorno entre passos, sucesso e encerramento corrigidos e testados no navegador. Dados positivos por props controladas; consulta/navegação reais preservadas; sem escrita simulada no produto.",
+      "evidence": "docs/evidence/qa-2026-11-18-review26/results.json",
+      "blockers": [
+        "backend"
+      ]
+    },
+    "1:69127": {
+      "front": "done",
+      "reason": "Lista recomposta com visão geral, performance e cards, três temas comparados. Oferta com fundo correto, ícones nativos por etapa, retorno entre passos, sucesso e encerramento corrigidos e testados no navegador. Dados positivos por props controladas; consulta/navegação reais preservadas; sem escrita simulada no produto.",
+      "evidence": "docs/evidence/qa-2026-11-18-review26/results.json",
+      "blockers": [
+        "backend"
+      ]
+    },
+    "1:70897": {
+      "front": "done",
+      "reason": "Lista recomposta com visão geral, performance e cards, três temas comparados. Oferta com fundo correto, ícones nativos por etapa, retorno entre passos, sucesso e encerramento corrigidos e testados no navegador. Dados positivos por props controladas; consulta/navegação reais preservadas; sem escrita simulada no produto.",
+      "evidence": "docs/evidence/qa-2026-11-18-review26/results.json",
+      "blockers": [
+        "backend"
       ]
     }
   }

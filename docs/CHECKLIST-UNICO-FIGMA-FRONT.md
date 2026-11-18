@@ -10,17 +10,40 @@ Atualizado em 2026-11-18. Contagem por **telas e estados independentes do Figma*
 | Situação | Quantidade |
 | --- | ---: |
 | Total inventariado | **279** |
-| Prontas no frontend | **244** |
-| Implementadas, aguardando revalidação/comparação completa | **26** |
+| Prontas no frontend | **252** |
+| Implementadas, aguardando revalidação/comparação completa | **18** |
 | Ainda exigem implementação, complemento ou correção | **9** |
 | Com implementação existente (prontas + revalidação) | **270 / 279 (96,8%)** |
 
-**Para encerrar o front faltam 9 itens de implementação/ajuste e 26 de revalidação.** “Pronto no frontend” não significa fluxo integrado liberado: dependências de backend/designer podem afetar também telas prontas. Os números não classificam toda pendência como tela nova nem como problema de API. A comparação de Crédito, carteira global e editor editorial que não foi concluída integralmente permanece em revalidação.
+**Para encerrar o front faltam 9 itens de implementação/ajuste e 18 de revalidação.** “Pronto no frontend” não significa fluxo integrado liberado: dependências de backend/designer podem afetar também telas prontas. Os números não classificam toda pendência como tela nova nem como problema de API. A comparação de Crédito, carteira global e editor editorial que não foi concluída integralmente permanece em revalidação.
 
 Fonte por frame: [progresso atual](FRONTEND-PROGRESS.json). A base anterior permanece histórica; [atualizações com evidências](FRONTEND-PROGRESS-OVERRIDES.json) registram cada mudança. Ao finalizar **cada entrega**, atualizar os IDs comprovados, executar `node scripts/frontend-progress.mjs` e informar este panorama na resposta final.
 <!-- frontend-progress:end -->
 
 
+
+
+
+## Entrega 18/11 — contratos do cliente: lista, temas e oferta
+
+Portal `0d91651`. [Publicação 44366521708](https://github.com/WillTbn/Strategy-analytics-v2/actions/runs/44366521708), concluída e conferida. **Oito dos 26 estados** desta rodada foram revalidados: lista `1:32479`, variantes `1:69127`/`1:70897` e oferta `1:34294`, `1:36148`, `1:39818`, `1:41796`, `1:43678`. Não significa conclusão dos outros 18 nem homologação financeira integrada.
+
+- [x] Substituída a tabela genérica por Visão Geral, Performance Geral e Seus Contratos: quatro resumos, três gráficos, banner existente, cards, métricas, moeda firmada, evolução e Ver Contrato. Consultas reais de lista e Home independentes; todas as páginas consultadas antes da contagem, sem limite implícito da primeira página e sem uma chamada de detalhe por card.
+- [x] Três temas comparados com as referências recuperadas: fundos dos painéis, valores secundários, cores dos valores e legibilidade. Ícones nativos de 24 px, banner e setas de retorno específicas de cada etapa conferidos por hash e no navegador. Gráficos são renderizados pela dependência existente a partir de séries fornecidas; as curvas de exemplo do Figma não viraram dados financeiros nem imagens fixas no produto.
+- [x] Zero é distinto de indisponível; moedas não são somadas nem tratadas como conversão sem cotação. O capital global `initialContractualCapital` não foi reapresentado como entrada individual. Valor base recebido continua visível; entrada/posição/distribuição ausentes usam “—”. Contratos vigentes são contados pelo status recebido na lista completa.
+- [x] Navegador controlado: quatro resumos positivos, 14 contratos/rolagem interna, gráficos e minigráficos, cinco períodos, Percentual/Absoluto, média fornecida, vazio, loading, erro e retry, métricas ausentes e três temas. Prévia montou os componentes reais por props/callback; nenhum store de API fake. Arquivos removidos antes do build e arquivados somente como texto.
+- [x] Oferta: fundo correto com lista e banner, passos 1–5, seleções múltiplas, teclado na região, validação antes de avançar e retorno preservando escolhas/valor. Corrigidos glass, espaçamentos, legendas das regiões, área de rolagem, ícones por etapa e sucesso em **572 × 646**. Corrigido “Ir para Contratos”: nome de rota com capitalização errada impedia fechar o modal. Encerramento e reabertura limpa repetidos após a correção.
+- [x] Sucesso e retorno final exercitados somente com callback local controlado. No produto, o adapter existente continua falhando explicitamente enquanto não houver integração confirmada para envio; não foi simulada persistência, criado endpoint ou enviado pedido financeiro real.
+- [x] Consulta local real: três contratos do Éric, saldos por moeda separados, abertura de Legacy Prime e retorno à lista. Mobile de 390 px: documento de 378 px, nenhuma imagem ausente e modal com 330 px, sem rolagem horizontal externa.
+- [x] **492 testes** passaram, incluindo oito novos testes de dados/paginação, ausência de métrica individual e regressão de encerramento/falha da oferta. Lint, build, auditoria e diff desta entrega aprovados; auditoria preservada. Mudanças alheias em PRODUCT.md e documentação de integração não incluídas.
+- [x] **Verificação publicada:** lista com três contratos ativos, saldos BRL/USD separados, abertura de Legacy Prime e retorno, etapas 1–2 da oferta, Voltar/fechar e reabrir limpo. Mobile: 390 px, documento de 378 px, sem imagens ausentes. Auditoria, lint, 492 testes, build, upload e ativação passaram no CI; 16 assets nativos distintos publicados conferidos por SHA256. Nenhum pedido financeiro real enviado.
+- [ ] **Designer — `1:37994`:** o frame recuperado mostra as opções de modalidade sem a seleção e seus campos de valor. Os inputs condicionais preexistentes foram reutilizados e testados, sem acrescentar campos; falta confirmar esse estado visual. Este frame continua em revalidação, separado dos cinco estados de oferta comprovados.
+- [ ] **Integração posterior:** entrada individual, posição atual, próxima distribuição, prazo/categoria e séries/agregados de performance não estão completos na consulta atualmente integrada. A apresentação positiva está preparada por props e foi testada. Confirmar as projeções/consultas antes de implementar o adapter; não criar HTTP nem usar capital global, valores de exemplo ou soma de moedas para preencher lacunas.
+- [ ] **Envio:** o frontend ainda não tem contrato HTTP confirmado de solicitação de contrato para substituir o adapter indisponível. Confirmar integração antes de liberar persistência; o sucesso controlado não comprova gravação no backend.
+
+Panorama: **279 estados, 252 prontos, 18 em revalidação e 9 em implementação/ajuste**. Implementação existente **270/279 (96,8%)**; prontos **90,3%**. Permanecem **13 superfícies sem referência** para avaliação do Éric; nenhuma nova nesta entrega. Os 18 restantes estão enumerados na matriz, sem aprovação por inferência.
+
+[Resultados](evidence/qa-2026-11-18-review26/results.json) · [Matriz dos 26](evidence/qa-2026-11-18-review26/review-matrix.json) · [Referências](evidence/qa-2026-11-18-review26/references.json) · [Contextos completos](evidence/qa-2026-11-18-review26/high-fidelity.json) · [Desktop controlado](evidence/qa-2026-11-18-review26/contracts-directory-controlled.png) · [Sucesso controlado](evidence/qa-2026-11-18-review26/contracts-offer-success-controlled.png) · [Publicação](evidence/qa-2026-11-18-review26/publication.json) · [Tela publicada](evidence/qa-2026-11-18-review26/contracts-directory-hml.png).
 
 
 ## Entrega 18/11 — Área do Cliente: saque em etapas
@@ -1383,13 +1406,13 @@ Legenda vigente: classificação de 16/11 por código e evidências, detalhada e
 | [1:29678](https://www.figma.com/design/BaDXlWpxbIoY4azOaQnXgv?node-id=1-29678)     | [UI] HOME - VERSÃO PADRÃO                                                    | Pronto no front · P02 |
 | [1:31985](https://www.figma.com/design/BaDXlWpxbIoY4azOaQnXgv?node-id=1-31985)     | [UI] HOME - CONTA NOVA - Sem depósito                                        | Pronto no front · P03 |
 | [1:32335](https://www.figma.com/design/BaDXlWpxbIoY4azOaQnXgv?node-id=1-32335)     | [EC] HOME · Conta nova · Estados do gráfico e do período                     | Pronto no front · P03 |
-| [1:32479](https://www.figma.com/design/BaDXlWpxbIoY4azOaQnXgv?node-id=1-32479)     | [UI] CONTRATOS - GERAL                                                       | Implementado · revalidar · P04 |
-| [1:34294](https://www.figma.com/design/BaDXlWpxbIoY4azOaQnXgv?node-id=1-34294)     | [UI] CONTRATOS - OFERTA_CONTRATO - 1                                         | Implementado · revalidar · P05 |
-| [1:36148](https://www.figma.com/design/BaDXlWpxbIoY4azOaQnXgv?node-id=1-36148)     | [UI] CONTRATOS - OFERTA_CONTRATO - 2                                         | Implementado · revalidar · P05 |
+| [1:32479](https://www.figma.com/design/BaDXlWpxbIoY4azOaQnXgv?node-id=1-32479)     | [UI] CONTRATOS - GERAL                                                       | Pronto no front · P04 |
+| [1:34294](https://www.figma.com/design/BaDXlWpxbIoY4azOaQnXgv?node-id=1-34294)     | [UI] CONTRATOS - OFERTA_CONTRATO - 1                                         | Pronto no front · P05 |
+| [1:36148](https://www.figma.com/design/BaDXlWpxbIoY4azOaQnXgv?node-id=1-36148)     | [UI] CONTRATOS - OFERTA_CONTRATO - 2                                         | Pronto no front · P05 |
 | [1:37994](https://www.figma.com/design/BaDXlWpxbIoY4azOaQnXgv?node-id=1-37994)     | [UI] CONTRATOS - OFERTA_CONTRATO - 3                                         | Implementado · revalidar · P05 |
-| [1:39818](https://www.figma.com/design/BaDXlWpxbIoY4azOaQnXgv?node-id=1-39818)     | [UI] CONTRATOS - OFERTA_CONTRATO - 4                                         | Implementado · revalidar · P05 |
-| [1:41796](https://www.figma.com/design/BaDXlWpxbIoY4azOaQnXgv?node-id=1-41796)     | [UI] CONTRATOS - OFERTA_CONTRATO - 5A                                        | Implementado · revalidar · P05 |
-| [1:43678](https://www.figma.com/design/BaDXlWpxbIoY4azOaQnXgv?node-id=1-43678)     | [UI] CONTRATOS - OFERTA_CONTRATO - 5A                                        | Implementado · revalidar · P05 |
+| [1:39818](https://www.figma.com/design/BaDXlWpxbIoY4azOaQnXgv?node-id=1-39818)     | [UI] CONTRATOS - OFERTA_CONTRATO - 4                                         | Pronto no front · P05 |
+| [1:41796](https://www.figma.com/design/BaDXlWpxbIoY4azOaQnXgv?node-id=1-41796)     | [UI] CONTRATOS - OFERTA_CONTRATO - 5A                                        | Pronto no front · P05 |
+| [1:43678](https://www.figma.com/design/BaDXlWpxbIoY4azOaQnXgv?node-id=1-43678)     | [UI] CONTRATOS - OFERTA_CONTRATO - 5A                                        | Pronto no front · P05 |
 | [1:45691](https://www.figma.com/design/BaDXlWpxbIoY4azOaQnXgv?node-id=1-45691)     | [UI] CONTRATOS - PAG ESPECIFICA                                              | Implementado · revalidar · P04 |
 | [1:46764](https://www.figma.com/design/BaDXlWpxbIoY4azOaQnXgv?node-id=1-46764)     | [UI] CONTRATOS - PAG ESPECIFICA                                              | Implementado · revalidar · P04 |
 | [1:48631](https://www.figma.com/design/BaDXlWpxbIoY4azOaQnXgv?node-id=1-48631)     | [UI] CONTRATOS - PAG ESPECIFICA                                              | Implementado · revalidar · P04 |
@@ -1457,8 +1480,8 @@ Legenda vigente: classificação de 16/11 por código e evidências, detalhada e
 | [1:68090](https://www.figma.com/design/BaDXlWpxbIoY4azOaQnXgv?node-id=1-68090)     | [UI] PERFIL - Pág Resumo - Dados Pessoais                                    | Pronto no front · P10 |
 | [1:68461](https://www.figma.com/design/BaDXlWpxbIoY4azOaQnXgv?node-id=1-68461)     | [UI] HOME - VERSÃO PADRÃO                                                    | Implementado · revalidar · P12 |
 | [1:68794](https://www.figma.com/design/BaDXlWpxbIoY4azOaQnXgv?node-id=1-68794)     | [UI] HOME - VERSÃO PADRÃO                                                    | Implementado · revalidar · P12 |
-| [1:69127](https://www.figma.com/design/BaDXlWpxbIoY4azOaQnXgv?node-id=1-69127)     | [UI] CONTRATOS - GERAL                                                       | Implementado · revalidar · P04 |
-| [1:70897](https://www.figma.com/design/BaDXlWpxbIoY4azOaQnXgv?node-id=1-70897)     | [UI] CONTRATOS - GERAL                                                       | Implementado · revalidar · P04 |
+| [1:69127](https://www.figma.com/design/BaDXlWpxbIoY4azOaQnXgv?node-id=1-69127)     | [UI] CONTRATOS - GERAL                                                       | Pronto no front · P04 |
+| [1:70897](https://www.figma.com/design/BaDXlWpxbIoY4azOaQnXgv?node-id=1-70897)     | [UI] CONTRATOS - GERAL                                                       | Pronto no front · P04 |
 | [1:72668](https://www.figma.com/design/BaDXlWpxbIoY4azOaQnXgv?node-id=1-72668)     | [UI] ALAVANCAGEM                                                             | Pronto no front · P06 |
 | [1:72787](https://www.figma.com/design/BaDXlWpxbIoY4azOaQnXgv?node-id=1-72787)     | [UI] ALAVANCAGEM                                                             | Pronto no front · P06 |
 | [1:72906](https://www.figma.com/design/BaDXlWpxbIoY4azOaQnXgv?node-id=1-72906)     | [UI] COMUNICAÇÃO (List View)                                                 | Implementado · revalidar · P12 |

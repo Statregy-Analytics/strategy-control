@@ -11,12 +11,12 @@
   },
   "metrics": {
     "total": 279,
-    "done": 244,
-    "validation": 26,
+    "done": 252,
+    "validation": 18,
     "adjustment": 9,
     "implemented": 270,
     "implementedPercent": 96.8,
-    "readyPercent": 87.5
+    "readyPercent": 90.3
   },
   "withoutLinkedFigmaReference": {
     "count": 13,
@@ -4455,19 +4455,20 @@
       "link": "[1:32479](https://www.figma.com/design/BaDXlWpxbIoY4azOaQnXgv?node-id=1-32479)",
       "counted": true,
       "group": "P04",
-      "category": "Ajuste de front",
-      "front": "validation",
+      "category": "Bloqueio backend",
+      "front": "done",
       "blockers": [
         "backend"
       ],
-      "reason": "Lista/detalhe genéricos integrados e testados funcionalmente; não comprovam a composição integral dos frames e temas. Métricas individuais/performance ainda têm lacunas registradas. Não marcar todos os desenhos como concluídos pela aprovação de navegação.",
+      "reason": "Lista recomposta com visão geral, performance e cards, três temas comparados. Oferta com fundo correto, ícones nativos por etapa, retorno entre passos, sucesso e encerramento corrigidos e testados no navegador. Dados positivos por props controladas; consulta/navegação reais preservadas; sem escrita simulada no produto.",
       "sources": [
         "portal:src/system/pages/contract/ContractsPage.vue",
         "portal:src/system/pages/contract/ContractPage.vue"
       ],
       "evidence": [
         "docs/QA-2026-11-12-LISTA-CONTRATOS.md",
-        "docs/QA-2026-11-12-CONTRATOS-NAVEGACAO.md"
+        "docs/QA-2026-11-12-CONTRATOS-NAVEGACAO.md",
+        "docs/evidence/qa-2026-11-18-review26/results.json"
       ],
       "browser": "navegação/dados testados; composição integral pendente",
       "historicalCategory": "Ajuste de front"
@@ -4480,20 +4481,19 @@
       "link": "[1:34294](https://www.figma.com/design/BaDXlWpxbIoY4azOaQnXgv?node-id=1-34294)",
       "counted": true,
       "group": "P05",
-      "category": "Ajuste de front",
-      "front": "validation",
+      "category": "Bloqueio backend",
+      "front": "done",
       "blockers": [
-        "backend",
-        "designer"
+        "backend"
       ],
-      "reason": "Fluxo existente confirmado conectado em ContractsPage → OpportunityInvestment, cinco passos testados. Referências dos seis modais recuperadas, variante de oferta ajustada; estado enviado somente em prévia controlada. Falta comparação integral da página de fundo e vínculo do estado selecionado dos valores no passo 3. Não há POST de solicitação de contrato no OpenAPI atual.",
+      "reason": "Lista recomposta com visão geral, performance e cards, três temas comparados. Oferta com fundo correto, ícones nativos por etapa, retorno entre passos, sucesso e encerramento corrigidos e testados no navegador. Dados positivos por props controladas; consulta/navegação reais preservadas; sem escrita simulada no produto.",
       "sources": [
         "portal:src/router/routes.js",
         "portal:src/system/pages/contract/ContractsPage.vue"
       ],
       "evidence": [
         "docs/CHECKLIST-UNICO-FIGMA-FRONT.md#ainda-é-trabalho-de-frontend",
-        "docs/evidence/qa-2026-11-17-transactions/results.json"
+        "docs/evidence/qa-2026-11-18-review26/results.json"
       ],
       "browser": "fluxo não integrado",
       "historicalCategory": "Ajuste de front"
@@ -4506,20 +4506,19 @@
       "link": "[1:36148](https://www.figma.com/design/BaDXlWpxbIoY4azOaQnXgv?node-id=1-36148)",
       "counted": true,
       "group": "P05",
-      "category": "Ajuste de front",
-      "front": "validation",
+      "category": "Bloqueio backend",
+      "front": "done",
       "blockers": [
-        "backend",
-        "designer"
+        "backend"
       ],
-      "reason": "Fluxo existente confirmado conectado em ContractsPage → OpportunityInvestment, cinco passos testados. Referências dos seis modais recuperadas, variante de oferta ajustada; estado enviado somente em prévia controlada. Falta comparação integral da página de fundo e vínculo do estado selecionado dos valores no passo 3. Não há POST de solicitação de contrato no OpenAPI atual.",
+      "reason": "Lista recomposta com visão geral, performance e cards, três temas comparados. Oferta com fundo correto, ícones nativos por etapa, retorno entre passos, sucesso e encerramento corrigidos e testados no navegador. Dados positivos por props controladas; consulta/navegação reais preservadas; sem escrita simulada no produto.",
       "sources": [
         "portal:src/router/routes.js",
         "portal:src/system/pages/contract/ContractsPage.vue"
       ],
       "evidence": [
         "docs/CHECKLIST-UNICO-FIGMA-FRONT.md#ainda-é-trabalho-de-frontend",
-        "docs/evidence/qa-2026-11-17-transactions/results.json"
+        "docs/evidence/qa-2026-11-18-review26/results.json"
       ],
       "browser": "fluxo não integrado",
       "historicalCategory": "Ajuste de front"
@@ -4535,17 +4534,17 @@
       "category": "Ajuste de front",
       "front": "validation",
       "blockers": [
-        "backend",
-        "designer"
+        "designer",
+        "backend"
       ],
-      "reason": "Fluxo existente confirmado conectado em ContractsPage → OpportunityInvestment, cinco passos testados. Referências dos seis modais recuperadas, variante de oferta ajustada; estado enviado somente em prévia controlada. Falta comparação integral da página de fundo e vínculo do estado selecionado dos valores no passo 3. Não há POST de solicitação de contrato no OpenAPI atual.",
+      "reason": "Modal inicial de modalidade recuperado e testado; o frame não mostra o estado após seleção nem os campos de valor condicionais já existentes. Sem criar campos novos nem aprovar essa composição por inferência. Retorno e preservação do valor foram testados.",
       "sources": [
         "portal:src/router/routes.js",
         "portal:src/system/pages/contract/ContractsPage.vue"
       ],
       "evidence": [
         "docs/CHECKLIST-UNICO-FIGMA-FRONT.md#ainda-é-trabalho-de-frontend",
-        "docs/evidence/qa-2026-11-17-transactions/results.json"
+        "docs/evidence/qa-2026-11-18-review26/results.json"
       ],
       "browser": "fluxo não integrado",
       "historicalCategory": "Ajuste de front"
@@ -4558,20 +4557,19 @@
       "link": "[1:39818](https://www.figma.com/design/BaDXlWpxbIoY4azOaQnXgv?node-id=1-39818)",
       "counted": true,
       "group": "P05",
-      "category": "Ajuste de front",
-      "front": "validation",
+      "category": "Bloqueio backend",
+      "front": "done",
       "blockers": [
-        "backend",
-        "designer"
+        "backend"
       ],
-      "reason": "Fluxo existente confirmado conectado em ContractsPage → OpportunityInvestment, cinco passos testados. Referências dos seis modais recuperadas, variante de oferta ajustada; estado enviado somente em prévia controlada. Falta comparação integral da página de fundo e vínculo do estado selecionado dos valores no passo 3. Não há POST de solicitação de contrato no OpenAPI atual.",
+      "reason": "Lista recomposta com visão geral, performance e cards, três temas comparados. Oferta com fundo correto, ícones nativos por etapa, retorno entre passos, sucesso e encerramento corrigidos e testados no navegador. Dados positivos por props controladas; consulta/navegação reais preservadas; sem escrita simulada no produto.",
       "sources": [
         "portal:src/router/routes.js",
         "portal:src/system/pages/contract/ContractsPage.vue"
       ],
       "evidence": [
         "docs/CHECKLIST-UNICO-FIGMA-FRONT.md#ainda-é-trabalho-de-frontend",
-        "docs/evidence/qa-2026-11-17-transactions/results.json"
+        "docs/evidence/qa-2026-11-18-review26/results.json"
       ],
       "browser": "fluxo não integrado",
       "historicalCategory": "Ajuste de front"
@@ -4584,20 +4582,19 @@
       "link": "[1:41796](https://www.figma.com/design/BaDXlWpxbIoY4azOaQnXgv?node-id=1-41796)",
       "counted": true,
       "group": "P05",
-      "category": "Ajuste de front",
-      "front": "validation",
+      "category": "Bloqueio backend",
+      "front": "done",
       "blockers": [
-        "backend",
-        "designer"
+        "backend"
       ],
-      "reason": "Fluxo existente confirmado conectado em ContractsPage → OpportunityInvestment, cinco passos testados. Referências dos seis modais recuperadas, variante de oferta ajustada; estado enviado somente em prévia controlada. Falta comparação integral da página de fundo e vínculo do estado selecionado dos valores no passo 3. Não há POST de solicitação de contrato no OpenAPI atual.",
+      "reason": "Lista recomposta com visão geral, performance e cards, três temas comparados. Oferta com fundo correto, ícones nativos por etapa, retorno entre passos, sucesso e encerramento corrigidos e testados no navegador. Dados positivos por props controladas; consulta/navegação reais preservadas; sem escrita simulada no produto.",
       "sources": [
         "portal:src/router/routes.js",
         "portal:src/system/pages/contract/ContractsPage.vue"
       ],
       "evidence": [
         "docs/CHECKLIST-UNICO-FIGMA-FRONT.md#ainda-é-trabalho-de-frontend",
-        "docs/evidence/qa-2026-11-17-transactions/results.json"
+        "docs/evidence/qa-2026-11-18-review26/results.json"
       ],
       "browser": "fluxo não integrado",
       "historicalCategory": "Ajuste de front"
@@ -4610,20 +4607,19 @@
       "link": "[1:43678](https://www.figma.com/design/BaDXlWpxbIoY4azOaQnXgv?node-id=1-43678)",
       "counted": true,
       "group": "P05",
-      "category": "Ajuste de front",
-      "front": "validation",
+      "category": "Bloqueio backend",
+      "front": "done",
       "blockers": [
-        "backend",
-        "designer"
+        "backend"
       ],
-      "reason": "Fluxo existente confirmado conectado em ContractsPage → OpportunityInvestment, cinco passos testados. Referências dos seis modais recuperadas, variante de oferta ajustada; estado enviado somente em prévia controlada. Falta comparação integral da página de fundo e vínculo do estado selecionado dos valores no passo 3. Não há POST de solicitação de contrato no OpenAPI atual.",
+      "reason": "Lista recomposta com visão geral, performance e cards, três temas comparados. Oferta com fundo correto, ícones nativos por etapa, retorno entre passos, sucesso e encerramento corrigidos e testados no navegador. Dados positivos por props controladas; consulta/navegação reais preservadas; sem escrita simulada no produto.",
       "sources": [
         "portal:src/router/routes.js",
         "portal:src/system/pages/contract/ContractsPage.vue"
       ],
       "evidence": [
         "docs/CHECKLIST-UNICO-FIGMA-FRONT.md#ainda-é-trabalho-de-frontend",
-        "docs/evidence/qa-2026-11-17-transactions/results.json"
+        "docs/evidence/qa-2026-11-18-review26/results.json"
       ],
       "browser": "fluxo não integrado",
       "historicalCategory": "Ajuste de front"
@@ -6355,19 +6351,20 @@
       "link": "[1:69127](https://www.figma.com/design/BaDXlWpxbIoY4azOaQnXgv?node-id=1-69127)",
       "counted": true,
       "group": "P04",
-      "category": "Ajuste de front",
-      "front": "validation",
+      "category": "Bloqueio backend",
+      "front": "done",
       "blockers": [
         "backend"
       ],
-      "reason": "Lista/detalhe genéricos integrados e testados funcionalmente; não comprovam a composição integral dos frames e temas. Métricas individuais/performance ainda têm lacunas registradas. Não marcar todos os desenhos como concluídos pela aprovação de navegação.",
+      "reason": "Lista recomposta com visão geral, performance e cards, três temas comparados. Oferta com fundo correto, ícones nativos por etapa, retorno entre passos, sucesso e encerramento corrigidos e testados no navegador. Dados positivos por props controladas; consulta/navegação reais preservadas; sem escrita simulada no produto.",
       "sources": [
         "portal:src/system/pages/contract/ContractsPage.vue",
         "portal:src/system/pages/contract/ContractPage.vue"
       ],
       "evidence": [
         "docs/QA-2026-11-12-LISTA-CONTRATOS.md",
-        "docs/QA-2026-11-12-CONTRATOS-NAVEGACAO.md"
+        "docs/QA-2026-11-12-CONTRATOS-NAVEGACAO.md",
+        "docs/evidence/qa-2026-11-18-review26/results.json"
       ],
       "browser": "navegação/dados testados; composição integral pendente",
       "historicalCategory": "Ajuste de front"
@@ -6380,19 +6377,20 @@
       "link": "[1:70897](https://www.figma.com/design/BaDXlWpxbIoY4azOaQnXgv?node-id=1-70897)",
       "counted": true,
       "group": "P04",
-      "category": "Ajuste de front",
-      "front": "validation",
+      "category": "Bloqueio backend",
+      "front": "done",
       "blockers": [
         "backend"
       ],
-      "reason": "Lista/detalhe genéricos integrados e testados funcionalmente; não comprovam a composição integral dos frames e temas. Métricas individuais/performance ainda têm lacunas registradas. Não marcar todos os desenhos como concluídos pela aprovação de navegação.",
+      "reason": "Lista recomposta com visão geral, performance e cards, três temas comparados. Oferta com fundo correto, ícones nativos por etapa, retorno entre passos, sucesso e encerramento corrigidos e testados no navegador. Dados positivos por props controladas; consulta/navegação reais preservadas; sem escrita simulada no produto.",
       "sources": [
         "portal:src/system/pages/contract/ContractsPage.vue",
         "portal:src/system/pages/contract/ContractPage.vue"
       ],
       "evidence": [
         "docs/QA-2026-11-12-LISTA-CONTRATOS.md",
-        "docs/QA-2026-11-12-CONTRATOS-NAVEGACAO.md"
+        "docs/QA-2026-11-12-CONTRATOS-NAVEGACAO.md",
+        "docs/evidence/qa-2026-11-18-review26/results.json"
       ],
       "browser": "navegação/dados testados; composição integral pendente",
       "historicalCategory": "Ajuste de front"

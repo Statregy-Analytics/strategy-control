@@ -1,0 +1,66 @@
+{
+  "date": "2026-11-18",
+  "scope": "Contract directory and offer backgrounds/states from the 26-state revalidation inventory",
+  "completed": [
+    "1:32479",
+    "1:69127",
+    "1:70897",
+    "1:34294",
+    "1:36148",
+    "1:39818",
+    "1:41796",
+    "1:43678"
+  ],
+  "leftInValidation": 18,
+  "controlledBrowser": [
+    "Four overview cards, 14 contracts and internal scroll",
+    "Three theme variants; exact 24px summary/row icons and 572x646 success",
+    "Positive charts, all period controls, Percentual/Absoluto, supplied average, mini charts",
+    "Empty list, independent error/retry, loading and absent metrics",
+    "Offer five steps; selections and amount retained on back; multiple assets and regions; keyboard region toggle",
+    "Success via controlled callback only, corrected case-sensitive route, closes and reopens clean",
+    "390px mobile: 378px document, no broken images; offer fits at 330px"
+  ],
+  "localIntegrated": [
+    "Complete real contract list and independent Home summary",
+    "Currencies displayed separately; unavailable per-client initial value not replaced by global contractual capital",
+    "Legacy Prime details opens and return navigates to the list"
+  ],
+  "tests": {
+    "total": 492,
+    "new": 8,
+    "passed": 492,
+    "lint": "passed",
+    "build": "passed",
+    "securityAudit": "passed without disabling checks",
+    "scopedDiff": "passed"
+  },
+  "financialRequests": 0,
+  "backend": [
+    "Own entry/current/next distribution and contract term/category projections missing from current list",
+    "Aggregate distribution/year yield, evolution, composition by term, dividends and individual chart series unavailable",
+    "No confirmed contract-request POST; default adapter retains explicit failure"
+  ],
+  "designer": [
+    "Step 3 selected modality/value-field state still has no recovered design. Existing inputs reused, not added or approved by inference. Frame 1:37994 remains validation."
+  ],
+  "hml": {
+    "status": "passed read-only browser validation after deployment",
+    "checks": [
+      "Three real active contracts and per-currency Home summary",
+      "Per-client initial value not replaced by global initial capital",
+      "Legacy Prime → detail → back to directory",
+      "Offer steps 1–2 and back; close/reopen clears local draft",
+      "390px viewport, 378px document, no broken images",
+      "Native published assets checked by SHA256"
+    ],
+    "financialRequests": 0,
+    "successState": "Verified only in controlled local component callback, not real backend persistence."
+  },
+  "noReferenceSurfaces": {
+    "total": 13,
+    "new": 0
+  },
+  "sampleCharts": "Reference plot SVGs contain sample financial data and were not used as production assets. The installed chart dependency renders validated supplied series.",
+  "commit": "0d916513557bcb662cdb112977f98f9c051518f3"
+}

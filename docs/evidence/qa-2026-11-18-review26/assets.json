@@ -1,0 +1,184 @@
+[
+  {
+    "nodeId": "1:32537",
+    "name": "imgFileInvoice",
+    "file": "public/system/icons/contracts/directory/1-32537-imgFileInvoice.svg",
+    "sha256": "c9a1a25a0b6c12c8ea4affed4bea91cacba92e0287d9243389faab40e067d953",
+    "geometry": {
+      "width": "24",
+      "height": "24",
+      "viewBox": "0 0 24 24"
+    }
+  },
+  {
+    "nodeId": "1:32537",
+    "name": "imgReceipt2",
+    "file": "public/system/icons/contracts/directory/1-32537-imgReceipt2.svg",
+    "sha256": "8455313581743e0f21e60389314918321d7e7ec7289c22b5b2e28cc4c2d4cf99",
+    "geometry": {
+      "width": "24",
+      "height": "24",
+      "viewBox": "0 0 24 24"
+    }
+  },
+  {
+    "nodeId": "1:32537",
+    "name": "imgCalendarDollar",
+    "file": "public/system/icons/contracts/directory/1-32537-imgCalendarDollar.svg",
+    "sha256": "9864cb927cadba0a4a3c41eed31bd95c51f1295f11cae59830f3d37fc61f8859",
+    "geometry": {
+      "width": "24",
+      "height": "24",
+      "viewBox": "0 0 24 24"
+    }
+  },
+  {
+    "nodeId": "1:32971",
+    "name": "imgFileDollar",
+    "file": "public/system/icons/contracts/directory/1-32971-imgFileDollar.svg",
+    "sha256": "d7c3d6ca8a61921223c817eddc29f8f0b212a568669777b1dac7905982cc23ec",
+    "geometry": {
+      "width": "24",
+      "height": "24",
+      "viewBox": "0 0 24 24"
+    }
+  },
+  {
+    "nodeId": "1:32971",
+    "name": "imgExternalLink",
+    "file": "public/system/icons/contracts/directory/1-32971-imgExternalLink.svg",
+    "sha256": "8a1474a5e37b3c433d76615b0276f95515b2184801fccbd4c02aabae95b4adec",
+    "geometry": {
+      "width": "24",
+      "height": "24",
+      "viewBox": "0 0 24 24"
+    }
+  },
+  {
+    "nodeId": "1:32959",
+    "name": "imgWhisk93C52372B3",
+    "file": "public/system/icons/contracts/request/1-69607-imgWhisk93C52372B3.png",
+    "sha256": "2d6ad40b40da825a4170c9f032a3ea713b89d3eccac1d7daf4f0d127c06a425a"
+  },
+  {
+    "nodeId": "1:32959",
+    "name": "imgPlus",
+    "file": "public/system/icons/contracts/request/1-69607-imgPlus.svg",
+    "sha256": "1a085f4d2e342fd8a5f617dfce49a454875d0e40c0ca4a2bcd939567ca726803",
+    "geometry": {
+      "width": "12",
+      "height": "12",
+      "viewBox": "0 0 12 12"
+    }
+  },
+  {
+    "nodeId": "1:32959",
+    "name": "imgExternalLink",
+    "file": "public/system/icons/contracts/request/1-69607-imgExternalLink.svg",
+    "sha256": "2326e4a9bff384e276904294fcf1d40f1981880c2c1c1f93d73fa619ba899ec8",
+    "geometry": {
+      "width": "24",
+      "height": "24",
+      "viewBox": "0 0 24 24"
+    }
+  },
+  {
+    "nodeId": "1:32537",
+    "name": "imgChartPie",
+    "file": "public/system/icons/contracts/directory/1-32537-imgChartPie.svg",
+    "sha256": "487ec302b5b857e02ccf97eb395372cdb3da944e0067d57509180ba155956ae5",
+    "geometry": {
+      "width": "24",
+      "height": "24",
+      "viewBox": "0 0 24 24"
+    }
+  },
+  {
+    "nodeId": "1:69185",
+    "name": "imgFileInvoice",
+    "file": "public/system/icons/contracts/directory/1-32537-imgFileInvoice.svg",
+    "sha256": "c9a1a25a0b6c12c8ea4affed4bea91cacba92e0287d9243389faab40e067d953",
+    "geometry": {
+      "width": "24",
+      "height": "24",
+      "viewBox": "0 0 24 24"
+    }
+  },
+  {
+    "nodeId": "1:69185",
+    "name": "imgReceipt2",
+    "file": "public/system/icons/contracts/directory/1-32537-imgReceipt2.svg",
+    "sha256": "8455313581743e0f21e60389314918321d7e7ec7289c22b5b2e28cc4c2d4cf99",
+    "geometry": {
+      "width": "24",
+      "height": "24",
+      "viewBox": "0 0 24 24"
+    }
+  },
+  {
+    "nodeId": "1:69185",
+    "name": "imgChartPie",
+    "file": "public/system/icons/contracts/directory/1-32537-imgChartPie.svg",
+    "sha256": "487ec302b5b857e02ccf97eb395372cdb3da944e0067d57509180ba155956ae5",
+    "geometry": {
+      "width": "24",
+      "height": "24",
+      "viewBox": "0 0 24 24"
+    }
+  },
+  {
+    "nodeId": "1:69185",
+    "name": "imgCalendarDollar",
+    "file": "public/system/icons/contracts/directory/1-32537-imgCalendarDollar.svg",
+    "sha256": "9864cb927cadba0a4a3c41eed31bd95c51f1295f11cae59830f3d37fc61f8859",
+    "geometry": {
+      "width": "24",
+      "height": "24",
+      "viewBox": "0 0 24 24"
+    }
+  },
+  {
+    "nodeId": "1:70955",
+    "name": "imgFileInvoice",
+    "file": "public/system/icons/contracts/directory/1-32537-imgFileInvoice.svg",
+    "sha256": "c9a1a25a0b6c12c8ea4affed4bea91cacba92e0287d9243389faab40e067d953",
+    "geometry": {
+      "width": "24",
+      "height": "24",
+      "viewBox": "0 0 24 24"
+    }
+  },
+  {
+    "nodeId": "1:70955",
+    "name": "imgReceipt2",
+    "file": "public/system/icons/contracts/directory/1-32537-imgReceipt2.svg",
+    "sha256": "8455313581743e0f21e60389314918321d7e7ec7289c22b5b2e28cc4c2d4cf99",
+    "geometry": {
+      "width": "24",
+      "height": "24",
+      "viewBox": "0 0 24 24"
+    }
+  },
+  {
+    "nodeId": "1:70955",
+    "name": "imgChartPie",
+    "file": "public/system/icons/contracts/directory/1-32537-imgChartPie.svg",
+    "sha256": "487ec302b5b857e02ccf97eb395372cdb3da944e0067d57509180ba155956ae5",
+    "geometry": {
+      "width": "24",
+      "height": "24",
+      "viewBox": "0 0 24 24"
+    }
+  },
+  {
+    "nodeId": "1:70955",
+    "name": "imgCalendarDollar",
+    "file": "public/system/icons/contracts/directory/1-32537-imgCalendarDollar.svg",
+    "sha256": "9864cb927cadba0a4a3c41eed31bd95c51f1295f11cae59830f3d37fc61f8859",
+    "geometry": {
+      "width": "24",
+      "height": "24",
+      "viewBox": "0 0 24 24"
+    }
+  }
+]

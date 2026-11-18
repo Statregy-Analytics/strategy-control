@@ -1,0 +1,184 @@
+[
+  {
+    "id": "1484:82147",
+    "name": "LG07 · EC · Simulação ao lado · PAINEL DE ESTADOS DO COMPONENTE · DESIGN GLASS",
+    "front": "validation",
+    "evidenceThisRound": false,
+    "remaining": "Tabelas oficiais/simuladas corrigidas e testadas com séries controladas e indisponíveis. O frame denominado Ao Lado mostra tabelas empilhadas; esclarecer relação com o controle antes de concluir a comparação do estado inteiro."
+  },
+  {
+    "id": "1484:86740",
+    "name": "EC01 · Painel de estados do componente · Solicitação pendente",
+    "front": "validation",
+    "evidenceThisRound": false,
+    "remaining": "A referência recuperada contém apenas título e superfície vazia de prancha, sem estados ou tela de produto. Não criar página nem aprovar um estado inexistente; esclarecer enquadramento do frame no inventário com designer. Os cards reais foram concluídos no P01."
+  },
+  {
+    "id": "1484:97530",
+    "name": "CO06 · SP · Criar Relatório · EDITOR ESPECÍFICO · DESIGN GLASS",
+    "front": "validation",
+    "evidenceThisRound": false,
+    "remaining": "CO06: composição, PDF/áudio/anexos sucessivos e celular testados. Índice H2/H3 sem editor de corpo não está definido; reter comparação completa até esclarecer a origem do índice, sem inventar controles."
+  },
+  {
+    "id": "1:32479",
+    "name": "[UI] CONTRATOS - GERAL",
+    "front": "done",
+    "evidenceThisRound": true,
+    "remaining": null
+  },
+  {
+    "id": "1:34294",
+    "name": "[UI] CONTRATOS - OFERTA_CONTRATO - 1",
+    "front": "done",
+    "evidenceThisRound": true,
+    "remaining": null
+  },
+  {
+    "id": "1:36148",
+    "name": "[UI] CONTRATOS - OFERTA_CONTRATO - 2",
+    "front": "done",
+    "evidenceThisRound": true,
+    "remaining": null
+  },
+  {
+    "id": "1:37994",
+    "name": "[UI] CONTRATOS - OFERTA_CONTRATO - 3",
+    "front": "validation",
+    "evidenceThisRound": false,
+    "remaining": "Fluxo existente confirmado conectado em ContractsPage → OpportunityInvestment, cinco passos testados. Referências dos seis modais recuperadas, variante de oferta ajustada; estado enviado somente em prévia controlada. Falta comparação integral da página de fundo e vínculo do estado selecionado dos valores no passo 3. Não há POST de solicitação de contrato no OpenAPI atual."
+  },
+  {
+    "id": "1:39818",
+    "name": "[UI] CONTRATOS - OFERTA_CONTRATO - 4",
+    "front": "done",
+    "evidenceThisRound": true,
+    "remaining": null
+  },
+  {
+    "id": "1:41796",
+    "name": "[UI] CONTRATOS - OFERTA_CONTRATO - 5A",
+    "front": "done",
+    "evidenceThisRound": true,
+    "remaining": null
+  },
+  {
+    "id": "1:43678",
+    "name": "[UI] CONTRATOS - OFERTA_CONTRATO - 5A",
+    "front": "done",
+    "evidenceThisRound": true,
+    "remaining": null
+  },
+  {
+    "id": "1:45691",
+    "name": "[UI] CONTRATOS - PAG ESPECIFICA",
+    "front": "validation",
+    "evidenceThisRound": false,
+    "remaining": "Lista/detalhe genéricos integrados e testados funcionalmente; não comprovam a composição integral dos frames e temas. Métricas individuais/performance ainda têm lacunas registradas. Não marcar todos os desenhos como concluídos pela aprovação de navegação."
+  },
+  {
+    "id": "1:46764",
+    "name": "[UI] CONTRATOS - PAG ESPECIFICA",
+    "front": "validation",
+    "evidenceThisRound": false,
+    "remaining": "Lista/detalhe genéricos integrados e testados funcionalmente; não comprovam a composição integral dos frames e temas. Métricas individuais/performance ainda têm lacunas registradas. Não marcar todos os desenhos como concluídos pela aprovação de navegação."
+  },
+  {
+    "id": "1:48631",
+    "name": "[UI] CONTRATOS - PAG ESPECIFICA",
+    "front": "validation",
+    "evidenceThisRound": false,
+    "remaining": "Lista/detalhe genéricos integrados e testados funcionalmente; não comprovam a composição integral dos frames e temas. Métricas individuais/performance ainda têm lacunas registradas. Não marcar todos os desenhos como concluídos pela aprovação de navegação."
+  },
+  {
+    "id": "1:50141",
+    "name": "[UI] CONTRATOS - PAG ESPECIFICA",
+    "front": "validation",
+    "evidenceThisRound": false,
+    "remaining": "Lista/detalhe genéricos integrados e testados funcionalmente; não comprovam a composição integral dos frames e temas. Métricas individuais/performance ainda têm lacunas registradas. Não marcar todos os desenhos como concluídos pela aprovação de navegação."
+  },
+  {
+    "id": "211:28821",
+    "name": "[EC] CONTRATOS - PAG ESPECIFICA · Operações · sem registro",
+    "front": "validation",
+    "evidenceThisRound": false,
+    "remaining": "Lista/detalhe genéricos integrados e testados funcionalmente; não comprovam a composição integral dos frames e temas. Métricas individuais/performance ainda têm lacunas registradas. Não marcar todos os desenhos como concluídos pela aprovação de navegação."
+  },
+  {
+    "id": "1:57431",
+    "name": "[UI] ALAVANCAGEM - MINHAS ALAVANCAGENS - STATUS ATIVAS",
+    "front": "validation",
+    "evidenceThisRound": false,
+    "remaining": "Consulta paginada e estados de empréstimos corrigidos; há teste controlado de ativos/quitados, mas falta comparação integral dos seis frames e massa real adequada."
+  },
+  {
+    "id": "1:58679",
+    "name": "[UI] ALAVANCAGEM - MINHAS ALAVANCAGENS - STATUS ATIVAS",
+    "front": "validation",
+    "evidenceThisRound": false,
+    "remaining": "Consulta paginada e estados de empréstimos corrigidos; há teste controlado de ativos/quitados, mas falta comparação integral dos seis frames e massa real adequada."
+  },
+  {
+    "id": "1:59912",
+    "name": "[UI] ALAVANCAGEM - MINHAS ALAVANCAGENS - STATUS ATIVAS",
+    "front": "validation",
+    "evidenceThisRound": false,
+    "remaining": "Consulta paginada e estados de empréstimos corrigidos; há teste controlado de ativos/quitados, mas falta comparação integral dos seis frames e massa real adequada."
+  },
+  {
+    "id": "1:68461",
+    "name": "[UI] HOME - VERSÃO PADRÃO",
+    "front": "validation",
+    "evidenceThisRound": false,
+    "remaining": "Teste de tema no perfil não aprova automaticamente os clones de Home/Comunicação/resumo; manter regressão específica por frame, sem afirmar defeito visual novo."
+  },
+  {
+    "id": "1:68794",
+    "name": "[UI] HOME - VERSÃO PADRÃO",
+    "front": "validation",
+    "evidenceThisRound": false,
+    "remaining": "Teste de tema no perfil não aprova automaticamente os clones de Home/Comunicação/resumo; manter regressão específica por frame, sem afirmar defeito visual novo."
+  },
+  {
+    "id": "1:69127",
+    "name": "[UI] CONTRATOS - GERAL",
+    "front": "done",
+    "evidenceThisRound": true,
+    "remaining": null
+  },
+  {
+    "id": "1:70897",
+    "name": "[UI] CONTRATOS - GERAL",
+    "front": "done",
+    "evidenceThisRound": true,
+    "remaining": null
+  },
+  {
+    "id": "1:72906",
+    "name": "[UI] COMUNICAÇÃO (List View)",
+    "front": "validation",
+    "evidenceThisRound": false,
+    "remaining": "Teste de tema no perfil não aprova automaticamente os clones de Home/Comunicação/resumo; manter regressão específica por frame, sem afirmar defeito visual novo."
+  },
+  {
+    "id": "1:73097",
+    "name": "[UI] COMUNICAÇÃO (List View)",
+    "front": "validation",
+    "evidenceThisRound": false,
+    "remaining": "Teste de tema no perfil não aprova automaticamente os clones de Home/Comunicação/resumo; manter regressão específica por frame, sem afirmar defeito visual novo."
+  },
+  {
+    "id": "1:73288",
+    "name": "[UI] PERFIL - Pág Resumo - Dados Pessoais",
+    "front": "validation",
+    "evidenceThisRound": false,
+    "remaining": "Teste de tema no perfil não aprova automaticamente os clones de Home/Comunicação/resumo; manter regressão específica por frame, sem afirmar defeito visual novo."
+  },
+  {
+    "id": "1:73602",
+    "name": "[UI] PERFIL - Pág Resumo - Dados Pessoais",
+    "front": "validation",
+    "evidenceThisRound": false,
+    "remaining": "Teste de tema no perfil não aprova automaticamente os clones de Home/Comunicação/resumo; manter regressão específica por frame, sem afirmar defeito visual novo."
+  }
+]

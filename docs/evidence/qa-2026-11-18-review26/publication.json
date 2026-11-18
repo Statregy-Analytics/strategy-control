@@ -1,0 +1,80 @@
+{
+  "commit": "0d916513557bcb662cdb112977f98f9c051518f3",
+  "run": 44366521708,
+  "url": "https://github.com/WillTbn/Strategy-analytics-v2/actions/runs/44366521708",
+  "conclusion": "success",
+  "checks": [
+    "audit",
+    "lint",
+    "492 tests",
+    "build",
+    "upload",
+    "activate"
+  ],
+  "assets": [
+    {
+      "file": "public/system/icons/contracts/directory/1-32537-imgFileInvoice.svg",
+      "sha256": "c9a1a25a0b6c12c8ea4affed4bea91cacba92e0287d9243389faab40e067d953"
+    },
+    {
+      "file": "public/system/icons/contracts/directory/1-32537-imgReceipt2.svg",
+      "sha256": "8455313581743e0f21e60389314918321d7e7ec7289c22b5b2e28cc4c2d4cf99"
+    },
+    {
+      "file": "public/system/icons/contracts/directory/1-32537-imgCalendarDollar.svg",
+      "sha256": "9864cb927cadba0a4a3c41eed31bd95c51f1295f11cae59830f3d37fc61f8859"
+    },
+    {
+      "file": "public/system/icons/contracts/directory/1-32971-imgFileDollar.svg",
+      "sha256": "d7c3d6ca8a61921223c817eddc29f8f0b212a568669777b1dac7905982cc23ec"
+    },
+    {
+      "file": "public/system/icons/contracts/directory/1-32971-imgExternalLink.svg",
+      "sha256": "8a1474a5e37b3c433d76615b0276f95515b2184801fccbd4c02aabae95b4adec"
+    },
+    {
+      "file": "public/system/icons/contracts/request/1-69607-imgWhisk93C52372B3.png",
+      "sha256": "2d6ad40b40da825a4170c9f032a3ea713b89d3eccac1d7daf4f0d127c06a425a"
+    },
+    {
+      "file": "public/system/icons/contracts/request/1-69607-imgPlus.svg",
+      "sha256": "1a085f4d2e342fd8a5f617dfce49a454875d0e40c0ca4a2bcd939567ca726803"
+    },
+    {
+      "file": "public/system/icons/contracts/request/1-69607-imgExternalLink.svg",
+      "sha256": "2326e4a9bff384e276904294fcf1d40f1981880c2c1c1f93d73fa619ba899ec8"
+    },
+    {
+      "file": "public/system/icons/contracts/directory/1-32537-imgChartPie.svg",
+      "sha256": "487ec302b5b857e02ccf97eb395372cdb3da944e0067d57509180ba155956ae5"
+    },
+    {
+      "file": "public/system/icons/contracts/offer/imgArrowLeft.svg",
+      "sha256": "bf5b8df0377abbdb7ae5c48d84a00f59060abc63a28b55fe182490339c6e47f5"
+    },
+    {
+      "file": "public/system/icons/contracts/offer/imgIconJamIconsOutlineLogosArrowRight.svg",
+      "sha256": "8645a99713e15be380ecda033ddd79fe3efaed874f29e6ad47da6ed6c40b753e"
+    },
+    {
+      "file": "public/system/icons/contracts/directory/1-37919-imgArrowLeft.svg",
+      "sha256": "e91f47ba710553502e7fb1805a6e10e8b77ee9c39e7e5b5f9bc9a56708b9d747"
+    },
+    {
+      "file": "public/system/icons/contracts/directory/1-39765-imgArrowLeft.svg",
+      "sha256": "6aa21561dded4164a602b90182706ec035bbdc4dd8b1319a2b4943eaba153d55"
+    },
+    {
+      "file": "public/system/icons/contracts/directory/1-41589-imgArrowLeft.svg",
+      "sha256": "576fc62662d2a3116f29bbd55f20ea18e9c8d0ca671c7d8e48351f645a4f5fb5"
+    },
+    {
+      "file": "public/system/icons/contracts/request/1-45461-imgArrowLeft.svg",
+      "sha256": "ce78eb00bae6fb55a36a6af39b699bd914ba881125fbe45db8cc3879ce44981e"
+    },
+    {
+      "file": "public/system/icons/contracts/offer/success.png",
+      "sha256": "7edaf9fafa1aff63342ddb298f487b570a5eb01ba6bddd17ce2f28c8917d3351"
+    }
+  ]
+}
