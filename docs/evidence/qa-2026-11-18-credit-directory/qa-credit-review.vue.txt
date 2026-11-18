@@ -1,0 +1,16 @@
+<template><div class="workspace" style="padding:24px;min-height:100vh;color:white;background:radial-gradient(ellipse at 80% 30%,#00527866,transparent 70%),#111522"><h1>Prévia controlada — componentes reais, sem persistência</h1>
+<div style="display:flex;flex-wrap:wrap;gap:16px;margin-bottom:24px"><credit-stage-badge label="Iniciada"/><credit-stage-badge label="Documentação" current/><credit-operation-action label="Editar Operação" icon="pen" @click="clicks++"/><credit-operation-action label="Editar Operação" icon="pen" disabled/><output>Ações: {{clicks}}</output></div>
+<div style="display:flex;flex-wrap:wrap;gap:16px;margin-bottom:24px"><button @click="mode='known'">Dados controlados</button><button @click="mode='empty'">Vazio confirmado</button><button @click="mode='unavailable'">Consulta indisponível</button></div>
+<supporting-directory kind="partners" :rows="mode==='known'?rows:[]" :available="mode!=='unavailable'" :summary="mode==='known'?{activePartners:12,products:28,validTables:15,expiringTables:3,maxCommission:5,bestConversion:42}:null" @edit="lastAction='Editar '+$event.name" @create="lastAction='Criar parceiro'"/><output>{{lastAction}}</output></div></template>
+<script setup>
+import {ref} from 'vue'
+import SupportingDirectory from './components/Workspaces/SupportingDirectory.vue'
+import CreditStageBadge from './components/Workspaces/CreditStageBadge.vue'
+import CreditOperationAction from './components/Workspaces/CreditOperationAction.vue'
+const mode=ref('known'), clicks=ref(0),lastAction=ref('')
+const rows=[
+{id:'qa-a',name:'Parceiro Fictício Aurora',publicCode:'P-QA-A',type:'Banco / Financeira',products:['Imóvel','Veículo'],enabledProducts:['Veículo'],commission:4.25,status:'Active',updatedAtUtc:'2026-11-18T14:00:00Z',rules:[{name:'Tabela São Paulo'}]},
+{id:'qa-b',name:'Parceiro Fictício Brisa',publicCode:'P-QA-B',type:'Plataforma de crédito',products:['Consórcio'],enabledProducts:[],commission:0,status:'Inactive',updatedAtUtc:null},
+{id:'qa-c',name:'Parceiro Fictício Horizonte',publicCode:'P-QA-C',products:'invalid',commission:false,status:null},
+]
+</script>

@@ -10,15 +10,38 @@ Atualizado em 2026-11-18. Contagem por **telas e estados independentes do Figma*
 | Situação | Quantidade |
 | --- | ---: |
 | Total inventariado | **279** |
-| Prontas no frontend | **234** |
-| Implementadas, aguardando revalidação/comparação completa | **35** |
+| Prontas no frontend | **236** |
+| Implementadas, aguardando revalidação/comparação completa | **33** |
 | Ainda exigem implementação, complemento ou correção | **10** |
 | Com implementação existente (prontas + revalidação) | **269 / 279 (96,4%)** |
 
-**Para encerrar o front faltam 10 itens de implementação/ajuste e 35 de revalidação.** “Pronto no frontend” não significa fluxo integrado liberado: dependências de backend/designer podem afetar também telas prontas. Os números não classificam toda pendência como tela nova nem como problema de API. A comparação de Crédito, carteira global e editor editorial que não foi concluída integralmente permanece em revalidação.
+**Para encerrar o front faltam 10 itens de implementação/ajuste e 33 de revalidação.** “Pronto no frontend” não significa fluxo integrado liberado: dependências de backend/designer podem afetar também telas prontas. Os números não classificam toda pendência como tela nova nem como problema de API. A comparação de Crédito, carteira global e editor editorial que não foi concluída integralmente permanece em revalidação.
 
 Fonte por frame: [progresso atual](FRONTEND-PROGRESS.json). A base anterior permanece histórica; [atualizações com evidências](FRONTEND-PROGRESS-OVERRIDES.json) registram cada mudança. Ao finalizar **cada entrega**, atualizar os IDs comprovados, executar `node scripts/frontend-progress.mjs` e informar este panorama na resposta final.
 <!-- frontend-progress:end -->
+
+
+## Entrega 18/11 — parceiros CR07 e estados de Nova operação EC02
+
+**Publicado em homologação:** `f8fcd41` + `5aa7059`, [deploy 44330702201 aprovado](https://github.com/Statregy-Analytics/strategy-control/actions/runs/44330702201). CR07 (`1484:94677`) e EC02 (`1484:94631`) passaram de revalidação a prontos no frontend. EC02 é uma prancha de componentes, não uma página nova. Nenhum campo ou ação de produto foi acrescentado.
+
+- [x] CR07: cabeçalho, seis resumos operacionais, abas Operações/Parceiros, seis indicadores de parceiros, busca e Criar Parceiro, tabela com identidade/logo, tipo, serviços, comissão, status, atualização e abertura. Largura de 1800 px com margens de 24 px, tipografia, cards e abas ajustados após comparação em desktop; grades de seis, três ou duas colunas conforme largura. Ícones nativos recuperados e conferidos por hash, com três arquivos novos, sem alterar seus viewBox.
+- [x] Serviços oferecidos e habilitados são projeções distintas. Ausência ou catálogo malformado não vira zero; vazio conhecido preserva zero. Só os habilitados identificados aparecem na linha de serviços. Comissão zero permanece 0,0%; booleanos, vazios e números inválidos não viram 0%. Lista e detalhes reutilizam o mesmo formatador.
+- [x] Busca de parceiros por nome, código, tipo, produto e regra nomeada, sem diferença de acentos na filtragem local. Abertura de detalhes, Fechar, evento Editar e Criar reutilizam as composições existentes. Estados positivo, vazio confirmado e indisponível exercitados em componentes reais com dados controlados, sem store nem API fictícios. Indicadores positivos/ausentes e contagens zero cobertos.
+- [x] EC02: etapas padrão/atual com 32 px; linhas de tipo e cliente, foco/seleção, Continuar desabilitado sem tipo, Criar desabilitado sem cliente, ação com ícone em estado ativo e desabilitado. A ação ativa foi testada como componente por teclado; no produto Editar Operação continua desabilitado até existir integração confirmada. Não foi criado um editor fora do desenho.
+- [x] Local e homologação: tipo → seleção real do Cláudio → tentativa de criar sem persistência simulada → voltar com tipo preservado → cancelar → reabrir limpo. Busca e seleção com dados reais; acesso de Criar Parceiro ao formulário existente e validação inicial. Nenhum empréstimo, parceiro ou saldo foi gravado.
+- [x] Navegador: comparação desktop, mobile de 390 px com documento de 375 px e rolagem interna de tabela, sem imagens ausentes. Prévia controlada removida antes do build; preservada apenas como texto em evidências.
+- [x] 459 testes locais, sendo oito preexistentes do usuário fora dos commits; 451 no CI. Lint, build, auditoria e diff desta entrega aprovados. A auditoria permaneceu ativa. O diff integral aponta apenas whitespace preexistente no Swagger local, não incluído. Módulo e ícones publicados conferidos por hash. Detector auxiliar registrou 26 avisos em relação ao DESIGN.md legado; a composição segue o Figma específico.
+- [ ] **Backend — parceiros:** o OpenAPI atual não documenta consulta/CRUD do parceiro, logo, produtos, serviços habilitados, regras, tabelas, comissão ou agregados do CR07. A interface mantém lista e indicadores indisponíveis. Não foram inventados endpoints nem contratos de escrita; props de apresentação não são DTOs confirmados.
+- [ ] **Backend — operação comercial:** GET/POST de `/admin/loans` já existem, mas o POST exige valor principal e modela o empréstimo informativo. Confirmar a criação comercial por tipo + cliente, projeção de etapas/indicadores e edição antes de integrar o fluxo desenhado. Não enviar valor zero, moeda ou `kind` presumidos para contornar o contrato.
+- [ ] **Backend — projeção do cliente na seleção:** `CustomerCardResponse` fornece documento mascarado e contato principal; não inclui cidade/UF nem e-mail e telefone separados como a linha de exemplo. Exibidos somente os dados recebidos. A busca integrada por `Claudio` passou; `Cláudio` não retornou esse registro na massa atual, sem presumir busca insensível a acentos no servidor.
+- [ ] **Integração ainda sem validação:** listas positivas e agregados de parceiros via HTTP, persistência de parceiro e criação/edição comercial. Os dados positivos controlados comprovam apresentação e ações locais; não comprovam esses cenários integrados.
+- [x] **Designer:** nenhum bloqueio novo nesses dois frames. LG07 e CO06 continuam nas pendências anteriores, sem decisão presumida.
+
+Panorama: **279 estados, 236 prontos, 33 em revalidação e 10 em implementação/ajuste**. Implementação existente **269/279 (96,4%)**; prontos **84,6%**. Permanecem **13 superfícies sem frame vinculado**, nenhuma criada nesta rodada. Pronto no frontend não significa homologação integrada concluída.
+
+[Resultados e limites](evidence/qa-2026-11-18-credit-directory/results.json) · [Referências](evidence/qa-2026-11-18-credit-directory/references.json) · [API](evidence/qa-2026-11-18-credit-directory/api-review.json) · [Publicação](evidence/qa-2026-11-18-credit-directory/publication.json) · [CR07 publicado](evidence/qa-2026-11-18-credit-directory/hml-partners-desktop.png) · [Componentes com dados controlados](evidence/qa-2026-11-18-credit-directory/local-partners.png).
+
 
 ## Entrega 18/11 — estrutura de abertura e edição dos motores LG05/LG06
 
@@ -155,7 +178,7 @@ Panorama desta rodada: **279 estados, 220 prontos, 50 em revalidação e 9 ajust
 
 ## Entrega 17/11 — Crédito: Lista, Cards, Kanban e seleções
 
-**Publicado em homologação:** `f74040a`, [deploy 44187768793 aprovado](https://github.com/Statregy-Analytics/strategy-control/actions/runs/44187768793), com auditoria, testes, lint, build, upload e ativação. Oito estados revalidados: CR01, CR02, CR03, painel EC01 e EC02.S01–S04. O painel EC02 completo permanece aberto; a ação/fluxo de Editar Operação não foi aprovado por inferência dos quatro componentes.
+**Publicado em homologação:** `f74040a`, [deploy 44187768793 aprovado](https://github.com/Statregy-Analytics/strategy-control/actions/runs/44187768793), com auditoria, testes, lint, build, upload e ativação. Oito estados revalidados: CR01, CR02, CR03, painel EC01 e EC02.S01–S04. Naquela rodada o painel EC02 completo permaneceu aberto; a revisão complementar de 18/11 abaixo conclui seus componentes, sem considerar a edição comercial integrada.
 
 - [x] Lista com identificação, avatar nativo, badges, valores, contadores, origem/responsável e abertura do registro. Cards com garantia e valores, badges, rodapé e ativos nativos. Kanban renderiza as operações da etapa explícita e abre a operação correta por teclado, inclusive fora da área inicialmente visível.
 - [x] Um registro sem etapa comercial não vira quadro vazio nem é colocado em uma etapa a partir do status financeiro. Campo/contador ausente permanece indisponível; zero conhecido é preservado. `PaidOff` entra nas finalizadas e aparece como Quitado.
@@ -164,13 +187,13 @@ Panorama desta rodada: **279 estados, 220 prontos, 50 em revalidação e 9 ajust
 - [x] 417 testes passaram; lint, build e auditoria passaram. Componentes reais exercitados localmente com dados fictícios, estados vazios/indisponíveis, teclado, abertura e celular. Prévia removida antes do build. Em homologação: três modos com a consulta vazia real, grupo de finalizadas, celular sem overflow e seleção de tipo/cliente de teste. Criação permaneceu bloqueada sem gravação; os estados preenchidos de etapa e contadores foram testados apenas localmente. Onze ativos publicados conferidos por HTTP e hash.
 - [ ] API: GET/POST de empréstimos **já existem**. Falta projeção comercial de etapa, parceiros, propostas, pendências, origem e responsável para preencher o desenho. O POST atual exige `principalAmount`; falta o contrato de criação inicial compatível com a etapa que só escolhe tipo e cliente, além da correspondência com os tipos comerciais. Não pedir uma rota já existente, adicionar campos fora do Figma ou usar valor zero fictício.
 - [ ] Seleção de cliente: localidade e outros contatos do exemplo não são devolvidos no card consultado. Não foram criados dados para ocupar essas linhas.
-- [ ] EC02 completo/Editar Operação segue em revalidação; os outros 57 estados e 7 ajustes continuam discriminados no inventário.
+- [x] EC02 completo revalidado em 18/11 conforme a entrega mais recente; criação/edição comercial continuam bloqueios da API. Os números desta seção são históricos.
 
 [Resultados e limites](evidence/qa-2026-11-17-credit-directory/results.json) · [Contrato HTTP verificado](evidence/qa-2026-11-17-credit-directory/api-contract.json). Nenhuma nova superfície sem referência; permanecem 13 para avaliação de Éric.
 
 ## Entrega 17/11 — Parceiros de Crédito e estados EC03
 
-**Publicado em homologação:** `f92940d`, [deploy 44180206805 aprovado](https://github.com/Statregy-Analytics/strategy-control/actions/runs/44180206805), com auditoria, testes, build, upload e ativação. Dez estados retirados de revalidação: CR08, CR09 (regras de Imóvel), CR10 e painel/variantes EC03. A revisão da tabela de parceiros também avançou, mas CR07 completo continua aberto; não houve aprovação por inferência das demais telas de Crédito.
+**Publicado em homologação:** `f92940d`, [deploy 44180206805 aprovado](https://github.com/Statregy-Analytics/strategy-control/actions/runs/44180206805), com auditoria, testes, build, upload e ativação. Dez estados retirados de revalidação: CR08, CR09 (regras de Imóvel), CR10 e painel/variantes EC03. A revisão da tabela de parceiros também avançou, mas CR07 completo permaneceu aberto naquela rodada (concluído na revisão complementar de 18/11); não houve aprovação por inferência das demais telas de Crédito.
 
 - [x] Formulários com largura, progresso, upload, ícones nativos e campos existentes do desenho. Continuar só habilita com nome, tipo e produto. Modal de regras usa os 895 px do frame, sem limite acidental de 560 px.
 - [x] Retorno preserva os dados locais; edição recebe nome, tipo e produtos do parceiro selecionado. Valores, percentuais e intervalos inválidos são recusados. Garantia não aceita dispensa LTV obrigatório; os três badges e o lápis da linha seguem EC03.
@@ -1270,14 +1293,14 @@ Legenda vigente: classificação de 16/11 por código e evidências, detalhada e
 | [1484:93838](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-93838) | CR04 · MD · Nova operação · Seleção do tipo · ESTADO · DESIGN GLASS                           | Pronto no front · R01 |
 | [1484:93952](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-93952) | CR05 · MD · Nova operação · Seleção do cliente · ESTADO · DESIGN GLASS                        | Pronto no front · R01 |
 | [1484:94059](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-94059) | CR06 · MD · Detalhes da operação · MODAL FIXO · DESIGN GLASS                                  | Pronto no front · R03 |
-| [1484:94631](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-94631) | EC02 · Painel de estados do componente · Nova operação                                        | Implementado · revalidar · R01 |
+| [1484:94631](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-94631) | EC02 · Painel de estados do componente · Nova operação                                        | Pronto no front · R01 |
 | [1484:94636](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-94636) | EC02.S01 · Etapa padrão                                                                       | Pronto no front · R01 |
 | [1484:94638](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-94638) | EC02.S02 · Etapa atual                                                                        | Pronto no front · R01 |
 | [1484:94643](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-94643) | EC02.S03 · Tipo de operação                                                                   | Pronto no front · R01 |
 | [1484:94653](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-94653) | EC02.S04 · Cliente selecionável                                                               | Pronto no front · R01 |
 | [1484:94673](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-94673) | EC02 · CONEXÃO · Fluxo → estados                                                              | Agregador/conexão — fora do percentual; ver estados filhos |
 | [1484:94676](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-94676) | F03 · Parceiros de crédito · Lista, criação e detalhes                                        | Agregador/conexão — fora do percentual; ver estados filhos |
-| [1484:94677](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-94677) | CR07 · PB · Parceiros de crédito · Lista · TELA BASE · DESIGN GLASS                           | Implementado · revalidar · R01 |
+| [1484:94677](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-94677) | CR07 · PB · Parceiros de crédito · Lista · TELA BASE · DESIGN GLASS                           | Pronto no front · R01 |
 | [1484:95173](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-95173) | CR08 · MD · Novo parceiro · Etapa 1 · ESTADO · DESIGN GLASS                                   | Pronto no front · R02 |
 | [1484:95475](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-95475) | CR09 · MD · Novo parceiro · Etapa 2 · ESTADO · DESIGN GLASS                                   | Pronto no front · R02 |
 | [1484:95847](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-95847) | CR10 · MD · Detalhes do parceiro · MODAL FIXO · DESIGN GLASS                                  | Pronto no front · R01 |

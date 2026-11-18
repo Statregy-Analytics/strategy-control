@@ -1,0 +1,300 @@
+{
+  "source": "https://strategyanalytics.codebiz.com.br/openapi/v1.json",
+  "checkedAt": "2026-11-18",
+  "partnerPaths": [],
+  "loanPaths": [
+    "/api/v1/admin/loans",
+    "/api/v1/admin/loans/{loanId}",
+    "/api/v1/admin/loans/{loanId}/status",
+    "/api/v1/admin/loans/{loanId}/documents",
+    "/api/v1/admin/loans/{loanId}/documents/{documentId}",
+    "/api/v1/admin/loans/{loanId}/history"
+  ],
+  "loanCreateSchema": {
+    "content": {
+      "application/json": {
+        "schema": {
+          "$ref": "#/components/schemas/CreateLoanRequest"
+        }
+      }
+    },
+    "required": true
+  },
+  "schemas": {
+    "CreateLoanRequest": {
+      "required": [
+        "clientId",
+        "contractId",
+        "currencyId",
+        "kind",
+        "principalAmount",
+        "outstandingAmount",
+        "interestRatePercent",
+        "termMonths",
+        "leverageRatio",
+        "purpose",
+        "collateral",
+        "startDate",
+        "dueDate",
+        "notes"
+      ],
+      "type": "object",
+      "properties": {
+        "clientId": {
+          "type": "string",
+          "format": "uuid",
+          "example": "3fa85f64-5717-4562-b3fc-2c963f66afa6"
+        },
+        "contractId": {
+          "type": [
+            "null",
+            "string"
+          ],
+          "format": "uuid",
+          "example": "3fa85f64-5717-4562-b3fc-2c963f66afa6"
+        },
+        "currencyId": {
+          "type": [
+            "null",
+            "string"
+          ],
+          "format": "uuid",
+          "example": "3fa85f64-5717-4562-b3fc-2c963f66afa6"
+        },
+        "kind": {
+          "type": [
+            "null",
+            "string"
+          ]
+        },
+        "principalAmount": {
+          "pattern": "^-?(?:0|[1-9]\\d*)(?:\\.\\d+)?$",
+          "type": [
+            "number",
+            "string"
+          ],
+          "format": "double",
+          "example": 1000.0
+        },
+        "outstandingAmount": {
+          "pattern": "^-?(?:0|[1-9]\\d*)(?:\\.\\d+)?$",
+          "type": [
+            "null",
+            "number",
+            "string"
+          ],
+          "format": "double",
+          "example": 1000.0
+        },
+        "interestRatePercent": {
+          "pattern": "^-?(?:0|[1-9]\\d*)(?:\\.\\d+)?$",
+          "type": [
+            "null",
+            "number",
+            "string"
+          ],
+          "format": "double"
+        },
+        "termMonths": {
+          "pattern": "^-?(?:0|[1-9]\\d*)$",
+          "type": [
+            "null",
+            "integer",
+            "string"
+          ],
+          "format": "int32"
+        },
+        "leverageRatio": {
+          "pattern": "^-?(?:0|[1-9]\\d*)(?:\\.\\d+)?$",
+          "type": [
+            "null",
+            "number",
+            "string"
+          ],
+          "format": "double"
+        },
+        "purpose": {
+          "type": [
+            "null",
+            "string"
+          ]
+        },
+        "collateral": {
+          "type": [
+            "null",
+            "string"
+          ]
+        },
+        "startDate": {
+          "type": [
+            "null",
+            "string"
+          ],
+          "format": "date",
+          "example": "2026-11-18"
+        },
+        "dueDate": {
+          "type": [
+            "null",
+            "string"
+          ],
+          "format": "date",
+          "example": "2026-11-18"
+        },
+        "notes": {
+          "type": [
+            "null",
+            "string"
+          ],
+          "example": "Example description."
+        }
+      },
+      "additionalProperties": false
+    },
+    "CustomerCardResponse": {
+      "required": [
+        "customerId",
+        "displayName",
+        "customerKind",
+        "status",
+        "maskedDocument",
+        "avatarUrl",
+        "advisorId",
+        "advisorName",
+        "lastAccessAtUtc",
+        "customerSince",
+        "documentClassification",
+        "documentLevel",
+        "documentComplianceStatus",
+        "complianceStatus",
+        "documentSummary",
+        "primaryContact",
+        "createdAtUtc",
+        "updatedAtUtc"
+      ],
+      "type": "object",
+      "properties": {
+        "customerId": {
+          "type": "string",
+          "format": "uuid",
+          "example": "3fa85f64-5717-4562-b3fc-2c963f66afa6"
+        },
+        "displayName": {
+          "type": [
+            "null",
+            "string"
+          ],
+          "example": "Jane Doe"
+        },
+        "customerKind": {
+          "type": "string"
+        },
+        "status": {
+          "type": "string"
+        },
+        "maskedDocument": {
+          "type": [
+            "null",
+            "string"
+          ]
+        },
+        "avatarUrl": {
+          "type": [
+            "null",
+            "string"
+          ],
+          "example": "https://example.com/resource"
+        },
+        "advisorId": {
+          "type": [
+            "null",
+            "string"
+          ],
+          "format": "uuid",
+          "example": "3fa85f64-5717-4562-b3fc-2c963f66afa6"
+        },
+        "advisorName": {
+          "type": [
+            "null",
+            "string"
+          ]
+        },
+        "lastAccessAtUtc": {
+          "type": [
+            "null",
+            "string"
+          ],
+          "format": "date-time",
+          "example": "2026-11-18T00:00:00Z"
+        },
+        "customerSince": {
+          "type": "string",
+          "format": "date",
+          "example": "2026-11-18"
+        },
+        "documentClassification": {
+          "type": [
+            "null",
+            "string"
+          ]
+        },
+        "documentLevel": {
+          "pattern": "^-?(?:0|[1-9]\\d*)$",
+          "type": [
+            "null",
+            "integer",
+            "string"
+          ],
+          "format": "int32"
+        },
+        "documentComplianceStatus": {
+          "type": [
+            "null",
+            "string"
+          ]
+        },
+        "complianceStatus": {
+          "type": [
+            "null",
+            "string"
+          ]
+        },
+        "documentSummary": {
+          "oneOf": [
+            {
+              "type": "null"
+            },
+            {
+              "$ref": "#/components/schemas/CustomerDocumentSummaryResponse"
+            }
+          ]
+        },
+        "primaryContact": {
+          "type": [
+            "null",
+            "string"
+          ]
+        },
+        "createdAtUtc": {
+          "type": "string",
+          "format": "date-time",
+          "example": "2026-11-18T00:00:00Z"
+        },
+        "updatedAtUtc": {
+          "type": [
+            "null",
+            "string"
+          ],
+          "format": "date-time",
+          "example": "2026-11-18T00:00:00Z"
+        },
+        "strategyId": {
+          "type": [
+            "null",
+            "string"
+          ]
+        }
+      }
+    }
+  }
+}

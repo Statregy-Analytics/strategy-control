@@ -1,0 +1,70 @@
+{
+  "date": "2026-11-18",
+  "frames": [
+    "1484:94631",
+    "1484:94677"
+  ],
+  "sourceCommit": "5aa7059cfca5afd726d2d7fd8c5be4a7e4aaa650",
+  "local": {
+    "tests": 459,
+    "userPreexistingUntrackedTests": 8,
+    "lint": "passed",
+    "build": "passed",
+    "audit": "passed; existing guard preserved",
+    "scopedDiff": "passed",
+    "fullDiff": "pre-existing Swagger whitespace at line 61861; not staged",
+    "controlled": [
+      "Six partner summary metrics with known values and unknown fallback; zero and invalid inputs covered by tests",
+      "Enabled services distinct from offered products; malformed arrays do not become zero",
+      "Commission positive, explicit zero and unavailable states; detail and list use same formatter",
+      "Search by partner identity, code, product and named rule, accent-insensitive locally",
+      "Open partner detail, edit event, create event, close, empty confirmed and unavailable list",
+      "Stage pills standard/current 32px, operation action enabled by keyboard and disabled variant 32px",
+      "Mobile component preview document375 at viewport390, table scrolls internally, no missing images"
+    ],
+    "integrated": [
+      "Type required before Continue; client required before Create",
+      "Customer cards search: Claudio returns real card; accent spelling Cláudio did not match server search in this sample",
+      "Select client enables Create, unsupported creation explicit with no POST",
+      "Back restores selected operation type; cancel clears next new operation",
+      "Partner create action opens existing basic-data form with Continue disabled initially"
+    ],
+    "fixture": "local-only html/js/vue removed before final build; archived as txt"
+  },
+  "writesPerformed": false,
+  "backend": [
+    "No partner/catalog/rules/summary endpoints in current OpenAPI; summary and list unavailable in product, no fictitious rows",
+    "GET/POST admin/loans exist; POST CreateLoanRequest requires principalAmount and represents informative loans, not the Figma commercial operation initialized by type and client",
+    "Commercial pipeline projection/creation/edit contract still needs confirmation; no invented financial amount, status, currency or payload",
+    "CustomerCardResponse exposes maskedDocument and primaryContact, not separate location/email/phone projection for the selection row; no data invented"
+  ],
+  "designer": [],
+  "unlinkedSurfaces": 13,
+  "homologation": {
+    "run": "https://github.com/Statregy-Analytics/strategy-control/actions/runs/44330702201",
+    "ciTests": 451,
+    "passed": [
+      "Type Continue initially disabled; selecting property-backed credit enables continuation",
+      "Client search Claudio returns a real card; selection enables create",
+      "Unsupported commercial Create reports unavailability without POST or fake success",
+      "Back preserves selected type; Cancel/reopen clears selection and disables Continue",
+      "Partners opens existing basic-data form; Continue disabled with incomplete basics",
+      "Summary and list remain unavailable from absent partner API, independent from loan query",
+      "Final published header 24px, desktop main width1800/tabs448 and six metric columns at2072px",
+      "Final published mobile390 document375; no outer overflow, internal table scroll and no missing images"
+    ],
+    "notValidated": [
+      "Positive partner list/summary and partner CRUD against HTTP (no endpoint contract)",
+      "Commercial operation persistence, editing and pipeline changes (no confirmed creation/editing contract)"
+    ],
+    "writesPerformed": false
+  },
+  "sourceCommits": [
+    "f8fcd41bf1f84afe3d3b0fb4f0a664102c099a20",
+    "5aa7059cfca5afd726d2d7fd8c5be4a7e4aaa650"
+  ],
+  "detector": {
+    "advisories": 26,
+    "scope": "component files; legacy DESIGN.md differences in radii, typography and color remain subordinate to approved Figma references"
+  }
+}

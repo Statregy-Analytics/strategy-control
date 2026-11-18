@@ -858,6 +858,16 @@
       "front": "validation",
       "reason": "Tabelas oficiais/simuladas corrigidas e testadas com séries controladas e indisponíveis. O frame denominado Ao Lado mostra tabelas empilhadas; esclarecer relação com o controle antes de concluir a comparação do estado inteiro.",
       "evidence": "docs/evidence/qa-2026-11-18-logic-editor/results.json"
+    },
+    "1484:94677": {
+      "front": "done",
+      "reason": "CR07 comparado com referência completa: seis indicadores, busca, serviços habilitados/oferecidos separados, tabela/badges, abertura e criação existentes, estados positivos controlados/vazio/indisponível e responsividade. Produto mantém dados indisponíveis sem contrato de parceiros.",
+      "evidence": "docs/evidence/qa-2026-11-18-credit-directory/results.json"
+    },
+    "1484:94631": {
+      "front": "done",
+      "reason": "EC02 revalidado como referência de componentes, sem criar página extra: etapas padrão/atual, seleção de tipo/cliente, ações habilitadas/desabilitadas, retorno/descarte. Criar/editar operação comercial continua dependendo de contrato confirmado da API.",
+      "evidence": "docs/evidence/qa-2026-11-18-credit-directory/results.json"
     }
   }
 }

@@ -11,12 +11,12 @@
   },
   "metrics": {
     "total": 279,
-    "done": 234,
-    "validation": 35,
+    "done": 236,
+    "validation": 33,
     "adjustment": 10,
     "implemented": 269,
     "implementedPercent": 96.4,
-    "readyPercent": 83.9
+    "readyPercent": 84.6
   },
   "withoutLinkedFigmaReference": {
     "count": 13,
@@ -3568,19 +3568,20 @@
       "link": "[1484:94631](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-94631)",
       "counted": true,
       "group": "R01",
-      "category": "Ajuste de front",
-      "front": "validation",
+      "category": "Bloqueio backend",
+      "front": "done",
       "blockers": [
         "backend"
       ],
-      "reason": "Há Lista/Cards/Kanban e escolha de tipo/cliente com testes parciais; revisão completa ainda pendente. OpenAPI de loans é informativo e não fornece funil, propostas, parceiros e comissões.",
+      "reason": "EC02 revalidado como referência de componentes, sem criar página extra: etapas padrão/atual, seleção de tipo/cliente, ações habilitadas/desabilitadas, retorno/descarte. Criar/editar operação comercial continua dependendo de contrato confirmado da API.",
       "sources": [
         "src/components/Workspaces/CreditWorkspace.vue",
         "src/components/Workspaces/CreditOperationDetails.vue"
       ],
       "evidence": [
         "docs/CHECKLIST-UNICO-FIGMA-FRONT.md#cr06-e-lg08--complemento-de-1411",
-        "docs/evidence/qa-2026-11-16-inventory/api-contract-review.json"
+        "docs/evidence/qa-2026-11-16-inventory/api-contract-review.json",
+        "docs/evidence/qa-2026-11-18-credit-directory/results.json"
       ],
       "browser": "parcial/isolada histórica; não integral",
       "historicalCategory": "Ajuste de front"
@@ -3697,19 +3698,20 @@
       "link": "[1484:94677](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-94677)",
       "counted": true,
       "group": "R01",
-      "category": "Ajuste de front",
-      "front": "validation",
+      "category": "Bloqueio backend",
+      "front": "done",
       "blockers": [
         "backend"
       ],
-      "reason": "Há Lista/Cards/Kanban e escolha de tipo/cliente com testes parciais; revisão completa ainda pendente. OpenAPI de loans é informativo e não fornece funil, propostas, parceiros e comissões.",
+      "reason": "CR07 comparado com referência completa: seis indicadores, busca, serviços habilitados/oferecidos separados, tabela/badges, abertura e criação existentes, estados positivos controlados/vazio/indisponível e responsividade. Produto mantém dados indisponíveis sem contrato de parceiros.",
       "sources": [
         "src/components/Workspaces/CreditWorkspace.vue",
         "src/components/Workspaces/CreditOperationDetails.vue"
       ],
       "evidence": [
         "docs/CHECKLIST-UNICO-FIGMA-FRONT.md#cr06-e-lg08--complemento-de-1411",
-        "docs/evidence/qa-2026-11-16-inventory/api-contract-review.json"
+        "docs/evidence/qa-2026-11-16-inventory/api-contract-review.json",
+        "docs/evidence/qa-2026-11-18-credit-directory/results.json"
       ],
       "browser": "parcial/isolada histórica; não integral",
       "historicalCategory": "Ajuste de front"

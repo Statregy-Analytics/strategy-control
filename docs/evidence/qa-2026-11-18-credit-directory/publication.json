@@ -1,0 +1,74 @@
+{
+  "commit": "5aa7059cfca5afd726d2d7fd8c5be4a7e4aaa650",
+  "run": "https://github.com/Statregy-Analytics/strategy-control/actions/runs/44330702201",
+  "conclusion": "success",
+  "ciTests": 451,
+  "localTests": 459,
+  "assets": [
+    {
+      "path": "assets/AdminWorkspacePage-DQPBzrh1.js",
+      "sha256": "f46ef923bf24c0ec4a16fa3aa1fe39e00e2c7bbf9bb407da75c1f943cdfd79ce",
+      "matchesLocalBuild": true
+    },
+    {
+      "path": "icons/partners/type-house.svg",
+      "sha256": "2b21665e6441e9f870f2db599f27e6577b533a8ef494046fdd0db6ccd398b9ac",
+      "matchesReference": true
+    },
+    {
+      "path": "icons/partners/pen.svg",
+      "sha256": "d92e46db114d22e270e636dcb046dab644fa7dce46431617b775b803a06b28b6",
+      "matchesReference": true
+    },
+    {
+      "path": "icons/workspace-review/credit-active.svg",
+      "sha256": "9b99fe790c4c7079f1c7eb527468e4ac8ddcaf56cc52317601b3b179734a3cab",
+      "matchesReference": true
+    },
+    {
+      "path": "icons/workspace-review/credit-pending-cr07.svg",
+      "sha256": "7fce730ca90912a9196eae65937dd8f7bea4bccfec469af7ebd6e386ef028702",
+      "matchesReference": true
+    },
+    {
+      "path": "icons/workspace-review/credit-documents.svg",
+      "sha256": "67a7c0bbd76361c672bdaa4a91a6be42ae44a12d1668e30fe7592528795daa9c",
+      "matchesReference": true
+    },
+    {
+      "path": "icons/workspace-review/credit-proposals-cr07.svg",
+      "sha256": "a5dfd09f3de6f75ff73da9c5be9778087c8ec4dba380a35402a2f1ca2cd3eb80",
+      "matchesReference": true
+    },
+    {
+      "path": "icons/workspace-review/credit-signature-cr07.svg",
+      "sha256": "ca408181db00a56e4b4655aa1ae9c2068eeca877ac779bb76c8c93c51710000c",
+      "matchesReference": true
+    },
+    {
+      "path": "icons/workspace-review/credit-contracted.svg",
+      "sha256": "f643c9eebc53d972bf2bfa7bc1e9f9ca47d322a4cc85a7e81be569a0225d5873",
+      "matchesReference": true
+    },
+    {
+      "path": "icons/workspaces/search.svg",
+      "sha256": "82945f8636d4c2b4095bbddca332aabe637615d91f3146e93262ea592db3309b",
+      "matchesReference": true
+    },
+    {
+      "path": "icons/credit/plus.svg",
+      "sha256": "2a5b3c6f81498e67ec4d7fb51e78e78d3a66362716c6c437170d1deabe1c54ac",
+      "matchesReference": true
+    },
+    {
+      "path": "icons/partners/directory-bank.svg",
+      "sha256": "6892d5b4a5095d0204721537578cf714ce8d32b089376c4c5d7d401a63150920",
+      "matchesReference": true
+    },
+    {
+      "path": "icons/partners/directory-open.svg",
+      "sha256": "374e717863ea3bd9703227000fd7469493d44fc85f85c1978dab72caddb250f3",
+      "matchesReference": true
+    }
+  ]
+}

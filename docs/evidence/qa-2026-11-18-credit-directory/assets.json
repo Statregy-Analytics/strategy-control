@@ -1,0 +1,194 @@
+[
+  {
+    "nodeId": "1484:94631",
+    "name": "imgHouse",
+    "sha256": "2b21665e6441e9f870f2db599f27e6577b533a8ef494046fdd0db6ccd398b9ac",
+    "existing": [
+      "public/icons/partners/type-house.svg",
+      "public/icons/workspace-review/credit-house.svg"
+    ],
+    "geometry": {
+      "width": "16",
+      "height": "16",
+      "viewBox": "0 0 16 16"
+    }
+  },
+  {
+    "nodeId": "1484:94631",
+    "name": "imgPen",
+    "sha256": "d92e46db114d22e270e636dcb046dab644fa7dce46431617b775b803a06b28b6",
+    "existing": [
+      "public/icons/partners/pen.svg",
+      "public/icons/logics/structural/1484-78333-imgPen.svg"
+    ],
+    "geometry": {
+      "width": "16",
+      "height": "16",
+      "viewBox": "0 0 16 16"
+    }
+  },
+  {
+    "nodeId": "1484:94677",
+    "name": "imgTrendingUp",
+    "sha256": "9b99fe790c4c7079f1c7eb527468e4ac8ddcaf56cc52317601b3b179734a3cab",
+    "existing": [
+      "public/icons/workspace-review/credit-active.svg"
+    ],
+    "geometry": {
+      "width": "14",
+      "height": "14",
+      "viewBox": "0 0 14 14"
+    }
+  },
+  {
+    "nodeId": "1484:94677",
+    "name": "imgCircleAlert",
+    "sha256": "7fce730ca90912a9196eae65937dd8f7bea4bccfec469af7ebd6e386ef028702",
+    "existing": [
+      "public/icons/workspace-review/credit-pending-cr07.svg"
+    ],
+    "geometry": {
+      "width": "14",
+      "height": "14",
+      "viewBox": "0 0 14 14"
+    }
+  },
+  {
+    "nodeId": "1484:94677",
+    "name": "imgFileText1",
+    "sha256": "67a7c0bbd76361c672bdaa4a91a6be42ae44a12d1668e30fe7592528795daa9c",
+    "existing": [
+      "public/icons/workspace-review/credit-documents.svg"
+    ],
+    "geometry": {
+      "width": "14",
+      "height": "14",
+      "viewBox": "0 0 14 14"
+    }
+  },
+  {
+    "nodeId": "1484:94677",
+    "name": "imgCircleCheck",
+    "sha256": "a5dfd09f3de6f75ff73da9c5be9778087c8ec4dba380a35402a2f1ca2cd3eb80",
+    "existing": [
+      "public/icons/workspace-review/credit-proposals-cr07.svg"
+    ],
+    "geometry": {
+      "width": "14",
+      "height": "14",
+      "viewBox": "0 0 14 14"
+    }
+  },
+  {
+    "nodeId": "1484:94677",
+    "name": "imgPen",
+    "sha256": "ca408181db00a56e4b4655aa1ae9c2068eeca877ac779bb76c8c93c51710000c",
+    "existing": [
+      "public/icons/workspace-review/credit-signature-cr07.svg"
+    ],
+    "geometry": {
+      "width": "14",
+      "height": "14",
+      "viewBox": "0 0 14 14"
+    }
+  },
+  {
+    "nodeId": "1484:94677",
+    "name": "imgDollarSign",
+    "sha256": "f643c9eebc53d972bf2bfa7bc1e9f9ca47d322a4cc85a7e81be569a0225d5873",
+    "existing": [
+      "public/icons/workspace-review/credit-contracted.svg"
+    ],
+    "geometry": {
+      "width": "14",
+      "height": "14",
+      "viewBox": "0 0 14 14"
+    }
+  },
+  {
+    "nodeId": "1484:94677",
+    "name": "imgSearch",
+    "sha256": "82945f8636d4c2b4095bbddca332aabe637615d91f3146e93262ea592db3309b",
+    "existing": [
+      "public/icons/workspaces/search.svg",
+      "public/icons/logics/directory/cards-imgSearch.svg",
+      "public/icons/workspace-review/partner-search.svg",
+      "public/icons/workspace-review/search.svg",
+      "public/icons/workspace-review/credit-customer-search.svg",
+      "public/icons/workspace-review/publication-search.svg",
+      "public/icons/wallet-directory/search.svg"
+    ],
+    "geometry": {
+      "width": "16",
+      "height": "16",
+      "viewBox": "0 0 16 16"
+    }
+  },
+  {
+    "nodeId": "1484:94677",
+    "name": "imgPlus",
+    "sha256": "2a5b3c6f81498e67ec4d7fb51e78e78d3a66362716c6c437170d1deabe1c54ac",
+    "existing": [
+      "public/icons/credit/plus.svg",
+      "public/icons/partners/rules-plus.svg",
+      "public/icons/workspaces/plus.svg",
+      "public/icons/contracts/ct20-plus.svg",
+      "public/icons/contracts/ct11-plus.svg",
+      "public/icons/contracts/plus.svg",
+      "public/icons/contracts/ct09/confirm-plus.svg",
+      "public/icons/contracts/ct09/plus.svg",
+      "public/icons/contracts/distribution/plus.svg",
+      "public/icons/contracts/selection/header-imgPlus.svg",
+      "public/icons/contracts/entry/2329-281-imgPlus2.svg",
+      "public/icons/contracts/entry/2328-353-imgPlus2.svg",
+      "public/icons/contracts/entry/2329-617-imgPlus.svg",
+      "public/icons/contracts/entry/2328-281-imgPlus.svg",
+      "public/icons/contracts/entry/2329-281-imgPlus1.svg",
+      "public/icons/contracts/entry/2328-353-imgPlus1.svg",
+      "public/icons/contracts/flows/2363-281-imgPlus.svg",
+      "public/icons/contracts/flows/2366-281-imgPlus.svg",
+      "public/icons/contracts/wallet-capital/1484-71887-imgPlus.svg",
+      "public/icons/contracts/wallet-capital/2325-797-imgPlus.svg",
+      "public/icons/contracts/wallet-capital/2326-281-imgPlus.svg",
+      "public/icons/logics/directory/cards-imgPlus.svg",
+      "public/icons/workspace-review/credit-new.svg",
+      "public/icons/workspace-review/partner-plus.svg",
+      "public/icons/publication/plus.svg",
+      "public/icons/publication/content-plus.svg"
+    ],
+    "geometry": {
+      "width": "16",
+      "height": "16",
+      "viewBox": "0 0 16 16"
+    }
+  },
+  {
+    "nodeId": "1484:94677",
+    "name": "imgBuilding2",
+    "sha256": "6892d5b4a5095d0204721537578cf714ce8d32b089376c4c5d7d401a63150920",
+    "existing": [
+      "public/icons/partners/directory-bank.svg"
+    ],
+    "geometry": {
+      "width": "20",
+      "height": "20",
+      "viewBox": "0 0 20 20"
+    }
+  },
+  {
+    "nodeId": "1484:94677",
+    "name": "imgChevronRight",
+    "sha256": "374e717863ea3bd9703227000fd7469493d44fc85f85c1978dab72caddb250f3",
+    "existing": [
+      "public/icons/partners/directory-open.svg",
+      "public/icons/workspaces/chevron-right.svg",
+      "public/icons/workspace-review/credit-open.svg",
+      "public/icons/credit-directory/open.svg"
+    ],
+    "geometry": {
+      "width": "16",
+      "height": "16",
+      "viewBox": "0 0 16 16"
+    }
+  }
+]

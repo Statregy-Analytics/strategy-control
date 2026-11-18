@@ -1,0 +1,26 @@
+[
+  {
+    "id": "1484:94631",
+    "shot": {
+      "width": 2048,
+      "height": 392,
+      "format": "png",
+      "original_width": 3400,
+      "original_height": 650
+    },
+    "figma": "https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI/?node-id=1484-94631",
+    "usage": "EC02 is a component-state reference, not an added product page"
+  },
+  {
+    "id": "1484:94677",
+    "shot": {
+      "width": 2048,
+      "height": 1103,
+      "format": "png",
+      "original_width": 2072,
+      "original_height": 1115
+    },
+    "figma": "https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI/?node-id=1484-94677",
+    "usage": "CR07 full partner directory page"
+  }
+]

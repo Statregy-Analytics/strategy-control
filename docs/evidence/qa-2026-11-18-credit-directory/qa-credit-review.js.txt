@@ -1,0 +1,1 @@
+import {createApp} from 'vue';import {Quasar} from 'quasar';import lang from 'quasar/lang/pt-BR';import 'quasar/src/css/index.sass';import '@quasar/extras/material-icons/material-icons.css';import './src/css/app.scss';import './src/css/workspaces.scss';import App from './src/qa-credit-review.vue';createApp(App).use(Quasar,{lang}).mount('#q-app');
