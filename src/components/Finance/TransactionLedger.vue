@@ -340,7 +340,7 @@ strong.positive {
   color: #66e59e;
 }
 strong.negative {
-  color: #ff6467;
+  color: #ff8a8a;
 }
 .transaction-ledger__badge {
   align-items: center;
