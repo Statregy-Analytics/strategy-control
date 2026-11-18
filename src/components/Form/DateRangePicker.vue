@@ -26,7 +26,13 @@
       style="font-size: 12px !important; border: 1px solid var(--Info-200, #b9e1ff)"
     >
       {{ localDateRange.from }} - {{ localDateRange.to }}
-      <q-btn flat round dense :aria-label="'Limpar ' + label" @click.prevent="resetDateRange"
+      <q-btn
+        class="date-range-clear"
+        flat
+        round
+        dense
+        :aria-label="'Limpar ' + label"
+        @click.prevent="resetDateRange"
         ><IconX size="14"
       /></q-btn>
     </q-badge>
@@ -89,3 +95,15 @@ export default defineComponent({
   },
 })
 </script>
+
+<style scoped>
+/* Preserve the original 14px clear icon footprint for every existing consumer. */
+.date-range-clear.q-btn {
+  min-width: 14px;
+  min-height: 14px;
+  width: 14px;
+  height: 14px;
+  padding: 0;
+  margin-left: 4px;
+}
+</style>
