@@ -11,12 +11,12 @@
   },
   "metrics": {
     "total": 279,
-    "done": 228,
-    "validation": 41,
+    "done": 231,
+    "validation": 38,
     "adjustment": 10,
     "implemented": 269,
     "implementedPercent": 96.4,
-    "readyPercent": 81.7
+    "readyPercent": 82.8
   },
   "withoutLinkedFigmaReference": {
     "count": 13,
@@ -1761,19 +1761,20 @@
       "link": "[1484:76065](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-76065)",
       "counted": true,
       "group": "L01",
-      "category": "Ajuste de front",
-      "front": "validation",
+      "category": "Bloqueio backend",
+      "front": "done",
       "blockers": [
         "backend"
       ],
-      "reason": "Há composição e testes parciais, mas falta revisão integral dos frames. API continua só catálogo/metadados, sem execução/configuração operacional. Não atribuir toda a conclusão ao backend.",
+      "reason": "LG01 Cards comparado com referência completa; filtros, ordenação, teclado, vazio/erro, retorno e celular testados. Publicado e conferido com catálogo real; indicadores/pausa operacionais seguem dependência HTTP, positivos somente com dados controlados.",
       "sources": [
         "src/components/Workspaces/LogicWorkspace.vue",
         "src/components/Workspaces/LogicPerformance.vue"
       ],
       "evidence": [
         "docs/CHECKLIST-UNICO-FIGMA-FRONT.md#lógicas--estados-de-performance-e-simulação",
-        "docs/evidence/qa-2026-11-16-inventory/api-contract-review.json"
+        "docs/evidence/qa-2026-11-16-inventory/api-contract-review.json",
+        "docs/evidence/qa-2026-11-18-logic-selection/results.json"
       ],
       "browser": "parcial histórica; frame integral pendente",
       "historicalCategory": "Ajuste de front"
@@ -1786,19 +1787,20 @@
       "link": "[1484:76704](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-76704)",
       "counted": true,
       "group": "L01",
-      "category": "Ajuste de front",
-      "front": "validation",
+      "category": "Bloqueio backend",
+      "front": "done",
       "blockers": [
         "backend"
       ],
-      "reason": "Há composição e testes parciais, mas falta revisão integral dos frames. API continua só catálogo/metadados, sem execução/configuração operacional. Não atribuir toda a conclusão ao backend.",
+      "reason": "LG02 Lista comparado com referência completa; filtros, ordenação, teclado, vazio/erro, retorno e celular testados. Publicado e conferido com catálogo real; indicadores/pausa operacionais seguem dependência HTTP, positivos somente com dados controlados.",
       "sources": [
         "src/components/Workspaces/LogicWorkspace.vue",
         "src/components/Workspaces/LogicPerformance.vue"
       ],
       "evidence": [
         "docs/CHECKLIST-UNICO-FIGMA-FRONT.md#lógicas--estados-de-performance-e-simulação",
-        "docs/evidence/qa-2026-11-16-inventory/api-contract-review.json"
+        "docs/evidence/qa-2026-11-16-inventory/api-contract-review.json",
+        "docs/evidence/qa-2026-11-18-logic-selection/results.json"
       ],
       "browser": "parcial histórica; frame integral pendente",
       "historicalCategory": "Ajuste de front"
@@ -1889,19 +1891,20 @@
       "link": "[1484:77323](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-77323)",
       "counted": true,
       "group": "L01",
-      "category": "Ajuste de front",
-      "front": "validation",
+      "category": "Bloqueio backend",
+      "front": "done",
       "blockers": [
         "backend"
       ],
-      "reason": "Há composição e testes parciais, mas falta revisão integral dos frames. API continua só catálogo/metadados, sem execução/configuração operacional. Não atribuir toda a conclusão ao backend.",
+      "reason": "LG04 Filtros e hover ativo comparado com referência completa; filtros, ordenação, teclado, vazio/erro, retorno e celular testados. Publicado e conferido com catálogo real; indicadores/pausa operacionais seguem dependência HTTP, positivos somente com dados controlados.",
       "sources": [
         "src/components/Workspaces/LogicWorkspace.vue",
         "src/components/Workspaces/LogicPerformance.vue"
       ],
       "evidence": [
         "docs/CHECKLIST-UNICO-FIGMA-FRONT.md#lógicas--estados-de-performance-e-simulação",
-        "docs/evidence/qa-2026-11-16-inventory/api-contract-review.json"
+        "docs/evidence/qa-2026-11-16-inventory/api-contract-review.json",
+        "docs/evidence/qa-2026-11-18-logic-selection/results.json"
       ],
       "browser": "parcial histórica; frame integral pendente",
       "historicalCategory": "Ajuste de front"

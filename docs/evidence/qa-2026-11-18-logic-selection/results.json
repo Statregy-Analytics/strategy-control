@@ -1,0 +1,52 @@
+{
+  "date": "2026-11-18",
+  "frames": [
+    "1484:76065",
+    "1484:76704",
+    "1484:77323"
+  ],
+  "sourceCommit": "8640d978d5149ff664d282fddd289f5f43863135",
+  "reference": "Full Figma design context and screenshots recovered for all three parents; annotations not rendered as product controls. Native SVG root dimensions preserved.",
+  "local": {
+    "automatedTests": 446,
+    "userPreexistingTestsNotCommitted": 8,
+    "lint": "passed",
+    "build": "passed",
+    "audit": "passed; existing exact advisory mitigation preserved",
+    "scopedDiff": "passed",
+    "controlled": [
+      "five card/row statuses, positive/negative/zero/unavailable indicators",
+      "combined status, links and performance sorting; check and grouped options",
+      "search without results; zero records; normalized error and retry",
+      "LG04 active 924x112 composition measured to within 1px; keyboard Editar and Entrar; Pausar disabled",
+      "390px cards/list without outer overflow; images loaded",
+      "real catalog open/return and create/cancel preserve Lista and search Quant; no writes"
+    ],
+    "controlledFixture": "Archived .txt only; removed all three temporary product sources before build"
+  },
+  "backend": [
+    "EngineResponse is catalog only: id/code/name/description/isSelectable/createdAtUtc/updatedAtUtc. isSelectable is never inferred as active.",
+    "Operational status, indices, target, performance, linked counts, cycle, next run and pause not documented in this catalog. Missing source disables constrained filters/sorts, displays unavailable and does not fabricate zeros.",
+    "Positive active operational states tested locally only, not claimed as live integration."
+  ],
+  "designer": [],
+  "writesPerformed": false,
+  "unlinkedSurfaces": 13,
+  "homologation": {
+    "deploy": "https://github.com/Statregy-Analytics/strategy-control/actions/runs/44311942818",
+    "ciTests": 438,
+    "passed": [
+      "real catalog cards and list, image dimensions 12/16/20px",
+      "status/link menus disable unsupported values; real creation-date sorting available",
+      "search empty result and clearing",
+      "open Quant Core and return preserves search, Lista and Mais Recentes",
+      "Novo Motor and cancel reuse existing editor without writes",
+      "390px cards and list no external overflow, all images loaded"
+    ],
+    "notValidated": [
+      "positive operational engine data in API (tested locally with controlled data)",
+      "pause or operational persistence (API contract unavailable)"
+    ],
+    "assetHashes": "23 native SVGs and entry module all match published build"
+  }
+}

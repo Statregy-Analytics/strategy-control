@@ -823,6 +823,21 @@
         "src/components/Contracts/ContractEngines.vue",
         "src/components/Contracts/ContractWorkspace.vue"
       ]
+    },
+    "1484:76065": {
+      "front": "done",
+      "reason": "LG01 Cards comparado com referência completa; filtros, ordenação, teclado, vazio/erro, retorno e celular testados. Publicado e conferido com catálogo real; indicadores/pausa operacionais seguem dependência HTTP, positivos somente com dados controlados.",
+      "evidence": "docs/evidence/qa-2026-11-18-logic-selection/results.json"
+    },
+    "1484:76704": {
+      "front": "done",
+      "reason": "LG02 Lista comparado com referência completa; filtros, ordenação, teclado, vazio/erro, retorno e celular testados. Publicado e conferido com catálogo real; indicadores/pausa operacionais seguem dependência HTTP, positivos somente com dados controlados.",
+      "evidence": "docs/evidence/qa-2026-11-18-logic-selection/results.json"
+    },
+    "1484:77323": {
+      "front": "done",
+      "reason": "LG04 Filtros e hover ativo comparado com referência completa; filtros, ordenação, teclado, vazio/erro, retorno e celular testados. Publicado e conferido com catálogo real; indicadores/pausa operacionais seguem dependência HTTP, positivos somente com dados controlados.",
+      "evidence": "docs/evidence/qa-2026-11-18-logic-selection/results.json"
     }
   }
 }

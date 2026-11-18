@@ -10,15 +10,32 @@ Atualizado em 2026-11-18. Contagem por **telas e estados independentes do Figma*
 | Situação | Quantidade |
 | --- | ---: |
 | Total inventariado | **279** |
-| Prontas no frontend | **228** |
-| Implementadas, aguardando revalidação/comparação completa | **41** |
+| Prontas no frontend | **231** |
+| Implementadas, aguardando revalidação/comparação completa | **38** |
 | Ainda exigem implementação, complemento ou correção | **10** |
 | Com implementação existente (prontas + revalidação) | **269 / 279 (96,4%)** |
 
-**Para encerrar o front faltam 10 itens de implementação/ajuste e 41 de revalidação.** “Pronto no frontend” não significa fluxo integrado liberado: dependências de backend/designer podem afetar também telas prontas. Os números não classificam toda pendência como tela nova nem como problema de API. A comparação de Crédito, carteira global e editor editorial que não foi concluída integralmente permanece em revalidação.
+**Para encerrar o front faltam 10 itens de implementação/ajuste e 38 de revalidação.** “Pronto no frontend” não significa fluxo integrado liberado: dependências de backend/designer podem afetar também telas prontas. Os números não classificam toda pendência como tela nova nem como problema de API. A comparação de Crédito, carteira global e editor editorial que não foi concluída integralmente permanece em revalidação.
 
 Fonte por frame: [progresso atual](FRONTEND-PROGRESS.json). A base anterior permanece histórica; [atualizações com evidências](FRONTEND-PROGRESS-OVERRIDES.json) registram cada mudança. Ao finalizar **cada entrega**, atualizar os IDs comprovados, executar `node scripts/frontend-progress.mjs` e informar este panorama na resposta final.
 <!-- frontend-progress:end -->
+
+## Entrega 18/11 — seleção de motores LG01/LG02/LG04
+
+**Publicado em homologação:** `8640d97`, [deploy 44311942818 aprovado](https://github.com/Statregy-Analytics/strategy-control/actions/runs/44311942818). Três referências completas recuperadas e comparadas: LG01 Cards, LG02 Lista e LG04 menus/hover ativo. Os demais frames não foram encerrados por compartilhar componentes.
+
+- [x] Cabeçalho, cinco resumos, Cards/Lista, busca e menus Status/Vínculos/Ordenar por conforme a composição recuperada. Vinte e três SVGs nativos com dimensões preservadas; cores, tipografia, espaçamento e agrupamentos dos menus revisados. Nenhum campo/ação acrescentado; anotações do frame não viraram controles.
+- [x] Cards com identidade, estado real, métricas e ciclo; encerramento apenas para Encerrado. Lista usa a composição compacta em todos os status, em vez da tabela genérica. Hover ativo LG04 medido em 924 × 112 px, com Editar/Entrar acessíveis por teclado; Pausar segue desabilitado sem integração confirmada.
+- [x] Busca sem acentos e por nome/código, combinação de status/vínculos/ordenação, grupos e seleção com check. Zero conhecido preservado; ausências não viram zero, status Ativo ou valores financeiros fictícios. `isSelectable` não equivale a atividade operacional. Ordenações dependem da fonte completa; atualização cadastral não é usada como atualização operacional.
+- [x] Local: cinco estados, valores positivos/negativos/zero/ausentes, ciclo sem deslocamento de dia, filtros e performance, teclado, vazio, busca sem resultado, erro e recuperação, Cards/Lista em 390 px sem overflow externo. Prévia controlada arquivada como texto e removida do produto antes do build.
+- [x] Homologação: catálogo real Quant Core, Cards/Lista, busca e limpeza, menus com opções operacionais indisponíveis, ordenação por data de criação, abertura/retorno preservando busca/Lista/ordenação, criação/cancelamento sem salvar, imagens carregadas e celular. Estados operacionais positivos foram conferidos localmente; não foram declarados homologados com dados reais da API.
+- [x] 446 testes locais (oito preexistentes do usuário fora destes commits), 438 no CI, lint, build e auditoria passaram. Proteção da auditoria mantida. Diff desta entrega aprovado; o check integral ainda aponta whitespace preexistente do Swagger local, preservado sem staging. Os 23 SVGs e o módulo publicado conferem por hash. Nenhum registro ou saldo alterado.
+- [ ] **Backend — motor operacional:** a consulta existente de catálogo retorna identidade, descrição, `isSelectable` e datas cadastrais; ainda não documenta estado operacional, índices, alvo, performance, contadores de vínculos, ciclo e próxima execução, nem pausa. O CRUD de catálogo e a consulta de vínculos de um contrato já existem: não pedir duplicação dessas rotas. Falta confirmar a projeção operacional que alimenta LG01/LG02 e a ação de pausa. Campos ausentes permanecem indisponíveis; filtros/ordens afetados não simulam resultados.
+- [ ] **Massa/integração:** os estados positivos de motores ativos, pausados, em análise e encerrados ainda precisam de projeção operacional para validação integrada. Não é impedimento visual nem justificativa para preencher números fictícios no produto.
+
+Panorama: **279 estados, 231 prontos, 38 em revalidação e 10 em implementação/ajuste**. Implementação existente **269/279 (96,4%)**; prontos **82,8%**. Três dos 41 estados revalidados nesta entrega. Permanecem **13 superfícies sem frame vinculado**, nenhuma nova. Pronto no frontend não significa homologação integrada concluída.
+
+[Resultados e limites](evidence/qa-2026-11-18-logic-selection/results.json) · [Referências](evidence/qa-2026-11-18-logic-selection/figma-references.json) · [API consultada](evidence/qa-2026-11-18-logic-selection/api-review.json) · [Publicação e hashes](evidence/qa-2026-11-18-logic-selection/publication.json) · [Cards publicados](evidence/qa-2026-11-18-logic-selection/hml-final.png) · [LG04 controlado](evidence/qa-2026-11-18-logic-selection/local-active-hover.png).
 
 ## Entrega 18/11 — seleção de contratos CT01/CT02 e participante CT09
 
@@ -1123,12 +1140,12 @@ Legenda vigente: classificação de 16/11 por código e evidências, detalhada e
 | [2157:281](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=2157-281)     | CT11.2 · EC · Motor de Dividendos — Conectado (Aleatório)                                     | Pronto no front · C02 |
 | [2157:348](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=2157-348)     | CT11.3 · EC · Motor de Dividendos — valor Fixo                                                | Pronto no front · C02 |
 | [1484:76064](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-76064) | F01 · Seleção de lógicas · Cards / Lista + painel temporário                                  | Agregador/conexão — fora do percentual; ver estados filhos |
-| [1484:76065](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-76065) | LG01 · PB · Seleção de lógicas · Cards · TELA BASE · DESIGN GLASS                             | Implementado · revalidar · L01 |
-| [1484:76704](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-76704) | LG02 · SP · Seleção de lógicas · Lista · SUBPÁGINA · DESIGN GLASS                             | Implementado · revalidar · L01 |
+| [1484:76065](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-76065) | LG01 · PB · Seleção de lógicas · Cards · TELA BASE · DESIGN GLASS                             | Pronto no front · L01 |
+| [1484:76704](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-76704) | LG02 · SP · Seleção de lógicas · Lista · SUBPÁGINA · DESIGN GLASS                             | Pronto no front · L01 |
 | [1484:77198](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-77198) | LG03 · MT · Resumo executivo da lógica · Hover temporário · PAINEL ISOLADO · DESIGN GLASS     | Pronto no front · L03 |
 | [1484:77225](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-77225) | LG01 · EC · Delta-Income em hover · Abrir · Editar · Vínculos · DESIGN GLASS                  | Pronto no front · L03 |
 | [1484:77226](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-77226) | EC01 · Card em hover · Abrir · Editar · Vínculos                                              | Pronto no front · L03 |
-| [1484:77323](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-77323) | LG04 · EC · Filtros abertos + Lista em hover · PAINEL DE ESTADOS SOLTO · DESIGN GLASS         | Implementado · revalidar · L01 |
+| [1484:77323](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-77323) | LG04 · EC · Filtros abertos + Lista em hover · PAINEL DE ESTADOS SOLTO · DESIGN GLASS         | Pronto no front · L01 |
 | [1484:77335](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-77335) | DD01 · Status · Aberto                                                                        | Pronto no front · L03 |
 | [1484:77346](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-77346) | DD02 · Vínculos · Aberto                                                                      | Pronto no front · L03 |
 | [1484:77353](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-77353) | DD03 · Ordenação · Aberto                                                                     | Pronto no front · L03 |
