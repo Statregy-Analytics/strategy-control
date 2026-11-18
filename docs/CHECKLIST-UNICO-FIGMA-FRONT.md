@@ -10,16 +10,36 @@ Atualizado em 2026-11-18. Contagem por **telas e estados independentes do Figma*
 | Situação | Quantidade |
 | --- | ---: |
 | Total inventariado | **279** |
-| Prontas no frontend | **239** |
-| Implementadas, aguardando revalidação/comparação completa | **31** |
+| Prontas no frontend | **244** |
+| Implementadas, aguardando revalidação/comparação completa | **26** |
 | Ainda exigem implementação, complemento ou correção | **9** |
 | Com implementação existente (prontas + revalidação) | **270 / 279 (96,8%)** |
 
-**Para encerrar o front faltam 9 itens de implementação/ajuste e 31 de revalidação.** “Pronto no frontend” não significa fluxo integrado liberado: dependências de backend/designer podem afetar também telas prontas. Os números não classificam toda pendência como tela nova nem como problema de API. A comparação de Crédito, carteira global e editor editorial que não foi concluída integralmente permanece em revalidação.
+**Para encerrar o front faltam 9 itens de implementação/ajuste e 26 de revalidação.** “Pronto no frontend” não significa fluxo integrado liberado: dependências de backend/designer podem afetar também telas prontas. Os números não classificam toda pendência como tela nova nem como problema de API. A comparação de Crédito, carteira global e editor editorial que não foi concluída integralmente permanece em revalidação.
 
 Fonte por frame: [progresso atual](FRONTEND-PROGRESS.json). A base anterior permanece histórica; [atualizações com evidências](FRONTEND-PROGRESS-OVERRIDES.json) registram cada mudança. Ao finalizar **cada entrega**, atualizar os IDs comprovados, executar `node scripts/frontend-progress.mjs` e informar este panorama na resposta final.
 <!-- frontend-progress:end -->
 
+
+
+
+## Entrega 18/11 — Área do Cliente: saque em etapas
+
+Portal: `2d20359`. Publicação concluída e conferida: [pipeline 44350098156](https://github.com/WillTbn/Strategy-analytics-v2/actions/runs/44350098156). Cinco estados revalidados com contexto completo e imagens do Figma: formulário `1:28279`, contas abertas `251:28194`, revisão `1:28491`, senha `1:28349` e sucesso `1:28421`.
+
+- [x] Home → rota existente de Solicitar Saque, título com retorno à Home, aviso, formulário, resumo de oito informações, senha e sucesso. Voltar preserva moeda, conta e valor; senha é apagada ao voltar, falhar, concluir ou desmontar. O sucesso só aparece após a resposta e permanece até a ação explícita Ir para a Home. Nenhum campo ou ação adicional.
+- [x] Cards, espaçamentos, campos brancos, dropdown glass, badges de moeda, resumo, botões, ícones nativos por estado e ilustração do sucesso comparados às referências. Arquivos nativos conferidos por hash, sem alterar geometria dos SVGs.
+- [x] Validação de saldo, valor positivo, conta ativa e moeda conhecida; saldo ausente/booleano/vazio não vira zero. Revisão congelada e invalidada se saldo, valor ou conta mudarem. Carregamento/erro bancário bloqueiam avanço também por submissão de teclado. Envio repetido e resposta após desmontagem protegidos.
+- [x] Navegador local: seleção real de contas e ligação com a aba bancária/cadastro existentes; etapas posteriores, falha, nova tentativa, sucesso e ação Home testados com componente real e dados controlados. Nenhuma requisição financeira enviada. Prévia removida antes do build; arquivada somente como texto.
+- [x] Mobile de 390 px: largura do documento 378 px, sem imagens ausentes. Corrigida e revalidada a divisão das colunas do resumo; nomes e valores quebram linha dentro do card.
+- [x] 484 testes aprovados, incluindo sete novos cenários do saque. Lint, build, auditoria existente e diff desta entrega aprovados. Alterações locais alheias preservadas; whitespace preexistente em PRODUCT.md não incluído.
+- [x] **Verificação publicada:** Home → Saque → retorno à Home; saldo disponível real de R$ 47.500,00; três contas mascaradas sem moeda desabilitadas; Adicionar conta abre a aba bancária e o formulário existentes. Mobile de 390 px, documento de 378 px e nenhuma imagem ausente. Os 19 assets nativos distintos foram comparados por hash com a publicação. Auditoria, lint, 484 testes, build, upload e ativação passaram no CI. Não foi enviado saque; senha/sucesso ficam cobertos pelo teste controlado, sem declarar escrita integrada concluída.
+- [ ] **Integração posterior — contas:** a resposta atual não informa a moeda das contas; opções permanecem desabilitadas sem inferir BRL. A apresentação completa foi testada com dados controlados.
+- [ ] **Integração posterior — confirmação:** o adapter existente continua recusando finalizar sem suporte HTTP confirmado para a senha exigida pelo desenho. Não foi criada rota, removida autenticação nem simulado sucesso na conta real. Esta dependência não bloqueia a implementação dos estados do frontend.
+
+Panorama: **279 estados, 244 prontos, 26 em revalidação e 9 em implementação/ajuste**. Implementação existente **270/279 (96,8%)**; prontos **87,5%**. Permanecem **13 superfícies sem referência** para avaliação do Éric, nenhuma nova. Estes números medem frontend, não homologação financeira integrada.
+
+[Resultados](evidence/qa-2026-11-18-withdrawal/results.json) · [Referências](evidence/qa-2026-11-18-withdrawal/references.json) · [Assets](evidence/qa-2026-11-18-withdrawal/assets.json) · [Sucesso controlado](evidence/qa-2026-11-18-withdrawal/withdrawal-success-controlled.png) · [Resumo móvel controlado](evidence/qa-2026-11-18-withdrawal/withdrawal-mobile-controlled.png) · [Publicação](evidence/qa-2026-11-18-withdrawal/publication.json) · [Tela publicada](evidence/qa-2026-11-18-withdrawal/withdrawal-hml.png).
 
 
 ## Entrega 18/11 — Transações P01, validação E03 e extrato corrigido P01.1
@@ -1355,11 +1375,11 @@ Legenda vigente: classificação de 16/11 por código e evidências, detalhada e
 
 | Frame                                                                              | Desenho                                                                      | Situação nesta revisão |
 | ---------------------------------------------------------------------------------- | ---------------------------------------------------------------------------- | ---------------------- |
-| [1:28279](https://www.figma.com/design/BaDXlWpxbIoY4azOaQnXgv?node-id=1-28279)     | [UI] FLUXO CARTEIRA - SAQUE - Passo 1                                        | Implementado · revalidar · P01 |
-| [251:28194](https://www.figma.com/design/BaDXlWpxbIoY4azOaQnXgv?node-id=251-28194) | [UI] FLUXO CARTEIRA - SAQUE - Passo 1 · Conta bancária aberta                | Implementado · revalidar · P01 |
-| [1:28349](https://www.figma.com/design/BaDXlWpxbIoY4azOaQnXgv?node-id=1-28349)     | [UI] FLUXO CARTEIRA - SAQUE - Passo 3                                        | Implementado · revalidar · P01 |
-| [1:28421](https://www.figma.com/design/BaDXlWpxbIoY4azOaQnXgv?node-id=1-28421)     | [UI] FLUXO CARTEIRA - SAQUE - Sucesso                                        | Implementado · revalidar · P01 |
-| [1:28491](https://www.figma.com/design/BaDXlWpxbIoY4azOaQnXgv?node-id=1-28491)     | [UI] FLUXO CARTEIRA - SAQUE - Passo 2                                        | Implementado · revalidar · P01 |
+| [1:28279](https://www.figma.com/design/BaDXlWpxbIoY4azOaQnXgv?node-id=1-28279)     | [UI] FLUXO CARTEIRA - SAQUE - Passo 1                                        | Pronto no front · P01 |
+| [251:28194](https://www.figma.com/design/BaDXlWpxbIoY4azOaQnXgv?node-id=251-28194) | [UI] FLUXO CARTEIRA - SAQUE - Passo 1 · Conta bancária aberta                | Pronto no front · P01 |
+| [1:28349](https://www.figma.com/design/BaDXlWpxbIoY4azOaQnXgv?node-id=1-28349)     | [UI] FLUXO CARTEIRA - SAQUE - Passo 3                                        | Pronto no front · P01 |
+| [1:28421](https://www.figma.com/design/BaDXlWpxbIoY4azOaQnXgv?node-id=1-28421)     | [UI] FLUXO CARTEIRA - SAQUE - Sucesso                                        | Pronto no front · P01 |
+| [1:28491](https://www.figma.com/design/BaDXlWpxbIoY4azOaQnXgv?node-id=1-28491)     | [UI] FLUXO CARTEIRA - SAQUE - Passo 2                                        | Pronto no front · P01 |
 | [1:29678](https://www.figma.com/design/BaDXlWpxbIoY4azOaQnXgv?node-id=1-29678)     | [UI] HOME - VERSÃO PADRÃO                                                    | Pronto no front · P02 |
 | [1:31985](https://www.figma.com/design/BaDXlWpxbIoY4azOaQnXgv?node-id=1-31985)     | [UI] HOME - CONTA NOVA - Sem depósito                                        | Pronto no front · P03 |
 | [1:32335](https://www.figma.com/design/BaDXlWpxbIoY4azOaQnXgv?node-id=1-32335)     | [EC] HOME · Conta nova · Estados do gráfico e do período                     | Pronto no front · P03 |

@@ -1,0 +1,272 @@
+[
+  {
+    "nodeId": "1:28279",
+    "name": "imgArrowLeft",
+    "file": "public/system/icons/withdrawal/1-28279-imgArrowLeft.svg",
+    "sha256": "92ca278a4e575619e0ee48309bc7906c25c76dbdebdd90937b0e83cac3cf9f56",
+    "geometry": {
+      "width": "40",
+      "height": "40",
+      "viewBox": "0 0 40 40"
+    }
+  },
+  {
+    "nodeId": "1:28279",
+    "name": "imgIconJamIconsOutlineLogosInfo",
+    "file": "public/system/icons/withdrawal/1-28279-imgIconJamIconsOutlineLogosInfo.svg",
+    "sha256": "bd50486a0aabf261c94479729890a36f46e56087cab7f41ce4b03f881731e1c8",
+    "geometry": {
+      "width": "16",
+      "height": "16",
+      "viewBox": "0 0 16 16"
+    }
+  },
+  {
+    "nodeId": "1:28279",
+    "name": "imgArrowUp",
+    "file": "public/system/icons/withdrawal/1-28279-imgArrowUp.svg",
+    "sha256": "79d661a5e7f2c6688d32984703077c7198704c5de4ef961bb45a57e25f877e26",
+    "geometry": {
+      "width": "32",
+      "height": "32",
+      "viewBox": "0 0 32 32"
+    }
+  },
+  {
+    "nodeId": "1:28279",
+    "name": "imgChevronDown",
+    "file": "public/system/icons/withdrawal/1-28279-imgChevronDown.svg",
+    "sha256": "bf4d010a736a3f220f97f31415a1c482c5e12c246e9eacbbcec95b7be2738e3d",
+    "geometry": {
+      "width": "16",
+      "height": "16",
+      "viewBox": "0 0 16 16"
+    }
+  },
+  {
+    "nodeId": "1:28279",
+    "name": "imgArrowLeft1",
+    "file": "public/system/icons/withdrawal/1-28279-imgArrowLeft1.svg",
+    "sha256": "95facb93e810766e097fef8cca0bebed25a1a05045cdf42215e2e17edc00a07d",
+    "geometry": {
+      "width": "24",
+      "height": "24",
+      "viewBox": "0 0 24 24"
+    }
+  },
+  {
+    "nodeId": "1:28279",
+    "name": "imgIconJamIconsOutlineLogosArrowRight",
+    "file": "public/system/icons/contracts/offer/imgIconJamIconsOutlineLogosArrowRight.svg",
+    "sha256": "8645a99713e15be380ecda033ddd79fe3efaed874f29e6ad47da6ed6c40b753e",
+    "geometry": {
+      "width": "24",
+      "height": "24",
+      "viewBox": "0 0 24 24"
+    }
+  },
+  {
+    "nodeId": "251:28194",
+    "name": "imgArrowLeft",
+    "file": "public/system/icons/withdrawal/251-28194-imgArrowLeft.svg",
+    "sha256": "af1c7e98ad41ed2edfa7e4912d5ce64d279667703400b00d953df84c39a12a02",
+    "geometry": {
+      "width": "40",
+      "height": "40",
+      "viewBox": "0 0 40 40"
+    }
+  },
+  {
+    "nodeId": "251:28194",
+    "name": "imgIconJamIconsOutlineLogosInfo",
+    "file": "public/system/icons/withdrawal/1-28279-imgIconJamIconsOutlineLogosInfo.svg",
+    "sha256": "bd50486a0aabf261c94479729890a36f46e56087cab7f41ce4b03f881731e1c8",
+    "geometry": {
+      "width": "16",
+      "height": "16",
+      "viewBox": "0 0 16 16"
+    }
+  },
+  {
+    "nodeId": "251:28194",
+    "name": "imgArrowUp",
+    "file": "public/system/icons/withdrawal/251-28194-imgArrowUp.svg",
+    "sha256": "ea74428f769d01d2c4f19ef06d3ba5d7e1413fffe978f75fbe81b4e30750b00f",
+    "geometry": {
+      "width": "32",
+      "height": "32",
+      "viewBox": "0 0 32 32"
+    }
+  },
+  {
+    "nodeId": "251:28194",
+    "name": "imgChevronDown",
+    "file": "public/system/icons/withdrawal/251-28194-imgChevronDown.svg",
+    "sha256": "31ed1190a1807971bd6441b9758133f027a24ddae38b72176b9fc0c40c933ce8",
+    "geometry": {
+      "width": "16",
+      "height": "16",
+      "viewBox": "0 0 16 16"
+    }
+  },
+  {
+    "nodeId": "251:28194",
+    "name": "imgArrowLeft1",
+    "file": "public/system/icons/withdrawal/251-28194-imgArrowLeft1.svg",
+    "sha256": "80ed4d2408ade43ca1a93178e148155927cdb017b66bf3910175b7dff1c331f4",
+    "geometry": {
+      "width": "24",
+      "height": "24",
+      "viewBox": "0 0 24 24"
+    }
+  },
+  {
+    "nodeId": "251:28194",
+    "name": "imgIconJamIconsOutlineLogosArrowRight",
+    "file": "public/system/icons/contracts/offer/imgIconJamIconsOutlineLogosArrowRight.svg",
+    "sha256": "8645a99713e15be380ecda033ddd79fe3efaed874f29e6ad47da6ed6c40b753e",
+    "geometry": {
+      "width": "24",
+      "height": "24",
+      "viewBox": "0 0 24 24"
+    }
+  },
+  {
+    "nodeId": "1:28349",
+    "name": "imgArrowLeft",
+    "file": "public/system/icons/withdrawal/1-28349-imgArrowLeft.svg",
+    "sha256": "f6a6b58d52212070318a13474c96a9333d0e9ee593949f040f98aef54ba75585",
+    "geometry": {
+      "width": "40",
+      "height": "40",
+      "viewBox": "0 0 40 40"
+    }
+  },
+  {
+    "nodeId": "1:28349",
+    "name": "imgArrowUp",
+    "file": "public/system/icons/withdrawal/1-28349-imgArrowUp.svg",
+    "sha256": "c9169a2a8bca6111553f66928ed04159b76afc5bbe4d13a5e4374cccb33ab590",
+    "geometry": {
+      "width": "32",
+      "height": "32",
+      "viewBox": "0 0 32 32"
+    }
+  },
+  {
+    "nodeId": "1:28349",
+    "name": "imgEye",
+    "file": "public/system/icons/withdrawal/1-28349-imgEye.svg",
+    "sha256": "74147f36763a06597f88dfa76d772c6dcd8efd46ebfbc930ebefac3600e20abe",
+    "geometry": {
+      "width": "16",
+      "height": "16",
+      "viewBox": "0 0 16 16"
+    }
+  },
+  {
+    "nodeId": "1:28349",
+    "name": "imgArrowLeft1",
+    "file": "public/system/icons/withdrawal/1-28349-imgArrowLeft1.svg",
+    "sha256": "de965c5801119352d0b5d4d4dedd432b337300497cf937360541e3e245f49145",
+    "geometry": {
+      "width": "24",
+      "height": "24",
+      "viewBox": "0 0 24 24"
+    }
+  },
+  {
+    "nodeId": "1:28349",
+    "name": "imgIconJamIconsOutlineLogosArrowRight",
+    "file": "public/system/icons/contracts/offer/imgIconJamIconsOutlineLogosArrowRight.svg",
+    "sha256": "8645a99713e15be380ecda033ddd79fe3efaed874f29e6ad47da6ed6c40b753e",
+    "geometry": {
+      "width": "24",
+      "height": "24",
+      "viewBox": "0 0 24 24"
+    }
+  },
+  {
+    "nodeId": "1:28421",
+    "name": "imgWhisk916E26874C",
+    "file": "public/system/icons/check.png",
+    "sha256": "7edaf9fafa1aff63342ddb298f487b570a5eb01ba6bddd17ce2f28c8917d3351"
+  },
+  {
+    "nodeId": "1:28421",
+    "name": "imgArrowLeft",
+    "file": "public/system/icons/withdrawal/1-28421-imgArrowLeft.svg",
+    "sha256": "7f4990f6c98c75dfa4fb76cbbe0d758a5bfc3e08483c47305fffcba812e9bc1d",
+    "geometry": {
+      "width": "40",
+      "height": "40",
+      "viewBox": "0 0 40 40"
+    }
+  },
+  {
+    "nodeId": "1:28421",
+    "name": "imgIconJamIconsOutlineLogosArrowRight",
+    "file": "public/system/icons/contracts/offer/imgIconJamIconsOutlineLogosArrowRight.svg",
+    "sha256": "8645a99713e15be380ecda033ddd79fe3efaed874f29e6ad47da6ed6c40b753e",
+    "geometry": {
+      "width": "24",
+      "height": "24",
+      "viewBox": "0 0 24 24"
+    }
+  },
+  {
+    "nodeId": "1:28491",
+    "name": "imgArrowLeft",
+    "file": "public/system/icons/withdrawal/1-28491-imgArrowLeft.svg",
+    "sha256": "1a52de4d849be7fcfc1b4a5aa12cb09bb875c21ffb5106d6c3f5ef6db6fa77ba",
+    "geometry": {
+      "width": "40",
+      "height": "40",
+      "viewBox": "0 0 40 40"
+    }
+  },
+  {
+    "nodeId": "1:28491",
+    "name": "imgIconJamIconsOutlineLogosInfo",
+    "file": "public/system/icons/withdrawal/1-28279-imgIconJamIconsOutlineLogosInfo.svg",
+    "sha256": "bd50486a0aabf261c94479729890a36f46e56087cab7f41ce4b03f881731e1c8",
+    "geometry": {
+      "width": "16",
+      "height": "16",
+      "viewBox": "0 0 16 16"
+    }
+  },
+  {
+    "nodeId": "1:28491",
+    "name": "imgArrowUp",
+    "file": "public/system/icons/withdrawal/1-28491-imgArrowUp.svg",
+    "sha256": "7150eb698c4b6e3cfc04ce7b97fd6811ae26b58b85e9ec817a5f6505e414c117",
+    "geometry": {
+      "width": "32",
+      "height": "32",
+      "viewBox": "0 0 32 32"
+    }
+  },
+  {
+    "nodeId": "1:28491",
+    "name": "imgArrowLeft1",
+    "file": "public/system/icons/withdrawal/1-28491-imgArrowLeft1.svg",
+    "sha256": "f044a4708eeb4f16d0235d3a438cfbdfd32c75c64cc0b290a9ce0627211b3280",
+    "geometry": {
+      "width": "24",
+      "height": "24",
+      "viewBox": "0 0 24 24"
+    }
+  },
+  {
+    "nodeId": "1:28491",
+    "name": "imgIconJamIconsOutlineLogosArrowRight",
+    "file": "public/system/icons/contracts/offer/imgIconJamIconsOutlineLogosArrowRight.svg",
+    "sha256": "8645a99713e15be380ecda033ddd79fe3efaed874f29e6ad47da6ed6c40b753e",
+    "geometry": {
+      "width": "24",
+      "height": "24",
+      "viewBox": "0 0 24 24"
+    }
+  }
+]

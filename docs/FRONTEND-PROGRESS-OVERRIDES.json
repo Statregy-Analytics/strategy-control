@@ -91,29 +91,49 @@
       "blockers": []
     },
     "1:28279": {
-      "front": "validation",
-      "reason": "Fluxo de saque conectado e protegido, com consulta real; estados finais aguardam API de confirmação e revalidação completa.",
-      "evidence": "docs/evidence/qa-2026-11-16-front-functional/api-and-tests.json"
+      "front": "done",
+      "reason": "Saque recomposto com formulário, seletor, revisão, senha e sucesso segundo contextos completos. Estados exercitados no navegador com componente real e dados controlados; consulta/navegação reais conferidas. Escrita financeira permanece dependência HTTP explícita.",
+      "evidence": "docs/evidence/qa-2026-11-18-withdrawal/results.json",
+      "blockers": [
+        "Moeda das contas bancárias ausente na resposta atual.",
+        "Confirmação da senha do saque sem contrato HTTP confirmado."
+      ]
     },
     "251:28194": {
-      "front": "validation",
-      "reason": "Fluxo de saque conectado e protegido, com consulta real; estados finais aguardam API de confirmação e revalidação completa.",
-      "evidence": "docs/evidence/qa-2026-11-16-front-functional/api-and-tests.json"
+      "front": "done",
+      "reason": "Saque recomposto com formulário, seletor, revisão, senha e sucesso segundo contextos completos. Estados exercitados no navegador com componente real e dados controlados; consulta/navegação reais conferidas. Escrita financeira permanece dependência HTTP explícita.",
+      "evidence": "docs/evidence/qa-2026-11-18-withdrawal/results.json",
+      "blockers": [
+        "Moeda das contas bancárias ausente na resposta atual.",
+        "Confirmação da senha do saque sem contrato HTTP confirmado."
+      ]
     },
     "1:28349": {
-      "front": "validation",
-      "reason": "Fluxo de saque conectado e protegido, com consulta real; estados finais aguardam API de confirmação e revalidação completa.",
-      "evidence": "docs/evidence/qa-2026-11-16-front-functional/api-and-tests.json"
+      "front": "done",
+      "reason": "Saque recomposto com formulário, seletor, revisão, senha e sucesso segundo contextos completos. Estados exercitados no navegador com componente real e dados controlados; consulta/navegação reais conferidas. Escrita financeira permanece dependência HTTP explícita.",
+      "evidence": "docs/evidence/qa-2026-11-18-withdrawal/results.json",
+      "blockers": [
+        "Moeda das contas bancárias ausente na resposta atual.",
+        "Confirmação da senha do saque sem contrato HTTP confirmado."
+      ]
     },
     "1:28421": {
-      "front": "validation",
-      "reason": "Fluxo de saque conectado e protegido, com consulta real; estados finais aguardam API de confirmação e revalidação completa.",
-      "evidence": "docs/evidence/qa-2026-11-16-front-functional/api-and-tests.json"
+      "front": "done",
+      "reason": "Saque recomposto com formulário, seletor, revisão, senha e sucesso segundo contextos completos. Estados exercitados no navegador com componente real e dados controlados; consulta/navegação reais conferidas. Escrita financeira permanece dependência HTTP explícita.",
+      "evidence": "docs/evidence/qa-2026-11-18-withdrawal/results.json",
+      "blockers": [
+        "Moeda das contas bancárias ausente na resposta atual.",
+        "Confirmação da senha do saque sem contrato HTTP confirmado."
+      ]
     },
     "1:28491": {
-      "front": "validation",
-      "reason": "Fluxo de saque conectado e protegido, com consulta real; estados finais aguardam API de confirmação e revalidação completa.",
-      "evidence": "docs/evidence/qa-2026-11-16-front-functional/api-and-tests.json"
+      "front": "done",
+      "reason": "Saque recomposto com formulário, seletor, revisão, senha e sucesso segundo contextos completos. Estados exercitados no navegador com componente real e dados controlados; consulta/navegação reais conferidas. Escrita financeira permanece dependência HTTP explícita.",
+      "evidence": "docs/evidence/qa-2026-11-18-withdrawal/results.json",
+      "blockers": [
+        "Moeda das contas bancárias ausente na resposta atual.",
+        "Confirmação da senha do saque sem contrato HTTP confirmado."
+      ]
     },
     "1:50683": {
       "front": "done",

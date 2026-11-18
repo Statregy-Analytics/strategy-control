@@ -11,12 +11,12 @@
   },
   "metrics": {
     "total": 279,
-    "done": 239,
-    "validation": 31,
+    "done": 244,
+    "validation": 26,
     "adjustment": 9,
     "implemented": 270,
     "implementedPercent": 96.8,
-    "readyPercent": 85.7
+    "readyPercent": 87.5
   },
   "withoutLinkedFigmaReference": {
     "count": 13,
@@ -4253,10 +4253,13 @@
       "link": "[1:28279](https://www.figma.com/design/BaDXlWpxbIoY4azOaQnXgv?node-id=1-28279)",
       "counted": true,
       "group": "P01",
-      "category": "Ajuste de front",
-      "front": "validation",
-      "blockers": [],
-      "reason": "Fluxo de saque conectado e protegido, com consulta real; estados finais aguardam API de confirmação e revalidação completa.",
+      "category": "Já correto",
+      "front": "done",
+      "blockers": [
+        "Moeda das contas bancárias ausente na resposta atual.",
+        "Confirmação da senha do saque sem contrato HTTP confirmado."
+      ],
+      "reason": "Saque recomposto com formulário, seletor, revisão, senha e sucesso segundo contextos completos. Estados exercitados no navegador com componente real e dados controlados; consulta/navegação reais conferidas. Escrita financeira permanece dependência HTTP explícita.",
       "sources": [
         "portal:src/system/pages/Wallet/CashWalletPage.vue",
         "portal:src/system/components/wallet/WalletTotal.vue",
@@ -4264,7 +4267,7 @@
       ],
       "evidence": [
         "docs/evidence/qa-2026-11-16-inventory/api-contract-review.json",
-        "docs/evidence/qa-2026-11-16-front-functional/api-and-tests.json"
+        "docs/evidence/qa-2026-11-18-withdrawal/results.json"
       ],
       "browser": "diagnóstico de código; envio não exercitado",
       "historicalCategory": "Ajuste de front"
@@ -4277,10 +4280,13 @@
       "link": "[251:28194](https://www.figma.com/design/BaDXlWpxbIoY4azOaQnXgv?node-id=251-28194)",
       "counted": true,
       "group": "P01",
-      "category": "Ajuste de front",
-      "front": "validation",
-      "blockers": [],
-      "reason": "Fluxo de saque conectado e protegido, com consulta real; estados finais aguardam API de confirmação e revalidação completa.",
+      "category": "Já correto",
+      "front": "done",
+      "blockers": [
+        "Moeda das contas bancárias ausente na resposta atual.",
+        "Confirmação da senha do saque sem contrato HTTP confirmado."
+      ],
+      "reason": "Saque recomposto com formulário, seletor, revisão, senha e sucesso segundo contextos completos. Estados exercitados no navegador com componente real e dados controlados; consulta/navegação reais conferidas. Escrita financeira permanece dependência HTTP explícita.",
       "sources": [
         "portal:src/system/pages/Wallet/CashWalletPage.vue",
         "portal:src/system/components/wallet/WalletTotal.vue",
@@ -4288,7 +4294,7 @@
       ],
       "evidence": [
         "docs/evidence/qa-2026-11-16-inventory/api-contract-review.json",
-        "docs/evidence/qa-2026-11-16-front-functional/api-and-tests.json"
+        "docs/evidence/qa-2026-11-18-withdrawal/results.json"
       ],
       "browser": "diagnóstico de código; envio não exercitado",
       "historicalCategory": "Ajuste de front"
@@ -4301,10 +4307,13 @@
       "link": "[1:28349](https://www.figma.com/design/BaDXlWpxbIoY4azOaQnXgv?node-id=1-28349)",
       "counted": true,
       "group": "P01",
-      "category": "Ajuste de front",
-      "front": "validation",
-      "blockers": [],
-      "reason": "Fluxo de saque conectado e protegido, com consulta real; estados finais aguardam API de confirmação e revalidação completa.",
+      "category": "Já correto",
+      "front": "done",
+      "blockers": [
+        "Moeda das contas bancárias ausente na resposta atual.",
+        "Confirmação da senha do saque sem contrato HTTP confirmado."
+      ],
+      "reason": "Saque recomposto com formulário, seletor, revisão, senha e sucesso segundo contextos completos. Estados exercitados no navegador com componente real e dados controlados; consulta/navegação reais conferidas. Escrita financeira permanece dependência HTTP explícita.",
       "sources": [
         "portal:src/system/pages/Wallet/CashWalletPage.vue",
         "portal:src/system/components/wallet/WalletTotal.vue",
@@ -4312,7 +4321,7 @@
       ],
       "evidence": [
         "docs/evidence/qa-2026-11-16-inventory/api-contract-review.json",
-        "docs/evidence/qa-2026-11-16-front-functional/api-and-tests.json"
+        "docs/evidence/qa-2026-11-18-withdrawal/results.json"
       ],
       "browser": "diagnóstico de código; envio não exercitado",
       "historicalCategory": "Ajuste de front"
@@ -4325,10 +4334,13 @@
       "link": "[1:28421](https://www.figma.com/design/BaDXlWpxbIoY4azOaQnXgv?node-id=1-28421)",
       "counted": true,
       "group": "P01",
-      "category": "Ajuste de front",
-      "front": "validation",
-      "blockers": [],
-      "reason": "Fluxo de saque conectado e protegido, com consulta real; estados finais aguardam API de confirmação e revalidação completa.",
+      "category": "Já correto",
+      "front": "done",
+      "blockers": [
+        "Moeda das contas bancárias ausente na resposta atual.",
+        "Confirmação da senha do saque sem contrato HTTP confirmado."
+      ],
+      "reason": "Saque recomposto com formulário, seletor, revisão, senha e sucesso segundo contextos completos. Estados exercitados no navegador com componente real e dados controlados; consulta/navegação reais conferidas. Escrita financeira permanece dependência HTTP explícita.",
       "sources": [
         "portal:src/system/pages/Wallet/CashWalletPage.vue",
         "portal:src/system/components/wallet/WalletTotal.vue",
@@ -4336,7 +4348,7 @@
       ],
       "evidence": [
         "docs/evidence/qa-2026-11-16-inventory/api-contract-review.json",
-        "docs/evidence/qa-2026-11-16-front-functional/api-and-tests.json"
+        "docs/evidence/qa-2026-11-18-withdrawal/results.json"
       ],
       "browser": "diagnóstico de código; envio não exercitado",
       "historicalCategory": "Ajuste de front"
@@ -4349,10 +4361,13 @@
       "link": "[1:28491](https://www.figma.com/design/BaDXlWpxbIoY4azOaQnXgv?node-id=1-28491)",
       "counted": true,
       "group": "P01",
-      "category": "Ajuste de front",
-      "front": "validation",
-      "blockers": [],
-      "reason": "Fluxo de saque conectado e protegido, com consulta real; estados finais aguardam API de confirmação e revalidação completa.",
+      "category": "Já correto",
+      "front": "done",
+      "blockers": [
+        "Moeda das contas bancárias ausente na resposta atual.",
+        "Confirmação da senha do saque sem contrato HTTP confirmado."
+      ],
+      "reason": "Saque recomposto com formulário, seletor, revisão, senha e sucesso segundo contextos completos. Estados exercitados no navegador com componente real e dados controlados; consulta/navegação reais conferidas. Escrita financeira permanece dependência HTTP explícita.",
       "sources": [
         "portal:src/system/pages/Wallet/CashWalletPage.vue",
         "portal:src/system/components/wallet/WalletTotal.vue",
@@ -4360,7 +4375,7 @@
       ],
       "evidence": [
         "docs/evidence/qa-2026-11-16-inventory/api-contract-review.json",
-        "docs/evidence/qa-2026-11-16-front-functional/api-and-tests.json"
+        "docs/evidence/qa-2026-11-18-withdrawal/results.json"
       ],
       "browser": "diagnóstico de código; envio não exercitado",
       "historicalCategory": "Ajuste de front"

@@ -1,0 +1,8 @@
+<template><main style="min-height:100vh;padding:24px;color:white;background:radial-gradient(at left bottom,#0c4b6c,transparent 65%),radial-gradient(at right top,#6c101d,transparent 60%),#080b15"><h1 style="font-size:24px">QA local — dados fictícios, sem requisição financeira</h1><label><input type="checkbox" v-model="fail">Simular falha</label><label><input type="checkbox" v-model="loading">Carregando bancos</label><p>Envios controlados: {{calls}} · {{result}}</p><div style="display:flex;justify-content:center"><withdrawal-flow :model="model" :banks="banks" :bank-state="{loading,error}" :submit-operation="submit" @completed="result='Home acionada'" @recover="result='Recuperação acionada'" @add-bank="result='Cadastro bancário acionado'"/></div></main></template>
+<script setup>
+import {ref} from "vue";
+import WithdrawalFlow from "./src/system/components/wallet/WithdrawalFlow.vue";
+const banks=[{id:"qa-brl",bankName:"001 - Banco fictício QA",branch:"0001",accountNumberMasked:"****1234",currencyIsoCode:"BRL",status:"Active"},{id:"qa-usd",bankName:"Banco fictício internacional QA",branch:"0002",accountNumberMasked:"****5678",currencyIsoCode:"USD",status:"Active"},{id:"qa-inactive",bankName:"Conta inativa QA",currencyIsoCode:"BRL",status:"Inactive"},{id:"qa-missing",bankName:"Conta sem moeda QA",status:"Active"}];
+const model={deposit:{currencies:[{currency:"BRL",balance:35000},{currency:"USD",balance:1000}]}};
+const calls=ref(0),result=ref(""),fail=ref(true),loading=ref(false),error=ref("");async function submit(){calls.value++;await new Promise(resolve=>setTimeout(resolve,800));if(fail.value)throw Error("Falha fictícia controlada. Tente novamente.");return {id:"qa-only"};}
+</script>

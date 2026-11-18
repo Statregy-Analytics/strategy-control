@@ -1,0 +1,61 @@
+{
+  "date": "2026-11-18",
+  "portalCommit": "2d203597dd7f94b3123c23d7766507503058c23c",
+  "figmaFile": "BaDXlWpxbIoY4azOaQnXgv",
+  "frames": [
+    "1:28279",
+    "251:28194",
+    "1:28491",
+    "1:28349",
+    "1:28421"
+  ],
+  "reference": "Full design contexts and screenshots recovered for all five frames; exact native assets preserved and hashed.",
+  "tests": {
+    "total": 484,
+    "passed": 484,
+    "newWithdrawalTests": 7,
+    "lint": "passed",
+    "build": "passed, exact guard text found in generated WalletOperation chunk",
+    "audit": "passed with existing verified mitigations; no disabled checks",
+    "scopedDiff": "passed; unrelated PRODUCT.md whitespace preserved"
+  },
+  "localBrowser": {
+    "realSession": [
+      "Home → Saque route",
+      "Existing bank accounts read with protected account numbers",
+      "Accounts without confirmed currency disabled",
+      "Add bank → existing profile bank tab/new account form"
+    ],
+    "controlled": [
+      "Form BRL, dropdown mixed currencies, inactive and unknown currency disabled",
+      "Amount above available disables Continue",
+      "Selecting USD bank changes currency and resets amount",
+      "Form → review → back preserves fields",
+      "Review → password, empty password disabled, show/hide password",
+      "Pending callback blocks buttons, no duplicated submission",
+      "Failure clears password and retains review, retry succeeds only after resolved callback",
+      "Success remains open until explicit Home action",
+      "Mobile 390px: document width 378px, no broken images; summary corrected and rechecked"
+    ],
+    "financialRequests": 0,
+    "preview": "Real production component mounted with controlled props/callback, no fake API/store. Removed from product and archived as text only."
+  },
+  "backendDependencies": [
+    "Current bank account responses omit currency; no currency inferred from country or wallet.",
+    "Existing adapter still blocks final withdrawal until password confirmation is supported by a confirmed HTTP contract. No password silently dropped, no fake success."
+  ],
+  "hml": {
+    "status": "passed read-only verification after successful deployment",
+    "tested": [
+      "Route /system/dashboard/cash renders new withdrawal flow",
+      "Home → Saque → return Home",
+      "Real available BRL balance 47500 shown without fake total",
+      "Three masked accounts without currency remain disabled",
+      "Add bank opens existing bank tab and account form",
+      "Mobile width 390, document 378, zero broken images"
+    ],
+    "financialSubmission": "Not sent. Final password/success states verified in controlled real-component harness only."
+  },
+  "newProductFieldsOrActions": false,
+  "newSurfaceWithoutFigma": false
+}

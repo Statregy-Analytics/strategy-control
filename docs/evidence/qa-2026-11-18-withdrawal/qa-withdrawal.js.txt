@@ -1,0 +1,6 @@
+import {createApp} from "vue";
+import {Quasar} from "quasar";
+import "quasar/src/css/index.sass";
+import "./src/css/app.scss";
+import QaWithdrawal from "./QaWithdrawal.vue";
+createApp(QaWithdrawal).use(Quasar,{config:{dark:true}}).mount("#q-app");
