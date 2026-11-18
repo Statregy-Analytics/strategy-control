@@ -125,6 +125,7 @@
   </div>
 </template>
 <script setup>
+import { assetCurrencyCode } from 'src/services/clientAssetProfile'
 import MoneyInput from 'src/components/Form/MoneyInput.vue'
 import { computed, ref } from 'vue'
 import { useQuasar } from 'quasar'
@@ -157,11 +158,16 @@ const id = ref(null),
   documentId = ref(null)
 const currencyOption = computed(() => {
   const c = props.currencies.find((c) => c.currencyId === detail.state.data?.currencyId)
-  return c ? { id: c.currencyId, name: c.currencyIsoCode } : null
+  const code = assetCurrencyCode(detail.state.data, props.currencies)
+  return c
+    ? { id: c.currencyId, name: c.currencyIsoCode }
+    : code && detail.state.data?.currencyId
+      ? { id: detail.state.data.currencyId, name: code }
+      : null
 })
 const formatValue = (r) => {
-  const currency = props.currencies.find((c) => c.currencyId === r.currencyId)
-  return currency ? money(r.declaredValue, currency.currencyIsoCode) : 'Moeda indisponível'
+  const code = assetCurrencyCode(r, props.currencies)
+  return code ? money(r.declaredValue, code) : 'Moeda indisponível'
 }
 const assetColumns = columns([
   ['nickname', 'Bem'],
@@ -177,13 +183,15 @@ const path = (suffix) => `admin/customers/${props.customerId}/assets/${id.value}
 async function loadDetail() {
   await detail.load(async () => (await financeGet(path())).data)
   const d = detail.state.data
-  if (d)
+  if (d) {
+    currencyCode.value = assetCurrencyCode(d, props.currencies) || ''
     form.value = {
       nickname: d.nickname,
       declaredValue: d.declaredValue,
       currencyId: d.currencyId,
       remainingBalance: d.remainingBalance,
     }
+  }
 }
 const loadDocuments = () => documents.load(async () => (await financeGet(path('/documents'))).data)
 function open(value) {
