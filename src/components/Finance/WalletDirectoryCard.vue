@@ -128,7 +128,9 @@
           <span>{{ row.lastMovementType ? financeLabel(row.lastMovementType) : '—' }}</span
           ><span>{{ date(row.lastMovement) }}</span>
         </div></template
-      ><span v-else>Última atualização: {{ date(row.lastMovement || row.updatedAt) }}</span
+      ><span v-else
+        >{{ mode === 'assets' ? 'Última movimentação' : 'Última atualização' }}:
+        {{ date(row.lastMovement || row.updatedAt) }}</span
       ><small v-if="mode !== 'strategy'">{{
         walletCardCount(row.movementCount, 'movimentação', 'movimentações')
       }}</small>
@@ -242,6 +244,14 @@ const percentTone = (value) => ({
 })
 const current = (c) => (props.row.currencies?.length === 1 ? props.row.currentTotal : c.current)
 const date = (value) =>
-  value && Number.isFinite(Date.parse(value)) ? new Date(value).toLocaleString('pt-BR') : '—'
+  value && Number.isFinite(Date.parse(value))
+    ? new Date(value).toLocaleString('pt-BR', {
+        day: '2-digit',
+        month: '2-digit',
+        year: 'numeric',
+        hour: '2-digit',
+        minute: '2-digit',
+      })
+    : '—'
 </script>
 <style scoped src="./walletDirectoryCard.scss"></style>

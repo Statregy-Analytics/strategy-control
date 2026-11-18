@@ -88,7 +88,7 @@
   }
   &__identity {
     margin-top: 16px;
-    padding-bottom: 16px;
+    padding-bottom: 12px;
     border-bottom: 1px solid #ffffff1f;
   }
   &__identity p {
@@ -144,9 +144,12 @@
   }
   td {
     color: #ffffffb8;
-    padding: 4px 8px 4px 0;
+    padding: 0 8px 8px 0;
     white-space: nowrap;
     font-weight: 400;
+  }
+  tbody tr:last-child td {
+    padding-bottom: 0;
   }
   td:last-child,
   th:last-child {
@@ -179,7 +182,8 @@
     align-items: center;
     gap: 8px;
     border-top: 1px solid #ffffff1f;
-    padding: 12px 0;
+    margin-top: 8px;
+    padding: 8px 0 0;
     font-size: 12px;
   }
   &__consolidated span:last-child {
@@ -215,8 +219,10 @@
     display: flex;
     justify-content: space-between;
     flex-wrap: wrap;
-    gap: 24px;
-    margin: 16px 0 24px;
+    gap: 16px;
+    margin: 16px 0 20px;
+    font-size: 12px;
+    line-height: 16px;
   }
   &__variation > div:last-of-type {
     text-align: right;
@@ -232,12 +238,15 @@
     margin: 0;
   }
   &__summary {
-    margin: 16px 0;
+    margin: 12px 0;
     display: flex;
     gap: 8px;
     align-items: center;
     flex-wrap: wrap;
     min-height: 20px;
+  }
+  &__summary {
+    row-gap: 4px;
   }
   &__summary strong {
     display: block;
@@ -276,8 +285,10 @@
     font-size: 12px;
   }
   &--deposit &__updated {
-    font-size: 14px;
+    font-size: 12px;
+    line-height: 16px;
     color: #ffffffb8;
+    margin-top: 12px;
   }
   &--deposit &__updated > span {
     display: block;
