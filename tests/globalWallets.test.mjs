@@ -173,3 +173,31 @@ test('wallet amounts retain the Portuguese separators used by the approved desig
   assert.equal(walletMoney(1234.56, 'EUR'), '€ 1.234,56')
   assert.equal(walletMoney(null, 'USD'), '—')
 })
+
+test('last movement type is taken only from evidence matching its timestamp, not an older recent item', async () => {
+  const p = portfolio('a', [currency('BRL', 10)])
+  const data = await readGlobalPortfolios(async (path) =>
+    path === 'admin/customers/cards'
+      ? { data: [{ customerId: 'a', displayName: 'QA' }] }
+      : path === 'admin/wallets'
+        ? {
+            data: [
+              {
+                id: 'w',
+                client: { id: 'a' },
+                type: 'Free',
+                status: 'Active',
+                lastMovementAtUtc: '2026-11-17T12:00:00Z',
+                recentMovements: [
+                  { type: 'Withdrawal', occurredAtUtc: '2026-11-16T12:00:00Z' },
+                  { type: 'Deposit', occurredAtUtc: '2026-11-17T09:00:00-03:00' },
+                ],
+              },
+            ],
+          }
+        : { data: p },
+  )
+  assert.equal(globalWalletRows(data).find((r) => r.type === 'deposit').lastMovementType, 'Deposit')
+  data.wallets[0].recentMovements.pop()
+  assert.equal(globalWalletRows(data).find((r) => r.type === 'deposit').lastMovementType, null)
+})

@@ -1,0 +1,265 @@
+.wallet-directory {
+  .directory-back {
+    min-height: 32px;
+    padding: 4px 10px;
+    color: #ffffffb8;
+    font-size: 14px;
+  }
+  .directory-back :deep(.q-btn__content) {
+    flex-direction: row-reverse;
+    gap: 8px;
+  }
+  .directory-toolbar {
+    border-radius: 10px;
+    padding: 16px;
+    background: #ffffff0f;
+  }
+  h2 {
+    font-weight: 700;
+  }
+  .directory-toolbar p {
+    font-size: 12px;
+    line-height: 16px;
+  }
+  .directory-filters {
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 16px;
+  }
+  .directory-filters > .q-input {
+    flex: 3 1 280px;
+  }
+  .directory-filters > :deep(.q-field) {
+    flex: 1 1 100px;
+    min-width: 0;
+  }
+  .directory-filters :deep(.q-field__control),
+  .directory-filters :deep(.q-field__marginal) {
+    height: 36px;
+    min-height: 36px;
+  }
+  .directory-filters :deep(.q-field__native),
+  .directory-filters :deep(.q-field__input) {
+    font-size: 14px;
+    color: #ffffffb8;
+  }
+  .directory-filters :deep(.q-field__control) {
+    border-radius: 8px;
+    background: linear-gradient(87deg, #ffffff1f, #ffffff0d, #ffffff1a);
+  }
+  .directory-filters > .q-btn {
+    min-height: 36px;
+    padding: 0 12px;
+    border-radius: 8px;
+    font-size: 14px;
+    color: #ffffffb8;
+    background: #ffffff0d;
+    flex: none;
+  }
+  .directory-view {
+    flex: none;
+    height: 36px;
+    padding: 4px;
+    gap: 4px;
+    background: #ffffff0d;
+  }
+  .directory-view button {
+    height: 26px;
+    width: 68px;
+  }
+  .directory-count {
+    color: #ffffff80;
+    font-size: 12px;
+    margin-top: 16px;
+  }
+  .directory-table {
+    background: linear-gradient(111deg, #ffffff12, #ffffff08, #ffffff12);
+    border: 1px solid #ffffff33;
+    border-radius: 12px;
+    color: white;
+    min-height: 600px;
+  }
+  .directory-table :deep(.q-table__middle) {
+    max-width: 100%;
+  }
+  .directory-table :deep(table) {
+    width: 100%;
+    font-family: Inter, sans-serif;
+    font-size: 14px;
+  }
+  .directory-table :deep(th) {
+    height: 40px;
+    padding: 12px 8px;
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+    background: #ffffff0f;
+    color: #ffffffb8;
+    border-color: #ffffff1a;
+  }
+  .directory-table :deep(td) {
+    height: 61px;
+    padding: 12px 8px;
+    color: #ffffffb8;
+    border-color: #ffffff14;
+    font-size: 14px;
+  }
+  .directory-table :deep(td strong) {
+    color: white;
+    font-weight: 600;
+  }
+  .directory-identity {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .directory-identity > img {
+    flex: none;
+  }
+  .directory-identity > div,
+  .directory-client-cell {
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+  }
+  .directory-identity span {
+    color: white;
+  }
+  .directory-identity small,
+  .directory-client-cell small {
+    color: #ffffff99;
+    font-size: 12px;
+    line-height: 16px;
+  }
+  .directory-identity small {
+    max-width: 180px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  .directory-currency-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+    max-width: 180px;
+  }
+  .directory-currency {
+    border: 1px solid #ffffff80;
+    border-radius: 6px;
+    padding: 2px 8px;
+    font-size: 12px;
+    line-height: 16px;
+    color: #ffffffb8;
+  }
+  .directory-badge {
+    font-size: 10px;
+    line-height: 16px;
+    padding: 2px 8px;
+    font-weight: 500;
+  }
+  .directory-badge.positive,
+  .directory-badge--deposit {
+    color: #7bf1a8;
+    border-color: #00c950;
+    background: #00c9501a;
+    text-transform: uppercase;
+  }
+  .directory-badge--pending {
+    color: #ffe28a;
+    border-color: #ffd96680;
+    background: #ffd96614;
+    text-transform: uppercase;
+  }
+  .directory-count-cell {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 12px;
+  }
+  .directory-movement {
+    display: flex;
+    flex-direction: column;
+    font-size: 12px;
+  }
+  .directory-row-actions {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 8px;
+  }
+  .directory-row-actions .q-btn {
+    min-height: 32px;
+    min-width: 32px;
+    padding: 8px;
+    border-radius: 8px;
+  }
+  .directory-row-actions .q-btn:hover {
+    background: #ffffff14;
+  }
+  .directory-positive {
+    color: #00d492;
+  }
+  @media (max-width: 1200px) {
+    .directory-filters {
+      flex-wrap: wrap;
+    }
+    .directory-filters > .q-input {
+      flex: 1 1 300px;
+    }
+    .directory-filters > :deep(.q-field) {
+      flex: 1 1 150px;
+    }
+  }
+  @media (max-width: 600px) {
+    .directory-filters > .q-input {
+      flex: 1 1 100%;
+    }
+    .directory-filters > :deep(.q-field) {
+      flex: 1 1 100%;
+    }
+    .directory-view {
+      margin-left: auto;
+    }
+    .directory-table {
+      min-height: 320px;
+    }
+  }
+}
+
+.wallet-directory {
+  .directory-code {
+    display: block;
+    max-width: 130px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  .directory-amounts {
+    display: flex;
+    flex-direction: column;
+    white-space: nowrap;
+    gap: 4px;
+  }
+  .directory-table :deep(th),
+  .directory-table :deep(td) {
+    white-space: normal;
+  }
+  .directory-table :deep(.directory-identity) {
+    min-width: 150px;
+  }
+  .directory-client-cell {
+    min-width: 110px;
+    max-width: 180px;
+    overflow-wrap: anywhere;
+  }
+}
+
+.wallet-directory .directory-filters > .q-field.q-input {
+  flex: 3 1 280px;
+}
+@media (max-width: 600px) {
+  .wallet-directory .directory-filters > .q-field.q-input {
+    flex: 1 1 100%;
+  }
+}

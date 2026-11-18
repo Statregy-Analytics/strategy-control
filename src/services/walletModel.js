@@ -40,7 +40,9 @@ export const finiteMoney = (value) =>
     : null
 export function walletMoney(value, currency) {
   const definition = WALLET_CURRENCIES.find((item) => item.code === currency)
-  if (finiteMoney(value) === null || !definition) return '—'
+  if (finiteMoney(value) === null || !/^[A-Z]{3}$/.test(currency || '')) return '—'
+  if (!definition)
+    return new Intl.NumberFormat('pt-BR', { style: 'currency', currency }).format(Number(value))
   return (
     definition.symbol +
     ' ' +

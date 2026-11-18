@@ -6,7 +6,8 @@
       class="directory-back"
       label="Voltar para Extrato Global"
       @click="emit('back')"
-    />
+      ><img src="/icons/wallet-directory/arrow-left.svg" alt=""
+    /></q-btn>
     <div class="directory-toolbar">
       <h2>{{ titles[type] }}</h2>
       <p>
@@ -15,7 +16,9 @@
             ? 'Todas as carteiras do sistema em uma visão unificada'
             : type === 'deposit'
               ? 'Recursos disponíveis para movimentação imediata'
-              : 'Carteiras dos clientes'
+              : type === 'assets'
+                ? 'Bens declarados pelos clientes: imóveis, veículos, consórcios e investimentos'
+                : 'Saldo que rende na Strategy, contratos vinculados e saldos por moeda'
         }}
       </p>
       <div class="directory-filters">
@@ -27,16 +30,17 @@
           :placeholder="searchLabel"
           :aria-label="searchLabel"
         >
-          <template #prepend><img src="/icons/workspace-review/search.svg" alt="" /></template>
+          <template #prepend><img src="/icons/wallet-directory/search.svg" alt="" /></template>
         </q-input>
         <glass-select
-          v-if="type === 'total'"
+          v-if="type === 'total' || type === 'assets'"
           v-model="kind"
-          :options="typeOptions"
+          :disable="type === 'assets'"
+          :options="type === 'assets' ? [] : typeOptions"
           placeholder="Tipo"
           aria-label="Tipo de carteira"
           clearable
-          dropdown-icon="img:/icons/workspace-review/chevron.svg"
+          dropdown-icon="img:/icons/wallet-directory/chevron.svg"
         />
         <glass-select
           v-model="status"
@@ -44,24 +48,24 @@
           placeholder="Status"
           aria-label="Status da carteira"
           clearable
-          dropdown-icon="img:/icons/workspace-review/chevron.svg"
+          dropdown-icon="img:/icons/wallet-directory/chevron.svg"
         />
         <glass-select
-          v-if="type !== 'total' || moreFilters"
+          v-if="type === 'deposit' || type === 'strategy' || moreFilters"
           v-model="currency"
           :options="currencyOptions"
           placeholder="Moeda"
           aria-label="Filtrar moeda"
           clearable
-          dropdown-icon="img:/icons/workspace-review/chevron.svg"
+          dropdown-icon="img:/icons/wallet-directory/chevron.svg"
         />
         <glass-select
           v-model="sort"
-          :options="[{ label: 'Maior valor', value: 'desc', disable: !comparisonCurrency }]"
-          placeholder="Maior valor"
+          :options="[{ label: sortLabel, value: 'desc', disable: !comparisonCurrency }]"
+          :placeholder="sortLabel"
           aria-label="Ordenar carteiras"
           clearable
-          dropdown-icon="img:/icons/workspace-review/chevron.svg"
+          dropdown-icon="img:/icons/wallet-directory/chevron.svg"
         />
         <q-btn
           outline
@@ -70,7 +74,7 @@
           :aria-expanded="moreFilters"
           :disable="type !== 'total'"
           @click="toggleFilters"
-          ><img src="/icons/workspace-review/filter.svg" alt=""
+          ><img src="/icons/wallet-directory/filter.svg" alt=""
         /></q-btn>
         <div class="directory-view" role="group" aria-label="Visualização das carteiras">
           <button
@@ -83,11 +87,17 @@
             :aria-pressed="view === item.key"
             @click="view = item.key"
           >
-            <img :src="'/icons/workspace-review/' + item.icon + '.svg'" alt="" />
+            <img :src="'/icons/wallet-directory/' + item.icon + '.svg'" alt="" />
           </button>
         </div>
       </div>
-      <p class="directory-count">{{ filtered.length }} carteiras encontradas</p>
+      <p class="directory-count">
+        {{
+          rows === null
+            ? 'Quantidade de carteiras indisponível'
+            : filtered.length + ' carteiras encontradas'
+        }}
+      </p>
     </div>
     <q-banner v-if="rows === null" class="q-my-md bg-transparent wallet-unavailable"
       >A consulta das carteiras ainda não está disponível.</q-banner
@@ -183,40 +193,149 @@
     </div>
     <q-table
       v-else
+      class="directory-table"
+      dark
       flat
       dense
-      hide-bottom
+      hide-pagination
       :rows="pageRows"
       :columns="columns"
       row-key="key"
       :pagination="{ rowsPerPage: 0 }"
       :no-data-label="rows === null ? 'Consulta indisponível' : 'Nenhuma carteira para exibir'"
     >
-      <template #body="scope"
-        ><q-tr :props="scope"
-          ><q-td v-for="column in scope.cols" :key="column.name" :props="scope"
-            ><row-actions
-              v-if="column.name === 'actions'"
-              :actions="[
-                { name: 'expand', label: 'Ver detalhes', icon: 'expand_more' },
-                {
-                  name: 'open',
-                  label: 'Ver movimentações',
-                  icon: 'visibility',
-                  disabled: scope.row.ledgerWalletIds?.length === 0,
-                },
-              ]"
-              @select="
-                $event === 'open'
-                  ? emit('open', scope.row.customerId, 'statement', scope.row.type)
-                  : toggle(scope.row.key)
-              "
-            /><template v-else>{{ column.value }}</template></q-td
-          ></q-tr
-        ><q-tr v-if="expanded === scope.row.key"
+      <template #body="scope">
+        <q-tr :props="scope">
+          <q-td v-for="column in scope.cols" :key="column.name" :props="scope">
+            <div v-if="column.name === 'wallet'" class="directory-identity">
+              <img :src="walletIcon(scope.row.type)" alt="" />
+              <div>
+                <span>{{ label(scope.row.type) }}</span
+                ><small :title="scope.row.code || ''">{{ scope.row.code || '—' }}</small>
+              </div>
+            </div>
+            <div v-else-if="column.name === 'client'" class="directory-client-cell">
+              <span>{{ scope.row.clientName || '—' }}</span>
+              <small>{{
+                type === 'deposit' ? scope.row.maskedDocument || '—' : scope.row.clientCode || '—'
+              }}</small>
+            </div>
+            <span
+              v-else-if="column.name === 'type'"
+              class="directory-badge"
+              :class="{ 'directory-badge--deposit': scope.row.type === 'deposit' }"
+              >{{ typeBadge(scope.row.type) }}</span
+            >
+            <span
+              v-else-if="column.name === 'status'"
+              class="directory-badge"
+              :class="statusClass(scope.row.status)"
+              >{{ statusLabel(scope.row.status) }}</span
+            >
+            <div v-else-if="column.name === 'currencies'" class="directory-currency-chips">
+              <span
+                v-for="code in currenciesFor(scope.row)"
+                :key="code"
+                class="directory-currency"
+                >{{ code }}</span
+              ><span v-if="!currenciesFor(scope.row).length">—</span>
+            </div>
+            <div v-else-if="column.name === 'lastMovement'" class="directory-movement">
+              <small v-if="type === 'deposit' && scope.row.lastMovementType">{{
+                financeLabel(scope.row.lastMovementType)
+              }}</small
+              >{{ date(scope.row.lastMovement) }}
+            </div>
+            <span
+              v-else-if="column.name === 'contractCount' || column.name === 'movementCount'"
+              class="directory-count-cell"
+              ><img
+                v-if="scope.row[column.name] != null"
+                :src="
+                  '/icons/wallet-directory/' +
+                  (column.name === 'contractCount' ? 'contract' : 'activity') +
+                  '.svg'
+                "
+                alt=""
+              />{{ scope.row[column.name] ?? '—' }}</span
+            >
+            <span v-else-if="column.name === 'holdings'" class="directory-count-cell"
+              ><img
+                v-if="scope.row.type === 'strategy' && scope.row.contractCount != null"
+                src="/icons/wallet-directory/contract.svg"
+                alt=""
+              />{{ holdings(scope.row) }}</span
+            >
+            <div v-else-if="column.name === 'assets'" class="directory-client-cell">
+              <span>{{ assetCountLabel(scope.row.assetCount) }}</span
+              ><small v-if="scope.row.assetDescription">{{ scope.row.assetDescription }}</small>
+            </div>
+            <span
+              v-else-if="column.name === 'yield' || column.name === 'appreciation'"
+              :class="{
+                'directory-positive':
+                  Number(scope.row[column.name === 'yield' ? 'yieldPercentage' : 'appreciation']) >
+                  0,
+              }"
+              >{{
+                percentage(scope.row[column.name === 'yield' ? 'yieldPercentage' : 'appreciation'])
+              }}</span
+            >
+            <div v-else-if="column.name === 'actions'" class="directory-row-actions">
+              <q-btn
+                flat
+                dense
+                :aria-label="primaryActionLabel(scope.row)"
+                :disable="
+                  type !== 'total' &&
+                  (scope.row.type === 'deposit' || scope.row.type === 'strategy')
+                    ? scope.row.ledgerWalletIds?.length === 0
+                    : false
+                "
+                :aria-expanded="
+                  scope.row.type === 'assets' && type !== 'total'
+                    ? expanded === scope.row.key
+                    : undefined
+                "
+                @click="primaryAction(scope.row)"
+                ><img src="/icons/wallet-directory/eye.svg" alt=""
+              /></q-btn>
+              <q-btn
+                v-if="type === 'strategy'"
+                flat
+                dense
+                :aria-label="'Ver contratos de ' + scope.row.clientName"
+                :aria-expanded="expanded === scope.row.key"
+                @click="toggle(scope.row.key)"
+                ><img src="/icons/wallet-directory/contract.svg" alt=""
+              /></q-btn>
+            </div>
+            <span
+              v-else-if="column.name === 'code' || column.name === 'clientCode'"
+              class="directory-code"
+              :title="column.value || ''"
+              >{{ column.value || '—' }}</span
+            >
+            <strong
+              v-else-if="column.name === 'balance' || column.name === 'declared'"
+              class="directory-amounts"
+              ><span v-for="amount in amountsFor(scope.row)" :key="amount.currency">{{
+                walletMoney(
+                  amount[column.name === 'declared' ? 'declared' : 'balance'],
+                  amount.currency,
+                )
+              }}</span
+              ><span v-if="!amountsFor(scope.row).length">—</span></strong
+            >
+            <strong v-else-if="column.money">{{ column.value }}</strong>
+            <template v-else>{{ column.value ?? '—' }}</template>
+          </q-td>
+        </q-tr>
+        <q-tr v-if="expanded === scope.row.key"
           ><q-td :colspan="columns.length"
-            ><wallet-details :row="scope.row" @changed="emit('changed')" /></q-td></q-tr
-      ></template>
+            ><wallet-details :row="scope.row" @changed="emit('changed')" /></q-td
+        ></q-tr>
+      </template>
     </q-table>
     <p v-if="rows !== null && !filtered.length && view === 'cards'" class="q-pa-lg text-center">
       Nenhuma carteira encontrada.
@@ -238,7 +357,7 @@
 import { computed, ref, watch } from 'vue'
 import GlassSelect from 'src/components/Entity/GlassSelect.vue'
 import EntityTableFooter from 'src/components/Entity/EntityTableFooter.vue'
-import RowActions from 'src/components/Entity/RowActions.vue'
+import { financeLabel } from 'src/services/financeService'
 import WalletDetails from './WalletDetails.vue'
 import { WALLET_TYPES, walletMoney } from 'src/services/walletModel'
 import { foldSearch } from 'src/services/adminWorkspaceModel'
@@ -269,10 +388,14 @@ const view = ref('cards'),
   expanded = ref(null),
   page = ref(1),
   pageSize = ref(10)
-const searchLabel = computed(() =>
-  props.type === 'total'
-    ? 'Buscar por cliente, ID, carteira, tipo...'
-    : 'Buscar por cliente, ID, carteira, moeda...',
+const searchLabel = computed(
+  () =>
+    ({
+      total: 'Buscar por cliente, ID, carteira, tipo...',
+      deposit: 'Buscar por cliente, ID, carteira, moeda...',
+      assets: 'Buscar por cliente, ID, tipo de bem...',
+      strategy: 'Buscar por cliente, carteira, contrato...',
+    })[props.type],
 )
 const currencyOptions = computed(() =>
   [
@@ -287,6 +410,7 @@ const currencyOptions = computed(() =>
     .sort()
     .map((code) => ({ label: code, value: code })),
 )
+const sortLabel = computed(() => (props.type === 'strategy' ? 'Maior saldo' : 'Maior valor'))
 const typeOptions = WALLET_TYPES.filter((t) => t.key !== 'total').map((t) => ({
   label: t.label,
   value: t.key,
@@ -339,6 +463,7 @@ watch(
     kind.value = null
     status.value = null
     currency.value = null
+    sort.value = null
   },
 )
 watch(comparisonCurrency, (value) => {
@@ -346,7 +471,12 @@ watch(comparisonCurrency, (value) => {
 })
 function toggleFilters() {
   moreFilters.value = !moreFilters.value
-  if (!moreFilters.value) currency.value = null
+  if (!moreFilters.value) {
+    currency.value = null
+    if (!comparisonCurrency.value) sort.value = null
+    page.value = 1
+    expanded.value = null
+  }
 }
 function setPageSize(value) {
   pageSize.value = value
@@ -390,24 +520,99 @@ function fields(row) {
     { label: 'Última movimentação', value: date(row.lastMovement) },
   ]
 }
-const columns = computed(() => [
-  { name: 'wallet', label: 'Carteira', field: (r) => label(r.type), align: 'left' },
-  { name: 'client', label: 'Cliente', field: 'clientName', align: 'left' },
-  { name: 'clientCode', label: 'ID Cliente', field: 'clientCode', align: 'left' },
-  {
-    name: 'currencies',
-    label: 'Moedas',
-    field: (r) => r.currencies?.map((c) => c.currency).join(' · ') || '—',
-    align: 'left',
-  },
-  ...fields({ type: props.type }).map((f) => ({
-    name: f.label,
-    label: f.label,
-    field: (r) => fields(r).find((v) => v.label === f.label)?.value || '—',
-    align: 'right',
-  })),
-  { name: 'actions', label: 'Ações', field: 'key', align: 'right' },
-])
+const typeBadge = (type) =>
+  ({ deposit: 'Depósito', strategy: 'Strategy', assets: 'Patrimônio' })[type] || '—'
+const walletIcon = (type) => '/icons/wallet-directory/wallet-' + type + '.svg'
+const statusClass = (value) => ({
+  positive: value === 'Active',
+  'directory-badge--pending': value === 'Pending',
+})
+const amountsFor = (row) =>
+  (row.currencies || []).filter((c) => !currency.value || c.currency === currency.value)
+const currenciesFor = (row) => [
+  ...new Set((row.currencies || []).map((c) => c.currency).filter(Boolean)),
+]
+const percentage = (value) =>
+  value == null || !Number.isFinite(Number(value))
+    ? '—'
+    : (Number(value) > 0 ? '+' : '') +
+      Number(value).toLocaleString('pt-BR', { maximumFractionDigits: 2 }) +
+      '%'
+const assetCountLabel = (count) =>
+  count == null ? '—' : count + (Number(count) === 1 ? ' bem' : ' bens')
+const holdings = (row) =>
+  row.type === 'strategy'
+    ? (row.contractCount ?? '—')
+    : row.type === 'assets' && row.assetCount != null
+      ? assetCountLabel(row.assetCount)
+      : '—'
+const primaryActionLabel = (row) =>
+  (props.type === 'total'
+    ? 'Abrir carteira de '
+    : row.type === 'assets'
+      ? 'Ver bens de '
+      : 'Ver movimentações de ') + row.clientName
+function primaryAction(row) {
+  if (props.type === 'total') emit('open', row.customerId, 'portfolio', row.type)
+  else if (row.type === 'assets') toggle(row.key)
+  else emit('open', row.customerId, 'statement', row.type)
+}
+const col = (name, label, field = name, money = false) => ({
+  name,
+  label,
+  field,
+  align: money ? 'right' : 'left',
+  money,
+})
+const columns = computed(() => {
+  const identity = [col('wallet', 'Carteira', (r) => label(r.type))]
+  const tail = [col('status', 'Status'), col('actions', '', 'key')]
+  if (props.type === 'total')
+    return [
+      ...identity,
+      col('type', 'Tipo'),
+      col('client', 'Cliente', 'clientName'),
+      col('code', 'ID Carteira'),
+      col('balance', 'Saldo', (r) => displayAmounts(r), true),
+      col('currencies', 'Moedas'),
+      col('status', 'Status'),
+      col('lastMovement', 'Última movimentação'),
+      col('holdings', 'Contratos / Bens'),
+      col('actions', '', 'key'),
+    ]
+  if (props.type === 'deposit')
+    return [
+      ...identity,
+      col('client', 'Cliente', 'clientName'),
+      col('clientCode', 'ID Cliente'),
+      col('currencies', 'Moedas'),
+      col('balance', 'Saldo', (r) => displayAmounts(r), true),
+      col('lastMovement', 'Última movimentação'),
+      col('movementCount', 'Movimentações'),
+      ...tail,
+    ]
+  if (props.type === 'assets')
+    return [
+      ...identity,
+      col('client', 'Cliente', 'clientName'),
+      col('assets', 'Bens'),
+      col('declared', 'Valor declarado', (r) => displayAmounts(r, 'declared'), true),
+      col('current', 'Valor atual', (r) => walletMoney(r.currentTotal, r.principalCurrency), true),
+      col('appreciation', 'Valorização'),
+      col('variation', 'Variação', (r) => walletMoney(r.variation, r.principalCurrency), true),
+      ...tail,
+    ]
+  return [
+    ...identity,
+    col('client', 'Cliente', 'clientName'),
+    col('contractCount', 'N° contratos'),
+    col('base', 'Capital base', (r) => walletMoney(r.base, r.principalCurrency), true),
+    col('balance', 'Saldo atual', (r) => displayAmounts(r), true),
+    col('yield', 'Rendimento'),
+    col('currencies', 'Moedas'),
+    ...tail,
+  ]
+})
 </script>
 <style scoped>
 .wallet-directory {
@@ -644,3 +849,5 @@ button:focus-visible {
   font-size: 16px;
 }
 </style>
+
+<style scoped src="./walletDirectoryReview.scss"></style>

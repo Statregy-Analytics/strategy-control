@@ -104,6 +104,15 @@ export function globalWalletRows(data) {
         yieldPercentage: null,
         appreciation: null,
         lastMovement,
+        lastMovementType:
+          wallets
+            .flatMap((w) => w.recentMovements || [])
+            .find(
+              (m) =>
+                lastMovement &&
+                m.occurredAtUtc &&
+                Date.parse(m.occurredAtUtc) === Date.parse(lastMovement),
+            )?.type || null,
         model,
         contractCount:
           type === 'strategy' ? sum(native.map((c) => c.investedBreakdown?.contractCount)) : null,

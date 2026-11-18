@@ -10,9 +10,6 @@
             :actions="[{ name: 'open', label: 'Abrir patrimônio', icon: 'edit' }]"
             @select="open(p.row.id)" /></q-td></template
     ></finance-table>
-    <p class="text-caption q-mt-md">
-      O cadastro de novos bens ficará disponível após a definição dos tipos e situações aceitos.
-    </p>
     <q-dialog
       v-model="dialog"
       position="right"

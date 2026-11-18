@@ -9,22 +9,79 @@
         :aria-pressed="selected === item.key"
         @click="selectWallet(item.key)"
       >
-        <img
-          v-if="!details"
-          src="/icons/wallets/wallet.svg"
-          class="wallet-watermark"
-          alt=""
-        /><span>{{
-          !details && item.key === 'assets' ? 'Carteira de Patrimônio' : item.label
-        }}</span
-        ><strong v-for="amount in walletDisplayAmounts(model, item.key)" :key="amount.currency">{{
-          walletMoney(amount.balance, amount.currency)
-        }}</strong
-        ><strong v-if="!walletDisplayAmounts(model, item.key).length">—</strong>
+        <template v-if="!details">
+          <img
+            v-if="item.key === 'total'"
+            src="/icons/wallet-directory/summary-watermark.svg"
+            class="wallet-watermark"
+            alt=""
+          />
+          <div class="wallet-global-heading">
+            <span
+              ><img
+                :src="
+                  '/icons/wallet-directory/' +
+                  (item.key === 'strategy' ? 'summary-strategy' : 'summary-wallet') +
+                  '.svg'
+                "
+                alt=""
+              />{{ item.key === 'assets' ? 'Carteira de Patrimônio' : item.label }}</span
+            ><small
+              class="wallet-global-badge"
+              :class="{ 'wallet-global-badge--available': item.key === 'deposit' }"
+              >{{
+                {
+                  total: 'Consolidado',
+                  deposit: 'Disponível',
+                  strategy: model?.yieldAvailable === true ? 'Rendendo' : '—',
+                  assets: 'Bens declarados',
+                }[item.key]
+              }}</small
+            >
+          </div>
+          <small v-if="item.key === 'total'" class="wallet-global-caption">Moedas Criadas</small>
+          <div class="wallet-global-amounts">
+            <strong>{{ walletMoney(globalWalletConverted(model, item.key).usd, 'USD') }}</strong>
+            <div class="wallet-global-secondary">
+              <span>{{ walletMoney(globalWalletConverted(model, item.key).brl, 'BRL') }}</span
+              ><small>{{
+                model?.fx?.['USD-BRL']
+                  ? (item.key === 'total' ? 'USD = ' : 'Cotação USD → BRL · ') +
+                    Number(model.fx['USD-BRL'].rate).toLocaleString('pt-BR', {
+                      maximumFractionDigits: 4,
+                    }) +
+                    (item.key === 'total' ? ' BRL' : '')
+                  : 'Cotação indisponível'
+              }}</small>
+            </div>
+          </div>
+          <div v-if="item.key === 'total'" class="wallet-global-circulation">
+            <span>Em circulação</span
+            ><strong>{{
+              walletMoney(model?.circulatingAmount, model?.circulatingCurrency)
+            }}</strong>
+            <div class="wallet-global-track" />
+            <small>{{
+              model?.circulationPercentage == null
+                ? '—'
+                : model.circulationPercentage + '% do Total'
+            }}</small>
+          </div>
+          <span v-else class="wallet-global-arrow"
+            ><img src="/icons/wallet-directory/summary-arrow.svg" alt=""
+          /></span>
+        </template>
+        <template v-else>
+          <span>{{ item.label }}</span
+          ><strong v-for="amount in walletDisplayAmounts(model, item.key)" :key="amount.currency">{{
+            walletMoney(amount.balance, amount.currency)
+          }}</strong
+          ><strong v-if="!walletDisplayAmounts(model, item.key).length">—</strong>
+        </template>
         <q-tooltip>{{ item.description }}</q-tooltip>
       </button>
     </div>
-    <p class="wallet-help">
+    <p v-if="details" class="wallet-help">
       Total = Depósito + Strategy + Patrimônio, por moeda. Valores de moedas diferentes não são
       somados.
     </p>
@@ -173,8 +230,9 @@
   </section>
 </template>
 <script setup>
+import { globalWalletConverted } from 'src/services/globalWalletFx'
 import { walletDisplayAmounts } from 'src/services/portfolioProjection'
-import { computed, ref } from 'vue'
+import { computed, ref, watch } from 'vue'
 import {
   WALLET_TYPES,
   YIELD_DESCRIPTION,
@@ -193,6 +251,12 @@ const orderedTypes = computed(() =>
 )
 const emit = defineEmits(['select'])
 const selected = ref(props.initialType)
+watch(
+  () => props.initialType,
+  (value) => {
+    selected.value = value
+  },
+)
 function selectWallet(type) {
   selected.value = props.details && selected.value === type ? null : type
   emit('select', selected.value)
@@ -344,5 +408,201 @@ dd {
   text-align: center;
   color: #ffffff99;
   white-space: normal;
+}
+</style>
+
+<style scoped>
+.wallet-cards--global {
+  margin: 16px 0 28px;
+  gap: 12px;
+}
+.wallet-cards--global button {
+  min-height: 177px;
+  border-radius: 12px;
+  padding: 20px;
+  background: linear-gradient(114deg, #ffffff0f, #ffffff14);
+}
+.wallet-cards--global button.selected {
+  border-color: #ffffffb8;
+  background: linear-gradient(114deg, #ffffff1f, #ffffff14);
+}
+.wallet-cards--global button.selected::after {
+  display: none;
+}
+.wallet-cards--global .wallet-watermark {
+  width: 128px;
+  height: 128px;
+  right: 16px;
+  bottom: 28px;
+  opacity: 1;
+}
+.wallet-global-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+  position: relative;
+}
+.wallet-cards--global .wallet-global-heading span {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0;
+  font-size: 12px;
+  letter-spacing: 0.3px;
+  text-transform: none;
+  font-weight: 600;
+}
+.wallet-global-heading img {
+  flex: none;
+}
+.wallet-global-badge {
+  border: 1px solid #ffffff80;
+  border-radius: 6px;
+  font-size: 10px;
+  padding: 2px 8px;
+  line-height: 12px;
+  white-space: nowrap;
+  font-weight: 400;
+}
+.wallet-global-badge--available {
+  color: #7bf1a8;
+  border-color: #00c950;
+  background: #00c9501a;
+  text-transform: uppercase;
+}
+.wallet-global-caption {
+  display: block;
+  font-size: 10px;
+  margin: 4px 0 0;
+  position: relative;
+}
+.wallet-global-amounts {
+  position: relative;
+  margin-top: 24px;
+  padding-bottom: 20px;
+}
+.wallet-global-caption + .wallet-global-amounts {
+  margin-top: 0;
+  padding-bottom: 8px;
+}
+.wallet-cards--global .wallet-global-amounts strong {
+  font-size: 20px;
+  line-height: 28px;
+}
+.wallet-cards--global .wallet-global-amounts strong + strong {
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 400;
+  margin-top: 4px;
+}
+.wallet-global-arrow {
+  display: grid !important;
+  position: absolute !important;
+  place-items: center;
+  width: 22px;
+  height: 22px;
+  bottom: 16px;
+  right: 16px;
+  border-radius: 6px;
+  border: 1px solid #ffffff33;
+  background: #ffffff0d;
+  margin: 0 !important;
+}
+.wallet-global-circulation {
+  position: relative;
+  color: #00d492;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: end;
+  gap: 4px;
+}
+.wallet-cards--global .wallet-global-circulation span {
+  font-size: 10px;
+  color: inherit;
+  margin: 0;
+  text-transform: none;
+}
+.wallet-cards--global .wallet-global-circulation strong {
+  font-size: 16px;
+  line-height: 20px;
+}
+.wallet-global-track {
+  height: 6px;
+  background: #ffffff1a;
+  border-radius: 4px;
+  grid-column: 1/-1;
+}
+.wallet-global-circulation small {
+  font-size: 10px;
+  grid-column: 1/-1;
+}
+@media (max-width: 600px) {
+  .wallet-cards--global {
+    grid-template-columns: 1fr;
+  }
+}
+</style>
+
+<style scoped>
+@media (min-width: 601px) and (max-width: 1400px) {
+  .wallet-cards--global {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+</style>
+
+<style scoped>
+.wallet-global-secondary {
+  margin: 12px 0 0;
+  border-left: 2px solid #ffffffb8;
+  padding-left: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.wallet-cards--global .wallet-global-secondary span {
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 600;
+  margin: 0;
+  text-transform: none;
+}
+.wallet-global-secondary small {
+  font-size: 10px;
+  color: #ffffff99;
+}
+.wallet-global-caption + .wallet-global-amounts .wallet-global-secondary {
+  border: 0;
+  padding: 0;
+  margin-top: 4px;
+}
+.wallet-global-caption + .wallet-global-amounts .wallet-global-secondary span {
+  font-weight: 400;
+}
+</style>
+
+<style scoped>
+.wallet-cards--global .wallet-global-heading span {
+  line-height: 18px;
+}
+.wallet-global-caption {
+  line-height: 12px;
+}
+.wallet-global-amounts {
+  padding-bottom: 0;
+}
+.wallet-global-caption + .wallet-global-amounts .wallet-global-secondary {
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+.wallet-global-caption + .wallet-global-amounts .wallet-global-secondary small {
+  border: 1px solid #ffffff80;
+  border-radius: 6px;
+  padding: 1px 6px;
+  white-space: nowrap;
 }
 </style>

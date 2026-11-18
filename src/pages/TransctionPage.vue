@@ -1,21 +1,37 @@
 <template>
   <q-page class="q-pa-md transactions-page">
-    <title-page title="Transações e carteiras" />
+    <title-page
+      ><template #heading
+        ><h1 class="transaction-heading">Transações</h1>
+        <p class="transaction-subtitle">Centro operacional de movimentações</p></template
+      ><template #actions
+        ><div class="transaction-header-actions">
+          <q-btn
+            outline
+            no-caps
+            label="Exportar"
+            disable
+            title="Exportação global indisponível no momento."
+            ><img src="/icons/wallet-directory/download.svg" alt="" /></q-btn
+          ><q-btn outline no-caps label="Nova Transação" @click="createOpen = true"
+            ><img src="/icons/wallet-directory/plus.svg" alt=""
+          /></q-btn></div></template
+    ></title-page>
     <resource-state :state="globalPortfolio.state" @retry="loadGlobalPortfolio">
       <wallet-overview
         :model="globalSummary"
         :details="false"
-        initial-type="total"
+        :initial-type="tab === 'wallets' ? walletType : 'total'"
         @select="selectWallet"
       />
     </resource-state>
-    <q-tabs v-model="tab" align="left" dense active-color="primary"
+    <q-tabs v-if="tab !== 'wallets'" v-model="tab" align="left" dense active-color="primary"
       ><q-tab name="transactions" label="Transações" no-caps /><q-tab
         name="wallets"
         label="Carteiras"
         no-caps
     /></q-tabs>
-    <q-separator />
+    <q-separator v-if="tab !== 'wallets'" />
     <div v-if="tab === 'transactions'" class="q-pt-md">
       <div class="row q-col-gutter-md q-mb-md">
         <div class="col-12 col-sm">
@@ -26,15 +42,6 @@
             debounce="350"
             placeholder="Buscar solicitações"
             aria-label="Buscar solicitações"
-          />
-        </div>
-        <div class="col-auto">
-          <q-btn
-            color="primary"
-            icon="add"
-            label="Nova transação"
-            no-caps
-            @click="createOpen = true"
           />
         </div>
       </div>
@@ -231,14 +238,8 @@
           :rows="globalRows"
           @open="openPortfolio"
           @back="tab = 'transactions'"
-          @changed="loadGlobalPortfolio" /></resource-state
-      ><q-btn
-        class="q-mt-md"
-        outline
-        no-caps
-        label="Consultar carteiras de um cliente"
-        @click="openPortfolio(null)"
-      />
+          @changed="loadGlobalPortfolio"
+      /></resource-state>
     </div>
     <q-dialog
       v-model="portfolioOpen"
@@ -351,6 +352,7 @@ import {
   contractSourceCurrency,
   contractTransactionTone,
 } from 'src/services/contractTransactionView'
+import { readGlobalWalletFx } from 'src/services/globalWalletFx'
 import WalletDirectory from 'src/components/Finance/WalletDirectory.vue'
 import WalletOverview from 'src/components/Finance/WalletOverview.vue'
 
@@ -400,18 +402,33 @@ const historyParams = computed(() => ({ search: search.value || undefined }))
 const globalPortfolio = useFinanceResource()
 const globalRequest = createRequestContext()
 const globalRows = computed(() => globalWalletRows(globalPortfolio.state.data))
-const globalSummary = computed(() => globalWalletSummary(globalPortfolio.state.data))
+const globalFx = useFinanceResource()
+const globalFxRequest = createRequestContext()
+const globalSummary = computed(() => {
+  const model = globalWalletSummary(globalPortfolio.state.data)
+  return model ? { ...model, fx: globalFx.state.data } : null
+})
 const globalFailures = computed(
   () => globalPortfolio.state.data?.records.filter((r) => r.error).length || 0,
 )
 async function loadGlobalPortfolio() {
   globalRequest.invalidate()
   const current = globalRequest.capture()
+  globalFxRequest.invalidate()
+  globalFx.reset()
   await globalPortfolio.load(() => readGlobalPortfolios(financeGet, current))
+  if (current() && globalPortfolio.state.data) {
+    const fxCurrent = globalFxRequest.capture()
+    await globalFx.load(() =>
+      readGlobalWalletFx(financeGet, globalWalletSummary(globalPortfolio.state.data), fxCurrent),
+    )
+  }
 }
 onMounted(loadGlobalPortfolio)
 onScopeDispose(() => {
   globalRequest.dispose()
+  globalFxRequest.dispose()
+  globalFx.reset()
   globalPortfolio.reset()
 })
 const contractDetail = computed(() => isContractTransaction(detail.state.data))
@@ -729,5 +746,43 @@ async function showAuditHistory() {
   display: inline-flex;
   align-items: center;
   gap: 4px;
+}
+</style>
+
+<style scoped>
+.transaction-heading {
+  font:
+    700 20px/28px Inter,
+    sans-serif;
+  margin: 0;
+  color: #fff;
+}
+.transaction-subtitle {
+  font:
+    400 12px/16px Inter,
+    sans-serif;
+  color: #ffffffb8;
+  margin: 2px 0 0;
+}
+.transaction-header-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.transaction-header-actions .q-btn {
+  min-height: 32px;
+  padding: 4px 10px;
+  border-radius: 6px;
+  background: #ffffff0d;
+  color: #ffffffb8;
+  font-size: 14px;
+}
+.transaction-header-actions :deep(.q-btn__content) {
+  gap: 8px;
+  flex-direction: row-reverse;
+}
+.transactions-page :deep(.title-page-heading-row) {
+  align-items: flex-start;
+  flex-wrap: wrap;
 }
 </style>

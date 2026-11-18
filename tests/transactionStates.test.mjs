@@ -5,6 +5,7 @@ import { readFileSync } from 'node:fs'
 import { parse, compileScript, compileTemplate } from '@vue/compiler-sfc'
 import * as Vue from 'vue'
 import { useFinanceResource } from '../src/composables/useFinanceResource.js'
+import { readGlobalWalletFx } from '../src/services/globalWalletFx.js'
 import { readCurrentPages } from '../src/services/requestContext.js'
 async function setup(file, props = {}, dependencies = {}) {
   const events = [],
@@ -167,6 +168,7 @@ async function setupPage() {
       quasar: { useQuasar: () => ({ notify() {} }) },
       'vue-router': { useRoute: () => ({ query: {} }) },
       'src/composables/useFinanceResource': { useFinanceResource },
+      'src/services/globalWalletFx': { readGlobalWalletFx },
       'src/services/globalWallets': {
         readGlobalPortfolios: async () => null,
         globalWalletRows: () => null,
