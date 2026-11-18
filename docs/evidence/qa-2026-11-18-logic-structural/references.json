@@ -1,0 +1,45 @@
+{
+  "fileKey": "i2jizg7UtPyg3KjAOvuFtI",
+  "frames": [
+    "1484:78227",
+    "1484:79982"
+  ],
+  "fullChildren": [
+    {
+      "id": "1484:78333",
+      "fullContext": true,
+      "screenshotReturned": true,
+      "codeLength": 30857
+    },
+    {
+      "id": "1484:78436",
+      "fullContext": true,
+      "screenshotReturned": true,
+      "codeLength": 150688
+    },
+    {
+      "id": "1484:78914",
+      "fullContext": true,
+      "screenshotReturned": true,
+      "codeLength": 23507
+    },
+    {
+      "id": "1484:80088",
+      "fullContext": true,
+      "screenshotReturned": true,
+      "codeLength": 35058
+    },
+    {
+      "id": "1484:80209",
+      "fullContext": true,
+      "screenshotReturned": true,
+      "codeLength": 166760
+    },
+    {
+      "id": "1484:80717",
+      "fullContext": true,
+      "screenshotReturned": true,
+      "codeLength": 27861
+    }
+  ]
+}

@@ -11,12 +11,12 @@
   },
   "metrics": {
     "total": 279,
-    "done": 232,
+    "done": 234,
     "validation": 35,
-    "adjustment": 12,
-    "implemented": 267,
-    "implementedPercent": 95.7,
-    "readyPercent": 83.2
+    "adjustment": 10,
+    "implemented": 269,
+    "implementedPercent": 96.4,
+    "readyPercent": 83.9
   },
   "withoutLinkedFigmaReference": {
     "count": 13,
@@ -2045,12 +2045,12 @@
       "link": "[1484:78227](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-78227)",
       "counted": true,
       "group": "L01",
-      "category": "Ajuste de front",
-      "front": "adjustment",
+      "category": "Bloqueio backend",
+      "front": "done",
       "blockers": [
         "backend"
       ],
-      "reason": "Comparação completa do LG05 comprovou composição estrutural incompleta: seis resumos do cabeçalho, campos específicos de abertura e limites efetivos, controles e composição dos vínculos. Não é apenas ausência de API.",
+      "reason": "LG05 — abertura: cabeçalho com seis indicadores, sete grupos estruturais e vínculos comparados com contextos completos. Edição, valores anteriores, cálculos condicionados a dados reais, descarte, teclado e celular testados; publicado. Persistência/projeções operacionais continuam bloqueios HTTP explícitos.",
       "sources": [
         "src/components/Workspaces/LogicWorkspace.vue",
         "src/components/Workspaces/LogicPerformance.vue"
@@ -2058,7 +2058,7 @@
       "evidence": [
         "docs/CHECKLIST-UNICO-FIGMA-FRONT.md#lógicas--estados-de-performance-e-simulação",
         "docs/evidence/qa-2026-11-16-inventory/api-contract-review.json",
-        "docs/evidence/qa-2026-11-18-logic-editor/results.json"
+        "docs/evidence/qa-2026-11-18-logic-structural/results.json"
       ],
       "browser": "parcial histórica; frame integral pendente",
       "historicalCategory": "Ajuste de front"
@@ -2381,12 +2381,12 @@
       "link": "[1484:79982](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-79982)",
       "counted": true,
       "group": "L01",
-      "category": "Ajuste de front",
-      "front": "adjustment",
+      "category": "Bloqueio backend",
+      "front": "done",
       "blockers": [
         "backend"
       ],
-      "reason": "Comparação completa do LG06 comprovou campos e estados de edição ainda incompletos: faixa de edição, valores anteriores e ações de vínculo. Corrigir composição específica, além da dependência HTTP.",
+      "reason": "LG06 — edição: cabeçalho com seis indicadores, sete grupos estruturais e vínculos comparados com contextos completos. Edição, valores anteriores, cálculos condicionados a dados reais, descarte, teclado e celular testados; publicado. Persistência/projeções operacionais continuam bloqueios HTTP explícitos.",
       "sources": [
         "src/components/Workspaces/LogicWorkspace.vue",
         "src/components/Workspaces/LogicPerformance.vue"
@@ -2394,7 +2394,7 @@
       "evidence": [
         "docs/CHECKLIST-UNICO-FIGMA-FRONT.md#lógicas--estados-de-performance-e-simulação",
         "docs/evidence/qa-2026-11-16-inventory/api-contract-review.json",
-        "docs/evidence/qa-2026-11-18-logic-editor/results.json"
+        "docs/evidence/qa-2026-11-18-logic-structural/results.json"
       ],
       "browser": "parcial histórica; frame integral pendente",
       "historicalCategory": "Ajuste de front"

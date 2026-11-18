@@ -845,14 +845,14 @@
       "evidence": "docs/evidence/qa-2026-11-18-logic-editor/results.json"
     },
     "1484:78227": {
-      "front": "adjustment",
-      "reason": "Comparação completa do LG05 comprovou composição estrutural incompleta: seis resumos do cabeçalho, campos específicos de abertura e limites efetivos, controles e composição dos vínculos. Não é apenas ausência de API.",
-      "evidence": "docs/evidence/qa-2026-11-18-logic-editor/results.json"
+      "front": "done",
+      "reason": "LG05 — abertura: cabeçalho com seis indicadores, sete grupos estruturais e vínculos comparados com contextos completos. Edição, valores anteriores, cálculos condicionados a dados reais, descarte, teclado e celular testados; publicado. Persistência/projeções operacionais continuam bloqueios HTTP explícitos.",
+      "evidence": "docs/evidence/qa-2026-11-18-logic-structural/results.json"
     },
     "1484:79982": {
-      "front": "adjustment",
-      "reason": "Comparação completa do LG06 comprovou campos e estados de edição ainda incompletos: faixa de edição, valores anteriores e ações de vínculo. Corrigir composição específica, além da dependência HTTP.",
-      "evidence": "docs/evidence/qa-2026-11-18-logic-editor/results.json"
+      "front": "done",
+      "reason": "LG06 — edição: cabeçalho com seis indicadores, sete grupos estruturais e vínculos comparados com contextos completos. Edição, valores anteriores, cálculos condicionados a dados reais, descarte, teclado e celular testados; publicado. Persistência/projeções operacionais continuam bloqueios HTTP explícitos.",
+      "evidence": "docs/evidence/qa-2026-11-18-logic-structural/results.json"
     },
     "1484:82147": {
       "front": "validation",

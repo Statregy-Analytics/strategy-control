@@ -1,0 +1,254 @@
+[
+  {
+    "node": "1484:78333",
+    "name": "imgArrowLeft",
+    "path": "/icons/logics/lg09/arrow-left.svg",
+    "sha256": "ed67668a0847e42ccdfd6abaa317fcf017aae773bb1b2dc6006437b008ce0d2b",
+    "root": "<svg preserveAspectRatio=\"none\" overflow=\"visible\" style=\"display: block;\" width=\"16\" height=\"16\" viewBox=\"0 0 16 16\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\">"
+  },
+  {
+    "node": "1484:78333",
+    "name": "imgActivity",
+    "path": "/icons/logics/structural/1484-78333-imgActivity.svg",
+    "sha256": "48f2a2f85f723001c0222d90d5184482bd6a129457359c43017716fdf90eef3c",
+    "root": "<svg preserveAspectRatio=\"none\" overflow=\"visible\" style=\"display: block;\" width=\"20\" height=\"20\" viewBox=\"0 0 20 20\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\">"
+  },
+  {
+    "node": "1484:78333",
+    "name": "imgInfo",
+    "path": "/icons/logics/structural/1484-78333-imgInfo.svg",
+    "sha256": "968befa7f52d560da756e65e896b47f85e5e48880211a893bf3fa81ded60c24d",
+    "root": "<svg preserveAspectRatio=\"none\" overflow=\"visible\" style=\"display: block;\" width=\"16\" height=\"16\" viewBox=\"0 0 16 16\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\">"
+  },
+  {
+    "node": "1484:78333",
+    "name": "imgCirclePause",
+    "path": "/icons/logics/structural/1484-78333-imgCirclePause.svg",
+    "sha256": "bf5375a8f64a6f7436352e0e955cce57622ae01f6ef0542ad26959ee527177db",
+    "root": "<svg preserveAspectRatio=\"none\" overflow=\"visible\" style=\"display: block;\" width=\"16\" height=\"16\" viewBox=\"0 0 16 16\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\">"
+  },
+  {
+    "node": "1484:78333",
+    "name": "imgPen",
+    "path": "/icons/logics/structural/1484-78333-imgPen.svg",
+    "sha256": "d92e46db114d22e270e636dcb046dab644fa7dce46431617b775b803a06b28b6",
+    "root": "<svg preserveAspectRatio=\"none\" overflow=\"visible\" style=\"display: block;\" width=\"16\" height=\"16\" viewBox=\"0 0 16 16\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\">"
+  },
+  {
+    "node": "1484:78333",
+    "name": "imgCircleCheck",
+    "path": "/icons/logics/structural/1484-78333-imgCircleCheck.svg",
+    "sha256": "019e684494e21b58b008c402f46037b10aadeeab7a95fdfe419bf7344acd7be8",
+    "root": "<svg preserveAspectRatio=\"none\" overflow=\"visible\" style=\"display: block;\" width=\"16\" height=\"16\" viewBox=\"0 0 16 16\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\">"
+  },
+  {
+    "node": "1484:78333",
+    "name": "imgClock",
+    "path": "/icons/logics/structural/1484-78333-imgClock.svg",
+    "sha256": "6e373ddc4980e569db576b0bb649ff5f3e6f46077a2b6759a345c50046cce4e9",
+    "root": "<svg preserveAspectRatio=\"none\" overflow=\"visible\" style=\"display: block;\" width=\"16\" height=\"16\" viewBox=\"0 0 16 16\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\">"
+  },
+  {
+    "node": "1484:78333",
+    "name": "imgCalendar",
+    "path": "/icons/logics/structural/1484-78333-imgCalendar.svg",
+    "sha256": "5f6cefb8bc4d7daea7b4107739b538898a59d0929f55a5f15b2eed6711f75a16",
+    "root": "<svg preserveAspectRatio=\"none\" overflow=\"visible\" style=\"display: block;\" width=\"16\" height=\"16\" viewBox=\"0 0 16 16\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\">"
+  },
+  {
+    "node": "1484:78436",
+    "name": "imgTarget",
+    "path": "/icons/logics/structural/1484-78436-imgTarget.svg",
+    "sha256": "2f79d73f0e0c29a23209ba41eb084ecc799f07634eb25d75f09e1a4e2e608c9b",
+    "root": "<svg preserveAspectRatio=\"none\" overflow=\"visible\" style=\"display: block;\" width=\"16\" height=\"16\" viewBox=\"0 0 16 16\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\">"
+  },
+  {
+    "node": "1484:78436",
+    "name": "imgInfo",
+    "path": "/icons/logics/structural/1484-78436-imgInfo.svg",
+    "sha256": "0a2ed3582fed139556c6ccd29bacfe77a962be0e5a7978f42441ddeb296bce54",
+    "root": "<svg preserveAspectRatio=\"none\" overflow=\"visible\" style=\"display: block;\" width=\"12\" height=\"12\" viewBox=\"0 0 12 12\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\">"
+  },
+  {
+    "node": "1484:78436",
+    "name": "imgClock",
+    "path": "/icons/logics/structural/1484-78436-imgClock.svg",
+    "sha256": "633ae47e734eda7cb2d1817b5989049e5a45f59314d5a87a66366b15a1bc581a",
+    "root": "<svg preserveAspectRatio=\"none\" overflow=\"visible\" style=\"display: block;\" width=\"16\" height=\"16\" viewBox=\"0 0 16 16\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\">"
+  },
+  {
+    "node": "1484:78436",
+    "name": "imgChevronDown",
+    "path": "/icons/logics/frequency/chevron.svg",
+    "sha256": "eea1d7d8daca2d4943179e58ead13109995aac1373f1979c2b493b55f6d0a638",
+    "root": "<svg preserveAspectRatio=\"none\" overflow=\"visible\" style=\"display: block;\" width=\"16\" height=\"16\" viewBox=\"0 0 16 16\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\">"
+  },
+  {
+    "node": "1484:78436",
+    "name": "imgSlidersVertical",
+    "path": "/icons/logics/damping/sliders.svg",
+    "sha256": "738e1e1da50b05174a785d664fbeaa15b185bc117fc69d6366056f114d59d09e",
+    "root": "<svg preserveAspectRatio=\"none\" overflow=\"visible\" style=\"display: block;\" width=\"16\" height=\"16\" viewBox=\"0 0 16 16\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\">"
+  },
+  {
+    "node": "1484:78436",
+    "name": "imgActivity",
+    "path": "/icons/logics/structural/1484-78436-imgActivity.svg",
+    "sha256": "c677640d5bb7995cc05fa7ff2e8d984f2f44f1b3bbad36a9304cb3534b56a10a",
+    "root": "<svg preserveAspectRatio=\"none\" overflow=\"visible\" style=\"display: block;\" width=\"16\" height=\"16\" viewBox=\"0 0 16 16\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\">"
+  },
+  {
+    "node": "1484:78436",
+    "name": "imgChevronUp",
+    "path": "/icons/logics/damping/chevron-up.svg",
+    "sha256": "ec66cd5f7caf36fe7aa5234fc48c9b69616ddfd4695ce7deaf47eba2c29f31ea",
+    "root": "<svg preserveAspectRatio=\"none\" overflow=\"visible\" style=\"display: block;\" width=\"16\" height=\"16\" viewBox=\"0 0 16 16\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\">"
+  },
+  {
+    "node": "1484:78436",
+    "name": "imgCircleCheck",
+    "path": "/icons/logics/structural/1484-78436-imgCircleCheck.svg",
+    "sha256": "50f09c20d530c433c8876a0224c7fdcbc9318a5ed5f35b6bf83c2567962aa4d5",
+    "root": "<svg preserveAspectRatio=\"none\" overflow=\"visible\" style=\"display: block;\" width=\"16\" height=\"16\" viewBox=\"0 0 16 16\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\">"
+  },
+  {
+    "node": "1484:78914",
+    "name": "imgInfo",
+    "path": "/icons/logics/structural/1484-78914-imgInfo.svg",
+    "sha256": "e62dde41a99ded8f286a208b51768b827ecdd5147412326feca37423e3954a2d",
+    "root": "<svg preserveAspectRatio=\"none\" overflow=\"visible\" style=\"display: block;\" width=\"12\" height=\"12\" viewBox=\"0 0 12 12\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\">"
+  },
+  {
+    "node": "1484:80088",
+    "name": "imgPonto",
+    "path": "/icons/logics/structural/1484-80088-imgPonto.svg",
+    "sha256": "0436cf52180f4e5098d881418249948d695972cc29c602ffcfe9da2e53757544",
+    "root": "<svg preserveAspectRatio=\"none\" overflow=\"visible\" style=\"display: block;\" width=\"4\" height=\"4\" viewBox=\"0 0 4 4\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\">"
+  },
+  {
+    "node": "1484:80088",
+    "name": "imgArrowLeft",
+    "path": "/icons/logics/lg09/arrow-left.svg",
+    "sha256": "ed67668a0847e42ccdfd6abaa317fcf017aae773bb1b2dc6006437b008ce0d2b",
+    "root": "<svg preserveAspectRatio=\"none\" overflow=\"visible\" style=\"display: block;\" width=\"16\" height=\"16\" viewBox=\"0 0 16 16\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\">"
+  },
+  {
+    "node": "1484:80088",
+    "name": "imgActivity",
+    "path": "/icons/logics/structural/1484-80088-imgActivity.svg",
+    "sha256": "07e1490559d691bcc59bd6715eac207ffc664a605bb5084d670b7a01b06b4562",
+    "root": "<svg preserveAspectRatio=\"none\" overflow=\"visible\" style=\"display: block;\" width=\"20\" height=\"20\" viewBox=\"0 0 20 20\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\">"
+  },
+  {
+    "node": "1484:80088",
+    "name": "imgInfo",
+    "path": "/icons/logics/structural/1484-80088-imgInfo.svg",
+    "sha256": "f9cdae3a172fb3403885ed733e54130a2d8b7d4156028048325fe18af1926f1e",
+    "root": "<svg preserveAspectRatio=\"none\" overflow=\"visible\" style=\"display: block;\" width=\"16\" height=\"16\" viewBox=\"0 0 16 16\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\">"
+  },
+  {
+    "node": "1484:80088",
+    "name": "imgCirclePause",
+    "path": "/icons/logics/structural/1484-80088-imgCirclePause.svg",
+    "sha256": "669839f9933a24de4f9a1428f0e64a24e6364f71dfd9bef928b5b406a375c54d",
+    "root": "<svg preserveAspectRatio=\"none\" overflow=\"visible\" style=\"display: block;\" width=\"16\" height=\"16\" viewBox=\"0 0 16 16\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\">"
+  },
+  {
+    "node": "1484:80088",
+    "name": "imgIcon",
+    "path": "/icons/logics/structural/1484-80088-imgIcon.svg",
+    "sha256": "15cd0ba1bb8632c1dfb5d64d07689221373d94b0c4550f765cce075fc894e6a8",
+    "root": "<svg preserveAspectRatio=\"none\" overflow=\"visible\" style=\"display: block;\" width=\"16\" height=\"16\" viewBox=\"0 0 16 16\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\">"
+  },
+  {
+    "node": "1484:80088",
+    "name": "imgSave",
+    "path": "/icons/logics/structural/1484-80088-imgSave.svg",
+    "sha256": "566d40c0a868e0d1611ce20cca3dc116379196653c2d151668aa54a002d75984",
+    "root": "<svg preserveAspectRatio=\"none\" overflow=\"visible\" style=\"display: block;\" width=\"16\" height=\"16\" viewBox=\"0 0 16 16\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\">"
+  },
+  {
+    "node": "1484:80088",
+    "name": "imgCircleCheck",
+    "path": "/icons/logics/structural/1484-80088-imgCircleCheck.svg",
+    "sha256": "a7bb3f812f240b67fcf6e68b52e53b99920bcbbf424ef88cda3521035d668416",
+    "root": "<svg preserveAspectRatio=\"none\" overflow=\"visible\" style=\"display: block;\" width=\"16\" height=\"16\" viewBox=\"0 0 16 16\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\">"
+  },
+  {
+    "node": "1484:80088",
+    "name": "imgClock",
+    "path": "/icons/logics/structural/1484-80088-imgClock.svg",
+    "sha256": "cf2cbcd860e1b7b654dd7415ee3b0b73e3dc42bd909ac4aebc98d88aa3470986",
+    "root": "<svg preserveAspectRatio=\"none\" overflow=\"visible\" style=\"display: block;\" width=\"16\" height=\"16\" viewBox=\"0 0 16 16\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\">"
+  },
+  {
+    "node": "1484:80088",
+    "name": "imgCalendar",
+    "path": "/icons/logics/structural/1484-80088-imgCalendar.svg",
+    "sha256": "5f6cefb8bc4d7daea7b4107739b538898a59d0929f55a5f15b2eed6711f75a16",
+    "root": "<svg preserveAspectRatio=\"none\" overflow=\"visible\" style=\"display: block;\" width=\"16\" height=\"16\" viewBox=\"0 0 16 16\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\">"
+  },
+  {
+    "node": "1484:80209",
+    "name": "imgTarget",
+    "path": "/icons/logics/structural/1484-80209-imgTarget.svg",
+    "sha256": "2f79d73f0e0c29a23209ba41eb084ecc799f07634eb25d75f09e1a4e2e608c9b",
+    "root": "<svg preserveAspectRatio=\"none\" overflow=\"visible\" style=\"display: block;\" width=\"16\" height=\"16\" viewBox=\"0 0 16 16\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\">"
+  },
+  {
+    "node": "1484:80209",
+    "name": "imgInfo",
+    "path": "/icons/logics/structural/1484-80209-imgInfo.svg",
+    "sha256": "0a2ed3582fed139556c6ccd29bacfe77a962be0e5a7978f42441ddeb296bce54",
+    "root": "<svg preserveAspectRatio=\"none\" overflow=\"visible\" style=\"display: block;\" width=\"12\" height=\"12\" viewBox=\"0 0 12 12\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\">"
+  },
+  {
+    "node": "1484:80209",
+    "name": "imgClock",
+    "path": "/icons/logics/structural/1484-80209-imgClock.svg",
+    "sha256": "633ae47e734eda7cb2d1817b5989049e5a45f59314d5a87a66366b15a1bc581a",
+    "root": "<svg preserveAspectRatio=\"none\" overflow=\"visible\" style=\"display: block;\" width=\"16\" height=\"16\" viewBox=\"0 0 16 16\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\">"
+  },
+  {
+    "node": "1484:80209",
+    "name": "imgChevronDown",
+    "path": "/icons/logics/frequency/chevron.svg",
+    "sha256": "eea1d7d8daca2d4943179e58ead13109995aac1373f1979c2b493b55f6d0a638",
+    "root": "<svg preserveAspectRatio=\"none\" overflow=\"visible\" style=\"display: block;\" width=\"16\" height=\"16\" viewBox=\"0 0 16 16\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\">"
+  },
+  {
+    "node": "1484:80209",
+    "name": "imgSlidersVertical",
+    "path": "/icons/logics/damping/sliders.svg",
+    "sha256": "738e1e1da50b05174a785d664fbeaa15b185bc117fc69d6366056f114d59d09e",
+    "root": "<svg preserveAspectRatio=\"none\" overflow=\"visible\" style=\"display: block;\" width=\"16\" height=\"16\" viewBox=\"0 0 16 16\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\">"
+  },
+  {
+    "node": "1484:80209",
+    "name": "imgActivity",
+    "path": "/icons/logics/structural/1484-80209-imgActivity.svg",
+    "sha256": "c677640d5bb7995cc05fa7ff2e8d984f2f44f1b3bbad36a9304cb3534b56a10a",
+    "root": "<svg preserveAspectRatio=\"none\" overflow=\"visible\" style=\"display: block;\" width=\"16\" height=\"16\" viewBox=\"0 0 16 16\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\">"
+  },
+  {
+    "node": "1484:80209",
+    "name": "imgChevronUp",
+    "path": "/icons/logics/damping/chevron-up.svg",
+    "sha256": "ec66cd5f7caf36fe7aa5234fc48c9b69616ddfd4695ce7deaf47eba2c29f31ea",
+    "root": "<svg preserveAspectRatio=\"none\" overflow=\"visible\" style=\"display: block;\" width=\"16\" height=\"16\" viewBox=\"0 0 16 16\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\">"
+  },
+  {
+    "node": "1484:80209",
+    "name": "imgCircleCheck",
+    "path": "/icons/logics/structural/1484-80209-imgCircleCheck.svg",
+    "sha256": "50f09c20d530c433c8876a0224c7fdcbc9318a5ed5f35b6bf83c2567962aa4d5",
+    "root": "<svg preserveAspectRatio=\"none\" overflow=\"visible\" style=\"display: block;\" width=\"16\" height=\"16\" viewBox=\"0 0 16 16\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\">"
+  },
+  {
+    "node": "1484:80717",
+    "name": "imgInfo",
+    "path": "/icons/logics/structural/1484-80717-imgInfo.svg",
+    "sha256": "e62dde41a99ded8f286a208b51768b827ecdd5147412326feca37423e3954a2d",
+    "root": "<svg preserveAspectRatio=\"none\" overflow=\"visible\" style=\"display: block;\" width=\"12\" height=\"12\" viewBox=\"0 0 12 12\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\">"
+  }
+]

@@ -1,0 +1,61 @@
+{
+  "date": "2026-11-18",
+  "frames": [
+    "1484:78227",
+    "1484:79982"
+  ],
+  "sourceCommit": "c30baf2",
+  "local": {
+    "tests": 453,
+    "userPreexistingUntrackedTests": 8,
+    "lint": "passed",
+    "build": "passed",
+    "audit": "passed, existing source guard preserved",
+    "scopedDiff": "passed",
+    "controlled": [
+      "seven structural groups, six metrics and linked papers with known data",
+      "target5 produces105 and previous4.8 retained; header current index unchanged",
+      "60.5 chance preserves39.5 complement; 10 percent of daily .8 yields .08",
+      "changed inputs persist across collapse/expand; Cancel discards and disables Save",
+      "invalid probability150 rejected, zero preserved, absent inputs never become defaults",
+      "links empty/unavailable/error/retry remain independent",
+      "mobile390 document375 no outer overflow"
+    ],
+    "integrated": [
+      "Quant Core catalog opens with all operational values unavailable",
+      "Edit starts with Save disabled; decimal edits retained and Save shows unavailability without false persistence",
+      "cancel returns readonly",
+      "existing LG11 minimized and LG09 history/return focus preserved"
+    ],
+    "fixture": "html/js/vue removed before build, archived only as text"
+  },
+  "writesPerformed": false,
+  "backend": [
+    "Operational engine configuration read/write, projections, scheduling and simulation not documented in catalog endpoints",
+    "Motor-centric link actions and damping range changes need confirmed persistence/interaction contract",
+    "Tooltip editor needs defined write contract and approved editing surface; kept disabled"
+  ],
+  "designer": [
+    "Prior LG07 Below/Side disposition ambiguity unchanged; not counted here."
+  ],
+  "unlinkedSurfaces": 13,
+  "homologation": {
+    "run": "https://github.com/Statregy-Analytics/strategy-control/actions/runs/44323540805",
+    "ciTests": 445,
+    "passed": [
+      "real catalog Quant Core with six operational fields unknown and no selectability-to-activity conversion",
+      "Save disabled before a change; first-focus localized decimal retained; complement60.5/39.5",
+      "invalid probability150 rejected; unsupported persistence explicit, no success or mutation",
+      "Cancel by mouse on desktop and keyboard on mobile, reopen clean and disabled Save",
+      "collapse/expand retains draft; LG11 accessible without extra visible controls",
+      "LG09 and return focus to history button; directory preserves Quant and Lista",
+      "direct Vínculos action focuses linked-paper section",
+      "390px document375; no missing images; tables scroll internally"
+    ],
+    "notValidated": [
+      "operational persistence and simulation with API-backed positive values",
+      "pause, tooltip editing, range CRUD and motor link writes (no confirmed endpoint/surface)"
+    ],
+    "writesPerformed": false
+  }
+}
