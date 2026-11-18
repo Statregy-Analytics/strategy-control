@@ -1,7 +1,21 @@
 <template>
-  <div class="workspace" :class="{ 'logic-creation': !recordId }">
+  <div
+    class="workspace"
+    :class="{ 'logic-creation': !recordId, 'logic-detail': Boolean(recordId) }"
+  >
     <logic-history v-if="historyOpen" @close="closeHistory" />
-    <header v-show="!historyOpen" class="workspace-header">
+    <logic-detail-header
+      v-if="recordId && !historyOpen"
+      :record="source"
+      :editing="editing"
+      :dirty="dirty"
+      :loading="resource.state.loading"
+      @close="$emit('close')"
+      @edit="editing = true"
+      @cancel="cancel"
+      @save="confirm"
+    />
+    <header v-if="!recordId" v-show="!historyOpen" class="workspace-header">
       <div>
         <q-btn v-if="recordId" flat no-caps label="Voltar para lógicas" @click="$emit('close')" />
         <h1>
@@ -43,14 +57,33 @@
         />
       </div>
     </header>
-    <main v-show="!historyOpen" class="workspace-main">
+    <main
+      v-show="!historyOpen"
+      class="workspace-main"
+      :class="{ 'logic-detail-main': Boolean(recordId) }"
+    >
       <q-banner v-if="catalogError" class="workspace-error" role="alert"
         >Não foi possível carregar as moedas.
         <q-btn flat no-caps label="Tentar novamente" @click="loadCatalog"
       /></q-banner>
       <q-banner v-if="error" class="workspace-error" role="alert">{{ error }}</q-banner
       ><resource-state :state="resource.state" @retry="load">
-        <div :class="recordId ? 'logic-existing' : 'workspace-editor'">
+        <logic-structural-definitions
+          v-if="recordId && configurationExpanded"
+          :model-value="form"
+          @collapse="configurationExpanded = false"
+          @patch="patchStructural"
+          :baseline="baselineForm"
+          :editing="editing"
+        />
+        <logic-configuration
+          v-else-if="recordId"
+          v-model="configurationExpanded"
+          enabled
+          body-id="logic-configuration-fields"
+          :intensity-invalid="intensityConstraint === false"
+        />
+        <div v-else class="workspace-editor">
           <logic-configuration
             v-model="configurationExpanded"
             :enabled="Boolean(recordId)"
@@ -124,18 +157,7 @@
             tabindex="-1"
             aria-label="Papéis Vinculados ao Motor"
           >
-            <profile-section
-              title="Papéis Vinculados ao Motor"
-              caption="Papéis possuem valor real. O motor apenas indexa a performance proporcionalmente ao índice de conexão de cada papel."
-              ><q-table
-                dark
-                flat
-                dense
-                :rows="[]"
-                :columns="linkedColumns"
-                hide-pagination
-                no-data-label="Vínculos indisponíveis nesta consulta."
-            /></profile-section>
+            <logic-detail-links :editing="editing" />
           </section>
           <logic-performance ref="performance" :editing="editing" @history="historyOpen = true" />
         </template>
@@ -167,8 +189,12 @@ import LogicCreationPreview from './LogicCreationPreview.vue'
 import LogicCreationFields from './LogicCreationFields.vue'
 import LogicCreationLinks from './LogicCreationLinks.vue'
 import LogicIdentity from './LogicIdentity.vue'
+import LogicDetailHeader from './LogicDetailHeader.vue'
+import LogicStructuralDefinitions from './LogicStructuralDefinitions.vue'
+import LogicDetailLinks from './LogicDetailLinks.vue'
+import { catalogLogicForm, validateStructuralDraft } from 'src/services/logicStructuralModel'
 import { useFinanceResource } from 'src/composables/useFinanceResource'
-import { financeGet, columns } from 'src/services/financeService'
+import { financeGet } from 'src/services/financeService'
 import { getPreferenceCatalog } from 'src/services/customerService'
 import {
   initialLogic,
@@ -215,6 +241,7 @@ watch(
 )
 
 const baseline = ref('')
+const baselineForm = computed(() => (baseline.value ? JSON.parse(baseline.value) : {}))
 const dirty = computed(() => JSON.stringify(form.value) !== baseline.value),
   validationError = computed(() => validateLogic(form.value))
 const fields = (items) =>
@@ -277,17 +304,6 @@ const sections = computed(() => [
     fields: [],
   },
 ])
-const linkedColumns = columns(
-  [
-    'Papel',
-    'Valor de entrada',
-    'Índice na conexão',
-    'Índice atual do motor',
-    'Valor atual',
-    'Variação desde conexão',
-    'Status do vínculo',
-  ].map((x) => [x, x]),
-)
 const validationRules = computed(() => logicRuleResults(form.value))
 async function loadContracts() {
   await contracts.load(async () => {
@@ -317,20 +333,14 @@ async function load() {
     if (!row) throw Error('Registro indisponível.')
     if (active) {
       source.value = row
-      form.value = {
-        ...initialLogic(),
-        name: row.name,
-        description: row.description || '',
-        initialIndex: null,
-        buffer: null,
-        positive: null,
-        negative: null,
-        status: null,
-      }
+      form.value = catalogLogicForm(row)
       baseline.value = JSON.stringify(form.value)
     }
     return row
   })
+}
+function patchStructural(patch) {
+  form.value = { ...form.value, ...patch }
 }
 function unavailable() {
   error.value = 'Não foi possível salvar esta configuração. Serviço indisponível no momento.'
@@ -340,6 +350,11 @@ function saveDraft() {
   if (!error.value) unavailable()
 }
 function confirm() {
+  if (props.recordId) {
+    error.value = validateStructuralDraft(form.value, baselineForm.value)
+    if (!error.value) unavailable()
+    return
+  }
   error.value = validateLogic(form.value)
   validationOpen.value = true
   if (!error.value) unavailable()
@@ -396,3 +411,48 @@ onScopeDispose(() => {
 </style>
 
 <style scoped lang="scss" src="./logicCreation.scss"></style>
+
+<style scoped>
+.logic-detail-main {
+  max-width: 1600px;
+  padding: 32px 24px;
+  margin: auto;
+}
+.logic-detail:deep(.logic-performance) {
+  border: 0;
+  background: transparent;
+  backdrop-filter: none;
+  box-shadow: none;
+  margin-top: 24px;
+  border-radius: 0;
+}
+.logic-detail:deep(.logic-performance > .profile-section__heading) {
+  padding: 0;
+  border: 0;
+  background: transparent;
+  min-height: 28px;
+  margin-bottom: 16px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.logic-detail:deep(.logic-performance > .profile-section__heading h2) {
+  font-size: 12px;
+  line-height: 20px;
+  letter-spacing: 0.6px;
+  text-transform: uppercase;
+}
+.logic-detail:deep(.logic-performance > .profile-section__body) {
+  padding: 0;
+}
+.logic-detail:deep(.logic-performance > .profile-section__heading .q-btn) {
+  font-size: 10px;
+  min-height: 24px;
+  line-height: 15px;
+  padding: 2px 8px;
+}
+@media (max-width: 600px) {
+  .logic-detail-main {
+    padding: 24px 16px;
+  }
+}
+</style>

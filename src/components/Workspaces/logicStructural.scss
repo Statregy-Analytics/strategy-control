@@ -1,0 +1,374 @@
+.logic-structural {
+  min-width: 0;
+  color: rgba(255, 255, 255, 0.72);
+}
+.logic-detail-section-title {
+  font-size: 12px;
+  line-height: 20px;
+  font-weight: 700;
+  letter-spacing: 0.6px;
+  text-transform: uppercase;
+  margin: 0 0 16px;
+  padding-left: 12px;
+}
+.logic-structural-panel {
+  padding: 24px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 14px;
+  background: linear-gradient(215deg, rgba(0, 0, 0, 0.118), rgba(0, 0, 0, 0.02));
+  backdrop-filter: blur(20px);
+  box-shadow: 4px 4px 12px rgba(0, 0, 0, 0.13);
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+.logic-structural-group {
+  min-width: 0;
+}
+.logic-structural-group h3 {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  font-size: 10px;
+  line-height: 15px;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  margin: 0 0 12px;
+  font-weight: 600;
+}
+.logic-structural-group img {
+  flex: none;
+}
+.logic-structural-box {
+  padding: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.05);
+  min-width: 0;
+}
+.logic-structural--editing .logic-structural-box {
+  border-color: #fee685;
+}
+.logic-structural-box p {
+  font-size: 12px;
+  line-height: 20px;
+  margin: 0 0 16px;
+  color: rgba(255, 255, 255, 0.6);
+}
+.logic-structural-grid {
+  display: grid;
+  gap: 16px;
+  min-width: 0;
+}
+.five {
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+}
+.four {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+.three {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+.two {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+.logic-structural-select {
+  position: relative;
+  align-content: start;
+  gap: 8px !important;
+}
+.logic-structural-select :deep(> span:first-child) {
+  font-size: 10px !important;
+  line-height: 15px;
+  letter-spacing: 0.25px;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.6);
+  padding-right: 18px;
+}
+.logic-structural-select :deep(.q-field__control),
+.logic-structural-select :deep(.q-field__marginal) {
+  height: 36px;
+  min-height: 36px;
+}
+.logic-structural-select :deep(.q-field__native) {
+  font-size: 12px;
+  line-height: 20px;
+  color: rgba(255, 255, 255, 0.72);
+}
+.logic-structural-select :deep(.q-field__control) {
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.05);
+}
+.logic-structural-select :deep(.q-select__dropdown-icon) {
+  font-size: 16px;
+  width: 16px;
+  height: 16px;
+}
+.logic-structural-info {
+  display: inline-block;
+  vertical-align: middle;
+  margin-left: 4px;
+}
+.logic-structural-chances {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  margin-top: 12px;
+  text-align: center;
+  font-size: 14px;
+  line-height: 24px;
+  min-height: 46px;
+  align-items: center;
+}
+.logic-structural--editing .logic-structural-chances {
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.03);
+}
+.logic-structural-warning {
+  padding: 8px 12px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.03);
+}
+.logic-structural-calculation {
+  margin-top: 16px;
+  padding: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.03);
+  font-size: 12px;
+  line-height: 20px;
+}
+.logic-structural-calculation small,
+.logic-structural-effective h4 {
+  display: block;
+  text-transform: uppercase;
+  font-size: 10px;
+  line-height: 15px;
+  letter-spacing: 0.5px;
+  margin: 0 0 8px;
+  color: rgba(255, 255, 255, 0.6);
+}
+.logic-structural-calculation p {
+  margin: 0;
+}
+.bands {
+  gap: 24px;
+}
+.logic-structural-band {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.04);
+  min-width: 0;
+}
+.logic-structural-band h4 {
+  font-size: 10px;
+  line-height: 15px;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  margin: 0;
+  font-weight: 600;
+}
+.logic-structural-band .logic-structural-calculation {
+  margin: 0;
+  border: 0;
+  background: transparent;
+  padding: 0;
+}
+.logic-structural-calculation dl {
+  margin: 0;
+}
+.logic-structural-calculation dl > div {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+}
+.logic-structural-calculation dd {
+  margin: 0;
+}
+.logic-structural-effective {
+  margin-top: 24px;
+  padding: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.04);
+}
+.logic-structural-effective small {
+  display: block;
+  font-size: 10px;
+  line-height: 15px;
+}
+.logic-structural-effective strong {
+  display: block;
+  font-size: 14px;
+  line-height: 20px;
+  color: white;
+  margin-top: 4px;
+}
+.logic-structural-damping-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+.logic-structural-damping-head > div {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  font-size: 12px;
+}
+.logic-structural-damping-head button,
+.logic-structural-damping-actions button {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 8px;
+  min-height: 24px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.05);
+  color: rgba(255, 255, 255, 0.72);
+  font-size: 10px;
+  line-height: 15px;
+  cursor: pointer;
+}
+.logic-structural-damping-head button:disabled,
+.logic-structural-damping-actions button:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+.logic-structural-damping-head button[role='switch'] {
+  width: 32px;
+  height: 18px;
+  min-height: 0;
+  border-radius: 20px;
+  padding: 2px;
+  background: rgba(255, 255, 255, 0.03);
+}
+.logic-structural-damping-head button[role='switch'] span {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: #99a0ab;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+}
+.logic-structural-damping-head button[role='switch'].is-on {
+  background: rgba(43, 127, 255, 0.2);
+  justify-content: flex-end;
+}
+.is-collapsed {
+  transform: rotate(180deg);
+}
+.logic-structural-table-scroll {
+  overflow: auto;
+  scrollbar-color: rgba(255, 255, 255, 0.3) transparent;
+}
+.logic-structural-table-scroll table {
+  border-collapse: collapse;
+  width: 100%;
+  min-width: 600px;
+  font-size: 12px;
+  line-height: 20px;
+}
+.logic-structural-table-scroll th,
+.logic-structural-table-scroll td {
+  text-align: left;
+  padding: 8px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+.logic-structural-table-scroll thead th {
+  background: rgba(255, 255, 255, 0.05);
+  color: rgba(255, 255, 255, 0.6);
+  font-weight: 500;
+}
+.logic-structural-table-scroll td:nth-last-child(-n + 2),
+.logic-structural-table-scroll thead th:nth-last-child(-n + 2) {
+  text-align: right;
+}
+.positive {
+  color: #66e59e;
+}
+.negative {
+  color: #ff6467;
+}
+.logic-structural-damping-actions {
+  display: flex;
+  gap: 8px;
+  margin-top: 16px;
+}
+.logic-structural-box .logic-structural-principle {
+  font-size: 14px;
+  line-height: 24px;
+  font-style: italic;
+  text-align: center;
+  color: rgba(255, 255, 255, 0.72);
+  margin: 24px 0 0;
+}
+.logic-structural--editing .logic-structural-principle {
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  padding: 12px;
+  border-radius: 8px;
+}
+.logic-structural button:focus-visible,
+.logic-structural-table-scroll:focus-visible {
+  outline: 2px solid #4bc7ff;
+  outline-offset: 3px;
+}
+@media (max-width: 1100px) {
+  .five,
+  .four {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+@media (max-width: 600px) {
+  .logic-structural-panel {
+    padding: 16px;
+  }
+  .logic-structural-box {
+    padding: 16px;
+  }
+  .five,
+  .four,
+  .three,
+  .two {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .logic-structural-damping-head {
+    flex-wrap: wrap;
+  }
+  .logic-structural-damping-head > div {
+    flex-wrap: wrap;
+  }
+}
+
+@media (min-width: 1101px) {
+  .logic-structural-group:nth-child(6) .logic-structural-box {
+    min-height: 368px;
+  }
+  .logic-structural--editing .logic-structural-group:nth-child(6) .logic-structural-box {
+    min-height: 416px;
+  }
+  .logic-structural-group:last-child .logic-structural-box {
+    min-height: 219px;
+  }
+}
+
+.logic-structural-collapse {
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  letter-spacing: inherit;
+  text-transform: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+.logic-structural-collapse:focus-visible {
+  outline: 2px solid #4bc7ff;
+  outline-offset: 4px;
+}

@@ -1,5 +1,9 @@
 <template>
-  <profile-section title="Performance Histórica do Índice do Motor" class="logic-performance">
+  <profile-section
+    v-if="!editing"
+    title="Performance Histórica do Índice do Motor"
+    class="logic-performance"
+  >
     <template #actions>
       <div class="logic-controls">
         <q-btn-toggle v-model="days" no-caps :options="dayOptions" />

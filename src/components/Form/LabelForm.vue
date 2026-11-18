@@ -5,7 +5,7 @@
         fontSize: typeof labelSize === 'number' ? labelSize + 'px' : labelSize,
         fontWeight: 500,
       }"
-      >{{ textLabel }}</span
+      ><slot name="label">{{ textLabel }}</slot></span
     >
     <slot></slot>
   </div>
