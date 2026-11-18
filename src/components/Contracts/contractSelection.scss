@@ -64,7 +64,7 @@
       sans-serif;
   }
   .workspace-toolbar :deep(.q-field__prepend) {
-    padding-right: 12px;
+    padding-right: 8px;
   }
   .workspace-toolbar .glass-select {
     width: 176px;
@@ -499,4 +499,14 @@
   font-size: 16px;
   width: 16px;
   height: 16px;
+}
+
+.contract-selection .workspace-toolbar :deep(.q-field__append) {
+  padding-left: 8px;
+}
+
+.contract-selection .workspace-toolbar .contract-selection-engine {
+  width: 176px;
+  min-width: 176px;
+  max-width: 176px;
 }

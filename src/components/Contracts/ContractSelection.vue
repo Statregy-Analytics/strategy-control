@@ -40,6 +40,7 @@
         ></glass-select>
         <glass-select
           v-model="engine"
+          class="contract-selection-engine"
           :options="engines"
           placeholder="Motor Principal"
           aria-label="Motor Principal"
