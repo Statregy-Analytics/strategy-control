@@ -147,19 +147,19 @@
       "evidence": "docs/evidence/qa-2026-11-17-revalidation/results.json"
     },
     "1:57431": {
-      "front": "validation",
-      "reason": "Consulta paginada e estados de empréstimos corrigidos; há teste controlado de ativos/quitados, mas falta comparação integral dos seis frames e massa real adequada.",
-      "evidence": "docs/evidence/qa-2026-11-16-front-functional/api-and-tests.json"
+      "front": "done",
+      "reason": "Modal comparado com contexto completo e screenshot recuperados; tabela ativa ligada à sequência revisão → Pix/comprovante → em análise. Navegador controlado: múltiplas parcelas, parcela única, antecipação, retorno, falha/retry preservando arquivo, confirmação explícita e celular. Sem API fake, endpoints inventados ou pagamento real. Integração de parcelas/cotação/comprovante permanece indisponível no OpenAPI atual.",
+      "evidence": "docs/evidence/qa-2026-11-18-leverage-review/results.json"
     },
     "1:58679": {
-      "front": "validation",
-      "reason": "Consulta paginada e estados de empréstimos corrigidos; há teste controlado de ativos/quitados, mas falta comparação integral dos seis frames e massa real adequada.",
-      "evidence": "docs/evidence/qa-2026-11-16-front-functional/api-and-tests.json"
+      "front": "done",
+      "reason": "Modal comparado com contexto completo e screenshot recuperados; tabela ativa ligada à sequência revisão → Pix/comprovante → em análise. Navegador controlado: múltiplas parcelas, parcela única, antecipação, retorno, falha/retry preservando arquivo, confirmação explícita e celular. Sem API fake, endpoints inventados ou pagamento real. Integração de parcelas/cotação/comprovante permanece indisponível no OpenAPI atual.",
+      "evidence": "docs/evidence/qa-2026-11-18-leverage-review/results.json"
     },
     "1:59912": {
-      "front": "validation",
-      "reason": "Consulta paginada e estados de empréstimos corrigidos; há teste controlado de ativos/quitados, mas falta comparação integral dos seis frames e massa real adequada.",
-      "evidence": "docs/evidence/qa-2026-11-16-front-functional/api-and-tests.json"
+      "front": "done",
+      "reason": "Modal comparado com contexto completo e screenshot recuperados; tabela ativa ligada à sequência revisão → Pix/comprovante → em análise. Navegador controlado: múltiplas parcelas, parcela única, antecipação, retorno, falha/retry preservando arquivo, confirmação explícita e celular. Sem API fake, endpoints inventados ou pagamento real. Integração de parcelas/cotação/comprovante permanece indisponível no OpenAPI atual.",
+      "evidence": "docs/evidence/qa-2026-11-18-leverage-review/results.json"
     },
     "1:61125": {
       "front": "done",

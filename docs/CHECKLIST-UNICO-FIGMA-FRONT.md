@@ -10,18 +10,38 @@ Atualizado em 2026-11-18. Contagem por **telas e estados independentes do Figma*
 | Situação | Quantidade |
 | --- | ---: |
 | Total inventariado | **279** |
-| Prontas no frontend | **252** |
-| Implementadas, aguardando revalidação/comparação completa | **18** |
+| Prontas no frontend | **255** |
+| Implementadas, aguardando revalidação/comparação completa | **15** |
 | Ainda exigem implementação, complemento ou correção | **9** |
 | Com implementação existente (prontas + revalidação) | **270 / 279 (96,8%)** |
 
-**Para encerrar o front faltam 9 itens de implementação/ajuste e 18 de revalidação.** “Pronto no frontend” não significa fluxo integrado liberado: dependências de backend/designer podem afetar também telas prontas. Os números não classificam toda pendência como tela nova nem como problema de API. A comparação de Crédito, carteira global e editor editorial que não foi concluída integralmente permanece em revalidação.
+**Para encerrar o front faltam 9 itens de implementação/ajuste e 15 de revalidação.** “Pronto no frontend” não significa fluxo integrado liberado: dependências de backend/designer podem afetar também telas prontas. Os números não classificam toda pendência como tela nova nem como problema de API. A comparação de Crédito, carteira global e editor editorial que não foi concluída integralmente permanece em revalidação.
 
 Fonte por frame: [progresso atual](FRONTEND-PROGRESS.json). A base anterior permanece histórica; [atualizações com evidências](FRONTEND-PROGRESS-OVERRIDES.json) registram cada mudança. Ao finalizar **cada entrega**, atualizar os IDs comprovados, executar `node scripts/frontend-progress.mjs` e informar este panorama na resposta final.
 <!-- frontend-progress:end -->
 
 
 
+
+
+## Entrega 18/11 — alavancagens: revisão, Pix e comprovante de parcelas
+
+Portal **bbf4e87**. [Publicação 44377168170](https://github.com/WillTbn/Strategy-analytics-v2/actions/runs/44377168170) concluída e conferida. **Três dos 18 estados** foram concluídos nesta rodada: revisão **1:57431**, Pix/comprovante **1:58679** e confirmação em análise **1:59912**. Os outros 15 permanecem em revalidação; esta entrega não representa homologação financeira integrada.
+
+- [x] Referências completas dos modais recuperadas nos nós 1:58632, 1:59880 e 1:61113, com screenshots dos três frames e contextos da visão geral/tabela. Reutilizados os componentes existentes; corrigidos glass, borda azul, tipografia, espaçamentos, badges e ícones nativos. Dimensões desktop medidas: revisão 572 × 536,64, Pix 572 × 693,77 e confirmação 572 × 622,94; diferenças subpixel de texto, sem dimensionamento fixo que corte conteúdo.
+- [x] Tabela das alavancagens ativas ligada à composição de pagamento: selecionar parcelas, pagar uma parcela ou antecipar → revisão → Pix/comprovante → confirmação em análise → retorno e nova consulta. Ativas vem antes de Em Simulação e Quitadas, como no frame. Nenhum campo ou ação adicional. Cabeçalho da moeda acompanha o valor fornecido, sem supor BRL para outro contrato.
+- [x] Estado indisponível diferente de vazio confirmado. Consultas e erros independentes por empréstimo; loading, retry, seleção e recolhimento preservam as demais seções. Ações ficam desabilitadas sem callbacks/dados confirmados; não existem parcelas, cotação, desconto ou Pix de exemplo no produto.
+- [x] Resumo rejeita valores booleanos/vazios, data impossível, moeda divergente e total inconsistente. Seleção rejeita parcelas pagas, desconhecidas ou duplicadas. Preparações repetidas e respostas de outro empréstimo/versão são protegidas; a troca do empréstimo libera a nova preparação sem deixar a resposta antiga interferir nela.
+- [x] Upload por seletor de arquivos usando comprovante fictício. Falha mantém o arquivo e permite nova tentativa; arquivo escolhido sozinho não confirma envio. Confirmação só após submitted=true; o retorno recarrega os dados sem marcar parcelas como pagas no frontend. Diálogo permanece protegido durante envio; respostas tardias e desmontagem não concluem o fluxo.
+- [x] Navegador controlado com componentes reais e props/callbacks: múltiplas parcelas, parcela única, antecipação, volta/fechamento, Pix dinâmico, chave copiada conferida no clipboard, comprovante, falha/retry, confirmação, vazio, loading, erro e integração indisponível. Nenhum store ou servidor de API fake. Prévias removidas antes do build e arquivadas somente como texto.
+- [x] Mobile de 390 px: documento de 390 px, modais de 342 px, nenhuma imagem ausente e nenhuma rolagem horizontal externa. Revisão, Pix e confirmação acessíveis, com quebra de texto dentro do card.
+- [x] **502 testes** aprovados, incluindo dez novos cenários de validação/concorrência/estado. Lint, build, auditoria preservada e diff desta entrega passaram. Auditoria, lint, testes, build, upload e ativação também passaram no CI. Sete assets nativos publicados conferidos por SHA256 e chunk publicado conferido com as novas guardas e mensagens.
+- [x] **Navegador publicado:** regra de nível 3 mantida para a conta da sessão; Voltar leva à Home. Não foi alterado o nível nem enviada operação financeira. Os estados positivos dos modais foram testados localmente com callbacks controlados, não com persistência integrada em homologação.
+- [ ] **API — conferência atual do OpenAPI:** a Área do Cliente dispõe de listagem/detalhe de empréstimo, documentos, URL temporária e histórico; faltam consulta das parcelas, resumo/cotação de pagamento com Pix, envio/confirmação do comprovante e extrato de parcelas para substituir os callbacks indisponíveis. Não foi inventado endpoint nem simulado pagamento na conta real. Isso não impede considerar prontos os três estados visuais implementados.
+
+Panorama: **279 estados, 255 prontos, 15 em revalidação e 9 em implementação/ajuste**. Implementação existente **270/279 (96,8%)**; prontos **91,4%**. Permanecem **13 superfícies sem referência** para avaliação do Éric, nenhuma nova. Os 15 restantes abrangem cinco detalhes de contrato, seis variantes de tema e quatro pontos que exigem definição/comparação com designer; estão individualizados na matriz, sem aprovação por inferência.
+
+[Resultados](evidence/qa-2026-11-18-leverage-review/results.json) · [Matriz dos 18](evidence/qa-2026-11-18-leverage-review/review-matrix.json) · [Referências](evidence/qa-2026-11-18-leverage-review/references.json) · [Contextos recuperados](evidence/qa-2026-11-18-leverage-review/high-fidelity.json) · [Assets](evidence/qa-2026-11-18-leverage-review/assets.json) · [Cobertura HTTP atual](evidence/qa-2026-11-18-leverage-review/api-coverage.json) · [Revisão](evidence/qa-2026-11-18-leverage-review/leverage-payment-review.png) · [Pix](evidence/qa-2026-11-18-leverage-review/leverage-payment-pix.png) · [Envio em análise](evidence/qa-2026-11-18-leverage-review/leverage-payment-submitted.png) · [Mobile](evidence/qa-2026-11-18-leverage-review/leverage-payment-submitted-mobile.png) · [Publicação](evidence/qa-2026-11-18-leverage-review/publication.json).
 
 
 ## Entrega 18/11 — contratos do cliente: lista, temas e oferta
@@ -1455,9 +1475,9 @@ Legenda vigente: classificação de 16/11 por código e evidências, detalhada e
 | [1:56020](https://www.figma.com/design/BaDXlWpxbIoY4azOaQnXgv?node-id=1-56020)     | [UI] FLUXO - SOLICITAR EMPRÉSTIMO -                                          | Pronto no front · P06 |
 | [1:56115](https://www.figma.com/design/BaDXlWpxbIoY4azOaQnXgv?node-id=1-56115)     | [UI] FLUXO - SOLICITAR EMPRÉSTIMO -                                          | Pronto no front · P06 |
 | [1:56231](https://www.figma.com/design/BaDXlWpxbIoY4azOaQnXgv?node-id=1-56231)     | [UI] ALAVANCAGEM - MINHAS ALAVANCAGENS - STATUS ATIVAS                       | Pronto no front · P06 |
-| [1:57431](https://www.figma.com/design/BaDXlWpxbIoY4azOaQnXgv?node-id=1-57431)     | [UI] ALAVANCAGEM - MINHAS ALAVANCAGENS - STATUS ATIVAS                       | Implementado · revalidar · P06 |
-| [1:58679](https://www.figma.com/design/BaDXlWpxbIoY4azOaQnXgv?node-id=1-58679)     | [UI] ALAVANCAGEM - MINHAS ALAVANCAGENS - STATUS ATIVAS                       | Implementado · revalidar · P06 |
-| [1:59912](https://www.figma.com/design/BaDXlWpxbIoY4azOaQnXgv?node-id=1-59912)     | [UI] ALAVANCAGEM - MINHAS ALAVANCAGENS - STATUS ATIVAS                       | Implementado · revalidar · P06 |
+| [1:57431](https://www.figma.com/design/BaDXlWpxbIoY4azOaQnXgv?node-id=1-57431)     | [UI] ALAVANCAGEM - MINHAS ALAVANCAGENS - STATUS ATIVAS                       | Pronto no front · P06 |
+| [1:58679](https://www.figma.com/design/BaDXlWpxbIoY4azOaQnXgv?node-id=1-58679)     | [UI] ALAVANCAGEM - MINHAS ALAVANCAGENS - STATUS ATIVAS                       | Pronto no front · P06 |
+| [1:59912](https://www.figma.com/design/BaDXlWpxbIoY4azOaQnXgv?node-id=1-59912)     | [UI] ALAVANCAGEM - MINHAS ALAVANCAGENS - STATUS ATIVAS                       | Pronto no front · P06 |
 | [1:61125](https://www.figma.com/design/BaDXlWpxbIoY4azOaQnXgv?node-id=1-61125)     | [UI] ALAVANCAGEM - MINHAS ALAVANCAGENS - STATUS EM ANÁLISE                   | Pronto no front · P06 |
 | [1:62011](https://www.figma.com/design/BaDXlWpxbIoY4azOaQnXgv?node-id=1-62011)     | [UI] ALAVANCAGEM - MINHAS ALAVANCAGENS - STATUS QUITADOS                     | Pronto no front · P06 |
 | [1:64153](https://www.figma.com/design/BaDXlWpxbIoY4azOaQnXgv?node-id=1-64153)     | [UI] COMUNICAÇÃO (List View)                                                 | Pronto no front · P07 |

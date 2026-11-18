@@ -1,0 +1,10 @@
+<template><main class="bg-simulator" style="padding:48px;color:white;min-height:100vh"><label>Estado<select v-model="mode"><option value="known">Com dados</option><option value="empty">Vazio</option><option value="unavailable">Indisponível</option><option value="error">Erro e retry</option><option value="loading">Carregando</option></select></label><h1 style="font-size:24px">Minhas Alavancagens</h1><active-leverage-list :loans="loans" :payment-adapter="adapter"/><p>Prévia controlada — arquivos fictícios, nenhuma chamada financeira.</p></main></template>
+<script setup>
+import {ref,computed,watch} from "vue";
+import ActiveLeverageList from "./src/system/components/leverage/ActiveLeverageList.vue";
+const loans=[{id:"qa-1",kind:"secured_automovel",status:"Active",currencyIsoCode:"BRL",interestRatePercent:2.1}];
+const rows=[{numero:10,vencimento:"05/05/2025",valor:1032.12,status:"Pago: 05/05/2025",comprovante:"ficticio.pdf"},{numero:11,vencimento:"05/06/2025",valor:1032.12,status:"Atrasado: 2 dias",pagar_agora:true},{numero:12,vencimento:"05/07/2025",valor:1032.12,status:"Em aberto",pagar_agora:false}];
+const mode=ref("known"); let consultationFailed=false; watch(mode,()=>consultationFailed=false);
+let attempts=0;
+const adapter=computed(()=>mode.value==="unavailable"?null:{listInstallments:async()=>{if(mode.value==="loading")return new Promise(()=>{});if(mode.value==="empty")return [];if(mode.value==="error"&&!consultationFailed){consultationFailed=true;throw Error("controlled")}return rows},preparePayment:async(loan,selected)=>({quote:{currency:"BRL",paymentDate:"2026-11-18",grossAmount:selected.length*1032.12,discountAmount:0,totalAmount:selected.length*1032.12},pixCode:"FICTICIO-QA-SEM-PAGAMENTO",pixKey:"qa-pagamento-ficticio"}),submitReceipt:async()=>{attempts++;if(attempts===1)throw Error("Falha controlada");return {submitted:true}}});
+</script>

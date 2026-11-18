@@ -11,12 +11,12 @@
   },
   "metrics": {
     "total": 279,
-    "done": 252,
-    "validation": 18,
+    "done": 255,
+    "validation": 15,
     "adjustment": 9,
     "implemented": 270,
     "implementedPercent": 96.8,
-    "readyPercent": 90.3
+    "readyPercent": 91.4
   },
   "withoutLinkedFigmaReference": {
     "count": 13,
@@ -5754,12 +5754,12 @@
       "link": "[1:57431](https://www.figma.com/design/BaDXlWpxbIoY4azOaQnXgv?node-id=1-57431)",
       "counted": true,
       "group": "P06",
-      "category": "Ajuste de front",
-      "front": "validation",
+      "category": "Bloqueio backend",
+      "front": "done",
       "blockers": [
         "backend"
       ],
-      "reason": "Consulta paginada e estados de empréstimos corrigidos; há teste controlado de ativos/quitados, mas falta comparação integral dos seis frames e massa real adequada.",
+      "reason": "Modal comparado com contexto completo e screenshot recuperados; tabela ativa ligada à sequência revisão → Pix/comprovante → em análise. Navegador controlado: múltiplas parcelas, parcela única, antecipação, retorno, falha/retry preservando arquivo, confirmação explícita e celular. Sem API fake, endpoints inventados ou pagamento real. Integração de parcelas/cotação/comprovante permanece indisponível no OpenAPI atual.",
       "sources": [
         "portal:src/system/pages/loan/LoanPage.vue",
         "portal:src/system/pages/leverage/LeveragePage.vue",
@@ -5768,7 +5768,7 @@
       ],
       "evidence": [
         "docs/evidence/qa-2026-11-16-inventory/api-contract-review.json",
-        "docs/evidence/qa-2026-11-16-front-functional/api-and-tests.json"
+        "docs/evidence/qa-2026-11-18-leverage-review/results.json"
       ],
       "browser": "código confirmado; fluxos legados não homologados",
       "historicalCategory": "Ajuste de front"
@@ -5781,12 +5781,12 @@
       "link": "[1:58679](https://www.figma.com/design/BaDXlWpxbIoY4azOaQnXgv?node-id=1-58679)",
       "counted": true,
       "group": "P06",
-      "category": "Ajuste de front",
-      "front": "validation",
+      "category": "Bloqueio backend",
+      "front": "done",
       "blockers": [
         "backend"
       ],
-      "reason": "Consulta paginada e estados de empréstimos corrigidos; há teste controlado de ativos/quitados, mas falta comparação integral dos seis frames e massa real adequada.",
+      "reason": "Modal comparado com contexto completo e screenshot recuperados; tabela ativa ligada à sequência revisão → Pix/comprovante → em análise. Navegador controlado: múltiplas parcelas, parcela única, antecipação, retorno, falha/retry preservando arquivo, confirmação explícita e celular. Sem API fake, endpoints inventados ou pagamento real. Integração de parcelas/cotação/comprovante permanece indisponível no OpenAPI atual.",
       "sources": [
         "portal:src/system/pages/loan/LoanPage.vue",
         "portal:src/system/pages/leverage/LeveragePage.vue",
@@ -5795,7 +5795,7 @@
       ],
       "evidence": [
         "docs/evidence/qa-2026-11-16-inventory/api-contract-review.json",
-        "docs/evidence/qa-2026-11-16-front-functional/api-and-tests.json"
+        "docs/evidence/qa-2026-11-18-leverage-review/results.json"
       ],
       "browser": "código confirmado; fluxos legados não homologados",
       "historicalCategory": "Ajuste de front"
@@ -5808,12 +5808,12 @@
       "link": "[1:59912](https://www.figma.com/design/BaDXlWpxbIoY4azOaQnXgv?node-id=1-59912)",
       "counted": true,
       "group": "P06",
-      "category": "Ajuste de front",
-      "front": "validation",
+      "category": "Bloqueio backend",
+      "front": "done",
       "blockers": [
         "backend"
       ],
-      "reason": "Consulta paginada e estados de empréstimos corrigidos; há teste controlado de ativos/quitados, mas falta comparação integral dos seis frames e massa real adequada.",
+      "reason": "Modal comparado com contexto completo e screenshot recuperados; tabela ativa ligada à sequência revisão → Pix/comprovante → em análise. Navegador controlado: múltiplas parcelas, parcela única, antecipação, retorno, falha/retry preservando arquivo, confirmação explícita e celular. Sem API fake, endpoints inventados ou pagamento real. Integração de parcelas/cotação/comprovante permanece indisponível no OpenAPI atual.",
       "sources": [
         "portal:src/system/pages/loan/LoanPage.vue",
         "portal:src/system/pages/leverage/LeveragePage.vue",
@@ -5822,7 +5822,7 @@
       ],
       "evidence": [
         "docs/evidence/qa-2026-11-16-inventory/api-contract-review.json",
-        "docs/evidence/qa-2026-11-16-front-functional/api-and-tests.json"
+        "docs/evidence/qa-2026-11-18-leverage-review/results.json"
       ],
       "browser": "código confirmado; fluxos legados não homologados",
       "historicalCategory": "Ajuste de front"

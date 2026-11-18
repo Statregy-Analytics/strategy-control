@@ -1,0 +1,61 @@
+{
+  "date": "2026-11-18",
+  "source": "https://strategyanalytics.codebiz.com.br/openapi/v1.json",
+  "paths": [
+    {
+      "path": "/api/v1/client/loans",
+      "verbs": [
+        "get"
+      ]
+    },
+    {
+      "path": "/api/v1/client/loans/{loanId}",
+      "verbs": [
+        "get"
+      ]
+    },
+    {
+      "path": "/api/v1/client/loans/{loanId}/documents",
+      "verbs": [
+        "get"
+      ]
+    },
+    {
+      "path": "/api/v1/client/loans/{loanId}/documents/{documentId}/temporary-url",
+      "verbs": [
+        "get"
+      ]
+    },
+    {
+      "path": "/api/v1/client/loans/{loanId}/history",
+      "verbs": [
+        "get"
+      ]
+    }
+  ],
+  "missing": [
+    "consultation of installments",
+    "payment quote / Pix data",
+    "receipt submission and confirmation"
+  ],
+  "note": "No financial requests sent. No endpoint invented.",
+  "loanResponseProperties": [
+    "id",
+    "publicCode",
+    "contract",
+    "kind",
+    "currencyIsoCode",
+    "principalAmount",
+    "outstandingAmount",
+    "interestRatePercent",
+    "termMonths",
+    "leverageRatio",
+    "purpose",
+    "collateral",
+    "startDate",
+    "dueDate",
+    "status",
+    "createdAtUtc",
+    "updatedAtUtc"
+  ]
+}

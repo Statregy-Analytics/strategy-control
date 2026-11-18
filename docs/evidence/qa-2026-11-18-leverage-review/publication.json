@@ -1,0 +1,55 @@
+{
+  "sourceCommit": "bbf4e874cde6106b3db4ca6c19cece05685ce43c",
+  "runId": 44377168170,
+  "url": "https://github.com/WillTbn/Strategy-analytics-v2/actions/runs/44377168170",
+  "status": "completed",
+  "conclusion": "success",
+  "nativeAssets": [
+    {
+      "path": "public/figma/my-leverage/payment-back.svg",
+      "sha256": "405c23af47f9cdcc9b797628501b0966a83e4571bf9452e42cc8890f4474918a",
+      "matches": true
+    },
+    {
+      "path": "public/figma/leverage-payment/car.svg",
+      "sha256": "8ae4f0e99baebfb8eb53023fe71a508b9213c65ad5b3fbb59ada950bd8494c1b",
+      "matches": true
+    },
+    {
+      "path": "public/figma/leverage-payment/file.svg",
+      "sha256": "01750593dd6c27d5fff6bd82d5a667f6435be5a0edce29f5ba551df30d4b6e25",
+      "matches": true
+    },
+    {
+      "path": "public/figma/loan-request/next.svg",
+      "sha256": "8645a99713e15be380ecda033ddd79fe3efaed874f29e6ad47da6ed6c40b753e",
+      "matches": true
+    },
+    {
+      "path": "public/figma/leverage-payment/pixBack.svg",
+      "sha256": "81fb30ea0b510b04b2224437776b02959e4d53067adf68171fe15027ab284d3b",
+      "matches": true
+    },
+    {
+      "path": "public/system/icons/check.png",
+      "sha256": "7edaf9fafa1aff63342ddb298f487b570a5eb01ba6bddd17ce2f28c8917d3351",
+      "matches": true
+    },
+    {
+      "path": "public/figma/my-leverage/payment-upload.svg",
+      "sha256": "98bc7f422f846d517e2ed110f1d0f711499d6caf556757f52310c55b7c8dc912",
+      "matches": true
+    }
+  ],
+  "bundle": {
+    "entry": "/assets/index-BtxlVh9e.js",
+    "chunks": [
+      "./MyLeveragesPage-CwU4aUvT.js",
+      "MyLeveragesPage-CwU4aUvT.js"
+    ],
+    "paymentPreparationGuard": true,
+    "paymentCopy": true,
+    "emptyCopy": true
+  },
+  "browser": "Level-3 gate and Voltar to Dashboard verified. No permission change; no integrated payment was attempted."
+}

@@ -1,0 +1,91 @@
+{
+  "date": "2026-11-18",
+  "portalCommit": "bbf4e874cde6106b3db4ca6c19cece05685ce43c",
+  "states": [
+    "1:57431",
+    "1:58679",
+    "1:59912"
+  ],
+  "scope": "Frontend presentation and state transitions; not integrated financial homologation.",
+  "figma": {
+    "file": "BaDXlWpxbIoY4azOaQnXgv",
+    "fullModalContexts": [
+      "1:58632",
+      "1:59880",
+      "1:61113"
+    ],
+    "backgroundOverview": "1:57491",
+    "backgroundInstallmentTable": "1:57595",
+    "referenceScreenshots": [
+      "1-57431-figma.png",
+      "1-58679-figma.png",
+      "1-59912-figma.png"
+    ]
+  },
+  "browserControlled": {
+    "realComponents": true,
+    "fakeApi": false,
+    "callbacksOnly": true,
+    "checks": [
+      "expand and collapse active leverage",
+      "pending filter and multiple selection",
+      "single installment and anticipation",
+      "review, back and close",
+      "real QR rendering from supplied fictitious Pix payload",
+      "copy Pix key verified using browser clipboard",
+      "receipt chosen with native file chooser",
+      "failed upload keeps file and allows retry",
+      "explicit submitted=true enters review confirmation",
+      "confirmation closes modal, reloads and does not mark installments paid",
+      "empty, loading, error and retry",
+      "missing adapter disables actions without inventing rows",
+      "390px mobile: no outer horizontal overflow, no missing images"
+    ],
+    "modalDimensions": {
+      "review": [
+        572,
+        536.64
+      ],
+      "pix": [
+        572,
+        693.77
+      ],
+      "submitted": [
+        572,
+        622.94
+      ]
+    }
+  },
+  "automated": {
+    "tests": 502,
+    "newTests": 10,
+    "lint": "passed",
+    "build": "passed",
+    "scopedDiffCheck": "passed",
+    "securityAudit": "passed; no disabled checks"
+  },
+  "integration": {
+    "currentOpenApi": "api-coverage.json",
+    "missing": [
+      "installment schedule projection",
+      "quote and Pix instructions",
+      "receipt submission confirmation",
+      "installment statement and direct receipt callbacks"
+    ],
+    "httpInvented": false,
+    "financialRequestsSent": false,
+    "hmlPredeploy": "Existing account sees level-3 access gate; account and permissions were not altered.",
+    "hmlPostdeploy": "Level-3 gate and Voltar to Dashboard verified. No permission change; no integrated payment was attempted."
+  },
+  "remaining": {
+    "validation": 15,
+    "adjustment": 9,
+    "withoutFigma": 13
+  },
+  "publication": {
+    "runId": 44377168170,
+    "url": "https://github.com/WillTbn/Strategy-analytics-v2/actions/runs/44377168170",
+    "status": "completed",
+    "conclusion": "success"
+  }
+}
