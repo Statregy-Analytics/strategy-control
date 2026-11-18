@@ -1,0 +1,272 @@
+{
+  "run": {
+    "conclusion": "success",
+    "headSha": "2027843f0184349fe66564fdcb5eb3b2c687a22c",
+    "jobs": [
+      {
+        "completedAt": "2026-11-18T13:43:22Z",
+        "conclusion": "success",
+        "databaseId": 134843659044,
+        "name": "Validate, build and deploy",
+        "startedAt": "2026-11-18T13:42:29Z",
+        "status": "completed",
+        "steps": [
+          {
+            "completedAt": "2026-11-18T13:42:32Z",
+            "conclusion": "success",
+            "name": "Set up job",
+            "number": 1,
+            "startedAt": "2026-11-18T13:42:30Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-11-18T13:42:41Z",
+            "conclusion": "success",
+            "name": "Check out repository",
+            "number": 2,
+            "startedAt": "2026-11-18T13:42:32Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-11-18T13:42:50Z",
+            "conclusion": "success",
+            "name": "Set up Node.js",
+            "number": 3,
+            "startedAt": "2026-11-18T13:42:41Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-11-18T13:42:56Z",
+            "conclusion": "success",
+            "name": "Install dependencies",
+            "number": 4,
+            "startedAt": "2026-11-18T13:42:50Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-11-18T13:42:57Z",
+            "conclusion": "success",
+            "name": "Audit dependencies",
+            "number": 5,
+            "startedAt": "2026-11-18T13:42:56Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-11-18T13:43:01Z",
+            "conclusion": "success",
+            "name": "Test",
+            "number": 6,
+            "startedAt": "2026-11-18T13:42:57Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-11-18T13:43:03Z",
+            "conclusion": "success",
+            "name": "Lint",
+            "number": 7,
+            "startedAt": "2026-11-18T13:43:01Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-11-18T13:43:08Z",
+            "conclusion": "success",
+            "name": "Build SPA",
+            "number": 8,
+            "startedAt": "2026-11-18T13:43:03Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-11-18T13:43:08Z",
+            "conclusion": "success",
+            "name": "Configure SSH",
+            "number": 9,
+            "startedAt": "2026-11-18T13:43:08Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-11-18T13:43:17Z",
+            "conclusion": "success",
+            "name": "Upload release",
+            "number": 10,
+            "startedAt": "2026-11-18T13:43:08Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-11-18T13:43:19Z",
+            "conclusion": "success",
+            "name": "Activate release",
+            "number": 11,
+            "startedAt": "2026-11-18T13:43:17Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-11-18T13:43:19Z",
+            "conclusion": "success",
+            "name": "Post Set up Node.js",
+            "number": 21,
+            "startedAt": "2026-11-18T13:43:19Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-11-18T13:43:19Z",
+            "conclusion": "success",
+            "name": "Post Check out repository",
+            "number": 22,
+            "startedAt": "2026-11-18T13:43:19Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-11-18T13:43:19Z",
+            "conclusion": "success",
+            "name": "Complete job",
+            "number": 23,
+            "startedAt": "2026-11-18T13:43:19Z",
+            "status": "completed"
+          }
+        ],
+        "url": "https://github.com/Statregy-Analytics/strategy-control/actions/runs/44316431937/job/134843659044"
+      }
+    ],
+    "status": "completed",
+    "url": "https://github.com/Statregy-Analytics/strategy-control/actions/runs/44316431937"
+  },
+  "assetChecks": [
+    {
+      "path": "/icons/logics/create/1484-77514-imgCheck.svg",
+      "match": true
+    },
+    {
+      "path": "/icons/logics/create/1484-77514-imgSave.svg",
+      "match": true
+    },
+    {
+      "path": "/icons/logics/create/1484-77672-imgTarget.svg",
+      "match": true
+    },
+    {
+      "path": "/icons/logics/create/1484-77833-imgActivity.svg",
+      "match": true
+    },
+    {
+      "path": "/icons/logics/create/1484-77978-imgCircleAlert.svg",
+      "match": true
+    },
+    {
+      "path": "/icons/logics/create/1484-77978-imgLink.svg",
+      "match": true
+    },
+    {
+      "path": "/icons/logics/create/1484-78098-imgCircleAlert.svg",
+      "match": true
+    },
+    {
+      "path": "/icons/logics/create/1484-78098-imgCircleCheck.svg",
+      "match": true
+    },
+    {
+      "path": "/icons/logics/create/1484-78098-imgCircleCheck1.svg",
+      "match": true
+    },
+    {
+      "path": "/icons/logics/damping/settings.svg",
+      "match": true
+    },
+    {
+      "path": "/icons/logics/directory/cards-imgSearch.svg",
+      "match": true
+    },
+    {
+      "path": "/icons/logics/frequency/calendar.svg",
+      "match": true
+    },
+    {
+      "path": "/icons/logics/frequency/chevron.svg",
+      "match": true
+    },
+    {
+      "path": "/icons/logics/frequency/clock.svg",
+      "match": true
+    },
+    {
+      "path": "/icons/logics/identity/activity.svg",
+      "match": true
+    },
+    {
+      "path": "/icons/logics/identity/box.svg",
+      "match": true
+    },
+    {
+      "path": "/icons/logics/identity/chart-pie.svg",
+      "match": true
+    },
+    {
+      "path": "/icons/logics/identity/check.svg",
+      "match": true
+    },
+    {
+      "path": "/icons/logics/identity/cpu.svg",
+      "match": true
+    },
+    {
+      "path": "/icons/logics/identity/heading-box.svg",
+      "match": true
+    },
+    {
+      "path": "/icons/logics/identity/layers.svg",
+      "match": true
+    },
+    {
+      "path": "/icons/logics/identity/shield.svg",
+      "match": true
+    },
+    {
+      "path": "/icons/logics/identity/trending-up.svg",
+      "match": true
+    },
+    {
+      "path": "/icons/logics/identity/zap.svg",
+      "match": true
+    },
+    {
+      "path": "/icons/logics/limits/calendar.svg",
+      "match": true
+    },
+    {
+      "path": "/icons/logics/limits/shield.svg",
+      "match": true
+    },
+    {
+      "path": "/icons/logics/limits/timer.svg",
+      "match": true
+    },
+    {
+      "path": "/icons/logics/preview/chart-pie.svg",
+      "match": true
+    },
+    {
+      "path": "/icons/logics/preview/clock.svg",
+      "match": true
+    },
+    {
+      "path": "/icons/logics/probability/gauge-valid.svg",
+      "match": true
+    },
+    {
+      "path": "/icons/logics/sovereign/target-heading.svg",
+      "match": true
+    },
+    {
+      "path": "/icons/logics/sovereign/target-principle.svg",
+      "match": true
+    },
+    {
+      "path": "/assets/index-tJ2dcWl9.js",
+      "match": true
+    }
+  ],
+  "localTests": 449,
+  "ciTests": [
+    "441"
+  ],
+  "localOnlyUserTests": 8
+}

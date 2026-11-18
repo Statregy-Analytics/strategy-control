@@ -11,12 +11,12 @@
   },
   "metrics": {
     "total": 279,
-    "done": 231,
-    "validation": 38,
-    "adjustment": 10,
-    "implemented": 269,
-    "implementedPercent": 96.4,
-    "readyPercent": 82.8
+    "done": 232,
+    "validation": 35,
+    "adjustment": 12,
+    "implemented": 267,
+    "implementedPercent": 95.7,
+    "readyPercent": 83.2
   },
   "withoutLinkedFigmaReference": {
     "count": 13,
@@ -2019,19 +2019,20 @@
       "link": "[1484:77408](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-77408)",
       "counted": true,
       "group": "L01",
-      "category": "Ajuste de front",
-      "front": "validation",
+      "category": "Bloqueio backend",
+      "front": "done",
       "blockers": [
         "backend"
       ],
-      "reason": "Há composição e testes parciais, mas falta revisão integral dos frames. API continua só catálogo/metadados, sem execução/configuração operacional. Não atribuir toda a conclusão ao backend.",
+      "reason": "Criação comparada por seções de contexto completo; composição, ciclo/decimais, intensidade, vínculos e prévia corrigidos. Testada localmente e publicada, inclusive celular. Persistência operacional continua dependência HTTP, sem sucesso fictício.",
       "sources": [
         "src/components/Workspaces/LogicWorkspace.vue",
         "src/components/Workspaces/LogicPerformance.vue"
       ],
       "evidence": [
         "docs/CHECKLIST-UNICO-FIGMA-FRONT.md#lógicas--estados-de-performance-e-simulação",
-        "docs/evidence/qa-2026-11-16-inventory/api-contract-review.json"
+        "docs/evidence/qa-2026-11-16-inventory/api-contract-review.json",
+        "docs/evidence/qa-2026-11-18-logic-editor/results.json"
       ],
       "browser": "parcial histórica; frame integral pendente",
       "historicalCategory": "Ajuste de front"
@@ -2045,18 +2046,19 @@
       "counted": true,
       "group": "L01",
       "category": "Ajuste de front",
-      "front": "validation",
+      "front": "adjustment",
       "blockers": [
         "backend"
       ],
-      "reason": "Há composição e testes parciais, mas falta revisão integral dos frames. API continua só catálogo/metadados, sem execução/configuração operacional. Não atribuir toda a conclusão ao backend.",
+      "reason": "Comparação completa do LG05 comprovou composição estrutural incompleta: seis resumos do cabeçalho, campos específicos de abertura e limites efetivos, controles e composição dos vínculos. Não é apenas ausência de API.",
       "sources": [
         "src/components/Workspaces/LogicWorkspace.vue",
         "src/components/Workspaces/LogicPerformance.vue"
       ],
       "evidence": [
         "docs/CHECKLIST-UNICO-FIGMA-FRONT.md#lógicas--estados-de-performance-e-simulação",
-        "docs/evidence/qa-2026-11-16-inventory/api-contract-review.json"
+        "docs/evidence/qa-2026-11-16-inventory/api-contract-review.json",
+        "docs/evidence/qa-2026-11-18-logic-editor/results.json"
       ],
       "browser": "parcial histórica; frame integral pendente",
       "historicalCategory": "Ajuste de front"
@@ -2380,18 +2382,19 @@
       "counted": true,
       "group": "L01",
       "category": "Ajuste de front",
-      "front": "validation",
+      "front": "adjustment",
       "blockers": [
         "backend"
       ],
-      "reason": "Há composição e testes parciais, mas falta revisão integral dos frames. API continua só catálogo/metadados, sem execução/configuração operacional. Não atribuir toda a conclusão ao backend.",
+      "reason": "Comparação completa do LG06 comprovou campos e estados de edição ainda incompletos: faixa de edição, valores anteriores e ações de vínculo. Corrigir composição específica, além da dependência HTTP.",
       "sources": [
         "src/components/Workspaces/LogicWorkspace.vue",
         "src/components/Workspaces/LogicPerformance.vue"
       ],
       "evidence": [
         "docs/CHECKLIST-UNICO-FIGMA-FRONT.md#lógicas--estados-de-performance-e-simulação",
-        "docs/evidence/qa-2026-11-16-inventory/api-contract-review.json"
+        "docs/evidence/qa-2026-11-16-inventory/api-contract-review.json",
+        "docs/evidence/qa-2026-11-18-logic-editor/results.json"
       ],
       "browser": "parcial histórica; frame integral pendente",
       "historicalCategory": "Ajuste de front"
@@ -2409,14 +2412,15 @@
       "blockers": [
         "backend"
       ],
-      "reason": "Há composição e testes parciais, mas falta revisão integral dos frames. API continua só catálogo/metadados, sem execução/configuração operacional. Não atribuir toda a conclusão ao backend.",
+      "reason": "Tabelas oficiais/simuladas corrigidas e testadas com séries controladas e indisponíveis. O frame denominado Ao Lado mostra tabelas empilhadas; esclarecer relação com o controle antes de concluir a comparação do estado inteiro.",
       "sources": [
         "src/components/Workspaces/LogicWorkspace.vue",
         "src/components/Workspaces/LogicPerformance.vue"
       ],
       "evidence": [
         "docs/CHECKLIST-UNICO-FIGMA-FRONT.md#lógicas--estados-de-performance-e-simulação",
-        "docs/evidence/qa-2026-11-16-inventory/api-contract-review.json"
+        "docs/evidence/qa-2026-11-16-inventory/api-contract-review.json",
+        "docs/evidence/qa-2026-11-18-logic-editor/results.json"
       ],
       "browser": "parcial histórica; frame integral pendente",
       "historicalCategory": "Ajuste de front"

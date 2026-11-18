@@ -1,0 +1,65 @@
+{
+  "date": "2026-11-18",
+  "sourceCommit": "2027843",
+  "reviewed": [
+    "1484:77408",
+    "1484:78227",
+    "1484:79982",
+    "1484:82147"
+  ],
+  "localTests": 449,
+  "localOnlyUserTests": 8,
+  "lint": "passed",
+  "build": "passed",
+  "audit": "passed, existing source guard mitigation retained",
+  "scopedDiff": "passed",
+  "fullDiff": "preexisting Swagger whitespace not changed/staged",
+  "completedFrontend": [
+    "1484:77408"
+  ],
+  "reclassifiedAdjustment": {
+    "1484:78227": "LG05 lacks exact structural display fields, six header indicators, tooltips/pause controls and linked-paper formula composition; not backend-only.",
+    "1484:79982": "LG06 lacks exact structural editable fields, old-value annotations, edition strip and link actions; not backend-only."
+  },
+  "retainedValidation": {
+    "1484:82147": "LG07 tables corrected and tested with controlled series and unavailable series, but name Ao Lado conflicts with full-width stacked layout. Keep entire state unvalidated until disposition is clarified."
+  },
+  "localBrowser": [
+    "creation numeric comma input 100,5000 and 4,80 produce 105,3240; date-only cycle retained",
+    "real currency catalog select BRL; linked contract search empty and selecting existing Alpha Hedge increments preview to 1",
+    "incomplete create opens validation; type/interval remain unavailable; no API mutation",
+    "independent links loading/empty/error/retry via controlled harness",
+    "controlled valid preview, official and simulated tables independently populated, positive/negative/neutral badges and zero preserved",
+    "below/side control; mobile collapses to one column and tables scroll internally by keyboard",
+    "creation mobile action overflow fixed; 390px document 375px after correction"
+  ],
+  "controlledFixture": "Removed html/js/vue sources before build; archived as txt only. No fictitious product data or routes.",
+  "writesPerformed": false,
+  "designer": [
+    "LG07 is named simulation side by side but screenshot and high-fidelity layout show full-width stacked tables. Confirm intended relation of Ao Lado control to this frame."
+  ],
+  "backend": [
+    "Full motor configuration and scheduling persistence/query, engine type/interval catalog, operational indices and simulations not documented. Catalog CRUD already exists and is not a substitute.",
+    "Existing contract query supplies selection data. Motor linkage writing still lacks confirmed operational endpoint."
+  ],
+  "unlinkedSurfaces": 13,
+  "homologation": {
+    "run": "https://github.com/Statregy-Analytics/strategy-control/actions/runs/44316431937",
+    "ciTests": 441,
+    "passed": [
+      "creation with comma input and exact projected index 105,3240",
+      "currency catalog and BRL selection; real contract selection increments count to 1",
+      "clearing target removes final index; does not convert missing into zero",
+      "create validation and draft unavailable error; cancel/reopen clean form",
+      "mobile document375 at viewport390, no missing images",
+      "existing edit simulation below/side controls; both official/simulated unavailable correctly; cancel returns readonly"
+    ],
+    "notValidated": [
+      "full motor configuration persistence and scheduling",
+      "positive official/simulated operational API data",
+      "LG05 and LG06 full structural composition (real frontend work remains)",
+      "LG07 complete layout disposition pending designer clarification"
+    ],
+    "writesPerformed": false
+  }
+}

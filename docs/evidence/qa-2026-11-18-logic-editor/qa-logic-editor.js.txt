@@ -1,0 +1,1 @@
+import {createApp} from 'vue';import {Quasar} from 'quasar';import lang from 'quasar/lang/pt-BR';import 'quasar/src/css/index.sass';import './src/css/app.scss';import './src/css/workspaces.scss';import App from './src/qa-logic-editor.vue';createApp(App).use(Quasar,{lang}).mount('#q-app');

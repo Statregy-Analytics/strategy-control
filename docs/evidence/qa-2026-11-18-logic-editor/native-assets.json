@@ -1,0 +1,247 @@
+[
+  {
+    "node": "1484:77514",
+    "name": "imgSave",
+    "path": "/icons/logics/create/1484-77514-imgSave.svg",
+    "sha256": "ed62ba5a7c37af1accd66458f3c0f6cf4a2b0805eb4c0bad778e170f94e67b54",
+    "root": "<svg preserveAspectRatio=\"none\" overflow=\"visible\" style=\"display: block;\" width=\"16\" height=\"16\" viewBox=\"0 0 16 16\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\">"
+  },
+  {
+    "node": "1484:77514",
+    "name": "imgCheck",
+    "path": "/icons/logics/create/1484-77514-imgCheck.svg",
+    "sha256": "6ec0472bd29e2dca3ad3dff53fd71b86bc8e6cb0216e983947996d7b40d13a7f",
+    "root": "<svg preserveAspectRatio=\"none\" overflow=\"visible\" style=\"display: block;\" width=\"16\" height=\"16\" viewBox=\"0 0 16 16\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\">"
+  },
+  {
+    "node": "1484:77540",
+    "name": "imgBox",
+    "path": "/icons/logics/identity/heading-box.svg",
+    "sha256": "1f8dafa53c792374e5ff4ce9734a5d0d3bad4925e0f89e042046e9c662cf2a12",
+    "root": "<svg preserveAspectRatio=\"none\" overflow=\"visible\" style=\"display: block;\" width=\"16\" height=\"16\" viewBox=\"0 0 16 16\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\">"
+  },
+  {
+    "node": "1484:77540",
+    "name": "imgChevronDown",
+    "path": "/icons/logics/frequency/chevron.svg",
+    "sha256": "eea1d7d8daca2d4943179e58ead13109995aac1373f1979c2b493b55f6d0a638",
+    "root": "<svg preserveAspectRatio=\"none\" overflow=\"visible\" style=\"display: block;\" width=\"16\" height=\"16\" viewBox=\"0 0 16 16\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\">"
+  },
+  {
+    "node": "1484:77540",
+    "name": "imgChartPie",
+    "path": "/icons/logics/identity/chart-pie.svg",
+    "sha256": "260b59c77e6e1c5dec5e647651b9ac95e8381b4f5349b6a8299359e8ca31242d",
+    "root": "<svg preserveAspectRatio=\"none\" overflow=\"visible\" style=\"display: block;\" width=\"20\" height=\"20\" viewBox=\"0 0 20 20\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\">"
+  },
+  {
+    "node": "1484:77540",
+    "name": "imgActivity",
+    "path": "/icons/logics/identity/activity.svg",
+    "sha256": "649cc8cb8a55868422dcb455178e09359d3e44857d858024b4a7e5a0dfcdeabf",
+    "root": "<svg preserveAspectRatio=\"none\" overflow=\"visible\" style=\"display: block;\" width=\"20\" height=\"20\" viewBox=\"0 0 20 20\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\">"
+  },
+  {
+    "node": "1484:77540",
+    "name": "imgTrendingUp",
+    "path": "/icons/logics/identity/trending-up.svg",
+    "sha256": "ed6f10b28c27ebef50fad8d1fba3e57c011e091c8938be3c14f6e191f3166f4c",
+    "root": "<svg preserveAspectRatio=\"none\" overflow=\"visible\" style=\"display: block;\" width=\"20\" height=\"20\" viewBox=\"0 0 20 20\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\">"
+  },
+  {
+    "node": "1484:77540",
+    "name": "imgZap",
+    "path": "/icons/logics/identity/zap.svg",
+    "sha256": "854b02f0977fb2ae720b4d493d4864268ae0212e911b831decfe905dc94ccea5",
+    "root": "<svg preserveAspectRatio=\"none\" overflow=\"visible\" style=\"display: block;\" width=\"20\" height=\"20\" viewBox=\"0 0 20 20\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\">"
+  },
+  {
+    "node": "1484:77540",
+    "name": "imgShield",
+    "path": "/icons/logics/identity/shield.svg",
+    "sha256": "caa990072477502094cb2343829c5e27696df17c7074801bce0c9728ded37fa3",
+    "root": "<svg preserveAspectRatio=\"none\" overflow=\"visible\" style=\"display: block;\" width=\"20\" height=\"20\" viewBox=\"0 0 20 20\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\">"
+  },
+  {
+    "node": "1484:77540",
+    "name": "imgBox1",
+    "path": "/icons/logics/identity/box.svg",
+    "sha256": "5733161df18212e456cecad351d0334e5b16822450703f3328dc14006a1385b4",
+    "root": "<svg preserveAspectRatio=\"none\" overflow=\"visible\" style=\"display: block;\" width=\"20\" height=\"20\" viewBox=\"0 0 20 20\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\">"
+  },
+  {
+    "node": "1484:77540",
+    "name": "imgLayers",
+    "path": "/icons/logics/identity/layers.svg",
+    "sha256": "13d8d1c569aadef95eb6c5b7aede96f71611e72631deed9c8248d9958485c803",
+    "root": "<svg preserveAspectRatio=\"none\" overflow=\"visible\" style=\"display: block;\" width=\"20\" height=\"20\" viewBox=\"0 0 20 20\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\">"
+  },
+  {
+    "node": "1484:77540",
+    "name": "imgCpu",
+    "path": "/icons/logics/identity/cpu.svg",
+    "sha256": "a68f0e1549fac41334ce6b44a451637469df788c9512965393aba4b440b80d4a",
+    "root": "<svg preserveAspectRatio=\"none\" overflow=\"visible\" style=\"display: block;\" width=\"20\" height=\"20\" viewBox=\"0 0 20 20\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\">"
+  },
+  {
+    "node": "1484:77540",
+    "name": "imgCheck",
+    "path": "/icons/logics/identity/check.svg",
+    "sha256": "0274d0adab350f105eae7e74eac8dbcef4de74100f2b5d91be7449901b18c21c",
+    "root": "<svg preserveAspectRatio=\"none\" overflow=\"visible\" style=\"display: block;\" width=\"22\" height=\"22\" viewBox=\"0 0 22 22\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\">"
+  },
+  {
+    "node": "1484:77672",
+    "name": "imgCalendar",
+    "path": "/icons/logics/limits/calendar.svg",
+    "sha256": "90f7cf5fc9b4627f558211f3bbf42137d28e7e8d72f26776cd8767159e318c10",
+    "root": "<svg preserveAspectRatio=\"none\" overflow=\"visible\" style=\"display: block;\" width=\"16\" height=\"16\" viewBox=\"0 0 16 16\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\">"
+  },
+  {
+    "node": "1484:77672",
+    "name": "imgTarget",
+    "path": "/icons/logics/create/1484-77672-imgTarget.svg",
+    "sha256": "afac5bd7a03fe5b00a4ad9d73d37a411601120d479d1147843fc5943c3cf91dc",
+    "root": "<svg preserveAspectRatio=\"none\" overflow=\"visible\" style=\"display: block;\" width=\"16\" height=\"16\" viewBox=\"0 0 16 16\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\">"
+  },
+  {
+    "node": "1484:77728",
+    "name": "imgClock",
+    "path": "/icons/logics/frequency/clock.svg",
+    "sha256": "893efa8d30adb452eb518f7ca36888a035b3e49131608f479a7398fb85b050aa",
+    "root": "<svg preserveAspectRatio=\"none\" overflow=\"visible\" style=\"display: block;\" width=\"16\" height=\"16\" viewBox=\"0 0 16 16\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\">"
+  },
+  {
+    "node": "1484:77728",
+    "name": "imgChevronDown",
+    "path": "/icons/logics/frequency/chevron.svg",
+    "sha256": "eea1d7d8daca2d4943179e58ead13109995aac1373f1979c2b493b55f6d0a638",
+    "root": "<svg preserveAspectRatio=\"none\" overflow=\"visible\" style=\"display: block;\" width=\"16\" height=\"16\" viewBox=\"0 0 16 16\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\">"
+  },
+  {
+    "node": "1484:77728",
+    "name": "imgCalendarPrimeiraExecucao",
+    "path": "/icons/logics/frequency/calendar.svg",
+    "sha256": "738892e4dc4ed93559e0953a8873d60f96fe71117181fcc934369d29866483cd",
+    "root": "<svg preserveAspectRatio=\"none\" overflow=\"visible\" style=\"display: block;\" width=\"16\" height=\"16\" viewBox=\"0 0 16 16\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\">"
+  },
+  {
+    "node": "1484:77789",
+    "name": "imgGauge",
+    "path": "/icons/logics/probability/gauge-valid.svg",
+    "sha256": "6dba304e19acd5acadbb21613c7442efc226ca32ba7ca2c0228b43d20ecbb73d",
+    "root": "<svg preserveAspectRatio=\"none\" overflow=\"visible\" style=\"display: block;\" width=\"16\" height=\"16\" viewBox=\"0 0 16 16\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\">"
+  },
+  {
+    "node": "1484:77833",
+    "name": "imgActivity",
+    "path": "/icons/logics/create/1484-77833-imgActivity.svg",
+    "sha256": "9fa9c860ef93e512677f5e9ae231cbbf0af9de3b16c46c34ae0783422a3d9dc6",
+    "root": "<svg preserveAspectRatio=\"none\" overflow=\"visible\" style=\"display: block;\" width=\"16\" height=\"16\" viewBox=\"0 0 16 16\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\">"
+  },
+  {
+    "node": "1484:77833",
+    "name": "imgChevronDown",
+    "path": "/icons/logics/frequency/chevron.svg",
+    "sha256": "eea1d7d8daca2d4943179e58ead13109995aac1373f1979c2b493b55f6d0a638",
+    "root": "<svg preserveAspectRatio=\"none\" overflow=\"visible\" style=\"display: block;\" width=\"16\" height=\"16\" viewBox=\"0 0 16 16\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\">"
+  },
+  {
+    "node": "1484:77860",
+    "name": "imgShield",
+    "path": "/icons/logics/limits/shield.svg",
+    "sha256": "102b177b4bfdbe67613521da2160054d9a01fefcd8c9d093b823a5621fc87b9a",
+    "root": "<svg preserveAspectRatio=\"none\" overflow=\"visible\" style=\"display: block;\" width=\"16\" height=\"16\" viewBox=\"0 0 16 16\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\">"
+  },
+  {
+    "node": "1484:77860",
+    "name": "imgTimer",
+    "path": "/icons/logics/limits/timer.svg",
+    "sha256": "1879274e9dbc28c44553c67316cb50c767ed097b62c9ff005dc930aefec10318",
+    "root": "<svg preserveAspectRatio=\"none\" overflow=\"visible\" style=\"display: block;\" width=\"16\" height=\"16\" viewBox=\"0 0 16 16\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\">"
+  },
+  {
+    "node": "1484:77860",
+    "name": "imgCalendar",
+    "path": "/icons/logics/limits/calendar.svg",
+    "sha256": "90f7cf5fc9b4627f558211f3bbf42137d28e7e8d72f26776cd8767159e318c10",
+    "root": "<svg preserveAspectRatio=\"none\" overflow=\"visible\" style=\"display: block;\" width=\"16\" height=\"16\" viewBox=\"0 0 16 16\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\">"
+  },
+  {
+    "node": "1484:77919",
+    "name": "imgSettings",
+    "path": "/icons/logics/damping/settings.svg",
+    "sha256": "ab8efde3bd2aa08a27b31378b88af05cf81772198c9509c998bb2f736bfa3093",
+    "root": "<svg preserveAspectRatio=\"none\" overflow=\"visible\" style=\"display: block;\" width=\"16\" height=\"16\" viewBox=\"0 0 16 16\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\">"
+  },
+  {
+    "node": "1484:77937",
+    "name": "imgTarget",
+    "path": "/icons/logics/sovereign/target-heading.svg",
+    "sha256": "cfcf4dae28f3294269995f7ff8f1b736c749412910b4920cae535868cb1aa33a",
+    "root": "<svg preserveAspectRatio=\"none\" overflow=\"visible\" style=\"display: block;\" width=\"16\" height=\"16\" viewBox=\"0 0 16 16\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\">"
+  },
+  {
+    "node": "1484:77937",
+    "name": "imgTarget1",
+    "path": "/icons/logics/sovereign/target-principle.svg",
+    "sha256": "39c11de23767d4d58458868b8b04f2af2a30facd4f6792908243e755493a5596",
+    "root": "<svg preserveAspectRatio=\"none\" overflow=\"visible\" style=\"display: block;\" width=\"20\" height=\"20\" viewBox=\"0 0 20 20\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\">"
+  },
+  {
+    "node": "1484:77978",
+    "name": "imgLink",
+    "path": "/icons/logics/create/1484-77978-imgLink.svg",
+    "sha256": "227f0bd3c96ff184ae0b4efa432671dc001c4046b5040fee49f4da9b249a96f1",
+    "root": "<svg preserveAspectRatio=\"none\" overflow=\"visible\" style=\"display: block;\" width=\"16\" height=\"16\" viewBox=\"0 0 16 16\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\">"
+  },
+  {
+    "node": "1484:77978",
+    "name": "imgSearch",
+    "path": "/icons/logics/directory/cards-imgSearch.svg",
+    "sha256": "82945f8636d4c2b4095bbddca332aabe637615d91f3146e93262ea592db3309b",
+    "root": "<svg preserveAspectRatio=\"none\" overflow=\"visible\" style=\"display: block;\" width=\"16\" height=\"16\" viewBox=\"0 0 16 16\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\">"
+  },
+  {
+    "node": "1484:77978",
+    "name": "imgCircleAlert",
+    "path": "/icons/logics/create/1484-77978-imgCircleAlert.svg",
+    "sha256": "c7d6ae0842ce4b36dd82fd065a3a958c6346290c6d85e6e0fa218dec89acba08",
+    "root": "<svg preserveAspectRatio=\"none\" overflow=\"visible\" style=\"display: block;\" width=\"16\" height=\"16\" viewBox=\"0 0 16 16\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\">"
+  },
+  {
+    "node": "1484:78098",
+    "name": "imgCircleCheck",
+    "path": "/icons/logics/create/1484-78098-imgCircleCheck.svg",
+    "sha256": "58aa2946827a3d5990c1a14b484cbb30b74e26eddc82cb786671aa8e14600f61",
+    "root": "<svg preserveAspectRatio=\"none\" overflow=\"visible\" style=\"display: block;\" width=\"16\" height=\"16\" viewBox=\"0 0 16 16\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\">"
+  },
+  {
+    "node": "1484:78098",
+    "name": "imgCircleCheck1",
+    "path": "/icons/logics/create/1484-78098-imgCircleCheck1.svg",
+    "sha256": "6716668a9aed53cd2597c1734a5c6e35c366e4e08b407745c1aa4d2d2a3c3a73",
+    "root": "<svg preserveAspectRatio=\"none\" overflow=\"visible\" style=\"display: block;\" width=\"12\" height=\"12\" viewBox=\"0 0 12 12\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\">"
+  },
+  {
+    "node": "1484:78098",
+    "name": "imgChartPie",
+    "path": "/icons/logics/preview/chart-pie.svg",
+    "sha256": "019697a57600e9774c6166ddaaa859ab58f92b2ccb7baf29d6cdd53911494a5f",
+    "root": "<svg preserveAspectRatio=\"none\" overflow=\"visible\" style=\"display: block;\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\">"
+  },
+  {
+    "node": "1484:78098",
+    "name": "imgClock",
+    "path": "/icons/logics/preview/clock.svg",
+    "sha256": "5e0c61d71e1ff1d669a719eb57342d481d9e4624d46e223f7506fc7d9b76292e",
+    "root": "<svg preserveAspectRatio=\"none\" overflow=\"visible\" style=\"display: block;\" width=\"12\" height=\"12\" viewBox=\"0 0 12 12\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\">"
+  },
+  {
+    "node": "1484:78098",
+    "name": "imgCircleAlert",
+    "path": "/icons/logics/create/1484-78098-imgCircleAlert.svg",
+    "sha256": "54cfa26d4fdb575ace8f2b8ff939e6e361a528f1d77ef037a60c1156e65a781f",
+    "root": "<svg preserveAspectRatio=\"none\" overflow=\"visible\" style=\"display: block;\" width=\"16\" height=\"16\" viewBox=\"0 0 16 16\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\">"
+  }
+]
