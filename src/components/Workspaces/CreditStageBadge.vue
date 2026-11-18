@@ -7,7 +7,7 @@ defineProps({ label: { type: String, default: null }, current: Boolean })
 <style scoped>
 .credit-stage {
   display: inline-flex;
-  padding: 6px 12px;
+  padding: 7px 13px;
   border: 1px solid #ffffff33;
   border-radius: 999px;
   background: #ffffff0d;
@@ -20,7 +20,8 @@ defineProps({ label: { type: String, default: null }, current: Boolean })
 }
 .credit-stage.current {
   color: white;
-  border-color: #ffffff42;
+  padding: 6.8px 12.8px;
+  border: 0.8px solid #ffffff42;
   background: linear-gradient(89deg, #ffffff1f, #ffffff0d 50%, #ffffff1a);
 }
 </style>

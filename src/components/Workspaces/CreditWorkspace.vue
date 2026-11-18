@@ -568,15 +568,15 @@ onScopeDispose(() => {
 
 <style scoped>
 .credit-customer-choice {
-  padding: 16px 40px;
-  min-height: 84px;
+  padding: 17px 17px 17px 45px;
+  min-height: 83.575px;
   border-color: #ffffff33;
   background: #ffffff0d;
   border-radius: 10px;
 }
 .credit-customer-choice strong {
   font:
-    600 14px/16px Inter,
+    600 14px/14px Inter,
     sans-serif;
 }
 .credit-customer-choice small {

@@ -1,5 +1,5 @@
 <template>
-  <section>
+  <section :class="{ 'partner-directory-section': kind === 'partners' }">
     <q-banner v-if="!available" class="workspace-error" role="status"
       >Consulta indisponível.</q-banner
     ><template v-if="kind === 'authors'"
@@ -15,13 +15,15 @@
         Nenhum redator encontrado.
       </p></template
     ><template v-else
-      ><div class="workspace-metrics">
-        <div v-for="label in partnerMetrics" :key="label" class="workspace-metric">
-          <small>{{ label }}</small
-          ><strong>Indisponível</strong>
+      ><div class="workspace-metrics partner-metrics">
+        <div v-for="metric in partnerMetrics" :key="metric.key" class="workspace-metric">
+          <small>{{ metric.label }}</small
+          ><strong :class="metric.tone" :data-unavailable="metric.value === 'Indisponível'">{{
+            metric.value
+          }}</strong>
         </div>
       </div>
-      <div class="workspace-toolbar">
+      <div class="workspace-toolbar partner-toolbar">
         <q-input
           v-model="search"
           outlined
@@ -82,12 +84,12 @@
         <template #body-cell-products="p"
           ><q-td :props="p"
             ><div class="partner-service-counts">
-              <span>— habilitado(s)</span
+              <span :class="{ enabled: partnerServices(p.row).enabled !== null }"
+                >{{ partnerServices(p.row).enabled ?? '—' }}
+                {{ partnerServices(p.row).enabled === 1 ? 'habilitado' : 'habilitados' }}</span
               ><span
-                >{{
-                  Array.isArray(p.row.products) ? p.row.products.length : '—'
-                }}
-                oferecido(s)</span
+                >{{ partnerServices(p.row).offered ?? '—' }}
+                {{ partnerServices(p.row).offered === 1 ? 'oferecido' : 'oferecidos' }}</span
               >
             </div>
             <small class="partner-service-names">{{ p.value }}</small></q-td
@@ -116,7 +118,12 @@
 </template>
 <script setup>
 import { computed, ref } from 'vue'
-import { foldSearch } from 'src/services/adminWorkspaceModel'
+import {
+  matchesPartnerSearch,
+  partnerServices,
+  partnerCommission,
+  partnerDirectoryMetrics,
+} from 'src/services/creditPartnerDirectory'
 import PartnerDetails from './PartnerDetails.vue'
 import AuthorCard from './AuthorCard.vue'
 import { columns, dateLabel } from 'src/services/financeService'
@@ -124,17 +131,12 @@ const props = defineProps({
   kind: { type: String, required: true },
   rows: { type: Array, default: () => [] },
   available: Boolean,
+  summary: { type: Object, default: null },
 })
 const emit = defineEmits(['edit', 'create'])
 const search = ref('')
 const filteredPartners = computed(() =>
-  (props.available ? props.rows : []).filter(
-    (row) =>
-      !search.value ||
-      [row.name, row.type, ...(row.products || [])].some((v) =>
-        foldSearch(v).includes(foldSearch(search.value)),
-      ),
-  ),
+  (props.available ? props.rows : []).filter((row) => matchesPartnerSearch(row, search.value)),
 )
 function editSelected() {
   const row = selected.value
@@ -142,29 +144,14 @@ function editSelected() {
   emit('edit', row)
 }
 const selected = ref(null)
-const partnerMetrics = [
-  'Parceiros Ativos',
-  'Produtos Cadastrados',
-  'Tabelas Vigentes',
-  'Tabelas Vencendo',
-  'Maior Comissão',
-  'Melhor Conversão',
-]
+const partnerMetrics = computed(() =>
+  partnerDirectoryMetrics(props.available ? props.summary : null),
+)
 const partnerColumns = columns([
   ['name', 'Parceiro'],
   ['type', 'Tipo'],
-  ['products', 'Serviços', (r) => (r.products || []).join(', ') || '—'],
-  [
-    'commission',
-    'Comissão Vigente',
-    (r) =>
-      r.commission == null || r.commission === '' || !Number.isFinite(Number(r.commission))
-        ? '—'
-        : new Intl.NumberFormat('pt-BR', {
-            maximumFractionDigits: 2,
-            minimumFractionDigits: 1,
-          }).format(Number(r.commission)) + '%',
-  ],
+  ['products', 'Serviços', (r) => partnerServices(r).names?.join(', ') || '—'],
+  ['commission', 'Comissão Vigente', (r) => partnerCommission(r.commission)],
   ['status', 'Status'],
   ['updatedAtUtc', 'Última Atualização', (r) => dateLabel(r.updatedAtUtc)],
   ['actions', ''],
@@ -194,7 +181,7 @@ const partnerColumns = columns([
 }
 .workspace-toolbar .q-input {
   flex: 1;
-  max-width: 520px;
+  max-width: 448px;
   min-width: 0;
 }
 .partner-create :deep(.q-btn__content) {
@@ -324,5 +311,125 @@ const partnerColumns = columns([
   font:
     400 12px/16px Inter,
     sans-serif;
+}
+</style>
+
+<style scoped>
+.partner-metrics {
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+}
+.partner-metrics .workspace-metric {
+  min-height: 98px;
+  padding: 16px 16px 24px;
+  border: 0.8px solid #ffffff1f;
+  border-radius: 14px;
+  background: linear-gradient(188deg, #00000032, #00000014 51%, #00000008);
+  box-shadow: 4px 4px 6px #00000021;
+  backdrop-filter: blur(20px);
+}
+.partner-metrics small {
+  font:
+    600 12px/16px Inter,
+    sans-serif;
+  letter-spacing: 0.6px;
+  color: #ffffff99;
+  margin-bottom: 8px;
+}
+.partner-metrics strong {
+  color: white;
+  display: block;
+  font:
+    700 24px/32px Inter,
+    sans-serif;
+  overflow-wrap: anywhere;
+}
+.partner-metrics strong[data-unavailable='true'] {
+  font-size: clamp(14px, 1.3vw, 24px);
+}
+.partner-toolbar {
+  padding: 16px;
+  border-bottom: 0.8px solid #ffffff1f;
+  border-radius: 10px;
+  background: linear-gradient(181deg, #00000032, #00000014 51%, #00000008);
+  box-shadow: 4px 4px 6px #00000021;
+}
+.partner-toolbar :deep(.q-field__control) {
+  height: 40px;
+  min-height: 40px;
+  border-radius: 8px;
+  background: #0000000d;
+}
+.partner-toolbar :deep(.q-field__control::before) {
+  border-color: #ffffff1f;
+}
+.partner-create {
+  min-height: 40px;
+  border-radius: 8px;
+  background: #ffffff0f;
+  color: #ffffffb8;
+  font:
+    500 14px/20px Inter,
+    sans-serif;
+}
+.partner-create::before {
+  border-color: #ffffff33;
+}
+.partner-service-counts span {
+  border-width: 0.5px;
+}
+.partner-service-counts span.enabled {
+  color: #74ffa0;
+  border: 0.8px solid #74ffa0;
+  background: #007a5533;
+  text-transform: uppercase;
+  font:
+    500 10px/13.333px Inter,
+    sans-serif;
+  letter-spacing: 0.25px;
+}
+.partner-directory :deep(td) {
+  white-space: normal;
+}
+.partner-directory :deep(th:first-child) {
+  width: 244px;
+}
+.partner-directory :deep(th:nth-child(2)) {
+  width: 276px;
+}
+.partner-directory :deep(th:nth-child(3)) {
+  min-width: 300px;
+}
+.partner-directory :deep(th:nth-child(4)) {
+  min-width: 174px;
+}
+.partner-directory :deep(th:nth-child(6)) {
+  min-width: 180px;
+}
+@media (max-width: 1300px) {
+  .partner-metrics {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+@media (max-width: 650px) {
+  .partner-metrics {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .partner-toolbar {
+    align-items: stretch;
+    flex-direction: column;
+  }
+  .partner-toolbar .q-input {
+    max-width: none;
+    width: 100%;
+  }
+}
+</style>
+
+<style scoped>
+.partner-metrics strong.warning {
+  color: #ffd56a;
+}
+.partner-metrics strong.positive {
+  color: #66e59e;
 }
 </style>

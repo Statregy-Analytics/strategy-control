@@ -25,9 +25,13 @@
           </li>
         </ol>
         <div class="credit-detail__actions">
-          <button v-for="action in actions" :key="action.label" disabled>
-            <img :src="'/icons/credit/' + action.icon + '.svg'" alt="" />{{ action.label }}
-          </button>
+          <credit-operation-action
+            v-for="action in actions"
+            :key="action.label"
+            :label="action.label"
+            :icon="action.icon"
+            disabled
+          />
         </div>
       </header>
       <form-section class="credit-detail__section" title="Informações da Operação">
@@ -133,6 +137,7 @@
   </q-dialog>
 </template>
 <script setup>
+import CreditOperationAction from './CreditOperationAction.vue'
 import { computed } from 'vue'
 import CreditStageBadge from './CreditStageBadge.vue'
 import { creditStages as stages } from 'src/services/creditDirectoryModel'
@@ -282,19 +287,7 @@ const proposalColumns = columns(
   flex-wrap: wrap;
   gap: 8px;
 }
-.credit-detail__actions button {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  padding: 5px 10px;
-  border: 1px solid rgba(255, 255, 255, 0.26);
-  border-radius: 8px;
-  background: linear-gradient(90deg, rgba(255, 255, 255, 0.12), rgba(255, 255, 255, 0.05));
-  color: white;
-  font: inherit;
-  font-size: 14px;
-  opacity: 0.5;
-}
+
 .credit-detail__section {
   padding: 24px;
   margin-top: 24px;

@@ -369,3 +369,29 @@
 .workspace-metric > .workspace-icon {
   margin-right: 6px;
 }
+
+.workspace--credit .workspace-main > .workspace-metrics {
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+}
+@media (max-width: 1400px) {
+  .workspace--credit .workspace-main > .workspace-metrics {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+@media (max-width: 650px) {
+  .workspace--credit .workspace-main > .workspace-metrics {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+.workspace--credit .workspace-main > .workspace-metrics .workspace-metric {
+  position: relative;
+}
+.workspace--credit .workspace-main > .workspace-metrics .workspace-metric > img {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+}
+.workspace--credit .workspace-main > .workspace-metrics .workspace-metric > small {
+  padding-right: 24px;
+}

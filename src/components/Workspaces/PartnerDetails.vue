@@ -118,6 +118,7 @@
 <script setup>
 import { computed, ref, watch, useId, nextTick } from 'vue'
 import { dateLabel } from 'src/services/financeService'
+import { partnerCommission } from 'src/services/creditPartnerDirectory'
 const props = defineProps({ partner: { type: Object, default: null } })
 defineEmits(['close', 'edit'])
 const tab = ref('Dados Gerais')
@@ -165,14 +166,7 @@ const statusClass = computed(() => ({
   'partner-active': props.partner?.status === 'Active',
   'partner-inactive': props.partner?.status === 'Inactive',
 }))
-const commission = computed(() => {
-  const value = props.partner?.commission
-  return value == null || value === '' || !Number.isFinite(Number(value))
-    ? 'Indisponível'
-    : new Intl.NumberFormat('pt-BR', { minimumFractionDigits: 1, maximumFractionDigits: 2 }).format(
-        Number(value),
-      ) + '%'
-})
+const commission = computed(() => partnerCommission(props.partner?.commission, 'Indisponível'))
 </script>
 <style scoped>
 .partner-detail {

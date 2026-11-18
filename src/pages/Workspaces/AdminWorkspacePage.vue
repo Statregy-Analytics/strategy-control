@@ -495,10 +495,10 @@ const creditKindOptions = computed(() =>
 )
 const creditMetricIcons = [
   'credit-active',
-  'credit-pending',
+  'credit-pending-cr07',
   'credit-documents',
-  'credit-final',
-  'credit-sign',
+  'credit-proposals-cr07',
+  'credit-signature-cr07',
   'credit-contracted',
 ]
 const publicationMetricIcons = [
@@ -877,9 +877,14 @@ onScopeDispose(() => {
   align-items: center;
   justify-content: flex-start;
   gap: 8px;
-  min-height: 42px;
-  padding: 12px 40px;
-  font-size: 14px;
+  min-height: 41.6px;
+  padding: 12px 13px 12px 41px;
+  border: 1px solid #ffffff33;
+  border-radius: 10px;
+  background: #ffffff0d;
+  font:
+    500 14px/14px Inter,
+    sans-serif;
 }
 .credit-type-modal .workspace-actions {
   margin: 40px -24px -24px;
@@ -963,5 +968,27 @@ onScopeDispose(() => {
 .workspace--credit .workspace-toolbar .q-btn :deep(.q-btn__content) {
   flex-direction: row-reverse;
   gap: 8px;
+}
+</style>
+
+<style scoped>
+.credit-type-modal .workspace-choice[aria-pressed='true'] {
+  border-color: #ffffff80;
+  background: #ffffff1f;
+}
+.credit-type-modal .workspace-choice:focus-visible {
+  outline: 2px solid #00a3ff;
+  outline-offset: 3px;
+}
+.credit-type-modal .workspace-actions .q-btn {
+  min-height: 36px;
+  background: #ffffff0f;
+  border-radius: 8px;
+  font:
+    500 14px/20px Inter,
+    sans-serif;
+}
+.credit-type-modal .workspace-actions .q-btn::before {
+  border-color: #ffffff47;
 }
 </style>
