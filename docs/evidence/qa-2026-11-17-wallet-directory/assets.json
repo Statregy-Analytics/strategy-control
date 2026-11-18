@@ -1,0 +1,131 @@
+{
+  "sourceFrames": [
+    "1484:89127",
+    "1484:87711",
+    "1484:88727",
+    "1484:90218"
+  ],
+  "assets": [
+    {
+      "path": "public/icons/wallet-directory/activity.svg",
+      "width": "12",
+      "height": "12",
+      "sha256": "e9472db42e76146577d4ab1adce645058b84c31bf0861c42e0d253bbb061a933"
+    },
+    {
+      "path": "public/icons/wallet-directory/arrow-left.svg",
+      "width": "16",
+      "height": "16",
+      "sha256": "ed67668a0847e42ccdfd6abaa317fcf017aae773bb1b2dc6006437b008ce0d2b"
+    },
+    {
+      "path": "public/icons/wallet-directory/chevron.svg",
+      "width": "16",
+      "height": "16",
+      "sha256": "eea1d7d8daca2d4943179e58ead13109995aac1373f1979c2b493b55f6d0a638"
+    },
+    {
+      "path": "public/icons/wallet-directory/contract.svg",
+      "width": "12",
+      "height": "12",
+      "sha256": "2d7a16d00d1eab140f6622a6f3db6b6b34584a0005ecfaf9ffe07f7fba76ed82"
+    },
+    {
+      "path": "public/icons/wallet-directory/contracts-action.svg",
+      "width": "16",
+      "height": "16",
+      "sha256": "4f78c4e15ffec9d4a08d952012cd37c999f3aa625ff1cac8a40cf61c7cdbbebf"
+    },
+    {
+      "path": "public/icons/wallet-directory/download.svg",
+      "width": "16",
+      "height": "16",
+      "sha256": "ca34517d0def4f02d7e80cd4912bd60a405b706e577ada7d186fcf203fc921f3"
+    },
+    {
+      "path": "public/icons/wallet-directory/eye.svg",
+      "width": "16",
+      "height": "16",
+      "sha256": "42b801e478bc0026ada26dd5ab9f857187a2ac938c77453e102c8672e7dfe181"
+    },
+    {
+      "path": "public/icons/wallet-directory/filter.svg",
+      "width": "16",
+      "height": "16",
+      "sha256": "0e4edc0812319b7dc78d1d65b3e943c0cf37f4a8ef129fd2db1a93b4ca1c36fa"
+    },
+    {
+      "path": "public/icons/wallet-directory/grid.svg",
+      "width": "16",
+      "height": "16",
+      "sha256": "0c7ff05bfa568664cef338ce84c8b08c9cd6fd1c43abb3026b5c945e351cb088"
+    },
+    {
+      "path": "public/icons/wallet-directory/list.svg",
+      "width": "16",
+      "height": "16",
+      "sha256": "3d3215f962968a37a3418582feae880fc4a1cef2a0425716e978daf0e7d9c23b"
+    },
+    {
+      "path": "public/icons/wallet-directory/plus.svg",
+      "width": "16",
+      "height": "16",
+      "sha256": "dfef3b250ec40ed56d72c144151343c0042808c756c330a0ec8cf848becc3839"
+    },
+    {
+      "path": "public/icons/wallet-directory/search.svg",
+      "width": "16",
+      "height": "16",
+      "sha256": "82945f8636d4c2b4095bbddca332aabe637615d91f3146e93262ea592db3309b"
+    },
+    {
+      "path": "public/icons/wallet-directory/summary-arrow.svg",
+      "width": "12",
+      "height": "12",
+      "sha256": "b2a032e4b627f955cee4af5fad59dc11372abe55f877e689326633fffedef9f9"
+    },
+    {
+      "path": "public/icons/wallet-directory/summary-strategy.svg",
+      "width": "16",
+      "height": "16",
+      "sha256": "c9e14cb1149dfb72848b57f872da1eaaa8518974d195e67e61f7a1fc1ede20a4"
+    },
+    {
+      "path": "public/icons/wallet-directory/summary-wallet.svg",
+      "width": "16",
+      "height": "16",
+      "sha256": "7dc5516bd463fd7db5f96d8d6619f50e1ad646d5755860d0111da2eb7c64550d"
+    },
+    {
+      "path": "public/icons/wallet-directory/summary-watermark.svg",
+      "width": "128",
+      "height": "128",
+      "sha256": "78044a5069739bb4c912ea1d9cdaedd5c15a52336bc1461a1891f45b7b570881"
+    },
+    {
+      "path": "public/icons/wallet-directory/wallet-assets.svg",
+      "width": "16",
+      "height": "16",
+      "sha256": "01986a78276571a208c365ce493f37011a056d5a7f036a5d3f1db50253b8f123"
+    },
+    {
+      "path": "public/icons/wallet-directory/wallet-deposit.svg",
+      "width": "16",
+      "height": "16",
+      "sha256": "81be808dd2a4d207e6b4ca6f1efeff23fc27436264be314806114100570cea44"
+    },
+    {
+      "path": "public/icons/wallet-directory/wallet-strategy.svg",
+      "width": "16",
+      "height": "16",
+      "sha256": "bb6efac71ead22fd77fee8c04e4df63db663f33dd9df1db20e19a484ce13f062"
+    },
+    {
+      "path": "public/icons/wallet-directory/yield.svg",
+      "width": "12",
+      "height": "12",
+      "sha256": "3632571a1d8d5d2d2f19a509232b51a1401bd8c50db4f52b5ed9860dd77ae672"
+    }
+  ],
+  "verification": "Native SVGs downloaded without geometry edits. Browser verified 16px list/action icons, 12px count/yield icons and 128px summary watermark. No temporary Figma URL used at runtime."
+}

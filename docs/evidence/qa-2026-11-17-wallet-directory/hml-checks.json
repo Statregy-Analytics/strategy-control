@@ -1,0 +1,196 @@
+{
+  "totalColumns": [
+    "Carteira",
+    "Tipo",
+    "Cliente",
+    "ID Carteira",
+    "Saldo",
+    "Moedas",
+    "Status",
+    "Última movimentação",
+    "Contratos / Bens",
+    ""
+  ],
+  "searchCount": 4,
+  "secondPage": "CARTEIRA\tTIPO\tCLIENTE\tID CARTEIRA\tSALDO\tMOEDAS\tSTATUS\tÚLTIMA MOVIMENTAÇÃO\tCONTRATOS / BENS\t\n\nCarteira Strategy\n—\n\tStrategy\t\nÉric Vicente teste novo\nSA-FBD9E7BA\n\t\n—\n\t\nR$ 50.000,00\n\t\nBRL\n\t—\t\n—\n\t\n1\t\n\n\nCarteira Strategy\n—\n\tStrategy\t\nMarcos Marciano Katan\nSA-0C314AAF\n\t\n—\n\t\nR$ 50.000,00\n\t\nBRL\n\t—\t\n—\n\t\n1\t",
+  "depositColumns": [
+    "Carteira",
+    "Cliente",
+    "ID Cliente",
+    "Moedas",
+    "Saldo",
+    "Última movimentação",
+    "Movimentações",
+    "Status",
+    ""
+  ],
+  "sortedDeposit": "CARTEIRA\tCLIENTE\tID CLIENTE\tMOEDAS\tSALDO\tÚLTIMA MOVIMENTAÇÃO\tMOVIMENTAÇÕES\tSTATUS\t\n\nCarteira de Depósito\n44fd4a72-9880-445f-957d-ec99b48d273f\n\t\nÉric Vicente\n—\n\t\nSA-B3A2E852\n\t\nBRL\n\t\nR$ 50.000,00\n\t\nDepósito\n09/10/2026, 10:47:40\n\t—\tATIVA\t\n\n\nCarteira de Depósito\na4a754a8-ce55-4d03-9822-012df4c3d737\n\t\nClaudio Manhães\n—\n\t\nSA-B47E6862\n\t\nBRL\n\t\nR$ 25.000,00\n\t\nDepósito\n09/10/2026, 10:47:44\n\t—\tATIVA\t",
+  "ericStatement": "Extrato\nclose\nCARTEIRA DE DEPÓSITO\nR$ 50.000,00\nUS$ 0,00\nCARTEIRA STRATEGY\nR$ 0,10\nUS$ 250.000,00\nPATRIMÔNIO\nR$ 370.000,00\nUS$ 0,00\nCARTEIRA TOTAL\nR$ 420.000,10\nUS$ 250.000,00\n\nTotal = Depósito + Strategy + Patrimônio, por moeda. Valores de moedas diferentes não são somados.\n\nClique de novo no card para desmarcar\n\nCARTEIRA DE DEPÓSITO · SALDOS POR MOEDA\nMOEDA\tSALDO\tÚLTIMO DEPÓSITO\tÚLTIMO SAQUE\nBRL\tR$ 50.000,00\t—\t—\nUSD\tUS$ 0,00\t—\t—\n\nSem rendimento. Saques em até 1 dia útil. Transferência para Strategy imediata.\n\nEXTRATO DA CONTA\nExportar\nDATA E HORA\tTIPO\tCARTEIRA\tDESCRIÇÃO\tVALOR\tSALDO\n09/10/2026, 10:47:40\t\nDepósito\tLivre\tREQ-2026-D578DE0D\tR$ 50.000,00\tR$ 50.000,00",
+  "strategyColumns": [
+    "Carteira",
+    "Cliente",
+    "N° contratos",
+    "Capital base",
+    "Saldo atual",
+    "Rendimento",
+    "Moedas",
+    "Status",
+    ""
+  ],
+  "claudioContracts": [
+    "CarteiraClienteN° contratosCapital baseSaldo atualRendimentoMoedasStatus",
+    "Carteira Strategy—Claudio ManhãesSA-B47E68622—R$ 261.500,20——BRL—",
+    "Contratos atrelados à carteira 2 contratosQA 136 - distribuicao atribuida - teste ficticio 16-11CTR-26AB2AB6AtivoVigência: 16/11/2026 a 16/12/2026Valor inicial R$ 0,20Valor base R$ 0,20Valor atual IndisponívelValor bloqueado IndisponívelParticipação 66,667%Ver contratoBeta Growth SpecCTR-403B56CCEncerradoVigência: 01/06/2024 a 01/06/2026Valor inicial R$ 261.500,00Valor base R$ 261.500,00Valor atual IndisponívelValor bloqueado IndisponívelParticipação 100%Ver contrato"
+  ],
+  "assetColumns": [
+    "Carteira",
+    "Cliente",
+    "Bens",
+    "Valor declarado",
+    "Valor atual",
+    "Valorização",
+    "Variação",
+    "Status",
+    ""
+  ],
+  "claudioAssets": "BEM\tTIPO\tVALOR DECLARADO\tSITUAÇÃO\tAÇÕES\nQA121-130 Administradora fictícia · QA121/130\tConsórcio\tR$ 100,00\tFinanciado\t\nmore_vert\n\nQA121-130 — investimento fictício\tInvestimento\tR$ 100,00\tQuitado\t\nmore_vert\n\nMarca fictícia QA Modelo fictício QA121-130\tVeículo\tR$ 100,00\tQuitado\t\nmore_vert\n\nQA121–130 — imóvel fictício de upload\tImóvel\tR$ 100,00\tQuitado\t\nmore_vert\n\nMarca fictícia QA Modelo fictício QA\tVeículo\tR$ 1.000,00\tInativo\t\nmore_vert",
+  "obsoleteNotice": 0,
+  "persistedCurrencyPassed": true,
+  "claudioPortfolio": "Carteiras do cliente\nclose\nCliente\nClaudio Manhães\ncancel\narrow_drop_down\nVisão consolidada (Carteira)\nCARTEIRA DE DEPÓSITO\nR$ 25.000,00\nCARTEIRA STRATEGY\nR$ 261.500,20\nPATRIMÔNIO\nR$ 310,00\nCARTEIRA TOTAL\nR$ 286.810,20\n\nTotal = Depósito + Strategy + Patrimônio, por moeda. Valores de moedas diferentes não são somados.\n\nClique de novo no card para desmarcar\n\nCARTEIRA DE DEPÓSITO · SALDOS POR MOEDA\nMoeda\tSaldo\tÚltimo depósito\tÚltimo saque\nBRL\tR$ 25.000,00\t—\t—\n\nSem rendimento. Saques em até 1 dia útil. Transferência para Strategy imediata.\n\nExtrato\nDe\nAté\ndownload\nExportar extrato CSV",
+  "backToStatement": true,
+  "newTransactionOpens": true,
+  "finalGeometry": [
+    {
+      "height": 16,
+      "loaded": true,
+      "name": "download.svg",
+      "width": 16
+    },
+    {
+      "height": 16,
+      "loaded": true,
+      "name": "plus.svg",
+      "width": 16
+    },
+    {
+      "height": 128,
+      "loaded": true,
+      "name": "summary-watermark.svg",
+      "width": 128
+    },
+    {
+      "height": 16,
+      "loaded": true,
+      "name": "summary-wallet.svg",
+      "width": 16
+    },
+    {
+      "height": 16,
+      "loaded": true,
+      "name": "summary-wallet.svg",
+      "width": 16
+    },
+    {
+      "height": 12,
+      "loaded": true,
+      "name": "summary-arrow.svg",
+      "width": 12
+    },
+    {
+      "height": 16,
+      "loaded": true,
+      "name": "summary-strategy.svg",
+      "width": 16
+    },
+    {
+      "height": 12,
+      "loaded": true,
+      "name": "summary-arrow.svg",
+      "width": 12
+    },
+    {
+      "height": 16,
+      "loaded": true,
+      "name": "summary-wallet.svg",
+      "width": 16
+    },
+    {
+      "height": 12,
+      "loaded": true,
+      "name": "summary-arrow.svg",
+      "width": 12
+    },
+    {
+      "height": 16,
+      "loaded": true,
+      "name": "arrow-left.svg",
+      "width": 16
+    },
+    {
+      "height": 16,
+      "loaded": true,
+      "name": "search.svg",
+      "width": 16
+    },
+    {
+      "height": 16,
+      "loaded": true,
+      "name": "chevron.svg",
+      "width": 16
+    },
+    {
+      "height": 16,
+      "loaded": true,
+      "name": "chevron.svg",
+      "width": 16
+    },
+    {
+      "height": 16,
+      "loaded": true,
+      "name": "chevron.svg",
+      "width": 16
+    },
+    {
+      "height": 16,
+      "loaded": true,
+      "name": "filter.svg",
+      "width": 16
+    },
+    {
+      "height": 16,
+      "loaded": true,
+      "name": "grid.svg",
+      "width": 16
+    },
+    {
+      "height": 16,
+      "loaded": true,
+      "name": "list.svg",
+      "width": 16
+    },
+    {
+      "height": 16,
+      "loaded": true,
+      "name": "wallet-deposit.svg",
+      "width": 16
+    },
+    {
+      "height": 16,
+      "loaded": true,
+      "name": "eye.svg",
+      "width": 16
+    },
+    {
+      "height": 16,
+      "loaded": true,
+      "name": "wallet-deposit.svg",
+      "width": 16
+    },
+    {
+      "height": 16,
+      "loaded": true,
+      "name": "eye.svg",
+      "width": 16
+    }
+  ]
+}

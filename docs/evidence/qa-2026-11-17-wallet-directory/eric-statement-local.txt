@@ -1,0 +1,218 @@
+- complementary:
+  - img "Strategy Analytics"
+  - list "Menu administrativo":
+    - link "Clientes":
+      - /url: /dataManagement
+      - generic: Clientes
+    - link "Contratos":
+      - /url: /contracts
+      - generic: Contratos
+    - link "Lógicas":
+      - /url: /logics
+      - generic: Lógicas
+    - link "Transações":
+      - /url: /transaction
+      - generic: Transações
+    - link "Crédito":
+      - /url: /credit
+      - generic: Crédito
+    - link "Comunicados":
+      - /url: /communications
+      - generic: Comunicados
+  - button "Expandir":
+    - generic: Configurações
+  - generic: person
+  - generic: Local Admin
+  - generic: admin@example.com
+  - link "Trocar Sistema":
+    - /url: /
+    - generic: Trocar Sistema
+  - button "Sair":
+    - generic: Sair
+  - button "Recolher menu"
+- main:
+  - heading "Transações" [level=1]
+  - paragraph: Centro operacional de movimentações
+  - button "Exportar" [disabled]:
+    - generic: Exportar
+  - button "Nova Transação":
+    - generic: Nova Transação
+  - region "Visão consolidada das carteiras":
+    - button "Carteira Total Consolidado Moedas Criadas US$ 2.150.341,94 R$ 12.439.943,16 Cotação USD → BRL · 5,7851 Em circulação — —":
+      - generic: Carteira Total
+      - generic: Consolidado
+      - generic: Moedas Criadas
+      - strong: US$ 2.150.341,94
+      - generic: R$ 12.439.943,16
+      - generic: Cotação USD → BRL · 5,7851
+      - generic: Em circulação
+      - strong: —
+      - generic: —
+    - button "Carteira de Depósito Disponível US$ 12.964,34 R$ 75.000,00 Cotação USD → BRL · 5,7851" [pressed]:
+      - generic: Carteira de Depósito
+      - generic: Disponível
+      - strong: US$ 12.964,34
+      - generic: R$ 75.000,00
+      - generic: Cotação USD → BRL · 5,7851
+    - button "Carteira Strategy — US$ 1.040.579,21 R$ 6.019.854,80 Cotação USD → BRL · 5,7851":
+      - generic: Carteira Strategy
+      - generic: —
+      - strong: US$ 1.040.579,21
+      - generic: R$ 6.019.854,80
+      - generic: Cotação USD → BRL · 5,7851
+    - button "Carteira de Patrimônio Bens declarados US$ 1.096.798,39 R$ 6.345.088,36 Cotação USD → BRL · 5,7851":
+      - generic: Carteira de Patrimônio
+      - generic: Bens declarados
+      - strong: US$ 1.096.798,39
+      - generic: R$ 6.345.088,36
+      - generic: Cotação USD → BRL · 5,7851
+  - button "Voltar para Extrato Global":
+    - generic: Voltar para Extrato Global
+  - heading "Carteiras de Depósito" [level=2]
+  - paragraph: Recursos disponíveis para movimentação imediata
+  - textbox "Buscar por cliente, ID, carteira, moeda..."
+  - generic: Status
+  - combobox "Status da carteira": Status
+  - generic: Moeda
+  - combobox "Filtrar moeda": Moeda
+  - generic: Maior valor
+  - combobox "Ordenar carteiras": Maior valor
+  - button "Mais Filtros" [disabled]:
+    - generic: Mais Filtros
+  - group "Visualização das carteiras":
+    - button "Cards"
+    - button "Lista" [pressed]
+  - paragraph: 2 carteiras encontradas
+  - table:
+    - rowgroup:
+      - row "Carteira Cliente ID Cliente Moedas Saldo Última movimentação Movimentações Status":
+        - columnheader "Carteira"
+        - columnheader "Cliente"
+        - columnheader "ID Cliente"
+        - columnheader "Moedas"
+        - columnheader "Saldo"
+        - columnheader "Última movimentação"
+        - columnheader "Movimentações"
+        - columnheader "Status"
+        - columnheader
+    - rowgroup:
+      - row "Carteira de Depósito a4a754a8-ce55-4d03-9822-012df4c3d737 Claudio Manhães — SA-B47E6862 BRL R$ 25.000,00 09/10/2026, 10:47:44 — Ativa Ver movimentações de Claudio Manhães":
+        - cell "Carteira de Depósito a4a754a8-ce55-4d03-9822-012df4c3d737":
+          - generic: Carteira de Depósito
+          - generic "a4a754a8-ce55-4d03-9822-012df4c3d737"
+        - cell "Claudio Manhães —":
+          - generic: Claudio Manhães
+          - generic: —
+        - cell "SA-B47E6862":
+          - generic "SA-B47E6862"
+        - cell "BRL":
+          - generic: BRL
+        - cell "R$ 25.000,00":
+          - strong:
+            - generic: R$ 25.000,00
+        - cell "09/10/2026, 10:47:44":
+          - generic: 09/10/2026, 10:47:44
+        - cell "—":
+          - generic: —
+        - cell "Ativa":
+          - generic: Ativa
+        - cell "Ver movimentações de Claudio Manhães":
+          - button "Ver movimentações de Claudio Manhães"
+      - row "Carteira de Depósito 44fd4a72-9880-445f-957d-ec99b48d273f Éric Vicente — SA-B3A2E852 BRL R$ 50.000,00 09/10/2026, 10:47:40 — Ativa Ver movimentações de Éric Vicente":
+        - cell "Carteira de Depósito 44fd4a72-9880-445f-957d-ec99b48d273f":
+          - generic: Carteira de Depósito
+          - generic "44fd4a72-9880-445f-957d-ec99b48d273f"
+        - cell "Éric Vicente —":
+          - generic: Éric Vicente
+          - generic: —
+        - cell "SA-B3A2E852":
+          - generic "SA-B3A2E852"
+        - cell "BRL":
+          - generic: BRL
+        - cell "R$ 50.000,00":
+          - strong:
+            - generic: R$ 50.000,00
+        - cell "09/10/2026, 10:47:40":
+          - generic: 09/10/2026, 10:47:40
+        - cell "—":
+          - generic: —
+        - cell "Ativa":
+          - generic: Ativa
+        - cell "Ver movimentações de Éric Vicente":
+          - button "Ver movimentações de Éric Vicente"
+  - generic: "Itens por página:"
+  - generic: "10"
+  - combobox "Itens por página": "10"
+  - generic: keyboard_arrow_down
+  - generic: Mostrando 1 a 2 de 2 registros
+  - generic: Página 1 de 1
+  - button "Anterior" [disabled]:
+    - generic: Anterior
+  - navigation "Paginação":
+    - button "1":
+      - generic: "1"
+  - button "Próximo" [disabled]:
+    - generic: Próximo
+- dialog:
+  - generic: Extrato
+  - button "Fechar painel":
+  - region "Visão consolidada das carteiras":
+    - button "Carteira de Depósito R$ 50.000,00 US$ 0,00" [pressed]:
+      - generic: Carteira de Depósito
+      - strong: R$ 50.000,00
+      - strong: US$ 0,00
+    - button "Carteira Strategy R$ 0,10 US$ 250.000,00":
+      - generic: Carteira Strategy
+      - strong: R$ 0,10
+      - strong: US$ 250.000,00
+    - button "Patrimônio R$ 370.000,00 US$ 0,00":
+      - generic: Patrimônio
+      - strong: R$ 370.000,00
+      - strong: US$ 0,00
+    - button "Carteira Total R$ 420.000,10 US$ 250.000,00":
+      - generic: Carteira Total
+      - strong: R$ 420.000,10
+      - strong: US$ 250.000,00
+    - paragraph: Total = Depósito + Strategy + Patrimônio, por moeda. Valores de moedas diferentes não são somados.
+    - paragraph: Clique de novo no card para desmarcar
+    - heading "Carteira de Depósito · saldos por moeda" [level=3]
+    - table:
+      - rowgroup:
+        - row "Moeda Saldo Último depósito Último saque":
+          - columnheader "Moeda"
+          - columnheader "Saldo"
+          - columnheader "Último depósito"
+          - columnheader "Último saque"
+      - rowgroup:
+        - row "BRL R$ 50.000,00 — —":
+          - cell "BRL"
+          - cell "R$ 50.000,00"
+          - cell "—"
+          - cell "—"
+        - row "USD US$ 0,00 — —":
+          - cell "USD"
+          - cell "US$ 0,00"
+          - cell "—"
+          - cell "—"
+    - paragraph: Sem rendimento. Saques em até 1 dia útil. Transferência para Strategy imediata.
+  - generic: Extrato da conta
+  - button "Exportar":
+    - generic: Exportar
+  - table:
+    - rowgroup:
+      - row "Data e hora Tipo Carteira Descrição Valor Saldo":
+        - columnheader "Data e hora"
+        - columnheader "Tipo"
+        - columnheader "Carteira"
+        - columnheader "Descrição"
+        - columnheader "Valor"
+        - columnheader "Saldo"
+    - rowgroup:
+      - row "09/10/2026, 10:47:40 Depósito Livre REQ-2026-D578DE0D R$ 50.000,00 R$ 50.000,00":
+        - cell "09/10/2026, 10:47:40"
+        - cell "Depósito":
+          - generic: Depósito
+        - cell "Livre"
+        - cell "REQ-2026-D578DE0D"
+        - cell "R$ 50.000,00"
+        - cell "R$ 50.000,00"

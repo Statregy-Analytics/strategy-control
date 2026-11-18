@@ -11,12 +11,12 @@
   },
   "metrics": {
     "total": 279,
-    "done": 216,
-    "validation": 54,
+    "done": 220,
+    "validation": 50,
     "adjustment": 9,
     "implemented": 270,
     "implementedPercent": 96.8,
-    "readyPercent": 77.4
+    "readyPercent": 78.9
   },
   "withoutLinkedFigmaReference": {
     "count": 13,
@@ -3083,17 +3083,21 @@
       "link": "[1484:87711](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-87711)",
       "counted": true,
       "group": "T03",
-      "category": "Ajuste de front",
-      "front": "validation",
-      "blockers": [],
-      "reason": "Componentes e consultas existem, mas falta comparação integral aos estados listados e regressão integrada. Isto é trabalho de validação do front, sem afirmar novo defeito visual ou ausência de API.",
+      "category": "Bloqueio backend",
+      "front": "done",
+      "blockers": [
+        "backend",
+        "designer"
+      ],
+      "reason": "V05: lista Depósito comparada, com máscara recebida, ID, moedas, saldo, tipo/horário da última movimentação e badges. Extrato real do Éric abriu no destino correto; contagem total não é inferida da coleção recentMovements. Estados vazios/erro e celular corrigidos e testados.",
       "sources": [
         "src/pages/TransctionPage.vue",
         "src/components/Finance/WalletDirectory.vue",
         "src/components/Finance/WalletOverview.vue"
       ],
       "evidence": [
-        "docs/CHECKLIST-UNICO-FIGMA-FRONT.md#ainda-é-trabalho-de-frontend"
+        "docs/CHECKLIST-UNICO-FIGMA-FRONT.md#ainda-é-trabalho-de-frontend",
+        "docs/evidence/qa-2026-11-17-wallet-directory/results.json"
       ],
       "browser": "sem aprovação integral por frame",
       "historicalCategory": "Ajuste de front"
@@ -3129,17 +3133,21 @@
       "link": "[1484:88727](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-88727)",
       "counted": true,
       "group": "T03",
-      "category": "Ajuste de front",
-      "front": "validation",
-      "blockers": [],
-      "reason": "Componentes e consultas existem, mas falta comparação integral aos estados listados e regressão integrada. Isto é trabalho de validação do front, sem afirmar novo defeito visual ou ausência de API.",
+      "category": "Bloqueio backend",
+      "front": "done",
+      "blockers": [
+        "backend",
+        "designer"
+      ],
+      "reason": "V07: lista Patrimônio comparada, com contagem, declaração, slots de valor atual/valorização/variação e olho direto. Consulta de bens usa a moeda persistida, sem criar campos/ações. Dados de mercado e projeção do filtro de tipos permanecem indisponíveis na fonte agregada atual.",
       "sources": [
         "src/pages/TransctionPage.vue",
         "src/components/Finance/WalletDirectory.vue",
         "src/components/Finance/WalletOverview.vue"
       ],
       "evidence": [
-        "docs/CHECKLIST-UNICO-FIGMA-FRONT.md#ainda-é-trabalho-de-frontend"
+        "docs/CHECKLIST-UNICO-FIGMA-FRONT.md#ainda-é-trabalho-de-frontend",
+        "docs/evidence/qa-2026-11-17-wallet-directory/results.json"
       ],
       "browser": "sem aprovação integral por frame",
       "historicalCategory": "Ajuste de front"
@@ -3152,17 +3160,21 @@
       "link": "[1484:89127](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-89127)",
       "counted": true,
       "group": "T03",
-      "category": "Ajuste de front",
-      "front": "validation",
-      "blockers": [],
-      "reason": "Componentes e consultas existem, mas falta comparação integral aos estados listados e regressão integrada. Isto é trabalho de validação do front, sem afirmar novo defeito visual ou ausência de API.",
+      "category": "Bloqueio backend",
+      "front": "done",
+      "blockers": [
+        "backend",
+        "designer"
+      ],
+      "reason": "V03: lista Total comparada ao contexto completo, com tipo, cliente/IDs, moedas, status, vínculos e olho direto. Busca, filtros, paginação, valores indisponíveis e cotação real testados localmente e publicados; projeções agregadas incompletas e exportação global seguem explícitas.",
       "sources": [
         "src/pages/TransctionPage.vue",
         "src/components/Finance/WalletDirectory.vue",
         "src/components/Finance/WalletOverview.vue"
       ],
       "evidence": [
-        "docs/CHECKLIST-UNICO-FIGMA-FRONT.md#ainda-é-trabalho-de-frontend"
+        "docs/CHECKLIST-UNICO-FIGMA-FRONT.md#ainda-é-trabalho-de-frontend",
+        "docs/evidence/qa-2026-11-17-wallet-directory/results.json"
       ],
       "browser": "sem aprovação integral por frame",
       "historicalCategory": "Ajuste de front"
@@ -3198,17 +3210,21 @@
       "link": "[1484:90218](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-90218)",
       "counted": true,
       "group": "T03",
-      "category": "Ajuste de front",
-      "front": "validation",
-      "blockers": [],
-      "reason": "Componentes e consultas existem, mas falta comparação integral aos estados listados e regressão integrada. Isto é trabalho de validação do front, sem afirmar novo defeito visual ou ausência de API.",
+      "category": "Bloqueio backend",
+      "front": "done",
+      "blockers": [
+        "backend",
+        "designer"
+      ],
+      "reason": "V09: lista Strategy comparada, com contratos, capital base, saldo, rendimento, moedas e status nos slots do desenho. Ícones de contagem 12px/ação 16px preservados; abertura e troca de carteira testadas. Encerrado do Cláudio ainda aparece na resposta financeira e não foi corrigido por regra local.",
       "sources": [
         "src/pages/TransctionPage.vue",
         "src/components/Finance/WalletDirectory.vue",
         "src/components/Finance/WalletOverview.vue"
       ],
       "evidence": [
-        "docs/CHECKLIST-UNICO-FIGMA-FRONT.md#ainda-é-trabalho-de-frontend"
+        "docs/CHECKLIST-UNICO-FIGMA-FRONT.md#ainda-é-trabalho-de-frontend",
+        "docs/evidence/qa-2026-11-17-wallet-directory/results.json"
       ],
       "browser": "sem aprovação integral por frame",
       "historicalCategory": "Ajuste de front"

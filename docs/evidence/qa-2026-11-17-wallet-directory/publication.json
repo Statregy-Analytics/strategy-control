@@ -1,0 +1,109 @@
+{
+  "commit": "a5f5bfa4aa59a7b290d86d9d8618e20813f8a1fe",
+  "run": "https://github.com/Statregy-Analytics/strategy-control/actions/runs/44211410121",
+  "assets": [
+    {
+      "path": "public/icons/wallet-directory/activity.svg",
+      "status": 200,
+      "matchesLocal": true
+    },
+    {
+      "path": "public/icons/wallet-directory/arrow-left.svg",
+      "status": 200,
+      "matchesLocal": true
+    },
+    {
+      "path": "public/icons/wallet-directory/chevron.svg",
+      "status": 200,
+      "matchesLocal": true
+    },
+    {
+      "path": "public/icons/wallet-directory/contract.svg",
+      "status": 200,
+      "matchesLocal": true
+    },
+    {
+      "path": "public/icons/wallet-directory/contracts-action.svg",
+      "status": 200,
+      "matchesLocal": true
+    },
+    {
+      "path": "public/icons/wallet-directory/download.svg",
+      "status": 200,
+      "matchesLocal": true
+    },
+    {
+      "path": "public/icons/wallet-directory/eye.svg",
+      "status": 200,
+      "matchesLocal": true
+    },
+    {
+      "path": "public/icons/wallet-directory/filter.svg",
+      "status": 200,
+      "matchesLocal": true
+    },
+    {
+      "path": "public/icons/wallet-directory/grid.svg",
+      "status": 200,
+      "matchesLocal": true
+    },
+    {
+      "path": "public/icons/wallet-directory/list.svg",
+      "status": 200,
+      "matchesLocal": true
+    },
+    {
+      "path": "public/icons/wallet-directory/plus.svg",
+      "status": 200,
+      "matchesLocal": true
+    },
+    {
+      "path": "public/icons/wallet-directory/search.svg",
+      "status": 200,
+      "matchesLocal": true
+    },
+    {
+      "path": "public/icons/wallet-directory/summary-arrow.svg",
+      "status": 200,
+      "matchesLocal": true
+    },
+    {
+      "path": "public/icons/wallet-directory/summary-strategy.svg",
+      "status": 200,
+      "matchesLocal": true
+    },
+    {
+      "path": "public/icons/wallet-directory/summary-wallet.svg",
+      "status": 200,
+      "matchesLocal": true
+    },
+    {
+      "path": "public/icons/wallet-directory/summary-watermark.svg",
+      "status": 200,
+      "matchesLocal": true
+    },
+    {
+      "path": "public/icons/wallet-directory/wallet-assets.svg",
+      "status": 200,
+      "matchesLocal": true
+    },
+    {
+      "path": "public/icons/wallet-directory/wallet-deposit.svg",
+      "status": 200,
+      "matchesLocal": true
+    },
+    {
+      "path": "public/icons/wallet-directory/wallet-strategy.svg",
+      "status": 200,
+      "matchesLocal": true
+    },
+    {
+      "path": "public/icons/wallet-directory/yield.svg",
+      "status": 200,
+      "matchesLocal": true
+    }
+  ],
+  "ciTests": 424,
+  "localTests": 432,
+  "note": "Eight pre-existing uncommitted user tests preserved; no harness in product."
+}

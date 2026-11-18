@@ -10,15 +10,33 @@ Atualizado em 2026-11-17. Contagem por **telas e estados independentes do Figma*
 | Situação | Quantidade |
 | --- | ---: |
 | Total inventariado | **279** |
-| Prontas no frontend | **216** |
-| Implementadas, aguardando revalidação/comparação completa | **54** |
+| Prontas no frontend | **220** |
+| Implementadas, aguardando revalidação/comparação completa | **50** |
 | Ainda exigem implementação, complemento ou correção | **9** |
 | Com implementação existente (prontas + revalidação) | **270 / 279 (96,8%)** |
 
-**Para encerrar o front faltam 9 itens de implementação/ajuste e 54 de revalidação.** “Pronto no frontend” não significa fluxo integrado liberado: dependências de backend/designer podem afetar também telas prontas. Os números não classificam toda pendência como tela nova nem como problema de API. A comparação de Crédito, carteira global e editor editorial que não foi concluída integralmente permanece em revalidação.
+**Para encerrar o front faltam 9 itens de implementação/ajuste e 50 de revalidação.** “Pronto no frontend” não significa fluxo integrado liberado: dependências de backend/designer podem afetar também telas prontas. Os números não classificam toda pendência como tela nova nem como problema de API. A comparação de Crédito, carteira global e editor editorial que não foi concluída integralmente permanece em revalidação.
 
 Fonte por frame: [progresso atual](FRONTEND-PROGRESS.json). A base anterior permanece histórica; [atualizações com evidências](FRONTEND-PROGRESS-OVERRIDES.json) registram cada mudança. Ao finalizar **cada entrega**, atualizar os IDs comprovados, executar `node scripts/frontend-progress.mjs` e informar este panorama na resposta final.
 <!-- frontend-progress:end -->
+
+## Entrega 17/11 — listas de carteiras e consolidação por PTAX
+
+**Publicado em homologação:** `a5f5bfa`, [deploy 44211410121 aprovado](https://github.com/Statregy-Analytics/strategy-control/actions/runs/44211410121), incluindo os lotes `dabaf11`, `b9e0c27` e `abce516`. Quatro referências completas comparadas: V03 (Total/Lista), V05 (Depósito/Lista), V07 (Patrimônio/Lista) e V09 (Strategy/Lista). Os outros cards e a expansão E01 continuam em revalidação; não foram encerrados por compartilhar componentes.
+
+- [x] Listas com as colunas de cada carteira, identificação/ID, máscara recebida, chips de moedas, badges e ações diretas. Removido o menu genérico. Ícone de vínculo com 12 px e ação de contratos com 16 px, conforme as referências; rendimento com percentual e valor nos slots do desenho.
+- [x] Resumo global com ativos nativos, seleção da carteira atual e conversão pela rota **já existente** `GET /admin/exchange-rates/latest`. Valores BRL/USD/EUR são convertidos antes da consolidação em USD e BRL. Sem taxa fixa nem soma de moedas nativas. Falha de uma cotação não apaga as demais; resposta atrasada não entra na nova consulta.
+- [x] Filtros combinados, busca sem acentos, ordenação em moeda comum e limpeza sem ordenação/página antigas. Vazios deixam de ser ocultados pela configuração da tabela; uma consulta indisponível não informa falsamente zero carteiras. Última movimentação usa o tipo somente quando a evidência coincide com o horário. Moedas do catálogo fora da lista legada, como TWD, deixam de aparecer como valor indisponível.
+- [x] Navegador local: quatro listas com dados controlados; paginação com 12 registros; busca + status + moeda + ordenação; campos ausentes; mensagem vazia/indisponibilidade; celular sem overflow da página e rolagem interna da tabela. Prévia controlada removida antes do build. Integração real: totais com PTAX 5,7851; carteira do Cláudio; extrato do Éric com R$ 50.000,00; vínculos de contratos e abertura da consulta de bens. Nenhum registro ou saldo alterado.
+- [x] A consulta de bens passa a mostrar o valor na moeda persistida (`currencyCode`), usando o resolvedor existente. Removida a mensagem antiga de tipos indefinidos e traduzido o status Financed para Financiado. Sem campos ou ações novos.
+- [x] 432 testes locais (incluindo oito testes preexistentes do usuário fora deste commit), 424 no CI, lint, build e auditoria passaram. A auditoria e a mitigação existente foram preservadas. Em homologação: quatro listas, busca, paginação, ordenação de Depósito, PTAX, carteira do Cláudio, extrato do Éric, vínculos, bens com moeda/status corrigidos, retorno ao extrato e abertura/fechamento de Nova Transação. Vinte ativos publicados conferidos por HTTP e hash. Nenhuma operação financeira executada.
+- [ ] **Dados/projeção agregada:** valor de mercado, valorização/variação do patrimônio, capital base/rendimento, tipos de bens, status/código público de grupos sem carteira ledger e contagem total de movimentos não vêm na projeção agregada consumida. Não converter valor declarado/líquido em valor de mercado; não usar a quantidade de `recentMovements` como total. Rotas de patrimônio/contratos/extrato individuais **já existem**; esta observação não solicita rotas duplicadas. Campos sem fonte confirmada ficam indisponíveis.
+- [ ] **Reteste do backend:** a resposta do Cláudio ainda inclui Beta Growth Spec encerrado (R$ 261.500,00) junto do contrato QA de R$ 0,20, totalizando R$ 261.500,20 na Strategy. Mantida a resposta; não houve compensação ou exclusão manual no front.
+- [ ] **Designer:** definir escopo/formato do Exportar global e estados abertos de Mais Filtros. O CSV do extrato individual já existe. Não foram inventados campos adicionais; o total reutiliza o filtro existente de moeda. Não confundir a consulta legada de bens aberta pelo olho com uma nova tela aprovada no Figma.
+
+Panorama desta rodada: **279 estados, 220 prontos, 50 em revalidação e 9 ajustes**. Implementação existente **96,8%**; prontos **78,9%**. Permanecem 13 superfícies sem frame vinculado para avaliação de Éric; nenhuma nova nesta rodada.
+
+[Resultados e limites](evidence/qa-2026-11-17-wallet-directory/results.json) · [Referências](evidence/qa-2026-11-17-wallet-directory/figma-references.json) · [Contrato HTTP consultado](evidence/qa-2026-11-17-wallet-directory/api-contract.json) · [Publicação](evidence/qa-2026-11-17-wallet-directory/publication.json) · [Verificações em homologação](evidence/qa-2026-11-17-wallet-directory/hml-checks.json).
 
 ## Entrega 17/11 — revisão dos editores editoriais
 
@@ -1128,16 +1146,16 @@ Legenda vigente: classificação de 16/11 por código e evidências, detalhada e
 | [2282:289](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=2282-289)     | E11 · Painel de estados do componente · Cancelar                                              | Pronto no front · T02 |
 | [1484:86915](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-86915) | F02 · Carteiras · Cards ↔ Lista                                                               | Agregador/conexão — fora do percentual; ver estados filhos |
 | [1484:86920](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-86920) | V02 · Carteira Total · Cards                                                                  | Implementado · revalidar · T03 |
-| [1484:87711](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-87711) | V05 · Carteira de Depósito · Lista                                                            | Implementado · revalidar · T03 |
+| [1484:87711](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-87711) | V05 · Carteira de Depósito · Lista                                                            | Pronto no front · T03 |
 | [1484:88127](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-88127) | V06 · Carteira de Patrimônio · Cards                                                          | Implementado · revalidar · T03 |
-| [1484:88727](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-88727) | V07 · Carteira de Patrimônio · Lista                                                          | Implementado · revalidar · T03 |
+| [1484:88727](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-88727) | V07 · Carteira de Patrimônio · Lista                                                          | Pronto no front · T03 |
 | [1484:89118](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-89118) | A03 · Cards ↔ Lista · Carteira Total                                                          | Agregador/conexão — fora do percentual; ver estados filhos |
 | [1484:89121](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-89121) | A04 · Cards ↔ Lista · Carteira de Depósito                                                    | Agregador/conexão — fora do percentual; ver estados filhos |
 | [1484:89124](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-89124) | A05 · Cards ↔ Lista · Carteira de Patrimônio                                                  | Agregador/conexão — fora do percentual; ver estados filhos |
-| [1484:89127](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-89127) | V03 · Carteira Total · Lista                                                                  | Implementado · revalidar · T03 |
+| [1484:89127](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-89127) | V03 · Carteira Total · Lista                                                                  | Pronto no front · T03 |
 | [1484:89697](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-89697) | V04 · Carteira de Depósito · Cards                                                            | Implementado · revalidar · T03 |
 | [1484:89694](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-89694) | F03 · Carteiras Strategy (contratos vinculados) · Cards + Lista + expansão                    | Agregador/conexão — fora do percentual; ver estados filhos |
-| [1484:90218](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-90218) | V09 · Carteira Strategy · Lista · Recolhido                                                   | Implementado · revalidar · T03 |
+| [1484:90218](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-90218) | V09 · Carteira Strategy · Lista · Recolhido                                                   | Pronto no front · T03 |
 | [1484:90787](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-90787) | V08 · Carteira Strategy · Cards · Recolhido                                                   | Implementado · revalidar · T03 |
 | [1484:91469](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-91469) | E01 · Carteira Strategy · Cards · Expandido                                                   | Implementado · revalidar · T03 |
 | [1484:92301](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-92301) | A06 · Cards · Recolher ↔ Expandir                                                             | Agregador/conexão — fora do percentual; ver estados filhos |

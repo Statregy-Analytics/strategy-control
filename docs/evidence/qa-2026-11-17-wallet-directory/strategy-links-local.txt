@@ -1,0 +1,298 @@
+- complementary:
+  - img "Strategy Analytics"
+  - list "Menu administrativo":
+    - link "Clientes":
+      - /url: /dataManagement
+      - generic: Clientes
+    - link "Contratos":
+      - /url: /contracts
+      - generic: Contratos
+    - link "Lógicas":
+      - /url: /logics
+      - generic: Lógicas
+    - link "Transações":
+      - /url: /transaction
+      - generic: Transações
+    - link "Crédito":
+      - /url: /credit
+      - generic: Crédito
+    - link "Comunicados":
+      - /url: /communications
+      - generic: Comunicados
+  - button "Expandir":
+    - generic: Configurações
+  - generic: person
+  - generic: Local Admin
+  - generic: admin@example.com
+  - link "Trocar Sistema":
+    - /url: /
+    - generic: Trocar Sistema
+  - button "Sair":
+    - generic: Sair
+  - button "Recolher menu"
+- main:
+  - heading "Transações" [level=1]
+  - paragraph: Centro operacional de movimentações
+  - button "Exportar" [disabled]:
+    - generic: Exportar
+  - button "Nova Transação":
+    - generic: Nova Transação
+  - region "Visão consolidada das carteiras":
+    - button "Carteira Total Consolidado Moedas Criadas US$ 2.150.341,94 R$ 12.439.943,16 Cotação USD → BRL · 5,7851 Em circulação — —":
+      - generic: Carteira Total
+      - generic: Consolidado
+      - generic: Moedas Criadas
+      - strong: US$ 2.150.341,94
+      - generic: R$ 12.439.943,16
+      - generic: Cotação USD → BRL · 5,7851
+      - generic: Em circulação
+      - strong: —
+      - generic: —
+    - button "Carteira de Depósito Disponível US$ 12.964,34 R$ 75.000,00 Cotação USD → BRL · 5,7851":
+      - generic: Carteira de Depósito
+      - generic: Disponível
+      - strong: US$ 12.964,34
+      - generic: R$ 75.000,00
+      - generic: Cotação USD → BRL · 5,7851
+    - button "Carteira Strategy — US$ 1.040.579,21 R$ 6.019.854,80 Cotação USD → BRL · 5,7851" [pressed]:
+      - generic: Carteira Strategy
+      - generic: —
+      - strong: US$ 1.040.579,21
+      - generic: R$ 6.019.854,80
+      - generic: Cotação USD → BRL · 5,7851
+    - button "Carteira de Patrimônio Bens declarados US$ 1.096.798,39 R$ 6.345.088,36 Cotação USD → BRL · 5,7851":
+      - generic: Carteira de Patrimônio
+      - generic: Bens declarados
+      - strong: US$ 1.096.798,39
+      - generic: R$ 6.345.088,36
+      - generic: Cotação USD → BRL · 5,7851
+  - button "Voltar para Extrato Global":
+    - generic: Voltar para Extrato Global
+  - heading "Carteiras Strategy" [level=2]
+  - paragraph: Saldo que rende na Strategy, contratos vinculados e saldos por moeda
+  - textbox "Buscar por cliente, carteira, contrato..."
+  - generic: Status
+  - combobox "Status da carteira": Status
+  - generic: Moeda
+  - combobox "Filtrar moeda": Moeda
+  - generic: Maior saldo
+  - combobox "Ordenar carteiras": Maior saldo
+  - button "Mais Filtros" [disabled]:
+    - generic: Mais Filtros
+  - group "Visualização das carteiras":
+    - button "Cards"
+    - button "Lista" [pressed]
+  - paragraph: 6 carteiras encontradas
+  - table:
+    - rowgroup:
+      - row "Carteira Cliente N° contratos Capital base Saldo atual Rendimento Moedas Status":
+        - columnheader "Carteira"
+        - columnheader "Cliente"
+        - columnheader "N° contratos"
+        - columnheader "Capital base"
+        - columnheader "Saldo atual"
+        - columnheader "Rendimento"
+        - columnheader "Moedas"
+        - columnheader "Status"
+        - columnheader
+    - rowgroup:
+      - row "Carteira Strategy — Claudio Manhães SA-B47E6862 2 — R$ 261.500,20 — BRL — Ver movimentações de Claudio Manhães Ver contratos de Claudio Manhães":
+        - cell "Carteira Strategy —":
+          - generic: Carteira Strategy
+          - generic: —
+        - cell "Claudio Manhães SA-B47E6862":
+          - generic: Claudio Manhães
+          - generic: SA-B47E6862
+        - cell "2":
+          - generic: "2"
+        - cell "—":
+          - strong: —
+        - cell "R$ 261.500,20":
+          - strong:
+            - generic: R$ 261.500,20
+        - cell "—"
+        - cell "BRL":
+          - generic: BRL
+        - cell "—":
+          - generic: —
+        - cell "Ver movimentações de Claudio Manhães Ver contratos de Claudio Manhães":
+          - button "Ver movimentações de Claudio Manhães" [disabled]
+          - button "Ver contratos de Claudio Manhães" [expanded]
+      - row "Contratos Atrelados à Carteira":
+        - cell "Contratos Atrelados à Carteira":
+          - region "Contratos Atrelados à Carteira":
+            - heading "Contratos atrelados à carteira" [level=3]
+            - status: 2 contratos
+            - article:
+              - heading "QA 136 - distribuicao atribuida - teste ficticio 16-11" [level=4]
+              - generic: CTR-26AB2AB6
+              - status: Ativo
+              - paragraph: "Vigência: 16/11/2026 a 16/12/2026"
+              - term: Valor inicial
+              - definition:
+                - generic: R$ 0,20
+              - term: Valor base
+              - definition:
+                - generic: R$ 0,20
+              - term: Valor atual
+              - definition:
+                - generic: Indisponível
+              - term: Valor bloqueado
+              - definition:
+                - generic: Indisponível
+              - term: Participação
+              - definition:
+                - generic: 66,667%
+              - link "Ver contrato":
+                - /url: /contracts?contractId=9a5aca18-182f-4493-b47e-5cf25454ad2e
+                - generic: Ver contrato
+            - article:
+              - heading "Beta Growth Spec" [level=4]
+              - generic: CTR-403B56CC
+              - status: Encerrado
+              - paragraph: "Vigência: 01/06/2024 a 01/06/2026"
+              - term: Valor inicial
+              - definition:
+                - generic: R$ 261.500,00
+              - term: Valor base
+              - definition:
+                - generic: R$ 261.500,00
+              - term: Valor atual
+              - definition:
+                - generic: Indisponível
+              - term: Valor bloqueado
+              - definition:
+                - generic: Indisponível
+              - term: Participação
+              - definition:
+                - generic: 100%
+              - link "Ver contrato":
+                - /url: /contracts?contractId=72981540-b565-429c-b1ff-59f61645ba6f
+                - generic: Ver contrato
+      - row "Carteira Strategy — Homologação Pessoa Física SA-D85E86AC 2 — US$ 400.000,00 — USD — Ver movimentações de Homologação Pessoa Física Ver contratos de Homologação Pessoa Física":
+        - cell "Carteira Strategy —":
+          - generic: Carteira Strategy
+          - generic: —
+        - cell "Homologação Pessoa Física SA-D85E86AC":
+          - generic: Homologação Pessoa Física
+          - generic: SA-D85E86AC
+        - cell "2":
+          - generic: "2"
+        - cell "—":
+          - strong: —
+        - cell "US$ 400.000,00":
+          - strong:
+            - generic: US$ 400.000,00
+        - cell "—"
+        - cell "USD":
+          - generic: USD
+        - cell "—":
+          - generic: —
+        - cell "Ver movimentações de Homologação Pessoa Física Ver contratos de Homologação Pessoa Física":
+          - button "Ver movimentações de Homologação Pessoa Física" [disabled]
+          - button "Ver contratos de Homologação Pessoa Física"
+      - row "Carteira Strategy — HPJ Homologação SA-56781CF7 2 — € 230.000,00 US$ 75.000,00 — EUR USD — Ver movimentações de HPJ Homologação Ver contratos de HPJ Homologação":
+        - cell "Carteira Strategy —":
+          - generic: Carteira Strategy
+          - generic: —
+        - cell "HPJ Homologação SA-56781CF7":
+          - generic: HPJ Homologação
+          - generic: SA-56781CF7
+        - cell "2":
+          - generic: "2"
+        - cell "—":
+          - strong: —
+        - cell "€ 230.000,00 US$ 75.000,00":
+          - strong:
+            - generic: € 230.000,00
+            - generic: US$ 75.000,00
+        - cell "—"
+        - cell "EUR USD":
+          - generic: EUR
+          - generic: USD
+        - cell "—":
+          - generic: —
+        - cell "Ver movimentações de HPJ Homologação Ver contratos de HPJ Homologação":
+          - button "Ver movimentações de HPJ Homologação" [disabled]
+          - button "Ver contratos de HPJ Homologação"
+      - row "Carteira Strategy — Éric Vicente SA-B3A2E852 3 — R$ 0,10 US$ 250.000,00 — BRL USD — Ver movimentações de Éric Vicente Ver contratos de Éric Vicente":
+        - cell "Carteira Strategy —":
+          - generic: Carteira Strategy
+          - generic: —
+        - cell "Éric Vicente SA-B3A2E852":
+          - generic: Éric Vicente
+          - generic: SA-B3A2E852
+        - cell "3":
+          - generic: "3"
+        - cell "—":
+          - strong: —
+        - cell "R$ 0,10 US$ 250.000,00":
+          - strong:
+            - generic: R$ 0,10
+            - generic: US$ 250.000,00
+        - cell "—"
+        - cell "BRL USD":
+          - generic: BRL
+          - generic: USD
+        - cell "—":
+          - generic: —
+        - cell "Ver movimentações de Éric Vicente Ver contratos de Éric Vicente":
+          - button "Ver movimentações de Éric Vicente" [disabled]
+          - button "Ver contratos de Éric Vicente"
+      - row "Carteira Strategy — Éric Vicente teste novo SA-FBD9E7BA 1 — R$ 50.000,00 — BRL — Ver movimentações de Éric Vicente teste novo Ver contratos de Éric Vicente teste novo":
+        - cell "Carteira Strategy —":
+          - generic: Carteira Strategy
+          - generic: —
+        - cell "Éric Vicente teste novo SA-FBD9E7BA":
+          - generic: Éric Vicente teste novo
+          - generic: SA-FBD9E7BA
+        - cell "1":
+          - generic: "1"
+        - cell "—":
+          - strong: —
+        - cell "R$ 50.000,00":
+          - strong:
+            - generic: R$ 50.000,00
+        - cell "—"
+        - cell "BRL":
+          - generic: BRL
+        - cell "—":
+          - generic: —
+        - cell "Ver movimentações de Éric Vicente teste novo Ver contratos de Éric Vicente teste novo":
+          - button "Ver movimentações de Éric Vicente teste novo" [disabled]
+          - button "Ver contratos de Éric Vicente teste novo"
+      - row "Carteira Strategy — Marcos Marciano Katan SA-0C314AAF 1 — R$ 50.000,00 — BRL — Ver movimentações de Marcos Marciano Katan Ver contratos de Marcos Marciano Katan":
+        - cell "Carteira Strategy —":
+          - generic: Carteira Strategy
+          - generic: —
+        - cell "Marcos Marciano Katan SA-0C314AAF":
+          - generic: Marcos Marciano Katan
+          - generic: SA-0C314AAF
+        - cell "1":
+          - generic: "1"
+        - cell "—":
+          - strong: —
+        - cell "R$ 50.000,00":
+          - strong:
+            - generic: R$ 50.000,00
+        - cell "—"
+        - cell "BRL":
+          - generic: BRL
+        - cell "—":
+          - generic: —
+        - cell "Ver movimentações de Marcos Marciano Katan Ver contratos de Marcos Marciano Katan":
+          - button "Ver movimentações de Marcos Marciano Katan" [disabled]
+          - button "Ver contratos de Marcos Marciano Katan"
+  - generic: "Itens por página:"
+  - generic: "10"
+  - combobox "Itens por página": "10"
+  - generic: keyboard_arrow_down
+  - generic: Mostrando 1 a 6 de 6 registros
+  - generic: Página 1 de 1
+  - button "Anterior" [disabled]:
+    - generic: Anterior
+  - navigation "Paginação":
+    - button "1":
+      - generic: "1"
+  - button "Próximo" [disabled]:
+    - generic: Próximo

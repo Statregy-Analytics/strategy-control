@@ -698,6 +698,42 @@
       "front": "done",
       "reason": "Painel editorial: composição, ativos nativos, estados de publicação, notificações e histórico real de arquivado conferidos; campos bloqueados e ações impedidas sem sucesso fictício. Agendamento/gravação editorial ampliada dependem do contrato HTTP e do estado aberto do designer.",
       "evidence": "docs/evidence/qa-2026-11-17-editor/results.json"
+    },
+    "1484:89127": {
+      "front": "done",
+      "reason": "V03: lista Total comparada ao contexto completo, com tipo, cliente/IDs, moedas, status, vínculos e olho direto. Busca, filtros, paginação, valores indisponíveis e cotação real testados localmente e publicados; projeções agregadas incompletas e exportação global seguem explícitas.",
+      "blockers": [
+        "backend",
+        "designer"
+      ],
+      "evidence": "docs/evidence/qa-2026-11-17-wallet-directory/results.json"
+    },
+    "1484:87711": {
+      "front": "done",
+      "reason": "V05: lista Depósito comparada, com máscara recebida, ID, moedas, saldo, tipo/horário da última movimentação e badges. Extrato real do Éric abriu no destino correto; contagem total não é inferida da coleção recentMovements. Estados vazios/erro e celular corrigidos e testados.",
+      "blockers": [
+        "backend",
+        "designer"
+      ],
+      "evidence": "docs/evidence/qa-2026-11-17-wallet-directory/results.json"
+    },
+    "1484:88727": {
+      "front": "done",
+      "reason": "V07: lista Patrimônio comparada, com contagem, declaração, slots de valor atual/valorização/variação e olho direto. Consulta de bens usa a moeda persistida, sem criar campos/ações. Dados de mercado e projeção do filtro de tipos permanecem indisponíveis na fonte agregada atual.",
+      "blockers": [
+        "backend",
+        "designer"
+      ],
+      "evidence": "docs/evidence/qa-2026-11-17-wallet-directory/results.json"
+    },
+    "1484:90218": {
+      "front": "done",
+      "reason": "V09: lista Strategy comparada, com contratos, capital base, saldo, rendimento, moedas e status nos slots do desenho. Ícones de contagem 12px/ação 16px preservados; abertura e troca de carteira testadas. Encerrado do Cláudio ainda aparece na resposta financeira e não foi corrigido por regra local.",
+      "blockers": [
+        "backend",
+        "designer"
+      ],
+      "evidence": "docs/evidence/qa-2026-11-17-wallet-directory/results.json"
     }
   }
 }

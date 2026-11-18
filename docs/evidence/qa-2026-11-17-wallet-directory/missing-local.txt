@@ -1,0 +1,76 @@
+- main:
+  - paragraph: Prévia local controlada · dados fictícios · sem gravação
+  - navigation:
+    - button "total"
+    - button "deposit"
+    - button "assets"
+    - button "strategy"
+    - button "Alternar vazio"
+    - button "Alternar indisponível"
+    - button "Alternar campos ausentes" [active]
+  - button "Voltar para Extrato Global":
+    - generic: Voltar para Extrato Global
+  - heading "Carteiras Strategy" [level=2]
+  - paragraph: Saldo que rende na Strategy, contratos vinculados e saldos por moeda
+  - textbox "Buscar por cliente, carteira, contrato..."
+  - generic: Status
+  - combobox "Status da carteira": Status
+  - generic: Moeda
+  - combobox "Filtrar moeda": Moeda
+  - generic: Maior saldo
+  - combobox "Ordenar carteiras": Maior saldo
+  - button "Mais Filtros" [disabled]:
+    - generic: Mais Filtros
+  - group "Visualização das carteiras":
+    - button "Cards"
+    - button "Lista" [pressed]
+  - paragraph: 1 carteiras encontradas
+  - table:
+    - rowgroup:
+      - row "Carteira Cliente N° contratos Capital base Saldo atual Rendimento Moedas Status":
+        - columnheader "Carteira"
+        - columnheader "Cliente"
+        - columnheader "N° contratos"
+        - columnheader "Capital base"
+        - columnheader "Saldo atual"
+        - columnheader "Rendimento"
+        - columnheader "Moedas"
+        - columnheader "Status"
+        - columnheader
+    - rowgroup:
+      - row "Carteira Strategy — Cliente de teste sem projeção — — — — — — — Ver movimentações de Cliente de teste sem projeção Ver contratos de Cliente de teste sem projeção":
+        - cell "Carteira Strategy —":
+          - generic: Carteira Strategy
+          - generic: —
+        - cell "Cliente de teste sem projeção —":
+          - generic: Cliente de teste sem projeção
+          - generic: —
+        - cell "—":
+          - generic: —
+        - cell "—":
+          - strong: —
+        - cell "—":
+          - strong:
+            - generic: —
+        - cell "—"
+        - cell "—":
+          - generic: —
+        - cell "—":
+          - generic: —
+        - cell "Ver movimentações de Cliente de teste sem projeção Ver contratos de Cliente de teste sem projeção":
+          - button "Ver movimentações de Cliente de teste sem projeção" [disabled]
+          - button "Ver contratos de Cliente de teste sem projeção"
+  - generic: "Itens por página:"
+  - generic: "10"
+  - combobox "Itens por página": "10"
+  - generic: keyboard_arrow_down
+  - generic: Mostrando 1 a 1 de 1 registros
+  - generic: Página 1 de 1
+  - button "Anterior" [disabled]:
+    - generic: Anterior
+  - navigation "Pagination":
+    - button "1":
+      - generic: "1"
+  - button "Próximo" [disabled]:
+    - generic: Próximo
+  - status: qa-client-0 · statement · deposit

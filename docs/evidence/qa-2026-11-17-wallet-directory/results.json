@@ -1,0 +1,66 @@
+{
+  "date": "2026-11-17",
+  "frames": [
+    "1484:89127",
+    "1484:87711",
+    "1484:88727",
+    "1484:90218"
+  ],
+  "localBrowser": {
+    "controlled": [
+      "four list column sets and direct row actions",
+      "combined accent-insensitive search + status + currency + same-currency ordering",
+      "12-row pagination next/previous and filter reset",
+      "missing financial fields stay unavailable; zero counts and singular one asset preserved",
+      "empty list message restored; unavailable count does not become zero",
+      "390px viewport has document scrollWidth 375; wide table scroll stays inside table",
+      "native icons loaded at original 12/16px dimensions, action icon distinguished from count icon"
+    ],
+    "integrated": [
+      "real PTAX: USD to BRL 5.7851; BRL/USD/EUR values converted before aggregation",
+      "customer portfolio opened for Claudio, statement opened for Eric with R$50,000 ledger entry",
+      "Claudio Strategy links expanded; closed Beta Growth Spec still included in the response",
+      "asset eye expanded the existing assets consultation; removed obsolete message claiming types undefined",
+      "Shared currency resolver wired to asset consultation; persisted BRL values and Portuguese Financiado verified on final HML build."
+    ],
+    "writes": "No transaction, asset or contract created/edited/approved/executed. No wallet balances changed. Harness removed before build; copied to evidence only."
+  },
+  "automation": {
+    "tests": 432,
+    "lint": "passed",
+    "audit": "passed with existing verified mitigation and no audit disabled",
+    "build": "local and final CI passed",
+    "ciTests": 424
+  },
+  "backend": [
+    "Portfolio has declared and financed asset values; no current market valuation/appreciation/variation projection. These remain unavailable, not derived from net equity.",
+    "Wallet list lacks aggregate movement count and grouped public wallet code. recentMovements is not treated as a complete transaction count; wallet statements already exist.",
+    "No aggregate projection of capital-base/yield/asset type breakdown/status for groups without ledger wallets. Portfolio and asset/contract/detail routes already exist; do not request duplicate routes.",
+    "Retest: Claudio response still includes closed Beta Growth Spec (R$261,500) together with QA contract R$0.20, yielding Strategy R$261,500.20. Front preserves response; no manual ledger adjustment."
+  ],
+  "designer": [
+    "Define export scope/format for global header; statement CSV export already exists, not a missing endpoint.",
+    "Opened extra-filter panels are not in the recovered four references. Reuse existing currency filter on total; do not invent additional fields. Asset-type filter remains unavailable without aggregate type projection."
+  ],
+  "publication": "https://github.com/Statregy-Analytics/strategy-control/actions/runs/44211410121",
+  "metricsAfter": {
+    "total": 279,
+    "done": 220,
+    "validation": 50,
+    "adjustment": 9,
+    "implemented": 270,
+    "implementedPercent": 96.8,
+    "readyPercent": 78.9
+  },
+  "unreferencedSurfaces": 13,
+  "homologationBrowser": [
+    "four lists checked against published build",
+    "accent-insensitive search found four Eric wallet groups; pagination next/previous",
+    "deposit sorted by known BRL amount; Eric statement opens R$50,000 ledger entry",
+    "Claudio portfolio opens correct customer, R$25,000 deposit",
+    "Strategy links expand closed Beta Growth Spec and active QA contract; API issue remains",
+    "asset consultation shows persisted BRL R$100 values and Financiado; no obsolete notice",
+    "back to global statement and existing New Transaction modal open/close",
+    "no financial transaction or customer record written"
+  ]
+}
