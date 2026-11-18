@@ -1,0 +1,58 @@
+{
+  "date": "2026-11-18",
+  "sourceCommit": "cd4424674464935de3c5322b793cab852177468e",
+  "completedFrames": [
+    "1:72906",
+    "1:73097",
+    "211:28821"
+  ],
+  "reclassifiedAsFrontendAdjustment": [
+    "1:45691",
+    "1:46764",
+    "1:48631",
+    "1:50141"
+  ],
+  "checks": {
+    "tests": 507,
+    "lint": "passed",
+    "build": "passed",
+    "securityAudit": "passed; two existing moderate, no blocked vulnerabilities",
+    "scopedDiffCheck": "passed"
+  },
+  "localBrowser": {
+    "components": "Real Vue/Quasar components with controlled props/callbacks, not a fake API/store",
+    "communication": [
+      "native theme 2 and 3 comparison",
+      "filters, unread by keyboard, apply, clear, pagination, list/card, Enter on card",
+      "loading/error/retry, confirmed empty and unavailable distinct",
+      "thumbnail failure/reset; missing author/image not fabricated",
+      "390px mobile; no outer horizontal overflow"
+    ],
+    "operations": [
+      "nine columns and exact two-line empty state",
+      "null query unavailable, loading/error/retry, zero/unknown values, parity and P/L",
+      "desktop section 301.94px height, table header 40px; internal mobile scroll"
+    ],
+    "temporaryPreviews": "Archived as text only; removed from product before build",
+    "dynamicThumbnails": "Evidence only; not shipped"
+  },
+  "publishedBrowser": {
+    "communication": "Updated native header/menu, category+period+unread, apply, loading guards, clear, list/card and retry exercised; actual API returns document level 0 / required 2. Full positive list and pagination tested locally only.",
+    "contracts": "Three contracts loaded; Legacy Prime detail opens, nine operation headers and unavailable query message present, documents/history independent; return to list confirmed.",
+    "financialWrites": false,
+    "nativeAssetsVerified": 12,
+    "runConclusion": "success"
+  },
+  "limitations": [
+    "Full contract page variants are incomplete frontend work, not just API blockers.",
+    "Four Home/profile theme variants remain without full comparison.",
+    "Four designer-dependent frames remain in validation.",
+    "Positive controlled states do not prove integrated financial persistence."
+  ],
+  "documentationChecks": {
+    "adminLint": "passed",
+    "adminBuild": "passed",
+    "scopedDiff": "passed",
+    "progressGenerator": "passed; 279/258/8/13"
+  }
+}

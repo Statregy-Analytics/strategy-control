@@ -1,0 +1,58 @@
+{
+  "date": "2026-11-18",
+  "source": "https://strategyanalytics.codebiz.com.br/openapi/v1.json",
+  "announcementFields": [
+    "id",
+    "publicCode",
+    "title",
+    "summary",
+    "body",
+    "category",
+    "publishedAtUtc",
+    "isRead",
+    "readAtUtc"
+  ],
+  "announcementQuery": [
+    "page",
+    "pageSize",
+    "category",
+    "unread",
+    "X-Workspace-Id"
+  ],
+  "clientOperationPaths": [],
+  "contractDetailFields": [
+    "id",
+    "publicCode",
+    "name",
+    "businessStatus",
+    "term",
+    "startDate",
+    "expectedEndDate",
+    "currency",
+    "initialContractualCapital",
+    "myParticipation",
+    "primaryEngine",
+    "entryValue",
+    "currentPosition",
+    "result",
+    "createdAtUtc"
+  ],
+  "contractRequestEndpoint": {
+    "path": "/api/v1/client/contracts/requests",
+    "methods": [
+      "post",
+      "get"
+    ],
+    "fields": [
+      "objective",
+      "period",
+      "modality",
+      "initialAmount",
+      "monthlyAmount",
+      "currencyId",
+      "assetTypes",
+      "regions"
+    ]
+  },
+  "note": "No financial requests or additional API paths invented. Contract-request mapping remains frontend integration work to verify."
+}

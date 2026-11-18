@@ -300,11 +300,10 @@
     },
     "1:37994": {
       "front": "validation",
-      "reason": "Modal inicial de modalidade recuperado e testado; o frame não mostra o estado após seleção nem os campos de valor condicionais já existentes. Sem criar campos novos nem aprovar essa composição por inferência. Retorno e preservação do valor foram testados.",
-      "evidence": "docs/evidence/qa-2026-11-18-review26/results.json",
+      "reason": "Designer: falta estado selecionado dos campos de valor no passo 3. Front: POST /client/contracts/requests existe no OpenAPI de 18/11; adapter ainda indisponível. Verificar mapeamento objective/period/modality/initialAmount/monthlyAmount/assetTypes/regions e currencyId do catálogo, sem atribuir ausência da rota ao backend.",
+      "evidence": "docs/evidence/qa-2026-11-18-review15/api-coverage.json",
       "blockers": [
-        "designer",
-        "backend"
+        "designer"
       ]
     },
     "1:39818": {
@@ -919,6 +918,62 @@
       "front": "done",
       "reason": "Lista recomposta com visão geral, performance e cards, três temas comparados. Oferta com fundo correto, ícones nativos por etapa, retorno entre passos, sucesso e encerramento corrigidos e testados no navegador. Dados positivos por props controladas; consulta/navegação reais preservadas; sem escrita simulada no produto.",
       "evidence": "docs/evidence/qa-2026-11-18-review26/results.json",
+      "blockers": [
+        "backend"
+      ]
+    },
+    "1:45691": {
+      "front": "adjustment",
+      "reason": "A rota real mantém detalhe genérico, documentos e histórico. Faltam composição integral de visão geral/performance, distribuição, dividendos/aportes e respectivos estados, App/ativos e popover do desenho. Referências recuperadas; trabalho de frontend ainda necessário, além da projeção HTTP. Navegação funcional não equivale a layout completo.",
+      "evidence": "docs/evidence/qa-2026-11-18-review15/results.json",
+      "blockers": [
+        "backend"
+      ]
+    },
+    "1:46764": {
+      "front": "adjustment",
+      "reason": "A rota real mantém detalhe genérico, documentos e histórico. Faltam composição integral de visão geral/performance, distribuição, dividendos/aportes e respectivos estados, App/ativos e popover do desenho. Referências recuperadas; trabalho de frontend ainda necessário, além da projeção HTTP. Navegação funcional não equivale a layout completo.",
+      "evidence": "docs/evidence/qa-2026-11-18-review15/results.json",
+      "blockers": [
+        "backend"
+      ]
+    },
+    "1:48631": {
+      "front": "adjustment",
+      "reason": "A rota real mantém detalhe genérico, documentos e histórico. Faltam composição integral de visão geral/performance, distribuição, dividendos/aportes e respectivos estados, App/ativos e popover do desenho. Referências recuperadas; trabalho de frontend ainda necessário, além da projeção HTTP. Navegação funcional não equivale a layout completo.",
+      "evidence": "docs/evidence/qa-2026-11-18-review15/results.json",
+      "blockers": [
+        "backend"
+      ]
+    },
+    "1:50141": {
+      "front": "adjustment",
+      "reason": "A rota real mantém detalhe genérico, documentos e histórico. Faltam composição integral de visão geral/performance, distribuição, dividendos/aportes e respectivos estados, App/ativos e popover do desenho. Referências recuperadas; trabalho de frontend ainda necessário, além da projeção HTTP. Navegação funcional não equivale a layout completo.",
+      "evidence": "docs/evidence/qa-2026-11-18-review15/results.json",
+      "blockers": [
+        "backend"
+      ]
+    },
+    "211:28821": {
+      "front": "done",
+      "reason": "Sem consulta de operações no OpenAPI atual; componente não converte indisponibilidade em vazio, nem importa operações fictícias.",
+      "evidence": "docs/evidence/qa-2026-11-18-review15/results.json",
+      "blockers": [
+        "backend"
+      ]
+    },
+    "1:72906": {
+      "front": "done",
+      "reason": "Consulta real de comunicados integrada; API não fornece autor/capa nem filtro por autor. Insights e Relatórios não são preenchidos com comunicados. Estados positivos de imagens/autores testados somente com props controladas.",
+      "evidence": "docs/evidence/qa-2026-11-18-review15/results.json",
+      "blockers": [
+        "backend"
+      ]
+    },
+    "1:73097": {
+      "front": "done",
+      "reason": "Consulta real de comunicados integrada; API não fornece autor/capa nem filtro por autor. Insights e Relatórios não são preenchidos com comunicados. Estados positivos de imagens/autores testados somente com props controladas.",
+      "evidence": "docs/evidence/qa-2026-11-18-review15/results.json",
       "blockers": [
         "backend"
       ]

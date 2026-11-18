@@ -1,0 +1,70 @@
+{
+  "commit": "cd4424674464935de3c5322b793cab852177468e",
+  "run": "https://github.com/WillTbn/Strategy-analytics-v2/actions/runs/44395222107",
+  "conclusion": "success",
+  "publishedEntry": "/assets/index-DWQwtszK.js",
+  "nativeAssets": [
+    {
+      "file": "1-72906-imgChevronDown.svg",
+      "sha256": "d068148040dd0bb241a5317842409c6b33835fdd0e9018526630564dd4e79c7c",
+      "matches": true
+    },
+    {
+      "file": "1-72906-imgChevronLeft.svg",
+      "sha256": "7ebd4a1f25729051740de898dd3889c7d9d7956f8ab3837dde545a06e9095088",
+      "matches": true
+    },
+    {
+      "file": "1-72906-imgChevronRight.svg",
+      "sha256": "45a68007e7c453fde83b5a2499a3acee8e3e3b181f0c81059bb93e62f60b6223",
+      "matches": true
+    },
+    {
+      "file": "1-72906-imgLayoutGrid.svg",
+      "sha256": "284c95d62ae7f1f84c470ff62887a4d6bee6bae7edf35216fce3d66cbef8738f",
+      "matches": true
+    },
+    {
+      "file": "1-72906-imgLayoutList.svg",
+      "sha256": "2df342685e72e2c132d61f91fe447913d3ccaaf5b8c1d3372828107eb084d7f9",
+      "matches": true
+    },
+    {
+      "file": "imgBell.svg",
+      "sha256": "7ff05c0c3744ec1c6a9c804cfc109fada2f414483b40f38a6d5e0a51f7ad9999",
+      "matches": true
+    },
+    {
+      "file": "imgFileDollar.svg",
+      "sha256": "3295cc60e05ee7c8de11ea3dc48ace813fe211b9fcb8a58e56202a2e611e08d9",
+      "matches": true
+    },
+    {
+      "file": "imgGroup1.svg",
+      "sha256": "ef4b466fd4259625b674e4cb7fb0b3f11675a5bcaf44fbe2baf97097cb2bb393",
+      "matches": true
+    },
+    {
+      "file": "imgHome.svg",
+      "sha256": "1edfdbe36a72acf7ced0dff0d8d09f3e0f9fc6166e164da525cecac089d41e51",
+      "matches": true
+    },
+    {
+      "file": "imgReceipt2.svg",
+      "sha256": "b6eccd047a4b1dd18726b1271fe14f8ee27d38b50cfef57b93733a0253c07c18",
+      "matches": true
+    },
+    {
+      "file": "imgSpeakerphone.svg",
+      "sha256": "98bc6fe1e9e5b4443f1d6ec941e822bd88791d01f00a31532f18ce0a1ccf33e2",
+      "matches": true
+    },
+    {
+      "file": "/system/icons/auth/logo-mask.svg",
+      "reusedExistingAsset": true,
+      "sha256": "dc4bcd3d304b16ab6113404295f7d940cac35189b41049b76f485a1fd65b8b9c",
+      "matches": true
+    }
+  ],
+  "browser": "Communication filters and actual level gate; Legacy Prime detail/operations unavailable and return to list verified. No financial writes. Positive list tested locally only."
+}

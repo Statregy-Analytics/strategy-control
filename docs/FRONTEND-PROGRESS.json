@@ -11,12 +11,12 @@
   },
   "metrics": {
     "total": 279,
-    "done": 255,
-    "validation": 15,
-    "adjustment": 9,
-    "implemented": 270,
-    "implementedPercent": 96.8,
-    "readyPercent": 91.4
+    "done": 258,
+    "validation": 8,
+    "adjustment": 13,
+    "implemented": 266,
+    "implementedPercent": 95.3,
+    "readyPercent": 92.5
   },
   "withoutLinkedFigmaReference": {
     "count": 13,
@@ -4534,17 +4534,16 @@
       "category": "Ajuste de front",
       "front": "validation",
       "blockers": [
-        "designer",
-        "backend"
+        "designer"
       ],
-      "reason": "Modal inicial de modalidade recuperado e testado; o frame não mostra o estado após seleção nem os campos de valor condicionais já existentes. Sem criar campos novos nem aprovar essa composição por inferência. Retorno e preservação do valor foram testados.",
+      "reason": "Designer: falta estado selecionado dos campos de valor no passo 3. Front: POST /client/contracts/requests existe no OpenAPI de 18/11; adapter ainda indisponível. Verificar mapeamento objective/period/modality/initialAmount/monthlyAmount/assetTypes/regions e currencyId do catálogo, sem atribuir ausência da rota ao backend.",
       "sources": [
         "portal:src/router/routes.js",
         "portal:src/system/pages/contract/ContractsPage.vue"
       ],
       "evidence": [
         "docs/CHECKLIST-UNICO-FIGMA-FRONT.md#ainda-é-trabalho-de-frontend",
-        "docs/evidence/qa-2026-11-18-review26/results.json"
+        "docs/evidence/qa-2026-11-18-review15/api-coverage.json"
       ],
       "browser": "fluxo não integrado",
       "historicalCategory": "Ajuste de front"
@@ -4633,18 +4632,19 @@
       "counted": true,
       "group": "P04",
       "category": "Ajuste de front",
-      "front": "validation",
+      "front": "adjustment",
       "blockers": [
         "backend"
       ],
-      "reason": "Lista/detalhe genéricos integrados e testados funcionalmente; não comprovam a composição integral dos frames e temas. Métricas individuais/performance ainda têm lacunas registradas. Não marcar todos os desenhos como concluídos pela aprovação de navegação.",
+      "reason": "A rota real mantém detalhe genérico, documentos e histórico. Faltam composição integral de visão geral/performance, distribuição, dividendos/aportes e respectivos estados, App/ativos e popover do desenho. Referências recuperadas; trabalho de frontend ainda necessário, além da projeção HTTP. Navegação funcional não equivale a layout completo.",
       "sources": [
         "portal:src/system/pages/contract/ContractsPage.vue",
         "portal:src/system/pages/contract/ContractPage.vue"
       ],
       "evidence": [
         "docs/QA-2026-11-12-LISTA-CONTRATOS.md",
-        "docs/QA-2026-11-12-CONTRATOS-NAVEGACAO.md"
+        "docs/QA-2026-11-12-CONTRATOS-NAVEGACAO.md",
+        "docs/evidence/qa-2026-11-18-review15/results.json"
       ],
       "browser": "navegação/dados testados; composição integral pendente",
       "historicalCategory": "Ajuste de front"
@@ -4658,18 +4658,19 @@
       "counted": true,
       "group": "P04",
       "category": "Ajuste de front",
-      "front": "validation",
+      "front": "adjustment",
       "blockers": [
         "backend"
       ],
-      "reason": "Lista/detalhe genéricos integrados e testados funcionalmente; não comprovam a composição integral dos frames e temas. Métricas individuais/performance ainda têm lacunas registradas. Não marcar todos os desenhos como concluídos pela aprovação de navegação.",
+      "reason": "A rota real mantém detalhe genérico, documentos e histórico. Faltam composição integral de visão geral/performance, distribuição, dividendos/aportes e respectivos estados, App/ativos e popover do desenho. Referências recuperadas; trabalho de frontend ainda necessário, além da projeção HTTP. Navegação funcional não equivale a layout completo.",
       "sources": [
         "portal:src/system/pages/contract/ContractsPage.vue",
         "portal:src/system/pages/contract/ContractPage.vue"
       ],
       "evidence": [
         "docs/QA-2026-11-12-LISTA-CONTRATOS.md",
-        "docs/QA-2026-11-12-CONTRATOS-NAVEGACAO.md"
+        "docs/QA-2026-11-12-CONTRATOS-NAVEGACAO.md",
+        "docs/evidence/qa-2026-11-18-review15/results.json"
       ],
       "browser": "navegação/dados testados; composição integral pendente",
       "historicalCategory": "Ajuste de front"
@@ -4683,18 +4684,19 @@
       "counted": true,
       "group": "P04",
       "category": "Ajuste de front",
-      "front": "validation",
+      "front": "adjustment",
       "blockers": [
         "backend"
       ],
-      "reason": "Lista/detalhe genéricos integrados e testados funcionalmente; não comprovam a composição integral dos frames e temas. Métricas individuais/performance ainda têm lacunas registradas. Não marcar todos os desenhos como concluídos pela aprovação de navegação.",
+      "reason": "A rota real mantém detalhe genérico, documentos e histórico. Faltam composição integral de visão geral/performance, distribuição, dividendos/aportes e respectivos estados, App/ativos e popover do desenho. Referências recuperadas; trabalho de frontend ainda necessário, além da projeção HTTP. Navegação funcional não equivale a layout completo.",
       "sources": [
         "portal:src/system/pages/contract/ContractsPage.vue",
         "portal:src/system/pages/contract/ContractPage.vue"
       ],
       "evidence": [
         "docs/QA-2026-11-12-LISTA-CONTRATOS.md",
-        "docs/QA-2026-11-12-CONTRATOS-NAVEGACAO.md"
+        "docs/QA-2026-11-12-CONTRATOS-NAVEGACAO.md",
+        "docs/evidence/qa-2026-11-18-review15/results.json"
       ],
       "browser": "navegação/dados testados; composição integral pendente",
       "historicalCategory": "Ajuste de front"
@@ -4708,18 +4710,19 @@
       "counted": true,
       "group": "P04",
       "category": "Ajuste de front",
-      "front": "validation",
+      "front": "adjustment",
       "blockers": [
         "backend"
       ],
-      "reason": "Lista/detalhe genéricos integrados e testados funcionalmente; não comprovam a composição integral dos frames e temas. Métricas individuais/performance ainda têm lacunas registradas. Não marcar todos os desenhos como concluídos pela aprovação de navegação.",
+      "reason": "A rota real mantém detalhe genérico, documentos e histórico. Faltam composição integral de visão geral/performance, distribuição, dividendos/aportes e respectivos estados, App/ativos e popover do desenho. Referências recuperadas; trabalho de frontend ainda necessário, além da projeção HTTP. Navegação funcional não equivale a layout completo.",
       "sources": [
         "portal:src/system/pages/contract/ContractsPage.vue",
         "portal:src/system/pages/contract/ContractPage.vue"
       ],
       "evidence": [
         "docs/QA-2026-11-12-LISTA-CONTRATOS.md",
-        "docs/QA-2026-11-12-CONTRATOS-NAVEGACAO.md"
+        "docs/QA-2026-11-12-CONTRATOS-NAVEGACAO.md",
+        "docs/evidence/qa-2026-11-18-review15/results.json"
       ],
       "browser": "navegação/dados testados; composição integral pendente",
       "historicalCategory": "Ajuste de front"
@@ -4732,19 +4735,20 @@
       "link": "[211:28821](https://www.figma.com/design/BaDXlWpxbIoY4azOaQnXgv?node-id=211-28821)",
       "counted": true,
       "group": "P04",
-      "category": "Ajuste de front",
-      "front": "validation",
+      "category": "Bloqueio backend",
+      "front": "done",
       "blockers": [
         "backend"
       ],
-      "reason": "Lista/detalhe genéricos integrados e testados funcionalmente; não comprovam a composição integral dos frames e temas. Métricas individuais/performance ainda têm lacunas registradas. Não marcar todos os desenhos como concluídos pela aprovação de navegação.",
+      "reason": "Sem consulta de operações no OpenAPI atual; componente não converte indisponibilidade em vazio, nem importa operações fictícias.",
       "sources": [
         "portal:src/system/pages/contract/ContractsPage.vue",
         "portal:src/system/pages/contract/ContractPage.vue"
       ],
       "evidence": [
         "docs/QA-2026-11-12-LISTA-CONTRATOS.md",
-        "docs/QA-2026-11-12-CONTRATOS-NAVEGACAO.md"
+        "docs/QA-2026-11-12-CONTRATOS-NAVEGACAO.md",
+        "docs/evidence/qa-2026-11-18-review15/results.json"
       ],
       "browser": "navegação/dados testados; composição integral pendente",
       "historicalCategory": "Ajuste de front"
@@ -6457,16 +6461,19 @@
       "link": "[1:72906](https://www.figma.com/design/BaDXlWpxbIoY4azOaQnXgv?node-id=1-72906)",
       "counted": true,
       "group": "P12",
-      "category": "Ajuste de front",
-      "front": "validation",
-      "blockers": [],
-      "reason": "Teste de tema no perfil não aprova automaticamente os clones de Home/Comunicação/resumo; manter regressão específica por frame, sem afirmar defeito visual novo.",
+      "category": "Bloqueio backend",
+      "front": "done",
+      "blockers": [
+        "backend"
+      ],
+      "reason": "Consulta real de comunicados integrada; API não fornece autor/capa nem filtro por autor. Insights e Relatórios não são preenchidos com comunicados. Estados positivos de imagens/autores testados somente com props controladas.",
       "sources": [
         "portal:src/system/pages/DashboardPage.vue",
         "portal:src/system/pages/CommunicationPage.vue"
       ],
       "evidence": [
-        "docs/QA-2026-11-04-PERFIL-DOCUMENTACAO-121-130.md"
+        "docs/QA-2026-11-04-PERFIL-DOCUMENTACAO-121-130.md",
+        "docs/evidence/qa-2026-11-18-review15/results.json"
       ],
       "browser": "comparação específica pendente",
       "historicalCategory": "Ajuste de front"
@@ -6479,16 +6486,19 @@
       "link": "[1:73097](https://www.figma.com/design/BaDXlWpxbIoY4azOaQnXgv?node-id=1-73097)",
       "counted": true,
       "group": "P12",
-      "category": "Ajuste de front",
-      "front": "validation",
-      "blockers": [],
-      "reason": "Teste de tema no perfil não aprova automaticamente os clones de Home/Comunicação/resumo; manter regressão específica por frame, sem afirmar defeito visual novo.",
+      "category": "Bloqueio backend",
+      "front": "done",
+      "blockers": [
+        "backend"
+      ],
+      "reason": "Consulta real de comunicados integrada; API não fornece autor/capa nem filtro por autor. Insights e Relatórios não são preenchidos com comunicados. Estados positivos de imagens/autores testados somente com props controladas.",
       "sources": [
         "portal:src/system/pages/DashboardPage.vue",
         "portal:src/system/pages/CommunicationPage.vue"
       ],
       "evidence": [
-        "docs/QA-2026-11-04-PERFIL-DOCUMENTACAO-121-130.md"
+        "docs/QA-2026-11-04-PERFIL-DOCUMENTACAO-121-130.md",
+        "docs/evidence/qa-2026-11-18-review15/results.json"
       ],
       "browser": "comparação específica pendente",
       "historicalCategory": "Ajuste de front"

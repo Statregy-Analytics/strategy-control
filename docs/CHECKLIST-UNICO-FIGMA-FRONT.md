@@ -10,12 +10,12 @@ Atualizado em 2026-11-18. Contagem por **telas e estados independentes do Figma*
 | Situação | Quantidade |
 | --- | ---: |
 | Total inventariado | **279** |
-| Prontas no frontend | **255** |
-| Implementadas, aguardando revalidação/comparação completa | **15** |
-| Ainda exigem implementação, complemento ou correção | **9** |
-| Com implementação existente (prontas + revalidação) | **270 / 279 (96,8%)** |
+| Prontas no frontend | **258** |
+| Implementadas, aguardando revalidação/comparação completa | **8** |
+| Ainda exigem implementação, complemento ou correção | **13** |
+| Com implementação existente (prontas + revalidação) | **266 / 279 (95,3%)** |
 
-**Para encerrar o front faltam 9 itens de implementação/ajuste e 15 de revalidação.** “Pronto no frontend” não significa fluxo integrado liberado: dependências de backend/designer podem afetar também telas prontas. Os números não classificam toda pendência como tela nova nem como problema de API. A comparação de Crédito, carteira global e editor editorial que não foi concluída integralmente permanece em revalidação.
+**Para encerrar o front faltam 13 itens de implementação/ajuste e 8 de revalidação.** “Pronto no frontend” não significa fluxo integrado liberado: dependências de backend/designer podem afetar também telas prontas. Os números não classificam toda pendência como tela nova nem como problema de API. A comparação de Crédito, carteira global e editor editorial que não foi concluída integralmente permanece em revalidação.
 
 Fonte por frame: [progresso atual](FRONTEND-PROGRESS.json). A base anterior permanece histórica; [atualizações com evidências](FRONTEND-PROGRESS-OVERRIDES.json) registram cada mudança. Ao finalizar **cada entrega**, atualizar os IDs comprovados, executar `node scripts/frontend-progress.mjs` e informar este panorama na resposta final.
 <!-- frontend-progress:end -->
@@ -23,6 +23,27 @@ Fonte por frame: [progresso atual](FRONTEND-PROGRESS.json). A base anterior perm
 
 
 
+
+
+## Entrega 18/11 — revalidação dos 15: Comunicação e Operações de contrato
+
+Portal **cd44246**. [Publicação 44395222107](https://github.com/WillTbn/Strategy-analytics-v2/actions/runs/44395222107) concluída. **Três estados prontos:** Comunicação temas 2 e 3 (`1:72906`, `1:73097`) e Operações sem registro (`211:28821`). Esta rodada não conclui os 15 estados originais.
+
+- [x] Comunicação: substituída composição divergente por layout comparado com os contextos completos dos dois temas: lista, miniatura opcional, categorias, datas, painel glass de filtros, controles de visualização e paginação. Cabeçalho com logo, máscara e ícones nativos; reutilizados componentes e HTTP existentes. Nenhum campo ou ação novo.
+- [x] Filtros permanecem acessíveis durante loading/erro; aplicar/limpar protegidos durante consulta. Lista desconhecida difere de lista vazia confirmada. Publicador permanece indisponível, porque a API não fornece autor nem filtro por autor; imagens e autores não são inventados. Insights e Relatórios não são preenchidos com dados de Comunicados.
+- [x] Local controlado: filtros, período, novos via teclado, aplicar/limpar, paginação, lista/card, abertura por Enter, loading, erro/retry, vazio, indisponível e falha/troca de miniatura. Componentes Vue/Quasar reais com props/callbacks; nenhum servidor/store de API fake. Imagens de exemplo e prévias removidas do produto antes do build.
+- [x] Operações: removido JSON fictício; nove colunas e mensagem de vazio do Figma, sem ordenação/paginação extras. Zero e indisponível distintos. Consulta ausente não informa “Nenhuma operação”: mostra indisponibilidade. Cabeçalho de 40 px e seção de 301,94 px comparados; mobile usa rolagem somente na tabela.
+- [x] Mobile de 390 px: corrigida sobreposição das abas e da navegação; sem rolagem horizontal externa. Ícones mantêm dimensões nativas, sem deformação pelo flex. Duas variantes de tema comparadas no navegador com screenshots do Figma.
+- [x] **507 testes aprovados**, incluindo cinco novos cenários; lint, build, auditoria preservada e diff do commit passaram. CI passou auditoria, lint, testes, build, upload e ativação. Doze assets nativos publicados conferidos por SHA256 (onze desta pasta e a máscara de logo já existente).
+- [x] **Publicação conferida:** menu atualizado e filtros de Comunicação funcionais, com bloqueio real de nível 0/exigência 2 preservado. Os estados positivos completos da lista foram testados localmente; não representam leitura integrada autorizada desta conta. Detalhe/retorno de contrato e mensagem de Operações indisponíveis conferidos sem operação financeira.
+- [ ] **Front — quatro detalhes de contrato reclassificados para ajuste:** `1:45691`, `1:46764`, `1:48631` e `1:50141`. A rota atual é genérica e não implementa integralmente visão geral/performance, distribuição, dividendos/aportes, App/ativos e popover dos desenhos. Referências recuperadas e lacunas individualizadas na matriz; não atribuir todo esse trabalho à API nem aprovar os quatro pela navegação.
+- [ ] **Revalidação restante:** quatro temas de Home/perfil (`1:68461`, `1:68794`, `1:73288`, `1:73602`) ainda sem comparação integral. Quatro pontos de designer permanecem explícitos: LG07 “ao lado” vs referência empilhada; EC01 prancha vazia; CO06 origem do índice H2/H3; oferta passo 3 sem estado selecionado dos valores. Não foram inventados desenhos para encerrá-los.
+- [ ] **HTTP atual:** Comunicados não retorna capa/autor; não foi localizada consulta de operações de contrato no OpenAPI atual. Projeções financeiras completas continuam separadas dos ajustes visuais. Falhas/ausências da API não são convertidas em dados de exemplo.
+- [ ] **Correção da pendência antiga de solicitação:** `POST /client/contracts/requests` **já existe**, assim como GET no cliente. O adapter do front ainda está indisponível e precisa mapear os campos e resolver `currencyId` pelo catálogo (`currencies[].id`). As referências antigas abaixo sobre ausência de POST foram superadas por esta conferência de 18/11; não pedir ao backend uma rota já existente. Ausência de enums e confirmação de mapeamento não equivalem a falha reproduzida de API.
+
+Panorama: **279 estados: 258 prontos, 8 em revalidação, 13 em implementação/ajuste. Implementação existente 266/279 (95,3%); prontos 92,5%.** A redução de 96,8% para 95,3% corrige a classificação de quatro detalhes incompletos; não houve retirada de telas prontas. Permanecem **13 superfícies sem referência**, nenhuma nova.
+
+[Evidências e limites dos testes](evidence/qa-2026-11-18-review15/results.json) · [Matriz dos 15](evidence/qa-2026-11-18-review15/review-matrix.json) · [Referências](evidence/qa-2026-11-18-review15/references.json) · [Contextos](evidence/qa-2026-11-18-review15/high-fidelity.json) · [Cobertura HTTP](evidence/qa-2026-11-18-review15/api-coverage.json) · [Publicação e hashes](evidence/qa-2026-11-18-review15/publication.json) · [Tema 2 local](evidence/qa-2026-11-18-review15/communication-theme2-viewport-final.png) · [Tema 3 local](evidence/qa-2026-11-18-review15/communication-theme3-viewport-final.png) · [Operações local](evidence/qa-2026-11-18-review15/contract-operations-empty-controlled.png) · [Mobile local](evidence/qa-2026-11-18-review15/communication-mobile-controlled.png).
 
 ## Entrega 18/11 — alavancagens: revisão, Pix e comprovante de parcelas
 
@@ -1433,11 +1454,11 @@ Legenda vigente: classificação de 16/11 por código e evidências, detalhada e
 | [1:39818](https://www.figma.com/design/BaDXlWpxbIoY4azOaQnXgv?node-id=1-39818)     | [UI] CONTRATOS - OFERTA_CONTRATO - 4                                         | Pronto no front · P05 |
 | [1:41796](https://www.figma.com/design/BaDXlWpxbIoY4azOaQnXgv?node-id=1-41796)     | [UI] CONTRATOS - OFERTA_CONTRATO - 5A                                        | Pronto no front · P05 |
 | [1:43678](https://www.figma.com/design/BaDXlWpxbIoY4azOaQnXgv?node-id=1-43678)     | [UI] CONTRATOS - OFERTA_CONTRATO - 5A                                        | Pronto no front · P05 |
-| [1:45691](https://www.figma.com/design/BaDXlWpxbIoY4azOaQnXgv?node-id=1-45691)     | [UI] CONTRATOS - PAG ESPECIFICA                                              | Implementado · revalidar · P04 |
-| [1:46764](https://www.figma.com/design/BaDXlWpxbIoY4azOaQnXgv?node-id=1-46764)     | [UI] CONTRATOS - PAG ESPECIFICA                                              | Implementado · revalidar · P04 |
-| [1:48631](https://www.figma.com/design/BaDXlWpxbIoY4azOaQnXgv?node-id=1-48631)     | [UI] CONTRATOS - PAG ESPECIFICA                                              | Implementado · revalidar · P04 |
-| [1:50141](https://www.figma.com/design/BaDXlWpxbIoY4azOaQnXgv?node-id=1-50141)     | [UI] CONTRATOS - PAG ESPECIFICA                                              | Implementado · revalidar · P04 |
-| [211:28821](https://www.figma.com/design/BaDXlWpxbIoY4azOaQnXgv?node-id=211-28821) | [EC] CONTRATOS - PAG ESPECIFICA · Operações · sem registro                   | Implementado · revalidar · P04 |
+| [1:45691](https://www.figma.com/design/BaDXlWpxbIoY4azOaQnXgv?node-id=1-45691)     | [UI] CONTRATOS - PAG ESPECIFICA                                              | Implementação/ajuste pendente · P04 |
+| [1:46764](https://www.figma.com/design/BaDXlWpxbIoY4azOaQnXgv?node-id=1-46764)     | [UI] CONTRATOS - PAG ESPECIFICA                                              | Implementação/ajuste pendente · P04 |
+| [1:48631](https://www.figma.com/design/BaDXlWpxbIoY4azOaQnXgv?node-id=1-48631)     | [UI] CONTRATOS - PAG ESPECIFICA                                              | Implementação/ajuste pendente · P04 |
+| [1:50141](https://www.figma.com/design/BaDXlWpxbIoY4azOaQnXgv?node-id=1-50141)     | [UI] CONTRATOS - PAG ESPECIFICA                                              | Implementação/ajuste pendente · P04 |
+| [211:28821](https://www.figma.com/design/BaDXlWpxbIoY4azOaQnXgv?node-id=211-28821) | [EC] CONTRATOS - PAG ESPECIFICA · Operações · sem registro                   | Pronto no front · P04 |
 | [1:50557](https://www.figma.com/design/BaDXlWpxbIoY4azOaQnXgv?node-id=1-50557)     | [UI] ALAVANCAGEM                                                             | Pronto no front · P06 |
 | [1:50683](https://www.figma.com/design/BaDXlWpxbIoY4azOaQnXgv?node-id=1-50683)     | [UI] ALAVANCAGEM - BLOQUEADO                                                 | Pronto no front · P06 |
 | [1:50860](https://www.figma.com/design/BaDXlWpxbIoY4azOaQnXgv?node-id=1-50860)     | [UI] FLUXO - SOLICITAR EMPRÉSTIMO -                                          | Pronto no front · P06 |
@@ -1504,8 +1525,8 @@ Legenda vigente: classificação de 16/11 por código e evidências, detalhada e
 | [1:70897](https://www.figma.com/design/BaDXlWpxbIoY4azOaQnXgv?node-id=1-70897)     | [UI] CONTRATOS - GERAL                                                       | Pronto no front · P04 |
 | [1:72668](https://www.figma.com/design/BaDXlWpxbIoY4azOaQnXgv?node-id=1-72668)     | [UI] ALAVANCAGEM                                                             | Pronto no front · P06 |
 | [1:72787](https://www.figma.com/design/BaDXlWpxbIoY4azOaQnXgv?node-id=1-72787)     | [UI] ALAVANCAGEM                                                             | Pronto no front · P06 |
-| [1:72906](https://www.figma.com/design/BaDXlWpxbIoY4azOaQnXgv?node-id=1-72906)     | [UI] COMUNICAÇÃO (List View)                                                 | Implementado · revalidar · P12 |
-| [1:73097](https://www.figma.com/design/BaDXlWpxbIoY4azOaQnXgv?node-id=1-73097)     | [UI] COMUNICAÇÃO (List View)                                                 | Implementado · revalidar · P12 |
+| [1:72906](https://www.figma.com/design/BaDXlWpxbIoY4azOaQnXgv?node-id=1-72906)     | [UI] COMUNICAÇÃO (List View)                                                 | Pronto no front · P12 |
+| [1:73097](https://www.figma.com/design/BaDXlWpxbIoY4azOaQnXgv?node-id=1-73097)     | [UI] COMUNICAÇÃO (List View)                                                 | Pronto no front · P12 |
 | [1:73288](https://www.figma.com/design/BaDXlWpxbIoY4azOaQnXgv?node-id=1-73288)     | [UI] PERFIL - Pág Resumo - Dados Pessoais                                    | Implementado · revalidar · P12 |
 | [1:73602](https://www.figma.com/design/BaDXlWpxbIoY4azOaQnXgv?node-id=1-73602)     | [UI] PERFIL - Pág Resumo - Dados Pessoais                                    | Implementado · revalidar · P12 |
 | [163:27273](https://www.figma.com/design/BaDXlWpxbIoY4azOaQnXgv?node-id=163-27273) | [UI] PERFIL - Pág Resumo - Dados Pessoais · Moeda Primária aberta (dropdown) | Pronto no front · P10 |
