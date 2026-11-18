@@ -144,6 +144,8 @@ export function projectClientContract(contract, customerId) {
     currencyId: contract.currency?.id,
     currencyCode: contract.currency?.isoCode,
     startDate: contract.startDate,
+    linkedAtUtc: participant.linkedAtUtc || null,
+    engineName: contract.primaryEngine?.name || null,
     endDate: contract.expectedEndDate,
     initialValue: participant.allocatedAmount,
     percentage: participant.allocationPercentage,

@@ -1,0 +1,351 @@
+.wallet-card {
+  padding: 24px;
+  min-width: 0;
+  color: #ffffffb8;
+  border: 1px solid #ffffff33;
+  border-radius: 14px;
+  background: #ffffff0f;
+  backdrop-filter: blur(20px);
+  box-shadow: 4px 4px 6px #00000021;
+  font:
+    400 14px/20px Inter,
+    sans-serif;
+  &--total {
+    min-height: 592px;
+  }
+  &--deposit {
+    min-height: 585px;
+  }
+  &--assets {
+    min-height: 673px;
+  }
+  &--strategy {
+    min-height: 753px;
+  }
+  &__heading {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+  }
+  &__heading > div {
+    flex: 1;
+    min-width: 0;
+  }
+  h3 {
+    font:
+      600 16px/24px Inter,
+      sans-serif;
+    color: white;
+    margin: 0;
+    overflow-wrap: anywhere;
+  }
+  &__heading small {
+    display: block;
+    font: 400 12px/16px monospace;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    max-width: 100%;
+  }
+  &__icon {
+    display: grid;
+    place-items: center;
+    flex: none;
+    width: 40px;
+    height: 40px;
+    border: 1px solid #ffffff33;
+    border-radius: 10px;
+    background: #ffffff0d;
+  }
+  &__badge {
+    display: inline-block;
+    flex: none;
+    border: 1px solid #ffffff80;
+    border-radius: 6px;
+    padding: 2px 8px;
+    font:
+      400 12px/16px Inter,
+      sans-serif;
+    color: white;
+  }
+  &__badge--active {
+    border-color: #00c950;
+    color: #7bf1a8;
+    background: #00c9501a;
+  }
+  &__badge--pending {
+    border-color: #ffd96680;
+    color: #ffe28a;
+    background: #ffd96614;
+  }
+  &__heading &__badge:not(:empty),
+  &__state &__badge {
+    font-size: 10px;
+  }
+  &__badge--active,
+  &__badge--pending {
+    text-transform: uppercase;
+  }
+  &__identity {
+    margin-top: 16px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid #ffffff1f;
+  }
+  &__identity p {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    margin: 0 0 12px;
+    overflow-wrap: anywhere;
+  }
+  &__identity img {
+    flex: none;
+  }
+  &__identity small {
+    display: block;
+    font:
+      400 12px/16px Inter,
+      sans-serif;
+    overflow-wrap: anywhere;
+  }
+  &__code {
+    font-family: monospace !important;
+    margin-top: 12px;
+  }
+  &__links {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    margin: 0;
+    padding: 16px 0;
+    border-bottom: 1px solid #ffffff1f;
+  }
+  &__composition {
+    overflow-x: auto;
+    max-width: 100%;
+    padding-top: 12px;
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+    line-height: 20px;
+  }
+  th {
+    font-weight: 400;
+    text-align: left;
+    font-size: 12px;
+    color: #ffffffb8;
+    padding: 0 8px 8px 0;
+  }
+  th:not(:first-child),
+  td:not(:first-child) {
+    text-align: right;
+  }
+  td {
+    color: #ffffffb8;
+    padding: 4px 8px 4px 0;
+    white-space: nowrap;
+    font-weight: 400;
+  }
+  td:last-child,
+  th:last-child {
+    padding-right: 0;
+  }
+  td:not(:first-child) {
+    color: #ffffffb8;
+  }
+  td small {
+    display: block;
+    color: #ffffff99;
+    font:
+      400 10px/14px Inter,
+      sans-serif;
+  }
+  &__table--wide {
+    font-size: 12px;
+    min-width: 350px;
+  }
+  &__table--wide th {
+    font-size: 12px;
+  }
+  td.wallet-card__amount {
+    font-weight: 600;
+    color: white;
+  }
+  &__consolidated {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 8px;
+    border-top: 1px solid #ffffff1f;
+    padding: 12px 0;
+    font-size: 12px;
+  }
+  &__consolidated span:last-child {
+    color: white;
+    text-align: right;
+  }
+  &__metric {
+    display: flex;
+    justify-content: space-between;
+    gap: 8px;
+    margin: 16px 0;
+  }
+  &__metric strong {
+    font-size: 14px;
+    text-align: right;
+    color: white;
+    font-weight: 600;
+  }
+  &__metric strong small {
+    display: block;
+    font-size: 12px;
+    font-weight: 400;
+  }
+  .wallet-card__positive,
+  td.wallet-card__positive {
+    color: #7bf1a8;
+  }
+  .wallet-card__negative,
+  td.wallet-card__negative {
+    color: #ff8787;
+  }
+  &__variation {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 24px;
+    margin: 16px 0 24px;
+  }
+  &__variation > div:last-of-type {
+    text-align: right;
+  }
+  &__variation strong {
+    display: block;
+    font-size: 20px;
+    line-height: 28px;
+    margin-top: 8px;
+  }
+  &__variation p {
+    width: 100%;
+    margin: 0;
+  }
+  &__summary {
+    margin: 16px 0;
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    flex-wrap: wrap;
+    min-height: 20px;
+  }
+  &__summary strong {
+    display: block;
+    width: 100%;
+    font-size: 20px;
+    line-height: 28px;
+  }
+  &__state {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    border-top: 1px solid #ffffff1f;
+    padding-top: 12px;
+    margin: 16px 0 12px;
+  }
+  &__state small {
+    font-size: 12px;
+    color: #ffffff99;
+  }
+  &__updated {
+    border-top: 1px solid #ffffff1f;
+    padding-top: 12px;
+    margin: 0 0 12px;
+    font-size: 12px;
+    color: #ffffff99;
+  }
+  &__updated > div {
+    display: flex;
+    justify-content: space-between;
+    gap: 8px;
+    margin-top: 4px;
+  }
+  &__updated small {
+    display: block;
+    font-size: 12px;
+  }
+  &--deposit &__updated {
+    font-size: 14px;
+    color: #ffffffb8;
+  }
+  &--deposit &__updated > span {
+    display: block;
+    margin-bottom: 4px;
+  }
+  &--deposit &__updated small {
+    font-size: 12px;
+    margin-top: 4px;
+  }
+  &__chips {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+    margin: 16px 0;
+    min-height: 24px;
+  }
+  &__chips a {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    max-width: 100%;
+    padding: 3px 8px;
+    font: 400 10px/16px monospace;
+    border: 1px solid #ffffff80;
+    background: #ffffff0d;
+    border-radius: 6px;
+    color: white;
+    text-decoration: none;
+    overflow-wrap: anywhere;
+  }
+  &__chips > span {
+    font-size: 12px;
+  }
+  footer {
+    display: flex;
+    gap: 8px;
+  }
+  footer .q-btn {
+    flex: 1;
+    min-height: 32px;
+    padding: 4px 8px;
+    border-radius: 8px;
+    background: #ffffff0d;
+    font-size: 14px;
+    color: white;
+    min-width: 0;
+  }
+  footer :deep(.q-btn__content) {
+    gap: 6px;
+    flex-direction: row-reverse;
+  }
+  footer :deep(.q-btn:before) {
+    border-color: #ffffff33;
+  }
+  &__expanded {
+    border-top: 1px solid #ffffff1f;
+    padding-top: 32px;
+    margin-top: 16px;
+    min-width: 0;
+  }
+  @media (max-width: 600px) {
+    padding: 20px;
+    min-height: 0;
+    footer {
+      flex-direction: column;
+    }
+    &__table--wide {
+      font-size: 12px;
+    }
+  }
+}

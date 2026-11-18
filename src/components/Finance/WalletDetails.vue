@@ -1,6 +1,12 @@
 <template>
   <div>
-    <template v-if="row.type === 'strategy'"
+    <client-portfolio-contracts
+      v-if="row.type === 'strategy' && compact"
+      :customer-id="row.customerId"
+      all-currencies
+      compact
+    />
+    <template v-else-if="row.type === 'strategy'"
       ><client-portfolio-contracts
         v-for="currency in row.currencies?.filter((item) => item.currencyId) || []"
         :key="currency.currencyId"
@@ -29,5 +35,5 @@ import ClientPortfolioContracts from 'src/components/Clients/ClientPortfolioCont
 import CustomerAssets from './CustomerAssets.vue'
 import WalletOverview from './WalletOverview.vue'
 defineEmits(['changed'])
-defineProps({ row: { type: Object, required: true } })
+defineProps({ compact: Boolean, row: { type: Object, required: true } })
 </script>

@@ -236,6 +236,7 @@
         ><wallet-directory
           :type="walletType"
           :rows="globalRows"
+          :fx="globalFx.state.data"
           @open="openPortfolio"
           @back="tab = 'transactions'"
           @changed="loadGlobalPortfolio"

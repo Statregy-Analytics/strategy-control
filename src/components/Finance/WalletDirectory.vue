@@ -103,93 +103,22 @@
       >A consulta das carteiras ainda não está disponível.</q-banner
     >
     <div v-if="view === 'cards'" class="directory-cards">
-      <article v-for="row in pageRows" :key="row.key" class="directory-card">
-        <header>
-          <span class="directory-card-icon"
-            ><img
-              :src="
-                '/icons/workspace-review/' +
-                (type === 'total' && row.type === 'deposit' ? 'deposit-global' : row.type) +
-                '.svg'
-              "
-              alt=""
-          /></span>
-          <div>
-            <h3>{{ label(row.type) }}</h3>
-            <small :title="row.code || ''">{{ row.code || '—' }}</small>
-          </div>
-          <span v-if="type === 'total'" class="directory-badge">{{
-            row.type === 'strategy' ? 'Strategy' : row.type === 'assets' ? 'Patrimônio' : 'Depósito'
-          }}</span>
-          <span v-else class="directory-badge" :class="{ positive: row.status === 'Active' }">{{
-            statusLabel(row.status)
-          }}</span>
-        </header>
-        <p class="directory-client">
-          <img src="/icons/workspace-review/user.svg" alt="" />{{ row.clientName }}
-        </p>
-        <p class="directory-client-id">
-          ID: {{ row.clientCode || '—'
-          }}<template v-if="row.maskedDocument"> · {{ row.maskedDocument }}</template>
-        </p>
-        <dl>
-          <template v-for="field in fields(row)" :key="field.label"
-            ><dt>{{ field.label }}</dt>
-            <dd>{{ field.value }}</dd></template
-          >
-        </dl>
-        <p v-if="row.type === 'strategy'" class="directory-links">
-          <img src="/icons/workspace-review/contract.svg" alt="" />{{
-            row.contractCount == null
-              ? 'Vínculos indisponíveis'
-              : row.contractCount + ' contratos vinculados'
-          }}
-        </p>
-        <div v-if="type === 'total'" class="directory-state">
-          <span class="directory-badge" :class="{ positive: row.status === 'Active' }">{{
-            statusLabel(row.status)
-          }}</span
-          ><small>{{ date(row.lastMovement) }}</small>
-        </div>
-        <div class="card-actions">
-          <q-btn
-            outline
-            dense
-            no-caps
-            label="Ver Movimentações"
-            :disable="row.ledgerWalletIds?.length === 0"
-            :title="
-              row.ledgerWalletIds?.length === 0
-                ? 'Movimentações ainda não disponíveis para esta carteira.'
-                : undefined
-            "
-            @click="emit('open', row.customerId, 'statement', row.type)"
-            ><img src="/icons/workspace-review/eye.svg" alt=""
-          /></q-btn>
-          <q-btn
-            outline
-            dense
-            no-caps
-            :label="
-              type === 'total'
-                ? 'Abrir Carteira'
-                : row.type === 'strategy'
-                  ? 'Ver contratos'
-                  : row.type === 'assets'
-                    ? 'Ver bens'
-                    : 'Abrir Carteira'
-            "
-            @click="
-              type === 'total' || row.type === 'deposit'
-                ? emit('open', row.customerId, 'portfolio', row.type)
-                : toggle(row.key)
-            "
-          />
-        </div>
-        <div v-if="expanded === row.key" class="q-mt-md">
-          <wallet-details :row="row" @changed="emit('changed')" />
-        </div>
-      </article>
+      <wallet-directory-card
+        v-for="row in pageRows"
+        :key="row.key"
+        :row="row"
+        :mode="type"
+        :fx="fx"
+        :expanded="type === 'strategy' && expanded === row.key"
+        @movements="emit('open', row.customerId, 'statement', row.type)"
+        @open="
+          type === 'strategy'
+            ? toggle(row.key)
+            : emit('open', row.customerId, 'portfolio', row.type)
+        "
+      >
+        <wallet-details :row="row" compact @changed="emit('changed')" />
+      </wallet-directory-card>
     </div>
     <q-table
       v-else
@@ -370,12 +299,14 @@ import { computed, ref, watch } from 'vue'
 import GlassSelect from 'src/components/Entity/GlassSelect.vue'
 import EntityTableFooter from 'src/components/Entity/EntityTableFooter.vue'
 import { financeLabel } from 'src/services/financeService'
+import WalletDirectoryCard from './WalletDirectoryCard.vue'
 import WalletDetails from './WalletDetails.vue'
 import { WALLET_TYPES, walletMoney } from 'src/services/walletModel'
 import { foldSearch } from 'src/services/adminWorkspaceModel'
 const props = defineProps({
   type: { type: String, default: 'total' },
   rows: { type: Array, default: null },
+  fx: { type: Object, default: null },
 })
 const emit = defineEmits(['open', 'back', 'changed'])
 const titles = {
@@ -506,31 +437,6 @@ function displayAmounts(row, key = 'balance') {
       .map((c) => walletMoney(c[key], c.currency))
       .join(' · ') || '—'
   )
-}
-function fields(row) {
-  if (props.type === 'total')
-    return [
-      { label: 'Saldo total', value: displayAmounts(row) },
-      ...(row.type === 'assets'
-        ? [{ label: 'Valorização', value: row.appreciation == null ? '—' : row.appreciation + '%' }]
-        : []),
-    ]
-  if (row.type === 'strategy')
-    return [
-      { label: 'Capital base', value: walletMoney(row.base, row.principalCurrency) },
-      { label: 'Saldo atualizado', value: walletMoney(row.updatedTotal, row.principalCurrency) },
-      { label: 'Rendimento', value: row.yieldPercentage == null ? '—' : row.yieldPercentage + '%' },
-    ]
-  if (row.type === 'assets')
-    return [
-      { label: 'Valor declarado', value: displayAmounts(row, 'declared') },
-      { label: 'Valor atual', value: walletMoney(row.currentTotal, row.principalCurrency) },
-      { label: 'Valorização', value: row.appreciation == null ? '—' : row.appreciation + '%' },
-    ]
-  return [
-    { label: 'Saldo atual', value: displayAmounts(row) },
-    { label: 'Última movimentação', value: date(row.lastMovement) },
-  ]
 }
 const typeBadge = (type) =>
   ({ deposit: 'Depósito', strategy: 'Strategy', assets: 'Patrimônio' })[type] || '—'
@@ -835,7 +741,7 @@ button:focus-visible {
   border: 1px solid #ffffff20;
   border-radius: 12px;
 }
-.wallet-directory :deep(th) {
+.wallet-directory :deep(.q-table th) {
   background: #ffffff08;
 }
 .wallet-unavailable {

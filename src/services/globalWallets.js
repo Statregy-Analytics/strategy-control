@@ -76,6 +76,9 @@ export function globalWalletRows(data) {
       const currencies = native.map((c) => ({
         ...model[type].currencies.find((v) => v.currency === c.currencyIsoCode),
         currencyId: c.currencyId,
+        ...(type === 'strategy'
+          ? { contractCount: c.investedBreakdown?.contractCount ?? null }
+          : {}),
       }))
       const wallets = data.wallets.filter(
         (w) => w.client.id === client.customerId && w.type === typeNames[type],
