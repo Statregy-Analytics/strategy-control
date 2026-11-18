@@ -108,26 +108,12 @@
           /></q-btn>
         </div></div
     ></template>
-    <div class="logic-simulation" :class="{ 'logic-simulation--side': arrangement === 'side' }">
-      <section>
-        <h3><i />Tabela Atual (Valores Oficiais)</h3>
-        <temporal-indicator-table
-          :indicators="logicTemporalIndicators"
-          label="Tabela atual — valores oficiais"
-        />
-      </section>
-      <section>
-        <h3 class="simulated"><i />Tabela Simulada (Parâmetros em Edição)</h3>
-        <temporal-indicator-table
-          :indicators="logicTemporalIndicators"
-          label="Tabela simulada — parâmetros em edição"
-        />
-      </section>
-    </div>
+    <logic-simulation-tables :arrangement="arrangement" />
   </profile-section>
 </template>
 <script setup>
 import { ref } from 'vue'
+import LogicSimulationTables from './LogicSimulationTables.vue'
 import ProfileSection from 'src/components/Entity/ProfileSection.vue'
 import TemporalChart from 'src/components/Entity/TemporalChart.vue'
 import TemporalIndicatorTable from 'src/components/Entity/TemporalIndicatorTable.vue'
@@ -268,42 +254,6 @@ small {
   font-size: 10px;
   gap: 4px;
 }
-.logic-simulation {
-  display: grid;
-  gap: 16px;
-}
-.logic-simulation--side {
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-}
-.logic-simulation section {
-  min-width: 0;
-  overflow: hidden;
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  border-radius: 8px;
-}
-.logic-simulation h3 {
-  margin: 0;
-  font-size: 10px;
-  line-height: 16px;
-  padding: 8px 16px;
-  background: rgba(255, 255, 255, 0.04);
-  color: var(--sa-muted, rgba(255, 255, 255, 0.6));
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-.logic-simulation h3 i {
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background: rgba(255, 255, 255, 0.6);
-}
-.logic-simulation h3.simulated {
-  background: rgba(0, 163, 255, 0.08);
-}
-.logic-simulation h3.simulated i {
-  background: #00a3ff;
-}
 @media (max-width: 1100px) {
   .logic-summary {
     grid-template-columns: repeat(4, minmax(0, 1fr));
@@ -313,8 +263,7 @@ small {
   .logic-summary {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
-  .logic-chart-grid,
-  .logic-simulation--side {
+  .logic-chart-grid {
     grid-template-columns: 1fr;
   }
   .logic-performance__body {

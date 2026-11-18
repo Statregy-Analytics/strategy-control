@@ -11,6 +11,7 @@
         <q-input
           :model-value="modelValue.name"
           aria-label="Nome do Motor *"
+          placeholder="Ex: Alpha-2 Institutional"
           outlined
           dense
           dark
@@ -37,6 +38,7 @@
       <q-input
         :model-value="modelValue.description"
         aria-label="Descrição Interna"
+        placeholder="Descrição técnica ou administrativa do motor"
         outlined
         dense
         dark

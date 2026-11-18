@@ -1,9 +1,9 @@
 <template>
-  <div class="workspace">
+  <div class="workspace" :class="{ 'logic-creation': !recordId }">
     <logic-history v-if="historyOpen" @close="closeHistory" />
     <header v-show="!historyOpen" class="workspace-header">
       <div>
-        <q-btn flat no-caps label="Voltar para lógicas" @click="$emit('close')" />
+        <q-btn v-if="recordId" flat no-caps label="Voltar para lógicas" @click="$emit('close')" />
         <h1>
           {{
             recordId
@@ -22,13 +22,17 @@
             v-if="!recordId"
             outline
             no-caps
-            label="Salvar Rascunho"
-            @click="saveDraft" /><q-btn
+            @click="saveDraft"
+            ><img src="/icons/logics/create/1484-77514-imgSave.svg" alt="" />Salvar Rascunho</q-btn
+          ><q-btn
             outline
             no-caps
-            :label="recordId ? 'Salvar Alterações' : 'Confirmar e Criar'"
             :disable="recordId && (!dirty || resource.state.loading || !source)"
-            @click="confirm" /></template
+            @click="confirm"
+            ><img v-if="!recordId" src="/icons/logics/create/1484-77514-imgCheck.svg" alt="" />{{
+              recordId ? 'Salvar Alterações' : 'Confirmar e Criar'
+            }}</q-btn
+          ></template
         ><q-btn
           v-else
           outline
@@ -60,8 +64,13 @@
               :code="source?.code || ''"
             />
             <template v-for="section in sections" :key="section.title">
+              <logic-creation-fields
+                v-if="!recordId && ['cycle', 'intensity'].includes(section.key)"
+                v-model="form"
+                :kind="section.key"
+              />
               <logic-frequency
-                v-if="section.key === 'frequency'"
+                v-else-if="section.key === 'frequency'"
                 v-model="form"
                 :disabled="!editing"
               />
@@ -94,39 +103,14 @@
                 </div>
               </profile-section>
             </template>
-            <profile-section
+            <logic-creation-links
               v-if="!recordId"
-              title="Vincular Papéis/Contratos (Opcional)"
-              caption="Associe contratos ou papéis existentes agora ou faça depois."
-              ><q-input
-                v-model="contractSearch"
-                outlined
-                dense
-                dark
-                placeholder="Buscar contrato ou papel por nome ou ID..."
-                aria-label="Buscar contrato ou papel por nome ou ID"
-              /><resource-state :state="contracts.state" @retry="loadContracts"
-                ><q-list
-                  ><q-item v-for="row in matchedContracts" :key="row.id"
-                    ><q-item-section avatar
-                      ><q-checkbox
-                        v-model="form.contracts"
-                        :val="row.id"
-                        :aria-label="'Vincular ' + row.name" /></q-item-section
-                    ><q-item-section
-                      >{{ row.name }}<small>{{ row.publicCode }}</small></q-item-section
-                    ></q-item
-                  ></q-list
-                ></resource-state
-              >
-              <p>Importante sobre Vínculos</p>
-              <small
-                >Papéis vinculados após o início do ciclo não herdam performance anterior. A
-                valorização passa a ser calculada a partir do índice na conexão.</small
-              ></profile-section
-            >
+              v-model="form.contracts"
+              :state="contracts.state"
+              @retry="loadContracts"
+            />
           </logic-configuration>
-          <logic-draft-preview
+          <logic-creation-preview
             v-if="!recordId"
             :model-value="form"
             :currencies="currencyOptions"
@@ -179,7 +163,9 @@ import LogicProbability from './LogicProbability.vue'
 import LogicLimits from './LogicLimits.vue'
 import LogicSovereign from './LogicSovereign.vue'
 import LogicFrequency from './LogicFrequency.vue'
-import LogicDraftPreview from './LogicDraftPreview.vue'
+import LogicCreationPreview from './LogicCreationPreview.vue'
+import LogicCreationFields from './LogicCreationFields.vue'
+import LogicCreationLinks from './LogicCreationLinks.vue'
 import LogicIdentity from './LogicIdentity.vue'
 import { useFinanceResource } from 'src/composables/useFinanceResource'
 import { financeGet, columns } from 'src/services/financeService'
@@ -189,7 +175,6 @@ import {
   projectedFinalIndex,
   validateLogic,
   logicRuleResults,
-  foldSearch,
   logicIntensityConstraint,
 } from 'src/services/adminWorkspaceModel'
 const props = defineProps({
@@ -213,7 +198,6 @@ const form = ref(initialLogic()),
   error = ref(''),
   resource = useFinanceResource(),
   contracts = useFinanceResource(),
-  contractSearch = ref(''),
   currencyOptions = ref([]),
   catalogError = ref(false),
   historyOpen = ref(false),
@@ -305,11 +289,6 @@ const linkedColumns = columns(
   ].map((x) => [x, x]),
 )
 const validationRules = computed(() => logicRuleResults(form.value))
-const matchedContracts = computed(() =>
-  (contracts.state.data || []).filter((c) =>
-    foldSearch(c.name + ' ' + c.publicCode).includes(foldSearch(contractSearch.value)),
-  ),
-)
 async function loadContracts() {
   await contracts.load(async () => {
     let all = [],
@@ -415,3 +394,5 @@ onScopeDispose(() => {
   margin: auto;
 }
 </style>
+
+<style scoped lang="scss" src="./logicCreation.scss"></style>

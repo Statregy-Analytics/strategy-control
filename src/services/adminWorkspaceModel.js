@@ -206,8 +206,9 @@ export function validateLogic(form) {
   )
     return 'Os limites diários devem ser menores que os mensais.'
   if (
-    Number(form.intensity) >= Number(form.dailyCeiling) ||
-    Number(form.intensity) >= Math.abs(Number(form.dailyFloor))
+    !logicRuleResults(form)
+      .slice(0, 2)
+      .every((rule) => rule.valid)
   )
     return 'A intensidade deve ser menor que os limites diários.'
   return ''
@@ -307,20 +308,26 @@ export function logicIntensityConstraint(form) {
 export function logicRuleResults(form) {
   const finite = (v) => v !== null && v !== undefined && v !== '' && Number.isFinite(Number(v))
   const less = (a, b) => finite(a) && finite(b) && Number(a) >= 0 && Number(a) < Math.abs(Number(b))
+  const effective = (boundary) =>
+    form.intensityMode === 'Percentual da Banda Diária'
+      ? finite(form.intensity) && finite(boundary)
+        ? (Math.abs(Number(boundary)) * Number(form.intensity)) / 100
+        : null
+      : form.intensity
   return [
     {
       label: 'Intensidade positiva menor que teto diário',
       valid:
         finite(form.dailyCeiling) &&
         Number(form.dailyCeiling) >= 0 &&
-        less(form.intensity, form.dailyCeiling),
+        less(effective(form.dailyCeiling), form.dailyCeiling),
     },
     {
       label: 'Intensidade negativa menor que piso diário em módulo',
       valid:
         finite(form.dailyFloor) &&
         Number(form.dailyFloor) <= 0 &&
-        less(form.intensity, form.dailyFloor),
+        less(effective(form.dailyFloor), form.dailyFloor),
     },
     {
       label: 'Teto diário menor que teto mensal',

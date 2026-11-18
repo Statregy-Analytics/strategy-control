@@ -45,3 +45,16 @@ test('invalid signs are left to configuration validation rather than mislabeled 
     null,
   )
 })
+
+test('percentage-of-daily-band mode validates the effective move, not the configured percentage', () => {
+  const form = {
+    intensityMode: 'Percentual da Banda Diária',
+    intensity: 5,
+    dailyCeiling: 0.8,
+    dailyFloor: -0.8,
+  }
+  assert.equal(logicIntensityConstraint(form), true)
+  assert.equal(logicIntensityConstraint({ ...form, intensity: 100 }), false)
+  assert.equal(logicIntensityConstraint({ ...form, intensity: null }), null)
+  assert.equal(logicIntensityConstraint({ ...form, intensityMode: null }), false)
+})
