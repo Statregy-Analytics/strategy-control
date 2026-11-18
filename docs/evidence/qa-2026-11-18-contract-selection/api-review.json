@@ -1,0 +1,546 @@
+{
+  "url": "https://strategyanalytics.codebiz.com.br/openapi/v1.json",
+  "paths": {
+    "/api/v1/admin/contracts/{contractId}/participants": {
+      "post": {
+        "tags": [
+          "Contracts"
+        ],
+        "operationId": "AddContractParticipant",
+        "parameters": [
+          {
+            "name": "contractId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "example": "3fa85f64-5717-4562-b3fc-2c963f66afa6"
+            }
+          },
+          {
+            "name": "Idempotency-Key",
+            "in": "header",
+            "description": "Client-generated key that makes this 'contracts.admin.participants.add' request safe to retry. Replaying the same key with the same payload replays the original response; replaying it with a different payload returns 409.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "X-Workspace-Id",
+            "in": "header",
+            "description": "Workspace to operate against. Optional: falls back to the workspace claim on the access token, or to the user's only workspace when they belong to just one.",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AddContractParticipantRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponseOfContractResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Conflict",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Too many requests. Only enabled when Security:RateLimiting:Enabled is true. Empty body — the global rate limiter rejects the request before it reaches application code."
+          },
+          "401": {
+            "description": "Authentication is required, or the supplied token is missing/invalid/expired. Usually an empty body (rejected before reaching application code); a small number of endpoints can instead throw an application-level auth.* error that carries the ApiErrorResponse envelope (see the 'default' response)."
+          },
+          "403": {
+            "description": "The authenticated caller does not satisfy this endpoint's authorization policy. Usually an empty body (rejected by the authorization middleware); some endpoints instead throw an application-level forbidden.* error (e.g. no workspace selected, user not linked to a customer) that carries the ApiErrorResponse envelope (see the 'default' response)."
+          },
+          "default": {
+            "description": "Error response for any status code not documented explicitly above. Follows the shared ApiErrorResponse envelope.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {},
+                    "success": {
+                      "type": "boolean",
+                      "example": true
+                    },
+                    "requestId": {
+                      "type": "string"
+                    },
+                    "correlationId": {
+                      "type": [
+                        "null",
+                        "string"
+                      ]
+                    },
+                    "errors": {
+                      "type": "array",
+                      "items": {
+                        "required": [
+                          "code",
+                          "message"
+                        ],
+                        "type": "object",
+                        "properties": {
+                          "code": {
+                            "type": "string"
+                          },
+                          "message": {
+                            "type": "string",
+                            "example": "Example description."
+                          },
+                          "field": {
+                            "type": [
+                              "null",
+                              "string"
+                            ]
+                          },
+                          "retryAfterSeconds": {
+                            "pattern": "^-?(?:0|[1-9]\\d*)$",
+                            "type": [
+                              "null",
+                              "integer",
+                              "string"
+                            ],
+                            "format": "int32"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {}
+        ]
+      }
+    },
+    "/api/v1/admin/contracts/{contractId}/participants/{clientId}": {
+      "delete": {
+        "tags": [
+          "Contracts"
+        ],
+        "operationId": "RemoveContractParticipant",
+        "parameters": [
+          {
+            "name": "contractId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "example": "3fa85f64-5717-4562-b3fc-2c963f66afa6"
+            }
+          },
+          {
+            "name": "clientId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "example": "3fa85f64-5717-4562-b3fc-2c963f66afa6"
+            }
+          },
+          {
+            "name": "Idempotency-Key",
+            "in": "header",
+            "description": "Client-generated key that makes this 'contracts.admin.participants.remove' request safe to retry. Replaying the same key with the same payload replays the original response; replaying it with a different payload returns 409.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "X-Workspace-Id",
+            "in": "header",
+            "description": "Workspace to operate against. Optional: falls back to the workspace claim on the access token, or to the user's only workspace when they belong to just one.",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Conflict",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Too many requests. Only enabled when Security:RateLimiting:Enabled is true. Empty body — the global rate limiter rejects the request before it reaches application code."
+          },
+          "401": {
+            "description": "Authentication is required, or the supplied token is missing/invalid/expired. Usually an empty body (rejected before reaching application code); a small number of endpoints can instead throw an application-level auth.* error that carries the ApiErrorResponse envelope (see the 'default' response)."
+          },
+          "403": {
+            "description": "The authenticated caller does not satisfy this endpoint's authorization policy. Usually an empty body (rejected by the authorization middleware); some endpoints instead throw an application-level forbidden.* error (e.g. no workspace selected, user not linked to a customer) that carries the ApiErrorResponse envelope (see the 'default' response)."
+          },
+          "default": {
+            "description": "Error response for any status code not documented explicitly above. Follows the shared ApiErrorResponse envelope.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {},
+                    "success": {
+                      "type": "boolean",
+                      "example": true
+                    },
+                    "requestId": {
+                      "type": "string"
+                    },
+                    "correlationId": {
+                      "type": [
+                        "null",
+                        "string"
+                      ]
+                    },
+                    "errors": {
+                      "type": "array",
+                      "items": {
+                        "required": [
+                          "code",
+                          "message"
+                        ],
+                        "type": "object",
+                        "properties": {
+                          "code": {
+                            "type": "string"
+                          },
+                          "message": {
+                            "type": "string",
+                            "example": "Example description."
+                          },
+                          "field": {
+                            "type": [
+                              "null",
+                              "string"
+                            ]
+                          },
+                          "retryAfterSeconds": {
+                            "pattern": "^-?(?:0|[1-9]\\d*)$",
+                            "type": [
+                              "null",
+                              "integer",
+                              "string"
+                            ],
+                            "format": "int32"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {}
+        ]
+      }
+    }
+  },
+  "intradayPaths": [],
+  "contractPaths": [
+    "/api/v1/admin/contracts/catalog/capital-origins",
+    "/api/v1/admin/contracts/catalog/statuses",
+    "/api/v1/admin/contracts/catalog/statuses/{statusId}",
+    "/api/v1/admin/contracts/catalog/engines",
+    "/api/v1/admin/contracts/catalog/engines/{engineId}",
+    "/api/v1/admin/contracts/catalog/markets",
+    "/api/v1/admin/contracts/catalog/markets/{marketId}",
+    "/api/v1/admin/contracts/catalog/networks",
+    "/api/v1/admin/contracts/catalog/networks/{networkId}",
+    "/api/v1/admin/contracts/catalog/assets",
+    "/api/v1/admin/contracts/catalog/assets/{assetId}",
+    "/api/v1/admin/contracts/catalog/asset-sets",
+    "/api/v1/admin/contracts/catalog/asset-sets/{presetSetId}",
+    "/api/v1/client/contracts",
+    "/api/v1/client/contracts/{contractId}",
+    "/api/v1/client/contracts/{contractId}/documents",
+    "/api/v1/client/contracts/{contractId}/documents/{documentId}/temporary-url",
+    "/api/v1/client/contracts/{contractId}/history",
+    "/api/v1/admin/contracts/drafts",
+    "/api/v1/admin/contracts/{contractId}/draft",
+    "/api/v1/admin/contracts/{contractId}/finalize",
+    "/api/v1/admin/contracts",
+    "/api/v1/admin/contracts/{contractId}",
+    "/api/v1/admin/contracts/{contractId}/status",
+    "/api/v1/admin/contracts/{contractId}/participants",
+    "/api/v1/admin/contracts/{contractId}/participants/{clientId}",
+    "/api/v1/admin/contracts/{contractId}/documents",
+    "/api/v1/admin/contracts/{contractId}/documents/{documentId}",
+    "/api/v1/admin/contracts/{contractId}/engines",
+    "/api/v1/admin/contracts/{contractId}/history",
+    "/api/v1/admin/contracts/{contractId}/assets",
+    "/api/v1/admin/contracts/{contractId}/assets/{contractAssetId}",
+    "/api/v1/admin/contracts/{contractId}/assets/export"
+  ],
+  "schemas": {
+    "AddContractParticipantRequest": {
+      "required": [
+        "clientId",
+        "allocatedAmount"
+      ],
+      "type": "object",
+      "properties": {
+        "clientId": {
+          "type": "string",
+          "format": "uuid",
+          "example": "3fa85f64-5717-4562-b3fc-2c963f66afa6"
+        },
+        "allocatedAmount": {
+          "pattern": "^-?(?:0|[1-9]\\d*)(?:\\.\\d+)?$",
+          "type": [
+            "null",
+            "number",
+            "string"
+          ],
+          "format": "double",
+          "example": 1000.0
+        }
+      },
+      "additionalProperties": false
+    },
+    "ContractAssetUniverseSummaryResponse": {
+      "required": [
+        "assetCount",
+        "marketCount",
+        "currencyCount",
+        "networkCount"
+      ],
+      "type": "object",
+      "properties": {
+        "assetCount": {
+          "pattern": "^-?(?:0|[1-9]\\d*)$",
+          "type": [
+            "integer",
+            "string"
+          ],
+          "format": "int32"
+        },
+        "marketCount": {
+          "pattern": "^-?(?:0|[1-9]\\d*)$",
+          "type": [
+            "integer",
+            "string"
+          ],
+          "format": "int32"
+        },
+        "currencyCount": {
+          "pattern": "^-?(?:0|[1-9]\\d*)$",
+          "type": [
+            "integer",
+            "string"
+          ],
+          "format": "int32"
+        },
+        "networkCount": {
+          "pattern": "^-?(?:0|[1-9]\\d*)$",
+          "type": [
+            "integer",
+            "string"
+          ],
+          "format": "int32"
+        }
+      }
+    },
+    "ContractListItemResponse": {
+      "required": [
+        "id",
+        "publicCode",
+        "name",
+        "registrationStatus",
+        "businessStatus",
+        "createdAtUtc",
+        "clients",
+        "clientCount",
+        "initialContractualCapital",
+        "currentCapital",
+        "currencyCode",
+        "startDate",
+        "endDate",
+        "primaryEngine",
+        "assetUniverseSummary"
+      ],
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "format": "uuid",
+          "example": "3fa85f64-5717-4562-b3fc-2c963f66afa6"
+        },
+        "publicCode": {
+          "type": "string"
+        },
+        "name": {
+          "type": [
+            "null",
+            "string"
+          ],
+          "example": "Jane Doe"
+        },
+        "registrationStatus": {
+          "type": "string"
+        },
+        "businessStatus": {
+          "oneOf": [
+            {
+              "type": "null"
+            },
+            {
+              "$ref": "#/components/schemas/ContractReferenceResponse"
+            }
+          ]
+        },
+        "createdAtUtc": {
+          "type": "string",
+          "format": "date-time",
+          "example": "2026-11-18T00:00:00Z"
+        },
+        "clients": {
+          "type": "array",
+          "items": {
+            "$ref": "#/components/schemas/ContractListClientResponse"
+          }
+        },
+        "clientCount": {
+          "pattern": "^-?(?:0|[1-9]\\d*)$",
+          "type": [
+            "integer",
+            "string"
+          ],
+          "format": "int32"
+        },
+        "initialContractualCapital": {
+          "pattern": "^-?(?:0|[1-9]\\d*)(?:\\.\\d+)?$",
+          "type": [
+            "null",
+            "number",
+            "string"
+          ],
+          "format": "double"
+        },
+        "currentCapital": {
+          "pattern": "^-?(?:0|[1-9]\\d*)(?:\\.\\d+)?$",
+          "type": [
+            "null",
+            "number",
+            "string"
+          ],
+          "format": "double"
+        },
+        "currencyCode": {
+          "type": [
+            "null",
+            "string"
+          ],
+          "example": "EUR"
+        },
+        "startDate": {
+          "type": [
+            "null",
+            "string"
+          ],
+          "format": "date",
+          "example": "2026-11-18"
+        },
+        "endDate": {
+          "type": [
+            "null",
+            "string"
+          ],
+          "format": "date",
+          "example": "2026-11-18"
+        },
+        "primaryEngine": {
+          "oneOf": [
+            {
+              "type": "null"
+            },
+            {
+              "$ref": "#/components/schemas/ContractListEngineResponse"
+            }
+          ]
+        },
+        "assetUniverseSummary": {
+          "$ref": "#/components/schemas/ContractAssetUniverseSummaryResponse"
+        }
+      }
+    }
+  },
+  "findings": [
+    "currentCapital is nullable; listing keeps unavailable rather than copying initialContractualCapital.",
+    "Contract listing has no intraday count/result summary. No contract-request or intraday route in current OpenAPI; contract-operations handles financial contract operations and is not an intraday trade recording contract.",
+    "POST participant already exists; selected participant entry still has the documented item 138 source-wallet/write blockers. No participant created in this revalidation."
+  ]
+}

@@ -1,0 +1,299 @@
+{
+  "date": "2026-11-18",
+  "codeCommit": "b99be882aab3cb1bb8c5f5b48ad0be820ebb8c42",
+  "includedCommits": [
+    "5ec1e85",
+    "a207823",
+    "de17752",
+    "b99be88"
+  ],
+  "run": {
+    "conclusion": "success",
+    "headSha": "b99be882aab3cb1bb8c5f5b48ad0be820ebb8c42",
+    "jobs": [
+      {
+        "completedAt": "2026-11-18T12:36:55Z",
+        "conclusion": "success",
+        "databaseId": 134805739127,
+        "name": "Validate, build and deploy",
+        "startedAt": "2026-11-18T12:36:02Z",
+        "status": "completed",
+        "steps": [
+          {
+            "completedAt": "2026-11-18T12:36:03Z",
+            "conclusion": "success",
+            "name": "Set up job",
+            "number": 1,
+            "startedAt": "2026-11-18T12:36:03Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-11-18T12:36:10Z",
+            "conclusion": "success",
+            "name": "Check out repository",
+            "number": 2,
+            "startedAt": "2026-11-18T12:36:03Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-11-18T12:36:13Z",
+            "conclusion": "success",
+            "name": "Set up Node.js",
+            "number": 3,
+            "startedAt": "2026-11-18T12:36:10Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-11-18T12:36:24Z",
+            "conclusion": "success",
+            "name": "Install dependencies",
+            "number": 4,
+            "startedAt": "2026-11-18T12:36:13Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-11-18T12:36:25Z",
+            "conclusion": "success",
+            "name": "Audit dependencies",
+            "number": 5,
+            "startedAt": "2026-11-18T12:36:24Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-11-18T12:36:30Z",
+            "conclusion": "success",
+            "name": "Test",
+            "number": 6,
+            "startedAt": "2026-11-18T12:36:25Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-11-18T12:36:35Z",
+            "conclusion": "success",
+            "name": "Lint",
+            "number": 7,
+            "startedAt": "2026-11-18T12:36:30Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-11-18T12:36:42Z",
+            "conclusion": "success",
+            "name": "Build SPA",
+            "number": 8,
+            "startedAt": "2026-11-18T12:36:35Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-11-18T12:36:42Z",
+            "conclusion": "success",
+            "name": "Configure SSH",
+            "number": 9,
+            "startedAt": "2026-11-18T12:36:42Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-11-18T12:36:50Z",
+            "conclusion": "success",
+            "name": "Upload release",
+            "number": 10,
+            "startedAt": "2026-11-18T12:36:42Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-11-18T12:36:52Z",
+            "conclusion": "success",
+            "name": "Activate release",
+            "number": 11,
+            "startedAt": "2026-11-18T12:36:50Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-11-18T12:36:52Z",
+            "conclusion": "success",
+            "name": "Post Set up Node.js",
+            "number": 21,
+            "startedAt": "2026-11-18T12:36:52Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-11-18T12:36:52Z",
+            "conclusion": "success",
+            "name": "Post Check out repository",
+            "number": 22,
+            "startedAt": "2026-11-18T12:36:52Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-11-18T12:36:52Z",
+            "conclusion": "success",
+            "name": "Complete job",
+            "number": 23,
+            "startedAt": "2026-11-18T12:36:52Z",
+            "status": "completed"
+          }
+        ],
+        "url": "https://github.com/Statregy-Analytics/strategy-control/actions/runs/44305459622/job/134805739127"
+      }
+    ],
+    "status": "completed",
+    "url": "https://github.com/Statregy-Analytics/strategy-control/actions/runs/44305459622"
+  },
+  "localTests": 442,
+  "ciTests": 434,
+  "localOnlyPreexistingTests": 8,
+  "lint": "passed",
+  "build": "passed",
+  "securityAudit": "passed; existing verified exact-advisory mitigation retained",
+  "scopedDiffCheck": "passed",
+  "unrelatedFullDiffNote": "Preexisting trailing whitespace in uncommitted docs/Api/milestone-3-swagger.json left untouched.",
+  "nativeAssets": [
+    {
+      "path": "public/icons/contracts/selection/card-imgBuilding2.svg",
+      "sha256": "4860414d0819a7c3656a9d3e16b6b8a5962e62589e9261fe7db6d1c775484908",
+      "matchesLocal": true
+    },
+    {
+      "path": "public/icons/contracts/selection/card-imgCalendar.svg",
+      "sha256": "b0c910f00838050e4ed79f2d2887ee73fb07ae05e6ae7da49ac00934e043b718",
+      "matchesLocal": true
+    },
+    {
+      "path": "public/icons/contracts/selection/card-imgChartPie.svg",
+      "sha256": "810c64739012e862ab5e6afd570cc589a6edd642f7d4b22633f5af4b378465c6",
+      "matchesLocal": true
+    },
+    {
+      "path": "public/icons/contracts/selection/card-imgChevronRight.svg",
+      "sha256": "a6e88186176eeb2a1c0af6e18d62613a70349ee5cc0cf86fb2b8bb830dd8e3a2",
+      "matchesLocal": true
+    },
+    {
+      "path": "public/icons/contracts/selection/card-imgClock.svg",
+      "sha256": "3f63e7159d70e42b981c3bca5731a58cb198beb7c3c32bbfacba516440947a6f",
+      "matchesLocal": true
+    },
+    {
+      "path": "public/icons/contracts/selection/card-imgCoins.svg",
+      "sha256": "08dcf4effb50ce3e2d923c581017c1bb3f52f238b5cac3b49ff193bb7be22528",
+      "matchesLocal": true
+    },
+    {
+      "path": "public/icons/contracts/selection/card-imgCoins1.svg",
+      "sha256": "f6baa923bfd42ac9b82fe7cc1ce7660dd7e6063d11da9d97078209e535d89046",
+      "matchesLocal": true
+    },
+    {
+      "path": "public/icons/contracts/selection/card-imgFileText.svg",
+      "sha256": "15bbdbc2bd093113d3dfbc063ef0e63045b3d91ee685d80622845083b24d40d5",
+      "matchesLocal": true
+    },
+    {
+      "path": "public/icons/contracts/selection/card-imgUsers.svg",
+      "sha256": "1fb730eff3f95c293afe48ec14d74c5dabb69d05ad1bb2a67d7ed0e36428d11a",
+      "matchesLocal": true
+    },
+    {
+      "path": "public/icons/contracts/selection/header-imgArrowUpDown.svg",
+      "sha256": "1bfcb137c5df1d3ab130fe5c30f2109aced9dcb85b6ce20c52a2090de3f5cc04",
+      "matchesLocal": true
+    },
+    {
+      "path": "public/icons/contracts/selection/header-imgCalendar.svg",
+      "sha256": "155d5c986516f818d5ff13315257f655d84146403dcc75d16cf363430986ef73",
+      "matchesLocal": true
+    },
+    {
+      "path": "public/icons/contracts/selection/header-imgChartPie.svg",
+      "sha256": "837b9e2b6edc4d95120bfdcf7ab5194ee957518c1a3b600e1a4dd5a393bb8c5a",
+      "matchesLocal": true
+    },
+    {
+      "path": "public/icons/contracts/selection/header-imgChevronDown.svg",
+      "sha256": "b7a15cb3fa917acb47a99e0b4eb0fec4e09ece3ed0da0d7558b0b0d04a5d4f3a",
+      "matchesLocal": true
+    },
+    {
+      "path": "public/icons/contracts/selection/header-imgIconeSolicitacoes.svg",
+      "sha256": "ed1a12aff832596bcfb4b5800f4ef121812ba6aa36492f486647ddab66ec34a4",
+      "matchesLocal": true
+    },
+    {
+      "path": "public/icons/contracts/selection/header-imgLayoutGrid.svg",
+      "sha256": "f8810202ec59758f914750a3942b948673f8ce9d1e3bb5cf44303178c082c8b0",
+      "matchesLocal": true
+    },
+    {
+      "path": "public/icons/contracts/selection/header-imgLayoutList.svg",
+      "sha256": "7c61fa38271a3d94b0d2a0459fdcdd3574005ee50005dfb5504d886992a8cad0",
+      "matchesLocal": true
+    },
+    {
+      "path": "public/icons/contracts/selection/header-imgPlus.svg",
+      "sha256": "2a5b3c6f81498e67ec4d7fb51e78e78d3a66362716c6c437170d1deabe1c54ac",
+      "matchesLocal": true
+    },
+    {
+      "path": "public/icons/contracts/selection/header-imgSearch.svg",
+      "sha256": "70a88becc91a8b004457d78f615653669af510ecd20a220380fd7b9b588dc03b",
+      "matchesLocal": true
+    },
+    {
+      "path": "public/icons/contracts/selection/header-imgUsers.svg",
+      "sha256": "978de52efba111262f1d7a10434e7863a61665ba10f58e32505221d8ea8874b0",
+      "matchesLocal": true
+    },
+    {
+      "path": "public/icons/contracts/selection/list-imgArrowRight.svg",
+      "sha256": "8ced191cebfed38eebacef8652ed7c121466bfb393a54da5482ea97342f84a16",
+      "matchesLocal": true
+    },
+    {
+      "path": "public/icons/contracts/selection/list-imgBuilding2.svg",
+      "sha256": "dba9f5ef64ccfff15da53ec662763fd17ffd8d4a2c419d63f325c2e54f782cd9",
+      "matchesLocal": true
+    },
+    {
+      "path": "public/icons/contracts/selection/list-imgChartPie2.svg",
+      "sha256": "4b379404fb7aad7f31d3b58ca5d56e7313e0e5e2f9ead8df17f3449a16575712",
+      "matchesLocal": true
+    },
+    {
+      "path": "public/icons/contracts/selection/list-imgChevronRight.svg",
+      "sha256": "6ea79b8a6e44df7568a34b08551b67afafc36ea61475d2eb476e5c407add51b4",
+      "matchesLocal": true
+    },
+    {
+      "path": "public/icons/contracts/selection/list-imgCoins.svg",
+      "sha256": "ad678666e6a3fd73702dbb4e7f3b8026af4b042941f93c400a925ba553008f44",
+      "matchesLocal": true
+    },
+    {
+      "path": "public/icons/contracts/selection/list-imgFileText1.svg",
+      "sha256": "bb6efac71ead22fd77fee8c04e4df63db663f33dd9df1db20e19a484ce13f062",
+      "matchesLocal": true
+    },
+    {
+      "path": "public/icons/contracts/selection/list-imgLayoutGrid.svg",
+      "sha256": "c018b75e2cb244b86375d959cbd31852cedf86da5879b75fc40b0665e3774eee",
+      "matchesLocal": true
+    },
+    {
+      "path": "public/icons/contracts/selection/list-imgLayoutList.svg",
+      "sha256": "6879845d424c4a5a92341a5061f04b124a0afd621ecf41904f4affa1907d4a6f",
+      "matchesLocal": true
+    },
+    {
+      "path": "public/icons/contracts/selection/list-imgUser.svg",
+      "sha256": "cd6434664baea81a257276e1042d20bf7607983bb6bee108f7b809cce62b76a5",
+      "matchesLocal": true
+    }
+  ],
+  "entryModules": [
+    {
+      "path": "/assets/index-vetamSsr.js",
+      "sha256": "65477b56f3d4b412168ab59a7070a3922729a86ab9de25ba0a727067decfef26",
+      "matchesLocal": true
+    }
+  ],
+  "fixtureRemovedBeforeBuild": true
+}

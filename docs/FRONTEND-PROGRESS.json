@@ -11,12 +11,12 @@
   },
   "metrics": {
     "total": 279,
-    "done": 225,
-    "validation": 45,
-    "adjustment": 9,
-    "implemented": 270,
-    "implementedPercent": 96.8,
-    "readyPercent": 80.6
+    "done": 228,
+    "validation": 41,
+    "adjustment": 10,
+    "implemented": 269,
+    "implementedPercent": 96.4,
+    "readyPercent": 81.7
   },
   "withoutLinkedFigmaReference": {
     "count": 13,
@@ -1153,16 +1153,20 @@
       "link": "[1484:69985](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-69985)",
       "counted": true,
       "group": "C06",
-      "category": "Ajuste de front",
-      "front": "validation",
-      "blockers": [],
-      "reason": "Código e cenários específicos existentes; revisão integral do frame e escrita integrada restante não foram comprovadas. Nenhum defeito adicional nem endpoint ausente foi inferido.",
+      "category": "Bloqueio backend",
+      "front": "done",
+      "blockers": [
+        "backend"
+      ],
+      "reason": "CT01 Cards comparado com contexto completo/screenshot e testado no navegador local e publicado. Dados ausentes e escrita financeira do item138 continuam explícitos; nenhum sucesso simulado.",
       "sources": [
-        "src/pages/Contracts/ContractsPage.vue"
+        "src/pages/Contracts/ContractsPage.vue",
+        "src/components/Contracts/ContractSelection.vue"
       ],
       "evidence": [
         "docs/QA-2026-11-13-CONTRATOS-CT04-CT07.md",
-        "docs/CHECKLIST-UNICO-FIGMA-FRONT.md#ct09--inclusão-de-participante-no-contrato-existente-1511"
+        "docs/CHECKLIST-UNICO-FIGMA-FRONT.md#ct09--inclusão-de-participante-no-contrato-existente-1511",
+        "docs/evidence/qa-2026-11-18-contract-selection/results.json"
       ],
       "browser": "parcial histórica; revisão integral pendente",
       "historicalCategory": "Ajuste de front"
@@ -1175,16 +1179,20 @@
       "link": "[1484:70685](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-70685)",
       "counted": true,
       "group": "C06",
-      "category": "Ajuste de front",
-      "front": "validation",
-      "blockers": [],
-      "reason": "Código e cenários específicos existentes; revisão integral do frame e escrita integrada restante não foram comprovadas. Nenhum defeito adicional nem endpoint ausente foi inferido.",
+      "category": "Bloqueio backend",
+      "front": "done",
+      "blockers": [
+        "backend"
+      ],
+      "reason": "CT02 Lista comparado com contexto completo/screenshot e testado no navegador local e publicado. Dados ausentes e escrita financeira do item138 continuam explícitos; nenhum sucesso simulado.",
       "sources": [
-        "src/pages/Contracts/ContractsPage.vue"
+        "src/pages/Contracts/ContractsPage.vue",
+        "src/components/Contracts/ContractSelection.vue"
       ],
       "evidence": [
         "docs/QA-2026-11-13-CONTRATOS-CT04-CT07.md",
-        "docs/CHECKLIST-UNICO-FIGMA-FRONT.md#ct09--inclusão-de-participante-no-contrato-existente-1511"
+        "docs/CHECKLIST-UNICO-FIGMA-FRONT.md#ct09--inclusão-de-participante-no-contrato-existente-1511",
+        "docs/evidence/qa-2026-11-18-contract-selection/results.json"
       ],
       "browser": "parcial histórica; revisão integral pendente",
       "historicalCategory": "Ajuste de front"
@@ -1317,16 +1325,20 @@
       "link": "[1484:73324](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-73324)",
       "counted": true,
       "group": "C06",
-      "category": "Ajuste de front",
-      "front": "validation",
-      "blockers": [],
-      "reason": "Código e cenários específicos existentes; revisão integral do frame e escrita integrada restante não foram comprovadas. Nenhum defeito adicional nem endpoint ausente foi inferido.",
+      "category": "Bloqueio backend",
+      "front": "done",
+      "blockers": [
+        "backend"
+      ],
+      "reason": "CT09 seleção inicial do participante comparado com contexto completo/screenshot e testado no navegador local e publicado. Dados ausentes e escrita financeira do item138 continuam explícitos; nenhum sucesso simulado.",
       "sources": [
-        "src/pages/Contracts/ContractsPage.vue"
+        "src/components/Contracts/ContractParticipantDialog.vue",
+        "src/components/Contracts/ContractWorkspace.vue"
       ],
       "evidence": [
         "docs/QA-2026-11-13-CONTRATOS-CT04-CT07.md",
-        "docs/CHECKLIST-UNICO-FIGMA-FRONT.md#ct09--inclusão-de-participante-no-contrato-existente-1511"
+        "docs/CHECKLIST-UNICO-FIGMA-FRONT.md#ct09--inclusão-de-participante-no-contrato-existente-1511",
+        "docs/evidence/qa-2026-11-18-contract-selection/results.json"
       ],
       "browser": "parcial histórica; revisão integral pendente",
       "historicalCategory": "Ajuste de front"
@@ -1388,17 +1400,19 @@
       "counted": true,
       "group": "C03",
       "category": "Ajuste de front",
-      "front": "validation",
+      "front": "adjustment",
       "blockers": [
-        "designer",
-        "backend"
+        "backend",
+        "designer"
       ],
-      "reason": "Modal desenhado sem gatilho localizado em CT07/CT11; operações intradiárias não têm contrato operacional. Não criar botão. Revisão de composição ainda pendente.",
+      "reason": "CT12 não possui modal integrado no código atual. Há desenho do modal, mas o CT11 recuperado não mostra a ação/gatilho para abri-lo e não existe rota intradiária documentada. Definir o vínculo com designer antes de publicar tela solta/ação extra; preparar integração a partir do contrato HTTP real.",
       "sources": [
-        "src/components/Finance/ContractSections.vue"
+        "src/components/Contracts/ContractEngines.vue",
+        "src/components/Contracts/ContractWorkspace.vue"
       ],
       "evidence": [
-        "docs/CHECKLIST-UNICO-FIGMA-FRONT.md#contratos--contraste-e-estados-expandidos-rodada-atual"
+        "docs/CHECKLIST-UNICO-FIGMA-FRONT.md#contratos--contraste-e-estados-expandidos-rodada-atual",
+        "docs/evidence/qa-2026-11-18-contract-selection/results.json"
       ],
       "browser": "histórica; não repetida em 16/11",
       "historicalCategory": "Ajuste de front"

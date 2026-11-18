@@ -10,15 +10,37 @@ Atualizado em 2026-11-18. Contagem por **telas e estados independentes do Figma*
 | Situação | Quantidade |
 | --- | ---: |
 | Total inventariado | **279** |
-| Prontas no frontend | **225** |
-| Implementadas, aguardando revalidação/comparação completa | **45** |
-| Ainda exigem implementação, complemento ou correção | **9** |
-| Com implementação existente (prontas + revalidação) | **270 / 279 (96,8%)** |
+| Prontas no frontend | **228** |
+| Implementadas, aguardando revalidação/comparação completa | **41** |
+| Ainda exigem implementação, complemento ou correção | **10** |
+| Com implementação existente (prontas + revalidação) | **269 / 279 (96,4%)** |
 
-**Para encerrar o front faltam 9 itens de implementação/ajuste e 45 de revalidação.** “Pronto no frontend” não significa fluxo integrado liberado: dependências de backend/designer podem afetar também telas prontas. Os números não classificam toda pendência como tela nova nem como problema de API. A comparação de Crédito, carteira global e editor editorial que não foi concluída integralmente permanece em revalidação.
+**Para encerrar o front faltam 10 itens de implementação/ajuste e 41 de revalidação.** “Pronto no frontend” não significa fluxo integrado liberado: dependências de backend/designer podem afetar também telas prontas. Os números não classificam toda pendência como tela nova nem como problema de API. A comparação de Crédito, carteira global e editor editorial que não foi concluída integralmente permanece em revalidação.
 
 Fonte por frame: [progresso atual](FRONTEND-PROGRESS.json). A base anterior permanece histórica; [atualizações com evidências](FRONTEND-PROGRESS-OVERRIDES.json) registram cada mudança. Ao finalizar **cada entrega**, atualizar os IDs comprovados, executar `node scripts/frontend-progress.mjs` e informar este panorama na resposta final.
 <!-- frontend-progress:end -->
+
+## Entrega 18/11 — seleção de contratos CT01/CT02 e participante CT09
+
+**Publicado em homologação:** `b99be88`, incluindo `5ec1e85`, `a207823` e `de17752`, [deploy 44305459622 aprovado](https://github.com/Statregy-Analytics/strategy-control/actions/runs/44305459622). CT01 (Cards), CT02 (Lista) e estado inicial CT09 foram comparados com referências completas e revalidados. CT12 foi analisado e **reclassificado como implementação/ajuste**, pois o modal não está integrado no código atual. Não foi encerrado como uma dependência exclusiva de backend.
+
+- [x] CT01: identidade com ícone nativo, ID/badge, nome/data, chips de clientes, capital inicial/atual, vigência, motor, universo e operações em sua composição. CT02: tabela com identidade/status, clientes, capital atual e inicial, datas com seta, motor, contadores do universo e abertura direta. Tipografia, divisórias, hover, paleta e densidade ajustados.
+- [x] Cabeçalho com os SVGs recuperados para busca, filtros, solicitações, criação, ordenação e Lista/Cards. Rótulos Motor Principal/Ordenar por completos nos pontos testados; setas de 16 px preservadas. Busca, cliente, motor, período e ordenação continuam usando o modelo existente. O contador de solicitações somente aparece quando conhecido.
+- [x] Rascunho não aparece como Ativo por herdar a configuração de status de negócio. Rótulo real desconhecido é preservado com estilo neutro. Contadores zero e strings numéricas válidas são mantidos; campos ausentes não viram zero. Capital atual não usa capital inicial como substituto.
+- [x] Período reutiliza DateRangePicker. Slot para ícone nativo, importação explícita dos ícones padrão existentes e limpeza por teclado sem aumentar a área de 14 px nos outros consumidores. Contraste do intervalo corrigido após identificar interferência de um estilo global antigo.
+- [x] CT09 inicial compacto: 512 × 267 px, cabeçalho 53 px e corpo 143 px. A composição ampliada autorizada do item138 continua aparecendo somente após a seleção. Busca real sem resultado, participante duplicado bloqueado, cancelar/reabrir sem seleção/erro antigo e celular foram conferidos sem gravação de vínculo.
+- [x] Local: componentes reais com dados controlados nos cinco estados de status, capital positivo/zero/ausente, nomes longos, vários clientes e contadores ausentes. Busca/cliente/motor/ordenação combinados, abertura por Enter, período/aplicar/limpar, vazio, erro e repetição que recupera a consulta. Cards e Lista em 390 px sem overflow externo. Prévia removida antes do build.
+- [x] Homologação: filtros combinados com Legacy Prime, abertura do contrato correto por Enter e retorno preservando busca/cliente/motor/ordenação/Lista; CT09 e duplicidade; cadastro existente aberto e cancelado sem gravar; solicitações com indisponibilidade explícita; busca vazia; cards/tabela/modal em celular. Estados financeiros positivos e status sem massa real foram testados localmente, sem afirmar integração inexistente.
+- [x] 442 testes locais (oito preexistentes do usuário fora destes commits), 434 no CI, lint, build e auditoria passaram; proteção existente preservada. Check do diff desta entrega passou. O check integral ainda aponta whitespace preexistente no Swagger local, que não foi alterado nem incluído. Vinte e oito SVGs e módulo de entrada publicados conferidos por HTTP/hash. Nenhum registro, saldo, vínculo ou operação financeira alterado.
+- [ ] **CT12 — front + designer:** existe o desenho do modal, mas o CT11 recuperado não mostra o gatilho para abri-lo. Definir origem/vínculo da abertura; falta integrar o modal. Não criar botão fora do desenho ou publicar tela solta. Este é um item real de implementação/ajuste, não tela concluída.
+- [ ] **CT12 — backend:** falta contrato HTTP documentado para gravação/consulta intradiária e seus efeitos, além do resumo de operações na seleção. A rota de operações financeiras do contrato não equivale ao registro intradiário e não foi reutilizada arbitrariamente.
+- [ ] **API/massa:** `currentCapital` **já existe** na resposta da lista, mas não estava preenchido nos registros consultados. Confirmar projeção/dado com backend; manter indisponível. O resumo do universo já existe e foi integrado, inclusive zero conhecido. Não pedir campos ou rotas duplicados.
+- [ ] **Solicitações:** ainda não há contrato de consulta/escrita documentado, incluindo contador de novas. Mantidos erro e contadores desconhecidos; sem lista vazia/sucesso fictício.
+- [ ] **Entrada financeira do participante:** POST simples de participantes já existe (`clientId`, `allocatedAmount`). As pendências anteriores do item138 para origens, moedas, débitos e entrada financeira permanecem; esta revisão não homologou um novo vínculo persistido.
+
+Panorama corrigido: **279 estados, 228 prontos, 41 em revalidação e 10 em implementação/ajuste**. Implementação existente **269/279 (96,4%)**; prontos **81,7%**. Dos 45 em revalidação, três foram concluídos e um passou a ajuste. A queda de 96,8% para 96,4% corrige o inventário após comprovar a ausência de CT12 integrado; não decorre de remoção de código. Permanecem **13 superfícies sem frame vinculado**, nenhuma nova nesta entrega. Pronto no frontend não significa homologação integrada concluída.
+
+[Resultados e limites](evidence/qa-2026-11-18-contract-selection/results.json) · [Referências](evidence/qa-2026-11-18-contract-selection/figma-references.json) · [API consultada](evidence/qa-2026-11-18-contract-selection/api-review.json) · [Publicação e hashes](evidence/qa-2026-11-18-contract-selection/publication.json) · [CT02 publicado](evidence/qa-2026-11-18-contract-selection/hml-list.png) · [CT09 publicado](evidence/qa-2026-11-18-contract-selection/hml-participant.png).
 
 ## Entrega 18/11 — cards de carteiras e Strategy expandida
 
@@ -1073,8 +1095,8 @@ Legenda vigente: classificação de 16/11 por código e evidências, detalhada e
 | [2077:281](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=2077-281)     | C11.2 · Identificação e valor · erros ao salvar (caixas no lugar)                             | Pronto no front · A13 |
 | [2095:281](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=2095-281)     | C09.1 · MD · Dados Bancários — Adicionar Conta · preenchido, conta principal ativa            | Pronto no front · A07 |
 | [1484:69984](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-69984) | F01 · Seleção de contratos · Cards / Lista + painéis temporários                              | Agregador/conexão — fora do percentual; ver estados filhos |
-| [1484:69985](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-69985) | CT01 · PB · Seleção de contratos · Cards · DESIGN GLASS                                       | Implementado · revalidar · C06 |
-| [1484:70685](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-70685) | CT02 · SP · Seleção de contratos · Lista · DESIGN GLASS                                       | Implementado · revalidar · C06 |
+| [1484:69985](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-69985) | CT01 · PB · Seleção de contratos · Cards · DESIGN GLASS                                       | Pronto no front · C06 |
+| [1484:70685](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-70685) | CT02 · SP · Seleção de contratos · Lista · DESIGN GLASS                                       | Pronto no front · C06 |
 | [1484:71333](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-71333) | F02 · Criação de contrato · Tela única + painéis acionados                                    | Agregador/conexão — fora do percentual; ver estados filhos |
 | [1484:71334](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-71334) | CT04 · SP · Criar novo contrato · Tela única completa · DESIGN GLASS                          | Pronto no front · C01 |
 | [1484:72006](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-72006) | CT05 · MD · Selecionar clientes para vincular · DESIGN GLASS                                  | Pronto no front · C01 |
@@ -1082,10 +1104,10 @@ Legenda vigente: classificação de 16/11 por código e evidências, detalhada e
 | [1484:72187](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-72187) | F03 · Contrato aberto · Componentes, estados e ações                                          | Agregador/conexão — fora do percentual; ver estados filhos |
 | [1484:72188](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-72188) | CT07 · PB · Contrato aberto · Página base · DESIGN GLASS                                      | Pronto no front · C02 |
 | [1484:73154](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-73154) | CT08 · CP · Clientes vinculados · Lista · DESIGN GLASS                                        | Pronto no front · C02 |
-| [1484:73324](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-73324) | CT09 · MD · Adicionar cliente vinculado · DESIGN GLASS                                        | Implementado · revalidar · C06 |
+| [1484:73324](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-73324) | CT09 · MD · Adicionar cliente vinculado · DESIGN GLASS                                        | Pronto no front · C06 |
 | [1484:73364](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-73364) | CT10 · MD · Ver detalhes do cliente · DESIGN GLASS                                            | Pronto no front · C02 |
 | [1484:73521](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-73521) | CT11 · CP · Motores e operações · Maximizado · DESIGN GLASS                                   | Pronto no front · C02 |
-| [1484:73658](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-73658) | CT12 · MD · Adicionar operação intradiária · DESIGN GLASS                                     | Implementado · revalidar · C03 |
+| [1484:73658](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-73658) | CT12 · MD · Adicionar operação intradiária · DESIGN GLASS                                     | Implementação/ajuste pendente · C03 |
 | [1484:73745](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-73745) | CT13 · CP · Ativos do contrato · Maximizado · DESIGN GLASS                                    | Pronto no front · C05 |
 | [1484:73893](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-73893) | CT14 · PE · Ativos do contrato · Editar ativo / Excluir · DESIGN GLASS                        | Pronto no front · C05 |
 | [1484:74090](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-74090) | CT15 · CP · Dívidas vinculadas · Maximizado · DESIGN GLASS                                    | Pronto no front · C05 |

@@ -1,0 +1,105 @@
+{
+  "date": "2026-11-18",
+  "framesRevalidated": {
+    "1484:69985": "CT01 Seleção de contratos / Cards",
+    "1484:70685": "CT02 Seleção de contratos / Lista",
+    "1484:73324": "CT09 Adicionar participante / seleção inicial"
+  },
+  "frameReclassified": {
+    "1484:73658": {
+      "front": "adjustment",
+      "reason": "Modal CT12 não encontrado no código integrado. O CT11 recuperado não mostra gatilho para abri-lo; falta definir o vínculo sem criar ação extra. Não há rota intradiária documentada. Não foi publicada uma tela solta nem reusada indevidamente uma operação financeira."
+    }
+  },
+  "figma": {
+    "fileKey": "i2jizg7UtPyg3KjAOvuFtI",
+    "fullContexts": [
+      "1484:70093",
+      "1484:70173",
+      "1484:70685",
+      "1484:73324",
+      "1484:73658",
+      "1484:73521"
+    ],
+    "sparseParent": "1484:69985 expanded through complete header and card contexts; parent screenshot downloaded separately",
+    "nativeAssets": "28 SVGs from header/card/list contexts, preserving original dimensions; CT09 reuses its six existing native assets."
+  },
+  "changes": [
+    "CT01 identity icon, ID/status badges, client chips, capital/term panel, engine/universe/operations and direct opening aligned with full context.",
+    "CT02 dense table with native icons, status badge, current/initial capital, arrow between dates and separate universe counters. No unavailable value replaced by initial capital.",
+    "Header search, filter icons, full labels and view selection use native assets; current requested count only renders if known.",
+    "Draft registration takes precedence over configured Active business status; unknown real business labels kept without classifying as active.",
+    "Known zero and numeric string universe counters preserved; missing/invalid values remain unavailable.",
+    "Date-range primitive reused with optional icon slot and direct imports for its existing icons; existing clear action is keyboard accessible, keeps 14px footprint and readable period styling in Contract selection.",
+    "CT09 empty state restored to 512px and compact header/body; authorized item138 expansion after selection preserved."
+  ],
+  "localBrowser": [
+    "Actual ContractSelection component in a temporary fixture: five business/registration states, positive capital, zero capital, absent counters, multiple clients and long names.",
+    "Combined search/client/engine/sort, Enter opening callback, range apply and clear by Enter, empty collection, failed read and retry recovery.",
+    "Cards and List at 390px with no external overflow; list scrolls internally at1400px. Native assets loaded; dropdown restored to original16px. Full Motor Principal/Ordenar por labels measured at1280px.",
+    "Real API: Legacy Prime opening, initial participant modal, real customer lookup, duplicate block, cancel and return preserving search. Mobile participant327px inside375px document.",
+    "Temporary fixture source retained as .txt evidence and removed before build."
+  ],
+  "homologation": {
+    "url": "https://admin.strategyanalytics.com.br/contracts",
+    "checks": [
+      "Cards/list read real contracts and drafts; current capital unavailable where API supplies no current amount; no invented intraday counts.",
+      "Search Legacy + client Eric Vicente + engine Quant Core + A-Z + range01/11-10/11/2026 leaves Legacy Prime.",
+      "Period apply, clear by Enter, native clear14px and final white text on glass verified.",
+      "Enter opens exact Legacy Prime contract01b837f5-4b9c-4171-a5d0-fee468ac6df1; returning preserves search/client/engine/sort and List.",
+      "CT09 initial512x267px, header53px, body143px; six existing icons loaded.",
+      "Lookup of nonexisting QA name shows no result and disabled submit; Eric duplicate shows existing-link warning and disabled confirmation. Cancel/reopen clears selection/error. No participant POST performed.",
+      "390px: CT09 width327px, title within viewport; cards no external overflow; list1400px inside356px visible area.",
+      "No-result contract search shows explicit empty state.",
+      "Solicitações opens the existing unavailable/error state with unknown counters, not a fake empty successful list.",
+      "Criar Novo Contrato navigates to existing /contracts?new=1; returned without saving draft or finalizing."
+    ],
+    "limits": [
+      "Positive current capital and blocked/analysis statuses validated in controlled local data; no new financial records created to manufacture live states.",
+      "POST participant persistence and source-wallet financial entry were not claimed; existing item138 blockers remain.",
+      "CT12 remains incomplete and was not counted as ready."
+    ],
+    "finalCommit": "b99be882aab3cb1bb8c5f5b48ad0be820ebb8c42",
+    "finalRun": "https://github.com/Statregy-Analytics/strategy-control/actions/runs/44305459622",
+    "finalRetest": [
+      "Full filter labels fit without ellipsis at2048px: Motor Principal text102px/native102px; Ordenar por81px/native81px. Same labels also measured at1280px locally.",
+      "Final range badge is white rgb255/255/255 on rgba255/255/255/0.06, clear control14x14px; Enter clears the range.",
+      "Final390px Cards: document375px, card341px with341px scroll; List document390px and1400px table inside356px scroll container.",
+      "Final28 SVGs and application entry module published hash match local build."
+    ]
+  },
+  "backend": [
+    "currentCapital exists in current ContractListItemResponse but was not populated in inspected records; retain unavailable rather than initial capital.",
+    "Contract list has no intraday operation count/result summary. No documented intraday recording/list route in current OpenAPI; contract-operations is a different financial operation.",
+    "Contract request query/write contract remains undocumented, including new-request count. Existing adapter explicitly fails rather than guessing endpoint or success.",
+    "POST participants already exists with clientId/allocatedAmount; existing item138 still needs source wallets/currencies/debits/financial entry semantics. Do not request a duplicate simple participant route."
+  ],
+  "designer": [
+    "Define the CT12 entry point/link from the contract: recovered CT11 does not show a button to open it. No new action invented."
+  ],
+  "tests": {
+    "local": 442,
+    "ci": 434,
+    "preexistingLocalOnly": 8,
+    "lint": "passed",
+    "build": "passed",
+    "securityAudit": "passed; existing verified exact advisory mitigation retained",
+    "scopedDiffCheck": "passed",
+    "fullDiffCheck": "Preexisting trailing whitespace in uncommitted docs/Api/milestone-3-swagger.json preserved outside this change."
+  },
+  "scopeNotes": [
+    "No backend writes, participant insertion or financial operation performed.",
+    "No new surface without Figma reference; thirteen prior unlinked surfaces unchanged.",
+    "Local screenshots show controlled data; HML screenshots show actual test environment data."
+  ],
+  "metricsExpected": {
+    "total": 279,
+    "done": 228,
+    "validation": 41,
+    "adjustment": 10,
+    "implemented": 269,
+    "implementedPercent": 96.4,
+    "readyPercent": 81.7,
+    "note": "Three validated; one missing implementation discovered and reclassified. Percentage decrease is inventory correction, not code removal."
+  }
+}

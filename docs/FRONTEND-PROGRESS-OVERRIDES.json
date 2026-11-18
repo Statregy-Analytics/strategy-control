@@ -774,6 +774,55 @@
       "blockers": [
         "backend"
       ]
+    },
+    "1484:69985": {
+      "front": "done",
+      "reason": "CT01 Cards comparado com contexto completo/screenshot e testado no navegador local e publicado. Dados ausentes e escrita financeira do item138 continuam explícitos; nenhum sucesso simulado.",
+      "evidence": "docs/evidence/qa-2026-11-18-contract-selection/results.json",
+      "blockers": [
+        "backend"
+      ],
+      "sources": [
+        "src/pages/Contracts/ContractsPage.vue",
+        "src/components/Contracts/ContractSelection.vue"
+      ]
+    },
+    "1484:70685": {
+      "front": "done",
+      "reason": "CT02 Lista comparado com contexto completo/screenshot e testado no navegador local e publicado. Dados ausentes e escrita financeira do item138 continuam explícitos; nenhum sucesso simulado.",
+      "evidence": "docs/evidence/qa-2026-11-18-contract-selection/results.json",
+      "blockers": [
+        "backend"
+      ],
+      "sources": [
+        "src/pages/Contracts/ContractsPage.vue",
+        "src/components/Contracts/ContractSelection.vue"
+      ]
+    },
+    "1484:73324": {
+      "front": "done",
+      "reason": "CT09 seleção inicial do participante comparado com contexto completo/screenshot e testado no navegador local e publicado. Dados ausentes e escrita financeira do item138 continuam explícitos; nenhum sucesso simulado.",
+      "evidence": "docs/evidence/qa-2026-11-18-contract-selection/results.json",
+      "blockers": [
+        "backend"
+      ],
+      "sources": [
+        "src/components/Contracts/ContractParticipantDialog.vue",
+        "src/components/Contracts/ContractWorkspace.vue"
+      ]
+    },
+    "1484:73658": {
+      "front": "adjustment",
+      "reason": "CT12 não possui modal integrado no código atual. Há desenho do modal, mas o CT11 recuperado não mostra a ação/gatilho para abri-lo e não existe rota intradiária documentada. Definir o vínculo com designer antes de publicar tela solta/ação extra; preparar integração a partir do contrato HTTP real.",
+      "evidence": "docs/evidence/qa-2026-11-18-contract-selection/results.json",
+      "blockers": [
+        "backend",
+        "designer"
+      ],
+      "sources": [
+        "src/components/Contracts/ContractEngines.vue",
+        "src/components/Contracts/ContractWorkspace.vue"
+      ]
     }
   }
 }
