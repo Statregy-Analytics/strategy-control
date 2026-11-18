@@ -1,24 +1,42 @@
 # Checklist único — telas do Figma e integração
 
-Atualização: 17/11/2026. Este é o índice desta revisão ampla. Evidências anteriores continuam nos documentos vinculados; uma tela existente não é automaticamente considerada revalidada nesta rodada.
+Atualização: 18/11/2026. Este é o índice desta revisão ampla. Evidências anteriores continuam nos documentos vinculados; uma tela existente não é automaticamente considerada revalidada nesta rodada.
 
 <!-- frontend-progress:start -->
 ## Panorama atual do frontend
 
-Atualizado em 2026-11-17. Contagem por **telas e estados independentes do Figma**, com peso igual; não é estimativa de horas. Os 30 agrupamentos/conexões do inventário foram excluídos.
+Atualizado em 2026-11-18. Contagem por **telas e estados independentes do Figma**, com peso igual; não é estimativa de horas. Os 30 agrupamentos/conexões do inventário foram excluídos.
 
 | Situação | Quantidade |
 | --- | ---: |
 | Total inventariado | **279** |
-| Prontas no frontend | **220** |
-| Implementadas, aguardando revalidação/comparação completa | **50** |
+| Prontas no frontend | **225** |
+| Implementadas, aguardando revalidação/comparação completa | **45** |
 | Ainda exigem implementação, complemento ou correção | **9** |
 | Com implementação existente (prontas + revalidação) | **270 / 279 (96,8%)** |
 
-**Para encerrar o front faltam 9 itens de implementação/ajuste e 50 de revalidação.** “Pronto no frontend” não significa fluxo integrado liberado: dependências de backend/designer podem afetar também telas prontas. Os números não classificam toda pendência como tela nova nem como problema de API. A comparação de Crédito, carteira global e editor editorial que não foi concluída integralmente permanece em revalidação.
+**Para encerrar o front faltam 9 itens de implementação/ajuste e 45 de revalidação.** “Pronto no frontend” não significa fluxo integrado liberado: dependências de backend/designer podem afetar também telas prontas. Os números não classificam toda pendência como tela nova nem como problema de API. A comparação de Crédito, carteira global e editor editorial que não foi concluída integralmente permanece em revalidação.
 
 Fonte por frame: [progresso atual](FRONTEND-PROGRESS.json). A base anterior permanece histórica; [atualizações com evidências](FRONTEND-PROGRESS-OVERRIDES.json) registram cada mudança. Ao finalizar **cada entrega**, atualizar os IDs comprovados, executar `node scripts/frontend-progress.mjs` e informar este panorama na resposta final.
 <!-- frontend-progress:end -->
+
+## Entrega 18/11 — cards de carteiras e Strategy expandida
+
+**Publicado em homologação:** `c9b6286`, incluindo `383d9df`, [deploy 44296200867 aprovado](https://github.com/Statregy-Analytics/strategy-control/actions/runs/44296200867). Cinco estados comparados com referências completas: V02 (Total/Cards), V04 (Depósito/Cards), V06 (Patrimônio/Cards), V08 (Strategy/Cards recolhido) e E01 (Strategy/Cards expandido). Nenhum outro frame encerrado por compartilhar componentes.
+
+- [x] Composição específica por carteira: ícones nativos, identificação e máscara recebida, saldos por moeda, consolidado, indicadores, status e ações do desenho. Contraste das moedas e percentuais corrigido; estilo do cabeçalho da listagem deixa de interferir nos cards. Espaçamentos, divisórias e horários sem segundos ajustados na comparação final.
+- [x] Sete moedas-base preservadas, mais moedas efetivamente recebidas; zero conhecido e ausência não são confundidos. Consolidação usa a integração PTAX existente; falta de taxa não vira soma de moedas nativas. Patrimônio atual não usa valor declarado ou líquido como substituto.
+- [x] Strategy expande/recolhe contratos em todas as moedas do cliente, reutilizando a consulta existente. Cards compactos mostram valor de entrada do participante, percentual, motor e data de vínculo. Máximo de quatro detalhes simultâneos, erro/repetição independente e descarte de resposta de outro contexto. O perfil padrão continua filtrado por cliente e moeda.
+- [x] Navegador local: quatro modos e expansão, estados positivos/zero/ausentes, duas moedas, teclado, links e celular. Prévia controlada removida antes do build. 440 testes locais (oito são preexistentes do usuário fora deste commit), 432 no CI, lint, build e auditoria passaram. `git diff --cached --check` passou; o check integral aponta whitespace preexistente no Swagger local, preservado sem staging.
+- [x] Homologação: cinco estados, contraste e SVGs; Depósito do Cláudio e extrato de R$ 25.000,00; consulta de bens; Strategy do Cláudio; abertura do contrato QA136 correto e retorno; três contratos do Éric em BRL/USD com participações próprias; fechar por Enter; troca Cards/Lista; busca vazia; celular sem overflow externo após assentamento do layout, com rolagem interna da composição. Quatorze SVGs e módulo de entrada publicados conferidos por HTTP/hash. Nenhum registro ou saldo alterado.
+- [ ] **Backend — projeção agregada:** continuam ausentes valor de mercado/valorização/variação, capital base/rendimento, descrição por tipo de bem, contagem total de movimentos, chips/vínculo compartilhado de contratos e código/status de grupos sem ledger. Não usar `recentMovements.length` como total. As rotas individuais de bens, contratos, extrato e PTAX **já existem**; não pedir duplicação. Estados positivos sem massa real foram verificados localmente, não declarados como integração homologada.
+- [ ] **Backend — participação:** a resposta atual não traz saldo atual individual do participante. O saldo do contrato inteiro não deve ocupar esse campo. Motor e data de vínculo já são retornados e agora aparecem.
+- [ ] **Backend — Cláudio:** ainda retorna Beta Growth Spec encerrado (R$ 261.500,00) junto de QA136 (R$ 0,20), total Strategy R$ 261.500,20. Sem exclusão local para esconder a divergência.
+- [ ] **Designer:** permanecem as definições anteriores do Exportar global e dos estados abertos de Mais Filtros; não foram criados controles extras. O painel legado de bens reutilizado continua entre as superfícies sem frame vinculado para avaliação de Éric.
+
+Panorama: **279 estados, 225 prontos, 45 em revalidação e 9 em implementação/ajuste**. Implementação existente **96,8%**; prontos **80,6%**. Cinco dos 50 estados desta solicitação revalidados; os outros 45 continuam discriminados no inventário. Permanecem **13 superfícies sem frame vinculado**, nenhuma nova nesta entrega. Pronto no frontend não significa homologação integrada concluída.
+
+[Resultados, testes e bloqueios](evidence/qa-2026-11-18-wallet-cards/results.json) · [Referências recuperadas](evidence/qa-2026-11-18-wallet-cards/references.json) · [Contrato HTTP](evidence/qa-2026-11-18-wallet-cards/api-contract.json) · [Publicação e hashes](evidence/qa-2026-11-18-wallet-cards/publication.json) · [Strategy publicada](evidence/qa-2026-11-18-wallet-cards/hml-strategy-expanded.png).
 
 ## Entrega 17/11 — listas de carteiras e consolidação por PTAX
 
@@ -1145,19 +1163,19 @@ Legenda vigente: classificação de 16/11 por código e evidências, detalhada e
 | [2187:404](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=2187-404)     | MD06.3 · Transação corrigida · Detalhes com a transação original                              | Pronto no front · T02 |
 | [2282:289](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=2282-289)     | E11 · Painel de estados do componente · Cancelar                                              | Pronto no front · T02 |
 | [1484:86915](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-86915) | F02 · Carteiras · Cards ↔ Lista                                                               | Agregador/conexão — fora do percentual; ver estados filhos |
-| [1484:86920](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-86920) | V02 · Carteira Total · Cards                                                                  | Implementado · revalidar · T03 |
+| [1484:86920](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-86920) | V02 · Carteira Total · Cards                                                                  | Pronto no front · T03 |
 | [1484:87711](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-87711) | V05 · Carteira de Depósito · Lista                                                            | Pronto no front · T03 |
-| [1484:88127](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-88127) | V06 · Carteira de Patrimônio · Cards                                                          | Implementado · revalidar · T03 |
+| [1484:88127](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-88127) | V06 · Carteira de Patrimônio · Cards                                                          | Pronto no front · T03 |
 | [1484:88727](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-88727) | V07 · Carteira de Patrimônio · Lista                                                          | Pronto no front · T03 |
 | [1484:89118](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-89118) | A03 · Cards ↔ Lista · Carteira Total                                                          | Agregador/conexão — fora do percentual; ver estados filhos |
 | [1484:89121](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-89121) | A04 · Cards ↔ Lista · Carteira de Depósito                                                    | Agregador/conexão — fora do percentual; ver estados filhos |
 | [1484:89124](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-89124) | A05 · Cards ↔ Lista · Carteira de Patrimônio                                                  | Agregador/conexão — fora do percentual; ver estados filhos |
 | [1484:89127](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-89127) | V03 · Carteira Total · Lista                                                                  | Pronto no front · T03 |
-| [1484:89697](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-89697) | V04 · Carteira de Depósito · Cards                                                            | Implementado · revalidar · T03 |
+| [1484:89697](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-89697) | V04 · Carteira de Depósito · Cards                                                            | Pronto no front · T03 |
 | [1484:89694](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-89694) | F03 · Carteiras Strategy (contratos vinculados) · Cards + Lista + expansão                    | Agregador/conexão — fora do percentual; ver estados filhos |
 | [1484:90218](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-90218) | V09 · Carteira Strategy · Lista · Recolhido                                                   | Pronto no front · T03 |
-| [1484:90787](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-90787) | V08 · Carteira Strategy · Cards · Recolhido                                                   | Implementado · revalidar · T03 |
-| [1484:91469](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-91469) | E01 · Carteira Strategy · Cards · Expandido                                                   | Implementado · revalidar · T03 |
+| [1484:90787](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-90787) | V08 · Carteira Strategy · Cards · Recolhido                                                   | Pronto no front · T03 |
+| [1484:91469](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-91469) | E01 · Carteira Strategy · Cards · Expandido                                                   | Pronto no front · T03 |
 | [1484:92301](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-92301) | A06 · Cards · Recolher ↔ Expandir                                                             | Agregador/conexão — fora do percentual; ver estados filhos |
 | [1484:92532](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-92532) | F01 · Operações de crédito · Lista / Cards / Kanban                                           | Agregador/conexão — fora do percentual; ver estados filhos |
 | [1484:92533](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-92533) | CR01 · PB · Operações de crédito · Lista · TELA BASE · DESIGN GLASS                           | Pronto no front · R01 |

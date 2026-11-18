@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-17",
+  "updatedAt": "2026-11-18",
   "baseline": "docs/evidence/qa-2026-11-16-inventory/classification.json",
   "baselineSha256": "26c2a433d27898a864d7f1a0091a8aa30f218751b023914037090ae0d8652c26",
   "unit": "Frames/estados independentes do Figma, não rotas nem horas",
@@ -11,12 +11,12 @@
   },
   "metrics": {
     "total": 279,
-    "done": 220,
-    "validation": 50,
+    "done": 225,
+    "validation": 45,
     "adjustment": 9,
     "implemented": 270,
     "implementedPercent": 96.8,
-    "readyPercent": 78.9
+    "readyPercent": 80.6
   },
   "withoutLinkedFigmaReference": {
     "count": 13,
@@ -3060,17 +3060,20 @@
       "link": "[1484:86920](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-86920)",
       "counted": true,
       "group": "T03",
-      "category": "Ajuste de front",
-      "front": "validation",
-      "blockers": [],
-      "reason": "Componentes e consultas existem, mas falta comparação integral aos estados listados e regressão integrada. Isto é trabalho de validação do front, sem afirmar novo defeito visual ou ausência de API.",
+      "category": "Bloqueio backend",
+      "front": "done",
+      "blockers": [
+        "backend"
+      ],
+      "reason": "V02 Total/Cards comparado com contexto completo e screenshot; componentes reais testados localmente e cinco estados revalidados publicados. Campos agregados/valor atual da participação sem fonte continuam indisponíveis.",
       "sources": [
         "src/pages/TransctionPage.vue",
         "src/components/Finance/WalletDirectory.vue",
         "src/components/Finance/WalletOverview.vue"
       ],
       "evidence": [
-        "docs/CHECKLIST-UNICO-FIGMA-FRONT.md#ainda-é-trabalho-de-frontend"
+        "docs/CHECKLIST-UNICO-FIGMA-FRONT.md#ainda-é-trabalho-de-frontend",
+        "docs/evidence/qa-2026-11-18-wallet-cards/results.json"
       ],
       "browser": "sem aprovação integral por frame",
       "historicalCategory": "Ajuste de front"
@@ -3110,17 +3113,20 @@
       "link": "[1484:88127](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-88127)",
       "counted": true,
       "group": "T03",
-      "category": "Ajuste de front",
-      "front": "validation",
-      "blockers": [],
-      "reason": "Componentes e consultas existem, mas falta comparação integral aos estados listados e regressão integrada. Isto é trabalho de validação do front, sem afirmar novo defeito visual ou ausência de API.",
+      "category": "Bloqueio backend",
+      "front": "done",
+      "blockers": [
+        "backend"
+      ],
+      "reason": "V06 Patrimônio/Cards comparado com contexto completo e screenshot; componentes reais testados localmente e cinco estados revalidados publicados. Campos agregados/valor atual da participação sem fonte continuam indisponíveis.",
       "sources": [
         "src/pages/TransctionPage.vue",
         "src/components/Finance/WalletDirectory.vue",
         "src/components/Finance/WalletOverview.vue"
       ],
       "evidence": [
-        "docs/CHECKLIST-UNICO-FIGMA-FRONT.md#ainda-é-trabalho-de-frontend"
+        "docs/CHECKLIST-UNICO-FIGMA-FRONT.md#ainda-é-trabalho-de-frontend",
+        "docs/evidence/qa-2026-11-18-wallet-cards/results.json"
       ],
       "browser": "sem aprovação integral por frame",
       "historicalCategory": "Ajuste de front"
@@ -3187,17 +3193,20 @@
       "link": "[1484:89697](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-89697)",
       "counted": true,
       "group": "T03",
-      "category": "Ajuste de front",
-      "front": "validation",
-      "blockers": [],
-      "reason": "Componentes e consultas existem, mas falta comparação integral aos estados listados e regressão integrada. Isto é trabalho de validação do front, sem afirmar novo defeito visual ou ausência de API.",
+      "category": "Bloqueio backend",
+      "front": "done",
+      "blockers": [
+        "backend"
+      ],
+      "reason": "V04 Depósito/Cards comparado com contexto completo e screenshot; componentes reais testados localmente e cinco estados revalidados publicados. Campos agregados/valor atual da participação sem fonte continuam indisponíveis.",
       "sources": [
         "src/pages/TransctionPage.vue",
         "src/components/Finance/WalletDirectory.vue",
         "src/components/Finance/WalletOverview.vue"
       ],
       "evidence": [
-        "docs/CHECKLIST-UNICO-FIGMA-FRONT.md#ainda-é-trabalho-de-frontend"
+        "docs/CHECKLIST-UNICO-FIGMA-FRONT.md#ainda-é-trabalho-de-frontend",
+        "docs/evidence/qa-2026-11-18-wallet-cards/results.json"
       ],
       "browser": "sem aprovação integral por frame",
       "historicalCategory": "Ajuste de front"
@@ -3237,17 +3246,20 @@
       "link": "[1484:90787](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-90787)",
       "counted": true,
       "group": "T03",
-      "category": "Ajuste de front",
-      "front": "validation",
-      "blockers": [],
-      "reason": "Componentes e consultas existem, mas falta comparação integral aos estados listados e regressão integrada. Isto é trabalho de validação do front, sem afirmar novo defeito visual ou ausência de API.",
+      "category": "Bloqueio backend",
+      "front": "done",
+      "blockers": [
+        "backend"
+      ],
+      "reason": "V08 Strategy/Cards recolhido comparado com contexto completo e screenshot; componentes reais testados localmente e cinco estados revalidados publicados. Campos agregados/valor atual da participação sem fonte continuam indisponíveis.",
       "sources": [
         "src/pages/TransctionPage.vue",
         "src/components/Finance/WalletDirectory.vue",
         "src/components/Finance/WalletOverview.vue"
       ],
       "evidence": [
-        "docs/CHECKLIST-UNICO-FIGMA-FRONT.md#ainda-é-trabalho-de-frontend"
+        "docs/CHECKLIST-UNICO-FIGMA-FRONT.md#ainda-é-trabalho-de-frontend",
+        "docs/evidence/qa-2026-11-18-wallet-cards/results.json"
       ],
       "browser": "sem aprovação integral por frame",
       "historicalCategory": "Ajuste de front"
@@ -3260,17 +3272,20 @@
       "link": "[1484:91469](https://www.figma.com/design/i2jizg7UtPyg3KjAOvuFtI?node-id=1484-91469)",
       "counted": true,
       "group": "T03",
-      "category": "Ajuste de front",
-      "front": "validation",
-      "blockers": [],
-      "reason": "Componentes e consultas existem, mas falta comparação integral aos estados listados e regressão integrada. Isto é trabalho de validação do front, sem afirmar novo defeito visual ou ausência de API.",
+      "category": "Bloqueio backend",
+      "front": "done",
+      "blockers": [
+        "backend"
+      ],
+      "reason": "E01 Strategy/Cards expandido comparado com contexto completo e screenshot; componentes reais testados localmente e cinco estados revalidados publicados. Campos agregados/valor atual da participação sem fonte continuam indisponíveis.",
       "sources": [
         "src/pages/TransctionPage.vue",
         "src/components/Finance/WalletDirectory.vue",
         "src/components/Finance/WalletOverview.vue"
       ],
       "evidence": [
-        "docs/CHECKLIST-UNICO-FIGMA-FRONT.md#ainda-é-trabalho-de-frontend"
+        "docs/CHECKLIST-UNICO-FIGMA-FRONT.md#ainda-é-trabalho-de-frontend",
+        "docs/evidence/qa-2026-11-18-wallet-cards/results.json"
       ],
       "browser": "sem aprovação integral por frame",
       "historicalCategory": "Ajuste de front"

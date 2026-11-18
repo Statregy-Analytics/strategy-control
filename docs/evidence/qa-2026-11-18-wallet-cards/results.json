@@ -1,0 +1,79 @@
+{
+  "date": "2026-11-18",
+  "scope": {
+    "1484:86920": "V02 Total/Cards",
+    "1484:89697": "V04 Depósito/Cards",
+    "1484:88127": "V06 Patrimônio/Cards",
+    "1484:90787": "V08 Strategy/Cards recolhido",
+    "1484:91469": "E01 Strategy/Cards expandido"
+  },
+  "figma": {
+    "fileKey": "i2jizg7UtPyg3KjAOvuFtI",
+    "fullChildren": [
+      "1484:87175",
+      "1484:87234",
+      "1484:87287",
+      "1484:87346",
+      "1484:89952",
+      "1484:88382",
+      "1484:90976",
+      "1484:91815"
+    ],
+    "note": "Sparse parent contexts supplemented by complete child contexts and screenshots. Fourteen native SVGs downloaded and preserved; no temporary asset URL in runtime."
+  },
+  "frontChanges": [
+    "Separate composition for each wallet type with native icons, identity, masked document, currency rows, indicators, state and direct actions.",
+    "Explicit light text for currency table cells; table header style scoped to directory list to prevent bleed into cards.",
+    "Fixed seven base currencies plus actual extra codes. Known zero kept distinct from missing data; real PTAX before multi-currency consolidation.",
+    "Strategy expansion reuses existing client contracts lookup across currencies, four concurrent detail reads, independent per-contract error/retry and stale-context guards.",
+    "Compact linked contracts show participant entry value, percentage, linkedAtUtc and actual engine. Whole contract currentBalance is never used as participant current value.",
+    "No fields or actions added beyond recovered references; no financial writes."
+  ],
+  "localBrowser": [
+    "Controlled actual components: all four card modes and expanded Strategy with BRL/USD linked contracts.",
+    "Positive values, known zero, missing currencies, appreciation, market current value, currency counts and unavailable consolidation without quotes.",
+    "Open/close, movement callback by Enter, contract link targets and mobile internal table scrolling.",
+    "Real API: Claudio linked contracts and existing contract route, asset panel and currency/status; no records changed."
+  ],
+  "automated": [
+    "Eight new tests; 440 local tests pass including eight preexisting user tests not committed; 432 tests in CI.",
+    "Default profile client/currency scope preserved; all-currency mode fetches listing once.",
+    "Maximum four concurrent reads; per-record failure does not clear other contracts; retry supported.",
+    "Late customer response cannot populate next context; missing scope does not issue requests; wrong participant rejected.",
+    "Conversion uses rates, keeps zero/unknown separate and does not substitute net/declared for current market value."
+  ],
+  "homologation": {
+    "url": "https://admin.strategyanalytics.com.br/transaction",
+    "commit": "c9b6286b77cd8b112370cb8ea910cbf6292db2ce",
+    "deployRun": "44296200867",
+    "checks": [
+      "Five published card states observed; native icons loaded and light currency text confirmed.",
+      "Claudio deposit R$25,000.00 and existing statement REQ-2026-E0320E63 opened; return passed.",
+      "Patrimony opens existing client assets panel: four active assets declared BRL400, debt90, net310. Market fields remain unavailable.",
+      "Strategy Claudio expansion shows active QA136 BRL0.20 and closed Beta Growth Spec BRL261500; no fake exclusion.",
+      "Open Contract navigates to /contracts?contractId=9a5aca18-182f-4493-b47e-5cf25454ad2e and correct QA136 title, then back.",
+      "Eric expansion shows three contracts in BRL/USD with own allocations BRL0.10, USD200000 and USD50000; no Claudio allocation reused.",
+      "Close by Enter, Cards/List switching and no-result search passed; expansion reset on query change.",
+      "390px viewport after responsive layout settled: document width375 <= viewport390, card composition301px with350px internal scroll, images loaded.",
+      "No captured browser console errors at final check."
+    ],
+    "notValidated": [
+      "Live API outage/failure injection and delayed customer responses exercised in automated tests rather than forcing a server failure.",
+      "Live positive market appreciation and participant current balance unavailable from the consumed API; positive UI states verified with controlled local data only."
+    ]
+  },
+  "backendBlockers": [
+    "Global aggregate projection does not provide market current/appreciation/variation, capital base/yield, total movement count, asset-type description, public wallet code/status for groups without ledger, or contract chips/shared indicator. Missing fields remain unavailable; no duplicate route requested.",
+    "Contract participant current balance absent from current response; contract-level currentBalance is not a substitute. primaryEngine and participant linkedAtUtc are already available and integrated.",
+    "Claudio Strategy total still includes closed Beta Growth Spec BRL261500 plus active QA136 BRL0.20, totaling BRL261500.20."
+  ],
+  "designerBlockers": [
+    "Previously recorded definition of global export scope/format and opened More Filters states remains outside these five card compositions. Existing individual statement export already exists."
+  ],
+  "visualEvidenceNote": "local-*.png and saved local fixture document intermediate layout checks; hml-*.png are final published state evidence. Temporary fixture removed before build. No financial transaction performed.",
+  "noReferenceSurfaces": {
+    "previous": 13,
+    "new": 0,
+    "note": "Existing legacy client assets panel reused, not introduced as a new Figma screen."
+  }
+}

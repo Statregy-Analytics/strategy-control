@@ -1,0 +1,223 @@
+{
+  "date": "2026-11-18",
+  "codeCommit": "c9b6286b77cd8b112370cb8ea910cbf6292db2ce",
+  "run": {
+    "conclusion": "success",
+    "headSha": "c9b6286b77cd8b112370cb8ea910cbf6292db2ce",
+    "jobs": [
+      {
+        "completedAt": "2026-11-18T11:37:03Z",
+        "conclusion": "success",
+        "databaseId": 134773751600,
+        "name": "Validate, build and deploy",
+        "startedAt": "2026-11-18T11:36:20Z",
+        "status": "completed",
+        "steps": [
+          {
+            "completedAt": "2026-11-18T11:36:21Z",
+            "conclusion": "success",
+            "name": "Set up job",
+            "number": 1,
+            "startedAt": "2026-11-18T11:36:20Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-11-18T11:36:25Z",
+            "conclusion": "success",
+            "name": "Check out repository",
+            "number": 2,
+            "startedAt": "2026-11-18T11:36:21Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-11-18T11:36:26Z",
+            "conclusion": "success",
+            "name": "Set up Node.js",
+            "number": 3,
+            "startedAt": "2026-11-18T11:36:25Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-11-18T11:36:36Z",
+            "conclusion": "success",
+            "name": "Install dependencies",
+            "number": 4,
+            "startedAt": "2026-11-18T11:36:26Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-11-18T11:36:38Z",
+            "conclusion": "success",
+            "name": "Audit dependencies",
+            "number": 5,
+            "startedAt": "2026-11-18T11:36:36Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-11-18T11:36:42Z",
+            "conclusion": "success",
+            "name": "Test",
+            "number": 6,
+            "startedAt": "2026-11-18T11:36:38Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-11-18T11:36:47Z",
+            "conclusion": "success",
+            "name": "Lint",
+            "number": 7,
+            "startedAt": "2026-11-18T11:36:42Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-11-18T11:36:53Z",
+            "conclusion": "success",
+            "name": "Build SPA",
+            "number": 8,
+            "startedAt": "2026-11-18T11:36:47Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-11-18T11:36:53Z",
+            "conclusion": "success",
+            "name": "Configure SSH",
+            "number": 9,
+            "startedAt": "2026-11-18T11:36:53Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-11-18T11:36:59Z",
+            "conclusion": "success",
+            "name": "Upload release",
+            "number": 10,
+            "startedAt": "2026-11-18T11:36:53Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-11-18T11:37:01Z",
+            "conclusion": "success",
+            "name": "Activate release",
+            "number": 11,
+            "startedAt": "2026-11-18T11:36:59Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-11-18T11:37:01Z",
+            "conclusion": "success",
+            "name": "Post Set up Node.js",
+            "number": 21,
+            "startedAt": "2026-11-18T11:37:01Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-11-18T11:37:01Z",
+            "conclusion": "success",
+            "name": "Post Check out repository",
+            "number": 22,
+            "startedAt": "2026-11-18T11:37:01Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-11-18T11:37:01Z",
+            "conclusion": "success",
+            "name": "Complete job",
+            "number": 23,
+            "startedAt": "2026-11-18T11:37:01Z",
+            "status": "completed"
+          }
+        ],
+        "url": "https://github.com/Statregy-Analytics/strategy-control/actions/runs/44296200867/job/134773751600"
+      }
+    ],
+    "status": "completed",
+    "url": "https://github.com/Statregy-Analytics/strategy-control/actions/runs/44296200867"
+  },
+  "localTests": 440,
+  "ciTests": 432,
+  "localOnlyPreexistingTests": 8,
+  "lint": "passed",
+  "build": "passed",
+  "securityAudit": "passed; existing exact picomatch mitigation retained",
+  "scopedDiffCheck": "passed",
+  "unrelatedWorktreeNote": "Full git diff --check flags preexisting whitespace in docs/Api/milestone-3-swagger.json; not modified or staged by this delivery.",
+  "assets": [
+    {
+      "path": "public/icons/wallet-cards/assets-total.svg",
+      "sha256": "01986a78276571a208c365ce493f37011a056d5a7f036a5d3f1db50253b8f123",
+      "matchesLocal": true
+    },
+    {
+      "path": "public/icons/wallet-cards/assets.svg",
+      "sha256": "e678d7a87823a7c24cf585a58e44f815f76a72ec9cb37a7d73d81b5066146211",
+      "matchesLocal": true
+    },
+    {
+      "path": "public/icons/wallet-cards/collapse.svg",
+      "sha256": "ff9c8c8b4abd0880b57805c3435bb477caf2b0c023975dd4be4b112722f71649",
+      "matchesLocal": true
+    },
+    {
+      "path": "public/icons/wallet-cards/contract-box.svg",
+      "sha256": "a4f38f9634483bcb8e865e88741b99c2c4d6dffadb5f4f3ba3f0d77f30cea4f3",
+      "matchesLocal": true
+    },
+    {
+      "path": "public/icons/wallet-cards/contract-open.svg",
+      "sha256": "4f78c4e15ffec9d4a08d952012cd37c999f3aa625ff1cac8a40cf61c7cdbbebf",
+      "matchesLocal": true
+    },
+    {
+      "path": "public/icons/wallet-cards/contracts.svg",
+      "sha256": "2ee3386fbfeca1060a5cebfe235e8c5f9f97867441ba7a7140786479898730dc",
+      "matchesLocal": true
+    },
+    {
+      "path": "public/icons/wallet-cards/deposit-total.svg",
+      "sha256": "81be808dd2a4d207e6b4ca6f1efeff23fc27436264be314806114100570cea44",
+      "matchesLocal": true
+    },
+    {
+      "path": "public/icons/wallet-cards/deposit.svg",
+      "sha256": "ec68358e3c8509dca00bc13c0e1df1413b2e051cc94a79745b37117aa6462354",
+      "matchesLocal": true
+    },
+    {
+      "path": "public/icons/wallet-cards/engine.svg",
+      "sha256": "98f494497df06e6bae2ecf147bf34eb4ab7b0f6fcdc8c44bfb6a6080336ad5ac",
+      "matchesLocal": true
+    },
+    {
+      "path": "public/icons/wallet-cards/eye.svg",
+      "sha256": "43b1f4e23682298047a6b015e44e08534682602ae29137f80a6406f7eda94df3",
+      "matchesLocal": true
+    },
+    {
+      "path": "public/icons/wallet-cards/share.svg",
+      "sha256": "4296e9017a05ef4a58f15f8244affffa34ef4dddc92ccab2bb0ca80b45d15842",
+      "matchesLocal": true
+    },
+    {
+      "path": "public/icons/wallet-cards/strategy-total.svg",
+      "sha256": "bb6efac71ead22fd77fee8c04e4df63db663f33dd9df1db20e19a484ce13f062",
+      "matchesLocal": true
+    },
+    {
+      "path": "public/icons/wallet-cards/strategy.svg",
+      "sha256": "ec68358e3c8509dca00bc13c0e1df1413b2e051cc94a79745b37117aa6462354",
+      "matchesLocal": true
+    },
+    {
+      "path": "public/icons/wallet-cards/user.svg",
+      "sha256": "40387aa6f1e196434bace0ec38a53b70f78b2a009ee5d766d55ebd332e3e49f2",
+      "matchesLocal": true
+    }
+  ],
+  "entryModules": [
+    {
+      "path": "/assets/index-CXh7OQhi.js",
+      "sha256": "66ad477e3627b689d6e236456c38b3365d1360d3f7f798d11b3a5039e73800f2",
+      "matchesLocal": true
+    }
+  ],
+  "fixtureRemovedBeforeBuild": true
+}

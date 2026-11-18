@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-17",
+  "updatedAt": "2026-11-18",
   "method": "Estados de implementação atualizados apenas onde existe evidência específica; done significa front pronto, não ausência de dependência HTTP. validation é implementação existente que precisa revalidação/comparação. adjustment inclui completar/corrigir código e não significa necessariamente uma tela do zero.",
   "items": {
     "1484:79229": {
@@ -734,6 +734,46 @@
         "designer"
       ],
       "evidence": "docs/evidence/qa-2026-11-17-wallet-directory/results.json"
+    },
+    "1484:86920": {
+      "front": "done",
+      "reason": "V02 Total/Cards comparado com contexto completo e screenshot; componentes reais testados localmente e cinco estados revalidados publicados. Campos agregados/valor atual da participação sem fonte continuam indisponíveis.",
+      "evidence": "docs/evidence/qa-2026-11-18-wallet-cards/results.json",
+      "blockers": [
+        "backend"
+      ]
+    },
+    "1484:89697": {
+      "front": "done",
+      "reason": "V04 Depósito/Cards comparado com contexto completo e screenshot; componentes reais testados localmente e cinco estados revalidados publicados. Campos agregados/valor atual da participação sem fonte continuam indisponíveis.",
+      "evidence": "docs/evidence/qa-2026-11-18-wallet-cards/results.json",
+      "blockers": [
+        "backend"
+      ]
+    },
+    "1484:88127": {
+      "front": "done",
+      "reason": "V06 Patrimônio/Cards comparado com contexto completo e screenshot; componentes reais testados localmente e cinco estados revalidados publicados. Campos agregados/valor atual da participação sem fonte continuam indisponíveis.",
+      "evidence": "docs/evidence/qa-2026-11-18-wallet-cards/results.json",
+      "blockers": [
+        "backend"
+      ]
+    },
+    "1484:90787": {
+      "front": "done",
+      "reason": "V08 Strategy/Cards recolhido comparado com contexto completo e screenshot; componentes reais testados localmente e cinco estados revalidados publicados. Campos agregados/valor atual da participação sem fonte continuam indisponíveis.",
+      "evidence": "docs/evidence/qa-2026-11-18-wallet-cards/results.json",
+      "blockers": [
+        "backend"
+      ]
+    },
+    "1484:91469": {
+      "front": "done",
+      "reason": "E01 Strategy/Cards expandido comparado com contexto completo e screenshot; componentes reais testados localmente e cinco estados revalidados publicados. Campos agregados/valor atual da participação sem fonte continuam indisponíveis.",
+      "evidence": "docs/evidence/qa-2026-11-18-wallet-cards/results.json",
+      "blockers": [
+        "backend"
+      ]
     }
   }
 }

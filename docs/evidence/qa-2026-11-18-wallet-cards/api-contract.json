@@ -1,0 +1,386 @@
+{
+  "source": "https://strategyanalytics.codebiz.com.br/openapi/v1.json",
+  "schemas": {
+    "ContractEngineLinkResponse": {
+      "required": [
+        "contractEngineId",
+        "engineId",
+        "code",
+        "name",
+        "functionDescription",
+        "role",
+        "connectionStatus",
+        "connectedAtUtc",
+        "disconnectedAtUtc",
+        "indexAtConnection",
+        "entryValue",
+        "engineConfigurationVersionId",
+        "engineSnapshotId",
+        "currentIndex",
+        "variationSinceConnectionPercentage"
+      ],
+      "type": "object",
+      "properties": {
+        "contractEngineId": {
+          "type": "string",
+          "format": "uuid",
+          "example": "3fa85f64-5717-4562-b3fc-2c963f66afa6"
+        },
+        "engineId": {
+          "type": "string",
+          "format": "uuid",
+          "example": "3fa85f64-5717-4562-b3fc-2c963f66afa6"
+        },
+        "code": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string",
+          "example": "Jane Doe"
+        },
+        "functionDescription": {
+          "type": [
+            "null",
+            "string"
+          ],
+          "example": "Example description."
+        },
+        "role": {
+          "type": "string"
+        },
+        "connectionStatus": {
+          "type": "string"
+        },
+        "connectedAtUtc": {
+          "type": [
+            "null",
+            "string"
+          ],
+          "format": "date-time",
+          "example": "2026-11-18T00:00:00Z"
+        },
+        "disconnectedAtUtc": {
+          "type": [
+            "null",
+            "string"
+          ],
+          "format": "date-time",
+          "example": "2026-11-18T00:00:00Z"
+        },
+        "indexAtConnection": {
+          "pattern": "^-?(?:0|[1-9]\\d*)(?:\\.\\d+)?$",
+          "type": [
+            "null",
+            "number",
+            "string"
+          ],
+          "format": "double"
+        },
+        "entryValue": {
+          "pattern": "^-?(?:0|[1-9]\\d*)(?:\\.\\d+)?$",
+          "type": [
+            "null",
+            "number",
+            "string"
+          ],
+          "format": "double"
+        },
+        "engineConfigurationVersionId": {
+          "type": [
+            "null",
+            "string"
+          ],
+          "format": "uuid",
+          "example": "3fa85f64-5717-4562-b3fc-2c963f66afa6"
+        },
+        "engineSnapshotId": {
+          "type": [
+            "null",
+            "string"
+          ],
+          "format": "uuid",
+          "example": "3fa85f64-5717-4562-b3fc-2c963f66afa6"
+        },
+        "currentIndex": {
+          "pattern": "^-?(?:0|[1-9]\\d*)(?:\\.\\d+)?$",
+          "type": [
+            "null",
+            "number",
+            "string"
+          ],
+          "format": "double"
+        },
+        "variationSinceConnectionPercentage": {
+          "pattern": "^-?(?:0|[1-9]\\d*)(?:\\.\\d+)?$",
+          "type": [
+            "null",
+            "number",
+            "string"
+          ],
+          "format": "double"
+        }
+      }
+    },
+    "ContractParticipantResponse": {
+      "required": [
+        "participantId",
+        "clientId",
+        "displayName",
+        "personType",
+        "allocatedAmount",
+        "allocationPercentage",
+        "contributedAmount",
+        "baseAmount",
+        "linkedAtUtc"
+      ],
+      "type": "object",
+      "properties": {
+        "participantId": {
+          "type": "string",
+          "format": "uuid",
+          "example": "3fa85f64-5717-4562-b3fc-2c963f66afa6"
+        },
+        "clientId": {
+          "type": "string",
+          "format": "uuid",
+          "example": "3fa85f64-5717-4562-b3fc-2c963f66afa6"
+        },
+        "displayName": {
+          "type": "string",
+          "example": "Jane Doe"
+        },
+        "personType": {
+          "type": "string"
+        },
+        "allocatedAmount": {
+          "pattern": "^-?(?:0|[1-9]\\d*)(?:\\.\\d+)?$",
+          "type": [
+            "null",
+            "number",
+            "string"
+          ],
+          "format": "double",
+          "example": 1000.0
+        },
+        "allocationPercentage": {
+          "pattern": "^-?(?:0|[1-9]\\d*)(?:\\.\\d+)?$",
+          "type": [
+            "null",
+            "number",
+            "string"
+          ],
+          "format": "double"
+        },
+        "contributedAmount": {
+          "pattern": "^-?(?:0|[1-9]\\d*)(?:\\.\\d+)?$",
+          "type": [
+            "number",
+            "string"
+          ],
+          "format": "double",
+          "example": 1000.0
+        },
+        "baseAmount": {
+          "pattern": "^-?(?:0|[1-9]\\d*)(?:\\.\\d+)?$",
+          "type": [
+            "null",
+            "number",
+            "string"
+          ],
+          "format": "double",
+          "example": 1000.0
+        },
+        "linkedAtUtc": {
+          "type": "string",
+          "format": "date-time",
+          "example": "2026-11-18T00:00:00Z"
+        }
+      }
+    },
+    "ContractResponse": {
+      "required": [
+        "id",
+        "publicCode",
+        "name",
+        "registrationStatus",
+        "term",
+        "startDate",
+        "expectedEndDate",
+        "currency",
+        "initialContractualCapital",
+        "initialConsolidatedCapital",
+        "currentBalance",
+        "initialCapitalOrigin",
+        "financialNotes",
+        "businessStatus",
+        "primaryEngine",
+        "participants",
+        "createdAtUtc",
+        "updatedAtUtc",
+        "finalizedAtUtc",
+        "version",
+        "assetUniverseSummary"
+      ],
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "format": "uuid",
+          "example": "3fa85f64-5717-4562-b3fc-2c963f66afa6"
+        },
+        "publicCode": {
+          "type": "string"
+        },
+        "name": {
+          "type": [
+            "null",
+            "string"
+          ],
+          "example": "Jane Doe"
+        },
+        "registrationStatus": {
+          "type": "string"
+        },
+        "term": {
+          "oneOf": [
+            {
+              "type": "null"
+            },
+            {
+              "$ref": "#/components/schemas/ContractTermResponse"
+            }
+          ]
+        },
+        "startDate": {
+          "type": [
+            "null",
+            "string"
+          ],
+          "format": "date",
+          "example": "2026-11-18"
+        },
+        "expectedEndDate": {
+          "type": [
+            "null",
+            "string"
+          ],
+          "format": "date",
+          "example": "2026-11-18"
+        },
+        "currency": {
+          "oneOf": [
+            {
+              "type": "null"
+            },
+            {
+              "$ref": "#/components/schemas/ContractCurrencyResponse"
+            }
+          ]
+        },
+        "initialContractualCapital": {
+          "pattern": "^-?(?:0|[1-9]\\d*)(?:\\.\\d+)?$",
+          "type": [
+            "null",
+            "number",
+            "string"
+          ],
+          "format": "double"
+        },
+        "initialConsolidatedCapital": {
+          "pattern": "^-?(?:0|[1-9]\\d*)(?:\\.\\d+)?$",
+          "type": [
+            "null",
+            "number",
+            "string"
+          ],
+          "format": "double"
+        },
+        "currentBalance": {
+          "pattern": "^-?(?:0|[1-9]\\d*)(?:\\.\\d+)?$",
+          "type": [
+            "null",
+            "number",
+            "string"
+          ],
+          "format": "double",
+          "example": 1000.0
+        },
+        "initialCapitalOrigin": {
+          "oneOf": [
+            {
+              "type": "null"
+            },
+            {
+              "$ref": "#/components/schemas/ContractReferenceResponse"
+            }
+          ]
+        },
+        "financialNotes": {
+          "type": [
+            "null",
+            "string"
+          ],
+          "example": "Example description."
+        },
+        "businessStatus": {
+          "oneOf": [
+            {
+              "type": "null"
+            },
+            {
+              "$ref": "#/components/schemas/ContractReferenceResponse"
+            }
+          ]
+        },
+        "primaryEngine": {
+          "oneOf": [
+            {
+              "type": "null"
+            },
+            {
+              "$ref": "#/components/schemas/ContractPrimaryEngineResponse"
+            }
+          ]
+        },
+        "participants": {
+          "type": "array",
+          "items": {
+            "$ref": "#/components/schemas/ContractParticipantResponse"
+          }
+        },
+        "createdAtUtc": {
+          "type": "string",
+          "format": "date-time",
+          "example": "2026-11-18T00:00:00Z"
+        },
+        "updatedAtUtc": {
+          "type": [
+            "null",
+            "string"
+          ],
+          "format": "date-time",
+          "example": "2026-11-18T00:00:00Z"
+        },
+        "finalizedAtUtc": {
+          "type": [
+            "null",
+            "string"
+          ],
+          "format": "date-time",
+          "example": "2026-11-18T00:00:00Z"
+        },
+        "version": {
+          "pattern": "^-?(?:0|[1-9]\\d*)$",
+          "type": [
+            "integer",
+            "string"
+          ],
+          "format": "int32"
+        },
+        "assetUniverseSummary": {
+          "$ref": "#/components/schemas/ContractAssetUniverseSummaryResponse"
+        }
+      }
+    }
+  }
+}
