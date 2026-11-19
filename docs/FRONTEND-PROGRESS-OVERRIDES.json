@@ -301,10 +301,12 @@
     "1:37994": {
       "front": "validation",
       "reason": "Designer: falta estado selecionado dos campos de valor no passo 3. Front: POST /client/contracts/requests existe no OpenAPI de 18/11; adapter ainda indisponível. Verificar mapeamento objective/period/modality/initialAmount/monthlyAmount/assetTypes/regions e currencyId do catálogo, sem atribuir ausência da rota ao backend.",
-      "evidence": "docs/evidence/qa-2026-11-18-review15/api-coverage.json",
+      "evidence": "docs/evidence/qa-2026-11-19-review17/matrix.json",
       "blockers": [
         "designer"
-      ]
+      ],
+      "browser": "Não repetido nesta rodada; revisão da classificação e evidências anteriores.",
+      "lastReviewResult": "Designer: falta estado selecionado dos campos de valor no passo 3. Front: POST /client/contracts/requests existe no OpenAPI de 18/11; adapter ainda indisponível. Verificar mapeamento objective/period/modality/initialAmount/monthlyAmount/assetTypes/regions e currencyId do catálogo, sem atribuir ausência da rota ao backend."
     },
     "1:39818": {
       "front": "done",
@@ -533,40 +535,44 @@
       "evidence": "docs/evidence/qa-2026-11-17-loan-offers/results.json"
     },
     "1:50960": {
-      "front": "adjustment",
-      "reason": "Detalhes com status Ativo mostram etapas de solicitação/editáveis. A interface atual não foi substituída por um novo fluxo de edição presumido. Confirmar consulta versus edição e estados das ações. Mapear dados/estágios/ofertas ao contrato comercial; GET /client/loans e detalhe já existem. Campo collateral existe no DTO e não foi descrito como ausente.",
-      "evidence": "docs/evidence/qa-2026-11-19-nine-adjustments/results.json",
+      "front": "validation",
+      "reason": "Usuário confirmou que as telas da Área do Cliente estão validadas e devem permanecer como estão, com empréstimos por etapas. Mantida a implementação existente, sem nova composição ou campos. Reclassificação de escopo, não novo teste: comparação detalhada dos estados e integração comercial continuam sem nova evidência nesta rodada.",
+      "evidence": "docs/evidence/qa-2026-11-19-review17/matrix.json",
       "blockers": [
-        "designer",
         "backend"
-      ]
+      ],
+      "browser": "Acesso real ao catálogo mostra bloqueio Nível 3; conta Éric consta no Nível 0.",
+      "lastReviewResult": "Telas aprovadas preservadas. Falta conta elegível/massa para percorrer estados integrados; não é novo defeito de API comprovado."
     },
     "1:51347": {
-      "front": "adjustment",
-      "reason": "Detalhes com status Ativo mostram etapas de solicitação/editáveis. A interface atual não foi substituída por um novo fluxo de edição presumido. O frame de documentos inclui IPTU e metragem de imóvel também no automóvel. Confirmar consulta versus edição e estados das ações. Mapear dados/estágios/ofertas ao contrato comercial; GET /client/loans e detalhe já existem. Campo collateral existe no DTO e não foi descrito como ausente.",
-      "evidence": "docs/evidence/qa-2026-11-19-nine-adjustments/results.json",
+      "front": "validation",
+      "reason": "Usuário confirmou que as telas da Área do Cliente estão validadas e devem permanecer como estão, com empréstimos por etapas. Mantida a implementação existente, sem nova composição ou campos. Reclassificação de escopo, não novo teste: comparação detalhada dos estados e integração comercial continuam sem nova evidência nesta rodada.",
+      "evidence": "docs/evidence/qa-2026-11-19-review17/matrix.json",
       "blockers": [
-        "designer",
         "backend"
-      ]
+      ],
+      "browser": "Acesso real ao catálogo mostra bloqueio Nível 3; conta Éric consta no Nível 0.",
+      "lastReviewResult": "Telas aprovadas preservadas. Falta conta elegível/massa para percorrer estados integrados; não é novo defeito de API comprovado."
     },
     "1:51728": {
-      "front": "adjustment",
-      "reason": "Detalhes com status Ativo mostram etapas de solicitação/editáveis. A interface atual não foi substituída por um novo fluxo de edição presumido. Confirmar consulta versus edição e estados das ações. Mapear dados/estágios/ofertas ao contrato comercial; GET /client/loans e detalhe já existem. Campo collateral existe no DTO e não foi descrito como ausente.",
-      "evidence": "docs/evidence/qa-2026-11-19-nine-adjustments/results.json",
+      "front": "validation",
+      "reason": "Usuário confirmou que as telas da Área do Cliente estão validadas e devem permanecer como estão, com empréstimos por etapas. Mantida a implementação existente, sem nova composição ou campos. Reclassificação de escopo, não novo teste: comparação detalhada dos estados e integração comercial continuam sem nova evidência nesta rodada.",
+      "evidence": "docs/evidence/qa-2026-11-19-review17/matrix.json",
       "blockers": [
-        "designer",
         "backend"
-      ]
+      ],
+      "browser": "Acesso real ao catálogo mostra bloqueio Nível 3; conta Éric consta no Nível 0.",
+      "lastReviewResult": "Telas aprovadas preservadas. Falta conta elegível/massa para percorrer estados integrados; não é novo defeito de API comprovado."
     },
     "1:52034": {
-      "front": "adjustment",
-      "reason": "Detalhes com status Ativo mostram etapas de solicitação/editáveis. A interface atual não foi substituída por um novo fluxo de edição presumido. Confirmar consulta versus edição e estados das ações. Mapear dados/estágios/ofertas ao contrato comercial; GET /client/loans e detalhe já existem. Campo collateral existe no DTO e não foi descrito como ausente.",
-      "evidence": "docs/evidence/qa-2026-11-19-nine-adjustments/results.json",
+      "front": "validation",
+      "reason": "Usuário confirmou que as telas da Área do Cliente estão validadas e devem permanecer como estão, com empréstimos por etapas. Mantida a implementação existente, sem nova composição ou campos. Reclassificação de escopo, não novo teste: comparação detalhada dos estados e integração comercial continuam sem nova evidência nesta rodada.",
+      "evidence": "docs/evidence/qa-2026-11-19-review17/matrix.json",
       "blockers": [
-        "designer",
         "backend"
-      ]
+      ],
+      "browser": "Acesso real ao catálogo mostra bloqueio Nível 3; conta Éric consta no Nível 0.",
+      "lastReviewResult": "Telas aprovadas preservadas. Falta conta elegível/massa para percorrer estados integrados; não é novo defeito de API comprovado."
     },
     "1:54430": {
       "front": "done",
@@ -577,13 +583,14 @@
       ]
     },
     "1:54617": {
-      "front": "adjustment",
-      "reason": "O fluxo de automóvel continua mostrando título de imóvel e upload de IPTU/metragem. Designer confirmar os documentos e título do fluxo de automóvel; confirmar API de solicitação/vínculo. Não exigir documentos de imóvel do cliente de veículo por suposição.",
-      "evidence": "docs/evidence/qa-2026-11-19-nine-adjustments/results.json",
+      "front": "validation",
+      "reason": "Usuário confirmou que as telas da Área do Cliente estão validadas e devem permanecer como estão, com empréstimos por etapas. Mantida a implementação existente, sem nova composição ou campos. Reclassificação de escopo, não novo teste: comparação detalhada dos estados e integração comercial continuam sem nova evidência nesta rodada.",
+      "evidence": "docs/evidence/qa-2026-11-19-review17/matrix.json",
       "blockers": [
-        "designer",
         "backend"
-      ]
+      ],
+      "browser": "Acesso real ao catálogo mostra bloqueio Nível 3; conta Éric consta no Nível 0.",
+      "lastReviewResult": "Telas aprovadas preservadas. Falta conta elegível/massa para percorrer estados integrados; não é novo defeito de API comprovado."
     },
     "37:27142": {
       "front": "done",
@@ -713,8 +720,8 @@
     },
     "1484:96882": {
       "front": "adjustment",
-      "reason": "Referência fechada menciona blocos e botão + para escolher mídia, mas não fornece o menu aberto nem controles de H2/H3. O textarea existente não foi declarado editor completo. Frames abertos de inserção/formatação e contrato editorial para persistência, sem inventar toolbar/menus.",
-      "evidence": "docs/evidence/qa-2026-11-19-nine-adjustments/results.json",
+      "reason": "Entrada Criar Novo Conteúdo → CO03 → editor já conectada no código existente, conforme esclarecimento do usuário. Pendência distinta: inserção de mídia entre blocos e controles H2/H3 citados pelo editor; não foram fornecidos estados abertos desses controles. Não inventar menu. Textarea não equivale a editor completo; confirmar persistência editorial.",
+      "evidence": "docs/evidence/qa-2026-11-19-scope-clarification/results.json",
       "blockers": [
         "designer",
         "backend"
@@ -722,8 +729,8 @@
     },
     "1484:97193": {
       "front": "adjustment",
-      "reason": "Referência fechada menciona blocos e botão + para escolher mídia, mas não fornece o menu aberto nem controles de H2/H3. O textarea existente não foi declarado editor completo. Frames abertos de inserção/formatação e contrato editorial para persistência, sem inventar toolbar/menus.",
-      "evidence": "docs/evidence/qa-2026-11-19-nine-adjustments/results.json",
+      "reason": "Entrada Criar Novo Conteúdo → CO03 → editor já conectada no código existente, conforme esclarecimento do usuário. Pendência distinta: inserção de mídia entre blocos e controles H2/H3 citados pelo editor; não foram fornecidos estados abertos desses controles. Não inventar menu. Textarea não equivale a editor completo; confirmar persistência editorial.",
+      "evidence": "docs/evidence/qa-2026-11-19-scope-clarification/results.json",
       "blockers": [
         "designer",
         "backend"
@@ -732,7 +739,9 @@
     "1484:97530": {
       "front": "validation",
       "reason": "CO06: composição, PDF/áudio/anexos sucessivos e celular testados. Índice H2/H3 sem editor de corpo não está definido; reter comparação completa até esclarecer a origem do índice, sem inventar controles.",
-      "evidence": "docs/evidence/qa-2026-11-17-editor/results.json"
+      "evidence": "docs/evidence/qa-2026-11-19-review17/matrix.json",
+      "browser": "Não repetido nesta rodada; revisão da classificação e evidências anteriores.",
+      "lastReviewResult": "CO06: composição, PDF/áudio/anexos sucessivos e celular testados. Índice H2/H3 sem editor de corpo não está definido; reter comparação completa até esclarecer a origem do índice, sem inventar controles."
     },
     "1484:97906": {
       "front": "done",
@@ -853,8 +862,8 @@
     },
     "1484:73658": {
       "front": "adjustment",
-      "reason": "CT12 contém os campos do modal, mas o CT11 reconsultado continua sem ação para abri-lo. Não criado gatilho nem rota solta. Designer indicar o gatilho/estado de abertura; depois implementar conexão do modal e confirmar contrato operacional da API.",
-      "evidence": "docs/evidence/qa-2026-11-19-nine-adjustments/results.json",
+      "reason": "Usuário apontou o botão solto Adicionar operação (1484:69938) como possível abertura do CT12 e vai confirmar posição/vínculo com Éric. Candidato registrado; não criada ação em local presumido. Conexão do modal e integração operacional continuam pendentes.",
+      "evidence": "docs/evidence/qa-2026-11-19-scope-clarification/results.json",
       "blockers": [
         "designer",
         "backend"
@@ -893,7 +902,9 @@
     "1484:82147": {
       "front": "validation",
       "reason": "Tabelas oficiais/simuladas corrigidas e testadas com séries controladas e indisponíveis. O frame denominado Ao Lado mostra tabelas empilhadas; esclarecer relação com o controle antes de concluir a comparação do estado inteiro.",
-      "evidence": "docs/evidence/qa-2026-11-18-logic-editor/results.json"
+      "evidence": "docs/evidence/qa-2026-11-19-review17/matrix.json",
+      "browser": "Não repetido nesta rodada; revisão da classificação e evidências anteriores.",
+      "lastReviewResult": "Tabelas oficiais/simuladas corrigidas e testadas com séries controladas e indisponíveis. O frame denominado Ao Lado mostra tabelas empilhadas; esclarecer relação com o controle antes de concluir a comparação do estado inteiro."
     },
     "1484:94677": {
       "front": "done",
@@ -918,10 +929,12 @@
     "1484:86740": {
       "front": "validation",
       "reason": "A referência recuperada contém apenas título e superfície vazia de prancha, sem estados ou tela de produto. Não criar página nem aprovar um estado inexistente; esclarecer enquadramento do frame no inventário com designer. Os cards reais foram concluídos no P01.",
-      "evidence": "docs/evidence/qa-2026-11-18-transaction-directory/references.json",
+      "evidence": "docs/evidence/qa-2026-11-19-review17/matrix.json",
       "blockers": [
         "designer"
-      ]
+      ],
+      "browser": "Não repetido nesta rodada; revisão da classificação e evidências anteriores.",
+      "lastReviewResult": "A referência recuperada contém apenas título e superfície vazia de prancha, sem estados ou tela de produto. Não criar página nem aprovar um estado inexistente; esclarecer enquadramento do frame no inventário com designer. Os cards reais foram concluídos no P01."
     },
     "1:32479": {
       "front": "done",
@@ -950,34 +963,42 @@
     "1:45691": {
       "front": "validation",
       "reason": "Composição agrupada, performance e distribuição por barras implementadas conforme contextos completos, por propriedades. Passou testes/CI; falta comparação visual desktop/mobile e geometria dos assets. Integração das séries não foi presumida.",
-      "evidence": "docs/evidence/qa-2026-11-19-contract-detail/results.json",
+      "evidence": "docs/evidence/qa-2026-11-19-review17/matrix.json",
       "blockers": [
         "backend"
-      ]
+      ],
+      "browser": "Componentes reais em prévia local com props fictícias; variantes agrupada/separada/App, séries, comparação/período, seis donuts, vazio/indisponível, participante, Escape e modal de ativos vazio.",
+      "lastReviewResult": "Popover corrigido: limite direito 399→378 px, largura 358→337 px, viewport útil 378 px. Tabelas com rolagem interna. Não conclui comparação integral do frame; origem aprovada do App, exportação real, persistência e adapter das projeções continuam pendentes."
     },
     "1:46764": {
       "front": "validation",
       "reason": "Composição separada com três resumos, performance, seis donuts, dividendos, aportes, aplicativo e resumo implementada. Rota real conectada aos campos confirmados, testes/CI aprovados. Falta conferência visual no navegador; métricas não fornecidas continuam indisponíveis.",
-      "evidence": "docs/evidence/qa-2026-11-19-contract-detail/results.json",
+      "evidence": "docs/evidence/qa-2026-11-19-review17/matrix.json",
       "blockers": [
         "backend"
-      ]
+      ],
+      "browser": "Componentes reais em prévia local com props fictícias; variantes agrupada/separada/App, séries, comparação/período, seis donuts, vazio/indisponível, participante, Escape e modal de ativos vazio.",
+      "lastReviewResult": "Popover corrigido: limite direito 399→378 px, largura 358→337 px, viewport útil 378 px. Tabelas com rolagem interna. Não conclui comparação integral do frame; origem aprovada do App, exportação real, persistência e adapter das projeções continuam pendentes."
     },
     "1:48631": {
       "front": "validation",
       "reason": "Variante App, resumo compacto, banner e modal de ativos implementados por propriedades; callback de exportação protegido. Origem do aplicativo deve ser aprovada, sem incorporar captura financeira de exemplo. Falta validar abertura, geometria e responsividade no navegador e confirmar adapter da variante.",
-      "evidence": "docs/evidence/qa-2026-11-19-contract-detail/results.json",
+      "evidence": "docs/evidence/qa-2026-11-19-review17/matrix.json",
       "blockers": [
         "backend"
-      ]
+      ],
+      "browser": "Componentes reais em prévia local com props fictícias; variantes agrupada/separada/App, séries, comparação/período, seis donuts, vazio/indisponível, participante, Escape e modal de ativos vazio.",
+      "lastReviewResult": "Popover corrigido: limite direito 399→378 px, largura 358→337 px, viewport útil 378 px. Tabelas com rolagem interna. Não conclui comparação integral do frame; origem aprovada do App, exportação real, persistência e adapter das projeções continuam pendentes."
     },
     "1:50141": {
       "front": "validation",
       "reason": "Aportes, histórico e popover de participante implementados com dados fornecidos, sem consultar clientes alheios ou criar retratos/IDs/valores. Testes de props/reatividade passaram; falta validar popover, teclado e geometria no navegador e ligar projeção confirmada.",
-      "evidence": "docs/evidence/qa-2026-11-19-contract-detail/results.json",
+      "evidence": "docs/evidence/qa-2026-11-19-review17/matrix.json",
       "blockers": [
         "backend"
-      ]
+      ],
+      "browser": "Componentes reais em prévia local com props fictícias; variantes agrupada/separada/App, séries, comparação/período, seis donuts, vazio/indisponível, participante, Escape e modal de ativos vazio.",
+      "lastReviewResult": "Popover corrigido: limite direito 399→378 px, largura 358→337 px, viewport útil 378 px. Tabelas com rolagem interna. Não conclui comparação integral do frame; origem aprovada do App, exportação real, persistência e adapter das projeções continuam pendentes."
     },
     "211:28821": {
       "front": "done",
@@ -1002,6 +1023,34 @@
       "blockers": [
         "backend"
       ]
+    },
+    "1:68461": {
+      "front": "validation",
+      "reason": "Teste de tema no perfil não aprova automaticamente os clones de Home/Comunicação/resumo; manter regressão específica por frame, sem afirmar defeito visual novo.",
+      "evidence": "docs/evidence/qa-2026-11-19-review17/matrix.json",
+      "browser": "Consulta real local de Home/resumo e temas cinza/Aurora; larguras observadas 1280 e 763. Sem teste integral de todos os gráficos/conteúdos dos frames.",
+      "lastReviewResult": "Corrigidos cabeçalho e valores em largura de tablet. Composição aprovada preservada; falta comparação integral e estados positivos de blocos indisponíveis."
+    },
+    "1:68794": {
+      "front": "validation",
+      "reason": "Teste de tema no perfil não aprova automaticamente os clones de Home/Comunicação/resumo; manter regressão específica por frame, sem afirmar defeito visual novo.",
+      "evidence": "docs/evidence/qa-2026-11-19-review17/matrix.json",
+      "browser": "Consulta real local de Home/resumo e temas cinza/Aurora; larguras observadas 1280 e 763. Sem teste integral de todos os gráficos/conteúdos dos frames.",
+      "lastReviewResult": "Corrigidos cabeçalho e valores em largura de tablet. Composição aprovada preservada; falta comparação integral e estados positivos de blocos indisponíveis."
+    },
+    "1:73288": {
+      "front": "validation",
+      "reason": "Teste de tema no perfil não aprova automaticamente os clones de Home/Comunicação/resumo; manter regressão específica por frame, sem afirmar defeito visual novo.",
+      "evidence": "docs/evidence/qa-2026-11-19-review17/matrix.json",
+      "browser": "Consulta real local de Home/resumo e temas cinza/Aurora; larguras observadas 1280 e 763. Sem teste integral de todos os gráficos/conteúdos dos frames.",
+      "lastReviewResult": "Corrigidos cabeçalho e valores em largura de tablet. Composição aprovada preservada; falta comparação integral e estados positivos de blocos indisponíveis."
+    },
+    "1:73602": {
+      "front": "validation",
+      "reason": "Teste de tema no perfil não aprova automaticamente os clones de Home/Comunicação/resumo; manter regressão específica por frame, sem afirmar defeito visual novo.",
+      "evidence": "docs/evidence/qa-2026-11-19-review17/matrix.json",
+      "browser": "Consulta real local de Home/resumo e temas cinza/Aurora; larguras observadas 1280 e 763. Sem teste integral de todos os gráficos/conteúdos dos frames.",
+      "lastReviewResult": "Corrigidos cabeçalho e valores em largura de tablet. Composição aprovada preservada; falta comparação integral e estados positivos de blocos indisponíveis."
     }
   }
 }

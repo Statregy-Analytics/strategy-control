@@ -1,0 +1,392 @@
+[
+  {
+    "id": "1484:82147",
+    "name": "LG07 · EC · Simulação ao lado · PAINEL DE ESTADOS DO COMPONENTE · DESIGN GLASS",
+    "status": "validation",
+    "reasonBefore": "Tabelas oficiais/simuladas corrigidas e testadas com séries controladas e indisponíveis. O frame denominado Ao Lado mostra tabelas empilhadas; esclarecer relação com o controle antes de concluir a comparação do estado inteiro.",
+    "sources": [
+      {
+        "path": "src/components/Workspaces/LogicWorkspace.vue",
+        "exists": true,
+        "sha256": "54195bd930095886f4bbf00acd28520fdfdad8664a67a76dd5c56106341ef30a"
+      },
+      {
+        "path": "src/components/Workspaces/LogicPerformance.vue",
+        "exists": true,
+        "sha256": "e9d3be1f5832ad833894fa0e111bdda784cc976c39e9450769912157e83a5e13"
+      }
+    ],
+    "browser": "Não repetido nesta rodada; revisão da classificação e evidências anteriores.",
+    "result": "Tabelas oficiais/simuladas corrigidas e testadas com séries controladas e indisponíveis. O frame denominado Ao Lado mostra tabelas empilhadas; esclarecer relação com o controle antes de concluir a comparação do estado inteiro."
+  },
+  {
+    "id": "1484:86740",
+    "name": "EC01 · Painel de estados do componente · Solicitação pendente",
+    "status": "validation",
+    "reasonBefore": "A referência recuperada contém apenas título e superfície vazia de prancha, sem estados ou tela de produto. Não criar página nem aprovar um estado inexistente; esclarecer enquadramento do frame no inventário com designer. Os cards reais foram concluídos no P01.",
+    "sources": [
+      {
+        "path": "src/pages/TransctionPage.vue",
+        "exists": true,
+        "sha256": "4d322b4fd077b74f12f9169e760887139d5553ef54fe270ee35ee642cea86a49"
+      },
+      {
+        "path": "src/components/Finance/WalletDirectory.vue",
+        "exists": true,
+        "sha256": "f36a18512ddae34ba36f84eb17bbefc0823e01b08e2d4f457e96e510958977f9"
+      },
+      {
+        "path": "src/components/Finance/WalletOverview.vue",
+        "exists": true,
+        "sha256": "6aeb1b17eb7beb6665d6ff4b559ca0d4d35f08cb741faaceb93b94c7161972cc"
+      }
+    ],
+    "browser": "Não repetido nesta rodada; revisão da classificação e evidências anteriores.",
+    "result": "A referência recuperada contém apenas título e superfície vazia de prancha, sem estados ou tela de produto. Não criar página nem aprovar um estado inexistente; esclarecer enquadramento do frame no inventário com designer. Os cards reais foram concluídos no P01."
+  },
+  {
+    "id": "1484:97530",
+    "name": "CO06 · SP · Criar Relatório · EDITOR ESPECÍFICO · DESIGN GLASS",
+    "status": "validation",
+    "reasonBefore": "CO06: composição, PDF/áudio/anexos sucessivos e celular testados. Índice H2/H3 sem editor de corpo não está definido; reter comparação completa até esclarecer a origem do índice, sem inventar controles.",
+    "sources": [
+      {
+        "path": "src/components/Workspaces/PublicationWorkspace.vue",
+        "exists": true,
+        "sha256": "5dc818c18a5aad3d04d1e91feb0334bbfbc0176929bc125cc9b880d8aedbd365"
+      }
+    ],
+    "browser": "Não repetido nesta rodada; revisão da classificação e evidências anteriores.",
+    "result": "CO06: composição, PDF/áudio/anexos sucessivos e celular testados. Índice H2/H3 sem editor de corpo não está definido; reter comparação completa até esclarecer a origem do índice, sem inventar controles."
+  },
+  {
+    "id": "1:37994",
+    "name": "[UI] CONTRATOS - OFERTA_CONTRATO - 3",
+    "status": "validation",
+    "reasonBefore": "Designer: falta estado selecionado dos campos de valor no passo 3. Front: POST /client/contracts/requests existe no OpenAPI de 18/11; adapter ainda indisponível. Verificar mapeamento objective/period/modality/initialAmount/monthlyAmount/assetTypes/regions e currencyId do catálogo, sem atribuir ausência da rota ao backend.",
+    "sources": [
+      {
+        "path": "portal:src/router/routes.js",
+        "exists": true,
+        "sha256": "7bc70ed75286f0d9a8554201480995347942b416dc10c94fefde82de4ce62562"
+      },
+      {
+        "path": "portal:src/system/pages/contract/ContractsPage.vue",
+        "exists": true,
+        "sha256": "51bfd6415aa0200b2e50097a08c4d18b4796d9c616c754b65e2d57fcfcbd7458"
+      }
+    ],
+    "browser": "Não repetido nesta rodada; revisão da classificação e evidências anteriores.",
+    "result": "Designer: falta estado selecionado dos campos de valor no passo 3. Front: POST /client/contracts/requests existe no OpenAPI de 18/11; adapter ainda indisponível. Verificar mapeamento objective/period/modality/initialAmount/monthlyAmount/assetTypes/regions e currencyId do catálogo, sem atribuir ausência da rota ao backend."
+  },
+  {
+    "id": "1:45691",
+    "name": "[UI] CONTRATOS - PAG ESPECIFICA",
+    "status": "validation",
+    "reasonBefore": "Composição agrupada, performance e distribuição por barras implementadas conforme contextos completos, por propriedades. Passou testes/CI; falta comparação visual desktop/mobile e geometria dos assets. Integração das séries não foi presumida.",
+    "sources": [
+      {
+        "path": "portal:src/system/pages/contract/ContractsPage.vue",
+        "exists": true,
+        "sha256": "51bfd6415aa0200b2e50097a08c4d18b4796d9c616c754b65e2d57fcfcbd7458"
+      },
+      {
+        "path": "portal:src/system/pages/contract/ContractPage.vue",
+        "exists": true,
+        "sha256": "7bc301c4bc7d007272f6f22a555301ae6f48e6be6a6ff383c0fe882aaaef8da1"
+      }
+    ],
+    "browser": "Componentes reais em prévia local com props fictícias; variantes agrupada/separada/App, séries, comparação/período, seis donuts, vazio/indisponível, participante, Escape e modal de ativos vazio.",
+    "result": "Popover corrigido: limite direito 399→378 px, largura 358→337 px, viewport útil 378 px. Tabelas com rolagem interna. Não conclui comparação integral do frame; origem aprovada do App, exportação real, persistência e adapter das projeções continuam pendentes."
+  },
+  {
+    "id": "1:46764",
+    "name": "[UI] CONTRATOS - PAG ESPECIFICA",
+    "status": "validation",
+    "reasonBefore": "Composição separada com três resumos, performance, seis donuts, dividendos, aportes, aplicativo e resumo implementada. Rota real conectada aos campos confirmados, testes/CI aprovados. Falta conferência visual no navegador; métricas não fornecidas continuam indisponíveis.",
+    "sources": [
+      {
+        "path": "portal:src/system/pages/contract/ContractsPage.vue",
+        "exists": true,
+        "sha256": "51bfd6415aa0200b2e50097a08c4d18b4796d9c616c754b65e2d57fcfcbd7458"
+      },
+      {
+        "path": "portal:src/system/pages/contract/ContractPage.vue",
+        "exists": true,
+        "sha256": "7bc301c4bc7d007272f6f22a555301ae6f48e6be6a6ff383c0fe882aaaef8da1"
+      }
+    ],
+    "browser": "Componentes reais em prévia local com props fictícias; variantes agrupada/separada/App, séries, comparação/período, seis donuts, vazio/indisponível, participante, Escape e modal de ativos vazio.",
+    "result": "Popover corrigido: limite direito 399→378 px, largura 358→337 px, viewport útil 378 px. Tabelas com rolagem interna. Não conclui comparação integral do frame; origem aprovada do App, exportação real, persistência e adapter das projeções continuam pendentes."
+  },
+  {
+    "id": "1:48631",
+    "name": "[UI] CONTRATOS - PAG ESPECIFICA",
+    "status": "validation",
+    "reasonBefore": "Variante App, resumo compacto, banner e modal de ativos implementados por propriedades; callback de exportação protegido. Origem do aplicativo deve ser aprovada, sem incorporar captura financeira de exemplo. Falta validar abertura, geometria e responsividade no navegador e confirmar adapter da variante.",
+    "sources": [
+      {
+        "path": "portal:src/system/pages/contract/ContractsPage.vue",
+        "exists": true,
+        "sha256": "51bfd6415aa0200b2e50097a08c4d18b4796d9c616c754b65e2d57fcfcbd7458"
+      },
+      {
+        "path": "portal:src/system/pages/contract/ContractPage.vue",
+        "exists": true,
+        "sha256": "7bc301c4bc7d007272f6f22a555301ae6f48e6be6a6ff383c0fe882aaaef8da1"
+      }
+    ],
+    "browser": "Componentes reais em prévia local com props fictícias; variantes agrupada/separada/App, séries, comparação/período, seis donuts, vazio/indisponível, participante, Escape e modal de ativos vazio.",
+    "result": "Popover corrigido: limite direito 399→378 px, largura 358→337 px, viewport útil 378 px. Tabelas com rolagem interna. Não conclui comparação integral do frame; origem aprovada do App, exportação real, persistência e adapter das projeções continuam pendentes."
+  },
+  {
+    "id": "1:50141",
+    "name": "[UI] CONTRATOS - PAG ESPECIFICA",
+    "status": "validation",
+    "reasonBefore": "Aportes, histórico e popover de participante implementados com dados fornecidos, sem consultar clientes alheios ou criar retratos/IDs/valores. Testes de props/reatividade passaram; falta validar popover, teclado e geometria no navegador e ligar projeção confirmada.",
+    "sources": [
+      {
+        "path": "portal:src/system/pages/contract/ContractsPage.vue",
+        "exists": true,
+        "sha256": "51bfd6415aa0200b2e50097a08c4d18b4796d9c616c754b65e2d57fcfcbd7458"
+      },
+      {
+        "path": "portal:src/system/pages/contract/ContractPage.vue",
+        "exists": true,
+        "sha256": "7bc301c4bc7d007272f6f22a555301ae6f48e6be6a6ff383c0fe882aaaef8da1"
+      }
+    ],
+    "browser": "Componentes reais em prévia local com props fictícias; variantes agrupada/separada/App, séries, comparação/período, seis donuts, vazio/indisponível, participante, Escape e modal de ativos vazio.",
+    "result": "Popover corrigido: limite direito 399→378 px, largura 358→337 px, viewport útil 378 px. Tabelas com rolagem interna. Não conclui comparação integral do frame; origem aprovada do App, exportação real, persistência e adapter das projeções continuam pendentes."
+  },
+  {
+    "id": "1:50960",
+    "name": "[UI] ALAVANCAGEM - PÁG ALAVANCAGEM - GARANTIA IMÓVEL",
+    "status": "validation",
+    "reasonBefore": "Usuário confirmou que as telas da Área do Cliente estão validadas e devem permanecer como estão, com empréstimos por etapas. Mantida a implementação existente, sem nova composição ou campos. Reclassificação de escopo, não novo teste: comparação detalhada dos estados e integração comercial continuam sem nova evidência nesta rodada.",
+    "sources": [
+      {
+        "path": "portal:src/system/pages/loan/LoanPage.vue",
+        "exists": true,
+        "sha256": "4916672618337d5a5dd4a4dd920cc9dfac40529bf3f7db4496a0567150afad2e"
+      },
+      {
+        "path": "portal:src/system/pages/leverage/LeveragePage.vue",
+        "exists": true,
+        "sha256": "3a34d489f4fb1cefa82002318d65ea12bd368833e00939d42368e332b5ff0a29"
+      },
+      {
+        "path": "portal:src/system/layouts/leverage/yourLeverages/ActiveYourLeverages.vue",
+        "exists": true,
+        "sha256": "8b3d3a5835cb15cf8ec17d66aba3b9dea298fe055f4e8772e836193119bb29b0"
+      },
+      {
+        "path": "portal:src/system/layouts/loans/steps/DocUploadLoanLayout.vue",
+        "exists": true,
+        "sha256": "18460f67c5d20029940cd83ac6a5947a5981707ad724038936e47dcfdccbcf6f"
+      }
+    ],
+    "browser": "Acesso real ao catálogo mostra bloqueio Nível 3; conta Éric consta no Nível 0.",
+    "result": "Telas aprovadas preservadas. Falta conta elegível/massa para percorrer estados integrados; não é novo defeito de API comprovado."
+  },
+  {
+    "id": "1:51347",
+    "name": "[UI] ALAVANCAGEM - PÁG ALAVANCAGEM - GARANTIA AUTOMÓVEL",
+    "status": "validation",
+    "reasonBefore": "Usuário confirmou que as telas da Área do Cliente estão validadas e devem permanecer como estão, com empréstimos por etapas. Mantida a implementação existente, sem nova composição ou campos. Reclassificação de escopo, não novo teste: comparação detalhada dos estados e integração comercial continuam sem nova evidência nesta rodada.",
+    "sources": [
+      {
+        "path": "portal:src/system/pages/loan/LoanPage.vue",
+        "exists": true,
+        "sha256": "4916672618337d5a5dd4a4dd920cc9dfac40529bf3f7db4496a0567150afad2e"
+      },
+      {
+        "path": "portal:src/system/pages/leverage/LeveragePage.vue",
+        "exists": true,
+        "sha256": "3a34d489f4fb1cefa82002318d65ea12bd368833e00939d42368e332b5ff0a29"
+      },
+      {
+        "path": "portal:src/system/layouts/leverage/yourLeverages/ActiveYourLeverages.vue",
+        "exists": true,
+        "sha256": "8b3d3a5835cb15cf8ec17d66aba3b9dea298fe055f4e8772e836193119bb29b0"
+      },
+      {
+        "path": "portal:src/system/layouts/loans/steps/DocUploadLoanLayout.vue",
+        "exists": true,
+        "sha256": "18460f67c5d20029940cd83ac6a5947a5981707ad724038936e47dcfdccbcf6f"
+      }
+    ],
+    "browser": "Acesso real ao catálogo mostra bloqueio Nível 3; conta Éric consta no Nível 0.",
+    "result": "Telas aprovadas preservadas. Falta conta elegível/massa para percorrer estados integrados; não é novo defeito de API comprovado."
+  },
+  {
+    "id": "1:51728",
+    "name": "[UI] ALAVANCAGEM - PÁG ALAVANCAGEM - CONSÓRCIO AUTOMÓVEL",
+    "status": "validation",
+    "reasonBefore": "Usuário confirmou que as telas da Área do Cliente estão validadas e devem permanecer como estão, com empréstimos por etapas. Mantida a implementação existente, sem nova composição ou campos. Reclassificação de escopo, não novo teste: comparação detalhada dos estados e integração comercial continuam sem nova evidência nesta rodada.",
+    "sources": [
+      {
+        "path": "portal:src/system/pages/loan/LoanPage.vue",
+        "exists": true,
+        "sha256": "4916672618337d5a5dd4a4dd920cc9dfac40529bf3f7db4496a0567150afad2e"
+      },
+      {
+        "path": "portal:src/system/pages/leverage/LeveragePage.vue",
+        "exists": true,
+        "sha256": "3a34d489f4fb1cefa82002318d65ea12bd368833e00939d42368e332b5ff0a29"
+      },
+      {
+        "path": "portal:src/system/layouts/leverage/yourLeverages/ActiveYourLeverages.vue",
+        "exists": true,
+        "sha256": "8b3d3a5835cb15cf8ec17d66aba3b9dea298fe055f4e8772e836193119bb29b0"
+      },
+      {
+        "path": "portal:src/system/layouts/loans/steps/DocUploadLoanLayout.vue",
+        "exists": true,
+        "sha256": "18460f67c5d20029940cd83ac6a5947a5981707ad724038936e47dcfdccbcf6f"
+      }
+    ],
+    "browser": "Acesso real ao catálogo mostra bloqueio Nível 3; conta Éric consta no Nível 0.",
+    "result": "Telas aprovadas preservadas. Falta conta elegível/massa para percorrer estados integrados; não é novo defeito de API comprovado."
+  },
+  {
+    "id": "1:52034",
+    "name": "[UI] ALAVANCAGEM - PÁG ALAVANCAGEM - COLATERAL",
+    "status": "validation",
+    "reasonBefore": "Usuário confirmou que as telas da Área do Cliente estão validadas e devem permanecer como estão, com empréstimos por etapas. Mantida a implementação existente, sem nova composição ou campos. Reclassificação de escopo, não novo teste: comparação detalhada dos estados e integração comercial continuam sem nova evidência nesta rodada.",
+    "sources": [
+      {
+        "path": "portal:src/system/pages/loan/LoanPage.vue",
+        "exists": true,
+        "sha256": "4916672618337d5a5dd4a4dd920cc9dfac40529bf3f7db4496a0567150afad2e"
+      },
+      {
+        "path": "portal:src/system/pages/leverage/LeveragePage.vue",
+        "exists": true,
+        "sha256": "3a34d489f4fb1cefa82002318d65ea12bd368833e00939d42368e332b5ff0a29"
+      },
+      {
+        "path": "portal:src/system/layouts/leverage/yourLeverages/ActiveYourLeverages.vue",
+        "exists": true,
+        "sha256": "8b3d3a5835cb15cf8ec17d66aba3b9dea298fe055f4e8772e836193119bb29b0"
+      },
+      {
+        "path": "portal:src/system/layouts/loans/steps/DocUploadLoanLayout.vue",
+        "exists": true,
+        "sha256": "18460f67c5d20029940cd83ac6a5947a5981707ad724038936e47dcfdccbcf6f"
+      }
+    ],
+    "browser": "Acesso real ao catálogo mostra bloqueio Nível 3; conta Éric consta no Nível 0.",
+    "result": "Telas aprovadas preservadas. Falta conta elegível/massa para percorrer estados integrados; não é novo defeito de API comprovado."
+  },
+  {
+    "id": "1:54617",
+    "name": "[UI] FLUXO - SOLICITAR EMPRÉSTIMO -",
+    "status": "validation",
+    "reasonBefore": "Usuário confirmou que as telas da Área do Cliente estão validadas e devem permanecer como estão, com empréstimos por etapas. Mantida a implementação existente, sem nova composição ou campos. Reclassificação de escopo, não novo teste: comparação detalhada dos estados e integração comercial continuam sem nova evidência nesta rodada.",
+    "sources": [
+      {
+        "path": "portal:src/system/pages/loan/LoanPage.vue",
+        "exists": true,
+        "sha256": "4916672618337d5a5dd4a4dd920cc9dfac40529bf3f7db4496a0567150afad2e"
+      },
+      {
+        "path": "portal:src/system/pages/leverage/LeveragePage.vue",
+        "exists": true,
+        "sha256": "3a34d489f4fb1cefa82002318d65ea12bd368833e00939d42368e332b5ff0a29"
+      },
+      {
+        "path": "portal:src/system/layouts/leverage/yourLeverages/ActiveYourLeverages.vue",
+        "exists": true,
+        "sha256": "8b3d3a5835cb15cf8ec17d66aba3b9dea298fe055f4e8772e836193119bb29b0"
+      },
+      {
+        "path": "portal:src/system/layouts/loans/steps/DocUploadLoanLayout.vue",
+        "exists": true,
+        "sha256": "18460f67c5d20029940cd83ac6a5947a5981707ad724038936e47dcfdccbcf6f"
+      }
+    ],
+    "browser": "Acesso real ao catálogo mostra bloqueio Nível 3; conta Éric consta no Nível 0.",
+    "result": "Telas aprovadas preservadas. Falta conta elegível/massa para percorrer estados integrados; não é novo defeito de API comprovado."
+  },
+  {
+    "id": "1:68461",
+    "name": "[UI] HOME - VERSÃO PADRÃO",
+    "status": "validation",
+    "reasonBefore": "Teste de tema no perfil não aprova automaticamente os clones de Home/Comunicação/resumo; manter regressão específica por frame, sem afirmar defeito visual novo.",
+    "sources": [
+      {
+        "path": "portal:src/system/pages/DashboardPage.vue",
+        "exists": true,
+        "sha256": "adc908fbbbe11d7eff4e7ca9915ccaf2b985292e07a695b9a8aa785b7ee3cef4"
+      },
+      {
+        "path": "portal:src/system/pages/CommunicationPage.vue",
+        "exists": true,
+        "sha256": "864d8cc5ba79c50d928d92890767240ad97d61f8e99977fe59418622041629ea"
+      }
+    ],
+    "browser": "Consulta real local de Home/resumo e temas cinza/Aurora; larguras observadas 1280 e 763. Sem teste integral de todos os gráficos/conteúdos dos frames.",
+    "result": "Corrigidos cabeçalho e valores em largura de tablet. Composição aprovada preservada; falta comparação integral e estados positivos de blocos indisponíveis."
+  },
+  {
+    "id": "1:68794",
+    "name": "[UI] HOME - VERSÃO PADRÃO",
+    "status": "validation",
+    "reasonBefore": "Teste de tema no perfil não aprova automaticamente os clones de Home/Comunicação/resumo; manter regressão específica por frame, sem afirmar defeito visual novo.",
+    "sources": [
+      {
+        "path": "portal:src/system/pages/DashboardPage.vue",
+        "exists": true,
+        "sha256": "adc908fbbbe11d7eff4e7ca9915ccaf2b985292e07a695b9a8aa785b7ee3cef4"
+      },
+      {
+        "path": "portal:src/system/pages/CommunicationPage.vue",
+        "exists": true,
+        "sha256": "864d8cc5ba79c50d928d92890767240ad97d61f8e99977fe59418622041629ea"
+      }
+    ],
+    "browser": "Consulta real local de Home/resumo e temas cinza/Aurora; larguras observadas 1280 e 763. Sem teste integral de todos os gráficos/conteúdos dos frames.",
+    "result": "Corrigidos cabeçalho e valores em largura de tablet. Composição aprovada preservada; falta comparação integral e estados positivos de blocos indisponíveis."
+  },
+  {
+    "id": "1:73288",
+    "name": "[UI] PERFIL - Pág Resumo - Dados Pessoais",
+    "status": "validation",
+    "reasonBefore": "Teste de tema no perfil não aprova automaticamente os clones de Home/Comunicação/resumo; manter regressão específica por frame, sem afirmar defeito visual novo.",
+    "sources": [
+      {
+        "path": "portal:src/system/pages/DashboardPage.vue",
+        "exists": true,
+        "sha256": "adc908fbbbe11d7eff4e7ca9915ccaf2b985292e07a695b9a8aa785b7ee3cef4"
+      },
+      {
+        "path": "portal:src/system/pages/CommunicationPage.vue",
+        "exists": true,
+        "sha256": "864d8cc5ba79c50d928d92890767240ad97d61f8e99977fe59418622041629ea"
+      }
+    ],
+    "browser": "Consulta real local de Home/resumo e temas cinza/Aurora; larguras observadas 1280 e 763. Sem teste integral de todos os gráficos/conteúdos dos frames.",
+    "result": "Corrigidos cabeçalho e valores em largura de tablet. Composição aprovada preservada; falta comparação integral e estados positivos de blocos indisponíveis."
+  },
+  {
+    "id": "1:73602",
+    "name": "[UI] PERFIL - Pág Resumo - Dados Pessoais",
+    "status": "validation",
+    "reasonBefore": "Teste de tema no perfil não aprova automaticamente os clones de Home/Comunicação/resumo; manter regressão específica por frame, sem afirmar defeito visual novo.",
+    "sources": [
+      {
+        "path": "portal:src/system/pages/DashboardPage.vue",
+        "exists": true,
+        "sha256": "adc908fbbbe11d7eff4e7ca9915ccaf2b985292e07a695b9a8aa785b7ee3cef4"
+      },
+      {
+        "path": "portal:src/system/pages/CommunicationPage.vue",
+        "exists": true,
+        "sha256": "864d8cc5ba79c50d928d92890767240ad97d61f8e99977fe59418622041629ea"
+      }
+    ],
+    "browser": "Consulta real local de Home/resumo e temas cinza/Aurora; larguras observadas 1280 e 763. Sem teste integral de todos os gráficos/conteúdos dos frames.",
+    "result": "Corrigidos cabeçalho e valores em largura de tablet. Composição aprovada preservada; falta comparação integral e estados positivos de blocos indisponíveis."
+  }
+]

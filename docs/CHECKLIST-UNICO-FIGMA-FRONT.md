@@ -11,11 +11,11 @@ Atualizado em 2026-11-19. Contagem por **telas e estados independentes do Figma*
 | --- | ---: |
 | Total inventariado | **279** |
 | Prontas no frontend | **259** |
-| Implementadas, aguardando revalidação/comparação completa | **12** |
-| Ainda exigem implementação, complemento ou correção | **8** |
-| Com implementação existente (prontas + revalidação) | **271 / 279 (97,1%)** |
+| Implementadas, aguardando revalidação/comparação completa | **17** |
+| Ainda exigem implementação, complemento ou correção | **3** |
+| Com implementação existente (prontas + revalidação) | **276 / 279 (98,9%)** |
 
-**Para encerrar o front faltam 8 itens de implementação/ajuste e 12 de revalidação.** “Pronto no frontend” não significa fluxo integrado liberado: dependências de backend/designer podem afetar também telas prontas. Os números não classificam toda pendência como tela nova nem como problema de API. A comparação de Crédito, carteira global e editor editorial que não foi concluída integralmente permanece em revalidação.
+**Para encerrar o front faltam 3 itens de implementação/ajuste e 17 de revalidação.** “Pronto no frontend” não significa fluxo integrado liberado: dependências de backend/designer podem afetar também telas prontas. Os números não classificam toda pendência como tela nova nem como problema de API. A comparação de Crédito, carteira global e editor editorial que não foi concluída integralmente permanece em revalidação.
 
 Fonte por frame: [progresso atual](FRONTEND-PROGRESS.json). A base anterior permanece histórica; [atualizações com evidências](FRONTEND-PROGRESS-OVERRIDES.json) registram cada mudança. Ao finalizar **cada entrega**, atualizar os IDs comprovados, executar `node scripts/frontend-progress.mjs` e informar este panorama na resposta final.
 <!-- frontend-progress:end -->
@@ -26,6 +26,43 @@ Fonte por frame: [progresso atual](FRONTEND-PROGRESS.json). A base anterior perm
 
 
 
+
+## Entrega 19/11 — revalidação dos 17 estados e responsividade
+
+**Publicado no portal: `c73ec93` (inclui `5864d03`), [CI/deploy 44613402397](https://github.com/WillTbn/Strategy-analytics-v2/actions/runs/44613402397), sucesso.** Três arquivos CSS da publicação conferidos por SHA256 contra o build isolado. Nenhum campo, ação ou composição desktop aprovado foi acrescentado ou substituído.
+
+- [x] Corrigido popover do participante: regra de largura não sobrepõe mais o limite calculado pelo Quasar. Em viewport 390 px, borda direita passou de 399 para 378 px (largura útil 378), preservando rolagem interna, dados e Escape.
+- [x] Corrigido estouro horizontal da Home em tablet: cabeçalho permite quebra entre 600–1023 px, valores dos cards quebram dentro da área disponível e a grade da Home respeita o contêiner nessa faixa. Medida real local 763 px: conteúdo e clientWidth de 751 px. Regras desktop acima de 1023 px preservadas.
+- [x] Componentes reais do contrato testados em prévia temporária: variantes separada, agrupada e App; séries positivas, comparação e período; seis donuts; estados vazio e indisponível; participante com nome extenso; abertura/Escape; ativos vazios e PDF desabilitado sem integração. Prévia arquivada como texto e removida do projeto, sem mocks na aplicação publicada.
+- [x] Consulta real de Home e resumo do perfil; alternância dos temas Cinza/Aurora e restauração do tema original. Home publicada conferida a 390 px, `clientWidth = scrollWidth = 378`. Não houve operação financeira nem envio de solicitação de empréstimo.
+- [x] **529 testes**, lint, build e auditoria aprovados em snapshot isolado contendo somente os commits desta entrega. O CI também concluiu verificações, upload e ativação; auditoria preservada. Alterações locais de outras frentes não foram publicadas nestes commits.
+
+### Resultado por grupo dos 17 estados
+
+| Estados | Resultado e o que ainda falta |
+| --- | --- |
+| LG07 `1484:82147` | Permanece a dúvida de “Ao Lado” versus tabelas empilhadas do frame. Não foi alterada a composição por suposição; falta decisão do designer e comparação integral. |
+| EC01 `1484:86740` | Referência anterior é uma prancha vazia; designer precisa confirmar enquadramento do estado. Não foi criada tela vazia no produto. |
+| CO06 `1484:97530` | Composição e anexos têm evidência anterior. Origem do índice H2/H3 continua indefinida; sem novo teste de navegador nesta rodada. |
+| Oferta `1:37994` | Continua pendente definir estado selecionado do valor e completar adapter de solicitação a partir do endpoint existente. Não é ausência comprovada de rota na API. |
+| Contratos `1:45691`, `1:46764`, `1:48631`, `1:50141` | Avançaram os testes locais dos componentes e foi corrigido o popover. Comparação integral, callbacks reais de exportação/destino, origem aprovada do App e projeções integradas continuam em aberto. Não foram promovidos por teste parcial. |
+| Empréstimos `1:50960`, `1:51347`, `1:51728`, `1:52034`, `1:54617` | Mantido o fluxo por etapas aprovado. Sessão real do Éric consta no Nível 0 e exibe bloqueio de Nível 3; sem massa elegível, os estados integrados desses cinco frames não foram percorridos. Isso é limite de teste, sem novo defeito de API comprovado. |
+| Home/resumo `1:68461`, `1:68794`, `1:73288`, `1:73602` | Temas e consultas reais conferidos; responsividade corrigida. Comparação integral dos clones, gráficos positivos e conteúdo restrito por nível ainda não encerrada. A aprovação anterior da composição foi preservada. |
+
+**Panorama mantido: 279 estados; 259 prontos, 17 em revalidação e 3 em implementação/ajuste. Implementação existente: 276/279 (98,9%); prontos: 92,8%.** Correções parciais e testes de código não promovem um frame inteiro. As 13 superfícies sem referência permanecem para avaliação do Éric. Não é homologação integrada concluída.
+
+[Matriz dos 17 e limites por frame](evidence/qa-2026-11-19-review17/matrix.json) · [Testes e resultados](evidence/qa-2026-11-19-review17/results.json) · [Publicação e hashes](evidence/qa-2026-11-19-review17/publication.json) · [Home publicada em 390 px](evidence/qa-2026-11-19-review17/home-published.png) · [Popover corrigido](evidence/qa-2026-11-19-review17/participant-mobile-fixed.png).
+
+## Esclarecimentos de escopo — 19/11/2026
+
+Esta seção atualiza a classificação da revisão dos nove ajustes abaixo; a revisão anterior permanece como histórico.
+
+- **Área do Cliente:** usuário confirmou que as telas estão validadas e devem permanecer como estão, com empréstimos por etapas. Os cinco frames `1:50960`, `1:51347`, `1:51728`, `1:52034` e `1:54617` passam de ajuste para revalidação da implementação existente. Não serão criadas novas páginas de detalhe, formulários ou exigências de documentos por interpretação dos storyboards. Não se afirma novo teste de navegador nem aprovação integrada da API.
+- **Criar Novo Conteúdo:** entrada `1484:96184` → CO03 → editor `1484:96882` já conectada no código. Conferidos diálogo de seleção, habilitação de Continuar e navegação com o tipo escolhido. Essa ação é diferente do “+” interno entre blocos citado pelo editor para inserir mídia. Os estados abertos de inserção e H2/H3 continuam sem definição; nenhum menu novo foi inventado.
+- **CT12:** botão `1484:69938`, “Adicionar operação”, registrado como candidato. Usuário confirmará com Éric a posição e o vínculo. A ação não foi encaixada arbitrariamente.
+- **Limite desta rodada:** apenas revisão de código e atualização documental; aplicação preservada, sem novo teste de navegador ou deploy. Treze superfícies sem referência permanecem para avaliação do Éric.
+
+[Decisões e evidências](evidence/qa-2026-11-19-scope-clarification/results.json).
 
 ## Entrega 19/11 — revisão dos nove ajustes e CEP japonês
 
@@ -1511,10 +1548,10 @@ Legenda vigente: classificação de 16/11 por código e evidências, detalhada e
 | [1:50557](https://www.figma.com/design/BaDXlWpxbIoY4azOaQnXgv?node-id=1-50557)     | [UI] ALAVANCAGEM                                                             | Pronto no front · P06 |
 | [1:50683](https://www.figma.com/design/BaDXlWpxbIoY4azOaQnXgv?node-id=1-50683)     | [UI] ALAVANCAGEM - BLOQUEADO                                                 | Pronto no front · P06 |
 | [1:50860](https://www.figma.com/design/BaDXlWpxbIoY4azOaQnXgv?node-id=1-50860)     | [UI] FLUXO - SOLICITAR EMPRÉSTIMO -                                          | Pronto no front · P06 |
-| [1:50960](https://www.figma.com/design/BaDXlWpxbIoY4azOaQnXgv?node-id=1-50960)     | [UI] ALAVANCAGEM - PÁG ALAVANCAGEM - GARANTIA IMÓVEL                         | Implementação/ajuste pendente · P06 |
-| [1:51347](https://www.figma.com/design/BaDXlWpxbIoY4azOaQnXgv?node-id=1-51347)     | [UI] ALAVANCAGEM - PÁG ALAVANCAGEM - GARANTIA AUTOMÓVEL                      | Implementação/ajuste pendente · P06 |
-| [1:51728](https://www.figma.com/design/BaDXlWpxbIoY4azOaQnXgv?node-id=1-51728)     | [UI] ALAVANCAGEM - PÁG ALAVANCAGEM - CONSÓRCIO AUTOMÓVEL                     | Implementação/ajuste pendente · P06 |
-| [1:52034](https://www.figma.com/design/BaDXlWpxbIoY4azOaQnXgv?node-id=1-52034)     | [UI] ALAVANCAGEM - PÁG ALAVANCAGEM - COLATERAL                               | Implementação/ajuste pendente · P06 |
+| [1:50960](https://www.figma.com/design/BaDXlWpxbIoY4azOaQnXgv?node-id=1-50960)     | [UI] ALAVANCAGEM - PÁG ALAVANCAGEM - GARANTIA IMÓVEL                         | Implementado · revalidar · P06 |
+| [1:51347](https://www.figma.com/design/BaDXlWpxbIoY4azOaQnXgv?node-id=1-51347)     | [UI] ALAVANCAGEM - PÁG ALAVANCAGEM - GARANTIA AUTOMÓVEL                      | Implementado · revalidar · P06 |
+| [1:51728](https://www.figma.com/design/BaDXlWpxbIoY4azOaQnXgv?node-id=1-51728)     | [UI] ALAVANCAGEM - PÁG ALAVANCAGEM - CONSÓRCIO AUTOMÓVEL                     | Implementado · revalidar · P06 |
+| [1:52034](https://www.figma.com/design/BaDXlWpxbIoY4azOaQnXgv?node-id=1-52034)     | [UI] ALAVANCAGEM - PÁG ALAVANCAGEM - COLATERAL                               | Implementado · revalidar · P06 |
 | [1:52217](https://www.figma.com/design/BaDXlWpxbIoY4azOaQnXgv?node-id=1-52217)     | [UI] FLUXO - SOLICITAR EMPRÉSTIMO -                                          | Pronto no front · P06 |
 | [1:52330](https://www.figma.com/design/BaDXlWpxbIoY4azOaQnXgv?node-id=1-52330)     | [UI] FLUXO - SOLICITAR EMPRÉSTIMO -                                          | Pronto no front · P06 |
 | [1:52424](https://www.figma.com/design/BaDXlWpxbIoY4azOaQnXgv?node-id=1-52424)     | [UI] FLUXO - SOLICITAR EMPRÉSTIMO -                                          | Pronto no front · P06 |
@@ -1532,7 +1569,7 @@ Legenda vigente: classificação de 16/11 por código e evidências, detalhada e
 | [1:54146](https://www.figma.com/design/BaDXlWpxbIoY4azOaQnXgv?node-id=1-54146)     | [UI] FLUXO - SOLICITAR EMPRÉSTIMO -                                          | Pronto no front · P06 |
 | [1:54266](https://www.figma.com/design/BaDXlWpxbIoY4azOaQnXgv?node-id=1-54266)     | [UI] FLUXO - SOLICITAR EMPRÉSTIMO -                                          | Pronto no front · P06 |
 | [1:54430](https://www.figma.com/design/BaDXlWpxbIoY4azOaQnXgv?node-id=1-54430)     | [UI] FLUXO - SOLICITAR EMPRÉSTIMO -                                          | Pronto no front · P06 |
-| [1:54617](https://www.figma.com/design/BaDXlWpxbIoY4azOaQnXgv?node-id=1-54617)     | [UI] FLUXO - SOLICITAR EMPRÉSTIMO -                                          | Implementação/ajuste pendente · P06 |
+| [1:54617](https://www.figma.com/design/BaDXlWpxbIoY4azOaQnXgv?node-id=1-54617)     | [UI] FLUXO - SOLICITAR EMPRÉSTIMO -                                          | Implementado · revalidar · P06 |
 | [1:54810](https://www.figma.com/design/BaDXlWpxbIoY4azOaQnXgv?node-id=1-54810)     | OFERTAS CONSÓRCIO - LISTA                                                    | Pronto no front · P06 |
 | [1:55081](https://www.figma.com/design/BaDXlWpxbIoY4azOaQnXgv?node-id=1-55081)     | OFERTAS CONSÓRCIO - CARDS                                                    | Pronto no front · P06 |
 | [1:55357](https://www.figma.com/design/BaDXlWpxbIoY4azOaQnXgv?node-id=1-55357)     | [UI] FLUXO - SOLICITAR CONSÓRCIO                                             | Pronto no front · P06 |

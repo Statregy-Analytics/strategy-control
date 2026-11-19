@@ -1,0 +1,33 @@
+{
+  "commit": "c73ec93fb97dca5013cb8f65f75b2b41b6cbec91",
+  "ci": 44613402397,
+  "status": "success",
+  "url": "https://github.com/WillTbn/Strategy-analytics-v2/actions/runs/44613402397",
+  "entryAssets": [
+    {
+      "path": "/assets/index-GdrTsGyF.css",
+      "sha256": "70c29119776151e27b86de33d700e5b1db8fe13df43e1f72a96086ee9d4c2c59",
+      "tabletHeaderRule": false
+    }
+  ],
+  "entryScripts": [
+    "/assets/index-C67GG-W7.js"
+  ],
+  "featureCss": [
+    {
+      "path": "/assets/MainLayout-BkUJaT2a.css",
+      "sha256": "3bfe727a037c0caf127c6c42ebf6f1413328edcb7489529a9b792b06db51c8b7",
+      "matchesLocalBuild": true
+    },
+    {
+      "path": "/assets/WalletPage-JvMP7xns.css",
+      "sha256": "c37a73fa90e827b625812f8dff03bcb3fbbd5545e4ff169bd7e9e73cf1d9c376",
+      "matchesLocalBuild": true
+    },
+    {
+      "path": "/assets/ContractPage-BYfDOykW.css",
+      "sha256": "5cc83ba3a2ad00f8a60f619b4c5a660b069a359f34bcecdcdc6a6167c94d33ee",
+      "matchesLocalBuild": true
+    }
+  ]
+}

@@ -1,0 +1,457 @@
+
+> strategy-analytics@0.0.1 build
+> quasar build
+
+
+[38;2;25;118;210m [39m[38;2;28;117;207m█[39m[38;2;31;115;204m█[39m[38;2;34;114;201m█[39m[38;2;37;112;197m█[39m[38;2;40;111;194m█[39m[38;2;43;109;191m█[39m[38;2;45;108;188m╗[39m[38;2;48;106;185m [39m[38;2;51;105;182m█[39m[38;2;54;104;178m█[39m[38;2;57;102;175m╗[39m[38;2;60;101;172m [39m[38;2;63;99;169m [39m[38;2;66;98;166m [39m[38;2;69;96;163m█[39m[38;2;72;95;159m█[39m[38;2;75;93;156m╗[39m[38;2;78;92;153m [39m[38;2;80;90;150m█[39m[38;2;83;89;147m█[39m[38;2;86;88;144m█[39m[38;2;89;86;140m█[39m[38;2;92;85;137m█[39m[38;2;95;83;134m╗[39m[38;2;98;82;131m [39m[38;2;101;80;128m█[39m[38;2;104;79;125m█[39m[38;2;107;77;121m█[39m[38;2;110;76;118m█[39m[38;2;113;75;115m█[39m[38;2;115;73;112m█[39m[38;2;118;72;109m█[39m[38;2;121;70;106m╗[39m[38;2;124;69;102m [39m[38;2;127;67;99m█[39m[38;2;130;66;96m█[39m[38;2;133;64;93m█[39m[38;2;136;63;90m█[39m[38;2;139;61;87m█[39m[38;2;142;60;83m╗[39m[38;2;145;59;80m [39m[38;2;148;57;77m█[39m[38;2;150;56;74m█[39m[38;2;153;54;71m█[39m[38;2;156;53;68m█[39m[38;2;159;51;64m█[39m[38;2;162;50;61m█[39m[38;2;165;48;58m╗[39m
+[38;2;25;118;210m█[39m[38;2;28;117;207m█[39m[38;2;31;115;204m╔[39m[38;2;34;114;201m═[39m[38;2;37;112;197m═[39m[38;2;40;111;194m═[39m[38;2;43;109;191m█[39m[38;2;45;108;188m█[39m[38;2;48;106;185m╗[39m[38;2;51;105;182m█[39m[38;2;54;104;178m█[39m[38;2;57;102;175m║[39m[38;2;60;101;172m [39m[38;2;63;99;169m [39m[38;2;66;98;166m [39m[38;2;69;96;163m█[39m[38;2;72;95;159m█[39m[38;2;75;93;156m║[39m[38;2;78;92;153m█[39m[38;2;80;90;150m█[39m[38;2;83;89;147m╔[39m[38;2;86;88;144m═[39m[38;2;89;86;140m═[39m[38;2;92;85;137m█[39m[38;2;95;83;134m█[39m[38;2;98;82;131m╗[39m[38;2;101;80;128m█[39m[38;2;104;79;125m█[39m[38;2;107;77;121m╔[39m[38;2;110;76;118m═[39m[38;2;113;75;115m═[39m[38;2;115;73;112m═[39m[38;2;118;72;109m═[39m[38;2;121;70;106m╝[39m[38;2;124;69;102m█[39m[38;2;127;67;99m█[39m[38;2;130;66;96m╔[39m[38;2;133;64;93m═[39m[38;2;136;63;90m═[39m[38;2;139;61;87m█[39m[38;2;142;60;83m█[39m[38;2;145;59;80m╗[39m[38;2;148;57;77m█[39m[38;2;150;56;74m█[39m[38;2;153;54;71m╔[39m[38;2;156;53;68m═[39m[38;2;159;51;64m═[39m[38;2;162;50;61m█[39m[38;2;165;48;58m█[39m[38;2;168;47;55m╗[39m
+[38;2;25;118;210m█[39m[38;2;28;117;207m█[39m[38;2;31;115;204m║[39m[38;2;34;114;201m [39m[38;2;37;112;197m [39m[38;2;40;111;194m [39m[38;2;43;109;191m█[39m[38;2;45;108;188m█[39m[38;2;48;106;185m║[39m[38;2;51;105;182m█[39m[38;2;54;104;178m█[39m[38;2;57;102;175m║[39m[38;2;60;101;172m [39m[38;2;63;99;169m [39m[38;2;66;98;166m [39m[38;2;69;96;163m█[39m[38;2;72;95;159m█[39m[38;2;75;93;156m║[39m[38;2;78;92;153m█[39m[38;2;80;90;150m█[39m[38;2;83;89;147m█[39m[38;2;86;88;144m█[39m[38;2;89;86;140m█[39m[38;2;92;85;137m█[39m[38;2;95;83;134m█[39m[38;2;98;82;131m║[39m[38;2;101;80;128m█[39m[38;2;104;79;125m█[39m[38;2;107;77;121m█[39m[38;2;110;76;118m█[39m[38;2;113;75;115m█[39m[38;2;115;73;112m█[39m[38;2;118;72;109m█[39m[38;2;121;70;106m╗[39m[38;2;124;69;102m█[39m[38;2;127;67;99m█[39m[38;2;130;66;96m█[39m[38;2;133;64;93m█[39m[38;2;136;63;90m█[39m[38;2;139;61;87m█[39m[38;2;142;60;83m█[39m[38;2;145;59;80m║[39m[38;2;148;57;77m█[39m[38;2;150;56;74m█[39m[38;2;153;54;71m█[39m[38;2;156;53;68m█[39m[38;2;159;51;64m█[39m[38;2;162;50;61m█[39m[38;2;165;48;58m╔[39m[38;2;168;47;55m╝[39m
+[38;2;25;118;210m█[39m[38;2;28;117;207m█[39m[38;2;31;115;204m║[39m[38;2;34;114;201m▄[39m[38;2;37;112;197m▄[39m[38;2;40;111;194m [39m[38;2;43;109;191m█[39m[38;2;45;108;188m█[39m[38;2;48;106;185m║[39m[38;2;51;105;182m█[39m[38;2;54;104;178m█[39m[38;2;57;102;175m║[39m[38;2;60;101;172m [39m[38;2;63;99;169m [39m[38;2;66;98;166m [39m[38;2;69;96;163m█[39m[38;2;72;95;159m█[39m[38;2;75;93;156m║[39m[38;2;78;92;153m█[39m[38;2;80;90;150m█[39m[38;2;83;89;147m╔[39m[38;2;86;88;144m═[39m[38;2;89;86;140m═[39m[38;2;92;85;137m█[39m[38;2;95;83;134m█[39m[38;2;98;82;131m║[39m[38;2;101;80;128m╚[39m[38;2;104;79;125m═[39m[38;2;107;77;121m═[39m[38;2;110;76;118m═[39m[38;2;113;75;115m═[39m[38;2;115;73;112m█[39m[38;2;118;72;109m█[39m[38;2;121;70;106m║[39m[38;2;124;69;102m█[39m[38;2;127;67;99m█[39m[38;2;130;66;96m╔[39m[38;2;133;64;93m═[39m[38;2;136;63;90m═[39m[38;2;139;61;87m█[39m[38;2;142;60;83m█[39m[38;2;145;59;80m║[39m[38;2;148;57;77m█[39m[38;2;150;56;74m█[39m[38;2;153;54;71m╔[39m[38;2;156;53;68m═[39m[38;2;159;51;64m═[39m[38;2;162;50;61m█[39m[38;2;165;48;58m█[39m[38;2;168;47;55m╗[39m
+[38;2;25;118;210m╚[39m[38;2;28;117;207m█[39m[38;2;31;115;204m█[39m[38;2;34;114;201m█[39m[38;2;37;112;197m█[39m[38;2;40;111;194m█[39m[38;2;43;109;191m█[39m[38;2;45;108;188m╔[39m[38;2;48;106;185m╝[39m[38;2;51;105;182m╚[39m[38;2;54;104;178m█[39m[38;2;57;102;175m█[39m[38;2;60;101;172m█[39m[38;2;63;99;169m█[39m[38;2;66;98;166m█[39m[38;2;69;96;163m█[39m[38;2;72;95;159m╔[39m[38;2;75;93;156m╝[39m[38;2;78;92;153m█[39m[38;2;80;90;150m█[39m[38;2;83;89;147m║[39m[38;2;86;88;144m [39m[38;2;89;86;140m [39m[38;2;92;85;137m█[39m[38;2;95;83;134m█[39m[38;2;98;82;131m║[39m[38;2;101;80;128m█[39m[38;2;104;79;125m█[39m[38;2;107;77;121m█[39m[38;2;110;76;118m█[39m[38;2;113;75;115m█[39m[38;2;115;73;112m█[39m[38;2;118;72;109m█[39m[38;2;121;70;106m║[39m[38;2;124;69;102m█[39m[38;2;127;67;99m█[39m[38;2;130;66;96m║[39m[38;2;133;64;93m [39m[38;2;136;63;90m [39m[38;2;139;61;87m█[39m[38;2;142;60;83m█[39m[38;2;145;59;80m║[39m[38;2;148;57;77m█[39m[38;2;150;56;74m█[39m[38;2;153;54;71m║[39m[38;2;156;53;68m [39m[38;2;159;51;64m [39m[38;2;162;50;61m█[39m[38;2;165;48;58m█[39m[38;2;168;47;55m║[39m
+[38;2;25;118;210m [39m[38;2;28;117;207m╚[39m[38;2;31;115;204m═[39m[38;2;34;114;201m═[39m[38;2;37;112;197m▀[39m[38;2;40;111;194m▀[39m[38;2;43;109;191m═[39m[38;2;45;108;188m╝[39m[38;2;48;106;185m [39m[38;2;51;105;182m [39m[38;2;54;104;178m╚[39m[38;2;57;102;175m═[39m[38;2;60;101;172m═[39m[38;2;63;99;169m═[39m[38;2;66;98;166m═[39m[38;2;69;96;163m═[39m[38;2;72;95;159m╝[39m[38;2;75;93;156m [39m[38;2;78;92;153m╚[39m[38;2;80;90;150m═[39m[38;2;83;89;147m╝[39m[38;2;86;88;144m [39m[38;2;89;86;140m [39m[38;2;92;85;137m╚[39m[38;2;95;83;134m═[39m[38;2;98;82;131m╝[39m[38;2;101;80;128m╚[39m[38;2;104;79;125m═[39m[38;2;107;77;121m═[39m[38;2;110;76;118m═[39m[38;2;113;75;115m═[39m[38;2;115;73;112m═[39m[38;2;118;72;109m═[39m[38;2;121;70;106m╝[39m[38;2;124;69;102m╚[39m[38;2;127;67;99m═[39m[38;2;130;66;96m╝[39m[38;2;133;64;93m [39m[38;2;136;63;90m [39m[38;2;139;61;87m╚[39m[38;2;142;60;83m═[39m[38;2;145;59;80m╝[39m[38;2;148;57;77m╚[39m[38;2;150;56;74m═[39m[38;2;153;54;71m╝[39m[38;2;156;53;68m [39m[38;2;159;51;64m [39m[38;2;162;50;61m╚[39m[38;2;165;48;58m═[39m[38;2;168;47;55m╝[39m
+
+
+ Build mode............. SPA
+ Pkg quasar............. v2.35.2
+ Pkg @quasar/app-vite... v3.10.3
+ Pkg vite............... v8.3.5
+ Debugging.............. no
+
+ App • Compiling quasar.config.js (no env prefix; no dotenv files)
+ App • Env • Client code prefix: QCLI_; no dotenv files
+ App • Removing build artifacts: /tmp/strategy-review17-goot48x7/dist/spa
+
+ App •  WAIT  • Vite • Compiling SPA UI...
+(node:588656) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///tmp/strategy-review17-goot48x7/quasar.config.js.temporary.compiled.1795121594067.js?t=1795121594108 is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to /tmp/strategy-review17-goot48x7/package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+[plugin builtin:vite-reporter]
+(!) Some chunks are larger than 500 kB after minification. Consider:
+- Using dynamic import() to code-split the application
+- Use build.rolldownOptions.output.codeSplitting to improve chunking: https://rolldown.rs/reference/OutputOptions.codeSplitting
+- Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.
+[33m[PLUGIN_TIMINGS] [0mJavaScript callbacks ran for 35.1s of this 54.5s build (64%).
+The slowest callbacks, timed inside each callback (the wait before a callback starts is excluded, the time it awaits is included):
+  - plugin vite:prepare-out-dir renderStart (43%, 23.4s, 1 call)
+  - plugin unplugin-vue-i18n:resource transform (2%, 1.2s, 7119 calls)
+  - plugin vite-plugin-checker buildEnd (2%, 1.1s, 1 call)
+Additional callback time came from the callbacks below and from callbacks under 1s.
+2 callbacks are listed without a time. Their calls overlapped, so the time inside one call includes work from other calls. To find their cost, profile the build with `node --cpu-prof`:
+  - plugin vite:css transform (340 calls)
+  - plugin vite:vue transform (516 calls)
+See https://rolldown.rs/reference/InputOptions.checks#bundlertimings for more details.
+
+ App •  DONE  • Vite • Compiled SPA UI • 52748ms
+
+ Build summary with important files:
+ ╔═════════════════════════════════════════════════════╦══════════════╦══════════════╗
+ ║                                               Asset ║         Size ║      Gzipped ║
+ ╟─────────────────────────────────────────────────────╫──────────────╫──────────────╢
+ ║               assets/ActiveLoansSection-D53XxUtt.js ║      9.04 KB ║      3.56 KB ║
+ ║                     assets/CalendarPage-C3yPWCrL.js ║    238.24 KB ║     71.07 KB ║
+ ║                   assets/CashWalletPage-jjAuEMB9.js ║      1.50 KB ║      0.80 KB ║
+ ║                      assets/ChartWallet-D52AMIN6.js ║      6.42 KB ║      3.00 KB ║
+ ║                      assets/ClientsPage-BDcwrprA.js ║     11.70 KB ║      4.08 KB ║
+ ║                       assets/ClosePopup-rVSmEgIn.js ║      0.72 KB ║      0.40 KB ║
+ ║                assets/CollateraLoanPage-BXIQfANE.js ║      6.29 KB ║      2.73 KB ║
+ ║              assets/CommunicationLayout-B3GO7Wcm.js ║     15.65 KB ║      5.79 KB ║
+ ║                assets/CommunicationPage-DNDUVchK.js ║      0.72 KB ║      0.43 KB ║
+ ║                       assets/ConfigPage-DkJAluIj.js ║     32.76 KB ║     12.34 KB ║
+ ║                 assets/ConfirmEmailPage-kWZnXzmG.js ║      3.33 KB ║      1.59 KB ║
+ ║               assets/ConsortiumLoanPage-CxMojlAP.js ║      0.86 KB ║      0.51 KB ║
+ ║         assets/ConsortiumOffersLoanPage-Ds3I3gQA.js ║      0.51 KB ║      0.35 KB ║
+ ║                      assets/ContactForm-DS52jVSO.js ║      6.62 KB ║      2.46 KB ║
+ ║                     assets/ContractPage-BlvwW0ir.js ║     34.70 KB ║     11.41 KB ║
+ ║                    assets/ContractsPage-DNzBIcJ6.js ║     30.22 KB ║      9.34 KB ║
+ ║               assets/ControlDepositPage-DcXWrvnt.js ║     11.74 KB ║      4.31 KB ║
+ ║                assets/ControlreportPage-BLCgU9dt.js ║      8.02 KB ║      3.19 KB ║
+ ║                          assets/Cookies-BbJwoncG.js ║      3.71 KB ║      1.74 KB ║
+ ║                             assets/Dark-BEAldCHG.js ║      0.95 KB ║      0.49 KB ║
+ ║                      assets/DepositPage-CwTEZj-4.js ║      0.52 KB ║      0.36 KB ║
+ ║                      assets/DepositView-9EEBa6bQ.js ║      0.55 KB ║      0.38 KB ║
+ ║                    assets/ErrorNotFound-Dat-42D4.js ║      0.65 KB ║      0.44 KB ║
+ ║               assets/FlexibleincomePage-D0C2zj6r.js ║      2.13 KB ║      1.19 KB ║
+ ║                     assets/FooterSystem-C1b387HX.js ║      0.91 KB ║      0.56 KB ║
+ ║             assets/ForgotpasswordLayout-mOolFH0d.js ║      3.42 KB ║      1.53 KB ║
+ ║                      assets/GraphicPage-lK1-nVtz.js ║      5.17 KB ║      1.97 KB ║
+ ║                       assets/HeaderAuth-CH7GEsi_.js ║      5.98 KB ║      2.84 KB ║
+ ║                       assets/HeaderCard-BbHQ0-9u.js ║      1.24 KB ║      0.70 KB ║
+ ║                        assets/IndexPage-BGudf7c4.js ║      5.99 KB ║      2.55 KB ║
+ ║                      assets/InsightPage-Bja4xMg_.js ║      2.29 KB ║      1.18 KB ║
+ ║                       assets/LabelField-kLgsKc7s.js ║      0.49 KB ║      0.33 KB ║
+ ║                        assets/LabelForm-CttDCqpo.js ║      0.51 KB ║      0.36 KB ║
+ ║                    assets/LendingAccess-CjeieMnY.js ║      2.19 KB ║      1.15 KB ║
+ ║                     assets/LeveragePage-DxLK0RPV.js ║      3.91 KB ║      1.71 KB ║
+ ║                      assets/LoadingStep-BK-Ha7rY.js ║      0.95 KB ║      0.55 KB ║
+ ║                 assets/LoanOffersScreen-hjP7Dtr7.js ║     12.23 KB ║      4.60 KB ║
+ ║                         assets/LoanPage-1m5e3YT9.js ║      1.41 KB ║      0.78 KB ║
+ ║                        assets/LoginPage-D4u5be15.js ║     14.14 KB ║      4.29 KB ║
+ ║                       assets/MainLayout-BDfzpNzp.js ║     13.85 KB ║      6.32 KB ║
+ ║                       assets/MainLayout-Di3wmcC4.js ║     14.53 KB ║      5.84 KB ║
+ ║                   assets/ManagementPage-CN8tNI4B.js ║      5.02 KB ║      2.15 KB ║
+ ║                       assets/MoneyInput-1U0rbpf7.js ║      2.58 KB ║      1.24 KB ║
+ ║                  assets/MyLeveragesPage-b1yhckqN.js ║     27.29 KB ║      8.90 KB ║
+ ║                       assets/NewsLetter-ChT_ebaI.js ║      5.28 KB ║      1.83 KB ║
+ ║              assets/OffersFinalLoanPage-92kOFh06.js ║      0.50 KB ║      0.34 KB ║
+ ║                      assets/OurTeamPage-B4rwJF4N.js ║     14.48 KB ║      3.01 KB ║
+ ║                       assets/PdfPattern-B7jd9fBt.js ║   1732.61 KB ║    543.92 KB ║
+ ║                   assets/PerfomancePage-DU2o9_z5.js ║     10.29 KB ║      3.77 KB ║
+ ║                  assets/PerspectivePage-Cwk6bkLZ.js ║    109.85 KB ║     32.93 KB ║
+ ║                         assets/Platform-CH0lxUgd.js ║      3.09 KB ║      1.39 KB ║
+ ║                    assets/ProfileFields-xieCRdsD.js ║      1.96 KB ║      1.08 KB ║
+ ║                      assets/ProfilePage-DLTs9m7a.js ║     83.81 KB ║     26.32 KB ║
+ ║             assets/ProfileResourceState-CbmF8CNa.js ║      0.73 KB ║      0.47 KB ║
+ ║        assets/PropertyLoanDocumentsPage-DLpVWdv0.js ║      7.41 KB ║      3.11 KB ║
+ ║                assets/PublicProfilePage-DtjFWLCS.js ║      2.81 KB ║      1.41 KB ║
+ ║                           assets/QBadge-DZ2YagD7.js ║      0.95 KB ║      0.53 KB ║
+ ║                          assets/QBanner-BHUnhfFO.js ║      0.90 KB ║      0.49 KB ║
+ ║                             assets/QBtn-BDIMnYkG.js ║     10.36 KB ║      4.30 KB ║
+ ║                        assets/QBtnGroup-CGB-ylBt.js ║      0.71 KB ║      0.43 KB ║
+ ║                       assets/QBtnToggle-DTnuIroX.js ║      2.15 KB ║      0.99 KB ║
+ ║                            assets/QCard-DkcKBjsi.js ║      0.58 KB ║      0.36 KB ║
+ ║                     assets/QCardActions-DkeJZxBX.js ║      0.42 KB ║      0.31 KB ║
+ ║                     assets/QCardSection-DHhPGXGu.js ║      0.40 KB ║      0.30 KB ║
+ ║                        assets/QCheckbox-BhuPASuO.js ║      0.86 KB ║      0.50 KB ║
+ ║                            assets/QDate-LXC2VUSD.js ║     21.46 KB ║      7.15 KB ║
+ ║                          assets/QDialog-CagK59oF.js ║      9.81 KB ║      4.01 KB ║
+ ║                   assets/QExpansionItem-CGsv7Cqp.js ║      4.88 KB ║      2.06 KB ║
+ ║                            assets/QFile-C5QYuG9K.js ║      6.95 KB ║      3.04 KB ║
+ ║                            assets/QForm-CNldmY4Y.js ║      2.37 KB ║      1.11 KB ║
+ ║                          assets/QHeader-BHteBjKw.js ║      9.55 KB ║      3.65 KB ║
+ ║                             assets/QImg-Bhm5Awys.js ║      4.18 KB ║      1.85 KB ║
+ ║                    assets/QInnerLoading-D_LZCPdT.js ║      1.08 KB ║      0.60 KB ║
+ ║                           assets/QInput-wyIrIz_5.js ║     14.92 KB ║      5.70 KB ║
+ ║                       assets/QItemLabel-DG9PvPQA.js ║      0.72 KB ║      0.43 KB ║
+ ║                     assets/QItemSection--El8oljP.js ║      2.73 KB ║      1.30 KB ║
+ ║                          assets/QLayout-DCs5Z2qV.js ║      3.29 KB ║      1.49 KB ║
+ ║                  assets/QLinearProgress-CNbFzu3y.js ║      1.85 KB ║      0.85 KB ║
+ ║                            assets/QList-D8qBmGq7.js ║      0.76 KB ║      0.43 KB ║
+ ║                     assets/QMarkupTable-6XMlsNwy.js ║      0.88 KB ║      0.48 KB ║
+ ║                            assets/QPage-GAvFwgwu.js ║      0.91 KB ║      0.51 KB ║
+ ║                   assets/QPageContainer-Btkq3yE0.js ║      0.71 KB ║      0.42 KB ║
+ ║                    assets/QPageScroller-DdQ1_pnO.js ║      2.64 KB ║      1.22 KB ║
+ ║                      assets/QPopupProxy-BzH62CQ7.js ║      1.18 KB ║      0.69 KB ║
+ ║                      assets/QScrollArea-Df0qYRZo.js ║      8.71 KB ║      2.68 KB ║
+ ║                          assets/QSelect-CldnRQyz.js ║     54.19 KB ║     18.36 KB ║
+ ║                       assets/QSeparator-Bbboqz-o.js ║      1.03 KB ║      0.59 KB ║
+ ║                 assets/QSlideTransition-DNmhX-ps.js ║      0.47 KB ║      0.31 KB ║
+ ║                           assets/QSpace-BIvKGBU5.js ║      0.18 KB ║      0.17 KB ║
+ ║                       assets/QTabPanels-Bwpo1Mzr.js ║      7.41 KB ║      2.92 KB ║
+ ║                           assets/QTable-Caa0gU9Q.js ║     26.10 KB ║      8.85 KB ║
+ ║                            assets/QTabs-DjT_pg2G.js ║     11.46 KB ║      4.57 KB ║
+ ║                          assets/QToggle-Bqe6QeyX.js ║      0.64 KB ║      0.40 KB ║
+ ║                         assets/QToolbar-1YZtzgoZ.js ║      0.36 KB ║      0.27 KB ║
+ ║                         assets/QTooltip-BlQUoHfh.js ║      4.82 KB ║      2.15 KB ║
+ ║                   assets/QuadriviumPage-CkcgNKGD.js ║     13.55 KB ║      4.45 KB ║
+ ║                   assets/ReadingsLayout-CHZxWAt_.js ║     16.22 KB ║      4.80 KB ║
+ ║                 assets/ReadreportLayout-K5pYReHV.js ║      9.92 KB ║      3.17 KB ║
+ ║        assets/RegistrationDocumentField-CDVQMrEz.js ║      3.56 KB ║      1.55 KB ║
+ ║         assets/RegistrationDocumentPage-V8BhJ44I.js ║     14.34 KB ║      5.40 KB ║
+ ║     assets/RegistrationEmailPreviewPage-rdJlGROL.js ║      4.08 KB ║      1.89 KB ║
+ ║       assets/RegistrationEmploymentPage-Cdvnstcw.js ║      3.67 KB ║      1.66 KB ║
+ ║  assets/RegistrationPersonalPreviewPage--00m5yWe.js ║      7.47 KB ║      2.58 KB ║
+ ║          assets/RegistrationPreviewPage-ip4LFicv.js ║      9.09 KB ║      3.57 KB ║
+ ║           assets/RegistrationReviewPage-CECubkxB.js ║     10.64 KB ║      4.37 KB ║
+ ║                assets/RegistrationShell-cLWWz7v7.js ║      1.42 KB ║      0.77 KB ║
+ ║        assets/RegistrationSubmittedPage-T02Z7gE5.js ║      2.17 KB ║      1.20 KB ║
+ ║  assets/RegistrationTrustedContactsPage-CiU5tBQ8.js ║      4.59 KB ║      2.01 KB ║
+ ║                       assets/ReportPage-Dis_0kfu.js ║      3.73 KB ║      1.44 KB ║
+ ║                       assets/ReportView-DyBKhLFl.js ║      0.55 KB ║      0.38 KB ║
+ ║                    assets/ResourceState-DohGTWuf.js ║      0.77 KB ║      0.50 KB ║
+ ║                   assets/RoleuserLayout-XlV6geBz.js ║      2.74 KB ║      1.37 KB ║
+ ║                       assets/ScrollFire-B4VbxrUf.js ║      1.75 KB ║      0.84 KB ║
+ ║                  assets/SecuredLoanPage-BB1XdcvS.js ║      0.91 KB ║      0.54 KB ║
+ ║             assets/SecuredRequestWizard-icjxSYhR.js ║     19.72 KB ║      6.42 KB ║
+ ║               assets/SecurityincomePage-OLuVC3DE.js ║      2.13 KB ║      1.19 KB ║
+ ║               assets/SimulationLoanPage-86SBPQbp.js ║      0.50 KB ║      0.35 KB ║
+ ║                    assets/SimulatorPage-C5zYa8PY.js ║    115.52 KB ║     42.04 KB ║
+ ║                        assets/TextImage-Cl7J56mn.js ║      0.67 KB ║      0.44 KB ║
+ ║                    assets/TextareaTitle-CSyx80UM.js ║      0.42 KB ║      0.32 KB ║
+ ║                     assets/ThemeOptions-CXQ5TScU.js ║      1.80 KB ║      0.98 KB ║
+ ║                 assets/TitleDescription-CSJtSa-D.js ║      0.60 KB ║      0.37 KB ║
+ ║                        assets/TitlePage-Dh79WXZT.js ║      3.46 KB ║      1.60 KB ║
+ ║                   assets/TitleSecondary-Dd1WAmqQ.js ║      0.38 KB ║      0.29 KB ║
+ ║                    assets/TitleSubtitle-DomtLR9U.js ║      1.99 KB ║      0.94 KB ║
+ ║                 assets/TitleinterMedium-BL7JPt1U.js ║      0.38 KB ║      0.29 KB ║
+ ║                         assets/TouchPan-BNEpO2WO.js ║      5.46 KB ║      2.08 KB ║
+ ║                        assets/UsersPage-N_xmYcql.js ║     16.00 KB ║      5.13 KB ║
+ ║               assets/VariableincomePage--2zgWjjG.js ║      2.34 KB ║      1.30 KB ║
+ ║                        assets/ViewInput-BvYmAQ-Y.js ║      0.65 KB ║      0.33 KB ║
+ ║                  assets/WalletOperation-CbUSM04g.js ║     37.35 KB ║     11.35 KB ║
+ ║                       assets/WalletPage-DccV09Jn.js ║     22.51 KB ║      7.60 KB ║
+ ║                       assets/WalletView-BPpDeWwH.js ║      0.46 KB ║      0.33 KB ║
+ ║                         assets/WhoWeAre-B2ddCcWt.js ║      6.89 KB ║      2.75 KB ║
+ ║        assets/_plugin-vue_export-helper-BDNMzG2s.js ║      0.08 KB ║      0.10 KB ║
+ ║                       assets/apexcharts-adwY4hys.js ║      0.13 KB ║      0.13 KB ║
+ ║                            assets/axios-Bq0WhBcs.js ║     48.78 KB ║     18.13 KB ║
+ ║                            assets/axios-CmXR1VE6.js ║      0.45 KB ║      0.31 KB ║
+ ║                         assets/calendar-Cu6x4Qz2.js ║    129.53 KB ║     44.37 KB ║
+ ║             assets/clientAccountService-DOfitYNm.js ║      0.65 KB ║      0.31 KB ║
+ ║              assets/clientAnnouncements-C0dk2WSd.js ║      2.24 KB ║      1.12 KB ║
+ ║                      assets/clientLoans-BWh2De9m.js ║      1.15 KB ║      0.66 KB ║
+ ║               assets/clientMediaService-CcIho7VU.js ║      0.33 KB ║      0.25 KB ║
+ ║             assets/clientProfileService-BOGk-tQn.js ║      3.88 KB ║      1.23 KB ║
+ ║           assets/clientWalletOperations-CjsDlg0f.js ║      3.33 KB ║      1.42 KB ║
+ ║     assets/communicationDirectoryAssets-vexIW3jT.js ║      0.97 KB ║      0.42 KB ║
+ ║                assets/contractDirectory-CMD5Zj0-.js ║      2.45 KB ║      1.17 KB ║
+ ║                     assets/countryNames-DjoA7qId.js ║      0.38 KB ║      0.29 KB ║
+ ║                           assets/create-B5W2iILK.js ║      0.37 KB ║      0.25 KB ║
+ ║                             assets/date-TlUOPonC.js ║     20.37 KB ║      7.34 KB ║
+ ║                assets/emailConfirmation-CzfJm54Z.js ║      2.59 KB ║      1.20 KB ║
+ ║                       assets/escape-key-BgHAQmUn.js ║      2.32 KB ║      1.09 KB ║
+ ║                          assets/filters-CxRf--hU.js ║      0.91 KB ║      0.49 KB ║
+ ║               assets/financeIdempotency-CQPo9dzs.js ║      0.20 KB ║      0.18 KB ║
+ ║                   assets/financeService-Bd7GDEvI.js ║      2.45 KB ║      1.28 KB ║
+ ║                    assets/focus-manager-Mwr5X1rV.js ║      0.34 KB ║      0.21 KB ║
+ ║                           assets/format-DWQQclpo.js ║      0.44 KB ║      0.31 KB ║
+ ║                            assets/index-C67GG-W7.js ║     94.27 KB ║     33.79 KB ║
+ ║                      assets/investments-MYWCCHyi.js ║      0.71 KB ║      0.35 KB ║
+ ║                               assets/is-B_hOtYff.js ║      1.78 KB ║      0.62 KB ║
+ ║                      assets/layoutStore-B57_Rfq5.js ║      1.34 KB ║      0.65 KB ║
+ ║            assets/loanOfferPresentation-Cmr0OETk.js ║      2.50 KB ║      1.24 KB ║
+ ║                 assets/loanRequestDraft-CYmhqTVX.js ║     17.13 KB ║      6.71 KB ║
+ ║                            assets/pinia-CGrVrXGz.js ║      6.01 KB ║      2.82 KB ║
+ ║                 assets/private.use-form-Mfwsu3Di.js ║      0.32 KB ║      0.23 KB ║
+ ║              assets/profilePresentation-CCYcP6Tg.js ║      3.80 KB ║      1.83 KB ║
+ ║                   assets/qrcode.vue.esm-XfU6_ans.js ║     17.12 KB ║      6.32 KB ║
+ ║         assets/registrationConsentRules-yoGuQhoh.js ║      1.02 KB ║      0.55 KB ║
+ ║            assets/registrationDocuments-4H6agJ_l.js ║      7.30 KB ║      2.87 KB ║
+ ║      assets/registrationTrustedContacts-C-bAdPUJ.js ║     20.60 KB ║      7.19 KB ║
+ ║                           assets/render-DMXONQkV.js ║      0.55 KB ║      0.32 KB ║
+ ║                 assets/rolldown-runtime-DK3Fl9T5.js ║      0.15 KB ║      0.15 KB ║
+ ║         assets/runtime-core.esm-bundler-CPaHnW6q.js ║     68.21 KB ║     26.33 KB ║
+ ║          assets/runtime-dom.esm-bundler-BXinAqGM.js ║     16.18 KB ║      6.79 KB ║
+ ║                        assets/selection-D1n0btMr.js ║      0.31 KB ║      0.20 KB ║
+ ║                      assets/table-icons-x5xEGEOD.js ║      0.17 KB ║      0.17 KB ║
+ ║                 assets/tabler-icons-vue-CQh__GKR.js ║   2448.40 KB ║    457.93 KB ║
+ ║                            assets/touch-BowB9tqj.js ║      0.59 KB ║      0.36 KB ║
+ ║                              assets/uid-B1JNhznI.js ║      0.61 KB ║      0.37 KB ║
+ ║                     assets/use-checkbox-81zLgmb7.js ║      3.53 KB ║      1.58 KB ║
+ ║                         assets/use-dark-BHObfh0O.js ║      0.12 KB ║      0.12 KB ║
+ ║                 assets/use-element-size-B22UDPsd.js ║      0.93 KB ║      0.54 KB ║
+ ║                           assets/use-id-BcbIRoWK.js ║      0.48 KB ║      0.30 KB ║
+ ║              assets/use-key-composition-ZxWv4d1x.js ║     14.72 KB ║      5.38 KB ║
+ ║                 assets/use-render-cache-CzDBy1a_.js ║      0.25 KB ║      0.17 KB ║
+ ║                  assets/use-router-link-DOoZWQPS.js ║      9.00 KB ║      3.65 KB ║
+ ║                       assets/use-scroll-DohiG_xG.js ║      1.95 KB ║      1.02 KB ║
+ ║             assets/use-slide-transition-Cph_Z45Y.js ║      1.93 KB ║      0.85 KB ║
+ ║                   assets/use-transition-DTzj195z.js ║      0.70 KB ║      0.36 KB ║
+ ║                          assets/useCase-0D6QBhZO.js ║      0.43 KB ║      0.30 KB ║
+ ║                        assets/useCharts-ecpsGpHT.js ║      7.66 KB ║      2.31 KB ║
+ ║                    assets/useConfigdate-AMreOHq0.js ║      0.44 KB ║      0.27 KB ║
+ ║               assets/useFinanceResource-VjOUikzv.js ║      2.00 KB ║      0.96 KB ║
+ ║                  assets/usePendingEmail-MOttO-bF.js ║      0.08 KB ║      0.10 KB ║
+ ║              assets/useRegistrationFlow-Bxriju5o.js ║     15.07 KB ║      5.77 KB ║
+ ║                        assets/useReport-BCv-BVU-.js ║      4.05 KB ║      1.39 KB ║
+ ║                        assets/useStates-BJa6xdDV.js ║      2.75 KB ║      1.61 KB ║
+ ║                       assets/useStorage-DGyd2oEM.js ║      0.89 KB ║      0.40 KB ║
+ ║                         assets/useToken-DFi2oJhw.js ║      2.07 KB ║      0.85 KB ║
+ ║                             assets/user-B0KYvHCU.js ║      3.58 KB ║      1.51 KB ║
+ ║                             assets/view-De9wxnQ7.js ║      0.62 KB ║      0.34 KB ║
+ ║                  assets/vue3-apexcharts-DdndhpLv.js ║    562.23 KB ║    151.04 KB ║
+ ║               assets/walletPresentation-Dh0JSmq2.js ║      0.27 KB ║      0.20 KB ║
+ ╟─────────────────────────────────────────────────────╫──────────────╫──────────────╢
+ ║              assets/ActiveLoansSection-BoBzbMJr.css ║      3.25 KB ║      0.98 KB ║
+ ║                    assets/CalendarPage-CXGpjTso.css ║      0.17 KB ║      0.15 KB ║
+ ║                  assets/CashWalletPage-CftPJiy7.css ║      0.31 KB ║      0.19 KB ║
+ ║                     assets/ChartWallet-TRAAsLq6.css ║      1.41 KB ║      0.52 KB ║
+ ║                     assets/ClientsPage-BZ381BeQ.css ║      0.22 KB ║      0.16 KB ║
+ ║               assets/CollateraLoanPage-CmU5KGwJ.css ║     10.18 KB ║      2.23 KB ║
+ ║             assets/CommunicationLayout-B2fkEciQ.css ║      7.70 KB ║      1.70 KB ║
+ ║               assets/CommunicationPage-BKnClEZ3.css ║      0.69 KB ║      0.26 KB ║
+ ║                      assets/ConfigPage-B8ez0ZUW.css ║      8.27 KB ║      2.09 KB ║
+ ║                assets/ConfirmEmailPage-CvliQ9ti.css ║      0.12 KB ║      0.10 KB ║
+ ║                     assets/ContactForm-DY2ME3sI.css ║      0.86 KB ║      0.46 KB ║
+ ║                    assets/ContractPage-BYfDOykW.css ║     19.03 KB ║      3.82 KB ║
+ ║                   assets/ContractsPage-BwLhKaIv.css ║     15.11 KB ║      3.11 KB ║
+ ║                     assets/DepositPage-D04dgq2K.css ║      0.12 KB ║      0.12 KB ║
+ ║                     assets/DepositView-DtjhMt87.css ║      0.17 KB ║      0.11 KB ║
+ ║              assets/FlexibleincomePage-BOBkss6o.css ║      0.05 KB ║      0.07 KB ║
+ ║                     assets/GraphicPage-B0r1wC_6.css ║      0.59 KB ║      0.32 KB ║
+ ║                      assets/HeaderAuth-BEcr8J9Y.css ║      0.25 KB ║      0.19 KB ║
+ ║                       assets/IndexPage-BjbqB4_z.css ║      0.84 KB ║      0.44 KB ║
+ ║                     assets/InsightPage-RXX6_OIn.css ║      0.85 KB ║      0.38 KB ║
+ ║                   assets/LendingAccess-D3IGoxqo.css ║      0.15 KB ║      0.14 KB ║
+ ║                    assets/LeveragePage-Dx3uml-D.css ║      4.38 KB ║      1.25 KB ║
+ ║                     assets/LoadingStep-BSsn5ZoA.css ║      0.11 KB ║      0.11 KB ║
+ ║                assets/LoanOffersScreen-DiVD8WIU.css ║     10.25 KB ║      2.11 KB ║
+ ║                       assets/LoginPage-DSg773zu.css ║      3.96 KB ║      1.18 KB ║
+ ║                      assets/MainLayout-BkUJaT2a.css ║      4.92 KB ║      1.39 KB ║
+ ║                      assets/MainLayout-CyMr2gFt.css ║      2.18 KB ║      0.78 KB ║
+ ║                  assets/ManagementPage-DtzMX-ao.css ║      0.79 KB ║      0.33 KB ║
+ ║                 assets/MyLeveragesPage-pWzQUyst.css ║     12.73 KB ║      2.46 KB ║
+ ║                      assets/NewsLetter-UHJVyXHw.css ║      0.04 KB ║      0.06 KB ║
+ ║                     assets/OurTeamPage-DweppXIX.css ║      0.37 KB ║      0.24 KB ║
+ ║                      assets/PdfPattern-CRDah08Q.css ║      0.08 KB ║      0.10 KB ║
+ ║                  assets/PerfomancePage-WIMIjqUl.css ║      0.92 KB ║      0.44 KB ║
+ ║                 assets/PerspectivePage-lEAjbGaE.css ║     17.90 KB ║      2.21 KB ║
+ ║                   assets/ProfileFields-D0-UJb4V.css ║      0.49 KB ║      0.24 KB ║
+ ║                     assets/ProfilePage-DPB7KAha.css ║     15.36 KB ║      3.01 KB ║
+ ║       assets/PropertyLoanDocumentsPage-4GDCIwNn.css ║     10.69 KB ║      2.38 KB ║
+ ║               assets/PublicProfilePage-B0LsNCWx.css ║      0.12 KB ║      0.12 KB ║
+ ║                  assets/QuadriviumPage-DKu5ax3F.css ║      2.47 KB ║      0.71 KB ║
+ ║                  assets/ReadingsLayout-Dn6aD65g.css ║      2.22 KB ║      0.72 KB ║
+ ║                assets/ReadreportLayout-x1XGuNl0.css ║      0.00 KB ║      0.02 KB ║
+ ║       assets/RegistrationDocumentField-BHacWvI3.css ║      1.12 KB ║      0.45 KB ║
+ ║        assets/RegistrationDocumentPage-niBaRsrw.css ║      4.05 KB ║      1.27 KB ║
+ ║    assets/RegistrationEmailPreviewPage-DP3PTNbU.css ║      2.20 KB ║      0.74 KB ║
+ ║      assets/RegistrationEmploymentPage-D9udc9JA.css ║      1.33 KB ║      0.62 KB ║
+ ║ assets/RegistrationPersonalPreviewPage-1irZtEOP.css ║      3.08 KB ║      0.93 KB ║
+ ║         assets/RegistrationPreviewPage-DewleVHd.css ║      4.42 KB ║      1.32 KB ║
+ ║          assets/RegistrationReviewPage-CUKoX7sS.css ║      3.25 KB ║      1.02 KB ║
+ ║               assets/RegistrationShell-S-9gVsJf.css ║      2.03 KB ║      0.73 KB ║
+ ║       assets/RegistrationSubmittedPage-Cb3Ikig0.css ║      1.17 KB ║      0.55 KB ║
+ ║ assets/RegistrationTrustedContactsPage-CJGy4H5B.css ║      2.17 KB ║      0.79 KB ║
+ ║                      assets/ReportPage-BHNK-eLy.css ║      0.05 KB ║      0.07 KB ║
+ ║                      assets/ReportView-D9ekVsjo.css ║      0.17 KB ║      0.11 KB ║
+ ║            assets/SecuredRequestWizard-BKASN78X.css ║     18.80 KB ║      2.80 KB ║
+ ║              assets/SecurityincomePage-BxEPVLSK.css ║      0.05 KB ║      0.07 KB ║
+ ║                   assets/SimulatorPage-CUhkVKxw.css ║      1.99 KB ║      0.55 KB ║
+ ║                       assets/TextImage-DrSgzb21.css ║      0.04 KB ║      0.05 KB ║
+ ║                    assets/ThemeOptions-BTssj9GK.css ║      0.62 KB ║      0.35 KB ║
+ ║                assets/TitleDescription-D_bL7PPU.css ║      0.25 KB ║      0.18 KB ║
+ ║                       assets/TitlePage-DG-Uv0By.css ║      0.20 KB ║      0.14 KB ║
+ ║                  assets/TitleSecondary-BZB8FRsL.css ║      0.11 KB ║      0.11 KB ║
+ ║                   assets/TitleSubtitle-CVWLhOBz.css ║      1.21 KB ║      0.48 KB ║
+ ║                assets/TitleinterMedium-DDFFD80V.css ║      0.15 KB ║      0.14 KB ║
+ ║              assets/VariableincomePage-D9h1Lgrt.css ║      0.05 KB ║      0.07 KB ║
+ ║                 assets/WalletOperation-BYXbLr9P.css ║     13.18 KB ║      2.82 KB ║
+ ║                      assets/WalletPage-JvMP7xns.css ║      2.69 KB ║      0.86 KB ║
+ ║                      assets/WalletView-CN5mtXmp.css ║      0.17 KB ║      0.11 KB ║
+ ║                        assets/calendar-BhswP9uy.css ║     22.84 KB ║      4.61 KB ║
+ ║                           assets/index-GdrTsGyF.css ║    395.63 KB ║     73.00 KB ║
+ ║           assets/loanOfferPresentation-DiwZh4v9.css ║      1.07 KB ║      0.51 KB ║
+ ║                assets/loanRequestDraft-Cf3mL9Ep.css ║      8.05 KB ║      1.90 KB ║
+ ╟─────────────────────────────────────────────────────╫──────────────╫──────────────╢
+ ║                   data/postal/jp/2026-10-30/00.json ║      5.63 KB ║            - ║
+ ║                   data/postal/jp/2026-10-30/01.json ║     25.28 KB ║            - ║
+ ║                   data/postal/jp/2026-10-30/02.json ║     22.48 KB ║            - ║
+ ║                   data/postal/jp/2026-10-30/03.json ║     23.83 KB ║            - ║
+ ║                   data/postal/jp/2026-10-30/04.json ║     11.97 KB ║            - ║
+ ║                   data/postal/jp/2026-10-30/05.json ║      6.49 KB ║            - ║
+ ║                   data/postal/jp/2026-10-30/06.json ║     13.57 KB ║            - ║
+ ║                   data/postal/jp/2026-10-30/07.json ║     16.74 KB ║            - ║
+ ║                   data/postal/jp/2026-10-30/08.json ║     20.02 KB ║            - ║
+ ║                   data/postal/jp/2026-10-30/09.json ║     14.19 KB ║            - ║
+ ║                   data/postal/jp/2026-10-30/10.json ║     20.51 KB ║            - ║
+ ║                   data/postal/jp/2026-10-30/11.json ║      1.12 KB ║            - ║
+ ║                   data/postal/jp/2026-10-30/12.json ║      1.44 KB ║            - ║
+ ║                   data/postal/jp/2026-10-30/13.json ║      1.97 KB ║            - ║
+ ║                   data/postal/jp/2026-10-30/14.json ║      1.42 KB ║            - ║
+ ║                   data/postal/jp/2026-10-30/15.json ║      2.87 KB ║            - ║
+ ║                   data/postal/jp/2026-10-30/16.json ║      8.83 KB ║            - ║
+ ║                   data/postal/jp/2026-10-30/17.json ║      2.22 KB ║            - ║
+ ║                   data/postal/jp/2026-10-30/18.json ║      2.10 KB ║            - ║
+ ║                   data/postal/jp/2026-10-30/19.json ║      4.62 KB ║            - ║
+ ║                   data/postal/jp/2026-10-30/20.json ║      1.71 KB ║            - ║
+ ║                   data/postal/jp/2026-10-30/21.json ║      3.00 KB ║            - ║
+ ║                   data/postal/jp/2026-10-30/22.json ║      4.99 KB ║            - ║
+ ║                   data/postal/jp/2026-10-30/23.json ║      5.25 KB ║            - ║
+ ║                   data/postal/jp/2026-10-30/24.json ║      4.79 KB ║            - ║
+ ║                   data/postal/jp/2026-10-30/25.json ║      8.92 KB ║            - ║
+ ║                   data/postal/jp/2026-10-30/26.json ║      3.21 KB ║            - ║
+ ║                   data/postal/jp/2026-10-30/27.json ║     10.63 KB ║            - ║
+ ║                   data/postal/jp/2026-10-30/28.json ║     12.85 KB ║            - ║
+ ║                   data/postal/jp/2026-10-30/29.json ║     15.55 KB ║            - ║
+ ║                   data/postal/jp/2026-10-30/30.json ║     19.35 KB ║            - ║
+ ║                   data/postal/jp/2026-10-30/31.json ║     14.27 KB ║            - ║
+ ║                   data/postal/jp/2026-10-30/32.json ║     21.49 KB ║            - ║
+ ║                   data/postal/jp/2026-10-30/33.json ║      5.46 KB ║            - ║
+ ║                   data/postal/jp/2026-10-30/34.json ║      8.55 KB ║            - ║
+ ║                   data/postal/jp/2026-10-30/35.json ║     11.80 KB ║            - ║
+ ║                   data/postal/jp/2026-10-30/36.json ║      9.07 KB ║            - ║
+ ║                   data/postal/jp/2026-10-30/37.json ║     17.57 KB ║            - ║
+ ║                   data/postal/jp/2026-10-30/38.json ║     11.29 KB ║            - ║
+ ║                   data/postal/jp/2026-10-30/39.json ║      8.60 KB ║            - ║
+ ║                   data/postal/jp/2026-10-30/40.json ║     11.09 KB ║            - ║
+ ║                   data/postal/jp/2026-10-30/41.json ║     11.76 KB ║            - ║
+ ║                   data/postal/jp/2026-10-30/42.json ║     12.39 KB ║            - ║
+ ║                   data/postal/jp/2026-10-30/43.json ║     12.57 KB ║            - ║
+ ║                   data/postal/jp/2026-10-30/44.json ║     23.34 KB ║            - ║
+ ║                   data/postal/jp/2026-10-30/45.json ║     15.35 KB ║            - ║
+ ║                   data/postal/jp/2026-10-30/46.json ║      9.73 KB ║            - ║
+ ║                   data/postal/jp/2026-10-30/47.json ║     13.83 KB ║            - ║
+ ║                   data/postal/jp/2026-10-30/48.json ║     17.26 KB ║            - ║
+ ║                   data/postal/jp/2026-10-30/49.json ║     12.80 KB ║            - ║
+ ║                   data/postal/jp/2026-10-30/50.json ║     40.19 KB ║            - ║
+ ║                   data/postal/jp/2026-10-30/51.json ║     30.86 KB ║            - ║
+ ║                   data/postal/jp/2026-10-30/52.json ║     23.45 KB ║            - ║
+ ║                   data/postal/jp/2026-10-30/53.json ║      4.25 KB ║            - ║
+ ║                   data/postal/jp/2026-10-30/54.json ║      5.44 KB ║            - ║
+ ║                   data/postal/jp/2026-10-30/55.json ║      2.63 KB ║            - ║
+ ║                   data/postal/jp/2026-10-30/56.json ║      9.27 KB ║            - ║
+ ║                   data/postal/jp/2026-10-30/57.json ║     10.31 KB ║            - ║
+ ║                   data/postal/jp/2026-10-30/58.json ║      6.46 KB ║            - ║
+ ║                   data/postal/jp/2026-10-30/59.json ║     10.18 KB ║            - ║
+ ║                   data/postal/jp/2026-10-30/60.json ║     43.48 KB ║            - ║
+ ║                   data/postal/jp/2026-10-30/61.json ║     23.33 KB ║            - ║
+ ║                   data/postal/jp/2026-10-30/62.json ║     15.00 KB ║            - ║
+ ║                   data/postal/jp/2026-10-30/63.json ║     24.10 KB ║            - ║
+ ║                   data/postal/jp/2026-10-30/64.json ║     20.59 KB ║            - ║
+ ║                   data/postal/jp/2026-10-30/65.json ║     14.79 KB ║            - ║
+ ║                   data/postal/jp/2026-10-30/66.json ║     24.57 KB ║            - ║
+ ║                   data/postal/jp/2026-10-30/67.json ║     26.44 KB ║            - ║
+ ║                   data/postal/jp/2026-10-30/68.json ║     18.52 KB ║            - ║
+ ║                   data/postal/jp/2026-10-30/69.json ║     14.12 KB ║            - ║
+ ║                   data/postal/jp/2026-10-30/70.json ║     18.07 KB ║            - ║
+ ║                   data/postal/jp/2026-10-30/71.json ║      9.68 KB ║            - ║
+ ║                   data/postal/jp/2026-10-30/72.json ║     10.70 KB ║            - ║
+ ║                   data/postal/jp/2026-10-30/73.json ║     16.28 KB ║            - ║
+ ║                   data/postal/jp/2026-10-30/74.json ║      9.04 KB ║            - ║
+ ║                   data/postal/jp/2026-10-30/75.json ║     12.24 KB ║            - ║
+ ║                   data/postal/jp/2026-10-30/76.json ║      9.02 KB ║            - ║
+ ║                   data/postal/jp/2026-10-30/77.json ║     12.21 KB ║            - ║
+ ║                   data/postal/jp/2026-10-30/78.json ║     21.50 KB ║            - ║
+ ║                   data/postal/jp/2026-10-30/79.json ║     22.13 KB ║            - ║
+ ║                   data/postal/jp/2026-10-30/80.json ║     10.66 KB ║            - ║
+ ║                   data/postal/jp/2026-10-30/81.json ║     15.80 KB ║            - ║
+ ║                   data/postal/jp/2026-10-30/82.json ║      6.65 KB ║            - ║
+ ║                   data/postal/jp/2026-10-30/83.json ║     11.47 KB ║            - ║
+ ║                   data/postal/jp/2026-10-30/84.json ║     11.15 KB ║            - ║
+ ║                   data/postal/jp/2026-10-30/85.json ║     20.98 KB ║            - ║
+ ║                   data/postal/jp/2026-10-30/86.json ║     23.79 KB ║            - ║
+ ║                   data/postal/jp/2026-10-30/87.json ║     23.81 KB ║            - ║
+ ║                   data/postal/jp/2026-10-30/88.json ║     11.12 KB ║            - ║
+ ║                   data/postal/jp/2026-10-30/89.json ║     18.46 KB ║            - ║
+ ║                   data/postal/jp/2026-10-30/90.json ║     10.19 KB ║            - ║
+ ║                   data/postal/jp/2026-10-30/91.json ║     24.99 KB ║            - ║
+ ║                   data/postal/jp/2026-10-30/92.json ║     29.09 KB ║            - ║
+ ║                   data/postal/jp/2026-10-30/93.json ║     34.94 KB ║            - ║
+ ║                   data/postal/jp/2026-10-30/94.json ║     28.87 KB ║            - ║
+ ║                   data/postal/jp/2026-10-30/95.json ║     34.62 KB ║            - ║
+ ║                   data/postal/jp/2026-10-30/96.json ║     36.02 KB ║            - ║
+ ║                   data/postal/jp/2026-10-30/97.json ║      6.67 KB ║            - ║
+ ║                   data/postal/jp/2026-10-30/98.json ║     33.65 KB ║            - ║
+ ║                   data/postal/jp/2026-10-30/99.json ║     22.94 KB ║            - ║
+ ║              data/postal/jp/2026-10-30/catalog.json ║     47.18 KB ║            - ║
+ ║             data/postal/jp/2026-10-30/manifest.json ║      0.57 KB ║            - ║
+ ╟─────────────────────────────────────────────────────╫──────────────╫──────────────╢
+ ║                                          index.html ║      3.05 KB ║      0.86 KB ║
+ ╠═════════════════════════════════════════════════════╬══════════════╬══════════════╣
+ ║                                Total JS (203 files) ║   6667.61 KB ║            - ║
+ ║                                Total CSS (71 files) ║    652.39 KB ║            - ║
+ ║                                 Total HTML (1 file) ║      3.05 KB ║            - ║
+ ╚═════════════════════════════════════════════════════╩══════════════╩══════════════╝
+
+
+ Build succeeded
+
+ Build mode............. SPA
+ Pkg quasar............. v2.35.2
+ Pkg @quasar/app-vite... v3.10.3
+ Pkg vite............... v8.3.5
+ Debugging.............. no
+ Browser target......... es2019|edge88|firefox78|chrome87|safari13.1
+ =======================
+ Output folder.......... /tmp/strategy-review17-goot48x7/dist/spa
+
+ Tip: Built files are meant to be served over an HTTP server
+      Opening index.html over file:// won't work
+
+ Tip: You can use "quasar serve" command to create a web server,
+      both for testing or production. Type "quasar serve -h" for
+      parameters. Also, an npm script (usually named "start") can
+      be added for deployment environments.
+      If you're using Vue Router "history" mode, don't forget to
+      specify the "--history" parameter: "quasar serve --history"

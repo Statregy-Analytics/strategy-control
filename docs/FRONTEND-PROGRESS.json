@@ -12,10 +12,10 @@
   "metrics": {
     "total": 279,
     "done": 259,
-    "validation": 12,
-    "adjustment": 8,
-    "implemented": 271,
-    "implementedPercent": 97.1,
+    "validation": 17,
+    "adjustment": 3,
+    "implemented": 276,
+    "implementedPercent": 98.9,
     "readyPercent": 92.8
   },
   "withoutLinkedFigmaReference": {
@@ -1405,13 +1405,13 @@
         "designer",
         "backend"
       ],
-      "reason": "CT12 contém os campos do modal, mas o CT11 reconsultado continua sem ação para abri-lo. Não criado gatilho nem rota solta. Designer indicar o gatilho/estado de abertura; depois implementar conexão do modal e confirmar contrato operacional da API.",
+      "reason": "Usuário apontou o botão solto Adicionar operação (1484:69938) como possível abertura do CT12 e vai confirmar posição/vínculo com Éric. Candidato registrado; não criada ação em local presumido. Conexão do modal e integração operacional continuam pendentes.",
       "sources": [
         "src/components/Finance/ContractSections.vue"
       ],
       "evidence": [
         "docs/CHECKLIST-UNICO-FIGMA-FRONT.md#contratos--contraste-e-estados-expandidos-rodada-atual",
-        "docs/evidence/qa-2026-11-19-nine-adjustments/results.json"
+        "docs/evidence/qa-2026-11-19-scope-clarification/results.json"
       ],
       "browser": "histórica; não repetida em 16/11",
       "historicalCategory": "Ajuste de front"
@@ -2419,9 +2419,10 @@
       "evidence": [
         "docs/CHECKLIST-UNICO-FIGMA-FRONT.md#lógicas--estados-de-performance-e-simulação",
         "docs/evidence/qa-2026-11-16-inventory/api-contract-review.json",
-        "docs/evidence/qa-2026-11-18-logic-editor/results.json"
+        "docs/evidence/qa-2026-11-19-review17/matrix.json"
       ],
-      "browser": "parcial histórica; frame integral pendente",
+      "browser": "Não repetido nesta rodada; revisão da classificação e evidências anteriores.",
+      "lastReviewResult": "Tabelas oficiais/simuladas corrigidas e testadas com séries controladas e indisponíveis. O frame denominado Ao Lado mostra tabelas empilhadas; esclarecer relação com o controle antes de concluir a comparação do estado inteiro.",
       "historicalCategory": "Ajuste de front"
     },
     {
@@ -2664,9 +2665,10 @@
       ],
       "evidence": [
         "docs/CHECKLIST-UNICO-FIGMA-FRONT.md#ainda-é-trabalho-de-frontend",
-        "docs/evidence/qa-2026-11-18-transaction-directory/references.json"
+        "docs/evidence/qa-2026-11-19-review17/matrix.json"
       ],
-      "browser": "sem aprovação integral por frame",
+      "browser": "Não repetido nesta rodada; revisão da classificação e evidências anteriores.",
+      "lastReviewResult": "A referência recuperada contém apenas título e superfície vazia de prancha, sem estados ou tela de produto. Não criar página nem aprovar um estado inexistente; esclarecer enquadramento do frame no inventário com designer. Os cards reais foram concluídos no P01.",
       "historicalCategory": "Ajuste de front"
     },
     {
@@ -4135,13 +4137,13 @@
         "designer",
         "backend"
       ],
-      "reason": "Referência fechada menciona blocos e botão + para escolher mídia, mas não fornece o menu aberto nem controles de H2/H3. O textarea existente não foi declarado editor completo. Frames abertos de inserção/formatação e contrato editorial para persistência, sem inventar toolbar/menus.",
+      "reason": "Entrada Criar Novo Conteúdo → CO03 → editor já conectada no código existente, conforme esclarecimento do usuário. Pendência distinta: inserção de mídia entre blocos e controles H2/H3 citados pelo editor; não foram fornecidos estados abertos desses controles. Não inventar menu. Textarea não equivale a editor completo; confirmar persistência editorial.",
       "sources": [
         "src/components/Workspaces/PublicationWorkspace.vue"
       ],
       "evidence": [
         "docs/CHECKLIST-UNICO-FIGMA-FRONT.md#definições-do-designer",
-        "docs/evidence/qa-2026-11-19-nine-adjustments/results.json"
+        "docs/evidence/qa-2026-11-19-scope-clarification/results.json"
       ],
       "browser": "histórica; não repetida em 16/11",
       "historicalCategory": "Ajuste de front"
@@ -4160,13 +4162,13 @@
         "designer",
         "backend"
       ],
-      "reason": "Referência fechada menciona blocos e botão + para escolher mídia, mas não fornece o menu aberto nem controles de H2/H3. O textarea existente não foi declarado editor completo. Frames abertos de inserção/formatação e contrato editorial para persistência, sem inventar toolbar/menus.",
+      "reason": "Entrada Criar Novo Conteúdo → CO03 → editor já conectada no código existente, conforme esclarecimento do usuário. Pendência distinta: inserção de mídia entre blocos e controles H2/H3 citados pelo editor; não foram fornecidos estados abertos desses controles. Não inventar menu. Textarea não equivale a editor completo; confirmar persistência editorial.",
       "sources": [
         "src/components/Workspaces/PublicationWorkspace.vue"
       ],
       "evidence": [
         "docs/CHECKLIST-UNICO-FIGMA-FRONT.md#definições-do-designer",
-        "docs/evidence/qa-2026-11-19-nine-adjustments/results.json"
+        "docs/evidence/qa-2026-11-19-scope-clarification/results.json"
       ],
       "browser": "histórica; não repetida em 16/11",
       "historicalCategory": "Ajuste de front"
@@ -4191,9 +4193,10 @@
       ],
       "evidence": [
         "docs/CHECKLIST-UNICO-FIGMA-FRONT.md#definições-do-designer",
-        "docs/evidence/qa-2026-11-17-editor/results.json"
+        "docs/evidence/qa-2026-11-19-review17/matrix.json"
       ],
-      "browser": "histórica; não repetida em 16/11",
+      "browser": "Não repetido nesta rodada; revisão da classificação e evidências anteriores.",
+      "lastReviewResult": "CO06: composição, PDF/áudio/anexos sucessivos e celular testados. Índice H2/H3 sem editor de corpo não está definido; reter comparação completa até esclarecer a origem do índice, sem inventar controles.",
       "historicalCategory": "Ajuste de front"
     },
     {
@@ -4542,9 +4545,10 @@
       ],
       "evidence": [
         "docs/CHECKLIST-UNICO-FIGMA-FRONT.md#ainda-é-trabalho-de-frontend",
-        "docs/evidence/qa-2026-11-18-review15/api-coverage.json"
+        "docs/evidence/qa-2026-11-19-review17/matrix.json"
       ],
-      "browser": "fluxo não integrado",
+      "browser": "Não repetido nesta rodada; revisão da classificação e evidências anteriores.",
+      "lastReviewResult": "Designer: falta estado selecionado dos campos de valor no passo 3. Front: POST /client/contracts/requests existe no OpenAPI de 18/11; adapter ainda indisponível. Verificar mapeamento objective/period/modality/initialAmount/monthlyAmount/assetTypes/regions e currencyId do catálogo, sem atribuir ausência da rota ao backend.",
       "historicalCategory": "Ajuste de front"
     },
     {
@@ -4643,9 +4647,10 @@
       "evidence": [
         "docs/QA-2026-11-12-LISTA-CONTRATOS.md",
         "docs/QA-2026-11-12-CONTRATOS-NAVEGACAO.md",
-        "docs/evidence/qa-2026-11-19-contract-detail/results.json"
+        "docs/evidence/qa-2026-11-19-review17/matrix.json"
       ],
-      "browser": "navegação/dados testados; composição integral pendente",
+      "browser": "Componentes reais em prévia local com props fictícias; variantes agrupada/separada/App, séries, comparação/período, seis donuts, vazio/indisponível, participante, Escape e modal de ativos vazio.",
+      "lastReviewResult": "Popover corrigido: limite direito 399→378 px, largura 358→337 px, viewport útil 378 px. Tabelas com rolagem interna. Não conclui comparação integral do frame; origem aprovada do App, exportação real, persistência e adapter das projeções continuam pendentes.",
       "historicalCategory": "Ajuste de front"
     },
     {
@@ -4669,9 +4674,10 @@
       "evidence": [
         "docs/QA-2026-11-12-LISTA-CONTRATOS.md",
         "docs/QA-2026-11-12-CONTRATOS-NAVEGACAO.md",
-        "docs/evidence/qa-2026-11-19-contract-detail/results.json"
+        "docs/evidence/qa-2026-11-19-review17/matrix.json"
       ],
-      "browser": "navegação/dados testados; composição integral pendente",
+      "browser": "Componentes reais em prévia local com props fictícias; variantes agrupada/separada/App, séries, comparação/período, seis donuts, vazio/indisponível, participante, Escape e modal de ativos vazio.",
+      "lastReviewResult": "Popover corrigido: limite direito 399→378 px, largura 358→337 px, viewport útil 378 px. Tabelas com rolagem interna. Não conclui comparação integral do frame; origem aprovada do App, exportação real, persistência e adapter das projeções continuam pendentes.",
       "historicalCategory": "Ajuste de front"
     },
     {
@@ -4695,9 +4701,10 @@
       "evidence": [
         "docs/QA-2026-11-12-LISTA-CONTRATOS.md",
         "docs/QA-2026-11-12-CONTRATOS-NAVEGACAO.md",
-        "docs/evidence/qa-2026-11-19-contract-detail/results.json"
+        "docs/evidence/qa-2026-11-19-review17/matrix.json"
       ],
-      "browser": "navegação/dados testados; composição integral pendente",
+      "browser": "Componentes reais em prévia local com props fictícias; variantes agrupada/separada/App, séries, comparação/período, seis donuts, vazio/indisponível, participante, Escape e modal de ativos vazio.",
+      "lastReviewResult": "Popover corrigido: limite direito 399→378 px, largura 358→337 px, viewport útil 378 px. Tabelas com rolagem interna. Não conclui comparação integral do frame; origem aprovada do App, exportação real, persistência e adapter das projeções continuam pendentes.",
       "historicalCategory": "Ajuste de front"
     },
     {
@@ -4721,9 +4728,10 @@
       "evidence": [
         "docs/QA-2026-11-12-LISTA-CONTRATOS.md",
         "docs/QA-2026-11-12-CONTRATOS-NAVEGACAO.md",
-        "docs/evidence/qa-2026-11-19-contract-detail/results.json"
+        "docs/evidence/qa-2026-11-19-review17/matrix.json"
       ],
-      "browser": "navegação/dados testados; composição integral pendente",
+      "browser": "Componentes reais em prévia local com props fictícias; variantes agrupada/separada/App, séries, comparação/período, seis donuts, vazio/indisponível, participante, Escape e modal de ativos vazio.",
+      "lastReviewResult": "Popover corrigido: limite direito 399→378 px, largura 358→337 px, viewport útil 378 px. Tabelas com rolagem interna. Não conclui comparação integral do frame; origem aprovada do App, exportação real, persistência e adapter das projeções continuam pendentes.",
       "historicalCategory": "Ajuste de front"
     },
     {
@@ -4840,12 +4848,11 @@
       "counted": true,
       "group": "P06",
       "category": "Ajuste de front",
-      "front": "adjustment",
+      "front": "validation",
       "blockers": [
-        "designer",
         "backend"
       ],
-      "reason": "Detalhes com status Ativo mostram etapas de solicitação/editáveis. A interface atual não foi substituída por um novo fluxo de edição presumido. Confirmar consulta versus edição e estados das ações. Mapear dados/estágios/ofertas ao contrato comercial; GET /client/loans e detalhe já existem. Campo collateral existe no DTO e não foi descrito como ausente.",
+      "reason": "Usuário confirmou que as telas da Área do Cliente estão validadas e devem permanecer como estão, com empréstimos por etapas. Mantida a implementação existente, sem nova composição ou campos. Reclassificação de escopo, não novo teste: comparação detalhada dos estados e integração comercial continuam sem nova evidência nesta rodada.",
       "sources": [
         "portal:src/system/pages/loan/LoanPage.vue",
         "portal:src/system/pages/leverage/LeveragePage.vue",
@@ -4854,9 +4861,10 @@
       ],
       "evidence": [
         "docs/evidence/qa-2026-11-16-inventory/api-contract-review.json",
-        "docs/evidence/qa-2026-11-19-nine-adjustments/results.json"
+        "docs/evidence/qa-2026-11-19-review17/matrix.json"
       ],
-      "browser": "código confirmado; fluxos legados não homologados",
+      "browser": "Acesso real ao catálogo mostra bloqueio Nível 3; conta Éric consta no Nível 0.",
+      "lastReviewResult": "Telas aprovadas preservadas. Falta conta elegível/massa para percorrer estados integrados; não é novo defeito de API comprovado.",
       "historicalCategory": "Ajuste de front"
     },
     {
@@ -4868,12 +4876,11 @@
       "counted": true,
       "group": "P06",
       "category": "Ajuste de front",
-      "front": "adjustment",
+      "front": "validation",
       "blockers": [
-        "designer",
         "backend"
       ],
-      "reason": "Detalhes com status Ativo mostram etapas de solicitação/editáveis. A interface atual não foi substituída por um novo fluxo de edição presumido. O frame de documentos inclui IPTU e metragem de imóvel também no automóvel. Confirmar consulta versus edição e estados das ações. Mapear dados/estágios/ofertas ao contrato comercial; GET /client/loans e detalhe já existem. Campo collateral existe no DTO e não foi descrito como ausente.",
+      "reason": "Usuário confirmou que as telas da Área do Cliente estão validadas e devem permanecer como estão, com empréstimos por etapas. Mantida a implementação existente, sem nova composição ou campos. Reclassificação de escopo, não novo teste: comparação detalhada dos estados e integração comercial continuam sem nova evidência nesta rodada.",
       "sources": [
         "portal:src/system/pages/loan/LoanPage.vue",
         "portal:src/system/pages/leverage/LeveragePage.vue",
@@ -4882,9 +4889,10 @@
       ],
       "evidence": [
         "docs/evidence/qa-2026-11-16-inventory/api-contract-review.json",
-        "docs/evidence/qa-2026-11-19-nine-adjustments/results.json"
+        "docs/evidence/qa-2026-11-19-review17/matrix.json"
       ],
-      "browser": "código confirmado; fluxos legados não homologados",
+      "browser": "Acesso real ao catálogo mostra bloqueio Nível 3; conta Éric consta no Nível 0.",
+      "lastReviewResult": "Telas aprovadas preservadas. Falta conta elegível/massa para percorrer estados integrados; não é novo defeito de API comprovado.",
       "historicalCategory": "Ajuste de front"
     },
     {
@@ -4896,12 +4904,11 @@
       "counted": true,
       "group": "P06",
       "category": "Ajuste de front",
-      "front": "adjustment",
+      "front": "validation",
       "blockers": [
-        "designer",
         "backend"
       ],
-      "reason": "Detalhes com status Ativo mostram etapas de solicitação/editáveis. A interface atual não foi substituída por um novo fluxo de edição presumido. Confirmar consulta versus edição e estados das ações. Mapear dados/estágios/ofertas ao contrato comercial; GET /client/loans e detalhe já existem. Campo collateral existe no DTO e não foi descrito como ausente.",
+      "reason": "Usuário confirmou que as telas da Área do Cliente estão validadas e devem permanecer como estão, com empréstimos por etapas. Mantida a implementação existente, sem nova composição ou campos. Reclassificação de escopo, não novo teste: comparação detalhada dos estados e integração comercial continuam sem nova evidência nesta rodada.",
       "sources": [
         "portal:src/system/pages/loan/LoanPage.vue",
         "portal:src/system/pages/leverage/LeveragePage.vue",
@@ -4910,9 +4917,10 @@
       ],
       "evidence": [
         "docs/evidence/qa-2026-11-16-inventory/api-contract-review.json",
-        "docs/evidence/qa-2026-11-19-nine-adjustments/results.json"
+        "docs/evidence/qa-2026-11-19-review17/matrix.json"
       ],
-      "browser": "código confirmado; fluxos legados não homologados",
+      "browser": "Acesso real ao catálogo mostra bloqueio Nível 3; conta Éric consta no Nível 0.",
+      "lastReviewResult": "Telas aprovadas preservadas. Falta conta elegível/massa para percorrer estados integrados; não é novo defeito de API comprovado.",
       "historicalCategory": "Ajuste de front"
     },
     {
@@ -4924,12 +4932,11 @@
       "counted": true,
       "group": "P06",
       "category": "Ajuste de front",
-      "front": "adjustment",
+      "front": "validation",
       "blockers": [
-        "designer",
         "backend"
       ],
-      "reason": "Detalhes com status Ativo mostram etapas de solicitação/editáveis. A interface atual não foi substituída por um novo fluxo de edição presumido. Confirmar consulta versus edição e estados das ações. Mapear dados/estágios/ofertas ao contrato comercial; GET /client/loans e detalhe já existem. Campo collateral existe no DTO e não foi descrito como ausente.",
+      "reason": "Usuário confirmou que as telas da Área do Cliente estão validadas e devem permanecer como estão, com empréstimos por etapas. Mantida a implementação existente, sem nova composição ou campos. Reclassificação de escopo, não novo teste: comparação detalhada dos estados e integração comercial continuam sem nova evidência nesta rodada.",
       "sources": [
         "portal:src/system/pages/loan/LoanPage.vue",
         "portal:src/system/pages/leverage/LeveragePage.vue",
@@ -4938,9 +4945,10 @@
       ],
       "evidence": [
         "docs/evidence/qa-2026-11-16-inventory/api-contract-review.json",
-        "docs/evidence/qa-2026-11-19-nine-adjustments/results.json"
+        "docs/evidence/qa-2026-11-19-review17/matrix.json"
       ],
-      "browser": "código confirmado; fluxos legados não homologados",
+      "browser": "Acesso real ao catálogo mostra bloqueio Nível 3; conta Éric consta no Nível 0.",
+      "lastReviewResult": "Telas aprovadas preservadas. Falta conta elegível/massa para percorrer estados integrados; não é novo defeito de API comprovado.",
       "historicalCategory": "Ajuste de front"
     },
     {
@@ -5411,12 +5419,11 @@
       "counted": true,
       "group": "P06",
       "category": "Ajuste de front",
-      "front": "adjustment",
+      "front": "validation",
       "blockers": [
-        "designer",
         "backend"
       ],
-      "reason": "O fluxo de automóvel continua mostrando título de imóvel e upload de IPTU/metragem. Designer confirmar os documentos e título do fluxo de automóvel; confirmar API de solicitação/vínculo. Não exigir documentos de imóvel do cliente de veículo por suposição.",
+      "reason": "Usuário confirmou que as telas da Área do Cliente estão validadas e devem permanecer como estão, com empréstimos por etapas. Mantida a implementação existente, sem nova composição ou campos. Reclassificação de escopo, não novo teste: comparação detalhada dos estados e integração comercial continuam sem nova evidência nesta rodada.",
       "sources": [
         "portal:src/system/pages/loan/LoanPage.vue",
         "portal:src/system/pages/leverage/LeveragePage.vue",
@@ -5425,9 +5432,10 @@
       ],
       "evidence": [
         "docs/evidence/qa-2026-11-16-inventory/api-contract-review.json",
-        "docs/evidence/qa-2026-11-19-nine-adjustments/results.json"
+        "docs/evidence/qa-2026-11-19-review17/matrix.json"
       ],
-      "browser": "código confirmado; fluxos legados não homologados",
+      "browser": "Acesso real ao catálogo mostra bloqueio Nível 3; conta Éric consta no Nível 0.",
+      "lastReviewResult": "Telas aprovadas preservadas. Falta conta elegível/massa para percorrer estados integrados; não é novo defeito de API comprovado.",
       "historicalCategory": "Ajuste de front"
     },
     {
@@ -6324,9 +6332,11 @@
         "portal:src/system/pages/CommunicationPage.vue"
       ],
       "evidence": [
-        "docs/QA-2026-11-04-PERFIL-DOCUMENTACAO-121-130.md"
+        "docs/QA-2026-11-04-PERFIL-DOCUMENTACAO-121-130.md",
+        "docs/evidence/qa-2026-11-19-review17/matrix.json"
       ],
-      "browser": "comparação específica pendente",
+      "browser": "Consulta real local de Home/resumo e temas cinza/Aurora; larguras observadas 1280 e 763. Sem teste integral de todos os gráficos/conteúdos dos frames.",
+      "lastReviewResult": "Corrigidos cabeçalho e valores em largura de tablet. Composição aprovada preservada; falta comparação integral e estados positivos de blocos indisponíveis.",
       "historicalCategory": "Ajuste de front"
     },
     {
@@ -6346,9 +6356,11 @@
         "portal:src/system/pages/CommunicationPage.vue"
       ],
       "evidence": [
-        "docs/QA-2026-11-04-PERFIL-DOCUMENTACAO-121-130.md"
+        "docs/QA-2026-11-04-PERFIL-DOCUMENTACAO-121-130.md",
+        "docs/evidence/qa-2026-11-19-review17/matrix.json"
       ],
-      "browser": "comparação específica pendente",
+      "browser": "Consulta real local de Home/resumo e temas cinza/Aurora; larguras observadas 1280 e 763. Sem teste integral de todos os gráficos/conteúdos dos frames.",
+      "lastReviewResult": "Corrigidos cabeçalho e valores em largura de tablet. Composição aprovada preservada; falta comparação integral e estados positivos de blocos indisponíveis.",
       "historicalCategory": "Ajuste de front"
     },
     {
@@ -6524,9 +6536,11 @@
         "portal:src/system/pages/CommunicationPage.vue"
       ],
       "evidence": [
-        "docs/QA-2026-11-04-PERFIL-DOCUMENTACAO-121-130.md"
+        "docs/QA-2026-11-04-PERFIL-DOCUMENTACAO-121-130.md",
+        "docs/evidence/qa-2026-11-19-review17/matrix.json"
       ],
-      "browser": "comparação específica pendente",
+      "browser": "Consulta real local de Home/resumo e temas cinza/Aurora; larguras observadas 1280 e 763. Sem teste integral de todos os gráficos/conteúdos dos frames.",
+      "lastReviewResult": "Corrigidos cabeçalho e valores em largura de tablet. Composição aprovada preservada; falta comparação integral e estados positivos de blocos indisponíveis.",
       "historicalCategory": "Ajuste de front"
     },
     {
@@ -6546,9 +6560,11 @@
         "portal:src/system/pages/CommunicationPage.vue"
       ],
       "evidence": [
-        "docs/QA-2026-11-04-PERFIL-DOCUMENTACAO-121-130.md"
+        "docs/QA-2026-11-04-PERFIL-DOCUMENTACAO-121-130.md",
+        "docs/evidence/qa-2026-11-19-review17/matrix.json"
       ],
-      "browser": "comparação específica pendente",
+      "browser": "Consulta real local de Home/resumo e temas cinza/Aurora; larguras observadas 1280 e 763. Sem teste integral de todos os gráficos/conteúdos dos frames.",
+      "lastReviewResult": "Corrigidos cabeçalho e valores em largura de tablet. Composição aprovada preservada; falta comparação integral e estados positivos de blocos indisponíveis.",
       "historicalCategory": "Ajuste de front"
     },
     {

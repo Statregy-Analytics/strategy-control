@@ -1,0 +1,25 @@
+{
+  "date": "2026-11-19",
+  "scope": "Revisão dos 17 estados, preservando telas aprovadas",
+  "sourceCommits": [
+    "5864d03",
+    "c73ec93"
+  ],
+  "tests": {
+    "passed": 529,
+    "failed": 0,
+    "lint": "passed",
+    "build": "passed",
+    "audit": "passed",
+    "isolatedSnapshot": true
+  },
+  "browser": {
+    "positiveData": "Dados controlados exclusivamente na prévia de componentes reais; arquivos removidos antes da entrega. Não implantados mocks ou rota de QA.",
+    "realSession": "Éric; Home e resumo consultados; tema alternado e restaurado de Cinza e preto para Aurora e de volta; sem escrita financeira.",
+    "mobileLimit": "Contrato/popover testados com 390 px (clientWidth 378). Home/perfil medidos em 763 e 1280; override posterior não alterou a largura efetiva dessas abas, por isso não se afirma Home a 390.",
+    "limits": "Captura full-page falhou; usadas capturas de viewport. Comparação integral e validação integrada dos 17 frames não concluídas.",
+    "published": "Home da publicação c73ec93 conferida no navegador, largura 390 px: clientWidth=scrollWidth=378. Tema original restaurado. Três CSS de feature iguais ao build isolado por SHA256."
+  },
+  "classification": "Sem promoção de frame apenas por correção parcial, aceite anterior ou execução de testes de código.",
+  "publication": "publication.json"
+}

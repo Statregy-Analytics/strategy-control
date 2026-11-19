@@ -1,0 +1,864 @@
+
+> strategy-analytics@0.0.1 test
+> node --experimental-vm-modules --test tests/*.test.mjs
+
+(node:587960) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///tmp/strategy-review17-goot48x7/src/services/documentWindow.js is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to /tmp/strategy-review17-goot48x7/package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:587960) ExperimentalWarning: VM Modules is an experimental feature and might change at any time
+✔ asset upload retries the failed link using the uploaded ID and removes only the selected existing relationship (21.726318ms)
+✔ disposing the editor prevents any late upload or unlink from starting (19.01954ms)
+(node:587961) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///tmp/strategy-review17-goot48x7/src/services/documentWindow.js is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to /tmp/strategy-review17-goot48x7/package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:587961) ExperimentalWarning: VM Modules is an experimental feature and might change at any time
+✔ image previews use the bound asset and only request image files (19.618615ms)
+✔ an invalid temporary URL leaves a retryable preview error (8.528191ms)
+✔ a late preview cannot repopulate a disposed gallery (10.205063ms)
+(node:587964) ExperimentalWarning: VM Modules is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ asset document reserves its tab before the delayed URL and strips opener/referrer (25.534004ms)
+✔ blocked popup gives feedback without querying a URL (5.543255ms)
+✔ failure closes reserved tab and retry clears the previous error (14.392748ms)
+✔ leaving closes a pending tab and prevents late navigation or further calls (13.588274ms)
+✔ session change discards late failures without exposing errors (7.184676ms)
+✔ duplicate clicks request one URL and open one tab (16.808463ms)
+✔ invalid and external insecure URLs close the pending tab (35.266838ms)
+✔ closing reserved tab manually produces recoverable error (9.642694ms)
+(node:587968) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///tmp/strategy-review17-goot48x7/src/services/registrationIntegration.js is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to /tmp/strategy-review17-goot48x7/package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ registration saves all nationalities and birthplace IDs and resumes supported values (6.839396ms)
+✔ nationality limits reject repeated and fourth countries before submission (1.498409ms)
+✔ neighborhood persists independently from complement and has the confirmed length limit (8.074133ms)
+✔ financial writes omit a legacy end date even when the current profile has one (2.207594ms)
+✔ new trusted contacts do not invent relationships or email (4.431297ms)
+✔ shared profiles use explicit scopes and never render arbitrary returned properties (0.880478ms)
+(node:587969) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///tmp/strategy-review17-goot48x7/src/services/countryNames.js is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to /tmp/strategy-review17-goot48x7/package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:587969) ExperimentalWarning: VM Modules is an experimental feature and might change at any time
+✔ country ISO labels follow the client language and keep unknown API labels (44.92014ms)
+✔ asset creation delegates currency to the account; editing preserves original currency (2.25605ms)
+✔ profile edit follows official lock including rejected identities and fails closed on unavailable status (0.950716ms)
+✔ bank create and edit strip all obsolete holder fields at the HTTP boundary (5.510389ms)
+✔ confirmed submission clears only its account's remembered registration step (8.172511ms)
+(node:587971) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///tmp/strategy-review17-goot48x7/src/services/clientAssetModel.js is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to /tmp/strategy-review17-goot48x7/package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ investment rejects impossible or malformed dates before writing (9.981053ms)
+✔ fixed term requires a real maturity date (2.847099ms)
+✔ optional investment months reject zero and fractional values but accept empty (10.134951ms)
+✔ valid leap dates and decimal amounts survive unchanged; hidden term fields are cleared (1.824368ms)
+(node:587973) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///tmp/strategy-review17-goot48x7/src/services/clientAssetModel.js is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to /tmp/strategy-review17-goot48x7/package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ client asset form retains precision and creates only the correct subtype (2.563995ms)
+✔ missing required fields, currency and fractional years fail before writing (0.922837ms)
+✔ editing preserves review status and hidden metadata without archive actions (0.735598ms)
+✔ all four approved asset kinds generate their own detail and validate integer counts (4.389943ms)
+✔ investment summaries use term information rather than the settlement label of a physical asset (1.302242ms)
+(node:587974) ExperimentalWarning: VM Modules is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ client assets reader consults all pages and does not turn missing pages into empty assets (18.999385ms)
+✔ asset currencies use catalog IDs, preserve labels and ISO codes, and exclude inactive currencies (7.834754ms)
+✔ asset currencies distinguish an empty catalog from invalid or failed responses (19.789047ms)
+✔ asset currencies reject catalog results after the client session changes (8.131813ms)
+✔ all asset reads and writes stay in the client domain and no archive operation is exposed (13.759497ms)
+(node:587979) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///tmp/strategy-review17-goot48x7/src/services/clientBankCatalog.js is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to /tmp/strategy-review17-goot48x7/package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ profile bank catalog includes later pages and preserves all API names (71.100971ms)
+✔ an empty valid catalog returns an empty array without extra requests (0.417032ms)
+✔ later-page failures reject the entire load instead of publishing a partial bank catalog (1.016812ms)
+✔ pagination mismatches, repeated pages and truncated catalogs never appear as successful empty data (4.146258ms)
+✔ a changing catalog and duplicated bank IDs stop the load (3.124071ms)
+✔ a session change after the first page prevents subsequent reads and stale results (0.833201ms)
+(node:587982) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///tmp/strategy-review17-goot48x7/src/services/clientTransferModel.js is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to /tmp/strategy-review17-goot48x7/package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:587982) ExperimentalWarning: VM Modules is an experimental feature and might change at any time
+✔ component drops late recipient response and does not submit without current identity (319.819147ms)
+✔ component submits contract once, clears secret after 409 and reports no success (35.102554ms)
+✔ component disposal clears secret and ignores recipient arriving after close (15.2671ms)
+(node:587988) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///tmp/strategy-review17-goot48x7/src/services/clientTransferModel.js is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to /tmp/strategy-review17-goot48x7/package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ transfer payload contains only contract fields and requires resolved current recipient (7.114575ms)
+✔ transfer rejects contracts, missing currency, excess funds, missing password and invalid amounts (4.815971ms)
+✔ only Strategy to recipient Deposit waits thirty days (0.901636ms)
+✔ password errors use API codes and never echo server message or secrets (1.692367ms)
+✔ double click creates one request; new successful action creates a new key (1.671484ms)
+✔ ambiguous retry reuses key, changed amount creates another intent, definitive rejection releases key (3.54001ms)
+✔ listing propagates server category/unread/pagination and does not mark anything read (4.734464ms)
+✔ open reads detail first, then registers only previously unread detail (5.179353ms)
+✔ failed read receipt preserves body and offers retry, but failed detail never marks read (7.377647ms)
+✔ navigation or session change during detail read prevents registration for obsolete screen (5.558824ms)
+✔ malformed announcement and invalid dates do not become fake data (1.34376ms)
+✔ recipient errors distinguish own account, unknown ID and transport failure (3.24895ms)
+✔ publication period reads every server page before filtering and paginates the filtered result (1.049356ms)
+✔ period filter never presents partial data when a later page fails (1.136151ms)
+(node:588033) ExperimentalWarning: VM Modules is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:588033) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///tmp/strategy-review17-goot48x7/src/services/loanRequestDraft.js is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to /tmp/strategy-review17-goot48x7/package.json.
+✔ loan pagination reads every confirmed page and discards stale contexts (5.01053ms)
+✔ debt totals preserve currencies and unknown values, without assuming principal is outstanding (1.274484ms)
+✔ loan grouping and access use real status/level, never the legacy store default (0.744342ms)
+✔ withdrawal resolves currency ID only from confirmed Free wallet and rejects excess (1.121015ms)
+✔ withdrawal cannot pretend to verify a password the documented DTO cannot receive (1.342601ms)
+✔ collateral draft validates each step and never reaches a fake submitted state (826.741373ms)
+✔ changed loan and wallet templates compile, including gated offer slots (798.091284ms)
+(node:588041) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///tmp/strategy-review17-goot48x7/src/services/communicationDirectoryAssets.js is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to /tmp/strategy-review17-goot48x7/package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:588041) ExperimentalWarning: VM Modules is an experimental feature and might change at any time
+✔ directory emits draft and view changes without mutating supplied filters or invoking HTTP (321.911687ms)
+✔ unavailable consultation is not an empty confirmed list and invalid pagination cannot create pages (30.299782ms)
+✔ operations preserve zero, reject invalid values and tolerate missing parity and profit (49.467284ms)
+✔ list dates follow the approved short-year presentation without displaying epoch for missing dates (52.831392ms)
+✔ a failed thumbnail can recover when another real image is supplied (26.561804ms)
+(node:588049) ExperimentalWarning: VM Modules is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ BolsasChart initializes and follows incoming series without a shared data snapshot (173.475557ms)
+✔ RedesChart initializes and follows incoming series without a shared data snapshot (47.407158ms)
+✔ chart array defaults are isolated for separate component instances (181.745217ms)
+(node:588051) ExperimentalWarning: VM Modules is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ double activation starts only one document request and opens one tab (50.068123ms)
+✔ changing contract closes a pending tab and ignores its late URL (23.622375ms)
+✔ an old failure cannot overwrite a new opening or error after changing contract (12.969907ms)
+✔ leaving closes pending tabs, clears sensitive sections and suppresses late errors (14.379489ms)
+✔ a response from the previous session cannot open a document (8.528081ms)
+✔ blocked popups make no temporary-URL request and keep the existing recovery message (26.478379ms)
+✔ invalid URLs close the blank tab and a failed document can be retried (15.801013ms)
+✔ route changes clear document errors and old reads cannot overwrite the new contract (15.849099ms)
+✔ a document-section failure leaves detail and history usable, and retry recovers (12.357158ms)
+✔ leaving preserves a document that already opened successfully (16.144046ms)
+✔ an old document ID cannot start an opening in another contract (15.571739ms)
+✔ session changes suppress stale data and errors in independent reads (26.259491ms)
+✔ closing the blank tab while loading cannot navigate it on completion (6.42287ms)
+✔ leaving for another route never requests contracts for that route's ID or undefined (21.462424ms)
+(node:588063) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///tmp/strategy-review17-goot48x7/src/services/contractDetailPresentation.js is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to /tmp/strategy-review17-goot48x7/package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:588063) ExperimentalWarning: VM Modules is an experimental feature and might change at any time
+✔ detail model never substitutes global capital, result or unknown metrics for individual balances (71.08082ms)
+✔ detail currency and dates reject invalid values without leaking epoch dates (20.627795ms)
+✔ compositions require real percentages, totals and unique categories (1.983155ms)
+✔ application cannot embed an unapproved source or authentication-bearing origin (3.798893ms)
+✔ charts disable unavailable units and comparisons, preserve zero and reset when contract series changes (336.328637ms)
+✔ empty assets, unknown assets and unavailable export remain distinct (64.454401ms)
+✔ PDF export failure permits retry and rejects duplicate concurrent work (48.510409ms)
+✔ late export failures cannot overwrite the next contract (21.586514ms)
+✔ dividend destination changes only after confirmed callback and preserves value after failure (93.066338ms)
+✔ dividend destination guards unknown values, double submissions, stale responses and disposal (36.655734ms)
+✔ dividend absence does not become zero yield or a selected wallet (14.835616ms)
+✔ participant/history props are isolated and a new contract restores the history view (71.139903ms)
+✔ asset dialog closes on contract switch and unavailable values remain dashes (83.638664ms)
+(node:588064) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///tmp/strategy-review17-goot48x7/src/services/contractDirectory.js is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to /tmp/strategy-review17-goot48x7/package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ missing or blocked metrics never become zero and currencies never merge (8.831036ms)
+✔ active counter depends on complete supplied list, preserves empty and excludes closed (3.662347ms)
+✔ global contractual capital is never presented as the client's initial entry (1.101525ms)
+✔ all contract pages are fetched once, no incomplete first-page counter (1.377962ms)
+✔ canceled, duplicate and malformed paginated responses cannot replace a list (3.39054ms)
+✔ performance requires valid series and period filter uses supplied dates without mutating them (1.12352ms)
+(node:588078) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///tmp/strategy-review17-goot48x7/src/services/contractRequestDraft.js is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to /tmp/strategy-review17-goot48x7/package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:588078) ExperimentalWarning: VM Modules is an experimental feature and might change at any time
+✔ success action closes the offer and uses the existing case-sensitive route name (335.58721ms)
+✔ offer return is blocked while submit is pending and a failed submit never reaches success (92.684ms)
+(node:588087) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///tmp/strategy-review17-goot48x7/src/services/contractRequestDraft.js is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to /tmp/strategy-review17-goot48x7/package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ 140: each new request starts blank and validation is progressive across the five approved steps (6.460332ms)
+✔ 140: zero, malformed amounts and missing final selections cannot submit (0.950134ms)
+✔ 140: missing submit endpoint rejects instead of showing the successful request screen (1.796724ms)
+(node:588088) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///tmp/strategy-review17-goot48x7/src/services/documentPresentation.js is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to /tmp/strategy-review17-goot48x7/package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ rejection notes come from the matching file review, not another upload of the same type (7.91398ms)
+✔ missing, ambiguous or unrelated reviews never invent or disclose a rejection reason (0.999665ms)
+✔ resubmitted files do not retain old rejection notes (1.878207ms)
+✔ replacement form preserves the existing dates without inventing dates or fields (3.666849ms)
+✔ grouped requirements retain missing uploads, correct file identities and ungrouped attachments (2.359684ms)
+✔ progress requirements remain available when overview has no groups (1.225541ms)
+✔ pending progress requirements are merged even when the overview contains existing files (1.279007ms)
+✔ alternative identification requirements never label each alternative as individually mandatory (3.970954ms)
+✔ front and back retain their identities and side metadata in one current document group (3.988775ms)
+✔ superseded identity files never reappear as actionable ungrouped uploads (2.2117ms)
+✔ optional CPF and NIF appear only with upload capability and never duplicate an overview row (2.164935ms)
+(node:588105) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///tmp/strategy-review17-goot48x7/src/services/emailConfirmation.js is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to /tmp/strategy-review17-goot48x7/package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ only a masked address is presented and local validation never submits an empty code (19.521873ms)
+✔ the existing contract receives alphanumeric code unchanged and success clears it (7.063671ms)
+✔ unaccepted or malformed responses are never reported as success (3.742695ms)
+✔ invalid, expired and used verification codes show safe messages without echoing server data (4.097347ms)
+✔ confirmation and resend share the concurrency guard (3.489068ms)
+✔ accepted resend clears the old code and uses elapsed time, including after a background pause (3.503613ms)
+✔ attempt limits block confirmation and resend until Retry-After expires (2.086795ms)
+✔ resend limits preserve the server interval without blocking a valid confirmation (1.172666ms)
+✔ changing address or leaving discards late responses and clears the code/timer (4.298046ms)
+✔ leaving while a request is pending cannot start a cooldown or show stale errors (6.892664ms)
+✔ default browser timers are called without the clock object as receiver (6.80357ms)
+(node:588106) ExperimentalWarning: VM Modules is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ initial loading and errors never show a fabricated zero total (73.947557ms)
+✔ filter change from a later page makes exactly one request for page one (20.005247ms)
+✔ shrinking result corrects the page without rendering that empty page or count (30.636974ms)
+✔ zero pages corrects to page one without ever requesting page zero (14.539105ms)
+✔ disposing invalidates pending reads and prevents later reloads (9.909023ms)
+✔ a changed session cannot publish old rows or an old error (43.386586ms)
+✔ an old page response cannot replace the latest selection (9.189653ms)
+✔ a successful response without pagination keeps the actual collection count (9.150498ms)
+✔ session-invalidated data does not turn into a false successful empty table (14.073705ms)
+(node:588119) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///tmp/strategy-review17-goot48x7/src/services/homePresentation.js is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to /tmp/strategy-review17-goot48x7/package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ a complete, accessible and zero portfolio with no executed deposits is empty (11.948868ms)
+✔ the real uninitialized account response is empty only with independent confirmation (2.166404ms)
+✔ loading, denied, failed or missing reads never become zero balances (0.81601ms)
+✔ money, reserves, allocated contracts or an executed deposit prevent the new-account state (3.645046ms)
+✔ malformed totals and unavailable composition do not authorize an empty state (0.80349ms)
+✔ contracts empty state requires available items and an explicit total of zero (1.345903ms)
+✔ periods follow account age; there are no controls before a confirmed deposit (102.250441ms)
+✔ the year follows the customer's timezone rather than the UTC midnight (9.605821ms)
+✔ comparison is hidden only in the first month; month-end anniversaries are clamped (4.73834ms)
+✔ chart excludes time before the first executed deposit, invalid and future points (2.624909ms)
+✔ period filtering is anchored to today, without inventing samples at the range boundary (2.720157ms)
+✔ a flat chart has readable bounds and negative balances remain inside the axis (8.160822ms)
+✔ deposit history confirms none only after a successful complete empty query (8.903162ms)
+✔ history reads every page and uses execution timestamps rather than request dates (2.658566ms)
+✔ a failed execution-date read preserves the fact that a deposit exists, without guessing its date (3.577648ms)
+✔ inconsistent, canceled or duplicated deposit records cannot be interpreted as an empty account (2.138792ms)
+✔ a session change aborts history reading before it can start another request (9.996465ms)
+✔ an unavailable chart needs only one existence query, without scanning deposit history or reading details (1.136018ms)
+(node:588125) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///tmp/strategy-review17-goot48x7/src/services/japanesePostalCode.js is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to /tmp/strategy-review17-goot48x7/package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ Japanese postal format preserves leading zeros and normalizes the local keyboard (5.259905ms)
+✔ official nationwide dataset has valid locations and keeps every ambiguous municipality (533.249267ms)
+✔ actual data fills Tokyo, Osaka and a leading-zero Hokkaido code without auth or vendor requests (6.942571ms)
+✔ not found and actual ambiguous codes never pick the first municipality (13.860712ms)
+✔ failed static requests are evicted and allow retry (11.316966ms)
+✔ controller changes only province/city and deduplicates a successful code (1.290647ms)
+✔ controller ignores late responses after a new code, country or unmount invalidation (1.046731ms)
+✔ edits while loading survive and failures do not erase existing address (2.668739ms)
+✔ invalid response and interrupted lookup keep manual entry available (1.788105ms)
+(node:588132) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///tmp/strategy-review17-goot48x7/src/services/loanPaymentPresentation.js is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to /tmp/strategy-review17-goot48x7/package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:588132) ExperimentalWarning: VM Modules is an experimental feature and might change at any time
+✔ missing adapter leaves all payment actions unavailable and never creates a session (234.539575ms)
+✔ failed installment consultation can retry independently without exposing raw error (97.290609ms)
+✔ pending quote cannot duplicate and late result cannot open payment for another loan (72.891541ms)
+✔ receipt response after closing the session cannot confirm payment and refresh preserves server status (63.914174ms)
+✔ changing loans releases the old preparation lock without letting its response unlock the new one (30.234153ms)
+(node:588133) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///tmp/strategy-review17-goot48x7/src/services/loanDocumentation.js is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to /tmp/strategy-review17-goot48x7/package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:588133) ExperimentalWarning: VM Modules is an experimental feature and might change at any time
+✔ document response rejects unknown groups, duplicates and incomplete persisted files (3.392513ms)
+✔ failed upload preserves persisted files; retry appends only confirmed valid records (327.679994ms)
+✔ wrong-group or unconfirmed upload does not show a stored file (60.656073ms)
+✔ removal requires persisted confirmation and preserves the list on failure (37.395791ms)
+✔ pending upload cannot be duplicated and unmounted responses are ignored (45.212221ms)
+✔ missing API adapters and unmet continuation cannot cause an upload or progression (23.525733ms)
+(node:588146) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///tmp/strategy-review17-goot48x7/src/services/loanOfferPresentation.js is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to /tmp/strategy-review17-goot48x7/package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:588146) ExperimentalWarning: VM Modules is an experimental feature and might change at any time
+✔ pending toggle filters paid rows and does not mutate supplied installments (282.55944ms)
+✔ payment handlers cannot act without callbacks or send a paid/future single installment (71.028618ms)
+✔ failed statement download preserves selection and retry is possible (19.706571ms)
+✔ new installment projection clears stale selection (31.142085ms)
+✔ installment header follows supplied currency and missing amounts never display as zero (78.376326ms)
+(node:588154) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///tmp/strategy-review17-goot48x7/src/services/loanOfferPresentation.js is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to /tmp/strategy-review17-goot48x7/package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:588154) ExperimentalWarning: VM Modules is an experimental feature and might change at any time
+✔ opening an offer cannot display submission success, even if a reader returns a submitted-like property (389.919918ms)
+✔ a pending submission is not sent twice and only a confirmed result enables success (106.82251ms)
+✔ failed writes preserve selection; rejected or changed offers do not reach the writer (53.167628ms)
+✔ switching context invalidates a pending response and missing API adapters make no writes (99.301675ms)
+(node:588160) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///tmp/strategy-review17-goot48x7/src/services/loanOfferPresentation.js is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to /tmp/strategy-review17-goot48x7/package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ offers do not infer selection permission from a positive quote or bank status (2.967792ms)
+✔ selection is discarded if the same offer id changes monetary terms or permissions (0.891223ms)
+✔ malformed or duplicate offer responses cannot masquerade as an empty result (11.069276ms)
+✔ missing rates remain unavailable while a real zero rate is preserved (39.944255ms)
+✔ collateral quote must match the chosen amount and installments before acceptance (2.267342ms)
+✔ new offer, choice and confirmation templates compile (1252.725635ms)
+(node:588161) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///tmp/strategy-review17-goot48x7/src/services/profilePresentation.js is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to /tmp/strategy-review17-goot48x7/package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:588161) ExperimentalWarning: VM Modules is an experimental feature and might change at any time
+✔ quote uses supplied amounts, accepts zero discount and does not create a date or fixed discount (285.088729ms)
+✔ selecting a receipt alone never emits submitted or simulates completion (191.049496ms)
+✔ explicit receipt confirmation emits once and pending submission cannot duplicate (73.368152ms)
+✔ missing Pix data or adapter cannot submit, and late receipt response is discarded (62.492134ms)
+✔ payment quote rejects booleans, blank amounts, impossible dates and inconsistent totals (2.846412ms)
+✔ selection rejects paid, unknown, duplicate and boolean installment numbers (2.290291ms)
+✔ payment session binds loan, installments, currency and immutable quote without calculating an offer (2.623644ms)
+✔ payment flow only advances with confirmed submission and resets when session changes (35.642103ms)
+(node:588175) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///tmp/strategy-review17-goot48x7/src/services/loanRequestDraft.js is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to /tmp/strategy-review17-goot48x7/package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ property and vehicle drafts never share amounts, owners or spouse identifiers (6.27463ms)
+✔ amount boundaries reject missing, non-finite, string and out-of-range values (0.677459ms)
+✔ request cannot skip amount, reason or required time selection (1.172397ms)
+✔ conditional values are cleared without mutating unrelated values (0.710462ms)
+✔ spouse must be explicitly chosen and CPF validated only when applicable (6.993409ms)
+✔ property requires valid CEP or declaration, number or no-number, and positive area (1.878936ms)
+✔ outstanding payment is separate from complement and required only when financed (2.544111ms)
+✔ vehicle cannot pretend a valid FIPE simulation without a real catalogue (1.813691ms)
+✔ vehicle model catalogue rejects duplicate ids and has no fabricated fallback prices (11.866217ms)
+(node:588176) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///tmp/strategy-review17-goot48x7/src/services/loanSummaryPresentation.js is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to /tmp/strategy-review17-goot48x7/package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ missing or invalid installment counts never fabricate a discharge percentage (12.588662ms)
+✔ loan principal title keeps its actual currency and preserves unknown balances (49.677351ms)
+✔ unknown loan kinds are not presented as a fabricated collateral type (0.733057ms)
+✔ process labels and decimal rates follow Portuguese presentation without inventing rate periods (1.303638ms)
+(node:588189) ExperimentalWarning: VM Modules is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ login keeps its credentials independent during an attempt and blocks duplicate submissions (240.843358ms)
+✔ an unexpected authentication failure still clears the password and preserves the address (60.799971ms)
+(node:588190) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///tmp/strategy-review17-goot48x7/src/services/onboardingBlock.js is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to /tmp/strategy-review17-goot48x7/package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+Structured onboarding errors: passed
+✔ tests/onboarding-block.test.mjs (148.362676ms)
+(node:588191) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///tmp/strategy-review17-goot48x7/src/services/portfolioProjection.js is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to /tmp/strategy-review17-goot48x7/package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ portfolio separates Free, invested and Applied; includes assets once without trusting ambiguous legacy total (6.975327ms)
+✔ multiple currencies remain separate with no invented FX totals (6.20691ms)
+✔ confirmed empty portfolio shows zero but errors and missing fields never become zero (0.871233ms)
+✔ mismatched currency and duplicate currency blocks are rejected (0.615654ms)
+✔ client exposes available Free and Applied independently of home and never invents assets (1.713138ms)
+(node:588210) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///tmp/strategy-review17-goot48x7/src/services/preferenceEditor.js is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to /tmp/strategy-review17-goot48x7/package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ disposed editor does not read preferences after a late accepted write (12.037621ms)
+✔ disposed initial load does not read a residential profile from a later session (0.74638ms)
+✔ changed session suppresses old initial preference and catalog results (1.882281ms)
+✔ changed session after write prevents confirmation reads and success publication (10.142069ms)
+✔ unconfirmed accepted preferences disable further writes until a successful reload (1.859246ms)
+✔ disposed editor cannot be revived by a late load callback (1.110754ms)
+✔ loaded preferences from an earlier session cannot be written by the next session (0.79022ms)
+(node:588211) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///tmp/strategy-review17-goot48x7/src/services/preferenceEditor.js is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to /tmp/strategy-review17-goot48x7/package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ a missing preference country reuses only the registered primary residential country on save (11.279483ms)
+✔ country is never guessed from currency, language or an ambiguous address (0.676869ms)
+✔ an existing preference country is preserved and profile errors do not disable the form (5.186301ms)
+✔ loading reads the actual preferences without writing defaults (1.232443ms)
+✔ changing a control persists the complete contract and keeps hidden metadata (6.20352ms)
+✔ failed writes restore confirmed values and allow retrying (4.194845ms)
+✔ concurrent changes cannot overwrite a pending save (5.388231ms)
+✔ a failed read after an accepted save does not claim the old values were preserved (2.262229ms)
+✔ loading failures disable persistence without fabricated values (7.905491ms)
+✔ unmounting discards late responses and unknown controls are not written (1.832964ms)
+[Vue warn]: Property "discardBankForm" was accessed during render but is not defined on instance.
+  at <QCard key=0 ref="formRef" class="form-card bank-inline-form q-mt-lg"  ... >
+  at <QCard class="tool" >
+  at <App>
+(node:588222) ExperimentalWarning: VM Modules is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ save locks before async validation and rejects duplicate submits (15.854114ms)
+✔ archive writes cannot be submitted twice (11.408331ms)
+✔ archived accounts stay hidden when the API returns them after a reload (12.790915ms)
+✔ latest bank list survives an older request failure (5.315322ms)
+✔ loading clears old rows and an old success cannot hide a newer failure (7.062202ms)
+✔ late details after disposal cannot reopen a banking form or publish a notification (9.91152ms)
+✔ changing session during validation prevents any write (10.542363ms)
+✔ successful save clears sensitive form fields and unlocks only after refreshing (9.567501ms)
+✔ a late successful write cannot notify or refresh a disposed or changed session (19.701522ms)
+✔ existing fields are disabled during submission without introducing new actions (59.85341ms)
+✔ inline banking payload preserves account type, splits the digit and excludes holder fields (16.805436ms)
+✔ editing another bank field never silently clears a masked PIX key (6.351549ms)
+(node:588229) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///tmp/strategy-review17-goot48x7/src/services/profilePresentation.js is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to /tmp/strategy-review17-goot48x7/package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ saved nationality without its catalog description never claims missing personal data (6.115381ms)
+✔ an incomplete catalog keeps known countries and marks unresolved descriptions (1.227149ms)
+✔ catalog recovery restores labels without editing the saved profile (5.537156ms)
+✔ prefer-not-to-say remains translated without catalog and actual catalog labels take precedence (0.834864ms)
+✔ genuine missing nationality and legacy text keep the existing presentation (0.78008ms)
+(node:588247) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///tmp/strategy-review17-goot48x7/src/services/documentWindow.js is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to /tmp/strategy-review17-goot48x7/package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:588247) ExperimentalWarning: VM Modules is an experimental feature and might change at any time
+✔ upload and replacement lock before validation and preserve drafts after failure (47.42717ms)
+✔ a definition for an old country cannot replace the current instructions (6.967866ms)
+✔ closing a dialog invalidates definitions, including old errors (24.265672ms)
+✔ a superseded load cannot publish old documents or clear a newer failure (10.693058ms)
+✔ session change during validation prevents upload (9.755842ms)
+✔ successful upload clears the file and closes before refreshing (16.345408ms)
+✔ leaving the view suppresses late upload notifications and refreshes (9.641986ms)
+✔ upload from a requirement preserves its identity in the multipart request (21.369994ms)
+✔ replacement preflight rejects historical or already approved identity without losing the selected file (27.400515ms)
+✔ replacement of the current rejected side uses that file ID after preflight (15.039756ms)
+✔ fiscal and residence files use upload and exact replacement while preserving dates (73.957576ms)
+✔ group saves keep the second file after failure and never resend the accepted first file (23.273552ms)
+✔ a group resubmission replaces each rejected identity side exactly once (17.482585ms)
+✔ level summary failure keeps document loading and uploads independent (11.137117ms)
+(node:588250) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///tmp/strategy-review17-goot48x7/src/services/profileDocumentation.js is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to /tmp/strategy-review17-goot48x7/package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ approved profile groups exclude fiscal ID, platform and asset files while preserving identity sides and rejection reasons (21.638896ms)
+✔ documentation uses the official account level and counts, independent of legacy approval (1.155559ms)
+✔ level zero shows missing confirmations without falsely granting level one (4.124145ms)
+✔ missing official progress is unavailable rather than locally inferred (0.925973ms)
+✔ attachment icons use MIME or file extension instead of a generic document glyph (6.200219ms)
+✔ a resubmitted single-file row no longer offers the older rejected upload (2.582087ms)
+(node:588271) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///tmp/strategy-review17-goot48x7/src/services/profilePresentation.js is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to /tmp/strategy-review17-goot48x7/package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:588271) ExperimentalWarning: VM Modules is an experimental feature and might change at any time
+✔ older contract error cannot replace a successful retry (17.787729ms)
+✔ older contract details cannot replace the latest failed retry (13.592678ms)
+✔ superseded pagination does not request additional pages or documents (22.843259ms)
+✔ terms loading remains active when an old request finishes first (6.141739ms)
+✔ older terms error cannot overwrite the latest successful response (8.093732ms)
+✔ disposal and changed sessions stop late data publication and child requests (20.238307ms)
+✔ partial document failure keeps available files and does not block the terms section (12.634312ms)
+✔ real template distinguishes errors and loading from a successful empty section (54.849243ms)
+✔ contract download reserves its tab in the click handler before waiting for its URL (14.698578ms)
+✔ a blocked popup prevents the temporary URL call and reports the existing recovery (6.369673ms)
+✔ leaving Contracts and Terms closes a pending tab and ignores its late URL (7.884793ms)
+✔ session changes close the pending tab without exposing a stale URL or error (13.843261ms)
+✔ invalid URL or API failure closes its reserved tab and allows another attempt (18.114308ms)
+✔ double click starts only one contract URL call (4.956971ms)
+✔ leaving stops an old handler from initiating another download (13.254469ms)
+✔ a profile file uses its blob download and releases the URL without a popup (17.765808ms)
+✔ term text is downloaded as plain text and never executes markup (4.598696ms)
+✔ leaving or changing session prevents a pending profile file from triggering a blob download (14.368633ms)
+✔ a manually closed pending tab is not navigated when the URL arrives (5.181764ms)
+(node:588278) ExperimentalWarning: VM Modules is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ documentation: reserves tab synchronously, opens without opener/referrer and preserves file on exit (315.098524ms)
+✔ documentation: blocked popup avoids API request (12.261739ms)
+✔ documentation: failure closes reservation; retry opens once (21.225967ms)
+✔ documentation: duplicate clicks make one URL request (15.764902ms)
+✔ documentation: exit closes pending tab, rejects further actions and ignores late response (11.183292ms)
+✔ documentation: previous-session success cannot open a file (13.920009ms)
+✔ documentation: invalid and insecure external destinations leave no empty tab (37.401407ms)
+✔ documentation: manually closed reservation remains retryable (14.231732ms)
+✔ gallery: reserves tab synchronously, opens without opener/referrer and preserves file on exit (52.435377ms)
+✔ gallery: blocked popup avoids API request (7.978581ms)
+✔ gallery: failure closes reservation; retry opens once (13.799005ms)
+✔ gallery: duplicate clicks make one URL request (22.724225ms)
+✔ gallery: exit closes pending tab, rejects further actions and ignores late response (9.761769ms)
+✔ gallery: previous-session success cannot open a file (5.038219ms)
+✔ gallery: invalid and insecure external destinations leave no empty tab (21.919052ms)
+✔ gallery: manually closed reservation remains retryable (9.69557ms)
+✔ editor: reserves tab synchronously, opens without opener/referrer and preserves file on exit (32.150893ms)
+✔ editor: blocked popup avoids API request (6.163132ms)
+✔ editor: failure closes reservation; retry opens once (13.544551ms)
+✔ editor: duplicate clicks make one URL request (7.510034ms)
+✔ editor: exit closes pending tab, rejects further actions and ignores late response (11.64823ms)
+✔ editor: previous-session success cannot open a file (9.644751ms)
+✔ editor: invalid and insecure external destinations leave no empty tab (29.461263ms)
+✔ editor: manually closed reservation remains retryable (11.061097ms)
+✔ editor: local fictitious file opens without upload and releases its object URL (10.687902ms)
+(node:588292) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///tmp/strategy-review17-goot48x7/src/services/profileJobEdit.js is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to /tmp/strategy-review17-goot48x7/package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ optional empty amounts remain null while explicit zero and precise decimals survive (7.453437ms)
+✔ equivalent numeric formatting does not rewrite either unchanged profile (1.052958ms)
+✔ an intentional clear changes a saved amount to null without erasing metadata (0.607904ms)
+✔ occupation-only changes retain professional metadata and do not rewrite financial data (1.25027ms)
+✔ invalid amounts fail preflight even when occupation also changed (2.18455ms)
+✔ retry after a partial save preserves the draft and skips the confirmed professional write (9.160006ms)
+✔ a failed first write leaves both sections pending, without sending financial data (2.242774ms)
+✔ changing sessions during the first write stops subsequent writes and local confirmation (1.63203ms)
+✔ an error in either work resource shows retry without rendering missing data or zero amounts (42.711529ms)
+✔ loading hides work fields and a successful retry restores actual missing and zero values (5.938812ms)
+(node:588329) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///tmp/strategy-review17-goot48x7/src/services/profileSessions.js is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to /tmp/strategy-review17-goot48x7/package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+[Vue warn]: Failed to resolve component: q-td
+If this is a native custom element, make sure to exclude it from component resolution via compilerOptions.isCustomElement.
+  at <App>
+[Vue warn]: Failed to resolve component: q-td
+If this is a native custom element, make sure to exclude it from component resolution via compilerOptions.isCustomElement.
+  at <App>
+[Vue warn]: Failed to resolve component: q-td
+If this is a native custom element, make sure to exclude it from component resolution via compilerOptions.isCustomElement.
+  at <App>
+[Vue warn]: Failed to resolve component: q-td
+If this is a native custom element, make sure to exclude it from component resolution via compilerOptions.isCustomElement.
+  at <App>
+(node:588329) ExperimentalWarning: VM Modules is an experimental feature and might change at any time
+✔ an older sessions error cannot replace a newer successful retry (66.951488ms)
+✔ an older sessions success cannot hide the latest failed request (5.340275ms)
+✔ session changes and disposed views ignore late session errors (13.558219ms)
+✔ retry clears only the failed sessions state and restores real masked rows (11.359423ms)
+✔ loading and failure never claim the account has no sessions (56.24905ms)
+✔ a successful empty response keeps the existing empty text and actual sessions remain visible (11.870642ms)
+✔ privacy shows only first name and initials; sensitive fields never enter artwork model (77.204338ms)
+✔ missing data stays unavailable; zero and negative performance remain real values (19.964377ms)
+✔ invalid invitation URLs and metrics cannot enable complete export (15.283169ms)
+✔ tenure uses complete months and image dimensions match delivery formats (13.041648ms)
+(node:588343) ExperimentalWarning: VM Modules is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ the latest tab cancels a pending navigation even when returning to the current URL (69.548956ms)
+✔ rapid choices and reversed guard completion preserve the last selection (34.054611ms)
+✔ profile tab changes cannot modify the query of another route after leaving (19.712862ms)
+✔ Back and Forward restore tab from query without adding navigation loops (26.098184ms)
+✔ missing or invalid tab falls back to personal when external navigation changes the URL (10.879577ms)
+✔ selecting another tab drops the bank action while preserving unrelated query (11.275376ms)
+✔ a rejected navigation restores the last committed tab and a retry remains possible (16.210547ms)
+✔ an aborted navigation returns the picker to the committed tab without a loop (14.741795ms)
+(node:588349) ExperimentalWarning: VM Modules is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ profile terms reuse published consent content and the platform files without moving asset or fiscal files (14.42244ms)
+✔ one terms source failure retains the other source and exposes retry; both failures reject (8.093798ms)
+(node:588356) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///tmp/strategy-review17-goot48x7/src/services/profileTrustedEdit.js is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to /tmp/strategy-review17-goot48x7/package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+[Vue warn]: Failed to resolve component: q-icon
+If this is a native custom element, make sure to exclude it from component resolution via compilerOptions.isCustomElement.
+  at <App>
+[Vue warn]: Failed to resolve component: q-badge
+If this is a native custom element, make sure to exclude it from component resolution via compilerOptions.isCustomElement.
+  at <App>
+[Vue warn]: Failed to resolve component: q-tooltip
+If this is a native custom element, make sure to exclude it from component resolution via compilerOptions.isCustomElement.
+  at <App>
+[Vue warn]: Failed to resolve component: q-select
+If this is a native custom element, make sure to exclude it from component resolution via compilerOptions.isCustomElement.
+  at <App>
+[Vue warn]: Failed to resolve component: profile-fields
+If this is a native custom element, make sure to exclude it from component resolution via compilerOptions.isCustomElement.
+  at <App>
+[Vue warn]: Failed to resolve component: q-icon
+If this is a native custom element, make sure to exclude it from component resolution via compilerOptions.isCustomElement.
+  at <App>
+[Vue warn]: Failed to resolve component: q-badge
+If this is a native custom element, make sure to exclude it from component resolution via compilerOptions.isCustomElement.
+  at <App>
+[Vue warn]: Failed to resolve component: q-tooltip
+If this is a native custom element, make sure to exclude it from component resolution via compilerOptions.isCustomElement.
+  at <App>
+[Vue warn]: Failed to resolve component: q-select
+If this is a native custom element, make sure to exclude it from component resolution via compilerOptions.isCustomElement.
+  at <App>
+[Vue warn]: Failed to resolve component: profile-fields
+If this is a native custom element, make sure to exclude it from component resolution via compilerOptions.isCustomElement.
+  at <App>
+✔ empty profile creates a first contact without inventing relationship or email (8.976781ms)
+✔ multiple contacts retain IDs and hidden metadata; unchanged rows are not rewritten (2.089292ms)
+✔ all contacts are validated before any write; existing rows cannot be removed or rebound (2.444105ms)
+✔ retry skips a confirmed update after a later failure and preserves the draft (2.300678ms)
+✔ session change stops the batch and does not confirm another account's data (2.312447ms)
+✔ the real profile template uses only the existing name/phone pair and section actions (813.902438ms)
+✔ appended contacts preserve confirmed creates when retrying a later failure (4.597013ms)
+(node:588370) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///tmp/strategy-review17-goot48x7/src/services/profilePresentation.js is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to /tmp/strategy-review17-goot48x7/package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ missing profile data never becomes example identity, money or documents (4.478314ms)
+✔ summary and full profile share real financial values and preserve zero (62.295906ms)
+✔ only masked document numbers are presented and address complement is not a neighborhood (0.903796ms)
+✔ dates preserve the API calendar day and reject malformed values (0.885113ms)
+✔ a level, waived requirement or approved tax document does not unlock identity editing (0.992226ms)
+✔ session rows use real time and device, mask IP and never invent location (20.218199ms)
+✔ editing location preserves country, birthday, names, contacts and personal details (3.439579ms)
+✔ editing basic data keeps secondary names and addresses and never guesses a contact kind (9.398873ms)
+✔ structured contacts display server masks instead of missing data or raw values (2.402687ms)
+✔ editing basic data uses full-profile contacts and preserves them when only personal details change (2.385506ms)
+✔ invalid object contacts or ambiguous primary contacts cannot clear a saved email (19.676011ms)
+✔ basic profile rejects future and impossible birthdays before producing a write payload (4.187416ms)
+✔ birthday validation uses the local calendar day and does not invent requiredness (7.089813ms)
+(node:588371) ExperimentalWarning: VM Modules is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ registration uses the documented endpoint, envelope and stable key (58.126284ms)
+✔ confirmation and resend are public and transmit the code unchanged (46.032035ms)
+✔ public 401 preserves original error instead of refreshing or redirecting (23.606006ms)
+✔ rate limits and verification errors have safe messages (26.498702ms)
+(node:588382) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///tmp/strategy-review17-goot48x7/src/services/registrationIntegration.js is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to /tmp/strategy-review17-goot48x7/package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ CPF has no identification dates while RG retains its own dates (4.753989ms)
+✔ document length follows its definition without prohibiting alphanumeric identifiers (1.578682ms)
+✔ Brazil has all 27 UFs for new drafts; other countries are not given Brazilian states (27.941654ms)
+✔ CPF check digits, repeated digits and malformed input are validated at the field (7.241216ms)
+✔ nationality choices preserve the current selection and exclude other selections (2.571551ms)
+✔ formatting keeps precision, invalid input, zero and international numbers (1.797613ms)
+✔ review distinguishes confirmed uploads from newly selected replacement files (2.172416ms)
+(node:588395) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///tmp/strategy-review17-goot48x7/src/services/clientAssetModel.js is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to /tmp/strategy-review17-goot48x7/package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ editing uses an isolated copy and sends the entire ordered property list (9.267182ms)
+✔ removing all sends [] and an omitted draft field preserves the existing list (2.014936ms)
+✔ enforces limit and required bounded names/values before sending (2.792787ms)
+(node:588402) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///tmp/strategy-review17-goot48x7/src/services/registrationDocuments.js is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to /tmp/strategy-review17-goot48x7/package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ CPF resume preserves only the server mask and never submits it as a new CPF (6.186307ms)
+✔ resume displays server mask, issuer, region and dates and only reuses unchanged current evidence (8.694265ms)
+✔ edits or replacement files require a real number and cannot reuse old metadata (1.472909ms)
+✔ file copy preserves receipt identity; a new file is selected, never labeled as sent (1.14156ms)
+✔ other countries, archived records and ambiguous active documents never hydrate (1.41656ms)
+✔ passport selection and date format follow saved server type, never invent front/back mapping (0.770315ms)
+✔ passport resume preserves a different issuing country and changing it invalidates reused evidence (0.813737ms)
+(node:588403) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///tmp/strategy-review17-goot48x7/src/services/registrationDocuments.js is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to /tmp/strategy-review17-goot48x7/package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ eight Figma variants keep representative countries explicit without inventing a Canada layout (15.00834ms)
+✔ passport uses exactly number, issuing country, issue date and expiry for every variant (1.455588ms)
+✔ calendar formats distinguish US month/day from day/month and Japanese year/month/day (2.261886ms)
+✔ dates cannot have future issue or expiry earlier than issue; absent required rules are not invented (8.523663ms)
+✔ changing type ignores inactive dates and does not reuse identity values as passport values (1.616799ms)
+✔ variant/type lookup rejects unknown and inherited keys gracefully (1.547995ms)
+✔ file selection preserves one nonempty file and only applies supplied backend limits (0.977338ms)
+✔ draft copies isolate variants and parent edits while retaining File references only in memory (1.729796ms)
+(node:588404) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///tmp/strategy-review17-goot48x7/src/services/registrationEmployment.js is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to /tmp/strategy-review17-goot48x7/package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ the employment draft contains the business fields authorized by design and QA and no invented initial zero (5.846275ms)
+✔ Brazilian currency input preserves cents and grouping without binary floating point (9.661773ms)
+✔ malformed, negative and ambiguous values are rejected rather than rounded or silently coerced (0.78694ms)
+✔ all three monetary fields validate independently and failure preserves the exact draft (1.141903ms)
+✔ free-text occupation is required, employer optional, and both currencies come from the API catalogue (5.757986ms)
+✔ copied drafts preserve user strings and isolate state for navigation (0.521543ms)
+(node:588410) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///tmp/strategy-review17-goot48x7/src/services/registrationConsentRules.js is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to /tmp/strategy-review17-goot48x7/package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:588410) ExperimentalWarning: VM Modules is an experimental feature and might change at any time
+✔ review hydrates successful financial data independently from a failed professional read (101.004878ms)
+✔ new contacts use POST and retain IDs on partial failure and retry (24.14771ms)
+✔ failed review reads preserve drafts and report all failed sections together (23.227546ms)
+✔ successful retry clears unavailable state without overwriting hydrated financial edits (27.44007ms)
+✔ an unavailable financial read blocks its editing step without clearing successful occupation (8.084182ms)
+✔ logging in again to the same customer reloads saved data instead of previous-session drafts (16.114283ms)
+✔ an old mounted stage cannot write after logout and a new login to the same customer (11.901287ms)
+✔ new stage 4 writes professional, financial and both preferences before entering documents (14.159917ms)
+✔ server-defaulted currencies do not block professional step or cause a preference write (9.066044ms)
+✔ a financial write failure keeps drafts and retry skips confirmed professional data (13.479671ms)
+✔ a resumed documents deep link returns to stage 4 if professional prerequisites are missing (15.400593ms)
+✔ stage five restores masked document fields and reuses confirmed evidence without writing a masked number (17.60554ms)
+✔ no trusted contact declaration persists and restores on another session (7.933457ms)
+✔ final submission requires explicit truthfulness and sends only the confirmed flag (10.924861ms)
+✔ official profile lock prevents writes and preserves registration drafts (6.746503ms)
+✔ guard consent flag never bypasses actual versioned acceptance (17.684108ms)
+✔ explicit consent saves only legal agreements before submission (11.109665ms)
+✔ a policy version changed after reading requires a fresh acceptance (5.891863ms)
+✔ failed requirements read never submits and keeps review drafts (9.083205ms)
+✔ unconfirmed submission never navigates to success (9.399805ms)
+✔ an already locked submitted registration is never submitted twice (11.096974ms)
+(node:588416) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///tmp/strategy-review17-goot48x7/src/services/registrationIntegration.js is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to /tmp/strategy-review17-goot48x7/package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ personal save maps dates and existing fields while preserving unrelated data without unsupported extras (8.018167ms)
+✔ address creation preserves secondary addresses and does not conflate district with complement (4.848422ms)
+✔ financial save preserves zero absence precision and temporal metadata, rejects implicit currency conversion (4.678594ms)
+✔ professional save preserves metadata and does not invent an occupation (1.152225ms)
+✔ contacts preserve existing relationship and accept new contacts without one (1.257323ms)
+✔ document payload uses the returned schema, real country/type and explicit evidence IDs (1.622598ms)
+✔ catalog uses real countries and existing server values without fake choices (49.394922ms)
+✔ registration write retries an ambiguous failure with the same idempotency key (76.876448ms)
+(node:588416) ExperimentalWarning: VM Modules is an experimental feature and might change at any time
+✔ file retries reuse success and isolate evidence by customer without sending an invented customerId (11.849571ms)
+✔ an address variant without filiation fields preserves existing parents (2.863895ms)
+✔ clearing a personal string uses empty text because the API preserves existing values on null (1.310927ms)
+✔ address resume separates the number and resaving does not duplicate it (3.622849ms)
+✔ address resume keeps commas in the street and recognizes usual number suffixes (4.563153ms)
+✔ address resume leaves ambiguous lines and numbered street names untouched (0.91593ms)
+✔ only variants with a separate number field split the API address (0.923326ms)
+✔ professional employer is explicitly editable and preferences preserve all existing metadata (1.018562ms)
+(node:588424) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///tmp/strategy-review17-goot48x7/src/services/registrationPersonal.js is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to /tmp/strategy-review17-goot48x7/package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ birth date checks leap years, actual calendar dates and the local day boundary (3.7274ms)
+✔ blank fields are not declared mandatory without confirmed rules (17.800183ms)
+✔ catalog readiness requires all four lists without manufacturing options (0.992944ms)
+✔ selections must belong to their supplied catalog and nationality duplicates are rejected (3.381633ms)
+✔ an extra blank nationality is harmless because Figma has no remove action (1.335356ms)
+✔ draft copies preserve exact city and date without sharing lists or adding profile fields (0.953531ms)
+✔ validation preserves draft after failure and does not echo personal data (1.375765ms)
+(node:588444) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///tmp/strategy-review17-goot48x7/src/services/registrationPostalCode.js is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to /tmp/strategy-review17-goot48x7/package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ CEP accepts eight digits with optional hyphen, rejects invalid text without sending a request (14.835113ms)
+✔ lookup fills only the four Figma address fields and preserves number and complement (2.958113ms)
+✔ generic CEP does not erase street or district when the response omits them (1.232841ms)
+✔ not found and unavailable lookup preserve manual data and allow retry (2.058218ms)
+✔ late responses cannot overwrite another CEP or edits made during lookup (1.382571ms)
+✔ unmount or a newer request invalidates old results and old failures (6.026929ms)
+✔ incomplete or mismatched responses never partially fill the address (1.46144ms)
+✔ shared legacy lookup sends only CEP without authenticated credentials and bounds request duration (42.79279ms)
+✔ returning to a previously queried CEP after changing it performs a fresh lookup (2.755185ms)
+(node:588444) ExperimentalWarning: VM Modules is an experimental feature and might change at any time
+(node:588450) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///tmp/strategy-review17-goot48x7/src/services/registrationConsentRules.js is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to /tmp/strategy-review17-goot48x7/package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:588450) ExperimentalWarning: VM Modules is an experimental feature and might change at any time
+✔ direct receipt link never claims an unsent registration was sent (32.707283ms)
+✔ receipt survives reload using the actual submitted status (11.479312ms)
+✔ failed receipt read never renders a success confirmation (9.088296ms)
+(node:588458) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///tmp/strategy-review17-goot48x7/src/services/registrationIntegration.js is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to /tmp/strategy-review17-goot48x7/package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ new international accounts have real state/province choices before an address has been saved (32.828845ms)
+✔ existing regions are preserved and no neighbouring country catalogue is substituted (2.446034ms)
+✔ passport issuing country uses the existing countryId contract independently of residence (14.149357ms)
+(node:588472) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///tmp/strategy-review17-goot48x7/src/services/sessionIsolation.js is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to /tmp/strategy-review17-goot48x7/package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ resume accepts only existing authenticated registration screens without arbitrary destinations (2.078176ms)
+✔ last visited step survives a new login and is isolated by authenticated user (1.768983ms)
+✔ Home and invalid paths never overwrite registration progress and no anonymous progress is stored (0.438933ms)
+✔ explicit safe return takes precedence; corrupted storage and unavailable storage fail safely (0.768868ms)
+(node:588472) ExperimentalWarning: VM Modules is an experimental feature and might change at any time
+✔ real authentication restores the same user's stage after logout and login without changing progress (33.858051ms)
+✔ real authentication never sends another account to the previous user's stage (12.885122ms)
+✔ real router records only successful authenticated stage navigation and retains it through Home (6.867978ms)
+✔ expired-session router requires login and preserves only the safe return route (6.742901ms)
+✔ old progress migrates documents to 5 and employment to 4 without changing another account (0.938868ms)
+(node:588473) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///tmp/strategy-review17-goot48x7/src/services/registrationReview.js is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to /tmp/strategy-review17-goot48x7/package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ review has exactly the five Figma sections without sample data or invented initial values (12.923646ms)
+✔ review explicitly selects fields and never serializes password, codes, tokens or file names (6.620503ms)
+✔ identifier masking never reveals short values in full (0.741943ms)
+✔ review money distinguishes absence from zero and preserves large decimal amounts (3.501212ms)
+✔ opaque catalogue values are replaced by labels or unavailable descriptions (1.262318ms)
+✔ editing a document preserves its selected variant and review does not mutate drafts (1.689568ms)
+✔ absence summarizes the explicit choice and ignores inactive contact drafts (1.486276ms)
+✔ local issue aggregation catches invalid dates, money and missing document sides (9.997667ms)
+✔ failed reads are unavailable rather than not informed, while preserving draft values and Figma sections (3.94768ms)
+✔ review presents authorized professional additions and links to the new business order (1.810851ms)
+(node:588479) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///tmp/strategy-review17-goot48x7/src/services/registrationSteps.js is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to /tmp/strategy-review17-goot48x7/package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ step one requires only the Figma fields and optional referral may stay blank (5.310841ms)
+✔ residence accepts one known presentation choice without inventing HTTP country IDs (12.3879ms)
+✔ password length, exact confirmation, email and explicit acceptance are validated locally (0.804358ms)
+✔ validation does not mutate input, leak values in errors, or share form state (0.852314ms)
+(node:588479) ExperimentalWarning: VM Modules is an experimental feature and might change at any time
+✔ registration screens ship in homologation builds and preserve the existing registration (48.158264ms)
+(node:588486) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///tmp/strategy-review17-goot48x7/src/services/registrationTrustedContacts.js is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to /tmp/strategy-review17-goot48x7/package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ draft contains only name, phone and explicit absence without relationship or email (4.136117ms)
+✔ an empty step requires a contact or explicit absence (8.661893ms)
+✔ partially entered contacts get independent field errors, including additional rows (1.0303ms)
+✔ absence ignores but preserves edits and restores validation when unchecked (1.677156ms)
+✔ add requires complete rows and never appends repeated empty rows or when absence is selected (1.084997ms)
+✔ international punctuation is preserved without assuming DDI, length, surname count or uniqueness (0.599598ms)
+✔ copies isolate navigation drafts and errors do not echo names or phones (0.869818ms)
+✔ installed source guard and timed regression reject the vulnerable extglobs (118.082517ms)
+✔ audit accepts only mitigated leaf and transitive effects at the original high threshold (3.905052ms)
+✔ new direct high/critical advisories remain blocking, including in an inherited chain (0.99661ms)
+✔ new picomatch advisory, nested install or changed affected range cannot use the mitigation exception (0.723614ms)
+✔ audit errors, missing reports and inconsistent counts fail closed (0.670674ms)
+✔ source verification fails when the installed mitigation is missing or tampered (48.094884ms)
+(node:588505) ExperimentalWarning: VM Modules is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ a response from the previous login cannot populate the next session (48.992592ms)
+✔ late refresh cannot restore a logged out account or replace a new login (18.349315ms)
+✔ cross-tab login during refresh is preserved even without a local reset (15.05888ms)
+✔ concurrent expired requests share one refresh and retain idempotency keys (8.526054ms)
+✔ failed refresh expires only the current session (11.964561ms)
+✔ same-account refresh preserves in-flight responses and retries late 401 without another refresh (7.44468ms)
+✔ login checks the submitted email and the API identity before entering (10.067854ms)
+(node:588517) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///tmp/strategy-review17-goot48x7/src/services/walletPresentation.js is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to /tmp/strategy-review17-goot48x7/package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+Wallet mapping: currencies, unavailable values, zero and reserved balances passed.
+✔ tests/wallet-presentation.test.mjs (178.252494ms)
+(node:588535) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///tmp/strategy-review17-goot48x7/src/services/walletModel.js is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to /tmp/strategy-review17-goot48x7/package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ seven currencies retain missing values instead of fabricated zero balances (8.990198ms)
+✔ balance after operation never invents available funds or accepts overdrafts (0.375189ms)
+✔ only active accounts in the selected confirmed currency are eligible (0.389252ms)
+✔ withdrawal requires deposit balance, same-currency account and withdrawal password (0.876206ms)
+✔ transfer directions have distinct settlement rules and no password requirement (0.440338ms)
+✔ deposit respects configured currency minimum without assuming Figma example values (0.48943ms)
+✔ bank picker loads all pages and drops results from a closed context (1.500146ms)
+✔ consolidated total includes patrimony and never sums native currency balances (0.867653ms)
+(node:588540) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///tmp/strategy-review17-goot48x7/src/services/walletModel.js is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to /tmp/strategy-review17-goot48x7/package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:588540) ExperimentalWarning: VM Modules is an experimental feature and might change at any time
+✔ review validates account, currency and balance before asking for password (1.520886ms)
+✔ snapshot freezes reviewed values without password and masks account (18.792149ms)
+✔ changed balance, account or amount invalidates the reviewed operation (0.667072ms)
+✔ first two steps never write; final submit cannot duplicate; success waits for response (99.403621ms)
+✔ failure clears credential, keeps reviewed data and allows retry without false success (19.112824ms)
+✔ changed API balance returns to form and late completion after disposal is ignored (26.959695ms)
+✔ resource reload or error prevents advancing even by keyboard submission (12.843126ms)
+ℹ tests 529
+ℹ suites 0
+ℹ pass 529
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 5051.624631

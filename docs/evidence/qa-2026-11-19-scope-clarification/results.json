@@ -1,0 +1,32 @@
+{
+  "date": "2026-11-19",
+  "kind": "user-scope-clarification-and-source-review",
+  "client": {
+    "frames": [
+      "1:50960",
+      "1:51347",
+      "1:51728",
+      "1:52034",
+      "1:54617"
+    ],
+    "decision": "Preservar telas existentes e empréstimos por etapas; sem novas telas de detalhe presumidas.",
+    "classification": "validation",
+    "limit": "Aceite informado pelo usuário; nenhum novo teste no navegador ou API nesta rodada."
+  },
+  "contentCreation": {
+    "entryNode": "1484:96184",
+    "editorNode": "1484:96882",
+    "source": "src/pages/Workspaces/AdminWorkspacePage.vue",
+    "verified": "create abre typeOpen; seleção habilita Continuar; continueType navega com editor=new e kind=selectedType; PublicationWorkspace recebe kind.",
+    "remaining": "Botão interno entre blocos para inserir mídia e controles H2/H3 são outra interação, ainda sem desenho aberto confirmado."
+  },
+  "intraday": {
+    "modalNode": "1484:73658",
+    "candidateButtonNode": "1484:69938",
+    "label": "Adicionar operação",
+    "decision": "Aguardar confirmação do usuário com Éric sobre posição e vínculo."
+  },
+  "applicationChanges": false,
+  "browserTest": false,
+  "deployment": false
+}
