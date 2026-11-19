@@ -1,0 +1,523 @@
+{
+  "commit": "b9036577605feb9b14dde04f1fd8844f07e12770",
+  "run": "https://github.com/WillTbn/Strategy-analytics-v2/actions/runs/44606506188",
+  "conclusion": "success",
+  "entry": "/assets/index-BdYxoWtN.js",
+  "registrationChunks": [
+    "RegistrationDocumentPage-DuHUK3RK.js"
+  ],
+  "lookupMarkerPresent": true,
+  "datasetFilesVerified": [
+    {
+      "file": "00.json",
+      "sha256": "2629a908b17b5fd7f1fea5e13fe1e7918bd87a6e493b93568c6ff12cc9d08fb4",
+      "matches": true
+    },
+    {
+      "file": "01.json",
+      "sha256": "0ad871f0ec3f20d4aaf65b6d2a2ee0fd57a1208510597db0c8c965bb9c2d1052",
+      "matches": true
+    },
+    {
+      "file": "02.json",
+      "sha256": "5a7ff67f1d3774f544fb47f1645cfecce04e79ede69512b1154a7ac2db0295fe",
+      "matches": true
+    },
+    {
+      "file": "03.json",
+      "sha256": "61e85aa267ccacc114a0e0d08a5cf0592b398df439c869a52f553e6833f1d822",
+      "matches": true
+    },
+    {
+      "file": "04.json",
+      "sha256": "128a0941edf7673f38e0cc6d66a81ca806c2a925ffcbbe739ff7ca604c2d62a4",
+      "matches": true
+    },
+    {
+      "file": "05.json",
+      "sha256": "490f72a7ba7f19813051dc3d0b1aba64440203ce0ee71a1f84e402cedbf5e6a8",
+      "matches": true
+    },
+    {
+      "file": "06.json",
+      "sha256": "5f71cf5a03d1f4c8fb2c2ce0c2d06616e9eb4a7745cbd0b2cc3f2d3bcb083d14",
+      "matches": true
+    },
+    {
+      "file": "07.json",
+      "sha256": "970a807a09321fae9dfba7ab20832d71ab2d2a836ec08f78851d05fa1fbd76cf",
+      "matches": true
+    },
+    {
+      "file": "08.json",
+      "sha256": "8a3d9012b7067298298e0b1b3f18eadb67dd634798d9f6aff55d030f2dd6338c",
+      "matches": true
+    },
+    {
+      "file": "09.json",
+      "sha256": "aca3b08ad5144777bea0080f1c02fb96f92b59ba3135cacf51661e8b4d03feaa",
+      "matches": true
+    },
+    {
+      "file": "10.json",
+      "sha256": "e9170f44494f1967f25c18962b1ab3183f4e7c9380013c7957bd0b452276edf4",
+      "matches": true
+    },
+    {
+      "file": "11.json",
+      "sha256": "9b5a1dd7c4f5e0e6f0c63a37595d9e88961fee21de5ce49151fc804785166195",
+      "matches": true
+    },
+    {
+      "file": "12.json",
+      "sha256": "2c56248f1de8564339e2a175fa5cbf820a6cadbfa7eb76e0408d14d0c29453a8",
+      "matches": true
+    },
+    {
+      "file": "13.json",
+      "sha256": "287596ff13d109274672c2a7f2d6127c7d7879fe3ca5c579e3ab0afa75adbacc",
+      "matches": true
+    },
+    {
+      "file": "14.json",
+      "sha256": "7a738749fdeebda799b60d35e287c73a49b89f49df5ee73d881fc458cbb0557d",
+      "matches": true
+    },
+    {
+      "file": "15.json",
+      "sha256": "bb43ad6b07aec00c880323182e1d31ec0468d29fa8e89f09138dda7d1703e595",
+      "matches": true
+    },
+    {
+      "file": "16.json",
+      "sha256": "215a027a2f68e836eac4e0c9086af918714628b049c9dfa840052f4f00cecad3",
+      "matches": true
+    },
+    {
+      "file": "17.json",
+      "sha256": "7bfa93e6319df227db4a4e0fe3eaac5c34eac4029ad5e2a13fe3e11171de0290",
+      "matches": true
+    },
+    {
+      "file": "18.json",
+      "sha256": "eab6a008902b199cc5cdb64838353bde083ffc813da4b471d3692a4a7c6ff06d",
+      "matches": true
+    },
+    {
+      "file": "19.json",
+      "sha256": "7595753a743385c5395de272efe6920cb3b0f9b1d46ce1d7df19a32ce5fb077e",
+      "matches": true
+    },
+    {
+      "file": "20.json",
+      "sha256": "16f375d581ce0496665af872a32fb680deeb61227e3412c5e2d549bd22d39a41",
+      "matches": true
+    },
+    {
+      "file": "21.json",
+      "sha256": "630797259a381263d299f63340b38d741a703bc781c99615fb6dd827b631907f",
+      "matches": true
+    },
+    {
+      "file": "22.json",
+      "sha256": "fb0cdec66e3cfcd24d5561771589a429c0d57877fbe46f3162fe9ea8fddc0b41",
+      "matches": true
+    },
+    {
+      "file": "23.json",
+      "sha256": "41c3448f21aa8fbc16cf79eb1d03e2e82cbf3c03a1a9a053255370a6af1f2a06",
+      "matches": true
+    },
+    {
+      "file": "24.json",
+      "sha256": "9386c126826f498d0535588a0fef00a7108923fcf83251e4fe758bbe8708e853",
+      "matches": true
+    },
+    {
+      "file": "25.json",
+      "sha256": "67bfae754c2eda4abfeadb9cd874be70e44aa59db2c5def773ec24b0c3db4f16",
+      "matches": true
+    },
+    {
+      "file": "26.json",
+      "sha256": "1dd9e004543400b8dd8ef7d84aaeb2b02f12acfb2930efae584c22add63cbb27",
+      "matches": true
+    },
+    {
+      "file": "27.json",
+      "sha256": "d45d080928895f04e2b6661f07fdba8695b18314b376a429e60cf70eee2e8915",
+      "matches": true
+    },
+    {
+      "file": "28.json",
+      "sha256": "9baa8a4c0a60887770528a08f327b98dfb55d0a13ba5b72d2eab6fa607df1f4e",
+      "matches": true
+    },
+    {
+      "file": "29.json",
+      "sha256": "a97114bd9a81f81c4281bdb00977fdd5c6a90ee49564f452a3fb1ac185fd4161",
+      "matches": true
+    },
+    {
+      "file": "30.json",
+      "sha256": "45ef987607c6a6df69e564f68e7e69d5af68c113e77d5e0cd2146ac6c1c022c8",
+      "matches": true
+    },
+    {
+      "file": "31.json",
+      "sha256": "1f107c73f47eb421f719294d99a6f1d2718f0bdae4500d1fe3183514412aceba",
+      "matches": true
+    },
+    {
+      "file": "32.json",
+      "sha256": "d7e83d006d36eca2960525ebd69019e4a073523b018be8f46b265fdd9d934332",
+      "matches": true
+    },
+    {
+      "file": "33.json",
+      "sha256": "a3fe91a208cced0852d505b5f6da496177fd2bc4a1d11cbeddb1008cfa403e1f",
+      "matches": true
+    },
+    {
+      "file": "34.json",
+      "sha256": "5300a4a76b1ec8e3534264529f57ec470ddfcd74c09b69fed12e863a48462376",
+      "matches": true
+    },
+    {
+      "file": "35.json",
+      "sha256": "c07fa4b9c8f91758827fb85d40534d3bf30a483aef39d7de782e4205210470b7",
+      "matches": true
+    },
+    {
+      "file": "36.json",
+      "sha256": "ff7042f1c238ba29881d039746e8c1f9350d3fb8e4189a27bc869b057b0e8110",
+      "matches": true
+    },
+    {
+      "file": "37.json",
+      "sha256": "e4d61e4a56f8dcab762501fc347ee7e047f28b6e2299eaefb0e283c25f01a62b",
+      "matches": true
+    },
+    {
+      "file": "38.json",
+      "sha256": "363857bc92fe62f60677456ef348bd0c79bf649308ec467ac29f07c8df46457e",
+      "matches": true
+    },
+    {
+      "file": "39.json",
+      "sha256": "6bd8cf77a3222c70ba8ff8b44074d08b4e330f70c02a9740530f6ad74e9b3606",
+      "matches": true
+    },
+    {
+      "file": "40.json",
+      "sha256": "db486ff2ff054e1e9a470302691394c3f106a6fa62e6b1b6e89586fde3a34f98",
+      "matches": true
+    },
+    {
+      "file": "41.json",
+      "sha256": "c551c53ac3a5f45bce46594e701ed7a8816904fbb0742d199185486587af4126",
+      "matches": true
+    },
+    {
+      "file": "42.json",
+      "sha256": "80e94839006ef3f6e6f3342cf6d16d8b83883fae9db5cb59a340eca5010825aa",
+      "matches": true
+    },
+    {
+      "file": "43.json",
+      "sha256": "e103524df73f05bcd70619468162f528e8a4094e0a0fdc2b8311415cf9c1eda6",
+      "matches": true
+    },
+    {
+      "file": "44.json",
+      "sha256": "d5b04ba5697aff832fdace85c9864b54dce721c7893baa145e8656904a01d0be",
+      "matches": true
+    },
+    {
+      "file": "45.json",
+      "sha256": "20a698536f92c6a32209c6443a61a3e8cc5e2af847a1a0fe3f07161e3973e07e",
+      "matches": true
+    },
+    {
+      "file": "46.json",
+      "sha256": "47845f17c0ca0acd8a984ac16257ee85c296a04b2d9941c0631213199601357c",
+      "matches": true
+    },
+    {
+      "file": "47.json",
+      "sha256": "7a8746bdc806b0016e524952342a3cf274f26bbef367fc6c63e96ae98befcce9",
+      "matches": true
+    },
+    {
+      "file": "48.json",
+      "sha256": "8f9fd049a3090901cf8913088d1e9dcf0de7d5dcc537289ce47ae9a8a96f7d02",
+      "matches": true
+    },
+    {
+      "file": "49.json",
+      "sha256": "0927593b9d684c93d7e3ecb06f208cee575890264413265211fbd25446be0495",
+      "matches": true
+    },
+    {
+      "file": "50.json",
+      "sha256": "0ec5234cd86a30db58d6b458b323ff09451f34fe4327f53fd22c45ca78a09ba9",
+      "matches": true
+    },
+    {
+      "file": "51.json",
+      "sha256": "e58eabaeef2f04e93453480113ea3c578bdf84d5fdd30bcbb3a7dad0c37bfba6",
+      "matches": true
+    },
+    {
+      "file": "52.json",
+      "sha256": "370e3730cf1ab9d04b613702bd8efa9a59686c585ac235ca70f8e1d9dfbaaf2a",
+      "matches": true
+    },
+    {
+      "file": "53.json",
+      "sha256": "4c7642142b972460bd55ccaa6fc0da12b768b9b88312fe524adbefb0a8fc2789",
+      "matches": true
+    },
+    {
+      "file": "54.json",
+      "sha256": "b4a37831ea2e09f6f0b843e3e38e5b22e918c2057ca1ddc57ffa9db7e1f52242",
+      "matches": true
+    },
+    {
+      "file": "55.json",
+      "sha256": "d5dc631d4fdfa9bc95bf6b7646291bbe6ac7566f5a8a8b115b447dfbba7f78fe",
+      "matches": true
+    },
+    {
+      "file": "56.json",
+      "sha256": "3f653464e94931ec83b36f8404fb6e3d5f9d7c86d4c6f43c7b62a0b98ebcdaff",
+      "matches": true
+    },
+    {
+      "file": "57.json",
+      "sha256": "eceb113806096648607b9c19e9cac2d5b39401b9e42a0f522945876ef8f26c28",
+      "matches": true
+    },
+    {
+      "file": "58.json",
+      "sha256": "af2ad06f76f62d35fcef2cb92705f9dc9a6dccbbee07cb3aa74c8cf3dd72e252",
+      "matches": true
+    },
+    {
+      "file": "59.json",
+      "sha256": "1947ba1062163b03dafa55e9c8fc0acecf258169b7621150e9e2821b80b9710f",
+      "matches": true
+    },
+    {
+      "file": "60.json",
+      "sha256": "7171265949e6f730f88759dfb993863268d1aa5215aab284a81e6ac535c6a5e8",
+      "matches": true
+    },
+    {
+      "file": "61.json",
+      "sha256": "d0fc9a0c2b8d9352115e54667a56e84a9ddc0a88b72707b1313f9f904d38bb97",
+      "matches": true
+    },
+    {
+      "file": "62.json",
+      "sha256": "2212b74702ddb4fe88012d14b4eb653e7b92b2dabe5d2207d9350010a858fae4",
+      "matches": true
+    },
+    {
+      "file": "63.json",
+      "sha256": "a44bb7e7acc746cfd9986499a385545c88eeef22fa84da8a7fd1d32a3e056263",
+      "matches": true
+    },
+    {
+      "file": "64.json",
+      "sha256": "8189720d0c19abb7bd8d7527d7d3ca42a5dc30c01d47692d96d628ba1acec60d",
+      "matches": true
+    },
+    {
+      "file": "65.json",
+      "sha256": "dd52e755d73e88e31e24121996e44b72082e96bf09dec560e156ff0e8d47da60",
+      "matches": true
+    },
+    {
+      "file": "66.json",
+      "sha256": "8b8f782ad8bcd76f18a45d97e3dc199682e21c93235acc408efe2d995009861e",
+      "matches": true
+    },
+    {
+      "file": "67.json",
+      "sha256": "2a9e6d34992d7e369e287a6777d94b828e763c9bc03ad1ef215ad95c8a0740fe",
+      "matches": true
+    },
+    {
+      "file": "68.json",
+      "sha256": "be9d1740fb3af3e25ae90fd43f5f61573c0cac0dca3c86bbcd628fda16b00442",
+      "matches": true
+    },
+    {
+      "file": "69.json",
+      "sha256": "ad6c197770dcbd49564710d6587aa25f40253d18f4dd91f5f9b7221d5318a52e",
+      "matches": true
+    },
+    {
+      "file": "70.json",
+      "sha256": "febe0f5ad517dc7d7736b47953df1ff15792b2383e6593e610daf379282d67e9",
+      "matches": true
+    },
+    {
+      "file": "71.json",
+      "sha256": "dc8fe4a4dfe59061cea246d0cc98c3a51d57cab2a60712c0f7d4339c20e5afbc",
+      "matches": true
+    },
+    {
+      "file": "72.json",
+      "sha256": "2de4f6503126f044febcdfdb3ba7b62f23ebea7d029fd0af9b7bc17cac7eab5e",
+      "matches": true
+    },
+    {
+      "file": "73.json",
+      "sha256": "50160b84289631aadd0f8cb11c72893b4ef3b60800ab1a07b5c7049ce889be6e",
+      "matches": true
+    },
+    {
+      "file": "74.json",
+      "sha256": "a1aec9f644b10c18e9edd4eeb689fc9a7845aa41c199d45483ed1abf8fbea56e",
+      "matches": true
+    },
+    {
+      "file": "75.json",
+      "sha256": "8d4d6eb0760fd53b0f0efc240e68ff79c34d22b99f68de34525ba6d5f0d717a7",
+      "matches": true
+    },
+    {
+      "file": "76.json",
+      "sha256": "9385b92f77720fd196d24fac030e000594dd08096b668803b38803e703081cfe",
+      "matches": true
+    },
+    {
+      "file": "77.json",
+      "sha256": "6e578111fd10ca234a642d83481d2e9d7bf706d44ef8088ae5b3ce0ffafac7c9",
+      "matches": true
+    },
+    {
+      "file": "78.json",
+      "sha256": "9ea06e402cdeefb8fbd3d49cab36b1471b806f3b3a78cb6e08b1bbc7098ccdb1",
+      "matches": true
+    },
+    {
+      "file": "79.json",
+      "sha256": "d88974c0111bb3f249e5742dc149f1cf959ec75b3e07b5dd63fd328e282e621a",
+      "matches": true
+    },
+    {
+      "file": "80.json",
+      "sha256": "8594171f9e71577c42cee066eba822dc2754478d5ccecd6faed22ab7722e02b2",
+      "matches": true
+    },
+    {
+      "file": "81.json",
+      "sha256": "ff4abcc43564186a85721cb4f003e0187932be573194c384241e762413433e63",
+      "matches": true
+    },
+    {
+      "file": "82.json",
+      "sha256": "3fbf7b762eed41f74421e0510c4916951760ad2b6e9f7d26f61cde47c8578bc8",
+      "matches": true
+    },
+    {
+      "file": "83.json",
+      "sha256": "fe7544ab75ae496e5b6cb78ff5920f18c1207687aac91c92261a695a6a2dfa10",
+      "matches": true
+    },
+    {
+      "file": "84.json",
+      "sha256": "680ada1b9c5a9ff228eb6407f08bab6a3931d6ea8220330e3b1b4b3c4a124bde",
+      "matches": true
+    },
+    {
+      "file": "85.json",
+      "sha256": "b35fa4ece66957561b90cb1ddf5e7a30ad89a62384f3d893083897be2bbf7907",
+      "matches": true
+    },
+    {
+      "file": "86.json",
+      "sha256": "a828fa419b65821d27d021ad1f2df7d0a5933f2cb99630358bdf9a356dc9761c",
+      "matches": true
+    },
+    {
+      "file": "87.json",
+      "sha256": "87624d7a29d0636466c5c89941ea05497a99f3e369ad8ff5f5dbc5fee26d87c8",
+      "matches": true
+    },
+    {
+      "file": "88.json",
+      "sha256": "b74066080c413ab7d57e1c675dd6db978c6560f5bdae394b64eeceb04eec77d5",
+      "matches": true
+    },
+    {
+      "file": "89.json",
+      "sha256": "f3536b34ddc2a82924958fbd00749fd5da6d9ac4f7edfac0d918f3eb82fef5fa",
+      "matches": true
+    },
+    {
+      "file": "90.json",
+      "sha256": "a986e952a4c9b13f872f47d40c12bbf4c8a9fc1c6e2ec4decc9ac601c55cdf62",
+      "matches": true
+    },
+    {
+      "file": "91.json",
+      "sha256": "432c23fdf1c670ab62c26904e4a53d38974e8d6fd37be8565707b5d203fc831a",
+      "matches": true
+    },
+    {
+      "file": "92.json",
+      "sha256": "832456c16507d72e695366a8e44c484420202097541f9a9d6a013331b40e7257",
+      "matches": true
+    },
+    {
+      "file": "93.json",
+      "sha256": "08089e493d90e0cbb0afb9efd5d744e54d33ba3c8ed2df3f1c50821d89b002b8",
+      "matches": true
+    },
+    {
+      "file": "94.json",
+      "sha256": "b5e0a3ba7414e203900c60fb5403f61ed800670daa53d34bf46e1d163d2df895",
+      "matches": true
+    },
+    {
+      "file": "95.json",
+      "sha256": "5e96560b37d06b0684ac11a9a52376d6725d429656b3495ff8b3c795a46bb4da",
+      "matches": true
+    },
+    {
+      "file": "96.json",
+      "sha256": "0494b901e2f7ed32fd7bfbd01beed3c92e889d9baa1685410040cc9c87889043",
+      "matches": true
+    },
+    {
+      "file": "97.json",
+      "sha256": "cfabee190b30fa1f8e3cd5d9ee82d5f0e1779d6edb54a08f9d7e87c8da459032",
+      "matches": true
+    },
+    {
+      "file": "98.json",
+      "sha256": "7002d5014e67f90145286abf8ce803b5a85c6a8e4f6efbedb30f1e1a168a47ce",
+      "matches": true
+    },
+    {
+      "file": "99.json",
+      "sha256": "c9a3aed5972d09ef933697e135118fe5dcf5e117bb35c0577b45584301839e44",
+      "matches": true
+    },
+    {
+      "file": "catalog.json",
+      "sha256": "3c72ea77fdbc2b2e20fdc881f88f168e14e56fbc82479e2be5c0ed2ccfeead23",
+      "matches": true
+    },
+    {
+      "file": "manifest.json",
+      "sha256": "01f7b4c3f1ebe53a7a46f19624a3d12ddba4ad113f9ab96b82c2643796b812fe",
+      "matches": true
+    }
+  ],
+  "browser": "Positive lookup exercised locally with real components and static data. No country/account changed; no integrated Japanese-address write tested."
+}

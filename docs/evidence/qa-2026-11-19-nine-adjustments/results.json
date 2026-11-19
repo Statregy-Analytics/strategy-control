@@ -1,0 +1,72 @@
+{
+  "date": "2026-11-19",
+  "scope": "Revisão dos nove ajustes; implementar o que tem definição suficiente sem criar ações/rotas/campos.",
+  "completedFrames": [
+    "37:27382"
+  ],
+  "remainingAdjustmentFrames": [
+    "1484:73658",
+    "1484:96882",
+    "1484:97193",
+    "1:50960",
+    "1:51347",
+    "1:51728",
+    "1:52034",
+    "1:54617"
+  ],
+  "sourceDataset": "postal-manifest.json",
+  "browserLocal": {
+    "environment": "Componentes reais do cadastro em prévia isolada por props; sem API/store fake. Consulta usa os JSON reais servidos pelo localhost.",
+    "passed": [
+      "1000001 preenche 13/Tôkyô e 千代田区",
+      "0600000 e teclado japonês preservam zero inicial, normalizam a máscara e preenchem Hokkaido",
+      "Código 0040000 apresenta ambiguidade sem escolher município",
+      "9999999 apresenta não encontrado e preserva a edição manual",
+      "Endereço e complemento não são sobrescritos",
+      "390px: documento/clientWidth 378px, sem rolagem horizontal externa e sem imagens ausentes"
+    ],
+    "desktopEvidence": "japanese-postal-desktop.jpg",
+    "mobileEvidence": "japanese-postal-mobile.jpg"
+  },
+  "limits": [
+    "Não foi alterado o país de residência de conta real de teste. Persistência integrada para residência Japão não foi exercitada.",
+    "Falha de transporte, resposta tardia, troca de código/invalidação e formatos incorretos cobertos por testes de código; não foi simulado servidor no navegador.",
+    "Demais oito ajustes não foram promovidos: confirmar desenhos/estados antes de implementar controles novos.",
+    "Doze estados já implementados seguem aguardando revalidação; nenhuma aprovação por inferência."
+  ],
+  "automated": {
+    "isolatedSnapshot": true,
+    "tests": 529,
+    "passed": 529,
+    "newTests": 9,
+    "lint": "passed",
+    "build": "passed",
+    "audit": "passed; preserved",
+    "scopedDiffCheck": "passed",
+    "ci": "Audit, lint, tests, build, upload and activation passed."
+  },
+  "publication": {
+    "commit": "b903657",
+    "run": "https://github.com/WillTbn/Strategy-analytics-v2/actions/runs/44606506188",
+    "status": "success",
+    "datasetFilesVerified": 102,
+    "compiledLookupVerified": true
+  },
+  "withoutReferenceSurfaces": 13,
+  "progress": {
+    "total": 279,
+    "done": 259,
+    "validation": 12,
+    "adjustment": 8,
+    "implemented": 271,
+    "implementedPercent": 97.1,
+    "readyPercent": 92.8
+  },
+  "sourceCommit": "b903657",
+  "documentationChecks": {
+    "adminLint": "passed",
+    "adminBuild": "passed",
+    "progressGenerator": "passed",
+    "scopedDiff": "passed"
+  }
+}

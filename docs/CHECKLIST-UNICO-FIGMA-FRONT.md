@@ -10,12 +10,12 @@ Atualizado em 2026-11-19. Contagem por **telas e estados independentes do Figma*
 | Situação | Quantidade |
 | --- | ---: |
 | Total inventariado | **279** |
-| Prontas no frontend | **258** |
+| Prontas no frontend | **259** |
 | Implementadas, aguardando revalidação/comparação completa | **12** |
-| Ainda exigem implementação, complemento ou correção | **9** |
-| Com implementação existente (prontas + revalidação) | **270 / 279 (96,8%)** |
+| Ainda exigem implementação, complemento ou correção | **8** |
+| Com implementação existente (prontas + revalidação) | **271 / 279 (97,1%)** |
 
-**Para encerrar o front faltam 9 itens de implementação/ajuste e 12 de revalidação.** “Pronto no frontend” não significa fluxo integrado liberado: dependências de backend/designer podem afetar também telas prontas. Os números não classificam toda pendência como tela nova nem como problema de API. A comparação de Crédito, carteira global e editor editorial que não foi concluída integralmente permanece em revalidação.
+**Para encerrar o front faltam 8 itens de implementação/ajuste e 12 de revalidação.** “Pronto no frontend” não significa fluxo integrado liberado: dependências de backend/designer podem afetar também telas prontas. Os números não classificam toda pendência como tela nova nem como problema de API. A comparação de Crédito, carteira global e editor editorial que não foi concluída integralmente permanece em revalidação.
 
 Fonte por frame: [progresso atual](FRONTEND-PROGRESS.json). A base anterior permanece histórica; [atualizações com evidências](FRONTEND-PROGRESS-OVERRIDES.json) registram cada mudança. Ao finalizar **cada entrega**, atualizar os IDs comprovados, executar `node scripts/frontend-progress.mjs` e informar este panorama na resposta final.
 <!-- frontend-progress:end -->
@@ -25,6 +25,34 @@ Fonte por frame: [progresso atual](FRONTEND-PROGRESS.json). A base anterior perm
 
 
 
+
+
+## Entrega 19/11 — revisão dos nove ajustes e CEP japonês
+
+**Publicado: portal `b903657`, [CI/deploy 44606506188](https://github.com/WillTbn/Strategy-analytics-v2/actions/runs/44606506188), concluído e conferido.** A revisão não confirmou nove ajustes independentes de designer/backend. O CEP japonês foi implementado. Os outros oito continuam abertos com definições específicas, listadas na matriz; não foi criado menu, gatilho ou fluxo de edição para preencher uma lacuna do desenho.
+
+- [x] `37:27382`: código postal japonês preenche **apenas Província e Cidade ou distrito**, usando os campos existentes. Normaliza sete dígitos, hífen e teclado japonês; preserva zeros iniciais, rua e complemento. Erros permitem preenchimento manual. Respostas antigas, saída/troca de variação e edições feitas durante a consulta são protegidas.
+- [x] Base nacional oficial Japan Post de **30/10/2026**: 124.527 registros de origem, 120.721 códigos postais, 1.892 municípios e 47 províncias. Os 134 códigos com mais de um município não escolhem o primeiro resultado. Não foram incluídos códigos especiais de estabelecimentos; nesses casos o usuário mantém o preenchimento manual.
+- [x] Dados estáticos versionados servidos pelo próprio frontend, carregando catálogo e uma parte por prefixo. Nenhuma consulta com código completo é enviada a fornecedor externo; sem credenciais nem alteração do payload do endereço. Gerador reproduzível e SHA256 de origem documentados, sem nova dependência de biblioteca ou endpoint de backend.
+- [x] Navegador local com os componentes reais e os JSON reais: Tóquio, Hokkaido/zero inicial, teclado japonês, código não encontrado, código ambíguo e dados manuais preservados. Não foi criado servidor/store de API fake. Prévia arquivada somente como texto e removida antes do build.
+- [x] Mobile 390 px: documento e clientWidth de 378 px, nenhuma rolagem horizontal externa nem imagem ausente. A composição do Figma foi preservada; nenhum campo ou ação novo.
+- [x] **529 testes** passaram na cópia isolada do commit, incluindo nove novos cenários e a regressão brasileira. Falha de transporte, concorrência e resposta inválida foram testadas por código; não se afirma teste de erro HTTP no navegador. Lint, build, auditoria e diff do commit aprovados. O CI repetiu auditoria/lint/testes/build e concluiu upload/ativação. Código da consulta publicado conferido e os 102 arquivos de dados comparados por SHA256.
+- [ ] **Persistência integrada:** não foi alterado o país de residência de uma conta para testar. A consulta visual positiva foi local; gravação integrada de uma conta de residência Japão continua fora do teste executado.
+
+### O que impede concluir os outros oito
+
+| Estado | Pendência concreta |
+| --- | --- |
+| CT12 `1484:73658` | CT11 reconsultado continua sem ação para abrir o modal. Designer precisa indicar o gatilho e estado de abertura; API operacional deve ser confirmada. Não publicar rota solta ou criar botão. |
+| CO04 `1484:96882` e CO05 `1484:97193` | O texto do Figma manda escolher mídia no botão “+”, mas os estados abertos desse menu e dos controles H2/H3 não estão nos frames recuperados. Falta desenho dos controles e contrato editorial; textarea não foi aprovado como editor completo. |
+| Detalhes de empréstimos `1:50960`, `1:51347`, `1:51728`, `1:52034` | Status “Ativo” aparece junto de formulários/etapas de solicitação. Confirmar se são consulta ou edição e como funcionam as ações. A composição ainda precisa de front após essa definição. GET de empréstimos/detalhe já existe e o DTO contém `collateral`; não se pede nova listagem nem se declara todo o campo ausente. Falta confirmar mapeamento comercial, estágios e ofertas. |
+| Automóvel `1:54617` | Continua com título de imóvel e upload de IPTU/metragem. A mesma mistura aparece na documentação do detalhe de automóvel. Confirmar documentos/título antes de exigir arquivos de imóvel ou criar outros campos. |
+
+Os oito continuam em **implementação/ajuste**, sem exclusão do denominador para aumentar o percentual. Definições solicitadas ao usuário: consulta versus edição e links dos estados abertos de editor/gatilho CT12; nenhuma resposta foi presumida.
+
+Panorama após esta correção: **279 telas/estados; 259 prontos (92,8%), 12 em revalidação e 8 em implementação/ajuste. Implementação existente: 271/279 (97,1%).** As 13 superfícies sem referência permanecem para avaliação do Éric, nenhuma nova. Isso não equivale a homologação integrada concluída.
+
+[Matriz dos nove](evidence/qa-2026-11-19-nine-adjustments/review-matrix.json) · [Resultados e limites](evidence/qa-2026-11-19-nine-adjustments/results.json) · [Referências recuperadas](evidence/qa-2026-11-19-nine-adjustments/references.json) · [Campos atuais de empréstimos](evidence/qa-2026-11-19-nine-adjustments/loan-api-fields.json) · [Publicação e hashes](evidence/qa-2026-11-19-nine-adjustments/publication.json) · [Base postal e origem](evidence/qa-2026-11-19-nine-adjustments/postal-manifest.json) · [Desktop local](evidence/qa-2026-11-19-nine-adjustments/japanese-postal-desktop.jpg) · [Mobile local](evidence/qa-2026-11-19-nine-adjustments/japanese-postal-mobile.jpg).
 
 ## Entrega 19/11 — composição dos detalhes de contratos do cliente
 
@@ -1563,7 +1591,7 @@ Legenda vigente: classificação de 16/11 por código e evidências, detalhada e
 | [6:25690](https://www.figma.com/design/BaDXlWpxbIoY4azOaQnXgv?node-id=6-25690)     | [UI] CADASTRO - 5 Documento e endereço - Brasil                              | Pronto no front · P13 |
 | [37:27142](https://www.figma.com/design/BaDXlWpxbIoY4azOaQnXgv?node-id=37-27142)   | [UI] CADASTRO - 5 Documento e endereço - Estados Unidos e Canadá             | Pronto no front · P14 |
 | [37:27262](https://www.figma.com/design/BaDXlWpxbIoY4azOaQnXgv?node-id=37-27262)   | [UI] CADASTRO - 5 Documento e endereço - América do Sul (Argentina)          | Pronto no front · P14 |
-| [37:27382](https://www.figma.com/design/BaDXlWpxbIoY4azOaQnXgv?node-id=37-27382)   | [UI] CADASTRO - 5 Documento e endereço - Japão                               | Implementação/ajuste pendente · P14 |
+| [37:27382](https://www.figma.com/design/BaDXlWpxbIoY4azOaQnXgv?node-id=37-27382)   | [UI] CADASTRO - 5 Documento e endereço - Japão                               | Pronto no front · P14 |
 | [37:27502](https://www.figma.com/design/BaDXlWpxbIoY4azOaQnXgv?node-id=37-27502)   | [UI] CADASTRO - 5 Documento e endereço - China                               | Pronto no front · P14 |
 | [37:27622](https://www.figma.com/design/BaDXlWpxbIoY4azOaQnXgv?node-id=37-27622)   | [UI] CADASTRO - 5 Documento e endereço - Europa (Portugal)                   | Pronto no front · P14 |
 | [37:27742](https://www.figma.com/design/BaDXlWpxbIoY4azOaQnXgv?node-id=37-27742)   | [UI] CADASTRO - 5 Documento e endereço - África (África do Sul)              | Pronto no front · P14 |

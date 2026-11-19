@@ -1,0 +1,10 @@
+<template><registration-shell :step="5" title="Documento e endereço" :style="{'--registration-background-angle': '220.8169deg'}"><registration-document-step variant="jp" v-model="draft" :catalog="catalog" /></registration-shell></template>
+<script setup>
+import {ref} from 'vue';
+import RegistrationShell from './src/system/components/registration/RegistrationShell.vue';
+import RegistrationDocumentStep from './src/system/components/registration/RegistrationDocumentStep.vue';
+import {newRegistrationDocuments} from './src/services/registrationDocuments';
+import {registrationSubdivisions} from './src/services/registrationSubdivisions';
+const draft=ref(newRegistrationDocuments('jp'));
+const catalog={region:registrationSubdivisions.JP};
+</script>

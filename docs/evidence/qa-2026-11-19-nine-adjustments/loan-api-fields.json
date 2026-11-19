@@ -1,0 +1,52 @@
+{
+  "ClientLoanResponse": {
+    "fields": [
+      "id",
+      "publicCode",
+      "contract",
+      "kind",
+      "currencyIsoCode",
+      "principalAmount",
+      "outstandingAmount",
+      "interestRatePercent",
+      "termMonths",
+      "leverageRatio",
+      "purpose",
+      "collateral",
+      "startDate",
+      "dueDate",
+      "status",
+      "createdAtUtc",
+      "updatedAtUtc"
+    ],
+    "kind": {
+      "type": "string"
+    }
+  },
+  "LoanResponse": {
+    "fields": [
+      "id",
+      "publicCode",
+      "client",
+      "contract",
+      "kind",
+      "currencyIsoCode",
+      "principalAmount",
+      "outstandingAmount",
+      "interestRatePercent",
+      "termMonths",
+      "leverageRatio",
+      "purpose",
+      "collateral",
+      "startDate",
+      "dueDate",
+      "status",
+      "notes",
+      "createdAtUtc",
+      "updatedAtUtc"
+    ],
+    "kind": {
+      "type": "string"
+    }
+  }
+}

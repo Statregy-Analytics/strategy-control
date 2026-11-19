@@ -11,12 +11,12 @@
   },
   "metrics": {
     "total": 279,
-    "done": 258,
+    "done": 259,
     "validation": 12,
-    "adjustment": 9,
-    "implemented": 270,
-    "implementedPercent": 96.8,
-    "readyPercent": 92.5
+    "adjustment": 8,
+    "implemented": 271,
+    "implementedPercent": 97.1,
+    "readyPercent": 92.8
   },
   "withoutLinkedFigmaReference": {
     "count": 13,
@@ -1402,17 +1402,16 @@
       "category": "Ajuste de front",
       "front": "adjustment",
       "blockers": [
-        "backend",
-        "designer"
+        "designer",
+        "backend"
       ],
-      "reason": "CT12 não possui modal integrado no código atual. Há desenho do modal, mas o CT11 recuperado não mostra a ação/gatilho para abri-lo e não existe rota intradiária documentada. Definir o vínculo com designer antes de publicar tela solta/ação extra; preparar integração a partir do contrato HTTP real.",
+      "reason": "CT12 contém os campos do modal, mas o CT11 reconsultado continua sem ação para abri-lo. Não criado gatilho nem rota solta. Designer indicar o gatilho/estado de abertura; depois implementar conexão do modal e confirmar contrato operacional da API.",
       "sources": [
-        "src/components/Contracts/ContractEngines.vue",
-        "src/components/Contracts/ContractWorkspace.vue"
+        "src/components/Finance/ContractSections.vue"
       ],
       "evidence": [
         "docs/CHECKLIST-UNICO-FIGMA-FRONT.md#contratos--contraste-e-estados-expandidos-rodada-atual",
-        "docs/evidence/qa-2026-11-18-contract-selection/results.json"
+        "docs/evidence/qa-2026-11-19-nine-adjustments/results.json"
       ],
       "browser": "histórica; não repetida em 16/11",
       "historicalCategory": "Ajuste de front"
@@ -4136,13 +4135,13 @@
         "designer",
         "backend"
       ],
-      "reason": "CO04 comparado: composição/ativos corrigidos, prévia e capa testadas. Editor de blocos/mídia e H2/H3 ainda incompleto; não aprovar textarea como editor completo. Precisa estados abertos do designer e contrato editorial da API.",
+      "reason": "Referência fechada menciona blocos e botão + para escolher mídia, mas não fornece o menu aberto nem controles de H2/H3. O textarea existente não foi declarado editor completo. Frames abertos de inserção/formatação e contrato editorial para persistência, sem inventar toolbar/menus.",
       "sources": [
         "src/components/Workspaces/PublicationWorkspace.vue"
       ],
       "evidence": [
         "docs/CHECKLIST-UNICO-FIGMA-FRONT.md#definições-do-designer",
-        "docs/evidence/qa-2026-11-17-editor/results.json"
+        "docs/evidence/qa-2026-11-19-nine-adjustments/results.json"
       ],
       "browser": "histórica; não repetida em 16/11",
       "historicalCategory": "Ajuste de front"
@@ -4161,13 +4160,13 @@
         "designer",
         "backend"
       ],
-      "reason": "CO05 comparado: composição/ativos e obrigatórios corrigidos. Blocos/mídia e índice H2/H3 ainda precisam implementação e referência dos controles; persistência de metadados depende da API.",
+      "reason": "Referência fechada menciona blocos e botão + para escolher mídia, mas não fornece o menu aberto nem controles de H2/H3. O textarea existente não foi declarado editor completo. Frames abertos de inserção/formatação e contrato editorial para persistência, sem inventar toolbar/menus.",
       "sources": [
         "src/components/Workspaces/PublicationWorkspace.vue"
       ],
       "evidence": [
         "docs/CHECKLIST-UNICO-FIGMA-FRONT.md#definições-do-designer",
-        "docs/evidence/qa-2026-11-17-editor/results.json"
+        "docs/evidence/qa-2026-11-19-nine-adjustments/results.json"
       ],
       "browser": "histórica; não repetida em 16/11",
       "historicalCategory": "Ajuste de front"
@@ -4843,9 +4842,10 @@
       "category": "Ajuste de front",
       "front": "adjustment",
       "blockers": [
+        "designer",
         "backend"
       ],
-      "reason": "Detalhe informativo existente; falta concluir composição do frame extenso. Desenho mistura status Ativo com etapas editáveis e ações de solicitação; confirmar aplicação dessas ações ao detalhe ativo. DTO existente não fornece snapshot estruturado de imóvel/veículo, condições e proposta. Não solicitar nova listagem geral: GET /client/loans e /{id} já existem.",
+      "reason": "Detalhes com status Ativo mostram etapas de solicitação/editáveis. A interface atual não foi substituída por um novo fluxo de edição presumido. Confirmar consulta versus edição e estados das ações. Mapear dados/estágios/ofertas ao contrato comercial; GET /client/loans e detalhe já existem. Campo collateral existe no DTO e não foi descrito como ausente.",
       "sources": [
         "portal:src/system/pages/loan/LoanPage.vue",
         "portal:src/system/pages/leverage/LeveragePage.vue",
@@ -4854,7 +4854,7 @@
       ],
       "evidence": [
         "docs/evidence/qa-2026-11-16-inventory/api-contract-review.json",
-        "docs/evidence/qa-2026-11-17-loan-offers/results.json"
+        "docs/evidence/qa-2026-11-19-nine-adjustments/results.json"
       ],
       "browser": "código confirmado; fluxos legados não homologados",
       "historicalCategory": "Ajuste de front"
@@ -4870,9 +4870,10 @@
       "category": "Ajuste de front",
       "front": "adjustment",
       "blockers": [
+        "designer",
         "backend"
       ],
-      "reason": "Detalhe informativo existente; falta concluir composição do frame extenso. Desenho mistura status Ativo com etapas editáveis e ações de solicitação; confirmar aplicação dessas ações ao detalhe ativo. DTO existente não fornece snapshot estruturado de imóvel/veículo, condições e proposta. Não solicitar nova listagem geral: GET /client/loans e /{id} já existem.",
+      "reason": "Detalhes com status Ativo mostram etapas de solicitação/editáveis. A interface atual não foi substituída por um novo fluxo de edição presumido. O frame de documentos inclui IPTU e metragem de imóvel também no automóvel. Confirmar consulta versus edição e estados das ações. Mapear dados/estágios/ofertas ao contrato comercial; GET /client/loans e detalhe já existem. Campo collateral existe no DTO e não foi descrito como ausente.",
       "sources": [
         "portal:src/system/pages/loan/LoanPage.vue",
         "portal:src/system/pages/leverage/LeveragePage.vue",
@@ -4881,7 +4882,7 @@
       ],
       "evidence": [
         "docs/evidence/qa-2026-11-16-inventory/api-contract-review.json",
-        "docs/evidence/qa-2026-11-17-loan-offers/results.json"
+        "docs/evidence/qa-2026-11-19-nine-adjustments/results.json"
       ],
       "browser": "código confirmado; fluxos legados não homologados",
       "historicalCategory": "Ajuste de front"
@@ -4897,9 +4898,10 @@
       "category": "Ajuste de front",
       "front": "adjustment",
       "blockers": [
+        "designer",
         "backend"
       ],
-      "reason": "Detalhe informativo existente; falta concluir composição do frame extenso. Desenho mistura status Ativo com etapas editáveis e ações de solicitação; confirmar aplicação dessas ações ao detalhe ativo. DTO existente não fornece snapshot estruturado de imóvel/veículo, condições e proposta. Não solicitar nova listagem geral: GET /client/loans e /{id} já existem.",
+      "reason": "Detalhes com status Ativo mostram etapas de solicitação/editáveis. A interface atual não foi substituída por um novo fluxo de edição presumido. Confirmar consulta versus edição e estados das ações. Mapear dados/estágios/ofertas ao contrato comercial; GET /client/loans e detalhe já existem. Campo collateral existe no DTO e não foi descrito como ausente.",
       "sources": [
         "portal:src/system/pages/loan/LoanPage.vue",
         "portal:src/system/pages/leverage/LeveragePage.vue",
@@ -4908,7 +4910,7 @@
       ],
       "evidence": [
         "docs/evidence/qa-2026-11-16-inventory/api-contract-review.json",
-        "docs/evidence/qa-2026-11-17-loan-offers/results.json"
+        "docs/evidence/qa-2026-11-19-nine-adjustments/results.json"
       ],
       "browser": "código confirmado; fluxos legados não homologados",
       "historicalCategory": "Ajuste de front"
@@ -4924,9 +4926,10 @@
       "category": "Ajuste de front",
       "front": "adjustment",
       "blockers": [
+        "designer",
         "backend"
       ],
-      "reason": "Detalhe informativo existente; falta concluir composição do frame extenso. Desenho mistura status Ativo com etapas editáveis e ações de solicitação; confirmar aplicação dessas ações ao detalhe ativo. DTO existente não fornece snapshot estruturado de imóvel/veículo, condições e proposta. Não solicitar nova listagem geral: GET /client/loans e /{id} já existem.",
+      "reason": "Detalhes com status Ativo mostram etapas de solicitação/editáveis. A interface atual não foi substituída por um novo fluxo de edição presumido. Confirmar consulta versus edição e estados das ações. Mapear dados/estágios/ofertas ao contrato comercial; GET /client/loans e detalhe já existem. Campo collateral existe no DTO e não foi descrito como ausente.",
       "sources": [
         "portal:src/system/pages/loan/LoanPage.vue",
         "portal:src/system/pages/leverage/LeveragePage.vue",
@@ -4935,7 +4938,7 @@
       ],
       "evidence": [
         "docs/evidence/qa-2026-11-16-inventory/api-contract-review.json",
-        "docs/evidence/qa-2026-11-17-loan-offers/results.json"
+        "docs/evidence/qa-2026-11-19-nine-adjustments/results.json"
       ],
       "browser": "código confirmado; fluxos legados não homologados",
       "historicalCategory": "Ajuste de front"
@@ -5410,9 +5413,10 @@
       "category": "Ajuste de front",
       "front": "adjustment",
       "blockers": [
+        "designer",
         "backend"
       ],
-      "reason": "Referência recuperada de automóvel usa título Imóvel e campos IPTU/imóvel: designer deve confirmar campos corretos antes da implementação; API de solicitação/vínculo ainda ausente.",
+      "reason": "O fluxo de automóvel continua mostrando título de imóvel e upload de IPTU/metragem. Designer confirmar os documentos e título do fluxo de automóvel; confirmar API de solicitação/vínculo. Não exigir documentos de imóvel do cliente de veículo por suposição.",
       "sources": [
         "portal:src/system/pages/loan/LoanPage.vue",
         "portal:src/system/pages/leverage/LeveragePage.vue",
@@ -5421,7 +5425,7 @@
       ],
       "evidence": [
         "docs/evidence/qa-2026-11-16-inventory/api-contract-review.json",
-        "docs/evidence/qa-2026-11-17-loan-offers/results.json"
+        "docs/evidence/qa-2026-11-19-nine-adjustments/results.json"
       ],
       "browser": "código confirmado; fluxos legados não homologados",
       "historicalCategory": "Ajuste de front"
@@ -6873,17 +6877,17 @@
       "link": "[37:27382](https://www.figma.com/design/BaDXlWpxbIoY4azOaQnXgv?node-id=37-27382)",
       "counted": true,
       "group": "P14",
-      "category": "Ajuste de front",
-      "front": "adjustment",
+      "category": "Já correto",
+      "front": "done",
       "blockers": [],
-      "reason": "Composição conferida; falta implementar o preenchimento de província/cidade por código postal mostrado no Figma. A tela agora informa indisponibilidade e permite preenchimento manual. Fonte/contrato de consulta ainda não definido; não é atribuído como bug da API.",
+      "reason": "Preenchimento automático por cópia oficial Japan Post, apenas província/cidade; códigos ambíguos mantêm preenchimento manual. Testes de dados, concorrência e navegador desktop/mobile passaram. Reteste integrado da gravação requer uma conta de residência Japão; não foi alterado o país de outra conta para testar.",
       "sources": [
         "portal:src/services/registrationDocuments.js",
         "portal:src/system/pages/registration/RegistrationDocumentPage.vue"
       ],
       "evidence": [
         "docs/CHECKLIST-CADASTRO-SETE-ETAPAS.md",
-        "docs/evidence/qa-2026-11-17-revalidation/jp-postal-unavailable.txt"
+        "docs/evidence/qa-2026-11-19-nine-adjustments/results.json"
       ],
       "browser": "validações locais por variante; upload/retomada integrados pendentes",
       "historicalCategory": "Ajuste de front"

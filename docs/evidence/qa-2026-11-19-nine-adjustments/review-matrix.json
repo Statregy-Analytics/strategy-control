@@ -1,0 +1,107 @@
+[
+  {
+    "id": "1484:73658",
+    "name": "CT12 · MD · Adicionar operação intradiária · DESIGN GLASS",
+    "front": "adjustment",
+    "blockers": [
+      "designer",
+      "backend"
+    ],
+    "reference": "references.json",
+    "result": "CT12 contém os campos do modal, mas o CT11 reconsultado continua sem ação para abri-lo. Não criado gatilho nem rota solta.",
+    "remaining": "Designer indicar o gatilho/estado de abertura; depois implementar conexão do modal e confirmar contrato operacional da API."
+  },
+  {
+    "id": "1484:96882",
+    "name": "CO04 · SP · Criar Insight · EDITOR BASE · DESIGN GLASS",
+    "front": "adjustment",
+    "blockers": [
+      "designer",
+      "backend"
+    ],
+    "reference": "references.json",
+    "result": "Referência fechada menciona blocos e botão + para escolher mídia, mas não fornece o menu aberto nem controles de H2/H3. O textarea existente não foi declarado editor completo.",
+    "remaining": "Frames abertos de inserção/formatação e contrato editorial para persistência, sem inventar toolbar/menus."
+  },
+  {
+    "id": "1484:97193",
+    "name": "CO05 · SP · Criar Comunicado Oficial · VARIAÇÃO EDITORIAL · DESIGN GLASS",
+    "front": "adjustment",
+    "blockers": [
+      "designer",
+      "backend"
+    ],
+    "reference": "references.json",
+    "result": "Referência fechada menciona blocos e botão + para escolher mídia, mas não fornece o menu aberto nem controles de H2/H3. O textarea existente não foi declarado editor completo.",
+    "remaining": "Frames abertos de inserção/formatação e contrato editorial para persistência, sem inventar toolbar/menus."
+  },
+  {
+    "id": "1:50960",
+    "name": "[UI] ALAVANCAGEM - PÁG ALAVANCAGEM - GARANTIA IMÓVEL",
+    "front": "adjustment",
+    "blockers": [
+      "designer",
+      "backend"
+    ],
+    "reference": "references.json",
+    "result": "Detalhes com status Ativo mostram etapas de solicitação/editáveis. A interface atual não foi substituída por um novo fluxo de edição presumido.",
+    "remaining": "Confirmar consulta versus edição e estados das ações. Mapear dados/estágios/ofertas ao contrato comercial; GET /client/loans e detalhe já existem. Campo collateral existe no DTO e não foi descrito como ausente."
+  },
+  {
+    "id": "1:51347",
+    "name": "[UI] ALAVANCAGEM - PÁG ALAVANCAGEM - GARANTIA AUTOMÓVEL",
+    "front": "adjustment",
+    "blockers": [
+      "designer",
+      "backend"
+    ],
+    "reference": "references.json",
+    "result": "Detalhes com status Ativo mostram etapas de solicitação/editáveis. A interface atual não foi substituída por um novo fluxo de edição presumido. O frame de documentos inclui IPTU e metragem de imóvel também no automóvel.",
+    "remaining": "Confirmar consulta versus edição e estados das ações. Mapear dados/estágios/ofertas ao contrato comercial; GET /client/loans e detalhe já existem. Campo collateral existe no DTO e não foi descrito como ausente."
+  },
+  {
+    "id": "1:51728",
+    "name": "[UI] ALAVANCAGEM - PÁG ALAVANCAGEM - CONSÓRCIO AUTOMÓVEL",
+    "front": "adjustment",
+    "blockers": [
+      "designer",
+      "backend"
+    ],
+    "reference": "references.json",
+    "result": "Detalhes com status Ativo mostram etapas de solicitação/editáveis. A interface atual não foi substituída por um novo fluxo de edição presumido.",
+    "remaining": "Confirmar consulta versus edição e estados das ações. Mapear dados/estágios/ofertas ao contrato comercial; GET /client/loans e detalhe já existem. Campo collateral existe no DTO e não foi descrito como ausente."
+  },
+  {
+    "id": "1:52034",
+    "name": "[UI] ALAVANCAGEM - PÁG ALAVANCAGEM - COLATERAL",
+    "front": "adjustment",
+    "blockers": [
+      "designer",
+      "backend"
+    ],
+    "reference": "references.json",
+    "result": "Detalhes com status Ativo mostram etapas de solicitação/editáveis. A interface atual não foi substituída por um novo fluxo de edição presumido.",
+    "remaining": "Confirmar consulta versus edição e estados das ações. Mapear dados/estágios/ofertas ao contrato comercial; GET /client/loans e detalhe já existem. Campo collateral existe no DTO e não foi descrito como ausente."
+  },
+  {
+    "id": "1:54617",
+    "name": "[UI] FLUXO - SOLICITAR EMPRÉSTIMO -",
+    "front": "adjustment",
+    "blockers": [
+      "designer",
+      "backend"
+    ],
+    "reference": "references.json",
+    "result": "O fluxo de automóvel continua mostrando título de imóvel e upload de IPTU/metragem.",
+    "remaining": "Designer confirmar os documentos e título do fluxo de automóvel; confirmar API de solicitação/vínculo. Não exigir documentos de imóvel do cliente de veículo por suposição."
+  },
+  {
+    "id": "37:27382",
+    "name": "[UI] CADASTRO - 5 Documento e endereço - Japão",
+    "front": "done",
+    "blockers": [],
+    "reference": "references.json",
+    "result": "Preenchimento automático por cópia oficial Japan Post, apenas província/cidade; códigos ambíguos mantêm preenchimento manual. Testes de dados, concorrência e navegador desktop/mobile passaram.",
+    "remaining": "Reteste integrado da gravação requer uma conta de residência Japão; não foi alterado o país de outra conta para testar."
+  }
+]

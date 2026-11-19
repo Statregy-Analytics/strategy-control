@@ -1,0 +1,1 @@
+import {createApp} from 'vue';import {Quasar} from 'quasar';import * as Q from 'quasar';import '@quasar/extras/material-icons/material-icons.css';import 'quasar/src/css/index.sass';import './src/css/app.scss';import App from './QaNine.vue';createApp(App).use(Quasar,{components:Object.fromEntries(Object.entries(Q).filter(([name])=>/^Q[A-Z]/.test(name)))}).mount('#q-app');

@@ -534,23 +534,39 @@
     },
     "1:50960": {
       "front": "adjustment",
-      "reason": "Detalhe informativo existente; falta concluir composição do frame extenso. Desenho mistura status Ativo com etapas editáveis e ações de solicitação; confirmar aplicação dessas ações ao detalhe ativo. DTO existente não fornece snapshot estruturado de imóvel/veículo, condições e proposta. Não solicitar nova listagem geral: GET /client/loans e /{id} já existem.",
-      "evidence": "docs/evidence/qa-2026-11-17-loan-offers/results.json"
+      "reason": "Detalhes com status Ativo mostram etapas de solicitação/editáveis. A interface atual não foi substituída por um novo fluxo de edição presumido. Confirmar consulta versus edição e estados das ações. Mapear dados/estágios/ofertas ao contrato comercial; GET /client/loans e detalhe já existem. Campo collateral existe no DTO e não foi descrito como ausente.",
+      "evidence": "docs/evidence/qa-2026-11-19-nine-adjustments/results.json",
+      "blockers": [
+        "designer",
+        "backend"
+      ]
     },
     "1:51347": {
       "front": "adjustment",
-      "reason": "Detalhe informativo existente; falta concluir composição do frame extenso. Desenho mistura status Ativo com etapas editáveis e ações de solicitação; confirmar aplicação dessas ações ao detalhe ativo. DTO existente não fornece snapshot estruturado de imóvel/veículo, condições e proposta. Não solicitar nova listagem geral: GET /client/loans e /{id} já existem.",
-      "evidence": "docs/evidence/qa-2026-11-17-loan-offers/results.json"
+      "reason": "Detalhes com status Ativo mostram etapas de solicitação/editáveis. A interface atual não foi substituída por um novo fluxo de edição presumido. O frame de documentos inclui IPTU e metragem de imóvel também no automóvel. Confirmar consulta versus edição e estados das ações. Mapear dados/estágios/ofertas ao contrato comercial; GET /client/loans e detalhe já existem. Campo collateral existe no DTO e não foi descrito como ausente.",
+      "evidence": "docs/evidence/qa-2026-11-19-nine-adjustments/results.json",
+      "blockers": [
+        "designer",
+        "backend"
+      ]
     },
     "1:51728": {
       "front": "adjustment",
-      "reason": "Detalhe informativo existente; falta concluir composição do frame extenso. Desenho mistura status Ativo com etapas editáveis e ações de solicitação; confirmar aplicação dessas ações ao detalhe ativo. DTO existente não fornece snapshot estruturado de imóvel/veículo, condições e proposta. Não solicitar nova listagem geral: GET /client/loans e /{id} já existem.",
-      "evidence": "docs/evidence/qa-2026-11-17-loan-offers/results.json"
+      "reason": "Detalhes com status Ativo mostram etapas de solicitação/editáveis. A interface atual não foi substituída por um novo fluxo de edição presumido. Confirmar consulta versus edição e estados das ações. Mapear dados/estágios/ofertas ao contrato comercial; GET /client/loans e detalhe já existem. Campo collateral existe no DTO e não foi descrito como ausente.",
+      "evidence": "docs/evidence/qa-2026-11-19-nine-adjustments/results.json",
+      "blockers": [
+        "designer",
+        "backend"
+      ]
     },
     "1:52034": {
       "front": "adjustment",
-      "reason": "Detalhe informativo existente; falta concluir composição do frame extenso. Desenho mistura status Ativo com etapas editáveis e ações de solicitação; confirmar aplicação dessas ações ao detalhe ativo. DTO existente não fornece snapshot estruturado de imóvel/veículo, condições e proposta. Não solicitar nova listagem geral: GET /client/loans e /{id} já existem.",
-      "evidence": "docs/evidence/qa-2026-11-17-loan-offers/results.json"
+      "reason": "Detalhes com status Ativo mostram etapas de solicitação/editáveis. A interface atual não foi substituída por um novo fluxo de edição presumido. Confirmar consulta versus edição e estados das ações. Mapear dados/estágios/ofertas ao contrato comercial; GET /client/loans e detalhe já existem. Campo collateral existe no DTO e não foi descrito como ausente.",
+      "evidence": "docs/evidence/qa-2026-11-19-nine-adjustments/results.json",
+      "blockers": [
+        "designer",
+        "backend"
+      ]
     },
     "1:54430": {
       "front": "done",
@@ -562,8 +578,12 @@
     },
     "1:54617": {
       "front": "adjustment",
-      "reason": "Referência recuperada de automóvel usa título Imóvel e campos IPTU/imóvel: designer deve confirmar campos corretos antes da implementação; API de solicitação/vínculo ainda ausente.",
-      "evidence": "docs/evidence/qa-2026-11-17-loan-offers/results.json"
+      "reason": "O fluxo de automóvel continua mostrando título de imóvel e upload de IPTU/metragem. Designer confirmar os documentos e título do fluxo de automóvel; confirmar API de solicitação/vínculo. Não exigir documentos de imóvel do cliente de veículo por suposição.",
+      "evidence": "docs/evidence/qa-2026-11-19-nine-adjustments/results.json",
+      "blockers": [
+        "designer",
+        "backend"
+      ]
     },
     "37:27142": {
       "front": "done",
@@ -596,9 +616,10 @@
       "evidence": "docs/evidence/qa-2026-11-17-revalidation/results.json"
     },
     "37:27382": {
-      "front": "adjustment",
-      "reason": "Composição conferida; falta implementar o preenchimento de província/cidade por código postal mostrado no Figma. A tela agora informa indisponibilidade e permite preenchimento manual. Fonte/contrato de consulta ainda não definido; não é atribuído como bug da API.",
-      "evidence": "docs/evidence/qa-2026-11-17-revalidation/jp-postal-unavailable.txt"
+      "front": "done",
+      "reason": "Preenchimento automático por cópia oficial Japan Post, apenas província/cidade; códigos ambíguos mantêm preenchimento manual. Testes de dados, concorrência e navegador desktop/mobile passaram. Reteste integrado da gravação requer uma conta de residência Japão; não foi alterado o país de outra conta para testar.",
+      "evidence": "docs/evidence/qa-2026-11-19-nine-adjustments/results.json",
+      "blockers": []
     },
     "1484:95173": {
       "front": "done",
@@ -692,13 +713,21 @@
     },
     "1484:96882": {
       "front": "adjustment",
-      "reason": "CO04 comparado: composição/ativos corrigidos, prévia e capa testadas. Editor de blocos/mídia e H2/H3 ainda incompleto; não aprovar textarea como editor completo. Precisa estados abertos do designer e contrato editorial da API.",
-      "evidence": "docs/evidence/qa-2026-11-17-editor/results.json"
+      "reason": "Referência fechada menciona blocos e botão + para escolher mídia, mas não fornece o menu aberto nem controles de H2/H3. O textarea existente não foi declarado editor completo. Frames abertos de inserção/formatação e contrato editorial para persistência, sem inventar toolbar/menus.",
+      "evidence": "docs/evidence/qa-2026-11-19-nine-adjustments/results.json",
+      "blockers": [
+        "designer",
+        "backend"
+      ]
     },
     "1484:97193": {
       "front": "adjustment",
-      "reason": "CO05 comparado: composição/ativos e obrigatórios corrigidos. Blocos/mídia e índice H2/H3 ainda precisam implementação e referência dos controles; persistência de metadados depende da API.",
-      "evidence": "docs/evidence/qa-2026-11-17-editor/results.json"
+      "reason": "Referência fechada menciona blocos e botão + para escolher mídia, mas não fornece o menu aberto nem controles de H2/H3. O textarea existente não foi declarado editor completo. Frames abertos de inserção/formatação e contrato editorial para persistência, sem inventar toolbar/menus.",
+      "evidence": "docs/evidence/qa-2026-11-19-nine-adjustments/results.json",
+      "blockers": [
+        "designer",
+        "backend"
+      ]
     },
     "1484:97530": {
       "front": "validation",
@@ -824,15 +853,11 @@
     },
     "1484:73658": {
       "front": "adjustment",
-      "reason": "CT12 não possui modal integrado no código atual. Há desenho do modal, mas o CT11 recuperado não mostra a ação/gatilho para abri-lo e não existe rota intradiária documentada. Definir o vínculo com designer antes de publicar tela solta/ação extra; preparar integração a partir do contrato HTTP real.",
-      "evidence": "docs/evidence/qa-2026-11-18-contract-selection/results.json",
+      "reason": "CT12 contém os campos do modal, mas o CT11 reconsultado continua sem ação para abri-lo. Não criado gatilho nem rota solta. Designer indicar o gatilho/estado de abertura; depois implementar conexão do modal e confirmar contrato operacional da API.",
+      "evidence": "docs/evidence/qa-2026-11-19-nine-adjustments/results.json",
       "blockers": [
-        "backend",
-        "designer"
-      ],
-      "sources": [
-        "src/components/Contracts/ContractEngines.vue",
-        "src/components/Contracts/ContractWorkspace.vue"
+        "designer",
+        "backend"
       ]
     },
     "1484:76065": {
