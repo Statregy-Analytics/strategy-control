@@ -11,12 +11,12 @@
   },
   "metrics": {
     "total": 279,
-    "done": 259,
-    "validation": 17,
+    "done": 262,
+    "validation": 14,
     "adjustment": 3,
     "implemented": 276,
     "implementedPercent": 98.9,
-    "readyPercent": 92.8
+    "readyPercent": 93.9
   },
   "withoutLinkedFigmaReference": {
     "count": 13,
@@ -2409,7 +2409,7 @@
       "category": "Ajuste de front",
       "front": "validation",
       "blockers": [
-        "backend"
+        "designer"
       ],
       "reason": "Tabelas oficiais/simuladas corrigidas e testadas com séries controladas e indisponíveis. O frame denominado Ao Lado mostra tabelas empilhadas; esclarecer relação com o controle antes de concluir a comparação do estado inteiro.",
       "sources": [
@@ -2419,10 +2419,10 @@
       "evidence": [
         "docs/CHECKLIST-UNICO-FIGMA-FRONT.md#lógicas--estados-de-performance-e-simulação",
         "docs/evidence/qa-2026-11-16-inventory/api-contract-review.json",
-        "docs/evidence/qa-2026-11-19-review17/matrix.json"
+        "docs/evidence/qa-2026-11-19-contract-request/results.json"
       ],
       "browser": "Não repetido nesta rodada; revisão da classificação e evidências anteriores.",
-      "lastReviewResult": "Tabelas oficiais/simuladas corrigidas e testadas com séries controladas e indisponíveis. O frame denominado Ao Lado mostra tabelas empilhadas; esclarecer relação com o controle antes de concluir a comparação do estado inteiro.",
+      "lastReviewResult": "Dúvida de composição Ao Lado versus tabelas empilhadas é do desenho; não classificar como defeito comprovado da API. Evidência anterior das tabelas preservada.",
       "historicalCategory": "Ajuste de front"
     },
     {
@@ -4533,22 +4533,20 @@
       "link": "[1:37994](https://www.figma.com/design/BaDXlWpxbIoY4azOaQnXgv?node-id=1-37994)",
       "counted": true,
       "group": "P05",
-      "category": "Ajuste de front",
-      "front": "validation",
-      "blockers": [
-        "designer"
-      ],
-      "reason": "Designer: falta estado selecionado dos campos de valor no passo 3. Front: POST /client/contracts/requests existe no OpenAPI de 18/11; adapter ainda indisponível. Verificar mapeamento objective/period/modality/initialAmount/monthlyAmount/assetTypes/regions e currencyId do catálogo, sem atribuir ausência da rota ao backend.",
+      "category": "Já correto",
+      "front": "done",
+      "blockers": [],
+      "reason": "Envio do wizard aprovado integrado ao POST existente, com BRL do catálogo e enum da modalidade confirmado na API. Híbrida testada no navegador local contra homologação; Recorrente e Única no portal publicado. Uma solicitação por modalidade conferida na consulta, valores e seleções corretos. Validação, falha, respostas preservadas, sucesso e retorno exercitados; sem mudar campos ou layout aprovado.",
       "sources": [
         "portal:src/router/routes.js",
         "portal:src/system/pages/contract/ContractsPage.vue"
       ],
       "evidence": [
         "docs/CHECKLIST-UNICO-FIGMA-FRONT.md#ainda-é-trabalho-de-frontend",
-        "docs/evidence/qa-2026-11-19-review17/matrix.json"
+        "docs/evidence/qa-2026-11-19-contract-request/results.json"
       ],
-      "browser": "Não repetido nesta rodada; revisão da classificação e evidências anteriores.",
-      "lastReviewResult": "Designer: falta estado selecionado dos campos de valor no passo 3. Front: POST /client/contracts/requests existe no OpenAPI de 18/11; adapter ainda indisponível. Verificar mapeamento objective/period/modality/initialAmount/monthlyAmount/assetTypes/regions e currencyId do catálogo, sem atribuir ausência da rota ao backend.",
+      "browser": "Três modalidades pelo navegador; Recurring/SinglePayment na publicação af63719, Hybrid local contra API HML.",
+      "lastReviewResult": "Bloqueio local removido; fluxo de solicitação e persistência confirmados. Não é criação/contratação financeira.",
       "historicalCategory": "Ajuste de front"
     },
     {
@@ -4850,7 +4848,7 @@
       "category": "Ajuste de front",
       "front": "validation",
       "blockers": [
-        "backend"
+        "test-data"
       ],
       "reason": "Usuário confirmou que as telas da Área do Cliente estão validadas e devem permanecer como estão, com empréstimos por etapas. Mantida a implementação existente, sem nova composição ou campos. Reclassificação de escopo, não novo teste: comparação detalhada dos estados e integração comercial continuam sem nova evidência nesta rodada.",
       "sources": [
@@ -4861,10 +4859,10 @@
       ],
       "evidence": [
         "docs/evidence/qa-2026-11-16-inventory/api-contract-review.json",
-        "docs/evidence/qa-2026-11-19-review17/matrix.json"
+        "docs/evidence/qa-2026-11-19-contract-request/results.json"
       ],
       "browser": "Acesso real ao catálogo mostra bloqueio Nível 3; conta Éric consta no Nível 0.",
-      "lastReviewResult": "Telas aprovadas preservadas. Falta conta elegível/massa para percorrer estados integrados; não é novo defeito de API comprovado.",
+      "lastReviewResult": "Teste integrado pendente por massa: conta Éric no Nível 0 e área exige Nível 3. Não é falha nova de API comprovada; composição aprovada preservada.",
       "historicalCategory": "Ajuste de front"
     },
     {
@@ -4878,7 +4876,7 @@
       "category": "Ajuste de front",
       "front": "validation",
       "blockers": [
-        "backend"
+        "test-data"
       ],
       "reason": "Usuário confirmou que as telas da Área do Cliente estão validadas e devem permanecer como estão, com empréstimos por etapas. Mantida a implementação existente, sem nova composição ou campos. Reclassificação de escopo, não novo teste: comparação detalhada dos estados e integração comercial continuam sem nova evidência nesta rodada.",
       "sources": [
@@ -4889,10 +4887,10 @@
       ],
       "evidence": [
         "docs/evidence/qa-2026-11-16-inventory/api-contract-review.json",
-        "docs/evidence/qa-2026-11-19-review17/matrix.json"
+        "docs/evidence/qa-2026-11-19-contract-request/results.json"
       ],
       "browser": "Acesso real ao catálogo mostra bloqueio Nível 3; conta Éric consta no Nível 0.",
-      "lastReviewResult": "Telas aprovadas preservadas. Falta conta elegível/massa para percorrer estados integrados; não é novo defeito de API comprovado.",
+      "lastReviewResult": "Teste integrado pendente por massa: conta Éric no Nível 0 e área exige Nível 3. Não é falha nova de API comprovada; composição aprovada preservada.",
       "historicalCategory": "Ajuste de front"
     },
     {
@@ -4906,7 +4904,7 @@
       "category": "Ajuste de front",
       "front": "validation",
       "blockers": [
-        "backend"
+        "test-data"
       ],
       "reason": "Usuário confirmou que as telas da Área do Cliente estão validadas e devem permanecer como estão, com empréstimos por etapas. Mantida a implementação existente, sem nova composição ou campos. Reclassificação de escopo, não novo teste: comparação detalhada dos estados e integração comercial continuam sem nova evidência nesta rodada.",
       "sources": [
@@ -4917,10 +4915,10 @@
       ],
       "evidence": [
         "docs/evidence/qa-2026-11-16-inventory/api-contract-review.json",
-        "docs/evidence/qa-2026-11-19-review17/matrix.json"
+        "docs/evidence/qa-2026-11-19-contract-request/results.json"
       ],
       "browser": "Acesso real ao catálogo mostra bloqueio Nível 3; conta Éric consta no Nível 0.",
-      "lastReviewResult": "Telas aprovadas preservadas. Falta conta elegível/massa para percorrer estados integrados; não é novo defeito de API comprovado.",
+      "lastReviewResult": "Teste integrado pendente por massa: conta Éric no Nível 0 e área exige Nível 3. Não é falha nova de API comprovada; composição aprovada preservada.",
       "historicalCategory": "Ajuste de front"
     },
     {
@@ -4934,7 +4932,7 @@
       "category": "Ajuste de front",
       "front": "validation",
       "blockers": [
-        "backend"
+        "test-data"
       ],
       "reason": "Usuário confirmou que as telas da Área do Cliente estão validadas e devem permanecer como estão, com empréstimos por etapas. Mantida a implementação existente, sem nova composição ou campos. Reclassificação de escopo, não novo teste: comparação detalhada dos estados e integração comercial continuam sem nova evidência nesta rodada.",
       "sources": [
@@ -4945,10 +4943,10 @@
       ],
       "evidence": [
         "docs/evidence/qa-2026-11-16-inventory/api-contract-review.json",
-        "docs/evidence/qa-2026-11-19-review17/matrix.json"
+        "docs/evidence/qa-2026-11-19-contract-request/results.json"
       ],
       "browser": "Acesso real ao catálogo mostra bloqueio Nível 3; conta Éric consta no Nível 0.",
-      "lastReviewResult": "Telas aprovadas preservadas. Falta conta elegível/massa para percorrer estados integrados; não é novo defeito de API comprovado.",
+      "lastReviewResult": "Teste integrado pendente por massa: conta Éric no Nível 0 e área exige Nível 3. Não é falha nova de API comprovada; composição aprovada preservada.",
       "historicalCategory": "Ajuste de front"
     },
     {
@@ -5421,7 +5419,7 @@
       "category": "Ajuste de front",
       "front": "validation",
       "blockers": [
-        "backend"
+        "test-data"
       ],
       "reason": "Usuário confirmou que as telas da Área do Cliente estão validadas e devem permanecer como estão, com empréstimos por etapas. Mantida a implementação existente, sem nova composição ou campos. Reclassificação de escopo, não novo teste: comparação detalhada dos estados e integração comercial continuam sem nova evidência nesta rodada.",
       "sources": [
@@ -5432,10 +5430,10 @@
       ],
       "evidence": [
         "docs/evidence/qa-2026-11-16-inventory/api-contract-review.json",
-        "docs/evidence/qa-2026-11-19-review17/matrix.json"
+        "docs/evidence/qa-2026-11-19-contract-request/results.json"
       ],
       "browser": "Acesso real ao catálogo mostra bloqueio Nível 3; conta Éric consta no Nível 0.",
-      "lastReviewResult": "Telas aprovadas preservadas. Falta conta elegível/massa para percorrer estados integrados; não é novo defeito de API comprovado.",
+      "lastReviewResult": "Teste integrado pendente por massa: conta Éric no Nível 0 e área exige Nível 3. Não é falha nova de API comprovada; composição aprovada preservada.",
       "historicalCategory": "Ajuste de front"
     },
     {
@@ -6527,20 +6525,20 @@
       "link": "[1:73288](https://www.figma.com/design/BaDXlWpxbIoY4azOaQnXgv?node-id=1-73288)",
       "counted": true,
       "group": "P12",
-      "category": "Ajuste de front",
-      "front": "validation",
+      "category": "Já correto",
+      "front": "done",
       "blockers": [],
-      "reason": "Teste de tema no perfil não aprova automaticamente os clones de Home/Comunicação/resumo; manter regressão específica por frame, sem afirmar defeito visual novo.",
+      "reason": "Revalidado o resumo do perfil nos temas Cinza e Aurora, preservando composição expressamente aprovada pelo usuário. Dados reais, alternância das abas, paginação e retorno das sessões, abertura/fechamento do compartilhamento e seletor de idioma conferidos no portal publicado; assets presentes e sem rolagem horizontal na largura efetiva observada. Tema original restaurado. Não aprova os outros estados de compartilhamento ou os clones da Home.",
       "sources": [
         "portal:src/system/pages/DashboardPage.vue",
         "portal:src/system/pages/CommunicationPage.vue"
       ],
       "evidence": [
         "docs/QA-2026-11-04-PERFIL-DOCUMENTACAO-121-130.md",
-        "docs/evidence/qa-2026-11-19-review17/matrix.json"
+        "docs/evidence/qa-2026-11-19-contract-request/results.json"
       ],
-      "browser": "Consulta real local de Home/resumo e temas cinza/Aurora; larguras observadas 1280 e 763. Sem teste integral de todos os gráficos/conteúdos dos frames.",
-      "lastReviewResult": "Corrigidos cabeçalho e valores em largura de tablet. Composição aprovada preservada; falta comparação integral e estados positivos de blocos indisponíveis.",
+      "browser": "Perfil resumido publicado: Cinza/Aurora; largura efetiva 1280, clientWidth=scrollWidth=1268; abas e paginação conferidas.",
+      "lastReviewResult": "Comparação dos temas e regressão do resumo encerradas, sem alterar a tela aprovada.",
       "historicalCategory": "Ajuste de front"
     },
     {
@@ -6551,20 +6549,20 @@
       "link": "[1:73602](https://www.figma.com/design/BaDXlWpxbIoY4azOaQnXgv?node-id=1-73602)",
       "counted": true,
       "group": "P12",
-      "category": "Ajuste de front",
-      "front": "validation",
+      "category": "Já correto",
+      "front": "done",
       "blockers": [],
-      "reason": "Teste de tema no perfil não aprova automaticamente os clones de Home/Comunicação/resumo; manter regressão específica por frame, sem afirmar defeito visual novo.",
+      "reason": "Revalidado o resumo do perfil nos temas Cinza e Aurora, preservando composição expressamente aprovada pelo usuário. Dados reais, alternância das abas, paginação e retorno das sessões, abertura/fechamento do compartilhamento e seletor de idioma conferidos no portal publicado; assets presentes e sem rolagem horizontal na largura efetiva observada. Tema original restaurado. Não aprova os outros estados de compartilhamento ou os clones da Home.",
       "sources": [
         "portal:src/system/pages/DashboardPage.vue",
         "portal:src/system/pages/CommunicationPage.vue"
       ],
       "evidence": [
         "docs/QA-2026-11-04-PERFIL-DOCUMENTACAO-121-130.md",
-        "docs/evidence/qa-2026-11-19-review17/matrix.json"
+        "docs/evidence/qa-2026-11-19-contract-request/results.json"
       ],
-      "browser": "Consulta real local de Home/resumo e temas cinza/Aurora; larguras observadas 1280 e 763. Sem teste integral de todos os gráficos/conteúdos dos frames.",
-      "lastReviewResult": "Corrigidos cabeçalho e valores em largura de tablet. Composição aprovada preservada; falta comparação integral e estados positivos de blocos indisponíveis.",
+      "browser": "Perfil resumido publicado: Cinza/Aurora; largura efetiva 1280, clientWidth=scrollWidth=1268; abas e paginação conferidas.",
+      "lastReviewResult": "Comparação dos temas e regressão do resumo encerradas, sem alterar a tela aprovada.",
       "historicalCategory": "Ajuste de front"
     },
     {

@@ -1,0 +1,18 @@
+{
+  "commit": "af6371952b2f9a07a9b585c10f716bc5a4c704dc",
+  "run": 44617029053,
+  "status": "success",
+  "url": "https://github.com/WillTbn/Strategy-analytics-v2/actions/runs/44617029053",
+  "checks": [
+    {
+      "asset": "/assets/ContractsPage-Ba6V6UtL.js",
+      "matchesLocalBuild": true,
+      "sha256": "1b373748bee2559aaa28e8d2de2f177dc79b4a9e77d76056686e1b40625046be"
+    },
+    {
+      "asset": "/assets/contractRequestService-DQ50Obru.js",
+      "matchesLocalBuild": true,
+      "sha256": "140abe57a6eb952b570a201928b441c49c7772caa1fb85d057355a23642273cb"
+    }
+  ]
+}

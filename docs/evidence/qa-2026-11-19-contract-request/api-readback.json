@@ -1,0 +1,1 @@
+{"status": 200, "requests": [{"modality": "Hybrid", "count": 1, "passed": true, "hasId": true}, {"modality": "Recurring", "count": 1, "passed": true, "hasId": true}, {"modality": "SinglePayment", "count": 1, "passed": true, "hasId": true}], "allPassed": true}

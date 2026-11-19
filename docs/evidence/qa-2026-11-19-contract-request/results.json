@@ -1,0 +1,43 @@
+{
+  "date": "2026-11-19",
+  "sourceCommit": "af6371952b2f9a07a9b585c10f716bc5a4c704dc",
+  "completedFrames": [
+    "1:37994",
+    "1:73288",
+    "1:73602"
+  ],
+  "implementation": "Adapter da solicitação existente; nenhuma mudança de template, CSS, campo ou ação. A única linha nova no componente passa um guard de vida do formulário.",
+  "tests": {
+    "passed": 536,
+    "failed": 0,
+    "targeted": 12,
+    "lint": "passed",
+    "build": "passed",
+    "audit": "passed",
+    "isolatedSnapshot": true
+  },
+  "integratedBrowser": {
+    "localWithHmlApi": [
+      "Hybrid: 1234,56 inicial e 250,10 mensal, Ações, EUA, BRL; sucesso e retorno à lista.",
+      "Rejeição inicial da modalidade em português manteve respostas e não exibiu sucesso. Corrigida no front."
+    ],
+    "publishedHml": [
+      "Recurring: 150,00 mensal, sem inicial; ETFs, EUA.",
+      "SinglePayment: 1500,00 inicial, sem mensal; Ações, EUA.",
+      "Valor zero bloqueia avanço; cada nova solicitação começa em branco; sucesso somente com ID da API."
+    ],
+    "readback": "Uma solicitação de cada modalidade, valores/moeda/ativos/região conferidos; ver api-readback.json. Não é contratação, aplicação de capital ou movimentação financeira.",
+    "profile": [
+      "Cinza e Aurora conferidos no perfil resumido existente, com dados reais.",
+      "Alternância Dados Pessoais/Contas Bancárias e retorno sem recarregar.",
+      "Paginação de sessões avançou de 1–5 para 6–10 e retornou. Nenhuma sessão encerrada.",
+      "Compartilhamento abre/fecha; indisponibilidade dos indicadores mantém download bloqueado. Não foi declarado compartilhamento integrado pronto.",
+      "Menu de idioma abriu com seleção atual; fechado sem troca. Tema original Cinza restaurado.",
+      "Largura efetiva observada 1280; clientWidth e scrollWidth 1268. O override solicitado não foi usado como prova de 1920."
+    ],
+    "limits": "Imagens de viewport, sem afirmar captura integral em todos os breakpoints. Captura final SinglePayment vazia foi descartada; confirmação pelo AX e readback. Recurring tem captura válida. Comparações integrais dos outros 14 continuam pendentes."
+  },
+  "backendBlockersForRequest": [],
+  "designerForCompletedFrames": "Composição aprovada preservada; o envio não exigiu novo desenho nem campos. Dúvidas dos editores/CT12/LG07/CO06/EC01 permanecem separadas.",
+  "unrelatedWork": "Alterações já existentes nos dois worktrees preservadas e excluídas dos commits desta entrega."
+}

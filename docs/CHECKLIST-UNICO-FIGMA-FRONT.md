@@ -10,12 +10,12 @@ Atualizado em 2026-11-19. Contagem por **telas e estados independentes do Figma*
 | Situação | Quantidade |
 | --- | ---: |
 | Total inventariado | **279** |
-| Prontas no frontend | **259** |
-| Implementadas, aguardando revalidação/comparação completa | **17** |
+| Prontas no frontend | **262** |
+| Implementadas, aguardando revalidação/comparação completa | **14** |
 | Ainda exigem implementação, complemento ou correção | **3** |
 | Com implementação existente (prontas + revalidação) | **276 / 279 (98,9%)** |
 
-**Para encerrar o front faltam 3 itens de implementação/ajuste e 17 de revalidação.** “Pronto no frontend” não significa fluxo integrado liberado: dependências de backend/designer podem afetar também telas prontas. Os números não classificam toda pendência como tela nova nem como problema de API. A comparação de Crédito, carteira global e editor editorial que não foi concluída integralmente permanece em revalidação.
+**Para encerrar o front faltam 3 itens de implementação/ajuste e 14 de revalidação.** “Pronto no frontend” não significa fluxo integrado liberado: dependências de backend/designer podem afetar também telas prontas. Os números não classificam toda pendência como tela nova nem como problema de API. A comparação de Crédito, carteira global e editor editorial que não foi concluída integralmente permanece em revalidação.
 
 Fonte por frame: [progresso atual](FRONTEND-PROGRESS.json). A base anterior permanece histórica; [atualizações com evidências](FRONTEND-PROGRESS-OVERRIDES.json) registram cada mudança. Ao finalizar **cada entrega**, atualizar os IDs comprovados, executar `node scripts/frontend-progress.mjs` e informar este panorama na resposta final.
 <!-- frontend-progress:end -->
@@ -26,6 +26,31 @@ Fonte por frame: [progresso atual](FRONTEND-PROGRESS.json). A base anterior perm
 
 
 
+
+## Entrega 19/11 — solicitação integrada e três estados encerrados
+
+**Publicado: portal `af63719`, [CI/deploy 44617029053](https://github.com/WillTbn/Strategy-analytics-v2/actions/runs/44617029053), sucesso.** Os dois chunks da integração conferidos por SHA256 contra o build isolado. Não houve mudança de template/CSS nem criação de campo ou ação. As composições aprovadas foram preservadas.
+
+- [x] `1:37994`: removido o bloqueio local de envio. O formulário existente consulta BRL no catálogo e envia objetivo, período, modalidade, valores inicial/mensal, moeda, ativos e regiões. Aplicação Única → `SinglePayment`, Recorrente → `Recurring`, Híbrida → `Hybrid`; os rótulos do Figma continuam na tela. Valor recorrente não é enviado como aporte inicial.
+- [x] Sessão, idempotência e autenticação pelos serviços existentes. Fechar/desmontar o formulário ou trocar sessão durante a consulta do catálogo impede o envio seguinte. Catálogo sem ID de BRL, falha ou resposta sem ID não mostram sucesso. Dados do envio são copiados antes da consulta; respostas editadas depois não alteram o payload em andamento.
+- [x] Navegador: validações progressivas, zero bloqueando avanço, nova solicitação em branco, cinco etapas, estado de envio, falha sem falso sucesso, confirmação e retorno à lista. Híbrida exercitada localmente contra API HML; Recorrente e Única no portal publicado. **A leitura posterior confirmou exatamente uma solicitação de cada modalidade**, com moeda, valores, ativos e região corretos. São pedidos fictícios, sem aplicação de capital/contratação financeira.
+- [x] A primeira tentativa com modalidade em português recebeu `400 contract_request.modality_invalid`; o mapeamento foi corrigido no frontend e o cenário foi reexecutado com sucesso. Não continua como pendência do backend. O Swagger ainda pode documentar os valores aceitos, sem bloquear este fluxo.
+- [x] `1:73288` e `1:73602`: resumo do perfil Cinza/Aurora revalidado no portal publicado. Alternância Dados Pessoais/Contas Bancárias, paginação das sessões e retorno, abertura/fechamento do compartilhamento e menu de idioma conferidos. Tema original restaurado; nenhuma sessão encerrada ou preferência de idioma/moeda alterada. Não foi aprovado o download de compartilhamento quando faltam indicadores, nem os outros frames da Home por inferência.
+- [x] **536 testes** aprovados, incluindo 12 direcionados ao envio/navegação; lint, build e auditoria aprovados em snapshot isolado. O CI também concluiu os checks e a ativação. Trabalho não relacionado nos worktrees permaneceu fora do commit.
+
+### O que continua aberto — sem confundir dependências
+
+| Responsável / natureza | Estados | Pendência real |
+| --- | --- | --- |
+| Designer | LG07 `1484:82147`, EC01 `1484:86740`, CO06 `1484:97530` | Resolver “Ao Lado” versus prancha empilhada; confirmar a prancha vazia EC01; definir origem do índice H2/H3 de relatório. Sem novo erro HTTP comprovado nesses pontos. |
+| Designer + complemento de front | CT12 `1484:73658`, CO04 `1484:96882`, CO05 `1484:97193` | Posição/gatilho de Adicionar operação e estados dos controles internos do editor ainda faltam. Continuam sendo os três ajustes, sem botão/menu inventado. |
+| Massa de teste / integração | `1:50960`, `1:51347`, `1:51728`, `1:52034`, `1:54617` | Conta disponível está no Nível 0; a área exige Nível 3. Falta percorrer o fluxo com conta elegível. Não classificar isso como bug de backend ou mudar a liberação no front. Telas por etapas aprovadas permanecem como estão. |
+| Front: comparação e adapters por concluir | `1:45691`, `1:46764`, `1:48631`, `1:50141`, `1:68461`, `1:68794` | Continua a comparação integral das composições de detalhes/Home, incluindo estados positivos e integração das projeções. Não foram encerrados por testes de outro componente ou pela aprovação do resumo do perfil. |
+| API/projeções a confirmar no fluxo integrado | Detalhes/Home acima | Métricas/séries indisponíveis, callbacks de destino/exportação e origem do App precisam de confirmação e ligação por cenário. Não declarar rotas ausentes nem pedir campos novos só por falta de adapter no frontend. |
+
+**Panorama: 279 estados; 262 prontos (93,9%), 14 em revalidação e 3 ajustes. Implementação existente: 276/279 (98,9%).** Os três encerramentos reduzem a revalidação de 17 para 14; o percentual de implementação existente permanece porque esses estados já tinham composição. As 13 superfícies sem referência continuam separadas para avaliação de Éric. Isso não encerra a homologação integrada dos demais cenários.
+
+[Resultados](evidence/qa-2026-11-19-contract-request/results.json) · [Leitura das três solicitações](evidence/qa-2026-11-19-contract-request/api-readback.json) · [Contrato HTTP e modalidades](evidence/qa-2026-11-19-contract-request/api-contract.json) · [Publicação](evidence/qa-2026-11-19-contract-request/publication.json) · [Sucesso publicado](evidence/qa-2026-11-19-contract-request/request-success-hml-recurring.png).
 
 ## Entrega 19/11 — revalidação dos 17 estados e responsividade
 
@@ -1536,7 +1561,7 @@ Legenda vigente: classificação de 16/11 por código e evidências, detalhada e
 | [1:32479](https://www.figma.com/design/BaDXlWpxbIoY4azOaQnXgv?node-id=1-32479)     | [UI] CONTRATOS - GERAL                                                       | Pronto no front · P04 |
 | [1:34294](https://www.figma.com/design/BaDXlWpxbIoY4azOaQnXgv?node-id=1-34294)     | [UI] CONTRATOS - OFERTA_CONTRATO - 1                                         | Pronto no front · P05 |
 | [1:36148](https://www.figma.com/design/BaDXlWpxbIoY4azOaQnXgv?node-id=1-36148)     | [UI] CONTRATOS - OFERTA_CONTRATO - 2                                         | Pronto no front · P05 |
-| [1:37994](https://www.figma.com/design/BaDXlWpxbIoY4azOaQnXgv?node-id=1-37994)     | [UI] CONTRATOS - OFERTA_CONTRATO - 3                                         | Implementado · revalidar · P05 |
+| [1:37994](https://www.figma.com/design/BaDXlWpxbIoY4azOaQnXgv?node-id=1-37994)     | [UI] CONTRATOS - OFERTA_CONTRATO - 3                                         | Pronto no front · P05 |
 | [1:39818](https://www.figma.com/design/BaDXlWpxbIoY4azOaQnXgv?node-id=1-39818)     | [UI] CONTRATOS - OFERTA_CONTRATO - 4                                         | Pronto no front · P05 |
 | [1:41796](https://www.figma.com/design/BaDXlWpxbIoY4azOaQnXgv?node-id=1-41796)     | [UI] CONTRATOS - OFERTA_CONTRATO - 5A                                        | Pronto no front · P05 |
 | [1:43678](https://www.figma.com/design/BaDXlWpxbIoY4azOaQnXgv?node-id=1-43678)     | [UI] CONTRATOS - OFERTA_CONTRATO - 5A                                        | Pronto no front · P05 |
@@ -1613,8 +1638,8 @@ Legenda vigente: classificação de 16/11 por código e evidências, detalhada e
 | [1:72787](https://www.figma.com/design/BaDXlWpxbIoY4azOaQnXgv?node-id=1-72787)     | [UI] ALAVANCAGEM                                                             | Pronto no front · P06 |
 | [1:72906](https://www.figma.com/design/BaDXlWpxbIoY4azOaQnXgv?node-id=1-72906)     | [UI] COMUNICAÇÃO (List View)                                                 | Pronto no front · P12 |
 | [1:73097](https://www.figma.com/design/BaDXlWpxbIoY4azOaQnXgv?node-id=1-73097)     | [UI] COMUNICAÇÃO (List View)                                                 | Pronto no front · P12 |
-| [1:73288](https://www.figma.com/design/BaDXlWpxbIoY4azOaQnXgv?node-id=1-73288)     | [UI] PERFIL - Pág Resumo - Dados Pessoais                                    | Implementado · revalidar · P12 |
-| [1:73602](https://www.figma.com/design/BaDXlWpxbIoY4azOaQnXgv?node-id=1-73602)     | [UI] PERFIL - Pág Resumo - Dados Pessoais                                    | Implementado · revalidar · P12 |
+| [1:73288](https://www.figma.com/design/BaDXlWpxbIoY4azOaQnXgv?node-id=1-73288)     | [UI] PERFIL - Pág Resumo - Dados Pessoais                                    | Pronto no front · P12 |
+| [1:73602](https://www.figma.com/design/BaDXlWpxbIoY4azOaQnXgv?node-id=1-73602)     | [UI] PERFIL - Pág Resumo - Dados Pessoais                                    | Pronto no front · P12 |
 | [163:27273](https://www.figma.com/design/BaDXlWpxbIoY4azOaQnXgv?node-id=163-27273) | [UI] PERFIL - Pág Resumo - Dados Pessoais · Moeda Primária aberta (dropdown) | Pronto no front · P10 |
 | [4:25438](https://www.figma.com/design/BaDXlWpxbIoY4azOaQnXgv?node-id=4-25438)     | [UI] LOGIN                                                                   | Pronto no front · P13 |
 | [4:25513](https://www.figma.com/design/BaDXlWpxbIoY4azOaQnXgv?node-id=4-25513)     | [UI] CADASTRO - 1 Criar conta                                                | Pronto no front · P13 |

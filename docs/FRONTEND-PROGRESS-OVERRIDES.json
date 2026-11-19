@@ -299,14 +299,12 @@
       ]
     },
     "1:37994": {
-      "front": "validation",
-      "reason": "Designer: falta estado selecionado dos campos de valor no passo 3. Front: POST /client/contracts/requests existe no OpenAPI de 18/11; adapter ainda indisponível. Verificar mapeamento objective/period/modality/initialAmount/monthlyAmount/assetTypes/regions e currencyId do catálogo, sem atribuir ausência da rota ao backend.",
-      "evidence": "docs/evidence/qa-2026-11-19-review17/matrix.json",
-      "blockers": [
-        "designer"
-      ],
-      "browser": "Não repetido nesta rodada; revisão da classificação e evidências anteriores.",
-      "lastReviewResult": "Designer: falta estado selecionado dos campos de valor no passo 3. Front: POST /client/contracts/requests existe no OpenAPI de 18/11; adapter ainda indisponível. Verificar mapeamento objective/period/modality/initialAmount/monthlyAmount/assetTypes/regions e currencyId do catálogo, sem atribuir ausência da rota ao backend."
+      "front": "done",
+      "reason": "Envio do wizard aprovado integrado ao POST existente, com BRL do catálogo e enum da modalidade confirmado na API. Híbrida testada no navegador local contra homologação; Recorrente e Única no portal publicado. Uma solicitação por modalidade conferida na consulta, valores e seleções corretos. Validação, falha, respostas preservadas, sucesso e retorno exercitados; sem mudar campos ou layout aprovado.",
+      "evidence": "docs/evidence/qa-2026-11-19-contract-request/results.json",
+      "blockers": [],
+      "browser": "Três modalidades pelo navegador; Recurring/SinglePayment na publicação af63719, Hybrid local contra API HML.",
+      "lastReviewResult": "Bloqueio local removido; fluxo de solicitação e persistência confirmados. Não é criação/contratação financeira."
     },
     "1:39818": {
       "front": "done",
@@ -537,42 +535,42 @@
     "1:50960": {
       "front": "validation",
       "reason": "Usuário confirmou que as telas da Área do Cliente estão validadas e devem permanecer como estão, com empréstimos por etapas. Mantida a implementação existente, sem nova composição ou campos. Reclassificação de escopo, não novo teste: comparação detalhada dos estados e integração comercial continuam sem nova evidência nesta rodada.",
-      "evidence": "docs/evidence/qa-2026-11-19-review17/matrix.json",
+      "evidence": "docs/evidence/qa-2026-11-19-contract-request/results.json",
       "blockers": [
-        "backend"
+        "test-data"
       ],
       "browser": "Acesso real ao catálogo mostra bloqueio Nível 3; conta Éric consta no Nível 0.",
-      "lastReviewResult": "Telas aprovadas preservadas. Falta conta elegível/massa para percorrer estados integrados; não é novo defeito de API comprovado."
+      "lastReviewResult": "Teste integrado pendente por massa: conta Éric no Nível 0 e área exige Nível 3. Não é falha nova de API comprovada; composição aprovada preservada."
     },
     "1:51347": {
       "front": "validation",
       "reason": "Usuário confirmou que as telas da Área do Cliente estão validadas e devem permanecer como estão, com empréstimos por etapas. Mantida a implementação existente, sem nova composição ou campos. Reclassificação de escopo, não novo teste: comparação detalhada dos estados e integração comercial continuam sem nova evidência nesta rodada.",
-      "evidence": "docs/evidence/qa-2026-11-19-review17/matrix.json",
+      "evidence": "docs/evidence/qa-2026-11-19-contract-request/results.json",
       "blockers": [
-        "backend"
+        "test-data"
       ],
       "browser": "Acesso real ao catálogo mostra bloqueio Nível 3; conta Éric consta no Nível 0.",
-      "lastReviewResult": "Telas aprovadas preservadas. Falta conta elegível/massa para percorrer estados integrados; não é novo defeito de API comprovado."
+      "lastReviewResult": "Teste integrado pendente por massa: conta Éric no Nível 0 e área exige Nível 3. Não é falha nova de API comprovada; composição aprovada preservada."
     },
     "1:51728": {
       "front": "validation",
       "reason": "Usuário confirmou que as telas da Área do Cliente estão validadas e devem permanecer como estão, com empréstimos por etapas. Mantida a implementação existente, sem nova composição ou campos. Reclassificação de escopo, não novo teste: comparação detalhada dos estados e integração comercial continuam sem nova evidência nesta rodada.",
-      "evidence": "docs/evidence/qa-2026-11-19-review17/matrix.json",
+      "evidence": "docs/evidence/qa-2026-11-19-contract-request/results.json",
       "blockers": [
-        "backend"
+        "test-data"
       ],
       "browser": "Acesso real ao catálogo mostra bloqueio Nível 3; conta Éric consta no Nível 0.",
-      "lastReviewResult": "Telas aprovadas preservadas. Falta conta elegível/massa para percorrer estados integrados; não é novo defeito de API comprovado."
+      "lastReviewResult": "Teste integrado pendente por massa: conta Éric no Nível 0 e área exige Nível 3. Não é falha nova de API comprovada; composição aprovada preservada."
     },
     "1:52034": {
       "front": "validation",
       "reason": "Usuário confirmou que as telas da Área do Cliente estão validadas e devem permanecer como estão, com empréstimos por etapas. Mantida a implementação existente, sem nova composição ou campos. Reclassificação de escopo, não novo teste: comparação detalhada dos estados e integração comercial continuam sem nova evidência nesta rodada.",
-      "evidence": "docs/evidence/qa-2026-11-19-review17/matrix.json",
+      "evidence": "docs/evidence/qa-2026-11-19-contract-request/results.json",
       "blockers": [
-        "backend"
+        "test-data"
       ],
       "browser": "Acesso real ao catálogo mostra bloqueio Nível 3; conta Éric consta no Nível 0.",
-      "lastReviewResult": "Telas aprovadas preservadas. Falta conta elegível/massa para percorrer estados integrados; não é novo defeito de API comprovado."
+      "lastReviewResult": "Teste integrado pendente por massa: conta Éric no Nível 0 e área exige Nível 3. Não é falha nova de API comprovada; composição aprovada preservada."
     },
     "1:54430": {
       "front": "done",
@@ -585,12 +583,12 @@
     "1:54617": {
       "front": "validation",
       "reason": "Usuário confirmou que as telas da Área do Cliente estão validadas e devem permanecer como estão, com empréstimos por etapas. Mantida a implementação existente, sem nova composição ou campos. Reclassificação de escopo, não novo teste: comparação detalhada dos estados e integração comercial continuam sem nova evidência nesta rodada.",
-      "evidence": "docs/evidence/qa-2026-11-19-review17/matrix.json",
+      "evidence": "docs/evidence/qa-2026-11-19-contract-request/results.json",
       "blockers": [
-        "backend"
+        "test-data"
       ],
       "browser": "Acesso real ao catálogo mostra bloqueio Nível 3; conta Éric consta no Nível 0.",
-      "lastReviewResult": "Telas aprovadas preservadas. Falta conta elegível/massa para percorrer estados integrados; não é novo defeito de API comprovado."
+      "lastReviewResult": "Teste integrado pendente por massa: conta Éric no Nível 0 e área exige Nível 3. Não é falha nova de API comprovada; composição aprovada preservada."
     },
     "37:27142": {
       "front": "done",
@@ -902,9 +900,12 @@
     "1484:82147": {
       "front": "validation",
       "reason": "Tabelas oficiais/simuladas corrigidas e testadas com séries controladas e indisponíveis. O frame denominado Ao Lado mostra tabelas empilhadas; esclarecer relação com o controle antes de concluir a comparação do estado inteiro.",
-      "evidence": "docs/evidence/qa-2026-11-19-review17/matrix.json",
+      "evidence": "docs/evidence/qa-2026-11-19-contract-request/results.json",
       "browser": "Não repetido nesta rodada; revisão da classificação e evidências anteriores.",
-      "lastReviewResult": "Tabelas oficiais/simuladas corrigidas e testadas com séries controladas e indisponíveis. O frame denominado Ao Lado mostra tabelas empilhadas; esclarecer relação com o controle antes de concluir a comparação do estado inteiro."
+      "lastReviewResult": "Dúvida de composição Ao Lado versus tabelas empilhadas é do desenho; não classificar como defeito comprovado da API. Evidência anterior das tabelas preservada.",
+      "blockers": [
+        "designer"
+      ]
     },
     "1484:94677": {
       "front": "done",
@@ -1039,18 +1040,20 @@
       "lastReviewResult": "Corrigidos cabeçalho e valores em largura de tablet. Composição aprovada preservada; falta comparação integral e estados positivos de blocos indisponíveis."
     },
     "1:73288": {
-      "front": "validation",
-      "reason": "Teste de tema no perfil não aprova automaticamente os clones de Home/Comunicação/resumo; manter regressão específica por frame, sem afirmar defeito visual novo.",
-      "evidence": "docs/evidence/qa-2026-11-19-review17/matrix.json",
-      "browser": "Consulta real local de Home/resumo e temas cinza/Aurora; larguras observadas 1280 e 763. Sem teste integral de todos os gráficos/conteúdos dos frames.",
-      "lastReviewResult": "Corrigidos cabeçalho e valores em largura de tablet. Composição aprovada preservada; falta comparação integral e estados positivos de blocos indisponíveis."
+      "front": "done",
+      "reason": "Revalidado o resumo do perfil nos temas Cinza e Aurora, preservando composição expressamente aprovada pelo usuário. Dados reais, alternância das abas, paginação e retorno das sessões, abertura/fechamento do compartilhamento e seletor de idioma conferidos no portal publicado; assets presentes e sem rolagem horizontal na largura efetiva observada. Tema original restaurado. Não aprova os outros estados de compartilhamento ou os clones da Home.",
+      "evidence": "docs/evidence/qa-2026-11-19-contract-request/results.json",
+      "browser": "Perfil resumido publicado: Cinza/Aurora; largura efetiva 1280, clientWidth=scrollWidth=1268; abas e paginação conferidas.",
+      "lastReviewResult": "Comparação dos temas e regressão do resumo encerradas, sem alterar a tela aprovada.",
+      "blockers": []
     },
     "1:73602": {
-      "front": "validation",
-      "reason": "Teste de tema no perfil não aprova automaticamente os clones de Home/Comunicação/resumo; manter regressão específica por frame, sem afirmar defeito visual novo.",
-      "evidence": "docs/evidence/qa-2026-11-19-review17/matrix.json",
-      "browser": "Consulta real local de Home/resumo e temas cinza/Aurora; larguras observadas 1280 e 763. Sem teste integral de todos os gráficos/conteúdos dos frames.",
-      "lastReviewResult": "Corrigidos cabeçalho e valores em largura de tablet. Composição aprovada preservada; falta comparação integral e estados positivos de blocos indisponíveis."
+      "front": "done",
+      "reason": "Revalidado o resumo do perfil nos temas Cinza e Aurora, preservando composição expressamente aprovada pelo usuário. Dados reais, alternância das abas, paginação e retorno das sessões, abertura/fechamento do compartilhamento e seletor de idioma conferidos no portal publicado; assets presentes e sem rolagem horizontal na largura efetiva observada. Tema original restaurado. Não aprova os outros estados de compartilhamento ou os clones da Home.",
+      "evidence": "docs/evidence/qa-2026-11-19-contract-request/results.json",
+      "browser": "Perfil resumido publicado: Cinza/Aurora; largura efetiva 1280, clientWidth=scrollWidth=1268; abas e paginação conferidas.",
+      "lastReviewResult": "Comparação dos temas e regressão do resumo encerradas, sem alterar a tela aprovada.",
+      "blockers": []
     }
   }
 }

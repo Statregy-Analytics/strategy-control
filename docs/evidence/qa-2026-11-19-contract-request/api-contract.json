@@ -1,0 +1,146 @@
+{
+  "source": "https://strategyanalytics.codebiz.com.br/openapi/v1.json",
+  "path": "/api/v1/client/contracts/requests",
+  "method": "POST",
+  "request": {
+    "required": [
+      "objective",
+      "period",
+      "modality",
+      "initialAmount",
+      "monthlyAmount",
+      "currencyId",
+      "assetTypes",
+      "regions"
+    ],
+    "type": "object",
+    "properties": {
+      "objective": {
+        "type": [
+          "null",
+          "string"
+        ]
+      },
+      "period": {
+        "type": [
+          "null",
+          "string"
+        ]
+      },
+      "modality": {
+        "type": [
+          "null",
+          "string"
+        ]
+      },
+      "initialAmount": {
+        "pattern": "^-?(?:0|[1-9]\\d*)(?:\\.\\d+)?$",
+        "type": [
+          "null",
+          "number",
+          "string"
+        ],
+        "format": "double",
+        "example": 1000.0
+      },
+      "monthlyAmount": {
+        "pattern": "^-?(?:0|[1-9]\\d*)(?:\\.\\d+)?$",
+        "type": [
+          "null",
+          "number",
+          "string"
+        ],
+        "format": "double",
+        "example": 1000.0
+      },
+      "currencyId": {
+        "type": [
+          "null",
+          "string"
+        ],
+        "format": "uuid",
+        "example": "3fa85f64-5717-4562-b3fc-2c963f66afa6"
+      },
+      "assetTypes": {
+        "type": [
+          "null",
+          "array"
+        ],
+        "items": {
+          "type": "string"
+        }
+      },
+      "regions": {
+        "type": [
+          "null",
+          "array"
+        ],
+        "items": {
+          "type": "string"
+        }
+      }
+    },
+    "additionalProperties": false
+  },
+  "response": {
+    "required": [
+      "id",
+      "publicCode",
+      "status",
+      "answers",
+      "submittedAtUtc"
+    ],
+    "type": "object",
+    "properties": {
+      "id": {
+        "type": "string",
+        "format": "uuid",
+        "example": "3fa85f64-5717-4562-b3fc-2c963f66afa6"
+      },
+      "publicCode": {
+        "type": "string"
+      },
+      "status": {
+        "type": "string"
+      },
+      "answers": {
+        "$ref": "#/components/schemas/ContractRequestAnswersResponse"
+      },
+      "submittedAtUtc": {
+        "type": "string",
+        "format": "date-time",
+        "example": "2026-11-19T00:00:00Z"
+      }
+    }
+  },
+  "currencyCatalogItem": {
+    "required": [
+      "value",
+      "label",
+      "id"
+    ],
+    "type": "object",
+    "properties": {
+      "value": {
+        "type": "string"
+      },
+      "label": {
+        "type": "string"
+      },
+      "id": {
+        "type": [
+          "null",
+          "string"
+        ],
+        "format": "uuid",
+        "example": "3fa85f64-5717-4562-b3fc-2c963f66afa6"
+      }
+    }
+  },
+  "observedModalities": {
+    "Aplicação Única": "SinglePayment",
+    "Com Aportes Recorrentes": "Recurring",
+    "Aplicação Híbrida": "Hybrid"
+  },
+  "note": "O OpenAPI não enumera as modalidades; valores confirmados pelo erro de validação e pelos envios reais. Não é bloqueio runtime após o mapeamento."
+}
