@@ -1,0 +1,10 @@
+{
+  "browserValidated": false,
+  "detailRead": true,
+  "hasContractId": true,
+  "currencyMapped": true,
+  "individualBaseAvailable": true,
+  "acquisitionAvailable": false,
+  "currentPositionAvailable": false,
+  "noGlobalCapitalFallback": true
+}

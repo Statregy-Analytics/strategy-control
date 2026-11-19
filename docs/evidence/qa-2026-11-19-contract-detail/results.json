@@ -1,0 +1,70 @@
+{
+  "date": "2026-11-19",
+  "scope": "Composição dos detalhes de contrato do cliente; preservar identidade e integrações existentes",
+  "commit": "f95bc72",
+  "implementedFramesPendingBrowser": [
+    "1:45691",
+    "1:46764",
+    "1:48631",
+    "1:50141"
+  ],
+  "newReadyFrames": [],
+  "automated": {
+    "isolatedSnapshot": true,
+    "tests": 520,
+    "passed": 520,
+    "lint": "passed",
+    "build": "passed",
+    "audit": "passed; audit preserved",
+    "note": "Published source a4b00eb passed isolated snapshot checks; exact final source is verified by CI 44540551348, preserving audit.",
+    "ci": "Exact final source passed audit/lint/tests/build/upload/activation in 44540551348."
+  },
+  "browser": {
+    "state": "not_validated",
+    "reason": "Windows Computer Use interrupted because the current browser URL could not be established confidently. No further app inputs issued; no screenshot/rendered geometry approval claimed."
+  },
+  "implemented": [
+    "Overview with three native decorative assets; missing metrics never become zero.",
+    "Performance unit, period, comparison, bar distribution and six donut compositions from supplied series.",
+    "Dividend Yield, destination callback confirmation/failure guards and monthly reason tooltip.",
+    "Contributions, history and participant popover using scoped supplied data.",
+    "Assets modal, unknown vs confirmed empty, PDF callback retry/concurrency guards.",
+    "Application container, trusted HTTPS origin guard, no embedded financial screenshot.",
+    "Footer and existing Profile/Contracts and Terms route.",
+    "Existing independent detail/documents/history reads, session and stale-response guards retained.",
+    "App nested panel dimensions and assets table sticky header refined from the retrieved frames; final rendered geometry remains unverified.",
+    "Participant popover follows 1:50510: 48px avatar, identity and level, customer date, divider and three statistics. Contribution point tooltip uses supplied participant/image/value/date; no sample avatar shipped."
+  ],
+  "integrationLimits": [
+    "Only documented detail fields mapped on the real route. Rich series, distributions, next payment, last-12-month and accumulated income, contribution history/participants and asset list are not invented.",
+    "Destination change and asset PDF disabled without callback; no undocumented HTTP calls.",
+    "Application requires approved source/provider. Screenshot used by Figma as an example was not shipped as an application.",
+    "Grouped/bar, standalone App and positive participant states prepared as presentation props; actual choice/data adapter still needs business/API confirmation.",
+    "Existing generic documents/history sections preserved; no new unrelated actions or fields added."
+  ],
+  "remaining": [
+    "Four Home/profile theme variants still require full browser comparison.",
+    "LG07/EC01/editor H2-H3/offer selected amount still depend on design clarification.",
+    "Other nine adjustment states remain individually documented."
+  ],
+  "unrelatedWork": "Existing uncommitted backend-alignment changes and shared documentation preserved; not part of portal source commit.",
+  "publication": "publication.json",
+  "apiRead": "api-read.json",
+  "progress": {
+    "total": 279,
+    "done": 258,
+    "validation": 12,
+    "adjustment": 9,
+    "implemented": 270,
+    "implementedPercent": 96.8,
+    "readyPercent": 92.5
+  },
+  "featureCommit": "a4b00eb",
+  "documentationChecks": {
+    "adminLint": "passed",
+    "adminBuild": "passed",
+    "scopedDiff": "passed",
+    "progressGenerator": "passed"
+  },
+  "layoutCommit": "2c040f7"
+}

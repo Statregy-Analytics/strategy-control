@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-18",
+  "updatedAt": "2026-11-19",
   "baseline": "docs/evidence/qa-2026-11-16-inventory/classification.json",
   "baselineSha256": "26c2a433d27898a864d7f1a0091a8aa30f218751b023914037090ae0d8652c26",
   "unit": "Frames/estados independentes do Figma, não rotas nem horas",
@@ -12,10 +12,10 @@
   "metrics": {
     "total": 279,
     "done": 258,
-    "validation": 8,
-    "adjustment": 13,
-    "implemented": 266,
-    "implementedPercent": 95.3,
+    "validation": 12,
+    "adjustment": 9,
+    "implemented": 270,
+    "implementedPercent": 96.8,
     "readyPercent": 92.5
   },
   "withoutLinkedFigmaReference": {
@@ -4632,11 +4632,11 @@
       "counted": true,
       "group": "P04",
       "category": "Ajuste de front",
-      "front": "adjustment",
+      "front": "validation",
       "blockers": [
         "backend"
       ],
-      "reason": "A rota real mantém detalhe genérico, documentos e histórico. Faltam composição integral de visão geral/performance, distribuição, dividendos/aportes e respectivos estados, App/ativos e popover do desenho. Referências recuperadas; trabalho de frontend ainda necessário, além da projeção HTTP. Navegação funcional não equivale a layout completo.",
+      "reason": "Composição agrupada, performance e distribuição por barras implementadas conforme contextos completos, por propriedades. Passou testes/CI; falta comparação visual desktop/mobile e geometria dos assets. Integração das séries não foi presumida.",
       "sources": [
         "portal:src/system/pages/contract/ContractsPage.vue",
         "portal:src/system/pages/contract/ContractPage.vue"
@@ -4644,7 +4644,7 @@
       "evidence": [
         "docs/QA-2026-11-12-LISTA-CONTRATOS.md",
         "docs/QA-2026-11-12-CONTRATOS-NAVEGACAO.md",
-        "docs/evidence/qa-2026-11-18-review15/results.json"
+        "docs/evidence/qa-2026-11-19-contract-detail/results.json"
       ],
       "browser": "navegação/dados testados; composição integral pendente",
       "historicalCategory": "Ajuste de front"
@@ -4658,11 +4658,11 @@
       "counted": true,
       "group": "P04",
       "category": "Ajuste de front",
-      "front": "adjustment",
+      "front": "validation",
       "blockers": [
         "backend"
       ],
-      "reason": "A rota real mantém detalhe genérico, documentos e histórico. Faltam composição integral de visão geral/performance, distribuição, dividendos/aportes e respectivos estados, App/ativos e popover do desenho. Referências recuperadas; trabalho de frontend ainda necessário, além da projeção HTTP. Navegação funcional não equivale a layout completo.",
+      "reason": "Composição separada com três resumos, performance, seis donuts, dividendos, aportes, aplicativo e resumo implementada. Rota real conectada aos campos confirmados, testes/CI aprovados. Falta conferência visual no navegador; métricas não fornecidas continuam indisponíveis.",
       "sources": [
         "portal:src/system/pages/contract/ContractsPage.vue",
         "portal:src/system/pages/contract/ContractPage.vue"
@@ -4670,7 +4670,7 @@
       "evidence": [
         "docs/QA-2026-11-12-LISTA-CONTRATOS.md",
         "docs/QA-2026-11-12-CONTRATOS-NAVEGACAO.md",
-        "docs/evidence/qa-2026-11-18-review15/results.json"
+        "docs/evidence/qa-2026-11-19-contract-detail/results.json"
       ],
       "browser": "navegação/dados testados; composição integral pendente",
       "historicalCategory": "Ajuste de front"
@@ -4684,11 +4684,11 @@
       "counted": true,
       "group": "P04",
       "category": "Ajuste de front",
-      "front": "adjustment",
+      "front": "validation",
       "blockers": [
         "backend"
       ],
-      "reason": "A rota real mantém detalhe genérico, documentos e histórico. Faltam composição integral de visão geral/performance, distribuição, dividendos/aportes e respectivos estados, App/ativos e popover do desenho. Referências recuperadas; trabalho de frontend ainda necessário, além da projeção HTTP. Navegação funcional não equivale a layout completo.",
+      "reason": "Variante App, resumo compacto, banner e modal de ativos implementados por propriedades; callback de exportação protegido. Origem do aplicativo deve ser aprovada, sem incorporar captura financeira de exemplo. Falta validar abertura, geometria e responsividade no navegador e confirmar adapter da variante.",
       "sources": [
         "portal:src/system/pages/contract/ContractsPage.vue",
         "portal:src/system/pages/contract/ContractPage.vue"
@@ -4696,7 +4696,7 @@
       "evidence": [
         "docs/QA-2026-11-12-LISTA-CONTRATOS.md",
         "docs/QA-2026-11-12-CONTRATOS-NAVEGACAO.md",
-        "docs/evidence/qa-2026-11-18-review15/results.json"
+        "docs/evidence/qa-2026-11-19-contract-detail/results.json"
       ],
       "browser": "navegação/dados testados; composição integral pendente",
       "historicalCategory": "Ajuste de front"
@@ -4710,11 +4710,11 @@
       "counted": true,
       "group": "P04",
       "category": "Ajuste de front",
-      "front": "adjustment",
+      "front": "validation",
       "blockers": [
         "backend"
       ],
-      "reason": "A rota real mantém detalhe genérico, documentos e histórico. Faltam composição integral de visão geral/performance, distribuição, dividendos/aportes e respectivos estados, App/ativos e popover do desenho. Referências recuperadas; trabalho de frontend ainda necessário, além da projeção HTTP. Navegação funcional não equivale a layout completo.",
+      "reason": "Aportes, histórico e popover de participante implementados com dados fornecidos, sem consultar clientes alheios ou criar retratos/IDs/valores. Testes de props/reatividade passaram; falta validar popover, teclado e geometria no navegador e ligar projeção confirmada.",
       "sources": [
         "portal:src/system/pages/contract/ContractsPage.vue",
         "portal:src/system/pages/contract/ContractPage.vue"
@@ -4722,7 +4722,7 @@
       "evidence": [
         "docs/QA-2026-11-12-LISTA-CONTRATOS.md",
         "docs/QA-2026-11-12-CONTRATOS-NAVEGACAO.md",
-        "docs/evidence/qa-2026-11-18-review15/results.json"
+        "docs/evidence/qa-2026-11-19-contract-detail/results.json"
       ],
       "browser": "navegação/dados testados; composição integral pendente",
       "historicalCategory": "Ajuste de front"

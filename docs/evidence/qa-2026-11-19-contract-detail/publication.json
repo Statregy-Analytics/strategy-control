@@ -1,0 +1,116 @@
+{
+  "commit": "f95bc72e9af34ce7099372587d036c8ce32a0956",
+  "featureCommit": "a4b00eb",
+  "layoutCommit": "2c040f7",
+  "run": "https://github.com/WillTbn/Strategy-analytics-v2/actions/runs/44540551348",
+  "conclusion": "success",
+  "entry": "/assets/index-gv1N5gDC.js",
+  "contractChunks": [
+    "ContractPage-S9aWtOaT.js"
+  ],
+  "nativeAssetsVerified": [
+    {
+      "file": "1-47098-imgFileInvoice.svg",
+      "sha256": "01716c093e9534a4388f8e52192273fb978b98d3b267bd23837735843ce83d82",
+      "matches": true
+    },
+    {
+      "file": "1-47098-imgPackage.svg",
+      "sha256": "7d2bab4ad7f846d151fcdff42c380d779f156d9543a0719eeb4d27965612996c",
+      "matches": true
+    },
+    {
+      "file": "1-47251-imgFileInvoice.svg",
+      "sha256": "e5b5529f9577ad4e2cf71cd83ef6aac7bb562b98efd16455b9d8d3e96642dfa2",
+      "matches": true
+    },
+    {
+      "file": "1-47251-imgPackage.svg",
+      "sha256": "140182892d59a2ad746b290b99c48a33c1578f9bec1726a75535af52e1bcab6d",
+      "matches": true
+    },
+    {
+      "file": "1-47350-imgFileInvoice.svg",
+      "sha256": "cc15ca05f05782fc8dce90677406f71fc80dbafda0d30157f8caebc6f1d28c8c",
+      "matches": true
+    },
+    {
+      "file": "1-47350-imgPackage.svg",
+      "sha256": "55cd76180cdcb4ccdd365944584f9f0fecf73ba2ef058301dd25ac4802280e38",
+      "matches": true
+    },
+    {
+      "file": "imgArrowLeft.svg",
+      "sha256": "8ff784fed12c85170f1173dab0bf20f5c016fb974b86ad2805efa4987a7446b5",
+      "matches": true
+    },
+    {
+      "file": "imgArrowUpRight.svg",
+      "sha256": "c45e51a34217ac38c9eedc33eed8c26328e6f53eff0190776f51414bee6c1334",
+      "matches": true
+    },
+    {
+      "file": "imgChartPie.svg",
+      "sha256": "55802f29bc7dabc22a7eecf7f407b95c96a2052da41536153f324a24105a89a1",
+      "matches": true
+    },
+    {
+      "file": "imgContent.png",
+      "sha256": "724beff00e74a0391e5b3dcf43526b02416d728a124ac124c40b2145858c3ae9",
+      "matches": true
+    },
+    {
+      "file": "imgFileInvoice.svg",
+      "sha256": "ac59b99657a92326ac07709e1b9a808190806de136f41b7d1a59b183665e0747",
+      "matches": true
+    },
+    {
+      "file": "imgFileUpload.svg",
+      "sha256": "24e3ef7e282b227597df228c109350dcb0ac6d4d9ea45ce31806b8c6ebba8241",
+      "matches": true
+    },
+    {
+      "file": "imgPackage.svg",
+      "sha256": "685ce62e1b7c48dd7bf0af7f57c95e2a19bfd762fcb10ca0314e83b583f48c17",
+      "matches": true
+    },
+    {
+      "file": "imgRosetteDiscountCheck.svg",
+      "sha256": "b4c739fcf80d973f7a52b77b2eaa83f1e91189053fb0c673a4059be75d17d069",
+      "matches": true
+    },
+    {
+      "file": "imgWhisk93C52372B3.png",
+      "sha256": "2d6ad40b40da825a4170c9f032a3ea713b89d3eccac1d7daf4f0d127c06a425a",
+      "matches": true
+    },
+    {
+      "file": "imgWhiskA02F73Df51.png",
+      "sha256": "49d8ba4c98a8373a22bfbb07fdf3baef51259488857a1fbdb00f84723b9932a2",
+      "matches": true
+    },
+    {
+      "file": "imgWhiskE88B8Da488.png",
+      "sha256": "a977e9a95096441194e0d36c6525aaaa9fd9fd28f9c4c6c905d0d147b3593b90",
+      "matches": true
+    },
+    {
+      "file": "imgWhiskEa8D61A4C51.png",
+      "sha256": "a22785bba62a9fa247e0a6e61c8dc973de171d45368fe859a277aedd5133a7b9",
+      "matches": true
+    },
+    {
+      "file": "imgX.svg",
+      "sha256": "49e60e861acbb88acb08b69300192d954d344d9ef25705dd1ba7ca79a61d45b3",
+      "matches": true
+    }
+  ],
+  "browser": "not validated; Windows browser URL verification interrupted",
+  "newCompositionMarkers": {
+    "Receber dividendos em:": true,
+    "Aportes": true,
+    "Ativos do Contrato": true,
+    "detail-app-group": true,
+    "detail-participant-divider": true
+  }
+}

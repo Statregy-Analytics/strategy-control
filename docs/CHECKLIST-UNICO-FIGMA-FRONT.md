@@ -5,17 +5,17 @@ Atualização: 18/11/2026. Este é o índice desta revisão ampla. Evidências a
 <!-- frontend-progress:start -->
 ## Panorama atual do frontend
 
-Atualizado em 2026-11-18. Contagem por **telas e estados independentes do Figma**, com peso igual; não é estimativa de horas. Os 30 agrupamentos/conexões do inventário foram excluídos.
+Atualizado em 2026-11-19. Contagem por **telas e estados independentes do Figma**, com peso igual; não é estimativa de horas. Os 30 agrupamentos/conexões do inventário foram excluídos.
 
 | Situação | Quantidade |
 | --- | ---: |
 | Total inventariado | **279** |
 | Prontas no frontend | **258** |
-| Implementadas, aguardando revalidação/comparação completa | **8** |
-| Ainda exigem implementação, complemento ou correção | **13** |
-| Com implementação existente (prontas + revalidação) | **266 / 279 (95,3%)** |
+| Implementadas, aguardando revalidação/comparação completa | **12** |
+| Ainda exigem implementação, complemento ou correção | **9** |
+| Com implementação existente (prontas + revalidação) | **270 / 279 (96,8%)** |
 
-**Para encerrar o front faltam 13 itens de implementação/ajuste e 8 de revalidação.** “Pronto no frontend” não significa fluxo integrado liberado: dependências de backend/designer podem afetar também telas prontas. Os números não classificam toda pendência como tela nova nem como problema de API. A comparação de Crédito, carteira global e editor editorial que não foi concluída integralmente permanece em revalidação.
+**Para encerrar o front faltam 9 itens de implementação/ajuste e 12 de revalidação.** “Pronto no frontend” não significa fluxo integrado liberado: dependências de backend/designer podem afetar também telas prontas. Os números não classificam toda pendência como tela nova nem como problema de API. A comparação de Crédito, carteira global e editor editorial que não foi concluída integralmente permanece em revalidação.
 
 Fonte por frame: [progresso atual](FRONTEND-PROGRESS.json). A base anterior permanece histórica; [atualizações com evidências](FRONTEND-PROGRESS-OVERRIDES.json) registram cada mudança. Ao finalizar **cada entrega**, atualizar os IDs comprovados, executar `node scripts/frontend-progress.mjs` e informar este panorama na resposta final.
 <!-- frontend-progress:end -->
@@ -24,6 +24,27 @@ Fonte por frame: [progresso atual](FRONTEND-PROGRESS.json). A base anterior perm
 
 
 
+
+
+## Entrega 19/11 — composição dos detalhes de contratos do cliente
+
+Portal **f95bc72** (composição `a4b00eb`, encaixe App `2c040f7`). [Publicação 44540551348](https://github.com/WillTbn/Strategy-analytics-v2/actions/runs/44540551348) concluída. Os quatro estados `1:45691`, `1:46764`, `1:48631` e `1:50141` receberam implementação de apresentação e passam de **ajuste** para **revalidação**. **Nenhum novo frame foi marcado pronto**, porque falta conferência no navegador.
+
+- [x] Composição ligada à rota existente: nome do contrato, Visão Geral, Análise Gráfica, Operações, Dividend Yield, Aportes, aplicativo, resumo e acesso à Área Perfil › Contratos e Termos. Reutilizados TitlePage, Quasar, ApexCharts e o componente de Operações; sem campos ou ações fora do desenho. Consultas independentes de documentos/histórico e suas proteções de sessão continuam preservadas.
+- [x] Variante agrupada com barras e variante separada com seis donuts preparadas por propriedades, sem criar seletor de layout no produto. Unidade absoluta/percentual, períodos, comparação e segmentos usam séries fornecidas; ausência de séries desabilita o que não pode funcionar.
+- [x] Aportes com histórico, origem/cotação fornecida e popover de participante. Não consulta clientes alheios, não cria retratos, IDs, níveis, percentuais ou aportes de exemplo. Variante App e modal de ativos preparados; exportação exige callback real, com falha/retry e proteção contra concorrência/troca de contrato.
+- [x] Dividendos: opção de destino exige integração fornecida e resposta confirmada; sem mudança otimista nem sucesso fictício. Tooltip permite motivo mensal fornecido, com texto escapado. Falha mantém o destino anterior; resposta antiga não altera outro contrato.
+- [x] Aplicativo: apenas origem HTTPS explicitamente aprovada, credenciais de URL rejeitadas e iframe restrito. Sem origem confirmada mostra indisponibilidade. A captura financeira usada pelo Figma como exemplo não foi incorporada ao produto; imagens de participantes permanecem dinâmicas.
+- [x] Dezenove assets nativos baixados, incluindo variantes dos ícones selecionados. Arquivos publicados conferidos por SHA256; dimensões raiz dos SVGs preservadas. **Posições e geometria renderizada ainda não foram aprovadas.**
+- [x] **520 testes** passaram na cópia isolada do commit, incluindo 13 novos de dados/estado/concorrência/segurança e as regressões do detalhe. Lint, build e auditoria passaram; auditoria permaneceu ativa. A revisão exata publicada também passou nos checks do CI, upload e ativação. Alterações locais das outras frentes não foram incluídas no commit do portal.
+- [x] Leitura real da API com conta fictícia de homologação: lista/detalhe consultados, moeda e base individual mapeadas. Entrada e posição atual indisponíveis continuam “—”; capital global e resultado não preenchem métricas individuais nem rendimento dos últimos 12 meses.
+- [ ] **Navegador — pendente real:** Computer Use foi interrompido por não confirmar a URL atual com segurança no Windows. Nenhuma nova interação foi enviada após a interrupção. Não foi validado o render desktop/mobile, a geometria dos assets, abertura dos diálogos, abas/teclado e navegação publicada desta composição. Testes de componentes por VM/reatividade não substituem esse reteste.
+- [ ] **Integração ainda não ligada nesta rota:** séries, distribuição, próxima distribuição, rendimento de 12 meses, lucro acumulado, aportes/participantes, universo de ativos/PDF, destino dos dividendos e origem/provedor do aplicativo precisam de projeções/adapters confirmados. Não foi afirmada ausência de endpoints nem criada chamada HTTP presumida. Estado positivo, variantes e callbacks foram exercitados por testes de código; não houve operação financeira real.
+- [ ] As quatro variantes de Home/perfil ainda aguardam comparação completa. LG07 “ao lado”, EC01 prancha vazia, índice H2/H3 e oferta com valores selecionados continuam individualizados nas pendências do designer. Os nove ajustes restantes não foram declarados concluídos por esta entrega.
+
+**Panorama: 279 telas/estados; 258 prontos (92,5%), 12 em revalidação, 9 em implementação/ajuste. Implementação existente: 270/279 (96,8%).** O aumento corresponde aos quatro detalhes implementados; não significa homologação integrada nem aprovação visual. Permanecem **13 superfícies sem referência**, nenhuma criada nesta rodada.
+
+[Testes e limites](evidence/qa-2026-11-19-contract-detail/results.json) · [Contextos completos](evidence/qa-2026-11-19-contract-detail/high-fidelity.json) · [Assets e verificação pendente de geometria](evidence/qa-2026-11-19-contract-detail/assets.json) · [Leitura real da API](evidence/qa-2026-11-19-contract-detail/api-read.json) · [Publicação e hashes](evidence/qa-2026-11-19-contract-detail/publication.json).
 
 ## Entrega 18/11 — revalidação dos 15: Comunicação e Operações de contrato
 
@@ -1454,10 +1475,10 @@ Legenda vigente: classificação de 16/11 por código e evidências, detalhada e
 | [1:39818](https://www.figma.com/design/BaDXlWpxbIoY4azOaQnXgv?node-id=1-39818)     | [UI] CONTRATOS - OFERTA_CONTRATO - 4                                         | Pronto no front · P05 |
 | [1:41796](https://www.figma.com/design/BaDXlWpxbIoY4azOaQnXgv?node-id=1-41796)     | [UI] CONTRATOS - OFERTA_CONTRATO - 5A                                        | Pronto no front · P05 |
 | [1:43678](https://www.figma.com/design/BaDXlWpxbIoY4azOaQnXgv?node-id=1-43678)     | [UI] CONTRATOS - OFERTA_CONTRATO - 5A                                        | Pronto no front · P05 |
-| [1:45691](https://www.figma.com/design/BaDXlWpxbIoY4azOaQnXgv?node-id=1-45691)     | [UI] CONTRATOS - PAG ESPECIFICA                                              | Implementação/ajuste pendente · P04 |
-| [1:46764](https://www.figma.com/design/BaDXlWpxbIoY4azOaQnXgv?node-id=1-46764)     | [UI] CONTRATOS - PAG ESPECIFICA                                              | Implementação/ajuste pendente · P04 |
-| [1:48631](https://www.figma.com/design/BaDXlWpxbIoY4azOaQnXgv?node-id=1-48631)     | [UI] CONTRATOS - PAG ESPECIFICA                                              | Implementação/ajuste pendente · P04 |
-| [1:50141](https://www.figma.com/design/BaDXlWpxbIoY4azOaQnXgv?node-id=1-50141)     | [UI] CONTRATOS - PAG ESPECIFICA                                              | Implementação/ajuste pendente · P04 |
+| [1:45691](https://www.figma.com/design/BaDXlWpxbIoY4azOaQnXgv?node-id=1-45691)     | [UI] CONTRATOS - PAG ESPECIFICA                                              | Implementado · revalidar · P04 |
+| [1:46764](https://www.figma.com/design/BaDXlWpxbIoY4azOaQnXgv?node-id=1-46764)     | [UI] CONTRATOS - PAG ESPECIFICA                                              | Implementado · revalidar · P04 |
+| [1:48631](https://www.figma.com/design/BaDXlWpxbIoY4azOaQnXgv?node-id=1-48631)     | [UI] CONTRATOS - PAG ESPECIFICA                                              | Implementado · revalidar · P04 |
+| [1:50141](https://www.figma.com/design/BaDXlWpxbIoY4azOaQnXgv?node-id=1-50141)     | [UI] CONTRATOS - PAG ESPECIFICA                                              | Implementado · revalidar · P04 |
 | [211:28821](https://www.figma.com/design/BaDXlWpxbIoY4azOaQnXgv?node-id=211-28821) | [EC] CONTRATOS - PAG ESPECIFICA · Operações · sem registro                   | Pronto no front · P04 |
 | [1:50557](https://www.figma.com/design/BaDXlWpxbIoY4azOaQnXgv?node-id=1-50557)     | [UI] ALAVANCAGEM                                                             | Pronto no front · P06 |
 | [1:50683](https://www.figma.com/design/BaDXlWpxbIoY4azOaQnXgv?node-id=1-50683)     | [UI] ALAVANCAGEM - BLOQUEADO                                                 | Pronto no front · P06 |
