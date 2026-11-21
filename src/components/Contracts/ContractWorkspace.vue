@@ -1705,7 +1705,7 @@ watch(
   max-width: 1552px;
   margin: 20px auto 0;
   display: grid;
-  grid-template-columns: repeat(6, minmax(0, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
   gap: 16px;
 }
 .contract-metrics > div {
