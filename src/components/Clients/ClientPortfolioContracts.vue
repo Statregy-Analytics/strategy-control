@@ -204,7 +204,11 @@ async function load() {
       active,
     )
     if (!rows) return null
-    return rows.filter((row) => row.clients?.some((client) => client.clientId === customerId))
+    return rows.filter(
+      (row) =>
+        row.registrationStatus !== 'Draft' &&
+        row.clients?.some((client) => client.clientId === customerId),
+    )
   })
   if (
     !active() ||
