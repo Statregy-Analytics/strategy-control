@@ -129,17 +129,6 @@
                       v-model="termUnit"
                       :options="termOptions"
                       aria-label="Unidade do prazo"
-                    />
-                    <q-btn
-                      flat
-                      round
-                      dense
-                      :icon="participantsCollapsed ? 'expand_more' : 'expand_less'"
-                      :aria-label="
-                        participantsCollapsed ? 'Expandir clientes' : 'Recolher clientes'
-                      "
-                      :aria-expanded="!participantsCollapsed"
-                      @click="participantsCollapsed = !participantsCollapsed"
                     /></div></label-form
                 ><label-form text-label="Início do Contrato"
                   ><q-input
