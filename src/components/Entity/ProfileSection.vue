@@ -14,7 +14,7 @@
       </div>
       <slot name="actions" />
     </header>
-    <div class="profile-section__body"><slot /></div>
+    <div v-show="!collapsed" class="profile-section__body"><slot /></div>
   </section>
 </template>
 <script setup>
@@ -22,6 +22,7 @@ defineProps({
   title: { type: String, required: true },
   icon: { type: String, default: '' },
   iconSrc: { type: String, default: '' },
+  collapsed: Boolean,
   caption: { type: String, default: '' },
 })
 </script>

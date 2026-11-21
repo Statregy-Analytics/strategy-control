@@ -4,6 +4,7 @@
     :title="title"
     :icon-src="icon ? `/icons/contracts/${icon}.svg` : ''"
     :caption="caption"
+    :collapsed="collapsed"
   >
     <template #title-suffix><slot name="title-suffix" /></template>
     <template #actions><slot name="actions" /></template><slot />
@@ -14,6 +15,7 @@ import ProfileSection from 'src/components/Entity/ProfileSection.vue'
 defineProps({
   title: { type: String, required: true },
   icon: { type: String, default: '' },
+  collapsed: Boolean,
   caption: { type: String, default: '' },
 })
 </script>

@@ -92,7 +92,9 @@
           <img :src="'/icons/contracts/' + metric.icon + '.svg'" alt="" /><span>{{
             metric.label
           }}</span
-          ><strong>{{ metric.value }}</strong
+          ><strong :class="{ 'contract-currency-badge': metric.label === 'Moeda Firmada' }">{{
+            metric.value
+          }}</strong
           ><small v-if="metric.caption">{{ metric.caption }}</small>
         </div>
       </div>
@@ -127,6 +129,17 @@
                       v-model="termUnit"
                       :options="termOptions"
                       aria-label="Unidade do prazo"
+                    />
+                    <q-btn
+                      flat
+                      round
+                      dense
+                      :icon="participantsCollapsed ? 'expand_more' : 'expand_less'"
+                      :aria-label="
+                        participantsCollapsed ? 'Expandir clientes' : 'Recolher clientes'
+                      "
+                      :aria-expanded="!participantsCollapsed"
+                      @click="participantsCollapsed = !participantsCollapsed"
                     /></div></label-form
                 ><label-form text-label="Início do Contrato"
                   ><q-input
@@ -488,7 +501,10 @@
           <h2 class="contract-operational-title">
             <img src="/icons/contracts/ct21-trending-up.svg" alt="" />Resumo Operacional
           </h2>
-          <contract-panel title="Clientes Vinculados" icon="users"
+          <contract-panel
+            title="Clientes Vinculados"
+            icon="users"
+            :collapsed="participantsCollapsed"
             ><template #title-suffix
               ><span class="contract-optional">{{
                 detail.state.data?.participants?.length || 0
@@ -523,6 +539,15 @@
                   icon="img:/icons/contracts/plus.svg"
                   :disable="busy || !canAddContractParticipant(detail.state.data)"
                   @click="clientOpen = true"
+                />
+                <q-btn
+                  flat
+                  round
+                  dense
+                  :icon="participantsCollapsed ? 'expand_more' : 'expand_less'"
+                  :aria-label="participantsCollapsed ? 'Expandir clientes' : 'Recolher clientes'"
+                  :aria-expanded="!participantsCollapsed"
+                  @click="participantsCollapsed = !participantsCollapsed"
                 /></div
             ></template>
             <div v-if="!detail.state.data?.participants?.length" class="contract-empty">
@@ -1069,6 +1094,7 @@ const dirty = computed(
   () =>
     JSON.stringify([form.value, termValue.value, termUnit.value, endDate.value]) !== baseline.value,
 )
+const participantsCollapsed = ref(false)
 const participantColumns = computed(() =>
   columns([
     ['client', 'Cliente'],
@@ -2084,8 +2110,8 @@ watch(
   height: 44px;
   min-height: 44px;
 }
-.contract-row .contract-term :deep(.q-field__control),
-.contract-row .contract-term :deep(.q-field__marginal) {
+.contract-row .contract-term :deep(.q-field--dense .q-field__control),
+.contract-row .contract-term :deep(.q-field--dense .q-field__marginal) {
   height: 36px;
   min-height: 36px;
 }
@@ -2195,5 +2221,13 @@ watch(
 .contract-engine-icon img {
   width: 16px;
   height: 16px;
+}
+.contract-currency-badge {
+  display: inline-flex;
+  justify-self: start;
+  border: 1px solid #ffffff33;
+  border-radius: 6px;
+  padding: 3px 8px;
+  background: #ffffff0d;
 }
 </style>
