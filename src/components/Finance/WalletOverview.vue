@@ -53,11 +53,6 @@
               }}</small
             >
           </div>
-          <small
-            v-if="item.key === 'total' && presentation !== 'transactions'"
-            class="wallet-global-caption"
-            >Moedas Criadas</small
-          >
           <div class="wallet-global-amounts">
             <strong>{{ walletMoney(globalWalletConverted(model, item.key).usd, 'USD') }}</strong>
             <div class="wallet-global-secondary">
@@ -78,31 +73,20 @@
             </div>
           </div>
           <div v-if="item.key === 'total'" class="wallet-global-circulation">
-            <span>{{ presentation === 'transactions' ? 'Capital base' : 'Em circulação' }}</span
+            <span>Capital base</span
             ><strong>{{
-              walletMoney(
-                presentation === 'transactions'
-                  ? model?.baseCapitalAmount
-                  : model?.circulatingAmount,
-                presentation === 'transactions'
-                  ? model?.baseCapitalCurrency
-                  : model?.circulatingCurrency,
-              )
+              walletMoney(model?.baseCapitalAmount, model?.baseCapitalCurrency)
             }}</strong>
             <div class="wallet-global-track">
-              <span
-                v-if="presentation === 'transactions' && baseProgress !== null"
-                :style="{ width: baseProgress + '%' }"
-              />
+              <span v-if="baseProgress !== null" :style="{ width: baseProgress + '%' }" />
             </div>
             <small>{{
-              presentation === 'transactions'
-                ? baseProgress === null
-                  ? '—'
-                  : baseProgress + '% da Carteira Total'
-                : model?.circulationPercentage == null
-                  ? '—'
-                  : model.circulationPercentage + '% do Total'
+              baseProgress === null
+                ? '—'
+                : baseProgress.toLocaleString('pt-BR', {
+                    minimumFractionDigits: 2,
+                    maximumFractionDigits: 2,
+                  }) + '% da Carteira Total'
             }}</small>
           </div>
           <span v-else class="wallet-global-arrow"

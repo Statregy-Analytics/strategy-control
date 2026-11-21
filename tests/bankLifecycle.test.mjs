@@ -35,6 +35,9 @@ async function bank(overrides = {}) {
       'src/services/bankCatalog': { readBankCatalog },
       'src/services/bankBrand': { bankLogo },
       'src/services/customerService': service,
+      'src/services/financeService': {
+        financeGet: async () => ({ data: { currencies: [{ id: 'brl', code: 'BRL' }] } }),
+      },
     },
     transform: (s) => s.replace(/\nload\(\)\n/, '\nconst initial=load()\n'),
     exports:
@@ -141,4 +144,20 @@ test('canceling bank form and reopening on the same customer ignores an old acce
   assert.equal(h.m.form.branch, 'new-form')
   assert.equal(h.notices.length, 0)
   h.dispose()
+})
+
+test('editing an account preserves its currency when only another field changes', async () => {
+  let payload
+  const h = await bank({
+    getCustomerBankAccount: async () => ({ bankId: 'bank', currencyId: 'usd' }),
+    updateCustomerBankAccount: async (_, __, body) => {
+      payload = body
+    },
+  })
+  await h.m.initial
+  await h.m.startEdit({ id: 'account' })
+  h.m.form.branch = '0002'
+  h.m.formRef.value = { validate: async () => true, resetValidation() {} }
+  await h.m.save()
+  assert.equal(payload.currencyId, 'usd')
 })

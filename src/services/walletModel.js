@@ -85,7 +85,9 @@ export function bankCurrency(bank) {
   return bank?.currencyIsoCode || null
 }
 export function compatibleBanks(banks, currency) {
-  return (banks || []).filter((bank) => bank.status === 'Active' && bankCurrency(bank) === currency)
+  return (banks || []).filter(
+    (bank) => bank.status === 'Active' && (!bankCurrency(bank) || bankCurrency(bank) === currency),
+  )
 }
 export function validateWalletOperation({
   mode,
@@ -109,7 +111,7 @@ export function validateWalletOperation({
   }
   if (
     mode === 'withdrawal' &&
-    (!bank || bank.status !== 'Active' || bankCurrency(bank) !== currency)
+    (!bank || bank.status !== 'Active' || (bankCurrency(bank) && bankCurrency(bank) !== currency))
   )
     return 'Selecione uma conta ativa na mesma moeda.'
   if (mode === 'withdrawal' && !password) return 'Informe sua Senha de Saque.'

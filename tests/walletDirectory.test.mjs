@@ -99,7 +99,7 @@ test('each wallet list exposes the Figma columns and direct actions, preserving 
     ],
   }
   for (const type of Object.keys(expected)) {
-    const i = await instance(type, [row('a', type === 'total' ? 'strategy' : type, 'BRL', 0)])
+    const i = await instance(type, [row('a', type, 'BRL', 0)])
     assert.deepEqual(
       Array.from(i.state.columns.value, (c) => c.name),
       expected[type],
@@ -111,7 +111,7 @@ test('each wallet list exposes the Figma columns and direct actions, preserving 
     assert.equal(i.state.holdings({ type: 'assets', assetCount: 0 }), '0 bens')
     assert.equal(i.state.percentage(-2.5), '-2,5%')
     const col = i.state.columns.value.find((c) => c.name === 'balance')
-    if (col) assert.equal(col.field(i.props.rows[0]), 'R$ 0,00')
+    if (col) assert.equal(col.field(i.props.rows[0]), '—')
     i.dispose()
   }
 })

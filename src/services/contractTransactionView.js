@@ -31,7 +31,19 @@ export function contractTransactionLabel(row) {
   return null
 }
 export function contractEndpoint(endpoint, currency) {
-  if (!endpoint) return { title: 'Indisponível', detail: '' }
+  if (!endpoint) return { title: '—', detail: '' }
+  currency = endpoint.currencyIsoCode || currency
+  if (endpoint.kind === 'Asset')
+    return {
+      title: endpoint.assetName || 'Patrimônio',
+      detail:
+        {
+          RealEstate: 'Imóvel',
+          Vehicle: 'Veículo',
+          Consortium: 'Consórcio',
+          Investment: 'Investimento',
+        }[endpoint.assetType] || '',
+    }
   if (endpoint.kind === 'Contract')
     return {
       title: endpoint.contractName || endpoint.contractPublicCode || 'Contrato',
@@ -45,17 +57,17 @@ export function contractEndpoint(endpoint, currency) {
           : endpoint.walletType === 'Free'
             ? 'Carteira de Depósito'
             : 'Carteira',
-      detail: currency
-        ? currency + (endpoint.walletType === 'Applied' ? ' · saldo parado' : '')
-        : '',
+      detail: endpoint.customerName || currency || '',
     }
   return {
     title: endpoint.bankName || 'Conta externa',
-    detail: endpoint.accountNumberMasked
-      ? /[*•]/.test(endpoint.accountNumberMasked)
-        ? endpoint.accountNumberMasked
-        : '****' + String(endpoint.accountNumberMasked).slice(-4)
-      : '',
+    detail: [
+      endpoint.branch ? 'Ag. ' + endpoint.branch : '',
+      endpoint.accountNumberMasked ? '****' + String(endpoint.accountNumberMasked).slice(-4) : '',
+      currency,
+    ]
+      .filter(Boolean)
+      .join(' · '),
   }
 }
 export function transactionContractId(row) {

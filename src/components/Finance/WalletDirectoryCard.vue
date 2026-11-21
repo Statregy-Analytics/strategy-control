@@ -73,7 +73,7 @@
         </tbody>
       </table>
     </div>
-    <div class="wallet-card__consolidated">
+    <div v-if="consolidated.value !== null" class="wallet-card__consolidated">
       <span>Consolidado</span
       ><span
         >{{ consolidated.approximate ? '≈ ' : ''
@@ -210,7 +210,9 @@ const statusClass = computed(() => ({
 }))
 const badge = computed(() =>
   props.mode === 'total'
-    ? { deposit: 'Depósito', assets: 'Patrimônio', strategy: 'Strategy' }[props.row.type]
+    ? { total: 'Total', deposit: 'Depósito', assets: 'Patrimônio', strategy: 'Strategy' }[
+        props.row.type
+      ]
     : status.value,
 )
 const badgeClass = computed(() =>
@@ -219,9 +221,7 @@ const badgeClass = computed(() =>
     : statusClass.value,
 )
 const currencies = computed(() => walletCardCurrencies(props.row))
-const consolidated = computed(() =>
-  walletCardConsolidated(props.row, props.fx, props.mode === 'assets' ? 'current' : 'balance'),
-)
+const consolidated = computed(() => walletCardConsolidated(props.row, props.fx, 'balance'))
 const currencyCount = computed(() =>
   walletCardCount(
     props.row.currencyCount ?? (props.row.currencies?.length || null),

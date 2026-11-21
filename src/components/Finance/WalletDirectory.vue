@@ -433,22 +433,32 @@ const date = (value) =>
 function displayAmounts(row, key = 'balance') {
   return (
     row.currencies
-      ?.filter((c) => !currency.value || c.currency === currency.value)
+      ?.filter((c) => c.balance !== 0 && (!currency.value || c.currency === currency.value))
       .map((c) => walletMoney(c[key], c.currency))
       .join(' · ') || '—'
   )
 }
 const typeBadge = (type) =>
-  ({ deposit: 'Depósito', strategy: 'Strategy', assets: 'Patrimônio' })[type] || '—'
-const walletIcon = (type) => '/icons/wallet-directory/wallet-' + type + '.svg'
+  ({ total: 'Total', deposit: 'Depósito', strategy: 'Strategy', assets: 'Patrimônio' })[type] || '—'
+const walletIcon = (type) =>
+  type === 'total'
+    ? '/icons/wallet-directory/summary-wallet.svg'
+    : '/icons/wallet-directory/wallet-' + type + '.svg'
 const statusClass = (value) => ({
   positive: value === 'Active',
   'directory-badge--pending': value === 'Pending',
 })
 const amountsFor = (row) =>
-  (row.currencies || []).filter((c) => !currency.value || c.currency === currency.value)
+  (row.currencies || []).filter(
+    (c) => c.balance !== 0 && (!currency.value || c.currency === currency.value),
+  )
 const currenciesFor = (row) => [
-  ...new Set((row.currencies || []).map((c) => c.currency).filter(Boolean)),
+  ...new Set(
+    (row.currencies || [])
+      .filter((c) => c.balance !== 0)
+      .map((c) => c.currency)
+      .filter(Boolean),
+  ),
 ]
 const percentage = (value) =>
   value == null || !Number.isFinite(Number(value))

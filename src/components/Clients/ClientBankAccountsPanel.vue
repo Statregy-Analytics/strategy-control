@@ -51,7 +51,10 @@
               }}</span
               ><span class="bank-name" :title="bankName(props.row.bankId)">{{
                 bankName(props.row.bankId)
-              }}</span>
+              }}</span
+              ><q-badge v-if="props.row.currencyIsoCode" outline>{{
+                currencyBadge(props.row.currencyIsoCode)
+              }}</q-badge>
             </div></q-td
           ></template
         >
@@ -219,6 +222,25 @@
           <q-card-section>
             <q-form ref="formRef" class="q-pt-sm" @submit.prevent="save">
               <div class="row q-col-gutter-sm bank-profile-fields">
+                <label-form text-label="Moeda" class-name="col-12 col-md-4"
+                  ><q-select
+                    v-model="form.currencyId"
+                    :options="currencyOptions"
+                    emit-value
+                    map-options
+                    clearable
+                    outlined
+                    dense
+                    :loading="currencyLoading"
+                    :disable="saving || currencyLoading || !!currencyError"
+                    aria-label="Moeda da conta"
+                    placeholder="Sem moeda definida"
+                /></label-form>
+                <div v-if="currencyError" role="alert" class="col-12">
+                  {{ currencyError
+                  }}<q-btn flat dense no-caps label="Tentar novamente" @click="loadCurrencies" />
+                </div>
+
                 <label-form class-name="col-12 col-md-4 bank-field" text-label="Banco">
                   <glass-select
                     ref="bankSelectRef"
@@ -448,6 +470,7 @@
 </template>
 
 <script setup>
+import { financeGet } from 'src/services/financeService'
 import GlassSelect from 'src/components/Entity/GlassSelect.vue'
 import { bankLogo } from 'src/services/bankBrand'
 import { computed, nextTick, reactive, ref, watch, onScopeDispose } from 'vue'
@@ -508,7 +531,33 @@ const statusOptions = [
   { label: 'Ativa', value: 'Active' },
   { label: 'Inativa', value: 'Inactive' },
 ]
+let currencyActive = true
+onScopeDispose(() => {
+  currencyActive = false
+})
+const currencyOptions = ref([])
+const currencyError = ref('')
+const currencyLoading = ref(false)
+async function loadCurrencies() {
+  currencyLoading.value = true
+  currencyError.value = ''
+  try {
+    const result = await financeGet('preferences/catalog')
+    if (!currencyActive) return
+    currencyOptions.value = (result.data?.currencies || [])
+      .filter((c) => c.id && c.isActive !== false)
+      .map((c) => ({ value: c.id, label: c.code || c.value || c.isoCode }))
+    if (!currencyOptions.value.length) throw Error('Moedas indisponíveis.')
+  } catch {
+    if (currencyActive) currencyError.value = 'Não foi possível carregar as moedas.'
+  } finally {
+    if (currencyActive) currencyLoading.value = false
+  }
+}
+loadCurrencies()
+const currencyBadge = (code) => ({ BRL: 'R$ · BRL', USD: 'US$ · USD' })[code] || code
 const emptyForm = () => ({
+  currencyId: null,
   bankId: null,
   branch: '',
   accountNumber: '',
@@ -641,7 +690,10 @@ const load = async () => {
       'Não foi possível carregar o catálogo de bancos.',
     )
   }
-  if (accountsResult.status === 'fulfilled') accounts.value = accountsResult.value?.data ?? []
+  if (accountsResult.status === 'fulfilled')
+    accounts.value = (accountsResult.value?.data ?? []).filter(
+      (account) => account.status !== 'Archived' && !account.archivedAtUtc,
+    )
   else
     loadError.value = getApiErrorMessage(
       accountsResult.reason,
@@ -669,6 +721,7 @@ const startEdit = async (account) => {
     if (!active()) return
     editingId.value = account.id
     Object.assign(form, {
+      currencyId: detail.currencyId ?? null,
       bankId: detail.bankId,
       branch: detail.branch,
       accountNumber: detail.accountNumber,

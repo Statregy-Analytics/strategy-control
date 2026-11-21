@@ -15,6 +15,12 @@ export function walletCardCurrencies(row) {
   }))
 }
 export function walletCardConsolidated(row, fx, key = 'balance') {
+  if (Object.hasOwn(row || {}, 'consolidated'))
+    return {
+      value: key === 'balance' ? finiteMoney(row.consolidated?.amount) : null,
+      currency: row.consolidated?.currencyIsoCode,
+      approximate: row.consolidated?.converted === true,
+    }
   const native = (row?.currencies || []).map((c) => ({
     currency: c.currency,
     balance: key === 'current' && row.currencies.length === 1 ? row.currentTotal : c[key],

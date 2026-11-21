@@ -1,5 +1,9 @@
 import { characteristicErrors } from './realEstateCharacteristics.js'
 const messagesByCode = {
+  'customers.invalid_bank_account_currency': 'Selecione uma moeda ativa para a conta.',
+  'transaction.bank_account_currency_mismatch':
+    'A moeda da operação deve ser a mesma da conta bancária.',
+  'exchange_rate.unavailable': 'Cotação indisponível. Tente novamente mais tarde.',
   ...characteristicErrors,
   internal_server_error:
     'O servidor não conseguiu concluir a operação. Tente novamente mais tarde.',

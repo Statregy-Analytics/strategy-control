@@ -29,6 +29,7 @@ export function transactionMoney(value, currency) {
 export function transactionActor(actor) {
   return (
     actor?.displayName ||
+    (actor?.userId === null ? 'Sistema Automático' : '') ||
     { Admin: 'Admin', Client: 'Cliente', Customer: 'Cliente', System: 'Sistema' }[actor?.type] ||
     'Indisponível'
   )
@@ -38,6 +39,7 @@ export function transactionEndpoint(endpoint) {
   return [result.title, result.detail].filter(Boolean).join(' · ')
 }
 export function transactionTone(row) {
+  if (row.status === 'Initiated') return 'initiated'
   return row.status === 'Completed'
     ? 'completed'
     : ['Error', 'Rejected', 'Canceled', 'Cancelled'].includes(row.status)
@@ -72,7 +74,13 @@ export function correctionFundingText(details) {
 export function filterTransactionRows(rows, filters, now = new Date()) {
   const query = foldSearch(filters.search).trim()
   return rows.filter((row) => {
-    if (filters.type && row.type !== filters.type) return false
+    if (
+      filters.type &&
+      (transferKindLabels[filters.type]
+        ? row.transferKind !== filters.type
+        : row.type !== filters.type)
+    )
+      return false
     if (filters.status && row.status !== filters.status) return false
     if (filters.clientId && row.clientId !== filters.clientId) return false
     if (filters.actor && transactionActor(row.createdBy) !== filters.actor) return false
@@ -80,7 +88,7 @@ export function filterTransactionRows(rows, filters, now = new Date()) {
       const day = new Date(now)
       day.setHours(0, 0, 0, 0)
       day.setDate(day.getDate() - (Number(filters.days) - 1))
-      const time = Date.parse(row.requestedAtUtc)
+      const time = Date.parse(row.requestedAtUtc || row.createdAtUtc)
       if (!Number.isFinite(time) || time < +day || time > +now) return false
     }
     return (
@@ -126,7 +134,14 @@ export function transactionEndpointParts(row, side) {
   const currency =
     side === 'source' ? contractSourceCurrency(row) : row.currencyIsoCode || row.currency?.isoCode
   const result = contractEndpoint(row[side], currency)
-  if (row[side] && !['Wallet', 'Contract'].includes(row[side].kind) && currency)
-    result.detail = [result.detail, currency].filter(Boolean).join(' · ')
   return result
 }
+
+export const transferKindLabels = {
+  WalletImmediate: 'entre carteiras · imediata',
+  WalletUpTo30Days: 'entre carteiras · até 30 dias',
+  OtherClient: 'para outro cliente',
+}
+export const transactionTypeDetail = (row) => transferKindLabels[row.transferKind] || ''
+export const transactionFilterType = (row) => row.transferKind || row.type
+export const isAssetLog = (row) => ['AssetIncluded', 'AssetRemoved'].includes(row.type)

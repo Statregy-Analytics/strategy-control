@@ -130,6 +130,8 @@ export function auditDate(value) {
 const uuid = (value) =>
   typeof value === 'string' && /^[a-f\d]{8}(-[a-f\d]{4}){3}-[a-f\d]{12}$/i.test(value)
 export function auditTarget(row, scope = {}) {
+  if (row.parentResourceType && uuid(row.parentResourceId))
+    row = { ...row, resourceType: row.parentResourceType, resourceId: row.parentResourceId }
   const query = { history: '1' }
   if (
     row.module === 'Customers' &&
@@ -138,7 +140,7 @@ export function auditTarget(row, scope = {}) {
     return { name: 'ClienteDetalhe', params: { id: row.customerId || row.resourceId }, query }
   if (row.resourceType === 'Contract' && uuid(row.resourceId))
     return { name: 'contracts', query: { ...query, contractId: row.resourceId } }
-  if (row.resourceType === 'Transaction' && uuid(row.resourceId))
+  if (['Transaction', 'FinancialTransaction'].includes(row.resourceType) && uuid(row.resourceId))
     return { name: 'Transações', query: { ...query, transactionId: row.resourceId } }
   if (scope.resourceType === row.resourceType && scope.resourceId === row.resourceId) return null
   return {
@@ -162,6 +164,7 @@ export function auditRecord(row, metadata) {
     AnnouncementTarget: 'Público do comunicado',
     Contract: 'Contrato',
     Transaction: 'Transação',
+    FinancialTransaction: 'Transação',
   }
   return `${names[row.resourceType] || row.resourceType || 'Registro'} · ${String(row.resourceId || '—').slice(0, 8)}`
 }

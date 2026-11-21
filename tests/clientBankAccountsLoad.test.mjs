@@ -38,13 +38,20 @@ async function harness(failSecondPage = false) {
     }
   }
   service.listCustomerBankAccounts = async () => ({
-    data: [{ id: 'account', bankId: 'bank-2', accountNumberMasked: '****' }],
+    data: [
+      { id: 'account', bankId: 'bank-2', accountNumberMasked: '****' },
+      { id: 'archived-status', status: 'Archived' },
+      { id: 'archived-date', archivedAtUtc: '2026-11-19T14:00:00Z' },
+    ],
   })
   const values = {
     vue: { computed, nextTick, reactive, ref, watch() {}, onScopeDispose() {} },
     quasar: { QDialog: {}, QExpansionItem: {} },
     'src/services/bankBrand': { bankLogo },
     'src/services/customerService': service,
+    'src/services/financeService': {
+      financeGet: async () => ({ data: { currencies: [{ id: 'brl', code: 'BRL' }] } }),
+    },
     'src/services/requestContext': requestContext,
     'src/services/bankCatalog': { readBankCatalog },
     'src/services/apiError': { getApiErrorMessage: (_, fallback) => fallback },
@@ -113,4 +120,9 @@ test('bank suggestions require text, search code/name and retain selected labels
   assert.equal(model.filteredBankOptions.value[0].value, 'bank-1')
   model.filterBanks('', (callback) => callback())
   assert.equal(model.bankOptionLabel('bank-2'), '2 — Bank 2')
+})
+
+test('bank section excludes archived accounts while preserving active legacy rows', async () => {
+  const { model } = await harness()
+  assert.deepEqual(Array.from(model.accounts.value, (account) => account.id), ['account'])
 })

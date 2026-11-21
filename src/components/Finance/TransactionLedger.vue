@@ -8,7 +8,7 @@
         </tr>
       </thead>
       <tbody>
-        <template v-for="row in rows" :key="row.id">
+        <template v-for="row in rows" :key="row.type + row.id">
           <tr
             :class="{
               'transaction-ledger__error': row.status === 'Error',
@@ -16,7 +16,9 @@
             }"
           >
             <td>
-              <span class="transaction-ledger__original">{{ when(row.requestedAtUtc) }}</span
+              <span class="transaction-ledger__original">{{
+                when(row.requestedAtUtc || row.createdAtUtc)
+              }}</span
               ><small v-if="correction(row).originalDate"
                 >original: {{ correction(row).originalDate }}</small
               >
@@ -35,6 +37,9 @@
                       ? 'Transferência'
                       : contractTransactionLabel(row) || financeLabel(row.type)
                   }}</span
+                  ><small v-if="transactionTypeDetail(row)">{{ transactionTypeDetail(row) }}</small
+                  ><small v-if="row.transferKind === 'WalletUpTo30Days' && row.dueAtUtc"
+                    >até {{ when(row.dueAtUtc, true) }}</small
                   ><small v-if="correction(row).original"
                     >corrige {{ correction(row).original }}</small
                   >
@@ -97,7 +102,7 @@
               <button
                 type="button"
                 :aria-label="'Abrir transação ' + (row.requestNumber || '')"
-                :disabled="!row.id"
+                :disabled="!row.id || isAssetLog(row)"
                 @click="$emit('open', row.id)"
               >
                 <img :src="assets.imgIcon2" alt="" />
@@ -122,6 +127,8 @@ import { contractTransactionLabel } from 'src/services/contractTransactionView'
 import { transactionDirectoryAssets } from 'src/services/transactionDirectoryAssets'
 import {
   transactionStatusLabel,
+  transactionTypeDetail,
+  isAssetLog,
   transactionWhen as when,
   transactionEndpointParts as endpointParts,
   transactionMoney as money,
@@ -172,7 +179,7 @@ const typeIcon = (row) =>
     : {
         Withdrawal: assets.imgIcon4,
         Yield: assets.imgIcon3,
-        AssetAdded: assets.imgIcon6,
+        AssetIncluded: assets.imgIcon6,
         WalletTransfer: assets.imgIcon3,
         InterCustomerTransfer: assets.imgIcon3,
         AssignedContribution: assets.imgIcon5,
@@ -359,5 +366,11 @@ strong.negative {
 <style scoped>
 img {
   flex: none;
+}
+</style>
+
+<style scoped>
+.transaction-ledger :deep(.initiated) {
+  color: #60a5fa;
 }
 </style>

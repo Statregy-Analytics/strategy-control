@@ -255,6 +255,10 @@ const pending = computed(
     ].includes(props.record.status),
 )
 const actions = computed(() => {
+  if (['WalletTransfer', 'InterCustomerTransfer'].includes(props.record.type))
+    return props.record.status === 'Initiated' && props.record.availableActions?.includes('Cancel')
+      ? [{ key: 'Cancel', label: 'Cancelar', icon: 'Icon1', disabled: false }]
+      : []
   const allowed = props.record.availableActions || [],
     rows = []
   const add = (key, label, name, enabled = allowed.includes(key)) =>
@@ -309,7 +313,7 @@ function loadHistory() {
     readCurrentPages(
       (page) =>
         props.read('admin/audit/changes', {
-          ResourceType: 'Transaction',
+          ResourceType: 'FinancialTransaction',
           ResourceId: id,
           page,
           pageSize: 100,

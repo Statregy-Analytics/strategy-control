@@ -17,15 +17,14 @@
             ><img src="/icons/contracts/flows/2349-281-imgIcon.svg" alt=""
           /></q-btn></div></template
     ></title-page>
-    <resource-state :state="globalPortfolio.state" @retry="loadGlobalPortfolio">
-      <wallet-overview
-        :model="globalSummary"
-        :details="false"
-        presentation="transactions"
-        :initial-type="tab === 'wallets' ? walletType : 'total'"
-        @select="selectWallet"
-      />
-    </resource-state>
+    <resource-state :state="globalTotals.state" @retry="loadGlobalTotals" />
+    <wallet-overview
+      :model="globalSummary"
+      :details="false"
+      presentation="transactions"
+      :initial-type="tab === 'wallets' ? walletType : 'total'"
+      @select="selectWallet"
+    />
     <keep-alive
       ><transaction-directory
         v-if="tab === 'transactions'"
@@ -36,22 +35,11 @@
         @open="open"
     /></keep-alive>
     <div v-if="tab === 'wallets'">
-      <resource-state
-        v-if="globalFailures"
-        :state="{
-          loading: false,
-          error:
-            'Não foi possível consultar a carteira de ' +
-            globalFailures +
-            ' cliente(s). Os demais resultados estão disponíveis.',
-        }"
-        @retry="loadGlobalPortfolio"
-      />
       <resource-state :state="globalPortfolio.state" @retry="loadGlobalPortfolio"
         ><wallet-directory
           :type="walletType"
           :rows="globalRows"
-          :fx="globalFx.state.data"
+          :fx="globalSummary?.fx"
           @open="openPortfolio"
           @back="tab = 'transactions'"
           @changed="loadGlobalPortfolio"
@@ -162,16 +150,11 @@ const walletType = ref('total'),
 
 import ContractTransactionDetail from 'src/components/Contracts/ContractTransactionDetail.vue'
 import { isContractTransaction } from 'src/services/contractTransactionView'
-import { readGlobalWalletFx } from 'src/services/globalWalletFx'
+import { readWalletClients, walletTotalsModel } from 'src/services/walletDirectoryApi'
 import WalletDirectory from 'src/components/Finance/WalletDirectory.vue'
 import WalletOverview from 'src/components/Finance/WalletOverview.vue'
 
 import { computed, ref, watch, nextTick, onMounted, onScopeDispose } from 'vue'
-import {
-  readGlobalPortfolios,
-  globalWalletRows,
-  globalWalletSummary,
-} from 'src/services/globalWallets'
 import { createRequestContext, readCurrentPages } from 'src/services/requestContext'
 import { useQuasar } from 'quasar'
 import { useRoute } from 'vue-router'
@@ -230,34 +213,25 @@ onScopeDispose(() => {
 })
 const globalPortfolio = useFinanceResource()
 const globalRequest = createRequestContext()
-const globalRows = computed(() => globalWalletRows(globalPortfolio.state.data))
-const globalFx = useFinanceResource()
-const globalFxRequest = createRequestContext()
-const globalSummary = computed(() => {
-  const model = globalWalletSummary(globalPortfolio.state.data)
-  return model ? { ...model, fx: globalFx.state.data } : null
-})
-const globalFailures = computed(
-  () => globalPortfolio.state.data?.records.filter((r) => r.error).length || 0,
-)
+const globalRows = computed(() => globalPortfolio.state.data)
+const globalTotals = useFinanceResource()
+const globalSummary = computed(() => globalTotals.state.data)
+const loadGlobalTotals = () =>
+  globalTotals.load(async () => walletTotalsModel((await financeGet('admin/wallets/totals')).data))
 async function loadGlobalPortfolio() {
   globalRequest.invalidate()
   const current = globalRequest.capture()
-  globalFxRequest.invalidate()
-  globalFx.reset()
-  await globalPortfolio.load(() => readGlobalPortfolios(financeGet, current))
-  if (current() && globalPortfolio.state.data) {
-    const fxCurrent = globalFxRequest.capture()
-    await globalFx.load(() =>
-      readGlobalWalletFx(financeGet, globalWalletSummary(globalPortfolio.state.data), fxCurrent),
-    )
-  }
+  const type = walletType.value
+  await globalPortfolio.load(() => readWalletClients(financeGet, current, type))
 }
-onMounted(loadGlobalPortfolio)
+watch(walletType, loadGlobalPortfolio)
+onMounted(() => {
+  loadGlobalPortfolio()
+  loadGlobalTotals()
+})
 onScopeDispose(() => {
   globalRequest.dispose()
-  globalFxRequest.dispose()
-  globalFx.reset()
+  globalTotals.reset()
   globalPortfolio.reset()
 })
 const contractDetail = computed(() => isContractTransaction(detail.state.data))
@@ -267,10 +241,11 @@ const workflowActions = computed(() =>
       ['Validate', 'Approve', 'Reject', 'Execute', 'Cancel'].includes(action) &&
       (![
         'WalletTransfer',
+        'InterCustomerTransfer',
         'ContractContribution',
         'ContractRedemption',
         'Yield',
-        'AssetAdded',
+        'AssetIncluded',
         'AssetRemoved',
       ].includes(detail.state.data?.type) ||
         action === 'Cancel'),
@@ -285,6 +260,7 @@ const loadDetail = () =>
   })
 function onCreated(value) {
   loadGlobalPortfolio()
+  loadGlobalTotals()
   createOpen.value = false
   loadHistoryList()
   loadPendingList()
@@ -406,6 +382,7 @@ function stateCompleted(result) {
 }
 function onTransactionEdited() {
   loadGlobalPortfolio()
+  loadGlobalTotals()
   correctingTransaction.value = false
   editingTransaction.value = false
   busy.value = false
@@ -463,6 +440,7 @@ async function executeConfirmed(password) {
     })
     reason.value = ''
     loadGlobalPortfolio()
+    loadGlobalTotals()
     await loadDetail()
     loadHistoryList()
     loadPendingList()

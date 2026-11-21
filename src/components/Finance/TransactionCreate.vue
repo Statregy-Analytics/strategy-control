@@ -187,8 +187,7 @@
           v-if="kind !== 'transfer' && clientId && !banks.state.loading && !bankOptions.length"
           class="transaction-create__help"
         >
-          Nenhuma conta com moeda {{ currency }} confirmada. A moeda das contas bancárias está
-          indisponível.
+          Nenhuma conta ativa compatível com {{ currency }}.
         </p>
         <label-form v-if="kind === 'deposit'" text-label="Upload de Comprovante (PDF)"
           ><q-file

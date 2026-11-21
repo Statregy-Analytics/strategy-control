@@ -109,6 +109,7 @@
   </div>
 </template>
 <script setup>
+import { transferKindLabels } from 'src/services/transactionDirectoryModel'
 import { computed, reactive, ref, watch } from 'vue'
 import FormSection from 'src/components/Entity/FormSection.vue'
 import GlassSelect from 'src/components/Entity/GlassSelect.vue'
@@ -160,7 +161,24 @@ const options = (key, label) => [
       .map((r) => [r[key], { value: r[key], label: label(r) }]),
   ).values(),
 ]
-const typeOptions = computed(() => options('type', (r) => financeLabel(r.type)))
+const typeOptions = [
+  'Deposit',
+  'Withdrawal',
+  'WalletTransfer',
+  'InterCustomerTransfer',
+  'WalletImmediate',
+  'WalletUpTo30Days',
+  'OtherClient',
+  'ContractOperation',
+  'ContractRedemption',
+  'AssetIncluded',
+  'AssetRemoved',
+].map((value) => ({
+  value,
+  label: transferKindLabels[value]
+    ? 'Transferência · ' + transferKindLabels[value]
+    : financeLabel(value),
+}))
 const statusOptions = computed(() =>
   options('status', (r) => transactionStatusLabel(r.status, financeLabel(r.status))),
 )

@@ -1,32 +1,22 @@
 <template>
   <div>
     <client-portfolio-contracts
-      v-if="row.type === 'strategy' && compact"
+      v-if="row.type === 'strategy'"
       :customer-id="row.customerId"
       all-currencies
       compact
     />
-    <template v-else-if="row.type === 'strategy'"
-      ><client-portfolio-contracts
-        v-for="currency in row.currencies?.filter((item) => item.currencyId) || []"
-        :key="currency.currencyId"
-        :customer-id="row.customerId"
-        :currency-id="currency.currencyId"
-        :currency-code="currency.currency"
-      />
-      <p v-if="!row.currencies?.some((item) => item.currencyId)">
-        Vínculos dos contratos ainda indisponíveis.
-      </p></template
-    >
     <customer-assets
       v-else-if="row.type === 'assets'"
       :customer-id="row.customerId"
+      :wallet-assets="row.assets || []"
+      :principal-currency="row.principalCurrency"
       @changed="$emit('changed')"
     />
     <wallet-overview
       v-else
       :model="row.model || { deposit: row, principalCurrency: row.principalCurrency }"
-      initial-type="deposit"
+      :initial-type="row.type === 'total' ? 'total' : 'deposit'"
     />
   </div>
 </template>

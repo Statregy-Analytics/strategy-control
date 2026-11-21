@@ -218,3 +218,25 @@ test('record history never falls back to a global audit query for an invalid sco
   await assert.rejects(service.history('', id), /inválido/)
   assert.equal(called, false)
 })
+
+test('child audit changes navigate to their parent contract or financial transaction', () => {
+  const id = '11111111-1111-4111-8111-111111111111'
+  assert.equal(
+    auditTarget({
+      resourceType: 'ContractParticipant',
+      resourceId: 'child',
+      parentResourceType: 'Contract',
+      parentResourceId: id,
+    }).query.contractId,
+    id,
+  )
+  assert.equal(
+    auditTarget({
+      resourceType: 'FinancialTransactionDocument',
+      resourceId: 'child',
+      parentResourceType: 'FinancialTransaction',
+      parentResourceId: id,
+    }).query.transactionId,
+    id,
+  )
+})

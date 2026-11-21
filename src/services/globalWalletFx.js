@@ -23,6 +23,7 @@ export async function readGlobalWalletFx(read, model, current = () => true) {
   return Object.fromEntries(quotes)
 }
 export function globalWalletConverted(model, type) {
+  if (model?.totals) return model.totals[type] || { usd: null, brl: null }
   const rows = model?.[type]?.currencies
   const quotes = model?.fx
   if (!Array.isArray(rows) || !rows.length) return { usd: null, brl: null }

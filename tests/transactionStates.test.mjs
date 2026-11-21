@@ -169,6 +169,10 @@ async function setupPage() {
       'vue-router': { useRoute: () => ({ query: {} }) },
       'src/composables/useFinanceResource': { useFinanceResource },
       'src/services/globalWalletFx': { readGlobalWalletFx },
+      'src/services/walletDirectoryApi': {
+        readWalletClients: async () => [],
+        walletTotalsModel: () => ({}),
+      },
       'src/services/globalWallets': {
         readGlobalPortfolios: async () => null,
         globalWalletRows: () => null,

@@ -222,7 +222,7 @@ const loadHistory = () =>
     readCurrentPages(
       (page) =>
         props.read('admin/audit/changes', {
-          ResourceType: 'Transaction',
+          ResourceType: 'FinancialTransaction',
           ResourceId: props.record.id,
           page,
           pageSize: 100,

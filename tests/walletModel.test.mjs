@@ -46,9 +46,9 @@ test('only active accounts in the selected confirmed currency are eligible', () 
   ]
   assert.deepEqual(
     compatibleBanks(banks, 'BRL').map((bank) => bank.id),
-    ['1'],
+    ['1', '4'],
   )
-  assert.deepEqual(compatibleBanks(banks, 'EUR'), [])
+  assert.deepEqual(compatibleBanks(banks, 'EUR'), [banks[3]])
 })
 
 test('withdrawal requires deposit balance, same-currency account and withdrawal password', () => {

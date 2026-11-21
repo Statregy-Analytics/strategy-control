@@ -143,6 +143,8 @@ import { financeGet, financeWrite, columns, financeLabel, money } from 'src/serv
 const props = defineProps({
   customerId: { type: String, required: true },
   currencies: { type: Array, default: () => [] },
+  walletAssets: { type: Array, default: () => [] },
+  principalCurrency: { type: String, default: null },
 })
 const emit = defineEmits(['changed']),
   $q = useQuasar(),
@@ -167,7 +169,15 @@ const currencyOption = computed(() => {
 })
 const formatValue = (r) => {
   const code = assetCurrencyCode(r, props.currencies)
-  return code ? money(r.declaredValue, code) : 'Moeda indisponível'
+  const label = code ? money(r.declaredValue, code) : 'Moeda indisponível'
+  const linked = props.walletAssets.find((item) => (item.assetId || item.id) === r.id)
+  const equivalent = linked?.primaryCurrencyEquivalent
+  const value = typeof equivalent === 'object' ? equivalent?.amount : equivalent
+  const currency =
+    typeof equivalent === 'object' ? equivalent?.currencyIsoCode : props.principalCurrency
+  return typeof value === 'number' && Number.isFinite(value) && /^[A-Z]{3}$/.test(currency || '')
+    ? label + ' · ≈ ' + money(value, currency) + ' na moeda principal'
+    : label
 }
 const assetColumns = columns([
   ['nickname', 'Bem'],
