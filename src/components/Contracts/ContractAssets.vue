@@ -12,8 +12,8 @@
     ></template>
     <template v-else
       ><p class="asset-instruction">
-        <img src="/icons/contracts/ct13-info.svg" alt="" />Para inserir, editar ou remover ativos do
-        contrato, clique em <strong>Editar Contrato</strong> no topo da página.
+        <information-icon />Para inserir, editar ou remover ativos do contrato, clique em
+        <strong>Editar Contrato</strong> no topo da página.
       </p>
       <div class="asset-toolbar asset-toolbar--end">
         <q-btn outline no-caps label="Baixar Excel" disable
@@ -79,32 +79,27 @@
       <h3>
         <img src="/icons/contracts/ct13-chart-pie.svg" alt="" />Composição Estratégica do Contrato
       </h3>
-      <div class="asset-composition-fields">
-        <label-form
-          v-for="label in ['Intradiário (%)', 'Núcleo (%)', 'Tática (%)']"
-          :key="label"
-          :text-label="label"
-          ><q-input outlined dark dense disable placeholder="Indisponível" :aria-label="label"
-        /></label-form>
-      </div>
-      <p class="asset-instruction">
-        <strong>Informação:</strong> A soma dos três percentuais deve fechar exatamente 100%. Esses
-        valores alimentarão o gráfico de composição estratégica do contrato.
-      </p>
+      <contract-composition
+        :model-value="composition"
+        :readonly="!editing || busy"
+        @update:model-value="$emit('update:composition', $event)"
+      />
     </section>
   </section>
 </template>
 <script setup>
+import InformationIcon from 'src/components/Entity/InformationIcon.vue'
 import { computed } from 'vue'
 import ResourceState from 'src/components/Finance/ResourceState.vue'
-import LabelForm from 'src/components/Form/LabelForm.vue'
+import ContractComposition from './ContractComposition.vue'
 import { columns } from 'src/services/financeService'
 const props = defineProps({
   state: { type: Object, required: true },
   editing: Boolean,
   busy: Boolean,
+  composition: { type: Object, default: () => ({}) },
 })
-defineEmits(['add', 'remove', 'retry'])
+defineEmits(['add', 'remove', 'retry', 'update:composition'])
 const items = computed(() => props.state.data?.items || [])
 const markets = computed(
   () => new Set(items.value.map((a) => a.market?.id || a.network?.id).filter(Boolean)).size,

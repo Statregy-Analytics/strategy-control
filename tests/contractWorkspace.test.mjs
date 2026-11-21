@@ -78,6 +78,7 @@ async function setup({
   const modules = {
     vue,
     'src/services/contractDistribution': { distributionState },
+    'src/services/contractComposition': await import('../src/services/contractComposition.js'),
     'src/services/contractWalletCapital': { walletCapitalBlocked },
     'src/services/requestContext': { readCurrentPages },
     './useFinanceResource': { useFinanceResource },

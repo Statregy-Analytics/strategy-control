@@ -35,8 +35,7 @@
         <glass-select
           v-if="type === 'total' || type === 'assets'"
           v-model="kind"
-          :disable="type === 'assets'"
-          :options="type === 'assets' ? [] : typeOptions"
+          :options="type === 'assets' ? assetTypeOptions : typeOptions"
           placeholder="Tipo"
           aria-label="Tipo de carteira"
           clearable
@@ -51,7 +50,7 @@
           dropdown-icon="img:/icons/wallet-directory/chevron.svg"
         />
         <glass-select
-          v-if="type === 'deposit' || type === 'strategy' || moreFilters"
+          v-if="type !== 'total' || moreFilters"
           v-model="currency"
           :options="currencyOptions"
           placeholder="Moeda"
@@ -72,7 +71,6 @@
           no-caps
           label="Mais Filtros"
           :aria-expanded="moreFilters"
-          :disable="type !== 'total'"
           @click="toggleFilters"
           ><img src="/icons/wallet-directory/filter.svg" alt=""
         /></q-btn>
@@ -109,10 +107,10 @@
         :row="row"
         :mode="type"
         :fx="fx"
-        :expanded="type === 'strategy' && expanded === row.key"
+        :expanded="['strategy', 'assets'].includes(type) && expanded === row.key"
         @movements="emit('open', row.customerId, 'statement', row.type)"
         @open="
-          type === 'strategy'
+          ['strategy', 'assets'].includes(type)
             ? toggle(row.key)
             : emit('open', row.customerId, 'portfolio', row.type)
         "
@@ -358,6 +356,13 @@ const typeOptions = WALLET_TYPES.filter((t) => t.key !== 'total').map((t) => ({
   label: t.label,
   value: t.key,
 }))
+const assetTypeOptions = computed(() =>
+  [
+    ...new Set(
+      (props.rows || []).flatMap((r) => (r.assets || []).map((a) => a.assetType)).filter(Boolean),
+    ),
+  ].map((value) => ({ value, label: financeLabel(value) })),
+)
 const statusOptions = computed(() =>
   [...new Set((props.rows || []).map((r) => r.status).filter(Boolean))].map((value) => ({
     label: statusLabel(value),
@@ -372,7 +377,10 @@ const filtered = computed(() => {
   const rows = (props.rows || []).filter(
     (r) =>
       (props.type === 'total' || r.type === props.type) &&
-      (!kind.value || props.type !== 'total' || r.type === kind.value) &&
+      (!kind.value ||
+        (props.type === 'assets'
+          ? r.assets?.some((a) => a.assetType === kind.value)
+          : r.type === kind.value)) &&
       (!status.value || r.status === status.value) &&
       (!currency.value || r.currencies?.some((c) => c.currency === currency.value)) &&
       (!search.value ||
@@ -382,13 +390,16 @@ const filtered = computed(() => {
           r.code,
           label(r.type),
           r.maskedDocument,
+          ...(r.assets || []).flatMap((a) => [a.name, financeLabel(a.assetType)]),
+          ...(r.contracts || []).flatMap((c) => [c.name, c.publicCode]),
           ...(r.currencies || []).map((c) => c.currency),
         ].some((v) => foldSearch(v).includes(foldSearch(search.value)))),
   )
   if (sort.value && comparisonCurrency.value)
     rows.sort((a, b) => {
-      const x = a.currencies?.find((c) => c.currency === comparisonCurrency.value)?.balance,
-        y = b.currencies?.find((c) => c.currency === comparisonCurrency.value)?.balance
+      const field = props.type === 'assets' ? 'declared' : 'balance'
+      const x = a.currencies?.find((c) => c.currency === comparisonCurrency.value)?.[field],
+        y = b.currencies?.find((c) => c.currency === comparisonCurrency.value)?.[field]
       return x == null ? (y == null ? 0 : 1) : y == null ? -1 : Number(y) - Number(x)
     })
   return rows

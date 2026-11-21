@@ -5,7 +5,14 @@ export function walletCardCurrencies(row) {
   const codes = [
     ...new Set([
       ...WALLET_CURRENCIES.map((c) => c.code),
-      ...native.map((c) => c.currency).filter(Boolean),
+      ...native
+        .filter((c) =>
+          [c.balance, c.declared, c.contracted, c.idle].some(
+            (v) => finiteMoney(v) !== null && Number(v) !== 0,
+          ),
+        )
+        .map((c) => c.currency)
+        .filter(Boolean),
     ]),
   ]
   return codes.map((code) => ({

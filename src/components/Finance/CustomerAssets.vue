@@ -1,6 +1,46 @@
 <template>
   <div>
+    <div v-if="compact" class="wallet-asset-cards">
+      <h3>Bens Vinculados</h3>
+      <p v-if="!walletAssets.length">Nenhum bem vinculado.</p>
+      <article v-for="asset in walletAssets" :key="asset.assetId" class="wallet-asset-card">
+        <header>
+          <strong>{{ asset.name }}</strong
+          ><span>{{ financeLabel(asset.status) }}</span>
+        </header>
+        <p>{{ financeLabel(asset.assetType) }} · {{ asset.currencyIsoCode }}</p>
+        <dl>
+          <div>
+            <dt>Valor declarado</dt>
+            <dd>{{ money(asset.declaredValue, asset.currencyIsoCode) }}</dd>
+          </div>
+          <div>
+            <dt>Valor atual</dt>
+            <dd>{{ money(asset.currentValue, asset.currencyIsoCode) }}</dd>
+          </div>
+        </dl>
+        <p v-if="asset.primaryCurrencyEquivalent != null">
+          ≈
+          {{
+            money(
+              typeof asset.primaryCurrencyEquivalent === 'object'
+                ? asset.primaryCurrencyEquivalent.amount
+                : asset.primaryCurrencyEquivalent,
+              typeof asset.primaryCurrencyEquivalent === 'object'
+                ? asset.primaryCurrencyEquivalent.currencyIsoCode
+                : principalCurrency,
+            )
+          }}
+          na moeda principal
+        </p>
+        <footer>
+          <span>Registrado em {{ dateLabel(asset.registeredAtUtc) }}</span
+          ><q-btn outline dense no-caps label="Abrir bem" @click="open(asset.assetId)" />
+        </footer>
+      </article>
+    </div>
     <finance-table
+      v-else
       ref="table"
       :path="`admin/customers/${customerId}/assets`"
       :columns="assetColumns"
@@ -125,6 +165,7 @@
   </div>
 </template>
 <script setup>
+import { dateLabel } from 'src/services/financeService'
 import { assetCurrencyCode } from 'src/services/clientAssetProfile'
 import MoneyInput from 'src/components/Form/MoneyInput.vue'
 import { computed, ref } from 'vue'
@@ -143,6 +184,7 @@ import { financeGet, financeWrite, columns, financeLabel, money } from 'src/serv
 const props = defineProps({
   customerId: { type: String, required: true },
   currencies: { type: Array, default: () => [] },
+  compact: Boolean,
   walletAssets: { type: Array, default: () => [] },
   principalCurrency: { type: String, default: null },
 })
@@ -268,3 +310,49 @@ function link() {
   mutate('post', '/documents', { documentId: documentId.value }, loadDocuments)
 }
 </script>
+
+<style scoped>
+.wallet-asset-cards {
+  display: grid;
+  gap: 12px;
+}
+.wallet-asset-cards h3 {
+  font-size: 14px;
+  margin: 0;
+}
+.wallet-asset-card {
+  border: 1px solid #ffffff1f;
+  border-radius: 10px;
+  padding: 16px;
+  background: #ffffff08;
+}
+.wallet-asset-card header,
+.wallet-asset-card footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+.wallet-asset-card header span {
+  border: 1px solid #ffffff66;
+  border-radius: 6px;
+  padding: 2px 8px;
+  font-size: 10px;
+  text-transform: uppercase;
+}
+.wallet-asset-card p,
+.wallet-asset-card dt,
+.wallet-asset-card footer {
+  font-size: 12px;
+  color: #ffffff99;
+}
+.wallet-asset-card dl {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+.wallet-asset-card dd {
+  margin: 4px 0 0;
+  font-weight: 700;
+}
+</style>

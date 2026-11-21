@@ -9,11 +9,12 @@
       </header>
       <div class="contract-flow__body">
         <div class="contract-flow__box contract-requests__info">
-          <img :src="icon('Info')" alt="" />
+          <information-icon />
           <p>
-            Pedidos feitos pelos clientes no "Quero Conhecer" da Área do Cliente. Nada sai da
-            carteira do cliente: o assessor entra em contato, combina a moeda firmada e as moedas e
-            cria o contrato ou inclui o cliente num contrato aberto.
+            Pedidos feitos pelos clientes no "Quero Conhecer" da Área do Cliente. A solicitação não
+            mexe em saldo: o assessor entra em contato, combina a moeda firmada, as moedas e as
+            carteiras e cria o contrato ou inclui o cliente num contrato aberto; o aporte só sai das
+            carteiras do cliente nessa hora.
           </p>
         </div>
         <div class="contract-requests__filters" role="tablist" aria-label="Status da solicitação">
@@ -72,17 +73,27 @@
                 </td>
               </tr>
               <tr v-if="!rows.length">
-                <td colspan="6">Nenhuma solicitação encontrada.</td>
+                <td colspan="6" class="contract-requests__empty">
+                  <strong>{{ empty.title }}</strong>
+                  <p>{{ empty.description }}</p>
+                </td>
               </tr>
             </tbody>
           </table></resource-state
         >
       </div>
-      <footer><q-btn outline no-caps label="Fechar" @click="$emit('close')" /></footer></q-card
+      <footer>
+        <q-pagination
+          v-if="resource.state.data?.totalPages > 1"
+          v-model="page"
+          :max="resource.state.data.totalPages"
+          aria-label="Página das solicitações"
+        /><q-btn outline no-caps label="Fechar" @click="$emit('close')" /></footer></q-card
   ></q-dialog>
 </template>
 <script setup>
-import { ref, computed, onScopeDispose } from 'vue'
+import InformationIcon from 'src/components/Entity/InformationIcon.vue'
+import { ref, computed, watch, onScopeDispose } from 'vue'
 import ResourceState from 'src/components/Finance/ResourceState.vue'
 import { useFinanceResource } from 'src/composables/useFinanceResource'
 import { money } from 'src/services/financeService'
@@ -96,7 +107,8 @@ import {
 const props = defineProps({ read: { type: Function, default: listContractRequests } })
 const emit = defineEmits(['close', 'open', 'count'])
 const resource = useFinanceResource(),
-  status = ref('All')
+  status = ref('All'),
+  page = ref(1)
 let active = true
 const rows = computed(() =>
   (resource.state.data?.items || []).filter(
@@ -104,6 +116,35 @@ const rows = computed(() =>
   ),
 )
 const counts = computed(() => resource.state.data?.counts || {})
+const empty = computed(
+  () =>
+    ({
+      All: {
+        title: 'Nenhuma solicitação de contrato ainda',
+        description:
+          'Os pedidos que os clientes enviam pelo "Quero Conhecer" da Área do Cliente aparecem aqui.',
+      },
+      New: {
+        title: 'Nenhuma solicitação nova',
+        description:
+          'Os pedidos que os clientes enviam pelo "Quero Conhecer" da Área do Cliente aparecem aqui.',
+      },
+      InContact: {
+        title: 'Nenhuma solicitação em contato',
+        description:
+          'As solicitações em que o assessor já entrou em contato com o cliente aparecem aqui.',
+      },
+      Fulfilled: {
+        title: 'Nenhuma solicitação atendida',
+        description:
+          'As solicitações que viraram contrato ou entraram num contrato aberto aparecem aqui.',
+      },
+      Canceled: {
+        title: 'Nenhuma solicitação cancelada',
+        description: 'As solicitações canceladas, com o motivo, aparecem aqui.',
+      },
+    })[status.value],
+)
 const when = (value) =>
   value
     ? new Date(value).toLocaleString('pt-BR', {
@@ -117,7 +158,11 @@ const when = (value) =>
 const icon = (name) => '/icons/contracts/flows/2360-281-img' + name + '.svg'
 async function load() {
   await resource.load(async () => {
-    const result = await props.read()
+    const result = await props.read({
+      page: page.value,
+      pageSize: 20,
+      ...(status.value === 'All' ? {} : { status: status.value }),
+    })
     if (!Array.isArray(result?.items)) throw Error('Solicitações indisponíveis.')
     return result
   })
@@ -127,6 +172,11 @@ onScopeDispose(() => {
   active = false
   resource.reset()
 })
+watch(status, () => {
+  if (page.value !== 1) page.value = 1
+  else load()
+})
+watch(page, load)
 load()
 </script>
 <style src="./contractFlow.scss" lang="scss"></style>
@@ -138,7 +188,7 @@ load()
 .contract-requests__info {
   display: flex;
   gap: 12px;
-  align-items: flex-start;
+  align-items: center;
 }
 .contract-requests__info img {
   flex-shrink: 0;
@@ -157,7 +207,7 @@ load()
   font-size: 12px;
 }
 .contract-requests__filters button[aria-selected='true'] {
-  border-color: #2b7fff;
+  border-color: #ffffff;
   background: #ffffff1a;
   color: #fff;
 }
@@ -189,13 +239,24 @@ load()
 .contract-requests__open {
   border: 0;
   background: transparent;
-  color: #bedbff;
+  color: #ffffff;
   padding: 0;
   font-size: 12px;
   cursor: pointer;
 }
 .contract-requests tr:hover {
   background: #ffffff0a;
+}
+.contract-requests__empty {
+  text-align: center;
+  padding: 40px 16px !important;
+}
+.contract-requests__empty strong {
+  font-size: 16px;
+}
+.contract-requests__empty p {
+  margin: 8px 0 0;
+  color: #ffffff99;
 }
 @media (max-width: 600px) {
   .contract-requests table {

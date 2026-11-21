@@ -24,7 +24,9 @@
               tag
             }}</span></template
           >
-          <span v-else class="assigned-clients__badge">Atribuído</span>
+          <span v-else class="assigned-clients__badge assigned-clients__badge--assigned"
+            >ATRIBUÍDO</span
+          >
         </div>
         <q-btn
           v-if="walletMode"
@@ -125,7 +127,7 @@ const walletTags = (row) =>
     .map((type) => {
       const codes = [
         ...new Set(
-          (row.walletSources || [])
+          (row.walletSources || row.contributions?.map((c) => ({ ...c, type: c.wallet })) || [])
             .filter((line) => line.type === type.key)
             .map((line) => line.currencyIsoCode),
         ),
@@ -237,10 +239,10 @@ function documentLabel(row) {
   align-self: flex-start;
   margin-top: 4px;
   padding: 3px 8px;
-  border: 1px solid #2b7fff;
+  border: 1px solid #ffffff;
   border-radius: 8px;
   background: #ffffff1a;
-  color: #bedbff;
+  color: #ffffff;
   font-size: 10px;
 }
 .assigned-clients dl {
@@ -296,5 +298,10 @@ function documentLabel(row) {
   width: 16px;
   height: 16px;
   margin-right: 8px;
+}
+.assigned-clients__badge--assigned {
+  color: #74ffa0;
+  border-color: #74ffa0;
+  background: #007a5533;
 }
 </style>

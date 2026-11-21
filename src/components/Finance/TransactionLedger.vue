@@ -38,8 +38,6 @@
                       : contractTransactionLabel(row) || financeLabel(row.type)
                   }}</span
                   ><small v-if="transactionTypeDetail(row)">{{ transactionTypeDetail(row) }}</small
-                  ><small v-if="row.transferKind === 'WalletUpTo30Days' && row.dueAtUtc"
-                    >até {{ when(row.dueAtUtc, true) }}</small
                   ><small v-if="correction(row).original"
                     >corrige {{ correction(row).original }}</small
                   >
@@ -61,7 +59,12 @@
               <span class="transaction-ledger__original">{{
                 row.destinationClient?.name || endpointParts(row, 'destination').title
               }}</span
-              ><small>{{ endpointParts(row, 'destination').detail }}</small>
+              ><small
+                >{{ endpointParts(row, 'destination').detail
+                }}<template v-if="row.transferKind === 'WalletUpTo30Days' && row.dueAtUtc">
+                  · até {{ when(row.dueAtUtc, true) }}</template
+                ></small
+              >
             </td>
             <td>
               <strong

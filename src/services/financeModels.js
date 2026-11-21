@@ -1,4 +1,4 @@
-import { walletCapitalBlocked } from './contractWalletCapital.js'
+import { walletCapitalBlocked, walletContributionState } from './contractWalletCapital.js'
 export function positiveAmount(value) {
   if (
     value === null ||
@@ -59,7 +59,14 @@ export function buildContractTerm(term) {
 }
 export function buildDraftPayload(form, term) {
   const allocations = form.clientAllocations || []
-  if (allocations.some((row) => row.walletSources?.length)) throw new Error(walletCapitalBlocked)
+  if (
+    allocations.some(
+      (row) =>
+        row.walletSources?.length &&
+        !walletContributionState(row.walletSources, form.currencyCode).valid,
+    )
+  )
+    throw new Error(walletCapitalBlocked)
   if (allocations.some((p) => !p.clientId))
     throw new Error('Selecione o cliente de cada participação ou remova a linha vazia.')
   if (new Set(allocations.map((p) => p.clientId)).size !== allocations.length)
@@ -83,6 +90,24 @@ export function buildDraftPayload(form, term) {
     clientAllocations: allocations.map((p) => ({
       clientId: p.clientId,
       allocatedAmount: nullableAmount(p.allocatedAmount),
+      ...(p.walletSources?.length
+        ? {
+            contributions: p.walletSources.map((line) => ({
+              wallet: line.type,
+              currencyId: line.currencyId,
+              amount: Number(line.amount),
+            })),
+          }
+        : p.contributions?.length
+          ? {
+              contributions: p.contributions.map((line) => ({
+                wallet: line.wallet,
+                currencyId: line.currencyId,
+                amount: Number(line.amount),
+              })),
+            }
+          : {}),
+      ...(p.contractRequestId ? { contractRequestId: p.contractRequestId } : {}),
     })),
   }
 }

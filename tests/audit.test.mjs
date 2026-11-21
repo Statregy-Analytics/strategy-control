@@ -45,7 +45,7 @@ test('record navigation opens supported histories and keeps other records in Aud
   )
   assert.equal(auditTarget({ resourceType: 'Contract', resourceId: id }).query.contractId, id)
   assert.equal(auditTarget({ resourceType: 'Transaction', resourceId: id }).query.transactionId, id)
-  for (const type of ['Announcement', 'Loan', 'Engine', 'Contract']) {
+  for (const type of ['Loan', 'Engine', 'Contract']) {
     const row = { resourceType: type, resourceId: type === 'Contract' ? 'https://bad.test' : id }
     assert.deepEqual(auditTarget(row), { name: 'Auditoria', query: row })
     assert.equal(auditTarget(row, row), null, 'an already open Audit history has no self-link')
@@ -82,10 +82,7 @@ test('impossible calendar days and incomplete resource scopes do not reach the A
 })
 test('audit date values stay in UTC and malformed currency metadata cannot break a row', () => {
   assert.equal(auditDate('2026-11-12T12:34:00Z'), '12/11/2026 12:34')
-  assert.equal(
-    auditValue('ArchivedAtUtc', '2026-11-12T12:34:00.123456Z'),
-    '2026-11-12T12:34:00.123456Z',
-  )
+  assert.equal(auditValue('ArchivedAtUtc', '2026-11-12T12:34:00.123456Z'), '12/11/2026 12:34')
   assert.equal(auditValue('ArchivedAtUtc', null), '—')
   assert.equal(auditValue('Amount', '50', 'not-a-currency'), '50')
   assert.equal(auditDate('invalid'), '—')
@@ -239,4 +236,11 @@ test('child audit changes navigate to their parent contract or financial transac
     }).query.transactionId,
     id,
   )
+})
+
+test('announcement audit opens the actual publication editor', () => {
+  assert.deepEqual(auditTarget({ resourceType: 'Announcement', resourceId: id }), {
+    name: 'Comunicados',
+    query: { history: '1', id, editor: 'open' },
+  })
 })

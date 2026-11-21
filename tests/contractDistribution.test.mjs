@@ -373,7 +373,7 @@ test('136: card renders assigned values and escaped customer names, without extr
         Vue.h('button', slots.default?.()),
   })
   const html = await renderToString(app)
-  assert.match(html, /Atribuído/)
+  assert.match(html, /ATRIBUÍDO/)
   assert.match(html, /60,00%/)
   assert.match(html, /40,00%/)
   assert.match(html, /500\.000,00 · 100,00%/)
@@ -386,6 +386,7 @@ test('136: card renders assigned values and escaped customer names, without extr
 test('136: customer selection reads every real cards page and keeps only masked documents', async () => {
   const reads = []
   const exports = {
+    'src/services/walletModel': await import('../src/services/walletModel.js'),
     './customerService': {
       listCustomerCards: async (params) => {
         reads.push(params)
@@ -443,6 +444,7 @@ test('136: assigned currency selector uses catalog IDs without requiring a clien
     events = []
   let fail = false
   const exports = {
+    'src/services/walletModel': await import('../src/services/walletModel.js'),
     vue: Vue,
     './ResourceState.vue': { default: {} },
     'src/composables/useFinanceResource': { useFinanceResource },

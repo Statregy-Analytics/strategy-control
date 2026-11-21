@@ -342,7 +342,7 @@ function updateAmount(line, value) {
   border: 1px dashed #fff3;
 }
 .wallet-capital__add.open:deep(:before) {
-  border: 1.2px solid #2b7fff;
+  border: 1.2px solid #ffffff;
 }
 .wallet-capital__add img {
   margin-right: 8px;
@@ -374,7 +374,7 @@ function updateAmount(line, value) {
   cursor: pointer;
 }
 .wallet-capital__picker [role='tab'][aria-selected='true'] {
-  border-color: #2b7fff;
+  border-color: #ffffff;
   background: #ffffff1a;
   color: #fff;
   font-weight: 600;
@@ -480,7 +480,7 @@ function updateAmount(line, value) {
   border-color: #ffffff1f;
 }
 .wallet-capital__sources:deep(.q-field--focused .q-field__control:after) {
-  border-color: #2b7fff;
+  border-color: #ffffff;
 }
 .wallet-capital__sources:deep(.insufficient .q-field__control:before),
 .wallet-capital__sources:deep(.insufficient .q-field__control:after) {
@@ -506,7 +506,7 @@ function updateAmount(line, value) {
   opacity: 1;
 }
 .wallet-capital__sources button:focus-visible {
-  outline: 2px solid #2b7fff;
+  outline: 2px solid #ffffff;
   outline-offset: 2px;
 }
 @media (max-width: 400px) {

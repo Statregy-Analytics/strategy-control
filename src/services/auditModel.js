@@ -33,6 +33,28 @@ const modules = {
 export const auditModule = (value) => modules[value] || value || '—'
 const fields = {
   Title: 'Título',
+  InitialContractualCapital: 'Capital inicial contratual',
+  InitialConsolidatedCapital: 'Capital consolidado inicial',
+  InitialCapitalOriginId: 'Origem do capital inicial',
+  PrimaryEngineId: 'Motor principal',
+  InitialContractStatusId: 'Status inicial',
+  CurrencyId: 'Moeda',
+  StartDate: 'Início do contrato',
+  ExpectedEndDate: 'Término previsto',
+  CreatedAtUtc: 'Criado em',
+  UpdatedAtUtc: 'Atualizado em',
+  FinalizedAtUtc: 'Finalizado em',
+  FinalizedBy: 'Finalizado por',
+  RegistrationStatus: 'Status do cadastro',
+  AllocationPercentage: 'Participação',
+  ParticipationRatio: 'Participação diluída',
+  ContributedAmount: 'Aportes',
+  BaseAmount: 'Capital base',
+  CurrentBalance: 'Saldo atual',
+  EntryEngineIndex: 'Índice do motor na entrada',
+  IndexAtConnection: 'Índice na conexão',
+  TermValue: 'Prazo',
+  TermUnit: 'Unidade do prazo',
   Summary: 'Resumo',
   Body: 'Conteúdo',
   Name: 'Nome',
@@ -104,11 +126,32 @@ export function auditValue(field, value, currency) {
         Rejected: 'Reprovado',
         Completed: 'Concluído',
         Pending: 'Pendente',
+        Initiated: 'Iniciada',
+        Canceled: 'Cancelada',
+        Cancelled: 'Cancelada',
+        Created: 'Criado',
       }[safe] || String(safe)
     )
+  if (/(AtUtc|Date)$/i.test(field || '') && /^\d{4}-\d{2}-\d{2}/.test(String(safe)))
+    return auditDate(safe)
+  if (/TermUnit$/i.test(field || ''))
+    return { Year: 'Anos', Month: 'Meses', Day: 'Dias' }[safe] || String(safe)
+  if (/^-?\d+(\.\d+)?$/.test(String(safe)) && !sensitive.test(field || '')) {
+    if (/(Percentage|Ratio)$/i.test(field || ''))
+      return (
+        new Intl.NumberFormat('pt-BR', { maximumFractionDigits: 2 }).format(
+          Number(safe) * (/Ratio$/i.test(field) ? 100 : 1),
+        ) + '%'
+      )
+    if (/(Index|IndexAtConnection)$/i.test(field || ''))
+      return new Intl.NumberFormat('pt-BR', {
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 8,
+      }).format(Number(safe))
+  }
   if (
     currency &&
-    /^(Amount|Balance|AllocatedAmount|Value)$/i.test(field || '') &&
+    /(Amount|Balance|Capital|Value|Income|DeclaredAssets)$/i.test(field || '') &&
     /^-?\d+(\.\d+)?$/.test(String(safe))
   ) {
     try {
@@ -142,6 +185,8 @@ export function auditTarget(row, scope = {}) {
     return { name: 'contracts', query: { ...query, contractId: row.resourceId } }
   if (['Transaction', 'FinancialTransaction'].includes(row.resourceType) && uuid(row.resourceId))
     return { name: 'Transações', query: { ...query, transactionId: row.resourceId } }
+  if (row.resourceType === 'Announcement' && uuid(row.resourceId))
+    return { name: 'Comunicados', query: { ...query, id: row.resourceId, editor: 'open' } }
   if (scope.resourceType === row.resourceType && scope.resourceId === row.resourceId) return null
   return {
     name: 'Auditoria',

@@ -36,6 +36,7 @@
     <contract-request-detail
       v-if="requestId"
       :request-id="requestId"
+      @changed="loadRequestCount"
       @close="closeRequests"
       @create="fromRequest($event, false)"
       @include="fromRequest($event, true)"
@@ -43,14 +44,14 @@
   </q-page>
 </template>
 <script setup>
-import { computed, ref, watch } from 'vue'
+import { computed, ref, watch, onScopeDispose } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import ResourceState from 'src/components/Finance/ResourceState.vue'
 import ContractRequestsDialog from 'src/components/Contracts/ContractRequestsDialog.vue'
 import ContractRequestDetail from 'src/components/Contracts/ContractRequestDetail.vue'
 import ContractRequestBanner from 'src/components/Contracts/ContractRequestBanner.vue'
 import { useFinanceResource } from 'src/composables/useFinanceResource'
-import { readContractRequest } from 'src/services/contractRequests'
+import { readContractRequest, listContractRequests } from 'src/services/contractRequests'
 import ContractWorkspace from 'src/components/Contracts/ContractWorkspace.vue'
 import ContractSelection from 'src/components/Contracts/ContractSelection.vue'
 const route = useRoute(),
@@ -64,6 +65,19 @@ const activeContract = computed(() =>
 const workspaceOpen = computed(() => Boolean(activeContract.value) || route.query.new === '1')
 const source = useFinanceResource(),
   newRequests = ref(null)
+let active = true
+async function loadRequestCount() {
+  try {
+    const result = await listContractRequests({ page: 1, pageSize: 1 })
+    if (active) newRequests.value = result.counts.New
+  } catch {
+    if (active) newRequests.value = null
+  }
+}
+onScopeDispose(() => {
+  active = false
+})
+loadRequestCount()
 const idQuery = (value) =>
   typeof value === 'string' && /^[0-9a-f]{8}(-[0-9a-f]{4}){3}-[0-9a-f]{12}$/i.test(value)
     ? value

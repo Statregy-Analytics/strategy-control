@@ -11,9 +11,9 @@
       </header>
       <section v-if="!client" class="wallet-capital__body">
         <p class="wallet-capital__info">
-          <img :src="asset('2325-281', 'Info')" alt="" />Escolha um cliente por vez. Na próxima
-          etapa você define quanto sai da Carteira Strategy e da Carteira de Depósito dele, moeda
-          por moeda; o capital do contrato é a soma dos aportes.
+          <information-icon />Escolha um cliente por vez. Na próxima etapa você define quanto sai da
+          Carteira Strategy e da Carteira de Depósito dele, moeda por moeda; o capital do contrato é
+          a soma dos aportes.
         </p>
         <q-input
           v-model="search"
@@ -97,6 +97,7 @@
   </q-dialog>
 </template>
 <script setup>
+import InformationIcon from 'src/components/Entity/InformationIcon.vue'
 import { computed } from 'vue'
 import ResourceState from 'src/components/Finance/ResourceState.vue'
 import LabelForm from 'src/components/Form/LabelForm.vue'
@@ -217,7 +218,7 @@ const asset = (node, name) => `/icons/contracts/wallet-capital/${node}-img${name
 }
 .wallet-capital__clients > button:hover {
   background: #ffffff1a;
-  border-color: #2b7fff;
+  border-color: #ffffff;
 }
 .wallet-capital__clients > button:disabled {
   opacity: 0.4;
@@ -343,7 +344,7 @@ const asset = (node, name) => `/icons/contracts/wallet-capital/${node}-img${name
   border: 1px dashed #fff3;
 }
 .wallet-capital__add.open:deep(:before) {
-  border: 1.2px solid #2b7fff;
+  border: 1.2px solid #ffffff;
 }
 .wallet-capital__add img {
   margin-right: 8px;
@@ -375,7 +376,7 @@ const asset = (node, name) => `/icons/contracts/wallet-capital/${node}-img${name
   cursor: pointer;
 }
 .wallet-capital__picker [role='tab'][aria-selected='true'] {
-  border-color: #2b7fff;
+  border-color: #ffffff;
   background: #ffffff1a;
   color: #fff;
   font-weight: 600;
@@ -501,7 +502,7 @@ const asset = (node, name) => `/icons/contracts/wallet-capital/${node}-img${name
   border-color: #ffffff1f;
 }
 .wallet-capital:deep(.q-field--focused .q-field__control:after) {
-  border-color: #2b7fff;
+  border-color: #ffffff;
 }
 .wallet-capital:deep(.insufficient .q-field__control:before),
 .wallet-capital:deep(.insufficient .q-field__control:after) {
@@ -527,7 +528,7 @@ const asset = (node, name) => `/icons/contracts/wallet-capital/${node}-img${name
   opacity: 1;
 }
 .wallet-capital button:focus-visible {
-  outline: 2px solid #2b7fff;
+  outline: 2px solid #ffffff;
   outline-offset: 2px;
 }
 @media (max-width: 400px) {

@@ -7,7 +7,7 @@
             v-else-if="icon"
             :name="icon"
             size="16px"
-          />{{ title }}
+          />{{ title }}<slot name="title-suffix" />
         </h2>
         <p v-if="caption">{{ caption }}</p>
         <slot name="summary" />

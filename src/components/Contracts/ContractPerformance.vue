@@ -107,7 +107,7 @@ const metricLabels = [
 ]
 const events = [
   { label: 'Entrada de participante', color: '#00bc7d' },
-  { label: 'Aporte', color: '#2b7fff' },
+  { label: 'Aporte', color: '#ffffff' },
   { label: 'Retirada', color: '#fb2c36' },
   { label: 'Fechamento de ciclo', color: 'rgba(187,77,0,0.2)' },
   { label: 'Mudança de motor', color: '#ad46ff' },

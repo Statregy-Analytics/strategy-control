@@ -131,11 +131,14 @@ const row = {
   history: [],
 }
 
-test('141: missing API is an error, never a successful empty list or fake attendance', async () => {
-  await assert.rejects(requests.listContractRequests(), /consultar/)
-  await assert.rejects(requests.readContractRequest('id'), /consultar/)
+test('141: failed reads are never a successful empty list or fake attendance', async () => {
+  const fail = async () => {
+    throw Error('Falha ao consultar')
+  }
+  await assert.rejects(requests.listContractRequests({}, fail), /consultar/)
+  await assert.rejects(requests.readContractRequest('id', fail), /consultar/)
   await assert.rejects(requests.writeContractRequest('id'), /atualizar/)
-  const x = await instance('src/components/Contracts/ContractRequestsDialog.vue', {})
+  const x = await instance('src/components/Contracts/ContractRequestsDialog.vue', { read: fail })
   assert.ok(x.h.resource.state.error)
   assert.equal(x.h.resource.state.data, null)
   assert.equal(x.events.length, 0)
@@ -184,7 +187,7 @@ test('141: empty result only follows a successful read, stale result after close
       h.resource.state.data = { items: [], counts: { All: 0 } }
     },
   )
-  assert.match(markup, /Nenhuma solicitação encontrada/)
+  assert.match(markup, /Nenhuma solicitação de contrato ainda/)
   assert.doesNotMatch(markup, /SOL-2026-00021|Holding Investimentos/)
 })
 test('141: failure to mark contact preserves note and does not pretend a successful state transition', async () => {
@@ -333,4 +336,38 @@ test('139: completed detail renders only available contract/quote actions and ac
   assert.match(markup, /As partes deste aporte não estão disponíveis/)
   assert.match(markup, /Ver contrato/)
   assert.match(markup, /Adicionar Observação/)
+})
+
+test('published request API maps real IDs, counts and notes and preserves zero values', async () => {
+  const raw = {
+    id: 'req',
+    publicCode: 'SOL-1',
+    client: { clientId: 'client', displayName: 'Cliente' },
+    answers: { currencyIsoCode: 'BRL', initialAmount: 0 },
+    serviceNotes: 'nota',
+  }
+  const result = await requests.listContractRequests({ page: 2 }, async (path, params) => {
+    assert.equal(path, 'admin/contracts/requests')
+    assert.equal(params.page, 2)
+    return {
+      data: { items: [raw], counts: { all: 1, new: 0, inContact: 1, fulfilled: 0, canceled: 0 } },
+    }
+  })
+  assert.equal(result.counts.New, 0)
+  assert.equal(result.items[0].client.customerId, 'client')
+  assert.equal(result.items[0].answers.initialAmount, 0)
+  const calls = []
+  await requests.writeContractRequest(
+    'req',
+    { status: 'Canceled', attendanceNote: 'nota', reason: 'Teste' },
+    async (...args) => calls.push(args),
+  )
+  assert.deepEqual(calls, [
+    ['patch', 'admin/contracts/requests/req', { serviceNotes: 'nota' }],
+    ['post', 'admin/contracts/requests/req/cancel', { reason: 'Teste' }],
+  ])
+  await assert.rejects(
+    requests.writeContractRequest('req', { status: 'Fulfilled' }, () => assert.fail()),
+    /atualizar/,
+  )
 })

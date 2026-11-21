@@ -15,8 +15,8 @@
       </header>
       <section v-if="step === 'selection'" class="capital-distribution__body">
         <p class="capital-distribution__info">
-          <img :src="icon('info')" alt="" />Selecione um ou mais clientes que receberão participação
-          no contrato. Na próxima etapa você distribuirá o capital inicial contratual entre eles.
+          <information-icon />Selecione um ou mais clientes que receberão participação no contrato.
+          Na próxima etapa você distribuirá o capital inicial contratual entre eles.
         </p>
         <q-input
           v-model="search"
@@ -71,7 +71,8 @@
           </div>
         </div>
         <p v-if="!positiveCapital" class="capital-distribution__missing" role="status">
-          Capital Inicial não definido
+          <strong>Capital Inicial não definido</strong><br />Defina o capital inicial contratual
+          antes de prosseguir para a distribuição.
         </p>
       </section>
       <section v-else class="capital-distribution__body">
@@ -84,8 +85,8 @@
           </div>
         </div>
         <p class="capital-distribution__info">
-          <img :src="icon('info')" alt="" />Informe o valor ou a participação (%) de cada cliente:
-          um calcula o outro (participação = valor ÷ capital inicial).
+          <information-icon />Informe o valor ou a participação (%) de cada cliente: um calcula o
+          outro (participação = valor ÷ capital inicial).
         </p>
         <div v-for="(row, index) in rows" :key="row.clientId" class="capital-distribution__client">
           <div class="capital-distribution__client-heading">
@@ -179,6 +180,7 @@
   </q-dialog>
 </template>
 <script setup>
+import InformationIcon from 'src/components/Entity/InformationIcon.vue'
 import { computed, onScopeDispose, ref } from 'vue'
 import LabelForm from 'src/components/Form/LabelForm.vue'
 import { distributionCustomers } from 'src/services/contractDistributionCustomers'
@@ -395,7 +397,7 @@ header img {
 }
 .capital-distribution__option.selected {
   background: #ffffff1a;
-  border-color: #2b7fff;
+  border-color: #ffffff;
 }
 .capital-distribution__option:hover {
   background: #ffffff14;
@@ -411,8 +413,8 @@ header img {
   border-radius: 4px;
 }
 .selected .capital-distribution__check {
-  background: #2b7fff;
-  border-color: #2b7fff;
+  background: #ffffff;
+  border-color: #ffffff;
 }
 .capital-distribution__check img {
   width: 12px;
@@ -617,10 +619,10 @@ footer :deep(.q-btn.disabled) {
   height: 36px;
 }
 :deep(.q-field--focused .q-field__control:after) {
-  border-color: #2b7fff;
+  border-color: #ffffff;
 }
 button:focus-visible {
-  outline: 2px solid #2b7fff;
+  outline: 2px solid #ffffff;
   outline-offset: 2px;
 }
 @media (max-width: 400px) {
@@ -642,5 +644,14 @@ button:focus-visible {
   h2 {
     font-size: 12px;
   }
+}
+.capital-distribution__totals-grid small {
+  color: #fee685;
+}
+.capital-distribution__totals.closed .capital-distribution__totals-grid small {
+  color: #74ffa0;
+}
+.capital-distribution__info {
+  align-items: center;
 }
 </style>

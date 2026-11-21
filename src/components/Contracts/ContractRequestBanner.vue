@@ -1,7 +1,7 @@
 <template>
   <aside class="request-origin">
     <div class="request-origin__top">
-      <img src="/icons/contracts/flows/2366-364-imgInfo.svg" alt="" />
+      <information-icon />
       <div>
         <strong>Contrato a partir da solicitação {{ context.code }}</strong
         ><small
@@ -23,6 +23,7 @@
   </aside>
 </template>
 <script setup>
+import InformationIcon from 'src/components/Entity/InformationIcon.vue'
 import { computed } from 'vue'
 import { money } from 'src/services/financeService'
 import { requestApplicationLabel } from 'src/services/contractRequests'
@@ -54,7 +55,7 @@ const answers = computed(() => {
 </script>
 <style scoped>
 .request-origin {
-  border: 1px solid #2b7fff;
+  border: 1px solid #ffffff;
   border-radius: 12px;
   background: #ffffff1a;
   padding: 16px 20px;
@@ -82,7 +83,7 @@ const answers = computed(() => {
 .request-origin button {
   border: 0;
   background: none;
-  color: #bedbff;
+  color: #ffffff;
   font-size: 12px;
   cursor: pointer;
 }

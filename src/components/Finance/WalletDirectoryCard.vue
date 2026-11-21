@@ -155,7 +155,7 @@
         no-caps
         label="Ver Movimentações"
         :aria-label="'Ver movimentações de ' + row.clientName"
-        :disable="!row.ledgerWalletIds?.length"
+        :disable="!row.customerId"
         @click="emit('movements')"
         ><img src="/icons/wallet-cards/eye.svg" alt="" /></q-btn
       ><q-btn
@@ -242,7 +242,8 @@ const percentTone = (value) => ({
   'wallet-card__positive': finiteMoney(value) !== null && Number(value) > 0,
   'wallet-card__negative': finiteMoney(value) !== null && Number(value) < 0,
 })
-const current = (c) => (props.row.currencies?.length === 1 ? props.row.currentTotal : c.current)
+const current = (c) =>
+  c.current ?? (props.row.currencies?.length === 1 ? props.row.currentTotal : null)
 const date = (value) =>
   value && Number.isFinite(Date.parse(value))
     ? new Date(value).toLocaleString('pt-BR', {

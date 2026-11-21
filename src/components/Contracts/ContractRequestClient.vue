@@ -96,12 +96,12 @@ const amount = computed(() => {
 }
 .request-client span {
   display: inline-block;
-  border: 1px solid #2b7fff;
+  border: 1px solid #ffffff;
   border-radius: 6px;
   background: #ffffff1a;
   padding: 2px 8px;
   font-size: 10px;
-  color: #bedbff;
+  color: #ffffff;
   margin-top: 4px;
 }
 .request-client dl {

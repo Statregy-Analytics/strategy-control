@@ -108,7 +108,7 @@
                   v-model="form.name"
                   outlined
                   dense
-                  placeholder="Ex: Contrato Alpha 2026-Q1"
+                  placeholder="Ex: Contrato Expansão Patrimonial 2026-Q1 5 anos"
                   aria-label="Nome do Contrato" /></label-form
             ></contract-panel>
             <contract-panel title="Vigência e Prazos" icon="calendar"
@@ -139,11 +139,13 @@
                 /></label-form>
               </div>
               <div class="contract-end">
-                <img src="/icons/contracts/clock.svg" alt="" />
+                <span class="contract-end__clock"
+                  ><img src="/icons/contracts/clock.svg" alt=""
+                /></span>
                 <div>
                   <small>Previsão de Término</small><strong>{{ dateLabel(expectedEnd) }}</strong>
                 </div>
-                <span>Calculado automaticamente com base no prazo selecionado</span>
+                <span>Calculado automaticamente com base no prazo selecionado.</span>
               </div></contract-panel
             >
             <contract-panel
@@ -155,10 +157,11 @@
                     ><currency-select
                       v-model="form.currencyId"
                       :use-catalog="true"
+                      detailed
                       :customer-id="form.clientAllocations[0]?.clientId"
                       :current="currentCurrency"
                       :disable="!draft || (walletOrigin && form.clientAllocations.length > 0)"
-                      @currency-code="currencyCode = $event" /></label-form
+                      @currency-code="setCurrencyCode" /></label-form
                   ><label-form text-label="Capital Inicial Contratual"
                     ><q-input
                       v-if="walletOrigin"
@@ -187,6 +190,7 @@
                   ><div class="contract-origins">
                     <label v-for="origin in catalog.state.data?.origins || []" :key="origin.id"
                       ><q-radio
+                        color="white"
                         v-model="form.initialCapitalOriginId"
                         :val="origin.id"
                         :disable="!draft"
@@ -235,11 +239,10 @@
                     aria-label="Observação Financeira"
                 /></label-form>
                 <p v-if="walletOrigin" class="contract-audit-note">
-                  <img src="/icons/contracts/wallet-capital/1484-71525-imgInfo.svg" alt="" />A moeda
-                  firmada define a moeda oficial do contrato e a base da performance. Valores de
-                  carteiras em outras moedas são convertidos pela última PTAX de venda do Banco
-                  Central; o aporte registra a moeda e o valor de origem, a cotação e o valor
-                  convertido.
+                  <information-icon />A moeda firmada define a moeda oficial do contrato e a base da
+                  performance. Valores de carteiras em outras moedas são convertidos pela última
+                  PTAX de venda do Banco Central; o aporte registra a moeda e o valor de origem, a
+                  cotação e o valor convertido.
                 </p></resource-state
               ></contract-panel
             >
@@ -256,7 +259,13 @@
                       aria-label="Motor Principal" /></label-form
                   ><label-form text-label="Índice do Motor na Conexão"
                     ><q-input
-                      :model-value="primaryConnection?.indexAtConnection ?? ''"
+                      :model-value="
+                        primaryConnection?.indexAtConnection == null
+                          ? ''
+                          : Number(primaryConnection.indexAtConnection).toLocaleString('pt-BR', {
+                              maximumFractionDigits: 8,
+                            })
+                      "
                       outlined
                       dense
                       disable
@@ -352,16 +361,11 @@
               </div>
               <h3>Composição Estratégica</h3>
               <p>Defina a distribuição estratégica do contrato por tipo de operação.</p>
-              <div class="contract-row contract-row--three">
-                <label-form
-                  v-for="label in ['Intradiário (%)', 'Núcleo (%)', 'Tática (%)']"
-                  :key="label"
-                  :text-label="label"
-                  ><q-input outlined dense disable placeholder="Indisponível" :aria-label="label"
-                /></label-form></div
-            ></contract-panel>
+              <contract-composition v-model="form.strategicComposition" />
+            </contract-panel>
             <contract-panel v-else title="Ativos do Contrato" icon="assets"
               ><contract-assets
+                v-model:composition="form.strategicComposition"
                 :state="assets.state"
                 editing
                 :busy="busy"
@@ -391,8 +395,8 @@
                 @retry="loadDebts"
             /></contract-panel>
             <p class="contract-audit-note">
-              <img src="/icons/contracts/info.svg" alt="" />A criação do contrato registra os
-              vínculos e alterações no histórico de auditoria.
+              <information-icon />A criação do contrato registra os vínculos e alterações no
+              histórico de auditoria.
             </p>
           </div>
           <aside class="contract-side">
@@ -462,42 +466,65 @@
             ></contract-panel>
             <contract-panel title="Resumo do Contrato" icon="summary"
               ><dl class="contract-summary">
-                <div v-for="item in summary" :key="item.label">
-                  <dt>{{ item.label }}</dt>
-                  <dd>{{ item.value }}</dd>
+                <div
+                  v-for="(group, index) in summaryGroups"
+                  :key="index"
+                  class="contract-summary__group"
+                >
+                  <div v-for="item in group" :key="item.label">
+                    <dt>{{ item.label }}</dt>
+                    <dd>
+                      <span :class="{ 'contract-status': item.label === 'Status Inicial' }">{{
+                        item.value
+                      }}</span>
+                    </dd>
+                  </div>
                 </div>
               </dl></contract-panel
             >
           </aside>
         </div>
         <div v-else class="contract-open-sections">
-          <h2 class="contract-operational-title">Resumo Operacional</h2>
+          <h2 class="contract-operational-title">
+            <img src="/icons/contracts/ct21-trending-up.svg" alt="" />Resumo Operacional
+          </h2>
           <contract-panel title="Clientes Vinculados" icon="users"
-            ><template #actions
+            ><template #title-suffix
               ><span class="contract-optional">{{
                 detail.state.data?.participants?.length || 0
-              }}</span
-              ><q-btn-toggle
-                v-model="participantLayout"
-                no-caps
-                :options="[
-                  {
-                    label: 'Cards',
-                    value: 'cards',
-                    icon: 'img:/icons/contracts/ct08-chart-pie.svg',
-                  },
-                  {
-                    label: 'Lista',
-                    value: 'list',
-                    icon: 'img:/icons/contracts/ct08-chart-column.svg',
-                  },
-                ]" /><q-btn
-                outline
-                no-caps
-                label="Adicionar"
-                :disable="busy || !canAddContractParticipant(detail.state.data)"
-                @click="clientOpen = true"
-            /></template>
+              }}</span></template
+            >
+            <template #actions
+              ><div class="contract-participant-toolbar">
+                <div
+                  class="contract-view-toggle"
+                  role="group"
+                  aria-label="Visualização de participantes"
+                >
+                  <button
+                    v-for="layout in ['list', 'cards']"
+                    :key="layout"
+                    :aria-label="
+                      layout === 'list' ? 'Lista de participantes' : 'Cards de participantes'
+                    "
+                    :aria-pressed="participantLayout === layout"
+                    @click="participantLayout = layout"
+                  >
+                    <img
+                      :src="'/icons/layout-' + (layout === 'list' ? 'list' : 'grid') + '.svg'"
+                      alt=""
+                    />
+                  </button>
+                </div>
+                <q-btn
+                  outline
+                  no-caps
+                  label="Adicionar"
+                  icon="img:/icons/contracts/plus.svg"
+                  :disable="busy || !canAddContractParticipant(detail.state.data)"
+                  @click="clientOpen = true"
+                /></div
+            ></template>
             <div v-if="!detail.state.data?.participants?.length" class="contract-empty">
               Nenhum cliente vinculado.
             </div>
@@ -535,6 +562,15 @@
                       }}</small>
                     </div>
                   </div></q-td
+                ></template
+              >
+              <template #body-cell-status="scope"
+                ><q-td :props="scope"
+                  ><span
+                    class="contract-status"
+                    :class="'contract-status--' + (scope.row.clientStatus || '').toLowerCase()"
+                    >{{ scope.value }}</span
+                  ></q-td
                 ></template
               >
               <template #body-cell-actions="scope"
@@ -629,7 +665,9 @@
             class="contract-expansion"
             expand-icon="img:/icons/contracts/chevron.svg"
             ><template #header
-              ><img class="contract-section-icon" src="/icons/contracts/engine.svg" alt="" />
+              ><span class="contract-engine-icon"
+                ><img src="/icons/contracts/pulse.svg" alt=""
+              /></span>
               <div class="contract-expansion-title">
                 <strong>Motores e Operações do Contrato</strong
                 ><small>Motores vinculados, distribuição e operações do contrato.</small>
@@ -830,6 +868,9 @@
 </template>
 
 <script setup>
+import ContractComposition from './ContractComposition.vue'
+import InformationIcon from 'src/components/Entity/InformationIcon.vue'
+import { WALLET_CURRENCIES } from 'src/services/walletModel'
 import { ref, computed, watch, nextTick, onScopeDispose } from 'vue'
 import { useQuasar } from 'quasar'
 import { onBeforeRouteLeave, onBeforeRouteUpdate } from 'vue-router'
@@ -995,8 +1036,14 @@ watch(
   },
   { immediate: true },
 )
-const primaryConnection = computed(() =>
-  engines.state.data?.find((e) => e.engineId === form.value.primaryEngineId),
+function setCurrencyCode(code) {
+  currencyCode.value = code
+  form.value.currencyCode = code
+}
+const primaryConnection = computed(
+  () =>
+    engines.state.data?.find((e) => e.engineId === form.value.primaryEngineId) ||
+    detail.state.data?.primaryEngine,
 )
 const connectionDate = computed(() =>
   primaryConnection.value?.connectedAtUtc
@@ -1025,7 +1072,7 @@ const dirty = computed(
 const participantColumns = computed(() =>
   columns([
     ['client', 'Cliente'],
-    ['status', 'Status', () => 'Indisponível'],
+    ['status', 'Status', (row) => financeLabel(row.clientStatus)],
     ['linkedAtUtc', 'Vínculo', (row) => dateLabel(row.linkedAtUtc)],
     [
       'allocationPercentage',
@@ -1034,7 +1081,7 @@ const participantColumns = computed(() =>
     ],
     ['contributedAmount', 'Aportes', (row) => money(row.contributedAmount, currencyCode.value)],
     ['withdrawals', 'Retiradas', () => 'Indisponível'],
-    ['position', 'Posição Atual', () => 'Indisponível'],
+    ['position', 'Posição Atual', (row) => money(row.currentValue?.value, currencyCode.value)],
     ['lastDeposit', 'Último Depósito', () => 'Indisponível'],
     ['lastWithdrawal', 'Última Retirada', () => 'Indisponível'],
     ['actions', 'Ações'],
@@ -1085,7 +1132,13 @@ const summary = computed(() => [
         : money(detail.state.data?.initialConsolidatedCapital, currencyCode.value),
   },
   { label: 'Moeda Firmada', value: currencyCode.value },
-  { label: 'Origem do Capital', value: selectedOrigin.value?.name || '—' },
+  {
+    label: 'Origem do Capital',
+    value:
+      selectedOrigin.value?.code === 'CONTRACT_VALUE'
+        ? 'Valor atribuído'
+        : selectedOrigin.value?.name || '—',
+  },
   {
     label: 'Motor Principal',
     value:
@@ -1106,12 +1159,39 @@ const summary = computed(() => [
       'Rascunho',
   },
 ])
+const summaryGroups = computed(() => [
+  summary.value.slice(0, 1),
+  summary.value.slice(1, 4),
+  summary.value.slice(4, 6),
+  summary.value.slice(6, 8),
+  summary.value.slice(8),
+])
+const currencyDefinition = computed(() =>
+  WALLET_CURRENCIES.find((c) => c.code === currencyCode.value),
+)
 const headerMetrics = computed(() => {
   const d = detail.state.data
   return d
     ? [
-        { label: 'Início do Contrato', value: dateLabel(d.startDate), icon: 'calendar' },
-        { label: 'Fim do Contrato', value: dateLabel(d.expectedEndDate), icon: 'clock' },
+        {
+          label: 'Início do Contrato',
+          value: dateLabel(d.startDate),
+          caption:
+            d.startDate && d.expectedEndDate
+              ? `Período: ${d.startDate.slice(0, 4)} — ${d.expectedEndDate.slice(0, 4)}`
+              : '',
+          icon: 'calendar',
+        },
+        {
+          label: 'Fim do Contrato',
+          value: dateLabel(d.expectedEndDate),
+          caption: d.expectedEndDate
+            ? Date.parse(d.expectedEndDate) > Date.now()
+              ? `${Math.ceil((Date.parse(d.expectedEndDate) - Date.now()) / 86400000)} dias restantes`
+              : 'Prazo encerrado'
+            : '',
+          icon: 'clock',
+        },
         {
           label: 'Capital Inicial Contratual',
           value: money(d.initialContractualCapital, currencyCode.value),
@@ -1125,10 +1205,17 @@ const headerMetrics = computed(() => {
         },
         {
           label: 'Saldo Atual',
-          value: money(d.currentBalance?.value, currencyCode.value),
+          value: money(d.currentBalance, currencyCode.value),
           icon: 'debt',
         },
-        { label: 'Moeda Firmada', value: d.currency?.isoCode || '—', icon: 'coins' },
+        {
+          label: 'Moeda Firmada',
+          value: currencyDefinition.value
+            ? `${currencyDefinition.value.symbol} · ${currencyDefinition.value.code}`
+            : d.currency?.isoCode || '—',
+          caption: currencyDefinition.value?.name,
+          icon: 'coins',
+        },
       ]
     : []
 })
@@ -1891,6 +1978,9 @@ watch(
   margin: 0;
 }
 .contract-status {
+  display: inline-flex;
+  align-items: center;
+  border: 1px solid currentColor;
   border-radius: 8px;
   text-transform: uppercase;
   font-size: 10px;
@@ -1967,5 +2057,143 @@ watch(
 .contract-participant-identity strong,
 .contract-participant-identity small {
   display: block;
+}
+.contract-summary__group {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+.contract-summary__group:first-child,
+.contract-summary__group:nth-child(4) {
+  grid-template-columns: 1fr;
+}
+.contract-summary__group:nth-child(2) > :first-child {
+  grid-column: 1/-1;
+}
+.contract-term :deep(.q-field__control),
+.contract-term :deep(.q-field__marginal) {
+  height: 36px;
+  min-height: 36px;
+  background: #ffffff0d;
+}
+.contract-term :deep(.q-field__native) {
+  min-height: 36px;
+}
+.contract-row :deep(.q-field--dense:not(.q-textarea) .q-field__control),
+.contract-row :deep(.q-field__marginal) {
+  height: 44px;
+  min-height: 44px;
+}
+.contract-row .contract-term :deep(.q-field__control),
+.contract-row .contract-term :deep(.q-field__marginal) {
+  height: 36px;
+  min-height: 36px;
+}
+.contract-workspace :deep(input[type='date']) {
+  color-scheme: dark;
+}
+.contract-workspace :deep(input::placeholder) {
+  color: #ffffff99;
+  opacity: 1;
+}
+.contract-end .contract-end__clock {
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  flex: 0 0 40px;
+  border: 1px solid white;
+  border-radius: 50%;
+  margin: 0;
+}
+.contract-end small {
+  color: white;
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: 12px;
+}
+.contract-end strong {
+  font-size: 18px;
+}
+.contract-end > span:last-child {
+  color: white;
+}
+.contract-operational-title,
+.contract-participant-toolbar {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.contract-operational-title img {
+  width: 20px;
+  height: 20px;
+}
+.contract-view-toggle {
+  display: flex;
+  align-items: center;
+  width: 68px;
+  height: 40px;
+  padding: 3px;
+  background: #ffffff0d;
+  border: 1px solid #ffffff1f;
+  border-radius: 10px;
+}
+.contract-view-toggle button {
+  display: grid;
+  place-items: center;
+  width: 30px;
+  height: 30px;
+  padding: 4px;
+  border: 1px solid transparent;
+  border-radius: 8px;
+  background: transparent;
+  cursor: pointer;
+  opacity: 0.6;
+}
+.contract-view-toggle button[aria-pressed='true'] {
+  border-color: #ffffff33;
+  background: #ffffff0d;
+  opacity: 1;
+}
+.contract-view-toggle img {
+  filter: brightness(0) invert(1);
+  width: 18px;
+  height: 18px;
+}
+.contract-participant-identity > img {
+  box-sizing: border-box;
+  border: 1px solid white;
+  border-radius: 50%;
+  width: 28px;
+  height: 28px;
+  padding: 6px;
+}
+.contract-participant-actions :deep(.q-btn) {
+  min-height: 24px;
+}
+.contract-participant-table :deep(td) {
+  height: 48px;
+  padding: 8px;
+}
+.contract-toolbar :deep(.q-btn) {
+  min-height: 32px;
+}
+.contract-toolbar :deep(.q-btn:last-child) {
+  margin-left: auto;
+}
+.contract-engine-icon {
+  margin-right: 12px;
+  display: grid;
+  place-items: center;
+  flex: 0 0 30px;
+  width: 30px;
+  height: 30px;
+  border: 1px solid #ffffff33;
+  border-radius: 4px;
+  background: linear-gradient(90deg, #ffffff14, #ffffff08, #ffffff12);
+}
+.contract-engine-icon img {
+  width: 16px;
+  height: 16px;
 }
 </style>

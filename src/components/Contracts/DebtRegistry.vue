@@ -5,8 +5,8 @@
         ><img src="/icons/contracts/plus.svg" alt=""
       /></q-btn>
       <p v-else>
-        <img src="/icons/contracts/info.svg" alt="" />Para inserir, editar ou remover dívidas,
-        clique em <strong>Editar Contrato</strong> no topo da página.
+        <information-icon />Para inserir, editar ou remover dívidas, clique em
+        <strong>Editar Contrato</strong> no topo da página.
       </p>
     </div>
     <resource-state :state="state" @retry="$emit('retry')"
@@ -172,6 +172,7 @@
   </section>
 </template>
 <script setup>
+import InformationIcon from 'src/components/Entity/InformationIcon.vue'
 import { computed, ref, onScopeDispose } from 'vue'
 import ResourceState from 'src/components/Finance/ResourceState.vue'
 import WorkspaceField from 'src/components/Workspaces/WorkspaceField.vue'

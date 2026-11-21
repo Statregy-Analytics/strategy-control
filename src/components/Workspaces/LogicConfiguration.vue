@@ -32,13 +32,14 @@
         <span>Intensidade por atualização deve ser menor que limite diário</span>
       </div>
       <div class="logic-configuration__notice" role="note">
-        <img src="/icons/logics/lg11/info.svg" alt="" />
+        <information-icon />
         <span>Intensidade alta pode causar muitas travas</span>
       </div>
     </div>
   </profile-section>
 </template>
 <script setup>
+import InformationIcon from 'src/components/Entity/InformationIcon.vue'
 import ProfileSection from 'src/components/Entity/ProfileSection.vue'
 defineProps({
   enabled: Boolean,

@@ -22,7 +22,7 @@
       :model="globalSummary"
       :details="false"
       presentation="transactions"
-      :initial-type="tab === 'wallets' ? walletType : 'total'"
+      :initial-type="tab === 'wallets' ? walletType : null"
       @select="selectWallet"
     />
     <keep-alive

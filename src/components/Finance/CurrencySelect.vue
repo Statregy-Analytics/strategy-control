@@ -5,15 +5,31 @@
       :disable="disable"
       :options="options"
       option-value="id"
-      option-label="name"
+      :option-label="detailed ? 'label' : 'name'"
       emit-value
       map-options
       outlined
       dense
       clearable
+      popup-content-class="profile-glass-menu"
       aria-label="Moeda"
       @update:model-value="$emit('update:modelValue', $event)"
-    />
+      ><template v-if="detailed" #selected-item="scope"
+        ><span class="currency-option"
+          ><span aria-hidden="true">{{ scope.opt.flag }}</span
+          >{{ scope.opt.label }}</span
+        ></template
+      ><template v-if="detailed" #option="scope"
+        ><q-item v-bind="scope.itemProps"
+          ><q-item-section
+            ><span class="currency-option"
+              ><span aria-hidden="true">{{ scope.opt.flag }}</span
+              >{{ scope.opt.label }}</span
+            ></q-item-section
+          ></q-item
+        ></template
+      ></q-select
+    >
     <p v-if="!options.length" class="text-caption q-mt-sm">
       {{
         useCatalog
@@ -26,12 +42,14 @@
   </resource-state>
 </template>
 <script setup>
+import { WALLET_CURRENCIES } from 'src/services/walletModel'
 import { computed, watch } from 'vue'
 import ResourceState from './ResourceState.vue'
 import { useFinanceResource } from 'src/composables/useFinanceResource'
 import { financeGet } from 'src/services/financeService'
 const props = defineProps({
   disable: Boolean,
+  detailed: Boolean,
   useCatalog: Boolean,
   customerId: { type: String, default: null },
   modelValue: { type: String, default: null },
@@ -44,8 +62,37 @@ const options = computed(() => {
     id: w.currencyId,
     name: w.currencyIsoCode,
   }))
-  if (props.current?.id) items.push(props.current)
+  if (props.current?.id && !items.some((i) => i.id === props.current.id)) items.push(props.current)
   return [...new Map(items.filter((i) => i.id).map((i) => [i.id, i])).values()]
+    .filter(
+      (i) =>
+        !props.detailed ||
+        WALLET_CURRENCIES.some((c) => c.code === i.name) ||
+        i.id === props.modelValue,
+    )
+    .map((i) => {
+      if (!props.detailed) return i
+      const definition = WALLET_CURRENCIES.find((c) => c.code === i.name)
+      const country = {
+        BRL: 'BR',
+        USD: 'US',
+        EUR: 'EU',
+        CAD: 'CA',
+        JPY: 'JP',
+        CNY: 'CN',
+        AUD: 'AU',
+      }[i.name]
+      return {
+        ...i,
+        label: props.detailed && definition ? `${definition.name} · ${i.name}` : i.name,
+        flag: country
+          ? country
+              .split('')
+              .map((c) => String.fromCodePoint(127397 + c.charCodeAt(0)))
+              .join('')
+          : '',
+      }
+    })
 })
 const load = () =>
   resource.load(async () => {
@@ -72,3 +119,11 @@ watch(
   { immediate: true },
 )
 </script>
+
+<style scoped>
+.currency-option {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+</style>

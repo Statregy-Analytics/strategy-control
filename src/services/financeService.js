@@ -115,6 +115,9 @@ const labels = {
   PendingConnection: 'Conexão pendente',
   Connected: 'Conectado',
   Active: 'Ativo',
+  Prospect: 'Em cadastro',
+  Blocked: 'Bloqueado',
+  Suspended: 'Suspenso',
   Inactive: 'Inativo',
 }
 export const financeLabel = (value) => labels[value] || value || '—'

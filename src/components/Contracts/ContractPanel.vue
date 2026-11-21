@@ -5,6 +5,7 @@
     :icon-src="icon ? `/icons/contracts/${icon}.svg` : ''"
     :caption="caption"
   >
+    <template #title-suffix><slot name="title-suffix" /></template>
     <template #actions><slot name="actions" /></template><slot />
   </profile-section>
 </template>

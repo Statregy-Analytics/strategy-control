@@ -47,8 +47,8 @@ export function walletMoney(value, currency) {
     definition.symbol +
     ' ' +
     new Intl.NumberFormat('pt-BR', {
-      minimumFractionDigits: 2,
-      maximumFractionDigits: 2,
+      minimumFractionDigits: currency === 'JPY' ? 0 : 2,
+      maximumFractionDigits: currency === 'JPY' ? 0 : 2,
     }).format(Number(value))
   )
 }

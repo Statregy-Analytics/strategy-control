@@ -10,6 +10,7 @@
       v-else-if="row.type === 'assets'"
       :customer-id="row.customerId"
       :wallet-assets="row.assets || []"
+      :compact="compact"
       :principal-currency="row.principalCurrency"
       @changed="$emit('changed')"
     />

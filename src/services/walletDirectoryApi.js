@@ -16,12 +16,24 @@ export function walletClientRow(item, type) {
     count: c.assetCount,
     declared: numberInputValue(c.declaredValue),
     current: numberInputValue(c.currentValue),
+    appreciation:
+      numberInputValue(c.currentValue) !== null && numberInputValue(c.declaredValue) > 0
+        ? (Number(c.currentValue) / Number(c.declaredValue) - 1) * 100
+        : null,
+    variation:
+      numberInputValue(c.currentValue) !== null && numberInputValue(c.declaredValue) !== null
+        ? Number(c.currentValue) - Number(c.declaredValue)
+        : null,
   }))
   return {
     key: `${item.client.id}:${type}`,
     type,
     customerId: item.client.id,
     clientName: item.client.name,
+    clientCode: item.client.publicCode || item.client.id,
+    currencyCount: currencies.filter((c) =>
+      [c.balance, c.declared, c.current, c.contracted, c.idle].some((v) => v !== null && v !== 0),
+    ).length,
     status: item.status,
     currencies,
     principalCurrency: item.primaryCurrencyIsoCode,
@@ -30,6 +42,10 @@ export function walletClientRow(item, type) {
     base: numberInputValue(item.capitalBase),
     contractCount: item.contractCount,
     assetCount: item.assetCount,
+    assetDescription: (item.assets || [])
+      .map((asset) => asset.name)
+      .filter(Boolean)
+      .join(' · '),
     yieldPercentage: numberInputValue(item.yield),
     currentTotal: null,
     contracts: (item.contracts || []).map((c) => ({ ...c, id: c.contractId })),

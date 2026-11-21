@@ -1,3 +1,4 @@
+import { compositionPayload } from 'src/services/contractComposition'
 import { ref, computed, watch, onScopeDispose } from 'vue'
 import { useFinanceResource } from './useFinanceResource'
 import { financeGet, financeWrite } from 'src/services/financeService'
@@ -49,6 +50,7 @@ export function useContractWorkspace(props, emit, notify) {
     form.value = d
       ? {
           name: d.name,
+          strategicComposition: { ...d.strategicComposition },
           startDate: d.startDate,
           currencyId: d.currency?.id ?? null,
           initialContractualCapital: d.initialContractualCapital,
@@ -60,10 +62,13 @@ export function useContractWorkspace(props, emit, notify) {
             clientId: p.clientId,
             allocatedAmount: p.allocatedAmount,
             displayName: p.displayName,
+            contributions: p.contributions,
+            contractRequestId: p.contractRequest?.requestId || p.contractRequest?.id,
           })),
         }
       : {
           name: null,
+          strategicComposition: {},
           startDate: null,
           currencyId: null,
           initialContractualCapital: null,
@@ -74,7 +79,7 @@ export function useContractWorkspace(props, emit, notify) {
           clientAllocations: [],
         }
     termValue.value = d?.term?.value ?? null
-    termUnit.value = d?.term?.unit ?? null
+    termUnit.value = d?.term?.unit ?? 'Year'
     endDate.value = d?.expectedEndDate ?? null
     stagedAssets.value = [...(assets.state.data?.items || [])]
     assetsChanged.value = false
@@ -194,7 +199,12 @@ export function useContractWorkspace(props, emit, notify) {
     error.value = ''
     let payload
     try {
-      if (props.sourceRequestId)
+      if (
+        props.sourceRequestId &&
+        !form.value.clientAllocations.some(
+          (row) => row.clientId === props.requestContext?.client?.customerId,
+        )
+      )
         throw Error(
           'Não foi possível vincular o contrato à solicitação. Os dados foram mantidos nesta tela.',
         )
@@ -204,11 +214,15 @@ export function useContractWorkspace(props, emit, notify) {
       if (
         draft.value &&
         capitalOrigin?.code === 'CLIENT_WALLET' &&
-        (finalize || form.value.clientAllocations.length)
+        (finalize || form.value.clientAllocations.length) &&
+        (!form.value.clientAllocations.length ||
+          form.value.clientAllocations.some(
+            (row) => !row.walletSources?.length && !row.contributions?.length,
+          ))
       )
         throw Error(walletCapitalBlocked)
       const term = buildContractTerm(
-        termUnit.value || (termValue.value !== null && termValue.value !== '')
+        termValue.value !== null && termValue.value !== ''
           ? { value: termValue.value, unit: termUnit.value }
           : null,
       )
@@ -244,7 +258,20 @@ export function useContractWorkspace(props, emit, notify) {
           'Distribua o capital inicial entre os clientes, com valor positivo para cada um e soma igual ao capital contratual.',
         )
       payload = draft.value
-        ? buildDraftPayload(form.value, term)
+        ? buildDraftPayload(
+            {
+              ...form.value,
+              currencyCode: form.value.currencyCode || detail.state.data?.currency?.isoCode,
+              clientAllocations: form.value.clientAllocations.map((row) => ({
+                ...row,
+                ...(props.sourceRequestId &&
+                row.clientId === props.requestContext?.client?.customerId
+                  ? { contractRequestId: props.sourceRequestId }
+                  : {}),
+              })),
+            },
+            term,
+          )
         : {
             name: form.value.name?.trim() || null,
             financialNotes: form.value.financialNotes?.trim() || null,
@@ -253,6 +280,7 @@ export function useContractWorkspace(props, emit, notify) {
               ? { term }
               : {}),
           }
+      payload.strategicComposition = compositionPayload(form.value.strategicComposition)
       if (draft.value && assetsChanged.value)
         payload.assetUniverse = {
           presetSetId: null,
