@@ -17,8 +17,11 @@ export function walletCardCurrencies(row) {
   ]
   return codes.map((code) => ({
     currency: code,
-    name: WALLET_CURRENCIES.find((c) => c.code === code)?.name || code,
     ...native.find((c) => c.currency === code),
+    name:
+      native.find((c) => c.currency === code)?.name ||
+      WALLET_CURRENCIES.find((c) => c.code === code)?.name ||
+      code,
   }))
 }
 export function walletCardConsolidated(row, fx, key = 'balance') {

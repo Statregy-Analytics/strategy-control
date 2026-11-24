@@ -4,15 +4,18 @@
       <q-btn
         v-for="item in documentTypes"
         :key="item.value"
+        class="contract-file-slot"
         outline
         no-caps
+        stack
         :label="item.label"
         icon="img:/icons/contracts/upload.svg"
-        :disable="saving"
+        :disable="saving || !contractId"
         @click="chooseType(item.value)"
       />
     </div>
     <contract-documents
+      v-if="contractId"
       add-label="Enviar Arquivo"
       :show-add="!uploadSlots"
       :state="files.state"
@@ -87,7 +90,7 @@ import { createDocumentWindow } from 'src/services/documentWindow'
 import ContractDocuments from './ContractDocuments.vue'
 import LabelForm from 'src/components/Form/LabelForm.vue'
 import GlassSelect from 'src/components/Entity/GlassSelect.vue'
-const props = defineProps({ contractId: { type: String, required: true }, uploadSlots: Boolean })
+const props = defineProps({ contractId: { type: String, default: '' }, uploadSlots: Boolean })
 const documentTypes = [
   { label: 'Contrato Digitalizado', value: 'ScannedContract' },
   { label: 'Documento Complementar', value: 'SupplementaryDocument' },
@@ -116,6 +119,10 @@ function chooseType(value) {
   open.value = true
 }
 async function load() {
+  if (!props.contractId) {
+    files.reset()
+    return
+  }
   await files.load(async () => {
     const result = await financeGet(base())
     if (!Array.isArray(result.data)) throw Error('Lista de arquivos indisponível.')
@@ -248,7 +255,21 @@ onScopeDispose(() => {
 .contract-file-slots {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 12px;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+.contract-file-slots > .q-btn.contract-file-slot {
+  min-height: 96px;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.06);
+  font-size: 12px;
+}
+.contract-file-slots :deep(.q-btn::before) {
+  border-style: dashed;
+  border-color: rgba(255, 255, 255, 0.2);
+}
+.contract-file-slots :deep(.q-icon) {
+  font-size: 16px;
   margin-bottom: 16px;
 }
 @media (max-width: 600px) {

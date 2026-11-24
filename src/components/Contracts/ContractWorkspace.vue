@@ -380,13 +380,12 @@
               caption="Repositório de arquivos digitais do contrato"
               ><template #actions><span class="contract-optional">Opcional</span></template>
               <contract-file-manager
-                v-if="id"
                 :key="id"
-                :contract-id="id"
+                :contract-id="id || ''"
                 upload-slots
                 @changed="loadHistory"
               />
-              <p v-else class="contract-muted">
+              <p v-if="!id" class="contract-muted">
                 Salve o rascunho para enviar os arquivos do contrato.
               </p></contract-panel
             >
@@ -629,8 +628,20 @@
                 :key="p.clientId"
                 class="contract-participant"
               >
-                <h3>{{ p.displayName }}</h3>
-                <small>Vínculo desde {{ dateLabel(p.linkedAtUtc) }}</small>
+                <div class="contract-participant-identity">
+                  <img
+                    :src="
+                      ['PJ', 'Organization'].includes(p.personType)
+                        ? '/icons/contracts/ct08-building2.svg'
+                        : '/icons/contracts/ct08-user.svg'
+                    "
+                    alt=""
+                  />
+                  <div>
+                    <h3>{{ p.displayName }}</h3>
+                    <small>Vínculo desde {{ dateLabel(p.linkedAtUtc) }}</small>
+                  </div>
+                </div>
                 <dl>
                   <div>
                     <dt>Participação</dt>
@@ -640,7 +651,9 @@
                   </div>
                   <div>
                     <dt>Aportes totais</dt>
-                    <dd>{{ money(p.contributedAmount, currencyCode) }}</dd>
+                    <dd class="contract-participant-credit">
+                      {{ money(p.contributedAmount, currencyCode) }}
+                    </dd>
                   </div>
                   <div>
                     <dt>Retiradas totais</dt>
@@ -648,6 +661,16 @@
                   </div>
                   <div>
                     <dt>Posição atual</dt>
+                    <dd>{{ money(p.currentValue?.value, currencyCode) }}</dd>
+                  </div>
+                </dl>
+                <dl class="contract-participant-activity">
+                  <div>
+                    <dt>Último depósito:</dt>
+                    <dd>Indisponível</dd>
+                  </div>
+                  <div>
+                    <dt>Última retirada:</dt>
                     <dd>Indisponível</dd>
                   </div>
                 </dl>
@@ -1752,6 +1775,7 @@ watch(
 }
 .contract-operational-title {
   font-size: 14px;
+  line-height: 20px;
   text-transform: uppercase;
   letter-spacing: 0.04em;
   margin: 0;
@@ -1789,6 +1813,19 @@ watch(
 .contract-participant dd {
   margin: 0;
   text-align: right;
+}
+.contract-participant-credit {
+  color: #74ffa0;
+}
+.contract-participant .contract-participant-activity > div {
+  border-bottom: 0;
+  padding: 4px 0;
+}
+.contract-participant-activity dt {
+  text-transform: none;
+}
+.contract-participant-activity dd {
+  font-size: 12px;
 }
 .contract-expansion {
   border: 1px solid rgba(255, 255, 255, 0.12);
@@ -1863,6 +1900,8 @@ watch(
 }
 .contract-open-sections :deep(.q-table__middle) {
   overflow-x: auto;
+  scrollbar-width: thin;
+  scrollbar-color: #ffffff66 transparent;
 }
 @media (max-width: 1050px) {
   .contract-create-grid {

@@ -195,7 +195,12 @@
             >
             <div v-else-if="column.name === 'assets'" class="directory-client-cell">
               <span>{{ assetCountLabel(scope.row.assetCount) }}</span
-              ><small v-if="scope.row.assetDescription">{{ scope.row.assetDescription }}</small>
+              ><small
+                v-if="scope.row.assetDescription"
+                class="directory-asset-summary"
+                :title="scope.row.assetDescription"
+                >{{ scope.row.assetDescription }}</small
+              >
             </div>
             <div
               v-else-if="column.name === 'yield' || column.name === 'appreciation'"
@@ -218,6 +223,9 @@
               >
               <small v-if="column.name === 'yield'" class="directory-yield-amount">{{
                 walletMoney(scope.row.yieldAmount, scope.row.principalCurrency)
+              }}</small>
+              <small v-else class="directory-yield-amount">{{
+                walletMoney(scope.row.variation, scope.row.principalCurrency)
               }}</small>
             </div>
             <div v-else-if="column.name === 'actions'" class="directory-row-actions">
@@ -256,14 +264,21 @@
               >{{ column.value || '—' }}</span
             >
             <strong
-              v-else-if="column.name === 'balance' || column.name === 'declared'"
+              v-else-if="['balance', 'declared', 'currentAmounts'].includes(column.name)"
               class="directory-amounts"
-              ><span v-for="amount in amountsFor(scope.row)" :key="amount.currency">{{
-                walletMoney(
-                  amount[column.name === 'declared' ? 'declared' : 'balance'],
-                  amount.currency,
-                )
-              }}</span
+              ><span v-for="amount in amountsFor(scope.row)" :key="amount.currency">
+                <span v-if="column.name !== 'declared'" class="directory-currency">{{
+                  amount.currency
+                }}</span
+                >{{
+                  walletMoney(
+                    column.name === 'currentAmounts'
+                      ? (amount.current ??
+                          (scope.row.currencies?.length === 1 ? scope.row.currentTotal : null))
+                      : amount[column.name === 'declared' ? 'declared' : 'balance'],
+                    amount.currency,
+                  )
+                }}</span
               ><span v-if="!amountsFor(scope.row).length">—</span></strong
             >
             <strong v-else-if="column.money">{{ column.value }}</strong>
@@ -300,6 +315,7 @@ import { financeLabel } from 'src/services/financeService'
 import WalletDirectoryCard from './WalletDirectoryCard.vue'
 import WalletDetails from './WalletDetails.vue'
 import { WALLET_TYPES, walletMoney } from 'src/services/walletModel'
+import { walletCardConsolidated } from 'src/services/walletCardModel'
 import { foldSearch } from 'src/services/adminWorkspaceModel'
 const props = defineProps({
   type: { type: String, default: 'total' },
@@ -503,6 +519,10 @@ const col = (name, label, field = name, money = false) => ({
   align: money ? 'right' : 'left',
   money,
 })
+function consolidatedLabel(row) {
+  const value = walletCardConsolidated(row, props.fx)
+  return (value.approximate ? '≈ ' : '') + walletMoney(value.value, value.currency)
+}
 const columns = computed(() => {
   const identity = [col('wallet', 'Carteira', (r) => label(r.type))]
   const tail = [col('status', 'Status'), col('actions', '', 'key')]
@@ -512,8 +532,8 @@ const columns = computed(() => {
       col('type', 'Tipo'),
       col('client', 'Cliente', 'clientName'),
       col('code', 'ID Carteira'),
-      col('balance', 'Saldo', (r) => displayAmounts(r), true),
-      col('currencies', 'Moedas'),
+      col('balance', 'Saldo por moeda', (r) => displayAmounts(r), true),
+      col('consolidated', 'Consolidado', consolidatedLabel, true),
       col('status', 'Status'),
       col('lastMovement', 'Última movimentação'),
       col('holdings', 'Contratos / Bens'),
@@ -524,8 +544,8 @@ const columns = computed(() => {
       ...identity,
       col('client', 'Cliente', 'clientName'),
       col('clientCode', 'ID Cliente'),
-      col('currencies', 'Moedas'),
-      col('balance', 'Saldo', (r) => displayAmounts(r), true),
+      col('balance', 'Saldo por moeda', (r) => displayAmounts(r), true),
+      col('consolidated', 'Consolidado', consolidatedLabel, true),
       col('lastMovement', 'Última movimentação'),
       col('movementCount', 'Movimentações'),
       ...tail,
@@ -535,10 +555,10 @@ const columns = computed(() => {
       ...identity,
       col('client', 'Cliente', 'clientName'),
       col('assets', 'Bens'),
-      col('declared', 'Valor declarado', (r) => displayAmounts(r, 'declared'), true),
-      col('current', 'Valor atual', (r) => walletMoney(r.currentTotal, r.principalCurrency), true),
+      col('currentAmounts', 'Valor por moeda', (r) => displayAmounts(r, 'current'), true),
+      col('declared', 'Declarado', (r) => displayAmounts(r, 'declared'), true),
+      col('consolidated', 'Consolidado', consolidatedLabel, true),
       col('appreciation', 'Valorização'),
-      col('variation', 'Variação', (r) => walletMoney(r.variation, r.principalCurrency), true),
       ...tail,
     ]
   return [
@@ -546,9 +566,9 @@ const columns = computed(() => {
     col('client', 'Cliente', 'clientName'),
     col('contractCount', 'N° contratos'),
     col('base', 'Capital base', (r) => walletMoney(r.base, r.principalCurrency), true),
-    col('balance', 'Saldo atual', (r) => displayAmounts(r), true),
+    col('consolidated', 'Consolidado', consolidatedLabel, true),
     col('yield', 'Rendimento'),
-    col('currencies', 'Moedas'),
+    col('balance', 'Saldo por moeda', (r) => displayAmounts(r), true),
     ...tail,
   ]
 })
@@ -556,6 +576,29 @@ const columns = computed(() => {
 <style scoped>
 .wallet-directory {
   color: #fff;
+  padding: 0 24px 24px;
+}
+.directory-table :deep(.q-table__middle) {
+  scrollbar-width: thin;
+  scrollbar-color: #ffffff66 transparent;
+}
+.directory-amounts > span {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 8px;
+}
+.directory-asset-summary {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  max-width: 220px;
+}
+@media (max-width: 600px) {
+  .wallet-directory {
+    padding: 0 16px 16px;
+  }
 }
 .directory-back {
   margin: 16px 0;

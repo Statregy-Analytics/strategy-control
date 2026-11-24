@@ -5,6 +5,7 @@ import { readFileSync } from 'node:fs'
 import { parse, compileScript } from '@vue/compiler-sfc'
 import * as Vue from 'vue'
 import * as wallet from '../src/services/walletModel.js'
+import * as walletCard from '../src/services/walletCardModel.js'
 import { foldSearch } from '../src/services/adminWorkspaceModel.js'
 const { descriptor } = parse(readFileSync('src/components/Finance/WalletDirectory.vue', 'utf8'))
 const code = compileScript(descriptor, { id: 'wallet-directory-test' }).content
@@ -17,11 +18,13 @@ async function instance(type = 'total', rows = []) {
         ? Vue
         : name.endsWith('walletModel')
           ? wallet
-          : name.endsWith('adminWorkspaceModel')
-            ? { foldSearch }
-            : name.endsWith('financeService')
-              ? { financeLabel: (v) => v }
-              : { default: {} }
+          : name.endsWith('walletCardModel')
+            ? walletCard
+            : name.endsWith('adminWorkspaceModel')
+              ? { foldSearch }
+              : name.endsWith('financeService')
+                ? { financeLabel: (v) => v }
+                : { default: {} }
     return new vm.SyntheticModule(
       Object.keys(values),
       function () {
@@ -58,7 +61,7 @@ test('each wallet list exposes the Figma columns and direct actions, preserving 
       'client',
       'code',
       'balance',
-      'currencies',
+      'consolidated',
       'status',
       'lastMovement',
       'holdings',
@@ -68,8 +71,8 @@ test('each wallet list exposes the Figma columns and direct actions, preserving 
       'wallet',
       'client',
       'clientCode',
-      'currencies',
       'balance',
+      'consolidated',
       'lastMovement',
       'movementCount',
       'status',
@@ -79,10 +82,10 @@ test('each wallet list exposes the Figma columns and direct actions, preserving 
       'wallet',
       'client',
       'assets',
+      'currentAmounts',
       'declared',
-      'current',
+      'consolidated',
       'appreciation',
-      'variation',
       'status',
       'actions',
     ],
@@ -91,9 +94,9 @@ test('each wallet list exposes the Figma columns and direct actions, preserving 
       'client',
       'contractCount',
       'base',
-      'balance',
+      'consolidated',
       'yield',
-      'currencies',
+      'balance',
       'status',
       'actions',
     ],

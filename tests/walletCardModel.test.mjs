@@ -23,6 +23,16 @@ test('card composition preserves known zero and keeps missing currencies unavail
   assert.equal(rows[1].balance, undefined)
   assert.equal(source.currencies.length, 2)
 })
+test('missing API currency names retain the catalogue label', () => {
+  const rows = walletCardCurrencies({
+    currencies: [
+      { currency: 'BRL', name: null, balance: 1 },
+      { currency: 'USD', name: '', balance: 2 },
+    ],
+  })
+  assert.equal(rows[0].name, 'Real brasileiro')
+  assert.equal(rows[1].name, 'Dólar americano')
+})
 test('card total uses directional quotes only when consolidation needs conversion', () => {
   const row = {
     currencies: [

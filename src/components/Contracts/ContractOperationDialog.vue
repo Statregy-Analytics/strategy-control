@@ -213,7 +213,7 @@ header .q-btn {
 .operation-direction .selected {
   background: #00bc7d33;
   border-color: #00bc7d8c;
-  color: #000;
+  color: #fff;
 }
 .operation-notice {
   margin: 16px 0;
