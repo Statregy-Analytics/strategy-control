@@ -1,4 +1,5 @@
 import { capitalCents, centsDecimal } from './contractDistribution.js'
+import { walletContributionState } from './contractWalletCapital.js'
 export const participantEntryBlocked =
   'Não foi possível confirmar a inclusão. Os dados foram mantidos nesta tela e nenhum saldo foi debitado.'
 function percentUnits(value) {
@@ -119,4 +120,39 @@ export function canAddContractParticipant(contract) {
     ['Created', 'Finalized'].includes(contract?.registrationStatus) &&
     contract?.businessStatus?.code === 'ACTIVE'
   )
+}
+
+export function participantEntryPayload(input, currency, contractRequestId = null) {
+  const state = walletContributionState(input.walletSources || [], currency)
+  if (!input.clientId || !state.valid || state.total !== capitalCents(input.allocatedAmount))
+    throw Error('Confira as carteiras e os valores do aporte antes de confirmar.')
+  if (
+    !input.password ||
+    !(Number(input.engineIndexAtEntry) > 0) ||
+    !Number.isFinite(Number(input.engineIndexAtEntry))
+  )
+    throw Error('Informe a senha do admin e aguarde o índice atual do motor.')
+  return {
+    clientId: input.clientId,
+    allocatedAmount: centsDecimal(state.total),
+    contributions: state.rows.map((row) => ({
+      wallet: row.type,
+      currencyId: row.currencyId,
+      amount: row.amount,
+    })),
+    engineIndexAtEntry: input.engineIndexAtEntry,
+    password: input.password,
+    observation: input.note?.trim() || null,
+    ...(contractRequestId ? { contractRequestId } : {}),
+  }
+}
+
+export function participantEntryRawIndex(engines, primaryEngineId) {
+  const value = engines?.find(
+    (row) =>
+      row.engineId === primaryEngineId &&
+      row.role === 'Primary' &&
+      row.connectionStatus === 'Connected',
+  )?.currentIndex
+  return value != null && Number.isFinite(Number(value)) && Number(value) > 0 ? value : null
 }

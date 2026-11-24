@@ -379,14 +379,16 @@
               title="Documentos do Contrato"
               caption="Repositório de arquivos digitais do contrato"
               ><template #actions><span class="contract-optional">Opcional</span></template>
-              <div class="contract-upload-grid">
-                <q-btn v-for="label in documentSlots" :key="label" outline no-caps disable
-                  ><img src="/icons/contracts/upload.svg" alt="" /><span>{{ label }}</span
-                  ><q-tooltip
-                    >Tipo documental específico não disponível no catálogo.</q-tooltip
-                  ></q-btn
-                >
-              </div></contract-panel
+              <contract-file-manager
+                v-if="id"
+                :key="id"
+                :contract-id="id"
+                upload-slots
+                @changed="loadHistory"
+              />
+              <p v-else class="contract-muted">
+                Salve o rascunho para enviar os arquivos do contrato.
+              </p></contract-panel
             >
             <contract-panel v-if="!draft" title="Dívidas Vinculadas ao Contrato" icon="debt"
               ><debt-registry
@@ -734,9 +736,14 @@
               ><img class="contract-section-icon" src="/icons/contracts/summary.svg" alt="" />
               <div class="contract-expansion-title">
                 <strong>Documentos do Contrato</strong
-                ><small>{{ documents.state.data?.length ?? '—' }} documentos</small>
+                ><small>{{
+                  contractFileCount === null
+                    ? 'Arquivos e documentos dos participantes'
+                    : `${(documents.state.data?.length || 0) + contractFileCount} documentos`
+                }}</small>
               </div></template
             ><contract-documents
+              add-label="Vincular Documento do Participante"
               :state="documents.state"
               :busy="busy"
               :opening="opening"
@@ -746,6 +753,12 @@
               @open="openDocument"
               @download="downloadContractDocument"
               @remove="unlinkDocument"
+            />
+            <contract-file-manager
+              :key="id"
+              :contract-id="id"
+              @changed="loadHistory"
+              @loaded="contractFileCount = $event"
             />
           </q-expansion-item>
           <contract-panel title="Histórico de Aportes do Capital Base" icon="wallet"
@@ -899,6 +912,7 @@ import ContractAssets from './ContractAssets.vue'
 import ContractAssetDialog from './ContractAssetDialog.vue'
 import ContractEngines from './ContractEngines.vue'
 import ContractDocuments from './ContractDocuments.vue'
+import ContractFileManager from './ContractFileManager.vue'
 import DebtRegistry from './DebtRegistry.vue'
 import ParticipantDetailPanel from './ParticipantDetail.vue'
 import ContractParticipantDialog from './ContractParticipantDialog.vue'
@@ -920,7 +934,7 @@ import {
 } from 'src/services/financeService'
 import { centsDecimal } from 'src/services/contractDistribution'
 import {
-  participantEntryBlocked,
+  participantEntryPayload,
   canAddContractParticipant,
 } from 'src/services/contractParticipantEntry'
 import { walletCapitalTotal } from 'src/services/contractWalletCapital'
@@ -1124,14 +1138,12 @@ const debtSummary = computed(() => {
     .sort()
   return `${rows.length} ${rows.length === 1 ? 'dívida' : 'dívidas'} • Saldo total: ${total} • Próx. vencimento: ${dates.length ? dateLabel(dates[0]) : '—'}`
 })
+const contractFileCount = ref(null)
+watch(id, () => {
+  contractFileCount.value = null
+})
 const participantName = (clientId) =>
   detail.state.data?.participants?.find((p) => p.clientId === clientId)?.displayName || 'Cliente'
-const documentSlots = [
-  'Contrato Digitalizado',
-  'Documento Complementar',
-  'Termo de Adesão',
-  'Outros Documentos',
-]
 const summary = computed(() => [
   { label: 'Nome', value: form.value.name || '—' },
   { label: 'Clientes Vinculados', value: form.value.clientAllocations?.length || 0 },
@@ -1310,9 +1322,19 @@ async function addClient() {
   selectedClient.value = null
   selectedClientData.value = null
 }
-async function includeParticipant() {
-  // The current request has no source wallets, quotes or entry snapshot. Never send a flattened total.
-  return { success: false, message: participantEntryBlocked }
+async function includeParticipant(input) {
+  if (!canAddContractParticipant(detail.state.data) || busy.value)
+    return { success: false, message: 'O contrato não está disponível para inclusão.' }
+  try {
+    const requestId =
+      props.requestContext?.client?.customerId === input.clientId ? props.sourceRequestId : null
+    const payload = participantEntryPayload(input, currencyCode.value, requestId)
+    const success = await writeSection('post', 'participants', payload, loadContributions)
+    if (success) emit('saved', id.value)
+    return { success, message: success ? '' : error.value }
+  } catch (e) {
+    return { success: false, message: e.message }
+  }
 }
 
 function removeClient(key) {

@@ -136,6 +136,7 @@
                   ><q-input
                     v-model="entryDate"
                     type="date"
+                    readonly
                     outlined
                     dense
                     aria-label="Data de entrada"
@@ -151,6 +152,9 @@
                       aria-label="Índice do motor na entrada" /></resource-state
                 ></label-form>
               </div>
+              <p class="participant-dialog__hint">
+                A data de entrada será registrada no momento da confirmação.
+              </p>
               <h3><img :src="image('FileText')" alt="" />{{ hasConversion ? 5 : 4 }}. Auditoria</h3>
               <div class="participant-dialog__audit">
                 <img :src="image('TriangleAlert')" alt="" />
@@ -190,7 +194,17 @@
                   dense
                   placeholder="Informações adicionais sobre a operação"
                   aria-label="Observação da inclusão"
-              /></label-form> </template
+              /></label-form>
+              <label-form text-label="Senha do admin">
+                <q-input
+                  v-model="password"
+                  type="password"
+                  autocomplete="current-password"
+                  outlined
+                  dense
+                  aria-label="Senha do admin"
+                />
+              </label-form> </template
           ></template>
           <p v-if="error" class="participant-dialog__error" role="alert">{{ error }}</p>
         </div>
@@ -227,6 +241,7 @@ import {
 import {
   participantEntryImpact,
   participantEntryIndex,
+  participantEntryRawIndex,
   validEntryDate,
 } from 'src/services/contractParticipantEntry'
 const props = defineProps({
@@ -245,6 +260,7 @@ const emit = defineEmits(['close'])
 const flow = useContractWalletCapital(props, () => {})
 const { client, lines, state, loadingQuotes, wallets, note } = flow
 const selected = ref(null),
+  password = ref(''),
   saving = ref(false),
   error = ref('')
 const today = new Date()
@@ -255,11 +271,13 @@ const pending = computed(() => props.busy || saving.value)
 let active = true
 onScopeDispose(() => {
   active = false
+  password.value = ''
 })
 watch(
   selected,
   () => {
     flow.back()
+    password.value = ''
     error.value = ''
   },
   { flush: 'sync' },
@@ -314,6 +332,7 @@ const canConfirm = computed(
     impact.value.valid &&
     validEntryDate(entryDate.value) &&
     engineIndex.value !== 'Indisponível' &&
+    !!password.value &&
     !props.engines.loading &&
     !props.engines.error &&
     !pending.value,
@@ -337,7 +356,11 @@ async function confirm() {
         after: undefined,
       })),
       note: note.value.trim() || null,
-      entryDate: entryDate.value,
+      engineIndexAtEntry: participantEntryRawIndex(
+        props.engines.data,
+        props.contract.primaryEngine?.engineId,
+      ),
+      password: password.value,
     })
     if (!active) return
     if (result?.success === true) emit('close')
@@ -346,6 +369,7 @@ async function confirm() {
   } catch {
     if (active) error.value = 'Não foi possível incluir o participante. Tente novamente.'
   } finally {
+    password.value = ''
     if (active) saving.value = false
   }
 }

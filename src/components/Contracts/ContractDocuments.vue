@@ -1,7 +1,7 @@
 <template>
   <section class="contract-documents">
-    <div class="document-toolbar">
-      <q-btn outline no-caps label="Adicionar Documento" @click="$emit('add')"
+    <div v-if="showAdd" class="document-toolbar">
+      <q-btn outline no-caps :label="addLabel" @click="$emit('add')"
         ><img src="/icons/contracts/ct20-plus.svg" alt=""
       /></q-btn>
     </div>
@@ -78,6 +78,8 @@ import { columns, dateLabel } from 'src/services/financeService'
 const props = defineProps({
   state: { type: Object, required: true },
   busy: Boolean,
+  showAdd: { type: Boolean, default: true },
+  addLabel: { type: String, default: 'Adicionar Documento' },
   opening: { type: String, default: null },
   downloading: { type: String, default: null },
 })

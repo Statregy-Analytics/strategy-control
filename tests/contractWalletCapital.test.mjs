@@ -685,9 +685,34 @@ test('138: unavailable current capital/index blocks even keyboard submission; fa
   await noIndex.control.confirm()
   assert.equal(writes, 0)
   const failed = await renderEntry()
+  failed.control.password.value = 'test-password'
   await failed.control.confirm()
   assert.equal(failed.control.error.value, entry.participantEntryBlocked)
   assert.equal(failed.control.flow.lines.value[0].amount, '145000.00')
+  assert.equal(failed.control.password.value, '')
+})
+
+test('participant entry preserves source currencies and index precision and rejects an inconsistent total', () => {
+  const input = {
+    clientId: 'client',
+    allocatedAmount: '200000',
+    walletSources: [source(), source('Applied', 'EUR', '10000', '15000', quote())],
+    engineIndexAtEntry: '101.3500123456',
+    password: 'test-password',
+    note: ' teste ',
+  }
+  const payload = entry.participantEntryPayload(input, 'BRL', 'request')
+  assert.deepEqual(payload.contributions, [
+    { wallet: 'Free', currencyId: 'currency-BRL', amount: '145000.00' },
+    { wallet: 'Applied', currencyId: 'currency-EUR', amount: '10000' },
+  ])
+  assert.equal(payload.engineIndexAtEntry, input.engineIndexAtEntry)
+  assert.equal(payload.contractRequestId, 'request')
+  assert.equal(payload.observation, 'teste')
+  assert.equal('entryDate' in payload, false)
+  assert.throws(() => entry.participantEntryPayload({ ...input, allocatedAmount: '199999' }, 'BRL'))
+  assert.throws(() => entry.participantEntryPayload({ ...input, password: '' }, 'BRL'))
+  assert.throws(() => entry.participantEntryPayload({ ...input, engineIndexAtEntry: null }, 'BRL'))
 })
 
 test('138: adding a participant is offered only for a finalized active contract', () => {
