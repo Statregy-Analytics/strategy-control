@@ -474,3 +474,15 @@
     }
   }
 }
+
+.publication-content-index {
+  padding-left: 18px;
+  font:
+    400 12px/20px Inter,
+    sans-serif;
+  color: #ffffffb8;
+  overflow-wrap: anywhere;
+}
+.publication-content-index .nested {
+  margin-left: 16px;
+}

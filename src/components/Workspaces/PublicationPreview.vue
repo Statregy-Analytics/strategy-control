@@ -23,7 +23,8 @@
           <div class="formal-publication__content">
             <h3>{{ form.title || 'Comunicado Oficial' }}</h3>
             <p v-if="form.summary">{{ form.summary }}</p>
-            <div class="workspace-preview">{{ form.body }}</div>
+            <publication-block-preview v-if="form.blocks?.length" :blocks="form.blocks" />
+            <div v-else class="workspace-preview">{{ form.body }}</div>
           </div>
           <dl>
             <div>
@@ -46,6 +47,7 @@
           ><h3>{{ form.title || 'Título' }}</h3>
           <p>{{ form.summary }}</p>
           <pdf-preview v-if="pdfUrl" :src="pdfUrl" />
+          <publication-block-preview v-else-if="form.blocks?.length" :blocks="form.blocks" />
           <div v-else class="workspace-preview">{{ form.body }}</div></template
         >
       </div>
@@ -53,6 +55,7 @@
   </q-dialog>
 </template>
 <script setup>
+import PublicationBlockPreview from './PublicationBlockPreview.vue'
 import PdfPreview from 'src/components/Entity/PdfPreview.vue'
 import { dateLabel } from 'src/services/financeService'
 defineProps({

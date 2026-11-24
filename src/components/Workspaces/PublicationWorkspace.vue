@@ -113,17 +113,11 @@
                 placeholder="Adicione um subtítulo ou resumo (opcional)..."
                 aria-label="Subtítulo ou resumo"
                 :readonly="locked"
-              /><q-input
+              /><publication-blocks
                 v-model="form.body"
-                outlined
-                dark
-                type="textarea"
-                rows="3"
-                placeholder="Escreva um parágrafo..."
-                aria-label="Conteúdo da publicação"
+                v-model:blocks="form.blocks"
                 :readonly="locked"
               />
-              <div class="publication-editor-rule" />
               <div class="publication-media-help">
                 💡 Como adicionar mídia ao conteúdo
                 <p>
@@ -266,7 +260,16 @@
               title="Índice do Conteúdo"
               icon-src="/icons/publication/editor-index.svg"
               caption="Gerado automaticamente a partir dos tópicos H2 e H3"
-              ><p>Adicione tópicos H2 e H3 no editor para gerar o índice</p></profile-section
+              ><ol v-if="headings.length" class="publication-content-index">
+                <li
+                  v-for="heading in headings"
+                  :key="heading.id"
+                  :class="{ nested: heading.level === 'h3' }"
+                >
+                  {{ heading.text }}
+                </li>
+              </ol>
+              <p v-else>Adicione tópicos H2 e H3 no editor para gerar o índice</p></profile-section
             ><profile-section
               v-if="kind === 'Comunicado Oficial'"
               title="Informações do Comunicado"
@@ -352,6 +355,8 @@ import AuthorDialog from './AuthorDialog.vue'
 import PublicationUpload from './PublicationUpload.vue'
 import PublicationPreview from './PublicationPreview.vue'
 import PublicationStatus from './PublicationStatus.vue'
+import PublicationBlocks from './PublicationBlocks.vue'
+import { publicationHeadings } from 'src/services/publicationBlocks'
 import { financeGet, financeWrite, columns } from 'src/services/financeService'
 import { useFinanceResource } from 'src/composables/useFinanceResource'
 import { createAuditService } from 'src/services/auditService'
@@ -376,6 +381,7 @@ const detail = useFinanceResource(),
     title: '',
     summary: '',
     body: '',
+    blocks: [],
     themes: [],
     code: '',
     version: '',
@@ -410,6 +416,7 @@ const extras = () =>
   Object.fromEntries(
     Object.entries(form.value).filter(([k]) => !['title', 'summary', 'body'].includes(k)),
   )
+const headings = computed(() => publicationHeadings(form.value.blocks))
 const dirty = computed(() => JSON.stringify(form.value) !== baseline.value),
   locked = computed(() =>
     publicationEditLocked({
@@ -514,6 +521,11 @@ async function loadHistory() {
 async function save(publish) {
   if (busy.value || locked.value) return
   error.value = ''
+  if (form.value.blocks.length) {
+    error.value =
+      'A gravação de blocos e mídias ainda não está disponível. Use a prévia para conferir o conteúdo; ele não foi salvo.'
+    return
+  }
   if (!props.recordId) {
     error.value = validatePublication(form.value, props.kind)
     if (!error.value)
