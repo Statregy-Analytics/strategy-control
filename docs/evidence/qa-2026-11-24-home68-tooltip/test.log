@@ -433,23 +433,23 @@ To eliminate this warning, add "type": "module" to /home/jorgenunes/Projetos/Str
 ✔ a failed read after an accepted save does not claim the old values were preserved (1.934082ms)
 ✔ loading failures disable persistence without fabricated values (5.475702ms)
 ✔ unmounting discards late responses and unknown controls are not written (1.74729ms)
-[Vue warn]: Property "currencyError" was accessed during render but is not defined on instance. 
-  at <QCard key=0 ref="formRef" class="form-card bank-inline-form q-mt-lg"  ... > 
-  at <QCard class="tool" > 
+[Vue warn]: Property "currencyError" was accessed during render but is not defined on instance.
+  at <QCard key=0 ref="formRef" class="form-card bank-inline-form q-mt-lg"  ... >
+  at <QCard class="tool" >
   at <App>
-[Vue warn]: Property "discardBankForm" was accessed during render but is not defined on instance. 
-  at <QCard key=0 ref="formRef" class="form-card bank-inline-form q-mt-lg"  ... > 
-  at <QCard class="tool" > 
+[Vue warn]: Property "discardBankForm" was accessed during render but is not defined on instance.
+  at <QCard key=0 ref="formRef" class="form-card bank-inline-form q-mt-lg"  ... >
+  at <QCard class="tool" >
   at <App>
-[Vue warn]: Property "currencyOptions" was accessed during render but is not defined on instance. 
-  at <QCard text-label="Moeda" > 
-  at <QCard key=0 ref="formRef" class="form-card bank-inline-form q-mt-lg"  ... > 
-  at <QCard class="tool" > 
+[Vue warn]: Property "currencyOptions" was accessed during render but is not defined on instance.
+  at <QCard text-label="Moeda" >
+  at <QCard key=0 ref="formRef" class="form-card bank-inline-form q-mt-lg"  ... >
+  at <QCard class="tool" >
   at <App>
-[Vue warn]: Property "currencyLoading" was accessed during render but is not defined on instance. 
-  at <QCard text-label="Moeda" > 
-  at <QCard key=0 ref="formRef" class="form-card bank-inline-form q-mt-lg"  ... > 
-  at <QCard class="tool" > 
+[Vue warn]: Property "currencyLoading" was accessed during render but is not defined on instance.
+  at <QCard text-label="Moeda" >
+  at <QCard key=0 ref="formRef" class="form-card bank-inline-form q-mt-lg"  ... >
+  at <QCard class="tool" >
   at <App>
 (node:309177) ExperimentalWarning: VM Modules is an experimental feature and might change at any time
 (Use `node --trace-warnings ...` to show where the warning was created)
@@ -574,16 +574,16 @@ Reparsing as ES module because module syntax was detected. This incurs a perform
 To eliminate this warning, add "type": "module" to /home/jorgenunes/Projetos/Strategy-analytics-v2/package.json.
 (Use `node --trace-warnings ...` to show where the warning was created)
 [Vue warn]: Failed to resolve component: q-td
-If this is a native custom element, make sure to exclude it from component resolution via compilerOptions.isCustomElement. 
+If this is a native custom element, make sure to exclude it from component resolution via compilerOptions.isCustomElement.
   at <App>
 [Vue warn]: Failed to resolve component: q-td
-If this is a native custom element, make sure to exclude it from component resolution via compilerOptions.isCustomElement. 
+If this is a native custom element, make sure to exclude it from component resolution via compilerOptions.isCustomElement.
   at <App>
 [Vue warn]: Failed to resolve component: q-td
-If this is a native custom element, make sure to exclude it from component resolution via compilerOptions.isCustomElement. 
+If this is a native custom element, make sure to exclude it from component resolution via compilerOptions.isCustomElement.
   at <App>
 [Vue warn]: Failed to resolve component: q-td
-If this is a native custom element, make sure to exclude it from component resolution via compilerOptions.isCustomElement. 
+If this is a native custom element, make sure to exclude it from component resolution via compilerOptions.isCustomElement.
   at <App>
 (node:309271) ExperimentalWarning: VM Modules is an experimental feature and might change at any time
 ✔ an older sessions error cannot replace a newer successful retry (62.916173ms)
@@ -615,34 +615,34 @@ Reparsing as ES module because module syntax was detected. This incurs a perform
 To eliminate this warning, add "type": "module" to /home/jorgenunes/Projetos/Strategy-analytics-v2/package.json.
 (Use `node --trace-warnings ...` to show where the warning was created)
 [Vue warn]: Failed to resolve component: q-icon
-If this is a native custom element, make sure to exclude it from component resolution via compilerOptions.isCustomElement. 
+If this is a native custom element, make sure to exclude it from component resolution via compilerOptions.isCustomElement.
   at <App>
 [Vue warn]: Failed to resolve component: q-badge
-If this is a native custom element, make sure to exclude it from component resolution via compilerOptions.isCustomElement. 
+If this is a native custom element, make sure to exclude it from component resolution via compilerOptions.isCustomElement.
   at <App>
 [Vue warn]: Failed to resolve component: q-tooltip
-If this is a native custom element, make sure to exclude it from component resolution via compilerOptions.isCustomElement. 
+If this is a native custom element, make sure to exclude it from component resolution via compilerOptions.isCustomElement.
   at <App>
 [Vue warn]: Failed to resolve component: q-select
-If this is a native custom element, make sure to exclude it from component resolution via compilerOptions.isCustomElement. 
+If this is a native custom element, make sure to exclude it from component resolution via compilerOptions.isCustomElement.
   at <App>
 [Vue warn]: Failed to resolve component: profile-fields
-If this is a native custom element, make sure to exclude it from component resolution via compilerOptions.isCustomElement. 
+If this is a native custom element, make sure to exclude it from component resolution via compilerOptions.isCustomElement.
   at <App>
 [Vue warn]: Failed to resolve component: q-icon
-If this is a native custom element, make sure to exclude it from component resolution via compilerOptions.isCustomElement. 
+If this is a native custom element, make sure to exclude it from component resolution via compilerOptions.isCustomElement.
   at <App>
 [Vue warn]: Failed to resolve component: q-badge
-If this is a native custom element, make sure to exclude it from component resolution via compilerOptions.isCustomElement. 
+If this is a native custom element, make sure to exclude it from component resolution via compilerOptions.isCustomElement.
   at <App>
 [Vue warn]: Failed to resolve component: q-tooltip
-If this is a native custom element, make sure to exclude it from component resolution via compilerOptions.isCustomElement. 
+If this is a native custom element, make sure to exclude it from component resolution via compilerOptions.isCustomElement.
   at <App>
 [Vue warn]: Failed to resolve component: q-select
-If this is a native custom element, make sure to exclude it from component resolution via compilerOptions.isCustomElement. 
+If this is a native custom element, make sure to exclude it from component resolution via compilerOptions.isCustomElement.
   at <App>
 [Vue warn]: Failed to resolve component: profile-fields
-If this is a native custom element, make sure to exclude it from component resolution via compilerOptions.isCustomElement. 
+If this is a native custom element, make sure to exclude it from component resolution via compilerOptions.isCustomElement.
   at <App>
 ✔ empty profile creates a first contact without inventing relationship or email (9.3019ms)
 ✔ multiple contacts retain IDs and hidden metadata; unchanged rows are not rewritten (2.158223ms)

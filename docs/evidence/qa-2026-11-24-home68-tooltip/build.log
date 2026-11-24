@@ -26,7 +26,7 @@
 Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
 To eliminate this warning, add "type": "module" to /home/jorgenunes/Projetos/Strategy-analytics-v2/package.json.
 (Use `node --trace-warnings ...` to show where the warning was created)
-[plugin builtin:vite-reporter] 
+[plugin builtin:vite-reporter]
 (!) Some chunks are larger than 500 kB after minification. Consider:
 - Using dynamic import() to code-split the application
 - Use build.rolldownOptions.output.codeSplitting to improve chunking: https://rolldown.rs/reference/OutputOptions.codeSplitting
@@ -454,4 +454,3 @@ See https://rolldown.rs/reference/InputOptions.checks#bundlertimings for more de
       be added for deployment environments.
       If you're using Vue Router "history" mode, don't forget to
       specify the "--history" parameter: "quasar serve --history"
-
