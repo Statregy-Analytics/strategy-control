@@ -1,0 +1,31 @@
+{
+  "date": "2026-11-24",
+  "commit": "797dfe946c91cbd293c1079de16c546874cc89da",
+  "scope": "Remove exposed native-wallet breakdown under Home values; existing q-tooltip attached to value, keyboard focusable only while actual details are available and values visible. No extra fields, actions or new composition. Existing explanatory info tooltips preserved.",
+  "localBrowser": {
+    "listRemoved": true,
+    "keyboardTooltip": true,
+    "hiddenBalancesRemoveTooltipAndTabStop": true,
+    "visibilityRestored": true
+  },
+  "tests": {
+    "passed": 553,
+    "failed": 0,
+    "lint": "passed",
+    "build": "passed",
+    "diff": "source commit passed; existing unrelated PRODUCT.md whitespace left untouched"
+  },
+  "limits": "No full-frame revalidation; previous graphs/performance and other pending states unchanged. Mouse-hover not driven separately; q-tooltip native anchor handling reused, keyboard behavior observed.",
+  "publishedBrowser": {
+    "cardsWithoutInlineDetails": true,
+    "keyboardTooltip": true,
+    "hiddenTooltips": 0,
+    "hiddenDetailTabStops": 0,
+    "visibilityRestored": true
+  },
+  "deployment": {
+    "conclusion": "success",
+    "url": "https://github.com/WillTbn/Strategy-analytics-v2/actions/runs/45401763908",
+    "commit": "797dfe946c91cbd293c1079de16c546874cc89da"
+  }
+}

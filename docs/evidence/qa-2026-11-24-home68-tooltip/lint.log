@@ -1,0 +1,4 @@
+
+> strategy-analytics@0.0.1 lint
+> eslint --ext .js,.vue ./
+
