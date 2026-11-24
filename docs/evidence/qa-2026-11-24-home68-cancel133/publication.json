@@ -1,0 +1,19 @@
+{
+  "sourceCommit": "83ca74d6a408ec320000d847847e9cfc10794178",
+  "cardCommit": "793a55c",
+  "run": 45400104889,
+  "conclusion": "success",
+  "url": "https://github.com/WillTbn/Strategy-analytics-v2/actions/runs/45400104889",
+  "assets": [
+    {
+      "path": "/assets/WalletPage-C5RXkx9s.js",
+      "sha256": "1f7be1a82c8e0594cfca34296c1f3750dea6de1cbeea2b9457908563edf933a5",
+      "matchesLocalBuild": true
+    },
+    {
+      "path": "/assets/WalletPage-BCq0H21e.css",
+      "sha256": "e221b0621e2763cbdc4dda73dcad0798ccfcb13735bb506f2ae451207ca94133",
+      "matchesLocalBuild": true
+    }
+  ]
+}

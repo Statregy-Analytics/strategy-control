@@ -1,0 +1,916 @@
+
+> strategy-analytics@0.0.1 test
+> node --experimental-vm-modules --test tests/*.test.mjs
+
+(node:232295) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///tmp/strategy-home68-_9ohaqz2/src/services/documentWindow.js is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to /tmp/strategy-home68-_9ohaqz2/package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:232295) ExperimentalWarning: VM Modules is an experimental feature and might change at any time
+✔ asset upload retries the failed link using the uploaded ID and removes only the selected existing relationship (19.662333ms)
+✔ disposing the editor prevents any late upload or unlink from starting (7.028408ms)
+(node:232296) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///tmp/strategy-home68-_9ohaqz2/src/services/documentWindow.js is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to /tmp/strategy-home68-_9ohaqz2/package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:232296) ExperimentalWarning: VM Modules is an experimental feature and might change at any time
+✔ image previews use the bound asset and only request image files (14.548589ms)
+✔ an invalid temporary URL leaves a retryable preview error (10.289445ms)
+✔ a late preview cannot repopulate a disposed gallery (6.251762ms)
+(node:232297) ExperimentalWarning: VM Modules is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ asset document reserves its tab before the delayed URL and strips opener/referrer (14.032478ms)
+✔ blocked popup gives feedback without querying a URL (6.354406ms)
+✔ failure closes reserved tab and retry clears the previous error (12.617012ms)
+✔ leaving closes a pending tab and prevents late navigation or further calls (4.406585ms)
+✔ session change discards late failures without exposing errors (9.848938ms)
+✔ duplicate clicks request one URL and open one tab (14.035034ms)
+✔ invalid and external insecure URLs close the pending tab (14.420422ms)
+✔ closing reserved tab manually produces recoverable error (6.031652ms)
+(node:232303) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///tmp/strategy-home68-_9ohaqz2/src/services/registrationIntegration.js is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to /tmp/strategy-home68-_9ohaqz2/package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ registration saves all nationalities and birthplace IDs and resumes supported values (14.03574ms)
+✔ nationality limits reject repeated and fourth countries before submission (1.792016ms)
+✔ neighborhood persists independently from complement and has the confirmed length limit (2.898368ms)
+✔ financial writes omit a legacy end date even when the current profile has one (2.06806ms)
+✔ new trusted contacts do not invent relationships or email (5.529654ms)
+✔ shared profiles use explicit scopes and never render arbitrary returned properties (1.437682ms)
+(node:232309) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///tmp/strategy-home68-_9ohaqz2/src/services/countryNames.js is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to /tmp/strategy-home68-_9ohaqz2/package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:232309) ExperimentalWarning: VM Modules is an experimental feature and might change at any time
+✔ country ISO labels follow the client language and keep unknown API labels (142.144443ms)
+✔ asset creation delegates currency to the account; editing preserves original currency (3.288836ms)
+✔ profile edit follows official lock including rejected identities and fails closed on unavailable status (0.852089ms)
+✔ bank create and edit strip all obsolete holder fields at the HTTP boundary (6.286808ms)
+✔ confirmed submission clears only its account's remembered registration step (1.27838ms)
+(node:232315) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///tmp/strategy-home68-_9ohaqz2/src/services/clientAssetModel.js is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to /tmp/strategy-home68-_9ohaqz2/package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ investment rejects impossible or malformed dates before writing (9.610685ms)
+✔ fixed term requires a real maturity date (3.239075ms)
+✔ optional investment months reject zero and fractional values but accept empty (2.828856ms)
+✔ valid leap dates and decimal amounts survive unchanged; hidden term fields are cleared (1.30495ms)
+(node:232321) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///tmp/strategy-home68-_9ohaqz2/src/services/clientAssetModel.js is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to /tmp/strategy-home68-_9ohaqz2/package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ client asset form retains precision and creates only the correct subtype (3.334538ms)
+✔ missing required fields, currency and fractional years fail before writing (1.33667ms)
+✔ editing preserves review status and hidden metadata without archive actions (0.883038ms)
+✔ all four approved asset kinds generate their own detail and validate integer counts (7.788561ms)
+✔ investment summaries use term information rather than the settlement label of a physical asset (2.258748ms)
+(node:232327) ExperimentalWarning: VM Modules is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ client assets reader consults all pages and does not turn missing pages into empty assets (23.43622ms)
+✔ asset currencies use catalog IDs, preserve labels and ISO codes, and exclude inactive currencies (5.197558ms)
+✔ asset currencies distinguish an empty catalog from invalid or failed responses (11.060781ms)
+✔ asset currencies reject catalog results after the client session changes (12.496349ms)
+✔ all asset reads and writes stay in the client domain and no archive operation is exposed (9.642937ms)
+(node:232332) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///tmp/strategy-home68-_9ohaqz2/src/services/clientBankCatalog.js is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to /tmp/strategy-home68-_9ohaqz2/package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ profile bank catalog includes later pages and preserves all API names (9.205795ms)
+✔ an empty valid catalog returns an empty array without extra requests (0.598958ms)
+✔ later-page failures reject the entire load instead of publishing a partial bank catalog (2.144817ms)
+✔ pagination mismatches, repeated pages and truncated catalogs never appear as successful empty data (1.100982ms)
+✔ a changing catalog and duplicated bank IDs stop the load (1.153582ms)
+✔ a session change after the first page prevents subsequent reads and stale results (0.743202ms)
+(node:232339) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///tmp/strategy-home68-_9ohaqz2/src/services/clientTransferModel.js is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to /tmp/strategy-home68-_9ohaqz2/package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:232339) ExperimentalWarning: VM Modules is an experimental feature and might change at any time
+✔ component drops late recipient response and does not submit without current identity (202.288942ms)
+✔ component submits contract once, clears secret after 409 and reports no success (17.539798ms)
+✔ component disposal clears secret and ignores recipient arriving after close (8.676295ms)
+(node:232340) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///tmp/strategy-home68-_9ohaqz2/src/services/clientTransferModel.js is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to /tmp/strategy-home68-_9ohaqz2/package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ transfer payload contains only contract fields and requires resolved current recipient (6.590024ms)
+✔ transfer rejects contracts, missing currency, excess funds, missing password and invalid amounts (1.21583ms)
+✔ only Strategy to recipient Deposit waits thirty days (0.500892ms)
+✔ password errors use API codes and never echo server message or secrets (1.266226ms)
+✔ double click creates one request; new successful action creates a new key (1.788609ms)
+✔ ambiguous retry reuses key, changed amount creates another intent, definitive rejection releases key (1.807475ms)
+✔ listing propagates server category/unread/pagination and does not mark anything read (2.391926ms)
+✔ open reads detail first, then registers only previously unread detail (1.471737ms)
+✔ failed read receipt preserves body and offers retry, but failed detail never marks read (5.941491ms)
+✔ navigation or session change during detail read prevents registration for obsolete screen (2.687848ms)
+✔ malformed announcement and invalid dates do not become fake data (6.401161ms)
+✔ recipient errors distinguish own account, unknown ID and transport failure (0.68384ms)
+✔ publication period reads every server page before filtering and paginates the filtered result (1.639897ms)
+✔ period filter never presents partial data when a later page fails (1.671236ms)
+(node:232372) ExperimentalWarning: VM Modules is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:232372) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///tmp/strategy-home68-_9ohaqz2/src/services/loanRequestDraft.js is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to /tmp/strategy-home68-_9ohaqz2/package.json.
+✔ loan pagination reads every confirmed page and discards stale contexts (3.596846ms)
+✔ debt totals preserve currencies and unknown values, without assuming principal is outstanding (3.006073ms)
+✔ loan grouping and access use real status/level, never the legacy store default (0.624727ms)
+✔ withdrawal resolves currency ID only from confirmed Free wallet and rejects excess (0.84719ms)
+✔ withdrawal cannot pretend to verify a password the documented DTO cannot receive (1.465415ms)
+✔ collateral draft validates each step and never reaches a fake submitted state (549.167004ms)
+✔ changed loan and wallet templates compile, including gated offer slots (600.3979ms)
+(node:232373) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///tmp/strategy-home68-_9ohaqz2/src/services/communicationDirectoryAssets.js is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to /tmp/strategy-home68-_9ohaqz2/package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:232373) ExperimentalWarning: VM Modules is an experimental feature and might change at any time
+✔ directory emits draft and view changes without mutating supplied filters or invoking HTTP (220.688242ms)
+✔ unavailable consultation is not an empty confirmed list and invalid pagination cannot create pages (31.107364ms)
+✔ operations preserve zero, reject invalid values and tolerate missing parity and profit (56.447256ms)
+✔ list dates follow the approved short-year presentation without displaying epoch for missing dates (34.193658ms)
+✔ a failed thumbnail can recover when another real image is supplied (43.497558ms)
+(node:232380) ExperimentalWarning: VM Modules is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ BolsasChart initializes and follows incoming series without a shared data snapshot (106.508778ms)
+✔ RedesChart initializes and follows incoming series without a shared data snapshot (32.280102ms)
+✔ chart array defaults are isolated for separate component instances (121.821469ms)
+(node:232385) ExperimentalWarning: VM Modules is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ double activation starts only one document request and opens one tab (28.388642ms)
+✔ changing contract closes a pending tab and ignores its late URL (14.473005ms)
+✔ an old failure cannot overwrite a new opening or error after changing contract (11.9546ms)
+✔ leaving closes pending tabs, clears sensitive sections and suppresses late errors (10.432792ms)
+✔ a response from the previous session cannot open a document (6.186112ms)
+✔ blocked popups make no temporary-URL request and keep the existing recovery message (22.624064ms)
+✔ invalid URLs close the blank tab and a failed document can be retried (9.18273ms)
+✔ route changes clear document errors and old reads cannot overwrite the new contract (7.944477ms)
+✔ a document-section failure leaves detail and history usable, and retry recovers (12.087339ms)
+✔ leaving preserves a document that already opened successfully (7.788701ms)
+✔ an old document ID cannot start an opening in another contract (10.263764ms)
+✔ session changes suppress stale data and errors in independent reads (13.71365ms)
+✔ closing the blank tab while loading cannot navigate it on completion (6.391556ms)
+✔ leaving for another route never requests contracts for that route's ID or undefined (13.343025ms)
+(node:232391) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///tmp/strategy-home68-_9ohaqz2/src/services/contractDetailPresentation.js is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to /tmp/strategy-home68-_9ohaqz2/package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:232391) ExperimentalWarning: VM Modules is an experimental feature and might change at any time
+✔ detail model never substitutes global capital, result or unknown metrics for individual balances (32.088473ms)
+✔ detail currency and dates reject invalid values without leaking epoch dates (13.055376ms)
+✔ compositions require real percentages, totals and unique categories (0.889981ms)
+✔ application cannot embed an unapproved source or authentication-bearing origin (0.717303ms)
+✔ charts disable unavailable units and comparisons, preserve zero and reset when contract series changes (251.196694ms)
+✔ empty assets, unknown assets and unavailable export remain distinct (38.193419ms)
+✔ PDF export failure permits retry and rejects duplicate concurrent work (33.491414ms)
+✔ late export failures cannot overwrite the next contract (20.108131ms)
+✔ dividend destination changes only after confirmed callback and preserves value after failure (60.826788ms)
+✔ dividend destination guards unknown values, double submissions, stale responses and disposal (57.076102ms)
+✔ dividend absence does not become zero yield or a selected wallet (26.435034ms)
+✔ participant/history props are isolated and a new contract restores the history view (108.329609ms)
+✔ asset dialog closes on contract switch and unavailable values remain dashes (58.445157ms)
+(node:232398) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///tmp/strategy-home68-_9ohaqz2/src/services/contractDirectory.js is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to /tmp/strategy-home68-_9ohaqz2/package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ missing or blocked metrics never become zero and currencies never merge (5.125861ms)
+✔ active counter depends on complete supplied list, preserves empty and excludes closed (8.905771ms)
+✔ global contractual capital is never presented as the client's initial entry (0.836204ms)
+✔ all contract pages are fetched once, no incomplete first-page counter (1.580274ms)
+✔ canceled, duplicate and malformed paginated responses cannot replace a list (2.285854ms)
+✔ performance requires valid series and period filter uses supplied dates without mutating them (1.190864ms)
+(node:232413) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///tmp/strategy-home68-_9ohaqz2/src/services/contractRequestDraft.js is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to /tmp/strategy-home68-_9ohaqz2/package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:232413) ExperimentalWarning: VM Modules is an experimental feature and might change at any time
+✔ success action closes the offer and uses the existing case-sensitive route name (198.449257ms)
+✔ offer return is blocked while submit is pending and a failed submit never reaches success (32.682531ms)
+(node:232415) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///tmp/strategy-home68-_9ohaqz2/src/services/contractRequestDraft.js is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to /tmp/strategy-home68-_9ohaqz2/package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:232415) ExperimentalWarning: VM Modules is an experimental feature and might change at any time
+✔ single, recurring and hybrid requests map only the fields visible in the existing BRL form (6.988751ms)
+✔ request mapping rejects invalid amounts and missing catalog IDs before a write (1.810581ms)
+✔ existing BRL form resolves BRL ID even when the first catalog currency is USD (8.907138ms)
+✔ missing BRL ID and failed catalog cannot post a request (16.987915ms)
+✔ closing the form or changing session while the catalog loads prevents submission (19.449474ms)
+✔ draft is snapshotted before catalog lookup; failed or unconfirmed writes cannot show success (22.948673ms)
+✔ session expiration after successful HTTP response never confirms another user form (36.22248ms)
+(node:232428) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///tmp/strategy-home68-_9ohaqz2/src/services/contractRequestDraft.js is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to /tmp/strategy-home68-_9ohaqz2/package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ 140: each new request starts blank and validation is progressive across the five approved steps (4.018683ms)
+✔ 140: zero, malformed amounts and missing final selections cannot submit (0.757509ms)
+✔ 140: incomplete draft rejects before any request and never shows success (1.216382ms)
+(node:232435) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///tmp/strategy-home68-_9ohaqz2/src/services/documentPresentation.js is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to /tmp/strategy-home68-_9ohaqz2/package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ rejection notes come from the matching file review, not another upload of the same type (11.750751ms)
+✔ missing, ambiguous or unrelated reviews never invent or disclose a rejection reason (0.790572ms)
+✔ resubmitted files do not retain old rejection notes (1.188123ms)
+✔ replacement form preserves the existing dates without inventing dates or fields (5.515637ms)
+✔ grouped requirements retain missing uploads, correct file identities and ungrouped attachments (1.621642ms)
+✔ progress requirements remain available when overview has no groups (1.298358ms)
+✔ pending progress requirements are merged even when the overview contains existing files (0.776586ms)
+✔ alternative identification requirements never label each alternative as individually mandatory (0.691314ms)
+✔ front and back retain their identities and side metadata in one current document group (1.234596ms)
+✔ superseded identity files never reappear as actionable ungrouped uploads (5.233516ms)
+✔ optional CPF and NIF appear only with upload capability and never duplicate an overview row (2.075495ms)
+(node:232436) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///tmp/strategy-home68-_9ohaqz2/src/services/emailConfirmation.js is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to /tmp/strategy-home68-_9ohaqz2/package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ only a masked address is presented and local validation never submits an empty code (9.253515ms)
+✔ the existing contract receives alphanumeric code unchanged and success clears it (3.49928ms)
+✔ unaccepted or malformed responses are never reported as success (2.200461ms)
+✔ invalid, expired and used verification codes show safe messages without echoing server data (4.033635ms)
+✔ confirmation and resend share the concurrency guard (2.327343ms)
+✔ accepted resend clears the old code and uses elapsed time, including after a background pause (1.730548ms)
+✔ attempt limits block confirmation and resend until Retry-After expires (1.612243ms)
+✔ resend limits preserve the server interval without blocking a valid confirmation (1.251458ms)
+✔ changing address or leaving discards late responses and clears the code/timer (3.979632ms)
+✔ leaving while a request is pending cannot start a cooldown or show stale errors (2.34736ms)
+✔ default browser timers are called without the clock object as receiver (3.381887ms)
+(node:232452) ExperimentalWarning: VM Modules is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ initial loading and errors never show a fabricated zero total (54.401469ms)
+✔ filter change from a later page makes exactly one request for page one (16.379516ms)
+✔ shrinking result corrects the page without rendering that empty page or count (12.004512ms)
+✔ zero pages corrects to page one without ever requesting page zero (7.603037ms)
+✔ disposing invalidates pending reads and prevents later reloads (5.892703ms)
+✔ a changed session cannot publish old rows or an old error (21.602676ms)
+✔ an old page response cannot replace the latest selection (10.025752ms)
+✔ a successful response without pagination keeps the actual collection count (6.985825ms)
+✔ session-invalidated data does not turn into a false successful empty table (8.566168ms)
+(node:232455) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///tmp/strategy-home68-_9ohaqz2/src/services/homePresentation.js is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to /tmp/strategy-home68-_9ohaqz2/package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ a complete, accessible and zero portfolio with no executed deposits is empty (3.397406ms)
+✔ the real uninitialized account response is empty only with independent confirmation (1.730729ms)
+✔ loading, denied, failed or missing reads never become zero balances (2.587968ms)
+✔ money, reserves, allocated contracts or an executed deposit prevent the new-account state (1.633785ms)
+✔ malformed totals and unavailable composition do not authorize an empty state (1.766011ms)
+✔ contracts empty state requires available items and an explicit total of zero (1.194049ms)
+✔ periods follow account age; there are no controls before a confirmed deposit (86.475112ms)
+✔ the year follows the customer's timezone rather than the UTC midnight (10.54873ms)
+✔ comparison is hidden only in the first month; month-end anniversaries are clamped (14.239764ms)
+✔ chart excludes time before the first executed deposit, invalid and future points (1.669933ms)
+✔ period filtering is anchored to today, without inventing samples at the range boundary (2.319648ms)
+✔ a flat chart has readable bounds and negative balances remain inside the axis (1.875213ms)
+✔ deposit history confirms none only after a successful complete empty query (2.515921ms)
+✔ history reads every page and uses execution timestamps rather than request dates (1.188248ms)
+✔ a failed execution-date read preserves the fact that a deposit exists, without guessing its date (0.7628ms)
+✔ inconsistent, canceled or duplicated deposit records cannot be interpreted as an empty account (5.993058ms)
+✔ a session change aborts history reading before it can start another request (2.856187ms)
+✔ an unavailable chart needs only one existence query, without scanning deposit history or reading details (0.780292ms)
+(node:232466) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///tmp/strategy-home68-_9ohaqz2/src/services/homeWalletCards.js is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to /tmp/strategy-home68-_9ohaqz2/package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:232466) ExperimentalWarning: VM Modules is an experimental feature and might change at any time
+✔ all four Home cards read the supplied converted amount without summing parts or applying quotes (4.393159ms)
+✔ confirmed zero amounts remain zero in every card (1.008276ms)
+✔ missing or blocked section never falls back to old summaries or a computed total (1.239625ms)
+✔ unavailable or malformed metrics never become zero or suppress other confirmed cards (1.051829ms)
+✔ separate wallet/deposit failures or loading cannot replace a valid backend Home total (183.110137ms)
+✔ Home reload and failure clear old headlines instead of showing stale operational balances (24.593164ms)
+(node:232473) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///tmp/strategy-home68-_9ohaqz2/src/services/japanesePostalCode.js is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to /tmp/strategy-home68-_9ohaqz2/package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ Japanese postal format preserves leading zeros and normalizes the local keyboard (4.186236ms)
+✔ official nationwide dataset has valid locations and keeps every ambiguous municipality (407.999612ms)
+✔ actual data fills Tokyo, Osaka and a leading-zero Hokkaido code without auth or vendor requests (6.442793ms)
+✔ not found and actual ambiguous codes never pick the first municipality (11.695129ms)
+✔ failed static requests are evicted and allow retry (5.129478ms)
+✔ controller changes only province/city and deduplicates a successful code (1.244996ms)
+✔ controller ignores late responses after a new code, country or unmount invalidation (1.127132ms)
+✔ edits while loading survive and failures do not erase existing address (3.690593ms)
+✔ invalid response and interrupted lookup keep manual entry available (0.866316ms)
+(node:232481) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///tmp/strategy-home68-_9ohaqz2/src/services/loanPaymentPresentation.js is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to /tmp/strategy-home68-_9ohaqz2/package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:232481) ExperimentalWarning: VM Modules is an experimental feature and might change at any time
+✔ missing adapter leaves all payment actions unavailable and never creates a session (218.207132ms)
+✔ failed installment consultation can retry independently without exposing raw error (52.337666ms)
+✔ pending quote cannot duplicate and late result cannot open payment for another loan (49.885507ms)
+✔ receipt response after closing the session cannot confirm payment and refresh preserves server status (41.5717ms)
+✔ changing loans releases the old preparation lock without letting its response unlock the new one (38.878092ms)
+(node:232488) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///tmp/strategy-home68-_9ohaqz2/src/services/loanDocumentation.js is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to /tmp/strategy-home68-_9ohaqz2/package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:232488) ExperimentalWarning: VM Modules is an experimental feature and might change at any time
+✔ document response rejects unknown groups, duplicates and incomplete persisted files (3.696615ms)
+✔ failed upload preserves persisted files; retry appends only confirmed valid records (211.429342ms)
+✔ wrong-group or unconfirmed upload does not show a stored file (59.660572ms)
+✔ removal requires persisted confirmation and preserves the list on failure (34.61882ms)
+✔ pending upload cannot be duplicated and unmounted responses are ignored (38.850479ms)
+✔ missing API adapters and unmet continuation cannot cause an upload or progression (22.051104ms)
+(node:232489) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///tmp/strategy-home68-_9ohaqz2/src/services/loanOfferPresentation.js is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to /tmp/strategy-home68-_9ohaqz2/package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:232489) ExperimentalWarning: VM Modules is an experimental feature and might change at any time
+✔ pending toggle filters paid rows and does not mutate supplied installments (211.882703ms)
+✔ payment handlers cannot act without callbacks or send a paid/future single installment (84.469104ms)
+✔ failed statement download preserves selection and retry is possible (30.347052ms)
+✔ new installment projection clears stale selection (25.591331ms)
+✔ installment header follows supplied currency and missing amounts never display as zero (64.484291ms)
+(node:232492) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///tmp/strategy-home68-_9ohaqz2/src/services/loanOfferPresentation.js is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to /tmp/strategy-home68-_9ohaqz2/package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:232492) ExperimentalWarning: VM Modules is an experimental feature and might change at any time
+✔ opening an offer cannot display submission success, even if a reader returns a submitted-like property (301.000759ms)
+✔ a pending submission is not sent twice and only a confirmed result enables success (28.63532ms)
+✔ failed writes preserve selection; rejected or changed offers do not reach the writer (35.957693ms)
+✔ switching context invalidates a pending response and missing API adapters make no writes (45.805626ms)
+(node:232510) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///tmp/strategy-home68-_9ohaqz2/src/services/loanOfferPresentation.js is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to /tmp/strategy-home68-_9ohaqz2/package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ offers do not infer selection permission from a positive quote or bank status (5.995794ms)
+✔ selection is discarded if the same offer id changes monetary terms or permissions (0.928905ms)
+✔ malformed or duplicate offer responses cannot masquerade as an empty result (2.653884ms)
+✔ missing rates remain unavailable while a real zero rate is preserved (35.08359ms)
+✔ collateral quote must match the chosen amount and installments before acceptance (2.732663ms)
+✔ new offer, choice and confirmation templates compile (838.115457ms)
+(node:232516) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///tmp/strategy-home68-_9ohaqz2/src/services/profilePresentation.js is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to /tmp/strategy-home68-_9ohaqz2/package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:232516) ExperimentalWarning: VM Modules is an experimental feature and might change at any time
+✔ quote uses supplied amounts, accepts zero discount and does not create a date or fixed discount (162.126651ms)
+✔ selecting a receipt alone never emits submitted or simulates completion (97.950897ms)
+✔ explicit receipt confirmation emits once and pending submission cannot duplicate (32.351961ms)
+✔ missing Pix data or adapter cannot submit, and late receipt response is discarded (41.631369ms)
+✔ payment quote rejects booleans, blank amounts, impossible dates and inconsistent totals (0.739806ms)
+✔ selection rejects paid, unknown, duplicate and boolean installment numbers (1.13652ms)
+✔ payment session binds loan, installments, currency and immutable quote without calculating an offer (1.129897ms)
+✔ payment flow only advances with confirmed submission and resets when session changes (34.626589ms)
+(node:232525) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///tmp/strategy-home68-_9ohaqz2/src/services/loanRequestDraft.js is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to /tmp/strategy-home68-_9ohaqz2/package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ property and vehicle drafts never share amounts, owners or spouse identifiers (4.280463ms)
+✔ amount boundaries reject missing, non-finite, string and out-of-range values (0.745858ms)
+✔ request cannot skip amount, reason or required time selection (1.204258ms)
+✔ conditional values are cleared without mutating unrelated values (0.842781ms)
+✔ spouse must be explicitly chosen and CPF validated only when applicable (1.311542ms)
+✔ property requires valid CEP or declaration, number or no-number, and positive area (1.891044ms)
+✔ outstanding payment is separate from complement and required only when financed (1.109288ms)
+✔ vehicle cannot pretend a valid FIPE simulation without a real catalogue (1.334095ms)
+✔ vehicle model catalogue rejects duplicate ids and has no fabricated fallback prices (1.344244ms)
+(node:232526) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///tmp/strategy-home68-_9ohaqz2/src/services/loanSummaryPresentation.js is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to /tmp/strategy-home68-_9ohaqz2/package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ missing or invalid installment counts never fabricate a discharge percentage (3.607756ms)
+✔ loan principal title keeps its actual currency and preserves unknown balances (45.392879ms)
+✔ unknown loan kinds are not presented as a fabricated collateral type (2.829307ms)
+✔ process labels and decimal rates follow Portuguese presentation without inventing rate periods (2.287759ms)
+(node:232539) ExperimentalWarning: VM Modules is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ login keeps its credentials independent during an attempt and blocks duplicate submissions (144.410785ms)
+✔ an unexpected authentication failure still clears the password and preserves the address (38.655164ms)
+(node:232540) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///tmp/strategy-home68-_9ohaqz2/src/services/onboardingBlock.js is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to /tmp/strategy-home68-_9ohaqz2/package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+Structured onboarding errors: passed
+✔ tests/onboarding-block.test.mjs (101.930197ms)
+(node:232551) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///tmp/strategy-home68-_9ohaqz2/src/services/phoneVerification.js is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to /tmp/strategy-home68-_9ohaqz2/package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ phone confirmation requires a successful request for the same number (8.293475ms)
+✔ successful confirmation clears the code and requests server progress reload (3.325199ms)
+✔ duplicate sends and disposed results cannot update the view (1.104549ms)
+✔ changed session cannot grant success after verification (2.07846ms)
+✔ errors clear the one-time code and retain retry context without approval (1.424036ms)
+✔ formatted Brazilian and international numbers are normalized for both requests (0.765735ms)
+✔ normalization does not silently accept letters or a missing country prefix (1.334266ms)
+✔ Brazilian mode rejects incomplete numbers and a different calling code (1.154654ms)
+✔ HTTP success without accepted=true cannot open code confirmation (1.99942ms)
+✔ HTTP success without succeeded=true cannot announce verification or reload progress (4.452882ms)
+(node:232560) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///tmp/strategy-home68-_9ohaqz2/src/services/portfolioProjection.js is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to /tmp/strategy-home68-_9ohaqz2/package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ portfolio separates Free, invested and Applied; includes assets once without trusting ambiguous legacy total (5.748478ms)
+✔ multiple currencies remain separate with no invented FX totals (2.227964ms)
+✔ confirmed empty portfolio shows zero but errors and missing fields never become zero (0.800791ms)
+✔ mismatched currency and duplicate currency blocks are rejected (0.522533ms)
+✔ client exposes available Free and Applied independently of home and never invents assets (1.579932ms)
+(node:232561) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///tmp/strategy-home68-_9ohaqz2/src/services/preferenceEditor.js is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to /tmp/strategy-home68-_9ohaqz2/package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ disposed editor does not read preferences after a late accepted write (3.301394ms)
+✔ disposed initial load does not read a residential profile from a later session (0.86311ms)
+✔ changed session suppresses old initial preference and catalog results (2.54157ms)
+✔ changed session after write prevents confirmation reads and success publication (1.52615ms)
+✔ unconfirmed accepted preferences disable further writes until a successful reload (11.596269ms)
+✔ disposed editor cannot be revived by a late load callback (1.335557ms)
+✔ loaded preferences from an earlier session cannot be written by the next session (0.971256ms)
+(node:232572) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///tmp/strategy-home68-_9ohaqz2/src/services/preferenceEditor.js is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to /tmp/strategy-home68-_9ohaqz2/package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ a missing preference country reuses only the registered primary residential country on save (21.462481ms)
+✔ country is never guessed from currency, language or an ambiguous address (0.529686ms)
+✔ an existing preference country is preserved and profile errors do not disable the form (1.002956ms)
+✔ loading reads the actual preferences without writing defaults (0.535227ms)
+✔ changing a control persists the complete contract and keeps hidden metadata (2.497095ms)
+✔ failed writes restore confirmed values and allow retrying (1.542992ms)
+✔ concurrent changes cannot overwrite a pending save (1.013976ms)
+✔ a failed read after an accepted save does not claim the old values were preserved (1.006422ms)
+✔ loading failures disable persistence without fabricated values (2.856337ms)
+✔ unmounting discards late responses and unknown controls are not written (3.391423ms)
+[Vue warn]: Property "currencyError" was accessed during render but is not defined on instance.
+  at <QCard key=0 ref="formRef" class="form-card bank-inline-form q-mt-lg"  ... >
+  at <QCard class="tool" >
+  at <App>
+[Vue warn]: Property "discardBankForm" was accessed during render but is not defined on instance.
+  at <QCard key=0 ref="formRef" class="form-card bank-inline-form q-mt-lg"  ... >
+  at <QCard class="tool" >
+  at <App>
+[Vue warn]: Property "currencyOptions" was accessed during render but is not defined on instance.
+  at <QCard text-label="Moeda" >
+  at <QCard key=0 ref="formRef" class="form-card bank-inline-form q-mt-lg"  ... >
+  at <QCard class="tool" >
+  at <App>
+[Vue warn]: Property "currencyLoading" was accessed during render but is not defined on instance.
+  at <QCard text-label="Moeda" >
+  at <QCard key=0 ref="formRef" class="form-card bank-inline-form q-mt-lg"  ... >
+  at <QCard class="tool" >
+  at <App>
+(node:232581) ExperimentalWarning: VM Modules is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ save locks before async validation and rejects duplicate submits (12.804941ms)
+✔ archive writes cannot be submitted twice (6.776917ms)
+✔ archived accounts stay hidden when the API returns them after a reload (9.906149ms)
+✔ latest bank list survives an older request failure (5.611042ms)
+✔ loading clears old rows and an old success cannot hide a newer failure (10.374797ms)
+✔ late details after disposal cannot reopen a banking form or publish a notification (7.691945ms)
+✔ changing session during validation prevents any write (7.782508ms)
+✔ successful save clears sensitive form fields and unlocks only after refreshing (12.548273ms)
+✔ a late successful write cannot notify or refresh a disposed or changed session (14.011623ms)
+✔ existing fields are disabled during submission without introducing new actions (52.118024ms)
+✔ inline banking payload preserves account type, splits the digit and excludes holder fields (6.872469ms)
+✔ editing another bank field never silently clears a masked PIX key (8.185763ms)
+(node:232582) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///tmp/strategy-home68-_9ohaqz2/src/services/profilePresentation.js is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to /tmp/strategy-home68-_9ohaqz2/package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ saved nationality without its catalog description never claims missing personal data (2.93155ms)
+✔ an incomplete catalog keeps known countries and marks unresolved descriptions (0.948713ms)
+✔ catalog recovery restores labels without editing the saved profile (2.676586ms)
+✔ prefer-not-to-say remains translated without catalog and actual catalog labels take precedence (1.526395ms)
+✔ genuine missing nationality and legacy text keep the existing presentation (2.866286ms)
+(node:232588) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///tmp/strategy-home68-_9ohaqz2/src/services/documentWindow.js is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to /tmp/strategy-home68-_9ohaqz2/package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:232588) ExperimentalWarning: VM Modules is an experimental feature and might change at any time
+✔ upload and replacement lock before validation and preserve drafts after failure (39.924901ms)
+✔ a definition for an old country cannot replace the current instructions (7.521742ms)
+✔ closing a dialog invalidates definitions, including old errors (16.171508ms)
+✔ a superseded load cannot publish old documents or clear a newer failure (7.37273ms)
+✔ session change during validation prevents upload (8.764182ms)
+✔ successful upload clears the file and closes before refreshing (7.316262ms)
+✔ leaving the view suppresses late upload notifications and refreshes (7.137261ms)
+✔ upload from a requirement preserves its identity in the multipart request (11.499501ms)
+✔ replacement preflight rejects historical or already approved identity without losing the selected file (17.141982ms)
+✔ replacement of the current rejected side uses that file ID after preflight (9.482447ms)
+✔ fiscal and residence files use upload and exact replacement while preserving dates (51.506217ms)
+✔ group saves keep the second file after failure and never resend the accepted first file (9.468491ms)
+✔ a group resubmission replaces each rejected identity side exactly once (12.106293ms)
+✔ level summary failure keeps document loading and uploads independent (25.333146ms)
+(node:232602) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///tmp/strategy-home68-_9ohaqz2/src/services/profileDocumentation.js is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to /tmp/strategy-home68-_9ohaqz2/package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ approved profile groups exclude fiscal ID, platform and asset files while preserving identity sides and rejection reasons (9.058863ms)
+✔ documentation uses the official account level and counts, independent of legacy approval (0.93675ms)
+✔ level zero shows missing confirmations without falsely granting level one (0.8317ms)
+✔ missing official progress is unavailable rather than locally inferred (0.691414ms)
+✔ attachment icons use MIME or file extension instead of a generic document glyph (1.332802ms)
+✔ a resubmitted single-file row no longer offers the older rejected upload (3.36295ms)
+✔ level one requires the complete profile and both confirmations from PR244 (0.592406ms)
+(node:232603) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///tmp/strategy-home68-_9ohaqz2/src/services/profilePresentation.js is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to /tmp/strategy-home68-_9ohaqz2/package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:232603) ExperimentalWarning: VM Modules is an experimental feature and might change at any time
+✔ older contract error cannot replace a successful retry (16.696755ms)
+✔ older contract details cannot replace the latest failed retry (7.327323ms)
+✔ superseded pagination does not request additional pages or documents (22.786697ms)
+✔ terms loading remains active when an old request finishes first (3.803156ms)
+✔ older terms error cannot overwrite the latest successful response (3.967899ms)
+✔ disposal and changed sessions stop late data publication and child requests (9.660455ms)
+✔ partial document failure keeps available files and does not block the terms section (8.9418ms)
+✔ real template distinguishes errors and loading from a successful empty section (21.620702ms)
+✔ contract download reserves its tab in the click handler before waiting for its URL (11.31033ms)
+✔ a blocked popup prevents the temporary URL call and reports the existing recovery (7.081486ms)
+✔ leaving Contracts and Terms closes a pending tab and ignores its late URL (8.235448ms)
+✔ session changes close the pending tab without exposing a stale URL or error (4.054394ms)
+✔ invalid URL or API failure closes its reserved tab and allows another attempt (15.34174ms)
+✔ double click starts only one contract URL call (5.030148ms)
+✔ leaving stops an old handler from initiating another download (3.747942ms)
+✔ a profile file uses its blob download and releases the URL without a popup (11.644149ms)
+✔ term text is downloaded as plain text and never executes markup (4.352611ms)
+✔ leaving or changing session prevents a pending profile file from triggering a blob download (10.038454ms)
+✔ a manually closed pending tab is not navigated when the URL arrives (3.968881ms)
+(node:232614) ExperimentalWarning: VM Modules is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ documentation: reserves tab synchronously, opens without opener/referrer and preserves file on exit (163.36203ms)
+✔ documentation: blocked popup avoids API request (7.958441ms)
+✔ documentation: failure closes reservation; retry opens once (14.933084ms)
+✔ documentation: duplicate clicks make one URL request (7.187678ms)
+✔ documentation: exit closes pending tab, rejects further actions and ignores late response (9.017505ms)
+✔ documentation: previous-session success cannot open a file (10.755105ms)
+✔ documentation: invalid and insecure external destinations leave no empty tab (19.984713ms)
+✔ documentation: manually closed reservation remains retryable (8.212374ms)
+✔ gallery: reserves tab synchronously, opens without opener/referrer and preserves file on exit (35.938942ms)
+✔ gallery: blocked popup avoids API request (10.105671ms)
+✔ gallery: failure closes reservation; retry opens once (5.712645ms)
+✔ gallery: duplicate clicks make one URL request (24.272231ms)
+✔ gallery: exit closes pending tab, rejects further actions and ignores late response (5.119188ms)
+✔ gallery: previous-session success cannot open a file (6.810411ms)
+✔ gallery: invalid and insecure external destinations leave no empty tab (17.728726ms)
+✔ gallery: manually closed reservation remains retryable (5.033263ms)
+✔ editor: reserves tab synchronously, opens without opener/referrer and preserves file on exit (14.848804ms)
+✔ editor: blocked popup avoids API request (7.428134ms)
+✔ editor: failure closes reservation; retry opens once (7.637758ms)
+✔ editor: duplicate clicks make one URL request (5.958362ms)
+✔ editor: exit closes pending tab, rejects further actions and ignores late response (6.328023ms)
+✔ editor: previous-session success cannot open a file (6.32629ms)
+✔ editor: invalid and insecure external destinations leave no empty tab (20.453163ms)
+✔ editor: manually closed reservation remains retryable (6.971887ms)
+✔ editor: local fictitious file opens without upload and releases its object URL (6.844664ms)
+(node:232620) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///tmp/strategy-home68-_9ohaqz2/src/services/profileJobEdit.js is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to /tmp/strategy-home68-_9ohaqz2/package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ optional empty amounts remain null while explicit zero and precise decimals survive (5.160996ms)
+✔ equivalent numeric formatting does not rewrite either unchanged profile (2.401889ms)
+✔ an intentional clear changes a saved amount to null without erasing metadata (1.745953ms)
+✔ occupation-only changes retain professional metadata and do not rewrite financial data (0.928614ms)
+✔ invalid amounts fail preflight even when occupation also changed (1.823796ms)
+✔ retry after a partial save preserves the draft and skips the confirmed professional write (2.074532ms)
+✔ a failed first write leaves both sections pending, without sending financial data (1.076756ms)
+✔ changing sessions during the first write stops subsequent writes and local confirmation (1.627091ms)
+✔ an error in either work resource shows retry without rendering missing data or zero amounts (27.161459ms)
+✔ loading hides work fields and a successful retry restores actual missing and zero values (16.694922ms)
+(node:232635) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///tmp/strategy-home68-_9ohaqz2/src/services/profileSessions.js is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to /tmp/strategy-home68-_9ohaqz2/package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+[Vue warn]: Failed to resolve component: q-td
+If this is a native custom element, make sure to exclude it from component resolution via compilerOptions.isCustomElement.
+  at <App>
+[Vue warn]: Failed to resolve component: q-td
+If this is a native custom element, make sure to exclude it from component resolution via compilerOptions.isCustomElement.
+  at <App>
+[Vue warn]: Failed to resolve component: q-td
+If this is a native custom element, make sure to exclude it from component resolution via compilerOptions.isCustomElement.
+  at <App>
+[Vue warn]: Failed to resolve component: q-td
+If this is a native custom element, make sure to exclude it from component resolution via compilerOptions.isCustomElement.
+  at <App>
+(node:232635) ExperimentalWarning: VM Modules is an experimental feature and might change at any time
+✔ an older sessions error cannot replace a newer successful retry (46.262604ms)
+✔ an older sessions success cannot hide the latest failed request (3.903968ms)
+✔ session changes and disposed views ignore late session errors (6.178108ms)
+✔ retry clears only the failed sessions state and restores real masked rows (8.408292ms)
+✔ loading and failure never claim the account has no sessions (36.897062ms)
+✔ a successful empty response keeps the existing empty text and actual sessions remain visible (14.49915ms)
+✔ privacy shows only first name and initials; sensitive fields never enter artwork model (36.220778ms)
+✔ missing data stays unavailable; zero and negative performance remain real values (11.512104ms)
+✔ invalid invitation URLs and metrics cannot enable complete export (5.242842ms)
+✔ tenure uses complete months and image dimensions match delivery formats (5.682717ms)
+(node:232653) ExperimentalWarning: VM Modules is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ the latest tab cancels a pending navigation even when returning to the current URL (33.466459ms)
+✔ rapid choices and reversed guard completion preserve the last selection (25.694241ms)
+✔ profile tab changes cannot modify the query of another route after leaving (23.286903ms)
+✔ Back and Forward restore tab from query without adding navigation loops (14.567156ms)
+✔ missing or invalid tab falls back to personal when external navigation changes the URL (8.132591ms)
+✔ selecting another tab drops the bank action while preserving unrelated query (7.886755ms)
+✔ a rejected navigation restores the last committed tab and a retry remains possible (7.01611ms)
+✔ an aborted navigation returns the picker to the committed tab without a loop (8.553451ms)
+(node:232661) ExperimentalWarning: VM Modules is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ profile terms reuse published consent content and the platform files without moving asset or fiscal files (10.584631ms)
+✔ one terms source failure retains the other source and exposes retry; both failures reject (8.202957ms)
+(node:232673) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///tmp/strategy-home68-_9ohaqz2/src/services/profileTrustedEdit.js is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to /tmp/strategy-home68-_9ohaqz2/package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+[Vue warn]: Failed to resolve component: q-icon
+If this is a native custom element, make sure to exclude it from component resolution via compilerOptions.isCustomElement.
+  at <App>
+[Vue warn]: Failed to resolve component: q-badge
+If this is a native custom element, make sure to exclude it from component resolution via compilerOptions.isCustomElement.
+  at <App>
+[Vue warn]: Failed to resolve component: q-tooltip
+If this is a native custom element, make sure to exclude it from component resolution via compilerOptions.isCustomElement.
+  at <App>
+[Vue warn]: Failed to resolve component: q-select
+If this is a native custom element, make sure to exclude it from component resolution via compilerOptions.isCustomElement.
+  at <App>
+[Vue warn]: Failed to resolve component: profile-fields
+If this is a native custom element, make sure to exclude it from component resolution via compilerOptions.isCustomElement.
+  at <App>
+[Vue warn]: Failed to resolve component: q-icon
+If this is a native custom element, make sure to exclude it from component resolution via compilerOptions.isCustomElement.
+  at <App>
+[Vue warn]: Failed to resolve component: q-badge
+If this is a native custom element, make sure to exclude it from component resolution via compilerOptions.isCustomElement.
+  at <App>
+[Vue warn]: Failed to resolve component: q-tooltip
+If this is a native custom element, make sure to exclude it from component resolution via compilerOptions.isCustomElement.
+  at <App>
+[Vue warn]: Failed to resolve component: q-select
+If this is a native custom element, make sure to exclude it from component resolution via compilerOptions.isCustomElement.
+  at <App>
+[Vue warn]: Failed to resolve component: profile-fields
+If this is a native custom element, make sure to exclude it from component resolution via compilerOptions.isCustomElement.
+  at <App>
+✔ empty profile creates a first contact without inventing relationship or email (7.417323ms)
+✔ multiple contacts retain IDs and hidden metadata; unchanged rows are not rewritten (1.593307ms)
+✔ all contacts are validated before any write; existing rows cannot be removed or rebound (3.934846ms)
+✔ retry skips a confirmed update after a later failure and preserves the draft (7.483289ms)
+✔ session change stops the batch and does not confirm another account's data (3.803186ms)
+✔ the real profile template uses only the existing name/phone pair and section actions (571.161849ms)
+✔ appended contacts preserve confirmed creates when retrying a later failure (6.248351ms)
+(node:232679) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///tmp/strategy-home68-_9ohaqz2/src/services/profilePresentation.js is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to /tmp/strategy-home68-_9ohaqz2/package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ missing profile data never becomes example identity, money or documents (3.765666ms)
+✔ summary and full profile share real financial values and preserve zero (29.41414ms)
+✔ only masked document numbers are presented and address complement is not a neighborhood (0.924016ms)
+✔ dates preserve the API calendar day and reject malformed values (0.575734ms)
+✔ a level, waived requirement or approved tax document does not unlock identity editing (1.125198ms)
+✔ session rows use real time and device, mask IP and never invent location (12.58125ms)
+✔ editing location preserves country, birthday, names, contacts and personal details (2.697736ms)
+✔ editing basic data keeps secondary names and addresses and never guesses a contact kind (2.945326ms)
+✔ structured contacts display server masks instead of missing data or raw values (1.666677ms)
+✔ editing basic data uses full-profile contacts and preserves them when only personal details change (1.880233ms)
+✔ invalid object contacts or ambiguous primary contacts cannot clear a saved email (1.005261ms)
+✔ basic profile rejects future and impossible birthdays before producing a write payload (6.434952ms)
+✔ birthday validation uses the local calendar day and does not invent requiredness (3.640211ms)
+(node:232687) ExperimentalWarning: VM Modules is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ registration uses the documented endpoint, envelope and stable key (34.902712ms)
+✔ confirmation and resend are public and transmit the code unchanged (21.569229ms)
+✔ public 401 preserves original error instead of refreshing or redirecting (18.48076ms)
+✔ rate limits and verification errors have safe messages (12.654105ms)
+(node:232693) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///tmp/strategy-home68-_9ohaqz2/src/services/registrationIntegration.js is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to /tmp/strategy-home68-_9ohaqz2/package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ CPF has no identification dates while RG retains its own dates (4.801539ms)
+✔ document length follows its definition without prohibiting alphanumeric identifiers (1.137311ms)
+✔ Brazil has all 27 UFs for new drafts; other countries are not given Brazilian states (16.588931ms)
+✔ CPF check digits, repeated digits and malformed input are validated at the field (5.188735ms)
+✔ nationality choices preserve the current selection and exclude other selections (1.651027ms)
+✔ formatting keeps precision, invalid input, zero and international numbers (1.287537ms)
+✔ review distinguishes confirmed uploads from newly selected replacement files (2.215901ms)
+(node:232705) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///tmp/strategy-home68-_9ohaqz2/src/services/clientAssetModel.js is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to /tmp/strategy-home68-_9ohaqz2/package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ editing uses an isolated copy and sends the entire ordered property list (8.225419ms)
+✔ removing all sends [] and an omitted draft field preserves the existing list (2.134597ms)
+✔ enforces limit and required bounded names/values before sending (1.938253ms)
+(node:232712) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///tmp/strategy-home68-_9ohaqz2/src/services/registrationDocuments.js is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to /tmp/strategy-home68-_9ohaqz2/package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ CPF resume preserves only the server mask and never submits it as a new CPF (3.18918ms)
+✔ resume displays server mask, issuer, region and dates and only reuses unchanged current evidence (3.407455ms)
+✔ edits or replacement files require a real number and cannot reuse old metadata (1.056557ms)
+✔ file copy preserves receipt identity; a new file is selected, never labeled as sent (0.945357ms)
+✔ other countries, archived records and ambiguous active documents never hydrate (1.182146ms)
+✔ passport selection and date format follow saved server type, never invent front/back mapping (0.936806ms)
+✔ passport resume preserves a different issuing country and changing it invalidates reused evidence (0.856156ms)
+(node:232713) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///tmp/strategy-home68-_9ohaqz2/src/services/registrationDocuments.js is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to /tmp/strategy-home68-_9ohaqz2/package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ eight Figma variants keep representative countries explicit without inventing a Canada layout (4.928354ms)
+✔ passport uses exactly number, issuing country, issue date and expiry for every variant (0.812975ms)
+✔ calendar formats distinguish US month/day from day/month and Japanese year/month/day (1.703376ms)
+✔ dates cannot have future issue or expiry earlier than issue; absent required rules are not invented (2.456147ms)
+✔ changing type ignores inactive dates and does not reuse identity values as passport values (1.340928ms)
+✔ variant/type lookup rejects unknown and inherited keys gracefully (0.76858ms)
+✔ file selection preserves one nonempty file and only applies supplied backend limits (0.582377ms)
+✔ draft copies isolate variants and parent edits while retaining File references only in memory (0.891504ms)
+(node:232726) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///tmp/strategy-home68-_9ohaqz2/src/services/registrationEmployment.js is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to /tmp/strategy-home68-_9ohaqz2/package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ the employment draft contains the business fields authorized by design and QA and no invented initial zero (4.031591ms)
+✔ Brazilian currency input preserves cents and grouping without binary floating point (7.888868ms)
+✔ malformed, negative and ambiguous values are rejected rather than rounded or silently coerced (1.631209ms)
+✔ all three monetary fields validate independently and failure preserves the exact draft (1.283979ms)
+✔ free-text occupation is required, employer optional, and both currencies come from the API catalogue (2.083007ms)
+✔ copied drafts preserve user strings and isolate state for navigation (0.803206ms)
+(node:232732) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///tmp/strategy-home68-_9ohaqz2/src/services/registrationConsentRules.js is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to /tmp/strategy-home68-_9ohaqz2/package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:232732) ExperimentalWarning: VM Modules is an experimental feature and might change at any time
+✔ review hydrates successful financial data independently from a failed professional read (102.862449ms)
+✔ new contacts use POST and retain IDs on partial failure and retry (14.535846ms)
+✔ failed review reads preserve drafts and report all failed sections together (9.7792ms)
+✔ successful retry clears unavailable state without overwriting hydrated financial edits (13.596868ms)
+✔ an unavailable financial read blocks its editing step without clearing successful occupation (7.806863ms)
+✔ logging in again to the same customer reloads saved data instead of previous-session drafts (13.015072ms)
+✔ an old mounted stage cannot write after logout and a new login to the same customer (11.848858ms)
+✔ new stage 4 writes professional, financial and both preferences before entering documents (12.692224ms)
+✔ server-defaulted currencies do not block professional step or cause a preference write (9.841263ms)
+✔ a financial write failure keeps drafts and retry skips confirmed professional data (11.134824ms)
+✔ a resumed documents deep link returns to stage 4 if professional prerequisites are missing (7.646743ms)
+✔ stage five restores masked document fields and reuses confirmed evidence without writing a masked number (10.922918ms)
+✔ no trusted contact declaration persists and restores on another session (7.080436ms)
+✔ final submission requires explicit truthfulness and sends only the confirmed flag (5.978945ms)
+✔ official profile lock prevents writes and preserves registration drafts (4.516571ms)
+✔ guard consent flag never bypasses actual versioned acceptance (6.596107ms)
+✔ explicit consent saves only legal agreements before submission (5.113441ms)
+✔ a policy version changed after reading requires a fresh acceptance (5.004468ms)
+✔ failed requirements read never submits and keeps review drafts (4.403356ms)
+✔ unconfirmed submission never navigates to success (7.655565ms)
+✔ an already locked submitted registration is never submitted twice (4.175232ms)
+(node:232733) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///tmp/strategy-home68-_9ohaqz2/src/services/registrationIntegration.js is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to /tmp/strategy-home68-_9ohaqz2/package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ personal save maps dates and existing fields while preserving unrelated data without unsupported extras (6.825172ms)
+✔ address creation preserves secondary addresses and does not conflate district with complement (1.875383ms)
+✔ financial save preserves zero absence precision and temporal metadata, rejects implicit currency conversion (1.156076ms)
+✔ professional save preserves metadata and does not invent an occupation (0.777297ms)
+✔ contacts preserve existing relationship and accept new contacts without one (0.701723ms)
+✔ document payload uses the returned schema, real country/type and explicit evidence IDs (1.106412ms)
+✔ catalog uses real countries and existing server values without fake choices (35.430495ms)
+(node:232733) ExperimentalWarning: VM Modules is an experimental feature and might change at any time
+✔ registration write retries an ambiguous failure with the same idempotency key (48.724617ms)
+✔ file retries reuse success and isolate evidence by customer without sending an invented customerId (6.849513ms)
+✔ an address variant without filiation fields preserves existing parents (1.426761ms)
+✔ clearing a personal string uses empty text because the API preserves existing values on null (1.603397ms)
+✔ address resume separates the number and resaving does not duplicate it (2.854543ms)
+✔ address resume keeps commas in the street and recognizes usual number suffixes (1.082296ms)
+✔ address resume leaves ambiguous lines and numbered street names untouched (0.521961ms)
+✔ only variants with a separate number field split the API address (0.855155ms)
+✔ professional employer is explicitly editable and preferences preserve all existing metadata (1.019717ms)
+(node:232734) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///tmp/strategy-home68-_9ohaqz2/src/services/registrationPersonal.js is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to /tmp/strategy-home68-_9ohaqz2/package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ birth date checks leap years, actual calendar dates and the local day boundary (3.094068ms)
+✔ blank fields are not declared mandatory without confirmed rules (9.655535ms)
+✔ catalog readiness requires all four lists without manufacturing options (0.879661ms)
+✔ selections must belong to their supplied catalog and nationality duplicates are rejected (1.480302ms)
+✔ an extra blank nationality is harmless because Figma has no remove action (0.885362ms)
+✔ draft copies preserve exact city and date without sharing lists or adding profile fields (0.997645ms)
+✔ validation preserves draft after failure and does not echo personal data (1.255906ms)
+(node:232747) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///tmp/strategy-home68-_9ohaqz2/src/services/registrationPostalCode.js is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to /tmp/strategy-home68-_9ohaqz2/package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ CEP accepts eight digits with optional hyphen, rejects invalid text without sending a request (8.383118ms)
+✔ lookup fills only the four Figma address fields and preserves number and complement (2.618805ms)
+✔ generic CEP does not erase street or district when the response omits them (3.140476ms)
+✔ not found and unavailable lookup preserve manual data and allow retry (1.271065ms)
+✔ late responses cannot overwrite another CEP or edits made during lookup (0.710771ms)
+✔ unmount or a newer request invalidates old results and old failures (1.409598ms)
+✔ incomplete or mismatched responses never partially fill the address (1.489129ms)
+(node:232747) ExperimentalWarning: VM Modules is an experimental feature and might change at any time
+✔ shared legacy lookup sends only CEP without authenticated credentials and bounds request duration (52.473956ms)
+✔ returning to a previously queried CEP after changing it performs a fresh lookup (1.125778ms)
+(node:232759) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///tmp/strategy-home68-_9ohaqz2/src/services/registrationConsentRules.js is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to /tmp/strategy-home68-_9ohaqz2/package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ direct receipt link never claims an unsent registration was sent (40.445006ms)
+(node:232759) ExperimentalWarning: VM Modules is an experimental feature and might change at any time
+✔ receipt survives reload using the actual submitted status (17.119059ms)
+✔ failed receipt read never renders a success confirmation (9.569857ms)
+(node:232760) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///tmp/strategy-home68-_9ohaqz2/src/services/registrationIntegration.js is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to /tmp/strategy-home68-_9ohaqz2/package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ new international accounts have real state/province choices before an address has been saved (19.869375ms)
+✔ existing regions are preserved and no neighbouring country catalogue is substituted (2.591304ms)
+✔ passport issuing country uses the existing countryId contract independently of residence (2.570593ms)
+(node:232774) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///tmp/strategy-home68-_9ohaqz2/src/services/sessionIsolation.js is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to /tmp/strategy-home68-_9ohaqz2/package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ resume accepts only existing authenticated registration screens without arbitrary destinations (2.321942ms)
+✔ last visited step survives a new login and is isolated by authenticated user (1.408847ms)
+✔ Home and invalid paths never overwrite registration progress and no anonymous progress is stored (0.35822ms)
+✔ explicit safe return takes precedence; corrupted storage and unavailable storage fail safely (0.628464ms)
+(node:232774) ExperimentalWarning: VM Modules is an experimental feature and might change at any time
+✔ real authentication restores the same user's stage after logout and login without changing progress (34.304566ms)
+✔ real authentication never sends another account to the previous user's stage (8.38418ms)
+✔ real router records only successful authenticated stage navigation and retains it through Home (5.310489ms)
+✔ expired-session router requires login and preserves only the safe return route (8.691784ms)
+✔ old progress migrates documents to 5 and employment to 4 without changing another account (1.025729ms)
+(node:232781) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///tmp/strategy-home68-_9ohaqz2/src/services/registrationReview.js is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to /tmp/strategy-home68-_9ohaqz2/package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ review has exactly the five Figma sections without sample data or invented initial values (7.135683ms)
+✔ review explicitly selects fields and never serializes password, codes, tokens or file names (0.972668ms)
+✔ identifier masking never reveals short values in full (0.483379ms)
+✔ review money distinguishes absence from zero and preserves large decimal amounts (1.234626ms)
+✔ opaque catalogue values are replaced by labels or unavailable descriptions (1.050185ms)
+✔ editing a document preserves its selected variant and review does not mutate drafts (1.60549ms)
+✔ absence summarizes the explicit choice and ignores inactive contact drafts (1.903591ms)
+✔ local issue aggregation catches invalid dates, money and missing document sides (12.376144ms)
+✔ failed reads are unavailable rather than not informed, while preserving draft values and Figma sections (2.21023ms)
+✔ review presents authorized professional additions and links to the new business order (1.309117ms)
+(node:232791) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///tmp/strategy-home68-_9ohaqz2/src/services/registrationSteps.js is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to /tmp/strategy-home68-_9ohaqz2/package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ step one requires only the Figma fields and optional referral may stay blank (12.760604ms)
+✔ residence accepts one known presentation choice without inventing HTTP country IDs (3.907253ms)
+✔ password length, exact confirmation, email and explicit acceptance are validated locally (1.093708ms)
+✔ validation does not mutate input, leak values in errors, or share form state (0.749143ms)
+✔ registration screens ship in homologation builds and preserve the existing registration (48.61065ms)
+(node:232791) ExperimentalWarning: VM Modules is an experimental feature and might change at any time
+(node:232797) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///tmp/strategy-home68-_9ohaqz2/src/services/registrationTrustedContacts.js is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to /tmp/strategy-home68-_9ohaqz2/package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ draft contains only name, phone and explicit absence without relationship or email (10.130582ms)
+✔ an empty step requires a contact or explicit absence (5.087216ms)
+✔ partially entered contacts get independent field errors, including additional rows (2.454553ms)
+✔ absence ignores but preserves edits and restores validation when unchecked (6.717688ms)
+✔ add requires complete rows and never appends repeated empty rows or when absence is selected (1.36317ms)
+✔ international punctuation is preserved without assuming DDI, length, surname count or uniqueness (0.717323ms)
+✔ copies isolate navigation drafts and errors do not echo names or phones (1.154854ms)
+✔ installed source guard and timed regression reject the vulnerable extglobs (107.90577ms)
+✔ audit accepts only mitigated leaf and transitive effects at the original high threshold (1.92657ms)
+✔ new direct high/critical advisories remain blocking, including in an inherited chain (0.784551ms)
+✔ new picomatch advisory, nested install or changed affected range cannot use the mitigation exception (1.798236ms)
+✔ audit errors, missing reports and inconsistent counts fail closed (1.634125ms)
+✔ source verification fails when the installed mitigation is missing or tampered (25.594858ms)
+(node:232817) ExperimentalWarning: VM Modules is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ a response from the previous login cannot populate the next session (31.223111ms)
+✔ late refresh cannot restore a logged out account or replace a new login (12.539794ms)
+✔ cross-tab login during refresh is preserved even without a local reset (16.485421ms)
+✔ concurrent expired requests share one refresh and retain idempotency keys (5.797024ms)
+✔ failed refresh expires only the current session (9.515248ms)
+✔ same-account refresh preserves in-flight responses and retries late 401 without another refresh (7.33139ms)
+✔ login checks the submitted email and the API identity before entering (8.210359ms)
+(node:232818) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///tmp/strategy-home68-_9ohaqz2/src/services/walletPresentation.js is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to /tmp/strategy-home68-_9ohaqz2/package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+Wallet mapping: currencies, unavailable values, zero and reserved balances passed.
+✔ tests/wallet-presentation.test.mjs (138.397342ms)
+(node:232842) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///tmp/strategy-home68-_9ohaqz2/src/services/walletModel.js is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to /tmp/strategy-home68-_9ohaqz2/package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ seven currencies retain missing values instead of fabricated zero balances (5.037441ms)
+✔ balance after operation never invents available funds or accepts overdrafts (0.474782ms)
+✔ only active accounts in the selected confirmed currency are eligible (0.704458ms)
+✔ withdrawal requires deposit balance, same-currency account and withdrawal password (1.228735ms)
+✔ transfer directions have distinct settlement rules and no password requirement (0.569191ms)
+✔ deposit respects configured currency minimum without assuming Figma example values (0.951427ms)
+✔ bank picker loads all pages and drops results from a closed context (2.279701ms)
+✔ consolidated total includes patrimony and never sums native currency balances (2.160475ms)
+(node:232850) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///tmp/strategy-home68-_9ohaqz2/src/services/walletModel.js is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to /tmp/strategy-home68-_9ohaqz2/package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:232850) ExperimentalWarning: VM Modules is an experimental feature and might change at any time
+✔ review validates account, currency and balance before asking for password (1.678018ms)
+✔ snapshot freezes reviewed values without password and masks account (17.409952ms)
+✔ changed balance, account or amount invalidates the reviewed operation (0.56353ms)
+✔ first two steps never write; final submit cannot duplicate; success waits for response (67.626388ms)
+✔ failure clears credential, keeps reviewed data and allows retry without false success (16.735214ms)
+✔ changed API balance returns to form and late completion after disposal is ignored (21.423803ms)
+✔ resource reload or error prevents advancing even by keyboard submission (11.144563ms)
+ℹ tests 553
+ℹ suites 0
+ℹ pass 553
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 3517.405842

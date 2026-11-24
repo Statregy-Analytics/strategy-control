@@ -1,0 +1,37 @@
+{
+  "date": "2026-11-24",
+  "items": [
+    68,
+    133
+  ],
+  "sourceCommits": [
+    "793a55c",
+    "83ca74d"
+  ],
+  "tests": {
+    "portalPassed": 553,
+    "portalFailed": 0,
+    "targetedHome": 29,
+    "newCardTests": 6,
+    "adminTargeted": 14,
+    "lint": "passed",
+    "build": "passed",
+    "audit": "passed",
+    "isolatedPortalSnapshot": true
+  },
+  "home": {
+    "mapping": "GET /client/home.wallets: deposit, strategy, patrimony, total; currencyIsoCode supplied by backend. No frontend sum or FX; total can deliberately differ from parts in tests and remains untouched.",
+    "operationalBalances": "Native-currency balances retained only for existing movement forms and detail lines, not used for card headlines.",
+    "verified": "API reads Éric and Cláudio; Éric card render local and published, hide/show restored. Zero, unavailable, loading/error and separate-query failure exercised by automated tests.",
+    "mobile": "Local e homologação publicados em 390px: clientWidth=scrollWidth=378; valor total com fonte 27.3px, sem overflow horizontal. Captura publicada preservada.",
+    "limits": "No browser login as Cláudio in this round; its four values checked through the API. No integrated all-zero account exercised, only component/model tests. Graph and contract performance not revalidated by this balance fix."
+  },
+  "cancel": {
+    "request": "SOL-2026-00003, own fictitious request created in 19/11 testing.",
+    "browser": "Empty reason disables OK; supplied reason submitted. Status Canceled persisted; actions disabled; Novas 3→2, Canceladas 0→1; canceled filter shows record and reason.",
+    "readback": "Status, reason and canceledAtUtc confirmed in API; available balances shown before/after remain BRL 47499 (deposit) and BRL 1 (idle Strategy). No contract created or financial operation executed.",
+    "historyLimit": "Detail DTO has no history array; history table still unavailable. Cancellation reason is visible in the list. This round does not approve general audit-history rendering.",
+    "frontendChange": false
+  },
+  "worktree": "Existing unrelated documentation changes preserved. Shared checklist and progress updated locally; only this delivery evidence/report staged, without publishing unrelated pending reviews."
+}

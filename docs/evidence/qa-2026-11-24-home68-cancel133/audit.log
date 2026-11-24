@@ -1,0 +1,17 @@
+
+> strategy-analytics@0.0.1 audit:security
+> node scripts/security/audit.mjs
+
+{
+  "npmAudit": {
+    "info": 0,
+    "low": 0,
+    "moderate": 2,
+    "high": 0,
+    "critical": 0,
+    "total": 2
+  },
+  "blocked": [],
+  "mitigated": []
+}
+Security audit passed; the exact picomatch advisory is mitigated by verified source guard and subprocess regression checks.

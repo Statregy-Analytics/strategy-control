@@ -1,0 +1,54 @@
+{
+  "eric": {
+    "status": "Available",
+    "currency": "BRL",
+    "cards": {
+      "deposit": {
+        "value": 49999.0,
+        "status": "Available",
+        "asOfUtc": "2026-11-24T12:55:42.0006449+00:00"
+      },
+      "strategy": {
+        "value": 1492701.1,
+        "status": "Available",
+        "asOfUtc": "2026-11-24T12:55:42.0006449+00:00"
+      },
+      "patrimony": {
+        "value": 370000.0,
+        "status": "Available",
+        "asOfUtc": "2026-11-24T12:55:42.0006449+00:00"
+      },
+      "total": {
+        "value": 1912700.1,
+        "status": "Available",
+        "asOfUtc": "2026-11-24T12:55:42.0006449+00:00"
+      }
+    }
+  },
+  "claudio": {
+    "status": "Available",
+    "currency": "BRL",
+    "cards": {
+      "deposit": {
+        "value": 25000.0,
+        "status": "Available",
+        "asOfUtc": "2026-11-24T12:55:59.2916134+00:00"
+      },
+      "strategy": {
+        "value": 0.2,
+        "status": "Available",
+        "asOfUtc": "2026-11-24T12:55:59.2916134+00:00"
+      },
+      "patrimony": {
+        "value": 400.0,
+        "status": "Available",
+        "asOfUtc": "2026-11-24T12:55:59.2916134+00:00"
+      },
+      "total": {
+        "value": 25400.2,
+        "status": "Available",
+        "asOfUtc": "2026-11-24T12:55:59.2916134+00:00"
+      }
+    }
+  }
+}

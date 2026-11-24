@@ -1,0 +1,89 @@
+{
+  "source": "https://strategyanalytics.codebiz.com.br/openapi/v1.json",
+  "home": {
+    "required": [
+      "status",
+      "currencyIsoCode",
+      "deposit",
+      "strategy",
+      "patrimony",
+      "total",
+      "quotes"
+    ],
+    "type": "object",
+    "properties": {
+      "status": {
+        "type": "string"
+      },
+      "currencyIsoCode": {
+        "type": [
+          "null",
+          "string"
+        ],
+        "example": "EUR"
+      },
+      "deposit": {
+        "oneOf": [
+          {
+            "type": "null"
+          },
+          {
+            "$ref": "#/components/schemas/ClientHomeValueResponse"
+          }
+        ]
+      },
+      "strategy": {
+        "oneOf": [
+          {
+            "type": "null"
+          },
+          {
+            "$ref": "#/components/schemas/ClientHomeValueResponse"
+          }
+        ]
+      },
+      "patrimony": {
+        "oneOf": [
+          {
+            "type": "null"
+          },
+          {
+            "$ref": "#/components/schemas/ClientHomeValueResponse"
+          }
+        ]
+      },
+      "total": {
+        "oneOf": [
+          {
+            "type": "null"
+          },
+          {
+            "$ref": "#/components/schemas/ClientHomeValueResponse"
+          }
+        ]
+      },
+      "quotes": {
+        "type": "array",
+        "items": {
+          "$ref": "#/components/schemas/ExchangeRateQuoteResponse"
+        }
+      }
+    }
+  },
+  "cancelPath": "/api/v1/admin/contracts/requests/{requestId}/cancel",
+  "cancelBody": {
+    "required": [
+      "reason"
+    ],
+    "type": "object",
+    "properties": {
+      "reason": {
+        "type": [
+          "null",
+          "string"
+        ]
+      }
+    },
+    "additionalProperties": false
+  }
+}
