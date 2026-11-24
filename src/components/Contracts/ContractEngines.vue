@@ -155,11 +155,20 @@
         </div>
       </dl>
       <div class="engine-empty" role="status">Consulta de operações intradiárias indisponível.</div>
+      <q-btn
+        class="engine-add-operation"
+        outline
+        no-caps
+        label="Adicionar operação"
+        @click="operationOpen = true"
+      />
     </section>
   </resource-state>
+  <contract-operation-dialog v-if="operationOpen" @close="operationOpen = false" />
 </template>
 <script setup>
-import { computed } from 'vue'
+import { computed, ref } from 'vue'
+import ContractOperationDialog from './ContractOperationDialog.vue'
 import ResourceState from 'src/components/Finance/ResourceState.vue'
 import { dateLabel, financeLabel } from 'src/services/financeService'
 // Display-state props are separate from the HTTP engine catalog. Keep them null
@@ -177,6 +186,7 @@ const props = defineProps({
     validator: (value) => value == null || ['primary', 'combined'].includes(value),
   },
 })
+const operationOpen = ref(false)
 const closingExplanation = computed(() =>
   props.closingMode === 'combined'
     ? 'Motor Principal + Operações: no fechamento, o resultado das operações soma ao do Motor Principal. Ex.: o motor deixou o contrato em R$ 100.000,00 e as operações somaram +R$ 10,00 → o contrato fecha com R$ 100.010,00.'
@@ -206,6 +216,12 @@ const index = (value) =>
     : 'Indisponível'
 </script>
 <style scoped>
+.engine-add-operation {
+  border-radius: 8px;
+  font-size: 12px;
+  color: #a8e5ff;
+  background: #10131cf0;
+}
 .engine-icon-box {
   display: inline-flex;
   padding: 6px;

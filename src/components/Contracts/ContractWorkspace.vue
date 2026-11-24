@@ -691,8 +691,8 @@
               <span>{{
                 financeLabel(detail.state.data?.primaryEngine?.connectionStatus)
               }}</span></template
-            ><contract-engines :state="engines.state" @retry="loadEngines" /> ></q-expansion-item
-          >
+            ><contract-engines :state="engines.state" @retry="loadEngines"
+          /></q-expansion-item>
           <q-expansion-item
             v-model="expandedSections.assets"
             class="contract-expansion"
